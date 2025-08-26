@@ -1,7 +1,7 @@
 ﻿within Modelica.Electrical.Analog.Ideal;
 model IdealizedOpAmpLimited "带限制的理想化运算放大器"
   parameter Real V0 = 15000.0 "零负载放大";
-  parameter Boolean useSupply = false 
+  parameter Boolean useSupply = false
     "使用供电引脚(否则保持恒定供电)" annotation(Evaluate = true);
   parameter SI.Voltage Vps = +15 "正极电压" 
     annotation(Dialog(enable = not useSupply));
@@ -19,21 +19,21 @@ model IdealizedOpAmpLimited "带限制的理想化运算放大器"
   SI.Power p_out = out.v * out.i "Output power";
   SI.Power p_s = -(p_in + p_out) "Supply power";
   SI.Current i_s = p_s / (vps - vns) "Supply current";
-  Modelica.Electrical.Analog.Interfaces.PositivePin in_p 
+  Modelica.Electrical.Analog.Interfaces.PositivePin in_p
     "输入端口的正极" annotation(Placement(transformation(
     extent = {{-90, -70}, {-110, -50}})));
-  Modelica.Electrical.Analog.Interfaces.NegativePin in_n 
+  Modelica.Electrical.Analog.Interfaces.NegativePin in_n
     "输入端口的负极" annotation(Placement(transformation(
     extent = {{-110, 50}, {-90, 70}})));
-  Modelica.Electrical.Analog.Interfaces.PositivePin out 
+  Modelica.Electrical.Analog.Interfaces.PositivePin out
     "输出端口的正极" annotation(Placement(transformation(extent = {{
-    110, -10}, {90, 10}}), iconTransformation(extent = {{110, -10}, 
+    110, -10}, {90, 10}}), iconTransformation(extent = {{110, -10},
     {90, 10}})));
   //optional supply pins
-  Modelica.Electrical.Analog.Interfaces.PositivePin s_p(final i = +i_s, final v = 
+  Modelica.Electrical.Analog.Interfaces.PositivePin s_p(final i = +i_s, final v =
     vps) if useSupply "可选的正电源引脚" annotation(Placement(
     transformation(extent = {{10, 90}, {-10, 110}})));
-  Modelica.Electrical.Analog.Interfaces.NegativePin s_n(final i = -i_s, final v = 
+  Modelica.Electrical.Analog.Interfaces.NegativePin s_n(final i = -i_s, final v =
     vns) if useSupply "可选的负电源引脚" annotation(Placement(
     transformation(extent = {{-10, -110}, {10, -90}})));
 protected
@@ -53,38 +53,38 @@ equation
     if homotopyType == Modelica.Blocks.Types.LimiterHomotopy.NoHomotopy then
       v_out = smooth(0, noEvent(if V0 * v_in > vps then vps else if V0 * v_in < vns then vns else V0 * v_in));
     else
-      v_out = homotopy(actual = smooth(0, noEvent(if V0 * v_in > vps then vps else if V0 * v_in < vns then vns else V0 * v_in)), 
+      v_out = homotopy(actual = smooth(0, noEvent(if V0 * v_in > vps then vps else if V0 * v_in < vns then vns else V0 * v_in)),
         simplified = simplifiedExpr);
     end if;
   else
     if homotopyType == Modelica.Blocks.Types.LimiterHomotopy.NoHomotopy then
       v_out = smooth(0, if V0 * v_in > vps then vps else if V0 * v_in < vns then vns else V0 * v_in);
     else
-      v_out = homotopy(actual = smooth(0, if V0 * v_in > vps then vps else if V0 * v_in < vns then vns else V0 * v_in), 
+      v_out = homotopy(actual = smooth(0, if V0 * v_in > vps then vps else if V0 * v_in < vns then vns else V0 * v_in),
         simplified = simplifiedExpr);
     end if;
   end if;
-  annotation(defaultComponentName = "opAmp", 
-    Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 
+  annotation(defaultComponentName = "opAmp",
+    Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100,
     100}}), graphics = {
-    Line(points = {{60, 0}, {90, 0}}, color = {0, 0, 255}), 
+    Line(points = {{60, 0}, {90, 0}}, color = {0, 0, 255}),
     Text(
-    extent = {{-150, 150}, {150, 110}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255}), 
-    Line(points = {{60, 0}, {90, 0}}, color = {0, 0, 255}), 
+    extent = {{-150, 150}, {150, 110}},
+    textString = "%name",
+    textColor = {0, 0, 255}),
+    Line(points = {{60, 0}, {90, 0}}, color = {0, 0, 255}),
     Polygon(
-    points = {{70, 0}, {-70, 80}, {-70, -80}, {70, 0}}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid, 
-    lineColor = {0, 0, 255}), 
-    Line(points = {{-100, 60}, {-70, 60}}, color = {0, 0, 255}), 
-    Line(points = {{-100, -60}, {-70, -60}}, color = {0, 0, 255}), 
-    Line(points = {{-60, 50}, {-40, 50}}, color = {0, 0, 255}), 
-    Line(points = {{-50, -40}, {-50, -60}}, color = {0, 0, 255}), 
-    Line(points = {{-60, -50}, {-40, -50}}, color = {0, 0, 255}), 
-    Line(points = {{0, 40}, {0, 100}}, color = {0, 0, 255}, visible = useSupply), 
-    Line(points = {{0, -100}, {0, -40}}, color = {0, 0, 255}, visible = useSupply)}), 
+    points = {{70, 0}, {-70, 80}, {-70, -80}, {70, 0}},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid,
+    lineColor = {0, 0, 255}),
+    Line(points = {{-100, 60}, {-70, 60}}, color = {0, 0, 255}),
+    Line(points = {{-100, -60}, {-70, -60}}, color = {0, 0, 255}),
+    Line(points = {{-60, 50}, {-40, 50}}, color = {0, 0, 255}),
+    Line(points = {{-50, -40}, {-50, -60}}, color = {0, 0, 255}),
+    Line(points = {{-60, -50}, {-40, -50}}, color = {0, 0, 255}),
+    Line(points = {{0, 40}, {0, 100}}, color = {0, 0, 255}, visible = useSupply),
+    Line(points = {{0, -100}, {0, -40}}, color = {0, 0, 255}, visible = useSupply)}),
     Documentation(info = "<html>
 <p>带饱和的理想运算放大器：</p>
 <ul>

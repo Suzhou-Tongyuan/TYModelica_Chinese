@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function multipleResolve2 
+function multipleResolve2
   "将多个矢量从坐标系1转换到坐标系2"
   extends Modelica.Icons.Function;
-  input TransformationMatrices.Orientation T 
+  input TransformationMatrices.Orientation T
     "旋转坐标系1至坐标系2的方向对象";
   input Real v1[3, :] "坐标系1中的矢量";
   output Real v2[3, size(v1, 2)] "坐标系2中的矢量";

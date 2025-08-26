@@ -1,13 +1,13 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
-model HollowCylinderRadialFlux 
+model HollowCylinderRadialFlux
   "具有径向通量的空心圆柱体；固定形状；线性或非线性材料特性"
 
   extends BaseClasses.FixedShape;
   extends Modelica.Magnetic.FluxTubes.Icons.HollowCylinderRadialFlux;
 
   parameter SI.Length l=0.01 "宽度（与通量方向正交）" 
-                                           annotation (Dialog(group= 
-          "Fixed geometry", groupImage= 
+                                           annotation (Dialog(group=
+          "Fixed geometry", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/HollowCylinderRadialFlux.png"));
   parameter SI.Radius r_i=0.01 "空心圆柱体的内半径" 
     annotation (Dialog(group="Fixed geometry"));
@@ -31,10 +31,10 @@ equation
 <p>
 对于具有非线性材料特性mu_r(B)、内外半径r_o/r_i长径比较大的磁性器件磁通管截面，可将其分成若干个径向磁通的空心圆筒磁通管串联。与仅使用一个磁通管单元进行建模相比，这样可以更真实地模拟磁通密度对半径的依赖关系.
 </p>
-</html>"), 
+</html>"),
     Icon(graphics={
         Text(
-          extent={{-150,50},{150,90}}, 
-          textString="%name", 
+          extent={{-150,50},{150,90}},
+          textString="%name",
           textColor={0,0,255})}));
 end HollowCylinderRadialFlux;

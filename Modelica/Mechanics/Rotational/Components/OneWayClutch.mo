@@ -4,14 +4,14 @@ model OneWayClutch "自由轮和离合器的并联连接"
   extends 
     Modelica.Mechanics.Rotational.Interfaces.PartialCompliantWithRelativeStates;
 
-  parameter Real mu_pos[:, 2]=[0, 0.5] 
+  parameter Real mu_pos[:, 2]=[0, 0.5]
     "正滑动摩擦系数 [-] 作为 w_rel [rad/s] 的函数 (w_rel>=0)";
-  parameter Real peak(final min=1) = 1 
+  parameter Real peak(final min=1) = 1
     "在 w==0 时 mu 的最大值的峰值 (mu0_max = peak*mu_pos[1,2])";
-  parameter Real cgeo(final min=0) = 1 
+  parameter Real cgeo(final min=0) = 1
     "包含摩擦分布假设的几何常数";
   parameter SI.Force fn_max(final min=0, start=1) "最大法向力";
-  parameter SI.AngularVelocity w_small=1e10 
+  parameter SI.AngularVelocity w_small=1e10
     "如果由于速度的重新初始化（reinit(..)）而产生跳变，则接近零的相对角速度（仅在可能发生此类冲动时设置为低值）" 
     annotation (Dialog(tab="高级"));
   extends 
@@ -19,7 +19,7 @@ model OneWayClutch "自由轮和离合器的并联连接"
 
   Real u "标准化力输入信号 (0..1)";
   SI.Force fn "法向力 (fn=fn_max*inPort.signal)";
-  Boolean startForward(start=false) 
+  Boolean startForward(start=false)
     "= true，如果 w_rel=0 并且开始向前滑动或 w_rel > w_small";
   Boolean locked(start=false) "= true，如果 w_rel=0 并且不滑动";
   Boolean stuck(start=false) "w_rel=0（锁定或开始向前滑动）";
@@ -29,7 +29,7 @@ protected
   SI.Torque tau0_max "w=0 且锁定时的最大摩擦力矩";
   Real mu0 "w=0 且滑动时的摩擦系数";
   Boolean free "= true，如果摩擦元件未激活";
-  Real sa(final unit="1") 
+  Real sa(final unit="1")
     "tau = f(a_rel) 摩擦特性的路径参数";
   constant Real eps0=1.0e-4 "相对滞后 epsilon";
   SI.Torque tau0_max_low "tau0_max 的最小值";
@@ -37,11 +37,11 @@ protected
   constant SI.AngularAcceleration unitAngularAcceleration=1;
   constant SI.Torque unitTorque=1;
 public
-  Modelica.Blocks.Interfaces.RealInput f_normalized 
+  Modelica.Blocks.Interfaces.RealInput f_normalized
     "标准化的力信号 0..1（法向力 = fn_max*f_normalized；如果 > 0，则离合器已接合）" 
     annotation (Placement(transformation(
-        origin={0,110}, 
-        extent={{20,-20},{-20,20}}, 
+        origin={0,110},
+        extent={{20,-20},{-20,20}},
         rotation=90)));
 
 equation
@@ -67,9 +67,9 @@ equation
   locked = pre(stuck) and not startForward;
 
   // 加速度和摩擦力矩
-  a_rel = unitAngularAcceleration*(if locked then 0 else sa - tau0/ 
+  a_rel = unitAngularAcceleration*(if locked then 0 else sa - tau0/
     unitTorque);
-  tau = if locked then sa*unitTorque else (if free then 0 else cgeo*fn* 
+  tau = if locked then sa*unitTorque else (if free then 0 else cgeo*fn*
     Modelica.Math.Vectors.interpolate(mu_pos[:,1], mu_pos[:,2], w_rel, 1));
 
   // 确定配置
@@ -79,17 +79,17 @@ equation
   lossPower = if stuck then 0 else tau*w_rel;
   annotation (
     Icon(
-        coordinateSystem(preserveAspectRatio=true, 
-          extent={{-100,-100},{100,100}}), 
+        coordinateSystem(preserveAspectRatio=true,
+          extent={{-100,-100},{100,100}}),
           graphics={
-        Text(extent={{-150,-110},{150,-70}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
-        Polygon(points={{-10,30},{50,0},{-10,-30},{-10,30}}, 
-          fillPattern=FillPattern.Solid), 
-        Line(visible=useHeatPort, 
-          points={{-100,-99},{-100,-40},{0,-40}}, 
-          color={191,0,0}, 
+        Text(extent={{-150,-110},{150,-70}},
+          textString="%name",
+          textColor={0,0,255}),
+        Polygon(points={{-10,30},{50,0},{-10,-30},{-10,30}},
+          fillPattern=FillPattern.Solid),
+        Line(visible=useHeatPort,
+          points={{-100,-99},{-100,-40},{0,-40}},
+          color={191,0,0},
           pattern=LinePattern.Dot)}), Documentation(info="<html>
 <p>
 这个组件模拟一个<strong>单向离合器</strong>，即一个具有两个一维转动接口的组件，在这两个一维转动接口之间存在摩擦力，这些一维转动接口通过法向力彼此压在一起。这些一维转动接口可以相对滑动。

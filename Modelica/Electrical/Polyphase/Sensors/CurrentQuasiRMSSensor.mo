@@ -1,27 +1,27 @@
 ﻿within Modelica.Electrical.Polyphase.Sensors;
-model CurrentQuasiRMSSensor 
+model CurrentQuasiRMSSensor
   "连续的多相系统准均方根电流传感器"
   extends Modelica.Icons.RoundSensor;
   extends Polyphase.Interfaces.TwoPlug;
   parameter Integer m(min=1) = 3 "相数" annotation(Evaluate=true);
-  Modelica.Blocks.Interfaces.RealOutput I(unit="A") 
+  Modelica.Blocks.Interfaces.RealOutput I(unit="A")
     "电流的连续准均方根值" annotation (Placement(
         transformation(
-        origin={0,-100}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={0,-100},
+        extent={{-10,-10},{10,10}},
         rotation=270), iconTransformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={0,-110})));
   Polyphase.Sensors.CurrentSensor currentSensor(final m=m) 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Polyphase.Blocks.QuasiRMS quasiRMS(final m=m) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={0,-50})));
 equation
-  connect(plug_p, currentSensor.plug_p) annotation (Line(points={{-100, 
+  connect(plug_p, currentSensor.plug_p) annotation (Line(points={{-100,
           0},{-100,0},{-10,0}}, color={0,0,255}));
   connect(currentSensor.plug_n, plug_n) annotation (Line(points={{10,0},{
           100,0},{100,0}}, color={0,0,255}));
@@ -29,22 +29,22 @@ equation
       points={{0,-11},{0,-38}}, color={0,0,127}));
   connect(quasiRMS.y, I) annotation (Line(
       points={{0,-61},{0,-100}}, color={0,0,127}));
-  annotation (defaultComponentName="currentRMSSensor", Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+  annotation (defaultComponentName="currentRMSSensor", Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
-                           Line(points={{0,-70},{0,-100}}), 
+                           Line(points={{0,-70},{0,-100}}),
           Text(
-          extent={{150,-100},{-150,-70}}, 
-          textString="m=%m"), 
+          extent={{150,-100},{-150,-70}},
+          textString="m=%m"),
         Text(
-          extent={{-150,80},{150,120}}, 
-              textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,80},{150,120}},
+              textString="%name",
+          textColor={0,0,255}),
         Text(
-          extent={{-30,-10},{30,-70}}, 
-          textColor={64,64,64}, 
-          textString="A"),  Line(points={{100,0},{-100,0}}, color={0,0,255})}), 
+          extent={{-30,-10},{30,-70}},
+          textColor={64,64,64},
+          textString="A"),  Line(points={{100,0},{-100,0}}, color={0,0,255})}),
       Documentation(revisions="<html>
-</html>", 
+</html>",
       info="<html>
 <p>
 该传感器确定多相电流系统的连续准<a href=\"Modelica://Modelica.Blocks.Math.RootMeanSquare\">均方根</a>值，代表等效的均方根电流向量<code>I</code>或相量。如果电流波形偏离正弦曲线，传感器的输出将不会完全是平均均方根值。

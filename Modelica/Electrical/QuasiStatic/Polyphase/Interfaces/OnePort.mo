@@ -2,25 +2,25 @@
 partial model OnePort "两个接口、参考连接和电压、电流声明"
   parameter Integer m(min=1) = 3 "相位数" annotation(Evaluate=true);
   SI.ComplexVoltage v[m] "复电压";
-  SI.Voltage abs_v[m]=Modelica.ComplexMath.abs(v) 
+  SI.Voltage abs_v[m]=Modelica.ComplexMath.abs(v)
     "复电压的幅值";
-  SI.Angle arg_v[m]=Modelica.ComplexMath.arg(v) 
+  SI.Angle arg_v[m]=Modelica.ComplexMath.arg(v)
     "复电压的幅角";
   SI.ComplexCurrent i[m] "复电流";
-  SI.Current abs_i[m]=Modelica.ComplexMath.abs(i) 
+  SI.Current abs_i[m]=Modelica.ComplexMath.abs(i)
     "复电流的幅值";
-  SI.Angle arg_i[m]=Modelica.ComplexMath.arg(i) 
+  SI.Angle arg_i[m]=Modelica.ComplexMath.arg(i)
     "复电流的幅角";
-  SI.ActivePower P[m]={Modelica.ComplexMath.real(v[k]* 
+  SI.ActivePower P[m]={Modelica.ComplexMath.real(v[k]*
       Modelica.ComplexMath.conj(i[k])) for k in 1:m} "有功功率";
   SI.ActivePower P_total=sum(P) "总有功功率";
-  SI.ReactivePower Q[m]={Modelica.ComplexMath.imag(v[k]* 
+  SI.ReactivePower Q[m]={Modelica.ComplexMath.imag(v[k]*
       Modelica.ComplexMath.conj(i[k])) for k in 1:m} "无功功率";
   SI.ReactivePower Q_total=sum(Q) "总无功功率";
-  SI.ApparentPower S[m]={Modelica.ComplexMath.abs(v[k]* 
-      Modelica.ComplexMath.conj(i[k])) for k in 1:m} 
+  SI.ApparentPower S[m]={Modelica.ComplexMath.abs(v[k]*
+      Modelica.ComplexMath.conj(i[k])) for k in 1:m}
     "复视在功率的幅值";
-  SI.ApparentPower S_total=sqrt(P_total^2 + Q_total^2) 
+  SI.ApparentPower S_total=sqrt(P_total^2 + Q_total^2)
     "总复视在功率的幅值";
   Real pf[m]={cos(Modelica.ComplexMath.arg(Complex(P[k], Q[k]))) for k in 1
       :m} "功率因数";
@@ -28,13 +28,13 @@ partial model OnePort "两个接口、参考连接和电压、电流声明"
   Real pf_total = cos(Modelica.ComplexMath.arg(Complex(P_total,Q_total)))
     "总功率因数";
   */
-  SI.AngularVelocity omega 
+  SI.AngularVelocity omega
     "参考系的角速度";
 
-  PositivePlug plug_p(final m=m) 
+  PositivePlug plug_p(final m=m)
     "正准静态多相插头" annotation (Placement(
         transformation(extent={{-110,-10},{-90,10}})));
-  NegativePlug plug_n(final m=m) 
+  NegativePlug plug_n(final m=m)
     "负准静态多相插头" annotation (Placement(
         transformation(extent={{90,-10},{110,10}})));
 equation

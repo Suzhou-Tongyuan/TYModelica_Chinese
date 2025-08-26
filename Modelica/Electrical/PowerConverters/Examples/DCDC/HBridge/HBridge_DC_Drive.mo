@@ -1,34 +1,34 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.DCDC.HBridge;
 model HBridge_DC_Drive "带驱动直流电机的H桥直流直流变换器"
-  extends ExampleTemplates.HBridge(signalPWM(useConstantDutyCycle=false), 
+  extends ExampleTemplates.HBridge(signalPWM(useConstantDutyCycle=false),
       constantVoltage(V=120));
   extends Modelica.Icons.Example;
-  parameter SI.Inductance Ld=3*dcpmData.La 
+  parameter SI.Inductance Ld=3*dcpmData.La
     "平滑电感";
-  final parameter SI.Torque tauNominal=dcpmData.ViNominal 
+  final parameter SI.Torque tauNominal=dcpmData.ViNominal
       *dcpmData.IaNominal/dcpmData.wNominal "额定转矩";
   parameter Real dMin=0.2 "最小占空比";
   parameter Real dMax=1 - dMin "最大占空比";
   Modelica.Electrical.Machines.BasicMachines.DCMachines.DC_PermanentMagnet 
     dcpm(
-    VaNominal=dcpmData.VaNominal, 
-    IaNominal=dcpmData.IaNominal, 
-    wNominal=dcpmData.wNominal, 
-    TaNominal=dcpmData.TaNominal, 
-    Ra=dcpmData.Ra, 
-    TaRef=dcpmData.TaRef, 
-    La=dcpmData.La, 
-    Jr=dcpmData.Jr, 
-    useSupport=false, 
-    Js=dcpmData.Js, 
-    frictionParameters=dcpmData.frictionParameters, 
-    coreParameters=dcpmData.coreParameters, 
-    strayLoadParameters=dcpmData.strayLoadParameters, 
-    brushParameters=dcpmData.brushParameters, 
-    ia(start=0, fixed=true), 
-    TaOperational=293.15, 
-    alpha20a=dcpmData.alpha20a, 
-    phiMechanical(fixed=true, start=0), 
+    VaNominal=dcpmData.VaNominal,
+    IaNominal=dcpmData.IaNominal,
+    wNominal=dcpmData.wNominal,
+    TaNominal=dcpmData.TaNominal,
+    Ra=dcpmData.Ra,
+    TaRef=dcpmData.TaRef,
+    La=dcpmData.La,
+    Jr=dcpmData.Jr,
+    useSupport=false,
+    Js=dcpmData.Js,
+    frictionParameters=dcpmData.frictionParameters,
+    coreParameters=dcpmData.coreParameters,
+    strayLoadParameters=dcpmData.strayLoadParameters,
+    brushParameters=dcpmData.brushParameters,
+    ia(start=0, fixed=true),
+    TaOperational=293.15,
+    alpha20a=dcpmData.alpha20a,
+    phiMechanical(fixed=true, start=0),
     wMechanical(fixed=true, start=0)) annotation (Placement(
         transformation(extent={{20,-80},{40,-60}})));
   parameter
@@ -46,8 +46,8 @@ model HBridge_DC_Drive "带驱动直流电机的H桥直流直流变换器"
     annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor(L=Ld) annotation (
       Placement(transformation(
-        origin={40,30}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={40,30},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
 equation
   connect(inductor.n, dcpm.pin_ap) annotation (Line(
@@ -64,9 +64,9 @@ equation
       points={{-79,-60},{-62,-60}}, color={0,0,127}));
   annotation (
     experiment(
-      StopTime=24, 
-      Interval=0.0002, 
-      Tolerance=1e-06), 
+      StopTime=24,
+      Interval=0.0002,
+      Tolerance=1e-06),
     Documentation(info="<html>
 <p>这个带有 DC 驱动的 H 桥示例演示了 DC 机器在四个象限中的运行。
 DC 输出电压等于<code>2 * (dutyCycle - 0.5)</code>乘以输入电压。</p>

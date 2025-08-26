@@ -1,17 +1,17 @@
 ﻿within Modelica.Mechanics.MultiBody.Sensors.Internal;
-model BasicAbsolutePosition 
+model BasicAbsolutePosition
   "用于测量绝对位置矢量的基本传感器"
   import Modelica.Mechanics.MultiBody.Types.ResolveInFrameA;
   extends Modelica.Mechanics.MultiBody.Sensors.Internal.PartialAbsoluteBaseSensor;
   Modelica.Blocks.Interfaces.RealOutput r[3](
-    each final quantity="Length", each final unit = "m") 
+    each final quantity="Length", each final unit = "m")
     "在由resolveInFrame定义的坐标系中解析的绝对位置矢量frame_a.r_0" 
     annotation (Placement(transformation(
-        origin={110,0}, 
+        origin={110,0},
         extent={{-10,-10},{10,10}})));
 
-  parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameA resolveInFrame= 
-    Modelica.Mechanics.MultiBody.Types.ResolveInFrameA.frame_a 
+  parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameA resolveInFrame=
+    Modelica.Mechanics.MultiBody.Types.ResolveInFrameA.frame_a
     "解析输出矢量r所在的坐标系(world、frame_a或frame_resolve)";
 
 equation
@@ -25,17 +25,17 @@ equation
     assert(false, "参数resolveInFrame的值错误");
     r = zeros(3);
   end if;
-  annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
-            -100},{100,100}}), 
+  annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
+            -100},{100,100}}),
       graphics={
         Text(
-          extent={{-127,75},{134,123}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-127,75},{134,123}},
+          textString="%name",
+          textColor={0,0,255}),
         Text(
-          extent={{-50,-14},{50,-54}}, 
-          textColor={64,64,64}, 
-          textString="m")}), 
+          extent={{-50,-14},{50,-54}},
+          textColor={64,64,64},
+          textString="m")}),
     Documentation(info="<html>
 <p>
 这个基本传感器旨在在高级传感器中使用，应确定frame_a原点的绝对位置矢量。

@@ -5,48 +5,48 @@ model Backlash "演示反弹(backlash)的案例"
   Rotational.Components.Fixed fixed1 
     annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
   Rotational.Components.SpringDamper springDamper(
-    c=20E3, 
-    d=50, 
+    c=20E3,
+    d=50,
     phi_nominal=1) 
     annotation (Placement(transformation(extent={{-20,30},{0,50}})));
   Rotational.Components.Inertia inertia1(
-    J=5, 
-    w(fixed=true, start=0), 
+    J=5,
+    w(fixed=true, start=0),
     phi(
-      fixed=true, 
-      displayUnit="deg", 
+      fixed=true,
+      displayUnit="deg",
       start=1.570796326794897)) 
     annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Rotational.Components.Fixed fixed2 
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   Rotational.Components.ElastoBacklash elastoBacklash(
-    c=20E3, 
-    d=50, 
-    b(displayUnit="deg") = 0.7853981633974483, 
+    c=20E3,
+    d=50,
+    b(displayUnit="deg") = 0.7853981633974483,
     phi_nominal=1) 
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Rotational.Components.Inertia inertia2(
-    J=5, 
-    w(fixed=true, start=0), 
+    J=5,
+    w(fixed=true, start=0),
     phi(
-      fixed=true, 
-      start=1.570796326794897, 
+      fixed=true,
+      start=1.570796326794897,
       displayUnit="deg")) 
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Rotational.Components.Fixed fixed3 
     annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
   Components.ElastoBacklash2           elastoBacklash2(
-    c=20E3, 
-    d=50, 
-    phi_nominal=1, 
+    c=20E3,
+    d=50,
+    phi_nominal=1,
     b(displayUnit="deg") = 0.78539816339745) 
     annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Rotational.Components.Inertia inertia3(
-    J=5, 
-    w(fixed=true, start=0), 
+    J=5,
+    w(fixed=true, start=0),
     phi(
-      fixed=true, 
-      start=1.570796326794897, 
+      fixed=true,
+      start=1.570796326794897,
       displayUnit="deg")) 
     annotation (Placement(transformation(extent={{20,-50},{40,-30}})));
 equation
@@ -69,6 +69,6 @@ equation
 它展示了<a href=\"modelica://Modelica.Mechanics.Rotational.Components.ElastoBacklash\" target=\"\">ElastoBacklash</a>和
 <a href=\"modelica://Modelica.Mechanics.Rotational.Components.ElastoBacklash2\" target=\"\">ElastoBacklash2</a>组件的差异(ElastoBacklash2组件在接触发生时生成事件，并且扭矩发生不连续的变化)。
 </p>
-</html>"), 
+</html>"),
        experiment(StopTime=1.0, Interval=0.001));
 end Backlash;

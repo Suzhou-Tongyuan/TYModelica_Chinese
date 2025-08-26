@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function absoluteRotation 
+function absoluteRotation
   "从另一个绝对方向和相对方向对象返回绝对方向对象"
 
   extends Modelica.Icons.Function;

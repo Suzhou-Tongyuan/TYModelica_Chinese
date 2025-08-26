@@ -17,9 +17,9 @@ Modelica.Clocked.IntegerSignals.Sampler.ShiftSample  shiftSample1(
   annotation (Placement(transformation(extent={{-30,24},{-18,36}})));
 equation
   connect(periodicClock.y, sample1.clock) annotation (Line(
-      points={{-55.4,0},{-46,0},{-46,22.8}}, 
-      color={175,175,175}, 
-      pattern=LinePattern.Dot, 
+      points={{-55.4,0},{-46,0},{-46,22.8}},
+      color={175,175,175},
+      pattern=LinePattern.Dot,
       thickness=0.5));
   connect(table.y, sample1.u) 
     annotation (Line(points={{-59,30},{-53.2,30}}, color={255,127,0}));
@@ -27,7 +27,7 @@ equation
     annotation (Line(points={{-39.4,30},{-31.2,30}}, color={255,127,0}));
   connect(shiftSample1.y, hold1.u) 
     annotation (Line(points={{-17.4,30},{-9.2,30}}, color={255,127,0}));
-  annotation (experiment(StopTime=0.2), 
+  annotation (experiment(StopTime=0.2),
   Documentation(info="<html>
 <p>
 模块文件的基本范例 

@@ -8,10 +8,10 @@ equation
   omega = 2*Modelica.Constants.pi*f;
   v = Complex(V*cos(phi), V*sin(phi));
   annotation (Icon(graphics={
-        Line(points={{-50,0},{50,0}}, color={85,170,255}), 
-        Line(points={{-70,30},{-70,10}}, color={85,170,255}), 
-        Line(points={{-80,20},{-60,20}}, color={85,170,255}), 
-        Line(points={{60,20},{80,20}}, color={85,170,255})}), 
+        Line(points={{-50,0},{50,0}}, color={85,170,255}),
+        Line(points={{-70,30},{-70,10}}, color={85,170,255}),
+        Line(points={{-80,20},{-60,20}}, color={85,170,255}),
+        Line(points={{60,20},{80,20}}, color={85,170,255})}),
                                          Documentation(info="<html>
 
 <p>

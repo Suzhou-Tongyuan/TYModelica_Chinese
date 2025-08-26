@@ -1,109 +1,109 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.InductionMachines;
-model IMC_Steinmetz 
+model IMC_Steinmetz
   "感应电机与鼠笼和斯坦梅茨连接"
 
   extends Modelica.Icons.Example;
   constant Integer m=3 "相数";
-  parameter SI.Voltage VNominal=100 
+  parameter SI.Voltage VNominal=100
     "每相标称均方根电压";
   parameter SI.Frequency fNominal=aimcData.fsNominal "标称频率";
   parameter SI.Time tStart1=0.1 "开始时间";
-  parameter SI.Capacitance Cr=0.0035 
+  parameter SI.Capacitance Cr=0.0035
     "电动机运行电容器";
-  parameter SI.Capacitance Cs=5*Cr 
+  parameter SI.Capacitance Cs=5*Cr
     "电机(附加)启动电容器";
-  parameter SI.AngularVelocity wSwitch(displayUnit="rev/min")= 
-       1350*2*Modelica.Constants.pi/60 
+  parameter SI.AngularVelocity wSwitch(displayUnit="rev/min")=
+       1350*2*Modelica.Constants.pi/60
     "切断启动电容的速度";
   parameter SI.Torque TLoad=2/3*161.4 "额定负载扭矩";
-  parameter SI.AngularVelocity wLoad(displayUnit="rev/min")= 
+  parameter SI.AngularVelocity wLoad(displayUnit="rev/min")=
        1462.5*2*Modelica.Constants.pi/60 "额定负载速度";
-  parameter SI.Inertia JLoad=0.29 
+  parameter SI.Inertia JLoad=0.29
     "载荷的转动惯量";
   Magnetic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage aimc(
-    p=aimcData.p, 
-    fsNominal=aimcData.fsNominal, 
-    TsRef=aimcData.TsRef, 
-    alpha20s(displayUnit="1/K") = aimcData.alpha20s, 
-    Jr=aimcData.Jr, 
-    Js=aimcData.Js, 
-    frictionParameters=aimcData.frictionParameters, 
-    phiMechanical(fixed=true), 
-    wMechanical(fixed=true), 
-    statorCoreParameters=aimcData.statorCoreParameters, 
-    strayLoadParameters=aimcData.strayLoadParameters, 
-    TrRef=aimcData.TrRef, 
-    Rs=aimcData.Rs*m/3, 
-    Lssigma=aimcData.Lssigma*m/3, 
-    Lszero=aimcData.Lszero*m/3, 
-    Lm=aimcData.Lm*m/3, 
-    Lrsigma=aimcData.Lrsigma*m/3, 
-    Rr=aimcData.Rr*m/3, 
-    TsOperational=293.15, 
-    effectiveStatorTurns=aimcData.effectiveStatorTurns, 
-    alpha20r=aimcData.alpha20r, 
+    p=aimcData.p,
+    fsNominal=aimcData.fsNominal,
+    TsRef=aimcData.TsRef,
+    alpha20s(displayUnit="1/K") = aimcData.alpha20s,
+    Jr=aimcData.Jr,
+    Js=aimcData.Js,
+    frictionParameters=aimcData.frictionParameters,
+    phiMechanical(fixed=true),
+    wMechanical(fixed=true),
+    statorCoreParameters=aimcData.statorCoreParameters,
+    strayLoadParameters=aimcData.strayLoadParameters,
+    TrRef=aimcData.TrRef,
+    Rs=aimcData.Rs*m/3,
+    Lssigma=aimcData.Lssigma*m/3,
+    Lszero=aimcData.Lszero*m/3,
+    Lm=aimcData.Lm*m/3,
+    Lrsigma=aimcData.Lrsigma*m/3,
+    Rr=aimcData.Rr*m/3,
+    TsOperational=293.15,
+    effectiveStatorTurns=aimcData.effectiveStatorTurns,
+    alpha20r=aimcData.alpha20r,
     TrOperational=293.15) 
     annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
-  Modelica.Electrical.Analog.Sources.SineVoltage sineVoltage(f= 
+  Modelica.Electrical.Analog.Sources.SineVoltage sineVoltage(f=
         fNominal, V=sqrt(2)*VNominal) annotation (Placement(
         transformation(extent={{-50,90},{-70,70}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-90,80}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-90,80},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=tStart1) 
     annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
   Modelica.Electrical.Analog.Ideal.IdealClosingSwitch idealCloser 
     annotation (Placement(transformation(
-        origin={-20,80}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={-20,80},
+        extent={{10,-10},{-10,10}},
         rotation=180)));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=JLoad) 
     annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque 
     quadraticLoadTorque(
-    w_nominal=wLoad, 
-    TorqueDirection=false, 
-    tau_nominal=-TLoad, 
+    w_nominal=wLoad,
+    TorqueDirection=false,
+    tau_nominal=-TLoad,
     useSupport=false) annotation (Placement(transformation(extent={{90,-50},{70,-30}})));
   Modelica.Electrical.Machines.Utilities.TerminalBox TerminalBox1(
       terminalConnection="D") 
     annotation (Placement(transformation(extent={{-20,-34},{0,-14}})));
   Modelica.Electrical.Polyphase.Basic.PlugToPin_p plugToPin_p3(m=m, k=3) 
     annotation (Placement(transformation(
-        origin={-30,18}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-30,18},
+        extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Electrical.Polyphase.Basic.PlugToPin_p plugToPin_p2(m=m, k=2) 
     annotation (Placement(transformation(
-        origin={-10,18}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-10,18},
+        extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Electrical.Polyphase.Basic.PlugToPin_p plugToPin_p1(m=m, k=1) 
     annotation (Placement(transformation(
-        origin={10,18}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={10,18},
+        extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Electrical.Analog.Basic.Capacitor cRun(C=Cr) annotation (
       Placement(transformation(
-        origin={10,40}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={10,40},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Capacitor cStart(C=Cs) annotation (
       Placement(transformation(
-        origin={30,40}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={30,40},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Analog.Ideal.IdealOpeningSwitch idealOpener 
     annotation (Placement(transformation(
-        origin={30,70}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={30,70},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold= 
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=
         wSwitch) annotation (Placement(transformation(
-        origin={60,40}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={60,40},
+        extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor relSpeedSensor annotation (
       Placement(transformation(extent={{-10,-10},{10,10}}, origin={30,-20})));
@@ -113,8 +113,8 @@ model IMC_Steinmetz
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
   Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensor 
     annotation (Placement(transformation(
-        origin={-10,-10}, 
-        extent={{-10,10},{10,-10}}, 
+        origin={-10,-10},
+        extent={{-10,10},{10,-10}},
         rotation=270)));
 initial equation
   aimc.is = zeros(3);
@@ -126,9 +126,9 @@ equation
     annotation (Line(points={{-80,80},{-70,80}}, color={0,0,255}));
   connect(sineVoltage.p, idealCloser.p) 
     annotation (Line(points={{-50,80},{-30,80}}, color={0,0,255}));
-  connect(booleanStep.y, idealCloser.control) annotation (Line(points={{-29,50},{-20,50},{-20,68}}, 
+  connect(booleanStep.y, idealCloser.control) annotation (Line(points={{-29,50},{-20,50},{-20,68}},
                                   color={255,0,255}));
-  connect(plugToPin_p3.pin_p, sineVoltage.n) annotation (Line(points={{-30,20},{-70,20},{-70,80}}, 
+  connect(plugToPin_p3.pin_p, sineVoltage.n) annotation (Line(points={{-30,20},{-70,20},{-70,80}},
                                   color={0,0,255}));
   connect(idealCloser.n, plugToPin_p2.pin_p) 
     annotation (Line(points={{-10,80},{-10,20}}, color={0,0,255}));
@@ -136,13 +136,13 @@ equation
     annotation (Line(points={{10,30},{10,20}}, color={0,0,255}));
   connect(loadInertia.flange_b, quadraticLoadTorque.flange) 
     annotation (Line(points={{60,-40},{70,-40}}));
-  connect(cRun.p, idealCloser.n) annotation (Line(points={{10,50},{10,80},{-10,80}}, 
+  connect(cRun.p, idealCloser.n) annotation (Line(points={{10,50},{10,80},{-10,80}},
                      color={0,0,255}));
   connect(plugToPin_p1.pin_p, cStart.n) 
     annotation (Line(points={{10,20},{30,20},{30,30}}, color={0,0,255}));
-  connect(idealOpener.n, cStart.p) annotation (Line(points={{30,60},{30,50}}, 
+  connect(idealOpener.n, cStart.p) annotation (Line(points={{30,60},{30,50}},
                                   color={0,0,255}));
-  connect(idealOpener.p, idealCloser.n) annotation (Line(points={{30,80},{-10,80}}, 
+  connect(idealOpener.p, idealCloser.n) annotation (Line(points={{30,80},{-10,80}},
                              color={0,0,255}));
   connect(greaterThreshold.y, idealOpener.control) annotation (Line(
         points={{60,51},{60,70},{42,70}}, color={255,0,255}));

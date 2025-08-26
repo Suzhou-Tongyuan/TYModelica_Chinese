@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.MultiBody.Types;
 type RotationTypes = enumeration(
-    RotationAxis "围绕固定轴在角度上旋转frame_a", 
-    TwoAxesVectors "在frame_a中解析frame_b的两个矢量", 
-    PlanarRotationSequence "平面旋转序列") 
+    RotationAxis "围绕固定轴在角度上旋转frame_a",
+    TwoAxesVectors "在frame_a中解析frame_b的两个矢量",
+    PlanarRotationSequence "平面旋转序列")
   "枚举类型，定义了frame_b相对于frame_a的固定方向的指定方式" 
     annotation (
       Documentation(Evaluate=true, info="<html>

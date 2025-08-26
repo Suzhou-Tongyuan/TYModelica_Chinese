@@ -1,9 +1,9 @@
 ﻿within Modelica.Magnetic.FluxTubes.UsersGuide.Hysteresis;
-class DynamicHysteresis "动态磁滞（涡流）"
+class DynamicHysteresis "动态磁滞(涡流)"
   extends Modelica.Icons.Information;
   annotation (Documentation(info="<html>
 
-<h4>动态磁滞（涡流）</h4>
+<h4>动态磁滞(涡流)</h4>
 
 <p>
 <<a href=\"modelica://Modelica.Magnetic.FluxTubes.Shapes. HysteresisAndMagnets\">HysteresisAndMagnets</a> 能够模拟涡流(动态迟滞)，外加核心材料的静态迟滞行为。涡流的计算可以通过相应元素参数对话框的“LossesAndHeat”选项卡中的开关<code>includeEddyCurrents</code>激活。元件的总磁场强度<code>H</code>为铁磁部分<code>Hstat</code>与涡流部分<code>Heddy:</code>之和。

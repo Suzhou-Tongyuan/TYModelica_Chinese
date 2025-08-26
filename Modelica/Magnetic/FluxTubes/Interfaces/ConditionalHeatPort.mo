@@ -1,15 +1,15 @@
 ﻿within Modelica.Magnetic.FluxTubes.Interfaces;
-partial model ConditionalHeatPort 
+partial model ConditionalHeatPort
   "部分模型包括一个条件热端口，以描述通过热网的功率损失"
 
   parameter Boolean useHeatPort = false "= true, 如果启用了HeatPort" 
   annotation(Evaluate=true, HideResult=true, choices(checkBox=true), Dialog(tab="Losses and heat", group="HeatPort"));
-  parameter SI.Temperature T=293.15 
+  parameter SI.Temperature T=293.15
     "如果 useHeatPort = false，固定设备温度" annotation(Dialog(tab="Losses and heat", group="HeatPort", enable=not useHeatPort));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(final T=T_heatPort, final Q_flow=-LossPower) if useHeatPort 
-    annotation (Placement(transformation(extent={{-10,-110},{10,-90}}), 
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
         iconTransformation(extent={{-10,-110},{10,-90}})));
-  SI.Power LossPower 
+  SI.Power LossPower
     "通过HeatPort失去电源离开组件";
   SI.Temperature T_heatPort "热口温度";
 equation
@@ -23,7 +23,7 @@ equation
        by Christoph Clauss<br> initially implemented<br>
        </li>
 </ul>
-</html>", 
+</html>",
       info="<html>
 <p>
 这种局部模型为连接到热网提供了一个有条件的加热端口.

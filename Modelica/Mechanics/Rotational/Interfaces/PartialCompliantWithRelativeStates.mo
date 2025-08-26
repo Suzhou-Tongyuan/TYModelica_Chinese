@@ -1,15 +1,15 @@
 ﻿within Modelica.Mechanics.Rotational.Interfaces;
-partial model PartialCompliantWithRelativeStates 
+partial model PartialCompliantWithRelativeStates
     "具有相对角度和角速度作为首选状态的两个一维转动接口的弹性连接的部分模型"
 
   SI.Angle phi_rel(
-    start=0, 
-    stateSelect=stateSelect, 
+    start=0,
+    stateSelect=stateSelect,
     nominal=if phi_nominal >= Modelica.Constants.eps then phi_nominal else 
         1) "相对转动角度（= flange_b.phi - flange_a.phi）";
-  SI.AngularVelocity w_rel(start=0, stateSelect=stateSelect) 
+  SI.AngularVelocity w_rel(start=0, stateSelect=stateSelect)
     "相对角速度（= der(phi_rel))";
-  SI.AngularAcceleration a_rel(start=0) 
+  SI.AngularAcceleration a_rel(start=0)
     "相对角加速度（= der(w_rel))";
   SI.Torque tau "一维转动接口之间的扭矩（= flange_b.tau）";
   Flange_a flange_a "具有弹性连接的一维转动组件的左侧一维转动接口" 
@@ -18,10 +18,10 @@ partial model PartialCompliantWithRelativeStates
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
   parameter SI.Angle phi_nominal(
-    displayUnit="rad", 
+    displayUnit="rad",
     min=0.0) = 1e-4 "phi_rel的标称值（用于缩放）" 
     annotation (Dialog(tab="高级"));
-  parameter StateSelect stateSelect=StateSelect.prefer 
+  parameter StateSelect stateSelect=StateSelect.prefer
     "优先使用phi_rel和w_rel作为状态" 
     annotation (HideResult=true, Dialog(tab="高级"));
 

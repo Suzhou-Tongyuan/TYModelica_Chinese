@@ -3,26 +3,26 @@ connector NegativeMagneticPort "负准静态磁口"
   extends Magnetic.QuasiStatic.FundamentalWave.Interfaces.MagneticPort;
   Modelica.Electrical.QuasiStatic.Types.Reference reference "Reference";
   annotation (
-    defaultComponentName="port_n", 
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
-            -100},{100,100}}), 
+    defaultComponentName="port_n",
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{100,100}}),
             graphics={Text(
-              extent={{-100,100},{100,60}}, 
-              textColor={255,170,85}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid, 
+              extent={{-100,100},{100,60}},
+              textColor={255,170,85},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid,
               textString="%name"), Rectangle(
-          extent={{-40,40},{40,-40}}, 
-          lineColor={255,170,85}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid)}), 
+          extent={{-40,40},{40,-40}},
+          lineColor={255,170,85},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), 
+            100,100}}),
          graphics={Rectangle(
-          extent={{-100,100},{100,-100}}, 
-          lineColor={255,170,85}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid)}), 
+          extent={{-100,100},{100,-100}},
+          lineColor={255,170,85},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
 <p>
 负磁端口是基于

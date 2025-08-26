@@ -7,13 +7,13 @@ model Rectifier "整流器示例"
   output SI.Current Itr=iAC.y_rms "瞬态电流";
   output SI.Current Iqs=iQS.len "QS电流";
   Sources.VoltageSource voltageQS(
-    f=50, 
-    V=VAC, 
-    phi=0, 
-    i(re(start=0), im(start=0)), 
+    f=50,
+    V=VAC,
+    phi=0,
+    i(re(start=0), im(start=0)),
     gamma(fixed=true, start=0)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-80,50})));
   Basic.Resistor resistorQS(R_ref=50E-3) 
     annotation (Placement(transformation(extent={{-72,50},{-52,70}})));
@@ -23,7 +23,7 @@ model Rectifier "整流器示例"
     annotation (Placement(transformation(extent={{-20,70},{0,90}})));
   Basic.Ground groundQS 
     annotation (Placement(transformation(extent={{-20,10},{0,30}})));
-  Utilities.IdealACDCConverter rectifierQS(conversionFactor= 
+  Utilities.IdealACDCConverter rectifierQS(conversionFactor=
         conversionFactor) 
     annotation (Placement(transformation(extent={{-10,40},{10,60}})));
   Modelica.Electrical.Analog.Basic.Ground groundDC1 
@@ -32,15 +32,15 @@ model Rectifier "整流器示例"
     annotation (Placement(transformation(extent={{20,70},{40,50}})));
   Modelica.Electrical.Analog.Basic.VariableConductor load1 annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={50,50})));
   Modelica.Electrical.Analog.Sources.SineVoltage voltageAC(
-    V=sqrt(2)*VAC, 
-    f=50, 
+    V=sqrt(2)*VAC,
+    f=50,
     phase=pi/2) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=270, 
+        extent={{-10,10},{10,-10}},
+        rotation=270,
         origin={-80,-50})));
   Modelica.Electrical.Analog.Basic.Resistor resistorAC(R=50E-3) 
     annotation (Placement(transformation(extent={{-70,-50},{-50,-30}})));
@@ -58,12 +58,12 @@ model Rectifier "整流器示例"
     annotation (Placement(transformation(extent={{40,-30},{60,-10}})));
   Modelica.Electrical.Analog.Basic.VariableConductor load2 annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={50,-50})));
   Modelica.Blocks.Sources.Ramp ramp(
-    height=1, 
-    duration=0.8, 
+    height=1,
+    duration=0.8,
     startTime=0.1) 
     annotation (Placement(transformation(extent={{100,-10},{80,10}})));
 equation
@@ -138,6 +138,6 @@ QS电压被整流（使用
 准静态模型需要在QS侧和DC侧都接地，
 而瞬态模型可能只有一个地，因为交流侧和直流侧通过二极管连接。
 </p>
-</html>"), 
+</html>"),
        experiment(StopTime=1.0, Interval=0.0001));
 end Rectifier;

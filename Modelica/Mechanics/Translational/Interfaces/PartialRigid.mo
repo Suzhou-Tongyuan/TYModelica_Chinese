@@ -1,9 +1,9 @@
 ﻿within Modelica.Mechanics.Translational.Interfaces;
-partial model PartialRigid 
+partial model PartialRigid
   "两个一维平动接口的刚性连接"
-  SI.Position s 
+  SI.Position s
     "组件中心的绝对位置 (s = flange_a.s + L/2 = flange_b.s - L/2)";
-  parameter SI.Length L(start=0) 
+  parameter SI.Length L(start=0)
     "组件的长度，从左一维平动接口到右一维平动接口 (= flange_b.s - flange_a.s)";
   extends Translational.Interfaces.PartialTwoFlanges;
 equation

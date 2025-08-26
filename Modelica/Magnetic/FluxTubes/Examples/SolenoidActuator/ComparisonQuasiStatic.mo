@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FluxTubes.Examples.SolenoidActuator;
-model ComparisonQuasiStatic 
+model ComparisonQuasiStatic
   "两个电磁线圈模型的电枢强制运动速度较慢，因此电磁场和电流都是准静态的"
 
   extends Modelica.Icons.Example;
@@ -7,39 +7,39 @@ model ComparisonQuasiStatic
   parameter SI.Voltage v_step=12 "应用电压";
 
   Modelica.Blocks.Sources.Ramp x_set(
-    duration=10, 
-    height=-(advancedSolenoid.x_max - advancedSolenoid.x_min), 
-    offset=advancedSolenoid.x_max) 
+    duration=10,
+    height=-(advancedSolenoid.x_max - advancedSolenoid.x_min),
+    offset=advancedSolenoid.x_max)
     "指定电枢位置，从 x_max 到 x_min 的慢速强制运动" 
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
   Modelica.Electrical.Analog.Basic.Ground advancedGround annotation (
       Placement(transformation(extent={{-80,10},{-60,30}})));
   Modelica.Electrical.Analog.Sources.StepVoltage advancedSource(V=v_step) 
     annotation (Placement(transformation(
-        origin={-70,50}, 
-        extent={{-10,10},{10,-10}}, 
+        origin={-70,50},
+        extent={{-10,10},{10,-10}},
         rotation=270)));
   FluxTubes.Examples.SolenoidActuator.Components.AdvancedSolenoid advancedSolenoid 
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
-  Modelica.Mechanics.Translational.Sources.Position advancedFeed_x(f_crit= 
+  Modelica.Mechanics.Translational.Sources.Position advancedFeed_x(f_crit=
        1000, exact=false) 
                          annotation (Placement(transformation(
-        origin={0,50}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={0,50},
+        extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.Electrical.Analog.Basic.Ground simpleGround annotation (
       Placement(transformation(extent={{-80,-90},{-60,-70}})));
   Modelica.Electrical.Analog.Sources.StepVoltage simpleSource(V=v_step) 
     annotation (Placement(transformation(
-        origin={-70,-50}, 
-        extent={{-10,10},{10,-10}}, 
+        origin={-70,-50},
+        extent={{-10,10},{10,-10}},
         rotation=270)));
   FluxTubes.Examples.SolenoidActuator.Components.SimpleSolenoid simpleSolenoid 
     annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
-  Modelica.Mechanics.Translational.Sources.Position simpleFeed_x(f_crit= 
+  Modelica.Mechanics.Translational.Sources.Position simpleFeed_x(f_crit=
         1000, exact=false) annotation (Placement(transformation(
-        origin={0,-50}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={0,-50},
+        extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.Blocks.Tables.CombiTable1Ds comparisonWithFEA(table=[0.00025,
         -85.8619, 0.00014821, 0.11954; 0.0005, -59.9662, 0.00013931,
@@ -54,29 +54,29 @@ model ComparisonQuasiStatic
         0.00375, -5.0469, 6.8527e-005, 0.046867; 0.004, -4.6573,
         6.6526e-005, 0.045158; 0.00425, -4.2977, 6.4425e-005, 0.043442;
         0.0045, -4.0912, 6.2747e-005, 0.04205; 0.00475, -3.7456,
-        6.1231e-005, 0.040733; 0.005, -3.5869, 5.9691e-005, 0.039467]) 
+        6.1231e-005, 0.040733; 0.005, -3.5869, 5.9691e-005, 0.039467])
     "Valid for u_source=12V only; column 1: position, col.2: force, col.3: armature flux, col.4: inductance" 
     annotation (Placement(transformation(extent={{60,40},{80,60}})));
 equation
   connect(advancedGround.p, advancedSource.n) 
     annotation (Line(points={{-70,30},{-70,40}}, color={0,0,255}));
-  connect(x_set.y, advancedFeed_x.s_ref) annotation (Line(points={{59,0}, 
+  connect(x_set.y, advancedFeed_x.s_ref) annotation (Line(points={{59,0},
           {20,0},{20,50},{12,50}}, color={0,0,127}));
-  connect(simpleSolenoid.p, simpleSource.p) annotation (Line(points={{-40,-40},{-50,-40},{-50,-40},{-70,-40}}, 
+  connect(simpleSolenoid.p, simpleSource.p) annotation (Line(points={{-40,-40},{-50,-40},{-50,-40},{-70,-40}},
                                                color={0,0,255}));
-  connect(simpleSolenoid.n, simpleSource.n) annotation (Line(points={{-40,-60},{-50,-60},{-50,-60},{-70,-60}}, 
+  connect(simpleSolenoid.n, simpleSource.n) annotation (Line(points={{-40,-60},{-50,-60},{-50,-60},{-70,-60}},
                                                color={0,0,255}));
   connect(simpleSolenoid.flange, simpleFeed_x.flange) 
     annotation (Line(points={{-20,-50},{-10,-50}}, color={0,127,0}));
-  connect(advancedSolenoid.n, advancedSource.n) annotation (Line(points={{-40,40},{-50,40},{-50,40},{-70,40}}, 
+  connect(advancedSolenoid.n, advancedSource.n) annotation (Line(points={{-40,40},{-50,40},{-50,40},{-70,40}},
                                                 color={0,0,255}));
-  connect(simpleFeed_x.s_ref, x_set.y) annotation (Line(points={{12,-50}, 
+  connect(simpleFeed_x.s_ref, x_set.y) annotation (Line(points={{12,-50},
           {20,-50},{20,0},{59,0}}, color={0,0,127}));
-  connect(x_set.y, comparisonWithFEA.u) annotation (Line(points={{59,0},{50,0},{50,50},{58,50}}, 
+  connect(x_set.y, comparisonWithFEA.u) annotation (Line(points={{59,0},{50,0},{50,50},{58,50}},
                                   color={0,0,127}));
   connect(advancedFeed_x.flange, advancedSolenoid.flange) 
     annotation (Line(points={{-10,50},{-20,50}}, color={0,127,0}));
-  connect(advancedSource.p, advancedSolenoid.p) annotation (Line(points={{-70,60},{-50,60},{-50,60},{-40,60}}, 
+  connect(advancedSource.p, advancedSolenoid.p) annotation (Line(points={{-70,60},{-50,60},{-50,60},{-40,60}},
                                                 color={0,0,255}));
   connect(simpleGround.p, simpleSource.n) 
     annotation (Line(points={{-70,-70},{-70,-60}}, color={0,0,255}));

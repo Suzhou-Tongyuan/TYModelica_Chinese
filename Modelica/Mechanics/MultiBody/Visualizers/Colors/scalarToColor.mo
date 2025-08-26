@@ -12,7 +12,7 @@ algorithm
   color :=colorMap[integer((size(colorMap, 1) - 1)/(T_max - T_min)*
   min((max(T,T_min) - T_min), T_max) + 1), :];
   */
-  color := colorMap[1 + integer((size(colorMap, 1) - 1) * (max(T_min, min(T, T_max)) - T_min) 
+  color := colorMap[1 + integer((size(colorMap, 1) - 1) * (max(T_min, min(T, T_max)) - T_min)
     / (T_max - T_min)),:];
   annotation(Inline = true, Documentation(info = "<html>
 <h4>语法</h4>

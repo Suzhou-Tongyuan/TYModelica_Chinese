@@ -1,9 +1,9 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
 function smallRotation "返回适用于小旋转的旋转角度"
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q 
+  input Quaternions.Orientation Q
     "将坐标系1旋转到坐标系2的四元数方向对象";
-  output SI.Angle phi[3] 
+  output SI.Angle phi[3]
     "坐标系1围绕x轴、y轴和z轴的旋转角度，用于将坐标系1旋转到坐标系2的小相对旋转";
 algorithm
   phi := 2*{Q[1],Q[2],Q[3]};

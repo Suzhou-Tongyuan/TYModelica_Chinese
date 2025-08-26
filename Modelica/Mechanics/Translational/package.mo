@@ -3,25 +3,25 @@ package Translational "用于建立一维平动机械系统模型的库"
   extends Modelica.Icons.Package;
 
   annotation (Icon(
-    coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, {100,100}}), 
+    coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, {100,100}}),
     graphics={
-      Line(origin={14,53}, points={{-84,-73},{66,-73}}), 
+      Line(origin={14,53}, points={{-84,-73},{66,-73}}),
       Rectangle(
-        origin={14,53}, 
-        lineColor={64,64,64}, 
-        fillColor={192,192,192}, 
-        fillPattern=FillPattern.Sphere, 
-        extent={{-81,-65},{-8,-22}}), 
+        origin={14,53},
+        lineColor={64,64,64},
+        fillColor={192,192,192},
+        fillPattern=FillPattern.Sphere,
+        extent={{-81,-65},{-8,-22}}),
       Line(
-        origin={14,53}, 
-        points={{-8,-43},{-1,-43},{6,-64},{17,-23},{29,-65},{40,-23},{50,-44}, {61,-44}}), 
-      Line(origin={14,53}, points={{-59,-73},{-84,-93}}), 
-      Line(origin={14,53}, points={{-11,-73},{-36,-93}}), 
-      Line(origin={14,53}, points={{-34,-73},{-59,-93}}), 
-      Line(origin={14,53}, points={{14,-73},{-11,-93}}), 
-      Line(origin={14,53}, points={{39,-73},{14,-93}}), 
+        origin={14,53},
+        points={{-8,-43},{-1,-43},{6,-64},{17,-23},{29,-65},{40,-23},{50,-44}, {61,-44}}),
+      Line(origin={14,53}, points={{-59,-73},{-84,-93}}),
+      Line(origin={14,53}, points={{-11,-73},{-36,-93}}),
+      Line(origin={14,53}, points={{-34,-73},{-59,-93}}),
+      Line(origin={14,53}, points={{14,-73},{-11,-93}}),
+      Line(origin={14,53}, points={{39,-73},{14,-93}}),
       Line(origin={14,53}, points={{63,-73},{38,-93}})
-    }), 
+    }),
     Documentation(info="<html><p>
 此包中包含用于对<em>一维平动机械</em>系统建模的组件。
 </p>

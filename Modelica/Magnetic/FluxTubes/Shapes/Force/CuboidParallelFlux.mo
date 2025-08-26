@@ -1,11 +1,11 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.Force;
-model CuboidParallelFlux 
+model CuboidParallelFlux
   "运动方向有通量的立方体，如矩形截面的气隙；恒定渗透率"
 
   extends BaseClasses.Force;
 
   SI.Length l=s "轴向长度（通量方向）" annotation (Dialog(
-        group="Variable geometry", groupImage= 
+        group="Variable geometry", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/CuboidParallelFlux.png"));
   parameter SI.Length a=0.01 "矩形截面宽度";
   parameter SI.Length b=0.01 "矩形截面高度";
@@ -13,7 +13,7 @@ model CuboidParallelFlux
   SI.MagneticFluxDensity B "均匀磁通密度";
 
 protected
-  parameter SI.Area A=a*b 
+  parameter SI.Area A=a*b
     "与通量方向正交的横截面积";
 
 equation

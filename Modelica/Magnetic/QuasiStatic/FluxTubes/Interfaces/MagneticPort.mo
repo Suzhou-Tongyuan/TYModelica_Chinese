@@ -1,8 +1,8 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FluxTubes.Interfaces;
 connector MagneticPort "准静磁口"
-  SI.ComplexMagneticPotential V_m 
+  SI.ComplexMagneticPotential V_m
   "端口处的复磁势";
-  flow SI.ComplexMagneticFlux Phi 
+  flow SI.ComplexMagneticFlux Phi
   "复合磁通量流入端口";
   annotation (Documentation(info="<html>
 <p>复准静态磁口的基本定义。

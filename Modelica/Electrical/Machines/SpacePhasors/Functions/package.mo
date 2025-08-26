@@ -15,7 +15,7 @@ package Functions "用于空间相量转换的函数"
 空间相量被定义为长度为2的向量，
 第一个元素表示空间相量的实部，第二个元素表示空间相量的虚部。
 </p>
-</html>", 
+</html>",
       revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

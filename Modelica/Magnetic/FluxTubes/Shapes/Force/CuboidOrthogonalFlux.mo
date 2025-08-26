@@ -1,14 +1,14 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.Force;
-model CuboidOrthogonalFlux 
+model CuboidOrthogonalFlux
   "磁通量与运动方向正交的立方体；恒定磁导率"
 
   extends BaseClasses.Force;
 
   SI.Length l=s "运动方向上的长度（与通量正交）" 
-    annotation (Dialog(group="可变几何形状", groupImage= 
+    annotation (Dialog(group="可变几何形状", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/CuboidOrthogonalFlux.png"));
   parameter SI.Length a=0.01 "矩形截面宽度";
-  parameter SI.Length b=0.01 
+  parameter SI.Length b=0.01
     "矩形截面高度（通量方向）";
 
   SI.MagneticFluxDensity B "均匀磁通密度";

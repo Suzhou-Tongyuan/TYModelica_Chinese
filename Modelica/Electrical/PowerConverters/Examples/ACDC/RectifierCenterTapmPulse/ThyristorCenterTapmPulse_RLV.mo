@@ -1,11 +1,11 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.RectifierCenterTapmPulse;
-model ThyristorCenterTapmPulse_RLV 
+model ThyristorCenterTapmPulse_RLV
   "带中心点和电阻电感负载及电压的2*m脉冲晶闸管整流器"
   extends ExampleTemplates.ThyristorCenterTapmPulse(pulsem(
         constantFiringAngle=constantFiringAngle));
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
-  parameter SI.Angle constantFiringAngle=30*pi/180 
+  parameter SI.Angle constantFiringAngle=30*pi/180
     "触发角";
   parameter SI.Resistance R=20 "负载电阻";
   parameter SI.Inductance L=1 "负载电感" 
@@ -13,18 +13,18 @@ model ThyristorCenterTapmPulse_RLV
   parameter SI.Voltage VDC=-50 "DC 负载偏置电压";
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
       Placement(transformation(
-        origin={30,30}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={30,30},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
-  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true, 
+  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
         start=0)) annotation (Placement(transformation(
-        origin={30,0}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={30,0},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
-  Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V= 
+  Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
         VDC) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={30,-30})));
 equation
   connect(resistor.n, inductor.p) annotation (Line(
@@ -37,9 +37,9 @@ equation
       points={{30,40},{-10,40},{-10,40},{-20,40}}, color={0,0,255}));
   annotation (
     experiment(
-      StopTime=0.1, 
-      Tolerance=1e-06, 
-      Interval=0.0002), 
+      StopTime=0.1,
+      Tolerance=1e-06,
+      Interval=0.0002),
     Documentation(info="<html>
 <p>此示例展示了带有 R-L 负载的受控 2*m 脉冲中心点整流器，包括 DC 电压源，其中 <code>m</code> 是相数。此示例中的额外 DC 电压源使得负载平均电压为负。</p>
 

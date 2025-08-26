@@ -1,23 +1,23 @@
 ﻿within Modelica.Mechanics.Translational.Sources;
-model Position 
+model Position
   "根据参考位置强制移动一维平动接口"
   extends 
     Modelica.Mechanics.Translational.Interfaces.PartialElementaryOneFlangeAndSupport2(
      s(stateSelect=if exact then StateSelect.default else StateSelect.prefer));
-  parameter Boolean exact=false 
+  parameter Boolean exact=false
     "如果为 true，则对输入信号进行精确处理/过滤；如果为 false，则进行过滤" 
     annotation (Evaluate=true);
-  parameter SI.Frequency f_crit=50 
+  parameter SI.Frequency f_crit=50
     "如果 exact=false，则为过滤输入信号的关键频率" 
     annotation (Dialog(enable=not exact));
-  SI.Velocity v(start=0, 
-    stateSelect=if exact then StateSelect.default else StateSelect.prefer) 
+  SI.Velocity v(start=0,
+    stateSelect=if exact then StateSelect.default else StateSelect.prefer)
     "如果 exact=false，则为一维平动接口的绝对速度；否则为虚拟量" 
     annotation(Dialog(enable=not exact, showStartAttribute = true));
-  SI.Acceleration a(start=0) 
+  SI.Acceleration a(start=0)
     "如果 exact=false，则为一维平动接口的绝对加速度；否则为虚拟量" 
     annotation(Dialog(enable=not exact, showStartAttribute = true));
-  Modelica.Blocks.Interfaces.RealInput s_ref(unit="m") 
+  Modelica.Blocks.Interfaces.RealInput s_ref(unit="m")
     "一维平动接口的参考位置作为输入信号" annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}})));
 protected
@@ -64,28 +64,28 @@ equation
 输入信号可以来自于 Modelica.Blocks.Sources 块库中的信号发生器块之一。
 </p>
 
-</html>"), 
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
+</html>"),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
       graphics={
         Rectangle(
-          extent={{-100,20},{100,-20}}, 
-          lineColor={0,127,0}, 
-          fillColor={160,215,160}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-100,20},{100,-20}},
+          lineColor={0,127,0},
+          fillColor={160,215,160},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{150,60},{-150,100}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
-        Line(points={{0,52},{0,32}}, color={0,127,0}), 
-        Line(points={{-29,32},{30,32}}, color={0,127,0}), 
-        Line(points={{-30,-32},{30,-32}}, color={0,127,0}), 
-        Line(points={{0,-32},{0,-100}}, color={0,127,0}), 
-        Text(extent={{30,-60},{150,-30}}, 
-          textString="exact="), 
-        Text(extent={{30,-90},{150,-60}}, 
-          textString="%exact"), 
-        Text(extent={{-140,-60},{-40,-30}}, 
-          textColor={128,128,128}, 
-          horizontalAlignment=TextAlignment.Right, 
+          extent={{150,60},{-150,100}},
+          textString="%name",
+          textColor={0,0,255}),
+        Line(points={{0,52},{0,32}}, color={0,127,0}),
+        Line(points={{-29,32},{30,32}}, color={0,127,0}),
+        Line(points={{-30,-32},{30,-32}}, color={0,127,0}),
+        Line(points={{0,-32},{0,-100}}, color={0,127,0}),
+        Text(extent={{30,-60},{150,-30}},
+          textString="exact="),
+        Text(extent={{30,-90},{150,-60}},
+          textString="%exact"),
+        Text(extent={{-140,-60},{-40,-30}},
+          textColor={128,128,128},
+          horizontalAlignment=TextAlignment.Right,
           textString="s_ref")}));
 end Position;

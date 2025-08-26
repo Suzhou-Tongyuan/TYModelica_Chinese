@@ -1,17 +1,17 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Interfaces;
 partial model TwoPortExtended "两个磁性端口，用于使用附加变量进行图形建模"
   extends TwoPortElementary;
-  SI.ComplexMagneticPotentialDifference V_m = port_p.V_m - port_n.V_m 
+  SI.ComplexMagneticPotentialDifference V_m = port_p.V_m - port_n.V_m
     "复磁势差";
-  SI.MagneticPotentialDifference abs_V_m = Modelica.ComplexMath.abs(V_m) 
+  SI.MagneticPotentialDifference abs_V_m = Modelica.ComplexMath.abs(V_m)
     "复合磁势差的大小";
-  SI.Angle arg_V_m = Modelica.ComplexMath.arg(V_m) 
+  SI.Angle arg_V_m = Modelica.ComplexMath.arg(V_m)
     "复磁势差论证";
-  SI.ComplexMagneticFlux Phi = port_p.Phi 
+  SI.ComplexMagneticFlux Phi = port_p.Phi
     "复合磁通量";
-  SI.MagneticFlux abs_Phi = Modelica.ComplexMath.abs(Phi) 
+  SI.MagneticFlux abs_Phi = Modelica.ComplexMath.abs(Phi)
     "复合磁通量的大小";
-  SI.Angle arg_Phi = Modelica.ComplexMath.arg(Phi) 
+  SI.Angle arg_Phi = Modelica.ComplexMath.arg(Phi)
     "复合磁通论证";
 
   annotation (Documentation(info="<html>

@@ -1,18 +1,18 @@
 ﻿within Modelica.Electrical.PowerConverters.Interfaces.Enable;
-partial model Enable2m 
+partial model Enable2m
   "提供2*m个触发信号的启用参数和可选启用输入的部分模型"
   extends Interfaces.Enable.Enable1m;
-  Modelica.Blocks.Logical.And andCondition_n[m] 
+  Modelica.Blocks.Logical.And andCondition_n[m]
     "m 个负电位晶体管的 And 条件" annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={60,-80})));
-  Modelica.Blocks.Interfaces.BooleanInput fire_n[m] 
+  Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
     "负电位晶体管的触发信号" annotation (
       Placement(transformation(
-        extent={{-20,-20},{20,20}}, 
-        rotation=90, 
+        extent={{-20,-20},{20,20}},
+        rotation=90,
         origin={60,-120})));
 equation
   connect(fire_n, andCondition_n.u1) annotation (Line(

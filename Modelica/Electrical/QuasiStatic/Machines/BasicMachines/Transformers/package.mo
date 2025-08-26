@@ -60,7 +60,7 @@ package Transformers "技术三相变压器库"
   电子邮件： <a href=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a>
   </dd>
 </dl>
-</html>", 
+</html>",
       revisions="<html>
   <ul>
   <li> v1.0.0 2006/11/19 Anton Haumer<br>
@@ -68,71 +68,71 @@ package Transformers "技术三相变压器库"
   <li> v2.2.0 2011/02/10 Anton Haumer<br>
        为所有机器添加条件 ThermalPort</li>
   </ul>
-</html>"), 
-       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
+</html>"),
+       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
             {100,100}}), graphics={
         Polygon(
-          origin={10,10}, 
-          fillColor={135,135,135}, 
-          fillPattern=FillPattern.VerticalCylinder, 
-          points={{-80,50},{-60,30},{-60,-50},{-80,-70},{-80,50}}), 
+          origin={10,10},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.VerticalCylinder,
+          points={{-80,50},{-60,30},{-60,-50},{-80,-70},{-80,50}}),
         Polygon(
-          origin={10,10}, 
-          fillColor={135,135,135}, 
-          fillPattern=FillPattern.VerticalCylinder, 
-          points={{60,50},{40,30},{40,-50},{60,-70},{60,50}}), 
+          origin={10,10},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.VerticalCylinder,
+          points={{60,50},{40,30},{40,-50},{60,-70},{60,50}}),
         Polygon(
-          origin={10,10}, 
-          fillColor={135,135,135}, 
-          fillPattern=FillPattern.VerticalCylinder, 
-          points={{-10,40},{-20,30},{-20,-50},{-10,-60},{0,-50},{0,30},{-10, 
-              40}}), 
+          origin={10,10},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.VerticalCylinder,
+          points={{-10,40},{-20,30},{-20,-50},{-10,-60},{0,-50},{0,30},{-10,
+              40}}),
         Polygon(
-          origin={10,10}, 
-          fillColor={135,135,135}, 
-          fillPattern=FillPattern.VerticalCylinder, 
-          points={{-80,50},{60,50},{40,30},{0,30},{-10,40},{-20,30},{-60,30}, 
-              {-80,50}}), 
+          origin={10,10},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.VerticalCylinder,
+          points={{-80,50},{60,50},{40,30},{0,30},{-10,40},{-20,30},{-60,30},
+              {-80,50}}),
         Polygon(
-          origin={10,10}, 
-          fillColor={135,135,135}, 
-          fillPattern=FillPattern.VerticalCylinder, 
+          origin={10,10},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.VerticalCylinder,
           points={{-80,-70},{60,-70},{40,-50},{0,-50},{-10,-60},{-20,-50},{
-              -60,-50},{-80,-70}}), 
+              -60,-50},{-80,-70}}),
         Rectangle(
-          origin={10,10}, 
-          lineColor={213,170,255}, 
-          fillColor={213,170,255}, 
-          fillPattern=FillPattern.VerticalCylinder, 
-          extent={{-88,-46},{-52,26}}), 
+          origin={10,10},
+          lineColor={213,170,255},
+          fillColor={213,170,255},
+          fillPattern=FillPattern.VerticalCylinder,
+          extent={{-88,-46},{-52,26}}),
         Rectangle(
-          origin={10,10}, 
-          lineColor={170,213,255}, 
-          fillColor={170,213,255}, 
-          fillPattern=FillPattern.VerticalCylinder, 
-          extent={{-94,-38},{-46,18}}), 
+          origin={10,10},
+          lineColor={170,213,255},
+          fillColor={170,213,255},
+          fillPattern=FillPattern.VerticalCylinder,
+          extent={{-94,-38},{-46,18}}),
         Rectangle(
-          origin={10,10}, 
-          lineColor={213,170,255}, 
-          fillColor={213,170,255}, 
-          fillPattern=FillPattern.VerticalCylinder, 
-          extent={{-28,-46},{8,26}}), 
+          origin={10,10},
+          lineColor={213,170,255},
+          fillColor={213,170,255},
+          fillPattern=FillPattern.VerticalCylinder,
+          extent={{-28,-46},{8,26}}),
         Rectangle(
-          origin={10,10}, 
-          lineColor={170,213,255}, 
-          fillColor={170,213,255}, 
-          fillPattern=FillPattern.VerticalCylinder, 
-          extent={{-34,-38},{14,18}}), 
+          origin={10,10},
+          lineColor={170,213,255},
+          fillColor={170,213,255},
+          fillPattern=FillPattern.VerticalCylinder,
+          extent={{-34,-38},{14,18}}),
         Rectangle(
-          origin={10,10}, 
-          lineColor={213,170,255}, 
-          fillColor={213,170,255}, 
-          fillPattern=FillPattern.VerticalCylinder, 
-          extent={{32,-46},{68,26}}), 
+          origin={10,10},
+          lineColor={213,170,255},
+          fillColor={213,170,255},
+          fillPattern=FillPattern.VerticalCylinder,
+          extent={{32,-46},{68,26}}),
         Rectangle(
-          origin={10,10}, 
-          lineColor={170,213,255}, 
-          fillColor={170,213,255}, 
-          fillPattern=FillPattern.VerticalCylinder, 
+          origin={10,10},
+          lineColor={170,213,255},
+          fillColor={170,213,255},
+          fillPattern=FillPattern.VerticalCylinder,
           extent={{26,-38},{74,18}})}));
 end Transformers;

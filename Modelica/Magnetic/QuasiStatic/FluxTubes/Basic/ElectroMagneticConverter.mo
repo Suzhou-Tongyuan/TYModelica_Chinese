@@ -4,24 +4,24 @@ model ElectroMagneticConverter "电磁能量转换"
   constant Complex j=Complex(0, 1);
   FluxTubes.Interfaces.PositiveMagneticPort port_p "正磁端口" annotation (Placement(transformation(extent={{90,90},{110,110}}), iconTransformation(extent={{90,90},{110,110}})));
   FluxTubes.Interfaces.NegativeMagneticPort port_n "负磁端口" annotation (Placement(transformation(extent={{110,-110},{90,-90}}), iconTransformation(extent={{110,-110},{90,-90}})));
-  Modelica.Electrical.QuasiStatic.SinglePhase.Interfaces.PositivePin pin_p 
+  Modelica.Electrical.QuasiStatic.SinglePhase.Interfaces.PositivePin pin_p
   "正极电针" annotation (Placement(transformation(extent={{-90,90},{-110,110}}), iconTransformation(extent={{-90,90},{-110,110}})));
-  Modelica.Electrical.QuasiStatic.SinglePhase.Interfaces.NegativePin pin_n 
+  Modelica.Electrical.QuasiStatic.SinglePhase.Interfaces.NegativePin pin_n
   "负极电针"   annotation (Placement(transformation(extent={{-110,-110},{-90,-90}}), iconTransformation(extent={{-110,-110},{-90,-90}})));
   SI.ComplexVoltage v "电压";
-  SI.ComplexCurrent i(re(start=0, stateSelect=StateSelect.prefer), 
-                                    im(start=0, stateSelect=StateSelect.prefer)) 
+  SI.ComplexCurrent i(re(start=0, stateSelect=StateSelect.prefer),
+                                    im(start=0, stateSelect=StateSelect.prefer))
   "电流";
-  SI.ComplexMagneticPotentialDifference V_m 
+  SI.ComplexMagneticPotentialDifference V_m
   "磁电势差";
-  SI.ComplexMagneticFlux Phi 
+  SI.ComplexMagneticFlux Phi
   "耦合到磁路中的磁通量";
   SI.AngularVelocity omega;
 
   parameter Real N=1 "转数";
 
   //仅供参考:
-  SI.ComplexMagneticFlux Psi 
+  SI.ComplexMagneticFlux Psi
   "通量连接，仅供参考";
   SI.Inductance L_stat "静态电感 abs(Psi/i) 仅供参考";
 
@@ -57,51 +57,51 @@ equation
   Connections.branch(port_p.reference, pin_p.reference);
   port_p.reference.gamma = pin_p.reference.gamma;
   annotation (
-    defaultComponentName="converter", 
+    defaultComponentName="converter",
     Icon(coordinateSystem(
-      preserveAspectRatio=false, 
+      preserveAspectRatio=false,
       extent={{-100,-100},{100,100}}), graphics={
-      Line(points={{-30,100},{-30,60}},color={85,170,255}), 
-      Line(points={{-30,-60},{-30,-100}},color={85,170,255}), 
-      Line(points={{-30,100},{-90,100}}, 
-                                       color={85,170,255}), 
-      Line(points={{-30,-100},{-88,-100}}, 
-                                         color={85,170,255}), 
-      Ellipse(extent={{-4,-34},{64,34}}, lineColor={255,170,85}), 
-      Line(points={{30,-100},{30,0}},  color={255,170,85}), 
-      Line(points={{30,0},{30,100}}, color={255,170,85}), 
-      Line(points={{30,100},{90,100}},color={255,170,85}), 
-      Line(points={{30,-100},{90,-100}}, 
-                                       color={255,170,85}), 
+      Line(points={{-30,100},{-30,60}},color={85,170,255}),
+      Line(points={{-30,-60},{-30,-100}},color={85,170,255}),
+      Line(points={{-30,100},{-90,100}},
+                                       color={85,170,255}),
+      Line(points={{-30,-100},{-88,-100}},
+                                         color={85,170,255}),
+      Ellipse(extent={{-4,-34},{64,34}}, lineColor={255,170,85}),
+      Line(points={{30,-100},{30,0}},  color={255,170,85}),
+      Line(points={{30,0},{30,100}}, color={255,170,85}),
+      Line(points={{30,100},{90,100}},color={255,170,85}),
+      Line(points={{30,-100},{90,-100}},
+                                       color={255,170,85}),
       Text(
-        extent={{-150,150},{150,110}}, 
-        textString="%name", 
-          pattern=LinePattern.None, 
-          textColor={0,0,255}), 
+        extent={{-150,150},{150,110}},
+        textString="%name",
+          pattern=LinePattern.None,
+          textColor={0,0,255}),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={-23,45}, 
-          rotation=270), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={-23,45},
+          rotation=270),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={-23,15}, 
-          rotation=270), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={-23,15},
+          rotation=270),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={-23,-15}, 
-          rotation=270), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={-23,-15},
+          rotation=270),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={-23,-45}, 
-          rotation=270)}), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={-23,-45},
+          rotation=270)}),
     Documentation(info="<html>
 <p>
 电磁能量转换分别由<em>安培</em>定律和<em>法拉第</em>定律给出:

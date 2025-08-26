@@ -7,8 +7,8 @@ function resolve1 "将矢量从坐标系2转换到坐标系1"
 algorithm
   v1 := transpose(R.T)*v2;
   annotation (
-    derivative(noDerivative=R) = Internal.resolve1_der, 
-    InlineAfterIndexReduction=true, 
+    derivative(noDerivative=R) = Internal.resolve1_der,
+    InlineAfterIndexReduction=true,
     Documentation(info="<html>
 <h4>语法</h4>
 <blockquote><pre>

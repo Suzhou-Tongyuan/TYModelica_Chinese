@@ -1,59 +1,59 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FundamentalWave.BasicMachines.Components;
 model RotorSaliencyAirGap "带有转子突出的气隙模型"
   import Modelica.Constants.pi;
-  Interfaces.PositiveMagneticPort port_sp 
+  Interfaces.PositiveMagneticPort port_sp
     "正复磁定子端口" annotation (Placement(
         transformation(extent={{-110,-110},{-90,-90}})));
-  Interfaces.NegativeMagneticPort port_sn 
+  Interfaces.NegativeMagneticPort port_sn
     "负复式磁性定子端口" annotation (Placement(
         transformation(extent={{-110,90},{-90,110}})));
-  Interfaces.PositiveMagneticPort port_rp 
+  Interfaces.PositiveMagneticPort port_rp
     "正复磁转子端口" annotation (Placement(
         transformation(extent={{90,90},{110,110}})));
-  Interfaces.NegativeMagneticPort port_rn 
+  Interfaces.NegativeMagneticPort port_rn
     "负复磁转子端口" annotation (Placement(
         transformation(extent={{90,-110},{110,-90}})));
-  Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a 
-    "转子法兰" annotation (Placement(transformation(extent={{-10, 
+  Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a
+    "转子法兰" annotation (Placement(transformation(extent={{-10,
             110},{10,90}})));
-  Modelica.Mechanics.Rotational.Interfaces.Flange_a support 
+  Modelica.Mechanics.Rotational.Interfaces.Flange_a support
     "反作用扭矩作用的支撑点" annotation (
       Placement(transformation(extent={{-10,-110},{10,-90}})));
   parameter Integer p "磁极对数";
   parameter Magnetic.FundamentalWave.Types.SalientInductance L0(d(start=1), q(
-        start=1)) 
+        start=1))
     "单个无弦线圈相对于基波的突出电感量";
-  final parameter Magnetic.FundamentalWave.Types.SalientReluctance R_m(d=1/L0.d, 
+  final parameter Magnetic.FundamentalWave.Types.SalientReluctance R_m(d=1/L0.d,
       q=1/L0.q) "Reluctance of the air gap model";
   // 磁势差的复相位
-  SI.ComplexMagneticPotentialDifference V_ms 
+  SI.ComplexMagneticPotentialDifference V_ms
     "定子相对于定子固定框架的复磁势差";
-  SI.ComplexMagneticPotentialDifference V_msr=V_ms* 
-      Modelica.ComplexMath.fromPolar(1, gammar) 
+  SI.ComplexMagneticPotentialDifference V_msr=V_ms*
+      Modelica.ComplexMath.fromPolar(1, gammar)
     "定子相对于转子固定框架的复磁势差";
-  SI.ComplexMagneticPotentialDifference V_mr 
+  SI.ComplexMagneticPotentialDifference V_mr
     "转子与转子固定框架之间的复磁势差";
-  SI.ComplexMagneticPotentialDifference V_mrr=V_mr* 
-      Modelica.ComplexMath.fromPolar(1, gammar) 
+  SI.ComplexMagneticPotentialDifference V_mrr=V_mr*
+      Modelica.ComplexMath.fromPolar(1, gammar)
     "转子与转子固定框架之间的复磁势差";
   // 磁通量的复相位
-  SI.ComplexMagneticFlux Phi_s 
+  SI.ComplexMagneticFlux Phi_s
     "定子固定框架的复磁通量";
-  SI.ComplexMagneticFlux Phi_sr=Phi_s* 
-      Modelica.ComplexMath.fromPolar(1, gammar) 
+  SI.ComplexMagneticFlux Phi_sr=Phi_s*
+      Modelica.ComplexMath.fromPolar(1, gammar)
     "定子相对于转子固定框架的复磁通量";
-  SI.ComplexMagneticFlux Phi_r 
+  SI.ComplexMagneticFlux Phi_r
     "转子固定框架的复磁通量";
-  SI.ComplexMagneticFlux Phi_rr=Phi_r* 
-      Modelica.ComplexMath.fromPolar(1, gammar) 
+  SI.ComplexMagneticFlux Phi_rr=Phi_r*
+      Modelica.ComplexMath.fromPolar(1, gammar)
     "转子固定框架的复磁通量";
   // 电气扭矩和机械角度
   SI.Torque tauElectrical "电气扭矩";
-  SI.Angle gamma=p*(flange_a.phi - support.phi) 
+  SI.Angle gamma=p*(flange_a.phi - support.phi)
     "转子和定子之间的电角度";
-  SI.Angle gammas=port_sp.reference.gamma 
+  SI.Angle gammas=port_sp.reference.gamma
     "定子固定框架中的角度电气量";
-  SI.Angle gammar=port_rp.reference.gamma 
+  SI.Angle gammar=port_rp.reference.gamma
     "转子固定框架中的角度电气量";
 equation
   port_sp.Phi = Phi_s "进入定子正端口的定子磁通";
@@ -89,22 +89,22 @@ equation
   if Connections.isRoot(port_sp.reference) then
     gammar = 0;
   end if;
-  annotation (defaultComponentName="airGap", 
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
+  annotation (defaultComponentName="airGap",
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Ellipse(
-          extent={{-100,100},{100,-100}}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
-        Line(points={{-100,90},{-100,60},{-80,60}}, color={255,170,85}), 
-        Line(points={{-100,-90},{-100,-60},{-80,-60}}, color={255,170,85}), 
-        Line(points={{40,60},{100,60},{100,90}}, color={255,170,85}), 
-        Line(points={{40,-60},{100,-60},{100,-90}}, color={255,170,85}), 
+          extent={{-100,100},{100,-100}},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-100,90},{-100,60},{-80,60}}, color={255,170,85}),
+        Line(points={{-100,-90},{-100,-60},{-80,-60}}, color={255,170,85}),
+        Line(points={{40,60},{100,60},{100,90}}, color={255,170,85}),
+        Line(points={{40,-60},{100,-60},{100,-90}}, color={255,170,85}),
         Ellipse(
-          extent={{-60,80},{60,-80}}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
-        Line(points={{0,80},{0,90}})}), 
+          extent={{-60,80},{60,-80}},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Line(points={{0,80},{0,90}})}),
     Documentation(info="<html>
 <p>
 这种突出气隙模型既可用于气隙均匀的机器，也可用于转子突出的机器。气隙模型对定子和转子并不对称，因为假定显著性总是指转子。气隙的显著性由 d 轴和 q 轴的主磁场电感表示.

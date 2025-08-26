@@ -2,11 +2,11 @@
 partial model PartialLineForce "无质量线性力元素的基础模型"
   extends LineForceBase;
 
-  SI.Position r_rel_a[3] 
+  SI.Position r_rel_a[3]
     "从frame_a原点到frame_b原点的位置矢量，在frame_a中解析";
-  Real e_a[3](each final unit = "1") 
+  Real e_a[3](each final unit = "1")
     "沿着连接frame_a原点和frame_b原点的线，在frame_a中解析的单位向量(从frame_a指向frame_b)";
-  SI.Force f 
+  SI.Force f
     "作用在frame_a和frame_b上的线力(正值表示作用在frame_b上且方向从frame_a指向frame_b)";
 equation
   // 计算两个坐标系之间的相对位置矢量
@@ -34,17 +34,17 @@ equation
    f = c*(s-s_unstretched);
 <strong>end</strong> Spring;
 </pre></blockquote>
-</html>"), 
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"),
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
     {100, 100}}), graphics = {
-    Ellipse(visible = fixedRotationAtFrame_a, extent = {{-70, 30}, {-130, -30}}, lineColor = {255, 0, 0}), 
-    Text(visible = fixedRotationAtFrame_a, 
-    extent = {{-62, 50}, {-140, 30}}, 
-    textColor = {255, 0, 0}, 
-    textString = "R=0"), 
-    Ellipse(visible = fixedRotationAtFrame_b, extent = {{70, 30}, {130, -30}}, lineColor = {255, 0, 0}), 
-    Text(visible = fixedRotationAtFrame_b, 
-    extent = {{62, 50}, {140, 30}}, 
-    textColor = {255, 0, 0}, 
+    Ellipse(visible = fixedRotationAtFrame_a, extent = {{-70, 30}, {-130, -30}}, lineColor = {255, 0, 0}),
+    Text(visible = fixedRotationAtFrame_a,
+    extent = {{-62, 50}, {-140, 30}},
+    textColor = {255, 0, 0},
+    textString = "R=0"),
+    Ellipse(visible = fixedRotationAtFrame_b, extent = {{70, 30}, {130, -30}}, lineColor = {255, 0, 0}),
+    Text(visible = fixedRotationAtFrame_b,
+    extent = {{62, 50}, {140, 30}},
+    textColor = {255, 0, 0},
     textString = "R=0")}));
 end PartialLineForce;

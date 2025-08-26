@@ -12,8 +12,8 @@ model IdealOpAmp "理想运算放大器(无源元件-零元件对)"
       Placement(transformation(extent={{90,-10},{110,10}})));
   Interfaces.NegativePin n2 "右端口的负极" annotation (
       Placement(transformation(
-        origin={0,-100}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={0,-100},
+        extent={{10,-10},{-10,10}},
         rotation=270)));
 equation
   v1 = p1.v - n1.v;
@@ -24,11 +24,11 @@ equation
   i2 = p2.i;
   v1 = 0;
   i1 = 0;
-  annotation (defaultComponentName="opAmp", 
+  annotation (defaultComponentName="opAmp",
     Documentation(info="<html>
 <p>理想运算放大器是一个双端口设备。左端口被固定为<em>v1=0</em>且<em>i1=0</em>(这种状态被称为“虚地”)。右端口极为灵活，任何电压<em>v2</em>和任何电流<em>i2</em>都是可以被接受的。
 </p>
-</html>", 
+</html>",
         revisions="<html>
 <ul>
 
@@ -36,24 +36,24 @@ equation
        Christoph Clauss<br>最初实现<br>
        </li>
 </ul>
-</html>"), 
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
+</html>"),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
-        Line(points={{60,0},{90,0}}, color={0,0,255}), 
+        Line(points={{60,0},{90,0}}, color={0,0,255}),
         Text(
-          extent={{-150,130},{150,90}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,130},{150,90}},
+          textString="%name",
+          textColor={0,0,255}),
         Polygon(
-          points={{70,0},{-70,80},{-70,-80},{70,0}}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid, 
-          lineColor={0,0,255}), 
-        Line(points={{0,-40},{0,-100}}, color={0,0,255}), 
-        Line(points={{-100,60},{-70,60}}, color={0,0,255}), 
-        Line(points={{-100,-60},{-70,-60}}, color={0,0,255}), 
-        Line(points={{70,0},{100,0}}, color={0,0,255}), 
-        Line(points={{-60,50},{-40,50}}, color={0,0,255}), 
-        Line(points={{-60,-50},{-40,-50}}, color={0,0,255}), 
+          points={{70,0},{-70,80},{-70,-80},{70,0}},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          lineColor={0,0,255}),
+        Line(points={{0,-40},{0,-100}}, color={0,0,255}),
+        Line(points={{-100,60},{-70,60}}, color={0,0,255}),
+        Line(points={{-100,-60},{-70,-60}}, color={0,0,255}),
+        Line(points={{70,0},{100,0}}, color={0,0,255}),
+        Line(points={{-60,50},{-40,50}}, color={0,0,255}),
+        Line(points={{-60,-50},{-40,-50}}, color={0,0,255}),
         Line(points={{-50,-40},{-50,-60}}, color={0,0,255})}));
 end IdealOpAmp;

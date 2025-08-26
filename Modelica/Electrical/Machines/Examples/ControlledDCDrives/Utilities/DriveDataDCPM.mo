@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.Examples.ControlledDCDrives.Utilities;
-record DriveDataDCPM 
+record DriveDataDCPM
   "受控直流永磁电机的参数"
   extends Modelica.Icons.Record;
   import Modelica.Electrical.Machines.Thermal.convertResistance;
@@ -8,23 +8,23 @@ record DriveDataDCPM
     Modelica.Electrical.Machines.Utilities.ParameterRecords.DcPermanentMagnetData 
     motorData "电机数据" annotation (Dialog(group="电机"), Placement(
         transformation(extent={{-10,-10},{10,10}})));
-  parameter SI.Resistance Ra=convertResistance(motorData.Ra, 
-      motorData.TaRef,motorData.alpha20a,motorData.TaNominal) 
+  parameter SI.Resistance Ra=convertResistance(motorData.Ra,
+      motorData.TaRef,motorData.alpha20a,motorData.TaNominal)
     "额定温度下的电枢电阻" 
     annotation(Dialog(group="电机", enable=false));
   parameter SI.Time Ta=motorData.La/Ra "电枢时间常数" 
     annotation(Dialog(group="电机", enable=false));
-  parameter SI.Power PNominal=motorData.ViNominal*motorData.IaNominal 
-    -motorData.frictionParameters.PRef -motorData.coreParameters.PRef -motorData.strayLoadParameters.PRef 
+  parameter SI.Power PNominal=motorData.ViNominal*motorData.IaNominal
+    -motorData.frictionParameters.PRef -motorData.coreParameters.PRef -motorData.strayLoadParameters.PRef
     "额定机械输出" 
     annotation(Dialog(group="电机", enable=false));
-  parameter SI.Torque tauNominal=PNominal/motorData.wNominal 
+  parameter SI.Torque tauNominal=PNominal/motorData.wNominal
     "额定转矩" 
     annotation(Dialog(group="电机", enable=false));
-  parameter SI.ElectricalTorqueConstant kPhi=tauNominal/motorData.IaNominal 
+  parameter SI.ElectricalTorqueConstant kPhi=tauNominal/motorData.IaNominal
     "转矩常数" 
     annotation(Dialog(group="电机", enable=false));
-  parameter SI.AngularVelocity w0=motorData.wNominal*motorData.VaNominal/motorData.ViNominal 
+  parameter SI.AngularVelocity w0=motorData.wNominal*motorData.VaNominal/motorData.ViNominal
     "空载转速" 
   annotation(Dialog(group="电机", enable=false));
 //逆变器
@@ -48,17 +48,17 @@ record DriveDataDCPM
     annotation(Dialog(tab="控制器", group="限制"));
   parameter SI.Torque tauMax=kPhi*IaMax "最大转矩" 
     annotation(Dialog(tab="控制器", group="限制", enable=false));
-  parameter SI.AngularVelocity wMax=motorData.wNominal*motorData.VaNominal/motorData.ViNominal 
+  parameter SI.AngularVelocity wMax=motorData.wNominal*motorData.VaNominal/motorData.ViNominal
     "最大转速" 
     annotation(Dialog(tab="控制器", group="限制"));
-  parameter SI.AngularAcceleration aMax=tauMax/(JL +motorData.Jr) 
+  parameter SI.AngularAcceleration aMax=tauMax/(JL +motorData.Jr)
     "最大加速度" 
     annotation(Dialog(tab="控制器", group="限制", enable=false));
 //电流控制器：绝对最佳
   parameter Real kpI=motorData.La/(2*Tsigma) "比例增益" annotation (
       Dialog(
-      tab="控制器", 
-      group="电流控制器", 
+      tab="控制器",
+      group="电流控制器",
       enable=false));
   parameter SI.Time TiI=Ta "积分时间常数" 
     annotation(Dialog(tab="控制器", group="电流控制器", enable=false));
@@ -67,8 +67,8 @@ record DriveDataDCPM
 //速度控制器：对称最佳
   parameter Real kpw=(JL + motorData.Jr)/(2*Tsub) "比例增益" 
     annotation (Dialog(
-      tab="控制器", 
-      group="速度控制器", 
+      tab="控制器",
+      group="速度控制器",
       enable=false));
   parameter SI.Time Tiw=4*Tsub "积分时间常数" 
     annotation(Dialog(tab="控制器", group="速度控制器", enable=false));
@@ -78,8 +78,8 @@ record DriveDataDCPM
   parameter Real kpP=1/(16*Tsub) "比例增益" 
     annotation(Dialog(tab="控制器", group="位置控制器", enable=false));
   annotation (
-    defaultComponentName="dcpmDriveData", 
-    defaultComponentPrefixes="parameter", 
+    defaultComponentName="dcpmDriveData",
+    defaultComponentPrefixes="parameter",
     Documentation(info="<html>
 <p>
 计算直流永磁电机的控制器参数：

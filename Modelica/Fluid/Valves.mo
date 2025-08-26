@@ -6,9 +6,9 @@
     import Modelica.Fluid.Types.CvTypes;
     import Modelica.Constants.pi;
 
-    constant SI.ReynoldsNumber Re_turbulent = 4000 
+    constant SI.ReynoldsNumber Re_turbulent = 4000
       "cf. 阀门全开时为直管 -- dp_阀门关闭湍流程度增加";
-    parameter Boolean use_Re = system.use_eps_Re 
+    parameter Boolean use_Re = system.use_eps_Re
       "true: 湍流区域由Re确定, false: 湍流区域由m_flow_small确定" 
       annotation(Dialog(tab = "高级"), Evaluate = true);
     //SI.MassFlowRate m_flow_turbulent=if not use_Re then m_flow_small else
@@ -18,14 +18,14 @@
     //  max(dp_small, m_flow_turbulent^2/(max(relativeFlowCoefficient,0.001)^2*Av^2*(Medium.density(state_a) + Medium.density(state_b))/2));
     // substitute m_flow_turbulent into dp_turbulent
     SI.AbsolutePressure dp_turbulent = if not use_Re then dp_small else 
-      max(dp_small, (Medium.dynamicViscosity(state_a) + Medium.dynamicViscosity(state_b)) ^ 2 * pi / 8 * Re_turbulent ^ 2 
+      max(dp_small, (Medium.dynamicViscosity(state_a) + Medium.dynamicViscosity(state_b)) ^ 2 * pi / 8 * Re_turbulent ^ 2
       / (max(relativeFlowCoefficient, 0.001) * Av * (Medium.density(state_a) + Medium.density(state_b))));
 
   protected
     Real relativeFlowCoefficient;
   initial equation
     if CvData == CvTypes.OpPoint then
-      m_flow_nominal = valveCharacteristic(opening_nominal) * Av * sqrt(rho_nominal) * Utilities.regRoot(dp_nominal, dp_small) 
+      m_flow_nominal = valveCharacteristic(opening_nominal) * Av * sqrt(rho_nominal) * Utilities.regRoot(dp_nominal, dp_small)
         "通过工作点确定 Av";
     end if;
 
@@ -34,20 +34,20 @@
 
     relativeFlowCoefficient = valveCharacteristic(opening_actual);
     if checkValve then
-      m_flow = homotopy(relativeFlowCoefficient * Av * sqrt(Medium.density(state_a)) * 
-        Utilities.regRoot2(dp, dp_turbulent, 1.0, 0.0, use_yd0 = true, yd0 = 0.0), 
+      m_flow = homotopy(relativeFlowCoefficient * Av * sqrt(Medium.density(state_a)) *
+        Utilities.regRoot2(dp, dp_turbulent, 1.0, 0.0, use_yd0 = true, yd0 = 0.0),
         relativeFlowCoefficient * m_flow_nominal * dp / dp_nominal);
     /* 在 Modelica 3.1 中（缺点：在 dp=0 时出现不必要的事件，而不是 smooth=2）
     m_flow = valveCharacteristic(opening)*Av*sqrt(Medium.density(state_a))*
     (if dp>=0 then Utilities.regRoot(dp, dp_turbulent) else 0);
     */
     elseif not allowFlowReversal then
-      m_flow = homotopy(relativeFlowCoefficient * Av * sqrt(Medium.density(state_a)) * 
-        Utilities.regRoot(dp, dp_turbulent), 
+      m_flow = homotopy(relativeFlowCoefficient * Av * sqrt(Medium.density(state_a)) *
+        Utilities.regRoot(dp, dp_turbulent),
         relativeFlowCoefficient * m_flow_nominal * dp / dp_nominal);
     else
-      m_flow = homotopy(relativeFlowCoefficient * Av * 
-        Utilities.regRoot2(dp, dp_turbulent, Medium.density(state_a), Medium.density(state_b)), 
+      m_flow = homotopy(relativeFlowCoefficient * Av *
+        Utilities.regRoot2(dp, dp_turbulent, Medium.density(state_a), Medium.density(state_b)),
         relativeFlowCoefficient * m_flow_nominal * dp / dp_nominal);
     /* 在 Modelica 3.1 中（缺点:在 dp=0 时出现不必要的事件，而不是 smooth=2）。
     In Modelica 3.1 (Disadvantage: Unnecessary event at dp=0, and instead of smooth=2)
@@ -84,11 +84,11 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
     import Modelica.Fluid.Types.CvTypes;
     import Modelica.Constants.pi;
     extends BaseClasses.PartialValve(
-    redeclare replaceable package Medium = 
+    redeclare replaceable package Medium =
       Modelica.Media.Water.WaterIF97_ph constrainedby 
       Modelica.Media.Interfaces.PartialTwoPhaseMedium);
     parameter Real Fl_nominal = 0.9 "液体压力恢复系数";
-    replaceable function FlCharacteristic = 
+    replaceable function FlCharacteristic =
       Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.one 
       constrainedby 
       Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.baseFun "压力恢复特性" annotation();
@@ -100,14 +100,14 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
     Medium.AbsolutePressure p_in "入口压力";
     Medium.AbsolutePressure p_out "出口压力";
 
-    constant SI.ReynoldsNumber Re_turbulent = 4000 
+    constant SI.ReynoldsNumber Re_turbulent = 4000
       "cf.阀门全开时为直管-- dp_阀门关闭湍流程度增加";
-    parameter Boolean use_Re = system.use_eps_Re 
+    parameter Boolean use_Re = system.use_eps_Re
       "true: 湍流区域由Re确定, false: 湍流区域由m_flow_small确定" 
       annotation(Dialog(tab = "高级"), Evaluate = true);
     //SI.Diameter diameter = Utilities.regRoot(4/pi*valveCharacteristic(opening_actual)*Av, 0.04/pi*valveCharacteristic(opening_nominal)*Av);
     SI.AbsolutePressure dp_turbulent = if not use_Re then dp_small else 
-      max(dp_small, (Medium.dynamicViscosity(state_a) + Medium.dynamicViscosity(state_b)) ^ 2 * pi / 8 * Re_turbulent ^ 2 
+      max(dp_small, (Medium.dynamicViscosity(state_a) + Medium.dynamicViscosity(state_b)) ^ 2 * pi / 8 * Re_turbulent ^ 2
       / (valveCharacteristic(opening_actual) * Av * (Medium.density(state_a) + Medium.density(state_b))));
   initial equation
     assert(not CvData == CvTypes.OpPoint, "汽化阀不支持 OpPoint 选项");
@@ -119,24 +119,24 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
     Ff = 0.96 - 0.28 * sqrt(p_sat / Medium.fluidConstants[1].criticalPressure);
     Fl = Fl_nominal * FlCharacteristic(opening_actual);
     dpEff = if p_out < (1 - Fl ^ 2) * p_in + Ff * Fl ^ 2 * p_sat then 
-      Fl ^ 2 * (p_in - Ff * p_sat) else dp 
+      Fl ^ 2 * (p_in - Ff * p_sat) else dp
       "有效压降，考虑可能的阻塞条件";
     // m_flow = valveCharacteristic(opening)*Av*sqrt(d)*sqrt(dpEff);
     if checkValve then
-      m_flow = homotopy(valveCharacteristic(opening_actual) * Av * sqrt(Medium.density(state_a)) * 
-        Utilities.regRoot2(dpEff, dp_turbulent, 1.0, 0.0, use_yd0 = true, yd0 = 0.0), 
+      m_flow = homotopy(valveCharacteristic(opening_actual) * Av * sqrt(Medium.density(state_a)) *
+        Utilities.regRoot2(dpEff, dp_turbulent, 1.0, 0.0, use_yd0 = true, yd0 = 0.0),
         valveCharacteristic(opening_actual) * m_flow_nominal * dp / dp_nominal);
     /* 在 Modelica 3.1 中（缺点：在 dpEff=0 时出现不必要的事件，而不是 smooth=2）。
     m_flow = valveCharacteristic(opening)*Av*sqrt(Medium.density(state_a))*
     (if dpEff>=0 then Utilities.regRoot(dpEff, dp_turbulent) else 0);
     */
     elseif not allowFlowReversal then
-      m_flow = homotopy(valveCharacteristic(opening_actual) * Av * sqrt(Medium.density(state_a)) * 
-        Utilities.regRoot(dpEff, dp_turbulent), 
+      m_flow = homotopy(valveCharacteristic(opening_actual) * Av * sqrt(Medium.density(state_a)) *
+        Utilities.regRoot(dpEff, dp_turbulent),
         valveCharacteristic(opening_actual) * m_flow_nominal * dp / dp_nominal);
     else
-      m_flow = homotopy(valveCharacteristic(opening_actual) * Av * 
-        Utilities.regRoot2(dpEff, dp_turbulent, Medium.density(state_a), Medium.density(state_b)), 
+      m_flow = homotopy(valveCharacteristic(opening_actual) * Av *
+        Utilities.regRoot2(dpEff, dp_turbulent, Medium.density(state_a), Medium.density(state_b)),
         valveCharacteristic(opening_actual) * m_flow_nominal * dp / dp_nominal);
     /* 在 Modelica 3.1 中（缺点:在 dp=0 时出现不必要的事件，而不是 smooth=2）。
     In Modelica 3.1 (Disadvantage: Unnecessary event at dp=0, and instead of smooth=2)
@@ -170,7 +170,7 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
 参数 <strong>Kv</strong> 和 <strong>Cv</strong> 的处理方法在 <a href=\"modelica://Modelica.Fluid.UsersGuide.ComponentDefinition.ValveCharacteristics\">User's Guide</a> 中有详细说明。
 </p>
 
-</html>"  , 
+</html>"  ,
       revisions = "<html>
 <ul>
 <li><em>2 Nov 2005</em>
@@ -187,10 +187,10 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
     parameter Medium.AbsolutePressure p_nominal "额定进口压力" 
     annotation(Dialog(group="额定工作点"));
     parameter Real Fxt_full=0.5 "全开时的 Fk*xt 临界比率";
-    replaceable function xtCharacteristic = 
+    replaceable function xtCharacteristic =
         Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.one 
       constrainedby 
-      Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.baseFun 
+      Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.baseFun
       "临界比率" annotation();
     Real Fxt;
     Real x "压降比";
@@ -198,13 +198,13 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
     Real Y "压缩系数";
     Medium.AbsolutePressure p "入口压力";
 
-    constant SI.ReynoldsNumber Re_turbulent = 4000 
+    constant SI.ReynoldsNumber Re_turbulent = 4000
       "cf. 阀门全开时为直管 -- dp_阀门关闭湍流程度增加";
-    parameter Boolean use_Re = system.use_eps_Re 
+    parameter Boolean use_Re = system.use_eps_Re
       "true: 湍流区域由 Re 确定, false: 湍流区域由 m_flow_small 确定" 
       annotation(Dialog(tab="高级"), Evaluate=true);
     SI.AbsolutePressure dp_turbulent = if not use_Re then dp_small else 
-      max(dp_small, (Medium.dynamicViscosity(state_a) + Medium.dynamicViscosity(state_b))^2*pi/8*Re_turbulent^2 
+      max(dp_small, (Medium.dynamicViscosity(state_a) + Medium.dynamicViscosity(state_b))^2*pi/8*Re_turbulent^2
                     /(max(valveCharacteristic(opening_actual),0.001)*Av*Y*(Medium.density(state_a) + Medium.density(state_b))));
   protected
     parameter Real Fxt_nominal(fixed=false) "额定 Fxt";
@@ -236,16 +236,16 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
     Y = 1 - abs(xs)/(3*Fxt);
     // m_flow = valveCharacteristic(opening)*Av*Y*sqrt(d)*sqrt(p*xs);
     if checkValve then
-      m_flow = homotopy(valveCharacteristic(opening_actual)*Av*Y*sqrt(Medium.density(state_a))* 
-                             (if xs>=0 then Utilities.regRoot(p*xs, dp_turbulent) else 0), 
+      m_flow = homotopy(valveCharacteristic(opening_actual)*Av*Y*sqrt(Medium.density(state_a))*
+                             (if xs>=0 then Utilities.regRoot(p*xs, dp_turbulent) else 0),
                         valveCharacteristic(opening_actual)*m_flow_nominal*dp/dp_nominal);
     elseif not allowFlowReversal then
-      m_flow = homotopy(valveCharacteristic(opening_actual)*Av*Y*sqrt(Medium.density(state_a))* 
-                             Utilities.regRoot(p*xs, dp_turbulent), 
+      m_flow = homotopy(valveCharacteristic(opening_actual)*Av*Y*sqrt(Medium.density(state_a))*
+                             Utilities.regRoot(p*xs, dp_turbulent),
                         valveCharacteristic(opening_actual)*m_flow_nominal*dp/dp_nominal);
     else
-      m_flow = homotopy(valveCharacteristic(opening_actual)*Av*Y* 
-                             Utilities.regRoot2(p*xs, dp_turbulent, Medium.density(state_a), Medium.density(state_b)), 
+      m_flow = homotopy(valveCharacteristic(opening_actual)*Av*Y*
+                             Utilities.regRoot2(p*xs, dp_turbulent, Medium.density(state_a), Medium.density(state_b)),
                         valveCharacteristic(opening_actual)*m_flow_nominal*dp/dp_nominal);
   /* 使用 smooth(0, ...)的替代公式 -- 不应使用，因为 regRoot2 具有连续导数
     -- cf. ModelicaTest.Fluid.TestPipesAndValves.DynamicPipeInitialization --
@@ -279,7 +279,7 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
 参数 <strong>Kv</strong> 和 <strong>Cv</strong> 的处理方法在 <a href=\"modelica://Modelica.Fluid.UsersGuide.ComponentDefinition.ValveCharacteristics\">User's Guide</a> 中有详细说明。
 </p>
 
-</html>"          , 
+</html>"          ,
       revisions="<html>
 <ul>
 <li><em>2 Nov 2005</em>
@@ -291,21 +291,21 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
 
   model ValveLinear "用于线性压降的水/蒸汽阀门"
     extends Modelica.Fluid.Interfaces.PartialTwoPortTransport;
-    parameter SI.AbsolutePressure dp_nominal 
+    parameter SI.AbsolutePressure dp_nominal
       "全开时的额定压降" 
       annotation(Dialog(group="额定工作点"));
-    parameter Medium.MassFlowRate m_flow_nominal 
+    parameter Medium.MassFlowRate m_flow_nominal
       "全开时的额定质量流量";
-    final parameter Types.HydraulicConductance k = m_flow_nominal/dp_nominal 
+    final parameter Types.HydraulicConductance k = m_flow_nominal/dp_nominal
       "全开时的渗透系数";
-    Modelica.Blocks.Interfaces.RealInput opening(min=0,max=1) 
+    Modelica.Blocks.Interfaces.RealInput opening(min=0,max=1)
       "=1: 完全打开， =0:完全关闭" 
     annotation (Placement(transformation(
-          origin={0,90}, 
-          extent={{-20,-20},{20,20}}, 
+          origin={0,90},
+          extent={{-20,-20},{20,20}},
           rotation=270), iconTransformation(
-          extent={{-20,-20},{20,20}}, 
-          rotation=270, 
+          extent={{-20,-20},{20,20}},
+          rotation=270,
           origin={0,80})));
 
   equation
@@ -317,25 +317,25 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
 
   annotation (
     Icon(coordinateSystem(
-          preserveAspectRatio=true, 
+          preserveAspectRatio=true,
           extent={{-100,-100},{100,100}}), graphics={
-          Line(points={{0,50},{0,0}}), 
+          Line(points={{0,50},{0,0}}),
           Rectangle(
-            extent={{-20,60},{20,50}}, 
-            fillPattern=FillPattern.Solid), 
+            extent={{-20,60},{20,50}},
+            fillPattern=FillPattern.Solid),
           Polygon(
-            points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},{-100,50}}, 
-            fillColor={255,255,255}, 
-            fillPattern=FillPattern.Solid), 
+            points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},{-100,50}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
           Polygon(
-            points=DynamicSelect({{-100,0},{100,-0},{100,0},{0,0},{-100,-0},{-100, 
+            points=DynamicSelect({{-100,0},{100,-0},{100,0},{0,0},{-100,-0},{-100,
                 0}}, {{-100,50*opening},{-100,50*opening},{100,-50*opening},{
-                100,50*opening},{0,0},{-100,-50*opening},{-100,50*opening}}), 
-            fillColor={0,255,0}, 
-            lineColor={255,255,255}, 
-            fillPattern=FillPattern.Solid), 
-          Polygon(points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},{-100, 
-                50}})}), 
+                100,50*opening},{0,0},{-100,-50*opening},{-100,50*opening}}),
+            fillColor={0,255,0},
+            lineColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Polygon(points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},{-100,
+                50}})}),
     Documentation(info="<html>
 <p>
 该模型非常简单，提供的压降与流速和 <code>opening</code> 输入成正比，无需计算任何流体特性。
@@ -344,7 +344,7 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
 
 <p>但必须指定介质模型，以便使用相同的介质模型将流体接口连接到其他组件。</p>
 <p>该模型为绝热模型（不向环境散热），忽略了从入口到出口的动能变化。</p>
-</html>"          , 
+</html>"          ,
       revisions="<html>
 <ul>
 <li><em>2 Nov 2005</em>
@@ -359,14 +359,14 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
     parameter SI.AbsolutePressure dp_nominal "全开=1时的额定压降" 
       annotation(Dialog(group = "额定工作点"));
     parameter Medium.MassFlowRate m_flow_nominal "全开=1时的额定质量流量";
-    final parameter Types.HydraulicConductance k = m_flow_nominal / dp_nominal 
+    final parameter Types.HydraulicConductance k = m_flow_nominal / dp_nominal
       "全开=1时的渗透系数";
     Modelica.Blocks.Interfaces.BooleanInput open 
       annotation(Placement(transformation(
-      origin = {0, 80}, 
-      extent = {{-20, -20}, {20, 20}}, 
+      origin = {0, 80},
+      extent = {{-20, -20}, {20, 20}},
       rotation = 270)));
-    parameter Real opening_min(min = 0) = 0 
+    parameter Real opening_min(min = 0) = 0
       "如果关闭，阀门缝隙会造成少量泄漏流";
   equation
     m_flow = if open then 1 * k * dp else opening_min * k * dp;
@@ -377,16 +377,16 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
 
     annotation(
       Icon(coordinateSystem(
-      preserveAspectRatio = false, 
+      preserveAspectRatio = false,
       extent = {{-100, -100}, {100, 100}}), graphics = {
-      Line(points = {{0, 50}, {0, 0}}), 
+      Line(points = {{0, 50}, {0, 0}}),
       Rectangle(
-      extent = {{-20, 60}, {20, 50}}, 
-      fillPattern = FillPattern.Solid), 
+      extent = {{-20, 60}, {20, 50}},
+      fillPattern = FillPattern.Solid),
       Polygon(
-      points = {{-100, 50}, {100, -50}, {100, 50}, {0, 0}, {-100, -50}, {-100, 50}}, 
-      fillColor = DynamicSelect({255, 255, 255}, if open then {0, 255, 0} else {255, 255, 255}), 
-      fillPattern = FillPattern.Solid)}), 
+      points = {{-100, 50}, {100, -50}, {100, 50}, {0, 0}, {-100, -50}, {-100, 50}},
+      fillColor = DynamicSelect({255, 255, 255}, if open then {0, 255, 0} else {255, 255, 255}),
+      fillPattern = FillPattern.Solid)}),
       Documentation(info = "<html>
 <p>
 如果 open = <strong>true</strong> ，这个非常简单的模型就会产生与流量成正比的（小）压降，否则，质量流量为零。如果 opening_min > 0，
@@ -404,7 +404,7 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
 <p>
 在图示动画中，阀门打开时显示为 \"绿色\"。
 </p>
-</html>"  , 
+</html>"  ,
       revisions = "<html>
 <ul>
 <li><em>Nov 2005</em>
@@ -413,33 +413,33 @@ by Katja Poschlad (based on ValveLinear).</li>
 </html>"  ));
   end ValveDiscrete;
 
-  model ValveDiscreteRamp 
+  model ValveDiscreteRamp
     "用于水/蒸汽的阀门，具有离散开启信号和斜坡开启功能"
     extends Modelica.Fluid.Interfaces.PartialTwoPortTransport;
-    parameter SI.AbsolutePressure dp_nominal 
+    parameter SI.AbsolutePressure dp_nominal
       "全开时的额定压降" 
       annotation(Dialog(group = "额定工作点"));
-    parameter Medium.MassFlowRate m_flow_nominal 
+    parameter Medium.MassFlowRate m_flow_nominal
       "全开时的额定质量流量";
-    parameter Real opening_min(min = 0) = 0 
+    parameter Real opening_min(min = 0) = 0
       "如果关闭，阀门缝隙会造成少量泄漏流";
-    final parameter Types.HydraulicConductance k = m_flow_nominal / dp_nominal 
+    final parameter Types.HydraulicConductance k = m_flow_nominal / dp_nominal
       "全开时的渗透系数";
     parameter SI.Time Topen "全开阀门的时间";
     parameter SI.Time Tclose = Topen "全关阀门的时间";
 
     Modelica.Blocks.Interfaces.BooleanInput open 
       annotation(Placement(transformation(
-      origin = {0, 80}, 
-      extent = {{-20, -20}, {20, 20}}, 
+      origin = {0, 80},
+      extent = {{-20, -20}, {20, 20}},
       rotation = 270)));
     Blocks.Logical.TriggeredTrapezoid openingGenerator(
-      amplitude = 1 - opening_min, rising = Topen, falling = 
-      Tclose, 
+      amplitude = 1 - opening_min, rising = Topen, falling =
+      Tclose,
       offset = opening_min) 
       annotation(Placement(transformation(
-      extent = {{-10, -10}, {10, 10}}, 
-      rotation = -90, 
+      extent = {{-10, -10}, {10, 10}},
+      rotation = -90,
       origin = {0, 30})));
 
 
@@ -450,27 +450,27 @@ by Katja Poschlad (based on ValveLinear).</li>
     // 等焓转化（无储存损失，无能量损失）
     port_a.h_outflow = inStream(port_b.h_outflow);
     port_b.h_outflow = inStream(port_a.h_outflow);
-    connect(open, openingGenerator.u) annotation(Line(points = {{0, 80}, {0, 42}, {2.22045e-15, 
+    connect(open, openingGenerator.u) annotation(Line(points = {{0, 80}, {0, 42}, {2.22045e-15,
       42}}, color = {255, 0, 255}));
     annotation(
       Icon(coordinateSystem(
-      preserveAspectRatio = false, 
+      preserveAspectRatio = false,
       extent = {{-100, -100}, {100, 100}}), graphics = {
-      Line(points = {{0, 50}, {0, 0}}), 
+      Line(points = {{0, 50}, {0, 0}}),
       Rectangle(
-      extent = {{-20, 60}, {20, 50}}, 
-      fillPattern = FillPattern.Solid), 
+      extent = {{-20, 60}, {20, 50}},
+      fillPattern = FillPattern.Solid),
       Polygon(
-      points = {{-100, 50}, {100, -50}, {100, 50}, {0, 0}, {-100, -50}, {-100, 50}}, 
-      fillColor = DynamicSelect({255, 255, 255}, if open then {0, 255, 0} else {255, 255, 255}), 
-      fillPattern = FillPattern.Solid)}), 
+      points = {{-100, 50}, {100, -50}, {100, 50}, {0, 0}, {-100, -50}, {-100, 50}},
+      fillColor = DynamicSelect({255, 255, 255}, if open then {0, 255, 0} else {255, 255, 255}),
+      fillPattern = FillPattern.Solid)}),
       Documentation(info = "<html>
 <p>
 该模型与 <a href=\"modelica://Modelica.Fluid.Valves.ValveDiscrete\">ValveDiscrete</a> 相似，
 不同之处在于阀门在打开时间 <code>Tclose</code> 内逐渐打开，在关闭时间 <code>Tclose</code> 内逐渐关闭，而不是突然关闭。
 这有助于避免在使用具有小压缩性的精确流体模型时出现不现实的现象，例如反向流动。
 </p>
-</html>"  , 
+</html>"  ,
       revisions = "<html>
 <ul>
 <li><em>Mar 2020</em>
@@ -479,64 +479,64 @@ by Francesco Casella (based on ValveLinear and ValveDiscrete).</li>
 </html>"  ));
   end ValveDiscreteRamp;
 
-  package BaseClasses 
+  package BaseClasses
     "阀门子库中使用的基类(只用于建立新的组件模型)"
     extends Modelica.Icons.BasesPackage;
     partial model PartialValve "阀门的基本模型"
 
       import Modelica.Fluid.Types.CvTypes;
       extends Modelica.Fluid.Interfaces.PartialTwoPortTransport(
-        dp_start = dp_nominal, 
-        m_flow_small = if system.use_eps_Re then system.eps_m_flow*m_flow_nominal else system.m_flow_small, 
+        dp_start = dp_nominal,
+        m_flow_small = if system.use_eps_Re then system.eps_m_flow*m_flow_nominal else system.m_flow_small,
         m_flow_start = m_flow_nominal);
 
-      parameter Modelica.Fluid.Types.CvTypes CvData=Modelica.Fluid.Types.CvTypes.OpPoint 
+      parameter Modelica.Fluid.Types.CvTypes CvData=Modelica.Fluid.Types.CvTypes.OpPoint
         "选择流量系数" 
        annotation(Dialog(group = "流量系数"));
       parameter SI.Area Av(
-        fixed= CvData == Modelica.Fluid.Types.CvTypes.Av, 
+        fixed= CvData == Modelica.Fluid.Types.CvTypes.Av,
         start=m_flow_nominal/(sqrt(rho_nominal*dp_nominal))*valveCharacteristic(
             opening_nominal)) "（公制）流量系数 Av" 
-       annotation(Dialog(group = "流量系数", 
+       annotation(Dialog(group = "流量系数",
                          enable = (CvData==Modelica.Fluid.Types.CvTypes.Av)));
       parameter Real Kv = 0 "（公制）流量系数 Kv [m3/h]" 
-      annotation(Dialog(group = "流量系数", 
+      annotation(Dialog(group = "流量系数",
                         enable = (CvData==Modelica.Fluid.Types.CvTypes.Kv)));
       parameter Real Cv = 0 "（US） 流量系数 Cv [USG/min]" 
-      annotation(Dialog(group = "流量系数", 
+      annotation(Dialog(group = "流量系数",
                         enable = (CvData==Modelica.Fluid.Types.CvTypes.Cv)));
       parameter SI.Pressure dp_nominal "额定压降" 
       annotation(Dialog(group="额定工作点"));
       parameter Medium.MassFlowRate m_flow_nominal "额定质量流量" 
       annotation(Dialog(group="额定工作点"));
-      parameter Medium.Density rho_nominal=Medium.density_pTX(Medium.p_default, Medium.T_default, Medium.X_default) 
+      parameter Medium.Density rho_nominal=Medium.density_pTX(Medium.p_default, Medium.T_default, Medium.X_default)
         "额定入口密度" 
-      annotation(Dialog(group="额定工作点", 
+      annotation(Dialog(group="额定工作点",
                         enable = (CvData==Modelica.Fluid.Types.CvTypes.OpPoint)));
       parameter Real opening_nominal(min=0,max=1)=1 "额定开度" 
-      annotation(Dialog(group="额定工作点", 
+      annotation(Dialog(group="额定工作点",
                         enable = (CvData==Modelica.Fluid.Types.CvTypes.OpPoint)));
 
-      parameter Boolean filteredOpening=false 
+      parameter Boolean filteredOpening=false
         "true: 开度用2阶临界阻尼滤波器进行滤波" 
         annotation(Dialog(group="开度过滤"),choices(checkBox=true));
-      parameter SI.Time riseTime=1 
+      parameter SI.Time riseTime=1
         "滤波器的上升时间 (达到开度步进的99.6%所需的时间)" 
         annotation(Dialog(group="开度过滤",enable=filteredOpening));
-      parameter Real leakageOpening(min=0,max=1)=1e-3 
+      parameter Real leakageOpening(min=0,max=1)=1e-3
         "开度信号受泄漏开度限制 (以改善数值计算)" 
         annotation(Dialog(group="开度过滤",enable=filteredOpening));
       parameter Boolean checkValve=false "反向流动停止" 
         annotation(Dialog(tab="假设"));
 
-      replaceable function valveCharacteristic = 
+      replaceable function valveCharacteristic =
           Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.linear 
         constrainedby 
-        Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.baseFun 
+        Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.baseFun
         "内在流动特性" 
         annotation(choicesAllMatching=true);
     protected
-      parameter SI.Pressure dp_small=if system.use_eps_Re then dp_nominal/m_flow_nominal*m_flow_small else system.dp_small 
+      parameter SI.Pressure dp_small=if system.use_eps_Re then dp_nominal/m_flow_nominal*m_flow_small else system.dp_small
         "零流量的正规化" 
        annotation(Dialog(tab="高级"));
 
@@ -544,22 +544,22 @@ by Francesco Casella (based on ValveLinear and ValveDiscrete).</li>
       constant SI.Area Kv2Av = 27.7e-6 "换算系数";
       constant SI.Area Cv2Av = 24.0e-6 "换算系数";
 
-      Modelica.Blocks.Interfaces.RealInput opening(min=0, max=1) 
+      Modelica.Blocks.Interfaces.RealInput opening(min=0, max=1)
         "阀门位置范围 0...1" 
                                        annotation (Placement(transformation(
-            origin={0,90}, 
-            extent={{-20,-20},{20,20}}, 
+            origin={0,90},
+            extent={{-20,-20},{20,20}},
             rotation=270), iconTransformation(
-            extent={{-20,-20},{20,20}}, 
-            rotation=270, 
+            extent={{-20,-20},{20,20}},
+            rotation=270,
             origin={0,80})));
 
-      Modelica.Blocks.Interfaces.RealOutput opening_filtered if filteredOpening 
+      Modelica.Blocks.Interfaces.RealOutput opening_filtered if filteredOpening
         "过滤阀位置范围 0...1" 
-        annotation (Placement(transformation(extent={{60,40},{80,60}}), 
+        annotation (Placement(transformation(extent={{60,40},{80,60}}),
             iconTransformation(extent={{60,50},{80,70}})));
 
-      Modelica.Blocks.Continuous.Filter filter(order=2, f_cut=5/(2*Modelica.Constants.pi 
+      Modelica.Blocks.Continuous.Filter filter(order=2, f_cut=5/(2*Modelica.Constants.pi
             *riseTime)) if filteredOpening 
         annotation (Placement(transformation(extent={{34,44},{48,58}})));
 
@@ -580,59 +580,59 @@ by Francesco Casella (based on ValveLinear and ValveDiscrete).</li>
 只要输入信号高于 uMin，程序块就会将输入信号作为输出信号。否则，y=uMin 将作为输出信号。
 </p>
 </html>"                  ), Icon(coordinateSystem(
-        preserveAspectRatio=true, 
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={
-        Line(points={{0,-90},{0,68}}, color={192,192,192}), 
+        Line(points={{0,-90},{0,68}}, color={192,192,192}),
         Polygon(
-          points={{0,90},{-8,68},{8,68},{0,90}}, 
-          lineColor={192,192,192}, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid), 
-        Line(points={{-90,0},{68,0}}, color={192,192,192}), 
+          points={{0,90},{-8,68},{8,68},{0,90}},
+          lineColor={192,192,192},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-90,0},{68,0}}, color={192,192,192}),
         Polygon(
-          points={{90,0},{68,-8},{68,8},{90,0}}, 
-          lineColor={192,192,192}, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid), 
-        Line(points={{-80,-70},{-50,-70},{50,70},{64,90}}), 
+          points={{90,0},{68,-8},{68,8},{90,0}},
+          lineColor={192,192,192},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-80,-70},{-50,-70},{50,70},{64,90}}),
         Text(
-          extent={{-150,-150},{150,-110}}, 
-          textString="uMin=%uMin"), 
+          extent={{-150,-150},{150,-110}},
+          textString="uMin=%uMin"),
         Text(
-          extent={{-150,150},{150,110}}, 
-          textString="%name", 
-          textColor={0,0,255})}), 
+          extent={{-150,150},{150,110}},
+          textString="%name",
+          textColor={0,0,255})}),
         Diagram(coordinateSystem(
-        preserveAspectRatio=true, 
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={
-        Line(points={{0,-60},{0,50}}, color={192,192,192}), 
+        Line(points={{0,-60},{0,50}}, color={192,192,192}),
         Polygon(
-          points={{0,60},{-5,50},{5,50},{0,60}}, 
-          lineColor={192,192,192}, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid), 
-        Line(points={{-60,0},{50,0}}, color={192,192,192}), 
+          points={{0,60},{-5,50},{5,50},{0,60}},
+          lineColor={192,192,192},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-60,0},{50,0}}, color={192,192,192}),
         Polygon(
-          points={{60,0},{50,-5},{50,5},{60,0}}, 
-          lineColor={192,192,192}, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid), 
-        Line(points={{-50,-40},{-30,-40},{30,40},{50,40}}), 
+          points={{60,0},{50,-5},{50,5},{60,0}},
+          lineColor={192,192,192},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-50,-40},{-30,-40},{30,40},{50,40}}),
         Text(
-          extent={{46,-6},{68,-18}}, 
-          textColor={128,128,128}, 
-          textString="u"), 
+          extent={{46,-6},{68,-18}},
+          textColor={128,128,128},
+          textString="u"),
         Text(
-          extent={{-30,70},{-5,50}}, 
-          textColor={128,128,128}, 
-          textString="y"), 
+          extent={{-30,70},{-5,50}},
+          textColor={128,128,128},
+          textString="y"),
         Text(
-          extent={{-58,-54},{-28,-42}}, 
-          textColor={128,128,128}, 
-          textString="uMin"), 
+          extent={{-58,-54},{-28,-42}},
+          textColor={128,128,128},
+          textString="uMin"),
         Text(
-          extent={{26,40},{66,56}}, 
-          textColor={128,128,128}, 
+          extent={{26,40},{66,56}},
+          textColor={128,128,128},
           textString="uMax")}));
     end MinLimiter;
 
@@ -666,37 +666,37 @@ by Francesco Casella (based on ValveLinear and ValveDiscrete).</li>
           points={{8.6,51},{0,51},{0,90}}, color={0,0,127}));
       annotation (
         Icon(coordinateSystem(
-            preserveAspectRatio=true, 
+            preserveAspectRatio=true,
             extent={{-100,-100},{100,100}}), graphics={
-            Line(points={{0,52},{0,0}}), 
+            Line(points={{0,52},{0,0}}),
             Rectangle(
-              extent={{-20,60},{20,52}}, 
-              fillPattern=FillPattern.Solid), 
+              extent={{-20,60},{20,52}},
+              fillPattern=FillPattern.Solid),
             Polygon(
-              points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},{-100,50}}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
+              points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},{-100,50}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
             Polygon(
               points=DynamicSelect({{-100,0},{100,-0},{100,0},{0,0},{-100,-0},{
-                  -100,0}}, {{-100,50*opening_actual},{-100,50*opening_actual},{100,-50* 
-                  opening},{100,50*opening_actual},{0,0},{-100,-50*opening_actual},{-100,50* 
-                  opening}}), 
-              fillColor={0,255,0}, 
-              lineColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
-            Polygon(points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},{-100, 
-                  50}}), 
-            Ellipse(visible=filteredOpening, 
-              extent={{-40,94},{40,14}}, 
-              lineColor={0,0,127}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
-            Line(visible=filteredOpening, 
-              points={{-20,25},{-20,63},{0,41},{20,63},{20,25}}, 
-              thickness=0.5), 
-            Line(visible=filteredOpening, 
-              points={{40,60},{60,60}}, 
-              color={0,0,127})}), 
+                  -100,0}}, {{-100,50*opening_actual},{-100,50*opening_actual},{100,-50*
+                  opening},{100,50*opening_actual},{0,0},{-100,-50*opening_actual},{-100,50*
+                  opening}}),
+              fillColor={0,255,0},
+              lineColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(points={{-100,50},{100,-50},{100,50},{0,0},{-100,-50},{-100,
+                  50}}),
+            Ellipse(visible=filteredOpening,
+              extent={{-40,94},{40,14}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(visible=filteredOpening,
+              points={{-20,25},{-20,63},{0,41},{20,63},{20,25}},
+              thickness=0.5),
+            Line(visible=filteredOpening,
+              points={{40,60},{60,60}},
+              color={0,0,127})}),
         Documentation(info="<html>
 <p>这是 <code>ValveIncompressible</code>、<code>ValveVaporizing</code> 和 <code>ValveCompressible</code> 阀门模型的基础模型。该模型基于 IEC 534 / ISA S.75 阀门尺寸标准。</p>
 
@@ -790,7 +790,7 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
     extends Modelica.Icons.VariantsPackage;
     partial function baseFun "阀门特性基本函数"
       extends Modelica.Icons.Function;
-      input Real pos(min=0, max=1) 
+      input Real pos(min=0, max=1)
           "开度 (0: 关闭, 1: 全开)";
       output Real rc "相对流量系数 (单位)";
       annotation (Documentation(info="<html>

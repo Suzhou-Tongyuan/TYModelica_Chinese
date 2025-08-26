@@ -7,7 +7,7 @@ model PolyphaseInductance "多相电感"
   parameter SI.Resistance R=0.1 "导线电缆阻力";
   parameter Real effectiveTurns=5 "有效转数";
   parameter SI.Inductance L=1 "负载电感";
-  final parameter SI.Reluctance R_m=m*effectiveTurns^2/2/L 
+  final parameter SI.Reluctance R_m=m*effectiveTurns^2/2/L
     "等效磁阻";
   Modelica.Electrical.Analog.Basic.Ground ground_e 
     annotation (Placement(transformation(extent={{-70,10},{-50,30}})));
@@ -15,55 +15,55 @@ model PolyphaseInductance "多相电感"
     annotation (Placement(transformation(extent={{-70,-90},{-50,-70}})));
   Modelica.Electrical.Polyphase.Basic.Star star_e(m=m) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-60,40})));
   Modelica.Electrical.Polyphase.Basic.Star star_m(m=m) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-60,-60})));
   Modelica.Electrical.Polyphase.Sources.SineVoltage voltageSource_e(
-    m=m, 
-    f=fill(f, m), 
-    V=fill(sqrt(2)*VRMS, m), 
+    m=m,
+    f=fill(f, m),
+    V=fill(sqrt(2)*VRMS, m),
     phase=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(
         m) + fill(Modelica.Constants.pi/2, m)) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-60,70})));
   Modelica.Electrical.Polyphase.Sources.SineVoltage voltageSource_m(
-    m=m, 
-    f=fill(f, m), 
-    V=fill(sqrt(2)*VRMS, m), 
+    m=m,
+    f=fill(f, m),
+    V=fill(sqrt(2)*VRMS, m),
     phase=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(
         m) + fill(Modelica.Constants.pi/2, m)) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-60,-30})));
-  Modelica.Electrical.Polyphase.Basic.Resistor resistor_e(m=m, R=fill(R, 
+  Modelica.Electrical.Polyphase.Basic.Resistor resistor_e(m=m, R=fill(R,
         m)) 
     annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
-  Modelica.Electrical.Polyphase.Basic.Resistor resistor_m(m=m, R=fill(R, 
+  Modelica.Electrical.Polyphase.Basic.Resistor resistor_m(m=m, R=fill(R,
         m)) 
     annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
-  Modelica.Electrical.Polyphase.Basic.Inductor inductor_e(m=m, L=fill(L, 
+  Modelica.Electrical.Polyphase.Basic.Inductor inductor_e(m=m, L=fill(L,
         m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={0,70})));
   Magnetic.FundamentalWave.Components.PolyphaseElectroMagneticConverter converter_m(
-    m=m, 
-    orientation=Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
+    m=m,
+    orientation=Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
     effectiveTurns=fill(effectiveTurns, m)) 
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
 
   Magnetic.FundamentalWave.Components.Reluctance reluctance_m(R_m(d=R_m, q=R_m)) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={60,-30})));
   Magnetic.FundamentalWave.Components.Ground groundM_m 
     annotation (Placement(transformation(extent={{10,-90},{30,-70}})));

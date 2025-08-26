@@ -3,103 +3,103 @@ model DCPM_Cooling "测试示例：DCPM电机的冷却"
   extends Modelica.Icons.Example;
   parameter SI.Voltage Va=100 "实际电枢电压";
   parameter SI.Voltage Ve=100 "实际励磁电压";
-  parameter SI.AngularVelocity w0= 
+  parameter SI.AngularVelocity w0=
       Modelica.Units.Conversions.from_rpm(1500) "空载转速";
   parameter SI.Torque TLoad=63.66 "额定负载转矩";
-  parameter SI.Inertia JLoad=0.15 
+  parameter SI.Inertia JLoad=0.15
     "负载的转动惯量";
-  parameter SI.Temperature TAmbient=293.15 
+  parameter SI.Temperature TAmbient=293.15
     "环境温度";
-  parameter SI.HeatCapacity Ca=20 
+  parameter SI.HeatCapacity Ca=20
     "电枢的热容量";
   parameter SI.HeatCapacity Cc=50 "磁芯的热容量";
-  final parameter SI.Power Losses=dcpm.Ra*dcpm.IaNominal^2 
+  final parameter SI.Power Losses=dcpm.Ra*dcpm.IaNominal^2
     "额定损耗";
-  final parameter SI.Temperature T0=293.15 
+  final parameter SI.Temperature T0=293.15
     "参考温度20°C";
-  final parameter SI.TemperatureDifference dTCoolant=10 
+  final parameter SI.TemperatureDifference dTCoolant=10
     "冷却剂温升";
-  final parameter SI.TemperatureDifference dTArmature=dcpm.TaNominal 
+  final parameter SI.TemperatureDifference dTArmature=dcpm.TaNominal
        - T0 - dTCoolant/2 "电枢温度升高";
-  parameter SI.ThermalConductance G_armature_core=2*Losses/ 
+  parameter SI.ThermalConductance G_armature_core=2*Losses/
       dTArmature "电枢-磁芯的热导";
-  parameter SI.ThermalConductance G_core_cooling=2*Losses/ 
+  parameter SI.ThermalConductance G_core_cooling=2*Losses/
       dTArmature "磁芯-冷却的热导";
   parameter SI.VolumeFlowRate CoolantFlow=50 "冷却剂流量";
   Machines.BasicMachines.DCMachines.DC_PermanentMagnet dcpm(
-    wMechanical(start=w0, fixed=true), 
-    VaNominal=dcpmData.VaNominal, 
-    IaNominal=dcpmData.IaNominal, 
-    wNominal=dcpmData.wNominal, 
-    TaNominal=dcpmData.TaNominal, 
-    Ra=dcpmData.Ra, 
-    TaRef=dcpmData.TaRef, 
-    La=dcpmData.La, 
-    Jr=dcpmData.Jr, 
-    useSupport=false, 
-    Js=dcpmData.Js, 
-    frictionParameters=dcpmData.frictionParameters, 
-    coreParameters=dcpmData.coreParameters, 
-    strayLoadParameters=dcpmData.strayLoadParameters, 
-    brushParameters=dcpmData.brushParameters, 
-    phiMechanical(fixed=true), 
-    ia(fixed=true), 
-    TaOperational=293.15, 
-    alpha20a=dcpmData.alpha20a, 
+    wMechanical(start=w0, fixed=true),
+    VaNominal=dcpmData.VaNominal,
+    IaNominal=dcpmData.IaNominal,
+    wNominal=dcpmData.wNominal,
+    TaNominal=dcpmData.TaNominal,
+    Ra=dcpmData.Ra,
+    TaRef=dcpmData.TaRef,
+    La=dcpmData.La,
+    Jr=dcpmData.Jr,
+    useSupport=false,
+    Js=dcpmData.Js,
+    frictionParameters=dcpmData.frictionParameters,
+    coreParameters=dcpmData.coreParameters,
+    strayLoadParameters=dcpmData.strayLoadParameters,
+    brushParameters=dcpmData.brushParameters,
+    phiMechanical(fixed=true),
+    ia(fixed=true),
+    TaOperational=293.15,
+    alpha20a=dcpmData.alpha20a,
     useThermalPort=true) "DC机器数据" 
     annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage armatureVoltage(V=Va) 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=90, 
+        extent={{10,-10},{-10,10}},
+        rotation=90,
         origin={-80,70})));
   Modelica.Electrical.Analog.Basic.Ground groundArmature annotation (
       Placement(transformation(
-        origin={-80,40}, 
+        origin={-80,40},
         extent={{-10,-10},{10,10}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=JLoad) 
     annotation (Placement(transformation(extent={{10,20},{30,40}})));
-  Modelica.Mechanics.Rotational.Sources.Torque loadTorque(useSupport= 
-        false) annotation (Placement(transformation(extent={{60,20},{40, 
+  Modelica.Mechanics.Rotational.Sources.Torque loadTorque(useSupport=
+        false) annotation (Placement(transformation(extent={{60,20},{40,
             40}})));
   Modelica.Blocks.Sources.Pulse pulse(
-    amplitude=-1.5*TLoad, 
-    offset=0, 
+    amplitude=-1.5*TLoad,
+    offset=0,
     period=1) 
     annotation (Placement(transformation(extent={{90,20},{70,40}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor armature(C=Ca, T(
         start=TAmbient, fixed=true)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=180, 
+        extent={{-10,-10},{10,10}},
+        rotation=180,
         origin={-50,-40})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor armatureCore(
       G=G_armature_core) 
     annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor core(C=Cc, T(
         start=TAmbient, fixed=true)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=180, 
+        extent={{-10,-10},{10,10}},
+        rotation=180,
         origin={-10,-40})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor coreCooling(G= 
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor coreCooling(G=
        G_core_cooling) 
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   Modelica.Thermal.FluidHeatFlow.Sources.Ambient inlet(
       constantAmbientTemperature=TAmbient, constantAmbientPressure=0) 
     annotation (Placement(transformation(extent={{-10,-80},{-30,-60}})));
   Modelica.Thermal.FluidHeatFlow.Sources.VolumeFlow volumeFlow(
-    T0=TAmbient, 
-    constantVolumeFlow=CoolantFlow, 
+    T0=TAmbient,
+    constantVolumeFlow=CoolantFlow,
     m=0) annotation (Placement(transformation(extent={{0,-80},{20,-60}})));
   Modelica.Thermal.FluidHeatFlow.Components.Pipe cooling(
-    tapT=0.5, 
-    T0=TAmbient, 
-    m=0, 
-    h_g=0, 
-    V_flowLaminar=0.1, 
-    dpLaminar(displayUnit="Pa") = 0.1, 
-    V_flowNominal=1, 
-    dpNominal(displayUnit="Pa") = 1, 
-    T0fixed=false, 
+    tapT=0.5,
+    T0=TAmbient,
+    m=0,
+    h_g=0,
+    V_flowLaminar=0.1,
+    dpLaminar(displayUnit="Pa") = 0.1,
+    V_flowNominal=1,
+    dpNominal(displayUnit="Pa") = 1,
+    T0fixed=false,
     useHeatPort=true) 
     annotation (Placement(transformation(extent={{30,-60},{50,-80}})));
   Modelica.Thermal.FluidHeatFlow.Sources.Ambient outlet(
@@ -113,8 +113,8 @@ protected
     annotation (Placement(transformation(extent={{-14,-4},{-6,4}})));
 public
   parameter Utilities.ParameterRecords.DcPermanentMagnetData dcpmData(
-    alpha20a(displayUnit="1/K")=Modelica.Electrical.Machines.Thermal.Constants.alpha20Copper, 
-    TaNominal=353.15, 
+    alpha20a(displayUnit="1/K")=Modelica.Electrical.Machines.Thermal.Constants.alpha20Copper,
+    TaNominal=353.15,
     TaRef=353.15) 
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
 
@@ -161,9 +161,9 @@ equation
   connect(fixedTemperature.port, thermalPort.heatPortPermanentMagnet) 
     annotation (Line(
       points={{22,0},{6,0},{6,-0.8},{-10.4,-0.8}}, color={191,0,0}));
-  connect(dcpm.thermalPort, thermalPort) annotation (Line(points={{-10,20}, 
+  connect(dcpm.thermalPort, thermalPort) annotation (Line(points={{-10,20},
           {-10,10},{-10,0}}, color={191,0,0}));
-  annotation (experiment(StopTime=25, Interval=1E-4, Tolerance=1E-6), Documentation(info= 
+  annotation (experiment(StopTime=25, Interval=1E-4, Tolerance=1E-6), Documentation(info=
          "<html>
 <p>
 电机以空载转速启动，然后施加负载脉冲。</p>

@@ -1,12 +1,12 @@
 ﻿within Modelica.Thermal.HeatTransfer.Interfaces;
-partial model Element1D 
+partial model Element1D
   "传热元件基类(带两个HeatPort连接器且不存储能量)"
 
-  SI.HeatFlowRate Q_flow 
+  SI.HeatFlowRate Q_flow
     "从端口a -> 端口b的热流量";
   SI.TemperatureDifference dT "port_a.T - port_b.T";
 public
-  HeatPort_a port_a annotation (Placement(transformation(extent={{-110,-10}, 
+  HeatPort_a port_a annotation (Placement(transformation(extent={{-110,-10},
             {-90,10}})));
   HeatPort_b port_b annotation (Placement(transformation(extent={{90,-10},{
             110,10}})));

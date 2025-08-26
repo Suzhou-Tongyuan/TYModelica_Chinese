@@ -1,91 +1,91 @@
 ﻿within Modelica.Clocked.ClockSignals.Sampler;
-block SuperSample 
+block SuperSample
   "对输入时钟进行超采样，并将其作为输出时钟"
   parameter Integer factor(min=1) "超采样因子 (>= 1)" annotation(Evaluate=true);
 
-  Clocked.ClockSignals.Interfaces.ClockInput u 
+  Clocked.ClockSignals.Interfaces.ClockInput u
     "时钟输入信号连接器" 
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  Clocked.ClockSignals.Interfaces.ClockOutput y 
+  Clocked.ClockSignals.Interfaces.ClockOutput y
     "连接时钟作为输出信号（y 时钟与 u 时钟的速度相同）" 
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 equation
   y = superSample(u,factor);
 
   annotation (
-   defaultComponentName="superSample1", 
+   defaultComponentName="superSample1",
    Icon(coordinateSystem(
-        preserveAspectRatio=false, 
-        extent={{-100,-100},{100,100}}, 
-        initialScale=0.06), 
-                     graphics={Line(points={{-80,-60},{-40,-60},{-40,-60},{0,-60}, 
-              {0,-60},{0,-60},{0,80},{40,80},{40,80},{80,80},{80,0},{80,0},{80,0}, 
-              {100,0}},          color={95,95,95}, 
-          pattern=LinePattern.Dot, 
+        preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}},
+        initialScale=0.06),
+                     graphics={Line(points={{-80,-60},{-40,-60},{-40,-60},{0,-60},
+              {0,-60},{0,-60},{0,80},{40,80},{40,80},{80,80},{80,0},{80,0},{80,0},
+              {100,0}},          color={95,95,95},
+          pattern=LinePattern.Dot,
           thickness=0.5),                          Line(
-          points={{-80,-60},{-80,0},{-100,0}}, 
-          color={95,95,95}, 
-          pattern=LinePattern.Dot, 
-          thickness=0.5), 
+          points={{-80,-60},{-80,0},{-100,0}},
+          color={95,95,95},
+          pattern=LinePattern.Dot,
+          thickness=0.5),
         Ellipse(
-          extent={{-95,-45},{-65,-75}}, 
-          lineColor={175,175,175}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-95,-45},{-65,-75}},
+          lineColor={175,175,175},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{-83,-57},{-77,-63}}, 
-          lineColor={175,175,175}, 
-          fillColor={95,95,95}, 
-          fillPattern=FillPattern.Solid, 
-          pattern=LinePattern.Dot), 
+          extent={{-83,-57},{-77,-63}},
+          lineColor={175,175,175},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.Dot),
         Ellipse(
-          extent={{-15,96},{15,66}}, 
-          lineColor={175,175,175}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-15,96},{15,66}},
+          lineColor={175,175,175},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{-3,83},{3,77}}, 
-          lineColor={175,175,175}, 
-          fillColor={95,95,95}, 
-          fillPattern=FillPattern.Solid, 
-          pattern=LinePattern.Dot), 
+          extent={{-3,83},{3,77}},
+          lineColor={175,175,175},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.Dot),
         Ellipse(
-          extent={{65,16},{95,-14}}, 
-          lineColor={175,175,175}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{65,16},{95,-14}},
+          lineColor={175,175,175},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{77,3},{83,-3}}, 
-          lineColor={175,175,175}, 
-          fillColor={95,95,95}, 
-          fillPattern=FillPattern.Solid, 
-          pattern=LinePattern.Dot), 
+          extent={{77,3},{83,-3}},
+          lineColor={175,175,175},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.Dot),
         Ellipse(
-          extent={{-48,-46},{-18,-76}}, 
-          lineColor={175,175,175}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-48,-46},{-18,-76}},
+          lineColor={175,175,175},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{34,96},{64,66}}, 
-          lineColor={175,175,175}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{34,96},{64,66}},
+          lineColor={175,175,175},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Polygon(
-          points={{25,0},{5,20},{5,10},{-25,10},{-25,-10},{5,-10},{5,-20}, 
-              {25,0}}, 
-          fillColor={95,95,95}, 
-          fillPattern=FillPattern.Solid, 
-          lineColor={95,95,95}, 
-          origin={-43,18}, 
-          rotation=90), 
+          points={{25,0},{5,20},{5,10},{-25,10},{-25,-10},{5,-10},{5,-20},
+              {25,0}},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid,
+          lineColor={95,95,95},
+          origin={-43,18},
+          rotation=90),
         Text(
-          extent={{-150,150},{150,110}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,150},{150,110}},
+          textString="%name",
+          textColor={0,0,255}),
         Text(
-          extent={{-150,-90},{150,-130}}, 
-          textString="%factor", 
-          textColor={0,0,0})}), 
+          extent={{-150,-90},{150,-130}},
+          textString="%factor",
+          textColor={0,0,0})}),
     Documentation(info="<html><p>
 该模块对时钟输入信号 u 进行超采样，并将其作为时钟输出信号 y 提供。
 </p>

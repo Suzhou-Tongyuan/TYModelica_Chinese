@@ -1,12 +1,12 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function smallRotation 
+function smallRotation
   "返回对小幅旋转有效的旋转角度，并可选择返回应为零的残差"
 
   extends Modelica.Icons.Function;
   input Orientation R "将坐标系1旋转到坐标系2的方向对象";
-  input Boolean withResidues=false 
+  input Boolean withResidues=false
     "= false/true，如果返回 'angles'/'angles and residues' 中的角度/角度和残留项";
-  output SI.Angle phi[if withResidues then 6 else 3] 
+  output SI.Angle phi[if withResidues then 6 else 3]
     "坐标系1绕x轴、y轴和z轴的旋转角度，将坐标系1旋转到坐标系2的小角度旋转 + 可选的三个应该为零的残留项";
 algorithm
   /* 平面旋转：

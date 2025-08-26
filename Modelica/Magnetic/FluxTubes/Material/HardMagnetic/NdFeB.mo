@@ -1,9 +1,9 @@
 ﻿within Modelica.Magnetic.FluxTubes.Material.HardMagnetic;
 record NdFeB "钕铁硼烧结，示例值"
   extends FluxTubes.Material.HardMagnetic.BaseData(
-    H_cBRef=900000, 
-    B_rRef=1.2, 
-    T_ref=20 + 273.15, 
+    H_cBRef=900000,
+    B_rRef=1.2,
+    T_ref=20 + 273.15,
     alpha_Br=-0.001);
   annotation (Documentation(info="<html>
 <p>

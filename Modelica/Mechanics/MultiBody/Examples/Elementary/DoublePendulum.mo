@@ -1,11 +1,11 @@
 ﻿within Modelica.Mechanics.MultiBody.Examples.Elementary;
-model DoublePendulum 
+model DoublePendulum
   "带有两个摆动构件和两个转动副的简单双摆模型"
 
   extends Modelica.Icons.Example;
   inner Modelica.Mechanics.MultiBody.World world annotation (Placement(
         transformation(extent={{-100,-10},{-80,10}})));
-  Modelica.Mechanics.MultiBody.Joints.Revolute revolute1(useAxisFlange=true,phi(fixed=true), 
+  Modelica.Mechanics.MultiBody.Joints.Revolute revolute1(useAxisFlange=true,phi(fixed=true),
       w(fixed=true)) annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Mechanics.Rotational.Components.Damper damper(
                                               d=0.1) 
@@ -22,26 +22,26 @@ equation
   connect(revolute1.support, damper.flange_a) annotation (Line(points={{-56,10},{-56,20},{-60,20},{-60,40}}));
   connect(revolute1.frame_b, boxBody1.frame_a) 
     annotation (Line(
-      points={{-40,0},{-20,0}}, 
-      color={95,95,95}, 
+      points={{-40,0},{-20,0}},
+      color={95,95,95},
       thickness=0.5));
   connect(revolute2.frame_b, boxBody2.frame_a) 
     annotation (Line(
-      points={{40,0},{60,0}}, 
-      color={95,95,95}, 
+      points={{40,0},{60,0}},
+      color={95,95,95},
       thickness=0.5));
   connect(boxBody1.frame_b, revolute2.frame_a) 
     annotation (Line(
-      points={{0,0},{20,0}}, 
-      color={95,95,95}, 
+      points={{0,0},{20,0}},
+      color={95,95,95},
       thickness=0.5));
   connect(world.frame_b, revolute1.frame_a) 
     annotation (Line(
-      points={{-80,0},{-60,0}}, 
-      color={95,95,95}, 
+      points={{-80,0},{-60,0}},
+      color={95,95,95},
       thickness=0.5));
   annotation (
-    experiment(StopTime=3), 
+    experiment(StopTime=3),
     Documentation(info="<html>
 <p>
 这个例子演示了通过使用关节(joint)和构件(body)元素来自动实现动画。

@@ -1,11 +1,11 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.Leakage;
-model QuarterHollowSphere 
+model QuarterHollowSphere
   "通过四分之一空心球边缘的泄漏流量"
 
   extends BaseClasses.Leakage;
 
   parameter SI.Length t(start=0.01) "球壳厚度" 
-    annotation (Dialog(group="Parameters", groupImage= 
+    annotation (Dialog(group="Parameters", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Leakage/QuarterHollowSphere.png"));
 
 equation

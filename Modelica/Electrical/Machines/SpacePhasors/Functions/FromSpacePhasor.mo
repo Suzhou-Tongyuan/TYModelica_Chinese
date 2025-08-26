@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.SpacePhasors.Functions;
-function FromSpacePhasor 
+function FromSpacePhasor
   "从空间相量和零序分量转换为多相值"
   import Modelica.Constants.pi;
   extends Modelica.Icons.Function;
@@ -8,7 +8,7 @@ function FromSpacePhasor
   input Integer m "相数";
   output Real y[m] "多相输出";
 protected
-  parameter SI.Angle phi[m]= 
+  parameter SI.Angle phi[m]=
       Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m);
   parameter Real TransformationMatrix[2, m]=2/m*{+cos(+phi),+sin(+phi)};
   parameter Real InverseTransformation[m, 2]={{+cos(-phi[k]),-sin(-phi[k])} 

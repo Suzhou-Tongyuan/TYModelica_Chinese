@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function from_T_inv 
+function from_T_inv
   "从逆变换矩阵 T_inv 返回方向对象 R"
   extends Modelica.Icons.Function;
-  input Real T_inv[3, 3] 
+  input Real T_inv[3, 3]
     "将矢量从坐标系 2 转换到坐标系 1 的逆变换矩阵 (v1=T_inv*v2)";
-  input SI.AngularVelocity w[3] 
+  input SI.AngularVelocity w[3]
     "坐标系 1 相对于坐标系 2 的角速度，以坐标系 1 为基准 (skew(w)=T_inv*der(transpose(T_inv)))";
   output Orientation R "将坐标系 1 旋转到坐标系 2 的方向对象";
 algorithm

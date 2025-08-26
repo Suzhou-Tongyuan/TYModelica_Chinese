@@ -4,18 +4,18 @@ connector NegativePin "负准静态单相引脚"
   QuasiStatic.Types.Reference reference "参考角度";
   annotation (
     Diagram(graphics={Text(
-          extent={{-100,100},{100,60}}, 
-          textColor={0,0,255}, 
+          extent={{-100,100},{100,60}},
+          textColor={0,0,255},
           textString="%name"), Rectangle(
-          extent={{-40,40},{40,-40}}, 
-          lineColor={85,170,255}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid)}), 
+          extent={{-40,40},{40,-40}},
+          lineColor={85,170,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}),
     Icon(graphics={Rectangle(
-          extent={{-100,100},{100,-100}}, 
-          lineColor={85,170,255}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid)}), 
+          extent={{-100,100},{100,-100}},
+          lineColor={85,170,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
 
 <p>

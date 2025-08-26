@@ -3,29 +3,29 @@ package BasicMachines "基本机械模型"
   extends Modelica.Icons.Package;
   annotation (Icon(graphics={
         Rectangle(
-          origin={0,14.817}, 
-          fillColor={170,213,255}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          extent={{-54.179,-59.817},{65.821,60.183}}), 
+          origin={0,14.817},
+          fillColor={170,213,255},
+          fillPattern=FillPattern.HorizontalCylinder,
+          extent={{-54.179,-59.817},{65.821,60.183}}),
         Rectangle(
-          origin={5.821,15}, 
-          fillColor={128,128,128}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          extent={{-80,-60},{-60,60}}), 
+          origin={5.821,15},
+          fillColor={128,128,128},
+          fillPattern=FillPattern.HorizontalCylinder,
+          extent={{-80,-60},{-60,60}}),
         Rectangle(
-          origin={5.821,15}, 
-          fillColor={95,95,95}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          extent={{60,-10},{80,10}}), 
+          origin={5.821,15},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.HorizontalCylinder,
+          extent={{60,-10},{80,10}}),
         Rectangle(
-          origin={5.821,15}, 
-          lineColor={95,95,95}, 
-          fillColor={95,95,95}, 
-          fillPattern=FillPattern.Solid, 
-          extent={{-60,50},{20,70}}), 
+          origin={5.821,15},
+          lineColor={95,95,95},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid,
+          extent={{-60,50},{20,70}}),
         Polygon(
-          origin={5.821,15}, 
-          fillPattern=FillPattern.Solid, 
+          origin={5.821,15},
+          fillPattern=FillPattern.Solid,
           points={{-70,-90},{-60,-90},{-30,-20},{20,-20},{50,-90},{60,-90},{
               60,-100},{-70,-100},{-70,-90}})}), Documentation(info="<html>
 此包含组件用于基于空间矢量理论建模准静态电感机械：

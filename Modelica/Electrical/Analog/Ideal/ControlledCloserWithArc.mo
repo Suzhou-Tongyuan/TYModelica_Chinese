@@ -1,19 +1,19 @@
 ﻿within Modelica.Electrical.Analog.Ideal;
-model ControlledCloserWithArc 
+model ControlledCloserWithArc
   "带有简单电弧效应的受控理想电气闭合器模型"
 
   parameter SI.Voltage level=0.5 "Switch level";
   extends Modelica.Electrical.Analog.Interfaces.IdealSwitchWithArc;
-  Modelica.Electrical.Analog.Interfaces.Pin control 
+  Modelica.Electrical.Analog.Interfaces.Pin control
     "Control pin: control.v > level switch closed, otherwise switch open" 
     annotation (Placement(transformation(
-        origin={0,100}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={0,100},
+        extent={{-10,-10},{10,10}},
         rotation=90)));
 equation
   off = control.v < level;
   control.i = 0;
-  annotation (defaultComponentName="switch", 
+  annotation (defaultComponentName="switch",
     Documentation(info="<html>
 
 <p>
@@ -22,7 +22,7 @@ equation
 <p>
 如果对电弧效应存在疑惑，请查看：<a href=\"modelica://Modelica.Electrical.Analog.Interfaces.IdealSwitchWithArc\">IdealSwitchWithArc</a>
 </p>
-</html>", 
+</html>",
         revisions="<html>
 <ul>
 <li><em>February 7, 2016   </em>
@@ -32,8 +32,8 @@ equation
        by Anton Haumer<br> initially implemented<br>
        </li>
 </ul>
-</html>"), 
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
+</html>"),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Line(points={{40,40},{34,16},{48,24},{40,0}}, color={255,0,0})}));
 end ControlledCloserWithArc;

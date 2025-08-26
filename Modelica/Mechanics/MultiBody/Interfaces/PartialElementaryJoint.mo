@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Interfaces;
-partial model PartialElementaryJoint 
+partial model PartialElementaryJoint
   "用于运动副的基础模型(具有两个坐标系+外部world+确保运动副已被连接的断言)"
 
   Interfaces.Frame_a frame_a "固定在运动副上的坐标系，带有一个局部力和局部力矩" annotation (Placement(transformation(extent={{-116,-16},{-84,16}})));
@@ -9,9 +9,9 @@ protected
   outer Modelica.Mechanics.MultiBody.World world;
 equation
   Connections.branch(frame_a.R, frame_b.R);
-  assert(cardinality(frame_a) > 0, 
+  assert(cardinality(frame_a) > 0,
     "运动副对象的连接器frame_a未被连接");
-  assert(cardinality(frame_b) > 0, 
+  assert(cardinality(frame_b) > 0,
     "运动副对象的连接器frame_b未被连接");
   annotation (Documentation(info="<html>
 <p>

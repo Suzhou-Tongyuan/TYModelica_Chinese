@@ -3,18 +3,18 @@ partial model TwoPlugElementary "两个带有引脚适配器和参考连接的�
   parameter Integer m(min=1) = 3 "相位数" annotation(Evaluate=true);
   SI.AngularVelocity omega "参考框架的角速度";
 
-  PositivePlug plug_p(final m=m) 
+  PositivePlug plug_p(final m=m)
     "正准静态多相插头" annotation (Placement(
         transformation(extent={{-110,-10},{-90,10}})));
-  NegativePlug plug_n(final m=m) 
+  NegativePlug plug_n(final m=m)
     "负准静态多相插头" annotation (Placement(
         transformation(extent={{90,-10},{110,10}})));
   Basic.PlugToPins_p plugToPins_p(final m=m) annotation (Placement(
         transformation(extent={{-80,-10},{-60,10}})));
   Basic.PlugToPins_n plugToPins_n(final m=m) annotation (Placement(
         transformation(
-        origin={70,0}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={70,0},
+        extent={{-10,-10},{10,10}},
         rotation=180)));
 equation
   omega = der(plug_p.reference.gamma);

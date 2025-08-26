@@ -1,7 +1,7 @@
 ﻿within Modelica.Electrical.Batteries.BatteryStacks;
-model CellStack 
+model CellStack
   "电池，其开路电压取决于电荷状态、自放电和内阻"
-  extends Modelica.Electrical.Batteries.BaseClasses.BaseCellStack(r0(final R=Ns*cellData.Ri/Np), 
+  extends Modelica.Electrical.Batteries.BaseClasses.BaseCellStack(r0(final R=Ns*cellData.Ri/Np),
     redeclare Modelica.Electrical.Batteries.ParameterRecords.CellData cellData);
 equation
   connect(r0.n, n) 

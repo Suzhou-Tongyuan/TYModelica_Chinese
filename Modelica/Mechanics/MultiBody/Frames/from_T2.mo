@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function from_T2 
+function from_T2
   "从变换矩阵T和其导数der(T)返回方向对象R"
   extends Modelica.Icons.Function;
-  input Real T[3, 3] 
+  input Real T[3, 3]
     "将矢量从坐标系 1 转换到坐标系 2 的变换矩阵 (v2=T*v1)";
   input Real der_T[3,3] "= der(T)";
   output Orientation R "将坐标系 1 旋转到坐标系 2 的方向对象";

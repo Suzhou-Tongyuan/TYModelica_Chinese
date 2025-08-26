@@ -1,9 +1,9 @@
 ﻿within Modelica.ComplexBlocks.ComplexMath;
 block Gain "输出增益值与输入信号的乘积"
 
-  parameter Complex k(re(start = 1), im(start = 0)) 
+  parameter Complex k(re(start = 1), im(start = 0))
     "与输入信号相乘的增益值";
-  parameter Boolean useConjugateInput = false 
+  parameter Boolean useConjugateInput = false
     "如果为真，则处理输入的共轭复数";
   Interfaces.ComplexInput u "输入信号连接器" annotation(Placement(
     transformation(extent = {{-140, -20}, {-100, 20}})));
@@ -29,16 +29,16 @@ equation
 <p>
 <br>
 </p>
-</html>"), 
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
     100, 100}}), graphics = {Polygon(
-    points = {{-100, -100}, {-100, 100}, {100, 0}, {-100, -100}}, 
-    lineColor = {85, 170, 255}, 
-    fillColor = {255, 255, 255}, 
+    points = {{-100, -100}, {-100, 100}, {100, 0}, {-100, -100}},
+    lineColor = {85, 170, 255},
+    fillColor = {255, 255, 255},
     fillPattern = FillPattern.Solid), Text(
-    extent = {{-150, -140}, {150, -100}}, 
+    extent = {{-150, -140}, {150, -100}},
     textString = "k=%k"), Text(
-    extent = {{-150, 140}, {150, 100}}, 
-    textString = "%name", 
+    extent = {{-150, 140}, {150, 100}},
+    textString = "%name",
     textColor = {0, 0, 255})}));
 end Gain;

@@ -2,7 +2,7 @@
 model OpAmpDetailed "运算放大器的详细模型"
   // 文献: Conelly, J.A.; Choi, P.: Macromodelling with SPICE. Englewood Cliffs: Prentice-Hall, 1992
   import Modelica.Constants.pi;
-  parameter SI.Resistance Rdm = 2.0e6 
+  parameter SI.Resistance Rdm = 2.0e6
     "输入电阻(差分输入模式)";
   parameter SI.Resistance Rcm = 2.0e9 "输入电阻(共模)";
   parameter SI.Capacitance Cin = 1.4e-12 "输入电容";
@@ -21,7 +21,7 @@ model OpAmpDetailed "运算放大器的详细模型"
   parameter SI.VoltageSlope sr_p = 0.5e6 "增加的斜率";
   parameter SI.VoltageSlope sr_m = 0.5e6 "减少的斜率";
   parameter SI.Resistance Rout = 75.0 "输出电阻";
-  parameter SI.Current Imaxso = 25.0e-3 
+  parameter SI.Current Imaxso = 25.0e-3
     "最大输出电流(电流源)";
   parameter SI.Current Imaxsi = 25.0e-3 "最大输出电流(吸收电流)";
 
@@ -29,9 +29,9 @@ model OpAmpDetailed "运算放大器的详细模型"
   parameter SI.Time Ts = 0.0000012 "采样时间";
 
   // power supply
-  final parameter SI.Voltage vcp_abs = abs(vcp) 
+  final parameter SI.Voltage vcp_abs = abs(vcp)
     "正向修正值，用于限制p_supply";
-  final parameter SI.Voltage vcm_abs = abs(vcm) 
+  final parameter SI.Voltage vcm_abs = abs(vcm)
     "正向修正值，用于限制msupply";
 
   // input stage
@@ -42,31 +42,31 @@ model OpAmpDetailed "运算放大器的详细模型"
 
   // gain stage (difference and common mode)
   final parameter Real Avd0_val = 10.0 ^ (Avd0 / 20.0) "差分模式增益";
-  final parameter Real Avcm_val = (Avd0_val / (10.0 ^ (CMRR / 20.0))) / 2.0 
+  final parameter Real Avcm_val = (Avd0_val / (10.0 ^ (CMRR / 20.0))) / 2.0
     "共模增益";
 
   // slew rate stage
-  final parameter SI.VoltageSlope sr_p_val = abs(sr_p) 
+  final parameter SI.VoltageSlope sr_p_val = abs(sr_p)
     "增加的斜率的值";
-  final parameter SI.VoltageSlope sr_m_val = -abs(sr_m) 
+  final parameter SI.VoltageSlope sr_m_val = -abs(sr_m)
     "减少的斜率的值";
 
   // output stage
   final parameter SI.Current Imaxso_val = abs(Imaxso) "方向朝外";
   final parameter SI.Current Imaxsi_val = abs(Imaxsi) "方向朝内";
 
-  Modelica.Electrical.Analog.Interfaces.PositivePin p 
+  Modelica.Electrical.Analog.Interfaces.PositivePin p
     "输入端口的正极引脚" annotation(Placement(transformation(
     extent = {{-110, -70}, {-90, -50}}), iconTransformation(extent = {{-110, -70}, {-90, -50}})));
-  Modelica.Electrical.Analog.Interfaces.NegativePin m 
+  Modelica.Electrical.Analog.Interfaces.NegativePin m
     "输入端口的负极引脚" annotation(Placement(transformation(
     extent = {{-90, 50}, {-110, 70}}), iconTransformation(extent = {{-90, 50}, {-110, 70}})));
   Modelica.Electrical.Analog.Interfaces.PositivePin outp "输出引脚" 
     annotation(Placement(transformation(extent = {{110, -10}, {90, 10}}), iconTransformation(extent = {{110, -10}, {90, 10}})));
-  Modelica.Electrical.Analog.Interfaces.PositivePin p_supply 
+  Modelica.Electrical.Analog.Interfaces.PositivePin p_supply
     "正向输出电压限制" annotation(Placement(transformation(
     extent = {{-10, 90}, {10, 110}}), iconTransformation(extent = {{-10, 90}, {10, 110}})));
-  Modelica.Electrical.Analog.Interfaces.NegativePin m_supply 
+  Modelica.Electrical.Analog.Interfaces.NegativePin m_supply
     "负向输出电压限制" annotation(Placement(transformation(
     extent = {{-10, -110}, {10, -90}}), iconTransformation(extent = {{-10, -110}, {10, -90}})));
 
@@ -187,11 +187,11 @@ equation
   // Laplace transformation
   q_sum = Avd0_val * q_fr3 + Avcm_val * (v_3 + v_4);
   q_sum_help = FCNq_sum_limit(
-    q_sum, 
-    q_fp1, 
-    v_pos, 
-    v_neg, 
-    vcp_abs, 
+    q_sum,
+    q_fp1,
+    v_pos,
+    v_neg,
+    vcp_abs,
     vcm_abs);
   der(q_fp1) = 2.0 * pi * fp1 * (q_sum_help - q_fp1);
 
@@ -204,16 +204,16 @@ equation
   v_out = outp.v;
   i_out = outp.i;
   i_out = FCNiout_limit(
-    v_source, 
-    v_out, 
-    Rout, 
-    Imaxsi_val, 
+    v_source,
+    v_out,
+    Rout,
+    Imaxsi_val,
     Imaxso_val);
 
   p_supply.i = 0;
   m_supply.i = 0;
 
-  annotation(defaultComponentName = "opAmp", 
+  annotation(defaultComponentName = "opAmp",
     Documentation(info = "<html>
 <p>OpAmpDetailed模型是一个通用的运算放大器模型。重点是将每个重要的数据表参数分离成一个与其他参数无关的子电路。该模型被分解为五个功能：<strong>输入</strong>、<strong>频率响应</strong>、<strong>增益</strong>、<strong>斜率</strong>和<strong>输出</strong>。每个功能都包含要建模的数据表参数。这种划分和单独子模型的建模基于[<a href=\"modelica://Modelica.Electrical.Analog.UsersGuide.References\">Conelly1992</a>]的描述。</p>
 
@@ -223,24 +223,24 @@ equation
 <dt><em>2009年6月17日</em></dt>
 <dd>由Susann Wolf最初实现</dd>
 </dl>
-</html>"), 
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
+</html>"),
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
     100}}), graphics = {
     Text(
-    extent = {{-150, 150}, {150, 110}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255}), 
+    extent = {{-150, 150}, {150, 110}},
+    textString = "%name",
+    textColor = {0, 0, 255}),
     Polygon(
-    points = {{70, 0}, {-70, 80}, {-70, -80}, {70, 0}}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid, 
-    lineColor = {0, 0, 255}), 
-    Line(points = {{0, 40}, {0, 110}}, color = {0, 0, 255}), 
-    Line(points = {{0, -40}, {0, -90}}, color = {0, 0, 255}), 
-    Line(points = {{-90, 60}, {-70, 60}}, color = {0, 0, 255}), 
-    Line(points = {{-90, -60}, {-70, -60}}, color = {0, 0, 255}), 
-    Line(points = {{70, 0}, {90, 0}}, color = {0, 0, 255}), 
-    Line(points = {{-58, 50}, {-38, 50}}, color = {0, 0, 255}), 
-    Line(points = {{-60, -51}, {-38, -51}}, color = {0, 0, 255}), 
+    points = {{70, 0}, {-70, 80}, {-70, -80}, {70, 0}},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid,
+    lineColor = {0, 0, 255}),
+    Line(points = {{0, 40}, {0, 110}}, color = {0, 0, 255}),
+    Line(points = {{0, -40}, {0, -90}}, color = {0, 0, 255}),
+    Line(points = {{-90, 60}, {-70, 60}}, color = {0, 0, 255}),
+    Line(points = {{-90, -60}, {-70, -60}}, color = {0, 0, 255}),
+    Line(points = {{70, 0}, {90, 0}}, color = {0, 0, 255}),
+    Line(points = {{-58, 50}, {-38, 50}}, color = {0, 0, 255}),
+    Line(points = {{-60, -51}, {-38, -51}}, color = {0, 0, 255}),
     Line(points = {{-49, -40}, {-49, -61}}, color = {0, 0, 255})}));
 end OpAmpDetailed;

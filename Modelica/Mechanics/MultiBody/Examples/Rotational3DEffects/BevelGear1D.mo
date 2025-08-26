@@ -1,43 +1,43 @@
 ﻿within Modelica.Mechanics.MultiBody.Examples.Rotational3DEffects;
-model BevelGear1D 
+model BevelGear1D
   "本示例演示了如何使用BevelGear1D模型，并说明了如何计算此类元件的功率"
   import Modelica.Mechanics.MultiBody.Frames;
   extends Modelica.Icons.Example;
-  parameter Modelica.Mechanics.MultiBody.Types.Axis na={1,0,0} 
+  parameter Modelica.Mechanics.MultiBody.Types.Axis na={1,0,0}
     "左侧齿轮轴的旋转轴";
-  parameter Modelica.Mechanics.MultiBody.Types.Axis nb={0,1,0} 
+  parameter Modelica.Mechanics.MultiBody.Types.Axis nb={0,1,0}
     "右侧齿轮轴的旋转轴";
 
   inner Modelica.Mechanics.MultiBody.World world(final driveTrainMechanics3D=true) annotation (Placement(transformation(
           extent={{-100,-50},{-80,-30}})));
   Modelica.Mechanics.MultiBody.Parts.Rotor1D       inertia1(
-    J=1.1, 
-    a(fixed=false), 
-    phi(fixed=true, start=0), 
-    w(fixed=true, start=0), 
+    J=1.1,
+    a(fixed=false),
+    phi(fixed=true, start=0),
+    w(fixed=true, start=0),
     n=na) annotation (Placement(transformation(extent={{-30,60},{-10,80}})));
   Modelica.Mechanics.MultiBody.Parts.Rotor1D       inertia2(J=18.2, n=nb) 
     annotation (Placement(transformation(extent={{50,60},{70,80}})));
   Modelica.Mechanics.MultiBody.Parts.BevelGear1D bevelGear(
-    ratio=10, 
-    n_a=na, 
+    ratio=10,
+    n_a=na,
     n_b=nb) annotation (Placement(transformation(extent={{0,60},{20,80}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute1(useAxisFlange=true, n={
-        1,0,0}, 
-    stateSelect=StateSelect.always, 
-    phi(fixed=true), 
+        1,0,0},
+    stateSelect=StateSelect.always,
+    phi(fixed=true),
     w(fixed=true)) 
     annotation (Placement(transformation(extent={{-60,-30},{-40,-50}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute2(useAxisFlange=true, n={
-        0,1,0}, 
-    stateSelect=StateSelect.always, 
-    phi(fixed=true), 
+        0,1,0},
+    stateSelect=StateSelect.always,
+    phi(fixed=true),
     w(fixed=true)) 
                 annotation (Placement(transformation(extent={{-20,-30},{0,-50}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute3(useAxisFlange=true, n={
-        0,0,1}, 
-    stateSelect=StateSelect.always, 
-    phi(fixed=true), 
+        0,0,1},
+    stateSelect=StateSelect.always,
+    phi(fixed=true),
     w(fixed=true)) 
                 annotation (Placement(transformation(extent={{20,-30},{40,-50}})));
   Modelica.Mechanics.Rotational.Sources.Torque torque1 
@@ -59,23 +59,23 @@ model BevelGear1D
   Modelica.Blocks.Sources.Sine sine4(amplitude=140, f=8) 
     annotation (Placement(transformation(extent={{-92,64},{-80,76}})));
   Modelica.Mechanics.MultiBody.Parts.BodyBox bodyBox(
-    r={0.1,0.1,0.1}, 
-    length=0.1, 
+    r={0.1,0.1,0.1},
+    length=0.1,
     width=0.1) 
     annotation (Placement(transformation(extent={{60,-50},{80,-30}})));
   Sensors.AbsoluteAngularVelocity sensor1(resolveInFrame=Modelica.Mechanics.MultiBody.Types.ResolveInFrameA.frame_a) 
     annotation (Placement(transformation(extent={{20,30},{40,50}})));
-  Sensors.CutTorque sensor2(resolveInFrame=Modelica.Mechanics.MultiBody.Types.ResolveInFrameA.frame_a, 
+  Sensors.CutTorque sensor2(resolveInFrame=Modelica.Mechanics.MultiBody.Types.ResolveInFrameA.frame_a,
       animation=false) 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=-90, 
+        extent={{10,-10},{-10,10}},
+        rotation=-90,
         origin={10,20})));
   SI.AngularVelocity ws[3] = sensor1.w;
   SI.Power bevelGearPower;
 equation
-  bevelGearPower = (ws + der(bevelGear.flange_a.phi)*na)*bevelGear.flange_a.tau*na + 
-                   (ws + der(bevelGear.flange_b.phi)*nb)*bevelGear.flange_b.tau*nb + 
+  bevelGearPower = (ws + der(bevelGear.flange_a.phi)*na)*bevelGear.flange_a.tau*na +
+                   (ws + der(bevelGear.flange_b.phi)*nb)*bevelGear.flange_b.tau*nb +
                    ws*sensor2.torque;
   assert(abs(bevelGearPower) < 1e-3, "Error, energy balance of bevel gear is wrong");
 
@@ -84,16 +84,16 @@ equation
   connect(bevelGear.flange_b, inertia2.flange_a) annotation (Line(
       points={{20,70},{50,70}}));
   connect(world.frame_b, revolute1.frame_a) annotation (Line(
-      points={{-80,-40},{-60,-40}}, 
-      color={95,95,95}, 
+      points={{-80,-40},{-60,-40}},
+      color={95,95,95},
       thickness=0.5));
   connect(revolute1.frame_b, revolute2.frame_a) annotation (Line(
-      points={{-40,-40},{-20,-40}}, 
-      color={95,95,95}, 
+      points={{-40,-40},{-20,-40}},
+      color={95,95,95},
       thickness=0.5));
   connect(revolute2.frame_b, revolute3.frame_a) annotation (Line(
-      points={{0,-40},{20,-40}}, 
-      color={95,95,95}, 
+      points={{0,-40},{20,-40}},
+      color={95,95,95},
       thickness=0.5));
   connect(torque1.flange, revolute1.axis) annotation (Line(
       points={{-56,-70},{-50,-70},{-50,-50}}));
@@ -112,34 +112,34 @@ equation
   connect(torque.support, mounting1D.flange_b) annotation (Line(
       points={{-50,60},{-50,46}}));
   connect(mounting1D.frame_a, revolute3.frame_b) annotation (Line(
-      points={{-60,36},{-60,0},{50,0},{50,-40},{40,-40}}, 
-      color={95,95,95}, 
+      points={{-60,36},{-60,0},{50,0},{50,-40},{40,-40}},
+      color={95,95,95},
       thickness=0.5));
   connect(torque.tau, sine4.y) annotation (Line(
       points={{-62,70},{-79.4,70}}, color={0,0,127}));
   connect(revolute3.frame_b, bodyBox.frame_a) annotation (Line(
-      points={{40,-40},{60,-40}}, 
-      color={95,95,95}, 
+      points={{40,-40},{60,-40}},
+      color={95,95,95},
       thickness=0.5));
   connect(inertia1.frame_a, revolute3.frame_b) annotation (Line(
-      points={{-20,60},{-20,0},{50,0},{50,-40},{40,-40}}, 
-      color={95,95,95}, 
+      points={{-20,60},{-20,0},{50,0},{50,-40},{40,-40}},
+      color={95,95,95},
       thickness=0.5));
   connect(inertia2.frame_a, revolute3.frame_b) annotation (Line(
-      points={{60,60},{60,0},{50,0},{50,-40},{40,-40}}, 
-      color={95,95,95}, 
+      points={{60,60},{60,0},{50,0},{50,-40},{40,-40}},
+      color={95,95,95},
       thickness=0.5));
   connect(bevelGear.frame_a, sensor1.frame_a) annotation (Line(
-      points={{10,60},{10,40},{20,40}}, 
-      color={95,95,95}, 
+      points={{10,60},{10,40},{20,40}},
+      color={95,95,95},
       thickness=0.5));
   connect(bevelGear.frame_a, sensor2.frame_b) annotation (Line(
-      points={{10,60},{10,30}}, 
-      color={95,95,95}, 
+      points={{10,60},{10,30}},
+      color={95,95,95},
       thickness=0.5));
   connect(sensor2.frame_a, revolute3.frame_b) annotation (Line(
-      points={{10,10},{10,0},{50,0},{50,-40},{40,-40}}, 
-      color={95,95,95}, 
+      points={{10,10},{10,0},{50,0},{50,-40},{40,-40}},
+      color={95,95,95},
       thickness=0.5));
   annotation (Documentation(info="<html>
 <p>
@@ -170,6 +170,6 @@ equation
 锥齿轮的总能量流bevelGearPower必须为零。如果模拟时使用的相对容差为1e-4，
 则bevelGearPower的数量级为1e-8(相对容差更小时，数值更小)。
 </p>
-</html>"), 
+</html>"),
     experiment(StopTime=1.0));
 end BevelGear1D;

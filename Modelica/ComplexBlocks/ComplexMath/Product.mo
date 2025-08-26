@@ -20,18 +20,18 @@ equation
 <p>
 <br>
 </p>
-</html>"), 
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
-    100, 100}}), graphics = {Line(points = {{-100, 60}, {-40, 60}, {-30, 40}}, 
-    color = {85, 170, 255}), 
-    Line(points = {{-100, -60}, {-40, -60}, {-30, -40}}, 
-    color = {85, 170, 255}), 
-    Line(points = {{50, 0}, {100, 0}}, color = {85, 170, 255}), 
-    Line(points = {{-30, 0}, {30, 0}}, color = {85, 170, 255}), 
-    Line(points = {{-15, 
-    25.99}, {15, -25.99}}, color = {85, 170, 255}), 
-    Line(points = {{-15, -25.99}, {15, 
-    25.99}}, color = {85, 170, 255}), 
-    Ellipse(extent = {{-50, 50}, {50, -50}}, 
+    100, 100}}), graphics = {Line(points = {{-100, 60}, {-40, 60}, {-30, 40}},
+    color = {85, 170, 255}),
+    Line(points = {{-100, -60}, {-40, -60}, {-30, -40}},
+    color = {85, 170, 255}),
+    Line(points = {{50, 0}, {100, 0}}, color = {85, 170, 255}),
+    Line(points = {{-30, 0}, {30, 0}}, color = {85, 170, 255}),
+    Line(points = {{-15,
+    25.99}, {15, -25.99}}, color = {85, 170, 255}),
+    Line(points = {{-15, -25.99}, {15,
+    25.99}}, color = {85, 170, 255}),
+    Ellipse(extent = {{-50, 50}, {50, -50}},
     lineColor = {85, 170, 255})}));
 end Product;

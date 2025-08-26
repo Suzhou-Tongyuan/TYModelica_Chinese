@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.ClockSignals.Clocks;
-block EventClock 
+block EventClock
   "当布尔输入从假变为真时产生时钟信号"
   extends Clocked.ClockSignals.Interfaces.PartialClock;
   Modelica.Blocks.Interfaces.BooleanInput u 
@@ -12,13 +12,13 @@ equation
   end if;
 
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,100}}, initialScale=0.06), 
+    Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,100}}, initialScale=0.06),
                     graphics={
         Text(
-          visible=useSolver, 
-          extent={{-150,-110},{150,-150}}, 
-          textColor={0,0,0}, 
-          textString="%solverMethod")}), 
+          visible=useSolver,
+          extent={{-150,-110},{150,-150}},
+          textColor={0,0,0},
+          textString="%solverMethod")}),
     Documentation(info="<html><p>
 这个组件生成一个时钟信号， 由连续时间的布尔输入信号 u 触发： 每当布尔输入信号 <strong>u</strong> 从 <strong>false</strong> 变为 <strong>true</strong> 时， 输出的时钟信号 <strong>y</strong> 就会滴答计时。
 </p>

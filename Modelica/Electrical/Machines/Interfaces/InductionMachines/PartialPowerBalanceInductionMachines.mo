@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.Interfaces.InductionMachines;
-record PartialPowerBalanceInductionMachines 
+record PartialPowerBalanceInductionMachines
   "异步电机部分功率平衡"
   extends Modelica.Icons.Record;
   SI.Power powerStator=0 "电气功率(定子)";

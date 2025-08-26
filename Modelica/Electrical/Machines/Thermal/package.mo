@@ -3,9 +3,9 @@ package Thermal "连接热模型的模型库"
   extends Modelica.Icons.Package;
 
   annotation (Icon(graphics={Ellipse(
-          extent={{-65,-63},{65,63}}, 
-          lineColor={191,0,0}, 
-          fillColor={191,0,0}, 
+          extent={{-65,-63},{65,63}},
+          lineColor={191,0,0},
+          fillColor={191,0,0},
           fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <h4>热概念</h4>
 <p>
@@ -151,7 +151,7 @@ alphaRef = -------------------------------
 <li><code>heatPort2[m]</code>: m=3个用于m=3个次级相的heatPorts</li>
 <li><code>heatPortCore</code>: 铁心损耗(尚未连接/实现)</li>
 </ul>
-</html>", 
+</html>",
         revisions="<html>
   <ul>
   <li> v2.2.0 2011/02/10 Anton Haumer<br>

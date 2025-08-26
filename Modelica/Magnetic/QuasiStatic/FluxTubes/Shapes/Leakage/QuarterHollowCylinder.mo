@@ -1,12 +1,12 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.Leakage;
-model QuarterHollowCylinder 
+model QuarterHollowCylinder
 "通过四分之一空心圆筒圆周方向的泄漏通量"
 
   extends BaseClasses.Leakage;
 
-  parameter SI.Length l=0.1 
+  parameter SI.Length l=0.1
   "轴向长度与通量正交(对于圆柱极，r>>r_i =2*pi*r)" 
-    annotation (Dialog(group="Parameters", groupImage= 
+    annotation (Dialog(group="Parameters", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Leakage/QuarterHollowCylinder.png"));
   parameter Real ratio(start=1) "常数比t/r_i";
 

@@ -2,26 +2,26 @@
 model Resistor "带基础热网结构的电阻"
   extends Modelica.Icons.Example;
   Basic.Resistor resistor(
-    R=100, 
-    alpha=1e-3, 
-    T_ref=293.15, 
-    i(start=0), 
+    R=100,
+    alpha=1e-3,
+    T_ref=293.15,
+    i(start=0),
     useHeatPort=true) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=-90, 
+        extent={{-10,10},{10,-10}},
+        rotation=-90,
         origin={-32,34})));
   Modelica.Electrical.Analog.Basic.Ground G 
   annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
   Modelica.Electrical.Analog.Sources.SineVoltage SineVoltage1(V=220, f=1) 
   annotation (Placement(transformation(
-        origin={-70,40}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-70,40},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
 
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(G= 
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductor(G=
         50) 
   annotation (Placement(transformation(
-        origin={4,34}, 
+        origin={4,34},
         extent={{-10,-10},{10,10}})));
   Thermal.HeatTransfer.Celsius.FixedTemperature fixedTemperature(T=20) 
     annotation (Placement(transformation(extent={{52,24},{32,44}})));

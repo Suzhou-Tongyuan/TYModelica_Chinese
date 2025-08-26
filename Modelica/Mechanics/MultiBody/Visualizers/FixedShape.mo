@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Visualizers;
-model FixedShape 
+model FixedShape
   "使用动态变化的形状属性可视化基本形状(具有一个坐标系连接器)"
   import Modelica.Mechanics.MultiBody.Types;
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialVisualizer;
@@ -7,13 +7,13 @@ model FixedShape
   parameter Boolean animation=true "=true，则启用动画";
   parameter Types.ShapeType shapeType="box" "形状类型" 
     annotation (Dialog(group="如果animation=true", enable=animation));
-  input SI.Position r_shape[3]={0,0,0} 
+  input SI.Position r_shape[3]={0,0,0}
     "从frame_a到形状原点的矢量，以frame_a为基准" 
     annotation (Dialog(group="如果animation=true", enable=animation));
-  input Types.Axis lengthDirection={1,0,0} 
+  input Types.Axis lengthDirection={1,0,0}
     "形状长度方向的矢量，以frame_a为基准" 
     annotation (Dialog(group="如果animation=true", enable=animation));
-  input Types.Axis widthDirection={0,1,0} 
+  input Types.Axis widthDirection={0,1,0}
     "形状宽度方向的矢量，以frame_a为基准" 
     annotation (Dialog(group="如果animation=true", enable=animation));
   input SI.Distance length(start=1) "形状长度" 
@@ -22,29 +22,29 @@ model FixedShape
     annotation (Dialog(group="如果animation=true", enable=animation));
   input SI.Distance height(start=0.1) "形状高度" 
     annotation (Dialog(group="如果animation=true", enable=animation));
-  input Modelica.Mechanics.MultiBody.Types.Color color={0,128,255} 
+  input Modelica.Mechanics.MultiBody.Types.Color color={0,128,255}
     "形状颜色" 
     annotation (Dialog(colorSelector=true, group="如果animation=true", enable=animation));
-  input Types.ShapeExtra extra=0.0 
+  input Types.ShapeExtra extra=0.0
     "圆柱体、锥体、管道、齿轮和弹簧的额外数据" 
     annotation (Dialog(group="如果animation=true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
     "环境光的反射(=0：光完全被吸收)" 
     annotation (Dialog(group="如果animation=true", enable=animation));
 
 protected
   Advanced.Shape vis(
-    shapeType=shapeType, 
-    r_shape=r_shape, 
-    lengthDirection=lengthDirection, 
-    widthDirection=widthDirection, 
-    length=length, 
-    width=width, 
-    height=height, 
-    color=color, 
-    extra=extra, 
-    specularCoefficient=specularCoefficient, 
-    r=frame_a.r_0, 
+    shapeType=shapeType,
+    r_shape=r_shape,
+    lengthDirection=lengthDirection,
+    widthDirection=widthDirection,
+    length=length,
+    width=width,
+    height=height,
+    color=color,
+    extra=extra,
+    specularCoefficient=specularCoefficient,
+    r=frame_a.r_0,
     R=frame_a.R) if world.enableAnimation and animation;
 equation
   // No forces and torques
@@ -155,30 +155,30 @@ shapeType=\"file://C:/users/myname/shapes/piston.dxf\"。
 预定义类型<a href=\"modelica://Modelica.Mechanics.MultiBody.Types.Color\">MultiBody.Types.Color</a>包含了MultiBody库中使用的颜色的菜单定义以及颜色编辑器。
 </p>
 
-</html>"), 
+</html>"),
          Icon(coordinateSystem(
-        preserveAspectRatio=true, 
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={
         Polygon(
-          points={{-100,32},{-64,46},{2,30},{72,54},{50,32},{-10,12},{-100,32}}, 
-          lineColor={215,215,215}, 
-          fillColor={160,160,160}, 
-          fillPattern=FillPattern.Solid), 
+          points={{-100,32},{-64,46},{2,30},{72,54},{50,32},{-10,12},{-100,32}},
+          lineColor={215,215,215},
+          fillColor={160,160,160},
+          fillPattern=FillPattern.Solid),
         Polygon(
-          points={{72,54},{50,32},{50,-60},{72,-32},{72,54}}, 
-          lineColor={215,215,215}, 
-          fillColor={160,160,164}, 
-          fillPattern=FillPattern.Solid), 
+          points={{72,54},{50,32},{50,-60},{72,-32},{72,54}},
+          lineColor={215,215,215},
+          fillColor={160,160,164},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,-65},{150,-95}}, 
-          textString="%shapeType"), 
+          extent={{-150,-65},{150,-95}},
+          textString="%shapeType"),
         Text(
-          extent={{-150,100},{150,60}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,100},{150,60}},
+          textString="%name",
+          textColor={0,0,255}),
         Polygon(
-          points={{-100,32},{-100,-60},{-10,-42},{50,-60},{50,32},{-10,12},{-100,32}}, 
-          lineColor={215,215,215}, 
-          fillColor={0,127,255}, 
+          points={{-100,32},{-100,-60},{-10,-42},{50,-60},{50,32},{-10,12},{-100,32}},
+          lineColor={215,215,215},
+          fillColor={0,127,255},
           fillPattern=FillPattern.Solid)}));
 end FixedShape;

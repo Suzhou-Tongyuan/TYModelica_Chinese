@@ -1,20 +1,20 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.Force;
-model HollowCylinderRadialFlux 
+model HollowCylinderRadialFlux
   "具有径向通量的空心圆柱体；恒定渗透率"
 
   extends BaseClasses.Force;
 
   SI.Length l=s "轴向长度（与通量方向正交）" 
-    annotation (Dialog(group="Variable geometry", groupImage= 
+    annotation (Dialog(group="Variable geometry", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/HollowCylinderRadialFlux.png"));
   parameter SI.Radius r_i=0.01 "空心圆柱体的内半径";
   parameter SI.Radius r_o=0.015 "空心圆柱体外半径";
 
-  SI.MagneticFluxDensity B_avg 
+  SI.MagneticFluxDensity B_avg
     "平均通量密度（算术平均半径处）";
 
 protected
-  SI.Area A_avg 
+  SI.Area A_avg
     "与通量方向正交的平均截面积（算术平均半径处）";
 
 equation

@@ -1,20 +1,20 @@
 ﻿within Modelica.Mechanics.Rotational.Examples;
-model LossyGearDemo1 
+model LossyGearDemo1
   "演示高效率齿轮可能导致运动卡滞的示例"
   extends Modelica.Icons.Example;
-  SI.Power PowerLoss=gear.flange_a.tau*der(gear.flange_a.phi) + gear.flange_b.tau 
+  SI.Power PowerLoss=gear.flange_a.tau*der(gear.flange_a.phi) + gear.flange_b.tau
       *der(gear.flange_b.phi) "齿轮损失的功率";
   Rotational.Components.LossyGear gear(
-    ratio=2, 
-    lossTable=[0, 0.5, 0.5, 0, 0], 
+    ratio=2,
+    lossTable=[0, 0.5, 0.5, 0, 0],
     useSupport=true) annotation (Placement(transformation(extent={{-10,0},{
             10,20}})));
 
   Rotational.Components.Inertia Inertia1(J=1) annotation (Placement(
         transformation(extent={{-40,0},{-20,20}})));
   Rotational.Components.Inertia Inertia2(
-    J=1.5, 
-    phi(fixed=true, start=0, nominal=0.001), 
+    J=1.5,
+    phi(fixed=true, start=0, nominal=0.001),
     w(fixed=true, start=0, nominal=0.01)) annotation (Placement(transformation(extent={{
             20,0},{40,20}})));
   Rotational.Sources.Torque torque1(useSupport=true) annotation (Placement(
@@ -24,8 +24,8 @@ model LossyGearDemo1
   Modelica.Blocks.Sources.Sine DriveSine(amplitude=10, f=1) 
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   Modelica.Blocks.Sources.Ramp load(
-    height=5, 
-    duration=2, 
+    height=5,
+    duration=2,
     offset=-10) annotation (Placement(transformation(extent={{100,0},{80,20}})));
   Rotational.Components.Fixed fixed annotation (Placement(transformation(
           extent={{-10,-30},{10,-10}})));
@@ -63,6 +63,6 @@ gear.mode  :  1 = forward rolling
 </code></pre><p>
 注意，如果<a href=\"modelica://Modelica.Mechanics.Rotational.Components.LossyGear\" target=\"\">LossyGear</a>模型被正确实现，那么<code>powerLoss</code>（=连接器的功率流之和）和 <code>gear.powerLoss</code>（= <code>gear.tau_loss</code>*<code>gear.w_a</code>， 其中<code>gear.tau_loss</code> 是通过轴承和齿轮摩擦的卡住/滑动状态以非常规的方式确定的；= [<a href=\"modelica://Modelica.Mechanics.Rotational.UsersGuide.References\" target=\"\">Pelchen2002</a>]中的方程（16））应该是相同的，或者两者差异应该接近零。
 </p>
-</html>"), 
+</html>"),
        experiment(StopTime=0.5, Interval=0.001));
 end LossyGearDemo1;

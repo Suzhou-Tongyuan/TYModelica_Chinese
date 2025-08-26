@@ -2,14 +2,14 @@
 function planarRotation "返回平面旋转的方向对象"
   import Modelica.Math;
   extends Modelica.Icons.Function;
-  input Real e[3](each final unit="1") 
+  input Real e[3](each final unit="1")
     "旋转轴的归一化向量(必须长度为1)";
-  input SI.Angle angle 
+  input SI.Angle angle
     "将坐标系1沿轴e旋转到坐标系2的旋转角度";
   input SI.AngularVelocity der_angle "= der(angle)";
   output Orientation R "将坐标系1旋转到坐标系2的方向对象";
 algorithm
-  R := Orientation(T=outerProduct(e,e) + (identity(3) - outerProduct(e,e))* 
+  R := Orientation(T=outerProduct(e,e) + (identity(3) - outerProduct(e,e))*
     Math.cos(angle) - skew(e)*Math.sin(angle), w= e*der_angle);
 
   annotation(Inline=true, Documentation(info="<html>

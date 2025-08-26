@@ -16,21 +16,21 @@ package Continuous "具有内部状态的连续控制模块库"
     /* InitialState是默认设置，因为它是Modelica2.2中的默认设置，
     因此该设置向后兼容
     */
-    parameter Init initType = Init.InitialState 
-      "初始化类型(1：无初始化，2：稳态初始化，3/4：初始输出值初始化)" annotation(Evaluate = true, 
+    parameter Init initType = Init.InitialState
+      "初始化类型(1：无初始化，2：稳态初始化，3/4：初始输出值初始化)" annotation(Evaluate = true,
       Dialog(group = "初始化"));
     parameter Real y_start = 0 "输出的初始值或猜测值(=state)" 
       annotation(Dialog(group = "初始化"));
     extends Interfaces.SISO(y(start = y_start));
     Modelica.Blocks.Interfaces.BooleanInput reset if use_reset "复位信号的可选连接器" annotation(Placement(
       transformation(
-      extent = {{-20, -20}, {20, 20}}, 
-      rotation = 90, 
+      extent = {{-20, -20}, {20, 20}},
+      rotation = 90,
       origin = {60, -120})));
     Modelica.Blocks.Interfaces.RealInput set if use_reset and use_set "设定信号的可选连接器" annotation(Placement(
       transformation(
-      extent = {{-20, -20}, {20, 20}}, 
-      rotation = 270, 
+      extent = {{-20, -20}, {20, 20}},
+      rotation = 270,
       origin = {60, 120})));
   protected
     Modelica.Blocks.Interfaces.BooleanOutput local_reset annotation(HideResult = true);
@@ -76,43 +76,43 @@ y = - u
 如果启用了<em>reset &nbsp;</em>端口，那么只要<em>reset &nbsp;</em>端口出现上升趋势， 输出<strong>y</strong>就会被复位为<em>set </em>或<em>y_start</em> &nbsp;(如果未启用<em>set &nbsp;</em>端口)。
 </p>
 </html>"  ), Icon(coordinateSystem(
-      preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
       Line(
-      points = {{-80.0, 78.0}, {-80.0, -90.0}}, 
-      color = {192, 192, 192}), 
+      points = {{-80.0, 78.0}, {-80.0, -90.0}},
+      color = {192, 192, 192}),
       Polygon(
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}), 
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}),
       Line(
-      points = {{-90.0, -80.0}, {82.0, -80.0}}, 
-      color = {192, 192, 192}), 
+      points = {{-90.0, -80.0}, {82.0, -80.0}},
+      color = {192, 192, 192}),
       Polygon(
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}), 
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}),
       Text(
-      textColor = {192, 192, 192}, 
-      extent = {{0.0, -70.0}, {60.0, -10.0}}, 
-      textString = "I"), 
+      textColor = {192, 192, 192},
+      extent = {{0.0, -70.0}, {60.0, -10.0}},
+      textString = "I"),
       Text(
-      extent = {{-150.0, -150.0}, {150.0, -110.0}}, 
-      textString = "k=%k"), 
+      extent = {{-150.0, -150.0}, {150.0, -110.0}},
+      textString = "k=%k"),
       Line(
-      points = DynamicSelect({{-80.0, -80.0}, {80.0, 80.0}}, if use_reset then {{-80.0, -80.0}, {60.0, 60.0}, {60.0, -80.0}, {80.0, -60.0}} else {{-80.0, -80.0}, {80.0, 80.0}}), 
-      color = {0, 0, 127}), 
+      points = DynamicSelect({{-80.0, -80.0}, {80.0, 80.0}}, if use_reset then {{-80.0, -80.0}, {60.0, 60.0}, {60.0, -80.0}, {80.0, -60.0}} else {{-80.0, -80.0}, {80.0, 80.0}}),
+      color = {0, 0, 127}),
       Line(
-      visible = use_reset, 
-      points = {{60, -100}, {60, -80}}, 
-      color = {255, 0, 255}, 
-      pattern = LinePattern.Dot), 
+      visible = use_reset,
+      points = {{60, -100}, {60, -80}},
+      color = {255, 0, 255},
+      pattern = LinePattern.Dot),
       Text(
-      visible = use_reset, 
-      extent = {{-28, -62}, {94, -86}}, 
+      visible = use_reset,
+      extent = {{-28, -62}, {94, -86}},
       textString = "reset")}));
   end Integrator;
 
@@ -125,13 +125,13 @@ y = - u
       annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
     parameter Boolean use_set = false "=true，当设置端口已启用，重置时需重新初始化值" 
       annotation(Dialog(enable = use_reset), Evaluate = true, HideResult = true, choices(checkBox = true));
-    parameter Init initType = Init.InitialState 
+    parameter Init initType = Init.InitialState
       "初始化类型(1：无初始化，2：稳态初始化，3/4：初始输出值初始化)" 
       annotation(Evaluate = true, Dialog(group = "初始化"));
-    parameter Boolean limitsAtInit = true 
+    parameter Boolean limitsAtInit = true
       "=false，当初始化过程中忽略了限值(即der(y)=k*u)" 
       annotation(Evaluate = true, Dialog(group = "初始化"));
-    parameter Real y_start = 0 
+    parameter Real y_start = 0
       "输出的初始值或猜测值(必须在限值outMin...outMax范围内)" 
       annotation(Dialog(group = "初始化"));
     parameter Boolean strict = false "=true，当使用noEvent(...)进行严格限制" 
@@ -139,13 +139,13 @@ y = - u
     extends Interfaces.SISO(y(start = y_start));
     Modelica.Blocks.Interfaces.BooleanInput reset if use_reset "复位信号的可选连接器" annotation(Placement(
       transformation(
-      extent = {{-20, -20}, {20, 20}}, 
-      rotation = 90, 
+      extent = {{-20, -20}, {20, 20}},
+      rotation = 90,
       origin = {60, -120})));
     Modelica.Blocks.Interfaces.RealInput set if use_reset and use_set "设定信号的可选连接器" annotation(Placement(
       transformation(
-      extent = {{-20, -20}, {20, 20}}, 
-      rotation = 270, 
+      extent = {{-20, -20}, {20, 20}},
+      rotation = 270,
       origin = {60, 120})));
   protected
     Modelica.Blocks.Interfaces.BooleanOutput local_reset annotation(HideResult = true);
@@ -175,9 +175,9 @@ y = - u
     end if;
     if initial() and not limitsAtInit then
       der(y) = k * u;
-      assert(y >= outMin - 0.001 * abs(outMax - outMin) and y <= outMax + 0.001 * abs(outMax - outMin), 
-        "LimIntegrator: During initialization the limits have been ignored.\n" 
-        + "However, the result is that the output y is not within the required limits:\n" 
+      assert(y >= outMin - 0.001 * abs(outMax - outMin) and y <= outMax + 0.001 * abs(outMax - outMin),
+        "LimIntegrator: During initialization the limits have been ignored.\n"
+        + "However, the result is that the output y is not within the required limits:\n"
         + "  y = " + String(y) + ", outMin = " + String(outMin) + ", outMax = " + String(outMax));
     elseif strict then
       der(y) = noEvent(if y < outMin and k * u < 0 or y > outMax and k * u > 0 then 0 else k * u);
@@ -198,58 +198,58 @@ y = - u
 如果启用了<em>reset &nbsp;</em>端口，那么只要<em>reset &nbsp;</em>端口出现上升趋势， 输出<strong>y</strong>就会复位为<em>set &nbsp;</em>或<em>y_start</em> (如果未启用<em>set &nbsp;</em>端口)。
 </p>
 </html>"), Icon(coordinateSystem(
-      preserveAspectRatio = true, 
+      preserveAspectRatio = true,
       extent = {{-100, -100}, {100, 100}}), graphics = {
-      Line(points = {{-80, 78}, {-80, -90}}, color = {192, 192, 192}), 
+      Line(points = {{-80, 78}, {-80, -90}}, color = {192, 192, 192}),
       Polygon(
-      points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 90}}, 
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid), 
-      Line(points = {{-90, -80}, {82, -80}}, color = {192, 192, 192}), 
+      points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 90}},
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid),
+      Line(points = {{-90, -80}, {82, -80}}, color = {192, 192, 192}),
       Polygon(
-      points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}}, 
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid), 
+      points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}},
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid),
       Line(
-      points = DynamicSelect({{-80, -80}, {20, 20}, {80, 20}}, if use_reset then {{-80, -80}, {20, 20}, {60, 20}, {60, -80}, {80, -60}} else {{-80, -80}, {20, 20}, {80, 20}}), 
-      color = {0, 0, 127}), 
+      points = DynamicSelect({{-80, -80}, {20, 20}, {80, 20}}, if use_reset then {{-80, -80}, {20, 20}, {60, 20}, {60, -80}, {80, -60}} else {{-80, -80}, {20, 20}, {80, 20}}),
+      color = {0, 0, 127}),
       Text(
-      extent = {{0, -10}, {60, -70}}, 
-      textColor = {192, 192, 192}, 
-      textString = "I"), 
+      extent = {{0, -10}, {60, -70}},
+      textColor = {192, 192, 192},
+      textString = "I"),
       Text(
-      extent = {{-150, -150}, {150, -110}}, 
-      textString = "k=%k"), 
+      extent = {{-150, -150}, {150, -110}},
+      textString = "k=%k"),
       Line(
-      visible = strict, 
-      points = DynamicSelect({{20, 20}, {80, 20}}, if use_reset then {{20, 20}, {60, 20}} else {{20, 20}, {80, 20}}), 
-      color = {255, 0, 0}), 
+      visible = strict,
+      points = DynamicSelect({{20, 20}, {80, 20}}, if use_reset then {{20, 20}, {60, 20}} else {{20, 20}, {80, 20}}),
+      color = {255, 0, 0}),
       Line(
-      visible = use_reset, 
-      points = {{60, -100}, {60, -80}}, 
-      color = {255, 0, 255}, 
-      pattern = LinePattern.Dot), 
+      visible = use_reset,
+      points = {{60, -100}, {60, -80}},
+      color = {255, 0, 255},
+      pattern = LinePattern.Dot),
       Text(
-      visible = use_reset, 
-      extent = {{-28, -62}, {94, -86}}, 
+      visible = use_reset,
+      extent = {{-28, -62}, {94, -86}},
       textString = "reset")}));
   end LimIntegrator;
 
   block Derivative "近似导数模块"
     import Modelica.Blocks.Types.Init;
     parameter Real k(unit = "1") = 1 "增益";
-    parameter SI.Time T(min = Modelica.Constants.small) = 0.01 
+    parameter SI.Time T(min = Modelica.Constants.small) = 0.01
       "时间常数(要求T>0；T=0是理想的导数模块)";
-    parameter Init initType = Init.NoInit 
+    parameter Init initType = Init.NoInit
       "初始化类型(1：无初始化，2：稳态初始化，3：初始状态初始化，4：初始输出值初始化)" 
-      annotation(Evaluate = true, 
+      annotation(Evaluate = true,
       Dialog(group = "初始化"));
     parameter Real x_start = 0 "状态的初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
     parameter Real y_start = 0 "输出初始值(=state)" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
     extends Interfaces.SISO;
 
@@ -294,29 +294,29 @@ T * s + 1</code></pre><p>
 <br>
 </p>
 </html>"  ), Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}), 
-      Line(points = {{-90.0, -80.0}, {82.0, -80.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}), 
-      Line(origin = {-24.667, -27.333}, 
-      points = {{-55.333, 87.333}, {-19.333, -40.667}, {86.667, -52.667}}, 
-      color = {0, 0, 127}, 
-      smooth = Smooth.Bezier), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{-30.0, 14.0}, {86.0, 60.0}}, 
-      textString = "DT1"), 
-      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}}, 
+      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}),
+      Line(points = {{-90.0, -80.0}, {82.0, -80.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}),
+      Line(origin = {-24.667, -27.333},
+      points = {{-55.333, 87.333}, {-19.333, -40.667}, {86.667, -52.667}},
+      color = {0, 0, 127},
+      smooth = Smooth.Bezier),
+      Text(textColor = {192, 192, 192},
+      extent = {{-30.0, 14.0}, {86.0, 60.0}},
+      textString = "DT1"),
+      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}},
       textString = "k=%k")}));
   end Derivative;
 
@@ -324,8 +324,8 @@ T * s + 1</code></pre><p>
     import Modelica.Blocks.Types.Init;
     parameter Real k(unit = "1") = 1 "增益";
     parameter SI.Time T(start = 1) "时间常数";
-    parameter Init initType = Init.NoInit 
-      "初始化类型(1：无初始化，2：稳态初始化，3/4：初始输出值初始化)" annotation(Evaluate = true, 
+    parameter Init initType = Init.NoInit
+      "初始化类型(1：无初始化，2：稳态初始化，3/4：初始输出值初始化)" annotation(Evaluate = true,
       Dialog(group = "初始化"));
     parameter Real y_start = 0 "输出(=状态)初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
@@ -361,29 +361,29 @@ y = ----------- * u
 <br>
 </p>
 </html>"), Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}), 
-      Line(points = {{-90.0, -80.0}, {82.0, -80.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}), 
-      Line(origin = {-26.667, 6.667}, 
-      points = {{106.667, 43.333}, {-13.333, 29.333}, {-53.333, -86.667}}, 
-      color = {0, 0, 127}, 
-      smooth = Smooth.Bezier), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{0.0, -60.0}, {60.0, 0.0}}, 
-      textString = "PT1"), 
-      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}}, 
+      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}),
+      Line(points = {{-90.0, -80.0}, {82.0, -80.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}),
+      Line(origin = {-26.667, 6.667},
+      points = {{106.667, 43.333}, {-13.333, 29.333}, {-53.333, -86.667}},
+      color = {0, 0, 127},
+      smooth = Smooth.Bezier),
+      Text(textColor = {192, 192, 192},
+      extent = {{0.0, -60.0}, {60.0, 0.0}},
+      textString = "PT1"),
+      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}},
       textString = "T=%T")}));
   end FirstOrder;
 
@@ -392,12 +392,12 @@ y = ----------- * u
     parameter Real k(unit = "1") = 1 "增益";
     parameter Real w(start = 1) "角频率";
     parameter Real D(start = 1) "阻尼系数";
-    parameter Init initType = Init.NoInit 
-      "初始化类型(1：无初始化，2：稳态初始化，3/4：初始输出值初始化)" annotation(Evaluate = true, 
+    parameter Init initType = Init.NoInit
+      "初始化类型(1：无初始化，2：稳态初始化，3/4：初始输出值初始化)" annotation(Evaluate = true,
       Dialog(group = "初始化"));
     parameter Real y_start = 0 "输出(=状态)初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
-    parameter Real yd_start = 0 
+    parameter Real yd_start = 0
       "输出(=状态)导数的初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
 
@@ -440,45 +440,45 @@ y = ------------------- * u
 <br>
 </p>
 </html>"), Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}), 
-      Line(points = {{-90.0, -80.0}, {82.0, -80.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}), 
-      Line(origin = {-1.939, -1.816}, 
-      points = {{81.939, 36.056}, {65.362, 36.056}, {14.39, -26.199}, {-29.966, 113.485}, {-65.374, -61.217}, {-78.061, -78.184}}, 
-      color = {0, 0, 127}, 
-      smooth = Smooth.Bezier), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{0.0, -70.0}, {60.0, -10.0}}, 
-      textString = "PT2"), 
-      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}}, 
+      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}),
+      Line(points = {{-90.0, -80.0}, {82.0, -80.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}),
+      Line(origin = {-1.939, -1.816},
+      points = {{81.939, 36.056}, {65.362, 36.056}, {14.39, -26.199}, {-29.966, 113.485}, {-65.374, -61.217}, {-78.061, -78.184}},
+      color = {0, 0, 127},
+      smooth = Smooth.Bezier),
+      Text(textColor = {192, 192, 192},
+      extent = {{0.0, -70.0}, {60.0, -10.0}},
+      textString = "PT2"),
+      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}},
       textString = "w=%w")}));
   end SecondOrder;
 
   block PI "比例积分控制器"
     import Modelica.Blocks.Types.Init;
     parameter Real k(unit = "1") = 1 "增益";
-    parameter SI.Time T(start = 1, min = Modelica.Constants.small) 
+    parameter SI.Time T(start = 1, min = Modelica.Constants.small)
       "时间常数(要求T>0)";
-    parameter Init initType = Init.NoInit 
+    parameter Init initType = Init.NoInit
       "初始化类型(1：无初始化，2：稳态初始化，3：初始状态初始化，4：初始输出值初始化)" 
-      annotation(Evaluate = true, 
+      annotation(Evaluate = true,
       Dialog(group = "初始化"));
     parameter Real x_start = 0 "输出初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
     parameter Real y_start = 0 "输出初始值" 
-      annotation(Dialog(enable = initType == Init.SteadyState or initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.SteadyState or initType == Init.InitialOutput, group =
       "初始化"));
 
     extends Interfaces.SISO;
@@ -495,7 +495,7 @@ y = ------------------- * u
   equation
     der(x) = u / T;
     y = k * (x + u);
-    annotation(defaultComponentName = "PI", 
+    annotation(defaultComponentName = "PI",
       Documentation(info="<html><p>
 这个模型定义了输入u和输出y之间的传递函数， 即<em>PI</em>系统：
 </p>
@@ -521,27 +521,27 @@ y = 0.3 ----------- * u
 <br>
 </p>
 </html>"), Icon(coordinateSystem(
-      preserveAspectRatio = true, 
+      preserveAspectRatio = true,
       extent = {{-100, -100}, {100, 100}}), graphics = {
-      Line(points = {{-80, 78}, {-80, -90}}, color = {192, 192, 192}), 
+      Line(points = {{-80, 78}, {-80, -90}}, color = {192, 192, 192}),
       Polygon(
-      points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 90}}, 
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid), 
-      Line(points = {{-90, -80}, {82, -80}}, color = {192, 192, 192}), 
+      points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 90}},
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid),
+      Line(points = {{-90, -80}, {82, -80}}, color = {192, 192, 192}),
       Polygon(
-      points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}}, 
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid), 
-      Line(points = {{-80.0, -80.0}, {-80.0, -20.0}, {60.0, 80.0}}, color = {0, 0, 127}), 
+      points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}},
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid),
+      Line(points = {{-80.0, -80.0}, {-80.0, -20.0}, {60.0, 80.0}}, color = {0, 0, 127}),
       Text(
-      extent = {{0, 6}, {60, -56}}, 
-      textColor = {192, 192, 192}, 
-      textString = "PI"), 
+      extent = {{0, 6}, {60, -56}},
+      textColor = {192, 192, 192},
+      textString = "PI"),
       Text(
-      extent = {{-150, -150}, {150, -110}}, 
+      extent = {{-150, -150}, {150, -110}},
       textString = "T=%T")}));
   end PI;
 
@@ -550,38 +550,38 @@ y = 0.3 ----------- * u
     extends Interfaces.SISO;
 
     parameter Real k(unit = "1") = 1 "增益";
-    parameter SI.Time Ti(min = Modelica.Constants.small, start = 0.5) 
+    parameter SI.Time Ti(min = Modelica.Constants.small, start = 0.5)
       "积分器时间常数";
-    parameter SI.Time Td(min = 0, start = 0.1) 
+    parameter SI.Time Td(min = 0, start = 0.1)
       "导数模块时间常数";
-    parameter Real Nd(min = Modelica.Constants.small) = 10 
+    parameter Real Nd(min = Modelica.Constants.small) = 10
       "Nd越高，导数模块越理想";
-    parameter Init initType = Init.InitialState 
+    parameter Init initType = Init.InitialState
       "初始化类型(1：无初始化，2：稳态初始化，3：初始状态初始化，4：初始输出值初始化)" 
-      annotation(Evaluate = true, 
+      annotation(Evaluate = true,
       Dialog(group = "初始化"));
-    parameter Real xi_start = 0 
+    parameter Real xi_start = 0
       "积分器输出的初始值或猜测值(=积分器状态)" 
       annotation(Dialog(group = "初始化"));
-    parameter Real xd_start = 0 
+    parameter Real xd_start = 0
       "导数模块状态的初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
     parameter Real y_start = 0 "初始化输出值" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
     constant SI.Time unitTime = 1 annotation(HideResult = true);
 
     Blocks.Math.Gain P(k = 1) "PID控制器的比例部分" 
       annotation(Placement(transformation(extent = {{-60, 60}, {-20, 100}})));
-    Blocks.Continuous.Integrator I(k = unitTime / Ti, y_start = xi_start, 
+    Blocks.Continuous.Integrator I(k = unitTime / Ti, y_start = xi_start,
       initType = if initType == Init.SteadyState then 
       Init.SteadyState else 
       if initType == Init.InitialState then 
-      Init.InitialState else Init.NoInit) 
+      Init.InitialState else Init.NoInit)
       "PID控制器的组成部分" 
       annotation(Placement(transformation(extent = {{-60, -20}, {-20, 20}})));
     Blocks.Continuous.Derivative D(k = Td / unitTime, T = max([Td / Nd, 100 * Modelica.
-      Constants.eps]), x_start = xd_start, 
+      Constants.eps]), x_start = xd_start,
       initType = if initType == Init.SteadyState or 
       initType == Init.InitialOutput then Init.SteadyState else 
       if initType == Init.InitialState then Init.InitialState else 
@@ -589,7 +589,7 @@ y = 0.3 ----------- * u
       annotation(Placement(transformation(extent = {{-60, -100}, {-20, -60}})));
     Blocks.Math.Gain Gain(k = k) "PID控制器的增益" 
       annotation(Placement(transformation(extent = {{60, -10}, {80, 10}})));
-    Blocks.Math.Add3 Add annotation(Placement(transformation(extent = {{20, -10}, 
+    Blocks.Math.Add3 Add annotation(Placement(transformation(extent = {{20, -10},
       {40, 10}})));
   initial equation
     if initType == Init.InitialOutput then
@@ -600,40 +600,40 @@ y = 0.3 ----------- * u
     connect(u, P.u) annotation(Line(points = {{-120, 0}, {-80, 0}, {-80, 80}, {-64, 80}}, color = {0, 0, 127}));
     connect(u, I.u) 
       annotation(Line(points = {{-120, 0}, {-64, 0}}, color = {0, 0, 127}));
-    connect(u, D.u) annotation(Line(points = {{-120, 0}, {-80, 0}, {-80, -80}, {-64, -80}}, 
+    connect(u, D.u) annotation(Line(points = {{-120, 0}, {-80, 0}, {-80, -80}, {-64, -80}},
       color = {0, 0, 127}));
     connect(P.y, Add.u1) annotation(Line(points = {{-18, 80}, {0, 80}, {0, 8}, {18, 8}}, color = {0, 0, 127}));
     connect(I.y, Add.u2) 
       annotation(Line(points = {{-18, 0}, {18, 0}}, color = {0, 0, 127}));
-    connect(D.y, Add.u3) annotation(Line(points = {{-18, -80}, {0, -80}, {0, -8}, {18, -8}}, 
+    connect(D.y, Add.u3) annotation(Line(points = {{-18, -80}, {0, -80}, {0, -8}, {18, -8}},
       color = {0, 0, 127}));
     connect(Add.y, Gain.u) 
       annotation(Line(points = {{41, 0}, {58, 0}}, color = {0, 0, 127}));
     connect(Gain.y, y) 
       annotation(Line(points = {{81, 0}, {110, 0}}, color = {0, 0, 127}));
-    annotation(defaultComponentName = "PID", 
+    annotation(defaultComponentName = "PID",
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}), 
-      Line(points = {{-90.0, -80.0}, {82.0, -80.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}), 
-      Line(points = {{-80, -80}, {-80, -20}, {60, 80}}, color = {0, 0, 127}), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{-20.0, -60.0}, {80.0, -20.0}}, 
-      textString = "PID"), 
-      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}}, 
-      textString = "Ti=%Ti")}), 
+      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}),
+      Line(points = {{-90.0, -80.0}, {82.0, -80.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}),
+      Line(points = {{-80, -80}, {-80, -20}, {60, 80}}, color = {0, 0, 127}),
+      Text(textColor = {192, 192, 192},
+      extent = {{-20.0, -60.0}, {80.0, -20.0}},
+      textString = "PID"),
+      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}},
+      textString = "Ti=%Ti")}),
       Documentation(info="<html><p>
 这是PID控制器的标准形式。 为了得到更实用的PID控制器， 推荐使用\"LimPID\"模块。
 </p>
@@ -656,38 +656,38 @@ PID模块可以通过参数<strong>initType</strong>以不同的方式初始化�
     extends Modelica.Blocks.Interfaces.SISO;
 
     parameter Real k(unit = "1") = 1 "增益";
-    parameter SI.Time Ti(min = Modelica.Constants.small, start = 0.5) 
+    parameter SI.Time Ti(min = Modelica.Constants.small, start = 0.5)
       "积分器的时间常数";
-    parameter SI.Time Td(min = 0, start = 0.1) 
+    parameter SI.Time Td(min = 0, start = 0.1)
       "微分块的时间常数";
-    parameter Real Nd(min = Modelica.Constants.small) = 10 
+    parameter Real Nd(min = Modelica.Constants.small) = 10
       "Nd越高，微分块越理想";
-    parameter Init initType = Init.InitialState 
+    parameter Init initType = Init.InitialState
       "初始化类型（1：不初始化，2：稳态，3：初始状态，4：初始输出）" 
-      annotation(Evaluate = true, 
+      annotation(Evaluate = true,
       Dialog(group = "初始化"));
-    parameter Real xi_start = 0 
+    parameter Real xi_start = 0
       "积分器输出的初始值或猜测值（= 积分器状态）" 
       annotation(Dialog(group = "初始化"));
-    parameter Real xd_start = 0 
+    parameter Real xd_start = 0
       "微分块状态的初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
     parameter Real y_start = 0 "输出的初始值" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
     constant SI.Time unitTime = 1 annotation(HideResult = true);
 
     Modelica.Blocks.Math.Gain P(k = k) "PID控制器的比例部分" 
       annotation(Placement(transformation(extent = {{-60, 60}, {-20, 100}})));
-    Modelica.Blocks.Continuous.Integrator I(k = unitTime / Ti, y_start = xi_start, 
+    Modelica.Blocks.Continuous.Integrator I(k = unitTime / Ti, y_start = xi_start,
       initType = if initType == Init.SteadyState then 
       Init.SteadyState else 
       if initType == Init.InitialState then 
-      Init.InitialState else Init.NoInit) 
+      Init.InitialState else Init.NoInit)
       "PID控制器的积分部分" 
       annotation(Placement(transformation(extent = {{-60, -20}, {-20, 20}})));
     Modelica.Blocks.Continuous.Derivative D(k = Td / unitTime, T = max([Td / Nd, 100 * Modelica.
-      Constants.eps]), x_start = xd_start, 
+      Constants.eps]), x_start = xd_start,
       initType = if initType == Init.SteadyState or 
       initType == Init.InitialOutput then Init.SteadyState else 
       if initType == Init.InitialState then Init.InitialState else 
@@ -695,7 +695,7 @@ PID模块可以通过参数<strong>initType</strong>以不同的方式初始化�
       annotation(Placement(transformation(extent = {{-60, -100}, {-20, -60}})));
     Modelica.Blocks.Math.Gain Gain(k = 1) "PID控制器的增益" 
       annotation(Placement(transformation(extent = {{60, -10}, {80, 10}})));
-    Modelica.Blocks.Math.Add3 Add annotation(Placement(transformation(extent = {{20, -10}, 
+    Modelica.Blocks.Math.Add3 Add annotation(Placement(transformation(extent = {{20, -10},
       {40, 10}})));
   initial equation
     if initType == Init.InitialOutput then
@@ -706,40 +706,40 @@ PID模块可以通过参数<strong>initType</strong>以不同的方式初始化�
     connect(u, P.u) annotation(Line(points = {{-120, 0}, {-80, 0}, {-80, 80}, {-64, 80}}, color = {0, 0, 127}));
     connect(u, I.u) 
       annotation(Line(points = {{-120, 0}, {-64, 0}}, color = {0, 0, 127}));
-    connect(u, D.u) annotation(Line(points = {{-120, 0}, {-80, 0}, {-80, -80}, {-64, -80}}, 
+    connect(u, D.u) annotation(Line(points = {{-120, 0}, {-80, 0}, {-80, -80}, {-64, -80}},
       color = {0, 0, 127}));
     connect(P.y, Add.u1) annotation(Line(points = {{-18, 80}, {0, 80}, {0, 8}, {18, 8}}, color = {0, 0, 127}));
     connect(I.y, Add.u2) 
       annotation(Line(points = {{-18, 0}, {18, 0}}, color = {0, 0, 127}));
-    connect(D.y, Add.u3) annotation(Line(points = {{-18, -80}, {0, -80}, {0, -8}, {18, -8}}, 
+    connect(D.y, Add.u3) annotation(Line(points = {{-18, -80}, {0, -80}, {0, -8}, {18, -8}},
       color = {0, 0, 127}));
     connect(Add.y, Gain.u) 
       annotation(Line(points = {{41, 0}, {58, 0}}, color = {0, 0, 127}));
     connect(Gain.y, y) 
       annotation(Line(points = {{81, 0}, {110, 0}}, color = {0, 0, 127}));
-    annotation(defaultComponentName = "PID_Parallel", 
+    annotation(defaultComponentName = "PID_Parallel",
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}), 
-      Line(points = {{-90.0, -80.0}, {82.0, -80.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}), 
-      Line(points = {{-80, -80}, {-80, -20}, {60, 80}}, color = {0, 0, 127}), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{-20.0, -60.0}, {80.0, -20.0}}, 
-      textString = "PID"), 
-      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}}, 
-      textString = "Ti=%Ti")}), 
+      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}),
+      Line(points = {{-90.0, -80.0}, {82.0, -80.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}),
+      Line(points = {{-80, -80}, {-80, -20}, {60, 80}}, color = {0, 0, 127}),
+      Text(textColor = {192, 192, 192},
+      extent = {{-20.0, -60.0}, {80.0, -20.0}},
+      textString = "PID"),
+      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}},
+      textString = "Ti=%Ti")}),
       Documentation(info = "<html>
 <p>
 这是教科书版本的PID控制器。
@@ -806,114 +806,114 @@ PID块可以通过参数 <strong>initType</strong> 以不同方式初始化。in
     extends Modelica.Blocks.Interfaces.SISO;
     parameter String Type = "Parallel" "PID类型" 
       annotation(choices(
-      choice = "Ideal", 
+      choice = "Ideal",
       choice = "Parallel"));
 
     parameter String Mode = "k,Ti,Td,Nd" "设置模式的参数" 
       annotation(choices(
-      choice = "k,Ti,Td,Nd", 
+      choice = "k,Ti,Td,Nd",
       choice = "P,I,D,N"));
     //mode1
     parameter Real k(unit = "1") = 1 "增益" 
       annotation(Dialog(enable = Mode == "k,Ti,Td,Nd", group = "k,Ti,Td,Nd"));
-    parameter SI.Time Ti(min = Modelica.Constants.small, start = 0.5) 
+    parameter SI.Time Ti(min = Modelica.Constants.small, start = 0.5)
       "积分器的时间常数" annotation(Dialog(enable = Mode == "k,Ti,Td,Nd", group = "k,Ti,Td,Nd"));
-    parameter SI.Time Td(min = 0, start = 0.1) 
+    parameter SI.Time Td(min = 0, start = 0.1)
       "微分块的时间常数" annotation(Dialog(enable = Mode == "k,Ti,Td,Nd", group = "k,Ti,Td,Nd"));
-    parameter Real Nd(min = Modelica.Constants.small) = 10 
+    parameter Real Nd(min = Modelica.Constants.small) = 10
       "Nd越大，微分块越理想" annotation(Dialog(enable = Mode == "k,Ti,Td,Nd", group = "k,Ti,Td,Nd"));
     //mode2  
     parameter Real P(unit = "1") = 1 "增益" 
       annotation(Dialog(enable = Mode == "P,I,D,N", group = "P,I,D,N"));
-    parameter Real I(unit = "1", min = Modelica.Constants.small, start = 1) 
+    parameter Real I(unit = "1", min = Modelica.Constants.small, start = 1)
       "积分" annotation(Dialog(enable = Mode == "P,I,D,N", group = "P,I,D,N"));
-    parameter Real D(unit = "1", min = 0, start = 0) 
+    parameter Real D(unit = "1", min = 0, start = 0)
       "微分" annotation(Dialog(enable = Mode == "P,I,D,N", group = "P,I,D,N"));
-    parameter Real N(min = Modelica.Constants.small) = 100 
+    parameter Real N(min = Modelica.Constants.small) = 100
       "滤波系数" annotation(Dialog(enable = Mode == "P,I,D,N", group = "P,I,D,N"));
 
-    parameter Init initType = Init.InitialState 
+    parameter Init initType = Init.InitialState
       "初始化类型(1: no init, 2: steady state, 3: initial state, 4: initial output)" 
-      annotation(Evaluate = true, 
+      annotation(Evaluate = true,
       Dialog(group = "初始化"));
-    parameter Real xi_start = 0 
+    parameter Real xi_start = 0
       "积分器输出的初始值或猜测值(= 积分器状态)" 
       annotation(Dialog(group = "初始化"));
-    parameter Real xd_start = 0 
+    parameter Real xd_start = 0
       "微分块状态的初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
     parameter Real y_start = 0 "输出的初始值" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
     constant SI.Time unitTime = 1 annotation(HideResult = true);
     Modelica.Blocks.Continuous.PID_Parallel PID_Parallel1(k = k, Ti = Ti, Td = Td, Nd = Nd, initType = initType, xi_start = xi_start, xd_start = xi_start, y_start = y_start) if Type == "Parallel" and Mode == "k,Ti,Td,Nd" 
-      annotation(Placement(transformation(origin = {0, 40}, 
+      annotation(Placement(transformation(origin = {0, 40},
       extent = {{-10, -10}, {10, 10}})));
     Modelica.Blocks.Continuous.PID PID1(k = k, Ti = Ti, Td = Td, Nd = Nd, initType = initType, xi_start = xi_start, xd_start = xi_start, y_start = y_start) if Type == "Ideal" and Mode == "k,Ti,Td,Nd" 
-      annotation(Placement(transformation(origin = {0, 80}, 
+      annotation(Placement(transformation(origin = {0, 80},
       extent = {{-10, -10}, {10, 10}})));
-    Modelica.Blocks.Continuous.PID_Parallel PID_Parallel2(k = P, Ti = unitTime / I, Td = D * unitTime, Nd = D * unitTime * N, initType = initType, xi_start = xi_start, xd_start = xi_start, y_start = y_start) if Type == "Parallel" and Mode == "P,I,D,N" 
-      annotation(Placement(transformation(origin = {0, -76}, 
+    Modelica.Blocks.Continuous.PID_Parallel PID_Parallel2(k = P, Ti = unitTime / I, Td = D * unitTime, Nd = D * unitTime * N + Modelica.Constants.eps, initType = initType, xi_start = xi_start, xd_start = xi_start, y_start = y_start) if Type == "Parallel" and Mode == "P,I,D,N" 
+      annotation(Placement(transformation(origin = {0, -76},
       extent = {{-10, -10}, {10, 10}})));
-    Modelica.Blocks.Continuous.PID PID2(k = P, Ti = unitTime / I, Td = D * unitTime, Nd = D * unitTime * N, initType = initType, xi_start = xi_start, xd_start = xi_start, y_start = y_start) if Type == "Ideal" and Mode == "P,I,D,N" 
-      annotation(Placement(transformation(origin = {4.44089e-16, -40}, 
+    Modelica.Blocks.Continuous.PID PID2(k = P, Ti = unitTime / I, Td = D * unitTime, Nd = D * unitTime * N + Modelica.Constants.eps, initType = initType, xi_start = xi_start, xd_start = xi_start, y_start = y_start) if Type == "Ideal" and Mode == "P,I,D,N" 
+      annotation(Placement(transformation(origin = {4.44089e-16, -40},
       extent = {{-10, -10}, {10, 10}})));
   equation
     connect(u, PID1.u) 
-      annotation(Line(origin = {-71, 15}, 
-      points = {{-49, -15}, {11, -15}, {11, 65}, {59, 65}}, 
+      annotation(Line(origin = {-71, 15},
+      points = {{-49, -15}, {11, -15}, {11, 65}, {59, 65}},
       color = {0, 0, 127}));
     connect(PID1.y, y) 
-      annotation(Line(origin = {56, 15}, 
-      points = {{-45, 65}, {4, 65}, {4, -15}, {54, -15}}, 
+      annotation(Line(origin = {56, 15},
+      points = {{-45, 65}, {4, 65}, {4, -15}, {54, -15}},
       color = {0, 0, 127}));
     connect(PID_Parallel1.u, u) 
-      annotation(Line(origin = {-71, -15}, 
-      points = {{59, 55}, {11, 55}, {11, 15}, {-49, 15}}, 
+      annotation(Line(origin = {-71, -15},
+      points = {{59, 55}, {11, 55}, {11, 15}, {-49, 15}},
       color = {0, 0, 127}), __MWORKS(BlockSystem(NamedSignal)));
     connect(PID_Parallel1.y, y) 
-      annotation(Line(origin = {56, -15}, 
-      points = {{-45, 55}, {4, 55}, {4, 15}, {54, 15}}, 
+      annotation(Line(origin = {56, -15},
+      points = {{-45, 55}, {4, 55}, {4, 15}, {54, 15}},
       color = {0, 0, 127}));
     connect(u, PID2.u) 
-      annotation(Line(origin = {-66, -20}, 
-      points = {{-54, 20}, {6, 20}, {6, -20}, {54, -20}}, 
+      annotation(Line(origin = {-66, -20},
+      points = {{-54, 20}, {6, 20}, {6, -20}, {54, -20}},
       color = {0, 0, 127}), __MWORKS(BlockSystem(NamedSignal)));
     connect(PID2.y, y) 
-      annotation(Line(origin = {61, -20}, 
-      points = {{-50, -20}, {-1, -20}, {-1, 20}, {49, 20}}, 
+      annotation(Line(origin = {61, -20},
+      points = {{-50, -20}, {-1, -20}, {-1, 20}, {49, 20}},
       color = {0, 0, 127}));
     connect(u, PID_Parallel2.u) 
-      annotation(Line(origin = {-66, -40}, 
-      points = {{-54, 40}, {6, 40}, {6, -36}, {54, -36}}, 
+      annotation(Line(origin = {-66, -40},
+      points = {{-54, 40}, {6, 40}, {6, -36}, {54, -36}},
       color = {0, 0, 127}), __MWORKS(BlockSystem(NamedSignal)));
     connect(PID_Parallel2.y, y) 
-      annotation(Line(origin = {61, -38}, 
-      points = {{-50, -38}, {-1, -38}, {-1, 38}, {49, 38}}, 
+      annotation(Line(origin = {61, -38},
+      points = {{-50, -38}, {-1, -38}, {-1, 38}, {49, 38}},
       color = {0, 0, 127}));
-    annotation(defaultComponentName = "PIDs", 
+    annotation(defaultComponentName = "PIDs",
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}), 
-      Line(points = {{-90.0, -80.0}, {82.0, -80.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}), 
-      Line(points = {{-80, -80}, {-80, -20}, {60, 80}}, color = {0, 0, 127}), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{-20.0, -60.0}, {80.0, -20.0}}, 
-      textString = "PID"), 
-      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}}, 
-      textString = "Ti=%Ti")}), 
+      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}),
+      Line(points = {{-90.0, -80.0}, {82.0, -80.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}),
+      Line(points = {{-80, -80}, {-80, -20}, {60, 80}}, color = {0, 0, 127}),
+      Text(textColor = {192, 192, 192},
+      extent = {{-20.0, -60.0}, {80.0, -20.0}},
+      textString = "PID"),
+      Text(extent = {{-150.0, -150.0}, {150.0, -110.0}},
+      textString = "Ti=%Ti")}),
       Documentation(info = "<html>
 <p>
 这是PID控制器的教材版本。对于更实用的PID控制器，可以使用LimPID块。
@@ -967,58 +967,58 @@ initType的可能值在<a href=\"modelica://Modelica.Blocks.Types.Init\">Modelic
 然而，如此设置并不可行。解决方案是不要通过代数方程初始化u或用于计算u的变量。
 </p>
 
-</html>"  ), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, 
-      grid = {2, 2}), graphics = {Rectangle(origin = {3, 55}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid, 
-      extent = {{-85, 41}, {85, -41}}), Text(origin = {45, 21}, 
-      lineColor = {0, 0, 0}, 
-      extent = {{-43, 7}, {43, -7}}, 
-      textString = "参数模式k、Ti、Td、Nd", 
-      textStyle = {TextStyle.None}, 
-      textColor = {0, 0, 0}, 
-      horizontalAlignment = LinePattern.None), Rectangle(origin = {3, -59}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid, 
-      extent = {{-85, 41}, {85, -41}}), Text(origin = {50, -93}, 
-      lineColor = {0, 0, 0}, 
-      extent = {{-38, 7}, {38, -7}}, 
-      textString = "参数模式P、I、D、N", 
-      textStyle = {TextStyle.None}, 
-      textColor = {0, 0, 0}, 
+</html>"  ), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}},
+      grid = {2, 2}), graphics = {Rectangle(origin = {3, 55},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid,
+      extent = {{-85, 41}, {85, -41}}), Text(origin = {45, 21},
+      lineColor = {0, 0, 0},
+      extent = {{-43, 7}, {43, -7}},
+      textString = "参数模式k、Ti、Td、Nd",
+      textStyle = {TextStyle.None},
+      textColor = {0, 0, 0},
+      horizontalAlignment = LinePattern.None), Rectangle(origin = {3, -59},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid,
+      extent = {{-85, 41}, {85, -41}}), Text(origin = {50, -93},
+      lineColor = {0, 0, 0},
+      extent = {{-38, 7}, {38, -7}},
+      textString = "参数模式P、I、D、N",
+      textStyle = {TextStyle.None},
+      textColor = {0, 0, 0},
       horizontalAlignment = LinePattern.None)}));
   end PIDs;
 
-  block LimPID 
+  block LimPID
     "P、PI、PD 和 PID 控制器，具有输出限制、抗饱和补偿器、设定点加权和可选的前馈"
     import Modelica.Blocks.Types.Init;
     import Modelica.Blocks.Types.SimpleController;
     extends Modelica.Blocks.Interfaces.SVcontrol;
-    output Real controlError = u_s - u_m 
+    output Real controlError = u_s - u_m
       "控制误差(也叫设定点误差或偏差)";
-    parameter .Modelica.Blocks.Types.SimpleController controllerType = 
+    parameter .Modelica.Blocks.Types.SimpleController controllerType =
       .Modelica.Blocks.Types.SimpleController.PID "控制模块类型";
     parameter Real k(min = 0, unit = "1") = 1 "控制模块增益";
-    parameter SI.Time Ti(min = Modelica.Constants.small) = 0.5 
-      "积分模块的时间常数" annotation(Dialog(enable = 
+    parameter SI.Time Ti(min = Modelica.Constants.small) = 0.5
+      "积分模块的时间常数" annotation(Dialog(enable =
       controllerType == .Modelica.Blocks.Types.SimpleController.PI or 
       controllerType == .Modelica.Blocks.Types.SimpleController.PID));
-    parameter SI.Time Td(min = 0) = 0.1 
-      "导数模块的时间常数" annotation(Dialog(enable = 
+    parameter SI.Time Td(min = 0) = 0.1
+      "导数模块的时间常数" annotation(Dialog(enable =
       controllerType == .Modelica.Blocks.Types.SimpleController.PD or 
       controllerType == .Modelica.Blocks.Types.SimpleController.PID));
     parameter Real yMax(start = 1) "输出上限";
     parameter Real yMin = -yMax "输出下限";
-    parameter Real wp(min = 0) = 1 
+    parameter Real wp(min = 0) = 1
       "比例模块设定点权重(0..1)";
     parameter Real wd(min = 0) = 0 "导数模块的设定点权重(0..1)" 
       annotation(Dialog(enable = controllerType == .Modelica.Blocks.Types.SimpleController.PD or 
       controllerType == .Modelica.Blocks.Types.SimpleController.PID));
-    parameter Real Ni(min = 100 * Modelica.Constants.eps) = 0.9 
+    parameter Real Ni(min = 100 * Modelica.Constants.eps) = 0.9
       "Ni*Ti为抗缠绕补偿的时间常数" 
       annotation(Dialog(enable = controllerType == .Modelica.Blocks.Types.SimpleController.PI or 
       controllerType == .Modelica.Blocks.Types.SimpleController.PID));
-    parameter Real Nd(min = 100 * Modelica.Constants.eps) = 10 
+    parameter Real Nd(min = 100 * Modelica.Constants.eps) = 10
       "Nd越高，导数模块越理想" 
       annotation(Dialog(enable = controllerType == .Modelica.Blocks.Types.SimpleController.PD or 
       controllerType == .Modelica.Blocks.Types.SimpleController.PID));
@@ -1026,34 +1026,34 @@ initType的可能值在<a href=\"modelica://Modelica.Blocks.Types.Init\">Modelic
       annotation(Evaluate = true, choices(checkBox = true));
     parameter Real kFF = 1 "前馈输入的增益" 
       annotation(Dialog(enable = withFeedForward));
-    parameter Init initType = Init.InitialState 
+    parameter Init initType = Init.InitialState
       "初始化类型(1：无初始化，2：稳态初始化，3：初始状态初始化，4：初始输出值初始化)" 
       annotation(Evaluate = true, Dialog(group = "初始化"));
-    parameter Real xi_start = 0 
+    parameter Real xi_start = 0
       "积分模块输出的初始值或猜测值(=积分模块状态)" 
-      annotation(Dialog(group = "初始化", 
+      annotation(Dialog(group = "初始化",
       enable = controllerType == .Modelica.Blocks.Types.SimpleController.PI or 
       controllerType == .Modelica.Blocks.Types.SimpleController.PID));
-    parameter Real xd_start = 0 
+    parameter Real xd_start = 0
       "导数模块状态的初始值或猜测值" 
-      annotation(Dialog(group = "初始化", 
+      annotation(Dialog(group = "初始化",
       enable = controllerType == .Modelica.Blocks.Types.SimpleController.PD or 
       controllerType == Modelica.Blocks.Types.SimpleController.PID));
     parameter Real y_start = 0 "初始化输出值" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
-    parameter Modelica.Blocks.Types.LimiterHomotopy homotopyType = Modelica.Blocks.Types.LimiterHomotopy.Linear 
+    parameter Modelica.Blocks.Types.LimiterHomotopy homotopyType = Modelica.Blocks.Types.LimiterHomotopy.Linear
       "基于同伦初始化的简化" 
       annotation(Evaluate = true, Dialog(group = "初始化"));
     parameter Boolean strict = false "=true，当严格限制noEvent(..)时" 
       annotation(Evaluate = true, choices(checkBox = true), Dialog(tab = "高级"));
     constant SI.Time unitTime = 1 annotation(HideResult = true);
-    Modelica.Blocks.Interfaces.RealInput u_ff if withFeedForward 
+    Modelica.Blocks.Interfaces.RealInput u_ff if withFeedForward
       "可供选择的前馈输入信号连接模块" 
       annotation(Placement(
       transformation(
-      origin = {60, -120}, 
-      extent = {{20, -20}, {-20, 20}}, 
+      origin = {60, -120},
+      extent = {{20, -20}, {-20, 20}},
       rotation = 270)));
     Modelica.Blocks.Math.Add addP(k1 = wp, k2 = -1) 
       annotation(Placement(transformation(extent = {{-80, 40}, {-60, 60}})));
@@ -1062,16 +1062,16 @@ initType的可能值在<a href=\"modelica://Modelica.Blocks.Types.Init\">Modelic
     Modelica.Blocks.Math.Gain P(k = 1) 
       annotation(Placement(transformation(extent = {{-50, 40}, {-30, 60}})));
     Modelica.Blocks.Continuous.Integrator I(
-      k = unitTime / Ti, 
-      y_start = xi_start, 
+      k = unitTime / Ti,
+      y_start = xi_start,
       initType = if initType == Init.SteadyState then Init.SteadyState else if 
       initType == Init.InitialState 
       then Init.InitialState else Init.NoInit) if with_I 
       annotation(Placement(transformation(extent = {{-50, -60}, {-30, -40}})));
     Modelica.Blocks.Continuous.Derivative D(
-      k = Td / unitTime, 
-      T = max([Td / Nd, 1.e-14]), 
-      x_start = xd_start, 
+      k = Td / unitTime,
+      T = max([Td / Nd, 1.e-14]),
+      x_start = xd_start,
       initType = if initType == Init.SteadyState or initType == Init.InitialOutput 
       then Init.SteadyState else if initType == Init.InitialState then 
       Init.InitialState else Init.NoInit) if with_D 
@@ -1084,15 +1084,15 @@ initType的可能值在<a href=\"modelica://Modelica.Blocks.Types.Init\">Modelic
       annotation(Placement(transformation(extent = {{-80, -60}, {-60, -40}})));
     Modelica.Blocks.Math.Add addSat(k1 = +1, k2 = -1) if with_I annotation(Placement(
       transformation(
-      origin = {80, -50}, 
-      extent = {{-10, -10}, {10, 10}}, 
+      origin = {80, -50},
+      extent = {{-10, -10}, {10, 10}},
       rotation = 270)));
     Modelica.Blocks.Math.Gain gainTrack(k = 1 / (k * Ni)) if with_I 
       annotation(Placement(transformation(extent = {{0, -80}, {-20, -60}})));
     Modelica.Blocks.Nonlinear.Limiter limiter(
-      uMax = yMax, 
-      uMin = yMin, 
-      strict = strict, 
+      uMax = yMax,
+      uMin = yMin,
+      strict = strict,
       homotopyType = homotopyType) 
       annotation(Placement(transformation(extent = {{70, -10}, {90, 10}})));
   protected
@@ -1115,7 +1115,7 @@ initType的可能值在<a href=\"modelica://Modelica.Blocks.Types.Init\">Modelic
     end if;
   equation
     if initType == Init.InitialOutput and (y_start < yMin or y_start > yMax) then
-      Modelica.Utilities.Streams.error("LimPID：初值y_start (=" + String(y_start) + 
+      Modelica.Utilities.Streams.error("LimPID：初值y_start (=" + String(y_start) +
         ")是外层yMin(=" + String(yMin) + ")值和外层yMax(=" + String(yMax) + ")值的极限值");
     end if;
 
@@ -1125,76 +1125,76 @@ initType的可能值在<a href=\"modelica://Modelica.Blocks.Types.Init\">Modelic
       -82, 6}}, color = {0, 0, 127}));
     connect(u_s, addI.u1) annotation(Line(points = {{-120, 0}, {-96, 0}, {-96, -42}, {
       -82, -42}}, color = {0, 0, 127}));
-    connect(addP.y, P.u) annotation(Line(points = {{-59, 50}, {-52, 50}}, color = {0, 
+    connect(addP.y, P.u) annotation(Line(points = {{-59, 50}, {-52, 50}}, color = {0,
       0, 127}));
     connect(addD.y, D.u) 
       annotation(Line(points = {{-59, 0}, {-52, 0}}, color = {0, 0, 127}));
     connect(addI.y, I.u) annotation(Line(points = {{-59, -50}, {-52, -50}}, color = {
       0, 0, 127}));
-    connect(P.y, addPID.u1) annotation(Line(points = {{-29, 50}, {-20, 50}, {-20, 8}, {-12, 
+    connect(P.y, addPID.u1) annotation(Line(points = {{-29, 50}, {-20, 50}, {-20, 8}, {-12,
       8}}, color = {0, 0, 127}));
     connect(D.y, addPID.u2) 
       annotation(Line(points = {{-29, 0}, {-12, 0}}, color = {0, 0, 127}));
-    connect(I.y, addPID.u3) annotation(Line(points = {{-29, -50}, {-20, -50}, {-20, -8}, 
+    connect(I.y, addPID.u3) annotation(Line(points = {{-29, -50}, {-20, -50}, {-20, -8},
       {-12, -8}}, color = {0, 0, 127}));
-    connect(limiter.y, addSat.u1) annotation(Line(points = {{91, 0}, {94, 0}, {94, 
+    connect(limiter.y, addSat.u1) annotation(Line(points = {{91, 0}, {94, 0}, {94,
       -20}, {86, -20}, {86, -38}}, color = {0, 0, 127}));
     connect(limiter.y, y) 
       annotation(Line(points = {{91, 0}, {110, 0}}, color = {0, 0, 127}));
-    connect(addSat.y, gainTrack.u) annotation(Line(points = {{80, -61}, {80, -70}, {2, -70}}, 
+    connect(addSat.y, gainTrack.u) annotation(Line(points = {{80, -61}, {80, -70}, {2, -70}},
       color = {0, 0, 127}));
-    connect(gainTrack.y, addI.u3) annotation(Line(points = {{-21, -70}, {-88, -70}, {-88, 
+    connect(gainTrack.y, addI.u3) annotation(Line(points = {{-21, -70}, {-88, -70}, {-88,
       -58}, {-82, -58}}, color = {0, 0, 127}));
     connect(u_m, addP.u2) annotation(Line(points = {{0, -120}, {0, -92}, {-92, -92}, {-92, 44}, {-82, 44}}, color = {0, 0, 127}));
     connect(u_m, addD.u2) annotation(Line(points = {{0, -120}, {0, -92}, {-92, -92}, {-92, -6}, {-82, -6}}, color = {0, 0, 127}));
     connect(u_m, addI.u2) annotation(Line(points = {{0, -120}, {0, -92}, {-92, -92}, {-92, -50}, {-82, -50}}, color = {0, 0, 127}));
-    connect(Dzero.y, addPID.u2) annotation(Line(points = {{-29.5, 25}, {-24, 25}, {-24, 
+    connect(Dzero.y, addPID.u2) annotation(Line(points = {{-29.5, 25}, {-24, 25}, {-24,
       0}, {-12, 0}}, color = {0, 0, 127}));
-    connect(Izero.y, addPID.u3) annotation(Line(points = {{-10.5, -50}, {-20, -50}, {-20, 
+    connect(Izero.y, addPID.u3) annotation(Line(points = {{-10.5, -50}, {-20, -50}, {-20,
       -8}, {-12, -8}}, color = {0, 0, 127}));
     connect(addPID.y, gainPID.u) 
       annotation(Line(points = {{11, 0}, {18, 0}}, color = {0, 0, 127}));
     connect(addFF.y, limiter.u) 
       annotation(Line(points = {{60.6, 0}, {68, 0}}, color = {0, 0, 127}));
-    connect(gainPID.y, addFF.u1) annotation(Line(points = {{41, 0}, {44, 0}, {44, 3.6}, 
+    connect(gainPID.y, addFF.u1) annotation(Line(points = {{41, 0}, {44, 0}, {44, 3.6},
       {46.8, 3.6}}, color = {0, 0, 127}));
-    connect(FFzero.y, addFF.u2) annotation(Line(points = {{40.5, -30}, {44, -30}, {44, 
-      -3.6}, {46.8, -3.6}}, 
+    connect(FFzero.y, addFF.u2) annotation(Line(points = {{40.5, -30}, {44, -30}, {44,
+      -3.6}, {46.8, -3.6}},
       color = {0, 0, 127}));
-    connect(addFF.u2, u_ff) annotation(Line(points = {{46.8, -3.6}, {44, -3.6}, {44, 
-      -92}, {60, -92}, {60, -120}}, 
+    connect(addFF.u2, u_ff) annotation(Line(points = {{46.8, -3.6}, {44, -3.6}, {44,
+      -92}, {60, -92}, {60, -120}},
       color = {0, 0, 127}));
-    connect(addFF.y, addSat.u2) annotation(Line(points = {{60.6, 0}, {64, 0}, {64, -20}, 
+    connect(addFF.y, addSat.u2) annotation(Line(points = {{60.6, 0}, {64, 0}, {64, -20},
       {74, -20}, {74, -38}}, color = {0, 0, 127}));
-    annotation(defaultComponentName = "PID", 
+    annotation(defaultComponentName = "PID",
       Icon(coordinateSystem(
-      preserveAspectRatio = true, 
+      preserveAspectRatio = true,
       extent = {{-100, -100}, {100, 100}}), graphics = {
-      Line(points = {{-80, 78}, {-80, -90}}, color = {192, 192, 192}), 
+      Line(points = {{-80, 78}, {-80, -90}}, color = {192, 192, 192}),
       Polygon(
-      points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 90}}, 
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid), 
-      Line(points = {{-90, -80}, {82, -80}}, color = {192, 192, 192}), 
+      points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 90}},
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid),
+      Line(points = {{-90, -80}, {82, -80}}, color = {192, 192, 192}),
       Polygon(
-      points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}}, 
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid), 
-      Line(points = {{-80, -80}, {-80, -20}, {30, 60}, {80, 60}}, color = {0, 0, 127}), 
+      points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}},
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid),
+      Line(points = {{-80, -80}, {-80, -20}, {30, 60}, {80, 60}}, color = {0, 0, 127}),
       Text(
-      extent = {{-20, -20}, {80, -60}}, 
-      textColor = {192, 192, 192}, 
-      textString = "%controllerType"), 
+      extent = {{-20, -20}, {80, -60}},
+      textColor = {192, 192, 192},
+      textString = "%controllerType"),
       Line(
-      visible = strict, 
-      points = {{30, 60}, {81, 60}}, 
-      color = {255, 0, 0})}), 
+      visible = strict,
+      points = {{30, 60}, {81, 60}},
+      color = {255, 0, 0})}),
       Diagram(graphics = {Text(
-      extent = {{79, -112}, {129, -102}}, 
-      textColor = {0, 0, 255}, 
-      textString = " (feed-forward)")}), 
+      extent = {{79, -112}, {129, -102}},
+      textColor = {0, 0, 255},
+      textString = " (feed-forward)")}),
       Documentation(info="<html><p>
 通过参数<strong>controllerType</strong>任意选择<strong>P</strong>， <strong>PI</strong>，<strong>PD</strong>，或<strong>PID</strong>。 例如，如果选择PI， 则属于D部分的所有组件都将从块中移除(通过条件声明)。 <a href=\"modelica://Modelica.Blocks.Examples.PID_Controller\" target=\"\">Modelica.Blocks.Examples.PID_Controller</a> 示例演示了此控制模块的用法。 并依据以下文献第三章， 描述了PID控制模块设计的几个实际方面：
 </p>
@@ -1263,22 +1263,22 @@ initType的可能值在<a href=\"modelica://Modelica.Blocks.Types.Init\">Modelic
     import Modelica.Blocks.Types.Init;
     extends Interfaces.SISO;
 
-    parameter Real b[:] = {1} 
+    parameter Real b[:] = {1}
       "传递函数的分子系数(比如，2*s+3写为{2,3})";
-    parameter Real a[:] = {1} 
+    parameter Real a[:] = {1}
       "传递函数的分母系数(比如，5*s+6写为{5,6})";
-    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit 
+    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit
       "初始化类型(1：无初始化，2：稳态初始化，3：初始状态初始化，4：初始输出值初始化)" 
-      annotation(Evaluate = true, Dialog(group = 
+      annotation(Evaluate = true, Dialog(group =
       "初始化"));
-    parameter Real x_start[size(a, 1) - 1] = zeros(nx) 
+    parameter Real x_start[size(a, 1) - 1] = zeros(nx)
       "状态的初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
-    parameter Real y_start = 0 
+    parameter Real y_start = 0
       "输出的初始值(y的导数为0到nx-1阶导数)" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
-    output Real x[size(a, 1) - 1](start = x_start) 
+    output Real x[size(a, 1) - 1](start = x_start)
       "依据控制模块规范形式的传递函数状态";
   protected
     parameter Integer na = size(a, 1) "传递函数分母大小";
@@ -1338,39 +1338,39 @@ TransferFunction g(b = {2,4}, a = {1,3});
 y = --------- * u
       s + 3
 </pre></blockquote>
-</html>"  ), 
+</html>"  ),
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-80.0, 0.0}, {80.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Text(textColor = {0, 0, 127}, 
-      extent = {{-90.0, 10.0}, {90.0, 90.0}}, 
-      textString = "b(s)"), 
-      Text(textColor = {0, 0, 127}, 
-      extent = {{-90.0, -90.0}, {90.0, -10.0}}, 
+      Line(points = {{-80.0, 0.0}, {80.0, 0.0}},
+      color = {0, 0, 127}),
+      Text(textColor = {0, 0, 127},
+      extent = {{-90.0, 10.0}, {90.0, 90.0}},
+      textString = "b(s)"),
+      Text(textColor = {0, 0, 127},
+      extent = {{-90.0, -90.0}, {90.0, -10.0}},
       textString = "a(s)")}));
   end TransferFunction;
   block StateSpaceAlg "线性状态空间系统算法版本"
     import Modelica.Blocks.Types.Init;
-    parameter Real A[:,size(A, 1)] = [1, 0; 0, 1] 
+    parameter Real A[:,size(A, 1)] = [1, 0; 0, 1]
       "状态空间模型的矩阵 A (例如，A=[1, 0; 0, 1])";
-    parameter Real B[size(A, 1),:] = [1; 1] 
+    parameter Real B[size(A, 1),:] = [1; 1]
       "状态空间模型的矩阵 B (例如，B=[1; 1])";
-    parameter Real C[:,size(A, 1)] = [1, 1] 
+    parameter Real C[:,size(A, 1)] = [1, 1]
       "状态空间模型的矩阵 C (例如，C=[1, 1])";
-    parameter Real D[size(C, 1),size(B, 2)] = zeros(size(C, 1), size(B, 2)) 
+    parameter Real D[size(C, 1),size(B, 2)] = zeros(size(C, 1), size(B, 2))
       "状态空间模型的矩阵 D";
-    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit 
+    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit
       "初始化类型 (1: 无初始化, 2: 稳态, 3: 初始状态, 4: 初始输出)" 
-      annotation(Evaluate = true, 
+      annotation(Evaluate = true,
       Dialog(group = "初始化"));
     parameter Real x_start[nx] = zeros(nx) "状态的初始或猜测值" 
       annotation(Dialog(group = "初始化"));
-    parameter Real y_start[ny] = zeros(ny) 
+    parameter Real y_start[ny] = zeros(ny)
       "输出的初始值（如果可能，剩余状态处于稳态）" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
     extends Modelica.Blocks.Interfaces.MIMO(final nin = size(B, 2), final nout = size(C, 1));
     output Real x[size(A, 1)](start = x_start) "状态向量";
@@ -1435,46 +1435,46 @@ parameter: D = zeros(ny,nu)
                        [x[2]]            [u[2]]
 </pre></blockquote>
 </html>"    ), Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100, -100}, {100, 100}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100, -100}, {100, 100}}),
       graphics = {
-      Text(extent = {{-90, 10}, {-10, 90}}, 
-      textString = "A", 
-      textColor = {0, 0, 127}), 
-      Text(extent = {{10, 10}, {90, 90}}, 
-      textString = "B", 
-      textColor = {0, 0, 127}), 
-      Text(extent = {{-90, -10}, {-10, -90}}, 
-      textString = "C", 
-      textColor = {0, 0, 127}), 
-      Text(extent = {{10, -10}, {90, -90}}, 
-      textString = "D", 
-      textColor = {0, 0, 127}), 
-      Line(points = {{0, -90}, {0, 90}}, 
-      color = {192, 192, 192}), 
-      Line(points = {{-90, 0}, {90, 0}}, 
+      Text(extent = {{-90, 10}, {-10, 90}},
+      textString = "A",
+      textColor = {0, 0, 127}),
+      Text(extent = {{10, 10}, {90, 90}},
+      textString = "B",
+      textColor = {0, 0, 127}),
+      Text(extent = {{-90, -10}, {-10, -90}},
+      textString = "C",
+      textColor = {0, 0, 127}),
+      Text(extent = {{10, -10}, {90, -90}},
+      textString = "D",
+      textColor = {0, 0, 127}),
+      Line(points = {{0, -90}, {0, 90}},
+      color = {192, 192, 192}),
+      Line(points = {{-90, 0}, {90, 0}},
       color = {192, 192, 192})}));
   end StateSpaceAlg;
   block TransferFunctionDia "线性传递函数，动态图标显示"
     import Modelica.Blocks.Types.Init;
     extends Interfaces.SISO;
 
-    parameter Real b[:] = {1} 
+    parameter Real b[:] = {1}
       "传递函数的分子系数(比如，2*s+3写为{2,3})";
-    parameter Real a[:] = {1} 
+    parameter Real a[:] = {1}
       "传递函数的分母系数(比如，5*s+6写为{5,6})";
-    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit 
+    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit
       "初始化类型(1：无初始化，2：稳态初始化，3：初始状态初始化，4：初始输出值初始化)" 
-      annotation(Evaluate = true, Dialog(group = 
+      annotation(Evaluate = true, Dialog(group =
       "初始化"));
-    parameter Real x_start[size(a, 1) - 1] = zeros(nx) 
+    parameter Real x_start[size(a, 1) - 1] = zeros(nx)
       "状态的初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
-    parameter Real y_start = 0 
+    parameter Real y_start = 0
       "输出的初始值(y的导数为0到nx-1阶导数)" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
-    output Real x[size(a, 1) - 1](start = x_start) 
+    output Real x[size(a, 1) - 1](start = x_start)
       "依据控制模块规范形式的传递函数状态";
   protected
     parameter Integer na = size(a, 1) "传递函数分母大小";
@@ -1533,43 +1533,43 @@ TransferFunction g(b = {2,4}, a = {1,3});
 y = --------- * u
       s + 3
 </pre></blockquote>
-</html>"  ), 
-      Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, 
-      grid = {2, 2}), graphics = {Line(origin = {0, 0}, 
-      points = {{-80, 0}, {80, 0}}, 
-      color = {0, 0, 127}), Text(origin = {0, 30}, 
-      lineColor = {0, 0, 127}, 
-      extent = {{-90, -20}, {90, 20}}, 
-      textString = "%{b(polynomial)}", 
-      textStyle = {TextStyle.None}, 
-      textColor = {0, 0, 127}), Text(origin = {0, -30}, 
-      lineColor = {0, 0, 127}, 
-      extent = {{-90, -20}, {90, 20}}, 
-      textString = "%{a(polynomial)}", 
-      textStyle = {TextStyle.None}, 
-      textColor = {0, 0, 127})}), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, 
+</html>"  ),
+      Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}},
+      grid = {2, 2}), graphics = {Line(origin = {0, 0},
+      points = {{-80, 0}, {80, 0}},
+      color = {0, 0, 127}), Text(origin = {0, 30},
+      lineColor = {0, 0, 127},
+      extent = {{-90, -20}, {90, 20}},
+      textString = "%{b(polynomial)}",
+      textStyle = {TextStyle.None},
+      textColor = {0, 0, 127}), Text(origin = {0, -30},
+      lineColor = {0, 0, 127},
+      extent = {{-90, -20}, {90, 20}},
+      textString = "%{a(polynomial)}",
+      textStyle = {TextStyle.None},
+      textColor = {0, 0, 127})}), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}},
       grid = {2, 2})) );
   end TransferFunctionDia;
 
   block StateSpace "线性状态空间系统"
     import Modelica.Blocks.Types.Init;
-    parameter Real A[:,size(A, 1)] = [1, 0; 0, 1] 
+    parameter Real A[:,size(A, 1)] = [1, 0; 0, 1]
       "状态空间模型的矩阵A(比如，A=[1,0;0,1])";
-    parameter Real B[size(A, 1),:] = [1; 1] 
+    parameter Real B[size(A, 1),:] = [1; 1]
       "状态空间模型的矩阵B(比如，B=[1;1])";
-    parameter Real C[:,size(A, 1)] = [1, 1] 
+    parameter Real C[:,size(A, 1)] = [1, 1]
       "状态空间模型的矩阵C(比如，C=[1,1])";
-    parameter Real D[size(C, 1),size(B, 2)] = zeros(size(C, 1), size(B, 2)) 
+    parameter Real D[size(C, 1),size(B, 2)] = zeros(size(C, 1), size(B, 2))
       "状态空间模型的矩阵D";
-    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit 
+    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit
       "初始化类型(1：无初始化，2：稳态初始化，3：初始状态初始化，4：初始输出值初始化)" 
-      annotation(Evaluate = true, 
+      annotation(Evaluate = true,
       Dialog(group = "初始化"));
     parameter Real x_start[nx] = zeros(nx) "状态的初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
-    parameter Real y_start[ny] = zeros(ny) 
+    parameter Real y_start[ny] = zeros(ny)
       "输出的初始值(剩余状态尽可能保持稳定)" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
 
     extends Interfaces.MIMO(final nin = size(B, 2), final nout = size(C, 1));
@@ -1624,24 +1624,24 @@ y[1]   = [0.1  2.0] * [    ] + [0  0] * [    ]
 <br>
 </p>
 </html>"), Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100, -100}, {100, 100}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100, -100}, {100, 100}}),
       graphics = {
-      Text(extent = {{-90, 10}, {-10, 90}}, 
-      textString = "A", 
-      textColor = {0, 0, 127}), 
-      Text(extent = {{10, 10}, {90, 90}}, 
-      textString = "B", 
-      textColor = {0, 0, 127}), 
-      Text(extent = {{-90, -10}, {-10, -90}}, 
-      textString = "C", 
-      textColor = {0, 0, 127}), 
-      Text(extent = {{10, -10}, {90, -90}}, 
-      textString = "D", 
-      textColor = {0, 0, 127}), 
-      Line(points = {{0, -90}, {0, 90}}, 
-      color = {192, 192, 192}), 
-      Line(points = {{-90, 0}, {90, 0}}, 
+      Text(extent = {{-90, 10}, {-10, 90}},
+      textString = "A",
+      textColor = {0, 0, 127}),
+      Text(extent = {{10, 10}, {90, 90}},
+      textString = "B",
+      textColor = {0, 0, 127}),
+      Text(extent = {{-90, -10}, {-10, -90}},
+      textString = "C",
+      textColor = {0, 0, 127}),
+      Text(extent = {{10, -10}, {90, -90}},
+      textString = "D",
+      textColor = {0, 0, 127}),
+      Line(points = {{0, -90}, {0, 90}},
+      color = {192, 192, 192}),
+      Line(points = {{-90, 0}, {90, 0}},
       color = {192, 192, 192})}));
   end StateSpace;
 
@@ -1650,12 +1650,12 @@ y[1]   = [0.1  2.0] * [    ] + [0  0] * [    ]
 
   equation
     y = der(u);
-    annotation(defaultComponentName = "der1", 
-      Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+    annotation(defaultComponentName = "der1",
+      Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
       graphics = {Text(
-      extent = {{-96, 28}, {94, -24}}, 
-      textString = "der()", 
-      textColor = {0, 0, 127})}), 
+      extent = {{-96, 28}, {94, -24}},
+      textString = "der()",
+      textColor = {0, 0, 127})}),
       Documentation(info = "<html>
 <p>
 定义输出值y是输入值u的导数。
@@ -1668,7 +1668,7 @@ Modelica翻译器必须对输入值u进行求导。
 </html>"));
   end Der;
 
-  block LowpassButterworth 
+  block LowpassButterworth
     "输出通过任意阶低通Butterworth滤波器滤波的输入信号"
 
     import Modelica.Blocks.Types.Init;
@@ -1678,27 +1678,27 @@ Modelica翻译器必须对输入值u进行求导。
 
     parameter Integer n(min = 1) = 2 "滤波器阶数";
     parameter SI.Frequency f(start = 1) "截止频率";
-    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit 
+    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit
       "初始化类型(1：无初始化，2：稳态初始化，3：初始状态初始化，4：初始输出值初始化)" 
-      annotation(Evaluate = true, 
+      annotation(Evaluate = true,
       Dialog(group = "初始化"));
-    parameter Real x1_start[m] = zeros(m) 
+    parameter Real x1_start[m] = zeros(m)
       "状态1的初始值或猜测值(der(x1)=x2)" 
       annotation(Dialog(group = "初始化"));
     parameter Real x2_start[m] = zeros(m) "状态2的初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
-    parameter Real xr_start = 0.0 
+    parameter Real xr_start = 0.0
       "奇数阶低通Butterworth滤波器的实数极点的初始值或猜测值，否则为空值" 
       annotation(Dialog(group = "初始化"));
-    parameter Real y_start = 0.0 
+    parameter Real y_start = 0.0
       "输出的初始值是可能稳态下的状态值。)" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
 
-    output Real x1[m](start = x1_start) 
+    output Real x1[m](start = x1_start)
       "二阶滤波器的状态1(der(x1) = x2)";
     output Real x2[m](start = x2_start) "二阶滤波器的状态2";
-    output Real xr(start = xr_start) 
+    output Real xr(start = xr_start)
       "实数极点状态下的奇数阶，否则为空值";
   protected
     parameter Integer m = integer(n / 2);
@@ -1773,33 +1773,33 @@ Modelica翻译器必须对输入值u进行求导。
     end if;
     annotation(
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{-79.5584, 91.817}, {-87.5584, 69.817}, {-71.5584, 69.817}, {-79.5584, 91.817}}), 
-      Line(origin = {-1.939, -1.816}, 
-      points = {{81.939, 36.056}, {65.362, 36.056}, {14.39, -26.199}, {-29.966, 113.485}, {-65.374, -61.217}, {-78.061, -78.184}}, 
-      color = {0, 0, 127}, 
-      smooth = Smooth.Bezier), 
-      Line(points = {{-90.9779, -80.7697}, {81.0221, -80.7697}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{91.3375, -79.8233}, {69.3375, -71.8233}, {69.3375, -87.8233}, {91.3375, -79.8233}}), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{-45.1735, -68.0}, {92.0, -11.47}}, 
-      textString = "LowpassButterworthFilter"), 
-      Text(extent = {{8.0, -146.0}, {8.0, -106.0}}, 
-      textString = "f=%f"), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{-2.0, 48.0}, {94.0, 94.0}}, 
-      textString = "%n")}), 
+      Line(points = {{-80.0, 78.0}, {-80.0, -90.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-79.5584, 91.817}, {-87.5584, 69.817}, {-71.5584, 69.817}, {-79.5584, 91.817}}),
+      Line(origin = {-1.939, -1.816},
+      points = {{81.939, 36.056}, {65.362, 36.056}, {14.39, -26.199}, {-29.966, 113.485}, {-65.374, -61.217}, {-78.061, -78.184}},
+      color = {0, 0, 127},
+      smooth = Smooth.Bezier),
+      Line(points = {{-90.9779, -80.7697}, {81.0221, -80.7697}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{91.3375, -79.8233}, {69.3375, -71.8233}, {69.3375, -87.8233}, {91.3375, -79.8233}}),
+      Text(textColor = {192, 192, 192},
+      extent = {{-45.1735, -68.0}, {92.0, -11.47}},
+      textString = "LowpassButterworthFilter"),
+      Text(extent = {{8.0, -146.0}, {8.0, -106.0}},
+      textString = "f=%f"),
+      Text(textColor = {192, 192, 192},
+      extent = {{-2.0, 48.0}, {94.0, 94.0}},
+      textString = "%n")}),
       Documentation(info="<html><p>
 <span style=\"color: rgb(51, 51, 51);\">该模块定义了输入 u 和输出 y 之间的传递函数为具有巴特沃斯特性和截止频率 f 的 n 阶低通滤波器。它通过一系列二阶滤波器和一个一阶滤波器实现。巴特沃斯滤波器的特点是，在截止频率 f 处的幅度为 1/sqrt(2) (= 3 dB)，即它们始终是“归一化”的。不同阶数的巴特沃斯滤波器的阶跃响应如下一图所示：</span>
 </p>
@@ -1816,22 +1816,22 @@ Modelica翻译器必须对输入值u进行求导。
     extends Modelica.Blocks.Interfaces.SISO;
     parameter Integer n = 2 "滤波器阶数";
     parameter SI.Frequency f(start = 1) "截止频率";
-    parameter Boolean normalized = true 
+    parameter Boolean normalized = true
       "如果截止频率处的振幅为3dB，则输出true；否则输出未修改滤波器";
-    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit 
+    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.NoInit
       "初始化类型(1：无初始化，2：稳态初始化，3：初始状态初始化，4：初始输出值初始化)" 
-      annotation(Evaluate = true, 
+      annotation(Evaluate = true,
       Dialog(group = "初始化"));
     parameter Real x_start[n] = zeros(n) "状态的初始值或猜测值" 
       annotation(Dialog(group = "初始化"));
-    parameter Real y_start = 0.0 
+    parameter Real y_start = 0.0
       "输出初始值(其余状态为稳态)" 
-      annotation(Dialog(enable = initType == Init.InitialOutput, group = 
+      annotation(Dialog(enable = initType == Init.InitialOutput, group =
       "初始化"));
 
     output Real x[n](start = x_start) "滤波器隐状态变量";
   protected
-    parameter Real alpha = if normalized then sqrt(2 ^ (1 / n) - 1) else 1.0 
+    parameter Real alpha = if normalized then sqrt(2 ^ (1 / n) - 1) else 1.0
       "归一化滤波器的频率校正系数";
     parameter Real w = 2 * Modelica.Constants.pi * f / alpha;
   initial equation
@@ -1851,33 +1851,33 @@ Modelica翻译器必须对输入值u进行求导。
     y = x[n];
     annotation(
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-80.6897, 77.6256}, {-80.6897, -90.3744}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{-79.7044, 90.6305}, {-87.7044, 68.6305}, {-71.7044, 68.6305}, {-79.7044, 90.6305}}), 
-      Line(points = {{-90.0, -80.0}, {82.0, -80.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{0.0, -60.0}, {60.0, 0.0}}, 
-      textString = "PTn"), 
-      Line(origin = {-17.976, -6.521}, 
-      points = {{96.962, 55.158}, {16.42, 50.489}, {-18.988, 18.583}, {-32.024, -53.479}, {-62.024, -73.479}}, 
-      color = {0, 0, 127}, 
-      smooth = Smooth.Bezier), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{-70.0, 48.0}, {26.0, 94.0}}, 
-      textString = "%n"), 
-      Text(extent = {{8.0, -146.0}, {8.0, -106.0}}, 
-      textString = "f=%f")}), 
+      Line(points = {{-80.6897, 77.6256}, {-80.6897, -90.3744}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-79.7044, 90.6305}, {-87.7044, 68.6305}, {-71.7044, 68.6305}, {-79.7044, 90.6305}}),
+      Line(points = {{-90.0, -80.0}, {82.0, -80.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}),
+      Text(textColor = {192, 192, 192},
+      extent = {{0.0, -60.0}, {60.0, 0.0}},
+      textString = "PTn"),
+      Line(origin = {-17.976, -6.521},
+      points = {{96.962, 55.158}, {16.42, 50.489}, {-18.988, 18.583}, {-32.024, -53.479}, {-62.024, -73.479}},
+      color = {0, 0, 127},
+      smooth = Smooth.Bezier),
+      Text(textColor = {192, 192, 192},
+      extent = {{-70.0, 48.0}, {26.0, 94.0}},
+      textString = "%n"),
+      Text(extent = {{8.0, -146.0}, {8.0, -106.0}},
+      textString = "f=%f")}),
       Documentation(info="<html><p>
 <span style=\"color: rgb(51, 51, 51);\">该模块定义了输入 u 和输出 y 之间的传递函数为具有临界阻尼特性和截止频率 f 的 n 阶滤波器。它通过一系列一阶滤波器实现。此滤波器类型特别适用于滤波逆模型的输入，因为该滤波器不会引入任何暂态响应。</span>
 </p>
@@ -1908,30 +1908,30 @@ y = ------------- * u
 </html>"  ));
   end CriticalDamping;
 
-  block Filter 
+  block Filter
     "连续的低通、高通、带通或带阻IIR滤波器的类型是分别为临界阻尼、贝塞尔、巴特沃斯和切比雪夫"
     import Modelica.Blocks.Continuous.Internal;
 
     extends Modelica.Blocks.Interfaces.SISO;
 
-    parameter Modelica.Blocks.Types.AnalogFilter analogFilter = Modelica.Blocks.Types.AnalogFilter.CriticalDamping 
+    parameter Modelica.Blocks.Types.AnalogFilter analogFilter = Modelica.Blocks.Types.AnalogFilter.CriticalDamping
       "模拟滤波器特性(临界阻尼/贝塞尔/巴特沃斯/切比雪夫)";
-    parameter Modelica.Blocks.Types.FilterType filterType = Modelica.Blocks.Types.FilterType.LowPass 
+    parameter Modelica.Blocks.Types.FilterType filterType = Modelica.Blocks.Types.FilterType.LowPass
       "滤波器类型(低通/高通/带通/带阻)";
     parameter Integer order(min = 1) = 2 "滤波器阶数";
     parameter SI.Frequency f_cut "截止频率";
-    parameter Real gain = 1.0 
+    parameter Real gain = 1.0
       "增益(=零频率响应的振幅)";
-    parameter Real A_ripple(unit = "dB") = 0.5 
+    parameter Real A_ripple(unit = "dB") = 0.5
       "切比雪夫滤波器的通带波纹(否则不使用)；要求大于0" 
       annotation(Dialog(enable = analogFilter == Modelica.Blocks.Types.AnalogFilter.ChebyshevI));
-    parameter SI.Frequency f_min = 0 
+    parameter SI.Frequency f_min = 0
       "带通/带阻滤波器的频带范围是f_min(增益为-3dB)到f_cut(增益为-3dB)" 
       annotation(Dialog(enable = filterType == Modelica.Blocks.Types.FilterType.BandPass or 
       filterType == Modelica.Blocks.Types.FilterType.BandStop));
-    parameter Boolean normalized = true 
+    parameter Boolean normalized = true
       "如果在f_cut频率处的振幅为-3dB，则为true，否则保持滤波器不变";
-    parameter Modelica.Blocks.Types.Init init = Modelica.Blocks.Types.Init.SteadyState 
+    parameter Modelica.Blocks.Types.Init init = Modelica.Blocks.Types.Init.SteadyState
       "初始化类型(无初始化/稳态初始化/初始状态初始化/初始输出值初始化)" 
       annotation(Evaluate = true, Dialog(tab = "高级"));
     final parameter Integer nx = if filterType == Modelica.Blocks.Types.FilterType.LowPass or 
@@ -1941,7 +1941,7 @@ y = ------------- * u
       annotation(Dialog(tab = "高级"));
     parameter Real y_start = 0 "输出值初始化" 
       annotation(Dialog(tab = "高级"));
-    parameter Real u_nominal = 1.0 
+    parameter Real u_nominal = 1.0
       "输入的标称值(用于缩放状态)" 
       annotation(Dialog(tab = "高级"));
     Modelica.Blocks.Interfaces.RealOutput x[nx] "滤波器状态";
@@ -2084,32 +2084,32 @@ y = ------------- * u
 
     annotation(
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-80.0, 80.0}, {-80.0, -88.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{-80.0, 92.0}, {-88.0, 70.0}, {-72.0, 70.0}, {-80.0, 92.0}}), 
-      Line(points = {{-90.0, -78.0}, {82.0, -78.0}}, 
-      color = {192, 192, 192}), 
-      Polygon(lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid, 
-      points = {{90.0, -78.0}, {68.0, -70.0}, {68.0, -86.0}, {90.0, -78.0}}), 
-      Text(textColor = {192, 192, 192}, 
-      extent = {{-66.0, 52.0}, {88.0, 90.0}}, 
-      textString = "%order"), 
+      Line(points = {{-80.0, 80.0}, {-80.0, -88.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-80.0, 92.0}, {-88.0, 70.0}, {-72.0, 70.0}, {-80.0, 92.0}}),
+      Line(points = {{-90.0, -78.0}, {82.0, -78.0}},
+      color = {192, 192, 192}),
+      Polygon(lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{90.0, -78.0}, {68.0, -70.0}, {68.0, -86.0}, {90.0, -78.0}}),
+      Text(textColor = {192, 192, 192},
+      extent = {{-66.0, 52.0}, {88.0, 90.0}},
+      textString = "%order"),
       Text(
-      extent = {{-138.0, -140.0}, {162.0, -110.0}}, 
-      textString = "f_cut=%f_cut"), 
-      Rectangle(lineColor = {160, 160, 164}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Backward, 
-      extent = {{-80.0, -78.0}, {22.0, 10.0}}), 
-      Line(origin = {3.333, -6.667}, points = {{-83.333, 34.667}, {24.667, 34.667}, {42.667, -71.333}}, color = {0, 0, 127}, smooth = Smooth.Bezier)}), 
+      extent = {{-138.0, -140.0}, {162.0, -110.0}},
+      textString = "f_cut=%f_cut"),
+      Rectangle(lineColor = {160, 160, 164},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Backward,
+      extent = {{-80.0, -78.0}, {22.0, 10.0}}),
+      Line(origin = {3.333, -6.667}, points = {{-83.333, 34.667}, {24.667, 34.667}, {42.667, -71.333}}, color = {0, 0, 127}, smooth = Smooth.Bezier)}),
       Documentation(info = "<html><p>
 本模块可模拟各种类型的过滤器：<strong>低通、高通、带通和带阻滤波器</strong>
 </p>
@@ -2190,8 +2190,8 @@ project.
     parameter Boolean useSupport(start = false) = false "使用外部给定逻辑值" annotation(Evaluate = true, choices(checkBox = true));
 
     Modelica.Blocks.Interfaces.BooleanInput sampleSupport if useSupport 
-      annotation(Placement(transformation(origin = {0.378379, -120.703}, 
-      extent = {{-20, -20}, {20, 20}}, 
+      annotation(Placement(transformation(origin = {0.378379, -120.703},
+      extent = {{-20, -20}, {20, 20}},
       rotation = 90)));
 
   protected
@@ -2209,50 +2209,50 @@ project.
 
     annotation(
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Ellipse(lineColor = {0, 0, 127}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid, 
-      extent = {{25.0, -10.0}, {45.0, 10.0}}), 
-      Line(points = {{-100.0, 0.0}, {-45.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Line(points = {{45.0, 0.0}, {100.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Line(points = {{-35.0, 0.0}, {30.0, 35.0}}, 
-      color = {0, 0, 127}), 
-      Ellipse(lineColor = {0, 0, 127}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid, 
+      Ellipse(lineColor = {0, 0, 127},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid,
+      extent = {{25.0, -10.0}, {45.0, 10.0}}),
+      Line(points = {{-100.0, 0.0}, {-45.0, 0.0}},
+      color = {0, 0, 127}),
+      Line(points = {{45.0, 0.0}, {100.0, 0.0}},
+      color = {0, 0, 127}),
+      Line(points = {{-35.0, 0.0}, {30.0, 35.0}},
+      color = {0, 0, 127}),
+      Ellipse(lineColor = {0, 0, 127},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid,
       extent = {{-45.0, -10.0}, {-25.0, 10.0}})}) );
 
   end TimeSampler;
 
-  package Internal 
+  package Internal
     "用户不应直接使用的内部实用功能和程序模块"
     extends Modelica.Icons.InternalPackage;
-    package Filter 
+    package Filter
       "不应直接使用的过滤器内部实用功能"
       extends Modelica.Icons.InternalPackage;
-      package base 
+      package base
         "截止频率为1rad/s的原型低通滤波器(其他滤波器由这些基本滤波器变换而来)"
         extends Modelica.Icons.InternalPackage;
-        function CriticalDamping 
+        function CriticalDamping
           "返回CriticalDamping过滤器(=低通滤波器，w_cut=1rad/s)的基本滤波器系数"
           extends Modelica.Icons.Function;
 
           input Integer order(min = 1) "滤波器阶数";
-          input Boolean normalized = true 
+          input Boolean normalized = true
             "=true，当f_cut处的振幅=-3db，否则不修改滤波器";
 
           output Real cr[order] "实极点系数";
         protected
           Real alpha = 1.0 "频率修正系数";
           Real alpha2 "= alpha*alpha";
-          Real den1[order] 
+          Real den1[order]
             "[p]一阶多项式分母系数(a*p+1)";
-          Real den2[0,2] 
+          Real den2[0,2]
             "[p^2，p]二阶多项式分母系数(b*p^2+a*p+1)";
           Real c0[0] "共轭复极时的s^0项系数";
           Real c1[0] "共轭复极时的s^1项系数";
@@ -2270,34 +2270,34 @@ project.
           end for;
 
           // 确定s的最大幂等于1的多项式
-          (cr,c0,c1) := 
+          (cr,c0,c1) :=
             Modelica.Blocks.Continuous.Internal.Filter.Utilities.toHighestPowerOne(
             den1, den2);
         end CriticalDamping;
 
-        function Bessel 
+        function Bessel
           "返回贝塞尔滤波器的基滤波器系数(=低通滤波器，w_cut=1rad/s)"
           extends Modelica.Icons.Function;
 
           input Integer order(min = 1) "滤波器系数";
-          input Boolean normalized = true 
+          input Boolean normalized = true
             "=true，当f_cut处的振幅=-3db，否则不修改滤波器";
 
           output Real cr[mod(order, 2)] "实极点系数";
-          output Real c0[integer(order / 2)] 
+          output Real c0[integer(order / 2)]
             "共轭复极时的s^0项系数";
-          output Real c1[integer(order / 2)] 
+          output Real c1[integer(order / 2)]
             "共轭复极时的s^1项系数";
         protected
           Real alpha = 1.0 "频率修正系数";
           Real alpha2 "= alpha*alpha";
-          Real den1[size(cr, 1)] 
+          Real den1[size(cr, 1)]
             "[p]一阶多项式分母系数(a*p+1)";
-          Real den2[size(c0, 1),2] 
+          Real den2[size(c0, 1),2]
             "[p^2，p]二阶多项式分母系数(b*p^2+a*p+1)";
           annotation();
         algorithm
-          (den1,den2,alpha) := 
+          (den1,den2,alpha) :=
             Modelica.Blocks.Continuous.Internal.Filter.Utilities.BesselBaseCoefficients(
             order);
           if not normalized then
@@ -2312,31 +2312,31 @@ project.
           end if;
 
           // 确定s的最大幂等于1的多项式
-          (cr,c0,c1) := 
+          (cr,c0,c1) :=
             Modelica.Blocks.Continuous.Internal.Filter.Utilities.toHighestPowerOne(
             den1, den2);
         end Bessel;
 
-        function Butterworth 
+        function Butterworth
           "返回巴特沃斯滤波器的基础滤波器系数（= 截止频率 w_cut = 1 rad/s 的低通滤波器）"
           import Modelica.Constants.pi;
           extends Modelica.Icons.Function;
 
           input Integer order(min = 1) "滤波器阶数";
-          input Boolean normalized = true 
+          input Boolean normalized = true
             "=true，当f_cut处的振幅=-3db，否则不修改滤波器";
 
           output Real cr[mod(order, 2)] "实极点系数";
-          output Real c0[integer(order / 2)] 
+          output Real c0[integer(order / 2)]
             "共轭复极时的s^0项系数";
-          output Real c1[integer(order / 2)] 
+          output Real c1[integer(order / 2)]
             "共轭复极时的s^1项系数";
         protected
           Real alpha = 1.0 "频率修正系数";
           Real alpha2 "= alpha*alpha";
-          Real den1[size(cr, 1)] 
+          Real den1[size(cr, 1)]
             "[p]一阶多项式分母系数(a*p+1)";
-          Real den2[size(c0, 1),2] 
+          Real den2[size(c0, 1),2]
             "[p^2，p]二阶多项式分母系数(b*p^2+a*p+1)";
           annotation(Documentation(info="<html><p>
 <br>
@@ -2380,12 +2380,12 @@ project.
 
 
 
-                 c1) := 
+                 c1) :=
             Modelica.Blocks.Continuous.Internal.Filter.Utilities.toHighestPowerOne(
             den1, den2);
         end Butterworth;
 
-        function ChebyshevI 
+        function ChebyshevI
           "返回切比雪夫I型滤波器的基滤波器系数(=w_cut=1rad/s的低通滤波器)"
           import Modelica.Math.asinh;
           import Modelica.Constants.pi;
@@ -2394,22 +2394,22 @@ project.
 
           input Integer order(min = 1) "滤波器阶数";
           input Real A_ripple = 0.5 "通带纹波[dB]";
-          input Boolean normalized = true 
+          input Boolean normalized = true
             "=true，当f_cut处的振幅=-3db，否则不修改滤波器";
 
           output Real cr[mod(order, 2)] "实极点系数";
-          output Real c0[integer(order / 2)] 
+          output Real c0[integer(order / 2)]
             "共轭复极时的s^0项系数";
-          output Real c1[integer(order / 2)] 
+          output Real c1[integer(order / 2)]
             "共轭复极时的s^1项系数";
         protected
           Real epsilon;
           Real fac;
           Real alpha = 1.0 "频率修正系数";
           Real alpha2 "= alpha*alpha";
-          Real den1[size(cr, 1)] 
+          Real den1[size(cr, 1)]
             "[p]分母一阶多项式系数(a*p+1)";
-          Real den2[size(c0, 1),2] 
+          Real den2[size(c0, 1),2]
             "[p^2,p]分母二阶多项式系数(b*p^2+a*p+1)";
           annotation(Documentation(info="<html><p>
 <br>
@@ -2437,7 +2437,7 @@ project.
           的变换，使滤波器传递函数在截止频率处的幅值为-3db
           */
           if normalized then
-            alpha := 
+            alpha :=
               Modelica.Blocks.Continuous.Internal.Filter.Utilities.normalizationFactor(
               den1, den2);
             alpha2 := alpha * alpha;
@@ -2449,7 +2449,7 @@ project.
           end if;
 
           // 求s的最高次幂等于1的多项式
-          (cr,c0,c1) := 
+          (cr,c0,c1) :=
             Modelica.Blocks.Continuous.Internal.Filter.Utilities.toHighestPowerOne(
             den1, den2);
         end ChebyshevI;
@@ -2458,26 +2458,26 @@ project.
 
       package coefficients "滤波器系数"
         extends Modelica.Icons.InternalPackage;
-        function lowPass 
+        function lowPass
           "返回给定截止频率下的低通滤波器系数"
           import Modelica.Constants.pi;
           extends Modelica.Icons.Function;
 
           input Real cr_in[:] "实极点系数";
-          input Real c0_in[:] 
+          input Real c0_in[:]
             "共轭复极时的s^0项系数";
-          input Real c1_in[size(c0_in, 1)] 
+          input Real c1_in[size(c0_in, 1)]
             "共轭复极时的s^1项系数";
           input SI.Frequency f_cut "截止频率";
 
           output Real cr[size(cr_in, 1)] "实极点系数";
-          output Real c0[size(c0_in, 1)] 
+          output Real c0[size(c0_in, 1)]
             "共轭复极时的s^0项系数";
-          output Real c1[size(c0_in, 1)] 
+          output Real c1[size(c0_in, 1)]
             "共轭复极时的s^1项系数";
 
         protected
-          SI.AngularVelocity w_cut = 2 * pi * f_cut 
+          SI.AngularVelocity w_cut = 2 * pi * f_cut
             "截止角频率";
           Real w_cut2 = w_cut * w_cut;
           annotation();
@@ -2495,26 +2495,26 @@ project.
 
         end lowPass;
 
-        function highPass 
+        function highPass
           "返回给定截止频率下的高通滤波器系数"
           import Modelica.Constants.pi;
           extends Modelica.Icons.Function;
 
           input Real cr_in[:] "实极点系数";
-          input Real c0_in[:] 
+          input Real c0_in[:]
             "共轭复极时的s^0项系数";
-          input Real c1_in[size(c0_in, 1)] 
+          input Real c1_in[size(c0_in, 1)]
             "共轭复极时的s^1项系数";
           input SI.Frequency f_cut "截止频率";
 
           output Real cr[size(cr_in, 1)] "实极点系数";
-          output Real c0[size(c0_in, 1)] 
+          output Real c0[size(c0_in, 1)]
             "共轭复极时的s^0项系数";
-          output Real c1[size(c0_in, 1)] 
+          output Real c1[size(c0_in, 1)]
             "共轭复极时的s^1项系数";
 
         protected
-          SI.AngularVelocity w_cut = 2 * pi * f_cut 
+          SI.AngularVelocity w_cut = 2 * pi * f_cut
             "截止角频率";
           Real w_cut2 = w_cut * w_cut;
           annotation();
@@ -2546,29 +2546,29 @@ project.
 
         end highPass;
 
-        function bandPass 
+        function bandPass
           "返回给定截止频率下的带通滤波器系数"
           import Modelica.Constants.pi;
           extends Modelica.Icons.Function;
 
           input Real cr_in[:] "实极点系数";
-          input Real c0_in[:] 
+          input Real c0_in[:]
             "共轭复极时的s^0项系数";
-          input Real c1_in[size(c0_in, 1)] 
+          input Real c1_in[size(c0_in, 1)]
             "共轭复极时的s^1项系数";
-          input SI.Frequency f_min 
+          input SI.Frequency f_min
             "带通滤波器的频带为f_min(A=-3db)...f_max(A=-3db)";
           input SI.Frequency f_max "最大频带频率";
 
           output Real cr[0] "实极点系数";
-          output Real c0[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real c0[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "共轭复极时的s^0项系数";
-          output Real c1[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real c1[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "共轭复极时的s^1项系数";
           output Real cn "PT2项的分母系数";
         protected
           SI.Frequency f0 = sqrt(f_min * f_max);
-          SI.AngularVelocity w_cut = 2 * pi * f0 
+          SI.AngularVelocity w_cut = 2 * pi * f0
             "截止角频率";
           Real w_band = (f_max - f_min) / f0;
           Real w_cut2 = w_cut * w_cut;
@@ -2623,10 +2623,10 @@ project.
           end for;
 
           for i in 1:size(c1_in, 1) loop
-            alpha := 
+            alpha :=
               Modelica.Blocks.Continuous.Internal.Filter.Utilities.bandPassAlpha(
-              c1_in[i], 
-              c0_in[i], 
+              c1_in[i],
+              c0_in[i],
               w_band);
             c := c1_in[i] * w_band / (alpha + 1 / alpha);
             j := size(cr_in, 1) + 2 * i - 1;
@@ -2640,28 +2640,28 @@ project.
 
         end bandPass;
 
-        function bandStop 
+        function bandStop
           "返回给定截止频率下的带截止滤波器系数"
           import Modelica.Constants.pi;
           extends Modelica.Icons.Function;
 
           input Real cr_in[:] "实极点系数";
-          input Real c0_in[:] 
+          input Real c0_in[:]
             "共轭复极时的s^0项系数";
-          input Real c1_in[size(c0_in, 1)] 
+          input Real c1_in[size(c0_in, 1)]
             "共轭复极时的s^1项系数";
-          input SI.Frequency f_min 
+          input SI.Frequency f_min
             "带阻滤波器的频带为f_min(A=-3db)...f_max(A=-3db)";
           input SI.Frequency f_max "最大频带频率";
 
           output Real cr[0] "实极点系数";
-          output Real c0[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real c0[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "共轭复极时的s^0项系数";
-          output Real c1[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real c1[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "共轭复极时的s^1项系数";
         protected
           SI.Frequency f0 = sqrt(f_min * f_max);
-          SI.AngularVelocity w_cut = 2 * pi * f0 
+          SI.AngularVelocity w_cut = 2 * pi * f0
             "截止角频率";
           Real w_band = (f_max - f_min) / f0;
           Real w_cut2 = w_cut * w_cut;
@@ -2738,10 +2738,10 @@ project.
 
           for i in 1:size(c1_in, 1) loop
             ww := w_band / c0_in[i];
-            alpha := 
+            alpha :=
               Modelica.Blocks.Continuous.Internal.Filter.Utilities.bandPassAlpha(
-              c1_in[i], 
-              c0_in[i], 
+              c1_in[i],
+              c0_in[i],
               ww);
             c := c1_in[i] * ww / (alpha + 1 / alpha);
             j := size(cr_in, 1) + 2 * i - 1;
@@ -2757,21 +2757,21 @@ project.
 
       package roots "根据模块实现的需要，返回滤波器的根和增益"
         extends Modelica.Icons.InternalPackage;
-        function lowPass 
+        function lowPass
           "根据给定的截止频率，按模块需要返回低通滤波器根数"
           extends Modelica.Icons.Function;
 
           input Real cr_in[:] "基准滤波器的实极点系数";
-          input Real c0_in[:] 
+          input Real c0_in[:]
             "共轭复极时的s^0项系数";
-          input Real c1_in[size(c0_in, 1)] 
+          input Real c1_in[size(c0_in, 1)]
             "共轭复极时的s^1项系数";
           input SI.Frequency f_cut "截止频率";
 
           output Real r[size(cr_in, 1)] "实特征值";
-          output Real a[size(c0_in, 1)] 
+          output Real a[size(c0_in, 1)]
             "复共轭特征值的实部";
-          output Real b[size(c0_in, 1)] 
+          output Real b[size(c0_in, 1)]
             "复共轭特征值的虚部";
           output Real ku[size(c0_in, 1)] "输入增益";
         protected
@@ -2859,21 +2859,21 @@ x1(s=0) = -ku*a/(a^2 + b^2)*u
 </html>"        ));
         end lowPass;
 
-        function highPass 
+        function highPass
           "根据给定的截止频率，按需要返回模块的高通滤波器根数"
           extends Modelica.Icons.Function;
 
           input Real cr_in[:] "基准滤波器的实极点系数";
-          input Real c0_in[:] 
+          input Real c0_in[:]
             "共轭复极时的s^0项系数";
-          input Real c1_in[size(c0_in, 1)] 
+          input Real c1_in[size(c0_in, 1)]
             "共轭复极时的s^1项系数";
           input SI.Frequency f_cut "截止频率";
 
           output Real r[size(cr_in, 1)] "实特征值";
-          output Real a[size(c0_in, 1)] 
+          output Real a[size(c0_in, 1)]
             "复共轭特征值的实部";
-          output Real b[size(c0_in, 1)] 
+          output Real b[size(c0_in, 1)]
             "复共轭特征值的虚部";
           output Real ku[size(c0_in, 1)] "输入项的增益";
           output Real k1[size(c0_in, 1)] "y=k1*x1+k2*x+u的增益";
@@ -2980,27 +2980,27 @@ y = s^2/(s^2 + c1*s + c0)*u  -&gt;  a = -c1/2
 </html>"  ));
         end highPass;
 
-        function bandPass 
+        function bandPass
           "根据给定的截止频率，按需要返回模块的带通滤波器根数"
           extends Modelica.Icons.Function;
 
           input Real cr_in[:] "基准滤波器的实极点系数";
-          input Real c0_in[:] 
+          input Real c0_in[:]
             "共轭复极时的基准滤波器s^0项的系数";
-          input Real c1_in[size(c0_in, 1)] 
+          input Real c1_in[size(c0_in, 1)]
             "共轭复极时的基准滤波器s^1项的系数";
-          input SI.Frequency f_min 
+          input SI.Frequency f_min
             "带通滤波器的频带为f_min(A=-3db)...f_max(A=-3db)";
           input SI.Frequency f_max "最大频带频率";
 
-          output Real a[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real a[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "复共轭特征值的实部";
-          output Real b[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real b[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "复共轭特征值的虚部";
           output Real ku[size(cr_in, 1) + 2 * size(c0_in, 1)] "输入项的增益";
-          output Real k1[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real k1[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "y=k1*x1+k2*x的增益";
-          output Real k2[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real k2[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "y=k1*x1+k2*x的增益";
         protected
           Real cr[0];
@@ -3016,8 +3016,8 @@ y = s^2/(s^2 + c1*s + c0)*u  -&gt;  a = -c1/2
           for i in 1:size(a, 1) loop
             a[i] := -c1[i] / 2;
             bb := c0[i] - a[i] * a[i];
-            assert(bb >= 0, "\n不能使用带通滤波器，因为变换的结果是\n" + 
-              "系统没有共轭复极\n" + 
+            assert(bb >= 0, "\n不能使用带通滤波器，因为变换的结果是\n" +
+              "系统没有共轭复极\n" +
               "尝试使用其他模拟滤波器进行带通\n");
             b[i] := sqrt(bb);
             ku[i] := c0[i] / b[i];
@@ -3076,27 +3076,27 @@ b：虚部特征值
 </html>"                ));
         end bandPass;
 
-        function bandStop 
+        function bandStop
           "根据给定的截止频率，按需要返回模块的带阻滤波器根数"
           extends Modelica.Icons.Function;
 
           input Real cr_in[:] "基准滤波器的实极点系数";
-          input Real c0_in[:] 
+          input Real c0_in[:]
             "共轭复极时的基准滤波器s^0项的系数";
-          input Real c1_in[size(c0_in, 1)] 
+          input Real c1_in[size(c0_in, 1)]
             "共轭复极时的基准滤波器s^1项的系数";
-          input SI.Frequency f_min 
+          input SI.Frequency f_min
             "带阻滤波器的频带为f_min(A=-3db)...f_max(A=-3db)";
           input SI.Frequency f_max "最大频带频率";
 
-          output Real a[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real a[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "复共轭特征值的实部";
-          output Real b[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real b[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "复共轭特征值的虚部";
           output Real ku[size(cr_in, 1) + 2 * size(c0_in, 1)] "输入项增益";
-          output Real k1[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real k1[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "y=k1*x1+k2*x的增益";
-          output Real k2[size(cr_in, 1) + 2 * size(c0_in, 1)] 
+          output Real k2[size(cr_in, 1) + 2 * size(c0_in, 1)]
             "y=k1*x1+k2*x的增益";
         protected
           Real cr[0];
@@ -3112,8 +3112,8 @@ b：虚部特征值
           for i in 1:size(a, 1) loop
             a[i] := -c1[i] / 2;
             bb := c0[i] - a[i] * a[i];
-            assert(bb >= 0, "\n不可能使用带阻滤波器，因为变换的结果是\n" + 
-              "没有共轭复极的系统\n" + 
+            assert(bb >= 0, "\n不可能使用带阻滤波器，因为变换的结果是\n" +
+              "没有共轭复极的系统\n" +
               "尝试使用另一个模拟滤波器作为带阻滤波器\n");
             b[i] := sqrt(bb);
             ku[i] := c0[i] / b[i];
@@ -3179,15 +3179,15 @@ b：特征值虚部
 
       package Utilities "用于滤波计算的实用功能"
         extends Modelica.Icons.InternalPackage;
-        function BesselBaseCoefficients 
+        function BesselBaseCoefficients
           "归一化低通贝塞尔滤波器的返回系数(=截止频率为1rad/s时的增益降低3dB)"
           extends Modelica.Icons.Function;
 
           import Modelica.Utilities.Streams;
           input Integer order "1...41范围内滤波器的阶次";
-          output Real c1[mod(order, 2)] 
+          output Real c1[mod(order, 2)]
             "[p]贝塞尔分母多项式系数(a*p+1)";
-          output Real c2[integer(order / 2),2] 
+          output Real c2[integer(order / 2),2]
             "[p^2,p]贝塞尔分母多项式系数(b2*p^2+b1*p+1)";
           output Real alpha "归一化系数";
         algorithm
@@ -4135,7 +4135,7 @@ b：特征值虚部
             c2[20,1] := 0.3757210572966463e-1;
             c2[20,2] := 0.5341611499960143e-1;
           else
-            Streams.error("输入参数顺序(= " + String(order) + 
+            Streams.error("输入参数顺序(= " + String(order) +
               ")不在1...41的范围内");
           end if;
 
@@ -4210,18 +4210,18 @@ k=0</code></pre><p>
 </html>"  ));
         end BesselBaseCoefficients;
 
-        function toHighestPowerOne 
+        function toHighestPowerOne
           "将滤波器转换为s的最大幂等于1的形式"
           extends Modelica.Icons.Function;
 
           input Real den1[:] "[s]多项式系数(den1[i]*s+1)";
-          input Real den2[:,2] 
+          input Real den2[:,2]
             "[s^2,s]多项式系数(den2[i,1]*s^2+den2[i,2]*s+1)";
-          output Real cr[size(den1, 1)] 
+          output Real cr[size(den1, 1)]
             "[s^0]多项式系数cr[i]*(s+1/cr[i])";
-          output Real c0[size(den2, 1)] 
+          output Real c0[size(den2, 1)]
             "[s^0]多项式系数(s^2+(den2[i,2]/den2[i,1])*s+(1/den2[i,1]))";
-          output Real c1[size(den2, 1)] 
+          output Real c1[size(den2, 1)]
             "[s^1]多项式系数(s^2+(den2[i,2]/den2[i,1])*s+(1/den2[i,1]))";
           annotation();
         algorithm
@@ -4235,15 +4235,15 @@ k=0</code></pre><p>
           end for;
         end toHighestPowerOne;
 
-        function normalizationFactor 
+        function normalizationFactor
           "计算低通滤波器的修正系数，使截止频率处的振幅为-3db(=10^(-3/20)=0.70794...)"
           extends Modelica.Icons.Function;
 
           import Modelica.Utilities.Streams;
 
-          input Real c1[:] 
+          input Real c1[:]
             "[p]多项式分母系数(c1[i}*p+1)";
-          input Real c2[:,2] 
+          input Real c2[:,2]
             "[p^2,p]多项式分母系数(c2[i,1]*p^2+c2[i,2]*p+1)";
           output Real alpha "修正系数(用alpha*p代替p)";
         protected
@@ -4251,17 +4251,17 @@ k=0</code></pre><p>
           Real alpha_max;
 
         public
-          function normalizationResidue 
+          function normalizationResidue
             "修正系数计算的残差"
             extends Modelica.Icons.Function;
-            input Real c1[:] 
+            input Real c1[:]
               "[p]多项式分母系数(c1[i]*p+1)";
-            input Real c2[:,2] 
+            input Real c2[:,2]
               "[p^2,p]多项式分母系数(c2[i,1]*p^2+c2[i,2]*p+1)";
             input Real alpha;
             output Real residue;
           protected
-            constant Real beta = 10 ^ (-3 / 20) 
+            constant Real beta = 10 ^ (-3 / 20)
               "所需的-3db振幅，即-3db=20*log(beta)";
             Real cc1;
             Real cc2;
@@ -4289,9 +4289,9 @@ k=0</code></pre><p>
         protected
           function findInterval "查找根的区间"
             extends Modelica.Icons.Function;
-            input Real c1[:] 
+            input Real c1[:]
               "[p]多项式分母系数(a*p+1)";
-            input Real c2[:,2] 
+            input Real c2[:,2]
               "[p^2,p]多项式分母系数(b*p^2+a*p+1)";
             output Real alpha_min;
             output Real alpha_max;
@@ -4314,18 +4314,18 @@ k=0</code></pre><p>
           end findInterval;
 
         public
-          function solveOneNonlinearEquation 
+          function solveOneNonlinearEquation
             "Solve f(u) = 0;f(u_min)和f(u_max)的符号必须不同"
             extends Modelica.Icons.Function;
             import Modelica.Utilities.Streams.error;
 
-            input Real c1[:] 
+            input Real c1[:]
               "[p]多项式分母系数(c1[i]*p+1)";
-            input Real c2[:,2] 
+            input Real c2[:,2]
               "[p^2,p]多项式分母系数(c2[i,1]*p^2+c2[i,2]*p+1)";
             input Real u_min "搜索区间的下限";
             input Real u_max "搜索区间的上限";
-            input Real tolerance = 100 * Modelica.Constants.eps 
+            input Real tolerance = 100 * Modelica.Constants.eps
               "解的相对容差u";
             output Real u "使f(u)=0的自变量值";
 
@@ -4353,11 +4353,11 @@ k=0</code></pre><p>
             fc := fb;
             if fa > 0.0 and fb > 0.0 or fa < 0.0 and fb < 0.0 then
               error(
-                "求解OneNonlinearEquation(..)的参数u_min和u_max\n" + 
-                "不括弧单一非线性方程的根：\n" + 
-                "  u_min  = " + String(u_min) + "\n" + "  u_max  = " + String(u_max) 
-                + "\n" + "  fa = f(u_min) = " + String(fa) + "\n" + 
-                "  fb = f(u_max) = " + String(fb) + "\n" + 
+                "求解OneNonlinearEquation(..)的参数u_min和u_max\n" +
+                "不括弧单一非线性方程的根：\n" +
+                "  u_min  = " + String(u_min) + "\n" + "  u_max  = " + String(u_max)
+                + "\n" + "  fa = f(u_min) = " + String(fa) + "\n" +
+                "  fb = f(u_max) = " + String(fb) + "\n" +
                 "fa和fb的符号必须相反，而事实并非如此");
             end if;
 
@@ -4457,9 +4457,9 @@ k=0</code></pre><p>
 
           // 计算alpha，使abs(G(p))=-3db
           alpha := solveOneNonlinearEquation(
-            c1, 
-            c2, 
-            alpha_min, 
+            c1,
+            c2,
+            alpha_min,
             alpha_max);
         end normalizationFactor;
 
@@ -4469,7 +4469,7 @@ k=0</code></pre><p>
           import Modelica;
           input Real a "s^1系数";
           input Real b "s^0系数";
-          input Modelica.Units.SI.AngularVelocity w 
+          input Modelica.Units.SI.AngularVelocity w
             "带宽角频率";
           output Real alpha "基于Alpha的带通";
 
@@ -4493,7 +4493,7 @@ k=0</code></pre><p>
           end residue;
 
         public
-          function solveOneNonlinearEquation 
+          function solveOneNonlinearEquation
             "Solve f(u) = 0;f(u_min)和f(u_max)必须有不同的符号"
             extends Modelica.Icons.Function;
             import Modelica.Utilities.Streams.error;
@@ -4503,7 +4503,7 @@ k=0</code></pre><p>
             input Real ww;
             input Real u_min "搜索区间的下限";
             input Real u_max "搜索区间的上限";
-            input Real tolerance = 100 * Modelica.Constants.eps 
+            input Real tolerance = 100 * Modelica.Constants.eps
               "解的相对容差u";
             output Real u "使f(u)=0的自变量值";
 
@@ -4531,11 +4531,11 @@ k=0</code></pre><p>
             fc := fb;
             if fa > 0.0 and fb > 0.0 or fa < 0.0 and fb < 0.0 then
               error(
-                "求解OneNonlinearEquation(..)的参数u_min和u_max\n" + 
-                "不括弧单一非线性方程的根\n" + 
-                "  u_min  = " + String(u_min) + "\n" + "  u_max  = " + String(u_max) 
-                + "\n" + "  fa = f(u_min) = " + String(fa) + "\n" + 
-                "  fb = f(u_max) = " + String(fb) + "\n" + 
+                "求解OneNonlinearEquation(..)的参数u_min和u_max\n" +
+                "不括弧单一非线性方程的根\n" +
+                "  u_min  = " + String(u_min) + "\n" + "  u_max  = " + String(u_max)
+                + "\n" + "  fa = f(u_min) = " + String(fa) + "\n" +
+                "  fb = f(u_max) = " + String(fb) + "\n" +
                 "fa和fb的符号必须相反，而事实并非如此");
             end if;
 
@@ -4725,9 +4725,9 @@ der(y) = k*u;</code></pre><p>
 <br>
 </p>
 </html>"), Icon(graphics = {Line(
-    origin = {0.061, 4.184}, 
-    points = {{81.939, 36.056}, {65.362, 36.056}, {14.39, -26.199}, {-29.966, 
-    113.485}, {-65.374, -61.217}, {-78.061, -78.184}}, 
-    color = {95, 95, 95}, 
+    origin = {0.061, 4.184},
+    points = {{81.939, 36.056}, {65.362, 36.056}, {14.39, -26.199}, {-29.966,
+    113.485}, {-65.374, -61.217}, {-78.061, -78.184}},
+    color = {95, 95, 95},
     smooth = Smooth.Bezier)}));
 end Continuous;

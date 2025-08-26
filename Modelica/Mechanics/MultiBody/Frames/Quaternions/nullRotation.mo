@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
-function nullRotation 
+function nullRotation
   "返回一个不旋转frame的四元数方向对象"
   extends Modelica.Icons.Function;
-  output Quaternions.Orientation Q 
+  output Quaternions.Orientation Q
     "将坐标系 1旋转到坐标系 2的四元数方向对象";
 algorithm
   Q := {0,0,0,1};

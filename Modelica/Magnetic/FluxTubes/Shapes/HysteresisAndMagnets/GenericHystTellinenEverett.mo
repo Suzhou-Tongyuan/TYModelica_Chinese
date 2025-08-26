@@ -1,16 +1,16 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
-model GenericHystTellinenEverett 
+model GenericHystTellinenEverett
   "基于泰利宁模型和埃弗雷特函数 [Ya89] 的具有铁磁滞后的通用磁通管)"
 
-  parameter FluxTubes.Material.HysteresisEverettParameter.BaseData mat= 
-      FluxTubes.Material.HysteresisEverettParameter.BaseData() 
+  parameter FluxTubes.Material.HysteresisEverettParameter.BaseData mat=
+      FluxTubes.Material.HysteresisEverettParameter.BaseData()
     "材料特性" 
     annotation (Dialog(group="Material"), choicesAllMatching=true);
   extends BaseClasses.GenericHysteresisTellinen(      mu0=mat.K*mu_0, sigma=mat.sigma);
 
 protected
   parameter SI.MagneticFluxDensity Js = 0.5 * FluxTubes.Utilities.everett(
-                                                     mat.Hsat,-mat.Hsat, mat, false) 
+                                                     mat.Hsat,-mat.Hsat, mat, false)
     "饱和偏振";
   //最终参数 Real mu0 = mat.K * mu_0;
   parameter SI.MagneticFluxDensity eps=mat.M/1000;
@@ -25,7 +25,7 @@ protected
   constant SI.MagneticFluxDensity unitT = 1;
 
 equation
-  H_lim = if Hstat<-mat.Hsat then -mat.Hsat elseif Hstat>mat.Hsat then mat.Hsat else Hstat;
+  H_lim = if Hstat<-mat.Hsat then -mat.Hsat else if Hstat>mat.Hsat then mat.Hsat else Hstat;
   H2 = H_lim-mat.Hc;
   H3 = -H_lim-mat.Hc;
 
@@ -36,9 +36,9 @@ equation
   hystF =  Js + unitT*(P4*P2-P3*P1) + mu0*Hstat + eps/2;
 
   annotation (defaultComponentName="core", Icon(graphics={Text(
-          extent={{40,0},{40,-30}}, 
-          textColor={255,128,0}, 
-          textString="TE")}), 
+          extent={{40,0},{40,-30}},
+          textColor={255,128,0},
+          textString="TE")}),
     Documentation(info="<html>
 
 <p>

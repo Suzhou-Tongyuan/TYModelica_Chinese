@@ -1,4 +1,5 @@
 ﻿package Modelica "Modelica标准库-Version4.0.0.TY.1.Beta-中文试用版"
+  parameter Boolean MediumTransfer = true "等于true时，可实现介质传递";
   extends Modelica.Icons.Package;
   package UsersGuide "用户指南"
     extends Modelica.Icons.Information;
@@ -102,7 +103,7 @@ Modelica标准库由以下主要子模型库组成：
  <li>不可压缩的基于表格的液体(h = h(T)等)。</li>
  <li>可压缩液体。</li>
  <li>干空气和湿空气。</li>
- <li>高精度水模型（IF97）。</li>
+ <li>高精度水模型(IF97)。</li>
  </ul>
  </td>
 </tr>
@@ -180,7 +181,7 @@ Matrices.eigenValues(A);
       extends Modelica.Icons.Information;
 
       annotation(Documentation(info = "<html><p>
-<span style=\"color: rgb(51, 51, 51);\">Modelica标准库定义了各个领域中最重要的基本连接器。如果可能，用户应该使用这些连接器，以便Modelica标准库中的组件与其他库中的组件可以无障碍地组合。以下是定义的基本连接器（势变量、流变量和stream变量的含义在下面的“连接器方程”部分中解释）：</span>
+<span style=\"color: rgb(51, 51, 51);\">Modelica标准库定义了各个领域中最重要的基本连接器。如果可能，用户应该使用这些连接器，以便Modelica标准库中的组件与其他库中的组件可以无障碍地组合。以下是定义的基本连接器(势变量、流变量和stream变量的含义在下面的\"连接器方程\"部分中解释)：</span>
 </p>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"1\">
 <tr><td><strong>domain</strong></td>
@@ -358,7 +359,7 @@ end Plug;
 <br>
 </p>
 <p>
-<span style=\"color: rgb(51, 51, 51);\">通过一个 connect(..) 方程，可以连接两个插头（因此也隐式地连接相位和接地引脚），或者将一个引脚连接器直接连接到插头连接器的相位或接地部分，例如 \"connect(resistor.p, plug.phase)\"。</span>
+<span style=\"color: rgb(51, 51, 51);\">通过一个 connect(..) 方程，可以连接两个插头(因此也隐式地连接相位和接地引脚)，或者将一个引脚连接器直接连接到插头连接器的相位或接地部分，例如 \"connect(resistor.p, plug.phase)\"。</span>
 </p>
 <h4>连接器方程</h4><p>
 上述列出的连接器变量基本上是通过以下策略确定的：
@@ -366,9 +367,9 @@ end Plug;
 <ol><li>
 陈述特定物理领域体积的相关平衡方程和边界条件。</li>
 <li>
-通过取无穷小体积的极限（例如，热领域：温度相同，热流率总和为零）简化第（1）步中的平衡方程和边界条件。</li>
+通过取无穷小体积的极限(例如，热领域：温度相同，热流率总和为零)简化第(1)步中的平衡方程和边界条件。</li>
 <li>
-在连接器中使用第（2）步平衡方程和边界条件所需的变量，并选择适当的Modelica<strong>前缀</strong>，以便这些方程通过Modelica连接语义生成。</li>
+在连接器中使用第(2)步平衡方程和边界条件所需的变量，并选择适当的Modelica<strong>前缀</strong>，以便这些方程通过Modelica连接语义生成。</li>
 </ol><p>
 通过一个例子说明Modelica连接语义：三个连接器c1、c2、c3的定义
 </p>
@@ -996,12 +997,12 @@ and
 
 <ol>
 <li> 无附加小节的一般信息，说明类的工作原理</li>
-<li> <strong>语法</strong>（仅适用于函数）：显示带有最小和完整输入参数的函数调用语法</li>
-<li> <strong>实施</strong>（可选）：解释如何实施</li>
-<li> <strong>局限性</strong>（可选）：解释组件的局限性</li>
-<li> <strong>注释</strong>（可选）：如果需要/有用</li>
-<li> <strong>示例</strong>（可选）：如果需要/有用</li>
-<li> <strong>致谢</strong>（可选）：如果需要</li>
+<li> <strong>语法</strong>(仅适用于函数)：显示带有最小和完整输入参数的函数调用语法</li>
+<li> <strong>实施</strong>(可选)：解释如何实施</li>
+<li> <strong>局限性</strong>(可选)：解释组件的局限性</li>
+<li> <strong>注释</strong>(可选)：如果需要/有用</li>
+<li> <strong>示例</strong>(可选)：如果需要/有用</li>
+<li> <strong>致谢</strong>(可选)：如果需要</li>
 <li> <strong>另见</strong>：显示相关模型的超链接</li>
 <li> <strong>修订历史</strong>(可选)：如果需要/打算为一个包/模型提供修订历史，
 则应将修订历史放在<code>annotation(Documentation(revisions=&quot;...&quot;));</code>中</li>
@@ -1186,13 +1187,13 @@ Modelica类的 <a href=\"http://www.w3c.org/\">HTML</a> 文档。
           extends Modelica.Icons.Information;
 
           annotation(Documentation(info = "<html><ol><li>
-<strong>类名和实例名</strong>通常用大小写书写 字母，例如“<span style=\"color: rgb(51, 51, 51);\">ElectricCurrent</span>”。<span style=\"color: rgb(51, 51, 51);\">下划线可以用于名称中。然而，需要注意的是，名称中的最后一个下划线可能表示后续字符将作为下标显示</span>。 例如：\"pin_a\" 可渲染为 \"pin<sub>a</sub>\"；.</li>
+<strong>类名和实例名</strong>通常用大小写书写 字母，例如\"<span style=\"color: rgb(51, 51, 51);\">ElectricCurrent</span>\"。<span style=\"color: rgb(51, 51, 51);\">下划线可以用于名称中。然而，需要注意的是，名称中的最后一个下划线可能表示后续字符将作为下标显示</span>。 例如：\"pin_a\" 可渲染为 \"pin<sub>a</sub>\"；.</li>
 <li>
 <strong>类名</strong>总是以大写字母开头、 函数除外，函数以小写字母开头.</li>
 <li>
-<strong>实例名</strong>，即<span style=\"color: rgb(51, 51, 51);\">组件实例和变量的名称（常量除外）通常以小写字母开头，只有少数情况下例外（如温度变量用T表示）。</span></li>
+<strong>实例名</strong>，即<span style=\"color: rgb(51, 51, 51);\">组件实例和变量的名称(常量除外)通常以小写字母开头，只有少数情况下例外(如温度变量用T表示)。</span></li>
 <li>
-<strong>常量名</strong>，即<span style=\"color: rgb(51, 51, 51);\">以 \\\\\\\\\\\\\\'constant\\\\\\\\\\\\\\' 前缀声明的变量名称遵循常规命名约定（= 大小写字母），通常以大写字母开头，例如：UniformGravity, SteadyState。</span></li>
+<strong>常量名</strong>，即<span style=\"color: rgb(51, 51, 51);\">以 \\\\\\\\\\\\\\'constant\\\\\\\\\\\\\\' 前缀声明的变量名称遵循常规命名约定(= 大小写字母)，通常以大写字母开头，例如：UniformGravity, SteadyState。</span></li>
 <li>
 具有相同声明的域的两个<strong>连接器</strong> 不同的图标通常用 <code>_a</code>, <code>_b</code> 或者<code>_p</code>, <code>_n</code>, 例如, <code>Flange_a</code>, <code>Flange_b</code>, <code>HeatPort_a</code>, <code>HeatPort_b</code>.</li>
 <li>
@@ -1390,7 +1391,7 @@ Modelica类的 <a href=\"http://www.w3c.org/\">HTML</a> 文档。
 
 <li> 建模者希望快速使用一个模型，例如：
   <ul>
-  <li> 自动检查模型是否仍然能翻译和/或模拟（在库发生某些变化后），</li>
+  <li> 自动检查模型是否仍然能翻译和/或模拟(在库发生某些变化后)，</li>
   <li> 通过拖放组件快速演示一个库，</li>
   <li> 实现一个简单的测试模型，以更好地理解所需的组件。</li>
   </ul>
@@ -1715,7 +1716,7 @@ email: <a href=\"mailto:author2@example.org\">author2@example.org</a><br>
 
 <p>这段代码出现在下面的\"Revisions\"一节中。</p>
 
-</html>"      , 
+</html>"      ,
             revisions = "<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr>
@@ -2236,10 +2237,93 @@ annotation(version      = \"4.0.1\",
 </ul>
 </html>"              ));
       end VersionManagement;
-      class Version_4_0_0_TY_1_build_2 "Version 4.0.0.TY.1 build 2 (December 30, 2024)"
+      class Version_4_0_0_TY_1_build_6 "版本4.0.0.TY.1 build 6(2025年7月30日)"
         extends Modelica.Icons.ReleaseNotes;
 
-        annotation (Documentation(info="<html><p>
+        annotation(Documentation(info = "<html><p>
+<span style=\"font-size: 22px;\"><strong>版本说明</strong></span>
+</p>
+<p>
+<span style=\"font-size: 19px;\"><strong>Version4.0.0.TY.1 build 6，2025.07.30</strong></span>
+</p>
+<p>
+<br>1.新增1个Blocks模型，具体见下表：<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"100\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"293.36\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">功能描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Cot</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Cot</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">用于计算输入值的余切值</td></tr></tbody></table><p>
+<br>2.修改时间相关表格模型的描述说明，具体见下表：<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"196.24\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"381.96\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化说明</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTimeTable</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Sources.CombiTimeTable</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">修改对MAT文件支持版本的说明</td></tr></tbody></table><p>
+<br>
+</p>
+<p>
+3.优化Modelica.Blocks.Math.RealFFTWithOutput模块存在的性能问题
+</p>
+<p>
+<br>
+</p>
+</html>"            ));
+      end Version_4_0_0_TY_1_build_6;
+      class Version_4_0_0_TY_1_build_5 "版本4.0.0.TY.1 build 5(2025年6月30日)"
+        extends Modelica.Icons.ReleaseNotes;
+
+        annotation(Documentation(info = "<html><p>
+<span style=\"font-size: 22px;\"><strong>版本说明</strong></span>
+</p>
+<p>
+<span style=\"font-size: 19px;\"><strong>Version4.0.0.TY.1 build 5，2025.06.30</strong></span>
+</p>
+<p>
+<br>1.新增2个Blocks模型，具体见下表：<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"100\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"293.36\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">功能描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">IntegerVectorOutput</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Interfaces.IntegerVectorOutput</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">用于矢量接口的整型数据输出连接器</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">BooleanVectorOutput</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Interfaces.BooleanVectorOutput</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">用于矢量接口的布尔型数据输出连接器</td></tr></tbody></table><p>
+<br>2.优化多路复用、解复用、相加等Blocks模型，具体见下表：<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"196.24\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"381.96\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化说明</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Multiplex</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.Multiplex</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Multiplex2</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.Multiplex2</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Multiplex3</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.Multiplex3</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Multiplex4</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.Multiplex4</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Multiplex5</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.Multiplex5</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Multiplex6</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.Multiplex6</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DeMultiplex</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.DeMultiplex</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DeMultiplex2</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.DeMultiplex2</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DeMultiplex3</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.DeMultiplex3</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DeMultiplex4</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.DeMultiplex4</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DeMultiplex5</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.DeMultiplex5</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DeMultiplex6</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Routing.DeMultiplex6</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增整数和布尔接口</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Add</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Add</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化图形界面</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Add3</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Add3</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化图形界面</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Product</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Product</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化图形界面</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Division</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Division</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化图形界面</td></tr></tbody></table><p>
+<br>
+</p>
+</html>"      ));
+      end Version_4_0_0_TY_1_build_5;
+      class Version_4_0_0_TY_1_build_4 "版本4.0.0.TY.1 build 4(2025年5月30日)"
+        extends Modelica.Icons.ReleaseNotes;
+
+        annotation(Documentation(info = "<html><p>
+<span style=\"font-size: 22px;\"><strong>版本说明</strong></span>
+</p>
+<p>
+<span style=\"font-size: 19px;\"><strong>Version4.0.0.TY.1 build 4，2025.05.30</strong></span>
+</p>
+<p>
+<br>1.同元基础库新增介质传递功能<br><br>2.优化插值表、PIDs等模型，具体见下表：<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"196.24\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"381.96\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化说明</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTimeTable</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Sources.CombiTimeTable</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增支持读取csv文件的说明</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTable1Ds</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.CombiTable1Ds</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增支持读取csv文件的说明</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTable1Dv</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.CombiTable1Dv</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增支持读取csv文件的说明</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTable2Ds</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.CombiTable2Ds</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增支持读取csv文件的说明</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTable2Dv</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.CombiTable2Dv</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增支持读取csv文件的说明</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">PIDs</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Continuous.PIDs</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">修改参数Nd，避免出现除零错误</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable2D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable2D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化表数据的内存排布与解析</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable3D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable3D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化表数据的内存排布与解析</td></tr></tbody></table><p>
+<br>
+</p>
+</html>"      ));
+      end Version_4_0_0_TY_1_build_4;
+      class Version_4_0_0_TY_1_build_3 "版本4.0.0.TY.1 build 3(2025年3月30日)"
+        extends Modelica.Icons.ReleaseNotes;
+
+        annotation(Documentation(info = "<html><p>
+<span style=\"font-size: 22px;\"><strong>版本说明</strong></span>
+</p>
+<p>
+<span style=\"font-size: 19px;\"><strong>Version4.0.0.TY.1 build 3，2025.03.30</strong></span>
+</p>
+<p>
+<br>1.新增1个Blocks模型，具体见下表：<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"100\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"293.36\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">功能描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">TransferFunctionDia</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Discrete.TransferFunctionDia</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">离散传递函数块，动态图标显示</td></tr></tbody></table><p>
+<br>2.优化插值表模型，具体见下表：<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"196.24\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"381.96\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化说明</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTimeTable</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Sources.CombiTimeTable</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增支持读取csv文件</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTable1Ds</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.CombiTable1Ds</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增支持读取csv文件</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTable1Dv</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.CombiTable1Dv</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增支持读取csv文件</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTable2Ds</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.CombiTable2Ds</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增支持读取csv文件</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTable2Dv</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.CombiTable2Dv</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">新增支持读取csv文件</td></tr></tbody></table><p>
+<br>
+</p>
+</html>"      ));
+      end Version_4_0_0_TY_1_build_3;
+      class Version_4_0_0_TY_1_build_2 "版本4.0.0.TY.1 build 2(2024年12月30日)"
+        extends Modelica.Icons.ReleaseNotes;
+
+        annotation(Documentation(info = "<html><p>
 <span style=\"font-size: 22px;\"><strong>版本说明</strong></span>
 </p>
 <p>
@@ -2248,7 +2332,7 @@ annotation(version      = \"4.0.1\",
 <p>
 1.新增9个Blocks模型，具体见下表：
 </p>
-<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"137.44\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"293.36\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">功能描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">TriangleWave</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Sources.TriangleWave</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">产生三角波信号</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">UnitDelayImproved</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Discrete.UnitDelayImproved</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">单位延迟改进优化版本</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Relay</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Nonlinear.Relay</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">两个常量之间切换输出</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">SlidingModeController</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Discrete.SlidingModeController</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">滑模控制器块实现基于迟滞的滑模控制（SMC）</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">TimeSampler</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Continuous.TimeSampler</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">根据仿真时间进行输入信号保持</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Pow</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Pow</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">幂函数块</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable1D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable1D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">一维查找表</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable2D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable2D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">二维查找表</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable3D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable3D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">三维查找表</td></tr></tbody></table><p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"137.44\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"293.36\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">功能描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">TriangleWave</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Sources.TriangleWave</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">产生三角波信号</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">UnitDelayImproved</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Discrete.UnitDelayImproved</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">单位延迟改进优化版本</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Relay</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Nonlinear.Relay</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">两个常量之间切换输出</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">SlidingModeController</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Discrete.SlidingModeController</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">滑模控制器块实现基于迟滞的滑模控制(SMC)</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">TimeSampler</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Continuous.TimeSampler</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">根据仿真时间进行输入信号保持</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Pow</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Pow</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">幂函数块</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable1D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable1D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">一维查找表</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable2D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable2D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">二维查找表</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable3D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable3D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">三维查找表</td></tr></tbody></table><p>
 2.新增6个Blocks案例模型，具体见下表：
 </p>
 <table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"223.56\">案例名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"359.08\">案例路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">案例描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">SlidingModeControllerExample</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Examples.SlidingModeControllerExample</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">滑膜控制例子展示</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">TimeSamplerTest</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Examples.TimeSamplerTest</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">信号保持例子</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable1D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Examples.LookupTable1D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">一维查找表案例，其中断点和表格数据来自模型参数</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable1D_File</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Examples.LookupTable1D_File</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">一维查找表案例，其中断点和表格数据来自文件读取</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable2D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Examples.LookupTable2D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">二维查找表案例，其中断点和表格数据来自模型参数</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable3D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Examples.LookupTable3D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">三维查找表案例，其中断点和表格数据来自模型参数</td></tr></tbody></table><p>
@@ -2257,12 +2341,12 @@ annotation(version      = \"4.0.1\",
 <table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"196.24\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"381.96\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化说明</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">PIDs</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Continuous.PIDs</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">增加模式选择</td></tr></tbody></table><p>
 <br>
 </p>
-</html>"                ));
+</html>"      ));
       end Version_4_0_0_TY_1_build_2;
-      class Version_4_0_0_TY_1_build_1 "Version 4.0.0.TY.1 build 1 (September 30, 2024)"
+      class Version_4_0_0_TY_1_build_1 "版本4.0.0.TY.1 build 1(2024年9月30日)"
         extends Modelica.Icons.ReleaseNotes;
 
-        annotation(Documentation(info = "<html><p>
+        annotation(Documentation(info="<html><p>
 <span style=\"font-size: 22px;\"><strong>版本说明</strong></span>
 </p>
 <p>
@@ -2280,9 +2364,12 @@ annotation(version      = \"4.0.1\",
 <table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"211\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"650.12\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化说明</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">PartialStep</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.StateGraph.Interfaces.PartialStep</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">解决状态机模型的版本兼容性问题</td></tr></tbody></table><p>
 4.修复Modelica.Icons图标等兼容问题。
 </p>
-</html>"            ));
+<p>
+<br>
+</p>
+</html>"      ));
       end Version_4_0_0_TY_1_build_1;
-      class Version_4_0_0_TY_1 "Version 4.0.0.TY.1 (June 30, 2024)"
+      class Version_4_0_0_TY_1 "版本4.0.0.TY.1(2024年6月30日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html><p>
@@ -2307,14 +2394,14 @@ annotation(version      = \"4.0.1\",
 <p>
 同元基础模型库Versions 4.0.0.TY.1相对于Modelica标准库4.0.0的更新如下：<br>表1 新增模型列表:
 </p>
-<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"470\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"434.6\">模型描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Blocks</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Sources.Clock(隐藏)</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">生成当前时间信号</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.Internal.readTimeTableData</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">从文本或MATLAB文件中读取表格数据</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.Internal.readTable1DData</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">从文本或MATLAB文件中读取表格数据</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.Internal.readTable2DData</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">从文本或MATLAB文件中读取表格数据</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Types.InitPlD</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">定义PID和LimPID模块初始化的枚举</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Electrical</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Electrical.Analog,Basic.HeatingResistor</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">温度相关电阻</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Electrical.Analog.ldeal.ldealGyrator</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">理想回转器</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Electrical.MultiPhase (隐藏)</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">用于单相或多相电气元件的库</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Mechanics</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Mechanics.MultiBody.Types.Init</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">初始化类型</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Mechanics.MultiBody.lcons.Motorlcon</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">电机图标</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Fluid</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Fluid.Examples.ControlledTankSystem.Utilities.RadioButton</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">按下时将其输出设置为“true”,并在\"reset”元素变为“true”时重置的按钮</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Media</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Media.Common.OneNonlinearEquation</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">以可靠有效的方式确定一个未知数的非线性代数方程的解，没有导数</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Math</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Vectors.Utilities.householderVector</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">计算一个归一化向量以将向量a映射到向量b上</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Vectors.Utilities.householderReflection</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">在具有正交向量u的平面上反映向量a</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.LAPACK.dgegv</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">计算(A，B)系统的广义特征值</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.LAPACK.dgelsx</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">计算秩缺陷A的实线性最小二乘问题的最小范数解</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.LAPACK.dgelsx vec</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">计算秩缺陷A的实线性最小二乘问题的最小范数解</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.LAPACK.dgeqpf</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">计算具有列透视的正方形或矩形矩阵A的QR因式分解</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.Utilities.householderReflection</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">在具有正交向量u的平面上映射矩阵A的每个向量</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.Utilities.householderSimilarityTransformation</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">相似性变换</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.tempinterpol1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">线性插值</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.tempInterpol2</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">矢量化线性插值</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.lcons</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.lcons.RotationalSensor(隐藏)</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">角度传感器图标</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Slunits(隐藏)</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">单位定义库</td></tr></tbody></table><p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"470\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"434.6\">模型描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Blocks</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Sources.Clock(隐藏)</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">生成当前时间信号</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.Internal.readTimeTableData</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">从文本或MATLAB文件中读取表格数据</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.Internal.readTable1DData</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">从文本或MATLAB文件中读取表格数据</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.Internal.readTable2DData</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">从文本或MATLAB文件中读取表格数据</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Types.InitPlD</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">定义PID和LimPID模块初始化的枚举</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Electrical</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Electrical.Analog,Basic.HeatingResistor</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">温度相关电阻</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Electrical.Analog.ldeal.ldealGyrator</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">理想回转器</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Electrical.MultiPhase (隐藏)</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">用于单相或多相电气元件的库</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Mechanics</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Mechanics.MultiBody.Types.Init</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">初始化类型</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Mechanics.MultiBody.lcons.Motorlcon</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">电机图标</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Fluid</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Fluid.Examples.ControlledTankSystem.Utilities.RadioButton</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">按下时将其输出设置为\"true\",并在\"reset\"元素变为\"true\"时重置的按钮</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Media</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Media.Common.OneNonlinearEquation</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">以可靠有效的方式确定一个未知数的非线性代数方程的解，没有导数</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Math</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Vectors.Utilities.householderVector</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">计算一个归一化向量以将向量a映射到向量b上</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Vectors.Utilities.householderReflection</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">在具有正交向量u的平面上反映向量a</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.LAPACK.dgegv</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">计算(A，B)系统的广义特征值</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.LAPACK.dgelsx</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">计算秩缺陷A的实线性最小二乘问题的最小范数解</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.LAPACK.dgelsx vec</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">计算秩缺陷A的实线性最小二乘问题的最小范数解</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.LAPACK.dgeqpf</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">计算具有列透视的正方形或矩形矩阵A的QR因式分解</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.Utilities.householderReflection</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">在具有正交向量u的平面上映射矩阵A的每个向量</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.Matrices.Utilities.householderSimilarityTransformation</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">相似性变换</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.tempinterpol1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">线性插值</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Math.tempInterpol2</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">矢量化线性插值</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.lcons</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"></td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.lcons.RotationalSensor(隐藏)</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">角度传感器图标</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\"><strong>Modelica.Slunits(隐藏)</strong></td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">单位定义库</td></tr></tbody></table><p>
 
 <br>
 </p>
-</html>"          ));
+</html>"            ));
       end Version_4_0_0_TY_1;
 
-      class Version_4_0_0 "Version 4.0.0 (June 4, 2020)"
+      class Version_4_0_0 "版本4.0.0(2020年6月4日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -2683,10 +2770,10 @@ Modelica版本4.0.0与版本3.2.3之间的确切差异已在<a href=\"modelica:/
 <tr><td>getTime</td>
     <td>只有在为Windows操作系统编译实现源文件(modelicinternal .c)时，才能正确返回月份和年份。这已经被纠正了。</td></tr>
 </table>
-</html>"                  ));
+</html>"                              ));
       end Version_4_0_0;
 
-      class Version_3_2_3 "Version 3.2.3 (January 23, 2019)"
+      class Version_3_2_3 "版本3.2.3(2019年1月23)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -3003,10 +3090,10 @@ Modelica版本4.0.0与版本3.2.3之间的确切差异已在<a href=\"modelica:/
     <td>没有计算函数输出<code>y</code>以产生最小值<code>imin</code>为1的离散均匀分布。这已经被纠正了。</td></tr>
 </table>
 
-</html>"                  ));
+</html>"            ));
       end Version_3_2_3;
 
-      class Version_3_2_2 "Version 3.2.2 (April 3, 2016)"
+      class Version_3_2_2 "版本3.2.2(2016年4月3日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -3042,7 +3129,7 @@ Modelica Specification <strong>3.2 revision 2</strong>.<br>&nbsp;
             <li> 票<a href=\"https://github.com/modelica/ModelicaStandardLibrary/issues/1758\">1758</a>
 说明对
 <a href=\"modelica://Modelica.Fluid.Examples.HeatingSystem\">Modelica.Fluid.Examples.HeatingSystem</a>
-如果设置选项“用于检查Modelica语义的迂腐模式”，则在Dymola 2016中失败。
+如果设置选项\"用于检查Modelica语义的迂腐模式\"，则在Dymola 2016中失败。
 由于以下原因，此问题未在库中修复:<br>
                  Modelica。流体库使用特定模式来定义生成的某些参数
 在参数的循环依赖中，如果只考虑事件信息。
@@ -3122,7 +3209,7 @@ ModelicaMatIO或zlib库。在这种情况下，这些函数的库注释需要是
 
 <ul>
 <li> <strong>Dymola 2017 Beta.1</strong> (Windows 64位，\"Check\"带有迂腐标志，即严格检查
-Modelica合规性，以及“使用仿真检查”)。<br>
+Modelica合规性，以及\"使用仿真检查\")。<br>
      <a href=\"https://github.com/modelica/ModelicaStandardLibrary/issues/1924\">#1924</a>:
      3.2.2+build.0-beta的回归测试。2使用Dymola 2017 Dev 4相对
 3.2.1 +构建。4参考文件<br>
@@ -3407,17 +3494,17 @@ DLR系统动力学与控制研究所)。
 这种改变(尽管形式上不向后兼容)为用户提供了更安全的使用方式。</td></tr>
 </table>
 
-</html>"                  ));
+</html>"            ));
       end Version_3_2_2;
 
-      class Version_3_2_1 "Version 3.2.1 (August 14, 2013)"
+      class Version_3_2_1 "版本3.2.1(2013年8月14日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
 <p>
 版本3.2.1向后兼容版本3.2，即使用
 版本3.0、3.0.1、3.1或3.2也可以在版本3.2.1上运行而不需要任何更改。
-这个版本是一个“清理”，主要强调质量改进和
+这个版本是一个\"清理\"，主要强调质量改进和
 工具兼容。目标就是这样
 <a href=\"https://www.modelica.org/tools\">Modelica tools</a>将支持这个包
 也会用同样的方式来解释。简短的概述:
@@ -3427,7 +3514,7 @@ DLR系统动力学与控制研究所)。
 <li> 这个版本的Modelica包<strong>与</strong>完全兼容
 Modelica Specification <strong>3.2 revision 2</strong>.<br>
 (特别是在Modelica包中使用的一些操作符，
-例如“root”，已在3.2 rev. 2中标准化，
+例如\"root\"，已在3.2 rev. 2中标准化，
 以及供应商特定的注释。此外,
 规范中有模棱两可/不清楚的描述
 纠正/改进。包的一个重要改进
@@ -3737,10 +3824,10 @@ Dymola 2013 FD01(32位)。此外，在OpenModelica中进行了基本检查
                         DerPressureByTemperature</td>
     <td> 新的SI单位类型 </td></tr>
 </table>
-</html>"                  ));
+</html>"            ));
       end Version_3_2_1;
 
-      class Version_3_2 "Version 3.2 (Oct. 25, 2010)"
+      class Version_3_2 "版本3.2(2010年10月25日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -3774,13 +3861,13 @@ Modelica 3.1(例如，具有文件名的文件
 
 <li> 所有的电机都在
 <a href=\"modelica://Modelica.Electrical.Machines\">Machines</a>机器
-库现在有一个“损失”选项卡在参数菜单中可选
+库现在有一个\"损失\"选项卡在参数菜单中可选
 机型损耗如摩擦损耗、定子铁芯损耗等
 或杂散负载损耗。</li>
 
 <li> 所有的电机都在
 <a href=\"modelica://Modelica.Electrical.Machines\">Machines</a>机器
-库现在有一个“powerBalance”结果记录，
+库现在有一个\"powerBalance\"结果记录，
 总结转换功率和损耗。</li>
 </ul>
 
@@ -3904,7 +3991,7 @@ HansJ&uuml; rg Wiesmann。)
 <tr><td colspan=\"2\"><strong>Modelica.UsersGuide</strong></td></tr>
 <tr><td> Conventions
                       </td>
-    <td> 大大改进了Modelica标准库的“约定”。</td></tr>
+    <td> 大大改进了Modelica标准库的\"约定\"。</td></tr>
 
 <tr><td colspan=\"2\"><strong>Modelica.Blocks.Examples</strong></td></tr>
 <tr><td> Filter<br>
@@ -3972,7 +4059,7 @@ HansJ&uuml; rg Wiesmann。)
                       <a href=\"modelica://Modelica.Blocks.Logical\">Logical</a>.
                       新的设计基于connectorSizing注释，它允许
 方便地处理任意数量的输入信号
-(例如，“And”块有1、2、…，N个输入，而不是只有2个输入
+(例如，\"And\"块有1、2、…，N个输入，而不是只有2个输入
 在 <a href=\"modelica://Modelica.Blocks.Logical\">Logical</a> library).
                       此外，图标更小，以便图表区域更小
 更好地利用</td></tr>
@@ -4395,7 +4482,7 @@ Modelica.Math.Matrices)。</td></tr>
 <tr><td> Pulse<br>
                       SawTooth </td>
     <td> 引入了新的参数\"nperiod\"来定义周期的数量
-对于信号类型。默认值是“无限周期”
+对于信号类型。默认值是\"无限周期\"
 (nperiods = 1)。</td></tr>
 <tr><td colspan=\"2\"><strong>Modelica.Electrical.</strong></td></tr>
 <tr><td> Polyphase.*</td>
@@ -4457,7 +4544,7 @@ Modelica。块库:<br>
     <td> 改变了实现方式，使无非线性代数
 如果给定的变量(例如p,T,X)存在，则出现方程系统
 不对应于介质状态(如p,h,X)。这是
-通过使用适当的“setState_xxx”调用来计算
+通过使用适当的\"setState_xxx\"调用来计算
 从给定变量得到的中等状态。如果一个非线性方程
 类中的专用处理程序解决
 setState_xxx(..)函数，但在模型中，该方程组为
@@ -4496,8 +4583,8 @@ Modelica.Blocks库:<br>
 <tr><td colspan=\"2\"><strong>Modelica.Electrical.Digital.Delay.</strong></td></tr>
 <tr><td> InertialDelaySensitive </td>
     <td> 以决定是否上升延迟(tLH)或
-使用下降延迟(tHL)，即“前一个”值
-必须使用输出y，而不是参数的“前一个”值
+使用下降延迟(tHL)，即\"前一个\"值
+必须使用输出y，而不是参数的\"前一个\"值
 输入x (delayType = delayTable[y_old, x])
 delayType = delayTable[x_old, x])。这已经被纠正了。</td></tr>
 <tr><td colspan=\"2\"><strong>Modelica.Mechanics.MultiBody.Parts.</strong></td></tr>
@@ -4530,7 +4617,7 @@ delayType = delayTable[x_old, x])。这已经被纠正了。</td></tr>
 <tr><td> Gearbox</td>
     <td> 如果useSupport=false，则内部LossyGear的支撑法兰
 模型已连接到(禁用)支持连接器。结果，
-LossyGear是“自由浮动的”。这已经被纠正了。</td></tr>
+LossyGear是\"自由浮动的\"。这已经被纠正了。</td></tr>
 
 <tr><td colspan=\"2\"><strong>Modelica.Fluid.Pipes.</strong></td></tr>
 <tr><td> DynamicPipe</td>
@@ -4571,7 +4658,7 @@ LossyGear是“自由浮动的”。这已经被纠正了。</td></tr>
                         dtrsyl</td>
     <td> 用于指定矩阵前导维的整数输入有一个下界1(例如，lda=max(1,n))
 为了避免在空矩阵的情况下出现不正确的值(例如，lda=0)。<br>
-指示LAPACK例程成功调用的Integer变量“info”已被转换为输出，其中它曾是受保护的变量。</td></tr>
+指示LAPACK例程成功调用的Integer变量\"info\"已被转换为输出，其中它曾是受保护的变量。</td></tr>
 </table>
 
 <p><br>
@@ -4582,7 +4669,7 @@ LossyGear是“自由浮动的”。这已经被纠正了。</td></tr>
 <tr><td colspan=\"2\"><strong>Modelica</strong></td></tr>
 <tr><td>
     <a href=\"https://github.com/modelica/ModelicaStandardLibrary/issues/155\">#155</a></td>
-    <td>错误地使用了“fillColor”和“fillPattern”注释</td>
+    <td>错误地使用了\"fillColor\"和\"fillPattern\"注释</td>
 </tr>
 
 <tr><td>
@@ -4597,7 +4684,7 @@ LossyGear是“自由浮动的”。这已经被纠正了。</td></tr>
 
 <tr><td>
     <a href=\"https://github.com/modelica/ModelicaStandardLibrary/issues/218\">#218</a></td>
-    <td>将“Modelica://”- uri替换为“Modelica://”- uri</td>
+    <td>将\"Modelica://\"- uri替换为\"Modelica://\"- uri</td>
 </tr>
 
 <tr><td>
@@ -4984,7 +5071,7 @@ Note:
 </html>"            ));
       end Version_3_2;
 
-      class Version_3_1 "Version 3.1 (August 14, 2009)"
+      class Version_3_1 "版本3.1(2009年8月14日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -5276,7 +5363,7 @@ Modelica 3.0和3.1中。</td></tr>
 </html>"            ));
       end Version_3_1;
 
-      class Version_3_0_1 "Version 3.0.1 (Jan. 27, 2009)"
+      class Version_3_0_1 "版本3.0.1(2009年1月27日)"
         extends Modelica.Icons.ReleaseNotes;
 
          annotation (Documentation(info="<html>
@@ -5290,20 +5377,20 @@ Modelica协会将Modelica License 1.1更改为新许可证文本的原因如下
 <ol>
 <li> 许可方和被许可方的权利更加明确。例如：
          <ul>
-         <li> 许可的作品（原始作品）可以在开源和商业软件中以未修改的形式使用（被许可方不能更改许可证，且作品必须免费提供）</li>
+         <li> 许可的作品(原始作品)可以在开源和商业软件中以未修改的形式使用(被许可方不能更改许可证，且作品必须免费提供)</li>
          <li> 如果从根据Modelica License 2许可证发布的Modelica包中复制一个模型组件，并进行修改以适应建模者的需求，
-              那么修改后的结果可以根据任何许可证进行授权（包括商业许可证）。</li>
+              那么修改后的结果可以根据任何许可证进行授权(包括商业许可证)。</li>
          <li> 实际上，无法将Modelica License 2下的Modelica包的许可证更改为其他许可证。
               也就是说，被许可方不能通过添加材料或更改类来更改许可证，
-              因此作品必须保持在Modelica License 2下（更准确地说，如果被许可方对“整体上代表原创作品”的原始作品进行了修改，
+              因此作品必须保持在Modelica License 2下(更准确地说，如果被许可方对\"整体上代表原创作品\"的原始作品进行了修改，
               他/她可以将许可证更改为其他许可证。
-              然而，对于一个Modelica包来说，这通常需要大量的更改，通常是不现实的）。</li>
+              然而，对于一个Modelica包来说，这通常需要大量的更改，通常是不现实的)。</li>
          <li> 如果使用根据Modelica License 2许可证发布的Modelica包构建了可执行文件，
-              则该可执行文件可以根据任何许可证进行授权（包括商业许可证）。</li>
+              则该可执行文件可以根据任何许可证进行授权(包括商业许可证)。</li>
          </ul>
          我们希望这种在开源贡献者、商业Modelica环境和Modelica用户之间的妥协，
          能够激励更多的人在Modelica License 2下自由地提供他们的Modelica包。<br><br></li>
-<li> 还增加了几个新条款，以使对许可方和被许可方的法律诉讼更不可能发生（从而进一步降低小风险）。</li>
+<li> 还增加了几个新条款，以使对许可方和被许可方的法律诉讼更不可能发生(从而进一步降低小风险)。</li>
 </ol>
 
 <p><br>
@@ -5399,10 +5486,10 @@ Modelica协会将Modelica License 1.1更改为新许可证文本的原因如下
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\" style=\"border-collapse:collapse;\">
 <tr><td colspan=\"2\"><strong>Mechanics.MultiBody.Forces</strong></td></tr>
 <tr><td> WorldTorque </td>
-          <td> 参数\"ResolveInFrame\"没有被传播，因此始终使用默认值（在世界坐标系中求解），与该参数的设置无关。</td>
+          <td> 参数\"ResolveInFrame\"没有被传播，因此始终使用默认值(在世界坐标系中求解)，与该参数的设置无关。</td>
 </tr>
 <tr><td> WorldForceAndTorque </td>
-          <td> 参数\"ResolveInFrame\"没有被传播，因此始终使用默认值（在世界坐标系中求解），与该参数的设置无关。<br>
+          <td> 参数\"ResolveInFrame\"没有被传播，因此始终使用默认值(在世界坐标系中求解)，与该参数的设置无关。<br>
 此外，内部使用了WorldTorque而不是Internal.BasicWorldTorque，因此worldTorque的可视化被执行了两次。</td>
 </tr>
 <tr><td colspan=\"2\"><strong>Mechanics.MultiBody.Sensors</strong></td></tr>
@@ -5483,10 +5570,10 @@ Modelica协会将Modelica License 1.1更改为新许可证文本的原因如下
 
 </table>
 
-</html>"      ));
+</html>"                  ));
       end Version_3_0_1;
 
-      class Version_3_0 "Version 3.0 (March 1, 2008)"
+      class Version_3_0 "版本3.0(2008年3月1日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -5756,7 +5843,7 @@ cardinality()仅用于检查heatPort是否连接。</td></tr>
                               https://ydlunacommon-cdn.nosdn.127.net/a1cae97a858953df57e2d0b44df2f376.png                  parameter SIunits.AngularVelocity wNominal</td></tr>
 <tr><td> </td>
           <td> 修改了以下组件变量和参数的名称，使其更简洁:<br>
-                                                从所有同步机器中删除了后缀“DamperCage”
+                                                从所有同步机器中删除了后缀\"DamperCage\"
 由于用户可以选择是否存在阻尼笼。<br><code>
                                                 RotorAngle……RotorDisplacementAngle<br>
                                                 J_Rotor ... Jr<br>
@@ -5842,7 +5929,7 @@ cardinality()仅用于检查heatPort是否连接。</td></tr>
           <td> 已移除ActuatedPrismatic关节。移动接头的法兰连接件<br>
                                                 可以使用参数useaxis法兰.</td></tr>
 <tr><td> Assemblies</td>
-          <td> 装配接头的实现略有改变，使注释\"structurallyIncomplete\"<br>可以删除(所有装配接头模型现在都是“平衡的”)。</td></tr>
+          <td> 装配接头的实现略有改变，使注释\"structurallyIncomplete\"<br>可以删除(所有装配接头模型现在都是\"平衡的\")。</td></tr>
 
 <tr><td colspan=\"2\"><strong>Mechanics.MultiBody.Joints.Internal</strong></td></tr>
 <tr><td> RevoluteWithLengthConstraint<br>
@@ -5912,7 +5999,7 @@ MultiBody.Joints.Assemblies.JointXYZ关节。
 用户和实现要简单得多。<br>
                                                 替换了\"Inertia\"和\"stateSelection\"中的\"stateSelection\"参数
 通过内置枚举<br>stateSelect=StateSelection.xxx。
-介绍了“RelativeStates”中的“stateSelect”枚举。<br>
+介绍了\"RelativeStates\"中的\"stateSelect\"枚举。<br>
                                                 自动转换脚本
 从\"old\"形式转换为\"new\"形式。</td></tr>
 <tr><td> LossyGear<br>
@@ -6079,7 +6166,7 @@ isroot到标准名称:<br>
                                                 BevelGear1D</td>
           <td> 更改了实现，不再使用连接器修饰符
 变量<br>，因为这违反了对的限制
-Modelica 3的“平衡模型”.</td></tr>
+Modelica 3的\"平衡模型\".</td></tr>
 
 <tr><td colspan=\"2\"><strong>Mechanics.Rotational.</strong></td></tr>
 <tr><td> InitializeFlange</td>
@@ -6098,7 +6185,7 @@ Modelica 3的“平衡模型”.</td></tr>
                                                 StepWithSignal</td>
           <td> 更改了实现，不再使用输出修饰符
 变量<br>，因为这违反了对的限制
-Modelica 3的“平衡模型”。</td></tr>
+Modelica 3的\"平衡模型\"。</td></tr>
 
 </table>
 
@@ -6125,9 +6212,9 @@ Modelica 3的“平衡模型”。</td></tr>
 <tr><td colspan=\"2\"><strong>Mechanics.Rotational.</strong></td></tr>
 <tr><td> ElastoBacklash </td>
           <td> 如果阻尼力矩过大，则反力力矩
-可以“拉”，这是非物理的。这个成分是
+可以\"拉\"，这是非物理的。这个成分是
 在这种情况下，新写了限制阻尼力矩
-这样“拉动”力矩就不会再发生。此外,
+这样\"拉动\"力矩就不会再发生。此外,
 在初始化期间，特征是连续的
 减少数值误差。相对角度和相对
 如果可能的话，角速度被用作状态
@@ -6211,10 +6298,10 @@ Phi_start到。Start和w_start到w_start。
 
 </table>
 
-</html>"            ));
+</html>"                        ));
       end Version_3_0;
 
-      class Version_2_2_2 "Version 2.2.2 (Aug. 31, 2007)"
+      class Version_2_2_2 "版本2.2.2(2007年8月31日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -7176,10 +7263,10 @@ startBackward,模式。
 
 </table>
 
-</html>"            ));
+</html>"                        ));
       end Version_2_2_2;
 
-      class Version_2_2_1 "Version 2.2.1 (March 24, 2006)"
+      class Version_2_2_1 "版本2.2.1(2006年3月24日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -7421,8 +7508,8 @@ q轴的参数与d轴的值相同
 在模拟过程中进行更改(例如，颜色可能用于
 显示部件的温度)。</li>
                    <li> 所有菜单都已更改，以遵循Modelica 2.2注释
-“对话框，组，选项卡，启用”(以前，一个非标准的Dymola
-使用了菜单定义)。还有，“enable”注释
+\"对话框，组，选项卡，启用\"(以前，一个非标准的Dymola
+使用了菜单定义)。还有，\"enable\"注释
 在所有菜单中使用
 如果要忽略输入，则禁用输入字段。</li>
                    <li> 现在所有可视形状都是用条件声明定义的
@@ -7512,10 +7599,10 @@ q轴的参数与d轴的值相同
 <tr><td>CombiTable1D<br>
                   CombiTable1Ds<br>
                   CombiTable2D</td>
-          <td> 参数“tableOnFile”现在决定是否从表中读取
+          <td> 参数\"tableOnFile\"现在决定是否从表中读取
 文件或从参数\"table\"使用。先前，if \"fileName\"不是
 \" name \"，总是从文件\"fileName\"独立读取表
-“tableOnFile”的设置。这已被更正。<br>
+\"tableOnFile\"的设置。这已被更正。<br>
 此外，表的初始化现在在
 when-子句不再在参数声明中，因为有些
 工具在某些情况下对参数声明进行评估
@@ -7556,7 +7643,7 @@ RDS/v，其中v=Beta*(W+dW)/(L+dL)。正确的公式是没有
 </html>"            ));
       end Version_2_2_1;
 
-      class Version_2_2 "Version 2.2 (April 6, 2005)"
+      class Version_2_2 "版本2.2(2005年4月6日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -7622,14 +7709,14 @@ Modelica语言中条件声明的新特性2.2)</li>
 </html>"            ));
       end Version_2_2;
 
-      class Version_2_1 "Version 2.1 (Nov. 11, 2004)"
+      class Version_2_1 "版本2.1(2004年11月11日)"
         extends Modelica.Icons.ReleaseNotes;
 
-         annotation (Documentation(info="<html>
+        annotation(Documentation(info = "<html>
 
-<p> 这是与之前版本的Modelica标准库相比的一个重大变化，因为<strong>包含了许多新库</strong>和组件，并且输入/输出块（Modelica.Blocks）已大大简化：</p>
+<p> 这是与之前版本的Modelica标准库相比的一个重大变化，因为<strong>包含了许多新库</strong>和组件，并且输入/输出块(Modelica.Blocks)已大大简化：</p>
 <ul>
-<li> 定义了一个没有层次结构的输入/输出连接器（这是由于Modelica语言的新特性）。例如，块 \"FirstOrder\" 的输入信号以前是通过 \"FirstOrder.inPort.signal[1]\" 访问的。现在通过 \"FirstOrder.u\" 来访问。这简化了特别是对初学者的理解和使用。</li>
+<li> 定义了一个没有层次结构的输入/输出连接器(这是由于Modelica语言的新特性)。例如，块 \"FirstOrder\" 的输入信号以前是通过 \"FirstOrder.inPort.signal[1]\" 访问的。现在通过 \"FirstOrder.u\" 来访问。这简化了特别是对初学者的理解和使用。</li>
 <li> 对<strong>Modelica.Blocks</strong> 库进行了去向量化。现在Modelica.Blocks库中的所有块都是标量块。因此，块的参数现在是标量，不再是向量。例如，一个名为 \"amplitude\" 的参数，之前的值可能是 \"{1}\"，现在的值为 \"1\"。这简化了特别是对初学者的理解和使用。<br>
          如果需要一个块的向量，可以通过给实例添加一个维度轻松实现。例如，\"Constant const[3](k={1,2,3})\" 定义了三个 Constant 块。新方法的另一个优点是，Modelica.Blocks 的实现更加简化，易于理解。</li>
 </ul>
@@ -7653,42 +7740,42 @@ Modelica语言中条件声明的新特性2.2)</li>
                    它基于 JGrafchart 和 Grafcet，具有与 StateCharts 相似的建模能力。它避免了通常使用的动作语言的缺陷。<br>
                    此库使得 ModelicaAdditions.PetriNets 库变得过时。</td></tr>
 <tr><td><a href=\"modelica://Modelica.Utilities.Files\">Modelica.Utilities.Files</a></td>
-          <td>用于操作文件和目录的函数（复制、移动、删除文件等）</td></tr>
+          <td>用于操作文件和目录的函数(复制、移动、删除文件等)</td></tr>
 <tr><td><a href=\"modelica://Modelica.Utilities.Streams\">Modelica.Utilities.Streams</a></td>
-          <td>从文件读取并写入文件（print、readLine、readFile、error 等）</td></tr>
+          <td>从文件读取并写入文件(print、readLine、readFile、error 等)</td></tr>
 <tr><td><a href=\"modelica://Modelica.Utilities.Strings\">Modelica.Utilities.Strings</a></td>
-          <td>字符串操作（子串、查找、替换、排序、扫描标记等）</td></tr>
+          <td>字符串操作(子串、查找、替换、排序、扫描标记等)</td></tr>
 <tr><td><a href=\"modelica://Modelica.Utilities.System\">Modelica.Utilities.System</a></td>
           <td>获取/设置当前目录，获取/设置环境变量，执行 shell 命令等</td></tr>
 </table>
 <p>
 以下是现有库的改进，并已作为 <strong>新库</strong> 添加。
-（使用之前库的模型会自动转换为新子库）</p>
+(使用之前库的模型会自动转换为新子库)</p>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><td><a href=\"modelica://Modelica.Blocks.Discrete\">Modelica.Blocks.Discrete</a></td>
           <td>具有固定采样周期的离散输入/输出块<br>
-                   （来自 ModelicaAdditions.Blocks.Discrete）</td></tr>
+                   (来自 ModelicaAdditions.Blocks.Discrete)</td></tr>
 <tr><td><a href=\"modelica://Modelica.Blocks.Logical\">Modelica.Blocks.Logical</a></td>
           <td>具有布尔输入和输出信号的逻辑组件<br>
-                   （来自 ModelicaAdditions.Blocks.Logical）</td></tr>
+                   (来自 ModelicaAdditions.Blocks.Logical)</td></tr>
 <tr><td><a href=\"modelica://Modelica.Blocks.Nonlinear\">Modelica.Blocks.Nonlinear</a></td>
           <td>具有间断或不可微分代数控制块，如变量限制器、<br>
-                   固定、变量和帕德延迟等。（来自 ModelicaAdditions.Blocks.Nonlinear）</td></tr>
+                   固定、变量和帕德延迟等。(来自 ModelicaAdditions.Blocks.Nonlinear)</td></tr>
 <tr><td><a href=\"modelica://Modelica.Blocks.Routing\">Modelica.Blocks.Routing</a></td>
           <td>用于组合和提取信号的块，如多路复用器<br>
-                   （来自 ModelicaAdditions.Blocks.Multiplexer）</td></tr>
+                   (来自 ModelicaAdditions.Blocks.Multiplexer)</td></tr>
 <tr><td><a href=\"modelica://Modelica.Blocks.Tables\">Modelica.Blocks.Tables</a></td>
           <td>一维和二维表格插值。CombiTimeTable 在 Modelica.Blocks.Sources 中可用<br>
-                   （来自 ModelicaAdditions.Tables）</td></tr>
+                   (来自 ModelicaAdditions.Tables)</td></tr>
 <tr><td><a href=\"modelica://Modelica.Mechanics.MultiBody\">Modelica.Mechanics.MultiBody</a></td>
           <td>用于建模三维机械系统运动的组件。包含
                    体、关节、力和传感器组件，运动学环路的解析处理，
                    具有质量的力元件，3D 力元件的串联/并联连接等。
-                   （来自 MultiBody 1.0，其中使用了新的信号连接器；
-                   使 ModelicaAdditions.MultiBody 库过时）</td></tr>
+                   (来自 MultiBody 1.0，其中使用了新的信号连接器；
+                   使 ModelicaAdditions.MultiBody 库过时)</td></tr>
 </table>
 <p>
-因此，ModelicaAdditions库已经过时，因为所有组件要么已包含在Modelica库中，要么被更强大的库（MultiBody、StateGraph）替代。
+因此，ModelicaAdditions库已经过时，因为所有组件要么已包含在Modelica库中，要么被更强大的库(MultiBody、StateGraph)替代。
 </p>
 <p>
 以下是已添加到<strong>现有</strong>库中的<strong>新组件</strong>。
@@ -7698,7 +7785,7 @@ Modelica语言中条件声明的新特性2.2)</li>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><td colspan=\"2\"><strong>Modelica.Blocks.Logical.</strong></td></tr>
 <tr><td>Pre</td>
-          <td>y = pre(u): 通过一个极小的时间延迟打破代数循环（事件迭代将继续，直到 u = pre(u)）</td></tr>
+          <td>y = pre(u): 通过一个极小的时间延迟打破代数循环(事件迭代将继续，直到 u = pre(u))</td></tr>
 <tr><td>Edge</td>
           <td>y = edge(u): 如果输入 u 有上升沿，则输出 y 为真</td></tr>
 <tr><td>FallingEdge</td>
@@ -7736,15 +7823,15 @@ Modelica语言中条件声明的新特性2.2)</li>
           <td>从变换矩阵T和其导数der(T)返回方向对象R</td></tr>
 <tr><td colspan=\"2\"><strong>Modelica.Mechanics.Rotational.</strong></td></tr>
 <tr><td>LinearSpeedDependentTorque</td>
-          <td>扭矩与速度的线性依赖关系（作为负载扭矩作用）</td></tr>
+          <td>扭矩与速度的线性依赖关系(作为负载扭矩作用)</td></tr>
 <tr><td>QuadraticSpeedDependentTorque</td>
-          <td>扭矩与速度的二次依赖关系（作为负载扭矩作用）</td></tr>
+          <td>扭矩与速度的二次依赖关系(作为负载扭矩作用)</td></tr>
 <tr><td>ConstantTorque</td>
-          <td>常数扭矩，不依赖于速度（作为负载扭矩作用）</td></tr>
+          <td>常数扭矩，不依赖于速度(作为负载扭矩作用)</td></tr>
 <tr><td>ConstantSpeed</td>
-          <td>常数速度，不依赖于扭矩（作为负载扭矩作用）</td></tr>
+          <td>常数速度，不依赖于扭矩(作为负载扭矩作用)</td></tr>
 <tr><td>TorqueStep</td>
-          <td>常数扭矩，不依赖于速度（作为负载扭矩作用）</td></tr>
+          <td>常数扭矩，不依赖于速度(作为负载扭矩作用)</td></tr>
 </table>
 <p>
 以下<strong>已修复的错误</strong>：
@@ -7753,10 +7840,10 @@ Modelica语言中条件声明的新特性2.2)</li>
 <tr><td colspan=\"2\"><strong>Modelica.Mechanics.MultiBody.Forces.</strong></td></tr>
 <tr><td>LineForceWithMass<br>
                   Spring</td>
-          <td>如果线性力或弹簧组件的质量不为零，质量被（隐式地）处理为“质量*质量”，而不是作为“质量”处理</td></tr>
+          <td>如果线性力或弹簧组件的质量不为零，质量被(隐式地)处理为\"质量*质量\"，而不是作为\"质量\"处理</td></tr>
 <tr><td colspan=\"2\"><strong>Modelica.Mechanics.Rotational.</strong></td></tr>
 <tr><td>Speed</td>
-          <td>如果参数 exact=<strong>false</strong>，则滤波器错误（位置被滤波，而不是速度输入信号）</td></tr>
+          <td>如果参数 exact=<strong>false</strong>，则滤波器错误(位置被滤波，而不是速度输入信号)</td></tr>
 </table>
 <p>
 其他更改：
@@ -7768,10 +7855,10 @@ Modelica语言中条件声明的新特性2.2)</li>
 <li>Modelica.Mechanics.Translational连接器的颜色从绿色更改为深绿色，以便更好地看到连接线，特别是在打印时。</li>
 <li>Modelica.Blocks连接器的实数信号的颜色从蓝色更改为深蓝色，以便与电气信号区分开来。</li>
 </ul>
-</html>"                ));
+</html>"            ));
       end Version_2_1;
 
-      class Version_1_6 "Version 1.6 (June 21, 2004)"
+      class Version_1_6 "版本1.6(2004年6月21日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -7847,10 +7934,10 @@ ShowVariableResistor
 <tr><td>ThermodynamicTemperature</td>
           <td>min=0 added</td></tr>
 </table>
-</html>"                  ));
+</html>"            ));
       end Version_1_6;
 
-      class Version_1_5 "Version 1.5 (Dec. 16, 2002)"
+      class Version_1_5 "版本1.5(2002年12月16日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -8058,7 +8145,7 @@ end BooleanStep;
 </html>"            ));
       end Version_1_5;
 
-      class Version_1_4 "Version 1.4 (June 28, 2001)"
+      class Version_1_4 "版本1.4(2001年6月28日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html>
@@ -8716,27 +8803,27 @@ Sine sin1(outPort(redeclare type SignalType=Modelica.SIunits.Torque))
   end UsersGuide;
 
   annotation(
-    preferredView = "info", 
-    version = "4.0.0.TY.1", 
-    versionDate = "2025-04-18", 
-    dateModified = "2025-04-18 15:00:00Z", 
-    revisionId = "e2983375f2 2024-04-04 08:28:31 +0200", 
-    uses(Complex(version = "4.0.0.TY.1"), ModelicaServices(version = "4.0.0.TY.1")), 
+    preferredView = "info",
+    version = "4.0.0.TY.1",
+    versionDate = "2025-04-18",
+    dateModified = "2025-04-18 15:00:00Z",
+    revisionId = "e2983375f2 2024-04-04 08:28:31 +0200",
+    uses(Complex(version = "4.0.0.TY.1"), ModelicaServices(version = "4.0.0.TY.1")),
     conversion(
-    from(version = {"3.0", "3.0.1", "3.1", "3.2", "3.2.1", "3.2.2", "3.2.3"}, script = "modelica://Modelica/Resources/Scripts/Conversion/ConvertModelica_from_3.2.3_to_4.0.0.mos")), 
+    from(version = {"3.0", "3.0.1", "3.1", "3.2", "3.2.1", "3.2.2", "3.2.3"}, script = "modelica://Modelica/Resources/Scripts/Conversion/ConvertModelica_from_3.2.3_to_4.0.0.mos")),
     Icon(coordinateSystem(extent = {{-100.0, -100.0}, {100.0, 100.0}}), graphics = {
     Polygon(
-    origin = {-6.9888, 20.048}, 
-    pattern = LinePattern.None, 
-    fillPattern = FillPattern.Solid, 
-    points = {{-93.0112, 10.3188}, {-93.0112, 10.3188}, {-73.011, 24.6}, {-63.011, 31.221}, {-51.219, 36.777}, {-39.842, 38.629}, {-31.376, 36.248}, {-25.819, 29.369}, {-24.232, 22.49}, {-23.703, 17.463}, {-15.501, 25.135}, {-6.24, 32.015}, {3.02, 36.777}, {15.191, 39.423}, {27.097, 37.306}, {32.653, 29.633}, {35.035, 20.108}, {43.501, 28.046}, {54.085, 35.19}, {65.991, 39.952}, {77.897, 39.688}, {87.422, 33.338}, {91.126, 21.696}, {90.068, 9.525}, {86.099, -1.058}, {79.749, -10.054}, {71.283, -21.431}, {62.816, -33.337}, {60.964, -32.808}, {70.489, -16.14}, {77.368, -2.381}, {81.072, 10.054}, {79.749, 19.05}, {72.605, 24.342}, {61.758, 23.019}, {49.587, 14.817}, {39.003, 4.763}, {29.214, -6.085}, {21.012, -16.669}, {13.339, -26.458}, {5.401, -36.777}, {-1.213, -46.037}, {-6.24, -53.446}, {-8.092, -52.387}, {-0.684, -40.746}, {5.401, -30.692}, {12.81, -17.198}, {19.424, -3.969}, {23.658, 7.938}, {22.335, 18.785}, {16.514, 23.283}, {8.047, 23.019}, {-1.478, 19.05}, {-11.267, 11.113}, {-19.734, 2.381}, {-29.259, -8.202}, {-38.519, -19.579}, {-48.044, -31.221}, {-56.511, -43.392}, {-64.449, -55.298}, {-72.386, -66.939}, {-77.678, -74.612}, {-79.53, -74.083}, {-71.857, -61.383}, {-62.861, -46.037}, {-52.278, -28.046}, {-44.869, -15.346}, {-38.784, -2.117}, {-35.344, 8.731}, {-36.403, 19.844}, {-42.488, 23.813}, {-52.013, 22.49}, {-60.744, 16.933}, {-68.947, 10.054}, {-76.884, 2.646}, {-93.0112, -12.1707}, {-93.0112, -12.1707}}, 
-    smooth = Smooth.Bezier), 
+    origin = {-6.9888, 20.048},
+    pattern = LinePattern.None,
+    fillPattern = FillPattern.Solid,
+    points = {{-93.0112, 10.3188}, {-93.0112, 10.3188}, {-73.011, 24.6}, {-63.011, 31.221}, {-51.219, 36.777}, {-39.842, 38.629}, {-31.376, 36.248}, {-25.819, 29.369}, {-24.232, 22.49}, {-23.703, 17.463}, {-15.501, 25.135}, {-6.24, 32.015}, {3.02, 36.777}, {15.191, 39.423}, {27.097, 37.306}, {32.653, 29.633}, {35.035, 20.108}, {43.501, 28.046}, {54.085, 35.19}, {65.991, 39.952}, {77.897, 39.688}, {87.422, 33.338}, {91.126, 21.696}, {90.068, 9.525}, {86.099, -1.058}, {79.749, -10.054}, {71.283, -21.431}, {62.816, -33.337}, {60.964, -32.808}, {70.489, -16.14}, {77.368, -2.381}, {81.072, 10.054}, {79.749, 19.05}, {72.605, 24.342}, {61.758, 23.019}, {49.587, 14.817}, {39.003, 4.763}, {29.214, -6.085}, {21.012, -16.669}, {13.339, -26.458}, {5.401, -36.777}, {-1.213, -46.037}, {-6.24, -53.446}, {-8.092, -52.387}, {-0.684, -40.746}, {5.401, -30.692}, {12.81, -17.198}, {19.424, -3.969}, {23.658, 7.938}, {22.335, 18.785}, {16.514, 23.283}, {8.047, 23.019}, {-1.478, 19.05}, {-11.267, 11.113}, {-19.734, 2.381}, {-29.259, -8.202}, {-38.519, -19.579}, {-48.044, -31.221}, {-56.511, -43.392}, {-64.449, -55.298}, {-72.386, -66.939}, {-77.678, -74.612}, {-79.53, -74.083}, {-71.857, -61.383}, {-62.861, -46.037}, {-52.278, -28.046}, {-44.869, -15.346}, {-38.784, -2.117}, {-35.344, 8.731}, {-36.403, 19.844}, {-42.488, 23.813}, {-52.013, 22.49}, {-60.744, 16.933}, {-68.947, 10.054}, {-76.884, 2.646}, {-93.0112, -12.1707}, {-93.0112, -12.1707}},
+    smooth = Smooth.Bezier),
     Ellipse(
-    origin = {40.8208, -37.7602}, 
-    fillColor = {161, 0, 4}, 
-    pattern = LinePattern.None, 
-    fillPattern = FillPattern.Solid, 
-    extent = {{-17.8562, -17.8563}, {17.8563, 17.8562}})}), 
+    origin = {40.8208, -37.7602},
+    fillColor = {161, 0, 4},
+    pattern = LinePattern.None,
+    fillPattern = FillPattern.Solid,
+    extent = {{-17.8562, -17.8563}, {17.8563, 17.8562}})}),
     Documentation(info = "<html>
 <div>
 <img src=\"modelica://Modelica/Resources/Images/Logos/Modelica_Libraries.svg\" width=\"250\">
@@ -8783,7 +8870,7 @@ Sine sin1(outPort(redeclare type SignalType=Modelica.SIunits.Torque))
 
 <p>
 <strong> Modelica协会根据3-Clause BSD许可证授权</strong><br>
-Copyright &copy; 1998-2020, Modelica协会和<a href=\"modelica://Modelica.UsersGuide.Contact\">贡献者</a>.
+Copyright &copy; 1998-2020, Modelica协会和<a href=\"modelica://Modelica.UsersGuide.Contact\">贡献者</a>。
 </p>
 
 <p>

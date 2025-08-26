@@ -4,20 +4,20 @@ model CurrentSource "恒定多相交流电流源"
   import Modelica.ComplexMath.j;
   import Modelica.ComplexMath.exp;
   parameter SI.Frequency f(start=1) "源的频率";
-  parameter SI.Current I[m](start=fill(1, m)) 
+  parameter SI.Current I[m](start=fill(1, m))
     "源的有效值电流";
   parameter SI.Angle phi[m]=-
-      Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m) 
+      Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m)
     "源的相位移";
 equation
   omega = 2*Modelica.Constants.pi*f;
   i = {I[k]*exp(j*phi[k]) for k in 1:m};
   annotation (
-    Icon(graphics={Line(points={{0,50},{0,-50}}, color={85,170,255}), 
+    Icon(graphics={Line(points={{0,50},{0,-50}}, color={85,170,255}),
           Polygon(
-          points={{90,0},{60,10},{60,-10},{90,0}}, 
-          lineColor={85,170,255}, 
-          fillColor={85,170,255}, 
+          points={{90,0},{60,10},{60,-10},{90,0}},
+          lineColor={85,170,255},
+          fillColor={85,170,255},
           fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 
 <p>

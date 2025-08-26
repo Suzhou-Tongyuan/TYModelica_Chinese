@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Polyphase.Interfaces;
-partial model TwoPort 
+partial model TwoPort
   "具有两个多相电气端口的元件，包括电流"
   extends FourPlug;
 equation

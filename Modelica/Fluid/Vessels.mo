@@ -7,8 +7,8 @@ package Vessels "流体储存装置"
 
     // 质量守恒、能量守恒，接口定义
     extends Modelica.Fluid.Vessels.BaseClasses.PartialLumpedVessel(
-      final fluidVolume = V, 
-      vesselArea = pi * (3 / 4 * V) ^ (2 / 3), 
+      final fluidVolume = V,
+      vesselArea = pi * (3 / 4 * V) ^ (2 / 3),
       heatTransfer(surfaceAreas = {4 * pi * (3 / 4 * V / pi) ^ (2 / 3)}), use_HeatTransfer = false, use_T_start = true);
 
     parameter SI.Volume V "容积";
@@ -19,14 +19,14 @@ package Vessels "流体储存装置"
       vessel_ps_static[i] = medium.p;
     end for;
 
-    annotation(defaultComponentName = "Volume", 
+    annotation(defaultComponentName = "Volume",
       Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
       100, 100}}), graphics = {Ellipse(
-      extent = {{-100, 100}, {100, -100}}, 
-      fillPattern = FillPattern.Sphere, 
+      extent = {{-100, 100}, {100, -100}},
+      fillPattern = FillPattern.Sphere,
       fillColor = {170, 213, 255}), Text(
-      extent = {{-150, 12}, {150, -18}}, 
-      textString = "V=%V")}), 
+      extent = {{-150, 12}, {150, -18}},
+      textString = "V=%V")}),
       Documentation(info = "<html><p>
 理想混合体积，大小恒定，具有两个流体端口和一个介质模型。其流体性质由上游物理量计算，
 如果显示<code>use_portsData=false</code>则节点和介质的压力相等。传热计算通过可用的传热接口进行，
@@ -60,18 +60,18 @@ package Vessels "流体储存装置"
       annotation(Dialog(tab = "假设", group = "环境"));
 
     // 初始化
-    parameter SI.Height level_start(min = 0) = 0.5 * height 
+    parameter SI.Height level_start(min = 0) = 0.5 * height
       "水箱液位的起始值" 
       annotation(Dialog(tab = "初始化"));
 
     // 质量和能量平衡，接口定义
     extends Modelica.Fluid.Vessels.BaseClasses.PartialLumpedVessel(
-      final fluidVolume = V, 
-      final fluidLevel = level, 
-      final fluidLevel_max = height, 
-      final vesselArea = crossArea, 
-      heatTransfer(surfaceAreas = {crossArea + 2 * sqrt(crossArea * pi) * level}), 
-      final initialize_p = false, 
+      final fluidVolume = V,
+      final fluidLevel = level,
+      final fluidLevel_max = height,
+      final vesselArea = crossArea,
+      heatTransfer(surfaceAreas = {crossArea + 2 * sqrt(crossArea * pi) * level}),
+      final initialize_p = false,
       final p_start = p_ambient);
 
   protected
@@ -83,7 +83,7 @@ package Vessels "流体储存装置"
 
     // 边界项能量平衡
     if Medium.singleState or energyDynamics == Types.Dynamics.SteadyState then
-      Wb_flow = 0 
+      Wb_flow = 0
         "忽略机械功，因为介质模型中也忽略了机械功（否则，如果水箱液位发生变化，温度的微小变化将不符合实际情况）";
     else
       Wb_flow = -p_ambient * der(V);
@@ -101,31 +101,31 @@ package Vessels "流体储存装置"
       der(level) = 0;
     end if;
 
-    annotation(defaultComponentName = "tank", 
+    annotation(defaultComponentName = "tank",
       Icon(coordinateSystem(
-      preserveAspectRatio = true, 
-      extent = {{-100, -100}, {100, 100}}, 
+      preserveAspectRatio = true,
+      extent = {{-100, -100}, {100, 100}},
       initialScale = 0.2), graphics = {
       Rectangle(
-      extent = {{-100, 100}, {100, -100}}, 
-      lineColor = {255, 255, 255}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.VerticalCylinder), 
+      extent = {{-100, 100}, {100, -100}},
+      lineColor = {255, 255, 255},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.VerticalCylinder),
       Rectangle(
-      extent = DynamicSelect({{-100, -100}, {100, 10}}, {{-100, -100}, {100, (-100 
-      + 200 * level / height)}}), 
-      fillColor = {85, 170, 255}, 
-      fillPattern = FillPattern.VerticalCylinder), 
-      Line(points = {{-100, 100}, {-100, -100}, {100, -100}, {100, 100}}), 
+      extent = DynamicSelect({{-100, -100}, {100, 10}}, {{-100, -100}, {100, (-100
+      + 200 * level / height)}}),
+      fillColor = {85, 170, 255},
+      fillPattern = FillPattern.VerticalCylinder),
+      Line(points = {{-100, 100}, {-100, -100}, {100, -100}, {100, 100}}),
       Text(
-      extent = {{-95, 60}, {95, 40}}, 
-      textString = "level ="), 
+      extent = {{-95, 60}, {95, 40}},
+      textString = "level ="),
       Text(
-      extent = {{-95, -24}, {95, -44}}, 
+      extent = {{-95, -24}, {95, -44}},
       textString = DynamicSelect("%level_start", String(
-      level, 
-      minimumLength = 1, 
-      significantDigits = 2)))}), 
+      level,
+      minimumLength = 1,
+      significantDigits = 2)))}),
       Documentation(info = "<html>
 <p>
 这是一个开放于环境并在固定压力<code>p_ambient</code>下的水箱模型。
@@ -175,9 +175,9 @@ Limitation to bottom ports only, added inlet and outlet loss factors.</li>
       // 接口定义
       parameter Integer nPorts = 0 "接口数量" 
         annotation(Evaluate = true, Dialog(connectorSizing = true, tab = "基本", group = "接口"));
-      VesselFluidPorts_b ports[nPorts](redeclare each package Medium = Medium) 
+      VesselFluidPorts_b ports[nPorts](redeclare each package Medium = Medium)
         "流体出入口" 
-        annotation(Placement(transformation(extent = {{-40, -10}, {40, 10}}, 
+        annotation(Placement(transformation(extent = {{-40, -10}, {40, 10}},
         origin = {0, -100})));
 
       // 接口性质
@@ -203,19 +203,19 @@ Limitation to bottom ports only, added inlet and outlet loss factors.</li>
       // 边界传热
       parameter Boolean use_HeatTransfer = false "true: 使用传热模型" 
         annotation(Dialog(tab = "假设", group = "传热"));
-      replaceable model HeatTransfer = 
+      replaceable model HeatTransfer =
         Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer 
         constrainedby 
         Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.PartialVesselHeatTransfer "壁面传热" 
         annotation(Dialog(tab = "假设", group = "传热", enable = use_HeatTransfer), choicesAllMatching = true);
       HeatTransfer heatTransfer(
-      redeclare final package Medium = Medium, 
-        final n = 1, 
-        final states = {medium.state}, 
+      redeclare final package Medium = Medium,
+        final n = 1,
+        final states = {medium.state},
         final use_k = use_HeatTransfer) 
         annotation(Placement(transformation(
-        extent = {{-10, -10}, {30, 30}}, 
-        rotation = 90, 
+        extent = {{-10, -10}, {30, 30}},
+        rotation = 90,
         origin = {-50, -10})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if use_HeatTransfer 
         annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
@@ -300,8 +300,8 @@ Limitation to bottom ports only, added inlet and outlet loss factors.</li>
           // 注意：渗透不应太接近零，否则会导致管道空载运行
           ports_penetration[i] = Utilities.regStep(fluidLevel - portsData_height[i] - 0.1 * portsData_diameter[i], 1, 1e-3, 0.1 * portsData_diameter[i]);
           m_flow_turbulent[i] = if not use_Re then m_flow_small else 
-            max(m_flow_small, (Modelica.Constants.pi / 8) * portsData_diameter[i] 
-            * (Medium.dynamicViscosity(Medium.setState_phX(vessel_ps_static[i], inStream(ports[i].h_outflow), inStream(ports[i].Xi_outflow))) 
+            max(m_flow_small, (Modelica.Constants.pi / 8) * portsData_diameter[i]
+            * (Medium.dynamicViscosity(Medium.setState_phX(vessel_ps_static[i], inStream(ports[i].h_outflow), inStream(ports[i].Xi_outflow)))
             + Medium.dynamicViscosity(medium.state)) * Re_turbulent);
         else
           // 假设接口直径无穷大
@@ -322,8 +322,8 @@ Limitation to bottom ports only, added inlet and outlet loss factors.</li>
             ports[i].p = vessel_ps_static[i] + 0.5*ports[i].m_flow^2/portAreas[i]^2
             * noEvent(if ports[i].m_flow>0 then zeta_in[i]/portInDensities[i] else -zeta_out[i]/medium.d);
             */
-            ports[i].p = vessel_ps_static[i] + (0.5 / portAreas[i] ^ 2 * Utilities.regSquare2(ports[i].m_flow, m_flow_turbulent[i], 
-              (portsData_zeta_in[i] - 1 + portAreas[i] ^ 2 / vesselArea ^ 2) / portInDensities[i] * ports_penetration[i], 
+            ports[i].p = vessel_ps_static[i] + (0.5 / portAreas[i] ^ 2 * Utilities.regSquare2(ports[i].m_flow, m_flow_turbulent[i],
+              (portsData_zeta_in[i] - 1 + portAreas[i] ^ 2 / vesselArea ^ 2) / portInDensities[i] * ports_penetration[i],
               (portsData_zeta_out[i] + 1 - portAreas[i] ^ 2 / vesselArea ^ 2) / medium.d / ports_penetration[i]));
           /*
           // 替代公式 m_flow=f(dp); 不允许 portsData_zeta_in[i]=1 
@@ -432,10 +432,10 @@ Limitation to bottom ports only, added inlet and outlet loss factors.</li>
 </li>
 <li><em>Dec. 2008</em> by R&uuml;diger Franke: 衍生自 OpenTank，以便使用可配置的接口直径</li>
 </ul>
-</html>"    ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"    ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {Text(
-        extent = {{-150, 110}, {150, 150}}, 
-        textString = "%name", 
+        extent = {{-150, 110}, {150, 150}},
+        textString = "%name",
         textColor = {0, 0, 255})}));
     end PartialLumpedVessel;
 
@@ -447,12 +447,12 @@ Limitation to bottom ports only, added inlet and outlet loss factors.</li>
         annotation(Documentation(info = "<html><p>
 <br>容器传热模型的基类。<br>
 </p>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
           {100, 100}}), graphics = {Ellipse(
-          extent = {{-60, 64}, {60, -56}}, 
-          fillPattern = FillPattern.Sphere, 
+          extent = {{-60, 64}, {60, -56}},
+          fillPattern = FillPattern.Sphere,
           fillColor = {232, 0, 0}), Text(
-          extent = {{-38, 26}, {40, -14}}, 
+          extent = {{-38, 26}, {40, -14}},
           textString = "%name")}));
       end PartialVesselHeatTransfer;
 
@@ -486,16 +486,16 @@ Limitation to bottom ports only, added inlet and outlet loss factors.</li>
 
     end HeatTransfer;
 
-    record VesselPortsData 
+    record VesselPortsData
       "描述容器进口/出口的数据：diameter-入口/出口的内（水力）直径,height-端口距底部的高度,
 zeta_out-容器外的流阻，默认为 0.5,适用于小直径且与墙壁齐平的安装情况,zeta_in-容器内的流阻，默认为 1.04，适用于小直径且与墙壁齐平的安装情况"
       extends Modelica.Icons.Record;
-      parameter SI.Diameter diameter 
+      parameter SI.Diameter diameter
         "入口/出口的内直径（水力直径）";
       parameter SI.Height height = 0 "端口距容器底部的高度";
-      parameter Real zeta_out(min = 0) = 0.5 
+      parameter Real zeta_out(min = 0) = 0.5
         "容器外的流阻，默认为 0.5，适用于小直径且与墙壁齐平的安装情况";
-      parameter Real zeta_in(min = 0) = 1.04 
+      parameter Real zeta_in(min = 0) = 1.04
         "容器内的流阻，默认为 1.04，适用于小直径且与墙壁齐平的安装情况";
       annotation(preferredView = "info", Documentation(info = "<html>
 <h4>容器接口数据</h4>
@@ -619,125 +619,125 @@ of Hydraulic Resistance</strong></a>. 3rd edition, Begell House, ISBN
 </html>"    ));
     end VesselPortsData;
 
-    connector VesselFluidPorts_a 
+    connector VesselFluidPorts_a
       "流体连接器,用于水平排列的流体接口矢量（拖动后需添加向量维度）"
       extends Interfaces.FluidPort;
-      annotation(defaultComponentName = "ports_b", 
+      annotation(defaultComponentName = "ports_b",
         Diagram(coordinateSystem(
-        preserveAspectRatio = false, 
-        extent = {{-50, -200}, {50, 200}}, 
+        preserveAspectRatio = false,
+        extent = {{-50, -200}, {50, 200}},
         initialScale = 0.2), graphics = {
-        Text(extent = {{-75, 130}, {75, 100}}, textString = "%name"), 
+        Text(extent = {{-75, 130}, {75, 100}}, textString = "%name"),
         Rectangle(
-        extent = {{-25, 100}, {25, -100}}), 
+        extent = {{-25, 100}, {25, -100}}),
         Ellipse(
-        extent = {{-22, 100}, {-10, -100}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-22, 100}, {-10, -100}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{-6, 100}, {6, -100}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-6, 100}, {6, -100}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{10, 100}, {22, -100}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid)}), 
+        extent = {{10, 100}, {22, -100}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid)}),
         Icon(coordinateSystem(
-        preserveAspectRatio = false, 
-        extent = {{-50, -200}, {50, 200}}, 
+        preserveAspectRatio = false,
+        extent = {{-50, -200}, {50, 200}},
         initialScale = 0.2), graphics = {
         Rectangle(
-        extent = {{-50, 200}, {50, -200}}, 
-        lineColor = {0, 127, 255}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 200}, {50, -200}},
+        lineColor = {0, 127, 255},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{-44, 200}, {-20, -200}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-44, 200}, {-20, -200}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{-12, 200}, {12, -200}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-12, 200}, {12, -200}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{20, 200}, {44, -200}}, 
-        fillColor = {0, 127, 255}, 
+        extent = {{20, 200}, {44, -200}},
+        fillColor = {0, 127, 255},
         fillPattern = FillPattern.Solid)}));
     end VesselFluidPorts_a;
 
-    connector VesselFluidPorts_b 
+    connector VesselFluidPorts_b
       "流体连接器,用于水平排列的流体接口矢量（拖动后需添加向量维度）"
       extends Interfaces.FluidPort;
-      annotation(defaultComponentName = "ports_b", 
+      annotation(defaultComponentName = "ports_b",
         Diagram(coordinateSystem(
-        preserveAspectRatio = false, 
-        extent = {{-50, -200}, {50, 200}}, 
+        preserveAspectRatio = false,
+        extent = {{-50, -200}, {50, 200}},
         initialScale = 0.2), graphics = {
-        Text(extent = {{-75, 130}, {75, 100}}, textString = "%name"), 
+        Text(extent = {{-75, 130}, {75, 100}}, textString = "%name"),
         Rectangle(
-        extent = {{-25, 100}, {25, -100}}), 
+        extent = {{-25, 100}, {25, -100}}),
         Ellipse(
-        extent = {{-22, 100}, {-10, -100}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-22, 100}, {-10, -100}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{-20, -69}, {-12, 69}}, 
-        lineColor = {0, 127, 255}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-20, -69}, {-12, 69}},
+        lineColor = {0, 127, 255},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{-6, 100}, {6, -100}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-6, 100}, {6, -100}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{10, 100}, {22, -100}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{10, 100}, {22, -100}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{-4, -69}, {4, 69}}, 
-        lineColor = {0, 127, 255}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-4, -69}, {4, 69}},
+        lineColor = {0, 127, 255},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{12, -69}, {20, 69}}, 
-        lineColor = {0, 127, 255}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid)}), 
+        extent = {{12, -69}, {20, 69}},
+        lineColor = {0, 127, 255},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid)}),
         Icon(coordinateSystem(
-        preserveAspectRatio = false, 
-        extent = {{-50, -200}, {50, 200}}, 
+        preserveAspectRatio = false,
+        extent = {{-50, -200}, {50, 200}},
         initialScale = 0.2), graphics = {
         Rectangle(
-        extent = {{-50, 200}, {50, -200}}, 
-        lineColor = {0, 127, 255}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 200}, {50, -200}},
+        lineColor = {0, 127, 255},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{-44, 200}, {-20, -200}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-44, 200}, {-20, -200}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{-12, 200}, {12, -200}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-12, 200}, {12, -200}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{20, 200}, {44, -200}}, 
-        fillColor = {0, 127, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{20, 200}, {44, -200}},
+        fillColor = {0, 127, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{-39, -118.5}, {-25, 113}}, 
-        lineColor = {0, 127, 255}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-39, -118.5}, {-25, 113}},
+        lineColor = {0, 127, 255},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{-7, -118.5}, {7, 113}}, 
-        lineColor = {0, 127, 255}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-7, -118.5}, {7, 113}},
+        lineColor = {0, 127, 255},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
         Ellipse(
-        extent = {{25, -117.5}, {39, 114}}, 
-        lineColor = {0, 127, 255}, 
-        fillColor = {255, 255, 255}, 
+        extent = {{25, -117.5}, {39, 114}},
+        lineColor = {0, 127, 255},
+        fillColor = {255, 255, 255},
         fillPattern = FillPattern.Solid)}));
     end VesselFluidPorts_b;
     annotation();

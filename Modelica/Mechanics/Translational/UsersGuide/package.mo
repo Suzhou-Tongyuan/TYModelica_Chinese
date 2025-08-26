@@ -3,7 +3,7 @@ package UsersGuide "一维平动库的用户指南"
   extends Modelica.Icons.Information;
 
   annotation (
-    DocumentationClass=true, 
+    DocumentationClass=true,
     Documentation(info="<html><p>
 <strong> Translational </strong>库是一个<strong> 免费 </strong>的Modelica包，提供了一维平动机械组件，以便用户对一维平动机械系统建模。 更多详细信息请参见以下子节：
 </p>

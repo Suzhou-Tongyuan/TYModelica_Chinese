@@ -9,32 +9,32 @@ model ControlCircuit "控制回路"
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
   Sources.StepVoltage stepA(V=10, startTime=0.1) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-90,-62})));
   OpAmpCircuits.Feedback feedbackA(p1(i(start=0))) 
     annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));
   OpAmpCircuits.PI PIA(
-    v2(fixed=true), 
-    k=kp, 
-    T=Ti, 
+    v2(fixed=true),
+    k=kp,
+    T=Ti,
     opAmp(v_in(start=0))) 
     annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
   OpAmpCircuits.FirstOrder firstOrder1A(
-    v2(fixed=true), 
-    T=T1, 
+    v2(fixed=true),
+    T=T1,
     opAmp(v_in(start=0))) 
     annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
   OpAmpCircuits.Add addA(i1_2(start=0), r(i(start=0))) 
     annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
   Sources.StepVoltage step1A(V=1, startTime=0.5) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={20,-60})));
   OpAmpCircuits.FirstOrder firstOrder2A(
-    v2(fixed=true), 
-    T=T2, 
+    v2(fixed=true),
+    T=T2,
     opAmp(v_in(start=0))) 
     annotation (Placement(transformation(extent={{60,-40},{80,-20}})));
   Blocks.Sources.Step stepB(height=10, startTime=0.1) 
@@ -42,8 +42,8 @@ model ControlCircuit "控制回路"
   Blocks.Math.Feedback feedbackB 
     annotation (Placement(transformation(extent={{-70,60},{-50,80}})));
   Blocks.Continuous.PI PIB(
-    k=kp, 
-    T=Ti, 
+    k=kp,
+    T=Ti,
     initType=Modelica.Blocks.Types.Init.InitialOutput) 
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
   Blocks.Continuous.FirstOrder firstOrder1B(T=T1, initType=Modelica.Blocks.Types.Init.InitialOutput) 
@@ -51,8 +51,8 @@ model ControlCircuit "控制回路"
   Blocks.Math.Add addB 
     annotation (Placement(transformation(extent={{30,60},{50,80}})));
   Blocks.Sources.Step step1B(height=1, startTime=0.5) 
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
-        rotation=90, 
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
         origin={20,30})));
   Blocks.Continuous.FirstOrder firstOrder2B(T=T2, initType=Modelica.Blocks.Types.Init.InitialOutput) 
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
@@ -72,19 +72,19 @@ equation
   connect(feedbackB.y,PIB. u) 
     annotation (Line(points={{-51,70},{-42,70}}, color={0,0,127}));
   connect(PIB.y,firstOrder1B. u) 
-    annotation (Line(points={{-19,70},{-12,70}}, 
+    annotation (Line(points={{-19,70},{-12,70}},
                                                color={0,0,127}));
-  connect(firstOrder1B.y, addB.u1) annotation (Line(points={{11,70},{19.5,70},{19.5, 
+  connect(firstOrder1B.y, addB.u1) annotation (Line(points={{11,70},{19.5,70},{19.5,
           76},{28,76}}, color={0,0,127}));
   connect(addB.y, firstOrder2B.u) 
     annotation (Line(points={{51,70},{58,70}}, color={0,0,127}));
   connect(step1B.y, addB.u2) 
     annotation (Line(points={{20,41},{20,64},{28,64}}, color={0,0,127}));
-  connect(firstOrder2B.y, feedbackB.u2) annotation (Line(points={{81,70},{90,70}, 
+  connect(firstOrder2B.y, feedbackB.u2) annotation (Line(points={{81,70},{90,70},
           {90,50},{-60,50},{-60,62}}, color={0,0,127}));
   connect(stepA.p, feedbackA.p1_2) 
     annotation (Line(points={{-90,-52},{-90,-30},{-70,-30}}, color={0,0,255}));
-  connect(firstOrder2A.p2, feedbackA.p1) annotation (Line(points={{80,-20},{80,-10}, 
+  connect(firstOrder2A.p2, feedbackA.p1) annotation (Line(points={{80,-20},{80,-10},
           {-70,-10},{-70,-20}}, color={0,0,255}));
   connect(ground.p, feedbackA.n1) 
     annotation (Line(points={{-90,-80},{-70,-80},{-70,-40}}, color={0,0,255}));
@@ -103,10 +103,10 @@ equation
   annotation (Documentation(info="<html>
 <p>这是一个带运算放大器的模拟控制回路。</p>
 <p>用户可以比较以下两个结果变量的差异：<code>firstOrder2B.y</code>和<code>firstOrder2A.v2</code>.</p>
-</html>"), 
+</html>"),
     experiment(
-      StartTime=0, 
-      StopTime=1, 
-      Tolerance=1e-006, 
+      StartTime=0,
+      StopTime=1,
+      Tolerance=1e-006,
       Interval=0.001));
 end ControlCircuit;

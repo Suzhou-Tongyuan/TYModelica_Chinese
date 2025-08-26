@@ -16,7 +16,7 @@ equation
        由Christoph Clauss<br>创建<br>
        </li>
 </ul>
-</html>", 
+</html>",
     info = "<html>
 <p>VoltageSource部分模型通过提供引脚、偏移量和startTime参数来准备电压源，这些参数在所有电压源中都是相同的。源行为通过从Modelica.Blocks信号源中继承和使用可替换模型获取。
 </p>

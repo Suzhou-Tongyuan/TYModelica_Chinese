@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.RealSignals.Sampler;
-block ShiftSample 
+block ShiftSample
   "将时钟实数输入信号移位上一间隔的一部分，并将其作为时钟输出信号"
 
   parameter Integer shiftCounter(min=0)=0 "移位公式的分子" 
@@ -7,59 +7,59 @@ block ShiftSample
   parameter Integer resolution(min=1)=1 "移位公式的分母" 
         annotation(Evaluate=true, Dialog(group="将第一个时钟激活时间移至'移位计数器/分辨率*interval(u)'秒的位置"));
 
-  Modelica.Blocks.Interfaces.RealInput u 
+  Modelica.Blocks.Interfaces.RealInput u
     "时钟实数输入信号连接器" 
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Interfaces.RealOutput y 
+  Modelica.Blocks.Interfaces.RealOutput y
     "时钟实数输出信号连接器" 
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 equation
      y = shiftSample(u,shiftCounter,resolution);
   annotation (
-   defaultComponentName="shiftSample1", 
+   defaultComponentName="shiftSample1",
    Icon(coordinateSystem(
-        preserveAspectRatio=true, 
-        extent={{-100,-100},{100,100}}, 
-        initialScale=0.06), 
-                     graphics={Line(points={{20,-50},{60,-50},{60,50}}, 
-                                 color={0,0,127}, 
-          pattern=LinePattern.Dot), 
-                               Line(points={{-80,-50},{-40,-50},{-40,50}}, 
-                                 color={0,0,127}, 
-          pattern=LinePattern.Dot), 
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}},
+        initialScale=0.06),
+                     graphics={Line(points={{20,-50},{60,-50},{60,50}},
+                                 color={0,0,127},
+          pattern=LinePattern.Dot),
+                               Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                 color={0,0,127},
+          pattern=LinePattern.Dot),
         Ellipse(
-          extent={{10,-40},{30,-60}}, 
-          lineColor={0,0,127}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{10,-40},{30,-60}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{50,60},{70,40}}, 
-          lineColor={0,0,127}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{50,60},{70,40}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Polygon(
-          points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34, 
-              0}}, 
-          fillColor={95,95,95}, 
-          fillPattern=FillPattern.Solid, 
-          lineColor={95,95,95}), 
+          points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
+              0}},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid,
+          lineColor={95,95,95}),
         Ellipse(
-          extent={{-90,-40},{-70,-60}}, 
-          lineColor={0,0,127}, 
-          fillColor={0,0,127}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-90,-40},{-70,-60}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{-50,60},{-30,40}}, 
-          lineColor={0,0,127}, 
-          fillColor={0,0,127}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-50,60},{-30,40}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,-100},{150,-140}}, 
-          textString="%shiftCounter/%resolution"), 
+          extent={{-150,-100},{150,-140}},
+          textString="%shiftCounter/%resolution"),
         Text(
-          extent={{-150,150},{150,110}}, 
-          textString="%name", 
-          textColor={0,0,255})}), 
+          extent={{-150,150},{150,110}},
+          textString="%name",
+          textColor={0,0,255})}),
     Documentation(info="<html><p>
 <span style=\"color: rgb(51, 51, 51);\">该模块将输出 y 的时钟第一次激活按周期的分数 shiftCounter/resolution 进行偏移（对于非周期信号，则按上一个间隔的分数进行偏移），并将输出 y 设置为输入 u 的最后一个可用值。在这里，</span><span style=\"color: rgb(51, 51, 51);\"><strong>shiftCounter </strong></span><span style=\"color: rgb(51, 51, 51);\">和 </span><span style=\"color: rgb(51, 51, 51);\"><strong>resolution </strong></span><span style=\"color: rgb(51, 51, 51);\">是正整数参数。</span>
 </p>

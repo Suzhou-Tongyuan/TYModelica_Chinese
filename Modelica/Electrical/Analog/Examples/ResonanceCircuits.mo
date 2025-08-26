@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Analog.Examples;
-model ResonanceCircuits 
+model ResonanceCircuits
   "利用共振电路生成FMUs(功能仿真单元)的示例"
   import Modelica.Constants.pi;
   extends Modelica.Icons.Example;
@@ -12,49 +12,49 @@ model ResonanceCircuits
   Modelica.Electrical.Analog.Sources.SineCurrent current1(I=1, f=f) 
     annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=90, 
+        extent={{-10,-10},{10,10}},
+        rotation=90,
         origin={-90,50})));
   Modelica.Electrical.Analog.Basic.Ground ground1 
     annotation (Placement(transformation(extent={{-100,10},{-80,30}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor1(i(fixed=true, start=0), L=L) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-30,50})));
   Modelica.Electrical.Analog.Basic.Conductor conductor1(G=1) 
     annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={30,50})));
   Modelica.Electrical.Analog.Basic.Capacitor capacitor1(v(start=0, fixed=true), C=C) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={90,50})));
   Modelica.Electrical.Analog.Sources.SineVoltage voltage2(V=1, f=f) 
     annotation (
       Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=90, 
+        extent={{10,-10},{-10,10}},
+        rotation=90,
         origin={-90,-50})));
   Modelica.Electrical.Analog.Basic.Ground ground2 
     annotation (Placement(
         transformation(extent={{-100,-90},{-80,-70}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor2(i(fixed=true, start=0), L=L) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={-30,-40})));
   Modelica.Electrical.Analog.Basic.Resistor resistor2(R=1) 
     annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={30,-40})));
   Modelica.Electrical.Analog.Basic.Capacitor capacitor2(v(start=0, fixed=true), C=C) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={90,-50})));
   Modelica.Electrical.Analog.Basic.GeneralVoltageToCurrentAdaptor 
     voltageToCurrentAdaptor1a(use_pder=false,use_fder=false) 
@@ -119,15 +119,15 @@ equation
   connect(voltageToCurrentAdaptor1a.f, currentToVoltageAdaptor1a.f) 
     annotation (Line(points={{-67,42},{-53,42}}, color={0,0,127}));
   connect(voltageToCurrentAdaptor1a.fder, currentToVoltageAdaptor1a.fder) 
-    annotation (Line(points={{-67,45},{-60.5,45},{-60.5,45},{-53,45}}, color={0, 
+    annotation (Line(points={{-67,45},{-60.5,45},{-60.5,45},{-53,45}}, color={0,
           0,127}));
-  connect(currentToVoltageAdaptor1a.pin_p, inductor1.p) annotation (Line(points= 
+  connect(currentToVoltageAdaptor1a.pin_p, inductor1.p) annotation (Line(points=
          {{-48,58},{-40,58},{-40,60},{-30,60}}, color={0,0,255}));
-  connect(currentToVoltageAdaptor1a.pin_n, inductor1.n) annotation (Line(points= 
+  connect(currentToVoltageAdaptor1a.pin_n, inductor1.n) annotation (Line(points=
          {{-48,42},{-42,42},{-42,40},{-30,40}}, color={0,0,255}));
-  connect(inductor1.p, currentToVoltageAdaptor1b.pin_p) annotation (Line(points= 
+  connect(inductor1.p, currentToVoltageAdaptor1b.pin_p) annotation (Line(points=
          {{-30,60},{-20,60},{-20,58},{-12,58}}, color={0,0,255}));
-  connect(currentToVoltageAdaptor1b.pin_n, inductor1.n) annotation (Line(points= 
+  connect(currentToVoltageAdaptor1b.pin_n, inductor1.n) annotation (Line(points=
          {{-12,42},{-20,42},{-20,40},{-30,40}}, color={0,0,255}));
   connect(inductor1.n, ground1a.p) 
     annotation (Line(points={{-30,40},{-30,30}}, color={0,0,255}));
@@ -168,14 +168,14 @@ equation
   connect(currentToVoltageAdaptor2a.p, voltageToCurrentAdaptor2a.p) 
     annotation (Line(points={{-67,-42},{-53,-42}}, color={0,0,127}));
   connect(currentToVoltageAdaptor2a.pder, voltageToCurrentAdaptor2a.pder) 
-    annotation (Line(points={{-67,-45},{-60.5,-45},{-60.5,-45},{-53,-45}}, 
+    annotation (Line(points={{-67,-45},{-60.5,-45},{-60.5,-45},{-53,-45}},
         color={0,0,127}));
   connect(currentToVoltageAdaptor2a.f, voltageToCurrentAdaptor2a.f) 
     annotation (Line(points={{-67,-58},{-53,-58}}, color={0,0,127}));
   connect(voltageToCurrentAdaptor2b.p, currentToVoltageAdaptor2b.p) 
     annotation (Line(points={{-7,-42},{7,-42}}, color={0,0,127}));
   connect(voltageToCurrentAdaptor2b.pder, currentToVoltageAdaptor2b.pder) 
-    annotation (Line(points={{-7,-45},{-0.5,-45},{-0.5,-45},{7,-45}}, color={0,0, 
+    annotation (Line(points={{-7,-45},{-0.5,-45},{-0.5,-45},{7,-45}}, color={0,0,
           127}));
   connect(inductor2.n, voltageToCurrentAdaptor2b.pin_p) 
     annotation (Line(points={{-20,-40},{-20,-42},{-12,-42}}, color={0,0,255}));
@@ -202,22 +202,26 @@ equation
   connect(currentToVoltageAdaptor2c.p, voltageToCurrentAdaptor2c.p) 
     annotation (Line(points={{53,-42},{67,-42}}, color={0,0,127}));
   connect(currentToVoltageAdaptor2c.pder, voltageToCurrentAdaptor2c.pder) 
-    annotation (Line(points={{53,-45},{59.5,-45},{59.5,-45},{67,-45}}, color={0, 
+    annotation (Line(points={{53,-45},{59.5,-45},{59.5,-45},{67,-45}}, color={0,
           0,127}));
   connect(currentToVoltageAdaptor2c.f, voltageToCurrentAdaptor2c.f) 
     annotation (Line(points={{53,-58},{67,-58}}, color={0,0,127}));
-  annotation (experiment(StopTime=1.0, Interval=0.0001), 
+  annotation (experiment(StopTime=1.0, Interval=0.0001),
                                                       Documentation(info="<html>
 <p>这个示例演示了如何通过物理连接器和输入/输出信号之间的适配器来连接并联共振电路和串联共振电路的组件，而不是直接连接。考虑到所需的导数，这些组件可以导出为输入/输出模块。(例如：<a href=\"https://fmi-standard.org\">Functional Mock-up Unit</a>)。
 电路中连接这些输入/输出模块长应该会产生与“直接物理连接的电路形式”相同的结果。</p>
 <p>请记住，用户应将物理组件分离并通过适配器信号连接时，应该需要放置适当的<a href=\"modelica://Modelica.Electrical.Analog.Basic.Ground\">接地组件</a>。
 </p>
-</html>"), 
-    Diagram(graphics={Text(
-          extent={{-100,90},{100,70}}, 
-          textColor={28,108,200}, 
-          textString="parallel resonance"), Text(
-          extent={{-100,-10},{100,-30}}, 
-          textColor={28,108,200}, 
-          textString="series resonance")}));
+</html>"),
+    Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
+grid={2,2}),graphics = {Text(origin={0,80},
+lineColor={28,108,200},
+extent={{-100,10},{100,-10}},
+textString="并联谐振",
+textStyle={TextStyle.None},
+textColor={28,108,200}), Text(origin={0,-20},
+lineColor={28,108,200},
+extent={{-100,10},{100,-10}},
+textString="串联谐振",
+textColor={28,108,200})}));
 end ResonanceCircuits;

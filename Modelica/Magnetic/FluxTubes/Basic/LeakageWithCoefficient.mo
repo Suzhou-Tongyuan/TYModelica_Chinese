@@ -1,16 +1,16 @@
 ﻿within Modelica.Magnetic.FluxTubes.Basic;
-model LeakageWithCoefficient 
+model LeakageWithCoefficient
   "泄漏磁阻相对于有用磁通路径的磁阻(不用于执行器的动态仿真)"
   extends BaseClasses.Leakage;
   import Modelica.Constants.eps;
-  parameter SI.CouplingCoefficient c_usefulFlux(final min=eps, final max=1-eps, start=0.7) 
+  parameter SI.CouplingCoefficient c_usefulFlux(final min=eps, final max=1-eps, start=0.7)
     "有效通量/(泄漏通量+有效通量)=有效通量/总通量" 
-    annotation (Dialog(groupImage= 
+    annotation (Dialog(groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Basic/LeakageWithCoefficient.png"));
   Blocks.Interfaces.RealInput R_mUsefulTot(quantity="Reluctance", unit="H-1") 
     annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}}, 
-        rotation=270, 
+        extent={{-20,-20},{20,20}},
+        rotation=270,
         origin={0,120})));
 equation
   (1 - c_usefulFlux)*R_m = c_usefulFlux*R_mUsefulTot;

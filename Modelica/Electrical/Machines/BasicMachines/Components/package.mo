@@ -5,7 +5,7 @@ package Components "机器组件，如气隙"
   annotation (Documentation(info="<html>
 <p>该库含有用于建模电气机器的组件，特别是基于空间矢量理论的三相感应电机。
 这些模型使用了SpacePhasors库。</p>
-</html>", 
+</html>",
       revisions="<html>
 <dl>
   <dt><strong>主要作者:</strong></dt>

@@ -4,7 +4,7 @@ package Dy "变压器：一次侧D接线/二次侧y接线"
 
   annotation (Documentation(info="<html>
 <p>此库含有所有可能矢量组中的一次侧D接线/二次侧y接线的变压器。</p>
-</html>", 
+</html>",
     revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

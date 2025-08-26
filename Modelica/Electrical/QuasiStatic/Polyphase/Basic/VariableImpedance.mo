@@ -1,29 +1,29 @@
 ﻿within Modelica.Electrical.QuasiStatic.Polyphase.Basic;
 model VariableImpedance "多相可变阻抗"
   extends Interfaces.TwoPlug;
-  parameter SI.Temperature T_ref[m]=fill(293.15, m) 
+  parameter SI.Temperature T_ref[m]=fill(293.15, m)
     "参考温度";
-  parameter SI.LinearTemperatureCoefficient alpha_ref[m]=zeros(m) 
+  parameter SI.LinearTemperatureCoefficient alpha_ref[m]=zeros(m)
     "电阻的温度系数 (R_actual = R_ref*(1 + alpha_ref*(heatPort.T - T_ref))";
   extends Modelica.Electrical.Polyphase.Interfaces.ConditionalHeatPort(final mh=m, T=T_ref);
   parameter Boolean frequencyDependent = false "如果为真，考虑频率依赖性" 
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   parameter SI.Frequency f_ref = 1 "参考频率，如果考虑频率依赖性" 
     annotation(Dialog(enable=frequencyDependent));
-  Modelica.ComplexBlocks.Interfaces.ComplexInput Z_ref[m] 
+  Modelica.ComplexBlocks.Interfaces.ComplexInput Z_ref[m]
     "可变复阻抗" annotation (Placement(transformation(
-        origin={0,120}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={0,120},
+        extent={{-20,-20},{20,20}},
         rotation=270), iconTransformation(
-        extent={{-20,-20},{20,20}}, 
-        rotation=270, 
+        extent={{-20,-20},{20,20}},
+        rotation=270,
         origin={0,120})));
   SinglePhase.Basic.VariableImpedance variableImpedance[m](
-    final T_ref=T_ref, 
-    final alpha_ref=alpha_ref, 
-    each final useHeatPort=useHeatPort, 
-    final T=T, 
-    final frequencyDependent=fill(frequencyDependent, m), 
+    final T_ref=T_ref,
+    final alpha_ref=alpha_ref,
+    each final useHeatPort=useHeatPort,
+    final T=T,
+    final frequencyDependent=fill(frequencyDependent, m),
     final f_ref=fill(f_ref, m)) 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
@@ -35,27 +35,27 @@ equation
       points={{0,-10},{0,-100}}, color={191,0,0}));
   connect(variableImpedance.Z_ref, Z_ref) annotation (Line(
       points={{0,12},{0,64},{0,120}}, color={85,170,255}));
-  annotation (defaultComponentName="impedance", 
+  annotation (defaultComponentName="impedance",
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), graphics={Line(points={{60,0},{90,0}}, 
-          color={85,170,255}),Line(points={{-90,0},{-60,0}}, color={85,170,255}), 
+            100,100}}), graphics={Line(points={{60,0},{90,0}},
+          color={85,170,255}),Line(points={{-90,0},{-60,0}}, color={85,170,255}),
           Rectangle(
-              extent={{-70,30},{70,-30}}, 
-              lineColor={85,170,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
+              extent={{-70,30},{70,-30}},
+              lineColor={85,170,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
             Polygon(
-              points={{-70,-30},{70,30},{70,-30},{-70,-30}}, 
-              lineColor={85,170,255}, 
-              fillColor={85,170,255}, 
-              fillPattern=FillPattern.Solid), 
+              points={{-70,-30},{70,30},{70,-30},{-70,-30}},
+              lineColor={85,170,255},
+              fillColor={85,170,255},
+              fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,90},{150,50}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,90},{150,50}},
+          textString="%name",
+          textColor={0,0,255}),
                 Text(
-              extent={{150,-80},{-150,-40}}, 
-              textString="m=%m")}), 
+              extent={{150,-80},{-150,-40}},
+              textString="m=%m")}),
     Documentation(info="<html>
 <p>阻抗模型表示每个相位中电阻和电感或电容器的<strong>串联</strong>连接。<br>
 <img src=\"modelica://Modelica/Resources/Images/Electrical/QuasiStatic/SinglePhase/Basic/RX_impedance.png\"></p>

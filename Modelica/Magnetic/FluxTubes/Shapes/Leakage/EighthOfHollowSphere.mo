@@ -1,11 +1,11 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.Leakage;
-model EighthOfHollowSphere 
+model EighthOfHollowSphere
   "通过八分之一空心球的一个边缘和相对平面的泄漏通量"
 
   extends BaseClasses.Leakage;
 
   parameter SI.Length t(start=0.01) "球壳厚度" 
-    annotation (Dialog(group="Parameters", groupImage= 
+    annotation (Dialog(group="Parameters", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Leakage/EighthOfHollowSphere.png"));
 
 equation

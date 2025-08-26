@@ -3,22 +3,22 @@ model InductorWithHysteresis
   extends Modelica.Icons.Example;
   Basic.Ground mag_ground 
     annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
-  Basic.ElectroMagneticConverterWithLeakageInductance winding(i(fixed= 
+  Basic.ElectroMagneticConverterWithLeakageInductance winding(i(fixed=
           true), N=10) 
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
   Modelica.Electrical.Analog.Basic.Ground el_ground 
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=0.1) annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   Modelica.Electrical.Analog.Sources.SineVoltage vSource(f=200, V=5) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-50,10})));
   Shapes.HysteresisAndMagnets.GenericHystTellinenEverett core(
-    mat=FluxTubes.Material.HysteresisEverettParameter.M330_50A(), 
-    A=4e-4, 
-    MagRel(fixed=true, start=0), 
-    includeEddyCurrents=true, 
-    derHstat(fixed=true), 
+    mat=FluxTubes.Material.HysteresisEverettParameter.M330_50A(),
+    A=4e-4,
+    MagRel(fixed=true, start=0),
+    includeEddyCurrents=true,
+    derHstat(fixed=true),
     l=0.1) 
     annotation (Placement(transformation(extent={{20,20},{40,40}})));
 equation
@@ -27,12 +27,12 @@ equation
   connect(vSource.p, resistor.p) annotation (Line(points={{-50,20},{-50,30},{-40,30}}, color={0,0,255}));
   connect(vSource.n, el_ground.p) annotation (Line(points={{-50,0},{-50,-10}}, color={0,0,255}));
   connect(winding.n, el_ground.p) annotation (Line(
-      points={{-10,0.2},{-10,-10},{-50,-10}}, 
+      points={{-10,0.2},{-10,-10},{-50,-10}},
                                             color={0,0,255}));
   connect(resistor.n, winding.p) annotation (Line(points={{-20,30},{-10,30},{-10,20},{-10,20}}, color={0,0,255}));
-  connect(winding.port_p,core. port_p) annotation (Line(points={{10,20},{10,30},{20,30}}, 
+  connect(winding.port_p,core. port_p) annotation (Line(points={{10,20},{10,30},{20,30}},
                            color={255,127,0}));
-  connect(mag_ground.port,core. port_n) annotation (Line(points={{10,-10},{46,-10},{46,30},{40,30}}, 
+  connect(mag_ground.port,core. port_n) annotation (Line(points={{10,-10},{46,-10},{46,30},{40,30}},
                                      color={255,127,0}));
   annotation (experiment(StartTime=0, StopTime=0.02, Interval=4e-6, Tolerance=1e-004), Documentation(info="<html>
 <p>

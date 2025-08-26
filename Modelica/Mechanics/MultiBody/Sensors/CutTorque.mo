@@ -1,21 +1,21 @@
 ﻿within Modelica.Mechanics.MultiBody.Sensors;
 model CutTorque "测量局部力矩矢量"
 
-  Modelica.Blocks.Interfaces.RealOutput torque[3] 
+  Modelica.Blocks.Interfaces.RealOutput torque[3]
     "在resolveInFrame定义的坐标系中解析的局部力矩" 
        annotation (Placement(transformation(
-        origin={-80,-110}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={-80,-110},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
 
-  parameter Boolean animation=true 
+  parameter Boolean animation=true
     "=true，如果启用动画(显示箭头)";
-  parameter Boolean positiveSign=true 
+  parameter Boolean positiveSign=true
     "=true，如果返回具有正号的力矩(=frame_a.t)，否则返回具有负号的力矩(=frame_b.t)";
-  input Types.Color torqueColor=Modelica.Mechanics.MultiBody.Types.Defaults.TorqueColor 
+  input Types.Color torqueColor=Modelica.Mechanics.MultiBody.Types.Defaults.TorqueColor
     "力矩箭头的颜色" 
     annotation (Dialog(colorSelector=true, group="如果animation=true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
     "环境光的反射(=0：光被完全吸收)" 
     annotation (Dialog(group="如果animation=true", enable=animation));
 
@@ -23,14 +23,14 @@ model CutTorque "测量局部力矩矢量"
 
 protected
   Visualizers.Advanced.DoubleArrow torqueArrow(
-    color=torqueColor, 
-    specularCoefficient=specularCoefficient, 
-    quantity=Modelica.Mechanics.MultiBody.Types.VectorQuantity.Torque, 
-    R=frame_b.R, 
-    r=frame_b.r_0, 
-    headAtOrigin=true, 
+    color=torqueColor,
+    specularCoefficient=specularCoefficient,
+    quantity=Modelica.Mechanics.MultiBody.Types.VectorQuantity.Torque,
+    R=frame_b.R,
+    r=frame_b.r_0,
+    headAtOrigin=true,
     r_head=-frame_a.t*(if positiveSign then +1 else -1)) if world.enableAnimation and animation;
-  Internal.BasicCutTorque cutTorque(resolveInFrame=resolveInFrame, positiveSign= 
+  Internal.BasicCutTorque cutTorque(resolveInFrame=resolveInFrame, positiveSign=
        positiveSign) 
     annotation (Placement(transformation(extent={{-62,-10},{-42,10}})));
   Modelica.Mechanics.MultiBody.Interfaces.ZeroPosition zeroPosition if 
@@ -38,31 +38,31 @@ protected
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
 equation
   connect(cutTorque.frame_a, frame_a) annotation (Line(
-      points={{-62,0},{-100,0}}, 
-      color={95,95,95}, 
+      points={{-62,0},{-100,0}},
+      color={95,95,95},
       thickness=0.5));
   connect(cutTorque.frame_b, frame_b) annotation (Line(
-      points={{-42,0},{100,0}}, 
-      color={95,95,95}, 
+      points={{-42,0},{100,0}},
+      color={95,95,95},
       thickness=0.5));
   connect(cutTorque.torque, torque) annotation (Line(
       points={{-60,-11},{-60,-80},{-80,-80},{-80,-110}}, color={0,0,127}));
   connect(cutTorque.frame_resolve, frame_resolve) annotation (Line(
-      points={{-44,-10},{-44,-74},{80,-74},{80,-100}}, 
-      color={95,95,95}, 
+      points={{-44,-10},{-44,-74},{80,-74},{80,-100}},
+      color={95,95,95},
       pattern=LinePattern.Dot));
   connect(zeroPosition.frame_resolve, cutTorque.frame_resolve) annotation (Line(
-      points={{-20,-30},{-44,-30},{-44,-10}}, 
-      color={95,95,95}, 
+      points={{-20,-30},{-44,-30},{-44,-10}},
+      color={95,95,95},
       pattern=LinePattern.Dot));
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,100}}), 
+    Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,100}}),
       graphics={
-        Line(points={{-80,-100},{-80,0}}, color={0,0,127}), 
+        Line(points={{-80,-100},{-80,0}}, color={0,0,127}),
         Text(
-          extent={{-50,-14},{50,-54}}, 
-          textColor={64,64,64}, 
-          textString="N.m")}), 
+          extent={{-50,-14},{50,-54}},
+          textColor={64,64,64},
+          textString="N.m")}),
     Documentation(info="<html>
 <p>
 该模型连接的两个坐标系之间的局部力矩由该模型确定并在输出信号连接器<strong>torque</strong>(=frame_a.t)处提供。

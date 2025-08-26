@@ -5,20 +5,20 @@ block UnitDelay "将时钟输入信号延迟一个采样周期"
   parameter Integer y_start=0 "第一个时钟周期的输出信号值";
 equation
   y = previous(u);
-  annotation (defaultComponentName="unitDelay1", 
+  annotation (defaultComponentName="unitDelay1",
        Icon(graphics={
-        Line(points={{-30,0},{30,0}}, color={255,128,0}), 
+        Line(points={{-30,0},{30,0}}, color={255,128,0}),
         Text(
-          extent={{-90,10},{90,90}}, 
-          textString="1", 
-          textColor={255,128,0}), 
+          extent={{-90,10},{90,90}},
+          textString="1",
+          textColor={255,128,0}),
         Text(
-          extent={{-90,-10},{90,-90}}, 
-          textString="z", 
-          textColor={255,128,0}), 
+          extent={{-90,-10},{90,-90}},
+          textString="z",
+          textColor={255,128,0}),
         Text(
-          extent={{-150,-150},{150,-110}}, 
-          textString="y_start=%y_start")}), 
+          extent={{-150,-150},{150,-110}},
+          textString="y_start=%y_start")}),
     Documentation(info="<html><p>
 该模块描述了单位延迟：
 </p>

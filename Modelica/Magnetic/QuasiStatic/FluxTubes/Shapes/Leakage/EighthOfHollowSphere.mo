@@ -1,11 +1,11 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.Leakage;
-model EighthOfHollowSphere 
+model EighthOfHollowSphere
 "通过中空球体八分之一的一面和另一面的漏磁"
 
   extends BaseClasses.Leakage;
 
   parameter SI.Length t(start=0.01) "球壳厚度" 
-    annotation (Dialog(group="Parameters", groupImage= 
+    annotation (Dialog(group="Parameters", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Leakage/EighthOfHollowSphere.png"));
 
 equation

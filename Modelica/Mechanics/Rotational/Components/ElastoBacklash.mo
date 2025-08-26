@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.Rotational.Components;
-model ElastoBacklash 
+model ElastoBacklash
   "串联线性弹簧和阻尼器的齿隙（采用弹性模型对齿隙建模）"
 
-  parameter SI.RotationalSpringConstant c(final min=Modelica.Constants.small, 
+  parameter SI.RotationalSpringConstant c(final min=Modelica.Constants.small,
       start=1.0e5) "弹簧刚度系数（要求 c > 0）";
-  parameter SI.RotationalDampingConstant d(final min=0, start=0) 
+  parameter SI.RotationalDampingConstant d(final min=0, start=0)
     "阻尼系数";
   parameter SI.Angle b(final min=0) = 0 "总齿隙";
   parameter SI.Angle phi_rel0=0 "未拉伸弹簧角度";
@@ -14,9 +14,9 @@ model ElastoBacklash
   extends 
     Modelica.Thermal.HeatTransfer.Interfaces.PartialElementaryConditionalHeatPortWithoutT;
 protected
-  final parameter SI.Angle bMax=b/2 
+  final parameter SI.Angle bMax=b/2
     "反弹在 bMin <= phi_rel - phi_rel0 <= bMax 范围内";
-  final parameter SI.Angle bMin=-bMax 
+  final parameter SI.Angle bMin=-bMax
     "反弹在 bMin <= phi_rel - phi_rel0 <= bMax 范围内";
   SI.Torque tau_c;
   SI.Torque tau_d;
@@ -73,7 +73,7 @@ equation
       tau_c, tau_d))) else if phi_diff < bMin then smooth(0, noEvent(if 
       tau_c + tau_d >= 0 then 0 else tau_c + max(tau_c, tau_d))) else 0;
     lossPower = if abs(b) <= bEps then tau_d*w_rel else if phi_diff > bMax 
-       then smooth(0, noEvent(if tau_c + tau_d <= 0 then 0 else min(tau_c, 
+       then smooth(0, noEvent(if tau_c + tau_d <= 0 then 0 else min(tau_c,
       tau_d)*w_rel)) else if phi_diff < bMin then smooth(0, noEvent(if 
       tau_c + tau_d >= 0 then 0 else max(tau_c, tau_d)*w_rel)) else 0;
   end if;
@@ -159,34 +159,34 @@ desiredContactTorque = c*phi_contact + d*<strong>der</strong>(phi_contact)
 还请参阅旋转库的用户指南中的讨论：<a href=\"modelica://Modelica.Mechanics.Rotational.UsersGuide.StateSelection\">State Selection</a>。
 </p>
 
-</html>"), 
+</html>"),
     Icon(
-    coordinateSystem(preserveAspectRatio=true, 
-      extent={{-100,-100},{100,100}}), 
+    coordinateSystem(preserveAspectRatio=true,
+      extent={{-100,-100},{100,100}}),
       graphics={
-    Line(points={{-80,32},{-58,32},{-48,0},{-34,61},{-20,0},{-8,60},{0,30},{20,30}}), 
-    Rectangle(extent={{-60,-10},{-10,-50}}, 
-      fillColor={192,192,192}, 
-      fillPattern=FillPattern.Solid), 
-    Line(points={{-60,-50},{0,-50}}), 
-    Line(points={{-60,-10},{0,-10}}), 
-    Line(points={{-10,-30},{20,-30}}), 
-    Line(points={{-80,-30},{-60,-30}}), 
-    Line(points={{-80,32},{-80,-30}}), 
-    Line(points={{20,30},{20,-30}}), 
-    Line(points={{-90,0},{-80,0}}), 
-    Line(points={{90,0},{80,0}}), 
-    Line(points={{20,0},{60,0},{60,-30}}), 
-    Line(points={{40,-12},{40,-40},{80,-40},{80,0}}), 
-    Text(extent={{-150,-130},{150,-90}}, 
-      textString="b=%b"), 
-    Text(extent={{-150,100},{150,60}}, 
-      textColor={0,0,255}, 
-      textString="%name"), 
-    Text(extent={{-152,-92},{148,-52}}, 
-      textString="c=%c"), 
-    Line(visible=useHeatPort, 
-      points={{-100,-100},{-100,-43},{-34,-43}}, 
-      color={191,0,0}, 
+    Line(points={{-80,32},{-58,32},{-48,0},{-34,61},{-20,0},{-8,60},{0,30},{20,30}}),
+    Rectangle(extent={{-60,-10},{-10,-50}},
+      fillColor={192,192,192},
+      fillPattern=FillPattern.Solid),
+    Line(points={{-60,-50},{0,-50}}),
+    Line(points={{-60,-10},{0,-10}}),
+    Line(points={{-10,-30},{20,-30}}),
+    Line(points={{-80,-30},{-60,-30}}),
+    Line(points={{-80,32},{-80,-30}}),
+    Line(points={{20,30},{20,-30}}),
+    Line(points={{-90,0},{-80,0}}),
+    Line(points={{90,0},{80,0}}),
+    Line(points={{20,0},{60,0},{60,-30}}),
+    Line(points={{40,-12},{40,-40},{80,-40},{80,0}}),
+    Text(extent={{-150,-130},{150,-90}},
+      textString="b=%b"),
+    Text(extent={{-150,100},{150,60}},
+      textColor={0,0,255},
+      textString="%name"),
+    Text(extent={{-152,-92},{148,-52}},
+      textString="c=%c"),
+    Line(visible=useHeatPort,
+      points={{-100,-100},{-100,-43},{-34,-43}},
+      color={191,0,0},
       pattern=LinePattern.Dot)}));
 end ElastoBacklash;

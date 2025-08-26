@@ -1,12 +1,12 @@
 ﻿within Modelica.Electrical.Batteries.BatteryStacksWithSensors;
 model Stack "带传感器的电池堆栈"
   extends Modelica.Electrical.Batteries.BaseClasses.BaseStackWithSensors(
-    redeclare Modelica.Electrical.Batteries.BaseClasses.BaseStackData stackData, 
+    redeclare Modelica.Electrical.Batteries.BaseClasses.BaseStackData stackData,
     redeclare Modelica.Electrical.Batteries.BatteryStacksWithSensors.Cell cell(
-      cellData=stackData.cellData, 
-      SOC0=SOC0, 
-      each SOCtolerance=SOCtolerance, 
-      each useHeatPort=useHeatPort, 
+      cellData=stackData.cellData,
+      SOC0=SOC0,
+      each SOCtolerance=SOCtolerance,
+      each useHeatPort=useHeatPort,
       each T=T));
   annotation (Documentation(info="<html>
 <p>

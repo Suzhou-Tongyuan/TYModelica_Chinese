@@ -3,7 +3,7 @@ class SupportForces "支撑力"
   extends Modelica.Icons.Information;
 
   annotation (
-    DocumentationClass=true, 
+    DocumentationClass=true,
     Documentation(info="<html>
 
 <p>下图表示了装备有支撑一维平动接口（下方中央的带边框的一维平动接口）的组件示例，该一维平动接口可用于固定组件在地面或其他移动元件上，或将其与力元件结合使用。

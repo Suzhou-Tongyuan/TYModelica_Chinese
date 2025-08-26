@@ -1,20 +1,20 @@
 ﻿within Modelica.Electrical.Analog.Basic;
-model GeneralVoltageToCurrentAdaptor 
+model GeneralVoltageToCurrentAdaptor
   "电气一端信号适配器，具有电流和电流导数作为输出，电压和电压导数作为输入(特别适用于FMUs)"
   extends Modelica.Blocks.Interfaces.Adaptors.PotentialToFlowAdaptor(
-    final Name_p="v", 
-    final Name_pder="dv", 
-    final Name_pder2="d2v", 
-    final Name_f="i", 
-    final Name_fder="di", 
-    final Name_fder2="d2i", 
-    final use_pder2=false, 
-    final use_fder2=false, 
-    final p(unit="V"), 
-    final pder(unit="V/s"), 
-    final pder2(unit="V/s2"), 
-    final f(unit="A"), 
-    final fder(unit="A/s"), 
+    final Name_p="v",
+    final Name_pder="dv",
+    final Name_pder2="d2v",
+    final Name_f="i",
+    final Name_fder="di",
+    final Name_fder2="d2i",
+    final use_pder2=false,
+    final use_fder2=false,
+    final p(unit="V"),
+    final pder(unit="V/s"),
+    final pder2(unit="V/s2"),
+    final f(unit="A"),
+    final fder(unit="A/s"),
     final fder2(unit="A/s2"));
   SI.Voltage v "Voltage drop between the two pins (= p.v - n.v)";
   SI.Current i "Current flowing from pin p to pin n";
@@ -41,11 +41,11 @@ equation
 <p>
 请注意，这个组件包含<strong>no ground</strong>。 请记住，将物理组件分离并通过适配器信号连接时，需要放置适当的<a href=\"modelica://Modelica.Electrical.Analog.Basic.Ground\">ground components</a>以在子电路中定义电位。
 </p>
-</html>"), 
+</html>"),
          Icon(graphics={
             Rectangle(
-              extent={{-20,100},{20,-100}}, 
-              lineColor={0,0,255}, 
-              radius=10, 
+              extent={{-20,100},{20,-100}},
+              lineColor={0,0,255},
+              radius=10,
           lineThickness=0.5)}));
 end GeneralVoltageToCurrentAdaptor;

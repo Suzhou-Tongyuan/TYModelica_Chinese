@@ -1,47 +1,47 @@
 ﻿within Modelica.Fluid.Examples;
 model HeatingSystem "加热系统的简化模型"
   extends Modelica.Icons.Example;
-  replaceable package Medium = 
+  replaceable package Medium =
     Modelica.Media.CompressibleLiquids.LinearWater_pT_Ambient 
     constrainedby Modelica.Media.Interfaces.PartialMedium annotation();
   Modelica.Fluid.Vessels.OpenTank tank(
-  redeclare package Medium = Medium, 
-    crossArea = 0.01, 
-    height = 2, 
-    level_start = 1, 
-    nPorts = 2, 
-    massDynamics = Modelica.Fluid.Types.Dynamics.FixedInitial, 
-    use_HeatTransfer = true, 
-    portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 
-    0.01), Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 
-    0.01)}, 
-  redeclare model HeatTransfer = 
-    Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer(k = 10), 
-    ports(each p(start = 1.1e5)), 
+  redeclare package Medium = Medium,
+    crossArea = 0.01,
+    height = 2,
+    level_start = 1,
+    nPorts = 2,
+    massDynamics = Modelica.Fluid.Types.Dynamics.FixedInitial,
+    use_HeatTransfer = true,
+    portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter =
+    0.01), Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter =
+    0.01)},
+  redeclare model HeatTransfer =
+    Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer(k = 10),
+    ports(each p(start = 1.1e5)),
     T_start = Modelica.Units.Conversions.from_degC(20)) 
     annotation(Placement(transformation(extent = {{-80, 30}, {-60, 50}})));
   Machines.ControlledPump pump(
-  redeclare package Medium = Medium, 
-    N_nominal = 1500, 
-    use_T_start = true, 
-    T_start = Modelica.Units.Conversions.from_degC(40), 
-    m_flow_start = 0.01, 
-    m_flow_nominal = 0.01, 
-    control_m_flow = false, 
-    allowFlowReversal = false, 
-    p_a_start = 110000, 
-    p_b_start = 130000, 
-    p_a_nominal = 110000, 
+  redeclare package Medium = Medium,
+    N_nominal = 1500,
+    use_T_start = true,
+    T_start = Modelica.Units.Conversions.from_degC(40),
+    m_flow_start = 0.01,
+    m_flow_nominal = 0.01,
+    control_m_flow = false,
+    allowFlowReversal = false,
+    p_a_start = 110000,
+    p_b_start = 130000,
+    p_a_nominal = 110000,
     p_b_nominal = 130000) 
     annotation(Placement(transformation(extent = {{-50, 10}, {-30, 30}})));
   Modelica.Fluid.Valves.ValveIncompressible valve(
-  redeclare package Medium = Medium, 
-    CvData = Modelica.Fluid.Types.CvTypes.OpPoint, 
-    port_b(p(start = 1.1e5)), 
-    m_flow_nominal = 0.01, 
-    show_T = true, 
-    allowFlowReversal = false, 
-    dp_start = 18000, 
+  redeclare package Medium = Medium,
+    CvData = Modelica.Fluid.Types.CvTypes.OpPoint,
+    port_b(p(start = 1.1e5)),
+    m_flow_nominal = 0.01,
+    show_T = true,
+    allowFlowReversal = false,
+    dp_start = 18000,
     dp_nominal = 10000) 
     annotation(Placement(transformation(extent = {{60, -80}, {40, -60}})));
 protected
@@ -54,12 +54,12 @@ public
     annotation(Placement(transformation(extent = {{-14, -27}, {0, -13}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor wall(G = 1.6e3 / 20) 
     annotation(Placement(transformation(
-    origin = {10, -48}, 
-    extent = {{8, -10}, {-8, 10}}, 
+    origin = {10, -48},
+    extent = {{8, -10}, {-8, 10}},
     rotation = 90)));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow burner(
-    Q_flow = 1.6e3, 
-    T_ref = 343.15, 
+    Q_flow = 1.6e3,
+    T_ref = 343.15,
     alpha = -0.5) 
     annotation(Placement(transformation(extent = {{16, 30}, {36, 50}})));
   inner Modelica.Fluid.System system(
@@ -67,36 +67,36 @@ public
     annotation(Placement(transformation(extent = {{-90, 70}, {
     -70, 90}})));
   Pipes.DynamicPipe heater(
-  redeclare package Medium = Medium, 
-    use_T_start = true, 
-    T_start = Modelica.Units.Conversions.from_degC(80), 
-    length = 2, 
-  redeclare model HeatTransfer = 
-    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer, 
-    diameter = 0.01, 
-    nNodes = 1, 
-  redeclare model FlowModel = 
-    Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow, 
-    use_HeatTransfer = true, 
-    modelStructure = Modelica.Fluid.Types.ModelStructure.a_v_b, 
+  redeclare package Medium = Medium,
+    use_T_start = true,
+    T_start = Modelica.Units.Conversions.from_degC(80),
+    length = 2,
+  redeclare model HeatTransfer =
+    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer,
+    diameter = 0.01,
+    nNodes = 1,
+  redeclare model FlowModel =
+    Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow,
+    use_HeatTransfer = true,
+    modelStructure = Modelica.Fluid.Types.ModelStructure.a_v_b,
     p_a_start = 130000) 
     annotation(Placement(transformation(extent = {{30, 10}, {50, 30}})));
   Pipes.DynamicPipe radiator(
-    use_T_start = true, 
-  redeclare package Medium = Medium, 
-    port_b(p(start = 1.1e5)), 
-    length = 10, 
-    T_start = Modelica.Units.Conversions.from_degC(40), 
-  redeclare model HeatTransfer = 
-    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer, 
-    diameter = 0.01, 
-    nNodes = 1, 
-  redeclare model FlowModel = 
-    Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow, 
-    use_HeatTransfer = true, 
-    modelStructure = Modelica.Fluid.Types.ModelStructure.a_v_b, 
-    p_a_start = 110000, 
-    state_a(p(start = 110000)), 
+    use_T_start = true,
+  redeclare package Medium = Medium,
+    port_b(p(start = 1.1e5)),
+    length = 10,
+    T_start = Modelica.Units.Conversions.from_degC(40),
+  redeclare model HeatTransfer =
+    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer,
+    diameter = 0.01,
+    nNodes = 1,
+  redeclare model FlowModel =
+    Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow,
+    use_HeatTransfer = true,
+    modelStructure = Modelica.Fluid.Types.ModelStructure.a_v_b,
+    p_a_start = 110000,
+    state_a(p(start = 110000)),
     state_b(p(start = 110000))) 
     annotation(Placement(transformation(extent = {{20, -80}, {0, -60}})));
 protected
@@ -105,50 +105,50 @@ protected
   Modelica.Blocks.Interfaces.RealOutput T_return(unit = "K") 
     annotation(Placement(transformation(extent = {{-46, -56}, {-58, -44}})));
 public
-  Modelica.Fluid.Sensors.Temperature sensor_T_forward(redeclare package Medium 
+  Modelica.Fluid.Sensors.Temperature sensor_T_forward(redeclare package Medium
     = Medium) 
     annotation(Placement(transformation(extent = {{50, 30}, {70, 50}})));
-  Modelica.Fluid.Sensors.Temperature sensor_T_return(redeclare package Medium 
+  Modelica.Fluid.Sensors.Temperature sensor_T_return(redeclare package Medium
     = Medium) 
     annotation(Placement(transformation(extent = {{-20, -60}, {-40, -40}})));
 protected
   Modelica.Blocks.Interfaces.RealOutput tankLevel(unit = "m") 
-    annotation(Placement(transformation(extent = {{-56, 34}, 
+    annotation(Placement(transformation(extent = {{-56, 34},
     {-44, 46}})));
 public
   Modelica.Blocks.Sources.Step handle(
-    startTime = 2000, 
-    height = 0.9, 
+    startTime = 2000,
+    height = 0.9,
     offset = 0.1) annotation(Placement(transformation(extent = {{26, -27}, {40, -13}})));
   Pipes.DynamicPipe pipe(
-  redeclare package Medium = Medium, 
-    use_T_start = true, 
-    T_start = Modelica.Units.Conversions.from_degC(80), 
-  redeclare model HeatTransfer = 
-    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer, 
-    diameter = 0.01, 
-  redeclare model FlowModel = 
-    Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow, 
-    length = 10, 
+  redeclare package Medium = Medium,
+    use_T_start = true,
+    T_start = Modelica.Units.Conversions.from_degC(80),
+  redeclare model HeatTransfer =
+    Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer,
+    diameter = 0.01,
+  redeclare model FlowModel =
+    Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow,
+    length = 10,
     p_a_start = 130000) 
-    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, 
-    rotation = -90, 
+    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}},
+    rotation = -90,
     origin = {80, -20})));
 equation
   tankLevel = tank.level;
-  connect(sensor_m_flow.m_flow, m_flow) annotation(Line(points = {{-10, 31}, 
+  connect(sensor_m_flow.m_flow, m_flow) annotation(Line(points = {{-10, 31},
     {-10, 40}, {0, 40}}, color = {0, 0, 127}));
   connect(sensor_m_flow.port_b, heater.port_a) 
-    annotation(Line(points = {{0, 20}, {0, 
+    annotation(Line(points = {{0, 20}, {0,
     20}, {30, 20}}, color = {0, 127, 255}));
   connect(T_ambient.port, wall.port_a) annotation(Line(
     points = {{0, -20}, {10, -20}, {10, -40}}, color = {191, 0, 0}));
   connect(sensor_T_forward.T, T_forward) annotation(Line(points = {{67, 40}, {
     80, 40}}, color = {0, 0, 127}));
-  connect(radiator.port_a, valve.port_b) annotation(Line(points = {{20, -70}, {20, 
+  connect(radiator.port_a, valve.port_b) annotation(Line(points = {{20, -70}, {20,
     -70}, {40, -70}}, color = {0, 127, 255}));
   connect(sensor_T_return.port, radiator.port_b) 
-    annotation(Line(points = {{-30, -60}, 
+    annotation(Line(points = {{-30, -60},
     {-30, -70}, {0, -70}}, color = {0, 127, 255}));
   connect(tank.ports[2], pump.port_a) annotation(Line(
     points = {{-68, 30}, {-68, 20}, {-50, 20}}, color = {0, 127, 255}));
@@ -173,7 +173,7 @@ equation
     points = {{80, -30}, {80, -70}, {60, -70}}, color = {0, 127, 255}));
   connect(radiator.port_b, tank.ports[1]) annotation(Line(
     points = {{0, -70}, {-72, -70}, {-72, 30}}, color = {0, 127, 255}));
-  annotation(Documentation(info = 
+  annotation(Documentation(info =
     "<html><p>
 一个带有封闭流动循环的简单加热系统。 在仿真时间为2000秒后，阀门完全打开。
 一个简单的理想化控制嵌入到相应的组件中，使得供暖系统可以通过阀门进行调节： 泵控制回路压力，燃烧器控制介质温度。
@@ -210,8 +210,8 @@ equation
 </p>
 <p style=\"text-align: center;\"><img src=\"modelica://Modelica/Resources/Images/Fluid/Examples/HeatingSystem.png\" alt=\"HeatingSystem.png\" data-href=\"\" style=\"\">
 </p>
-</html>"), experiment(StopTime = 6000), 
-    __Dymola_Commands(file(ensureSimulated = true) = 
-    "modelica://Modelica/Resources/Scripts/Dymola/Fluid/HeatingSystem/plotResults.mos" 
+</html>"), experiment(StopTime = 6000),
+    __Dymola_Commands(file(ensureSimulated = true) =
+    "modelica://Modelica/Resources/Scripts/Dymola/Fluid/HeatingSystem/plotResults.mos"
     "plotResults"));
 end HeatingSystem;

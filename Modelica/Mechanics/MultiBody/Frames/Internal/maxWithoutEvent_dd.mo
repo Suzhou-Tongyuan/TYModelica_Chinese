@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Internal;
-function maxWithoutEvent_dd 
+function maxWithoutEvent_dd
   "函数maxWithoutEvent_d(..)的一阶导数"
   extends Modelica.Icons.Function;
 

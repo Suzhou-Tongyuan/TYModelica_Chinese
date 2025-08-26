@@ -1,23 +1,23 @@
 ﻿within Modelica.Mechanics.Rotational.Interfaces;
-model InternalSupport 
+model InternalSupport
     "适配器模型，用于利用有条件的支撑连接器"
-  input SI.Torque tau 
+  input SI.Torque tau
     "外部支撑力矩（必须通过在使用InternalSupport模型的模型中进行力矩平衡计算而得出；= flange.tau)";
   SI.Angle phi "外部支撑角度（= flange.phi）";
-  Flange_a flange 
+  Flange_a flange
     "内部支撑一维转动接口（必须连接到条件支撑连接器以使用useSupport=true，连接到条件固定模型以使用useSupport=false）" 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
   flange.tau = tau;
   flange.phi = phi;
-  annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
+  annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
             -100},{100,100}}), graphics={Ellipse(
-              extent={{-20,20},{20,-20}}, 
-              lineColor={135,135,135}, 
-              fillColor={175,175,175}, 
+              extent={{-20,20},{20,-20}},
+              lineColor={135,135,135},
+              fillColor={175,175,175},
               fillPattern=FillPattern.Solid),Text(
-              extent={{-200,80},{200,40}}, 
-              textColor={0,0,255}, 
+              extent={{-200,80},{200,40}},
+              textColor={0,0,255},
               textString="%name")}), Documentation(info="<html>
 <p>
 这是一个适配器模型，用于在组件中利用一个条件

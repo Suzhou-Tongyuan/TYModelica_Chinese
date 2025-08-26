@@ -2,16 +2,16 @@
 model GearConstraint "演示GearConstraint模型的使用"
   extends Modelica.Icons.Example;
   Joints.GearConstraint gearConstraint(
-    ratio=10, 
-    phi_b(fixed=true), 
-    w_b(fixed=true), 
+    ratio=10,
+    phi_b(fixed=true),
+    w_b(fixed=true),
     checkTotalPower=true) 
                      annotation (Placement(transformation(extent={{50,40},{70,60}})));
   inner World world(driveTrainMechanics3D=true, g=0) annotation (Placement(
         transformation(extent={{-50,10},{-30,30}})));
   Parts.BodyCylinder cyl1(
-    diameter=0.1, 
-    color={0,128,0}, 
+    diameter=0.1,
+    color={0,128,0},
     r={0.4,0,0}) annotation (Placement(transformation(extent={{20,40},{40,60}})));
   Parts.BodyCylinder cyl2(r={0.4,0,0}, diameter=0.2) annotation (Placement(
         transformation(extent={{80,40},{100,60}})));
@@ -20,9 +20,9 @@ model GearConstraint "演示GearConstraint模型的使用"
       Placement(transformation(extent={{-100,60},{-80,80}})));
   Parts.Fixed fixed annotation (Placement(transformation(extent={{-50,-90},{-30,-70}})));
   Rotational.Components.Inertia inertia1(
-    J=cyl1.I[1, 1], 
-    a(fixed=false), 
-    phi(fixed=true, start=0), 
+    J=cyl1.I[1, 1],
+    a(fixed=false),
+    phi(fixed=true, start=0),
     w(fixed=true, start=0)) annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
   Rotational.Components.IdealGear idealGear(ratio=10, useSupport=true) 
     annotation (Placement(transformation(extent={{50,-40},{70,-20}})));
@@ -33,24 +33,24 @@ model GearConstraint "演示GearConstraint模型的使用"
   Parts.Mounting1D mounting1D annotation (Placement(transformation(extent={{-30,-70},{-10,-50}})));
 equation
   connect(world.frame_b, gearConstraint.bearing) annotation (Line(
-      points={{-30,20},{60,20},{60,40}}, 
-      color={95,95,95}, 
+      points={{-30,20},{60,20},{60,40}},
+      color={95,95,95},
       thickness=0.5));
   connect(cyl1.frame_b, gearConstraint.frame_a) annotation (Line(
-      points={{40,50},{50,50}}, 
-      color={95,95,95}, 
+      points={{40,50},{50,50}},
+      color={95,95,95},
       thickness=0.5));
   connect(gearConstraint.frame_b, cyl2.frame_a) annotation (Line(
-      points={{70,50},{80,50}}, 
-      color={95,95,95}, 
+      points={{70,50},{80,50}},
+      color={95,95,95},
       thickness=0.5));
   connect(torque1.frame_b, cyl1.frame_a) annotation (Line(
-      points={{10,50},{20,50}}, 
-      color={95,95,95}, 
+      points={{10,50},{20,50}},
+      color={95,95,95},
       thickness=0.5));
   connect(torque1.frame_a, world.frame_b) annotation (Line(
-      points={{-10,50},{-20,50},{-20,20},{-30,20}}, 
-      color={95,95,95}, 
+      points={{-10,50},{-20,50},{-20,20},{-30,20}},
+      color={95,95,95},
       thickness=0.5));
   connect(sine.y, torque1.torque) annotation (Line(
       points={{-79,70},{-6,70},{-6,62}},   color={0,0,127}));
@@ -67,8 +67,8 @@ equation
   connect(mounting1D.flange_b, torque2.support) annotation (Line(
       points={{-10,-60},{0,-60},{0,-40}}));
   connect(fixed.frame_b, mounting1D.frame_a) annotation (Line(
-      points={{-30,-80},{-20,-80},{-20,-70}}, 
-      color={95,95,95}, 
+      points={{-30,-80},{-20,-80},{-20,-70}},
+      color={95,95,95},
       thickness=0.5));
   annotation (experiment(StopTime=5), Documentation(info="<html>
 <p>

@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical;
-package Digital 
+package Digital
   "基于VHDL标准的数字电路元件库，具有9值逻辑和可转换为2值、3值、4值逻辑"
 
   extends Modelica.Icons.Package;
@@ -158,30 +158,30 @@ Germany
       D.Sources.DigitalClock CLK(period = 20, startTime = 0, width = 50) annotation(Placement(transformation(
         extent = {{-80, -56}, {-60, -36}})));
       D.Sources.Table D0(
-        y0 = L.'0', 
-        x = {L.'1', L.'0', L.'1', L.'0'}, 
-        t = {50, 100, 145, 200}) annotation(Placement(transformation(extent = {{-80, 58}, 
+        y0 = L.'0',
+        x = {L.'1', L.'0', L.'1', L.'0'},
+        t = {50, 100, 145, 200}) annotation(Placement(transformation(extent = {{-80, 58},
         {-60, 78}})));
       D.Sources.Table D1(
-        y0 = L.'0', 
-        x = {L.'1', L.'0', L.'1', L.'0'}, 
-        t = {22, 140, 150, 180}) annotation(Placement(transformation(extent = {{-80, 32}, 
+        y0 = L.'0',
+        x = {L.'1', L.'0', L.'1', L.'0'},
+        t = {22, 140, 150, 180}) annotation(Placement(transformation(extent = {{-80, 32},
         {-60, 52}})));
-      D.Examples.Utilities.MUX4 MUX annotation(Placement(transformation(extent = {{-10, 0}, 
+      D.Examples.Utilities.MUX4 MUX annotation(Placement(transformation(extent = {{-10, 0},
         {70, 80}})));
       D.Sources.Table D2(
-        y0 = L.'0', 
-        x = {L.'1', L.'0', L.'1', L.'0'}, 
-        t = {22, 140, 150, 180}) annotation(Placement(transformation(extent = {{-80, 6}, 
+        y0 = L.'0',
+        x = {L.'1', L.'0', L.'1', L.'0'},
+        t = {22, 140, 150, 180}) annotation(Placement(transformation(extent = {{-80, 6},
         {-60, 26}})));
       D.Sources.Table D3(
-        y0 = L.'0', 
-        x = {L.'1', L.'0', L.'1', L.'0'}, 
-        t = {22, 140, 150, 180}) annotation(Placement(transformation(extent = {{-80, -20}, 
+        y0 = L.'0',
+        x = {L.'1', L.'0', L.'1', L.'0'},
+        t = {22, 140, 150, 180}) annotation(Placement(transformation(extent = {{-80, -20},
         {-60, 0}})));
-      D.Examples.Utilities.JKFF FF annotation(Placement(transformation(extent = {{-20, -62}, 
+      D.Examples.Utilities.JKFF FF annotation(Placement(transformation(extent = {{-20, -62},
         {0, -42}})));
-      D.Sources.Set Enable(x = Modelica.Electrical.Digital.Interfaces.Logic.'1') annotation(Placement(transformation(extent = {{-80, -82}, 
+      D.Sources.Set Enable(x = Modelica.Electrical.Digital.Interfaces.Logic.'1') annotation(Placement(transformation(extent = {{-80, -82},
         {-60, -62}})));
     equation
       connect(CLK.y, FF.clk) annotation(Line(
@@ -216,19 +216,19 @@ Germany
       extends Modelica.Icons.Example;
 
       D.Examples.Utilities.JKFF FF 
-        annotation(Placement(transformation(extent = {{-10, -40}, {70, 
+        annotation(Placement(transformation(extent = {{-10, -40}, {70,
         40}})));
       D.Sources.DigitalClock CLK(period = 10, startTime = 0, width = 50) annotation(Placement(transformation(
         extent = {{-80, -10}, {-60, 10}})));
       D.Sources.Table J(
-        y0 = L.'0', 
-        x = {L.'1', L.'0', L.'1', L.'0'}, 
-        t = {50, 100, 145, 200}) annotation(Placement(transformation(extent = {{-80, 
+        y0 = L.'0',
+        x = {L.'1', L.'0', L.'1', L.'0'},
+        t = {50, 100, 145, 200}) annotation(Placement(transformation(extent = {{-80,
         18}, {-60, 38}})));
       D.Sources.Table K(
-        y0 = L.'0', 
-        x = {L.'1', L.'0', L.'1', L.'0'}, 
-        t = {22, 140, 150, 180}) annotation(Placement(transformation(extent = {{-80, 
+        y0 = L.'0',
+        x = {L.'1', L.'0', L.'1', L.'0'},
+        t = {22, 140, 150, 180}) annotation(Placement(transformation(extent = {{-80,
         -38}, {-60, -18}})));
     equation
       connect(J.y, FF.j) annotation(Line(
@@ -249,41 +249,41 @@ Germany
       extends Modelica.Icons.Example;
 
       Modelica.Electrical.Digital.Sources.Table a(
-        t = {1, 2, 3, 4}, 
-        x = {L.'1', L.'0', L.'1', L.'0'}, 
+        t = {1, 2, 3, 4},
+        x = {L.'1', L.'0', L.'1', L.'0'},
         y0 = L.'0') annotation(Placement(transformation(extent = {{-80, 18}, {-60, 38}})));
       Modelica.Electrical.Digital.Sources.Table b(
-        x = {L.'1', L.'0'}, 
-        t = {2, 4}, 
+        x = {L.'1', L.'0'},
+        t = {2, 4},
         y0 = L.'0') annotation(Placement(transformation(extent = {{-80, -38}, {-60, -18}})));
       Modelica.Electrical.Digital.Examples.Utilities.HalfAdder Adder(delayTime = 0.3, AND(G2(
-        y(start = L.'U', fixed = true))), 
+        y(start = L.'U', fixed = true))),
         XOR(G2(y(start = L.'U', fixed = true)))) 
-        annotation(Placement(transformation(extent = {{-40, 
+        annotation(Placement(transformation(extent = {{-40,
         -40}, {40, 40}})));
       Modelica.Electrical.Digital.Converters.LogicToReal s(
-        n = 1, 
-        value_U = 0.5, 
-        value_X = 0.5, 
-        value_0 = 0, 
-        value_1 = 1, 
-        value_Z = 0.5, 
-        value_W = 0.5, 
-        value_L = 0, 
-        value_H = 1, 
-        value_m = 0.5) annotation(Placement(transformation(extent = {{60, 
+        n = 1,
+        value_U = 0.5,
+        value_X = 0.5,
+        value_0 = 0,
+        value_1 = 1,
+        value_Z = 0.5,
+        value_W = 0.5,
+        value_L = 0,
+        value_H = 1,
+        value_m = 0.5) annotation(Placement(transformation(extent = {{60,
         18}, {80, 38}})));
       Modelica.Electrical.Digital.Converters.LogicToReal c(
-        n = 1, 
-        value_U = 0.5, 
-        value_X = 0.5, 
-        value_0 = 0, 
-        value_1 = 1, 
-        value_Z = 0.5, 
-        value_W = 0.5, 
-        value_L = 0, 
-        value_H = 1, 
-        value_m = 0.5) annotation(Placement(transformation(extent = {{60, 
+        n = 1,
+        value_U = 0.5,
+        value_X = 0.5,
+        value_0 = 0,
+        value_1 = 1,
+        value_Z = 0.5,
+        value_W = 0.5,
+        value_L = 0,
+        value_H = 1,
+        value_m = 0.5) annotation(Placement(transformation(extent = {{60,
         -38}, {80, -18}})));
     equation
       connect(b.y, Adder.b) annotation(Line(
@@ -340,10 +340,10 @@ Germany
       D.Examples.Utilities.FullAdder Adder1 annotation(Placement(
         transformation(extent = {{0, -30}, {60, 30}})));
       D.Converters.LogicToReal s(value_0 = 0, value_1 = 1, value_H = 1, value_L = 0, value_m = 0.5, value_U = 0.5, value_W = 0.5, value_X = 0.5, value_Z = 0.5, n = 1) 
-        annotation(Placement(transformation(extent = {{70, 
+        annotation(Placement(transformation(extent = {{70,
         12}, {90, 32}})));
       D.Converters.LogicToReal c_out(value_0 = 0, value_1 = 1, value_H = 1, value_L = 0, value_m = 0.5, value_U = 0.5, value_W = 0.5, value_X = 0.5, value_Z = 0.5, n = 1) 
-        annotation(Placement(transformation(extent = 
+        annotation(Placement(transformation(extent =
         {{70, -32}, {90, -12}})));
       D.Examples.Utilities.Counter3 Counter 
         annotation(Placement(transformation(extent = {{-60, -18}, {-20, 22}})));
@@ -353,19 +353,19 @@ Germany
         -90, -22}, {-70, -2}})));
     equation
       connect(Adder1.s, s.x[1]) 
-        annotation(Line(points = {{60.3, 21}, {68, 21}, {68, 
+        annotation(Line(points = {{60.3, 21}, {68, 21}, {68,
         22}, {75, 22}}, color = {127, 0, 127}));
       connect(Adder1.c_out, c_out.x[1]) 
-        annotation(Line(points = {{60, -21}, {68, 
+        annotation(Line(points = {{60, -21}, {68,
         -21}, {68, -22}, {75, -22}}, color = {127, 0, 127}));
       connect(CLK.y, Counter.count) annotation(Line(points = {{-70, -12}, {-60, -12}}, color = {127, 0, 127}));
-      connect(Enable.y, Counter.enable) annotation(Line(points = {{-70, 16}, {-60, 
+      connect(Enable.y, Counter.enable) annotation(Line(points = {{-70, 16}, {-60,
         16}}, color = {127, 0, 127}));
-      connect(Counter.q2, Adder1.a) annotation(Line(points = {{-20, 16}, {-10, 16}, 
+      connect(Counter.q2, Adder1.a) annotation(Line(points = {{-20, 16}, {-10, 16},
         {-10, 21}, {0, 21}}, color = {127, 0, 127}));
       connect(Counter.q1, Adder1.b) annotation(Line(points = {{-20, 2}, {-10, 2}, {
         -10, 9}, {0, 9}}, color = {127, 0, 127}));
-      connect(Counter.q0, Adder1.c_in) annotation(Line(points = {{-20, -12}, {-10, 
+      connect(Counter.q0, Adder1.c_in) annotation(Line(points = {{-20, -12}, {-10,
         -12}, {-10, -21}, {0, -21}}, color = {127, 0, 127}));
       annotation(
         Documentation(info = "<html>
@@ -404,48 +404,48 @@ Germany
       extends Modelica.Icons.Example;
 
       Modelica.Electrical.Digital.Sources.Table b4(
-        y0 = L.'0', 
-        x = {L.'1', L.'0'}, 
+        y0 = L.'0',
+        x = {L.'1', L.'0'},
         t = {1, 3}) annotation(Placement(transformation(extent = {{70, -20}, {110, 20}})));
       Modelica.Electrical.Digital.Sources.Table b1(
-        x = {L.'1', L.'0', L.'1'}, 
-        y0 = L.'0', 
+        x = {L.'1', L.'0', L.'1'},
+        y0 = L.'0',
         t = {1, 2, 3}) annotation(Placement(transformation(extent = {{-170, -20}, {
         -130, 20}})));
       Modelica.Electrical.Digital.Sources.Table b2(
-        y0 = L.'0', 
-        x = {L.'1'}, 
+        y0 = L.'0',
+        x = {L.'1'},
         t = {4}) annotation(Placement(transformation(extent = {{-90, -20}, {-50, 20}})));
       Modelica.Electrical.Digital.Sources.Table b3(
-        y0 = L.'0', 
-        x = {L.'1'}, 
+        y0 = L.'0',
+        x = {L.'1'},
         t = {1}) annotation(Placement(transformation(extent = {{-10, -20}, {30, 20}})));
       Modelica.Electrical.Digital.Sources.Table a1(
-        y0 = L.'0', 
-        x = {L.'1', L.'0', L.'1'}, 
-        t = {1, 2, 3}) annotation(Placement(transformation(extent = {{-170, 40}, {-130, 
+        y0 = L.'0',
+        x = {L.'1', L.'0', L.'1'},
+        t = {1, 2, 3}) annotation(Placement(transformation(extent = {{-170, 40}, {-130,
         80}})));
       Modelica.Electrical.Digital.Sources.Table a2(
-        y0 = L.'0', 
-        x = {L.'1'}, 
+        y0 = L.'0',
+        x = {L.'1'},
         t = {1}) annotation(Placement(transformation(extent = {{-90, 40}, {-50, 80}})));
       Modelica.Electrical.Digital.Sources.Table a3(
-        y0 = L.'0', 
-        x = {L.'1', L.'0'}, 
+        y0 = L.'0',
+        x = {L.'1', L.'0'},
         t = {1, 4}) annotation(Placement(transformation(extent = {{-8, 40}, {30, 80}})));
       Modelica.Electrical.Digital.Sources.Table a4(
-        y0 = L.'0', 
-        x = {L.'0'}, 
+        y0 = L.'0',
+        x = {L.'0'},
         t = {1}) annotation(Placement(transformation(extent = {{70, 40}, {110, 80}})));
       Modelica.Electrical.Digital.Sources.Set Set(x = L.'0') 
         annotation(Placement(transformation(
-        origin = {-150, -74}, 
-        extent = {{20, 20}, {-20, -20}}, 
+        origin = {-150, -74},
+        extent = {{20, 20}, {-20, -20}},
         rotation = 180)));
       Modelica.Electrical.Digital.Examples.Utilities.FullAdder Adder1(Adder1(AND(G2(
         y(start = L.'U', fixed = true))), XOR(G2(y(start = L.'U', fixed = true)))), Adder2(AND(G2(
         y(start = L.'U', fixed = true))), XOR(G2(y(start = L.'U', fixed = true))))) 
-        annotation(Placement(transformation(extent = 
+        annotation(Placement(transformation(extent =
         {{-100, -80}, {-60, -40}})));
       Modelica.Electrical.Digital.Examples.Utilities.FullAdder Adder2(Adder1(AND(G2(
         y(start = L.'U', fixed = true))), XOR(G2(y(start = L.'U', fixed = true)))), Adder2(AND(G2(
@@ -488,7 +488,7 @@ Germany
       connect(a4.y, Adder4.a) annotation(Line(
         points = {{110, 60}, {130, 60}, {130, -46}, {140, -46}}, color = {127, 0, 127}));
       annotation(
-        Diagram(coordinateSystem(extent = {{-200, -100}, {200, 100}})), 
+        Diagram(coordinateSystem(extent = {{-200, -100}, {200, 100}})),
         Documentation(info = "<html>
 <p>
 四个FullAdder被组合成一个四位加法器单元。
@@ -573,9 +573,9 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-50, 28}, {-30, 28}}, color = {127, 0, 127}));
       connect(clock.y, Counter.count) annotation(Line(
         points = {{-50, -28}, {-30, -28}}, color = {127, 0, 127}));
-      connect(Q0.x[1], Counter.q[1]) annotation(Line(points = {{71, -30}, {58, -30}, 
+      connect(Q0.x[1], Counter.q[1]) annotation(Line(points = {{71, -30}, {58, -30},
         {58, -24}, {50, -24}}, color = {127, 0, 127}));
-      connect(Q1.x[1], Counter.q[2]) annotation(Line(points = {{71, -10}, {60, -10}, 
+      connect(Q1.x[1], Counter.q[2]) annotation(Line(points = {{71, -10}, {60, -10},
         {60, -8}, {50, -8}}, color = {127, 0, 127}));
       connect(Q2.x[1], Counter.q[3]) annotation(Line(points = {{71, 10}, {60, 10}, {
         60, 8}, {50, 8}}, color = {127, 0, 127}));
@@ -594,8 +594,8 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       extends Modelica.Icons.Example;
 
       Modelica.Electrical.Digital.Delay.InertialDelaySensitiveVector delay(
-        final tHL = 1, 
-        final tLH = 2, 
+        final tHL = 1,
+        final tLH = 2,
         final n = 3, inertialDelaySensitive(each y(start = L.'U', fixed = true))) 
         annotation(Placement(transformation(extent = {{-36, -28}, {40, 48}})));
       Modelica.Electrical.Digital.Sources.Table table(x = {L.'0', L.'1', L.'0', L.'1', L.'0'}, t = {0, 1, 5, 7, 8}) 
@@ -614,7 +614,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-76, -40}, {-30.68, -40}, {-30.68, 13.4833}}, color = {127, 0, 127}));
       annotation(Documentation(info = "<html>
 <p>这个示例是对向量值敏感延迟组件的简单测试。延迟时间选择不同。为了检查结果，请绘制输入向量x和输出向量y。</p>
-</html>"      ), 
+</html>"      ),
         experiment(StopTime = 10));
     end VectorDelay;
 
@@ -631,10 +631,10 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       Modelica.Electrical.Digital.Sources.Table data_1(t = {0, 10}, x = {L.'H', L.'X'}) 
         annotation(Placement(transformation(extent = {{-86, 40}, {-66, 60}})));
       Modelica.Electrical.Digital.Registers.DFFREG dFFREG(
-        n = 2, 
-        tHL = 5, 
-        tLH = 6, 
-        delay(inertialDelaySensitive(each y(start = L.'U', fixed = true))), 
+        n = 2,
+        tHL = 5,
+        tLH = 6,
+        delay(inertialDelaySensitive(each y(start = L.'U', fixed = true))),
         dFFR(clock(start = L.'U', fixed = true), reset(start = L.'U', fixed = true))) 
         annotation(Placement(transformation(extent = {{-24, -26}, {70, 68}})));
 
@@ -647,7 +647,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-66, 18}, {-44, 18}, {-44, 37.92}, {-20.24, 37.92}}, color = {127, 0, 127}));
       connect(data_1.y, dFFREG.dataIn[2]) annotation(Line(
         points = {{-66, 50}, {-44, 50}, {-44, 41.68}, {-20.24, 41.68}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 25), 
+      annotation(experiment(StopTime = 25),
         Documentation(info = "<html>
 <p>这个示例是对Registers.DFFREG组件的简单测试。数据宽度设置为两个。在模拟之后用户可以在特定界面绘制dataIn和dataOut向量。为了验证结果，用户可以比较在DFFREG组件中记录的真值表。</p>
 </html>"          ));
@@ -666,9 +666,9 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       Modelica.Electrical.Digital.Sources.Table data_1(t = {0, 10}, x = {L.'H', L.'X'}) 
         annotation(Placement(transformation(extent = {{-86, 40}, {-66, 60}})));
       Modelica.Electrical.Digital.Registers.DFFREGL dFFREGL(
-        n = 2, 
-        tHL = 5, 
-        tLH = 6, delay(inertialDelaySensitive(each y(start = L.'U', fixed = true))), 
+        n = 2,
+        tHL = 5,
+        tLH = 6, delay(inertialDelaySensitive(each y(start = L.'U', fixed = true))),
         dFFR(clock(start = L.'U', fixed = true), reset(start = L.'U', fixed = true))) 
         annotation(Placement(transformation(extent = {{-41, -39}, {62, 65}})));
     equation
@@ -681,7 +681,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-68, 20}, {-52, 20}, {-52, 31.72}, {-36.88, 31.72}}, color = {127, 0, 127}));
       connect(data_1.y, dFFREGL.dataIn[2]) annotation(Line(
         points = {{-66, 50}, {-52, 50}, {-52, 35.88}, {-36.88, 35.88}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 25), 
+      annotation(experiment(StopTime = 25),
         Documentation(info = "<html>
 <p>这个示例是对Registers.DFFREGL组件的简单测试。数据宽度设置为两个。在模拟后，用户可以在特定窗口绘制dataIn和dataOut向量。为了验证结果，用户可以比较在DFFREGL组件中记录的真值表。</p>
 </html>"      ));
@@ -702,8 +702,8 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       Modelica.Electrical.Digital.Sources.Table set(x = {L.'0', L.'1', L.'0'}, t = {0, 5, 6}) 
         annotation(Placement(transformation(extent = {{-86, 74}, {-66, 94}})));
       Modelica.Electrical.Digital.Registers.DFFREGSRH dFFREGSRH(
-        tHL = 2, 
-        tLH = 3, 
+        tHL = 2,
+        tLH = 3,
         n = 2) 
         annotation(Placement(transformation(extent = {{-34, -37}, {73, 71}})));
     equation
@@ -718,7 +718,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-66, 18}, {-48, 18}, {-48, 36.44}, {-29.72, 36.44}}, color = {127, 0, 127}));
       connect(data_1.y, dFFREGSRH.dataIn[2]) annotation(Line(
         points = {{-66, 50}, {-48, 50}, {-48, 40.76}, {-29.72, 40.76}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 15), 
+      annotation(experiment(StopTime = 15),
         Documentation(info = "<html>
 <p>这个示例是对Registers.DFFREGSRH组件的简单测试。数据宽度设置为两个。在模拟后，绘制dataIn和dataOut向量，并且可以通过比较在DFFREGSRH组件中记录的真值表来验证结果。</p>
 </html>"          ));
@@ -739,8 +739,8 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       Modelica.Electrical.Digital.Sources.Table set(t = {0, 5, 6}, x = {L.'1', L.'0', L.'1'}) 
         annotation(Placement(transformation(extent = {{-86, 74}, {-66, 94}})));
       Modelica.Electrical.Digital.Registers.DFFREGSRL dFFREGSRL(
-        tHL = 2, 
-        tLH = 3, 
+        tHL = 2,
+        tLH = 3,
         n = 2) annotation(Placement(transformation(extent = {{-45, -54}, {81, 72}})));
     equation
       connect(reset.y, dFFREGSRL.reset) annotation(Line(
@@ -753,7 +753,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-66, 18}, {-56, 18}, {-56, 31.68}, {-39.96, 31.68}}, color = {127, 0, 127}));
       connect(data_1.y, dFFREGSRL.dataIn[2]) annotation(Line(
         points = {{-66, 50}, {-56, 50}, {-56, 36.72}, {-39.96, 36.72}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 15), 
+      annotation(experiment(StopTime = 15),
         Documentation(info = "<html>
 <p>这个示例是对Registers.DFFREGSRL组件的简单测试。数据宽度设置为两个。在模拟后，用户可以特定窗口绘制dataIn和dataOut向量，并且可以通过比较在DFFREGSRL组件中记录的真值表来验证结果。</p>
 </html>"      ));
@@ -772,8 +772,8 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       Modelica.Electrical.Digital.Sources.Table data_1(x = {L.'0', L.'1'}, t = {0, 16}) 
         annotation(Placement(transformation(extent = {{-86, 40}, {-66, 60}})));
       Modelica.Electrical.Digital.Registers.DLATREG dLATREG(
-        n = 2, 
-        tHL = 2, 
+        n = 2,
+        tHL = 2,
         tLH = 3, delay(inertialDelaySensitive(each y(start = L.'U', fixed = true)))) 
         annotation(Placement(transformation(extent = {{-45, -50}, {84, 79}})));
     equation
@@ -786,7 +786,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-66, 18}, {-56, 18}, {-56, 37.72}, {-39.84, 37.72}}, color = {127, 0, 127}));
       connect(data_1.y, dLATREG.dataIn[2]) annotation(Line(
         points = {{-66, 50}, {-56, 50}, {-56, 42.88}, {-39.84, 42.88}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 25), 
+      annotation(experiment(StopTime = 25),
         Documentation(info = "<html>
 <p>这个示例是对Registers.DLATREG组件的简单测试。数据宽度设置为两个。在模拟后，用户可以在特定窗口绘制dataIn和dataOut向量图，并且可以通过比较在DLATREG组件中记录的真值表来验证结果。</p>
 </html>"          ));
@@ -805,8 +805,8 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       Modelica.Electrical.Digital.Sources.Table data_1(x = {L.'0', L.'1'}, t = {0, 16}) 
         annotation(Placement(transformation(extent = {{-86, 40}, {-66, 60}})));
       Modelica.Electrical.Digital.Registers.DLATREGL dLATREGL(
-        tHL = 2, 
-        tLH = 3, 
+        tHL = 2,
+        tLH = 3,
         n = 2, delay(inertialDelaySensitive(each y(start = L.'U', fixed = true)))) annotation(Placement(transformation(extent = {{-45, -50}, {84, 79}})));
     equation
 
@@ -818,7 +818,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-66, 18}, {-56, 18}, {-56, 37.72}, {-39.84, 37.72}}, color = {127, 0, 127}));
       connect(data_1.y, dLATREGL.dataIn[2]) annotation(Line(
         points = {{-66, 50}, {-56, 50}, {-56, 42.88}, {-39.84, 42.88}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 25), 
+      annotation(experiment(StopTime = 25),
         Documentation(info = "<html>
 <p>这个示例是对Registers.DLATREGL组件的简单测试。数据宽度设置为两个。在模拟后，用户可以在特定窗口绘制dataIn和dataOut向量，并且可以通过比较在DLATREGL组件中记录的真值表来验证结果。</p>
 </html>"      ));
@@ -839,8 +839,8 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       Modelica.Electrical.Digital.Sources.Table set(x = {L.'0', L.'1', L.'0'}, t = {0, 5, 6}) 
         annotation(Placement(transformation(extent = {{-86, 74}, {-66, 94}})));
       Modelica.Electrical.Digital.Registers.DLATREGSRH dLATREGSRH(
-        tHL = 2, 
-        tLH = 3, 
+        tHL = 2,
+        tLH = 3,
         n = 2, delay(inertialDelaySensitive(each y(start = L.'U', fixed = true)))) annotation(Placement(transformation(extent = {{-45, -42}, {69, 71}})));
     equation
 
@@ -855,7 +855,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       connect(set.y, dLATREGSRH.set) annotation(Line(
         points = {{-66, 84}, {-40.44, 84}, {-40.44, 59.7}}, color = {127, 0, 127}));
 
-      annotation(experiment(StopTime = 25), 
+      annotation(experiment(StopTime = 25),
         Documentation(info = "<html>
 <p>这个示例是对Registers.DLATREGSRH组件的简单测试。数据宽度设置为两个。在模拟后，可以绘制dataIn和dataOut向量，并且可以通过比较在DLATREGSRH组件中记录的真值表来验证结果。</p>
 </html>"      ));
@@ -876,8 +876,8 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       Modelica.Electrical.Digital.Sources.Table set(t = {0, 5, 6}, x = {L.'1', L.'0', L.'1'}) 
         annotation(Placement(transformation(extent = {{-86, 74}, {-66, 94}})));
       Modelica.Electrical.Digital.Registers.DLATREGSRL dLATREGSRL(
-        tHL = 2, 
-        tLH = 3, 
+        tHL = 2,
+        tLH = 3,
         n = 2, delay(inertialDelaySensitive(each y(start = L.'U', fixed = true)))) annotation(Placement(transformation(extent = {{-45, -43}, {69, 71}})));
     equation
 
@@ -891,7 +891,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-66, 50}, {-56, 50}, {-56, 39.08}, {-40.44, 39.08}}, color = {127, 0, 127}));
       connect(set.y, dLATREGSRL.set) annotation(Line(
         points = {{-66, 84}, {-40.44, 84}, {-40.44, 59.6}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 25), 
+      annotation(experiment(StopTime = 25),
         Documentation(info = "<html>
 <p>这个示例是对Registers.DLATREGSRL组件的简单测试。数据宽度设置为两个。在模拟后，用户可以在特定窗口绘制dataIn和dataOut向量，并且可以通过比较在DLATREGSRL组件中记录的真值表来验证结果。</p>
 </html>"      ));
@@ -901,13 +901,13 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
       extends Modelica.Icons.Example;
       Modelica.Electrical.Digital.Sources.Table e_table(
-        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U', 
-        x = {L.'0', L.'1', L.'Z'}, 
+        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U',
+        x = {L.'0', L.'1', L.'Z'},
         t = {0, 5, 9}) 
         annotation(Placement(transformation(extent = {{-75, 30}, {-55, 50}})));
       Modelica.Electrical.Digital.Sources.Table x_table(
-        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U', 
-        x = {L.'1', L.'0'}, 
+        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U',
+        x = {L.'1', L.'0'},
         t = {1, 7}) 
         annotation(Placement(transformation(extent = {{-75, -20}, {-55, 0}})));
       Modelica.Electrical.Digital.Tristates.NXFERGATE nXFERGATE(
@@ -919,7 +919,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-55, -10}, {-45.2, -10}, {-45.2, -10.15}, {-35.4, -10.15}}, color = {127, 0, 127}));
       connect(e_table.y, nXFERGATE.enable) annotation(Line(
         points = {{-55, 40}, {-35.4, 40}, {-35.4, 27.05}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 12), 
+      annotation(experiment(StopTime = 12),
         Documentation(info = "<html>
 <p>这个示例是对Tristates.NXFERGATE组件的简单测试。</p>
 </html>"    ));
@@ -930,13 +930,13 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       extends Modelica.Icons.Example;
 
       Modelica.Electrical.Digital.Sources.Table e_table(
-        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U', 
-        x = {L.'0', L.'1', L.'Z'}, 
+        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U',
+        x = {L.'0', L.'1', L.'Z'},
         t = {0, 5, 9}) 
         annotation(Placement(transformation(extent = {{-75, 30}, {-55, 50}})));
       Modelica.Electrical.Digital.Sources.Table x_table(
-        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U', 
-        x = {L.'1', L.'0'}, 
+        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U',
+        x = {L.'1', L.'0'},
         t = {1, 7}) 
         annotation(Placement(transformation(extent = {{-75, -20}, {-55, 0}})));
       Modelica.Electrical.Digital.Tristates.NRXFERGATE nRXFERGATE(
@@ -947,7 +947,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-55, -10}, {-45.05, -10}, {-45.05, -9.9}, {-35.1, -9.9}}, color = {127, 0, 127}));
       connect(e_table.y, nRXFERGATE.enable) annotation(Line(
         points = {{-55, 40}, {-35.1, 40}, {-35.1, 29.3}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 12), 
+      annotation(experiment(StopTime = 12),
         Documentation(info = "<html>
 <p>这个示例是对Tristates.NRXFER组件的简单测试。模拟到12秒时用户可以在特定窗口绘制<code>nRXFERGATE</code>组件的x、enable和y。要验证结果，请将其与真值表<code>NRXferTable</code>进行比较。</p>
 </html>"      ));
@@ -957,18 +957,18 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
       extends Modelica.Icons.Example;
       Modelica.Electrical.Digital.Sources.Table e_table(
-        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U', 
-        x = {L.'0', L.'1', L.'Z'}, 
+        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U',
+        x = {L.'0', L.'1', L.'Z'},
         t = {0, 5, 9}) 
         annotation(Placement(transformation(extent = {{-75, 30}, {-55, 50}})));
       Modelica.Electrical.Digital.Sources.Table x_table(
-        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U', 
-        x = {L.'1', L.'0'}, 
+        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U',
+        x = {L.'1', L.'0'},
         t = {1, 7}) 
         annotation(Placement(transformation(extent = {{-75, -20}, {-55, 0}})));
       Modelica.Electrical.Digital.Tristates.BUF3S bUF3S(
-        tHL = 1, 
-        tLH = 1, 
+        tHL = 1,
+        tLH = 1,
         strength = Modelica.Electrical.Digital.Interfaces.Strength.'S_X01') 
         annotation(Placement(transformation(extent = {{-40, -50}, {48, 38}})));
     equation
@@ -976,7 +976,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-55, -10}, {-35.6, -10.4}}, color = {127, 0, 127}));
       connect(e_table.y, bUF3S.enable) annotation(Line(
         points = {{-55, 40}, {-35.6, 40}, {-35.6, 24.8}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 12), 
+      annotation(experiment(StopTime = 12),
         Documentation(info = "<html>
 <p>这个示例是对Tristates.BUF3S组件的简单测试。在模拟到12秒时，用户可以在特定窗口绘制<code>bUF3S</code>组件的x、enable和y。要验证结果，请将其与真值表Buf3sTable进行比较。</p>
 </html>"      ));
@@ -987,13 +987,13 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       extends Modelica.Icons.Example;
 
       Modelica.Electrical.Digital.Sources.Table e_table(
-        y0 = L.'U', 
-        x = {L.'0', L.'1', L.'Z'}, 
+        y0 = L.'U',
+        x = {L.'0', L.'1', L.'Z'},
         t = {0, 5, 9}) 
         annotation(Placement(transformation(extent = {{-75, 30}, {-55, 50}})));
       Modelica.Electrical.Digital.Sources.Table x_table(
-        y0 = L.'U', 
-        x = {L.'1', L.'0'}, 
+        y0 = L.'U',
+        x = {L.'1', L.'0'},
         t = {1, 7}) 
         annotation(Placement(transformation(extent = {{-75, -20}, {-55, 0}})));
       Modelica.Electrical.Digital.Tristates.INV3S iNV3S 
@@ -1003,7 +1003,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-55, -10}, {-42.6, -10}, {-42.6, -9.8}, {-30.2, -9.8}}, color = {127, 0, 127}));
       connect(e_table.y, iNV3S.enable) annotation(Line(
         points = {{-55, 40}, {-30.2, 40}, {-30.2, 20.6}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 12), 
+      annotation(experiment(StopTime = 12),
         Documentation(info = "<html>
 <p>这个示例是对Tristates.INV3S组件的简单测试。在模拟到12秒时绘制<code>iNV3S</code>组件的x、enable和y。要验证结果，请将其与真值表T.UX01Table进行比较。</p>
 </html>"      ));
@@ -1013,33 +1013,33 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
       extends Modelica.Icons.Example;
       Modelica.Electrical.Digital.Sources.Table e_table2(
-        y0 = L.'U', 
-        x = {L.'0', L.'1', L.'0'}, 
+        y0 = L.'U',
+        x = {L.'0', L.'1', L.'0'},
         t = {0, 3, 9}) 
         annotation(Placement(transformation(extent = {{-85, 68}, {-65, 88}})));
       Modelica.Electrical.Digital.Sources.Table x_table2(
-        y0 = L.'U', 
-        x = {L.'1', L.'0'}, 
+        y0 = L.'U',
+        x = {L.'1', L.'0'},
         t = {1, 7}) 
         annotation(Placement(transformation(extent = {{-85, 18}, {-65, 38}})));
       Modelica.Electrical.Digital.Tristates.BUF3S bUF3S2(
-        tHL = 1, 
-        tLH = 1, 
+        tHL = 1,
+        tLH = 1,
         strength = Modelica.Electrical.Digital.Interfaces.Strength.'S_X01') 
         annotation(Placement(transformation(extent = {{-48, -1}, {16, 63}})));
       Modelica.Electrical.Digital.Sources.Table e_table1(
-        y0 = L.'U', 
-        t = {0, 3, 9}, 
+        y0 = L.'U',
+        t = {0, 3, 9},
         x = {L.'0', L.'1', L.'0'}) 
         annotation(Placement(transformation(extent = {{-85, -24}, {-65, -4}})));
       Modelica.Electrical.Digital.Sources.Table x_table1(
-        y0 = L.'U', 
-        x = {L.'0', L.'1', L.'0'}, 
+        y0 = L.'U',
+        x = {L.'0', L.'1', L.'0'},
         t = {1, 5, 7}) 
         annotation(Placement(transformation(extent = {{-85, -74}, {-65, -54}})));
       Modelica.Electrical.Digital.Tristates.BUF3S bUF3S1(
-        tHL = 1, 
-        tLH = 1, 
+        tHL = 1,
+        tLH = 1,
         strength = Modelica.Electrical.Digital.Interfaces.Strength.'S_X01') 
         annotation(Placement(transformation(extent = {{-52, -94}, {14, -28}})));
       Modelica.Electrical.Digital.Tristates.WiredX wiredX(n = 2) 
@@ -1057,7 +1057,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{10.7, -64.3}, {24, -64.3}, {24, -21.8}, {36.8, -21.8}}, color = {127, 0, 127}));
       connect(bUF3S2.y, wiredX.x[2]) annotation(Line(
         points = {{12.8, 27.8}, {26, 27.8}, {26, -0.2}, {36.8, -0.2}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 12), 
+      annotation(experiment(StopTime = 12),
         Documentation(info = "<html>
 <p>这个示例是对Tristates.WiredX组件的简单测试。输入宽度设置为两个。在模拟到12秒时用户可以在特定窗口绘制WiredX组件的x[1]、x[2]和y。要验证结果，请将其与真值表Tables.ResolutionTable进行比较。</p>
 </html>"      ));
@@ -1070,18 +1070,18 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       D.Multiplexers.MUX2x1 Mux2x1 
         annotation(Placement(transformation(extent = {{-34, -48}, {56, 48}})));
       D.Sources.Table Input1(
-        y0 = L.'U', 
-        x = {L.'X', L.'0', L.'1', L.'0', L.'X', L.'U'}, 
+        y0 = L.'U',
+        x = {L.'X', L.'0', L.'1', L.'0', L.'X', L.'U'},
         t = {2, 4, 6, 8, 10, 12}) 
         annotation(Placement(transformation(extent = {{-90, 14}, {-70, 34}})));
       D.Sources.Step Select(
-        before = L.'0', 
-        after = L.'1', 
+        before = L.'0',
+        after = L.'1',
         stepTime = 7) 
         annotation(Placement(transformation(extent = {{-90, 58}, {-70, 78}})));
       D.Sources.Table Input0(
-        y0 = L.'U', 
-        t = {2, 4, 6, 8, 10, 12}, 
+        y0 = L.'U',
+        t = {2, 4, 6, 8, 10, 12},
         x = {L.'1', L.'X', L.'0', L.'X', L.'1', L.'U'}) 
         annotation(Placement(transformation(extent = {{-90, -34}, {-70, -14}})));
     equation
@@ -1091,7 +1091,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-70, -24}, {-29.5, -24}}, color = {127, 0, 127}));
       connect(Input1.y, Mux2x1.in1) annotation(Line(
         points = {{-70, 24}, {-29.5, 24}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 15), 
+      annotation(experiment(StopTime = 15),
         Documentation(info = "<html>
 <p>这个示例是一个简单的单路复用器组件测试，有2个输入(由源指定，一个选择输入和一个输出)。在模拟到15秒时用户可以在特定窗口绘制Mux2x1.in0、Mux2x1.in1、Mux2x1.sel和Mux2x1.out。将输出信号与输入信号进行比较。如果选择信号发生变化，输出就会切换到另一个输入。</p>
 </html>"      ));
@@ -1106,20 +1106,20 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         annotation(Placement(transformation(extent = {{-11, -41}, {103, 73}})));
       Modelica.Electrical.Digital.Sources.Table 
         addr_1(
-        y0 = L.'U', 
-        x = {L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-', 
-           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-', 
-           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-', 
-           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-', 
-           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-', 
-           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-', 
-           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-', 
-           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-', 
-           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-'}, 
-        t = {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 
-        115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 
-        200, 205, 210, 215, 220, 225, 230, 235, 240, 245, 250, 255, 260, 265, 270, 275, 280, 
-        285, 290, 295, 300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 
+        y0 = L.'U',
+        x = {L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-',
+           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-',
+           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-',
+           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-',
+           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-',
+           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-',
+           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-',
+           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-',
+           L.'U',L.'X',L.'0',L.'1',L.'Z',L.'W',L.'L',L.'H',L.'-'},
+        t = {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110,
+        115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185, 190, 195,
+        200, 205, 210, 215, 220, 225, 230, 235, 240, 245, 250, 255, 260, 265, 270, 275, 280,
+        285, 290, 295, 300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365,
         370, 375, 380, 385, 390, 395, 400}) 
         annotation(Placement(transformation(extent = {{-78, 76}, {-58, 96}})));
       Modelica.Electrical.Digital.Sources.Set 
@@ -1133,8 +1133,8 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         annotation(Placement(transformation(extent = {{-78, -70}, {-58, -50}})));
       Modelica.Electrical.Digital.Sources.Table 
         addr_0(
-        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U', 
-        t = {45, 90, 135, 180, 225, 270, 315, 360}, 
+        y0 = Modelica.Electrical.Digital.Interfaces.Logic.'U',
+        t = {45, 90, 135, 180, 225, 270, 315, 360},
         x = {L.'X', L.'0', L.'1', L.'Z', L.'W', L.'L', L.'H', L.'-'}) 
         annotation(Placement(transformation(extent = {{-78, 48}, {-58, 68}})));
       Modelica.Electrical.Digital.Sources.Set 
@@ -1154,7 +1154,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         points = {{-58, 30}, {-32, 30}, {-32, 30.25}, {-5.3, 30.25}}, color = {127, 0, 127}));
       connect(data_0.y, dLATRAM.dataIn[1]) annotation(Line(
         points = {{-58, 2}, {-34, 2}, {-34, 24.55}, {-5.3, 24.55}}, color = {127, 0, 127}));
-      annotation(experiment(StopTime = 400), 
+      annotation(experiment(StopTime = 400),
         Documentation(info = "<html>
 <p>这个示例是一个简单而不完整的单个DLATRAM组件测试。在模拟到400秒时绘制dLATRAM.addr[1]、dLATRAM.addr[2]和dLATRAM.dataOUT[1]、dLATRAM.dataOut[2]。地址输入使用所有可能的逻辑值组合进行指定。可以检查在哪些地址值情况下输出为'X'或'0'。</p>
 </html>"              ));
@@ -1183,19 +1183,19 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
           extent = {{-110, -80}, {-90, -60}})));
         D.Interfaces.DigitalOutput d annotation(Placement(transformation(
           extent = {{90, -10}, {110, 10}})));
-        D.Basic.Or Or1(n = 4) annotation(Placement(transformation(extent = {{50, 20}, 
+        D.Basic.Or Or1(n = 4) annotation(Placement(transformation(extent = {{50, 20},
           {70, 40}})));
-        D.Basic.And And1(n = 3) annotation(Placement(transformation(extent = {{-20, 
+        D.Basic.And And1(n = 3) annotation(Placement(transformation(extent = {{-20,
           60}, {0, 80}})));
-        D.Basic.And And2(n = 3) annotation(Placement(transformation(extent = {{-20, 
+        D.Basic.And And2(n = 3) annotation(Placement(transformation(extent = {{-20,
           34}, {0, 54}})));
-        D.Basic.And And3(n = 3) annotation(Placement(transformation(extent = {{-20, 
+        D.Basic.And And3(n = 3) annotation(Placement(transformation(extent = {{-20,
           8}, {0, 28}})));
-        D.Basic.And And4(n = 3) annotation(Placement(transformation(extent = {{-20, 
+        D.Basic.And And4(n = 3) annotation(Placement(transformation(extent = {{-20,
           -18}, {0, 2}})));
-        D.Basic.Not Not1 annotation(Placement(transformation(extent = {{-76, -54}, 
+        D.Basic.Not Not1 annotation(Placement(transformation(extent = {{-76, -54},
           {-56, -34}})));
-        D.Basic.Not Not2 annotation(Placement(transformation(extent = {{-76, -80}, 
+        D.Basic.Not Not2 annotation(Placement(transformation(extent = {{-76, -80},
           {-56, -60}})));
       equation
         connect(a0, Not1.x) annotation(Line(
@@ -1233,55 +1233,55 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         connect(a0, And2.x[3]) annotation(Line(
           points = {{-100, -44}, {-80, -44}, {-80, 49.3333}, {-16, 49.3333}}, color = {127, 0, 127}));
         connect(a1, And4.x[1]) annotation(Line(
-          points = {{-100, -70}, {-80, -70}, {-80, -90}, {-30, -90}, {-30, -13.3333}, 
+          points = {{-100, -70}, {-80, -70}, {-80, -90}, {-30, -90}, {-30, -13.3333},
           {-16, -13.3333}}, color = {127, 0, 127}));
         connect(a1, And3.x[1]) annotation(Line(
-          points = {{-100, -70}, {-80, -70}, {-80, -90}, {-30, -90}, {-30, 12.6667}, 
+          points = {{-100, -70}, {-80, -70}, {-80, -90}, {-30, -90}, {-30, 12.6667},
           {-16, 12.6667}}, color = {127, 0, 127}));
         annotation(
           Documentation(info = "<html>
 <p>MUX4是一个四位多路复用器，根据原理图由And、Not和Or门构建而成。</p>
 <p>参数delayTime和q0已存在但<strong>尚未</strong>在组件中使用。MUX4组件在其组件中使用标准值。</p>
-</html>"                ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"                ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
           {100, 100}}), graphics = {
           Rectangle(
-          extent = {{-90, 100}, {90, -100}}, 
-          lineThickness = 0.5, 
-          fillColor = {255, 255, 170}, 
-          fillPattern = FillPattern.Solid), 
+          extent = {{-90, 100}, {90, -100}},
+          lineThickness = 0.5,
+          fillColor = {255, 255, 170},
+          fillPattern = FillPattern.Solid),
           Line(
-          points = {{-60, 100}, {-60, -100}}, 
-          thickness = 0.5), 
+          points = {{-60, 100}, {-60, -100}},
+          thickness = 0.5),
           Line(
-          points = {{60, 100}, {60, -100}}, 
-          thickness = 0.5), 
+          points = {{60, 100}, {60, -100}},
+          thickness = 0.5),
           Text(
-          extent = {{-86, 80}, {-64, 60}}, 
-          textString = "D0"), 
+          extent = {{-86, 80}, {-64, 60}},
+          textString = "D0"),
           Text(
-          extent = {{64, 12}, {86, -8}}, 
-          textString = "D"), 
+          extent = {{64, 12}, {86, -8}},
+          textString = "D"),
           Text(
-          extent = {{-150, -100}, {150, -160}}, 
-          textColor = {0, 0, 255}, 
-          textString = "%name"), 
+          extent = {{-150, -100}, {150, -160}},
+          textColor = {0, 0, 255},
+          textString = "%name"),
           Text(
-          extent = {{-60, 100}, {60, 40}}, 
-          textString = "MUX"), 
+          extent = {{-60, 100}, {60, 40}},
+          textString = "MUX"),
           Text(
-          extent = {{-86, -60}, {-64, -80}}, 
-          textString = "A1"), 
+          extent = {{-86, -60}, {-64, -80}},
+          textString = "A1"),
           Text(
-          extent = {{-86, 54}, {-64, 34}}, 
-          textString = "D1"), 
+          extent = {{-86, 54}, {-64, 34}},
+          textString = "D1"),
           Text(
-          extent = {{-86, 28}, {-64, 8}}, 
-          textString = "D2"), 
+          extent = {{-86, 28}, {-64, 8}},
+          textString = "D2"),
           Text(
-          extent = {{-86, 2}, {-64, -18}}, 
-          textString = "D3"), 
+          extent = {{-86, 2}, {-64, -18}},
+          textString = "D3"),
           Text(
-          extent = {{-86, -36}, {-64, -56}}, 
+          extent = {{-86, -36}, {-64, -56}},
           textString = "A0")}));
       end MUX4;
 
@@ -1291,11 +1291,11 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 
         parameter SI.Time delayTime = 0 "延迟时间";
         parameter D.Interfaces.Logic q0 = L.'U' "输出的初始值";
-        D.Basic.Nor Nor1 annotation(Placement(transformation(extent = {{-40, 42}, 
+        D.Basic.Nor Nor1 annotation(Placement(transformation(extent = {{-40, 42},
           {0, 82}})));
-        D.Basic.Nor Nor2 annotation(Placement(transformation(extent = {{-40, -82}, 
+        D.Basic.Nor Nor2 annotation(Placement(transformation(extent = {{-40, -82},
           {0, -42}})));
-        D.Interfaces.DigitalInput s annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalInput s annotation(Placement(transformation(extent =
           {{-110, 60}, {-90, 80}})));
         D.Interfaces.DigitalInput r annotation(Placement(transformation(
           extent = {{-110, -80}, {-90, -60}})));
@@ -1315,42 +1315,42 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         connect(Nor2.y, q) annotation(Line(
           points = {{0, -62}, {70, -62}, {70, 70}, {100, 70}}, color = {127, 0, 127}));
         connect(TD1.y, Nor2.x[2]) annotation(Line(points = {{-40, -54}, {-32, -54}}, color = {127, 0, 127}));
-        connect(TD1.x, Nor1.y) annotation(Line(points = {{-56, -54}, {-70, -54}, {-70, 
+        connect(TD1.x, Nor1.y) annotation(Line(points = {{-56, -54}, {-70, -54}, {-70,
           -20}, {20, 20}, {20, 62}, {0, 62}}, color = {127, 0, 127}));
         annotation(
           Documentation(info = "<html>
 <p>RS是一个基本组件，例如RS(设定-复位)触发器，根据原理图由Nor门构建而成。为了避免数值环路，组件中插入了一个小的传输延迟，其延迟时间是RS组件的参数。初始值也可以通过参数设置。</p>
-</html>"                ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"                ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
           {100, 100}}), graphics = {
           Rectangle(
-          extent = {{-90, 100}, {90, -100}}, 
-          lineThickness = 0.5, 
-          fillColor = {255, 255, 170}, 
-          fillPattern = FillPattern.Solid), 
+          extent = {{-90, 100}, {90, -100}},
+          lineThickness = 0.5,
+          fillColor = {255, 255, 170},
+          fillPattern = FillPattern.Solid),
           Text(
-          extent = {{-100, 100}, {100, 40}}, 
-          textString = "RS"), 
+          extent = {{-100, 100}, {100, 40}},
+          textString = "RS"),
           Line(
-          points = {{-60, 100}, {-60, -100}}, 
-          thickness = 0.5), 
+          points = {{-60, 100}, {-60, -100}},
+          thickness = 0.5),
           Line(
-          points = {{60, 100}, {60, -100}}, 
-          thickness = 0.5), 
+          points = {{60, 100}, {60, -100}},
+          thickness = 0.5),
           Text(
-          extent = {{-86, -60}, {-64, -80}}, 
-          textString = "R"), 
+          extent = {{-86, -60}, {-64, -80}},
+          textString = "R"),
           Text(
-          extent = {{-86, 80}, {-64, 60}}, 
-          textString = "S"), 
+          extent = {{-86, 80}, {-64, 60}},
+          textString = "S"),
           Text(
-          extent = {{64, 80}, {86, 60}}, 
-          textString = "Q"), 
+          extent = {{64, 80}, {86, 60}},
+          textString = "Q"),
           Text(
-          extent = {{64, -60}, {86, -80}}, 
-          textString = "QN"), 
+          extent = {{64, -60}, {86, -80}},
+          textString = "QN"),
           Text(
-          extent = {{-150, -100}, {150, -160}}, 
-          textColor = {0, 0, 255}, 
+          extent = {{-150, -100}, {150, -160}},
+          textColor = {0, 0, 255},
           textString = "%name")}));
       end RS;
 
@@ -1360,11 +1360,11 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 
         parameter SI.Time delayTime = 0.01 "延迟时间";
         parameter D.Interfaces.Logic q0 = L.'U' "初始值";
-        D.Interfaces.DigitalInput s annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalInput s annotation(Placement(transformation(extent =
           {{-110, 60}, {-90, 80}})));
         D.Interfaces.DigitalInput r annotation(Placement(transformation(
           extent = {{-110, -80}, {-90, -60}})));
-        D.Interfaces.DigitalOutput q annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalOutput q annotation(Placement(transformation(extent =
           {{90, 60}, {110, 80}})));
         D.Interfaces.DigitalOutput qn "非 Q" 
           annotation(Placement(transformation(extent = {{90, -80}, {110, -60}})));
@@ -1373,9 +1373,9 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         D.Examples.Utilities.RS RS1(delayTime = delayTime, q0 = q0) 
           annotation(Placement(transformation(
           extent = {{-10, -40}, {70, 40}})));
-        D.Basic.And And1 annotation(Placement(transformation(extent = {{-70, 
+        D.Basic.And And1 annotation(Placement(transformation(extent = {{-70,
           8}, {-30, 48}})));
-        D.Basic.And And2 annotation(Placement(transformation(extent = {{-70, 
+        D.Basic.And And2 annotation(Placement(transformation(extent = {{-70,
           -48}, {-30, -8}})));
       equation
         connect(And2.y, RS1.r) 
@@ -1399,38 +1399,38 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         annotation(
           Documentation(info = "<html>
 <p>RSFF是根据RS组件原理图组成的RS(设定-复位)触发器。其参数delayTime是RS组件传输延迟的延迟时间，q0是该延迟的初始值。</p>
-</html>"                      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"                      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
           {100, 100}}), graphics = {
           Rectangle(
-          extent = {{-90, 100}, {90, -100}}, 
-          lineThickness = 0.5, 
-          fillColor = {255, 255, 170}, 
-          fillPattern = FillPattern.Solid), 
+          extent = {{-90, 100}, {90, -100}},
+          lineThickness = 0.5,
+          fillColor = {255, 255, 170},
+          fillPattern = FillPattern.Solid),
           Text(
-          extent = {{-100, 100}, {100, 40}}, 
-          textString = "RS"), 
+          extent = {{-100, 100}, {100, 40}},
+          textString = "RS"),
           Line(
-          points = {{-60, 100}, {-60, -100}}, 
-          thickness = 0.5), 
+          points = {{-60, 100}, {-60, -100}},
+          thickness = 0.5),
           Line(
-          points = {{60, 100}, {60, -100}}, 
-          thickness = 0.5), 
+          points = {{60, 100}, {60, -100}},
+          thickness = 0.5),
           Text(
-          extent = {{-86, -60}, {-64, -80}}, 
-          textString = "R"), 
+          extent = {{-86, -60}, {-64, -80}},
+          textString = "R"),
           Text(
-          extent = {{-86, 80}, {-64, 60}}, 
-          textString = "S"), 
+          extent = {{-86, 80}, {-64, 60}},
+          textString = "S"),
           Text(
-          extent = {{64, 80}, {86, 60}}, 
-          textString = "Q"), 
+          extent = {{64, 80}, {86, 60}},
+          textString = "Q"),
           Text(
-          extent = {{64, -60}, {86, -80}}, 
-          textString = "QN"), 
-          Line(points = {{-90, 20}, {-60, 0}, {-90, -20}}), 
+          extent = {{64, -60}, {86, -80}},
+          textString = "QN"),
+          Line(points = {{-90, 20}, {-60, 0}, {-90, -20}}),
           Text(
-          extent = {{-150, -100}, {150, -160}}, 
-          textColor = {0, 0, 255}, 
+          extent = {{-150, -100}, {150, -160}},
+          textColor = {0, 0, 255},
           textString = "%name")}));
       end RSFF;
 
@@ -1440,9 +1440,9 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 
         parameter SI.Time Tdel = 0.01 "延迟时间";
         parameter L QInit = L.'U' "初始值";
-        D.Interfaces.DigitalInput d annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalInput d annotation(Placement(transformation(extent =
           {{-110, 60}, {-90, 80}})));
-        D.Interfaces.DigitalOutput q annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalOutput q annotation(Placement(transformation(extent =
           {{90, 60}, {110, 80}})));
         D.Interfaces.DigitalOutput qn "非 Q" 
           annotation(Placement(transformation(extent = {{90, -80}, {110, -60}})));
@@ -1450,7 +1450,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
           extent = {{-110, -10}, {-90, 10}})));
         D.Examples.Utilities.RSFF RSFF1 annotation(Placement(transformation(
           extent = {{-10, -40}, {70, 40}})));
-        D.Basic.Not Not1 annotation(Placement(transformation(extent = {{-70, 
+        D.Basic.Not Not1 annotation(Placement(transformation(extent = {{-70,
           -48}, {-30, -8}})));
       equation
         connect(RSFF1.q, q) 
@@ -1471,35 +1471,35 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         annotation(
           Documentation(info = "<html>
 <p>DFF是根据RS组件原理图组成的D触发器。其参数delayTime是RS组件传输延迟的延迟时间，q0是该延迟的初始值。</p>
-</html>"                ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"                ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
           {100, 100}}), graphics = {
           Rectangle(
-          extent = {{-90, 100}, {90, -100}}, 
-          lineThickness = 0.5, 
-          fillColor = {255, 255, 170}, 
-          fillPattern = FillPattern.Solid), 
+          extent = {{-90, 100}, {90, -100}},
+          lineThickness = 0.5,
+          fillColor = {255, 255, 170},
+          fillPattern = FillPattern.Solid),
           Line(
-          points = {{-60, 100}, {-60, -100}}, 
-          thickness = 0.5), 
+          points = {{-60, 100}, {-60, -100}},
+          thickness = 0.5),
           Line(
-          points = {{60, 100}, {60, -100}}, 
-          thickness = 0.5), 
+          points = {{60, 100}, {60, -100}},
+          thickness = 0.5),
           Text(
-          extent = {{-86, 80}, {-64, 60}}, 
-          textString = "D"), 
+          extent = {{-86, 80}, {-64, 60}},
+          textString = "D"),
           Text(
-          extent = {{64, 80}, {86, 60}}, 
-          textString = "Q"), 
+          extent = {{64, 80}, {86, 60}},
+          textString = "Q"),
           Text(
-          extent = {{64, -60}, {86, -80}}, 
-          textString = "QN"), 
-          Line(points = {{-90, 20}, {-60, 0}, {-90, -20}}), 
+          extent = {{64, -60}, {86, -80}},
+          textString = "QN"),
+          Line(points = {{-90, 20}, {-60, 0}, {-90, -20}}),
           Text(
-          extent = {{-150, -100}, {150, -160}}, 
-          textColor = {0, 0, 255}, 
-          textString = "%name"), 
+          extent = {{-150, -100}, {150, -160}},
+          textColor = {0, 0, 255},
+          textString = "%name"),
           Text(
-          extent = {{-100, 100}, {100, 40}}, 
+          extent = {{-100, 100}, {100, 40}},
           textString = "D")}));
       end DFF;
 
@@ -1509,15 +1509,15 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 
         parameter SI.Time delayTime = 0.001 "延迟时间";
         parameter D.Interfaces.Logic q0 = L.'0' "初始值";
-        D.Interfaces.DigitalInput j annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalInput j annotation(Placement(transformation(extent =
           {{-110, 60}, {-90, 80}})));
-        D.Interfaces.DigitalOutput q annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalOutput q annotation(Placement(transformation(extent =
           {{90, 60}, {110, 80}})));
         D.Interfaces.DigitalOutput qn "非Q" 
           annotation(Placement(transformation(extent = {{90, -80}, {110, -60}})));
         D.Interfaces.DigitalInput clk annotation(Placement(transformation(
           extent = {{-110, -10}, {-90, 10}})));
-        D.Interfaces.DigitalInput k annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalInput k annotation(Placement(transformation(extent =
           {{-110, -80}, {-90, -60}})));
         D.Examples.Utilities.RS RS1(delayTime = delayTime, q0 = q0) 
           annotation(Placement(transformation(
@@ -1525,15 +1525,15 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         D.Examples.Utilities.RS RS2(delayTime = delayTime, q0 = q0) 
           annotation(Placement(transformation(
           extent = {{-44, -20}, {-4, 20}})));
-        D.Basic.And And1(n = 3) annotation(Placement(transformation(extent = {{-70, 
+        D.Basic.And And1(n = 3) annotation(Placement(transformation(extent = {{-70,
           4}, {-50, 24}})));
-        D.Basic.And And2(n = 3) annotation(Placement(transformation(extent = {{-70, 
+        D.Basic.And And2(n = 3) annotation(Placement(transformation(extent = {{-70,
           -24}, {-50, -4}})));
-        D.Basic.And And3 annotation(Placement(transformation(extent = {{4, 0}, {24, 
+        D.Basic.And And3 annotation(Placement(transformation(extent = {{4, 0}, {24,
           20}})));
         D.Basic.And And4 annotation(Placement(transformation(extent = {{4, -28}, {
           24, -8}})));
-        D.Basic.Not Not1 annotation(Placement(transformation(extent = {{-34, -66}, 
+        D.Basic.Not Not1 annotation(Placement(transformation(extent = {{-34, -66},
           {-14, -46}})));
       equation
         connect(And2.y, RS2.r) annotation(Line(points = {{-50, -14}, {-44, -14}}, color = {127, 0, 127}));
@@ -1548,57 +1548,57 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         connect(And3.y, RS1.s) annotation(Line(points = {{24, 10}, {30, 10}}, color = {127, 0, 127}));
         connect(RS2.qn, And4.x[2]) annotation(Line(points = {{-4, -14}, {8, -14}}, color = {127, 0, 127}));
         connect(RS2.q, And3.x[2]) annotation(Line(points = {{-4, 14}, {8, 14}}, color = {127, 0, 127}));
-        connect(clk, Not1.x) annotation(Line(points = {{-100, 0}, {-80, 0}, {-80, -56}, 
+        connect(clk, Not1.x) annotation(Line(points = {{-100, 0}, {-80, 0}, {-80, -56},
           {-30, -56}}, color = {127, 0, 127}));
         connect(Not1.y, And3.x[1]) annotation(Line(points = {{-14, -56}, {2, -56}, {
           2, 6}, {8, 6}}, color = {127, 0, 127}));
         connect(Not1.y, And4.x[1]) annotation(Line(points = {{-14, -56}, {2, -56}, {
           2, -22}, {8, -22}}, color = {127, 0, 127}));
-        connect(j, And1.x[2]) annotation(Line(points = {{-100, 70}, {-74, 70}, {-74, 
+        connect(j, And1.x[2]) annotation(Line(points = {{-100, 70}, {-74, 70}, {-74,
           14}, {-66, 14}}, color = {127, 0, 127}));
-        connect(RS1.q, And2.x[1]) annotation(Line(points = {{70, 10}, {80, 10}, 
+        connect(RS1.q, And2.x[1]) annotation(Line(points = {{70, 10}, {80, 10},
           {80, -36}, {-70, -36}, {-70, -19.3333}, {-66, -19.3333}}, color = {127, 0, 127}));
-        connect(RS1.qn, And1.x[3]) annotation(Line(points = {{70, -18}, {86, 
+        connect(RS1.qn, And1.x[3]) annotation(Line(points = {{70, -18}, {86,
           -18}, {86, 36}, {-70, 36}, {-70, 19.3333}, {-66, 19.3333}}, color = {127, 0, 127}));
         connect(RS1.qn, q) annotation(Line(points = {{70, -18}, {86, -18}, {86, 70}, {
           100, 70}}, color = {127, 0, 127}));
-        connect(RS1.q, qn) annotation(Line(points = {{70, 10}, {80, 10}, {80, -70}, {100, 
+        connect(RS1.q, qn) annotation(Line(points = {{70, 10}, {80, 10}, {80, -70}, {100,
           -70}}, color = {127, 0, 127}));
         annotation(
           Documentation(info = "<html>
 <p>JKFF是基于RS组件原理图构成的J-K触发器。其参数delayTime是RS组件传输延迟的延迟时间，q0是该延迟的初始值。</p>
-</html>"                ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"                ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
           {100, 100}}), graphics = {
           Rectangle(
-          extent = {{-90, 100}, {90, -100}}, 
-          lineThickness = 0.5, 
-          fillColor = {255, 255, 170}, 
-          fillPattern = FillPattern.Solid), 
+          extent = {{-90, 100}, {90, -100}},
+          lineThickness = 0.5,
+          fillColor = {255, 255, 170},
+          fillPattern = FillPattern.Solid),
           Line(
-          points = {{-60, 100}, {-60, -100}}, 
-          thickness = 0.5), 
+          points = {{-60, 100}, {-60, -100}},
+          thickness = 0.5),
           Line(
-          points = {{60, 100}, {60, -100}}, 
-          thickness = 0.5), 
+          points = {{60, 100}, {60, -100}},
+          thickness = 0.5),
           Text(
-          extent = {{-86, 80}, {-64, 60}}, 
-          textString = "J"), 
+          extent = {{-86, 80}, {-64, 60}},
+          textString = "J"),
           Text(
-          extent = {{64, 80}, {86, 60}}, 
-          textString = "Q"), 
+          extent = {{64, 80}, {86, 60}},
+          textString = "Q"),
           Text(
-          extent = {{64, -60}, {86, -80}}, 
-          textString = "QN"), 
-          Line(points = {{-90, 20}, {-60, 0}, {-90, -20}}), 
+          extent = {{64, -60}, {86, -80}},
+          textString = "QN"),
+          Line(points = {{-90, 20}, {-60, 0}, {-90, -20}}),
           Text(
-          extent = {{-150, -100}, {150, -160}}, 
-          textColor = {0, 0, 255}, 
-          textString = "%name"), 
+          extent = {{-150, -100}, {150, -160}},
+          textColor = {0, 0, 255},
+          textString = "%name"),
           Text(
-          extent = {{-100, 100}, {100, 40}}, 
-          textString = "JK"), 
+          extent = {{-100, 100}, {100, 40}},
+          textString = "JK"),
           Text(
-          extent = {{-86, -60}, {-64, -80}}, 
+          extent = {{-86, -60}, {-64, -80}},
           textString = "K")}));
       end JKFF;
 
@@ -1606,63 +1606,63 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         import L = Modelica.Electrical.Digital.Interfaces.Logic;
         parameter Real delayTime = 0 "延迟时间";
         Modelica.Electrical.Digital.Interfaces.DigitalInput b 
-          annotation(Placement(transformation(extent = {{-110, -80}, {-90, 
+          annotation(Placement(transformation(extent = {{-110, -80}, {-90,
           -60}})));
         Modelica.Electrical.Digital.Interfaces.DigitalOutput s 
           annotation(Placement(transformation(
           extent = {{90, 60}, {110, 80}})));
         Modelica.Electrical.Digital.Interfaces.DigitalInput a 
-          annotation(Placement(transformation(extent = {{-110, 60}, {-90, 
+          annotation(Placement(transformation(extent = {{-110, 60}, {-90,
           80}})));
         Modelica.Electrical.Digital.Interfaces.DigitalOutput c 
           annotation(Placement(transformation(
           extent = {{90, -80}, {110, -60}})));
         Modelica.Electrical.Digital.Gates.AndGate AND(tLH = delayTime, tHL = delayTime, G2(y(start = L.'U', fixed = true))) 
-          annotation(Placement(transformation(extent = {{-20, -82}, {20, 
+          annotation(Placement(transformation(extent = {{-20, -82}, {20,
           -42}})));
         Modelica.Electrical.Digital.Gates.XorGate XOR(tLH = delayTime, tHL = delayTime, G2(y(start = L.'U', fixed = true))) 
           annotation(Placement(transformation(extent = {{-20, 42}, {20, 82}})));
 
       equation
         connect(AND.y, c) 
-          annotation(Line(points = {{20, -62}, {60, -62}, {60, -70}, 
+          annotation(Line(points = {{20, -62}, {60, -62}, {60, -70},
           {100, -70}}, color = {127, 0, 127}));
         connect(XOR.y, s) 
-          annotation(Line(points = {{20, 62}, {60, 62}, {60, 70}, 
+          annotation(Line(points = {{20, 62}, {60, 62}, {60, 70},
           {100, 70}}, color = {127, 0, 127}));
         connect(b, AND.x[1]) 
           annotation(Line(points = {{-100, -70}, {-12, -70}}, color = {127, 0, 127}));
         connect(b, XOR.x[1]) 
-          annotation(Line(points = {{-100, -70}, {-30, -70}, 
+          annotation(Line(points = {{-100, -70}, {-30, -70},
           {-30, 54}, {-12, 54}}, color = {127, 0, 127}));
         connect(a, XOR.x[2]) 
           annotation(Line(points = {{-100, 70}, {-12, 70}}, color = {127, 0, 127}));
         connect(a, AND.x[2]) 
           annotation(Line(points = {{-100, 70}, {-40, 70}, {
           -40, -54}, {-12, -54}}, color = {127, 0, 127}));
-        annotation(Icon(coordinateSystem(preserveAspectRatio = true, 
+        annotation(Icon(coordinateSystem(preserveAspectRatio = true,
           extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(
-          extent = {{-90, 100}, {90, -100}}, 
-          lineThickness = 0.5, 
-          fillColor = {255, 255, 170}, 
+          extent = {{-90, 100}, {90, -100}},
+          lineThickness = 0.5,
+          fillColor = {255, 255, 170},
           fillPattern = FillPattern.Solid), Text(
-          extent = {{-90, 80}, {-60, 60}}, 
+          extent = {{-90, 80}, {-60, 60}},
           textString = "a"), Text(
-          extent = {{-90, -60}, {-60, -80}}, 
+          extent = {{-90, -60}, {-60, -80}},
           textString = "b"), Text(
-          extent = {{60, 80}, {90, 60}}, 
+          extent = {{60, 80}, {90, 60}},
           textString = "s"), Text(
-          extent = {{60, -60}, {90, -80}}, 
+          extent = {{60, -60}, {90, -80}},
           textString = "c"), Text(
-          extent = {{-150, -100}, {150, -160}}, 
-          textColor = {0, 0, 255}, 
+          extent = {{-150, -100}, {150, -160}},
+          textColor = {0, 0, 255},
           textString = "%name"), Text(
-          extent = {{-100, 100}, {100, 0}}, 
+          extent = {{-100, 100}, {100, 0}},
           textString = "+"), Line(
-          points = {{-60, 100}, {-60, -100}}, 
+          points = {{-60, 100}, {-60, -100}},
           thickness = 0.5), Line(
-          points = {{60, 100}, {60, -100}}, 
-          thickness = 0.5)}), 
+          points = {{60, 100}, {60, -100}},
+          thickness = 0.5)}),
           Documentation(info = "<html>
 <p>半加器是一个由门组件组成的二进制加法器。</p>
 <p>其逻辑行为如下：</p>
@@ -1702,7 +1702,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 </html>"                ));
       end HalfAdder;
 
-      model FullAdder 
+      model FullAdder
         "具有输入进位位的二进制数加法电路"
 
         HalfAdder Adder2(delayTime = 0.001) 
@@ -1713,31 +1713,31 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
           extent = {{-60, 36}, {-20, 76}})));
         Modelica.Electrical.Digital.Interfaces.DigitalInput a 
           annotation(Placement(transformation(
-          origin = {-100, 70}, 
-          extent = {{-10, -10}, {10, 10}}, 
+          origin = {-100, 70},
+          extent = {{-10, -10}, {10, 10}},
           rotation = 180)));
         Modelica.Electrical.Digital.Interfaces.DigitalInput b 
           annotation(Placement(transformation(
-          origin = {-100, 30}, 
-          extent = {{-10, -10}, {10, 10}}, 
+          origin = {-100, 30},
+          extent = {{-10, -10}, {10, 10}},
           rotation = 180)));
         Modelica.Electrical.Digital.Interfaces.DigitalInput c_in 
           annotation(Placement(transformation(
-          origin = {-100, -70}, 
-          extent = {{-10, -10}, {10, 10}}, 
+          origin = {-100, -70},
+          extent = {{-10, -10}, {10, 10}},
           rotation = 180)));
         Modelica.Electrical.Digital.Interfaces.DigitalOutput s 
           annotation(Placement(transformation(
-          origin = {101, 70}, 
-          extent = {{11, -10}, {-11, 10}}, 
+          origin = {101, 70},
+          extent = {{11, -10}, {-11, 10}},
           rotation = 180)));
         Modelica.Electrical.Digital.Interfaces.DigitalOutput c_out 
           annotation(Placement(transformation(
-          origin = {100, -70}, 
-          extent = {{10, -10}, {-10, 10}}, 
+          origin = {100, -70},
+          extent = {{10, -10}, {-10, 10}},
           rotation = 180)));
         Modelica.Electrical.Digital.Basic.Or OR 
-          annotation(Placement(transformation(extent = {{10, -90}, {50, 
+          annotation(Placement(transformation(extent = {{10, -90}, {50,
           -50}})));
       equation
 
@@ -1749,12 +1749,12 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         connect(Adder2.s, s) 
           annotation(Line(points = {{50, 70}, {101, 70}}, color = {127, 0, 127}));
         connect(Adder1.a, a) annotation(Line(points = {{-60, 70}, {-100, 70}}, color = {127, 0, 127}));
-        connect(b, Adder1.b) annotation(Line(points = {{-100, 30}, {-70, 30}, {-70, 
+        connect(b, Adder1.b) annotation(Line(points = {{-100, 30}, {-70, 30}, {-70,
           42}, {-60, 42}}, color = {127, 0, 127}));
         connect(Adder1.s, Adder2.a) annotation(Line(points = {{-20, 70}, {10, 70}}, color = {127, 0, 127}));
         connect(Adder1.c, OR.x[1]) annotation(Line(points = {{-20, 42}, {-10, 42}, {
           -10, -78}, {18, -78}}, color = {127, 0, 127}));
-        connect(c_in, Adder2.b) annotation(Line(points = {{-100, -70}, {0, -70}, {0, 
+        connect(c_in, Adder2.b) annotation(Line(points = {{-100, -70}, {0, -70}, {0,
           42}, {10, 42}}, color = {127, 0, 127}));
         annotation(
           Documentation(info = "<html>
@@ -1826,40 +1826,40 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 </tr>
 </table>
 </html>"                ), Icon(coordinateSystem(
-          preserveAspectRatio = true, 
+          preserveAspectRatio = true,
           extent = {{-100, -100}, {100, 100}}), graphics = {
           Rectangle(
-          extent = {{-90, 100}, {90, -100}}, 
-          lineThickness = 0.5, 
-          fillColor = {255, 255, 170}, 
-          fillPattern = FillPattern.Solid), 
+          extent = {{-90, 100}, {90, -100}},
+          lineThickness = 0.5,
+          fillColor = {255, 255, 170},
+          fillPattern = FillPattern.Solid),
           Text(
-          extent = {{-150, -96}, {150, -151}}, 
-          textColor = {0, 0, 255}, 
-          textString = "%name"), 
+          extent = {{-150, -96}, {150, -151}},
+          textColor = {0, 0, 255},
+          textString = "%name"),
           Text(
-          extent = {{-86, 80}, {-64, 60}}, 
-          textString = "a"), 
+          extent = {{-86, 80}, {-64, 60}},
+          textString = "a"),
           Text(
-          extent = {{-86, 40}, {-64, 20}}, 
-          textString = "b"), 
+          extent = {{-86, 40}, {-64, 20}},
+          textString = "b"),
           Text(
-          extent = {{-86, -60}, {-64, -80}}, 
-          textString = "c_in"), 
+          extent = {{-86, -60}, {-64, -80}},
+          textString = "c_in"),
           Text(
-          extent = {{60, -60}, {90, -80}}, 
-          textString = "c_out"), 
+          extent = {{60, -60}, {90, -80}},
+          textString = "c_out"),
           Text(
-          extent = {{64, 80}, {86, 60}}, 
-          textString = "s"), 
+          extent = {{64, 80}, {86, 60}},
+          textString = "s"),
           Text(
-          extent = {{-100, 100}, {100, 0}}, 
-          textString = "+"), 
+          extent = {{-100, 100}, {100, 0}},
+          textString = "+"),
           Line(
-          points = {{-60, 100}, {-60, -100}}, 
-          thickness = 0.5), 
+          points = {{-60, 100}, {-60, -100}},
+          thickness = 0.5),
           Line(
-          points = {{60, 100}, {60, -100}}, 
+          points = {{60, 100}, {60, -100}},
           thickness = 0.5)}));
       end FullAdder;
 
@@ -1868,7 +1868,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 
         parameter Integer n = 2 "单个加法器的数量";
         Modelica.Electrical.Digital.Examples.Utilities.FullAdder Adder[n] 
-          annotation(Placement(transformation(extent = 
+          annotation(Placement(transformation(extent =
           {{-20, -20}, {20, 20}})));
         Modelica.Electrical.Digital.Interfaces.DigitalInput a[n] 
           annotation(Placement(transformation(
@@ -1900,34 +1900,34 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
           Documentation(info = "<html>
 <p>加法器是一个通用的n位加法器，由一系列FullAdder组件连接而成。用户可以选择n，a和b是n位输入向量，s是和向量，c_out是“最高位”FullAdder的进位位。所有组件都是由门组件构建的。</p>
 </html>"                      ), Icon(coordinateSystem(
-          preserveAspectRatio = true, 
+          preserveAspectRatio = true,
           extent = {{-100, -100}, {100, 100}}), graphics = {
           Rectangle(
-          extent = {{-90, 100}, {90, -100}}, 
-          lineThickness = 0.5, 
-          fillColor = {255, 255, 170}, 
-          fillPattern = FillPattern.Solid), 
+          extent = {{-90, 100}, {90, -100}},
+          lineThickness = 0.5,
+          fillColor = {255, 255, 170},
+          fillPattern = FillPattern.Solid),
           Text(
-          extent = {{68, 80}, {88, 60}}, 
-          textString = "S"), 
+          extent = {{68, 80}, {88, 60}},
+          textString = "S"),
           Text(
-          extent = {{-150, -100}, {150, -160}}, 
-          textColor = {0, 0, 255}, 
-          textString = "%name"), 
+          extent = {{-150, -100}, {150, -160}},
+          textColor = {0, 0, 255},
+          textString = "%name"),
           Text(
-          extent = {{-40, 60}, {40, 20}}, 
-          textString = "Adder"), 
+          extent = {{-40, 60}, {40, 20}},
+          textString = "Adder"),
           Text(
-          extent = {{48, -60}, {88, -80}}, 
-          textString = "Cout"), 
+          extent = {{48, -60}, {88, -80}},
+          textString = "Cout"),
           Text(
-          extent = {{-90, -60}, {-50, -80}}, 
-          textString = "Cin"), 
+          extent = {{-90, -60}, {-50, -80}},
+          textString = "Cin"),
           Text(
-          extent = {{-88, 80}, {-68, 60}}, 
-          textString = "A"), 
+          extent = {{-88, 80}, {-68, 60}},
+          textString = "A"),
           Text(
-          extent = {{-88, 40}, {-68, 20}}, 
+          extent = {{-88, 40}, {-68, 20}},
           textString = "B")}));
       end Adder;
 
@@ -1938,7 +1938,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         D.Interfaces.DigitalInput enable 
           annotation(Placement(transformation(
           extent = {{-110, 60}, {-90, 80}})));
-        D.Interfaces.DigitalOutput q2 annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalOutput q2 annotation(Placement(transformation(extent =
           {{90, 60}, {110, 80}})));
         D.Interfaces.DigitalInput count 
           annotation(Placement(transformation(
@@ -1949,9 +1949,9 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
           annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}})));
         D.Examples.Utilities.JKFF FF3 
           annotation(Placement(transformation(extent = {{34, -20}, {74, 20}})));
-        D.Interfaces.DigitalOutput q1 annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalOutput q1 annotation(Placement(transformation(extent =
           {{90, -10}, {110, 10}})));
-        D.Interfaces.DigitalOutput q0 annotation(Placement(transformation(extent = 
+        D.Interfaces.DigitalOutput q0 annotation(Placement(transformation(extent =
           {{90, -80}, {110, -60}})));
       equation
         connect(enable, FF1.j) annotation(Line(
@@ -1976,39 +1976,39 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
           points = {{74, 14}, {80, 14}, {80, 70}, {100, 70}}, color = {127, 0, 127}));
         connect(FF1.q, q0) annotation(Line(points = {{-34, 14}, {-30, 14}, {-30, -70}, {
           100, -70}}, color = {127, 0, 127}));
-        connect(FF2.q, q1) annotation(Line(points = {{20, 14}, {24, 14}, {24, -50}, {86, 
+        connect(FF2.q, q1) annotation(Line(points = {{20, 14}, {24, 14}, {24, -50}, {86,
           -50}, {86, 0}, {100, 0}}, color = {127, 0, 127}));
         annotation(
           Documentation(info = "<html>
 <p>Counter3在使能信号为真时计数计数信号的高低电平。它由三个JK 触发器组成。q0、q1和q2是结果数字的位，其中q0是最低位，q2是最高位。</p>
-</html>"                ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"                ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
           {100, 100}}), graphics = {
           Rectangle(
-          extent = {{-90, 100}, {90, -100}}, 
-          lineThickness = 0.5, 
-          fillColor = {255, 255, 170}, 
-          fillPattern = FillPattern.Solid), 
+          extent = {{-90, 100}, {90, -100}},
+          lineThickness = 0.5,
+          fillColor = {255, 255, 170},
+          fillPattern = FillPattern.Solid),
           Text(
-          extent = {{-80, 80}, {-40, 60}}, 
-          textString = "ENABLE"), 
+          extent = {{-80, 80}, {-40, 60}},
+          textString = "ENABLE"),
           Text(
-          extent = {{64, 80}, {86, 60}}, 
-          textString = "Q2"), 
+          extent = {{64, 80}, {86, 60}},
+          textString = "Q2"),
           Text(
-          extent = {{64, -60}, {86, -80}}, 
-          textString = "Q0"), 
+          extent = {{64, -60}, {86, -80}},
+          textString = "Q0"),
           Text(
-          extent = {{-150, -100}, {150, -160}}, 
-          textColor = {0, 0, 255}, 
-          textString = "%name"), 
+          extent = {{-150, -100}, {150, -160}},
+          textColor = {0, 0, 255},
+          textString = "%name"),
           Text(
-          extent = {{-60, 40}, {60, 0}}, 
-          textString = "Counter3"), 
+          extent = {{-60, 40}, {60, 0}},
+          textString = "Counter3"),
           Text(
-          extent = {{-80, -60}, {-40, -80}}, 
-          textString = "COUNT"), 
+          extent = {{-80, -60}, {-40, -80}},
+          textString = "COUNT"),
           Text(
-          extent = {{62, 8}, {84, -12}}, 
+          extent = {{62, 8}, {84, -12}},
           textString = "Q1")}));
       end Counter3;
 
@@ -2020,10 +2020,10 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         parameter SI.Time delayTime = 0.001 "每个 JKFF 的延迟时间";
         parameter D.Interfaces.Logic q0 = L.'0' "初始值";
         D.Interfaces.DigitalInput enable 
-          annotation(Placement(transformation(extent = 
+          annotation(Placement(transformation(extent =
           {{-110, 60}, {-90, 80}})));
         D.Interfaces.DigitalInput count 
-          annotation(Placement(transformation(extent = 
+          annotation(Placement(transformation(extent =
           {{-110, -80}, {-90, -60}})));
         D.Examples.Utilities.JKFF FF[n](each delayTime = delayTime, each q0 = q0);
         D.Interfaces.DigitalOutput q[n] annotation(Placement(transformation(
@@ -2042,39 +2042,39 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         annotation(
           Documentation(info = "<html>
 <p>计数器是一个通用组件，如果使能信号被设置为真，则计数信号的高低电平将被计数。它由n个JK触发器组成。q是结果数字，其中q[0]是最低位，q[n]是最高位。</p>
-</html>"                ), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+</html>"                ), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
           -100}, {100, 100}}), graphics = {Rectangle(
-          extent = {{90, 80}, {110, -80}}, 
-          lineColor = {127, 0, 127}, 
-          fillColor = {127, 0, 127}, 
-          fillPattern = FillPattern.Solid)}), 
-          Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+          extent = {{90, 80}, {110, -80}},
+          lineColor = {127, 0, 127},
+          fillColor = {127, 0, 127},
+          fillPattern = FillPattern.Solid)}),
+          Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
           {100, 100}}), graphics = {
           Rectangle(
-          extent = {{90, 80}, {110, -80}}, 
-          lineColor = {127, 0, 127}, 
-          fillColor = {127, 0, 127}, 
-          fillPattern = FillPattern.Solid), 
+          extent = {{90, 80}, {110, -80}},
+          lineColor = {127, 0, 127},
+          fillColor = {127, 0, 127},
+          fillPattern = FillPattern.Solid),
           Rectangle(
-          extent = {{-90, 100}, {90, -100}}, 
-          lineThickness = 0.5, 
-          fillColor = {255, 255, 170}, 
-          fillPattern = FillPattern.Solid), 
+          extent = {{-90, 100}, {90, -100}},
+          lineThickness = 0.5,
+          fillColor = {255, 255, 170},
+          fillPattern = FillPattern.Solid),
           Text(
-          extent = {{-80, 80}, {-40, 60}}, 
-          textString = "ENABLE"), 
+          extent = {{-80, 80}, {-40, 60}},
+          textString = "ENABLE"),
           Text(
-          extent = {{66, 8}, {88, -12}}, 
-          textString = "Q"), 
+          extent = {{66, 8}, {88, -12}},
+          textString = "Q"),
           Text(
-          extent = {{-150, -100}, {150, -160}}, 
-          textColor = {0, 0, 255}, 
-          textString = "%name"), 
+          extent = {{-150, -100}, {150, -160}},
+          textColor = {0, 0, 255},
+          textString = "%name"),
           Text(
-          extent = {{-40, 40}, {40, 0}}, 
-          textString = "Counter"), 
+          extent = {{-40, 40}, {40, 0}},
+          textString = "Counter"),
           Text(
-          extent = {{-80, -60}, {-40, -80}}, 
+          extent = {{-80, -60}, {-40, -80}},
           textString = "COUNT")}));
       end Counter;
       annotation(Documentation(info = "<html>
@@ -2096,14 +2096,14 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
     extends Modelica.Icons.InterfacesPackage;
 
     type Logic = enumeration(
-      'U' "U  未初始化", 
-      'X' "X  强制未知", 
-      '0' "0  强制0", 
-      '1' "1  强制1", 
-      'Z' "Z  高阻", 
-      'W' "W  弱未知", 
-      'L' "L  弱0", 
-      'H' "H  弱1", 
+      'U' "U  未初始化",
+      'X' "X  强制未知",
+      '0' "0  强制0",
+      '1' "1  强制1",
+      'Z' "Z  高阻",
+      'W' "W  弱未知",
+      'L' "L  弱0",
+      'H' "H  弱1",
       '-' "-  无关") "逻辑值及其根据IEEE 1164 STD_ULOGIC类型进行编码的编码" 
       annotation(Documentation(info = "<html>
 <p><strong>代码表：</strong></p>
@@ -2127,9 +2127,9 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 </html>"      ));
 
     type UX01 = enumeration(
-      'U' "U  未初始化", 
-      'X' "X  强制未知", 
-      '0' "0  强制0", 
+      'U' "U  未初始化",
+      'X' "X  强制未知",
+      '0' "0  强制0",
       '1' "1  强制1") "IEEE1164 STD_ULOGIC类型的4值子类型" 
       annotation(Documentation(info = "<html>
 <p><strong>代码表：</strong></p>
@@ -2147,15 +2147,15 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 </table>
 </html>"      ));
     type Strength = enumeration(
-      'S_X01' "S_X01  强制 X, 0 和 1", 
-      'S_X0H' "S_X0H  强制 X, 0 和 弱1", 
-      'S_XL1' "S_XL1  强制 X, 1 和 弱0", 
-      'S_X0Z' "S_X0Z  强制 X, 0 和 高阻", 
-      'S_XZ1' "S_XZ1  强制 X, 1 和 高阻", 
-      'S_WLH' "S_WLH  弱 X, 0 和 1", 
-      'S_WLZ' "S_WLZ  弱 X, 0 和 高阻", 
-      'S_WZH' "S_WZH  弱 X, 1 和 高阻", 
-      'S_W0H' "S_W0H  弱 X, 1 和 强制0", 
+      'S_X01' "S_X01  强制 X, 0 和 1",
+      'S_X0H' "S_X0H  强制 X, 0 和 弱1",
+      'S_XL1' "S_XL1  强制 X, 1 和 弱0",
+      'S_X0Z' "S_X0Z  强制 X, 0 和 高阻",
+      'S_XZ1' "S_XZ1  强制 X, 1 和 高阻",
+      'S_WLH' "S_WLH  弱 X, 0 和 1",
+      'S_WLZ' "S_WLZ  弱 X, 0 和 高阻",
+      'S_WZH' "S_WZH  弱 X, 1 和 高阻",
+      'S_W0H' "S_W0H  弱 X, 1 和 强制0",
       'S_WL1' "S_WL1  弱 X, 0 和 强制1") "寄存器的输出强度" annotation(Documentation(info = "<html>
 
 <p><strong>强度表：</strong></p>
@@ -2184,45 +2184,45 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 </html>"          ));
 
     connector DigitalInput = input DigitalSignal "输入DigitalSignal连接器" 
-      annotation(defaultComponentName = "x", 
-      Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+      annotation(defaultComponentName = "x",
+      Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
       {100, 100}}), graphics = {Rectangle(
-      extent = {{-100, -100}, {100, 100}}, 
-      lineColor = {127, 0, 127}, 
-      fillColor = {127, 0, 127}, 
-      fillPattern = FillPattern.Solid)}), 
-      Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      extent = {{-100, -100}, {100, 100}},
+      lineColor = {127, 0, 127},
+      fillColor = {127, 0, 127},
+      fillPattern = FillPattern.Solid)}),
+      Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
       -100}, {100, 100}}), graphics = {Text(
-      extent = {{-150, -100}, {150, -160}}, 
-      textColor = {127, 0, 127}, 
+      extent = {{-150, -100}, {150, -160}},
+      textColor = {127, 0, 127},
       textString = "%name"), Rectangle(
-      extent = {{-100, -100}, {100, 100}}, 
-      lineColor = {127, 0, 127}, 
-      fillColor = {127, 0, 127}, 
-      fillPattern = FillPattern.Solid)}), 
+      extent = {{-100, -100}, {100, 100}},
+      lineColor = {127, 0, 127},
+      fillColor = {127, 0, 127},
+      fillPattern = FillPattern.Solid)}),
       Documentation(info = "<html>
 <p>DigitalInput是数字输入连接器定义。DigitalInput是Logic类型的。它可以具有逻辑值(U、X、0、1等)，这些逻辑值通过使用枚举进行内部编码(参见Logic类型的定义)。</p>
 </html>"      ));
 
     connector DigitalOutput = output DigitalSignal "输出DigitalSignal连接器" 
       annotation(defaultComponentName = "y", Icon(coordinateSystem(
-      preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+      preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
       graphics = {Polygon(
-      points = {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, 
-      lineColor = {127, 0, 127}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid)}), 
+      points = {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}},
+      lineColor = {127, 0, 127},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid)}),
       Diagram(coordinateSystem(
-      preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+      preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
       graphics = {Polygon(
-      points = {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, 
-      lineColor = {127, 0, 127}, 
-      fillColor = {255, 255, 255}, 
+      points = {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}},
+      lineColor = {127, 0, 127},
+      fillColor = {255, 255, 255},
       fillPattern = FillPattern.Solid), Text(
-      extent = {{-150, -100}, {150, -160}}, 
-      textColor = {127, 0, 127}, 
-      textString = "%name")}), 
-      Documentation(info = 
+      extent = {{-150, -100}, {150, -160}},
+      textColor = {127, 0, 127},
+      textString = "%name")}),
+      Documentation(info =
       "<html>
 <p>DigitalOutput是数字输出连接器定义。DigitalOutput是Logic类型的。它可以具有逻辑值(U、X、0、1等)，这些逻辑值通过使用枚举进行内部编码(参见Logic类型的定义)。箭头形状表示信号流方向。</p>
 </html>"      ));
@@ -2230,19 +2230,19 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
     partial block SISO "单输入，单输出"
       import D = Modelica.Electrical.Digital;
       D.Interfaces.DigitalInput x "Digital 输入信号连接器" 
-        annotation(Placement(transformation(extent = {{-70, -10}, {-50, 
+        annotation(Placement(transformation(extent = {{-70, -10}, {-50,
         10}})));
       D.Interfaces.DigitalOutput y "Digital 输出信号连接器" 
-        annotation(Placement(transformation(extent = {{90, -10}, {110, 
+        annotation(Placement(transformation(extent = {{90, -10}, {110,
         10}})));
       annotation(Icon(
-        coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+        coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), Line(points = {{50, 0}, {92, 0}}, 
-        color = {127, 0, 127})}), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid), Line(points = {{50, 0}, {92, 0}},
+        color = {127, 0, 127})}),
         Documentation(info = "<html>
 <p>SISO是连接模式的部分模型，具有单个(标量)数字输入和单个(标量)数字输出。除了连接器外，它还提供了一个可以由继承SISO模型的组件填充的图标矩形。</p>
 </html>"      ));
@@ -2252,20 +2252,20 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       import D = Modelica.Electrical.Digital;
 
       parameter Integer n(final min = 2) = 2 "输入数量";
-      D.Interfaces.DigitalInput x[n] 
+      D.Interfaces.DigitalInput x[n]
         "数字输入信号矢量的连接器" 
         annotation(Placement(transformation(
         extent = {{-70, -80}, {-50, 80}})));
       D.Interfaces.DigitalOutput y "数字输出信号连接器" 
-        annotation(Placement(transformation(extent = {{90, -10}, {110, 
+        annotation(Placement(transformation(extent = {{90, -10}, {110,
         10}})));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), Line(points = {{50, 0}, {90, 0}}, 
-        color = {127, 0, 127})}), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid), Line(points = {{50, 0}, {90, 0}},
+        color = {127, 0, 127})}),
         Documentation(info = "<html>
 <p>MISO是连接模式的部分模型，具有多个(矢量)数字输入和单个(标量)数字输出。除了连接器外，它还提供了一个可以由继承MISO模型的组件填充的图标矩形。</p>
 </html>"          ));
@@ -2274,29 +2274,29 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
     partial block MIMO "多输入-多输出"
       import D = Modelica.Electrical.Digital;
 
-      parameter Integer n(final min = 1) = 1 
+      parameter Integer n(final min = 1) = 1
         "输入数量=输出数量";
-      D.Interfaces.DigitalInput x[n] 
+      D.Interfaces.DigitalInput x[n]
         "数字输入信号矢量的连接器" 
         annotation(Placement(transformation(
         extent = {{-70, -80}, {-50, 80}})));
-      D.Interfaces.DigitalOutput y[n] 
+      D.Interfaces.DigitalOutput y[n]
         "数字输出信号矢量的连接器" 
-        annotation(Placement(transformation(extent = {{90, -10}, {110, 
+        annotation(Placement(transformation(extent = {{90, -10}, {110,
         10}})));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
-        Line(points = {{50, 0}, {90, 0}}, color = {127, 0, 127}), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
+        Line(points = {{50, 0}, {90, 0}}, color = {127, 0, 127}),
         Rectangle(
-        extent = {{50, 80}, {70, -80}}, 
-        lineColor = {127, 33, 107}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid)}), 
+        extent = {{50, 80}, {70, -80}},
+        lineColor = {127, 33, 107},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid)}),
         Documentation(info = "<html>
 <p>MIMO是连接模式的部分模型，具有多个(矢量)数字输入和多个(矢量)数字输出。除了连接器外，它还提供了一个可以由继承MISO模型的组件填充的图标矩形。</p>
 </html>"      ));
@@ -2313,7 +2313,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       parameter S strength = S.'S_X01' "输出强度";
       parameter Integer n_addr(min = 1) = 2 "地址位宽";
       parameter Integer n_data(min = 1) = 2 "数据位宽";
-      parameter String fileName = Modelica.Utilities.Files.loadResource("modelica://Modelica/Resources/Data/Electrical/Digital/Memory_Matrix.txt") 
+      parameter String fileName = Modelica.Utilities.Files.loadResource("modelica://Modelica/Resources/Data/Electrical/Digital/Memory_Matrix.txt")
         "存储内存矩阵的文件" 
         annotation(Dialog(group = "表数据定义", loadSelector(filter = "Text files (*.txt)", caption = "打开包含表的文件")));
 
@@ -2383,29 +2383,29 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         connect(inertialDelaySensitive[i].y, dataOut[i]);
       end for;
 
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Rectangle(
-        extent = {{-60, 80}, {60, -80}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5), 
+        extent = {{-60, 80}, {60, -80}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5),
         Line(
-        points = {{-84, 60}, {-60, 60}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-84, 60}, {-60, 60}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{60, 20}, {84, 20}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{60, 20}, {84, 20}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-84, -20}, {-60, -20}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, -20}, {-60, -20}},
+        color = {127, 0, 127}),
         Line(
-        points = {{-60, -10}, {-46, -20}, {-60, -30}}, 
-        color = {127, 0, 127}), 
+        points = {{-60, -10}, {-46, -20}, {-60, -30}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-41, -5}, {-24, -34}}, 
-        textColor = {127, 33, 107}, 
+        extent = {{-41, -5}, {-24, -34}},
+        textColor = {127, 33, 107},
         textString = "RE")}));
     end MemoryBase;
 
@@ -2431,7 +2431,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         L.'U', L.'X', L.'0', L.'X', L.'X', L.'X', L.'0', L.'X', L.'X';
         L.'0', L.'0', L.'0', L.'0', L.'0', L.'0', L.'0', L.'0', L.'0';
         L.'U', L.'X', L.'0', L.'1', L.'X', L.'X', L.'0', L.'1', L.'X';
-        L.'U', L.'X', L.'0', L.'X', L.'X', L.'X', L.'0', L.'X', L.'X'] 
+        L.'U', L.'X', L.'0', L.'X', L.'X', L.'X', L.'0', L.'X', L.'X']
       "'and'的9值逻辑";
 
     constant D.Interfaces.Logic OrTable[L, L]=[
@@ -2443,11 +2443,11 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         L.'U', L.'X', L.'X', L.'1', L.'X', L.'X', L.'X', L.'1', L.'X';
         L.'U', L.'X', L.'0', L.'1', L.'X', L.'X', L.'0', L.'1', L.'X';
         L.'1', L.'1', L.'1', L.'1', L.'1', L.'1', L.'1', L.'1', L.'1';
-        L.'U', L.'X', L.'X', L.'1', L.'X', L.'X', L.'X', L.'1', L.'X'] 
+        L.'U', L.'X', L.'X', L.'1', L.'X', L.'X', L.'X', L.'1', L.'X']
       "'or'的9值逻辑";
 
     constant D.Interfaces.Logic NotTable[L]={
-        L.'U',L.'X',L.'1',L.'0',L.'X',L.'X',L.'1',L.'0',L.'X'} 
+        L.'U',L.'X',L.'1',L.'0',L.'X',L.'X',L.'1',L.'0',L.'X'}
       "'not'的9值逻辑";
 
     constant D.Interfaces.Logic XorTable[L, L]=[
@@ -2459,7 +2459,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X';
         L.'U', L.'X', L.'0', L.'1', L.'X', L.'X', L.'0', L.'1', L.'X';
         L.'U', L.'X', L.'1', L.'0', L.'X', L.'X', L.'1', L.'0', L.'X';
-        L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X'] 
+        L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X']
       "'xor'的9值逻辑";
 
     constant D.Interfaces.Logic ResolutionTable[L, L]=[
@@ -2471,7 +2471,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         L.'U', L.'X', L.'0', L.'1', L.'W', L.'W', L.'W', L.'W', L.'X';
         L.'U', L.'X', L.'0', L.'1', L.'L', L.'W', L.'L', L.'W', L.'X';
         L.'U', L.'X', L.'0', L.'1', L.'H', L.'W', L.'W', L.'H', L.'X';
-        L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X'] 
+        L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X']
       "'wiredX'的9值逻辑";
     constant D.Interfaces.Logic X01Table[L]={
         L.'X',L.'X',L.'0',L.'1',L.'X',L.'X',L.'0',L.'1',L.'X'};
@@ -2513,7 +2513,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 1: 上升沿  |
 2: X 过渡"    ;
 
-    constant D.Interfaces.Logic StrengthMap[L, S]= 
+    constant D.Interfaces.Logic StrengthMap[L, S]=
         [L.'U', L.'U', L.'U', L.'U', L.'U', L.'U', L.'U', L.'U', L.'U', L.'U';
          L.'X', L.'X', L.'X', L.'X', L.'X', L.'W', L.'W', L.'W', L.'W', L.'W';
          L.'0', L.'0', L.'L', L.'0', L.'Z', L.'L', L.'L', L.'Z', L.'0', L.'L';
@@ -2522,7 +2522,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
          L.'X', L.'X', L.'X', L.'X', L.'X', L.'W', L.'W', L.'W', L.'W', L.'W';
          L.'0', L.'0', L.'L', L.'0', L.'Z', L.'L', L.'L', L.'Z', L.'0', L.'L';
          L.'1', L.'H', L.'1', L.'Z', L.'1', L.'H', L.'Z', L.'H', L.'H', L.'1';
-         L.'X', L.'X', L.'X', L.'X', L.'X', L.'W', L.'W', L.'W', L.'W', L.'W'] 
+         L.'X', L.'X', L.'X', L.'X', L.'X', L.'W', L.'W', L.'W', L.'W', L.'W']
       "通过 [信号，强度] 读数转换输出强度";
 
     constant D.Interfaces.Logic NXferTable[L, L]=[
@@ -2534,7 +2534,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X';
         L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z';
         L.'U', L.'X', L.'0', L.'1', L.'Z', L.'W', L.'L', L.'H', L.'X';
-        L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X'] 
+        L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X']
       "NX Transfer by [enable, input] reading";
 
     constant D.Interfaces.Logic NRXferTable[L, L]=[
@@ -2546,7 +2546,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         L.'U', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W';
         L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z';
         L.'U', L.'W', L.'L', L.'H', L.'Z', L.'W', L.'L', L.'H', L.'W';
-        L.'U', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W'] 
+        L.'U', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W']
       "通过读取 [启用、输入] 进行 NRX 传输";
 
     constant D.Interfaces.Logic PXferTable[L, L]=[
@@ -2558,7 +2558,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X';
         L.'U', L.'X', L.'0', L.'1', L.'Z', L.'W', L.'L', L.'H', L.'X';
         L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z';
-        L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X'] 
+        L.'U', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X', L.'X']
       "通过读取 [启用、输入] 进行 PX 传输";
 
     constant D.Interfaces.Logic PRXferTable[L, L]=[
@@ -2570,40 +2570,40 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         L.'U', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W';
         L.'U', L.'W', L.'L', L.'H', L.'Z', L.'W', L.'L', L.'H', L.'W';
         L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z', L.'Z';
-        L.'U', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W'] 
+        L.'U', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W', L.'W']
       "通过读取 [启用、输入] 进行 PRX 传输";
 
     constant D.Interfaces.Logic Buf3sTable[S, R, R]=[
-        {{{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'X',L.'0',L.'1'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'X',L.'0',L.'H'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'X',L.'L',L.'1'}}, 
-         {{L.'U',L.'U',L.'U',L.'Z'},{L.'U',L.'X',L.'X',L.'Z'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'X',L.'0',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'X',L.'Z',L.'1'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'W',L.'L',L.'H'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'Z'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'W',L.'L',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'W',L.'Z',L.'H'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'W',L.'0',L.'H'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'W',L.'L',L.'1'}}}] 
+        {{{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'X',L.'0',L.'1'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'X',L.'0',L.'H'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'X',L.'L',L.'1'}},
+         {{L.'U',L.'U',L.'U',L.'Z'},{L.'U',L.'X',L.'X',L.'Z'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'X',L.'0',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'X',L.'Z',L.'1'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'W',L.'L',L.'H'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'Z'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'W',L.'L',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'W',L.'Z',L.'H'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'W',L.'0',L.'H'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'Z',L.'Z',L.'Z',L.'Z'},{L.'U',L.'W',L.'L',L.'1'}}}]
       "按 [强度、启用、输入] 读取的三态表，高活性启用";
 
     constant D.Interfaces.Logic Buf3slTable[S, R, R]=[
-        {{{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'U',L.'X',L.'0',L.'1'},{L.'Z',L.'Z',L.'Z',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'U',L.'X',L.'0',L.'H'},{L.'Z',L.'Z',L.'Z',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'U',L.'X',L.'L',L.'1'},{L.'Z',L.'Z',L.'Z',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'Z'},{L.'U',L.'X',L.'X',L.'Z'},{L.'U',L.'X',L.'0',L.'Z'},{L.'Z',L.'Z',L.'Z',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'U',L.'X',L.'Z',L.'1'},{L.'Z',L.'Z',L.'Z',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'U',L.'W',L.'L',L.'H'},{L.'Z',L.'Z',L.'Z',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'Z'},{L.'U',L.'W',L.'L',L.'Z'},{L.'Z',L.'Z',L.'Z',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'U',L.'W',L.'Z',L.'H'},{L.'Z',L.'Z',L.'Z',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'U',L.'W',L.'0',L.'H'},{L.'Z',L.'Z',L.'Z',L.'Z'}}, 
-         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'U',L.'W',L.'L',L.'1'},{L.'Z',L.'Z',L.'Z',L.'Z'}}}] 
+        {{{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'U',L.'X',L.'0',L.'1'},{L.'Z',L.'Z',L.'Z',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'U',L.'X',L.'0',L.'H'},{L.'Z',L.'Z',L.'Z',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'U',L.'X',L.'L',L.'1'},{L.'Z',L.'Z',L.'Z',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'Z'},{L.'U',L.'X',L.'X',L.'Z'},{L.'U',L.'X',L.'0',L.'Z'},{L.'Z',L.'Z',L.'Z',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'U',L.'X',L.'Z',L.'1'},{L.'Z',L.'Z',L.'Z',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'U',L.'W',L.'L',L.'H'},{L.'Z',L.'Z',L.'Z',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'Z'},{L.'U',L.'W',L.'L',L.'Z'},{L.'Z',L.'Z',L.'Z',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'U',L.'W',L.'Z',L.'H'},{L.'Z',L.'Z',L.'Z',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'U',L.'W',L.'0',L.'H'},{L.'Z',L.'Z',L.'Z',L.'Z'}},
+         {{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'W',L.'W',L.'W'},{L.'U',L.'W',L.'L',L.'1'},{L.'Z',L.'Z',L.'Z',L.'Z'}}}]
       "按 [强度、启用、输入] 读取的三态表，低电平启用";
 
     constant D.Interfaces.Logic MUX2x1Table[R, R, R]=[
-        {{{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'0',L.'1'},{L.'U',L.'U',L.'U',L.'U'}}, 
-         {{L.'U',L.'X',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'U',L.'X',L.'0',L.'1'},{L.'X',L.'X',L.'X',L.'X'}}, 
-         {{L.'U',L.'U',L.'0',L.'U'},{L.'U',L.'X',L.'0',L.'X'},{L.'U',L.'X',L.'0',L.'1'},{L.'0',L.'0',L.'0',L.'0'}}, 
-         {{L.'U',L.'U',L.'U',L.'1'},{L.'U',L.'X',L.'X',L.'1'},{L.'U',L.'X',L.'0',L.'1'},{L.'1',L.'1',L.'1',L.'1'}}}] 
+        {{{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'U',L.'U',L.'U'},{L.'U',L.'X',L.'0',L.'1'},{L.'U',L.'U',L.'U',L.'U'}},
+         {{L.'U',L.'X',L.'U',L.'U'},{L.'U',L.'X',L.'X',L.'X'},{L.'U',L.'X',L.'0',L.'1'},{L.'X',L.'X',L.'X',L.'X'}},
+         {{L.'U',L.'U',L.'0',L.'U'},{L.'U',L.'X',L.'0',L.'X'},{L.'U',L.'X',L.'0',L.'1'},{L.'0',L.'0',L.'0',L.'0'}},
+         {{L.'U',L.'U',L.'U',L.'1'},{L.'U',L.'X',L.'X',L.'1'},{L.'U',L.'X',L.'0',L.'1'},{L.'1',L.'1',L.'1',L.'1'}}}]
       "按 [选择、输入 1、输入 0] 读取的多路复用器表";
 
     annotation (Documentation(info="<html>
@@ -2651,26 +2651,26 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <dt><em>2003年8月11日</em></dt>
 <dd>由Christoph Clauss最初建模。</dd>
 </dl>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
         100, 100}}), graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
-        Polygon(points = {{-6, 60}, {-16, 40}, {4, 40}, {-6, 60}}), 
-        Line(points = {{0, 60}, {20, 60}}), 
-        Line(points = {{10, 60}, {10, 40}}), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
+        Polygon(points = {{-6, 60}, {-16, 40}, {4, 40}, {-6, 60}}),
+        Line(points = {{0, 60}, {20, 60}}),
+        Line(points = {{10, 60}, {10, 40}}),
         Text(
-        extent = {{-50, -40}, {50, -20}}, 
-        textString = "传输"), 
+        extent = {{-50, -40}, {50, -20}},
+        textString = "传输"),
         Text(
-        extent = {{-50, -60}, {50, -40}}, 
+        extent = {{-50, -60}, {50, -40}},
         textString = "延迟")}));
     end TransportDelay;
 
@@ -2678,7 +2678,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       import D = Modelica.Electrical.Digital;
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
       extends D.Interfaces.SISO;
-      parameter SI.Time delayTime(start = 0) 
+      parameter SI.Time delayTime(start = 0)
         "保持值的最小时间";
       parameter D.Interfaces.Logic y0 = L.'U' "输出y的初始值";
     protected
@@ -2707,25 +2707,25 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <dt><em>2003年3月19日</em></dt>
 <dd>由Martin Otter最初建模。</dd>
 </dl>
-</html>"          ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"          ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
-        Polygon(points = {{-6, 60}, {-16, 40}, {4, 40}, {-6, 60}}), 
-        Line(points = {{10, 60}, {10, 40}}), 
-        Line(points = {{0, 60}, {20, 60}}), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
+        Polygon(points = {{-6, 60}, {-16, 40}, {4, 40}, {-6, 60}}),
+        Line(points = {{10, 60}, {10, 40}}),
+        Line(points = {{0, 60}, {20, 60}}),
         Text(
-        extent = {{-50, -40}, {50, -20}}, 
-        textString = "惯性"), 
+        extent = {{-50, -40}, {50, -20}},
+        textString = "惯性"),
         Text(
-        extent = {{-50, -60}, {50, -40}}, 
+        extent = {{-50, -60}, {50, -40}},
         textString = "延迟")}));
     end InertialDelay;
 
@@ -2738,7 +2738,7 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       parameter SI.Time tHL(start = 0) "下降惯性延迟";
       parameter D.Interfaces.Logic y0 = L.'U' "输出的初始值";
     protected
-      constant Integer delayTable[L,L] = Modelica.Electrical.Digital.Tables.DelayTable 
+      constant Integer delayTable[L,L] = Modelica.Electrical.Digital.Tables.DelayTable
         "根据信号变化规定的延迟表";
       SI.Time delayTime;
       D.Interfaces.Logic y_auxiliary(start = y0, fixed = true);
@@ -2777,28 +2777,28 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <li><em>2004年2月5日</em>由Christoph Clauss修订了处理<em>tHL=0</em>或<em>tLH=0</em></li>
 <li><em>2003年10月12日</em>由Christoph Clauss最初建模</li>
 </ul>
-</html>"          ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"          ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-50, -40}, {50, -20}}, 
-        textString = "惯性"), 
+        extent = {{-50, -40}, {50, -20}},
+        textString = "惯性"),
         Text(
-        extent = {{-50, -60}, {50, -40}}, 
-        textString = "延迟"), 
+        extent = {{-50, -60}, {50, -40}},
+        textString = "延迟"),
         Text(
-        extent = {{-50, -80}, {50, -60}}, 
-        textString = "敏感"), 
-        Polygon(points = {{-6, 60}, {-16, 40}, {4, 40}, {-6, 60}}), 
-        Line(points = {{10, 60}, {10, 40}}), 
+        extent = {{-50, -80}, {50, -60}},
+        textString = "敏感"),
+        Polygon(points = {{-6, 60}, {-16, 40}, {4, 40}, {-6, 60}}),
+        Line(points = {{10, 60}, {10, 40}}),
         Line(points = {{0, 60}, {20, 60}})}));
     end InertialDelaySensitive;
 
@@ -2811,45 +2811,45 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       parameter SI.Time tLH = 0 "低->高延迟";
       parameter Integer n(min = 1) = 1 "数据宽度";
       D.Interfaces.DigitalInput x[n] 
-        annotation(Placement(transformation(extent = {{-100, -12}, {-76, 12}}), 
+        annotation(Placement(transformation(extent = {{-100, -12}, {-76, 12}}),
         iconTransformation(extent = {{-100, -15}, {-72, 14}})));
       D.Interfaces.DigitalOutput y[n] annotation(Placement(transformation(
-        extent = {{72, -14}, {100, 14}}), iconTransformation(extent = {{72, -14}, 
+        extent = {{72, -14}, {100, 14}}), iconTransformation(extent = {{72, -14},
         {100, 14}})));
-      Digital.Delay.InertialDelaySensitive inertialDelaySensitive[n](each tLH = 
+      Digital.Delay.InertialDelaySensitive inertialDelaySensitive[n](each tLH =
         tLH, each tHL = tHL);
     equation
       for i in 1:n loop
         connect(x[i], inertialDelaySensitive[i].x);
         connect(inertialDelaySensitive[i].y, y[i]);
       end for;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {
         Rectangle(
-        extent = {{-50, 54}, {48, -54}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {255, 255, 255}), 
+        extent = {{-50, 54}, {48, -54}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillPattern = FillPattern.Solid,
+        fillColor = {255, 255, 255}),
         Line(
-        points = {{-80, 0}, {-50, 0}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, 0}, {-50, 0}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{48, 0}, {80, 0}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{48, 0}, {80, 0}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-40, 52}, {38, -20}}, 
-        textColor = {127, 33, 107}, 
-        textString = "延迟"), 
+        extent = {{-40, 52}, {38, -20}},
+        textColor = {127, 33, 107},
+        textString = "延迟"),
         Text(
-        extent = {{-26, 12}, {18, -32}}, 
-        textColor = {127, 0, 127}, 
-        textString = "信号"), 
+        extent = {{-26, 12}, {18, -32}},
+        textColor = {127, 0, 127},
+        textString = "信号"),
         Text(
-        extent = {{-32, 0}, {28, -62}}, 
-        textColor = {127, 0, 127}, 
+        extent = {{-32, 0}, {28, -62}},
+        textColor = {127, 0, 127},
         textString = "敏感")}), Documentation(info = "<html>
 
 <p>
@@ -2889,19 +2889,19 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <dt><em>2003年8月14日</em></dt>
 <dd>由Teresa Schlegel最初建模。</dd>
 </dl>
-</html>"    ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"    ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{-50, 40}, {50, 80}}, 
-        textString = "1"), 
+        extent = {{-50, 40}, {50, 80}},
+        textString = "1"),
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Ellipse(
-        extent = {{50, 6}, {62, -6}}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
+        extent = {{50, 6}, {62, -6}},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
         fillPattern = FillPattern.Solid)}));
     end Not;
 
@@ -2930,12 +2930,12 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <li><em>2004年9月15日</em>Christoph Clauss使用向量方法处理所有固定数量的输入</li>
 <li><em>2003年10月22日</em>Teresa Schlegel最初建模。</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {Text(
-        extent = {{-50, 40}, {50, 80}}, 
+        extent = {{-50, 40}, {50, 80}},
         textString = "&"), Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
         textString = "%name")}));
     end And;
 
@@ -2964,19 +2964,19 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <li><em>2004年9月15日</em>Christoph Clauss使用向量方法处理所有固定数量的输入</li>
 <li><em>2003年10月22日</em>Teresa Schlegel最初建模。</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{-50, 40}, {50, 80}}, 
-        textString = "&"), 
+        extent = {{-50, 40}, {50, 80}},
+        textString = "&"),
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Ellipse(
-        extent = {{50, 6}, {62, -6}}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
+        extent = {{50, 6}, {62, -6}},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
         fillPattern = FillPattern.Solid)}));
     end Nand;
 
@@ -3005,12 +3005,12 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <li><em>2004年9月15日</em>Christoph Clauss使用向量方法处理所有固定数量的输入</li>
 <li><em>2003年10月22日</em>Teresa Schlegel最初建模。</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {Text(
-        extent = {{-50, 40}, {50, 80}}, 
+        extent = {{-50, 40}, {50, 80}},
         textString = ">=1"), Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
         textString = "%name")}));
     end Or;
 
@@ -3039,19 +3039,19 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <li><em>2004年9月15日</em>Christoph Clauss使用向量方法处理所有固定数量的输入</li>
 <li><em>2003年10月22日</em>Liane Jacobi最初建模。</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{-50, 40}, {50, 80}}, 
-        textString = ">=1"), 
+        extent = {{-50, 40}, {50, 80}},
+        textString = ">=1"),
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Ellipse(
-        extent = {{50, 6}, {62, -6}}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
+        extent = {{50, 6}, {62, -6}},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
         fillPattern = FillPattern.Solid)}));
     end Nor;
 
@@ -3080,12 +3080,12 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <li><em>2004年9月15日</em>Christoph Clauss使用向量方法处理所有固定数量的输入</li>
 <li><em>2003年10月22日</em>Liane Jacobi最初建模。</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {Text(
-        extent = {{-50, 40}, {50, 80}}, 
+        extent = {{-50, 40}, {50, 80}},
         textString = "=1"), Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
         textString = "%name")}));
     end Xor;
 
@@ -3114,12 +3114,12 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <li><em>2004年9月15日</em>Christoph Clauss使用向量方法处理所有固定数量的输入</li>
 <li><em>2003年10月22日</em>Liane Jacobi最初建模。</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {Text(
-        extent = {{-50, 40}, {50, 80}}, 
+        extent = {{-50, 40}, {50, 80}},
         textString = "="), Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
         textString = "%name")}));
     end Xnor;
     annotation(Documentation(info = "<html>
@@ -3153,27 +3153,27 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
 <dt><em>August 14, 2003</em></dt>
 <dd>by Teresa Schlegel initially modelled.</dd>
 </dl>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-50, 80}, {50, 40}}, 
-        textString = "1"), 
+        extent = {{-50, 80}, {50, 40}},
+        textString = "1"),
         Text(
-        extent = {{-18, -60}, {20, -100}}, 
-        textString = "Gate"), 
+        extent = {{-18, -60}, {20, -100}},
+        textString = "Gate"),
         Ellipse(
-        extent = {{50, 6}, {62, -6}}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
+        extent = {{50, 6}, {62, -6}},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
         fillPattern = FillPattern.Solid)}));
     end InvGate;
 
@@ -3184,8 +3184,8 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       D.Basic.And G1(final n = n) annotation(Placement(transformation(extent = {
         {-40, -20}, {0, 20}})));
       D.Delay.InertialDelaySensitive G2(
-        tLH = tLH, 
-        tHL = tHL, 
+        tLH = tLH,
+        tHL = tHL,
         y0 = y0) annotation(Placement(transformation(extent = {{20, -20}, {60, 20}})));
     equation
       connect(x, G1.x) 
@@ -3206,22 +3206,22 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
  by Teresa Schlegel<br>
  initially modelled.</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-50, 80}, {50, 40}}, 
-        textString = "&"), 
+        extent = {{-50, 80}, {50, 40}},
+        textString = "&"),
         Text(
-        extent = {{-20, -60}, {20, -100}}, 
+        extent = {{-20, -60}, {20, -100}},
         textString = "Gate")}));
     end AndGate;
 
@@ -3229,11 +3229,11 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
       import D = Modelica.Electrical.Digital;
       extends D.Delay.DelayParams;
       extends D.Interfaces.MISO;
-      D.Basic.Nand G1(final n = n) annotation(Placement(transformation(extent = 
+      D.Basic.Nand G1(final n = n) annotation(Placement(transformation(extent =
         {{-40, -20}, {0, 20}})));
       D.Delay.InertialDelaySensitive G2(
-        tLH = tLH, 
-        tHL = tHL, 
+        tLH = tLH,
+        tHL = tHL,
         y0 = y0) annotation(Placement(transformation(extent = {{20, -20}, {60, 20}})));
     equation
       connect(x, G1.x) 
@@ -3242,28 +3242,28 @@ sum   <strong>Adder4</strong>.c_out  <strong>Adder4.s</strong>  <strong>Adder3.s
         annotation(Line(points = {{0, 0}, {28, 0}}, color = {127, 0, 127}));
       connect(G2.y, y) 
         annotation(Line(points = {{60, 0}, {100, 0}}, color = {127, 0, 127}));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-40, 40}, {40, 80}}, 
-        textString = "&"), 
+        extent = {{-40, 40}, {40, 80}},
+        textString = "&"),
         Text(
-        extent = {{-50, -64}, {50, -86}}, 
-        textString = "Gate"), 
+        extent = {{-50, -64}, {50, -86}},
+        textString = "Gate"),
         Ellipse(
-        extent = {{50, 6}, {62, -6}}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid)}), 
+        extent = {{50, 6}, {62, -6}},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid)}),
         Documentation(revisions = "<html>
 <ul>
 <li><em>September 15, 2004</em> vector approach used for all fixed numbers of inputs
@@ -3285,8 +3285,8 @@ initially modelled.</li>
       D.Basic.Or G1(final n = n) annotation(Placement(transformation(extent = {{
         -40, -20}, {0, 20}})));
       D.Delay.InertialDelaySensitive G2(
-        tLH = tLH, 
-        tHL = tHL, 
+        tLH = tLH,
+        tHL = tHL,
         y0 = y0) annotation(Placement(transformation(extent = {{20, -20}, {60, 20}})));
     equation
       connect(G1.y, G2.x) 
@@ -3305,22 +3305,22 @@ initially modelled.</li>
 <li><em>2003年10月22日</em>
  Teresa Schlegel最初建模。</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-50, 80}, {50, 40}}, 
-        textString = ">=1"), 
+        extent = {{-50, 80}, {50, 40}},
+        textString = ">=1"),
         Text(
-        extent = {{-20, -60}, {20, -100}}, 
+        extent = {{-20, -60}, {20, -100}},
         textString = "Gate")}));
     end OrGate;
 
@@ -3331,8 +3331,8 @@ initially modelled.</li>
       D.Basic.Nor G1(final n = n) annotation(Placement(transformation(extent = {
         {-40, -20}, {0, 20}})));
       D.Delay.InertialDelaySensitive G2(
-        tLH = tLH, 
-        tHL = tHL, 
+        tLH = tLH,
+        tHL = tHL,
         y0 = y0) annotation(Placement(transformation(extent = {{20, -20}, {60, 20}})));
     equation
       connect(G1.y, G2.x) 
@@ -3351,27 +3351,27 @@ initially modelled.</li>
 <li><em>2003年10月22日</em>
  Liane Jacobi最初建模。</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-50, 80}, {50, 40}}, 
-        textString = ">=1"), 
+        extent = {{-50, 80}, {50, 40}},
+        textString = ">=1"),
         Text(
-        extent = {{-20, -60}, {20, -100}}, 
-        textString = "Gate"), 
+        extent = {{-20, -60}, {20, -100}},
+        textString = "Gate"),
         Ellipse(
-        extent = {{50, 6}, {62, -6}}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
+        extent = {{50, 6}, {62, -6}},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
         fillPattern = FillPattern.Solid)}));
     end NorGate;
 
@@ -3382,8 +3382,8 @@ initially modelled.</li>
       D.Basic.Xor G1(final n = n) annotation(Placement(transformation(extent = {
         {-40, -20}, {0, 20}})));
       D.Delay.InertialDelaySensitive G2(
-        tLH = tLH, 
-        tHL = tHL, 
+        tLH = tLH,
+        tHL = tHL,
         y0 = y0) annotation(Placement(transformation(extent = {{20, -20}, {60, 20}})));
     equation
       connect(x, G1.x) 
@@ -3402,22 +3402,22 @@ initially modelled.</li>
 <li><em>2003年10月22日</em>
  Liane Jacobi最初建模。</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-50, 80}, {50, 40}}, 
-        textString = "=1"), 
+        extent = {{-50, 80}, {50, 40}},
+        textString = "=1"),
         Text(
-        extent = {{-20, -60}, {20, -100}}, 
+        extent = {{-20, -60}, {20, -100}},
         textString = "Gate")}));
     end XorGate;
 
@@ -3425,11 +3425,11 @@ initially modelled.</li>
       import D = Modelica.Electrical.Digital;
       extends D.Delay.DelayParams;
       extends D.Interfaces.MISO;
-      D.Basic.Xnor G1(final n = n) annotation(Placement(transformation(extent = 
+      D.Basic.Xnor G1(final n = n) annotation(Placement(transformation(extent =
         {{-40, -20}, {0, 20}})));
       D.Delay.InertialDelaySensitive G2(
-        tLH = tLH, 
-        tHL = tHL, 
+        tLH = tLH,
+        tHL = tHL,
         y0 = y0) annotation(Placement(transformation(extent = {{20, -20}, {60, 20}})));
     equation
       connect(x, G1.x) 
@@ -3448,22 +3448,22 @@ initially modelled.</li>
 <li><em>2003年10月22日</em>
  Liane Jacobi最初建模。</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-40, 80}, {40, 40}}, 
-        textString = "="), 
+        extent = {{-40, 80}, {40, 40}},
+        textString = "="),
         Text(
-        extent = {{-20, -60}, {20, -100}}, 
+        extent = {{-20, -60}, {20, -100}},
         textString = "Gate")}));
     end XnorGate;
 
@@ -3476,7 +3476,7 @@ initially modelled.</li>
     equation
       connect(G1.y, y) annotation(Line(points = {{10, 0}, {
         100, 0}}, color = {127, 0, 127}));
-      connect(G1.x, x) annotation(Line(points = {{-22, 0}, {-60, 0}}, color = {127, 0, 
+      connect(G1.x, x) annotation(Line(points = {{-22, 0}, {-60, 0}}, color = {127, 0,
         127}));
       annotation(
         Documentation(info = "<html>
@@ -3486,22 +3486,22 @@ initially modelled.</li>
 <dt><em>2004年9月21日</em></dt>
 <dd>由Andre Schneider最初建模。</dd>
 </dl>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-18, -60}, {20, -100}}, 
-        textString = "Gate"), 
+        extent = {{-18, -60}, {20, -100}},
+        textString = "Gate"),
         Text(
-        extent = {{-50, 80}, {50, 40}}, 
+        extent = {{-50, 80}, {50, 40}},
         textString = "1")}));
     end BufGate;
     annotation(Documentation(info = "<html>
@@ -3520,7 +3520,7 @@ initially modelled.</li>
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
       parameter D.Interfaces.Logic x(start = L.'1') "要设置的逻辑值";
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{90, -10}, {110, 
+        annotation(Placement(transformation(extent = {{90, -10}, {110,
         10}})));
     algorithm
       y := x;
@@ -3559,34 +3559,34 @@ initially modelled.</li>
 <dt><em>2003年8月20日</em></dt>
 <dd>由Teresa Schlegel最初建模。</dd>
 </dl>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
         100, 100}}), graphics = {
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 255, 170}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 255, 170},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-50, 40}, {50, 80}}, 
-        textString = "SET"), 
+        extent = {{-50, 40}, {50, 80}},
+        textString = "SET"),
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Line(points = {{50, 0}, {90, 0}}, color = {127, 0, 127})}));
     end Set;
 
     block Step "数字阶跃源"
       import D = Modelica.Electrical.Digital;
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
-      parameter D.Interfaces.Logic before(start = L.'0') 
+      parameter D.Interfaces.Logic before(start = L.'0')
         "步进前的逻辑值";
-      parameter D.Interfaces.Logic after(start = L.'1') 
+      parameter D.Interfaces.Logic after(start = L.'1')
         "步进后的逻辑值";
       parameter Real stepTime(start = 1) "步进时间";
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{90, -10}, {110, 
+        annotation(Placement(transformation(extent = {{90, -10}, {110,
         10}})));
     algorithm
       // assert(before >= L.min and before <= L.max, "Parameter is no logic value");
@@ -3630,18 +3630,18 @@ initially modelled.</li>
 <dt><em>2003年8月20日</em></dt>
 <dd>由Teresa Schlegel最初建模。</dd>
 </dl>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 255, 170}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 255, 170},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
-        Line(points = {{-30, 40}, {0, 40}, {0, 80}, {30, 80}}), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
+        Line(points = {{-30, 40}, {0, 40}, {0, 80}, {30, 80}}),
         Line(points = {{50, 0}, {90, 0}}, color = {127, 0, 127})}));
     end Step;
 
@@ -3649,12 +3649,12 @@ initially modelled.</li>
       import D = Modelica.Electrical.Digital;
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
       parameter D.Interfaces.Logic x[:] = {L.'1'} "值向量";
-      parameter Real t[size(x, 1)] = {1} 
+      parameter Real t[size(x, 1)] = {1}
         "相应时间点的向量";
       parameter D.Interfaces.Logic y0 = L.'U' "初始输出值";
       final parameter Integer n = size(x, 1) "表格大小";
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{90, -10}, {110, 
+        annotation(Placement(transformation(extent = {{90, -10}, {110,
         10}})));
     algorithm
       if initial() then
@@ -3705,28 +3705,28 @@ initially modelled.</li>
 <dt><em>2003年8月20日</em></dt>
 <dd>由Teresa Schlegel最初建模。</dd>
 </dl>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 255, 170}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 255, 170},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
-        Line(points = {{50, 0}, {90, 0}}, color = {127, 0, 127}), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
+        Line(points = {{50, 0}, {90, 0}}, color = {127, 0, 127}),
         Rectangle(
-        extent = {{-30, 80}, {32, 70}}, 
-        fillColor = {215, 215, 215}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-30, 80}, {32, 70}},
+        fillColor = {215, 215, 215},
+        fillPattern = FillPattern.Solid),
         Rectangle(
-        extent = {{-30, 70}, {32, 40}}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
-        Line(points = {{0, 80}, {0, 40}}), 
-        Line(points = {{-30, 60}, {32, 60}}), 
+        extent = {{-30, 70}, {32, 40}},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
+        Line(points = {{0, 80}, {0, 40}}),
+        Line(points = {{-30, 60}, {32, 60}}),
         Line(points = {{-30, 50}, {32, 50}})}));
     end Table;
 
@@ -3734,7 +3734,7 @@ initially modelled.</li>
       import D = Modelica.Electrical.Digital;
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
       parameter Real width(
-        final min = Modelica.Constants.small, final max = 100, start = 50) 
+        final min = Modelica.Constants.small, final max = 100, start = 50)
         "周期的宽度，以百分比表示";
       parameter SI.Time period(
         final min = Modelica.Constants.small, start = 1) "一个周期的时间";
@@ -3742,11 +3742,11 @@ initially modelled.</li>
       parameter D.Interfaces.Logic pulse(start = L.'0') "脉冲值";
       parameter D.Interfaces.Logic quiet(start = L.'1') "静态值";
       SI.Time T0(final start = startTime, fixed = true) "当前周期的开始时间";
-      parameter Integer nperiod(start = -1) 
+      parameter Integer nperiod(start = -1)
         "周期数（<0表示无限周期数）";
       Integer np(start = 0, fixed = true);
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{90, -10}, {110, 
+        annotation(Placement(transformation(extent = {{90, -10}, {110,
         10}})));
     protected
       Boolean sampling;
@@ -3774,7 +3774,7 @@ initially modelled.</li>
 要指定逻辑值参数，必须使用整数代码。
 </p>
 <p><strong>代码表</strong></p>
-<table border=\"1\" cellspacing=\"0"       + 
+<table border=\"1\" cellspacing=\"0"       +
         " cellpadding=\"2\">
 <tr><td><strong>逻辑值</strong></td>
 <td><strong>整数代码</strong></td>
@@ -3800,36 +3800,36 @@ initially modelled.</li>
 <dt><em>2003年9月2日</em></dt>
 <dd>由Christoph Clauss最初建模。</dd>
 </dl>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
         100, 100}}), graphics = {
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 255, 170}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 255, 170},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
-        Line(points = {{50, 0}, {90, 0}}, color = {127, 0, 127}), 
-        Line(points = {{-36, 40}, {-30, 40}, {-30, 40}, {-18, 40}, {-18, 40}, {-14, 40}, 
-        {-14, 80}, {14, 80}, {14, 40}, {14, 40}, {14, 40}, {28, 40}, {30, 40}, {36, 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
+        Line(points = {{50, 0}, {90, 0}}, color = {127, 0, 127}),
+        Line(points = {{-36, 40}, {-30, 40}, {-30, 40}, {-18, 40}, {-18, 40}, {-14, 40},
+        {-14, 80}, {14, 80}, {14, 40}, {14, 40}, {14, 40}, {28, 40}, {30, 40}, {36,
         40}})}));
     end Pulse;
 
     model DigitalClock "数字时钟源"
       import D = Modelica.Electrical.Digital;
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
-      parameter SI.Time startTime(start = 0) 
+      parameter SI.Time startTime(start = 0)
         "在<em>startTime</em>之前的输出 = 偏移量";
       parameter SI.Time period(
         final min = Modelica.Constants.small, start = 1) "一个周期的时间";
       parameter Real width(
-        final min = Modelica.Constants.small, final max = 100, start = 50) 
+        final min = Modelica.Constants.small, final max = 100, start = 50)
         "周期的宽度，以百分比表示";
       D.Interfaces.DigitalOutput y "数字输出信号的连接器" 
-        annotation(Placement(transformation(extent = {{90, -10}, {110, 
+        annotation(Placement(transformation(extent = {{90, -10}, {110,
         10}})));
     protected
       SI.Time t_i(final start = startTime, fixed = true) "当前周期的开始时间";
@@ -3874,32 +3874,32 @@ initially modelled.</li>
 <dt><em>2003年9月3日</em></dt>
 <dd>由Christoph Clauss最初建模。</dd>
 </dl>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
         100, 100}}), graphics = {
         Rectangle(
-        extent = {{-50, 100}, {50, -100}}, 
-        lineThickness = 0.5, 
-        fillColor = {213, 255, 170}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 100}, {50, -100}},
+        lineThickness = 0.5,
+        fillColor = {213, 255, 170},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
-        Line(points = {{50, 0}, {90, 0}}, color = {127, 0, 127}), 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
+        Line(points = {{50, 0}, {90, 0}}, color = {127, 0, 127}),
         Rectangle(
-        extent = {{-40, 80}, {42, 60}}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
-        Line(points = {{-30, 80}, {30, 80}, {30, 60}, {-30, 60}, 
-        {-30, 60}, {-30, 80}, {-10, 80}, {-10, 70}, {10, 70}, 
-        {10, 80}}), 
+        extent = {{-40, 80}, {42, 60}},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
+        Line(points = {{-30, 80}, {30, 80}, {30, 60}, {-30, 60},
+        {-30, 60}, {-30, 80}, {-10, 80}, {-10, 70}, {10, 70},
+        {10, 80}}),
         Rectangle(
-        extent = {{-26, 70}, {26, 62}}, 
-        fillColor = {0, 0, 0}, 
-        fillPattern = FillPattern.Solid), 
-        Line(points = {{-22, 66}, {22, 66}}), 
-        Line(points = {{-18, 74}, {18, 74}}), 
+        extent = {{-26, 70}, {26, 62}},
+        fillColor = {0, 0, 0},
+        fillPattern = FillPattern.Solid),
+        Line(points = {{-22, 66}, {22, 66}}),
+        Line(points = {{-18, 74}, {18, 74}}),
         Line(points = {{-14, 78}, {14, 78}})}));
     end DigitalClock;
     annotation();
@@ -3913,10 +3913,10 @@ initially modelled.</li>
       import D = Modelica.Electrical.Digital;
       import T = Modelica.Electrical.Digital.Tables;
       D.Interfaces.DigitalInput x[n] 
-        annotation(Placement(transformation(extent = {{-60, -10}, 
+        annotation(Placement(transformation(extent = {{-60, -10},
         {-40, 10}})));
       D.Interfaces.DigitalOutput y[n] 
-        annotation(Placement(transformation(extent = {{40, -10}, 
+        annotation(Placement(transformation(extent = {{40, -10},
         {60, 10}})));
       parameter Integer n(final min = 1, start = 1) "信号宽度";
     algorithm
@@ -3953,28 +3953,28 @@ initially modelled.</li>
      由Christoph Clauss<br>
      最初建模。</li>
 </ul>
-</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -100}, {-148, -40}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -100}, {-148, -40}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Polygon(
-        points = {{-40, -40}, {-40, 40}, {40, 40}, {-40, -40}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {127, 0, 127}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, -40}, {-40, 40}, {40, 40}, {-40, -40}},
+        lineColor = {127, 0, 127},
+        fillColor = {127, 0, 127},
+        fillPattern = FillPattern.Solid),
         Polygon(
-        points = {{-40, -40}, {40, -40}, {40, 40}, {-40, -40}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, -40}, {40, -40}, {40, 40}, {-40, -40}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{0, -20}, {40, -40}}, 
-        textString = "X01"), 
+        extent = {{0, -20}, {40, -40}},
+        textString = "X01"),
         Rectangle(
-        extent = {{-40, 40}, {40, -40}}, 
+        extent = {{-40, 40}, {40, -40}},
         lineThickness = 0.5)}));
     end LogicToX01;
 
@@ -3982,10 +3982,10 @@ initially modelled.</li>
       import D = Modelica.Electrical.Digital;
       import T = Modelica.Electrical.Digital.Tables;
       D.Interfaces.DigitalInput x[n] 
-        annotation(Placement(transformation(extent = {{-60, -10}, 
+        annotation(Placement(transformation(extent = {{-60, -10},
         {-40, 10}})));
       D.Interfaces.DigitalOutput y[n] 
-        annotation(Placement(transformation(extent = {{40, -10}, 
+        annotation(Placement(transformation(extent = {{40, -10},
         {60, 10}})));
       parameter Integer n(final min = 1, start = 1) "信号宽度";
     algorithm
@@ -4022,28 +4022,28 @@ initially modelled.</li>
      由Christoph Clauss<br>
      最初建模。</li>
 </ul>
-</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -100}, {-148, -40}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -100}, {-148, -40}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Polygon(
-        points = {{-40, -40}, {-40, 40}, {40, 40}, {-40, -40}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {127, 0, 127}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, -40}, {-40, 40}, {40, 40}, {-40, -40}},
+        lineColor = {127, 0, 127},
+        fillColor = {127, 0, 127},
+        fillPattern = FillPattern.Solid),
         Polygon(
-        points = {{-40, -40}, {40, -40}, {40, 40}, {-40, -40}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, -40}, {40, -40}, {40, 40}, {-40, -40}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{0, -20}, {40, -40}}, 
-        textString = "X01Z"), 
+        extent = {{0, -20}, {40, -40}},
+        textString = "X01Z"),
         Rectangle(
-        extent = {{-40, 40}, {40, -40}}, 
+        extent = {{-40, 40}, {40, -40}},
         lineThickness = 0.5)}));
     end LogicToX01Z;
 
@@ -4051,10 +4051,10 @@ initially modelled.</li>
       import D = Modelica.Electrical.Digital;
       import T = Modelica.Electrical.Digital.Tables;
       D.Interfaces.DigitalInput x[n] 
-        annotation(Placement(transformation(extent = {{-60, -10}, 
+        annotation(Placement(transformation(extent = {{-60, -10},
         {-40, 10}})));
       D.Interfaces.DigitalOutput y[n] 
-        annotation(Placement(transformation(extent = {{40, -10}, 
+        annotation(Placement(transformation(extent = {{40, -10},
         {60, 10}})));
       parameter Integer n(final min = 1, start = 1) "信号宽度";
     algorithm
@@ -4091,28 +4091,28 @@ initially modelled.</li>
      由Christoph Clauss<br>
      最初建模。</li>
 </ul>
-</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Text(
-        extent = {{152, -100}, {-148, -40}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -100}, {-148, -40}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Polygon(
-        points = {{-40, -40}, {-40, 40}, {40, 40}, {-40, -40}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {127, 0, 127}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, -40}, {-40, 40}, {40, 40}, {-40, -40}},
+        lineColor = {127, 0, 127},
+        fillColor = {127, 0, 127},
+        fillPattern = FillPattern.Solid),
         Polygon(
-        points = {{-40, -40}, {40, -40}, {40, 40}, {-40, -40}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, -40}, {40, -40}, {40, 40}, {-40, -40}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{0, -20}, {40, -40}}, 
-        textString = "UX01"), 
+        extent = {{0, -20}, {40, -40}},
+        textString = "UX01"),
         Rectangle(
-        extent = {{-40, 40}, {40, -40}}, 
+        extent = {{-40, 40}, {40, -40}},
         lineThickness = 0.5)}));
     end LogicToUX01;
 
@@ -4149,24 +4149,24 @@ false    '0'  (编码为3)
      由Christoph Clauss<br>
      最初建模。</li>
 </ul>
-</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Polygon(
-        points = {{-40, -40}, {40, 40}, {40, -40}, {-40, -40}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {127, 0, 127}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, -40}, {40, 40}, {40, -40}, {-40, -40}},
+        lineColor = {127, 0, 127},
+        fillColor = {127, 0, 127},
+        fillPattern = FillPattern.Solid),
         Polygon(
-        points = {{-40, 40}, {40, 40}, {-40, -40}, {-40, 40}}, 
-        lineColor = {255, 0, 255}, 
-        fillColor = {255, 0, 255}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, 40}, {40, 40}, {-40, -40}, {-40, 40}},
+        lineColor = {255, 0, 255},
+        fillColor = {255, 0, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{152, -100}, {-148, -40}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -100}, {-148, -40}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-40, 40}, {40, -40}}, 
+        extent = {{-40, 40}, {40, -40}},
         lineThickness = 0.5)}));
     end BooleanToLogic;
 
@@ -4209,25 +4209,25 @@ false    '0'  (编码为3)
      由Christoph Clauss<br>
      最初建模。</li>
 </ul>
-</html>"  ), 
+</html>"  ),
         Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
         100, 100}}), graphics = {
         Polygon(
-        points = {{-40, 40}, {40, 40}, {-40, -40}, {-40, 40}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {127, 0, 127}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, 40}, {40, 40}, {-40, -40}, {-40, 40}},
+        lineColor = {127, 0, 127},
+        fillColor = {127, 0, 127},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{152, -100}, {-148, -40}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{152, -100}, {-148, -40}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Polygon(
-        points = {{-40, -40}, {40, -40}, {40, 40}, {-40, -40}}, 
-        lineColor = {255, 0, 255}, 
-        fillColor = {255, 0, 255}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, -40}, {40, -40}, {40, 40}, {-40, -40}},
+        lineColor = {255, 0, 255},
+        fillColor = {255, 0, 255},
+        fillPattern = FillPattern.Solid),
         Rectangle(
-        extent = {{-40, 40}, {40, -40}}, 
+        extent = {{-40, 40}, {40, -40}},
         lineThickness = 0.5)}));
     end LogicToBoolean;
 
@@ -4271,21 +4271,21 @@ false    '0'  (编码为3)
      由Christoph Clauss<br>
      最初建模。</li>
 </ul>
-</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
         {100, 100}}), graphics = {
         Polygon(
-        points = {{-40, -40}, {40, 40}, {40, -40}, {-40, -40}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {127, 0, 127}, 
-        fillPattern = FillPattern.Solid), 
-        Polygon(points = {{-40, 40}, {40, 40}, {-40, -40}, {-40, 40}}, lineColor = {0, 
-        0, 255}), 
+        points = {{-40, -40}, {40, 40}, {40, -40}, {-40, -40}},
+        lineColor = {127, 0, 127},
+        fillColor = {127, 0, 127},
+        fillPattern = FillPattern.Solid),
+        Polygon(points = {{-40, 40}, {40, 40}, {-40, -40}, {-40, 40}}, lineColor = {0,
+        0, 255}),
         Text(
-        extent = {{148, -100}, {-152, -40}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{148, -100}, {-152, -40}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Rectangle(
-        extent = {{-40, 40}, {40, -40}}, 
+        extent = {{-40, 40}, {40, -40}},
         lineThickness = 0.5)}));
     end RealToLogic;
 
@@ -4296,15 +4296,15 @@ false    '0'  (编码为3)
       Modelica.Blocks.Interfaces.RealOutput y[n] 
         annotation (Placement(transformation(extent={{40,-10},{60,10}})));
       parameter Integer n(final min=1, start=1) "信号宽度";
-      parameter Real value_U(start=0.5) 
+      parameter Real value_U(start=0.5)
     "数字 U 的值（未初始化）";
-      parameter Real value_X(start=0.5) 
+      parameter Real value_X(start=0.5)
     "数字 X 的值（强制未知）";
       parameter Real value_0(start=0) "数字 0 的值（强制 0）";
       parameter Real value_1(start=1) "数字 1 的值（强制 1）";
-      parameter Real value_Z(start=0.5) 
+      parameter Real value_Z(start=0.5)
     "数字 Z 值（高阻抗）";
-      parameter Real value_W(start=0.5) 
+      parameter Real value_W(start=0.5)
     "数字 W（弱未知）的值";
       parameter Real value_L(start=0) "数字 L 的值（弱 0）";
       parameter Real value_H(start=1) "数字 H 的值（弱 1）";
@@ -4348,22 +4348,22 @@ by Christoph Clauss colors changed<br>
 by Christoph Clauss<br>
 initially modelled.</li>
 </ul>
-</html>"        ), 
+</html>"        ),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
         Polygon(
-          points={{-40,40},{40,40},{-40,-40},{-40,40}}, 
-          lineColor={127,0,127}, 
-          fillColor={127,0,127}, 
-          fillPattern=FillPattern.Solid), 
-        Polygon(points={{-40,-40},{40,-40},{40,40},{-40,-40}}, lineColor={0, 
-              0,255}), 
+          points={{-40,40},{40,40},{-40,-40},{-40,40}},
+          lineColor={127,0,127},
+          fillColor={127,0,127},
+          fillPattern=FillPattern.Solid),
+        Polygon(points={{-40,-40},{40,-40},{40,40},{-40,-40}}, lineColor={0,
+              0,255}),
         Text(
-          extent={{152,-100},{-148,-40}}, 
-          textColor={0,0,255}, 
-          textString="%name"), 
+          extent={{152,-100},{-148,-40}},
+          textColor={0,0,255},
+          textString="%name"),
         Rectangle(
-          extent={{-40,40},{40,-40}}, 
+          extent={{-40,40},{40,-40}},
           lineThickness=0.5)}));
     end LogicToReal;
     annotation();
@@ -4377,20 +4377,20 @@ initially modelled.</li>
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
       import S = Modelica.Electrical.Digital.Interfaces.Strength;
       import T = Modelica.Electrical.Digital.Tables;
-      parameter Integer ResetMap[L] = {1, 4, 3, 2, 4, 4, 3, 2, 4} 
+      parameter Integer ResetMap[L] = {1, 4, 3, 2, 4, 4, 3, 2, 4}
         "功能选择，默认为高电平复位";
-      parameter D.Interfaces.Strength strength = S.'S_X01' 
+      parameter D.Interfaces.Strength strength = S.'S_X01'
         "输出强度";
       parameter Integer n(min = 1) = 1 "数据宽度";
 
       D.Interfaces.DigitalInput reset 
-        annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}), 
+        annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}),
         iconTransformation(extent = {{-10, -100}, {10, -80}})));
       D.Interfaces.DigitalInput clock annotation(Placement(transformation(
         extent = {{-90, -30}, {-70, -10}}), iconTransformation(extent = {{-90, -30}, {
         -70, -10}})));
       D.Interfaces.DigitalInput dataIn[n] annotation(Placement(transformation(
-        extent = {{-90, 20}, {-70, 40}}), iconTransformation(extent = {{-90, 20}, {-70, 
+        extent = {{-90, 20}, {-70, 40}}), iconTransformation(extent = {{-90, 20}, {-70,
         40}})));
       D.Interfaces.DigitalOutput dataOut[n] annotation(Placement(
         transformation(extent = {{64, 26}, {84, 46}}), iconTransformation(
@@ -4460,43 +4460,43 @@ initially modelled.</li>
       next_assign_val := nextstate;
       dataOut := nextstate;
       annotation(Icon(coordinateSystem(
-        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Rectangle(
-        extent = {{-50, 60}, {50, -60}}, 
-        lineColor = {127, 33, 107}, 
-        lineThickness = 0.5, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {255, 255, 255}), 
+        extent = {{-50, 60}, {50, -60}},
+        lineColor = {127, 33, 107},
+        lineThickness = 0.5,
+        fillPattern = FillPattern.Solid,
+        fillColor = {255, 255, 255}),
         Line(
-        points = {{-70, 30}, {-50, 30}}, 
-        color = {127, 33, 107}, 
-        thickness = 1), 
+        points = {{-70, 30}, {-50, 30}},
+        color = {127, 33, 107},
+        thickness = 1),
         Line(
-        points = {{50, 30}, {76, 30}}, 
-        color = {127, 33, 107}, 
-        thickness = 1), 
+        points = {{50, 30}, {76, 30}},
+        color = {127, 33, 107},
+        thickness = 1),
         Line(
-        points = {{-80, -20}, {-50, -20}}, 
-        color = {127, 33, 107}), 
+        points = {{-80, -20}, {-50, -20}},
+        color = {127, 33, 107}),
         Line(
-        points = {{0, -84}, {0, -60}}, 
-        color = {127, 33, 107}), 
+        points = {{0, -84}, {0, -60}},
+        color = {127, 33, 107}),
         Line(
-        points = {{-50, -8}, {-34, -20}, {-50, -32}}, 
-        color = {127, 33, 107}), 
+        points = {{-50, -8}, {-34, -20}, {-50, -32}},
+        color = {127, 33, 107}),
         Text(
-        extent = {{-30, 54}, {20, 8}}, 
-        textColor = {127, 33, 107}, 
-        textString = "DFFR"), 
+        extent = {{-30, 54}, {20, 8}},
+        textColor = {127, 33, 107},
+        textString = "DFFR"),
         Text(
-        extent = {{-32, -14}, {-6, -26}}, 
-        textColor = {127, 33, 107}, 
-        textString = "clock"), 
+        extent = {{-32, -14}, {-6, -26}},
+        textColor = {127, 33, 107},
+        textString = "clock"),
         Text(
-        extent = {{-14, -44}, {12, -56}}, 
-        textColor = {127, 33, 107}, 
-        textString = "reset")}), 
+        extent = {{-14, -44}, {12, -56}},
+        textColor = {127, 33, 107},
+        textString = "reset")}),
         Documentation(info = "<html>
 <p>VHDL中的描述见 <a href=\"http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities\">http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities</a></p>
 
@@ -4569,7 +4569,7 @@ X-转换：0 -> X|U 或 X|U -> 1
       import T = Modelica.Electrical.Digital.Tables;
       parameter SI.Time tHL = 0 "高电平到低电平延迟";
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
-      parameter D.Interfaces.Strength strength = S.'S_X01' 
+      parameter D.Interfaces.Strength strength = S.'S_X01'
         "输出强度";
       parameter Integer n(min = 1) = 1 "数据宽度";
     protected
@@ -4582,84 +4582,84 @@ X-转换：0 -> X|U 或 X|U -> 1
 
     public
       Modelica.Electrical.Digital.Delay.InertialDelaySensitiveVector delay(
-        tHL = tHL, 
-        tLH = tLH, 
+        tHL = tHL,
+        tLH = tLH,
         n = n) 
         annotation(Placement(transformation(extent = {{22, 11}, {79, 69}})));
       D.Interfaces.DigitalInput reset 
-        annotation(Placement(transformation(extent = {{-100, -68}, {-84, -52}}), 
+        annotation(Placement(transformation(extent = {{-100, -68}, {-84, -52}}),
         iconTransformation(extent = {{-100, -68}, {-84, -52}})));
       D.Interfaces.DigitalInput clock 
         annotation(Placement(transformation(extent = {{-100, -28}, {-84, -12}})));
       D.Interfaces.DigitalInput dataIn[n] 
         annotation(Placement(transformation(extent = {{-100, 32}, {-84, 48}})));
       D.Interfaces.DigitalOutput dataOut[n] 
-        annotation(Placement(transformation(extent = {{84, 32}, {100, 48}}), 
+        annotation(Placement(transformation(extent = {{84, 32}, {100, 48}}),
         iconTransformation(extent = {{84, 32}, {100, 48}})));
 
-      D.Registers.DFFR dFFR(n = n, 
-        ResetMap = ResetMap, 
+      D.Registers.DFFR dFFR(n = n,
+        ResetMap = ResetMap,
         strength = strength) 
         annotation(Placement(transformation(extent = {{-78, -23}, {18, 74}})));
     equation
       connect(delay.y, dataOut) annotation(Line(
-        points = {{75.01, 40}, {92, 40}}, 
-        color = {127, 0, 127}, 
+        points = {{75.01, 40}, {92, 40}},
+        color = {127, 0, 127},
         thickness = 1));
       connect(dataIn, dFFR.dataIn) annotation(Line(
-        points = {{-92, 40}, {-68.4, 40}, {-68.4, 40.05}}, 
-        color = {127, 0, 127}, 
+        points = {{-92, 40}, {-68.4, 40}, {-68.4, 40.05}},
+        color = {127, 0, 127},
         thickness = 1));
       connect(dFFR.dataOut, delay.x) annotation(Line(
-        points = {{7.92, 40.05}, {25.99, 39.855}}, 
-        color = {127, 0, 127}, 
+        points = {{7.92, 40.05}, {25.99, 39.855}},
+        color = {127, 0, 127},
         thickness = 1));
       connect(clock, dFFR.clock) annotation(Line(
         points = {{-92, -20}, {-68.4, -20}, {-68.4, 15.8}}, color = {127, 0, 127}));
       connect(reset, dFFR.reset) annotation(Line(
         points = {{-92, -60}, {-30, -60}, {-30, -18.15}}, color = {127, 0, 127}));
       annotation(Icon(coordinateSystem(
-        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Rectangle(
-        extent = {{-50, 70}, {50, -50}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {255, 255, 255}), 
+        extent = {{-50, 70}, {50, -50}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillPattern = FillPattern.Solid,
+        fillColor = {255, 255, 255}),
         Line(
-        points = {{-86, 40}, {-50, 40}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-86, 40}, {-50, 40}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-84, -20}, {-50, -20}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, -20}, {-50, -20}},
+        color = {127, 0, 127}),
         Line(
-        points = {{-84, -60}, {0, -60}, {0, -50}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, -60}, {0, -60}, {0, -50}},
+        color = {127, 0, 127}),
         Line(
-        points = {{50, 40}, {84, 40}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{50, 40}, {84, 40}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-50, -10}, {-36, -20}, {-50, -30}}, 
-        color = {127, 0, 127}), 
+        points = {{-50, -10}, {-36, -20}, {-50, -30}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-32, 70}, {30, 10}}, 
-        textColor = {127, 33, 107}, 
-        textString = "DFFREG"), 
+        extent = {{-32, 70}, {30, 10}},
+        textColor = {127, 33, 107},
+        textString = "DFFREG"),
         Text(
-        extent = {{-14, -34}, {12, -46}}, 
-        textColor = {127, 33, 107}, 
-        textString = "reset"), 
+        extent = {{-14, -34}, {12, -46}},
+        textColor = {127, 33, 107},
+        textString = "reset"),
         Text(
-        extent = {{-28, -14}, {-2, -26}}, 
-        textColor = {127, 33, 107}, 
-        textString = "clock"), 
+        extent = {{-28, -14}, {-2, -26}},
+        textColor = {127, 33, 107},
+        textString = "clock"),
         Text(
-        extent = {{-26, 44}, {26, 2}}, 
-        textColor = {127, 33, 107}, 
-        textString = "high active")}), 
+        extent = {{-26, 44}, {26, 2}},
+        textColor = {127, 33, 107},
+        textString = "high active")}),
         Documentation(info = "<html>
 <p>VHDL中的描述见 <a href=\"http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities.vhd\">http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities.vhd</a></p>
 
@@ -4747,12 +4747,12 @@ X-转换：0 -> X|U 或 X|U -> 1
 </li>
 </ul>
 </html>"          ), Icon(graphics = {Rectangle(
-        extent = {{-30, 30}, {28, 16}}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid, 
+        extent = {{-30, 30}, {28, 16}},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid,
         pattern = LinePattern.None), Text(
-        extent = {{-28, 48}, {24, -1}}, 
-        textColor = {127, 33, 107}, 
+        extent = {{-28, 48}, {24, -1}},
+        textColor = {127, 33, 107},
         textString = "low active")}));
     end DFFREGL;
 
@@ -4770,23 +4770,23 @@ X-转换：0 -> X|U 或 X|U -> 1
         1, 4, 7, 2, 4, 4, 7, 2, 4;
         1, 5, 8, 2, 5, 5, 8, 2, 5;
         1, 6, 3, 2, 6, 6, 3, 2, 6;
-        1, 4, 7, 2, 4, 4, 7, 2, 4] 
+        1, 4, 7, 2, 4, 4, 7, 2, 4]
         "通过 [reset, set] 读取的功能选择";
       /* 默认为高电平的设置和复位 */
-      parameter D.Interfaces.Strength strength = S.'S_X01' 
+      parameter D.Interfaces.Strength strength = S.'S_X01'
         "输出强度";
       parameter Integer n(min = 1) = 1 "数据宽度";
 
       D.Interfaces.DigitalInput set 
         annotation(Placement(transformation(extent = {{-10, 100}, {10, 80}})));
       D.Interfaces.DigitalInput reset 
-        annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}), 
+        annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}),
         iconTransformation(extent = {{-10, -100}, {10, -80}})));
       D.Interfaces.DigitalInput clock annotation(Placement(transformation(
-        extent = {{-90, -20}, {-70, 0}}), iconTransformation(extent = {{-90, -30}, 
+        extent = {{-90, -20}, {-70, 0}}), iconTransformation(extent = {{-90, -30},
         {-70, -10}})));
       D.Interfaces.DigitalInput dataIn[n] annotation(Placement(transformation(
-        extent = {{-90, 20}, {-70, 40}}), iconTransformation(extent = {{-90, 20}, 
+        extent = {{-90, 20}, {-70, 40}}), iconTransformation(extent = {{-90, 20},
         {-70, 40}})));
       D.Interfaces.DigitalOutput dataOut[n] annotation(Placement(
         transformation(extent = {{68, 20}, {88, 40}}), iconTransformation(
@@ -4885,50 +4885,50 @@ X-转换：0 -> X|U 或 X|U -> 1
       next_assign_val := nextstate;
       dataOut := nextstate;
       annotation(Icon(coordinateSystem(
-        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Rectangle(
-        extent = {{-50, 60}, {50, -60}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {255, 255, 255}), 
+        extent = {{-50, 60}, {50, -60}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillPattern = FillPattern.Solid,
+        fillColor = {255, 255, 255}),
         Line(
-        points = {{-80, 30}, {-50, 30}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, 30}, {-50, 30}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{50, 30}, {80, 30}}, 
-        color = {127, 33, 107}, 
-        thickness = 1), 
+        points = {{50, 30}, {80, 30}},
+        color = {127, 33, 107},
+        thickness = 1),
         Line(
-        points = {{-80, -20}, {-50, -20}}, 
-        color = {127, 33, 107}), 
+        points = {{-80, -20}, {-50, -20}},
+        color = {127, 33, 107}),
         Line(
-        points = {{0, -84}, {0, -60}}, 
-        color = {127, 33, 107}), 
+        points = {{0, -84}, {0, -60}},
+        color = {127, 33, 107}),
         Line(
-        points = {{-50, -8}, {-34, -20}, {-50, -32}}, 
-        color = {127, 33, 107}), 
+        points = {{-50, -8}, {-34, -20}, {-50, -32}},
+        color = {127, 33, 107}),
         Text(
-        extent = {{-36, 66}, {34, -8}}, 
-        textColor = {127, 33, 107}, 
-        textString = "DFFSR"), 
+        extent = {{-36, 66}, {34, -8}},
+        textColor = {127, 33, 107},
+        textString = "DFFSR"),
         Text(
-        extent = {{-28, -14}, {-2, -26}}, 
-        textColor = {127, 33, 107}, 
-        textString = "clock"), 
+        extent = {{-28, -14}, {-2, -26}},
+        textColor = {127, 33, 107},
+        textString = "clock"),
         Text(
-        extent = {{-14, -44}, {12, -56}}, 
-        textColor = {127, 33, 107}, 
-        textString = "reset"), 
+        extent = {{-14, -44}, {12, -56}},
+        textColor = {127, 33, 107},
+        textString = "reset"),
         Line(
-        points = {{0, 80}, {0, 60}}, 
-        color = {127, 0, 127}), 
+        points = {{0, 80}, {0, 60}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-13, 56}, {13, 44}}, 
-        textColor = {127, 33, 107}, 
-        textString = "set")}), 
+        extent = {{-13, 56}, {13, 44}},
+        textColor = {127, 33, 107},
+        textString = "set")}),
         Documentation(info = "<html>
 <p>VHDL中的描述见 <a href=\"http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities.vhd\">http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities.vhd</a></p>
 
@@ -5010,7 +5010,7 @@ X-Trns: 0 -> X|U 或 X|U -> 1
       import T = Modelica.Electrical.Digital.Tables;
       parameter SI.Time tHL = 0 "高电平到低电平延迟";
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
-      parameter D.Interfaces.Strength strength = S.'S_X01' 
+      parameter D.Interfaces.Strength strength = S.'S_X01'
         "输出强度";
       parameter Integer n(min = 1) = 1 "数据宽度";
 
@@ -5029,14 +5029,14 @@ X-Trns: 0 -> X|U 或 X|U -> 1
 
     protected
       D.Delay.InertialDelaySensitiveVector delay(
-        tHL = tHL, 
-        tLH = tLH, 
+        tHL = tHL,
+        tLH = tLH,
         n = n, inertialDelaySensitive(each y(start = L.'U', fixed = true))) 
         annotation(Placement(transformation(extent = {{23, 12}, {79, 68}})));
 
       D.Registers.DFFSR dFFSR(
-        strength = strength, 
-        n = n, 
+        strength = strength,
+        n = n,
         ResetSetMap = ResetSetMap, clock(start = L.'U', fixed = true), reset(start = L.'U', fixed = true), set(start = L.'U', fixed = true)) 
         annotation(Placement(transformation(extent = {{-80, -25}, {20, 75}})));
     public
@@ -5052,8 +5052,8 @@ X-Trns: 0 -> X|U 或 X|U -> 1
         annotation(Placement(transformation(extent = {{84, 32}, {100, 48}})));
     equation
       connect(dFFSR.dataOut, delay.x) annotation(Line(
-        points = {{9.5, 40}, {26.92, 40}, {26.92, 39.86}}, 
-        color = {127, 0, 127}, 
+        points = {{9.5, 40}, {26.92, 40}, {26.92, 39.86}},
+        color = {127, 0, 127},
         thickness = 1));
       connect(set, dFFSR.set) annotation(Line(
         points = {{-92, 80}, {-30, 80}, {-30, 70}}, color = {127, 0, 127}));
@@ -5062,62 +5062,62 @@ X-Trns: 0 -> X|U 或 X|U -> 1
       connect(clock, dFFSR.clock) annotation(Line(
         points = {{-92, -20}, {-70, -20}, {-70, 15}}, color = {127, 0, 127}));
       connect(dataIn, dFFSR.dataIn) annotation(Line(
-        points = {{-92, 40}, {-70, 40}}, 
-        color = {127, 0, 127}, 
+        points = {{-92, 40}, {-70, 40}},
+        color = {127, 0, 127},
         thickness = 1));
       connect(delay.y, dataOut) annotation(Line(
-        points = {{75.08, 40}, {92, 40}}, 
-        color = {127, 0, 127}, 
+        points = {{75.08, 40}, {92, 40}},
+        color = {127, 0, 127},
         thickness = 1));
       annotation(Icon(coordinateSystem(
-        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Rectangle(
-        extent = {{-50, 70}, {52, -50}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{-50, 70}, {52, -50}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
         Line(
-        points = {{-86, 40}, {-50, 40}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-86, 40}, {-50, 40}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-84, -20}, {-50, -20}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, -20}, {-50, -20}},
+        color = {127, 0, 127}),
         Line(
-        points = {{52, 40}, {84, 40}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{52, 40}, {84, 40}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-50, -10}, {-36, -20}, {-50, -30}}, 
-        color = {127, 0, 127}), 
+        points = {{-50, -10}, {-36, -20}, {-50, -30}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-44, 94}, {38, -14}}, 
-        textColor = {127, 33, 107}, 
-        textString = "DFFREGSR"), 
+        extent = {{-44, 94}, {38, -14}},
+        textColor = {127, 33, 107},
+        textString = "DFFREGSR"),
         Text(
-        extent = {{-14, -32}, {12, -44}}, 
-        textColor = {127, 33, 107}, 
-        textString = "清零"), 
+        extent = {{-14, -32}, {12, -44}},
+        textColor = {127, 33, 107},
+        textString = "清零"),
         Text(
-        extent = {{-33, -13}, {-7, -25}}, 
-        textColor = {127, 33, 107}, 
-        textString = "时钟"), 
+        extent = {{-33, -13}, {-7, -25}},
+        textColor = {127, 33, 107},
+        textString = "时钟"),
         Line(
-        points = {{-84, 80}, {0, 80}, {0, 70}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, 80}, {0, 80}, {0, 70}},
+        color = {127, 0, 127}),
         Line(
-        points = {{-84, -60}, {0, -60}, {0, -50}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, -60}, {0, -60}, {0, -50}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-14, 66}, {12, 54}}, 
-        textColor = {127, 33, 107}, 
-        textString = "置位"), 
+        extent = {{-14, 66}, {12, 54}},
+        textColor = {127, 33, 107},
+        textString = "置位"),
         Text(
-        extent = {{-32, 38}, {26, 10}}, 
-        textColor = {127, 0, 127}, 
-        textString = "高电平有效")}), 
+        extent = {{-32, 38}, {26, 10}},
+        textColor = {127, 0, 127},
+        textString = "高电平有效")}),
         Documentation(info = "<html>
 <p>VHDL中的描述见 <a href=\"http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities.vhd\">http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities.vhd</a></p>
 
@@ -5173,12 +5173,12 @@ X-转换: 0 -> X|U 或 X|U -> 1
         4, 2, 7, 4, 4, 2, 7, 4]);
       // [清零, 置位] 读取的功能选择;
       annotation(Icon(graphics = {Rectangle(
-        extent = {{-36, 30}, {28, 16}}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid, 
+        extent = {{-36, 30}, {28, 16}},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid,
         pattern = LinePattern.None), Text(
-        extent = {{-30, 38}, {24, 12}}, 
-        textColor = {127, 0, 127}, 
+        extent = {{-30, 38}, {24, 12}},
+        textColor = {127, 0, 127},
         textString = "低有效")}), Documentation(info = "<html>
 <p>VHDL中的描述见 <a href=\"http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities.vhd\">http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities.vhd</a></p>
 
@@ -5232,21 +5232,21 @@ X-转换: 0 -> X|U 或 X|U -> 1
       import L = Modelica.Electrical.Digital.Interfaces.Logic;
       import S = Modelica.Electrical.Digital.Interfaces.Strength;
       import T = Modelica.Electrical.Digital.Tables;
-      parameter Integer ResetMap[L] = {1, 4, 3, 2, 4, 4, 3, 2, 4} 
+      parameter Integer ResetMap[L] = {1, 4, 3, 2, 4, 4, 3, 2, 4}
         "功能选择，默认为高有效复位";
-      parameter D.Interfaces.Strength strength = S.'S_X01' 
+      parameter D.Interfaces.Strength strength = S.'S_X01'
         "输出强度";
       parameter Integer n(min = 1) = 1 "数据宽度";
 
       D.Interfaces.DigitalInput reset 
-        annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}), 
+        annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}),
         iconTransformation(extent = {{-10, -100}, {10, -80}})));
       D.Interfaces.DigitalInput enable 
         annotation(Placement(transformation(
-        extent = {{-90, -20}, {-70, 0}}), iconTransformation(extent = {{-90, -30}, 
+        extent = {{-90, -20}, {-70, 0}}), iconTransformation(extent = {{-90, -30},
         {-70, -10}})));
       D.Interfaces.DigitalInput dataIn[n] annotation(Placement(transformation(
-        extent = {{-90, 20}, {-70, 40}}), iconTransformation(extent = {{-90, 20}, 
+        extent = {{-90, 20}, {-70, 40}}), iconTransformation(extent = {{-90, 20},
         {-70, 40}})));
       D.Interfaces.DigitalOutput dataOut[n] annotation(Placement(
         transformation(extent = {{66, 24}, {86, 44}}), iconTransformation(
@@ -5375,42 +5375,42 @@ NC = 无变化
  </li>
 </ul>
 </html>"      ), Icon(coordinateSystem(
-        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Rectangle(
-        extent = {{-50, 60}, {50, -60}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {255, 255, 255}), 
+        extent = {{-50, 60}, {50, -60}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillPattern = FillPattern.Solid,
+        fillColor = {255, 255, 255}),
         Line(
-        points = {{-80, 30}, {-50, 30}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, 30}, {-50, 30}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{50, 30}, {80, 30}}, 
-        color = {127, 33, 107}, 
-        thickness = 1), 
+        points = {{50, 30}, {80, 30}},
+        color = {127, 33, 107},
+        thickness = 1),
         Line(
-        points = {{-80, -20}, {-50, -20}}, 
-        color = {127, 33, 107}), 
+        points = {{-80, -20}, {-50, -20}},
+        color = {127, 33, 107}),
         Line(
-        points = {{0, -84}, {0, -60}}, 
-        color = {127, 33, 107}), 
+        points = {{0, -84}, {0, -60}},
+        color = {127, 33, 107}),
         Line(
-        points = {{-50, -8}, {-34, -20}, {-50, -32}}, 
-        color = {127, 33, 107}), 
+        points = {{-50, -8}, {-34, -20}, {-50, -32}},
+        color = {127, 33, 107}),
         Text(
-        extent = {{-30, 58}, {26, 2}}, 
-        textColor = {127, 33, 107}, 
-        textString = "DLATR"), 
+        extent = {{-30, 58}, {26, 2}},
+        textColor = {127, 33, 107},
+        textString = "DLATR"),
         Text(
-        extent = {{-29, -8}, {6, -32}}, 
-        textColor = {127, 33, 107}, 
-        textString = "enable"), 
+        extent = {{-29, -8}, {6, -32}},
+        textColor = {127, 33, 107},
+        textString = "enable"),
         Text(
-        extent = {{-14, -44}, {12, -56}}, 
-        textColor = {127, 33, 107}, 
+        extent = {{-14, -44}, {12, -56}},
+        textColor = {127, 33, 107},
         textString = "reset")}));
     end DLATR;
 
@@ -5421,7 +5421,7 @@ NC = 无变化
       import T = Modelica.Electrical.Digital.Tables;
       parameter SI.Time tHL = 0 "高->低延迟";
       parameter SI.Time tLH = 0 "低->高延迟";
-      parameter D.Interfaces.Strength strength = S.'S_X01' 
+      parameter D.Interfaces.Strength strength = S.'S_X01'
         "输出强度";
       parameter Integer n(min = 1) = 1 "数据宽度";
 
@@ -5435,8 +5435,8 @@ NC = 无变化
 
     public
       D.Delay.InertialDelaySensitiveVector delay(
-        tHL = tHL, 
-        tLH = tLH, 
+        tHL = tHL,
+        tLH = tLH,
         n = n) 
         annotation(Placement(transformation(extent = {{20, 12}, {76, 68}})));
       D.Interfaces.DigitalInput reset 
@@ -5446,25 +5446,25 @@ NC = 无变化
       D.Interfaces.DigitalInput dataIn[n] 
         annotation(Placement(transformation(extent = {{-100, 32}, {-84, 48}})));
       D.Interfaces.DigitalOutput dataOut[n] 
-        annotation(Placement(transformation(extent = {{84, 32}, {100, 48}}), 
+        annotation(Placement(transformation(extent = {{84, 32}, {100, 48}}),
         iconTransformation(extent = {{84, 32}, {100, 48}})));
-      D.Registers.DLATR dLATR(n = n, 
-        strength = strength, 
+      D.Registers.DLATR dLATR(n = n,
+        strength = strength,
         ResetMap = ResetMap) 
         annotation(Placement(transformation(extent = {{-78, -23}, {18, 74}})));
     equation
 
       connect(delay.y, dataOut) annotation(Line(
-        points = {{72.08, 40}, {92, 40}}, 
-        color = {127, 0, 127}, 
+        points = {{72.08, 40}, {92, 40}},
+        color = {127, 0, 127},
         thickness = 1));
       connect(dLATR.dataOut, delay.x) annotation(Line(
-        points = {{7.92, 40.05}, {15.96, 39.86}, {23.92, 39.86}}, 
-        color = {127, 0, 127}, 
+        points = {{7.92, 40.05}, {15.96, 39.86}, {23.92, 39.86}},
+        color = {127, 0, 127},
         thickness = 1));
       connect(dataIn, dLATR.dataIn) annotation(Line(
-        points = {{-92, 40}, {-80.2, 40}, {-80.2, 40.05}, {-68.4, 40.05}}, 
-        color = {127, 0, 127}, 
+        points = {{-92, 40}, {-80.2, 40}, {-80.2, 40.05}, {-68.4, 40.05}},
+        color = {127, 0, 127},
         thickness = 1));
       connect(enable, dLATR.enable) annotation(Line(
         points = {{-92, -20}, {-68.4, -20}, {-68.4, 15.8}}, color = {127, 0, 127}));
@@ -5506,46 +5506,46 @@ NC = 无变化
  </li>
 </ul>
 </html>"      ), Icon(coordinateSystem(
-        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Rectangle(
-        extent = {{-50, 70}, {52, -50}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {255, 255, 255}), 
+        extent = {{-50, 70}, {52, -50}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillPattern = FillPattern.Solid,
+        fillColor = {255, 255, 255}),
         Line(
-        points = {{-86, 40}, {-50, 40}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-86, 40}, {-50, 40}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-84, -20}, {-50, -20}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, -20}, {-50, -20}},
+        color = {127, 0, 127}),
         Line(
-        points = {{52, 40}, {84, 40}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{52, 40}, {84, 40}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-50, -10}, {-36, -20}, {-50, -30}}, 
-        color = {127, 0, 127}), 
+        points = {{-50, -10}, {-36, -20}, {-50, -30}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-32, 82}, {32, -2}}, 
-        textColor = {127, 0, 127}, 
-        textString = "DLATREG"), 
+        extent = {{-32, 82}, {32, -2}},
+        textColor = {127, 0, 127},
+        textString = "DLATREG"),
         Text(
-        extent = {{-14, -33}, {12, -45}}, 
-        textColor = {127, 33, 107}, 
-        textString = "reset"), 
+        extent = {{-14, -33}, {12, -45}},
+        textColor = {127, 33, 107},
+        textString = "reset"),
         Text(
-        extent = {{-33, -7}, {-1, -32}}, 
-        textColor = {127, 33, 107}, 
-        textString = "enable"), 
+        extent = {{-33, -7}, {-1, -32}},
+        textColor = {127, 33, 107},
+        textString = "enable"),
         Line(
-        points = {{-84, -60}, {0, -60}, {0, -50}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, -60}, {0, -60}, {0, -50}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-26, 44}, {26, 2}}, 
-        textColor = {127, 33, 107}, 
+        extent = {{-26, 44}, {26, 2}},
+        textColor = {127, 33, 107},
         textString = "高有效")}));
     end DLATREG;
 
@@ -5593,12 +5593,12 @@ NC = 无变化
  </li>
 </ul>
 </html>"      ), Icon(graphics = {Rectangle(
-        extent = {{-28, 30}, {30, 18}}, 
-        pattern = LinePattern.None, 
-        fillColor = {255, 255, 255}, 
+        extent = {{-28, 30}, {30, 18}},
+        pattern = LinePattern.None,
+        fillColor = {255, 255, 255},
         fillPattern = FillPattern.Solid), Text(
-        extent = {{-26, 48}, {26, -1}}, 
-        textColor = {127, 33, 107}, 
+        extent = {{-26, 48}, {26, -1}},
+        textColor = {127, 33, 107},
         textString = "low active")}));
     end DLATREGL;
 
@@ -5616,24 +5616,24 @@ NC = 无变化
         1, 4, 7, 2, 4, 4, 7, 2, 4;
         1, 5, 8, 2, 5, 5, 8, 2, 5;
         1, 6, 3, 2, 6, 6, 3, 2, 6;
-        1, 4, 7, 2, 4, 4, 7, 2, 4] 
+        1, 4, 7, 2, 4, 4, 7, 2, 4]
         "根据[reset, set]读取的功能选择";
       /* 默认置位和复位为高电平 */
-      parameter D.Interfaces.Strength strength = S.'S_X01' 
+      parameter D.Interfaces.Strength strength = S.'S_X01'
         "输出强度";
       parameter Integer n(min = 1) = 1 "数据宽度";
 
       D.Interfaces.DigitalInput set 
         annotation(Placement(transformation(extent = {{-10, 100}, {10, 80}})));
       D.Interfaces.DigitalInput reset 
-        annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}), 
+        annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}),
         iconTransformation(extent = {{-10, -100}, {10, -80}})));
       D.Interfaces.DigitalInput enable 
         annotation(Placement(transformation(
-        extent = {{-90, -20}, {-70, 0}}), iconTransformation(extent = {{-90, -30}, 
+        extent = {{-90, -20}, {-70, 0}}), iconTransformation(extent = {{-90, -30},
         {-70, -10}})));
       D.Interfaces.DigitalInput dataIn[n] annotation(Placement(transformation(
-        extent = {{-90, 20}, {-70, 40}}), iconTransformation(extent = {{-90, 20}, 
+        extent = {{-90, 20}, {-70, 40}}), iconTransformation(extent = {{-90, 20},
         {-70, 40}})));
       D.Interfaces.DigitalOutput dataOut[n] annotation(Placement(
         transformation(extent = {{68, 20}, {88, 40}}), iconTransformation(
@@ -5805,49 +5805,49 @@ NC = 不改变
  </li>
 </ul>
 </html>"      ), Icon(coordinateSystem(
-        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Rectangle(
-        extent = {{-50, 60}, {50, -60}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {255, 255, 255}), 
+        extent = {{-50, 60}, {50, -60}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillPattern = FillPattern.Solid,
+        fillColor = {255, 255, 255}),
         Line(
-        points = {{-80, 30}, {-50, 30}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, 30}, {-50, 30}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{50, 30}, {80, 30}}, 
-        color = {127, 33, 107}, 
-        thickness = 1), 
+        points = {{50, 30}, {80, 30}},
+        color = {127, 33, 107},
+        thickness = 1),
         Line(
-        points = {{-80, -20}, {-50, -20}}, 
-        color = {127, 33, 107}), 
+        points = {{-80, -20}, {-50, -20}},
+        color = {127, 33, 107}),
         Line(
-        points = {{0, -84}, {0, -60}}, 
-        color = {127, 33, 107}), 
+        points = {{0, -84}, {0, -60}},
+        color = {127, 33, 107}),
         Line(
-        points = {{-50, -8}, {-34, -20}, {-50, -32}}, 
-        color = {127, 33, 107}), 
+        points = {{-50, -8}, {-34, -20}, {-50, -32}},
+        color = {127, 33, 107}),
         Text(
-        extent = {{-34, 60}, {32, -6}}, 
-        textColor = {127, 33, 107}, 
-        textString = "DLATSR"), 
+        extent = {{-34, 60}, {32, -6}},
+        textColor = {127, 33, 107},
+        textString = "DLATSR"),
         Text(
-        extent = {{-29, -8}, {5, -30}}, 
-        textColor = {127, 33, 107}, 
-        textString = "enable"), 
+        extent = {{-29, -8}, {5, -30}},
+        textColor = {127, 33, 107},
+        textString = "enable"),
         Text(
-        extent = {{-14, -44}, {12, -56}}, 
-        textColor = {127, 33, 107}, 
-        textString = "reset"), 
+        extent = {{-14, -44}, {12, -56}},
+        textColor = {127, 33, 107},
+        textString = "reset"),
         Line(
-        points = {{0, 80}, {0, 60}}, 
-        color = {127, 0, 127}), 
+        points = {{0, 80}, {0, 60}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-13, 56}, {13, 44}}, 
-        textColor = {127, 33, 107}, 
+        extent = {{-13, 56}, {13, 44}},
+        textColor = {127, 33, 107},
         textString = "set")}));
     end DLATSR;
 
@@ -5859,7 +5859,7 @@ NC = 不改变
       import T = Modelica.Electrical.Digital.Tables;
       parameter SI.Time tHL = 0 "高电平到低电平延迟";
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
-      parameter D.Interfaces.Strength strength = S.'S_X01' 
+      parameter D.Interfaces.Strength strength = S.'S_X01'
         "输出强度";
       parameter Integer n(min = 1) = 1 "数据宽度";
 
@@ -5878,8 +5878,8 @@ NC = 不改变
 
     public
       D.Delay.InertialDelaySensitiveVector delay(
-        tHL = tHL, 
-        tLH = tLH, 
+        tHL = tHL,
+        tLH = tLH,
         n = n) 
         annotation(Placement(transformation(extent = {{20, 12}, {76, 68}})));
       D.Interfaces.DigitalInput set 
@@ -5891,17 +5891,17 @@ NC = 不改变
       D.Interfaces.DigitalInput dataIn[n] 
         annotation(Placement(transformation(extent = {{-100, 32}, {-84, 48}})));
       D.Interfaces.DigitalOutput dataOut[n] 
-        annotation(Placement(transformation(extent = {{84, 32}, {100, 48}}), 
+        annotation(Placement(transformation(extent = {{84, 32}, {100, 48}}),
         iconTransformation(extent = {{84, 32}, {100, 48}})));
-      D.Registers.DLATSR dLATSR(n = n, 
-        ResetSetMap = ResetSetMap, 
+      D.Registers.DLATSR dLATSR(n = n,
+        ResetSetMap = ResetSetMap,
         strength = strength) 
         annotation(Placement(transformation(extent = {{-78, -23}, {18, 74}})));
     equation
 
       connect(delay.y, dataOut) annotation(Line(
-        points = {{72.08, 40}, {92, 40}}, 
-        color = {127, 0, 127}, 
+        points = {{72.08, 40}, {92, 40}},
+        color = {127, 0, 127},
         thickness = 1));
       connect(set, dLATSR.set) annotation(Line(
         points = {{-92, 80}, {-30, 80}, {-30, 69.15}}, color = {127, 0, 127}));
@@ -5910,12 +5910,12 @@ NC = 不改变
       connect(enable, dLATSR.enable) annotation(Line(
         points = {{-92, -20}, {-68.4, -20}, {-68.4, 15.8}}, color = {127, 0, 127}));
       connect(dataIn, dLATSR.dataIn) annotation(Line(
-        points = {{-92, 40}, {-80.2, 40}, {-80.2, 40.05}, {-68.4, 40.05}}, 
-        color = {127, 0, 127}, 
+        points = {{-92, 40}, {-80.2, 40}, {-80.2, 40.05}, {-68.4, 40.05}},
+        color = {127, 0, 127},
         thickness = 1));
       connect(dLATSR.dataOut, delay.x) annotation(Line(
-        points = {{7.92, 40.05}, {23.92, 40.05}, {23.92, 39.86}}, 
-        color = {127, 0, 127}, 
+        points = {{7.92, 40.05}, {23.92, 40.05}, {23.92, 39.86}},
+        color = {127, 0, 127},
         thickness = 1));
       annotation(
         Documentation(info = "<html>
@@ -5960,53 +5960,53 @@ NC = 保持不变
 </li>
 </ul>
 </html>"          ), Icon(coordinateSystem(
-        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+        preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Rectangle(
-        extent = {{-50, 70}, {52, -50}}, 
-        lineColor = {127, 0, 127}, 
-        lineThickness = 0.5, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {255, 255, 255}), 
+        extent = {{-50, 70}, {52, -50}},
+        lineColor = {127, 0, 127},
+        lineThickness = 0.5,
+        fillPattern = FillPattern.Solid,
+        fillColor = {255, 255, 255}),
         Line(
-        points = {{-86, 40}, {-50, 40}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-86, 40}, {-50, 40}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-84, -20}, {-50, -20}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, -20}, {-50, -20}},
+        color = {127, 0, 127}),
         Line(
-        points = {{52, 40}, {84, 40}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{52, 40}, {84, 40}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-50, -10}, {-36, -20}, {-50, -30}}, 
-        color = {127, 0, 127}), 
+        points = {{-50, -10}, {-36, -20}, {-50, -30}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-46, 96}, {46, -18}}, 
-        textColor = {127, 0, 127}, 
-        textString = "DLATREGSR"), 
+        extent = {{-46, 96}, {46, -18}},
+        textColor = {127, 0, 127},
+        textString = "DLATREGSR"),
         Text(
-        extent = {{-14, -32}, {14, -45}}, 
-        textColor = {127, 33, 107}, 
-        textString = "复位"), 
+        extent = {{-14, -32}, {14, -45}},
+        textColor = {127, 33, 107},
+        textString = "复位"),
         Text(
-        extent = {{-33, -7}, {-1, -32}}, 
-        textColor = {127, 33, 107}, 
-        textString = "使能"), 
+        extent = {{-33, -7}, {-1, -32}},
+        textColor = {127, 33, 107},
+        textString = "使能"),
         Line(
-        points = {{-84, 80}, {0, 80}, {0, 70}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, 80}, {0, 80}, {0, 70}},
+        color = {127, 0, 127}),
         Line(
-        points = {{-84, -60}, {0, -60}, {0, -50}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, -60}, {0, -60}, {0, -50}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-14, 67}, {12, 53}}, 
-        textColor = {127, 33, 107}, 
-        textString = "置位"), 
+        extent = {{-14, 67}, {12, 53}},
+        textColor = {127, 33, 107},
+        textString = "置位"),
         Text(
-        extent = {{-28, 38}, {30, 10}}, 
-        textColor = {127, 0, 127}, 
+        extent = {{-28, 38}, {30, 10}},
+        textColor = {127, 0, 127},
         textString = "高电平有效")}));
     end DLATREGSRH;
 
@@ -6061,16 +6061,16 @@ NC = 保持不变
 </li>
 </ul>
 </html>"          ), Icon(graphics = {Rectangle(
-        extent = {{-40, 30}, {40, 16}}, 
-        pattern = LinePattern.None, 
-        fillColor = {255, 255, 255}, 
+        extent = {{-40, 30}, {40, 16}},
+        pattern = LinePattern.None,
+        fillColor = {255, 255, 255},
         fillPattern = FillPattern.Solid), Text(
-        extent = {{-30, 30}, {30, 16}}, 
-        textColor = {127, 0, 127}, 
+        extent = {{-30, 30}, {30, 16}},
+        textColor = {127, 0, 127},
         textString = "低电平有效")}));
     end DLATREGSRL;
 
-    annotation(Documentation(info = 
+    annotation(Documentation(info =
       "<html>
 <p>Registers是一组触发器和锁存器。与Examples.Utilities模型相反，Register模型是模型的算法部分中的一系列赋值。该模型文本几乎与标准逻辑文本相同。</p>
 </html>"  ));
@@ -6087,13 +6087,13 @@ NC = 保持不变
       parameter SI.Time tHL = 0 "高电平到低电平延迟";
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
       D.Interfaces.DigitalInput enable 
-        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), 
+        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}),
         iconTransformation(extent = {{-100, 60}, {-80, 80}})));
       D.Interfaces.DigitalInput x 
-        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}), 
+        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}),
         iconTransformation(extent = {{-100, -20}, {-80, 0}})));
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}), 
+        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}),
         iconTransformation(extent = {{80, -20}, {100, 0}})));
     protected
       D.Interfaces.Logic nextstate(start = L.'U');
@@ -6105,34 +6105,34 @@ NC = 保持不变
     equation
       connect(yy, inertialDelaySensitive.x);
       connect(inertialDelaySensitive.y, y);
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {
         Rectangle(
-        extent = {{-60, 60}, {60, -20}}, 
-        lineColor = {127, 0, 127}, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {213, 170, 255}, 
-        lineThickness = 0.5), 
+        extent = {{-60, 60}, {60, -20}},
+        lineColor = {127, 0, 127},
+        fillPattern = FillPattern.Solid,
+        fillColor = {213, 170, 255},
+        lineThickness = 0.5),
         Line(
-        points = {{-33, 16}, {31, 16}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-33, 16}, {31, 16}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-80, -10}, {-32, -10}, {-32, 10}, {30, 10}, {30, -10}, {80, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, -10}, {-32, -10}, {-32, 10}, {30, 10}, {30, -10}, {80, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-7, 46}, {39, 18}}, 
-        textColor = {127, 0, 127}, 
-        textString = "N"), 
+        extent = {{-7, 46}, {39, 18}},
+        textColor = {127, 0, 127},
+        textString = "N"),
         Line(
-        points = {{-82, 70}, {0, 70}, {0, 16}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-82, 70}, {0, 70}, {0, 16}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-44, -24}, {30, -46}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name")}), 
+        extent = {{-44, -24}, {30, -46}},
+        textColor = {0, 0, 255},
+        textString = "%name")}),
         Documentation(revisions = "<html>
 <ul>
 <li><em>2010年1月15日</em>由Ulrich Donath创建<br>
@@ -6165,18 +6165,18 @@ UX: 如果dataIn ==U则返回U，否则返回X
 
     end NXFERGATE;
 
-    model NRXFERGATE 
+    model NRXFERGATE
       "使能端口路高电平有效的传输门，输出强度减小"
       parameter SI.Time tHL = 0 "高电平到低电平延迟";
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
       D.Interfaces.DigitalInput enable 
-        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), 
+        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}),
         iconTransformation(extent = {{-100, 60}, {-80, 80}})));
       D.Interfaces.DigitalInput x 
-        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}), 
+        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}),
         iconTransformation(extent = {{-100, -20}, {-80, 0}})));
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}), 
+        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}),
         iconTransformation(extent = {{80, -20}, {100, 0}})));
     protected
       D.Interfaces.Logic nextstate(start = L.'U');
@@ -6188,34 +6188,34 @@ UX: 如果dataIn ==U则返回U，否则返回X
     equation
       connect(yy, inertialDelaySensitive.x);
       connect(inertialDelaySensitive.y, y);
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {
         Rectangle(
-        extent = {{-60, 60}, {60, -20}}, 
-        lineColor = {127, 0, 127}, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {213, 170, 255}, 
-        lineThickness = 0.5), 
+        extent = {{-60, 60}, {60, -20}},
+        lineColor = {127, 0, 127},
+        fillPattern = FillPattern.Solid,
+        fillColor = {213, 170, 255},
+        lineThickness = 0.5),
         Line(
-        points = {{-33, 16}, {31, 16}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-33, 16}, {31, 16}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-80, -10}, {-32, -10}, {-32, 10}, {30, 10}, {30, -10}, {80, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, -10}, {-32, -10}, {-32, 10}, {30, 10}, {30, -10}, {80, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-2, 46}, {44, 18}}, 
-        textColor = {127, 0, 127}, 
-        textString = "NR"), 
+        extent = {{-2, 46}, {44, 18}},
+        textColor = {127, 0, 127},
+        textString = "NR"),
         Line(
-        points = {{-82, 70}, {0, 70}, {0, 16}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-82, 70}, {0, 70}, {0, 16}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-36, -24}, {38, -46}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name")}), 
+        extent = {{-36, -24}, {38, -46}},
+        textColor = {0, 0, 255},
+        textString = "%name")}),
         Documentation(revisions = "<html>
 <ul>
 <li><em>2010年1月15日</em> 由Ulrich Donath创建<br>
@@ -6248,18 +6248,18 @@ UW: 如果 dataIn == U 则返回 U，否则返回 W
 </html>"                  ));
     end NRXFERGATE;
 
-    model PXFERGATE 
+    model PXFERGATE
       "使能端口低电平有效的传输门"
       parameter SI.Time tHL = 0 "高电平到低电平延迟";
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
       D.Interfaces.DigitalInput enable 
-        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), 
+        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}),
         iconTransformation(extent = {{-100, 60}, {-80, 80}})));
       D.Interfaces.DigitalInput x 
-        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}), 
+        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}),
         iconTransformation(extent = {{-100, -20}, {-80, 0}})));
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}), 
+        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}),
         iconTransformation(extent = {{80, -20}, {100, 0}})));
     protected
       D.Interfaces.Logic nextstate(start = L.'U');
@@ -6271,34 +6271,34 @@ UW: 如果 dataIn == U 则返回 U，否则返回 W
     equation
       connect(yy, inertialDelaySensitive.x);
       connect(inertialDelaySensitive.y, y);
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {
         Rectangle(
-        extent = {{-60, 60}, {60, -20}}, 
-        lineColor = {127, 0, 127}, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {213, 170, 255}, 
-        lineThickness = 0.5), 
+        extent = {{-60, 60}, {60, -20}},
+        lineColor = {127, 0, 127},
+        fillPattern = FillPattern.Solid,
+        fillColor = {213, 170, 255},
+        lineThickness = 0.5),
         Line(
-        points = {{-33, 16}, {31, 16}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-33, 16}, {31, 16}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-80, -10}, {-32, -10}, {-32, 10}, {30, 10}, {30, -10}, {80, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, -10}, {-32, -10}, {-32, 10}, {30, 10}, {30, -10}, {80, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-7, 46}, {39, 18}}, 
-        textColor = {127, 0, 127}, 
-        textString = "P"), 
+        extent = {{-7, 46}, {39, 18}},
+        textColor = {127, 0, 127},
+        textString = "P"),
         Line(
-        points = {{-82, 70}, {0, 70}, {0, 16}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-82, 70}, {0, 70}, {0, 16}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-36, -24}, {38, -46}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name")}), 
+        extent = {{-36, -24}, {38, -46}},
+        textColor = {0, 0, 255},
+        textString = "%name")}),
         Documentation(revisions = "<html>
 <ul>
 <li><em>2010年1月15日</em> 由Ulrich Donath创建<br>
@@ -6330,18 +6330,18 @@ UX: 如果 dataIn == U 则返回 U，否则返回 X
 </html>"          ));
     end PXFERGATE;
 
-    model PRXFERGATE 
+    model PRXFERGATE
       "使能端口低电平有效的传输门，输出强度减小"
       parameter SI.Time tHL = 0 "高电平到低电平延迟";
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
       D.Interfaces.DigitalInput enable 
-        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), 
+        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}),
         iconTransformation(extent = {{-100, 60}, {-80, 80}})));
       D.Interfaces.DigitalInput x 
-        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}), 
+        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}),
         iconTransformation(extent = {{-100, -20}, {-80, 0}})));
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}), 
+        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}),
         iconTransformation(extent = {{80, -20}, {100, 0}})));
     protected
       D.Interfaces.Logic nextstate(start = L.'U');
@@ -6353,34 +6353,34 @@ UX: 如果 dataIn == U 则返回 U，否则返回 X
     equation
       connect(yy, inertialDelaySensitive.x);
       connect(inertialDelaySensitive.y, y);
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {
         Rectangle(
-        extent = {{-60, 60}, {60, -20}}, 
-        lineColor = {127, 0, 127}, 
-        fillPattern = FillPattern.Solid, 
-        fillColor = {213, 170, 255}, 
-        lineThickness = 0.5), 
+        extent = {{-60, 60}, {60, -20}},
+        lineColor = {127, 0, 127},
+        fillPattern = FillPattern.Solid,
+        fillColor = {213, 170, 255},
+        lineThickness = 0.5),
         Line(
-        points = {{-33, 16}, {31, 16}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-33, 16}, {31, 16}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-80, -10}, {-32, -10}, {-32, 10}, {30, 10}, {30, -10}, {80, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, -10}, {-32, -10}, {-32, 10}, {30, 10}, {30, -10}, {80, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-2, 46}, {44, 18}}, 
-        textColor = {127, 0, 127}, 
-        textString = "PR"), 
+        extent = {{-2, 46}, {44, 18}},
+        textColor = {127, 0, 127},
+        textString = "PR"),
         Line(
-        points = {{-82, 70}, {0, 70}, {0, 16}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-82, 70}, {0, 70}, {0, 16}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-40, -24}, {34, -46}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name")}), 
+        extent = {{-40, -24}, {34, -46}},
+        textColor = {0, 0, 255},
+        textString = "%name")}),
         Documentation(revisions = "<html>
 <ul>
 <li><em>2010年1月15日</em> 由Ulrich Donath创建<br>
@@ -6417,13 +6417,13 @@ UW: 如果 dataIn == U 则返回 U，否则返回 W
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
       parameter D.Interfaces.Strength strength = S.'S_X01' "输出强度";
       D.Interfaces.DigitalInput enable 
-        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), 
+        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}),
         iconTransformation(extent = {{-100, 60}, {-80, 80}})));
       D.Interfaces.DigitalInput x 
-        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}), 
+        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}),
         iconTransformation(extent = {{-100, -20}, {-80, 0}})));
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}), 
+        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}),
         iconTransformation(extent = {{80, -20}, {100, 0}})));
     protected
       D.Interfaces.Logic nextstate(start = L.'U');
@@ -6435,29 +6435,29 @@ UW: 如果 dataIn == U 则返回 U，否则返回 W
     equation
       connect(yy, inertialDelaySensitive.x);
       connect(inertialDelaySensitive.y, y);
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {
         Line(
-        points = {{-80, 70}, {0, 70}, {0, 14}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, 70}, {0, 70}, {0, 14}},
+        color = {127, 0, 127},
+        thickness = 1),
         Polygon(
-        points = {{-40, 40}, {-40, -60}, {40, -10}, {-40, 40}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, 40}, {-40, -60}, {40, -10}, {-40, 40}},
+        lineColor = {127, 0, 127},
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Line(
-        points = {{-80, -10}, {-40, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, -10}, {-40, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{40, -10}, {82, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{40, -10}, {82, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-54, -62}, {20, -84}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name")}), 
+        extent = {{-54, -62}, {20, -84}},
+        textColor = {0, 0, 255},
+        textString = "%name")}),
         Documentation(revisions = "<html>
 <ul>
 <li><em>2010年1月22日</em> 由Ulrich Donath创建<br>
@@ -6496,13 +6496,13 @@ DataOut*: 根据三态表格 Buf3sTable 映射的 DataOut 强度
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
       parameter D.Interfaces.Strength strength = S.'S_X01' "输出强度";
       D.Interfaces.DigitalInput enable 
-        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), 
+        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}),
         iconTransformation(extent = {{-100, 60}, {-80, 80}})));
       D.Interfaces.DigitalInput x 
-        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}), 
+        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}),
         iconTransformation(extent = {{-100, -20}, {-80, 0}})));
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}), 
+        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}),
         iconTransformation(extent = {{80, -20}, {100, 0}})));
     protected
       D.Interfaces.Logic nextstate(start = L.'U');
@@ -6514,29 +6514,29 @@ DataOut*: 根据三态表格 Buf3sTable 映射的 DataOut 强度
     equation
       connect(yy, inertialDelaySensitive.x);
       connect(inertialDelaySensitive.y, y);
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {
         Line(
-        points = {{-80, 70}, {0, 70}, {0, 14}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, 70}, {0, 70}, {0, 14}},
+        color = {127, 0, 127},
+        thickness = 1),
         Polygon(
-        points = {{-40, 40}, {-40, -60}, {40, -10}, {-40, 40}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, 40}, {-40, -60}, {40, -10}, {-40, 40}},
+        lineColor = {127, 0, 127},
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Line(
-        points = {{-80, -10}, {-40, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, -10}, {-40, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{40, -10}, {82, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{40, -10}, {82, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Text(
-        extent = {{-54, -62}, {20, -84}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name")}), 
+        extent = {{-54, -62}, {20, -84}},
+        textColor = {0, 0, 255},
+        textString = "%name")}),
         Documentation(revisions = "<html>
 <ul>
 <li><em>2010年1月22日</em> 由Ulrich Donath创建<br>
@@ -6575,13 +6575,13 @@ DataOut*: 根据三态表格 Buf3slTable 映射的 DataOut 强度
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
       parameter D.Interfaces.Strength strength = S.'S_X01' "输出强度";
       D.Interfaces.DigitalInput enable 
-        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), 
+        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}),
         iconTransformation(extent = {{-100, 60}, {-80, 80}})));
       D.Interfaces.DigitalInput x 
-        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}), 
+        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}),
         iconTransformation(extent = {{-100, -20}, {-80, 0}})));
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}), 
+        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}),
         iconTransformation(extent = {{80, -20}, {100, 0}})));
     protected
       D.Interfaces.Logic nextstate(start = L.'U');
@@ -6593,34 +6593,34 @@ DataOut*: 根据三态表格 Buf3slTable 映射的 DataOut 强度
     equation
       connect(yy, inertialDelaySensitive.x);
       connect(inertialDelaySensitive.y, y);
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {
         Line(
-        points = {{-80, 70}, {0, 70}, {0, 14}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, 70}, {0, 70}, {0, 14}},
+        color = {127, 0, 127},
+        thickness = 1),
         Polygon(
-        points = {{-40, 40}, {-40, -60}, {40, -10}, {-40, 40}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, 40}, {-40, -60}, {40, -10}, {-40, 40}},
+        lineColor = {127, 0, 127},
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Line(
-        points = {{-80, -10}, {-40, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, -10}, {-40, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{40, -10}, {82, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{40, -10}, {82, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Ellipse(
-        extent = {{40, -3}, {54, -17}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{40, -3}, {54, -17}},
+        lineColor = {127, 0, 127},
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-54, -62}, {20, -84}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name")}), 
+        extent = {{-54, -62}, {20, -84}},
+        textColor = {0, 0, 255},
+        textString = "%name")}),
         Documentation(revisions = "<html>
 <ul>
 <li><em>2010年1月22日</em> 由Ulrich Donath创建<br>
@@ -6659,13 +6659,13 @@ DataOut*: 根据三态表格 Buf3sTable 映射的 DataOut 强度
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
       parameter D.Interfaces.Strength strength = S.'S_X01' "输出强度";
       D.Interfaces.DigitalInput enable 
-        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), 
+        annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}),
         iconTransformation(extent = {{-100, 60}, {-80, 80}})));
       D.Interfaces.DigitalInput x 
-        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}), 
+        annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}),
         iconTransformation(extent = {{-100, -20}, {-80, 0}})));
       D.Interfaces.DigitalOutput y 
-        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}), 
+        annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}),
         iconTransformation(extent = {{80, -20}, {100, 0}})));
     protected
       D.Interfaces.Logic nextstate(start = L.'U');
@@ -6677,34 +6677,34 @@ DataOut*: 根据三态表格 Buf3sTable 映射的 DataOut 强度
     equation
       connect(yy, inertialDelaySensitive.x);
       connect(inertialDelaySensitive.y, y);
-      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
         -100}, {100, 100}}), graphics = {
         Polygon(
-        points = {{-40, 40}, {-40, -60}, {40, -10}, {-40, 40}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, 40}, {-40, -60}, {40, -10}, {-40, 40}},
+        lineColor = {127, 0, 127},
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Line(
-        points = {{-80, 70}, {0, 70}, {0, 14}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, 70}, {0, 70}, {0, 14}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-80, -10}, {-40, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, -10}, {-40, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{40, -10}, {82, -10}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{40, -10}, {82, -10}},
+        color = {127, 0, 127},
+        thickness = 1),
         Ellipse(
-        extent = {{40, -3}, {54, -17}}, 
-        lineColor = {127, 0, 127}, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        extent = {{40, -3}, {54, -17}},
+        lineColor = {127, 0, 127},
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-54, -62}, {20, -84}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name")}), 
+        extent = {{-54, -62}, {20, -84}},
+        textColor = {0, 0, 255},
+        textString = "%name")}),
         Documentation(revisions = "<html>
 <ul>
 <li><em>2010年1月22日</em> 由Ulrich Donath创建<br>
@@ -6759,13 +6759,13 @@ DataOut*: 根据三态表格 Buf3slTable 映射的 DataOut 强度
 <li><em>2010年1月22日</em> 由Ulrich Donath创建<br>
  </li>
 </ul>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
         100, 100}}), graphics = {Text(
-        extent = {{-50, 40}, {50, 80}}, 
+        extent = {{-50, 40}, {50, 80}},
         textString = "Wire"), Text(
-        extent = {{152, -160}, {-148, -100}}, 
-        textColor = {0, 0, 255}, 
+        extent = {{152, -160}, {-148, -100}},
+        textColor = {0, 0, 255},
         textString = "%name")}));
     end WiredX;
     annotation();
@@ -6873,26 +6873,26 @@ Z  = L.'Z'
 <dt><em>2010年11月9日</em></dt>
 <dd>由Ulrich Donath创建</dd>
 </dl>
-</html>"      ), 
-        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+</html>"      ),
+        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Text(
-        extent = {{-50, 70}, {50, 30}}, 
-        textColor = {127, 33, 107}, 
-        textString = "DLATRAM"), 
+        extent = {{-50, 70}, {50, 30}},
+        textColor = {127, 33, 107},
+        textString = "DLATRAM"),
         Line(
-        points = {{-60, -40}, {-46, -50}, {-60, -60}}, 
-        color = {127, 0, 127}), 
+        points = {{-60, -40}, {-46, -50}, {-60, -60}},
+        color = {127, 0, 127}),
         Text(
-        extent = {{-41, -35}, {-24, -62}}, 
-        textColor = {127, 33, 107}, 
-        textString = "WE"), 
+        extent = {{-41, -35}, {-24, -62}},
+        textColor = {127, 33, 107},
+        textString = "WE"),
         Line(
-        points = {{-84, -50}, {-60, -50}}, 
-        color = {127, 0, 127}), 
+        points = {{-84, -50}, {-60, -50}},
+        color = {127, 0, 127}),
         Line(
-        points = {{-80, 20}, {-60, 20}}, 
-        color = {127, 0, 127}, 
+        points = {{-80, 20}, {-60, 20}},
+        color = {127, 0, 127},
         thickness = 1)}));
     end DLATRAM;
 
@@ -6956,12 +6956,12 @@ Z  = L.'Z'
 <dt><em>2010年10月19日</em></dt>
 <dd>由Ulrich Donath创建</dd>
 </dl>
-</html>"      ), 
-        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+</html>"      ),
+        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
         graphics = {
         Text(
-        extent = {{-50, 70}, {50, 30}}, 
-        textColor = {127, 33, 107}, 
+        extent = {{-50, 70}, {50, 30}},
+        textColor = {127, 33, 107},
         textString = "DLATROM")}));
     end DLATROM;
     annotation();
@@ -6979,16 +6979,16 @@ Z  = L.'Z'
       parameter SI.Time tLH = 0 "低电平到高电平延迟";
       parameter D.Interfaces.Strength strength = S.'S_X01' "输出强度";
       D.Interfaces.DigitalInput in1 "数据输入 1" 
-        annotation(Placement(transformation(extent = {{-100, 40}, {-80, 60}}), 
+        annotation(Placement(transformation(extent = {{-100, 40}, {-80, 60}}),
         iconTransformation(extent = {{-100, 40}, {-80, 60}})));
       D.Interfaces.DigitalInput in0 "数据输入 0" 
-        annotation(Placement(transformation(extent = {{-100, -60}, {-80, -40}}), 
+        annotation(Placement(transformation(extent = {{-100, -60}, {-80, -40}}),
         iconTransformation(extent = {{-100, -60}, {-80, -40}})));
       D.Interfaces.DigitalInput sel "选择输入" 
-        annotation(Placement(transformation(extent = {{-10, 80}, {10, 100}}), 
+        annotation(Placement(transformation(extent = {{-10, 80}, {10, 100}}),
         iconTransformation(extent = {{-10, 80}, {10, 100}})));
       D.Interfaces.DigitalOutput out "输出" 
-        annotation(Placement(transformation(extent = {{80, -10}, {100, 10}}), 
+        annotation(Placement(transformation(extent = {{80, -10}, {100, 10}}),
         iconTransformation(extent = {{80, -10}, {100, 10}})));
 
     protected
@@ -7008,39 +7008,39 @@ Z  = L.'Z'
 
       annotation(Icon(graphics = {
         Line(
-        points = {{-80, 50}, {-40, 50}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, 50}, {-40, 50}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-62, -50}, {-62, -50}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-62, -50}, {-62, -50}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{-80, -50}, {-40, -50}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{-80, -50}, {-40, -50}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{0, 60}, {0, 80}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{0, 60}, {0, 80}},
+        color = {127, 0, 127},
+        thickness = 1),
         Line(
-        points = {{40, 0}, {80, 0}}, 
-        color = {127, 0, 127}, 
-        thickness = 1), 
+        points = {{40, 0}, {80, 0}},
+        color = {127, 0, 127},
+        thickness = 1),
         Polygon(
-        points = {{-40, 80}, {-40, -80}, {40, -40}, {40, 40}, {-40, 80}}, 
-        lineColor = {213, 170, 255}, 
-        lineThickness = 1, 
-        fillColor = {213, 170, 255}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-40, 80}, {-40, -80}, {40, -40}, {40, 40}, {-40, 80}},
+        lineColor = {213, 170, 255},
+        lineThickness = 1,
+        fillColor = {213, 170, 255},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-36, -70}, {38, -92}}, 
-        textColor = {0, 0, 255}, 
-        textString = "%name"), 
+        extent = {{-36, -70}, {38, -92}},
+        textColor = {0, 0, 255},
+        textString = "%name"),
         Text(
-        extent = {{-38, 10}, {38, -10}}, 
-        textColor = {127, 0, 127}, 
-        textString = "MUX2x1")}), 
+        extent = {{-38, 10}, {38, -10}},
+        textColor = {127, 0, 127},
+        textString = "MUX2x1")}),
         Documentation(info = "<html>
 <p>在VHDL中的描述请参考 <a href=\"http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities.vhd\">http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_entities.vhd</a></p>
 <p>以及多路选择器表的描述请参考 <a href=\"http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_misc.vhd\">http://www.cs.sfu.ca/~ggbaker/reference/std_logic/src/std_logic_misc.vhd</a></p>
@@ -7169,27 +7169,27 @@ U  = L.&#39;U&#39;
 <p>
 版权所有 &copy; 1998-2020，Modelica Association 及贡献者
 </p>
-</html>"), Icon(coordinateSystem(preserveAspectRatio = false, 
+</html>"), Icon(coordinateSystem(preserveAspectRatio = false,
     extent = {{-100, -100}, {100, 100}}), graphics = {
     Line(
-    origin = {7, 47}, 
-    points = {{-84, -6}, {-52, -6}}), 
+    origin = {7, 47},
+    points = {{-84, -6}, {-52, -6}}),
     Rectangle(
-    origin = {59, 53}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid, 
-    extent = {{-104, -63}, {-64, 7}}), 
+    origin = {59, 53},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid,
+    extent = {{-104, -63}, {-64, 7}}),
     Rectangle(
-    origin = {146, 34}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid, 
-    extent = {{-104, -63}, {-64, 7}}), 
+    origin = {146, 34},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid,
+    extent = {{-104, -63}, {-64, 7}}),
     Line(
-    origin = {7, 15}, 
-    points = {{-84, -6}, {-52, -6}}), 
+    origin = {7, 15},
+    points = {{-84, -6}, {-52, -6}}),
     Line(
-    origin = {79, 30}, 
-    points = {{-84, -6}, {-37, -6}}), 
+    origin = {79, 30},
+    points = {{-84, -6}, {-37, -6}}),
     Line(
     points = {{42, -12}, {17, -12}, {17, -54}, {-71, -54}})}));
 end Digital;

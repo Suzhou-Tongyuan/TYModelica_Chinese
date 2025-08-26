@@ -1,39 +1,39 @@
 ﻿within Modelica.Clocked.RealSignals.Sampler;
-block SampleClocked 
+block SampleClocked
   "对连续实时输入信号进行采样，并将其作为时钟输出信号，时钟作为输入信号"
   extends Clocked.RealSignals.Interfaces.SamplerIcon;
-  Modelica.Blocks.Interfaces.RealInput u 
+  Modelica.Blocks.Interfaces.RealInput u
     "连续时间、实数输入信号连接器" 
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Interfaces.RealOutput y 
+  Modelica.Blocks.Interfaces.RealOutput y
     "时钟实数输出信号连接器" 
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Clocked.ClockSignals.Interfaces.ClockInput clock 
+  Clocked.ClockSignals.Interfaces.ClockInput clock
     "输出信号 y 与该时钟输入相关联" annotation (
       Placement(transformation(
-        extent={{-20,-20},{20,20}}, 
-        rotation=90, 
+        extent={{-20,-20},{20,20}},
+        rotation=90,
         origin={0,-120})));
 
 equation
   y = sample(u,clock);
 
   annotation (
-   defaultComponentName="sample1", 
+   defaultComponentName="sample1",
    Icon(coordinateSystem(
-        preserveAspectRatio=true, 
-        extent={{-100,-100},{100,100}}, 
-        initialScale=0.06), 
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}},
+        initialScale=0.06),
                      graphics={
         Line(
-          points={{0,-100},{0,18}}, 
-          color={175,175,175}, 
-          pattern=LinePattern.Dot, 
-          thickness=0.5), 
+          points={{0,-100},{0,18}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5),
     Text(
-        extent={{-150,90},{150,50}}, 
-        textString="%name", 
-        textColor={0,0,255})}), 
+        extent={{-150,90},{150,50}},
+        textString="%name",
+        textColor={0,0,255})}),
     Documentation(info="<html><p>
 这个模块类似于<a href=\"modelica://Modelica.Clocked.RealSignals.Sampler.Sample\" target=\"\">Sample</a>&nbsp; 模块。 唯一的区别在于通过第二个输入提供了一个时钟信号，并且输出与这个时钟相关联。
 </p>

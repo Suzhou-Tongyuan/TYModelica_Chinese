@@ -4,44 +4,44 @@ model MultiSensor "用于测量电流、电压和功率的传感器"
   import Modelica.ComplexMath.conj;
   import Modelica.ComplexMath.abs;
   import Modelica.ComplexMath.arg;
-  QuasiStatic.SinglePhase.Interfaces.PositivePin pc 
+  QuasiStatic.SinglePhase.Interfaces.PositivePin pc
     "正引脚，电流路径" 
     annotation (Placement(transformation(extent={{-90,-10},{-110,10}})));
-  QuasiStatic.SinglePhase.Interfaces.NegativePin nc 
+  QuasiStatic.SinglePhase.Interfaces.NegativePin nc
     "负引脚，电流路径" 
     annotation (Placement(transformation(extent={{110,-10},{90,10}})));
-  QuasiStatic.SinglePhase.Interfaces.PositivePin pv 
+  QuasiStatic.SinglePhase.Interfaces.PositivePin pv
     "正引脚，电压路径" 
     annotation (Placement(transformation(extent={{-10,110},{10,90}})));
-  QuasiStatic.SinglePhase.Interfaces.NegativePin nv 
+  QuasiStatic.SinglePhase.Interfaces.NegativePin nv
     "负引脚，电压路径" 
     annotation (Placement(transformation(extent={{10,-110},{-10,-90}})));
   Modelica.ComplexBlocks.Interfaces.ComplexOutput i(
-    redeclare final SI.Current re, redeclare final SI.Current im) 
+    redeclare final SI.Current re, redeclare final SI.Current im)
     "复数输出信号的电流" annotation (Placement(transformation(
-        origin={-60,-110}, 
-        extent={{10,10},{-10,-10}}, 
+        origin={-60,-110},
+        extent={{10,10},{-10,-10}},
         rotation=90), iconTransformation(
-        extent={{10,10},{-10,-10}}, 
-        rotation=90, 
+        extent={{10,10},{-10,-10}},
+        rotation=90,
         origin={-60,-110})));
   Modelica.ComplexBlocks.Interfaces.ComplexOutput v(
-    redeclare final SI.Voltage re, redeclare final SI.Voltage im) 
+    redeclare final SI.Voltage re, redeclare final SI.Voltage im)
     "复数输出信号的电压" annotation (Placement(transformation(
-        origin={60,-110}, 
-        extent={{10,10},{-10,-10}}, 
+        origin={60,-110},
+        extent={{10,10},{-10,-10}},
         rotation=90), iconTransformation(
-        extent={{10,10},{-10,-10}}, 
-        rotation=90, 
+        extent={{10,10},{-10,-10}},
+        rotation=90,
         origin={60,-110})));
   Modelica.ComplexBlocks.Interfaces.ComplexOutput apparentPower(
-    redeclare final SI.ActivePower re, redeclare final SI.ReactivePower im) 
+    redeclare final SI.ActivePower re, redeclare final SI.ReactivePower im)
     "瞬时视在功率的复数输出信号" annotation (Placement(transformation(
-        origin={-110,-60}, 
-        extent={{-10,10},{10,-10}}, 
+        origin={-110,-60},
+        extent={{-10,10},{10,-10}},
         rotation=180), iconTransformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=180, 
+        extent={{-10,10},{10,-10}},
+        rotation=180,
         origin={-110,-60})));
   output SI.Current abs_i=abs(i) "复数电流的绝对值";
   output SI.Angle arg_i=arg(i) "复数电流的幅角";
@@ -65,32 +65,32 @@ equation
   apparentPower = v*conj(i);
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
-      Line(points = {{0,100},{0,70}}, color={85,170,255}), 
-      Line(points = {{0,-70},{0,-100}}, color={85,170,255}), 
-      Line(points = {{-100,0},{100,0}}, color={85,170,255}), 
-      Line(points = {{0,70},{0,40}}), 
+      Line(points = {{0,100},{0,70}}, color={85,170,255}),
+      Line(points = {{0,-70},{0,-100}}, color={85,170,255}),
+      Line(points = {{-100,0},{100,0}}, color={85,170,255}),
+      Line(points = {{0,70},{0,40}}),
         Text(
-          extent={{-150,110},{150,150}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
-        Line(points={{-100,-60},{-80,-60},{-56,-42}}, 
-                                                   color={85,170,255}), 
-        Line(points={{-60,-100},{-60,-80},{-42,-56}}, 
-                                                   color={85,170,255}), 
-        Line(points={{60,-100},{60,-80},{42,-56}}, 
-                                                color={85,170,255}), 
+          extent={{-150,110},{150,150}},
+          textString="%name",
+          textColor={0,0,255}),
+        Line(points={{-100,-60},{-80,-60},{-56,-42}},
+                                                   color={85,170,255}),
+        Line(points={{-60,-100},{-60,-80},{-42,-56}},
+                                                   color={85,170,255}),
+        Line(points={{60,-100},{60,-80},{42,-56}},
+                                                color={85,170,255}),
         Text(
-          extent={{-100,-20},{-60,-60}}, 
-            textColor={64,64,64}, 
-            textString="V.A"), 
+          extent={{-100,-20},{-60,-60}},
+            textColor={64,64,64},
+            textString="V.A"),
         Text(
-          extent={{-80,-60},{-40,-100}}, 
-            textString="A", 
-            textColor={64,64,64}), 
+          extent={{-80,-60},{-40,-100}},
+            textString="A",
+            textColor={64,64,64}),
         Text(
-          extent={{40,-60},{80,-100}}, 
-            textString="V", 
-            textColor={64,64,64})}), 
+          extent={{40,-60},{80,-100}},
+            textString="V",
+            textColor={64,64,64})}),
     Documentation(info="<html>
 <p>这个多传感器用于测量单相系统的电流、电压和瞬时电功率，并具有分离的电压和电流路径。
 电压路径的引脚是pv和nv，电流路径的引脚是pc和nc。

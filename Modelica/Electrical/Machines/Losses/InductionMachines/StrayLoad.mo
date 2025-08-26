@@ -1,10 +1,10 @@
 ﻿within Modelica.Electrical.Machines.Losses.InductionMachines;
-model StrayLoad 
+model StrayLoad
   "电流和速度相关的杂散负载损耗模型"
   extends Modelica.Electrical.Polyphase.Interfaces.OnePort;
   extends Machines.Interfaces.FlangeSupport;
   import Modelica.Electrical.Polyphase.Functions.quasiRMS;
-  parameter Machines.Losses.StrayLoadParameters strayLoadParameters 
+  parameter Machines.Losses.StrayLoadParameters strayLoadParameters
     "杂散负载损耗参数";
   extends 
     Modelica.Thermal.HeatTransfer.Interfaces.PartialElementaryConditionalHeatPortWithoutT(
@@ -15,19 +15,19 @@ equation
   if (strayLoadParameters.PRef <= 0) then
     tau = 0;
   else
-    tau = -strayLoadParameters.tauRef*(iRMS/strayLoadParameters.IRef)^2* 
+    tau = -strayLoadParameters.tauRef*(iRMS/strayLoadParameters.IRef)^2*
       sign(w)*(abs(w)/strayLoadParameters.wRef)^strayLoadParameters.power_w;
   end if;
   lossPower = -tau*w;
   annotation (Icon(graphics={
-        Line(points={{-90,0},{90,0}}, color={0,0,255}), 
+        Line(points={{-90,0},{90,0}}, color={0,0,255}),
         Rectangle(
-          extent={{-70,30},{70,-30}}, 
-          lineColor={0,0,255}, 
-          pattern=LinePattern.Dot), 
+          extent={{-70,30},{70,-30}},
+          lineColor={0,0,255},
+          pattern=LinePattern.Dot),
         Text(
-          extent={{-150,90},{150,50}}, 
-          textColor={0,0,255}, 
+          extent={{-150,90},{150,50}},
+          textColor={0,0,255},
           textString="%name")}), Documentation(info="<html>
 <p>
 杂散负载损耗模型与EN 60034-2和IEEE 112标准类似，即它们依赖于电流的平方，

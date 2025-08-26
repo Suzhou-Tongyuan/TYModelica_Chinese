@@ -11,28 +11,29 @@ Modelica.Clocked.IntegerSignals.NonPeriodic.UnitDelay unitDelay1
   annotation (Placement(transformation(extent={{-38,48},{-58,68}})));
 Modelica.Blocks.Sources.IntegerConstant 
                                  const(k=1) 
-  annotation (Placement(transformation(extent={{-96,12},{-76,32}})));
+  annotation (Placement(transformation(origin={-94,28},
+extent={{-10,-10},{10,10}})));
 Modelica.Blocks.MathInteger.Sum sum(nu=2) 
   annotation (Placement(transformation(extent={{-54,22},{-42,34}})));
 equation
 connect(periodicClock.y, assignClock1.clock) annotation (Line(
-    points={{-29.4,6},{-20,6},{-20,20.8}}, 
-    color={175,175,175}, 
-    pattern=LinePattern.Dot, 
+    points={{-29.4,6},{-20,6},{-20,20.8}},
+    color={175,175,175},
+    pattern=LinePattern.Dot,
     thickness=0.5));
 connect(assignClock1.y, unitDelay1.u) annotation (Line(
-    points={{-13.4,28},{-2,28},{-2,58},{-36,58}}, 
+    points={{-13.4,28},{-2,28},{-2,58},{-36,58}},
     color={0,0,127}));
 connect(unitDelay1.y, sum.u[1]) annotation (Line(
-    points={{-59,58},{-70,58},{-70,30.1},{-54,30.1}}, 
+    points={{-59,58},{-70,58},{-70,30.1},{-54,30.1}},
     color={255,127,0}));
-connect(const.y, sum.u[2]) annotation (Line(
-    points={{-75,22},{-62,22},{-62,25.9},{-54,25.9}}, 
-    color={255,127,0}));
+connect(const.y, sum.u[2]) annotation (Line(origin={0,0},
+points={{-83,28},{-54,28}},
+color={255,127,0}));
 connect(sum.y, assignClock1.u) annotation (Line(
-    points={{-41.1,28},{-27.2,28}}, 
+    points={{-41.1,28},{-27.2,28}},
     color={255,127,0}));
-  annotation (experiment(StopTime=0.09), 
+  annotation (experiment(StopTime=0.09),
   Documentation(info="<html>
 <p>
 模块文件的基本范例 

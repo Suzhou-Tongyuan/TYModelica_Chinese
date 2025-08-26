@@ -8,28 +8,28 @@ model SwitchedRheostat "一定时间后会缩短的定速巡航器"
     plug_n(final m=m) "至负转子插头" annotation (Placement(
         transformation(extent={{90,-50},{110,-70}})));
   parameter SI.Resistance RStart "启动电阻";
-  parameter SI.Time tStart 
+  parameter SI.Time tStart
     "接通启动电阻器的持续时间";
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(final m=m) 
     annotation (Placement(transformation(extent={{-40,-70},{-60,-50}})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground ground 
     annotation (Placement(transformation(
-        origin={-80,-60}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-80,-60},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.QuasiStatic.Polyphase.Ideal.IdealCommutingSwitch 
     idealCommutingSwitch(
-    final m=m, 
-    Ron=fill(1e-5, m), 
+    final m=m,
+    Ron=fill(1e-5, m),
     Goff=fill(1e-5, m)) annotation (Placement(transformation(
-        origin={40,20}, 
-        extent={{-10,10},{10,-10}}, 
+        origin={40,20},
+        extent={{-10,10},{10,-10}},
         rotation=270)));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Resistor rheostat(
       final m=m, R_ref=fill(RStart, m)) annotation (Placement(
         transformation(extent={{0,-30},{-20,-10}})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starRheostat(
-      final m=m) annotation (Placement(transformation(extent={{-40,-30},{-60, 
+      final m=m) annotation (Placement(transformation(extent={{-40,-30},{-60,
             -10}})));
   Modelica.Blocks.Sources.BooleanStep booleanStep[m](final startTime=fill(
         tStart, m), final startValue=fill(false, m)) annotation (Placement(
@@ -51,31 +51,31 @@ equation
       points={{-40,-60},{40,-60},{40,10}}, color={85,170,255}));
   connect(plug_n, idealCommutingSwitch.plug_n2) annotation (Line(
       points={{100,-60},{40,-60},{40,10}}, color={85,170,255}));
-  annotation (defaultComponentName="rheostat", 
+  annotation (defaultComponentName="rheostat",
     Icon(coordinateSystem(
-        preserveAspectRatio=false, 
-        extent={{-100,-100},{100,100}}, 
+        preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Rectangle(
-              extent={{26,40},{54,-40}}, 
-              lineColor={85,170,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid),Line(points={{100,60},{-40,60}, 
-          {-40,40}}, color={85,170,255}), 
-                                      Line(points={{100,-60},{-40,-60},{-40, 
-          -40}}, color={85,170,255}), 
-                                  Ellipse(extent={{-44,40},{-36,32}}, 
-          lineColor={85,170,255}), 
-                               Ellipse(extent={{-44,-32},{-36,-40}}, 
-          lineColor={85,170,255}), 
-                               Line(points={{-80,40},{-42,-34}}, color={85,170,255}), 
-          Line(points={{40,40},{40,42},{40,60}}, color={85,170,255}), 
-          Line(points={{40,-40},{40,-60}}, color={85,170,255}), 
+              extent={{26,40},{54,-40}},
+              lineColor={85,170,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(points={{100,60},{-40,60},
+          {-40,40}}, color={85,170,255}),
+                                      Line(points={{100,-60},{-40,-60},{-40,
+          -40}}, color={85,170,255}),
+                                  Ellipse(extent={{-44,40},{-36,32}},
+          lineColor={85,170,255}),
+                               Ellipse(extent={{-44,-32},{-36,-40}},
+          lineColor={85,170,255}),
+                               Line(points={{-80,40},{-42,-34}}, color={85,170,255}),
+          Line(points={{40,40},{40,42},{40,60}}, color={85,170,255}),
+          Line(points={{40,-40},{40,-60}}, color={85,170,255}),
                                                             Line(points={{
-          10,-80},{70,-80}}, color={85,170,255}), 
-                                              Line(points={{40,-60},{40,-80}}, 
-          color={85,170,255}), 
-                           Line(points={{20,-90},{60,-90}}, color={85,170,255}), 
-          Line(points={{30,-100},{50,-100}}, color={85,170,255})}), 
+          10,-80},{70,-80}}, color={85,170,255}),
+                                              Line(points={{40,-60},{40,-80}},
+          color={85,170,255}),
+                           Line(points={{20,-90},{60,-90}}, color={85,170,255}),
+          Line(points={{30,-100},{50,-100}}, color={85,170,255})}),
     Documentation(info="<html>
 <p>开关式变流器，用于启动带滑环转子的感应电机:</p>
 <p>外转子电阻<code>RStart</code>在<code>tStart</code>时刻缩短.</p>

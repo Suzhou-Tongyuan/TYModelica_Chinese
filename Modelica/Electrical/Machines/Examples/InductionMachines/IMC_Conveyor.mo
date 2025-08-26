@@ -1,65 +1,65 @@
 ﻿within Modelica.Electrical.Machines.Examples.InductionMachines;
-model IMC_Conveyor 
+model IMC_Conveyor
   "测试示例：带逆变器驱动输送机的鼠笼型感应电机"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   constant Integer m=3 "相数";
   constant SI.Frequency unitFrequency=1 annotation(HideResult=true);
-  parameter SI.Voltage VNominal=100 
+  parameter SI.Voltage VNominal=100
     "每相额定有效值电压";
-  parameter SI.Frequency fNominal=aimcData.fsNominal 
+  parameter SI.Frequency fNominal=aimcData.fsNominal
     "额定频率";
-  parameter SI.AngularVelocity wNominal=2*pi*fNominal/aimcData.p 
+  parameter SI.AngularVelocity wNominal=2*pi*fNominal/aimcData.p
     "额定速度";
   parameter SI.Torque TLoad=161.4 "额定负载扭矩";
-  parameter SI.Inertia JLoad=0.29 
+  parameter SI.Inertia JLoad=0.29
     "负载的转动惯量";
   parameter SI.Length r=0.05 "传动半径";
   Machines.BasicMachines.InductionMachines.IM_SquirrelCage aimc(
-    p=aimcData.p, 
-    fsNominal=aimcData.fsNominal, 
-    Rs=aimcData.Rs, 
-    TsRef=aimcData.TsRef, 
-    alpha20s(displayUnit="1/K") = aimcData.alpha20s, 
-    Lszero=aimcData.Lszero, 
-    Lssigma=aimcData.Lssigma, 
-    Jr=aimcData.Jr, 
-    Js=aimcData.Js, 
-    frictionParameters=aimcData.frictionParameters, 
-    phiMechanical(fixed=true), 
-    wMechanical(fixed=true), 
-    statorCoreParameters=aimcData.statorCoreParameters, 
-    strayLoadParameters=aimcData.strayLoadParameters, 
-    Lm=aimcData.Lm, 
-    Lrsigma=aimcData.Lrsigma, 
-    Rr=aimcData.Rr, 
-    TrRef=aimcData.TrRef, 
-    TsOperational=293.15, 
-    alpha20r=aimcData.alpha20r, 
+    p=aimcData.p,
+    fsNominal=aimcData.fsNominal,
+    Rs=aimcData.Rs,
+    TsRef=aimcData.TsRef,
+    alpha20s(displayUnit="1/K") = aimcData.alpha20s,
+    Lszero=aimcData.Lszero,
+    Lssigma=aimcData.Lssigma,
+    Jr=aimcData.Jr,
+    Js=aimcData.Js,
+    frictionParameters=aimcData.frictionParameters,
+    phiMechanical(fixed=true),
+    wMechanical(fixed=true),
+    statorCoreParameters=aimcData.statorCoreParameters,
+    strayLoadParameters=aimcData.strayLoadParameters,
+    Lm=aimcData.Lm,
+    Lrsigma=aimcData.Lrsigma,
+    Rr=aimcData.Rr,
+    TrRef=aimcData.TrRef,
+    TsOperational=293.15,
+    alpha20r=aimcData.alpha20r,
     TrOperational=293.15) 
     annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Machines.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensor annotation (
       Placement(transformation(extent={{-10,10},{10,-10}}, rotation=270)));
   Blocks.Sources.CombiTimeTable dutyCycle(
-    table=[0,0; 1,1; 4,1; 5,0; 10,0; 11, -1; 14,-1; 15,0; 20,0], 
+    table=[0,0; 1,1; 4,1; 5,0; 10,0; 11, -1; 14,-1; 15,0; 20,0],
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) 
     annotation (Placement(transformation(extent={{-100,50},{-80,70}})));
   Machines.Utilities.VfController vfController(
-    final m=m, 
-    VNominal=VNominal, 
+    final m=m,
+    VNominal=VNominal,
     fNominal=fNominal) 
     annotation (Placement(transformation(extent={{-40,50},{-20,70}})));
   Modelica.Electrical.Polyphase.Sources.SignalVoltage signalVoltage(
       final m=m) annotation (Placement(transformation(
-        origin={0,60}, 
-        extent={{10,10},{-10,-10}}, 
+        origin={0,60},
+        extent={{10,10},{-10,-10}},
         rotation=270)));
   Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
       Placement(transformation(extent={{-50,80},{-70,100}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-90,90}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-90,90},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y") 
     annotation (Placement(transformation(extent={{-20,-34},{0,-14}})));
@@ -89,13 +89,13 @@ equation
     annotation (Line(points={{0,50},{0,40},{0,10}}, color={0,0,255}));
   connect(terminalBox.plugSupply, currentQuasiRMSSensor.plug_n) 
     annotation (Line(
-      points={{-10,-28},{-10,-20},{0,-20},{0,-10}}, 
+      points={{-10,-28},{-10,-20},{0,-20},{0,-10}},
       color={0,0,255}));
   connect(terminalBox.plug_sn, aimc.plug_sn) annotation (Line(
-      points={{-16,-30},{-16,-30}}, 
+      points={{-16,-30},{-16,-30}},
       color={0,0,255}));
   connect(terminalBox.plug_sp, aimc.plug_sp) annotation (Line(
-      points={{-4,-30},{-4,-30}}, 
+      points={{-4,-30},{-4,-30}},
       color={0,0,255}));
   connect(vfController.u, gain.y) 
     annotation (Line(points={{-42,60},{-49,60}}, color={0,0,127}));

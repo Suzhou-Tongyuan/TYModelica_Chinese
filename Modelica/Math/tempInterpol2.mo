@@ -1,4 +1,4 @@
-﻿function tempInterpol2 
+﻿function tempInterpol2
   "矢量化线性插值的临时函数"
   extends Modelica.Icons.Function;
 
@@ -55,6 +55,6 @@ algorithm
 
   annotation (Documentation(info="<html>
 
-</html>"), 
+</html>"),
   obsolete = "过时的功能");
 end tempInterpol2;

@@ -1,14 +1,14 @@
 ﻿within Modelica.Electrical.Machines.Examples.DCMachines;
-model DCPM_CurrentControlled 
+model DCPM_CurrentControlled
   "测试示例：电流控制器的永磁直流机"
   extends Modelica.Icons.Example;
   parameter SI.Torque TLoad=ViNominal*dcpmData.IaNominal/dcpmData.wNominal "额定负载转矩";
   parameter SI.AngularVelocity wLoad=dcpmData.wNominal "额定负载转矩";
   parameter SI.Inertia JLoad=dcpmData.Jr "负载的转动惯量";
   parameter SI.Resistance Ra=Modelica.Electrical.Machines.Thermal.convertResistance(
-    dcpmData.Ra, 
-    dcpmData.TaRef, 
-    dcpmData.alpha20a, 
+    dcpmData.Ra,
+    dcpmData.TaRef,
+    dcpmData.alpha20a,
     dcpmData.TaNominal) "热电阻";
   parameter SI.Voltage ViNominal=dcpmData.VaNominal - Ra*dcpmData.IaNominal "额定感应电压";
   parameter SI.Time Ta=dcpmData.La/Ra "电枢时间常数";
@@ -17,70 +17,70 @@ model DCPM_CurrentControlled
   parameter SI.Time Ti=Ta "电流控制器积分时间常数";
   parameter SI.MagneticFlux kPhi=ViNominal/dcpmData.wNominal "电压常数";
   Machines.BasicMachines.DCMachines.DC_PermanentMagnet dcpm(
-    VaNominal=dcpmData.VaNominal, 
-    IaNominal=dcpmData.IaNominal, 
-    wNominal=dcpmData.wNominal, 
-    TaNominal=dcpmData.TaNominal, 
-    Ra=dcpmData.Ra, 
-    TaRef=dcpmData.TaRef, 
-    La=dcpmData.La, 
-    Jr=dcpmData.Jr, 
-    useSupport=false, 
-    Js=dcpmData.Js, 
-    frictionParameters=dcpmData.frictionParameters, 
-    coreParameters=dcpmData.coreParameters, 
-    strayLoadParameters=dcpmData.strayLoadParameters, 
-    brushParameters=dcpmData.brushParameters, 
-    TaOperational=293.15, 
-    alpha20a=dcpmData.alpha20a, 
-    phiMechanical(fixed=true), 
-    wMechanical(fixed=true), 
+    VaNominal=dcpmData.VaNominal,
+    IaNominal=dcpmData.IaNominal,
+    wNominal=dcpmData.wNominal,
+    TaNominal=dcpmData.TaNominal,
+    Ra=dcpmData.Ra,
+    TaRef=dcpmData.TaRef,
+    La=dcpmData.La,
+    Jr=dcpmData.Jr,
+    useSupport=false,
+    Js=dcpmData.Js,
+    frictionParameters=dcpmData.frictionParameters,
+    coreParameters=dcpmData.coreParameters,
+    strayLoadParameters=dcpmData.strayLoadParameters,
+    brushParameters=dcpmData.brushParameters,
+    TaOperational=293.15,
+    alpha20a=dcpmData.alpha20a,
+    phiMechanical(fixed=true),
+    wMechanical(fixed=true),
     ia(fixed=true)) 
     annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
   Blocks.Sources.Step step(
-    height=dcpmData.IaNominal, 
-    offset=0, 
+    height=dcpmData.IaNominal,
+    offset=0,
     startTime=0.1) annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage signalVoltage 
     annotation (Placement(transformation(extent={{20,20},{0,40}})));
   Modelica.Electrical.Analog.Basic.Ground ground 
     annotation (Placement(transformation(
-        origin={-18,0}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-18,0},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=JLoad) 
     annotation (Placement(transformation(extent={{40,-30},{60,-10}})));
   Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque loadTorque(
-    useSupport=false, 
-    tau_nominal=-TLoad, 
-    TorqueDirection=false, 
+    useSupport=false,
+    tau_nominal=-TLoad,
+    TorqueDirection=false,
     w_nominal=wLoad) 
     annotation (Placement(transformation(extent={{90,-30},{70,-10}})));
   parameter Utilities.ParameterRecords.DcPermanentMagnetData dcpmData "DC机器数据" 
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   Analog.Sensors.CurrentSensor currentSensor 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=90, 
+        extent={{10,-10},{-10,10}},
+        rotation=90,
         origin={20,10})));
   Mechanics.Rotational.Sensors.SpeedSensor speedSensor 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={30,-38})));
   Blocks.Continuous.FirstOrder firstOrder(
-    k=1, 
-    T=Ts, 
-    initType=Modelica.Blocks.Types.Init.InitialOutput, 
+    k=1,
+    T=Ts,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
     y_start=0) 
     annotation (Placement(transformation(extent={{-20,50},{0,70}})));
   Blocks.Continuous.LimPID PID(
-    withFeedForward=true, 
-    initType=Modelica.Blocks.Types.Init.InitialOutput, 
-    controllerType=Modelica.Blocks.Types.SimpleController.PI, 
-    k=k, 
-    Ti=Ti, 
-    yMax=dcpmData.VaNominal, 
+    withFeedForward=true,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=k,
+    Ti=Ti,
+    yMax=dcpmData.VaNominal,
     kFF=kPhi) 
     annotation (Placement(transformation(extent={{-50,50},{-30,70}})));
 equation

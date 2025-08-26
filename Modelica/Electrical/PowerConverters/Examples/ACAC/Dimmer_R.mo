@@ -4,18 +4,18 @@ model Dimmer_R "电阻负载的调光器"
   extends Modelica.Icons.Example;
   Modelica.Electrical.Analog.Basic.Resistor loadResistor(R=RLoad) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={50,10})));
 equation
-  connect(ground.p, loadResistor.n) annotation (Line(points={{-80,-20},{50,-20}, 
+  connect(ground.p, loadResistor.n) annotation (Line(points={{-80,-20},{50,-20},
           {50,-3.55271e-15}}, color={0,0,255}));
   connect(loadResistor.p, multiSensor.nc) 
     annotation (Line(points={{50,20},{50,40},{30,40}}, color={0,0,255}));
   annotation (experiment(
-      StopTime=8, 
-      Interval=0.0001, 
-      Tolerance=1e-06), 
+      StopTime=8,
+      Interval=0.0001,
+      Tolerance=1e-06),
     Documentation(info="<html>
 <p>
 该模型演示了具有电阻性负载的相位角控制调光器的行为。

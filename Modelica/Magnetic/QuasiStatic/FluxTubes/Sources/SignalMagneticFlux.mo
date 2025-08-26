@@ -4,15 +4,15 @@ model SignalMagneticFlux "信号控制磁通源"
   extends FluxTubes.Interfaces.Source;
   Modelica.Blocks.Interfaces.RealInput f(unit="Hz") annotation (Placement(
         transformation(
-        origin={60,120}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={60,120},
+        extent={{-20,-20},{20,20}},
         rotation=270)));
-  SI.ComplexMagneticPotentialDifference V_m 
+  SI.ComplexMagneticPotentialDifference V_m
   "两个端口之间的磁电位差";
   Modelica.ComplexBlocks.Interfaces.ComplexInput Phi annotation (Placement(
         transformation(
-        origin={-60,120}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={-60,120},
+        extent={{-20,-20},{20,20}},
         rotation=270)));
 
 equation
@@ -21,23 +21,23 @@ equation
   Complex(0) = port_p.Phi + port_n.Phi;
   Phi = port_p.Phi;
   annotation (
-    defaultComponentName="magFluxSource", 
+    defaultComponentName="magFluxSource",
     Icon(coordinateSystem(
-      preserveAspectRatio=false, 
+      preserveAspectRatio=false,
       extent={{-100,-100},{100,100}}), graphics={
       Polygon(
-        points={{80,0},{60,6},{60,-6},{80,0}}, 
-        lineColor={255,170,85}, 
-        fillColor={255,170,85}, 
-        fillPattern=FillPattern.Solid), 
-      Line(points={{-90,0},{-50,0}},  color={255,170,85}), 
-      Line(points={{50,0},{90,0}},  color={255,170,85}), 
+        points={{80,0},{60,6},{60,-6},{80,0}},
+        lineColor={255,170,85},
+        fillColor={255,170,85},
+        fillPattern=FillPattern.Solid),
+      Line(points={{-90,0},{-50,0}},  color={255,170,85}),
+      Line(points={{50,0},{90,0}},  color={255,170,85}),
       Ellipse(
-        extent={{-50,-50},{50,50}}, 
-        lineColor={255,170,85}, 
-        fillColor={255,255,255}, 
-        fillPattern=FillPattern.Solid), 
-      Line(points={{0,50},{0,-50}}, color={255,170,85})}), 
+        extent={{-50,-50},{50,50}},
+        lineColor={255,170,85},
+        fillColor={255,255,255},
+        fillPattern=FillPattern.Solid),
+      Line(points={{0,50},{0,-50}}, color={255,170,85})}),
     Documentation(info="<html>
 <p>
 该源提供一个准静态磁通，输入为:

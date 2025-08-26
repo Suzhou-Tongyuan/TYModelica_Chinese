@@ -1,34 +1,34 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function axesRotationsAngles 
+function axesRotationsAngles
   "返回绕3个轴依次旋转的3个角度，以构建给定的定向对象"
 
 
   extends Modelica.Icons.Function;
   input Orientation R "将坐标系1旋转到坐标系2的方向对象";
   input Integer sequence[3](
-    min={1,1,1}, 
-    max={3,3,3}) = {1,2,3} 
+    min={1,1,1},
+    max={3,3,3}) = {1,2,3}
     "沿轴序列[i]从坐标系1旋转到坐标系2的旋转顺序";
-  input SI.Angle guessAngle1=0 
+  input SI.Angle guessAngle1=0
     "选择angles[1]，使|angles[1] - guessAngle1|最小";
-  output SI.Angle angles[3] 
+  output SI.Angle angles[3]
     "沿'sequence'定义的轴的旋转角度，使R=Frames.axesRotation(sequence,angles); -pi < angles[i] <= pi";
 protected
-  Real e1_1[3](each final unit="1") 
+  Real e1_1[3](each final unit="1")
     "第一旋转轴，以坐标系1为基准";
-  Real e2_1a[3](each final unit="1") 
+  Real e2_1a[3](each final unit="1")
     "第二旋转轴，以坐标系1a为基准";
-  Real e3_1[3](each final unit="1") 
+  Real e3_1[3](each final unit="1")
     "第三旋转轴，以坐标系1为基准";
-  Real e3_2[3](each final unit="1") 
+  Real e3_2[3](each final unit="1")
     "第三旋转轴，以坐标系2为基准";
-  Real A 
+  Real A
     "方程A*cos(angles[1])+B*sin(angles[1]) = 0中的系数A";
-  Real B 
+  Real B
     "方程A*cos(angles[1])+B*sin(angles[1]) = 0中的系数B";
   SI.Angle angle_1a "angles[1]的解1";
   SI.Angle angle_1b "angles[1]的解2";
-  TransformationMatrices.Orientation T_1a 
+  TransformationMatrices.Orientation T_1a
     "将坐标系1旋转到坐标系1a的方向对象";
 algorithm
 /* 通过以下步骤构造旋转对象R：
@@ -48,14 +48,14 @@ e2_1 = T_11ae2_1a = ( e1_1transpose(e1_1) + (identity(3) - e1_1transpose(e1_1))c
 最终得到 angles[1] 的方程式为： e2_1e3_1 = 0 = (e2_1acos(angles[1]) + cross(e1_1, e2_1a)sin(angles[1]))e3_1 = (e2_1ae3_1)cos(angles[1]) + cross(e1_1, e2_1a)e3_1sin(angles[1]) = Acos(angles[1]) + Bsin(angles[1]) 其中 A = e2_1ae3_1，B = cross(e1_1, e2_1a)e3_1 此方程在 -pi < angles[1] <= pi 范围内有两个解： sin(angles[1]) = kA/sqrt(AA + BB) cos(angles[1]) = -kB/sqrt(AA + BB) k = +/-1 tan(angles[1]) = kA/(-kB) 即： angles[1] = atan2(kA, -k*B) 如果 A 和 B 同时为零，则存在奇异配置， 导致 angles[1] 有无限多个解（每个值均可能）。
 2.使用函数Frames.planarRotationAngle 确定 angles[2]。 此函数要求在坐标系1a和坐标系1b中提供 e_3： e3_1a = Frames.resolve2(planarRotation(e1_1,angles[1]), e3_1); e3_1b = e3_2
 3.使用函数Frames.planarRotationAngle 确定 angles[3]。 此函数要求在坐标系1b和坐标系2中提供 e_2： e2_1b = e2_1a e2_2 = Frames.resolve2( R, Frames.resolve1(planarRotation(e1_1,angles[1]), e2_1a)); */
-  assert(sequence[1] <> sequence[2] and sequence[2] <> sequence[3], 
+  assert(sequence[1] <> sequence[2] and sequence[2] <> sequence[3],
     "input argument 'sequence[1:3]' is not valid");
-  e1_1 := if sequence[1] == 1 then {1,0,0} else if sequence[1] == 2 then {0,1, 
+  e1_1 := if sequence[1] == 1 then {1,0,0} else if sequence[1] == 2 then {0,1,
     0} else {0,0,1};
-  e2_1a := if sequence[2] == 1 then {1,0,0} else if sequence[2] == 2 then {0, 
+  e2_1a := if sequence[2] == 1 then {1,0,0} else if sequence[2] == 2 then {0,
     1,0} else {0,0,1};
   e3_1 := R.T[sequence[3], :];
-  e3_2 := if sequence[3] == 1 then {1,0,0} else if sequence[3] == 2 then {0,1, 
+  e3_2 := if sequence[3] == 1 then {1,0,0} else if sequence[3] == 2 then {0,1,
     0} else {0,0,1};
 
   A := e2_1a*e3_1;
@@ -71,8 +71,8 @@ e2_1 = T_11ae2_1a = ( e1_1transpose(e1_1) + (identity(3) - e1_1transpose(e1_1))c
   T_1a := TransformationMatrices.planarRotation(e1_1, angles[1]);
   angles[2] := planarRotationAngle(e2_1a, TransformationMatrices.resolve2(
     T_1a, e3_1), e3_2);
-  angles[3] := planarRotationAngle(e3_2, e2_1a, 
-    TransformationMatrices.resolve2(R.T, TransformationMatrices.resolve1(T_1a, 
+  angles[3] := planarRotationAngle(e3_2, e2_1a,
+    TransformationMatrices.resolve2(R.T, TransformationMatrices.resolve1(T_1a,
      e2_1a)));
 
   annotation (Documentation(info="<html>

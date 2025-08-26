@@ -1,58 +1,58 @@
 ﻿within Modelica.Electrical.PowerConverters.DCAC;
 model SinglePhase2Level "单相直流到交流转换器"
   extends Modelica.Blocks.Icons.Block;
-  parameter SI.Resistance RonTransistor=1e-05 
+  parameter SI.Resistance RonTransistor=1e-05
     "晶体管导通电阻";
-  parameter SI.Conductance GoffTransistor=1e-05 
+  parameter SI.Conductance GoffTransistor=1e-05
     "晶体管关断导纳";
-  parameter SI.Voltage VkneeTransistor=0 
+  parameter SI.Voltage VkneeTransistor=0
     "晶体管阈值电压";
-  parameter SI.Resistance RonDiode=1e-05 
+  parameter SI.Resistance RonDiode=1e-05
     "二极管导通电阻";
-  parameter SI.Conductance GoffDiode=1e-05 
+  parameter SI.Conductance GoffDiode=1e-05
     "二极管关断导纳";
   parameter SI.Voltage VkneeDiode=0 "二极管阈值电压";
   // parameter Boolean useEnable "Enables enable signal connector";
   extends PowerConverters.Interfaces.DCAC.DCtwoPin;
   extends PowerConverters.Interfaces.DCAC.ACpin;
-  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T= 
+  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
        293.15);
   extends Interfaces.Enable.Enable2;
   Modelica.Electrical.Analog.Ideal.IdealGTOThyristor transistor_p(
-    final Ron=RonTransistor, 
-    final Goff=GoffTransistor, 
-    final Vknee=VkneeTransistor, 
+    final Ron=RonTransistor,
+    final Goff=GoffTransistor,
+    final Vknee=VkneeTransistor,
     final useHeatPort=useHeatPort) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=270, 
+        extent={{-10,10},{10,-10}},
+        rotation=270,
         origin={30,20})));
   Modelica.Electrical.Analog.Ideal.IdealDiode diode_p(
-    final Ron=RonDiode, 
-    final Goff=GoffDiode, 
-    final Vknee=VkneeDiode, 
+    final Ron=RonDiode,
+    final Goff=GoffDiode,
+    final Vknee=VkneeDiode,
     final useHeatPort=useHeatPort) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=90, 
+        extent={{-10,-10},{10,10}},
+        rotation=90,
         origin={70,20})));
   Modelica.Electrical.Analog.Ideal.IdealGTOThyristor transistor_n(
-    final Ron=RonTransistor, 
-    final Goff=GoffTransistor, 
-    final Vknee=VkneeTransistor, 
+    final Ron=RonTransistor,
+    final Goff=GoffTransistor,
+    final Vknee=VkneeTransistor,
     final useHeatPort=useHeatPort) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=270, 
+        extent={{-10,10},{10,-10}},
+        rotation=270,
         origin={30,-20})));
   Modelica.Electrical.Analog.Ideal.IdealDiode diode_n(
-    final Ron=RonDiode, 
-    final Goff=GoffDiode, 
-    final Vknee=VkneeDiode, 
+    final Ron=RonDiode,
+    final Goff=GoffDiode,
+    final Vknee=VkneeDiode,
     final useHeatPort=useHeatPort) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=90, 
+        extent={{-10,-10},{10,10}},
+        rotation=90,
         origin={70,-20})));
 equation
   if not useHeatPort then
-    LossPower = transistor_p.LossPower + diode_n.LossPower + transistor_n.LossPower 
+    LossPower = transistor_p.LossPower + diode_n.LossPower + transistor_n.LossPower
        + diode_n.LossPower;
   end if;
   connect(transistor_p.p, dc_p) annotation (Line(
@@ -83,52 +83,52 @@ equation
       points={{-60,-69},{-60,10},{18,10}}, color={255,0,255}));
   connect(andCondition_n.y, transistor_n.fire) annotation (Line(
       points={{60,-69},{60,-50},{10,-50},{10,-30},{18,-30}}, color={255,0,255}));
-  annotation (defaultComponentName="inverter", 
+  annotation (defaultComponentName="inverter",
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={
         Line(
-          points={{-100,-100},{100,100}}, 
-          color={0,0,127}), 
+          points={{-100,-100},{100,100}},
+          color={0,0,127}),
         Rectangle(
-          extent={{-40,40},{40,-40}}, 
-          lineColor={255,255,255}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-40,40},{40,-40}},
+          lineColor={255,255,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Line(
-          points={{-20,20},{-20,-20}}, 
-          color={0,0,255}), 
+          points={{-20,20},{-20,-20}},
+          color={0,0,255}),
         Line(
-          points={{-28,20},{-28,-20}}, 
-          color={0,0,255}), 
+          points={{-28,20},{-28,-20}},
+          color={0,0,255}),
         Line(
-          points={{-40,0},{-28,0}}, 
-          color={0,0,255}), 
+          points={{-40,0},{-28,0}},
+          color={0,0,255}),
         Line(
-          points={{-20,4},{0,24},{0,40}}, 
-          color={0,0,255}), 
+          points={{-20,4},{0,24},{0,40}},
+          color={0,0,255}),
         Line(
-          points={{-20,-4},{0,-24},{0,-40}}, 
-          color={0,0,255}), 
+          points={{-20,-4},{0,-24},{0,-40}},
+          color={0,0,255}),
         Line(
-          points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, 
-          color={0,0,255}), 
+          points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}},
+          color={0,0,255}),
         Line(
-          points={{0,-24},{10,-24},{10,24},{0,24}}, 
-          color={0,0,255}), 
+          points={{0,-24},{10,-24},{10,24},{0,24}},
+          color={0,0,255}),
         Line(
-          points={{0,8},{20,8}}, 
-          color={0,0,255}), 
+          points={{0,8},{20,8}},
+          color={0,0,255}),
         Line(
-          points={{10,8},{0,-8},{20,-8},{10,8}}, 
-          color={0,0,255}), 
+          points={{10,8},{0,-8},{20,-8},{10,8}},
+          color={0,0,255}),
         Text(
-          extent={{-100,70},{0,50}}, 
-          textColor={0,0,255}, 
-          textString="直流"), 
+          extent={{-100,70},{0,50}},
+          textColor={0,0,255},
+          textString="直流"),
         Text(
-          extent={{0,-50},{100,-70}}, 
-          textColor={0,0,255}, 
-          textString="交流")}), 
+          extent={{0,-50},{100,-70}},
+          textColor={0,0,255},
+          textString="交流")}),
     Documentation(info="<html>
 <p>
 这是一个单相两级逆变器。布尔信号 <code>fire_p</code> 和 <code>fire_n</code> 不能同时为 <code>true</code>，以避免直流母线短路。该逆变器由两个晶体管和两个反并联自由轮二极管组成。

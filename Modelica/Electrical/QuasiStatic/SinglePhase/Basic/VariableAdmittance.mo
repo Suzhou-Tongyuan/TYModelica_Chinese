@@ -9,11 +9,11 @@ model VariableAdmittance "单相可变导纳"
   extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(T=T_ref);
   Modelica.ComplexBlocks.Interfaces.ComplexInput Y_ref "可变复导纳" 
     annotation (Placement(transformation(
-        origin={0,120}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={0,120},
+        extent={{-20,-20},{20,20}},
         rotation=270), iconTransformation(
-        extent={{-20,-20},{20,20}}, 
-        rotation=270, 
+        extent={{-20,-20},{20,20}},
+        rotation=270,
         origin={0,120})));
   parameter Boolean frequencyDependent = false "如果为真，则考虑频率依赖性" 
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
@@ -24,32 +24,32 @@ model VariableAdmittance "单相可变导纳"
   SI.Conductance G_ref=real(Y_ref) "导纳的电阻性成分";
   SI.Susceptance B_ref=imag(Y_ref) "导纳的反应性成分";
 equation
-  assert((1 + alpha_ref*(T_heatPort - T_ref)) >= Modelica.Constants.eps, 
+  assert((1 + alpha_ref*(T_heatPort - T_ref)) >= Modelica.Constants.eps,
     "模型温度超出范围!");
   G_actual = G_ref/(1 + alpha_ref*(T_heatPort - T_ref));
   B_actual = B_ref * (if not frequencyDependent then 1 else 
     (if B_ref>=0 then omega/(2*Modelica.Constants.pi*f_ref) else 2*Modelica.Constants.pi*f_ref/omega));
   i = Complex(G_actual, B_actual) * v;
   LossPower = real(v*conj(i));
-  annotation (defaultComponentName="admittance", 
+  annotation (defaultComponentName="admittance",
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={
-        Line(points={{60,0},{90,0}}, color={85,170,255}), 
-        Line(points={{-90,0},{-60,0}}, color={85,170,255}), 
+        Line(points={{60,0},{90,0}}, color={85,170,255}),
+        Line(points={{-90,0},{-60,0}}, color={85,170,255}),
         Rectangle(
-          extent={{-70,30},{70,-30}}, 
-          lineColor={85,170,255}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-70,30},{70,-30}},
+          lineColor={85,170,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Polygon(
-          points={{-70,-30},{70,30},{70,-30},{-70,-30}}, 
-          lineColor={85,170,255}, 
-          fillColor={85,170,255}, 
-          fillPattern=FillPattern.Solid), 
+          points={{-70,-30},{70,30},{70,-30},{-70,-30}},
+          lineColor={85,170,255},
+          fillColor={85,170,255},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,90},{150,50}}, 
-          textString="%name", 
-          textColor={0,0,255})}), 
+          extent={{-150,90},{150,50}},
+          textString="%name",
+          textColor={0,0,255})}),
     Documentation(info="<html>
 
 <p>导纳模型表示导体和电容器或电感器的<strong>并联</strong>连接。<br>

@@ -10,10 +10,10 @@ protected
 public
   Modelica.Blocks.Interfaces.RealInput Theta(unit="deg") "节流阀角度（deg）" 
     annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.RealInput Pm(unit="bar") 
+  Modelica.Blocks.Interfaces.RealInput Pm(unit="bar")
     "进气歧管压力（bar）" 
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput m_ai_der(unit="g/s") 
+  Modelica.Blocks.Interfaces.RealOutput m_ai_der(unit="g/s")
     "进入歧管的空气质量流量（g/s）" 
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 

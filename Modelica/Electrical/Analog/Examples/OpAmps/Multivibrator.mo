@@ -9,32 +9,32 @@ model Multivibrator "Schmitt触发器多谐振荡器"
   parameter SI.Resistance R=1000 "可变电阻";
   parameter SI.Capacitance C=1/f/(2*R*log(1 + 2*R1/R2)) "促使达到期望频率f的计算电容值";
   Modelica.Electrical.Analog.Ideal.IdealizedOpAmpLimited opAmp(
-    Vps=Vps, 
-    Vns=Vns, 
-    homotopyType = Modelica.Blocks.Types.LimiterHomotopy.LowerLimit, 
+    Vps=Vps,
+    Vns=Vns,
+    homotopyType = Modelica.Blocks.Types.LimiterHomotopy.LowerLimit,
     strict = true) annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   Modelica.Electrical.Analog.Basic.Ground ground 
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor vOut annotation (Placement(
         transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=270, 
+        extent={{-10,10},{10,-10}},
+        rotation=270,
         origin={50,-20})));
   Modelica.Electrical.Analog.Basic.Resistor r1(R=R1, i(start=0)) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-10,-40})));
   Modelica.Electrical.Analog.Basic.Resistor r2(R=R2) annotation (Placement(
         transformation(
-        extent={{10,10},{-10,-10}}, 
+        extent={{10,10},{-10,-10}},
         origin={10,-20})));
   Modelica.Electrical.Analog.Basic.Resistor r(R=R) 
     annotation (Placement(transformation(extent={{20,20},{0,40}})));
   Modelica.Electrical.Analog.Basic.Capacitor c(C=C, v(start=1, fixed=true)) 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=90, 
+        extent={{10,-10},{-10,10}},
+        rotation=90,
         origin={-30,-40})));
 equation
   connect(ground.p, r1.n) annotation (Line(
@@ -61,10 +61,10 @@ equation
 <p>这是一款根据Schmitt触发器原理设计的多谐振荡器，在设计时参考的参考文献如下：</p>
 <p>U. Tietze and C. Schenk, Halbleiter-Schaltungstechnik (German), 11th edition, Springer 1999, Chapter 6.5.3</p>
 <p>在初始化系统中存在两种解：一种是运放输出处于较低饱和极限状态的解，另一种是两个电压输入非常接近的解。为了使求解器收敛到前者，即所需的解，设置了<code>homotopyType</code>的参数。</p>
-</html>"), 
+</html>"),
     experiment(
-      StartTime=0, 
-      StopTime=1, 
-      Tolerance=1e-006, 
+      StartTime=0,
+      StopTime=1,
+      Tolerance=1e-006,
       Interval=0.001));
 end Multivibrator;

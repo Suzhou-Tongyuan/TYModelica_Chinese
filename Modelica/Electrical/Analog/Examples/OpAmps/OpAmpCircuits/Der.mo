@@ -14,7 +14,7 @@ model Der "微分运算放大器电路"
 equation
   connect(n1, n2) 
     annotation (Line(points={{-100,-100},{100,-100}}, color={0,0,255}));
-  connect(opAmp.out, p2) annotation (Line(points={{10,0},{80,0},{80,100},{100,100}}, 
+  connect(opAmp.out, p2) annotation (Line(points={{10,0},{80,0},{80,100},{100,100}},
         color={0,0,255}));
   connect(c.n, opAmp.in_n) 
     annotation (Line(points={{-30,30},{-10,30},{-10,6}}, color={0,0,255}));
@@ -30,7 +30,7 @@ equation
 <p>该模型为反相微分器，模型基于<a href=\"modelica://Modelica.Electrical.Analog.Ideal.IdealizedOpAmpLimited\">IdealizedOpAmpLimited</a>搭建。</p>
 <p><code>vOut=-k*der(vIn)</code></p>
 </html>"), Icon(graphics={Text(
-          extent={{-60,40},{20,-40}}, 
-          textColor={0,0,255}, 
+          extent={{-60,40},{20,-40}},
+          textColor={0,0,255},
           textString="der")}));
 end Der;

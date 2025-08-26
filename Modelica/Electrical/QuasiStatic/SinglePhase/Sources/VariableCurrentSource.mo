@@ -3,23 +3,23 @@ model VariableCurrentSource "可变交流电流"
   extends Interfaces.Source;
   Modelica.Blocks.Interfaces.RealInput f(unit="Hz") annotation (Placement(
         transformation(
-        origin={60,120}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={60,120},
+        extent={{-20,-20},{20,20}},
         rotation=270)));
   Modelica.ComplexBlocks.Interfaces.ComplexInput I annotation (Placement(
         transformation(
-        origin={-60,120}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={-60,120},
+        extent={{-20,-20},{20,20}},
         rotation=270)));
 equation
   omega = 2*Modelica.Constants.pi*f;
   i = I;
-  annotation (defaultComponentName="currentSource", 
-    Icon(graphics={Line(points={{0,50},{0,-50}}, color={85,170,255}), 
+  annotation (defaultComponentName="currentSource",
+    Icon(graphics={Line(points={{0,50},{0,-50}}, color={85,170,255}),
         Polygon(
-          points={{90,0},{60,10},{60,-10},{90,0}}, 
-          lineColor={85,170,255}, 
-          fillColor={85,170,255}, 
+          points={{90,0},{60,10},{60,-10},{90,0}},
+          lineColor={85,170,255},
+          fillColor={85,170,255},
           fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 
 <p>

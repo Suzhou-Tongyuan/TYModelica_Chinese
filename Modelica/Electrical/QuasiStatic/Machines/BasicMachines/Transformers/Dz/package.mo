@@ -3,7 +3,7 @@ package Dz "变压器：一次侧D / 二次侧zig-zag"
   extends Modelica.Icons.VariantsPackage;
   annotation (Documentation(info="<html>
 该包含有所有可能矢量组中连接的主D连接 / 次Zig-Zag连接的变压器。
-</html>", 
+</html>",
     revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

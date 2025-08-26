@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.Translational.Examples.Utilities;
-function GenerateStribeckFrictionTable 
+function GenerateStribeckFrictionTable
   "生成 Stribeck 摩擦表，例如 SupportFriction 的摩擦数据"
   extends Modelica.Icons.Function;
-  input Real F_prop(final unit="N.s/m", final min=0) 
+  input Real F_prop(final unit="N.s/m", final min=0)
     "速度相关的摩擦系数";
-  input SI.Force F_Coulomb 
+  input SI.Force F_Coulomb
     "常数摩擦：库仑摩擦力";
   input SI.Force F_Stribeck "Stribeck 效应";
   input Real fexp(final unit="s/m", final min=0) "指数衰减";
@@ -14,7 +14,7 @@ function GenerateStribeckFrictionTable
 algorithm
   for i in 1:nTable loop
     table[i, 1] := v_max*(i - 1)/(nTable - 1);
-    table[i, 2] := F_Coulomb + F_prop*table[i, 1] + F_Stribeck*Modelica.Math.exp(-fexp* 
+    table[i, 2] := F_Coulomb + F_prop*table[i, 1] + F_Stribeck*Modelica.Math.exp(-fexp*
       table[i, 1]);
   end for;
   annotation (Documentation(info="<html>

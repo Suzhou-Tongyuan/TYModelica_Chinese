@@ -2,10 +2,10 @@
 block IntegerChange "显示整数信号变化"
   extends Clocked.ClockSignals.Interfaces.ClockedBlockIcon;
 
-  Modelica.Blocks.Interfaces.IntegerInput u(start = 0) 
+  Modelica.Blocks.Interfaces.IntegerInput u(start = 0)
     "整数输入信号连接器" 
     annotation(Placement(transformation(extent = {{-140, -20}, {-100, 20}})));
-  Modelica.Blocks.Interfaces.BooleanOutput y 
+  Modelica.Blocks.Interfaces.BooleanOutput y
     "布尔输出信号连接器" 
     annotation(Placement(transformation(extent = {{100, -10}, {120, 10}})));
 
@@ -19,9 +19,9 @@ equation
   annotation(
     Icon(graphics = {
     Text(
-    extent = {{-90, 36}, {90, -36}}, 
-    textColor = {160, 160, 164}, 
-    textString = "change()")}), 
+    extent = {{-90, 36}, {90, -36}},
+    textColor = {160, 160, 164},
+    textString = "change()")}),
     Documentation(info="<html><p>
 这个模块是<a href=\"modelica://Modelica.Blocks.Math.IntegerChange\" target=\"\">Modelica.Blocks.Math.IntegerChange</a>&nbsp;的同步版本。 它使用 <code>previous</code> 而不是 <code>change</code> 的隐含 <code>pre</code>， 用于设置布尔输出 <code>y</code>， 在整数输入 <code>u</code> 发生变化时为 <code>true</code>。 因此，它的逻辑是：
 </p>

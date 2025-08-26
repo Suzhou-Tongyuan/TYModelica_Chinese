@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.Interfaces.InductionMachines;
-connector ThermalPortIMC 
+connector ThermalPortIMC
   "带鼠笼的异步电机热端口"
   extends 
     Machines.Interfaces.InductionMachines.PartialThermalPortInductionMachines;

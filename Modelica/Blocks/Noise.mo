@@ -2,60 +2,60 @@
 package Noise "噪声模块库"
   extends Modelica.Icons.Package;
 
-  model GlobalSeed 
+  model GlobalSeed
     "定义Noise子库中各模块的全局设置，尤其是定义全局种子"
-    parameter Boolean enableNoise = true 
+    parameter Boolean enableNoise = true
       "=true，如果噪声模块产生噪声作为输出；=false，如果它们产生恒定输出" 
       annotation(choices(checkBox = true));
-    parameter Boolean useAutomaticSeed = false 
+    parameter Boolean useAutomaticSeed = false
       "=true，如果根据系统时间和进程id选择种子；=false，如果使用固定种子" 
       annotation(choices(checkBox = true));
-    parameter Integer fixedSeed = 67867967 
+    parameter Integer fixedSeed = 67867967
       "固定了随机数生成器的全局种子(如果useAutomaticSeed=false)" 
       annotation(Dialog(enable = not useAutomaticSeed));
     final parameter Integer seed(fixed = false) "实际上使用了全局种子";
-    final parameter Integer id_impure(fixed = false) 
+    final parameter Integer id_impure(fixed = false)
       "非纯随机数生成模块Modelica.Math.Random.Utilities.impureXXX的id" annotation(HideResult = true);
   initial equation
     seed = if useAutomaticSeed then Modelica.Math.Random.Utilities.automaticGlobalSeed() else fixedSeed;
     id_impure = Modelica.Math.Random.Utilities.initializeImpureRandom(seed);
 
     annotation(
-      defaultComponentName = "全局种子", 
-      defaultComponentPrefixes = "内部", 
+      defaultComponentName = "全局种子",
+      defaultComponentPrefixes = "内部",
       missingInnerMessage = "
 您的模型正在使用外部“全局种子”组件，
 但内部“全局种子”组件没有定义，因此
 该工具引入了一个默认的内部“全局种子”组件。
 要更改默认设置，
 请拖动Noise.GlobalSeed放入模型中并指定种子。
-", Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), 
+", Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}),
       graphics = {Ellipse(
-      extent = {{-100, 100}, {100, -100}}, 
-      lineColor = {0, 0, 127}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid), 
+      extent = {{-100, 100}, {100, -100}},
+      lineColor = {0, 0, 127},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid),
       Text(
-      extent = {{-150, 150}, {150, 110}}, 
-      textString = "%name", 
-      textColor = {0, 0, 255}), 
-      Line(visible = enableNoise, 
-      points = {{-73, -15}, {-59, -15}, {-59, 1}, {-51, 1}, {-51, -47}, {-43, -47}, {-43, 
-      -25}, {-35, -25}, {-35, 59}, {-27, 59}, {-27, 27}, {-27, 27}, {-27, -33}, {-17, -33}, {-17, -15}, {-7, -15}, {-7, -43}, {3, 
-      -43}, {3, 39}, {9, 39}, {9, 53}, {15, 53}, {15, -3}, {25, -3}, {25, 9}, {31, 9}, {31, 
-      -21}, {41, -21}, {41, 51}, {51, 51}, {51, 17}, {59, 17}, {59, -49}, {69, -49}}, 
-      color = {215, 215, 215}), 
-      Text(visible = enableNoise and not useAutomaticSeed, 
-      extent = {{-90, -4}, {88, -30}}, 
-      textColor = {255, 0, 0}, 
-      textString = "%fixedSeed"), 
-      Line(visible = not enableNoise, 
-      points = {{-80, -4}, {84, -4}}, 
-      color = {215, 215, 215}), 
-      Text(visible = enableNoise and not useAutomaticSeed, 
-      extent = {{-84, 34}, {94, 8}}, 
-      textColor = {255, 0, 0}, 
-      textString = "fixedSeed =")}), 
+      extent = {{-150, 150}, {150, 110}},
+      textString = "%name",
+      textColor = {0, 0, 255}),
+      Line(visible = enableNoise,
+      points = {{-73, -15}, {-59, -15}, {-59, 1}, {-51, 1}, {-51, -47}, {-43, -47}, {-43,
+      -25}, {-35, -25}, {-35, 59}, {-27, 59}, {-27, 27}, {-27, 27}, {-27, -33}, {-17, -33}, {-17, -15}, {-7, -15}, {-7, -43}, {3,
+      -43}, {3, 39}, {9, 39}, {9, 53}, {15, 53}, {15, -3}, {25, -3}, {25, 9}, {31, 9}, {31,
+      -21}, {41, -21}, {41, 51}, {51, 51}, {51, 17}, {59, 17}, {59, -49}, {69, -49}},
+      color = {215, 215, 215}),
+      Text(visible = enableNoise and not useAutomaticSeed,
+      extent = {{-90, -4}, {88, -30}},
+      textColor = {255, 0, 0},
+      textString = "%fixedSeed"),
+      Line(visible = not enableNoise,
+      points = {{-80, -4}, {84, -4}},
+      color = {215, 215, 215}),
+      Text(visible = enableNoise and not useAutomaticSeed,
+      extent = {{-84, 34}, {94, 8}},
+      textColor = {255, 0, 0},
+      textString = "fixedSeed =")}),
       Documentation(revisions = "<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th>Date</th> <th align=\"left\">Description</th></tr>
@@ -112,22 +112,22 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
       r = distribution(r_raw, y_min, y_max);
     end when;
 
-    annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, 
+    annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100},
       {100, 100}}), graphics = {
-      Line(visible = enableNoise, 
-      points = {{-76, 60}, {78, 60}}, color = {95, 95, 95}, 
-      pattern = LinePattern.Dot), 
-      Line(visible = enableNoise, 
-      points = {{-76, -60}, {78, -60}}, color = {95, 95, 95}, 
-      pattern = LinePattern.Dot), 
-      Text(visible = enableNoise, 
-      extent = {{-70, 94}, {95, 64}}, 
-      textColor = {175, 175, 175}, 
-      textString = "%y_max"), 
-      Text(visible = enableNoise, 
-      extent = {{-70, -64}, {95, -94}}, 
-      textColor = {175, 175, 175}, 
-      textString = "%y_min")}), 
+      Line(visible = enableNoise,
+      points = {{-76, 60}, {78, 60}}, color = {95, 95, 95},
+      pattern = LinePattern.Dot),
+      Line(visible = enableNoise,
+      points = {{-76, -60}, {78, -60}}, color = {95, 95, 95},
+      pattern = LinePattern.Dot),
+      Text(visible = enableNoise,
+      extent = {{-70, 94}, {95, 64}},
+      textColor = {175, 175, 175},
+      textString = "%y_max"),
+      Text(visible = enableNoise,
+      extent = {{-70, -64}, {95, -94}},
+      textColor = {175, 175, 175},
+      textString = "%y_min")}),
       Documentation(info = "<html>
 <p>
 <a href=\"modelica://Modelica.Blocks.Noise\">Blocks.Noise</a>
@@ -167,7 +167,7 @@ UniformNoise模块根据均匀分布在输出端生成可重现的随机噪音�
 
     // 主对话菜单
     parameter Real mu = 0 "正态分布的期望值(平均值)" annotation(Dialog(enable = enableNoise));
-    parameter Real sigma(start = 1) 
+    parameter Real sigma(start = 1)
       "正态分布标准差" annotation(Dialog(enable = enableNoise));
 
   initial equation
@@ -179,16 +179,16 @@ UniformNoise模块根据均匀分布在输出端生成可重现的随机噪音�
       r = distribution(r_raw, mu, sigma);
     end when;
 
-    annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, 
+    annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100},
       {100, 100}}), graphics = {
-      Text(visible = enableNoise, 
-      extent = {{-66, 92}, {94, 66}}, 
-      textColor = {175, 175, 175}, 
-      textString = "mu=%mu"), 
-      Text(visible = enableNoise, 
-      extent = {{-70, -68}, {94, -96}}, 
-      textColor = {175, 175, 175}, 
-      textString = "sigma=%sigma")}), 
+      Text(visible = enableNoise,
+      extent = {{-66, 92}, {94, 66}},
+      textColor = {175, 175, 175},
+      textString = "mu=%mu"),
+      Text(visible = enableNoise,
+      extent = {{-70, -68}, {94, -96}},
+      textColor = {175, 175, 175},
+      textString = "sigma=%sigma")}),
       Documentation(info = "<html>
 <p>
 <a href=\"modelica://Modelica.Blocks.Noise\">Blocks.Noise</a>
@@ -222,18 +222,18 @@ NormalNoise模块根据正态分布在输出端生成可重现的随机噪音。
 </html>"));
   end NormalNoise;
 
-  block TruncatedNormalNoise 
+  block TruncatedNormalNoise
     "截断正态分布的噪声发生模块"
-    import distribution = 
+    import distribution =
       Modelica.Math.Distributions.TruncatedNormal.quantile;
     extends Modelica.Blocks.Interfaces.PartialNoise;
 
     // 主对话菜单
     parameter Real y_min(start = 0) "y的下限" annotation(Dialog(enable = enableNoise));
     parameter Real y_max(start = 1) "y的上限" annotation(Dialog(enable = enableNoise));
-    parameter Real mu = (y_max + y_min) / 2 
+    parameter Real mu = (y_max + y_min) / 2
       "正态分布的期望值(平均值)" annotation(Dialog(enable = enableNoise, tab = "高级", group = "噪声产生"));
-    parameter Real sigma = (y_max - y_min) / 6 
+    parameter Real sigma = (y_max - y_min) / 6
       "正态分布的标准差" annotation(Dialog(enable = enableNoise, tab = "高级", group = "噪声产生"));
 
   initial equation
@@ -245,28 +245,28 @@ NormalNoise模块根据正态分布在输出端生成可重现的随机噪音。
       r = distribution(r_raw, y_min, y_max, mu, sigma);
     end when;
 
-    annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, 
+    annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100},
       {100, 100}}), graphics = {
-      Line(visible = enableNoise, 
-      points = {{-76, 60}, {78, 60}}, color = {95, 95, 95}, 
-      pattern = LinePattern.Dot), 
-      Line(visible = enableNoise, 
-      points = {{-76, -60}, {78, -60}}, color = {95, 95, 95}, 
-      pattern = LinePattern.Dot), 
-      Text(visible = enableNoise, 
-      extent = {{-70, 94}, {95, 64}}, 
-      textColor = {175, 175, 175}, 
-      textString = "%y_max"), 
-      Text(visible = enableNoise, 
-      extent = {{-70, -64}, {95, -94}}, 
-      textColor = {175, 175, 175}, 
-      textString = "%y_min"), 
+      Line(visible = enableNoise,
+      points = {{-76, 60}, {78, 60}}, color = {95, 95, 95},
+      pattern = LinePattern.Dot),
+      Line(visible = enableNoise,
+      points = {{-76, -60}, {78, -60}}, color = {95, 95, 95},
+      pattern = LinePattern.Dot),
+      Text(visible = enableNoise,
+      extent = {{-70, 94}, {95, 64}},
+      textColor = {175, 175, 175},
+      textString = "%y_max"),
+      Text(visible = enableNoise,
+      extent = {{-70, -64}, {95, -94}},
+      textColor = {175, 175, 175},
+      textString = "%y_min"),
       Text(
-      extent = {{-71, 12}, {71, -12}}, 
-      textColor = {175, 175, 175}, 
-      origin = {-88, -11}, 
-      rotation = 90, 
-      textString = "normal")}), 
+      extent = {{-71, 12}, {71, -12}},
+      textColor = {175, 175, 175},
+      origin = {-88, -11},
+      rotation = 90,
+      textString = "normal")}),
       Documentation(info = "<html>
 <p>
 <a href=\"modelica://Modelica.Blocks.Noise\">Blocks.Noise</a>
@@ -310,7 +310,7 @@ TruncatedNormalNoise模块根据截断正态分布在输出端生成可重现的
 </html>"));
   end TruncatedNormalNoise;
 
-  block BandLimitedWhiteNoise 
+  block BandLimitedWhiteNoise
     "用于产生正态分布带限白噪声的噪声发生模块"
     import distribution = Modelica.Math.Distributions.Normal.quantile;
     extends Modelica.Blocks.Interfaces.PartialNoise;
@@ -332,15 +332,15 @@ TruncatedNormalNoise模块根据截断正态分布在输出端生成可重现的
     end when;
     annotation(Dialog(enable = enableNoise), Icon(
       graphics = {Text(
-      extent = {{-70, 96}, {92, 60}}, 
-      textColor = {175, 175, 175}, 
-      textString = "%noisePower"), 
+      extent = {{-70, 96}, {92, 60}},
+      textColor = {175, 175, 175},
+      textString = "%noisePower"),
       Text(
-      extent = {{-96, 11}, {96, -11}}, 
-      textColor = {175, 175, 175}, 
-      origin = {-87, 0}, 
-      rotation = 90, 
-      textString = "white noise")}), 
+      extent = {{-96, 11}, {96, -11}},
+      textColor = {175, 175, 175},
+      origin = {-87, 0},
+      rotation = 90,
+      textString = "white noise")}),
       Documentation(info = "<html>
 <p>
 有关噪声模块的共同属性摘要，请参见
@@ -403,7 +403,7 @@ TruncatedNormalNoise模块根据截断正态分布在输出端生成可重现的
 </html>"));
   end BandLimitedWhiteNoise;
   annotation(Icon(graphics = {Line(
-    points = {{-84, 0}, {-54, 0}, {-54, 40}, {-24, 40}, {-24, -70}, {6, -70}, {6, 80}, 
+    points = {{-84, 0}, {-54, 0}, {-54, 40}, {-24, 40}, {-24, -70}, {6, -70}, {6, 80},
     {36, 80}, {36, -20}, {66, -20}, {66, 60}})}), Documentation(info="<html><p>
 该子库包含使用伪随机数生成<strong>可重现噪声</strong>的模块。 在手动或使用优化方法设计控制系统时， 可重复性非常重要 (例如，在改变控制系统的某个参数或某个组件并重新模拟时， 重要的是噪声不能改变， 否则很难确定改变后的控制系统或不同计算的噪声是否改变了受控系统的行为)。 子库<a href=\"modelica://Modelica.Blocks.Examples.Noise\" target=\"\">Blocks.Examples.Noise</a>&nbsp;中提供了许多如何使用噪声模块的示例。
 </p>

@@ -8,38 +8,38 @@ model ElastoGap "演示ElastoGap的使用"
   Components.Rod rod2(L=2) 
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Components.SpringDamper springDamper1(
-    c=10, 
-    s_rel0=1, 
-    s_rel(fixed=false, start=1), 
+    c=10,
+    s_rel0=1,
+    s_rel(fixed=false, start=1),
     d=1.5) 
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   Components.SpringDamper springDamper2(
-    c=10, 
-    s_rel0=1, 
-    s_rel(fixed=false, start=1), 
+    c=10,
+    s_rel0=1,
+    s_rel(fixed=false, start=1),
     d=1.5) annotation (Placement(transformation(extent={{20,20},{40,40}})));
   Components.Mass mass1(
-    s(fixed=true, start=2), 
-    L=0, 
-    m=1, 
+    s(fixed=true, start=2),
+    L=0,
+    m=1,
     v(fixed=true)) 
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
   Components.ElastoGap elastoGap1(
-    c=10, 
-    s_rel(fixed=false, start=1.5), 
-    s_rel0=1.5, 
+    c=10,
+    s_rel(fixed=false, start=1.5),
+    s_rel0=1.5,
     d=1.5) 
     annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
   Components.ElastoGap elastoGap2(
-    c=10, 
-    s_rel(fixed=false, start=1.5), 
-    s_rel0=1.5, 
+    c=10,
+    s_rel(fixed=false, start=1.5),
+    s_rel0=1.5,
     d=1.5) 
     annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
   Components.Mass mass2(
-    s(fixed=true, start=2), 
-    L=0, 
-    m=1, 
+    s(fixed=true, start=2),
+    L=0,
+    m=1,
     v(fixed=true)) 
     annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
   parameter SI.TranslationalDampingConstant d=1.5 "阻尼常数";
@@ -66,7 +66,7 @@ equation
   connect(mass2.flange_b, elastoGap2.flange_a) annotation (Line(
       points={{10,-30},{20,-30}}, color={0,127,0}));
   annotation (
-    experiment(StopTime=5, Interval=0.01), 
+    experiment(StopTime=5, Interval=0.01),
     Documentation(info="<html>
 <p>
 这个模型演示了ElastoGaps对特征频率的影响：

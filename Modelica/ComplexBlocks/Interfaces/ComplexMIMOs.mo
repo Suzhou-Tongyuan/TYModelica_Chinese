@@ -1,5 +1,5 @@
 ﻿within Modelica.ComplexBlocks.Interfaces;
-partial block ComplexMIMOs 
+partial block ComplexMIMOs
   "具有相同数量输入和输出的多输入多输出连续控制模块"
   extends Modelica.ComplexBlocks.Icons.ComplexBlock;
   parameter Integer n=1 "输入数量 (= 输出数量)";
@@ -8,11 +8,11 @@ partial block ComplexMIMOs
   ComplexOutput y[n] "复合输出信号的连接器" annotation (
       Placement(transformation(extent={{100,-10},{120,10}})));
 
-  parameter Boolean useConjugateInput[n]=fill(false, n) 
+  parameter Boolean useConjugateInput[n]=fill(false, n)
     "如果为真，则处理输入的共轭复数";
 protected
   Complex uInternal[n]={if useConjugateInput[k] then 
-      Modelica.ComplexMath.conj(u[k]) else u[k] for k in 1:n} 
+      Modelica.ComplexMath.conj(u[k]) else u[k] for k in 1:n}
     "如果 useComplexInput = true，则等于 u 或 u 的共轭复数输入";
 
   annotation (Documentation(info="<html>

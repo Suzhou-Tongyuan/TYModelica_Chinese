@@ -6,45 +6,45 @@ model ULine "损耗RC线"
   Modelica.Electrical.Analog.Interfaces.Pin p2 annotation (Placement(
         transformation(extent={{90,-10},{110,10}})));
   Modelica.Electrical.Analog.Interfaces.Pin p3 annotation (Placement(
-        transformation(extent={{-10,-110},{10,-90}}), 
+        transformation(extent={{-10,-110},{10,-90}}),
         iconTransformation(extent={{-10,-110},{10,-90}})));
   SI.Voltage v13;
   SI.Voltage v23;
   SI.Current i1;
   SI.Current i2;
   parameter Real r(
-    final min=Modelica.Constants.small, 
-    unit="Ohm/m", 
+    final min=Modelica.Constants.small,
+    unit="Ohm/m",
     start=1) "单位电阻";
   parameter Real c(
-    final min=Modelica.Constants.small, 
-    unit="F/m", 
+    final min=Modelica.Constants.small,
+    unit="F/m",
     start=1) "单位电容";
-  parameter SI.Length length(final min=Modelica.Constants.small, 
+  parameter SI.Length length(final min=Modelica.Constants.small,
       start=1) "线路长度";
   parameter Integer N(final min=1, start=1) "聚集段数";
-  parameter SI.LinearTemperatureCoefficient alpha=0 
+  parameter SI.LinearTemperatureCoefficient alpha=0
     "电阻的温度因数(R_actual=R*(1+alpha*(heatPort.T-T_ref))";
   parameter Boolean useHeatPort=false "=true,当heatPort=enabled" 
     annotation (
-    Evaluate=true, 
-    HideResult=true, 
+    Evaluate=true,
+    HideResult=true,
     choices(checkBox=true));
-  parameter SI.Temperature T=293.15 
+  parameter SI.Temperature T=293.15
     "修正后设备温度，当useHeatPort=false" 
     annotation (Dialog(enable=not useHeatPort));
   parameter SI.Temperature T_ref=300.15 "参考温度";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatPort 
-    annotation (Placement(transformation(extent={{-10,-110},{10,-90}}), 
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
         iconTransformation(extent={{-108,-110},{-88,-90}})));
 protected
-   parameter SI.Resistance rm[N + 1]= 
+   parameter SI.Resistance rm[N + 1]=
   {if i==1 or i==N + 1 then r*length/(N*2) else r*length/N for i in 1:N+1};
   Modelica.Electrical.Analog.Basic.Resistor R[N + 1](
-    R=rm, 
-    T_ref=fill(T_ref, N + 1), 
-    alpha=fill(alpha, N + 1), 
-    useHeatPort=fill(useHeatPort, N + 1), 
+    R=rm,
+    T_ref=fill(T_ref, N + 1),
+    alpha=fill(alpha, N + 1),
+    useHeatPort=fill(useHeatPort, N + 1),
     T=fill(T, N + 1));
   Modelica.Electrical.Analog.Basic.Capacitor C[N](C=fill(c*length/(N), N));
 equation
@@ -68,7 +68,7 @@ equation
       connect(heatPort, R[i].heatPort);
     end for;
   end if;
-  annotation (defaultComponentName="line", 
+  annotation (defaultComponentName="line",
     Documentation(info="<html>
 <p>如下图所示，Ulined是一个单导线失调RC线路，由连接到参考引脚p3的电抗R和电容C段序列构成。模型的精度取决于聚集段数N。
 
@@ -95,26 +95,26 @@ equation
 <dt><em>1998</em></dt>
 <dd>by Christoph Clauss initially implemented</dd>
 </dl>
-</html>"), 
+</html>"),
     Icon(coordinateSystem(
-        preserveAspectRatio=true, 
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={
         Text(
-          extent={{-150,130},{150,90}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,130},{150,90}},
+          textString="%name",
+          textColor={0,0,255}),
         Rectangle(
-          extent={{-80,80},{80,-80}}, 
-          lineColor={0,0,255}, 
-          fillPattern=FillPattern.Solid, 
-          fillColor={255,255,255}), 
-        Line(points={{80,0},{100,0}}, color={0,0,255}), 
-        Line(points={{-80,0},{-100,0}}, color={0,0,255}), 
-        Line(points={{-40,40},{-40,20}}), 
-        Line(points={{40,30},{-40,30}}), 
-        Line(points={{40,40},{40,20}}), 
-        Line(points={{0,-80},{0,-100}}, color={0,0,255}), 
+          extent={{-80,80},{80,-80}},
+          lineColor={0,0,255},
+          fillPattern=FillPattern.Solid,
+          fillColor={255,255,255}),
+        Line(points={{80,0},{100,0}}, color={0,0,255}),
+        Line(points={{-80,0},{-100,0}}, color={0,0,255}),
+        Line(points={{-40,40},{-40,20}}),
+        Line(points={{40,30},{-40,30}}),
+        Line(points={{40,40},{40,20}}),
+        Line(points={{0,-80},{0,-100}}, color={0,0,255}),
         Text(
-          extent={{-70,-10},{70,-50}}, 
+          extent={{-70,-10},{70,-50}},
           textString="ULine")}));
 end ULine;

@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.Examples.Elementary.RealSignals;
-model TimeBasedStep 
+model TimeBasedStep
   "使用基于时钟模拟时间的步进源模块示例"
    extends Modelica.Icons.Example;
 Modelica.Clocked.RealSignals.TimeBasedSources.Step 
@@ -13,12 +13,12 @@ Modelica.Clocked.ClockSignals.Clocks.PeriodicRealClock
 equation
 
 connect(step.y, assignClock1.u) annotation (Line(
-    points={{-39,30},{-25.2,30}}, 
+    points={{-39,30},{-25.2,30}},
     color={0,0,127}));
 connect(periodicClock1.y, assignClock1.clock) annotation (Line(
-    points={{-57.4,-12},{-18,-12},{-18,22.8}}, 
-    color={175,175,175}, 
-    pattern=LinePattern.Dot, 
+    points={{-57.4,-12},{-18,-12},{-18,22.8}},
+    color={175,175,175},
+    pattern=LinePattern.Dot,
     thickness=0.5));
 annotation (experiment(StopTime=1.0), Documentation(info="<html>
 <p>

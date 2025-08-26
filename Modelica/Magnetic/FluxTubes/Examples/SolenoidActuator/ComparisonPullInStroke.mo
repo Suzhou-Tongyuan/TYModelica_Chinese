@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FluxTubes.Examples.SolenoidActuator;
-model ComparisonPullInStroke 
+model ComparisonPullInStroke
   "t=0 时电压阶跃后两种电磁铁模型的拉入行程"
 
   extends Modelica.Icons.Example;
@@ -10,26 +10,26 @@ model ComparisonPullInStroke
       Placement(transformation(extent={{-70,-10},{-50,10}})));
   Modelica.Electrical.Analog.Sources.StepVoltage advancedSource(V=v_step) 
     annotation (Placement(transformation(
-        origin={-60,30}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-60,30},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
-  FluxTubes.Examples.SolenoidActuator.Components.AdvancedSolenoid advancedSolenoid(x(fixed= 
-          true)) annotation (Placement(transformation(extent={{-20,20},{0, 
+  FluxTubes.Examples.SolenoidActuator.Components.AdvancedSolenoid advancedSolenoid(x(fixed=
+          true)) annotation (Placement(transformation(extent={{-20,20},{0,
             40}})));
-  Modelica.Mechanics.Translational.Components.Mass advancedLoad(m=0.01) 
+  Modelica.Mechanics.Translational.Components.Mass advancedLoad(m=0.01)
     "水平拉动的平移载荷" annotation (Placement(
         transformation(extent={{20,20},{40,40}})));
   Modelica.Electrical.Analog.Basic.Ground simpleGround annotation (
       Placement(transformation(extent={{-70,-90},{-50,-70}})));
   Modelica.Electrical.Analog.Sources.StepVoltage simpleSource(V=v_step) 
     annotation (Placement(transformation(
-        origin={-60,-50}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-60,-50},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
-  FluxTubes.Examples.SolenoidActuator.Components.SimpleSolenoid simpleSolenoid(x(fixed= 
-          true)) annotation (Placement(transformation(extent={{-20,-60},{0, 
+  FluxTubes.Examples.SolenoidActuator.Components.SimpleSolenoid simpleSolenoid(x(fixed=
+          true)) annotation (Placement(transformation(extent={{-20,-60},{0,
             -40}})));
-  Modelica.Mechanics.Translational.Components.Mass simpleLoad(m=0.01) 
+  Modelica.Mechanics.Translational.Components.Mass simpleLoad(m=0.01)
     "水平拉动的平移载荷" annotation (Placement(
         transformation(extent={{20,-60},{40,-40}})));
   Modelica.Blocks.Sources.CombiTimeTable comparisonWithFEA(
@@ -383,27 +383,27 @@ model ComparisonPullInStroke
         1.19953, -88.9312, 0.000220179; 0.0497, 1.19954, -88.9318,
         0.000220179; 0.0498, 1.19956, -88.9324, 0.000220179; 0.0499,
         1.19957, -88.933, 0.000220178; 0.05, 1.19958, -88.9335,
-        0.000220178; 0.05, 1.19958, -88.9335, 0.000220178], 
-    tableOnFile=false, 
-    columns=2:4, 
-    extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint) 
+        0.000220178; 0.05, 1.19958, -88.9335, 0.000220178],
+    tableOnFile=false,
+    columns=2:4,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
     "仅对 u_source=12VDC 和 m_load=0.01kg 有效；第 2 列：电流，第 3 列：力，第 4 列：位置" 
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
 
 equation
   connect(advancedGround.p, advancedSource.n) 
     annotation (Line(points={{-60,10},{-60,20}}, color={0,0,255}));
-  connect(advancedSource.p, advancedSolenoid.p) annotation (Line(points={{-60,40},{-40,40},{-40,40},{-20,40}}, 
+  connect(advancedSource.p, advancedSolenoid.p) annotation (Line(points={{-60,40},{-40,40},{-40,40},{-20,40}},
                                                 color={0,0,255}));
-  connect(advancedSolenoid.n, advancedSource.n) annotation (Line(points={{-20,20},{-40,20},{-40,20},{-60,20}}, 
+  connect(advancedSolenoid.n, advancedSource.n) annotation (Line(points={{-20,20},{-40,20},{-40,20},{-60,20}},
                                                 color={0,0,255}));
   connect(advancedSolenoid.flange, advancedLoad.flange_a) 
     annotation (Line(points={{0,30},{20,30}}, color={0,127,0}));
   connect(simpleGround.p, simpleSource.n) 
     annotation (Line(points={{-60,-70},{-60,-60}}, color={0,0,255}));
-  connect(simpleSource.p, simpleSolenoid.p) annotation (Line(points={{-60,-40},{-40,-40},{-40,-40},{-20,-40}}, 
+  connect(simpleSource.p, simpleSolenoid.p) annotation (Line(points={{-60,-40},{-40,-40},{-40,-40},{-20,-40}},
                                                color={0,0,255}));
-  connect(simpleSolenoid.n, simpleSource.n) annotation (Line(points={{-20,-60},{-40,-60},{-40,-60},{-60,-60}}, 
+  connect(simpleSolenoid.n, simpleSource.n) annotation (Line(points={{-20,-60},{-40,-60},{-40,-60},{-60,-60}},
                                                color={0,0,255}));
   connect(simpleSolenoid.flange, simpleLoad.flange_a) 
     annotation (Line(points={{0,-50},{20,-50}}, color={0,127,0}));

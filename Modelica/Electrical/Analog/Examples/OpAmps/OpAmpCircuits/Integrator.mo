@@ -15,11 +15,11 @@ model Integrator "积分运算放大器电路"
 equation
   connect(n1, n2) 
     annotation(Line(points = {{-100, -100}, {100, -100}}, color = {0, 0, 255}));
-  connect(opAmp.out, p2) annotation(Line(points = {{10, 0}, {80, 0}, {80, 100}, {100, 100}}, 
+  connect(opAmp.out, p2) annotation(Line(points = {{10, 0}, {80, 0}, {80, 100}, {100, 100}},
     color = {0, 0, 255}));
-  connect(n1, opAmp.in_p) annotation(Line(points = {{-100, -100}, {-10, -100}, {-10, -6}}, 
+  connect(n1, opAmp.in_p) annotation(Line(points = {{-100, -100}, {-10, -100}, {-10, -6}},
     color = {0, 0, 255}));
-  connect(r.p, p1) annotation(Line(points = {{-50, 30}, {-80, 30}, {-80, 100}, {-100, 100}}, 
+  connect(r.p, p1) annotation(Line(points = {{-50, 30}, {-80, 30}, {-80, 100}, {-100, 100}},
     color = {0, 0, 255}));
   connect(r.n, opAmp.in_n) 
     annotation(Line(points = {{-30, 30}, {-10, 30}, {-10, 6}}, color = {0, 0, 255}));
@@ -30,29 +30,29 @@ equation
   annotation(Documentation(info = "<html>
 <p>这个模型为反相积分器，该模型基于<a href=\"modelica://Modelica.Electrical.Analog.Ideal.IdealizedOpAmpLimited\">IdealizedOpAmpLimited</a>搭建。</p>
 <p><code>k*vin=-der(dvOut)</code></p>
-</html>"), 
+</html>"),
     Icon(graphics = {
     Polygon(
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid, 
-    points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}), 
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid,
+    points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}),
     Line(
-    points = {{-80.0, 78.0}, {-80.0, -90.0}}, 
-    color = {192, 192, 192}), 
+    points = {{-80.0, 78.0}, {-80.0, -90.0}},
+    color = {192, 192, 192}),
     Line(
-    points = DynamicSelect({{-80.0, -80.0}, {80.0, 80.0}}, if use_reset then {{-80.0, -80.0}, {60.0, 60.0}, {60.0, -80.0}, {80.0, -60.0}} else {{-80.0, -80.0}, {80.0, 80.0}}), 
-    color = {0, 0, 127}), 
+    points = DynamicSelect({{-80.0, -80.0}, {80.0, 80.0}}, if use_reset then {{-80.0, -80.0}, {60.0, 60.0}, {60.0, -80.0}, {80.0, -60.0}} else {{-80.0, -80.0}, {80.0, 80.0}}),
+    color = {0, 0, 127}),
     Line(
-    points = {{-90.0, -80.0}, {82.0, -80.0}}, 
-    color = {192, 192, 192}), 
+    points = {{-90.0, -80.0}, {82.0, -80.0}},
+    color = {192, 192, 192}),
     Polygon(
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid, 
-    points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}), 
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid,
+    points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}}),
     Text(
-    extent = {{-80, 40}, {0, -40}}, 
-    textColor = {0, 0, 255}, 
+    extent = {{-80, 40}, {0, -40}},
+    textColor = {0, 0, 255},
     textString = "I")}));
 end Integrator;

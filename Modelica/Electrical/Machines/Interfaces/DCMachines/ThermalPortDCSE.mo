@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.Interfaces.DCMachines;
-connector ThermalPortDCSE 
+connector ThermalPortDCSE
   "串励直流电机的热端口"
   extends Machines.Interfaces.DCMachines.PartialThermalPortDCMachines;
 

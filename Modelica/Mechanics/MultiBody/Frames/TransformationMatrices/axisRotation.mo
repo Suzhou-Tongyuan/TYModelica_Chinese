@@ -1,11 +1,11 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function axisRotation 
+function axisRotation
   "返回绕一个坐标系轴旋转的旋转对象"
   extends Modelica.Icons.Function;
   input Integer axis(min=1, max=3) "绕坐标系1的'axis'旋转";
-  input SI.Angle angle 
+  input SI.Angle angle
     "旋转角度，将坐标系1沿坐标系1的'axis'旋转到坐标系2";
-  output TransformationMatrices.Orientation T 
+  output TransformationMatrices.Orientation T
     "将坐标系1旋转到坐标系2的方向对象";
 algorithm
   T := if axis == 1 then [1, 0, 0; 0, Modelica.Math.cos(angle), Modelica.Math.sin(angle); 0, -Modelica.Math.sin(angle),

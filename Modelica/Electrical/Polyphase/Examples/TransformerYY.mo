@@ -5,36 +5,36 @@ model TransformerYY "带有多相组件的测试示例"
   parameter SI.Voltage V=1 "星型电压幅值";
   parameter SI.Frequency f=5 "频率";
   parameter SI.Inductance Lm=1 "变压器主电感";
-  parameter SI.Inductance LT=0.003 
+  parameter SI.Inductance LT=0.003
     "变压器漏感";
   parameter SI.Resistance RT=0.05 "变压器电阻";
   parameter SI.Resistance RL=1 "负载电阻";
   parameter Real nT=1 "变压器比";
   Sources.SineVoltage sineVoltage(
-    V=fill(V, m), 
-    f=fill(f, m), 
+    V=fill(V, m),
+    f=fill(f, m),
     m=m) annotation (Placement(transformation(
-        origin={-80,20}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-80,20},
+        extent={{-10,-10},{10,10}},
         rotation=180)));
   Basic.Star starS(m=m) annotation (Placement(transformation(
-        origin={-90,-62}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-90,-62},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Ground groundS annotation (Placement(
         transformation(extent={{-100,-100},{-80,-80}})));
   Ideal.IdealTransformer idealTransformer(
-    m=m, 
-    Lm1=fill(Lm, m), 
-    n=fill(nT, m)) annotation (Placement(transformation(extent={{-40,0},{-20, 
+    m=m,
+    Lm1=fill(Lm, m),
+    n=fill(nT, m)) annotation (Placement(transformation(extent={{-40,0},{-20,
             20}})));
   Basic.Star starT1(m=m) annotation (Placement(transformation(
-        origin={-40,-62}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-40,-62},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Basic.Star starT2(m=m) annotation (Placement(transformation(
-        origin={-20,-62}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-20,-62},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Ground groundT2 annotation (Placement(
         transformation(extent={{-30,-100},{-10,-80}})));
@@ -45,8 +45,8 @@ model TransformerYY "带有多相组件的测试示例"
   Basic.Resistor loadR(m=m, R=fill(RL, m)) annotation (Placement(
         transformation(extent={{70,10},{90,30}})));
   Basic.Star starL(m=m) annotation (Placement(transformation(
-        origin={90,-62}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={90,-62},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Ground groundT1 annotation (Placement(
         transformation(extent={{-50,-100},{-30,-80}})));
@@ -58,7 +58,7 @@ equation
     annotation (Line(points={{-90,-72},{-90,-80}}, color={0,0,255}));
   connect(starT1.pin_n, groundT1.p) 
     annotation (Line(points={{-40,-72},{-40,-80}}, color={0,0,255}));
-  connect(starT2.pin_n, groundT2.p) annotation (Line(points={{-20,-72},{-20, 
+  connect(starT2.pin_n, groundT2.p) annotation (Line(points={{-20,-72},{-20,
           -76},{-20,-76},{-20,-80}}, color={0,0,255}));
   connect(starS.plug_p, sineVoltage.plug_n) 
     annotation (Line(points={{-90,-52},{-90,20}}, color={0,0,255}));
@@ -66,7 +66,7 @@ equation
     annotation (Line(points={{-70,20},{-40,20}}, color={0,0,255}));
   connect(idealTransformer.plug_n1, starT1.plug_p) 
     annotation (Line(points={{-40,0},{-40,-52}}, color={0,0,255}));
-  connect(starT2.plug_p, idealTransformer.plug_n2) annotation (Line(points= 
+  connect(starT2.plug_p, idealTransformer.plug_n2) annotation (Line(points=
           {{-20,-52},{-20,-26},{-20,0}}, color={0,0,255}));
   connect(idealTransformer.plug_p2, transformerR.plug_p) 
     annotation (Line(points={{-20,20},{0,20}}, color={0,0,255}));
@@ -83,6 +83,6 @@ equation
 使用f=5Hz和LT=3mH，定义了约10%的名义电压降。<br>
 模拟1秒钟(2个周期)，并比较源、变压器和负载的电压和电流。
 </p>
-</html>"), 
+</html>"),
        experiment(StopTime=1.0, Interval=0.001));
 end TransformerYY;

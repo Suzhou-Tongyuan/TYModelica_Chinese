@@ -1,11 +1,11 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.Force;
-model HollowCylinderAxialFlux 
+model HollowCylinderAxialFlux
   "(具有轴向通量的（空心）圆柱体；恒定渗透率"
 
   extends BaseClasses.Force;
 
   SI.Length l=s "轴向长度（通量方向） " annotation (Dialog(
-        group="Variable geometry", groupImage= 
+        group="Variable geometry", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/HollowCylinderAxialFlux.png"));
   parameter SI.Radius r_i=0 "空心圆柱体的内半径";
   parameter SI.Radius r_o=0.01 "空心圆柱体外半径";
@@ -13,7 +13,7 @@ model HollowCylinderAxialFlux
   SI.MagneticFluxDensity B "均匀磁通密度";
 
 protected
-  parameter SI.Area A=pi*(r_o^2 - r_i^2) 
+  parameter SI.Area A=pi*(r_o^2 - r_i^2)
     "与通量方向正交的横截面积";
 
 equation

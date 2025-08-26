@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Examples.Systems.RobotR3.Utilities;
-model PathPlanning1 
+model PathPlanning1
   "生成最快运动学运动的参考角度"
   extends Blocks.Icons.Block;
 
@@ -8,68 +8,68 @@ model PathPlanning1
   parameter SI.AngularVelocity speedMax = 3 "轴的最大速度";
   parameter SI.AngularAcceleration accMax = 2.5 "轴的最大加速度";
   parameter SI.Time startTime=0 "运动开始时间";
-  parameter SI.Time swingTime=0.5 
+  parameter SI.Time swingTime=0.5
     "参考运动静止后，模拟停止前的额外时间";
   final parameter SI.Angle angleBeg=Cv.from_deg(angleBegDeg) "Start angles";
   final parameter SI.Angle angleEnd=Cv.from_deg(angleEndDeg) "End angles";
   ControlBus controlBus 
     annotation (Placement(transformation(
-        origin={100,0}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={100,0},
+        extent={{-20,-20},{20,20}},
         rotation=270)));
   Modelica.Blocks.Sources.KinematicPTP2 path(
-    q_end={angleEnd}, 
-    qd_max={speedMax}, 
-    qdd_max={accMax}, 
-    startTime=startTime, 
+    q_end={angleEnd},
+    qd_max={speedMax},
+    qdd_max={accMax},
+    startTime=startTime,
     q_begin={angleBeg}) 
-                      annotation (Placement(transformation(extent={{-50,-10}, 
+                      annotation (Placement(transformation(extent={{-50,-10},
             {-30,10}})));
   PathToAxisControlBus pathToAxis1(final nAxis=1, final axisUsed=1) 
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
 
-  Blocks.Logical.TerminateSimulation terminateSimulation(condition=time >= path.endTime 
-         + swingTime) annotation (Placement(transformation(extent={{-50,-30}, 
+  Blocks.Logical.TerminateSimulation terminateSimulation(condition=time >= path.endTime
+         + swingTime) annotation (Placement(transformation(extent={{-50,-30},
             {30,-24}})));
 equation
   connect(path.q, pathToAxis1.q) annotation (Line(points={{-29,8},{
           -2,8}}, color={0,0,127}));
-  connect(path.qd, pathToAxis1.qd) annotation (Line(points={{-29,3}, 
+  connect(path.qd, pathToAxis1.qd) annotation (Line(points={{-29,3},
           {-2,3}}, color={0,0,127}));
-  connect(path.qdd, pathToAxis1.qdd) annotation (Line(points={{-29, 
+  connect(path.qdd, pathToAxis1.qdd) annotation (Line(points={{-29,
           -3},{-2,-3}}, color={0,0,127}));
   connect(path.moving, pathToAxis1.moving) annotation (Line(
         points={{-29,-8},{-2,-8}}, color={255,0,255}));
   connect(pathToAxis1.axisControlBus, controlBus.axisControlBus1) annotation (
     Text(
-      string="%second", 
-      index=1, 
+      string="%second",
+      index=1,
       extent={{6,3},{6,3}}), Line(
-      points={{20,0},{60,0},{60,-0.1},{100.1,-0.1}}, 
-      color={255,204,51}, 
+      points={{20,0},{60,0},{60,-0.1},{100.1,-0.1}},
+      color={255,204,51},
       thickness=0.5));
   annotation (
     Icon(coordinateSystem(
-        preserveAspectRatio=true, 
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={
         Polygon(
-          points={{-80,90},{-88,68},{-72,68},{-80,90}}, 
-          lineColor={192,192,192}, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid), 
-        Line(points={{-80,78},{-80,-82}}, color={192,192,192}), 
-        Line(points={{-90,0},{82,0}}, color={192,192,192}), 
+          points={{-80,90},{-88,68},{-72,68},{-80,90}},
+          lineColor={192,192,192},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-80,78},{-80,-82}}, color={192,192,192}),
+        Line(points={{-90,0},{82,0}}, color={192,192,192}),
         Polygon(
-          points={{90,0},{68,8},{68,-8},{90,0}}, 
-          lineColor={192,192,192}, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid), 
+          points={{90,0},{68,8},{68,-8},{90,0}},
+          lineColor={192,192,192},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-42,55},{29,12}}, 
-          textColor={192,192,192}, 
-          textString="w"), 
-        Line(points={{-80,0},{-41,69},{26,69},{58,0}}), 
-        Text(extent={{-70,-44},{84,-68}}, textString="1 axis")}), 
+          extent={{-42,55},{29,12}},
+          textColor={192,192,192},
+          textString="w"),
+        Line(points={{-80,0},{-41,69},{26,69},{58,0}}),
+        Text(extent={{-70,-44},{84,-68}}, textString="1 axis")}),
     Documentation(info="<html>
 <p>
 已知

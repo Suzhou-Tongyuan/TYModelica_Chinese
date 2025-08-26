@@ -1,21 +1,21 @@
 ﻿within Modelica.Electrical.QuasiStatic.Polyphase.Ideal;
 model IdealOpeningSwitch "多相理想断开开关"
   extends QuasiStatic.Polyphase.Interfaces.TwoPlug;
-  parameter SI.Resistance Ron[m](final min=zeros(m), start= 
+  parameter SI.Resistance Ron[m](final min=zeros(m), start=
         fill(1e-5, m)) "闭合状态的电阻";
-  parameter SI.Conductance Goff[m](final min=zeros(m), start= 
+  parameter SI.Conductance Goff[m](final min=zeros(m), start=
         fill(1e-5, m)) "断开状态的导纳";
   extends Modelica.Electrical.Polyphase.Interfaces.ConditionalHeatPort(
       final mh=m, final T=fill(293.15, m));
-  Modelica.Blocks.Interfaces.BooleanInput control[m] 
+  Modelica.Blocks.Interfaces.BooleanInput control[m]
     "true => switch open, false => p--n connected" annotation (Placement(
         transformation(
-        origin={0,120}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={0,120},
+        extent={{-20,-20},{20,20}},
         rotation=270)));
   QuasiStatic.SinglePhase.Ideal.IdealOpeningSwitch idealOpeningSwitch[m](
-    final Ron=Ron, 
-    final Goff=Goff, 
+    final Ron=Ron,
+    final Goff=Goff,
     each final useHeatPort=useHeatPort) 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
@@ -27,20 +27,20 @@ equation
       points={{10,0},{39,0},{39,0},{68,0}}, color={85,170,255}));
   connect(plugToPins_p.pin_p, idealOpeningSwitch.pin_p) annotation (Line(
       points={{-68,0},{-10,0}}, color={85,170,255}));
-  annotation (defaultComponentName="switch", Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+  annotation (defaultComponentName="switch", Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
-                                   Line(points={{-90,0},{-44,0}}, color={85,170,255}), 
-          Ellipse(extent={{-44,4},{-36,-4}}, lineColor={85,170, 
-          255}),Line(points={{-37,2},{40,40}}, color={85,170,255}), 
+                                   Line(points={{-90,0},{-44,0}}, color={85,170,255}),
+          Ellipse(extent={{-44,4},{-36,-4}}, lineColor={85,170,
+          255}),Line(points={{-37,2},{40,40}}, color={85,170,255}),
                                                       Line(points={{40,0},{
-          90,0}}, color={85,170,255}), 
-                               Line(points={{40,20},{40,0}}, color={85,170,255}), 
+          90,0}}, color={85,170,255}),
+                               Line(points={{40,20},{40,0}}, color={85,170,255}),
         Text(
-          extent={{-150,90},{150,50}}, 
-              textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,90},{150,50}},
+              textString="%name",
+          textColor={0,0,255}),
                 Text(
-              extent={{150,-80},{-150,-40}}, 
+              extent={{150,-80},{-150,-40}},
               textString="m=%m")}), Documentation(info="<html>
 <p>
 包含 m 个理想断开开关（Modelica.Electrical.QuasiStatic.SinglePhase.Ideal.IdealOpeningSwitch）。

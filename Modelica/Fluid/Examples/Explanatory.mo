@@ -1,99 +1,99 @@
 ﻿within Modelica.Fluid.Examples;
-package Explanatory 
+package Explanatory
   "举例说明需要特别注意的事项"
   extends Modelica.Icons.ExamplesPackage;
 
-  model MeasuringTemperature 
+  model MeasuringTemperature
     "使用单接口（带或不带显式连接模型）和双接口传感器测量流体温度的区别"
     extends Modelica.Icons.Example;
-    Modelica.Fluid.Sensors.Temperature T_onePort(redeclare package Medium = 
+    Modelica.Fluid.Sensors.Temperature T_onePort(redeclare package Medium =
       Modelica.Media.Water.StandardWater) 
       annotation(Placement(transformation(extent = {{-20, 40}, {0, 60}})));
-    Modelica.Fluid.Sensors.TemperatureTwoPort T_twoPort(redeclare package Medium = 
+    Modelica.Fluid.Sensors.TemperatureTwoPort T_twoPort(redeclare package Medium =
       Modelica.Media.Water.StandardWater) 
       annotation(Placement(transformation(extent = {{-20, -20}, {0, 0}})));
     inner Modelica.Fluid.System system(energyDynamics = Modelica.Fluid.Types.Dynamics.FixedInitial) 
       annotation(Placement(transformation(
       extent = {{-100, 56}, {-80, 76}})));
-    Modelica.Fluid.Vessels.OpenTank openTankCold2(nPorts = 1, 
-    redeclare package Medium = Modelica.Media.Water.StandardWater, 
-      height = 2, 
-      crossArea = 2, 
-      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)}, 
-      level_start = 0.975, 
+    Modelica.Fluid.Vessels.OpenTank openTankCold2(nPorts = 1,
+    redeclare package Medium = Modelica.Media.Water.StandardWater,
+      height = 2,
+      crossArea = 2,
+      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)},
+      level_start = 0.975,
       T_start = 293.15) annotation(Placement(transformation(extent = {{20, 6}, {
       40, 26}})));
     Modelica.Fluid.Vessels.OpenTank openTankCold1(
-    redeclare package Medium = Modelica.Media.Water.StandardWater, 
-      height = 2, 
-      crossArea = 2, 
-      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)}, 
-      nPorts = 1, 
-      level_start = 0.975, 
-      T_start = 293.15) annotation(Placement(transformation(extent = {{20, 60}, 
+    redeclare package Medium = Modelica.Media.Water.StandardWater,
+      height = 2,
+      crossArea = 2,
+      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)},
+      nPorts = 1,
+      level_start = 0.975,
+      T_start = 293.15) annotation(Placement(transformation(extent = {{20, 60},
       {40, 80}})));
-    Modelica.Fluid.Vessels.OpenTank openTankHot1(nPorts = 1, 
-      level_start = 1, 
-    redeclare package Medium = Modelica.Media.Water.StandardWater, 
-      height = 2, 
-      crossArea = 2, 
-      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)}, 
-      T_start = 353.15) annotation(Placement(transformation(extent = {{60, 40}, 
+    Modelica.Fluid.Vessels.OpenTank openTankHot1(nPorts = 1,
+      level_start = 1,
+    redeclare package Medium = Modelica.Media.Water.StandardWater,
+      height = 2,
+      crossArea = 2,
+      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)},
+      T_start = 353.15) annotation(Placement(transformation(extent = {{60, 40},
       {80, 60}})));
-    Modelica.Fluid.Vessels.OpenTank openTankHot2(nPorts = 1, 
-      level_start = 1, 
-    redeclare package Medium = Modelica.Media.Water.StandardWater, 
-      height = 2, 
-      crossArea = 2, 
-      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)}, 
-      T_start = 353.15) annotation(Placement(transformation(extent = {{60, -10}, 
+    Modelica.Fluid.Vessels.OpenTank openTankHot2(nPorts = 1,
+      level_start = 1,
+    redeclare package Medium = Modelica.Media.Water.StandardWater,
+      height = 2,
+      crossArea = 2,
+      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)},
+      T_start = 353.15) annotation(Placement(transformation(extent = {{60, -10},
       {80, 10}})));
     Modelica.Fluid.Sources.MassFlowSource_T mFlow1(
-      nPorts = 1, 
-      medium(sat(psat(start = 1e5))), 
-    redeclare package Medium = Modelica.Media.Water.StandardWater, 
-      use_m_flow_in = true, 
-      use_T_in = false, 
-      T = 323.15) annotation(Placement(transformation(extent = 
+      nPorts = 1,
+      medium(sat(psat(start = 1e5))),
+    redeclare package Medium = Modelica.Media.Water.StandardWater,
+      use_m_flow_in = true,
+      use_T_in = false,
+      T = 323.15) annotation(Placement(transformation(extent =
       {{-60, 30}, {-40, 50}})));
     Modelica.Fluid.Sources.MassFlowSource_T mFlow2(
-      nPorts = 1, 
-      medium(sat(psat(start = 1e5))), 
-    redeclare package Medium = Modelica.Media.Water.StandardWater, 
-      use_m_flow_in = true, 
-      T = 323.15) annotation(Placement(transformation(extent = 
+      nPorts = 1,
+      medium(sat(psat(start = 1e5))),
+    redeclare package Medium = Modelica.Media.Water.StandardWater,
+      use_m_flow_in = true,
+      T = 323.15) annotation(Placement(transformation(extent =
       {{-60, -20}, {-40, 0}})));
     Modelica.Blocks.Sources.Sine sine(f = 1) 
-      annotation(Placement(transformation(extent = 
+      annotation(Placement(transformation(extent =
       {{-100, 10}, {-80, 30}})));
-    Modelica.Fluid.Sensors.Temperature T_junction(redeclare package Medium = 
+    Modelica.Fluid.Sensors.Temperature T_junction(redeclare package Medium =
       Modelica.Media.Water.StandardWater) 
       annotation(Placement(transformation(extent = {{-20, -80}, {0, -60}})));
-    Modelica.Fluid.Vessels.OpenTank openTankCold3(nPorts = 1, 
-    redeclare package Medium = Modelica.Media.Water.StandardWater, 
-      height = 2, 
-      crossArea = 2, 
-      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)}, 
-      level_start = 0.975, 
-      T_start = 293.15) annotation(Placement(transformation(extent = {{20, -60}, 
+    Modelica.Fluid.Vessels.OpenTank openTankCold3(nPorts = 1,
+    redeclare package Medium = Modelica.Media.Water.StandardWater,
+      height = 2,
+      crossArea = 2,
+      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)},
+      level_start = 0.975,
+      T_start = 293.15) annotation(Placement(transformation(extent = {{20, -60},
       {40, -40}})));
-    Modelica.Fluid.Vessels.OpenTank openTankHot3(nPorts = 1, 
-      level_start = 1, 
-    redeclare package Medium = Modelica.Media.Water.StandardWater, 
-      height = 2, 
-      crossArea = 2, 
-      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)}, 
-      T_start = 353.15) annotation(Placement(transformation(extent = {{60, -80}, 
+    Modelica.Fluid.Vessels.OpenTank openTankHot3(nPorts = 1,
+      level_start = 1,
+    redeclare package Medium = Modelica.Media.Water.StandardWater,
+      height = 2,
+      crossArea = 2,
+      portsData = {Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter = 0.05)},
+      T_start = 353.15) annotation(Placement(transformation(extent = {{60, -80},
       {80, -60}})));
     Modelica.Fluid.Sources.MassFlowSource_T mFlow3(
-      nPorts = 1, 
-      medium(sat(psat(start = 1e5))), 
-    redeclare package Medium = Modelica.Media.Water.StandardWater, 
-      use_m_flow_in = true, 
-      T = 323.15) annotation(Placement(transformation(extent = 
+      nPorts = 1,
+      medium(sat(psat(start = 1e5))),
+    redeclare package Medium = Modelica.Media.Water.StandardWater,
+      use_m_flow_in = true,
+      T = 323.15) annotation(Placement(transformation(extent =
       {{-60, -90}, {-40, -70}})));
     Modelica.Fluid.Fittings.TeeJunctionIdeal junctionIdeal(
-    redeclare package Medium = 
+    redeclare package Medium =
       Modelica.Media.Water.StandardWater) 
       annotation(Placement(transformation(extent = {{20, -90}, {40, -70}})));
   equation
@@ -117,23 +117,23 @@ package Explanatory
       points = {{-10, 40}, {-10, 40}, {70, 40}}, color = {0, 127, 255}));
     connect(T_twoPort.port_b, openTankHot2.ports[1]) annotation(Line(
       points = {{0, -10}, {30, -10}, {70, -10}}, color = {0, 127, 255}));
-    connect(junctionIdeal.port_3, openTankCold3.ports[1]) annotation(Line(points = {{30, -70}, 
+    connect(junctionIdeal.port_3, openTankCold3.ports[1]) annotation(Line(points = {{30, -70},
       {30, -65}, {30, -60}}, color = {0, 127, 255}));
-    connect(junctionIdeal.port_2, openTankHot3.ports[1]) annotation(Line(points = {{40, -80}, 
+    connect(junctionIdeal.port_2, openTankHot3.ports[1]) annotation(Line(points = {{40, -80},
       {55.5, -80}, {70, -80}}, color = {0, 127, 255}));
     connect(T_onePort.port, openTankCold1.ports[1]) annotation(Line(
       points = {{-10, 40}, {30, 40}, {30, 60}}, color = {0, 127, 255}));
-    annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+    annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
       -100}, {100, 100}}), graphics = {
       Text(
-      extent = {{42, 52}, {62, 46}}, 
-      textString = "T=80"), 
+      extent = {{42, 52}, {62, 46}},
+      textString = "T=80"),
       Text(
-      extent = {{-4, 76}, {18, 70}}, 
-      textString = "T=20"), 
+      extent = {{-4, 76}, {18, 70}},
+      textString = "T=20"),
       Text(
-      extent = {{-62, 20}, {-36, 12}}, 
-      textString = "T=50")}), 
+      extent = {{-62, 20}, {-36, 12}},
+      textString = "T=50")}),
       Documentation(info="<html><p>
 该模型展示了单接口和双接口温度传感器在使用和不使用显式结点模型时出现的差异。如下图所示，同一系统有 3 种不同的变化。在所有情况下，都定义了完全相同的流体系统。唯一不同的是如何测量温度：
 </p>
@@ -149,58 +149,58 @@ package Explanatory
 </p>
 <p style=\"text-align: center;\"><img src=\"modelica://Modelica/Resources/Images/Fluid/Examples/Explanatory/MeasuringTemperature2.png\" alt=\"MeasuringTemperature2.png\" data-href=\"\" style=\"\">
 </p>
-</html>"  ), 
+</html>"  ),
       experiment(StopTime = 1.1));
   end MeasuringTemperature;
 
-  model MomentumBalanceFittings 
+  model MomentumBalanceFittings
     "说明动量项在动量平衡中起主要作用的情况"
     extends Modelica.Icons.Example;
     Modelica.Fluid.Sources.Boundary_pT leftBoundary1(
-    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase, 
-      nPorts = 1, 
+    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase,
+      nPorts = 1,
       p = 100000) 
       annotation(Placement(transformation(extent = {{-80, 20}, {-60, 40}})));
     Modelica.Fluid.Sources.Boundary_pT rightBoundary1(
-    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase, 
-      nPorts = 1, 
+    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase,
+      nPorts = 1,
       p = 110000) 
       annotation(Placement(transformation(extent = {{80, 20}, {60, 40}})));
     Modelica.Fluid.Fittings.AbruptAdaptor suddenExpansion1(
-      diameter_a = 0.1, 
-      diameter_b = 0.2, 
-    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase, 
-      show_totalPressures = true, 
+      diameter_a = 0.1,
+      diameter_b = 0.2,
+    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase,
+      show_totalPressures = true,
       show_portVelocities = true) 
       annotation(Placement(transformation(extent = {{-12, 20}, {8, 40}})));
     Modelica.Fluid.Sources.Boundary_pT leftBoundary2(
-    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase, 
-      nPorts = 1, 
+    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase,
+      nPorts = 1,
       p = 100000) 
       annotation(Placement(transformation(extent = {{-90, -40}, {-70, -20}})));
     Modelica.Fluid.Sources.Boundary_pT rightBoundary2(
-    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase, 
-      nPorts = 1, 
+    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase,
+      nPorts = 1,
       p = 110000) 
       annotation(Placement(transformation(extent = {{90, -40}, {70, -20}})));
     Modelica.Fluid.Fittings.AbruptAdaptor suddenExpansion2(
-      diameter_a = diameter_a, 
-      diameter_b = diameter_b, 
-      port_b(p(start = 1e5)), 
-      m_flow_start = -10, 
-      F_fg(start = 100), 
-    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase, 
-      show_totalPressures = true, 
+      diameter_a = diameter_a,
+      diameter_b = diameter_b,
+      port_b(p(start = 1e5)),
+      m_flow_start = -10,
+      F_fg(start = 100),
+    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase,
+      show_totalPressures = true,
       show_portVelocities = true) 
       annotation(Placement(transformation(extent = {{-10, -40}, {10, -20}})));
     Modelica.Fluid.Fittings.AbruptAdaptor leftAdaptor(
-      diameter_a = 0.1, 
-    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase, 
+      diameter_a = 0.1,
+    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase,
       diameter_b = 1e60) 
       annotation(Placement(transformation(extent = {{-40, -40}, {-60, -20}})));
     Modelica.Fluid.Fittings.AbruptAdaptor rightAdaptor(
-    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase, 
-      diameter_a = 0.2, 
+    redeclare package Medium = Modelica.Media.Water.StandardWaterOnePhase,
+      diameter_a = 0.2,
       diameter_b = 1e60) 
       annotation(Placement(transformation(extent = {{40, -40}, {60, -20}})));
     parameter Real diameter_a = 0.1 annotation(Evaluate = true, HideResult = true);
@@ -235,10 +235,10 @@ package Explanatory
 </p>
 <p style=\"text-align: center;\"><img src=\"modelica://Modelica/Resources/Images/Fluid/Examples/Explanatory/MomentumBalanceFittings.png\" alt=\"MomentumBalanceFittings.png\" data-href=\"\" style=\"\">
 </p>
-</html>"  ), 
-      __Dymola_Commands(file = 
-      "modelica://Modelica/Resources/Scripts/Dymola/Fluid/MomentumBalanceFittings/Plot the model results.mos" 
-      "Plot the model results"), 
+</html>"  ),
+      __Dymola_Commands(file =
+      "modelica://Modelica/Resources/Scripts/Dymola/Fluid/MomentumBalanceFittings/Plot the model results.mos"
+      "Plot the model results"),
       experiment(StopTime = 1.1));
   end MomentumBalanceFittings;
   annotation();

@@ -1,15 +1,15 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function planarRotationAngle 
+function planarRotationAngle
   "给定旋转轴和矢量在坐标系1和坐标系2中的表示，返回平面旋转的角度"
 
   extends Modelica.Icons.Function;
-  input Real e[3](each final unit="1") 
+  input Real e[3](each final unit="1")
     "使坐标系1绕e旋转到坐标系2的归一化旋转轴(长度必须为1)";
-  input Real v1[3] 
+  input Real v1[3]
     "在坐标系1中解析的矢量v(不得与e平行)";
-  input Real v2[3] 
+  input Real v2[3]
     "在坐标系2中解析的矢量v，即v2 = resolve2(planarRotation(e,angle),v1)";
-  output SI.Angle angle 
+  output SI.Angle angle
     "将坐标系1沿轴e旋转到坐标系2的旋转角度范围：-pi <= angle <= pi";
 algorithm
   /* 矢量v在坐标系1和坐标系2中的解析如下：

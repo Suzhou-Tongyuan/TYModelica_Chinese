@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.Examples.Elementary.IntegerSignals;
-model Sample2 
+model Sample2
   "整数信号采样模块示例，在连续时间和时钟分区中直接馈通"
  extends Modelica.Icons.Example;
   Modelica.Clocked.IntegerSignals.Sampler.SampleClocked  sample1 
@@ -22,32 +22,32 @@ Modelica.Blocks.MathInteger.Sum sum2(         nu=2)
     annotation (Placement(transformation(extent={{-34,50},{-14,70}})));
 equation
   connect(periodicClock.y, sample1.clock) annotation (Line(
-      points={{-63.4,0},{-54,0},{-54,22.8}}, 
-      color={175,175,175}, 
-      pattern=LinePattern.Dot, 
+      points={{-63.4,0},{-54,0},{-54,22.8}},
+      color={175,175,175},
+      pattern=LinePattern.Dot,
       thickness=0.5));
   connect(sample1.y, sum1.u[1]) 
                              annotation (Line(
-    points={{-47.4,30},{-39.7,30},{-39.7,30.1},{-26,30.1}}, 
+    points={{-47.4,30},{-39.7,30},{-39.7,30.1},{-26,30.1}},
     color={255,127,0}));
   connect(sample2.y, sum1.u[2]) 
                              annotation (Line(
-    points={{-6.6,0},{-40,0},{-40,25.9},{-26,25.9}}, 
+    points={{-6.6,0},{-40,0},{-40,25.9},{-26,25.9}},
     color={255,127,0}));
   connect(integerConstant.y, sum2.u[1]) annotation (Line(
-      points={{-13,60},{-4,60},{-4,32.1},{2,32.1}}, 
+      points={{-13,60},{-4,60},{-4,32.1},{2,32.1}},
       color={255,127,0}));
   connect(sum1.y, sum2.u[2]) annotation (Line(
-      points={{-13.1,28},{-5.55,28},{-5.55,27.9},{2,27.9}}, 
+      points={{-13.1,28},{-5.55,28},{-5.55,27.9},{2,27.9}},
       color={255,127,0}));
   connect(hold1.u, sum2.y) 
     annotation (Line(points={{20.8,30},{14.9,30}}, color={255,127,0}));
-  connect(hold1.y, sample2.u) annotation (Line(points={{34.6,30},{50,30},{50,0}, 
+  connect(hold1.y, sample2.u) annotation (Line(points={{34.6,30},{50,30},{50,0},
           {7.2,0}}, color={255,127,0}));
   connect(sample1.u, step.y) annotation (Line(
-      points={{-61.2,30},{-75,30}}, 
+      points={{-61.2,30},{-75,30}},
       color={255,127,0}));
-  annotation (experiment(StopTime=0.2), 
+  annotation (experiment(StopTime=0.2),
     Documentation(info="<html>
 <p>
 模块文件的基本范例 

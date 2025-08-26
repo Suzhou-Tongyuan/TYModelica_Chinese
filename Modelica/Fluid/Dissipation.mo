@@ -1,5 +1,5 @@
 ﻿within Modelica.Fluid;
-package Dissipation 
+package Dissipation
   "对流换热与压降特性关联函数"
     extends Modelica.Icons.BasesPackage;
   import PI = Modelica.Constants.pi;
@@ -202,7 +202,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
     package Channel
     extends Modelica.Icons.VariantsPackage;
 
-      function kc_evenGapLaminar 
+      function kc_evenGapLaminar
         "均匀间隙 | 层流状态 | 考虑边界层发展 | 单侧或双侧传热 | 相同且恒定的壁面温度 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, Section Gb 6-10
@@ -218,7 +218,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -226,7 +226,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
@@ -240,12 +240,12 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         SI.Area A_cross = IN_con.s * IN_con.h "间隙横截面积";
         SI.Diameter d_hyd = 2 * IN_con.s "水力直径";
 
-        Real prandtlMax = if IN_con.target == TYP.UndevOne then 10 else if IN_con.target 
+        Real prandtlMax = if IN_con.target == TYP.UndevOne then 10 else if IN_con.target
           == TYP.UndevBoth then 1000 else 0 "最大普朗特数";
         Real prandtlMin = if IN_con.target == TYP.UndevOne or IN_con.target == TYP.UndevBoth then 
           0.1 else 0 "最小普朗特数";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross)
           "间隙中的平均速度";
 
         //故障状态
@@ -255,7 +255,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       algorithm
         Pr := abs(IN_var.eta * IN_var.cp / max(MIN, IN_var.lambda));
         Re := max(1, abs(IN_var.rho * velocity * d_hyd / max(MIN, IN_var.eta)));
-        kc := Modelica.Fluid.Dissipation.HeatTransfer.Channel.kc_evenGapLaminar_KC(IN_con, 
+        kc := Modelica.Fluid.Dissipation.HeatTransfer.Channel.kc_evenGapLaminar_KC(IN_con,
           IN_var);
         Nu := kc * d_hyd / max(MIN, IN_var.lambda);
 
@@ -279,7 +279,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_evenGapLaminar;
 
-      function kc_evenGapLaminar_KC 
+      function kc_evenGapLaminar_KC
         "均匀间隙 | 层流状态 | 考虑边界层发展 | 单侧或双侧传热 | 相同且恒定的壁面温度 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, Section Gb 6-10
@@ -294,7 +294,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           IN_var "函数 kc_evenGapLaminar_KC 的输入记录表" 
           annotation(Dialog(group = "变量输入"));
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_evenGapLaminar_KC";
 
       protected
@@ -302,11 +302,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         Real MIN = Modelica.Constants.eps;
 
-        SI.Area A_cross = max(MIN, IN_con.s * IN_con.h) 
+        SI.Area A_cross = max(MIN, IN_con.s * IN_con.h)
           "间隙横截面积";
         SI.Diameter d_hyd = 2 * IN_con.s "水力直径";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross)
           "间隙中的平均速度";
         SI.ReynoldsNumber Re = (IN_var.rho * velocity * d_hyd / max(MIN, IN_var.eta));
         SI.PrandtlNumber Pr = abs(IN_var.eta * IN_var.cp / max(MIN, IN_var.lambda));
@@ -317,11 +317,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           4.861 else if IN_con.target == TYP.DevBoth or IN_con.target == TYP.UndevBoth then 
           7.541 else 0 "第一努塞尔数";
         //资料来源: p.Gb 7, eq. 38
-        SI.NusseltNumber Nu_2 = 1.841 * (Re * Pr * d_hyd / (max(IN_con.L, MIN))) ^ (1 / 3) 
+        SI.NusseltNumber Nu_2 = 1.841 * (Re * Pr * d_hyd / (max(IN_con.L, MIN))) ^ (1 / 3)
           "第二努塞尔数";
         //资料来源: p.Gb 7, eq. 42
-        SI.NusseltNumber Nu_3 = if IN_con.target == TYP.UndevOne or IN_con.target == 
-          TYP.UndevBoth then (2 / (1 + 22 * Pr)) ^ (1 / 6) * (Re * Pr * d_hyd / (max(IN_con.L, MIN))) 
+        SI.NusseltNumber Nu_3 = if IN_con.target == TYP.UndevOne or IN_con.target ==
+          TYP.UndevBoth then (2 / (1 + 22 * Pr)) ^ (1 / 6) * (Re * Pr * d_hyd / (max(IN_con.L, MIN)))
           ^ (0.5) else 0 "第三平均努塞尔数";
         SI.NusseltNumber Nu = ((Nu_1) ^ 3 + (Nu_2) ^ 3 + (Nu_3) ^ 3) ^ (1 / 3);
 
@@ -338,7 +338,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_evenGapLaminar_KC;
 
-      record kc_evenGapLaminar_IN_con 
+      record kc_evenGapLaminar_IN_con
         "函数 kc_evenGapLaminar 和 kc_evenGapLaminar_KC 的输入记录表"
         extends 
           Modelica.Fluid.Dissipation.HeatTransfer.Channel.kc_evenGapOverall_IN_con;
@@ -352,7 +352,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end kc_evenGapLaminar_IN_con;
 
-      record kc_evenGapLaminar_IN_var 
+      record kc_evenGapLaminar_IN_var
         "函数 kc_evenGapLaminar 和 kc_evenGapLaminar_KC 的输入记录表"
 
         extends 
@@ -368,7 +368,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"                        ));
       end kc_evenGapLaminar_IN_var;
 
-      function kc_evenGapOverall 
+      function kc_evenGapOverall
         "均匀间隙 | 整体流动 | 考虑边界层发展 | 单侧或双侧传热 | 相同且恒定的壁面温度 | 表面粗糙度 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, Section Gb 6-10
@@ -387,7 +387,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -395,7 +395,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
@@ -410,12 +410,12 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         SI.Area A_cross = IN_con.s * IN_con.h "间隙横截面积";
         SI.Diameter d_hyd = 2 * IN_con.s "水力直径";
 
-        Real prandtlMax = if IN_con.target == TYP.UndevOne then 10 else if IN_con.target 
+        Real prandtlMax = if IN_con.target == TYP.UndevOne then 10 else if IN_con.target
           == TYP.UndevBoth then 1000 else 0 "最大普朗特数";
         Real prandtlMin = if IN_con.target == TYP.UndevOne or IN_con.target == TYP.UndevBoth then 
           0.1 else 0 "最小普朗特数";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross)
           "间隙中的平均速度";
 
         //故障状态
@@ -440,7 +440,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           end if;
         end for;
 
-        annotation(Inline = false, smoothOrder(normallyConstant = IN_con) = 2, 
+        annotation(Inline = false, smoothOrder(normallyConstant = IN_con) = 2,
           Documentation(info = "<html>
 <p>
 在不同的流体流动和传热情况下，计算流体流经均匀间隙时的平均对流传热系数 <strong>kc</strong>。需要注意的是，在该功能中还会观察故障状态，以检查是否满足预期的边界条件。
@@ -449,12 +449,12 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end kc_evenGapOverall;
 
-      function kc_evenGapOverall_KC 
+      function kc_evenGapOverall_KC
         "均匀间隙 | 整体流动 | 考虑边界层发展 | 单侧或双侧传热 | 相同且恒定的壁面温度 | 表面粗糙度 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, Section Gb 6-10
 
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -468,7 +468,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_evenGapOverall_KC";
 
       protected
@@ -477,11 +477,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real laminar = 2200 "层流区的最大雷诺数";
         Real turbulent = 1e4 "湍流区的最小雷诺数";
 
-        SI.Area A_cross = max(MIN, IN_con.s * IN_con.h) 
+        SI.Area A_cross = max(MIN, IN_con.s * IN_con.h)
           "间隙横截面积";
         SI.Diameter d_hyd = 2 * IN_con.s "水力直径";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross)
           "间隙中的平均速度";
         SI.ReynoldsNumber Re = (IN_var.rho * velocity * d_hyd / max(MIN, IN_var.eta));
         SI.PrandtlNumber Pr = abs(IN_var.eta * IN_var.cp / max(MIN, IN_var.lambda));
@@ -489,13 +489,13 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         kc_evenGapTurbulent_IN_con IN_con_turb(h = IN_con.h, s = IN_con.s, L = IN_con.L);
       algorithm
         kc := SMOOTH(
-          laminar, 
-          turbulent, 
+          laminar,
+          turbulent,
           Re) * Dissipation.HeatTransfer.Channel.kc_evenGapLaminar_KC(
           IN_con, IN_var) + SMOOTH(
-          turbulent, 
-          laminar, 
-          Re) * Dissipation.HeatTransfer.Channel.kc_evenGapTurbulent_KC(IN_con_turb, 
+          turbulent,
+          laminar,
+          Re) * Dissipation.HeatTransfer.Channel.kc_evenGapTurbulent_KC(IN_con_turb,
           IN_var);
         annotation(Inline = false, Documentation(info = "<html>
 <p>
@@ -507,7 +507,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_evenGapOverall_KC;
 
-      record kc_evenGapOverall_IN_con 
+      record kc_evenGapOverall_IN_con
         "函数 kc_evenGapOverall 和 kc_evenGapOverall_KC 的输入记录表"
         //均匀间隙变量
         extends 
@@ -522,7 +522,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end kc_evenGapOverall_IN_con;
 
-      record kc_evenGapOverall_IN_var 
+      record kc_evenGapOverall_IN_var
         "函数 kc_evenGapOverall 和 kc_evenGapOverall_KC 的输入记录表"
 
         //流体性质变量
@@ -542,7 +542,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"                              ));
       end kc_evenGapOverall_IN_var;
 
-      function kc_evenGapTurbulent 
+      function kc_evenGapTurbulent
         "均匀间隙 | 湍流状态 | 湍流流动 | 两侧的传热 | 相同且恒定的壁面温度 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, Section Gb 7
@@ -560,7 +560,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -568,7 +568,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
@@ -577,16 +577,16 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         Real prandtlMax = 100 "最大普朗特数";
         Real prandtlMin = 0.6 "最小普朗特数";
-        Real turbulentMax = 1e6 
+        Real turbulentMax = 1e6
           "湍流区的最大雷诺数";
-        Real turbulentMin = 3e4 
+        Real turbulentMin = 3e4
           "湍流区的最小雷诺数";
 
-        SI.Area A_cross = max(MIN, IN_con.s * IN_con.h) 
+        SI.Area A_cross = max(MIN, IN_con.s * IN_con.h)
           "间隙横截面积";
         SI.Diameter d_hyd = 2 * IN_con.s "水力直径";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross)
           "间隙中的平均速度";
 
         //故障状态
@@ -596,7 +596,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       algorithm
         Pr := abs(IN_var.eta * IN_var.cp / max(MIN, IN_var.lambda));
         Re := max(1, abs(IN_var.rho * velocity * d_hyd / max(MIN, IN_var.eta)));
-        kc := Modelica.Fluid.Dissipation.HeatTransfer.Channel.kc_evenGapTurbulent_KC(IN_con, 
+        kc := Modelica.Fluid.Dissipation.HeatTransfer.Channel.kc_evenGapTurbulent_KC(IN_con,
           IN_var);
         Nu := kc * d_hyd / max(MIN, IN_var.lambda);
 
@@ -619,7 +619,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_evenGapTurbulent;
 
-      function kc_evenGapTurbulent_KC 
+      function kc_evenGapTurbulent_KC
         "均匀间隙 | 湍流状态 | 湍流流动 | 两侧的传热 | 相同且恒定的壁面温度 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, Section Gb 7
@@ -635,28 +635,28 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_evenGapTurbulent_KC";
 
       protected
         Real MIN=Modelica.Constants.eps;
 
-        SI.Area A_cross=max(MIN, IN_con.s*IN_con.h) 
+        SI.Area A_cross=max(MIN, IN_con.s*IN_con.h)
           "间隙横截面积";
         SI.Diameter d_hyd=2*IN_con.s "水力直径";
 
-        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross) 
+        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross)
           "间隙中的平均速度";
         SI.ReynoldsNumber Re=max(MIN,(IN_var.rho*velocity*d_hyd/max(MIN, IN_var.eta)));
         SI.PrandtlNumber Pr=abs(IN_var.eta*IN_var.cp/max(MIN, IN_var.lambda));
 
         //资料来源: p.Ga 5, eq. 27
-        Real zeta=1/max(MIN, 1.8*Modelica.Math.log10(abs(Re)) - 1.5)^2 
+        Real zeta=1/max(MIN, 1.8*Modelica.Math.log10(abs(Re)) - 1.5)^2
           "压力损失系数";
 
         //资料来源: p.Gb 5, eq. 26
         //根据 Gb 7, sec. 2.4 节的假设
-        SI.NusseltNumber Nu=abs((zeta/8)*Re*Pr/(1 + 12.7*(zeta/8)^0.5*(Pr^(2/3) - 1)) 
+        SI.NusseltNumber Nu=abs((zeta/8)*Re*Pr/(1 + 12.7*(zeta/8)^0.5*(Pr^(2/3) - 1))
             *(1 + (d_hyd/max(MIN, IN_con.L))^(2/3)));
 
         //说明
@@ -673,7 +673,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"                                                ), smoothOrder(normallyConstant=IN_con) = 2);
       end kc_evenGapTurbulent_KC;
 
-      record kc_evenGapTurbulent_IN_con 
+      record kc_evenGapTurbulent_IN_con
         "函数 kc_evenGapTurbulent 和 kc_evenGapTurbulent_KC 的输入记录表"
 
         extends 
@@ -690,7 +690,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end kc_evenGapTurbulent_IN_con;
 
-      record kc_evenGapTurbulent_IN_var 
+      record kc_evenGapTurbulent_IN_var
         "函数 kc_evenGapTurbulent 和 kc_evenGapTurbulent_KC 的输入记录表"
 
         extends 
@@ -729,7 +729,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
     package General
     extends Modelica.Icons.VariantsPackage;
-      function kc_approxForcedConvection 
+      function kc_approxForcedConvection
         "强制对流 | 近似值 | 湍流状态 | 流体力学发展流体流动 的平均对流传热系数"
         extends Modelica.Icons.Function;
         //资料来源: A Bejan and A.D. Kraus. Heat Transfer handbook.John Wiley & Sons, 2nd edition, 2003. (p.424 ff)
@@ -746,7 +746,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -754,7 +754,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
@@ -768,7 +768,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real reynoldsMax[3] = {1.24e5, 1e6, 1e6} "最大雷诺数";
         Real reynoldsMin[3] = {2500, 1e4, 3e3} "最小雷诺数";
 
-        SI.Diameter d_hyd = max(MIN, 4 * IN_con.A_cross / max(MIN, IN_con.perimeter)) 
+        SI.Diameter d_hyd = max(MIN, 4 * IN_con.A_cross / max(MIN, IN_con.perimeter))
           "水力直径";
 
         //故障状态
@@ -776,28 +776,28 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       algorithm
         Pr := Modelica.Fluid.Dissipation.Utilities.Functions.General.PrandtlNumber(
-          IN_var.cp, 
-          IN_var.eta, 
+          IN_var.cp,
+          IN_var.eta,
           IN_var.lambda);
         Re := max(1, Modelica.Fluid.Dissipation.Utilities.Functions.General.ReynoldsNumber(
-          IN_con.A_cross, 
-          IN_con.perimeter, 
-          IN_var.rho, 
-          IN_var.eta, 
+          IN_con.A_cross,
+          IN_con.perimeter,
+          IN_var.rho,
+          IN_var.eta,
           abs(IN_var.m_flow))) "Reynolds number";
         kc := Modelica.Fluid.Dissipation.HeatTransfer.General.kc_approxForcedConvection_KC(
           IN_con, IN_var);
         Nu := kc * d_hyd / max(MIN, IN_var.lambda);
 
         //故障状态
-        fstatus[1] := if IN_con.target == TYP.Rough then if Pr > prandtlMax[1] or Pr 
+        fstatus[1] := if IN_con.target == TYP.Rough then if Pr > prandtlMax[1] or Pr
           < prandtlMin[1] then 1 else 0 else if IN_con.target == TYP.Middle then if 
-          Pr > prandtlMax[2] or Pr < prandtlMin[2] then 1 else 0 else if IN_con.target 
+          Pr > prandtlMax[2] or Pr < prandtlMin[2] then 1 else 0 else if IN_con.target
           == TYP.Finest then if Pr > prandtlMax[3] or Pr < prandtlMin[3] then 1 else 
           0 else 0;
-        fstatus[2] := if IN_con.target == TYP.Rough then if Re > reynoldsMax[1] or Re 
+        fstatus[2] := if IN_con.target == TYP.Rough then if Re > reynoldsMax[1] or Re
           < reynoldsMin[1] then 1 else 0 else if IN_con.target == TYP.Middle then 
-          if Re > reynoldsMax[2] or Re < reynoldsMin[2] then 1 else 0 else if IN_con.target 
+          if Re > reynoldsMax[2] or Re < reynoldsMin[2] then 1 else 0 else if IN_con.target
           == TYP.Finest then if Re > reynoldsMax[3] or Re < reynoldsMin[3] then 1 else 
           0 else 0;
 
@@ -817,7 +817,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_approxForcedConvection;
 
-      function kc_approxForcedConvection_KC 
+      function kc_approxForcedConvection_KC
         "强制对流 | 近似值 | 湍流状态 | 流体力学发展流体流动 的平均对流传热系数"
         extends Modelica.Icons.Function;
         //资料来源: A Bejan and A.D. Kraus. Heat Transfer handbook.John Wiley & Sons, 2nd edition, 2003. (p.424 ff)
@@ -835,7 +835,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_approxForcedConvection_KC";
 
       protected
@@ -843,19 +843,19 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         Real MIN = Modelica.Constants.eps;
 
-        SI.Diameter d_hyd = max(MIN, 4 * IN_con.A_cross / max(MIN, IN_con.perimeter)) 
+        SI.Diameter d_hyd = max(MIN, 4 * IN_con.A_cross / max(MIN, IN_con.perimeter))
           "水力直径";
 
-        SI.PrandtlNumber Pr = max(MIN, abs(IN_var.eta * IN_var.cp / max(MIN, IN_var.lambda))) 
+        SI.PrandtlNumber Pr = max(MIN, abs(IN_var.eta * IN_var.cp / max(MIN, IN_var.lambda)))
           "普朗特数";
-        SI.ReynoldsNumber Re = (4 * abs(IN_var.m_flow) / max(MIN, IN_con.perimeter * 
+        SI.ReynoldsNumber Re = (4 * abs(IN_var.m_flow) / max(MIN, IN_con.perimeter *
           IN_var.eta)) "雷诺数";
 
       algorithm
-        kc := IN_var.lambda / d_hyd * (if IN_con.target == TYP.Rough then 0.023 * Re ^ (4 / 5) * 
-          Pr ^ IN_con.exp_Pr else if IN_con.target == TYP.Middle then 0.023 * Re ^ (4 / 5) * Pr 
-          ^ (1 / 3) * (IN_var.eta / IN_var.eta_wall) ^ 0.14 else if IN_con.target == TYP.Finest and Pr 
-          <= 1.5 then 0.0214 * max(1, abs(Re ^ 0.8 - 100)) * Pr ^ 0.4 else if IN_con.target 
+        kc := IN_var.lambda / d_hyd * (if IN_con.target == TYP.Rough then 0.023 * Re ^ (4 / 5) *
+          Pr ^ IN_con.exp_Pr else if IN_con.target == TYP.Middle then 0.023 * Re ^ (4 / 5) * Pr
+          ^ (1 / 3) * (IN_var.eta / IN_var.eta_wall) ^ 0.14 else if IN_con.target == TYP.Finest and Pr
+          <= 1.5 then 0.0214 * max(1, abs(Re ^ 0.8 - 100)) * Pr ^ 0.4 else if IN_con.target
           == TYP.Finest then 0.012 * max(1, abs(Re ^ 0.87 - 280)) * Pr ^ 0.4 else 0);
 
         //说明
@@ -868,12 +868,12 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_approxForcedConvection_KC;
 
-      record kc_approxForcedConvection_IN_con 
+      record kc_approxForcedConvection_IN_con
         "函数 kc_approxForcedConvection 和 kc_approxForcedConvection_KC 的输入记录表"
         //通用变量
         extends 
           Modelica.Fluid.Dissipation.Utilities.Records.HeatTransfer.General;
-        parameter Real exp_Pr=0.4 
+        parameter Real exp_Pr=0.4
       "与 Dittus/Boelter有关的普朗特尔指数 | 0.4（加热） | 0.3（冷却）" 
       annotation (Dialog(group="Generic variables",enable=target == Modelica.Fluid.Dissipation.Utilities.Types.kc_general.Rough));
 
@@ -885,13 +885,13 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"  ));
       end kc_approxForcedConvection_IN_con;
 
-      record kc_approxForcedConvection_IN_var 
+      record kc_approxForcedConvection_IN_var
         "函数 kc_approxForcedConvection 和 kc_approxForcedConvection_KC 的输入记录表"
         //流体性质变量
         extends 
           Modelica.Fluid.Dissipation.Utilities.Records.General.FluidProperties;
-        SI.DynamicViscosity eta_wall 
-          "壁温下的流体动力黏度" annotation(Dialog(group = 
+        SI.DynamicViscosity eta_wall
+          "壁温下的流体动力黏度" annotation(Dialog(group =
           "流体性质", enable = target == 2));
 
         //输入变量（质量流量）
@@ -929,7 +929,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -937,20 +937,20 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
       protected
-        type TYP = 
+        type TYP =
           Modelica.Fluid.Dissipation.Utilities.Types.HTXGeometry_flatTubes annotation();
 
-        SI.Area A_c = if IN_con.geometry == TYP.LouverFin then IN_con.A_fr * ((IN_con.F_l 
-          - IN_con.delta_f) * (IN_con.F_p - IN_con.delta_f) / ((IN_con.F_l + IN_con.D_m) 
-          * IN_con.F_p)) else if IN_con.geometry == TYP.RectangularFin then IN_con.A_fr 
-          * (h * s / ((h + t + IN_con.D_m) * (s + t))) else 0 
+        SI.Area A_c = if IN_con.geometry == TYP.LouverFin then IN_con.A_fr * ((IN_con.F_l
+          - IN_con.delta_f) * (IN_con.F_p - IN_con.delta_f) / ((IN_con.F_l + IN_con.D_m)
+          * IN_con.F_p)) else if IN_con.geometry == TYP.RectangularFin then IN_con.A_fr
+          * (h * s / ((h + t + IN_con.D_m) * (s + t))) else 0
           "最小流动横截面积";
-        SI.Length h = if IN_con.geometry == TYP.RectangularFin then IN_con.D_h * (1 + 
+        SI.Length h = if IN_con.geometry == TYP.RectangularFin then IN_con.D_h * (1 +
           IN_con.alpha) / (2 * IN_con.alpha) else 0 "自由流高度";
         SI.Length l = if IN_con.geometry == TYP.RectangularFin then t / IN_con.delta else 
           0 "鳍片长度";
@@ -959,7 +959,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         SI.Length t = if IN_con.geometry == TYP.RectangularFin then s * IN_con.gamma else 
           0 "鳍片厚度";
       algorithm
-        kc := Modelica.Fluid.Dissipation.HeatTransfer.HeatExchanger.kc_flatTube_KC(IN_con, 
+        kc := Modelica.Fluid.Dissipation.HeatTransfer.HeatExchanger.kc_flatTube_KC(IN_con,
           IN_var);
         Pr := abs(IN_var.eta * IN_var.cp / IN_var.lambda);
 
@@ -971,7 +971,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           Nu := max(1e-3, kc * IN_con.D_h / IN_var.lambda);
         end if;
 
-        failureStatus := if IN_con.geometry == TYP.LouverFin then if Re < 100 or Re 
+        failureStatus := if IN_con.geometry == TYP.LouverFin then if Re < 100 or Re
           > 3000 then 1 else 0 else if IN_con.geometry == TYP.RectangularFin then 
           if Re < 300 or Re > 5000 then 1 else 0 else 0;
 
@@ -1002,29 +1002,29 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_flatTubePlateFin_KC";
 
       protected
-        type TYP = 
+        type TYP =
           Modelica.Fluid.Dissipation.Utilities.Types.HTXGeometry_flatTubes annotation();
 
         Real MIN = Modelica.Constants.eps;
         Real Phi = IN_con.Phi * 180 / PI "散热孔角度";
 
-        SI.ReynoldsNumber Re_Dh = max(MIN, (abs(IN_var.m_flow) * IN_con.D_h / (IN_var.eta * 
+        SI.ReynoldsNumber Re_Dh = max(MIN, (abs(IN_var.m_flow) * IN_con.D_h / (IN_var.eta *
           A_c))) "基于水力直径的雷诺数";
-        SI.ReynoldsNumber Re_Lp = max(MIN, (abs(IN_var.m_flow) * IN_con.L_p / (IN_var.eta * 
+        SI.ReynoldsNumber Re_Lp = max(MIN, (abs(IN_var.m_flow) * IN_con.L_p / (IN_var.eta *
           A_c))) "基于散热孔距的雷诺数";
         SI.PrandtlNumber Pr = IN_var.eta * IN_var.cp / IN_var.lambda "普朗特数";
         Real j "Colburn j 系数";
 
-        SI.Area A_c = if IN_con.geometry == TYP.LouverFin then IN_con.A_fr * ((IN_con.F_l 
-          - IN_con.delta_f) * (IN_con.F_p - IN_con.delta_f) / ((IN_con.F_l + IN_con.D_m) 
-          * IN_con.F_p)) else if IN_con.geometry == TYP.RectangularFin then IN_con.A_fr 
-          * (h * s / ((h + t + IN_con.D_m) * (s + t))) else 0 
+        SI.Area A_c = if IN_con.geometry == TYP.LouverFin then IN_con.A_fr * ((IN_con.F_l
+          - IN_con.delta_f) * (IN_con.F_p - IN_con.delta_f) / ((IN_con.F_l + IN_con.D_m)
+          * IN_con.F_p)) else if IN_con.geometry == TYP.RectangularFin then IN_con.A_fr
+          * (h * s / ((h + t + IN_con.D_m) * (s + t))) else 0
           "最小流动横截面积";
-        SI.Length h = if IN_con.geometry == TYP.RectangularFin then IN_con.D_h * (1 + 
+        SI.Length h = if IN_con.geometry == TYP.RectangularFin then IN_con.D_h * (1 +
           IN_con.alpha) / (2 * IN_con.alpha) else 0 "自由流高度";
         SI.Length l = if IN_con.geometry == TYP.RectangularFin then t / IN_con.delta else 
           0 "鳍片长度";
@@ -1035,13 +1035,13 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       algorithm
         if IN_con.geometry == TYP.LouverFin then
-          j := Re_Lp ^ (-0.49) * (Phi / 90) ^ 0.27 * (IN_con.F_p / IN_con.L_p) ^ (-0.14) * (IN_con.F_l 
-            / IN_con.L_p) ^ (-0.29) * (IN_con.T_d / IN_con.L_p) ^ (-0.23) * (IN_con.L_l / IN_con.L_p) 
+          j := Re_Lp ^ (-0.49) * (Phi / 90) ^ 0.27 * (IN_con.F_p / IN_con.L_p) ^ (-0.14) * (IN_con.F_l
+            / IN_con.L_p) ^ (-0.29) * (IN_con.T_d / IN_con.L_p) ^ (-0.23) * (IN_con.L_l / IN_con.L_p)
             ^ 0.68 * (IN_con.T_p / IN_con.L_p) ^ (-0.28) * (IN_con.delta_f / IN_con.L_p) ^ (-0.05);
           kc := j * (Re_Lp * Pr ^ (1 / 3) * IN_var.lambda / IN_con.L_p);
 
         elseif IN_con.geometry == TYP.RectangularFin then
-          j := 0.6522 * Re_Dh ^ (-0.5403) * (s / h) ^ (-0.1541) * (t / l) ^ 0.1499 * (t / s) ^ (-0.0678) * (1 
+          j := 0.6522 * Re_Dh ^ (-0.5403) * (s / h) ^ (-0.1541) * (t / l) ^ 0.1499 * (t / s) ^ (-0.0678) * (1
             + 5.269e-5 * Re_Dh ^ 1.340 * (s / h) ^ 0.504 * (t / l) ^ 0.456 * (t / s) ^ (-1.055)) ^ 0.1;
           kc := j * (Re_Dh * Pr ^ (1 / 3) * IN_var.lambda / IN_con.D_h);
         end if;
@@ -1055,41 +1055,41 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_flatTube_KC;
 
-      record kc_flatTube_IN_con 
+      record kc_flatTube_IN_con
         "函数 kc_flatTube 和 kc_flatTube_KC 的输入记录表"
         extends Modelica.Icons.Record;
 
         Modelica.Fluid.Dissipation.Utilities.Types.HTXGeometry_flatTubes 
-          geometry = Dissipation.Utilities.Types.HTXGeometry_flatTubes.LouverFin 
+          geometry = Dissipation.Utilities.Types.HTXGeometry_flatTubes.LouverFin
           "鳍片几何形状的选择" annotation(Dialog(group = "换热"));
 
         SI.Area A_fr = 0 "正面区域" annotation(Dialog(group = "换热"));
-        SI.Length D_h = 0 "水力直径" annotation(Dialog(group = "换热", 
+        SI.Length D_h = 0 "水力直径" annotation(Dialog(group = "换热",
           enable = geometry == 2));
         SI.Length D_m = 0 "扁管的主要管径" 
           annotation(Dialog(group = "换热"));
-        SI.Length F_l = 0 "鳍片长度" annotation(Dialog(group = "换热", enable = 
+        SI.Length F_l = 0 "鳍片长度" annotation(Dialog(group = "换热", enable =
           geometry == 1));
         SI.Length F_p = 0 "鳍片距，鳍片间距 + 鳍片厚度" annotation(Dialog(
           group = "换热", enable = geometry == 1));
-        SI.Length L_l = 0 "散热孔长度" annotation(Dialog(group = "换热", 
+        SI.Length L_l = 0 "散热孔长度" annotation(Dialog(group = "换热",
           enable = geometry == 1));
-        SI.Length L_p = 0 "散热孔距" annotation(Dialog(group = "换热", 
+        SI.Length L_p = 0 "散热孔距" annotation(Dialog(group = "换热",
           enable = geometry == 1));
-        SI.Length T_d = 0 "管道深度" annotation(Dialog(group = "换热", enable = 
+        SI.Length T_d = 0 "管道深度" annotation(Dialog(group = "换热", enable =
           geometry == 1));
-        SI.Length T_p = 0 "管间距" annotation(Dialog(group = "换热", enable = 
+        SI.Length T_p = 0 "管间距" annotation(Dialog(group = "换热", enable =
           geometry == 1));
 
         Real alpha = 0 "侧鳍间距 (s) / 自由流高度 (h)" annotation(
           Dialog(group = "Heat exchanger", enable = geometry == 2));
         Real gamma = 0 "鳍片厚度 (t) / 侧鳍片间距 (s)" annotation(Dialog(
           group = "换热", enable = geometry == 2));
-        Real delta = 0 "鳍片厚度 (t) / 鳍片长度 (l)" annotation(Dialog(group = 
+        Real delta = 0 "鳍片厚度 (t) / 鳍片长度 (l)" annotation(Dialog(group =
           "换热", enable = geometry == 2));
-        SI.Length delta_f = 0 "鳍片厚度" annotation(Dialog(group = "换热", 
+        SI.Length delta_f = 0 "鳍片厚度" annotation(Dialog(group = "换热",
           enable = geometry == 1));
-        SI.Angle Phi = 0 "散热孔角度" annotation(Dialog(group = "换热", 
+        SI.Angle Phi = 0 "散热孔角度" annotation(Dialog(group = "换热",
           enable = geometry == 1));
 
       annotation(Documentation(info = "<html>
@@ -1099,7 +1099,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end kc_flatTube_IN_con;
 
-      record kc_flatTube_IN_var 
+      record kc_flatTube_IN_var
         "函数 kc_flatTube 和 kc_flatTube_KC 的输入记录表"
         extends Modelica.Icons.Record;
 
@@ -1131,7 +1131,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -1139,20 +1139,20 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
       protected
-        type TYP = 
+        type TYP =
           Modelica.Fluid.Dissipation.Utilities.Types.HTXGeometry_roundTubes annotation();
 
         SI.Area A_c = IN_con.A_fr * ((IN_con.F_p * IN_con.P_t - IN_con.F_p * IN_con.D_c - (
-          IN_con.P_t - IN_con.D_c) * IN_con.delta_f) / (IN_con.F_p * IN_con.P_t)) 
+          IN_con.P_t - IN_con.D_c) * IN_con.delta_f) / (IN_con.F_p * IN_con.P_t))
           "最小流动横截面积";
-        SI.Area A_tot = if IN_con.geometry == TYP.LouverFin then IN_con.A_fr * ((IN_con.N 
-          * PI * IN_con.D_c * (IN_con.F_p - IN_con.delta_f) + 2 * (IN_con.P_t * IN_con.L - 
-          IN_con.N * PI * IN_con.D_c ^ 2 / 4)) / (IN_con.P_t * IN_con.F_p)) else 0 
+        SI.Area A_tot = if IN_con.geometry == TYP.LouverFin then IN_con.A_fr * ((IN_con.N
+          * PI * IN_con.D_c * (IN_con.F_p - IN_con.delta_f) + 2 * (IN_con.P_t * IN_con.L -
+          IN_con.N * PI * IN_con.D_c ^ 2 / 4)) / (IN_con.P_t * IN_con.F_p)) else 0
           "总传热面积";
         SI.Length D_h = if IN_con.geometry == TYP.LouverFin then 4 * A_c * IN_con.L / A_tot else 
           0 "水力直径";
@@ -1163,7 +1163,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       0 "水力直径";*/
 
       algorithm
-        kc := Modelica.Fluid.Dissipation.HeatTransfer.HeatExchanger.kc_roundTube_KC(IN_con, 
+        kc := Modelica.Fluid.Dissipation.HeatTransfer.HeatExchanger.kc_roundTube_KC(IN_con,
           IN_var);
         Pr := abs(IN_var.eta * IN_var.cp / IN_var.lambda);
 
@@ -1173,8 +1173,8 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           Nu := max(1e-3, kc * IN_con.D_c / IN_var.lambda);
         end if;
 
-        failureStatus := if IN_con.geometry == TYP.PlainFin then if Re < 300 or Re > 
-          8000 then 1 else 0 else if IN_con.geometry == TYP.LouverFin then if Re < 
+        failureStatus := if IN_con.geometry == TYP.PlainFin then if Re < 300 or Re >
+          8000 then 1 else 0 else if IN_con.geometry == TYP.LouverFin then if Re <
           300 or Re > 7000 then 1 else 0 else if IN_con.geometry == TYP.SlitFin then 
           if Re < 400 or Re > 7000 then 1 else 0 else if IN_con.geometry == TYP.WavyFin then 
           if Re < 350 or Re > 7000 then 1 else 0 else 0;
@@ -1191,7 +1191,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         extends Modelica.Icons.Function;
         //资料来源: A.M. Jacobi, Y. Park, D. Tafti, X. Zhang. AN ASSESSMENT OF THE STATE OF THE ART, AND POTENTIAL DESIGN IMPROVEMENTS, FOR FLAT-TUBE HEAT EXCHANGERS IN AIR CONDITIONING AND REFRIGERATION APPLICATIONS - PHASE I
 
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -1205,16 +1205,16 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_roundTube_KC";
 
       protected
-        type TYP = 
+        type TYP =
           Modelica.Fluid.Dissipation.Utilities.Types.HTXGeometry_roundTubes annotation();
 
         Real MIN = Modelica.Constants.eps;
 
-        SI.ReynoldsNumber Re_Dc = max(MIN, (abs(IN_var.m_flow) * IN_con.D_c / (IN_var.eta * 
+        SI.ReynoldsNumber Re_Dc = max(MIN, (abs(IN_var.m_flow) * IN_con.D_c / (IN_var.eta *
           A_c))) "基于鳍环直径的雷诺数";
 
         SI.ReynoldsNumber Re_i "波状鳍片过渡到线性化计算时的雷诺数";
@@ -1223,11 +1223,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real j "Colburn j 系数";
 
         SI.Area A_c = IN_con.A_fr * ((IN_con.F_p * IN_con.P_t - IN_con.F_p * IN_con.D_c - (
-          IN_con.P_t - IN_con.D_c) * IN_con.delta_f) / (IN_con.F_p * IN_con.P_t)) 
+          IN_con.P_t - IN_con.D_c) * IN_con.delta_f) / (IN_con.F_p * IN_con.P_t))
           "最小流动横截面积";
-        SI.Area A_tot = if IN_con.geometry == TYP.LouverFin then IN_con.A_fr * ((IN_con.N 
-          * PI * IN_con.D_c * (IN_con.F_p - IN_con.delta_f) + 2 * (IN_con.P_t * IN_con.L - 
-          IN_con.N * PI * IN_con.D_c ^ 2 / 4)) / (IN_con.P_t * IN_con.F_p)) else 0 
+        SI.Area A_tot = if IN_con.geometry == TYP.LouverFin then IN_con.A_fr * ((IN_con.N
+          * PI * IN_con.D_c * (IN_con.F_p - IN_con.delta_f) + 2 * (IN_con.P_t * IN_con.L -
+          IN_con.N * PI * IN_con.D_c ^ 2 / 4)) / (IN_con.P_t * IN_con.F_p)) else 0
           "总换热面积";
         SI.Length D_h = if IN_con.geometry == TYP.LouverFin then 4 * A_c * IN_con.L / A_tot else 
           0 "水力直径";
@@ -1248,8 +1248,8 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       algorithm
         if IN_con.geometry == TYP.PlainFin then
-          j := 0.991 * (2.24 * Re_Dc ^ (-0.092) * (IN_con.N / 4) ^ (-0.031)) ^ (0.607 * (4 - IN_con.N)) 
-            * (0.14 * Re_Dc ^ (-0.328) * (IN_con.P_t / IN_con.P_l) ^ (-0.502) * (IN_con.F_p / IN_con.D_c) 
+          j := 0.991 * (2.24 * Re_Dc ^ (-0.092) * (IN_con.N / 4) ^ (-0.031)) ^ (0.607 * (4 - IN_con.N))
+            * (0.14 * Re_Dc ^ (-0.328) * (IN_con.P_t / IN_con.P_l) ^ (-0.502) * (IN_con.F_p / IN_con.D_c)
             ^ (0.0312)) * (2.55 * (IN_con.P_l / IN_con.D_c) ^ (-1.28));
           kc := j * (Re_Dc * Pr ^ (1 / 3) * IN_var.lambda / IN_con.D_c);
 
@@ -1259,50 +1259,50 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
             J2 := -0.7344 + 2.1059 * IN_con.N ^ 0.55 / (log(Re_Dc) - 3.2);
             J3 := 0.08485 * (IN_con.P_l / IN_con.P_t) ^ (-4.4) * IN_con.N ^ (-0.68);
             J4 := -0.1741 * log(IN_con.N);
-            j := 14.3117 * Re_Dc ^ J1 * (IN_con.F_p / IN_con.D_c) ^ J2 * (IN_con.L_h / IN_con.L_p) ^ 
+            j := 14.3117 * Re_Dc ^ J1 * (IN_con.F_p / IN_con.D_c) ^ J2 * (IN_con.L_h / IN_con.L_p) ^
               J3 * (IN_con.F_p / IN_con.P_l) ^ J4 * (IN_con.P_l / IN_con.P_t) ^ (-1.724);
           elseif Re_Dc > 1100 then
-            J5 := -0.6027 + 0.02593 * (IN_con.P_l / D_h) ^ 0.52 * IN_con.N ^ (-0.5) * log(IN_con.L_h 
+            J5 := -0.6027 + 0.02593 * (IN_con.P_l / D_h) ^ 0.52 * IN_con.N ^ (-0.5) * log(IN_con.L_h
               / IN_con.L_p);
             J6 := -0.4776 + 0.40774 * IN_con.N ^ 0.7 / (log(Re_Dc) - 4.4);
-            J7 := -0.58655 * (IN_con.F_p / D_h) ^ 2.3 * (IN_con.P_l / IN_con.P_t) ^ (-1.6) * IN_con.N 
+            J7 := -0.58655 * (IN_con.F_p / D_h) ^ 2.3 * (IN_con.P_l / IN_con.P_t) ^ (-1.6) * IN_con.N
               ^ (-0.65);
             J8 := 0.0814 * (log(Re_Dc) - 3);
-            j := 1.1373 * Re_Dc ^ J5 * (IN_con.F_p / IN_con.P_l) ^ J6 * (IN_con.L_h / IN_con.L_p) ^ 
+            j := 1.1373 * Re_Dc ^ J5 * (IN_con.F_p / IN_con.P_l) ^ J6 * (IN_con.L_h / IN_con.L_p) ^
               J7 * (IN_con.P_l / IN_con.P_t) ^ J8 * IN_con.N ^ 0.3545;
           else
             J1 := -0.991 - 0.1055 * (IN_con.P_l / IN_con.P_t) ^ 3.1 * log(IN_con.L_h / IN_con.L_p);
             J2 := -0.7344 + 2.1059 * IN_con.N ^ 0.55 / (log(Re_Dc) - 3.2);
             J3 := 0.08485 * (IN_con.P_l / IN_con.P_t) ^ (-4.4) * IN_con.N ^ (-0.68);
             J4 := -0.1741 * log(IN_con.N);
-            J5 := -0.6027 + 0.02593 * (IN_con.P_l / D_h) ^ 0.52 * IN_con.N ^ (-0.5) * log(IN_con.L_h 
+            J5 := -0.6027 + 0.02593 * (IN_con.P_l / D_h) ^ 0.52 * IN_con.N ^ (-0.5) * log(IN_con.L_h
               / IN_con.L_p);
             J6 := -0.4776 + 0.40774 * IN_con.N ^ 0.7 / (log(Re_Dc) - 4.4);
-            J7 := -0.58655 * (IN_con.F_p / D_h) ^ 2.3 * (IN_con.P_l / IN_con.P_t) ^ (-1.6) * IN_con.N 
+            J7 := -0.58655 * (IN_con.F_p / D_h) ^ 2.3 * (IN_con.P_l / IN_con.P_t) ^ (-1.6) * IN_con.N
               ^ (-0.65);
             J8 := 0.0814 * (log(Re_Dc) - 3);
             j := SMOOTH(
-              900, 
-              1100, 
-              Re_Dc) * (14.3117 * Re_Dc ^ J1 * (IN_con.F_p / IN_con.D_c) ^ J2 * (IN_con.L_h / IN_con.L_p) 
-              ^ J3 * (IN_con.F_p / IN_con.P_l) ^ J4 * (IN_con.P_l / IN_con.P_t) ^ (-1.724)) + 
+              900,
+              1100,
+              Re_Dc) * (14.3117 * Re_Dc ^ J1 * (IN_con.F_p / IN_con.D_c) ^ J2 * (IN_con.L_h / IN_con.L_p)
+              ^ J3 * (IN_con.F_p / IN_con.P_l) ^ J4 * (IN_con.P_l / IN_con.P_t) ^ (-1.724)) +
               SMOOTH(
-              1100, 
-              900, 
-              Re_Dc) * (1.1373 * Re_Dc ^ J5 * (IN_con.F_p / IN_con.P_l) ^ J6 * (IN_con.L_h / IN_con.L_p) 
+              1100,
+              900,
+              Re_Dc) * (1.1373 * Re_Dc ^ J5 * (IN_con.F_p / IN_con.P_l) ^ J6 * (IN_con.L_h / IN_con.L_p)
               ^ J7 * (IN_con.P_l / IN_con.P_t) ^ J8 * IN_con.N ^ 0.3545);
           end if;
           kc := SMOOTH(
-            100, 
-            0, 
+            100,
+            0,
             Re_Dc) * j * (Re_Dc * Pr ^ (1 / 3) * IN_var.lambda / IN_con.D_c);
 
         elseif IN_con.geometry == TYP.SlitFin then
-          J1 := -0.674 + 0.1316 * IN_con.N / log(Re_Dc) - 0.3769 * IN_con.F_p / IN_con.D_c - 
+          J1 := -0.674 + 0.1316 * IN_con.N / log(Re_Dc) - 0.3769 * IN_con.F_p / IN_con.D_c -
             1.8857 * IN_con.N / Re_Dc;
           J2 := -0.0178 + 0.996 * IN_con.N / log(Re_Dc) + 26.7 * IN_con.N / Re_Dc;
           J3 := 1.865 + 1244.03 * IN_con.F_p / (Re_Dc * IN_con.D_c) - 14.37 / log(Re_Dc);
-          j := 1.6409 * Re_Dc ^ J1 * (IN_con.S_p / IN_con.S_h) ^ 1.16 * (IN_con.P_t / IN_con.P_l) ^ 
+          j := 1.6409 * Re_Dc ^ J1 * (IN_con.S_p / IN_con.S_h) ^ 1.16 * (IN_con.P_t / IN_con.P_l) ^
             1.37 * (IN_con.F_p / IN_con.D_c) ^ J2 * IN_con.N ^ J3;
           kc := j * (Re_Dc * Pr ^ (1 / 3) * IN_var.lambda / IN_con.D_c);
 
@@ -1330,12 +1330,12 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"                ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_roundTube_KC;
 
-      record kc_roundTube_IN_con 
+      record kc_roundTube_IN_con
         "函数 kc_roundTube 和 kc_roundTube_KC 的输入记录表"
         extends Modelica.Icons.Record;
 
         Modelica.Fluid.Dissipation.Utilities.Types.HTXGeometry_roundTubes 
-          geometry = Dissipation.Utilities.Types.HTXGeometry_roundTubes.PlainFin 
+          geometry = Dissipation.Utilities.Types.HTXGeometry_roundTubes.PlainFin
           "鳍片几何形状的选择" annotation(Dialog(group = "换热"));
 
         SI.Area A_fr = 0 "正面区域" annotation(Dialog(group = "换热"));
@@ -1343,25 +1343,25 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "换热"));
         SI.Length F_p = 0 "鳍片距，鳍片间距 + 鳍片厚度" 
           annotation(Dialog(group = "换热"));
-        SI.Length L = 0 "换热长度" annotation(Dialog(group = 
+        SI.Length L = 0 "换热长度" annotation(Dialog(group =
           "换热", enable = geometry == 2));
-        SI.Length L_h = 0 "散热孔高度" annotation(Dialog(group = "换热", 
+        SI.Length L_h = 0 "散热孔高度" annotation(Dialog(group = "换热",
           enable = geometry == 2));
-        SI.Length L_p = 0 "散热孔距" annotation(Dialog(group = "换热", 
+        SI.Length L_p = 0 "散热孔距" annotation(Dialog(group = "换热",
           enable = geometry == 2));
-        Integer N = 0 "管道排数" annotation(Dialog(group = "换热", 
+        Integer N = 0 "管道排数" annotation(Dialog(group = "换热",
           enable = (geometry == 1 or geometry == 2 or geometry == 3)));
         SI.Length P_d = 0 "波状鳍的深度、波高" annotation(Dialog(
           group = "换热", enable = geometry == 4));
-        SI.Length P_l = 0 "纵向管间距" annotation(Dialog(group = 
+        SI.Length P_l = 0 "纵向管间距" annotation(Dialog(group =
           "换热", enable = (geometry == 1 or geometry == 2 or geometry == 3)));
         SI.Length P_t = 0 "横向管间距" 
           annotation(Dialog(group = "换热"));
-        SI.Length S_h = 0 "狭缝高度" annotation(Dialog(group = "换热", 
+        SI.Length S_h = 0 "狭缝高度" annotation(Dialog(group = "换热",
           enable = geometry == 3));
-        SI.Length S_p = 0 "狭缝间距" annotation(Dialog(group = "换热", enable = 
+        SI.Length S_p = 0 "狭缝间距" annotation(Dialog(group = "换热", enable =
           geometry == 3));
-        SI.Length X_f = 0 "波状鳍的半波长" annotation(Dialog(group = 
+        SI.Length X_f = 0 "波状鳍的半波长" annotation(Dialog(group =
           "换热", enable = geometry == 4));
 
         SI.Length delta_f = 0 "鳍片厚度" annotation(Dialog(group = "换热"));
@@ -1373,7 +1373,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end kc_roundTube_IN_con;
 
-      record kc_roundTube_IN_var 
+      record kc_roundTube_IN_var
         "函数 kc_roundTube 和 kc_roundTube_KC 的输入记录表"
         extends Modelica.Icons.Record;
 
@@ -1401,7 +1401,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
     package HelicalPipe
     extends Modelica.Icons.VariantsPackage;
-      function kc_laminar 
+      function kc_laminar
         "螺旋管 | 层流状态 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, section Gc1 - Gc2
@@ -1418,7 +1418,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -1426,7 +1426,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
@@ -1436,14 +1436,14 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         SI.Diameter d_hyd = IN_con.d_hyd "水力直径";
         SI.Area A_cross = PI * IN_con.d_hyd ^ 2 / 4 "圆形横截面积";
         SI.Diameter d_s = IN_con.L / (IN_con.n_nt * PI) "线圈平均直径";
-        SI.Diameter d_w = sqrt(max(MIN, (d_s ^ 2 - (IN_con.h / PI) ^ 2))) 
+        SI.Diameter d_w = sqrt(max(MIN, (d_s ^ 2 - (IN_con.h / PI) ^ 2)))
           "螺旋管平均直径";
-        SI.Diameter d_coil = max(d_w, d_w * (1 + (IN_con.h / (PI * d_w)) ^ 2)) 
+        SI.Diameter d_coil = max(d_w, d_w * (1 + (IN_con.h / (PI * d_w)) ^ 2))
           "螺旋管的平均曲率直径";
-        SI.ReynoldsNumber Re_crit = 2300 * (1 + 8.6 * (IN_con.d_hyd / d_coil) ^ 0.45) 
+        SI.ReynoldsNumber Re_crit = 2300 * (1 + 8.6 * (IN_con.d_hyd / d_coil) ^ 0.45)
           "临界雷诺数";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross)
           "平均速度";
 
         //故障状态
@@ -1475,7 +1475,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_laminar;
 
-      function kc_laminar_KC 
+      function kc_laminar_KC
         "螺旋管 | 流体力学发展的层流区 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, section Gc1 - Gc2
@@ -1492,7 +1492,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_laminar_KC";
 
       protected
@@ -1501,22 +1501,22 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         SI.Diameter d_hyd=IN_con.d_hyd "水力直径";
         SI.Area A_cross=PI*IN_con.d_hyd^2/4 "圆形横截面积";
         SI.Diameter d_s=IN_con.L/(IN_con.n_nt*PI) "线圈平均直径";
-        SI.Diameter d_w=sqrt(max(MIN, (d_s^2 - (IN_con.h/PI)^2))) 
+        SI.Diameter d_w=sqrt(max(MIN, (d_s^2 - (IN_con.h/PI)^2)))
           "螺旋管平均直径";
-        SI.Diameter d_coil=max(d_w, d_w*(1 + (IN_con.h/(PI*d_w))^2)) 
+        SI.Diameter d_coil=max(d_w, d_w*(1 + (IN_con.h/(PI*d_w))^2))
           "螺旋管的平均曲率直径";
 
-        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross) 
+        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross)
           "平均速度";
         SI.ReynoldsNumber Re=(IN_var.rho*velocity*IN_con.d_hyd/max(MIN, IN_var.eta));
         SI.PrandtlNumber Pr=abs(IN_var.eta*IN_var.cp/max(MIN, IN_var.lambda));
 
-        Real m=0.5 + 0.2903*(IN_con.d_hyd/d_coil)^0.194 
+        Real m=0.5 + 0.2903*(IN_con.d_hyd/d_coil)^0.194
           "实际雷诺数的指数";
 
         //说明
       algorithm
-        kc := (IN_var.lambda/IN_con.d_hyd)*(3.66 + 0.08*(1 + 0.8*(IN_con.d_hyd/d_coil) 
+        kc := (IN_var.lambda/IN_con.d_hyd)*(3.66 + 0.08*(1 + 0.8*(IN_con.d_hyd/d_coil)
           ^0.9)*Re^(m)*Pr^(1/3));
       annotation(Inline=false, Documentation(info="<html>
 <p>
@@ -1528,7 +1528,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"          ), smoothOrder(normallyConstant= IN_con) = 2);
       end kc_laminar_KC;
 
-      record kc_laminar_IN_con 
+      record kc_laminar_IN_con
         "函数 kc_laminar 和 kc_laminar_KC 的输入记录表"
 
         extends 
@@ -1540,7 +1540,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"           ));
       end kc_laminar_IN_con;
 
-      record kc_laminar_IN_var 
+      record kc_laminar_IN_var
         "函数 kc_laminar 和 kc_laminar_KC 的输入记录表"
 
         extends 
@@ -1553,7 +1553,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end kc_laminar_IN_var;
 
-      function kc_overall 
+      function kc_overall
         "螺旋管 | 整体流 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, section Gc1 - Gc2
@@ -1570,7 +1570,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation (Dialog(group="输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation (Dialog(group="输出"));
@@ -1578,7 +1578,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation (Dialog(group="输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation (Dialog(group="输出"));
 
@@ -1587,7 +1587,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         SI.Area A_cross=PI*IN_con.d_hyd^2/4 "横截面积";
 
-        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross) 
+        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross)
           "平均速度";
 
         //说明
@@ -1608,13 +1608,13 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"                ), smoothOrder(normallyConstant= IN_con) = 2);
       end kc_overall;
 
-      function kc_overall_KC 
+      function kc_overall_KC
         "螺旋管 | 整体流 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, section Gc1 - Gc2
         //根据资料来源的方程式符号
 
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -1627,7 +1627,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           IN_var "函数 kc_overall_KC 的输入记录表" 
           annotation (Dialog(group="变量输入"));
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_overall_KC";
 
       protected
@@ -1636,31 +1636,31 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real turbulent=2.2e4 "湍流区的最小雷诺数";
 
         SI.Area A_cross=PI*IN_con.d_hyd^2/4 "Cross sectional area";
-        SI.Diameter d_s=max(1e-6, IN_con.L/(IN_con.n_nt*PI)) 
+        SI.Diameter d_s=max(1e-6, IN_con.L/(IN_con.n_nt*PI))
           "线圈平均直径";
-        SI.Diameter d_w=sqrt(max(MIN, abs(d_s^2 - (IN_con.h/PI)^2))) 
+        SI.Diameter d_w=sqrt(max(MIN, abs(d_s^2 - (IN_con.h/PI)^2)))
           "螺旋管平均直径";
-        SI.Diameter d_coil=d_w*(1 + (IN_con.h/(PI*d_w))^2) 
+        SI.Diameter d_coil=d_w*(1 + (IN_con.h/(PI*d_w))^2)
           "螺旋管的平均曲率直径";
-        SI.ReynoldsNumber Re_crit=min(4e3, 2300*(1 + 8.6*(IN_con.d_hyd/d_coil)^0.45)) 
+        SI.ReynoldsNumber Re_crit=min(4e3, 2300*(1 + 8.6*(IN_con.d_hyd/d_coil)^0.45))
           "临界雷诺数";
 
-        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross) 
+        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross)
           "平均速度";
-        SI.ReynoldsNumber Re=(IN_var.rho*velocity*IN_con.d_hyd/max(MIN, 
+        SI.ReynoldsNumber Re=(IN_var.rho*velocity*IN_con.d_hyd/max(MIN,
             IN_var.eta));
         SI.PrandtlNumber Pr=abs(IN_var.eta*IN_var.cp/max(MIN, IN_var.lambda));
 
         //说明
       algorithm
         kc := SMOOTH(
-                Re_crit, 
-                turbulent, 
-                Re)*Dissipation.HeatTransfer.HelicalPipe.kc_laminar_KC(IN_con, 
+                Re_crit,
+                turbulent,
+                Re)*Dissipation.HeatTransfer.HelicalPipe.kc_laminar_KC(IN_con,
           IN_var) + SMOOTH(
-                turbulent, 
-                Re_crit, 
-                Re)*Dissipation.HeatTransfer.HelicalPipe.kc_turbulent_KC(IN_con, 
+                turbulent,
+                Re_crit,
+                Re)*Dissipation.HeatTransfer.HelicalPipe.kc_turbulent_KC(IN_con,
           IN_var);
       annotation (Inline=false, Documentation(info="<html>
 <p>
@@ -1673,7 +1673,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end kc_overall_KC;
 
-      record kc_overall_IN_con 
+      record kc_overall_IN_con
         "函数 kc_overall 和 kc_overall_KC 的输入记录表"
 
         //螺旋管变量
@@ -1686,7 +1686,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"          ));
       end kc_overall_IN_con;
 
-      record kc_overall_IN_var 
+      record kc_overall_IN_var
         "函数 kc_overall 和 kc_overall_KC 的输入记录表"
 
         //流体性质变量
@@ -1702,7 +1702,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"                    ));
       end kc_overall_IN_var;
 
-      function kc_turbulent 
+      function kc_turbulent
         "螺旋管| 流体力学发展的湍流区 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, section Gc1 - Gc2
@@ -1719,7 +1719,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation (Dialog(group="输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation (Dialog(group="输出"));
@@ -1727,7 +1727,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation (Dialog(group="输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation (Dialog(group="输出"));
 
@@ -1738,7 +1738,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         SI.Area A_cross=PI*IN_con.d_hyd^2/4 "横截面积";
 
-        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross) 
+        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross)
           "平均速度";
 
         //故障状态
@@ -1770,7 +1770,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"                                ), smoothOrder(normallyConstant=IN_con) = 2);
       end kc_turbulent;
 
-      function kc_turbulent_KC 
+      function kc_turbulent_KC
         "螺旋管 | 流体力学发展的湍流区 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, 9th edition, Springer-Verlag, 2002, section Gc1 - Gc2
@@ -1787,7 +1787,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_turbulent_KC";
 
       protected
@@ -1797,23 +1797,23 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         SI.Diameter d_hyd=IN_con.d_hyd "水力直径";
         SI.Area A_cross=PI*IN_con.d_hyd^2/4 "圆形横截面积";
         SI.Diameter d_s=IN_con.L/(IN_con.n_nt*PI) "Mean coil diameter";
-        SI.Diameter d_w=sqrt(max(MIN, (d_s^2 - (IN_con.h/PI)^2))) 
+        SI.Diameter d_w=sqrt(max(MIN, (d_s^2 - (IN_con.h/PI)^2)))
           "螺旋管平均直径";
-        SI.Diameter d_coil=max(d_w, d_w*(1 + (IN_con.h/(PI*d_w))^2)) 
+        SI.Diameter d_coil=max(d_w, d_w*(1 + (IN_con.h/(PI*d_w))^2))
           "螺旋管的平均曲率直径";
 
-        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross) 
+        SI.Velocity velocity=abs(IN_var.m_flow)/max(MIN, IN_var.rho*A_cross)
           "平均速度";
-        SI.ReynoldsNumber Re=(IN_var.rho*velocity*IN_con.d_hyd/max(MIN, 
+        SI.ReynoldsNumber Re=(IN_var.rho*velocity*IN_con.d_hyd/max(MIN,
             IN_var.eta));
         SI.PrandtlNumber Pr=abs(IN_var.eta*IN_var.cp/max(MIN, IN_var.lambda));
 
-        Real zeta_TOT=0.3164*max(turbulent, Re)^(-0.25) + 0.03*sqrt(IN_con.d_hyd/ 
+        Real zeta_TOT=0.3164*max(turbulent, Re)^(-0.25) + 0.03*sqrt(IN_con.d_hyd/
             d_coil) "压力损失系数";
 
         //说明
       algorithm
-        kc := (IN_var.lambda/IN_con.d_hyd)*(zeta_TOT/8)*Re*Pr/(1 + 12.7*sqrt(zeta_TOT 
+        kc := (IN_var.lambda/IN_con.d_hyd)*(zeta_TOT/8)*Re*Pr/(1 + 12.7*sqrt(zeta_TOT
           /8)*(Pr^(2/3) - 1));
       annotation (Inline=false, Documentation(info="<html>
 <p>
@@ -1825,7 +1825,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"                                ), smoothOrder(normallyConstant=IN_con) = 2);
       end kc_turbulent_KC;
 
-      record kc_turbulent_IN_con 
+      record kc_turbulent_IN_con
         "函数 kc_turbulent 和 kc_turbulent_KC 的输入记录表"
 
         extends 
@@ -1837,7 +1837,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"                    ));
       end kc_turbulent_IN_con;
 
-      record kc_turbulent_IN_var 
+      record kc_turbulent_IN_var
         "函数 kc_turbulent 和 kc_turbulent_KC 的输入记录表"
 
         extends 
@@ -1867,7 +1867,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
     package Plate
     extends Modelica.Icons.VariantsPackage;
 
-      function kc_laminar 
+      function kc_laminar
         "板 | 层流状态 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, Aufl. 9, Springer-Verlag, 2002, Section Gd 1
@@ -1882,7 +1882,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -1890,7 +1890,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
@@ -1930,7 +1930,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_laminar;
 
-      function kc_laminar_KC 
+      function kc_laminar_KC
         "板 | 层流状态 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, Aufl. 9, Springer-Verlag, 2002, Section Gd 1
@@ -1945,7 +1945,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_laminar_KC";
 
       protected
@@ -1974,7 +1974,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_laminar_KC;
 
-      record kc_laminar_IN_con 
+      record kc_laminar_IN_con
         "函数 kc_laminar 和 kc_laminar_KC 的输入记录表"
         extends Modelica.Fluid.Dissipation.HeatTransfer.Plate.kc_overall_IN_con;
 
@@ -1985,7 +1985,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"              ));
       end kc_laminar_IN_con;
 
-      record kc_laminar_IN_var 
+      record kc_laminar_IN_var
         "函数 kc_laminar 和 kc_laminar_KC 的输入记录表"
         extends Modelica.Fluid.Dissipation.HeatTransfer.Plate.kc_overall_IN_var;
 
@@ -1995,7 +1995,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"        ));
       end kc_laminar_IN_var;
 
-      function kc_overall 
+      function kc_overall
         "均热板 | 整体区域 | 恒定壁温 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, Aufl. 9, Springer-Verlag, 2002, Section Gd 1
@@ -2009,7 +2009,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           IN_var "函数 kc_overall 的输入记录表" 
           annotation (Dialog(group="变量输入"));
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation (Dialog(group="输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation (Dialog(group="输出"));
@@ -2017,7 +2017,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation (Dialog(group="输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation (Dialog(group="输出"));
 
@@ -2057,7 +2057,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"        ), smoothOrder(normallyConstant=IN_con) = 2);
       end kc_overall;
 
-      function kc_overall_KC 
+      function kc_overall_KC
         "均热板 | 整体区域 | 恒定壁温 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, Aufl. 9, Springer-Verlag, 2002, Section Gd 1
@@ -2072,13 +2072,13 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_overall_KC";
 
       protected
-        SI.CoefficientOfHeatTransfer kc_lam= 
+        SI.CoefficientOfHeatTransfer kc_lam=
             Modelica.Fluid.Dissipation.HeatTransfer.Plate.kc_laminar_KC(     IN_con, IN_var);
-        SI.CoefficientOfHeatTransfer kc_turb= 
+        SI.CoefficientOfHeatTransfer kc_turb=
             Modelica.Fluid.Dissipation.HeatTransfer.Plate.kc_turbulent_KC(     IN_con, IN_var);
 
         //说明
@@ -2092,7 +2092,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"        ), smoothOrder(normallyConstant=IN_con) = 2);
       end kc_overall_KC;
 
-      record kc_overall_IN_con 
+      record kc_overall_IN_con
         "函数 kc_overall 和函数 kc_overall_KC 的输入记录表"
         //板变量
         extends Modelica.Fluid.Dissipation.Utilities.Records.HeatTransfer.Plate;
@@ -2105,7 +2105,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"              ));
       end kc_overall_IN_con;
 
-      record kc_overall_IN_var 
+      record kc_overall_IN_var
         "函数 kc_overall 和函数 kc_overall_KC 的输入记录表"
         //流体性质变量
         extends 
@@ -2122,7 +2122,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"              ));
       end kc_overall_IN_var;
 
-      function kc_turbulent 
+      function kc_turbulent
         "均热板 | 湍流状态 | 恒定壁温 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, Aufl. 9, Springer-Verlag, 2002, Section Gd 1
@@ -2137,7 +2137,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation (Dialog(group="输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation (Dialog(group="输出"));
@@ -2145,7 +2145,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation (Dialog(group="输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义s" 
           annotation (Dialog(group="输出"));
 
@@ -2185,7 +2185,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"        ), smoothOrder(normallyConstant=IN_con) = 2);
       end kc_turbulent;
 
-      function kc_turbulent_KC 
+      function kc_turbulent_KC
         "均热板 | 湍流状态 | 恒定壁温 的平均传热系数"
         extends Modelica.Icons.Function;
         //资料来源: VDI-Waermeatlas, Aufl. 9, Springer-Verlag, 2002, Section Gd 1
@@ -2200,7 +2200,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数  kc_turbulent_KC";
 
       protected
@@ -2219,7 +2219,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         //说明
       algorithm
-        kc := abs((lambda/L))*(0.037*Re^0.8*Pr)/(1 + 2.443/(max(Re^0.1, 1e-6))*(Pr^(2 
+        kc := abs((lambda/L))*(0.037*Re^0.8*Pr)/(1 + 2.443/(max(Re^0.1, 1e-6))*(Pr^(2
           /3) - 1));
       annotation (Inline=true, Documentation(info="<html><p>
 计算均匀表面上的流体力学发展的湍流的平均对流传热系数 <strong>kc</strong>。一般来说，在已知流体速度的情况下，该函数是计算平均对流传热系数 <strong>kc</strong> 的最佳数值函数。<a href=\"modelica://Modelica.Fluid.Dissipation.Utilities.SharedDocumentation.HeatTransfer.Plate.kc_turbulent\" target=\"\">查看更多信息</a> .
@@ -2229,7 +2229,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"              ), smoothOrder(normallyConstant=IN_con) = 2);
       end kc_turbulent_KC;
 
-      record kc_turbulent_IN_con 
+      record kc_turbulent_IN_con
         "函数 kc_turbulent 和 kc_turbulent_KC 的输入记录表"
         extends Modelica.Fluid.Dissipation.HeatTransfer.Plate.kc_overall_IN_con;
 
@@ -2241,7 +2241,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"              ));
       end kc_turbulent_IN_con;
 
-      record kc_turbulent_IN_var 
+      record kc_turbulent_IN_var
         "函数 kc_turbulent 和 kc_turbulent_KC 的输入记录表"
         extends Modelica.Fluid.Dissipation.HeatTransfer.Plate.kc_overall_IN_var;
 
@@ -2269,7 +2269,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
     package StraightPipe
     extends Modelica.Icons.VariantsPackage;
 
-      function kc_laminar 
+      function kc_laminar
         "直管 | 均匀的管壁温度或均匀的热通量 | 流体动力学发达或不发达的层流状态 的平均传热系数"
         extends Modelica.Icons.Function;
         //输入记录表
@@ -2283,7 +2283,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -2291,7 +2291,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
@@ -2304,7 +2304,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         SI.Area A_cross = PI * IN_con.d_hyd ^ 2 / 4 "横截面积";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross)
           "平均速度";
 
         //故障状态
@@ -2336,7 +2336,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_laminar;
 
-      function kc_laminar_KC 
+      function kc_laminar_KC
         "直管 | 均匀的管壁温度或均匀的热通量 | 流体动力学发达或不发达的层流状态 的平均传热系数"
         extends Modelica.Icons.Function;
         //输入记录表
@@ -2350,11 +2350,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_laminar_KC";
 
       protected
-        type TYP = 
+        type TYP =
           Modelica.Fluid.Dissipation.Utilities.Types.HeatTransferBoundary annotation();
 
         Real MIN = Modelica.Constants.eps;
@@ -2368,22 +2368,22 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           3.66 else if IN_con.target == TYP.UHFuDFF or IN_con.target == TYP.UHFuUFF then 
           4.364 else 0 "平均努塞数的帮助变量";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross)
           "平均速度";
-        SI.ReynoldsNumber Re = (IN_var.rho * velocity * IN_con.d_hyd / max(MIN, 
+        SI.ReynoldsNumber Re = (IN_var.rho * velocity * IN_con.d_hyd / max(MIN,
           IN_var.eta));
         SI.PrandtlNumber Pr = abs(IN_var.eta * IN_var.cp / max(MIN, IN_var.lambda));
 
         SI.NusseltNumber Nu2 = if IN_con.target == TYP.UWTuDFF or IN_con.target == TYP.UWTuUFF then 
-          1.615 * (Re * Pr * IN_con.d_hyd / IN_con.L) ^ (1 / 3) else if IN_con.target == 
-          TYP.UHFuDFF or IN_con.target == TYP.UHFuUFF then 1.953 * (Re * Pr * IN_con.d_hyd 
+          1.615 * (Re * Pr * IN_con.d_hyd / IN_con.L) ^ (1 / 3) else if IN_con.target ==
+          TYP.UHFuDFF or IN_con.target == TYP.UHFuUFF then 1.953 * (Re * Pr * IN_con.d_hyd
           / IN_con.L) ^ (1 / 3) else 0 "平均努塞数的帮助变量";
-        SI.NusseltNumber Nu3 = if IN_con.target == TYP.UWTuUFF then (2 / (1 + 22 * Pr)) ^ (1 / 
+        SI.NusseltNumber Nu3 = if IN_con.target == TYP.UWTuUFF then (2 / (1 + 22 * Pr)) ^ (1 /
           6) * (Re * Pr * IN_con.d_hyd / IN_con.L) ^ 0.5 else if IN_con.target == TYP.UHFuUFF then 
-          0.924 * (Pr ^ (1 / 3)) * (Re * IN_con.d_hyd / IN_con.L) ^ (1 / 2) else 0 
+          0.924 * (Pr ^ (1 / 3)) * (Re * IN_con.d_hyd / IN_con.L) ^ (1 / 2) else 0
           "平均努塞数的帮助变量";
 
-        SI.NusseltNumber Nu = (Nu1 ^ 3 + Nu0 ^ 3 + (Nu2 - Nu0) ^ 3 + Nu3 ^ 3) ^ (1 / 3) 
+        SI.NusseltNumber Nu = (Nu1 ^ 3 + Nu0 ^ 3 + (Nu2 - Nu0) ^ 3 + Nu3 ^ 3) ^ (1 / 3)
           "平均努塞数";
 
         //说明
@@ -2399,12 +2399,12 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_laminar_KC;
 
-      record kc_laminar_IN_con 
+      record kc_laminar_IN_con
         "函数 kc_laminar 和 kc_laminar_KC 的输入记录表"
         extends Utilities.Records.HeatTransfer.StraightPipe;
 
           //选择
-        Modelica.Fluid.Dissipation.Utilities.Types.HeatTransferBoundary target=Dissipation.Utilities.Types.HeatTransferBoundary.UWTuDFF 
+        Modelica.Fluid.Dissipation.Utilities.Types.HeatTransferBoundary target=Dissipation.Utilities.Types.HeatTransferBoundary.UWTuDFF
           "传热边界条件的选择" 
           annotation (Dialog(group="选择"));
 
@@ -2414,7 +2414,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"        ));
       end kc_laminar_IN_con;
 
-      record kc_laminar_IN_var 
+      record kc_laminar_IN_var
         "函数 kc_laminar 和 kc_laminar_KC 的输入记录表"
         extends 
           Modelica.Fluid.Dissipation.HeatTransfer.StraightPipe.kc_overall_IN_var;
@@ -2425,7 +2425,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"        ));
       end kc_laminar_IN_var;
 
-      function kc_overall 
+      function kc_overall
         "直管 | 均匀的管壁温度或均匀的热通量 | 流体动力学发达或不发达的总体流动状态 | 压力损失相关性 的平均传热系数"
         extends Modelica.Icons.Function;
         //输入记录表
@@ -2439,7 +2439,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -2447,7 +2447,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
@@ -2458,7 +2458,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         SI.Area A_cross = PI * IN_con.d_hyd ^ 2 / 4 "横截面积";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross)
           "平均速度";
 
         //故障状态
@@ -2504,10 +2504,10 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_overall;
 
-      function kc_overall_KC 
+      function kc_overall_KC
         "直管 | 均匀的管壁温度或均匀的热通量 | 流体动力学发达或不发达的总体流动状态 | 压力损失相关性 的平均传热系数"
         extends Modelica.Icons.Function;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -2521,7 +2521,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_overall_KC";
 
       protected
@@ -2531,9 +2531,9 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         SI.Area A_cross = PI * IN_con.d_hyd ^ 2 / 4 "横截面积";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho * A_cross)
           "平均速度";
-        SI.ReynoldsNumber Re = (IN_var.rho * velocity * IN_con.d_hyd / max(MIN, 
+        SI.ReynoldsNumber Re = (IN_var.rho * velocity * IN_con.d_hyd / max(MIN,
           IN_var.eta));
         SI.PrandtlNumber Pr = abs(IN_var.eta * IN_var.cp / max(MIN, IN_var.lambda));
 
@@ -2542,13 +2542,13 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       algorithm
         kc := SMOOTH(
-          laminar, 
-          turbulent, 
-          Re) * Dissipation.HeatTransfer.StraightPipe.kc_laminar_KC(IN_con_lam, 
+          laminar,
+          turbulent,
+          Re) * Dissipation.HeatTransfer.StraightPipe.kc_laminar_KC(IN_con_lam,
           IN_var) + SMOOTH(
-          turbulent, 
-          laminar, 
-          Re) * Dissipation.HeatTransfer.StraightPipe.kc_turbulent_KC(IN_con_turb, 
+          turbulent,
+          laminar,
+          Re) * Dissipation.HeatTransfer.StraightPipe.kc_turbulent_KC(IN_con_turb,
           IN_var);
 
         annotation(Inline = false, Documentation(info = "<html><p>
@@ -2559,11 +2559,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_overall_KC;
 
-      record kc_overall_IN_con 
+      record kc_overall_IN_con
         "函数 kc_overall 和 kc_overall_KC 的输入记录表"
 
           //选择
-        Modelica.Fluid.Dissipation.Utilities.Types.HeatTransferBoundary target=Dissipation.Utilities.Types.HeatTransferBoundary.UWTuDFF 
+        Modelica.Fluid.Dissipation.Utilities.Types.HeatTransferBoundary target=Dissipation.Utilities.Types.HeatTransferBoundary.UWTuDFF
           "传热边界条件的选择" 
           annotation (Dialog(group="选择"));
 
@@ -2575,7 +2575,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"));
       end kc_overall_IN_con;
 
-      record kc_overall_IN_var 
+      record kc_overall_IN_var
         "函数 kc_overall 和 kc_overall_KC 的输入记录表"
         //流体性质变量
         extends 
@@ -2590,7 +2590,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"        ));
       end kc_overall_IN_var;
 
-      function kc_turbulent 
+      function kc_turbulent
         "直管 | 流体力学发展的湍流状态 | 压力损失相关性 的平均传热系数"
         extends Modelica.Icons.Function;
         //输入记录表
@@ -2604,7 +2604,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "对流传热系数" 
           annotation(Dialog(group = "输出"));
         output SI.PrandtlNumber Pr "普朗特数" annotation(Dialog(group = "输出"));
@@ -2612,7 +2612,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "输出"));
         output SI.NusseltNumber Nu "努塞尔数" 
           annotation(Dialog(group = "输出"));
-        output Real failureStatus 
+        output Real failureStatus
           "0== 边界条件满足 | 1== 失败 >> 检查结果是否仍有意义" 
           annotation(Dialog(group = "输出"));
 
@@ -2623,7 +2623,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         SI.Area A_cross = PI * IN_con.d_hyd ^ 2 / 4 "横截面积";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / (IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / (IN_var.rho * A_cross)
           "平均速度";
 
         //故障状态
@@ -2670,7 +2670,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_turbulent;
 
-      function kc_turbulent_KC 
+      function kc_turbulent_KC
         "直管 | 流体力学发展的湍流状态 | 压力损失相关性 的平均传热系数"
         extends Modelica.Icons.Function;
         //输入记录表
@@ -2684,7 +2684,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "输出函数 kc_turbulent_KC";
 
       protected
@@ -2694,17 +2694,17 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         SI.Area A_cross = PI * IN_con.d_hyd ^ 2 / 4 "圆形截面积";
 
-        SI.Velocity velocity = abs(IN_var.m_flow) / (IN_var.rho * A_cross) 
+        SI.Velocity velocity = abs(IN_var.m_flow) / (IN_var.rho * A_cross)
           "平均速度";
         SI.ReynoldsNumber Re = max(MIN, (IN_var.rho * velocity * IN_con.d_hyd / IN_var.eta));
         SI.PrandtlNumber Pr = abs(IN_var.eta * IN_var.cp / IN_var.lambda);
 
-        Real zeta = abs(1 / max(MIN, 1.8 * Modelica.Math.log10(abs(Re)) - 1.5) ^ 2) 
+        Real zeta = abs(1 / max(MIN, 1.8 * Modelica.Math.log10(abs(Re)) - 1.5) ^ 2)
           "压力损失系数";
 
         //说明
       algorithm
-        kc := if IN_con.roughness == TYP.Neglected then abs(IN_var.lambda / IN_con.d_hyd) 
+        kc := if IN_con.roughness == TYP.Neglected then abs(IN_var.lambda / IN_con.d_hyd)
           * 0.023 * Re ^ 0.8 * Pr ^ (1 / 3) else if IN_con.roughness == TYP.Considered then abs(
           IN_var.lambda / IN_con.d_hyd) * (abs(zeta) / 8) * abs(Re) * abs(Pr) / (1 + 12.7 * (abs(
           zeta) / 8) ^ 0.5 * (abs(Pr) ^ (2 / 3) - 1)) * (1 + (IN_con.d_hyd / IN_con.L) ^ (2 / 3)) else 
@@ -2718,11 +2718,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ), smoothOrder(normallyConstant = IN_con) = 2);
       end kc_turbulent_KC;
 
-      record kc_turbulent_IN_con 
+      record kc_turbulent_IN_con
         "函数 kc_turbulent 和 kc_turbulent_KC 的输入记录表"
         extends Utilities.Records.HeatTransfer.StraightPipe;
 
-        Modelica.Fluid.Dissipation.Utilities.Types.Roughness roughness = Dissipation.Utilities.Types.Roughness.Considered 
+        Modelica.Fluid.Dissipation.Utilities.Types.Roughness roughness = Dissipation.Utilities.Types.Roughness.Considered
           "考虑表面粗糙度的选择" 
           annotation(Dialog(group = "选择"));
 
@@ -2735,7 +2735,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end kc_turbulent_IN_con;
 
-      record kc_turbulent_IN_var 
+      record kc_turbulent_IN_var
         "函数 kc_turbulent 和 kc_turbulent_KC 的输入记录表"
         extends 
           Modelica.Fluid.Dissipation.HeatTransfer.StraightPipe.kc_overall_IN_var;
@@ -2746,7 +2746,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"        ));
       end kc_turbulent_IN_var;
 
-      function kc_twoPhaseOverall_KC 
+      function kc_twoPhaseOverall_KC
         "直管 | 水平或垂直沸腾 | 水平冷凝 的局部两相传热系数"
         extends Modelica.Icons.Function;
         //资料来源_1: Bejan,A.: HEAT TRANSFER HANDBOOK, Wiley, 2003.
@@ -2761,7 +2761,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           IN_var annotation(Dialog(group = "变量输入"));
 
         //输出变量
-        output SI.CoefficientOfHeatTransfer kc 
+        output SI.CoefficientOfHeatTransfer kc
           "局部两相传热系数";
 
       protected
@@ -2776,7 +2776,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           IN_con, IN_var) else if IN_con.target == Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.CondHor then 
           Modelica.Fluid.Dissipation.Utilities.Functions.HeatTransfer.TwoPhase.kc_twoPhase_condensationHorizontal_KC(
           IN_con, IN_var) else MIN;
-        annotation(Inline = false, smoothOrder(normallyConstant = IN_con) = 2, 
+        annotation(Inline = false, smoothOrder(normallyConstant = IN_con) = 2,
           Documentation(info = "<html><p>
 计算整体流动状态下（水平/垂直）<strong>沸腾</strong>或（水平）<strong>冷凝</strong>的局部<strong>两相</strong>传热系数 kc_2ph。
 <a href=\"modelica://Modelica.Fluid.Dissipation.Utilities.SharedDocumentation.HeatTransfer.StraightPipe.kc_twoPhaseOverall\" target=\"\">查看更多信息</a> 。
@@ -2786,7 +2786,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end kc_twoPhaseOverall_KC;
 
-      record kc_twoPhaseOverall_KC_IN_con 
+      record kc_twoPhaseOverall_KC_IN_con
         "函数 kc_twoPhaseOverall_KC 的输入记录表"
         extends 
           Modelica.Fluid.Dissipation.Utilities.Records.HeatTransfer.TwoPhaseFlowHT_IN_con;
@@ -2797,7 +2797,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"));
       end kc_twoPhaseOverall_KC_IN_con;
 
-      record kc_twoPhaseOverall_KC_IN_var 
+      record kc_twoPhaseOverall_KC_IN_var
         "函数 kc_twoPhaseOverall_KC 的输入记录表"
         extends 
           Modelica.Fluid.Dissipation.Utilities.Records.HeatTransfer.TwoPhaseFlowHT_IN_var;
@@ -2824,7 +2824,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
     package Bend "用于计算弯头压力损失的库"
     extends Modelica.Icons.VariantsPackage;
 
-      function dp_curvedOverall_DP 
+      function dp_curvedOverall_DP
         "弯头 | 计算压力损失 | 整体流态 | 表面粗糙度 的压力损失"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
@@ -2833,7 +2833,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //根据来源对方程进行注释
 
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Bend;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -2863,36 +2863,36 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         //资料来源_1: p.336, sec.15: definition of flow regime boundaries
         SI.ReynoldsNumber Re_min=1 "最小雷诺数";
-        SI.ReynoldsNumber Re_lam_max=6.5e3 
+        SI.ReynoldsNumber Re_lam_max=6.5e3
           "层流区的最大雷诺数 (6.5e3)";
-        SI.ReynoldsNumber Re_turb_min=4e4 
+        SI.ReynoldsNumber Re_turb_min=4e4
           "湍流区的最小雷诺数 (4e4)";
-        SI.ReynoldsNumber Re_turb_max=3e5 
+        SI.ReynoldsNumber Re_turb_max=3e5
           "湍流区的最大雷诺数 (3e5)";
-        SI.ReynoldsNumber Re_turb_const=1e6 
+        SI.ReynoldsNumber Re_turb_const=1e6
           "独立于压力损失系数的雷诺数 (1e6)";
 
         SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(1e2, 754*Modelica.Math.exp(
-            if k <= 0.007 then 0.0065/0.007 else 0.0065/k))) 
+            if k <= 0.007 then 0.0065/0.007 else 0.0065/k)))
           "雷诺数增大时过渡区的开始（离开层流区）";
 
         //资料来源_1: p.357, diag. 6-1: coefficients for local resistance coefficient [zeta_LOC]:
         //IN_con.R_0/IN_con.d_hyd <= 3
         Real A1=if delta <= 70 then 0.9*sin(delta*PI/180) else if delta >= 100 then 
-            0.7 + 0.35*delta/90 else 1.0 
+            0.7 + 0.35*delta/90 else 1.0
           "考虑转角对zeta_LOC影响的系数";
         Real A2=if frac_RD > 2.0 then 6e2 else if frac_RD <= 2.0 and frac_RD > 0.55 then 
                   (if frac_RD > 1.0 then 1e3 else if frac_RD <= 1.0 and frac_RD > 0.7 then 
-                  3e3 else 6e3) else 4e3 
+                  3e3 else 6e3) else 4e3
           "在zeta_LOC上考虑层流区的系数";
-        Real B1=if frac_RD >= 1.0 then 0.21*(frac_RD)^(-0.5) else 0.21*(frac_RD)^(-2.5) 
+        Real B1=if frac_RD >= 1.0 then 0.21*(frac_RD)^(-0.5) else 0.21*(frac_RD)^(-2.5)
           "考虑zeta_LOC相对曲率半径(R_0/d_hyd)的系数";
-        Real C1=1.0 
+        Real C1=1.0
           "考虑到横截面积对 zeta_LOC（此处：圆形横截面积）的相对伸长率";
-        TYP.LocalResistanceCoefficient zeta_LOC_sharp_turb=max(MIN, A1*B1*C1) 
+        TYP.LocalResistanceCoefficient zeta_LOC_sharp_turb=max(MIN, A1*B1*C1)
           "湍流区的局部阻力系数（Re > Re_turb_max）";
 
-        SI.ReynoldsNumber Re=max(Re_min, 4*abs(m_flow)/(PI*IN_con.d_hyd*IN_var.eta)) 
+        SI.ReynoldsNumber Re=max(Re_min, 4*abs(m_flow)/(PI*IN_con.d_hyd*IN_var.eta))
           "雷诺数";
 
         //流动状态下的质量流量边界
@@ -2901,61 +2901,61 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //资料来源_1: p.357, diag. 6-1, sec. 2 / p.336, sec. 15 (turbulent regime + hydraulically rough):
         //IN_con.R_0/IN_con.d_hyd < 3
         Real C_Re=if frac_RD > 0.7 then 11.5/Re^0.19 else if frac_RD <= 0.7 and 
-            frac_RD >= 0.55 then 5.45/Re^0.131 else 1 + 4400/Re 
+            frac_RD >= 0.55 then 5.45/Re^0.131 else 1 + 4400/Re
           "水力完全湍流区的修正系数（Re_turb_min < Re < Re_turb_max）";
 
         //资料来源_1: p.357, diag. 6-1
         //IN_con.R_0/IN_con.d_hyd < 3
-        TYP.LocalResistanceCoefficient zeta_LOC_sharp=if Re < Re_lam_leave then A2/Re 
+        TYP.LocalResistanceCoefficient zeta_LOC_sharp=if Re < Re_lam_leave then A2/Re
              + zeta_LOC_sharp_turb else if Re < Re_turb_min then SMOOTH(
-            Re_lam_leave, 
-            Re_turb_min, 
+            Re_lam_leave,
+            Re_turb_min,
             Re)*(A2/max(Re_lam_leave, Re) + zeta_LOC_sharp_turb) + SMOOTH(
-            Re_turb_min, 
-            Re_lam_leave, 
+            Re_turb_min,
+            Re_lam_leave,
             Re)*(C_Re*zeta_LOC_sharp_turb) else if Re < Re_turb_max then SMOOTH(
-            Re_turb_min, 
-            Re_turb_max, 
+            Re_turb_min,
+            Re_turb_max,
             Re)*(C_Re*zeta_LOC_sharp_turb) + SMOOTH(
-            Re_turb_max, 
-            Re_turb_min, 
-            Re)*zeta_LOC_sharp_turb else zeta_LOC_sharp_turb 
+            Re_turb_max,
+            Re_turb_min,
+            Re)*zeta_LOC_sharp_turb else zeta_LOC_sharp_turb
           "R_0/d_hyd < 3 时的局部阻力系数";
 
-        TYP.LocalResistanceCoefficient zeta_LOC=zeta_LOC_sharp 
+        TYP.LocalResistanceCoefficient zeta_LOC=zeta_LOC_sharp
           "局部阻力系数";
 
         //资料来源_2: p.191, eq. 8.4: 考虑到表面粗糙度
         //限制最大雷诺数 Re=1e6 时的 lambda_FRI (资料来源_2: p.207, sec. 9.2.4)
-        TYP.DarcyFrictionFactor lambda_FRI_rough=0.25/(Modelica.Math.log10(k/(3.7* 
-            IN_con.d_hyd) + 5.74/min(1e6, max(Re_lam_leave, Re))^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_FRI_rough=0.25/(Modelica.Math.log10(k/(3.7*
+            IN_con.d_hyd) + 5.74/min(1e6, max(Re_lam_leave, Re))^0.9))^2
           "考虑表面粗糙度的 Darcy 摩擦系数";
 
         //资料来源_2: p.207, sec. 9.2.4: 表面粗糙度修正系数 CF
         Real CF_fri=1+SMOOTH(
-            Re_lam_max, 
-            Re_lam_leave, 
+            Re_lam_max,
+            Re_lam_leave,
             Re)*min(1.4, (lambda_FRI_rough*L/d_hyd/zeta_LOC)) + SMOOTH(
-            Re_lam_leave, 
-            Re_lam_max, 
+            Re_lam_leave,
+            Re_lam_max,
             Re) "考虑表面粗糙度的修正速度";
 
-        TYP.PressureLossCoefficient zeta_TOT=max(1, CF_fri)*zeta_LOC 
+        TYP.PressureLossCoefficient zeta_TOT=max(1, CF_fri)*zeta_LOC
           "压力损失系数";
 
         //说明
 
       algorithm
-        DP := zeta_TOT*(IN_var.rho/2)* 
+        DP := zeta_TOT*(IN_var.rho/2)*
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-          m_flow, 
-          m_flow_smooth, 
+          m_flow,
+          m_flow_smooth,
           2)/max(MIN, (IN_var.rho*A_cross)^2);
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
           inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.Bend.dp_curvedOverall_MFLOW(
-                IN_con, 
-                IN_var, 
-                DP)), 
+                IN_con,
+                IN_var,
+                DP)),
           Documentation(info="<html>
 <p>考虑表面粗糙度，计算层流区内不可压缩和单相流体通过圆形横截面的弯管的压力损失。</p>
 
@@ -2965,7 +2965,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"         ));
       end dp_curvedOverall_DP;
 
-      function dp_curvedOverall_MFLOW 
+      function dp_curvedOverall_MFLOW
         "弯头 | 计算压力损失 | 整体流态 | 表面粗糙度 的压力损失"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
@@ -2974,7 +2974,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //根据来源对方程进行注释
 
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Bend;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -2989,7 +2989,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         input SI.Pressure dp "Pressure loss" annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.MassFlowRate M_FLOW 
+        output SI.MassFlowRate M_FLOW
           "输出函数 dp_curvedOverall_MFLOW";
 
       protected
@@ -3004,119 +3004,119 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         //资料来源_1: p.336, sec.15: definition of flow regime boundaries
         SI.ReynoldsNumber Re_min=1 "最小雷诺数";
-        SI.ReynoldsNumber Re_lam_max=6.5e3 
+        SI.ReynoldsNumber Re_lam_max=6.5e3
           "层流区的最大雷诺数 (6.5e3)";
-        SI.ReynoldsNumber Re_turb_min=4e4 
+        SI.ReynoldsNumber Re_turb_min=4e4
           "湍流区的最小雷诺数 (4e4)";
-        SI.ReynoldsNumber Re_turb_max=3e5 
+        SI.ReynoldsNumber Re_turb_max=3e5
           "湍流区的最大雷诺数 (3e5)";
-        SI.ReynoldsNumber Re_turb_const=1e6 
+        SI.ReynoldsNumber Re_turb_const=1e6
           "独立于压力损失系数的雷诺数 (1e6)";
 
         SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(1e2, 754*Modelica.Math.exp(
-            if k <= 0.007 then 0.0065/0.007 else 0.0065/k))) 
+            if k <= 0.007 then 0.0065/0.007 else 0.0065/k)))
           "雷诺数增大时过渡区的开始（离开层流区）";
 
         //资料来源_1: p.357, diag. 6-1: coefficients for local resistance coefficient [zeta_LOC]:
         //IN_con.R_0/IN_con.d_hyd <= 3
         Real A1=if delta <= 70 then 0.9*sin(delta/180*PI) else if delta >= 100 then 
-            0.7 + 0.35*delta/90 else 1.0 
+            0.7 + 0.35*delta/90 else 1.0
           "考虑转角对zeta_LOC影响的系数";
         Real A2=if frac_RD > 2.0 then 6e2 else if frac_RD <= 2.0 and frac_RD > 0.55 then 
                   (if frac_RD > 1.0 then 1e3 else if frac_RD <= 1.0 and frac_RD > 0.7 then 
-                  3e3 else 6e3) else 4e3 
+                  3e3 else 6e3) else 4e3
           "在zeta_LOC上考虑层流区的系数";
-        Real B1=if frac_RD >= 1.0 then 0.21*(frac_RD)^(-0.5) else 0.21*(frac_RD)^(-2.5) 
+        Real B1=if frac_RD >= 1.0 then 0.21*(frac_RD)^(-0.5) else 0.21*(frac_RD)^(-2.5)
           "考虑zeta_LOC相对曲率半径(R_0/d_hyd)的系数";
-        Real C1=1.0 
+        Real C1=1.0
           "考虑到横截面积对 zeta_LOC（此处：圆形横截面积）的相对伸长率";
-        TYP.LocalResistanceCoefficient zeta_LOC_sharp_turb=max(MIN, A1*B1*C1) 
+        TYP.LocalResistanceCoefficient zeta_LOC_sharp_turb=max(MIN, A1*B1*C1)
           "湍流区的局部阻力系数（Re > Re_turb_max）";
 
         //资料来源_1: p.357, diag. 6-1: pressure loss boundaries for w.r.t. flow regimes
         //IN_con.R_0/d_hyd <=3
-        SI.AbsolutePressure dp_lam_max=(zeta_LOC_sharp_turb + A2/Re_lam_leave)*IN_var.rho 
-            /2*(Re_lam_leave*IN_var.eta/(IN_var.rho*d_hyd))^2 
+        SI.AbsolutePressure dp_lam_max=(zeta_LOC_sharp_turb + A2/Re_lam_leave)*IN_var.rho
+            /2*(Re_lam_leave*IN_var.eta/(IN_var.rho*d_hyd))^2
           "层流区的最大压力损失";
         SI.AbsolutePressure dp_turb_min=zeta_LOC_sharp_turb*(if frac_RD > 0.7 then 
             11.5/Re_turb_min^0.19 else if frac_RD <= 0.7 and frac_RD >= 0.55 then 
             5.45/Re_turb_min^0.131 else 1 + 4400/Re_turb_min)*IN_var.rho/2*(
-            Re_turb_min*IN_var.eta/(IN_var.rho*d_hyd))^2 
+            Re_turb_min*IN_var.eta/(IN_var.rho*d_hyd))^2
           "湍流区的最小压力损失";
         SI.AbsolutePressure dp_turb_max=zeta_LOC_sharp_turb*(if frac_RD > 0.7 then 
             11.5/Re_turb_max^0.19 else if frac_RD <= 0.7 and frac_RD >= 0.55 then 
             5.45/Re_turb_max^0.131 else 1 + 4400/Re_turb_max)*IN_var.rho/2*(
-            Re_turb_max*IN_var.eta/(IN_var.rho*d_hyd))^2 
+            Re_turb_max*IN_var.eta/(IN_var.rho*d_hyd))^2
           "湍流区的最大压力损失";
         SI.AbsolutePressure dp_turb_const=zeta_LOC_sharp_turb*IN_var.rho/2*(
-            Re_turb_const*IN_var.eta/(IN_var.rho*d_hyd))^2 
+            Re_turb_const*IN_var.eta/(IN_var.rho*d_hyd))^2
           "雷诺数与压力损失系数无关时的压力损失";
 
         //资料来源_1: p.357, diag. 6-1: mean velocities for assumed flow regime
         //IN_con.R_0/d_hyd <=3
-        SI.Velocity v_lam=if 1e7*sqrt(abs(zeta_LOC_sharp_turb*abs(dp)*IN_var.rho* 
+        SI.Velocity v_lam=if 1e7*sqrt(abs(zeta_LOC_sharp_turb*abs(dp)*IN_var.rho*
             d_hyd^2)) < abs(A2*IN_var.eta) then 2*abs(dp)*d_hyd/A2/IN_var.eta else (-
-            A2/2*IN_var.eta + 0.5*sqrt(max(MIN, (A2*IN_var.eta)^2 + 8* 
-            zeta_LOC_sharp_turb*abs(dp)*IN_var.rho*d_hyd^2)))/zeta_LOC_sharp_turb/ 
-            IN_var.rho/d_hyd 
+            A2/2*IN_var.eta + 0.5*sqrt(max(MIN, (A2*IN_var.eta)^2 + 8*
+            zeta_LOC_sharp_turb*abs(dp)*IN_var.rho*d_hyd^2)))/zeta_LOC_sharp_turb/
+            IN_var.rho/d_hyd
           "层流区的平均速度 (Re < Re_lam_leave)";
-        SI.Velocity v_tra=if 1e7*sqrt(abs(zeta_LOC_sharp_turb*abs(dp_lam_max)*IN_var.rho 
+        SI.Velocity v_tra=if 1e7*sqrt(abs(zeta_LOC_sharp_turb*abs(dp_lam_max)*IN_var.rho
             *d_hyd^2)) < abs(A2*IN_var.eta) then 2*abs(dp_lam_max)*d_hyd/A2/IN_var.eta 
-             else (-A2/2*IN_var.eta + 0.5*sqrt(max(MIN, (A2*IN_var.eta)^2 + 8* 
-            zeta_LOC_sharp_turb*abs(dp_lam_max)*IN_var.rho*d_hyd^2)))/ 
-            zeta_LOC_sharp_turb/IN_var.rho/d_hyd 
+             else (-A2/2*IN_var.eta + 0.5*sqrt(max(MIN, (A2*IN_var.eta)^2 + 8*
+            zeta_LOC_sharp_turb*abs(dp_lam_max)*IN_var.rho*d_hyd^2)))/
+            zeta_LOC_sharp_turb/IN_var.rho/d_hyd
           "过渡区的平均速度 (Re_lam_leave < Re_turb_min)";
-        SI.Velocity v_turb=if frac_RD > 0.7 then (max(MIN, abs(dp))/(IN_var.rho/2* 
-            11.5*zeta_LOC_sharp_turb)*(IN_var.rho*IN_con.d_hyd/max(MIN, IN_var.eta))^ 
+        SI.Velocity v_turb=if frac_RD > 0.7 then (max(MIN, abs(dp))/(IN_var.rho/2*
+            11.5*zeta_LOC_sharp_turb)*(IN_var.rho*IN_con.d_hyd/max(MIN, IN_var.eta))^
             0.19)^(1/(2 - 0.19)) else if frac_RD > 0.55 and frac_RD < 0.7 then (max(
-            MIN, abs(dp))/(IN_var.rho/2*5.45*zeta_LOC_sharp_turb)*(IN_var.rho*IN_con.d_hyd 
-            /max(MIN, IN_var.eta))^0.131)^(1/(2 - 0.131)) else -2200/(IN_var.rho* 
-            IN_con.d_hyd/IN_var.eta) + ((-2200/(IN_var.rho*IN_con.d_hyd/max(MIN, 
-            IN_var.eta)))^2 + 2*abs(max(MIN, dp))/max(MIN, IN_var.rho))^0.5 
+            MIN, abs(dp))/(IN_var.rho/2*5.45*zeta_LOC_sharp_turb)*(IN_var.rho*IN_con.d_hyd
+            /max(MIN, IN_var.eta))^0.131)^(1/(2 - 0.131)) else -2200/(IN_var.rho*
+            IN_con.d_hyd/IN_var.eta) + ((-2200/(IN_var.rho*IN_con.d_hyd/max(MIN,
+            IN_var.eta)))^2 + 2*abs(max(MIN, dp))/max(MIN, IN_var.rho))^0.5
           "湍流区的平均速度与压力损失系数的关系 (Re_turb_min < Re < Re_turb_max)";
-        SI.Velocity v_turb_const=sqrt(max(MIN, 2*abs(dp)/(IN_var.rho* 
-            zeta_LOC_sharp_turb))) 
+        SI.Velocity v_turb_const=sqrt(max(MIN, 2*abs(dp)/(IN_var.rho*
+            zeta_LOC_sharp_turb)))
           "湍流状态下的平均速度与压力损失系数无关 (Re > Re_turb_max)";
 
         //平滑条件下的平均流速与流态的关系
         SI.Velocity v_smooth=if dp < dp_lam_max then v_lam else if dp < dp_turb_min then 
                   SMOOTH(
-            dp_lam_max, 
-            dp_turb_min, 
+            dp_lam_max,
+            dp_turb_min,
             dp)*v_lam + SMOOTH(
-            dp_turb_min, 
-            dp_lam_max, 
+            dp_turb_min,
+            dp_lam_max,
             dp)*v_turb else if dp < dp_turb_max then v_turb else SMOOTH(
-            dp_turb_max, 
-            dp_turb_const, 
+            dp_turb_max,
+            dp_turb_const,
             dp)*v_turb + SMOOTH(
-            dp_turb_const, 
-            dp_turb_max, 
-            dp)*v_turb_const 
+            dp_turb_const,
+            dp_turb_max,
+            dp)*v_turb_const
           "R_0/d_hyd < 3 时平滑条件下的平均速度";
 
-        SI.ReynoldsNumber Re_smooth=max(Re_min, IN_var.rho*v_smooth*d_hyd/IN_var.eta) 
+        SI.ReynoldsNumber Re_smooth=max(Re_min, IN_var.rho*v_smooth*d_hyd/IN_var.eta)
           "平滑条件下的雷诺数";
 
         //资料来源_2: p.191, eq. 8.4: considering surface roughness
         //限制最大雷诺数 Re=1e6 时的 lambda_FRI (资料来源_2: p.207, sec. 9.2.4)
-        TYP.DarcyFrictionFactor lambda_FRI_rough=0.25/(Modelica.Math.log10(k/(3.7* 
-            IN_con.d_hyd) + 5.74/min(1e6, max(Re_lam_leave, Re_smooth))^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_FRI_rough=0.25/(Modelica.Math.log10(k/(3.7*
+            IN_con.d_hyd) + 5.74/min(1e6, max(Re_lam_leave, Re_smooth))^0.9))^2
           "考虑表面粗糙度的 Darcy 摩擦系数";
         TYP.DarcyFrictionFactor lambda_FRI_smooth=0.25/(Modelica.Math.log10(5.74/max(
-            Re_lam_leave, Re_smooth)^0.9))^2 
+            Re_lam_leave, Re_smooth)^0.9))^2
           "忽略表面粗糙度的 Darcy 摩擦系数";
 
         //资料来源_2: p.207, sec. 9.2.4: correction factors CF w.r.t.surface roughness
         Real CF_3=1+SMOOTH(
-            6e3, 
-            1e3, 
+            6e3,
+            1e3,
             Re_smooth)*min(1.4, (lambda_FRI_rough*L/d_hyd/zeta_LOC_sharp_turb)) + SMOOTH(
-            1e3, 
-            6e3, 
+            1e3,
+            6e3,
             Re_smooth) "考虑表面粗糙度的修正速度";
 
-        SI.Velocity velocity=v_smooth/max(1, CF_3)^(0.5) 
+        SI.Velocity velocity=v_smooth/max(1, CF_3)^(0.5)
           "考虑表面粗糙度的修正速度";
 
         //说明
@@ -3124,11 +3124,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       algorithm
         M_FLOW := sign(dp)*IN_var.rho*A_cross*abs(velocity);
 
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
           inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.Bend.dp_curvedOverall_DP(
-                IN_con, 
-                IN_var, 
-                M_FLOW)), 
+                IN_con,
+                IN_var,
+                M_FLOW)),
           Documentation(info="<html>
 <p>
 考虑表面粗糙度，计算层流区内不可压缩和单相流体通过圆形横截面的弯管的压力损失。
@@ -3143,7 +3143,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_curvedOverall_MFLOW;
 
-      record dp_curvedOverall_IN_con 
+      record dp_curvedOverall_IN_con
         "函数 dp_curvedOverall_DP 和 dp_curvedOverall_MFLOW 的输入记录表"
 
         //弯头变量
@@ -3155,7 +3155,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"  ));
       end dp_curvedOverall_IN_con;
 
-      record dp_curvedOverall_IN_var 
+      record dp_curvedOverall_IN_var
         "函数 dp_curvedOverall_DP 和 dp_curvedOverall_MFLOW 的输入记录表"
 
         //流体性质变量
@@ -3168,7 +3168,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"  ));
       end dp_curvedOverall_IN_var;
 
-      function dp_edgedOverall_DP 
+      function dp_edgedOverall_DP
         "直角弯头 | 计算压力损失 | 整体流态 | 表面粗糙度 的压力损失"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
@@ -3177,7 +3177,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //根据来源对方程进行注释
 
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Bend;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -3207,79 +3207,79 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //资料来源_2: p.207, sec. 9.2.4
         //资料来源_3: p.Lac 6, fig. 16
         SI.ReynoldsNumber Re_min=1 "最小雷诺数";
-        SI.ReynoldsNumber Re_lam_min=5e2 
+        SI.ReynoldsNumber Re_lam_min=5e2
           "粗糙度促成的过渡区开始";
-        SI.ReynoldsNumber Re_lam_max=1e4 
+        SI.ReynoldsNumber Re_lam_max=1e4
           "粗糙度促成的过渡区结束";
-        SI.ReynoldsNumber Re_turb_min=1e5 
+        SI.ReynoldsNumber Re_turb_min=1e5
           "取决于雷诺数的过渡区最小雷诺数";
-        SI.ReynoldsNumber Re_turb_max=2e5 
+        SI.ReynoldsNumber Re_turb_max=2e5
           "取决于雷诺数的过渡区最大雷诺数（k_Re=1）";
-        SI.ReynoldsNumber Re_turb_const=1e6 
+        SI.ReynoldsNumber Re_turb_const=1e6
           "独立于压力损失系数的雷诺数 (1e6)";
 
         //资料来源_1: p. 81, sec. 2-2-21: start of transition regime
-        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754* 
-            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k))) 
+        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754*
+            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k)))
           "雷诺数增大时过渡区的开始（离开层流区）";
 
         //资料来源_1: p.366, diag. 6-7
-        Real A=0.95 + 33.5/max(MIN, delta) 
+        Real A=0.95 + 33.5/max(MIN, delta)
           "考虑转角对 zeta_LOC 影响的系数";
-        Real C1=1 
+        Real C1=1
           "考虑到横截面积对 zeta_LOC（此处：圆形横截面积）的相对伸长率";
 
         //资料来源_1: p.366, diag. 6-7
-        TYP.LocalResistanceCoefficient zeta_LOC=max(MIN, 0.95*sin(PI/180*delta/2)^2 
+        TYP.LocalResistanceCoefficient zeta_LOC=max(MIN, 0.95*sin(PI/180*delta/2)^2
              + 2.05*sin(PI/180*delta/2)^4) "局部阻力系数";
 
         //资料来源_1: p.365: Correction w.r.t. effect of Reynolds number in laminar regime
-        Real B=24.8 
+        Real B=24.8
           "考虑雷诺数对 zeta_TOT 影响的系数";
-        Real exp=0.263 
+        Real exp=0.263
           "层流区雷诺数修正指数";
 
-        Real v_min=Re_min*IN_var.eta/(IN_var.rho*d_hyd) 
+        Real v_min=Re_min*IN_var.eta/(IN_var.rho*d_hyd)
           "线性插值的最小平均速度";
 
         SI.Velocity velocity=m_flow/(IN_var.rho*A_cross) "平均速度";
-        SI.ReynoldsNumber Re=max(Re_min, IN_var.rho*abs(velocity)*d_hyd/IN_var.eta) 
+        SI.ReynoldsNumber Re=max(Re_min, IN_var.rho*abs(velocity)*d_hyd/IN_var.eta)
           "雷诺数";
 
         //资料来源_2: p.191, eq. 8.4: considering surface roughness
-        TYP.DarcyFrictionFactor lambda_FRI_rough=0.25/(Modelica.Math.log10(k/(3.7* 
-            IN_con.d_hyd) + 5.74/max(Re_lam_min, Re)^0.9)) 
+        TYP.DarcyFrictionFactor lambda_FRI_rough=0.25/(Modelica.Math.log10(k/(3.7*
+            IN_con.d_hyd) + 5.74/max(Re_lam_min, Re)^0.9))
             ^2 "考虑表面粗糙度的 Darcy 摩擦系数";
-        TYP.DarcyFrictionFactor lambda_FRI_smooth=0.25/(Modelica.Math.log10(5.74/max(Re_lam_min, Re)^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_FRI_smooth=0.25/(Modelica.Math.log10(5.74/max(Re_lam_min, Re)^0.9))^2
           "忽略表面粗糙度的 Darcy 摩擦系数";
 
         //资料来源_3: Lac 6, Figure 18
-        Real CF_fri= SMOOTH(Re_lam_leave, Re_lam_min, Re)*max(1, min(1.4, (lambda_FRI_rough/ 
-            lambda_FRI_smooth))) + SMOOTH(Re_lam_min, Re_lam_leave, Re) 
+        Real CF_fri= SMOOTH(Re_lam_leave, Re_lam_min, Re)*max(1, min(1.4, (lambda_FRI_rough/
+            lambda_FRI_smooth))) + SMOOTH(Re_lam_min, Re_lam_leave, Re)
           "考虑表面粗糙度的修正速度";
 
         //资料来源_2: p.208, diag. 9.3: Correction w.r.t. effect of Reynolds number
         Real CF_Re=SMOOTH(
-            Re_turb_min, 
-            Re_turb_max, 
+            Re_turb_min,
+            Re_turb_max,
             Re)*B/Re^exp + SMOOTH(
-            Re_turb_max, 
-            Re_turb_min, 
+            Re_turb_max,
+            Re_turb_min,
             Re) "雷诺数修正系数";
 
-        TYP.PressureLossCoefficient zeta_TOT=A*C1*zeta_LOC*CF_Re*CF_fri 
+        TYP.PressureLossCoefficient zeta_TOT=A*C1*zeta_LOC*CF_Re*CF_fri
           "压力损失系数";
 
       algorithm
-        DP := zeta_TOT*(IN_var.rho/2)* 
+        DP := zeta_TOT*(IN_var.rho/2)*
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                velocity, 
-                v_min, 
+                velocity,
+                v_min,
                 2);
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.Bend.dp_edgedOverall_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 考虑表面粗糙度，计算通过带有尖角的直角弯头的弯管的压力损失，属于整体流动，适用于不可压缩和单相流体通过圆形横截面。
@@ -3294,7 +3294,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"                 ));
       end dp_edgedOverall_DP;
 
-      function dp_edgedOverall_MFLOW 
+      function dp_edgedOverall_MFLOW
         "直角弯头 | 计算压力损失 | 整体流态 | 表面粗糙度 的压力损失"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
@@ -3303,7 +3303,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //根据来源对方程进行注释
 
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Bend;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -3318,7 +3318,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         input SI.Pressure dp "压力损失" annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.MassFlowRate M_FLOW 
+        output SI.MassFlowRate M_FLOW
           "输出函数 dp_edgedOverall_MFLOW";
 
       protected
@@ -3333,141 +3333,141 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //资料来源_2: p.207, sec. 9.2.4
         //资料来源_3: p.Lac 6, fig. 16
         SI.ReynoldsNumber Re_min=1 "最小雷诺数";
-        SI.ReynoldsNumber Re_lam_min=500 
+        SI.ReynoldsNumber Re_lam_min=500
           "粗糙度促成的过渡区开始";
-        SI.ReynoldsNumber Re_lam_max=1e4 
+        SI.ReynoldsNumber Re_lam_max=1e4
           "粗糙度促成的过渡区结束";
-        SI.ReynoldsNumber Re_turb_min=1e5 
+        SI.ReynoldsNumber Re_turb_min=1e5
           "取决于雷诺数的过渡区最小雷诺数";
-        SI.ReynoldsNumber Re_turb_max=2e5 
+        SI.ReynoldsNumber Re_turb_max=2e5
           "取决于雷诺数的过渡区最大雷诺数（k_Re=1）";
-        SI.ReynoldsNumber Re_turb_const=1e6 
+        SI.ReynoldsNumber Re_turb_const=1e6
           "独立于压力损失系数的雷诺数 (1e6)";
 
         //资料来源_1: p. 81, sec. 2-2-21: 过渡区开始
-        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754* 
-            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k))) 
+        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754*
+            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k)))
           "雷诺数增大时过渡区的开始（离开层流区）";
 
         //资料来源_1: p.366, diag. 6-7
-        Real A=0.95 + 33.5/max(MIN, delta) 
+        Real A=0.95 + 33.5/max(MIN, delta)
           "考虑转角对 zeta_LOC 影响的系数";
-        Real C1=1 
+        Real C1=1
           "考虑到横截面积对 zeta_LOC（此处：圆形横截面积）的相对伸长率";
 
         //资料来源_1: p.366, diag. 6-7
-        TYP.LocalResistanceCoefficient zeta_LOC=max(MIN, 0.95*sin(PI/180*delta/2)^2 
+        TYP.LocalResistanceCoefficient zeta_LOC=max(MIN, 0.95*sin(PI/180*delta/2)^2
              + 2.05*sin(PI/180*delta/2)^4) "局部阻力系数";
 
         //资料来源_1: p.365: Correction w.r.t. 雷诺数的影响
-        Real B=24.8 
+        Real B=24.8
           "考虑雷诺数对 zeta_TOT 影响的系数";
         Real exp=0.263 "雷诺数修正指数";
         Real pow=(2 - exp) "压力损失 = f（质量流量^pow）";
       //   Real k_Re = B/(max(MIN, velocity)*IN_con.d_hyd*IN_var.rho)^exp*IN_var.eta^exp;
 
-        SI.Velocity v_min = Re_min*IN_var.eta/(IN_var.rho*d_hyd) 
+        SI.Velocity v_min = Re_min*IN_var.eta/(IN_var.rho*d_hyd)
           "正则化的最小平均速度";
 
-        SI.Pressure dp_min=A*C1*zeta_LOC*(B/2)*(d_hyd/IN_var.eta)^(-exp)*IN_var.rho^(1 - exp) 
-            *v_min^(pow) 
+        SI.Pressure dp_min=A*C1*zeta_LOC*(B/2)*(d_hyd/IN_var.eta)^(-exp)*IN_var.rho^(1 - exp)
+            *v_min^(pow)
           "线性平滑质量流量，减少压力损失";
 
-        SI.Velocity v_lam_min = Re_lam_min*IN_var.eta/(IN_var.rho*d_hyd) 
+        SI.Velocity v_lam_min = Re_lam_min*IN_var.eta/(IN_var.rho*d_hyd)
           "开始过渡到粗糙度区的平均速度";
-        SI.Velocity v_lam_leave = Re_lam_leave*IN_var.eta/(IN_var.rho*d_hyd) 
+        SI.Velocity v_lam_leave = Re_lam_leave*IN_var.eta/(IN_var.rho*d_hyd)
           "向粗糙度区过渡结束时的平均速度";
 
-        SI.Pressure dp_lam_min=A*C1*zeta_LOC*(B/2)*(d_hyd/IN_var.eta)^(-exp)*IN_var.rho^(1 - exp) 
-            *v_lam_min^(pow) 
+        SI.Pressure dp_lam_min=A*C1*zeta_LOC*(B/2)*(d_hyd/IN_var.eta)^(-exp)*IN_var.rho^(1 - exp)
+            *v_lam_min^(pow)
           "开始向粗糙度区过渡时的压力损失";
 
-        TYP.DarcyFrictionFactor lambda_lam_leave_rough=0.25/(Modelica.Math.log10(k/(3.7* 
-            IN_con.d_hyd) + 5.74/Re_lam_leave^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_lam_leave_rough=0.25/(Modelica.Math.log10(k/(3.7*
+            IN_con.d_hyd) + 5.74/Re_lam_leave^0.9))^2
           "考虑到 Re_lem_leave 处表面粗糙度的 Darcy 摩擦系数";
-        TYP.DarcyFrictionFactor lambda_lam_leave_smooth=0.25/(Modelica.Math.log10(5.74/Re_lam_leave^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_lam_leave_smooth=0.25/(Modelica.Math.log10(5.74/Re_lam_leave^0.9))^2
           "忽略 Re_lem_leave 处表面粗糙度的 Darcy 摩擦系数";
 
-        SI.Pressure dp_lam_leave=A*C1*zeta_LOC*(B/2)*max(1, min(1.4, (lambda_lam_leave_rough/ 
-            lambda_lam_leave_smooth)))*(d_hyd/IN_var.eta)^(-exp)*IN_var.rho^(1 - exp) 
-            *v_lam_leave^(pow) 
+        SI.Pressure dp_lam_leave=A*C1*zeta_LOC*(B/2)*max(1, min(1.4, (lambda_lam_leave_rough/
+            lambda_lam_leave_smooth)))*(d_hyd/IN_var.eta)^(-exp)*IN_var.rho^(1 - exp)
+            *v_lam_leave^(pow)
           "过渡到表面粗糙度状态结束时的压力损失";
 
-        TYP.DarcyFrictionFactor lambda_turb_min_rough=0.25/(Modelica.Math.log10(k/(3.7* 
-            IN_con.d_hyd) + 5.74/Re_turb_min^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_turb_min_rough=0.25/(Modelica.Math.log10(k/(3.7*
+            IN_con.d_hyd) + 5.74/Re_turb_min^0.9))^2
           "考虑到开始过渡到恒定湍流状态时表面粗糙度的 Darcy 摩擦系数";
-        TYP.DarcyFrictionFactor lambda_turb_min_smooth=0.25/(Modelica.Math.log10(5.74/Re_turb_min^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_turb_min_smooth=0.25/(Modelica.Math.log10(5.74/Re_turb_min^0.9))^2
           "忽略到开始过渡到恒定湍流状态时表面粗糙度的 Darcy 摩擦系数";
 
-        TYP.DarcyFrictionFactor lambda_turb_max_rough=0.25/(Modelica.Math.log10(k/(3.7* 
-            IN_con.d_hyd) + 5.74/Re_turb_max^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_turb_max_rough=0.25/(Modelica.Math.log10(k/(3.7*
+            IN_con.d_hyd) + 5.74/Re_turb_max^0.9))^2
           "考虑到开始过渡到恒定湍流状态时表面粗糙度的 Darcy 摩擦系数";
-        TYP.DarcyFrictionFactor lambda_turb_max_smooth=0.25/(Modelica.Math.log10(5.74/Re_turb_max^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_turb_max_smooth=0.25/(Modelica.Math.log10(5.74/Re_turb_max^0.9))^2
           "忽略到开始过渡到恒定湍流状态时表面粗糙度的 Darcy 摩擦系数";
 
-        SI.Velocity v_turb_min = Re_turb_min*IN_var.eta/(IN_var.rho*d_hyd) 
+        SI.Velocity v_turb_min = Re_turb_min*IN_var.eta/(IN_var.rho*d_hyd)
           "开始过渡到恒定湍流状态时的平均速度";
 
-        SI.Velocity v_turb_max = Re_turb_max*IN_var.eta/(IN_var.rho*d_hyd) 
+        SI.Velocity v_turb_max = Re_turb_max*IN_var.eta/(IN_var.rho*d_hyd)
           "过渡到恒定湍流状态结束时的平均速度";
 
-        SI.Pressure dp_turb_min=A*C1*zeta_LOC*(B/2)*max(1, min(1.4, (lambda_turb_min_rough/ 
-            lambda_turb_min_smooth)))*(d_hyd/IN_var.eta)^(-exp)*IN_var.rho^(1 - exp) 
-            *v_turb_min^(pow) 
+        SI.Pressure dp_turb_min=A*C1*zeta_LOC*(B/2)*max(1, min(1.4, (lambda_turb_min_rough/
+            lambda_turb_min_smooth)))*(d_hyd/IN_var.eta)^(-exp)*IN_var.rho^(1 - exp)
+            *v_turb_min^(pow)
           "开始过渡到恒定湍流状态时的压力损失";
 
-        SI.Pressure dp_turb_max=A*C1*zeta_LOC*max(1, min(1.4, (lambda_turb_max_rough/ 
-            lambda_turb_max_smooth)))*IN_var.rho/2*v_turb_max^2 
+        SI.Pressure dp_turb_max=A*C1*zeta_LOC*max(1, min(1.4, (lambda_turb_max_rough/
+            lambda_turb_max_smooth)))*IN_var.rho/2*v_turb_max^2
           "过渡到恒定湍流状态结束时的压力损失";
 
-        SI.Velocity v_turb=(A*C1*zeta_LOC*IN_var.rho/2)^(-0.5)* 
+        SI.Velocity v_turb=(A*C1*zeta_LOC*IN_var.rho/2)^(-0.5)*
             Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-            abs(dp), 
-            dp_min, 
+            abs(dp),
+            dp_min,
             0.5) "湍流条件下的平均速度";
 
-        SI.Velocity v_lam=(2*(d_hyd/IN_var.eta)^exp/(A*C1*zeta_LOC*B*(IN_var.rho)^(1 - exp)))^(1/pow)* 
+        SI.Velocity v_lam=(2*(d_hyd/IN_var.eta)^exp/(A*C1*zeta_LOC*B*(IN_var.rho)^(1 - exp)))^(1/pow)*
             Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-            abs(dp), 
-            dp_min, 
+            abs(dp),
+            dp_min,
             1/pow) "层流条件下的平均速度";
 
         //平滑条件下的平均流速与流态的关系
         SI.Velocity v_smooth=if abs(dp) > dp_turb_max then v_turb 
             else if abs(dp) < dp_turb_min then v_lam 
             else SMOOTH(
-            dp_turb_max, 
-            dp_turb_min, 
+            dp_turb_max,
+            dp_turb_min,
             abs(dp))*v_turb + SMOOTH(
-            dp_turb_min, 
-            dp_turb_max, 
+            dp_turb_min,
+            dp_turb_max,
             abs(dp))*v_lam "平滑条件下的平均速度";
 
-        SI.ReynoldsNumber Re_smooth=max(Re_min, IN_var.rho*v_smooth*d_hyd/IN_var.eta) 
+        SI.ReynoldsNumber Re_smooth=max(Re_min, IN_var.rho*v_smooth*d_hyd/IN_var.eta)
           "平滑条件下的雷诺数";
 
         //资料来源_2: p.191, eq. 8.4: 考虑到表面粗糙度
-        TYP.DarcyFrictionFactor lambda_FRI_rough=0.25/(Modelica.Math.log10(k/(3.7* 
-            IN_con.d_hyd) + 5.74/max(Re_lam_min, Re_smooth)^0.9)) 
+        TYP.DarcyFrictionFactor lambda_FRI_rough=0.25/(Modelica.Math.log10(k/(3.7*
+            IN_con.d_hyd) + 5.74/max(Re_lam_min, Re_smooth)^0.9))
             ^2 "考虑表面粗糙度的 Darcy 摩擦系数";
-        TYP.DarcyFrictionFactor lambda_FRI_smooth=0.25/(Modelica.Math.log10(5.74/max(Re_lam_min, Re_smooth)^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_FRI_smooth=0.25/(Modelica.Math.log10(5.74/max(Re_lam_min, Re_smooth)^0.9))^2
           "忽略表面粗糙度的 Darcy 摩擦系数";
 
         //资料来源_3: Lac 6, Figure 18
-        Real CF_fri= SMOOTH(dp_lam_leave, dp_lam_min, abs(dp))*max(1, min(1.4, (lambda_FRI_rough/ 
-            lambda_FRI_smooth))) + SMOOTH(dp_lam_min, dp_lam_leave, abs(dp)) 
+        Real CF_fri= SMOOTH(dp_lam_leave, dp_lam_min, abs(dp))*max(1, min(1.4, (lambda_FRI_rough/
+            lambda_FRI_smooth))) + SMOOTH(dp_lam_min, dp_lam_leave, abs(dp))
           "考虑表面粗糙度的修正速度";
 
-        SI.Velocity velocity=v_smooth/max(1, CF_fri)^(0.5) 
+        SI.Velocity velocity=v_smooth/max(1, CF_fri)^(0.5)
           "考虑表面粗糙度的修正速度";
 
       algorithm
           M_FLOW := sign(dp)*IN_var.rho*A_cross*velocity;
 
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.Bend.dp_edgedOverall_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 考虑表面粗糙度，计算通过带有尖角的直角弯头的弯管的压力损失，属于整体流动，适用于不可压缩和单相流体通过圆形横截面。
@@ -3485,7 +3485,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_edgedOverall_MFLOW;
 
-      record dp_edgedOverall_IN_con 
+      record dp_edgedOverall_IN_con
         "函数 dp_edgedOverall_DP 和 dp_edgedOverall_MFLOW 的输入记录表"
 
         //边缘弯曲变量
@@ -3498,7 +3498,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"  ));
       end dp_edgedOverall_IN_con;
 
-      record dp_edgedOverall_IN_var 
+      record dp_edgedOverall_IN_var
         "函数 dp_edgedOverall_DP 和 dp_edgedOverall_MFLOW 的输入记录表"
 
         //流体性质变量
@@ -3524,7 +3524,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
     package Channel "用于计算管道压力损失的库"
     extends Modelica.Icons.VariantsPackage;
 
-      function dp_internalFlowOverall_DP 
+      function dp_internalFlowOverall_DP
         "Pressure loss of internal flow | calculate pressure loss | overall flow regime | surface roughness | several geometries"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
@@ -3533,7 +3533,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //根据来源对方程进行注释
 
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Channel;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -3552,7 +3552,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         output SI.Pressure DP "输出函数 dp_internalFlowOverall_DP";
 
       protected
-        type TYP = 
+        type TYP =
             Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow annotation();
 
         Real MIN=Modelica.Constants.eps;
@@ -3562,69 +3562,69 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
                   PI/4*(IN_con.d_cir)^2 else if IN_con.geometry == TYP.Elliptical then 
                   PI*IN_con.a_ell*IN_con.b_ell else if IN_con.geometry == TYP.Rectangular then 
                   IN_con.a_rec*IN_con.b_rec else if IN_con.geometry == TYP.Isosceles then 
-                  0.5*(IN_con.a_tri*IN_con.h_tri) else 0) 
+                  0.5*(IN_con.a_tri*IN_con.h_tri) else 0)
           "横截面积";
         SI.Length perimeter=max(MIN, if IN_con.geometry == TYP.Annular then PI*(
             IN_con.D_ann + IN_con.d_ann) else if IN_con.geometry == TYP.Circular then 
                   PI*IN_con.d_cir else if IN_con.geometry == TYP.Elliptical then PI*(
             IN_con.a_ell + IN_con.b_ell) else if IN_con.geometry == TYP.Rectangular then 
                   2*(IN_con.a_rec + IN_con.b_rec) else if IN_con.geometry == TYP.Isosceles then 
-                  IN_con.a_tri + 2*((IN_con.h_tri)^2 + (IN_con.a_tri/2)^2)^0.5 else 0) 
+                  IN_con.a_tri + 2*((IN_con.h_tri)^2 + (IN_con.a_tri/2)^2)^0.5 else 0)
           "周长";
         SI.Diameter d_hyd=4*A_cross/perimeter "水力直径";
         Real beta=IN_con.beta*180/PI "顶角";
 
         //资料来源_2: p.138, sec 8.5
-        Real Dd_ann=min(max(MIN, IN_con.d_ann), IN_con.D_ann)/max(MIN, max(IN_con.d_ann, 
-            IN_con.D_ann)) 
+        Real Dd_ann=min(max(MIN, IN_con.d_ann), IN_con.D_ann)/max(MIN, max(IN_con.d_ann,
+            IN_con.D_ann))
           "环形几何体小直径与大直径之比";
-        Real CF_ann=98.7378*Dd_ann^0.0589 
+        Real CF_ann=98.7378*Dd_ann^0.0589
           "环形几何修正系数";
-        Real ab_rec=min(IN_con.a_rec, IN_con.b_rec)/max(MIN, max(IN_con.a_rec, IN_con.b_rec)) 
+        Real ab_rec=min(IN_con.a_rec, IN_con.b_rec)/max(MIN, max(IN_con.a_rec, IN_con.b_rec))
           "矩形几何的长宽比";
-        Real CF_rec=-59.85*(ab_rec)^3 + 148.67*(ab_rec)^2 - 128.1*(ab_rec) + 96.1 
+        Real CF_rec=-59.85*(ab_rec)^3 + 148.67*(ab_rec)^2 - 128.1*(ab_rec) + 96.1
           "矩形几何的修正系数";
-        Real ab_ell=min(IN_con.a_ell, IN_con.b_ell)/max(MIN, max(IN_con.a_ell, IN_con.b_ell)) 
+        Real ab_ell=min(IN_con.a_ell, IN_con.b_ell)/max(MIN, max(IN_con.a_ell, IN_con.b_ell))
           "环形几何体小长度与大长度之比";
-        Real CF_ell=-169.2211*(ab_ell)^4 + 260.9028*(ab_ell)^3 - 113.7890*(ab_ell)^2 
-             + 9.2588*(ab_ell)^1 + 78.7124 
+        Real CF_ell=-169.2211*(ab_ell)^4 + 260.9028*(ab_ell)^3 - 113.7890*(ab_ell)^2
+             + 9.2588*(ab_ell)^1 + 78.7124
           "椭圆几何修正系数";
-        Real CF_tri=-0.0013*(min(90, beta))^2 + 0.1577*(min(90, beta)) + 48.5575 
+        Real CF_tri=-0.0013*(min(90, beta))^2 + 0.1577*(min(90, beta)) + 48.5575
           "三角形几何的修正系数";
-        Real CF_lam=if IN_con.geometry == TYP.Annular then CF_ann else if IN_con.geometry 
+        Real CF_lam=if IN_con.geometry == TYP.Annular then CF_ann else if IN_con.geometry
              == TYP.Circular then 64 else if IN_con.geometry == TYP.Elliptical then 
             CF_ell else if IN_con.geometry == TYP.Rectangular then CF_rec else if 
-            IN_con.geometry == TYP.Isosceles then CF_tri else 0 
+            IN_con.geometry == TYP.Isosceles then CF_tri else 0
           "层流修正系数";
 
         //资料来源_1: p.81, fig. 2-3, sec 21-22: definition of flow regime boundaries
         Real k=max(MIN, abs(IN_con.K)/d_hyd) "相对粗糙度";
-        SI.ReynoldsNumber Re_lam_min=1e3 
+        SI.ReynoldsNumber Re_lam_min=1e3
           "层流区的最小雷诺数";
-        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635 
+        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635
           "层流区的最大雷诺数";
-        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754* 
-            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k))) 
+        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754*
+            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k)))
           "雷诺数增大时过渡区的开始（离开层流区）";
 
         //直管函数 dp_turbulent 的调整质量流量
-        SI.MassFlowRate m_flow_turb=m_flow*(PI/4*d_hyd^2)/A_cross 
+        SI.MassFlowRate m_flow_turb=m_flow*(PI/4*d_hyd^2)/A_cross
           "用于湍流计算的质量流量";
-        SI.Velocity velocity=m_flow/(IN_var.rho*A_cross) 
+        SI.Velocity velocity=m_flow/(IN_var.rho*A_cross)
           "内部流速";
         SI.ReynoldsNumber Re=IN_var.rho*abs(velocity)*d_hyd/IN_var.eta;
 
       protected
         Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_overall_IN_con 
           IN_2_con(
-          final roughness=IN_con.roughness, 
-          final d_hyd=d_hyd, 
-          final K=IN_con.K, 
+          final roughness=IN_con.roughness,
+          final d_hyd=d_hyd,
+          final K=IN_con.K,
           final L=IN_con.L) "湍流系统的输入记录表" 
           annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
         Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_overall_IN_var 
-          IN_2_var(                                                                     final eta= 
-                IN_var.eta, final rho=IN_var.rho) 
+          IN_2_var(                                                                     final eta=
+                IN_var.eta, final rho=IN_var.rho)
           "湍流系统的输入记录表" 
           annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
 
@@ -3632,19 +3632,19 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       algorithm
         DP := SMOOTH(
-                Re_lam_min, 
-                Re_lam_max, 
+                Re_lam_min,
+                Re_lam_max,
                 Re)*(CF_lam/2)*IN_con.L/d_hyd^2*velocity*IN_var.eta + SMOOTH(
-                Re_lam_max, 
-                Re_lam_min, 
+                Re_lam_max,
+                Re_lam_min,
                 Re)*Dissipation.PressureLoss.StraightPipe.dp_turbulent_DP(
-                IN_2_con, 
-                IN_2_var, 
+                IN_2_con,
+                IN_2_var,
                 m_flow_turb);
-      annotation(Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation(Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.Channel.dp_internalFlowOverall_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 针对不同几何形状的内部流动，计算不可压缩和单相流体流动的整体流动状态下的压降，同时考虑表面粗糙度。
@@ -3657,11 +3657,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_internalFlowOverall_DP;
 
-      function dp_internalFlowOverall_MFLOW 
+      function dp_internalFlowOverall_MFLOW
         "Pressure loss of internal flow | calculate mass flow rate | overall flow regime | surface roughness | several geometries"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Channel;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -3679,7 +3679,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         output SI.MassFlowRate M_FLOW "输出函数 dp_overall_MFLOW";
 
       protected
-        type TYP1 = 
+        type TYP1 =
             Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow annotation();
         type TYP2 = Modelica.Fluid.Dissipation.Utilities.Types.Roughness annotation();
 
@@ -3690,67 +3690,67 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
                   PI/4*(IN_con.d_cir)^2 else if IN_con.geometry == TYP1.Elliptical then 
                   PI*IN_con.a_ell*IN_con.b_ell else if IN_con.geometry == TYP1.Rectangular then 
                   IN_con.a_rec*IN_con.b_rec else if IN_con.geometry == TYP1.Isosceles then 
-                  0.5*(IN_con.a_tri*IN_con.h_tri) else 0) 
+                  0.5*(IN_con.a_tri*IN_con.h_tri) else 0)
           "横截面积";
         SI.Length perimeter=max(MIN, if IN_con.geometry == TYP1.Annular then PI*(
             IN_con.D_ann + IN_con.d_ann) else if IN_con.geometry == TYP1.Circular then 
-                  PI*IN_con.d_cir else if IN_con.geometry == TYP1.Elliptical then PI* 
+                  PI*IN_con.d_cir else if IN_con.geometry == TYP1.Elliptical then PI*
             (IN_con.a_ell + IN_con.b_ell) else if IN_con.geometry == TYP1.Rectangular then 
                   2*(IN_con.a_rec + IN_con.b_rec) else if IN_con.geometry == TYP1.Isosceles then 
-                  IN_con.a_tri + 2*((IN_con.h_tri)^2 + (IN_con.a_tri/2)^2)^0.5 else 0) 
+                  IN_con.a_tri + 2*((IN_con.h_tri)^2 + (IN_con.a_tri/2)^2)^0.5 else 0)
           "周长";
         SI.Diameter d_hyd=4*A_cross/perimeter "水力直径";
         Real beta=IN_con.beta*180/PI "顶角";
 
         //资料来源_2: p.138, sec 8.5
-        Real Dd_ann=min(max(MIN, IN_con.d_ann), IN_con.D_ann)/max(MIN, max(IN_con.d_ann, 
-            IN_con.D_ann)) 
+        Real Dd_ann=min(max(MIN, IN_con.d_ann), IN_con.D_ann)/max(MIN, max(IN_con.d_ann,
+            IN_con.D_ann))
           "环形几何体小直径与大直径之比";
-        Real CF_ann=98.7378*Dd_ann^0.0589 
+        Real CF_ann=98.7378*Dd_ann^0.0589
           "环形几何修正系数";
-        Real ab_rec=min(IN_con.a_rec, IN_con.b_rec)/max(MIN, max(IN_con.a_rec, IN_con.b_rec)) 
+        Real ab_rec=min(IN_con.a_rec, IN_con.b_rec)/max(MIN, max(IN_con.a_rec, IN_con.b_rec))
           "矩形几何的长宽比";
-        Real CF_rec=-59.85*(ab_rec)^3 + 148.67*(ab_rec)^2 - 128.1*(ab_rec) + 96.1 
+        Real CF_rec=-59.85*(ab_rec)^3 + 148.67*(ab_rec)^2 - 128.1*(ab_rec) + 96.1
           "矩形几何的修正系数";
-        Real ab_ell=min(IN_con.a_ell, IN_con.b_ell)/max(MIN, max(IN_con.a_ell, IN_con.b_ell)) 
+        Real ab_ell=min(IN_con.a_ell, IN_con.b_ell)/max(MIN, max(IN_con.a_ell, IN_con.b_ell))
           "环形几何体小长度与大长度之比";
-        Real CF_ell=-169.2211*(ab_ell)^4 + 260.9028*(ab_ell)^3 - 113.7890*(ab_ell)^2 
-             + 9.2588*(ab_ell)^1 + 78.7124 
+        Real CF_ell=-169.2211*(ab_ell)^4 + 260.9028*(ab_ell)^3 - 113.7890*(ab_ell)^2
+             + 9.2588*(ab_ell)^1 + 78.7124
           "椭圆几何修正系数";
-        Real CF_tri=-0.0013*(min(90, beta))^2 + 0.1577*(min(90, beta)) + 48.5575 
+        Real CF_tri=-0.0013*(min(90, beta))^2 + 0.1577*(min(90, beta)) + 48.5575
           "三角形几何的修正系数";
-        Real CF_lam=if IN_con.geometry == TYP1.Annular then CF_ann else if IN_con.geometry 
+        Real CF_lam=if IN_con.geometry == TYP1.Annular then CF_ann else if IN_con.geometry
              == TYP1.Circular then 64 else if IN_con.geometry == TYP1.Elliptical then 
                   CF_ell else if IN_con.geometry == TYP1.Rectangular then CF_rec else 
-                  if IN_con.geometry == TYP1.Isosceles then CF_tri else 0 
+                  if IN_con.geometry == TYP1.Isosceles then CF_tri else 0
           "层流修正系数";
 
         //资料来源_1: p.81, fig. 2-3, sec 21-22: definition of flow regime boundaries
         Real k=max(MIN, abs(IN_con.K)/d_hyd) "相对粗糙度";
-        SI.ReynoldsNumber Re_lam_min=1e3 
+        SI.ReynoldsNumber Re_lam_min=1e3
           "层流区的最小雷诺数";
-        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635 
+        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635
           "层流区的最大雷诺数";
-        SI.ReynoldsNumber Re_turb_min=4e3 
+        SI.ReynoldsNumber Re_turb_min=4e3
           "湍流区的最小雷诺数";
 
-        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754* 
-            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k))) 
+        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754*
+            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k)))
           "雷诺数增大时过渡区的开始（离开层流区）";
 
         //在计算直管压力损失时确定 Darcy 摩擦系数：
         //dp = lambda_FRI*L/d_hyd*(rho/2)*velocity^2 and assuming lambda_FRI == lambda_FRI_calc/Re^2
-        TYP.DarcyFrictionFactor lambda_FRI_calc=2*abs(dp)*d_hyd^3*IN_var.rho/(IN_con.L 
+        TYP.DarcyFrictionFactor lambda_FRI_calc=2*abs(dp)*d_hyd^3*IN_var.rho/(IN_con.L
             *IN_var.eta^2) "修正 Darcy 摩擦系数";
 
         //资料来源_3: p.Lab 1, eq. 5: determine Re assuming laminar regime
-        SI.ReynoldsNumber Re_lam=lambda_FRI_calc/CF_lam 
+        SI.ReynoldsNumber Re_lam=lambda_FRI_calc/CF_lam
           "假设为层流状态的雷诺数";
 
         //资料来源_3: p.Lab 2, eq. 10: determine Re assuming turbulent regime (Colebrook-White)
-        SI.ReynoldsNumber Re_turb=if IN_con.roughness == TYP2.Neglected then (max(MIN, 
-            lambda_FRI_calc)/0.3164)^(1/1.75) else -2*sqrt(max(lambda_FRI_calc, MIN)) 
-            *Modelica.Math.log10(2.51/sqrt(max(lambda_FRI_calc, MIN)) + k/3.7) 
+        SI.ReynoldsNumber Re_turb=if IN_con.roughness == TYP2.Neglected then (max(MIN,
+            lambda_FRI_calc)/0.3164)^(1/1.75) else -2*sqrt(max(lambda_FRI_calc, MIN))
+            *Modelica.Math.log10(2.51/sqrt(max(lambda_FRI_calc, MIN)) + k/3.7)
           "假设为湍流状态的雷诺数";
 
         //确定实际流态
@@ -3758,25 +3758,25 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //确定过渡区的 Re
         SI.ReynoldsNumber Re_trans=if Re_lam >= Re_lam_leave then 
             Modelica.Fluid.Dissipation.Utilities.Functions.General.CubicInterpolation_Re(
-            Re_check, 
-            Re_lam_leave, 
-            Re_turb_min, 
-            k, 
+            Re_check,
+            Re_lam_leave,
+            Re_turb_min,
+            k,
             lambda_FRI_calc) else 0;
         //确定实际 Re
-        SI.ReynoldsNumber Re=if Re_lam < Re_lam_leave then Re_lam else if Re_turb > 
+        SI.ReynoldsNumber Re=if Re_lam < Re_lam_leave then Re_lam else if Re_turb >
             Re_turb_min then Re_turb else Re_trans;
 
         Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_overall_IN_con 
           IN_2_con(
-          final roughness=IN_con.roughness, 
-          final d_hyd=d_hyd, 
-          final K=IN_con.K, 
+          final roughness=IN_con.roughness,
+          final d_hyd=d_hyd,
+          final K=IN_con.K,
           final L=IN_con.L) "湍流系统的输入记录表" 
           annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
         Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_overall_IN_var 
-          IN_2_var(                                                                     final eta= 
-                IN_var.eta, final rho=IN_var.rho) 
+          IN_2_var(                                                                     final eta=
+                IN_var.eta, final rho=IN_var.rho)
           "湍流系统的输入记录表" 
           annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
 
@@ -3784,21 +3784,21 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       algorithm
         M_FLOW := SMOOTH(
-                Re_lam_min, 
-                Re_turb, 
-                Re)*IN_var.rho*A_cross*(dp*(2/CF_lam)*(d_hyd^2/IN_con.L)*(1/ 
+                Re_lam_min,
+                Re_turb,
+                Re)*IN_var.rho*A_cross*(dp*(2/CF_lam)*(d_hyd^2/IN_con.L)*(1/
           IN_var.eta)) + SMOOTH(
-                Re_turb, 
-                Re_lam_min, 
-                Re)*(A_cross/((PI/4)*d_hyd^2))* 
+                Re_turb,
+                Re_lam_min,
+                Re)*(A_cross/((PI/4)*d_hyd^2))*
           Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_turbulent_MFLOW(
-                IN_2_con, 
-                IN_2_var, 
+                IN_2_con,
+                IN_2_var,
                 dp);
-      annotation(Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation(Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.Channel.dp_internalFlowOverall_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 针对不同几何形状的内部流动，计算不可压缩和单相流体流动的整体流动状态下的压降，同时考虑表面粗糙度。
@@ -3815,11 +3815,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_internalFlowOverall_MFLOW;
 
-      record dp_internalFlowOverall_IN_con 
+      record dp_internalFlowOverall_IN_con
         "函数 dp_internalFlowOverall_DP 和 dp_internalFlowOverall_MFLOW 的输入记录表"
 
         //管道变量
-        Modelica.Fluid.Dissipation.Utilities.Types.Roughness roughness=Dissipation.Utilities.Types.Roughness.Considered 
+        Modelica.Fluid.Dissipation.Utilities.Types.Roughness roughness=Dissipation.Utilities.Types.Roughness.Considered
           "考虑表面粗糙度的选择" 
           annotation (Dialog(group="管道"));
         extends 
@@ -3831,7 +3831,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_internalFlowOverall_IN_con;
 
-      record dp_internalFlowOverall_IN_var 
+      record dp_internalFlowOverall_IN_var
         "函数 dp_internalFlowOverall_DP 和 dp_internalFlowOverall_MFLOW 的输入记录表"
 
         //流体性质变量
@@ -3857,7 +3857,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
     package General "通用压力损失计算库"
     extends Modelica.Icons.VariantsPackage;
 
-      function dp_idealGas_DP 
+      function dp_idealGas_DP
         "通用压力损失 | 计算压力损失 | 理想气体 | 平均密度"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.General;
@@ -3879,25 +3879,25 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       protected
         Real Km_internal=IN_con.Km "压力损失系数";
 
-        SI.Density rho_internal=IN_var.p_m/(IN_con.R_s*IN_var.T_m) 
+        SI.Density rho_internal=IN_var.p_m/(IN_con.R_s*IN_var.T_m)
           "平均密度";
         SI.VolumeFlowRate V_flow=m_flow/rho_internal "体积流量 [m3/s]";
-        SI.VolumeFlowRate V_flow_min=(IN_con.R_s/Km_internal)^(1/IN_con.exp)* 
-            rho_internal^(1/IN_con.exp - 1)*IN_con.dp_smooth^(1/IN_con.exp) 
+        SI.VolumeFlowRate V_flow_min=(IN_con.R_s/Km_internal)^(1/IN_con.exp)*
+            rho_internal^(1/IN_con.exp - 1)*IN_con.dp_smooth^(1/IN_con.exp)
           "开始近似递减体积流量";
 
         //说明
 
       algorithm
-        DP := (Km_internal/IN_con.R_s)*(rho_internal)^(IN_con.exp - 1)* 
+        DP := (Km_internal/IN_con.R_s)*(rho_internal)^(IN_con.exp - 1)*
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                V_flow, 
-                V_flow_min, 
+                V_flow,
+                V_flow_min,
                 IN_con.exp);
-      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.General.dp_idealGas_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 使用平均密度计算<strong>理想气体</strong>的通用压降。
@@ -3910,7 +3910,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_idealGas_DP;
 
-      function dp_idealGas_MFLOW 
+      function dp_idealGas_MFLOW
         "通用压力损失 | 计算压力损失 | 理想气体 | 平均密度"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.General;
@@ -3931,21 +3931,21 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       protected
         Real Km_internal=IN_con.Km "压力损失系数";
 
-        SI.Density rho_internal=IN_var.p_m/(IN_con.R_s*IN_var.T_m) 
+        SI.Density rho_internal=IN_var.p_m/(IN_con.R_s*IN_var.T_m)
           "平均密度";
 
         //说明
 
       algorithm
-        M_FLOW := (IN_con.R_s/Km_internal)^(1/IN_con.exp)*(rho_internal)^(1/ 
+        M_FLOW := (IN_con.R_s/Km_internal)^(1/IN_con.exp)*(rho_internal)^(1/
           IN_con.exp)*Dissipation.Utilities.Functions.General.SmoothPower(
-                dp, 
-                IN_con.dp_smooth, 
+                dp,
+                IN_con.dp_smooth,
                 1/IN_con.exp);
-      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.General.dp_idealGas_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 使用平均密度计算<strong>理想气体</strong>的通用压降。
@@ -3958,7 +3958,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_idealGas_MFLOW;
 
-      record dp_idealGas_IN_con 
+      record dp_idealGas_IN_con
         "函数 dp_idealGas_DP 和 dp_idealGas_MFLOW 的输入记录表"
 
         //通用变量
@@ -3966,7 +3966,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           Modelica.Fluid.Dissipation.Utilities.Records.General.IdealGas_con;
 
         //线性化
-        SI.Pressure dp_smooth(min=Modelica.Constants.eps) = 1 
+        SI.Pressure dp_smooth(min=Modelica.Constants.eps) = 1
           "开始线性化，以减少压力损失" 
           annotation (Dialog(group="线性化"));
 
@@ -3977,7 +3977,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_idealGas_IN_con;
 
-      record dp_idealGas_IN_var 
+      record dp_idealGas_IN_var
         "函数 dp_idealGas_DP 和 dp_idealGas_MFLOW 的输入记录表"
 
         //通用变量
@@ -3991,7 +3991,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_idealGas_IN_var;
 
-      function dp_nominalDensityViscosity_DP 
+      function dp_nominalDensityViscosity_DP
         "通用压力损失 | 计算质量流量 | 额定工作点 | 压力损失律（指数） | 密度和动力黏度相关性"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.General;
@@ -4009,12 +4009,12 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.Pressure DP 
+        output SI.Pressure DP
           "输出函数 dp_nominalDensityViscosity_DP";
 
       protected
-        SI.MassFlowRate m_flow_smooth=(max(1, 0.01*IN_con.dp_nom)*IN_var.rho/IN_con.rho_nom 
-            *(1/IN_var.eta*IN_con.eta_nom)^(IN_con.exp_eta)*(1/IN_con.m_flow_nom))^(1 
+        SI.MassFlowRate m_flow_smooth=(max(1, 0.01*IN_con.dp_nom)*IN_var.rho/IN_con.rho_nom
+            *(1/IN_var.eta*IN_con.eta_nom)^(IN_con.exp_eta)*(1/IN_con.m_flow_nom))^(1
             /IN_con.exp) "质量流量递减时的近似值起点";
 
         //说明
@@ -4022,16 +4022,16 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       algorithm
         DP := if IN_con.exp > 1.0 or IN_con.exp < 1.0 then 
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                m_flow, 
-                m_flow_smooth, 
-                IN_con.exp)*(IN_var.eta/IN_con.eta_nom)^IN_con.exp_eta*IN_con.rho_nom 
+                m_flow,
+                m_flow_smooth,
+                IN_con.exp)*(IN_var.eta/IN_con.eta_nom)^IN_con.exp_eta*IN_con.rho_nom
           /IN_var.rho*IN_con.dp_nom*(1/IN_con.m_flow_nom)^(IN_con.exp) else 
-          m_flow/IN_con.m_flow_nom*(IN_var.eta/IN_con.eta_nom)^IN_con.exp_eta* 
+          m_flow/IN_con.m_flow_nom*(IN_var.eta/IN_con.eta_nom)^IN_con.exp_eta*
           IN_con.rho_nom/IN_var.rho*IN_con.dp_nom;
-      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.General.dp_nominalDensityViscosity_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 通过插值计算操作点处与额定流体变量（例如额定密度、额定动力黏度）相关的通用压降。此通用函数通过压降指数考虑压降规律，以及密度和动力黏度对压降的影响。
@@ -4044,7 +4044,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_nominalDensityViscosity_DP;
 
-      function dp_nominalDensityViscosity_MFLOW 
+      function dp_nominalDensityViscosity_MFLOW
         "通用压力损失 | 计算质量流量(可压缩) | 额定工作点 | 压力损失律（指数） | 密度和动力黏度相关性"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.General;
@@ -4063,7 +4063,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         input SI.Pressure dp "压降" annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.MassFlowRate M_FLOW 
+        output SI.MassFlowRate M_FLOW
           "输出函数 dp_nominalDensityViscosity_MFLOW";
 
         //说明
@@ -4071,16 +4071,16 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       algorithm
         M_FLOW := if IN_con.exp > 1.0 or IN_con.exp < 1.0 then 
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                dp, 
-                0.01*IN_con.dp_nom, 
-                1/IN_con.exp)*(IN_con.eta_nom/IN_var.eta)^(IN_con.exp_eta/ 
-          IN_con.exp)*(1/IN_con.dp_nom*IN_var.rho/IN_con.rho_nom)^(1/IN_con.exp) 
-          *IN_con.m_flow_nom else dp/IN_con.dp_nom*(IN_con.eta_nom/IN_var.eta)^ 
+                dp,
+                0.01*IN_con.dp_nom,
+                1/IN_con.exp)*(IN_con.eta_nom/IN_var.eta)^(IN_con.exp_eta/
+          IN_con.exp)*(1/IN_con.dp_nom*IN_var.rho/IN_con.rho_nom)^(1/IN_con.exp)
+          *IN_con.m_flow_nom else dp/IN_con.dp_nom*(IN_con.eta_nom/IN_var.eta)^
           (IN_con.exp_eta)*IN_var.rho/IN_con.rho_nom*IN_con.m_flow_nom;
-      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.General.dp_nominalDensityViscosity_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 根据额定流体变量（例如额定密度、额定动力黏度）在操作点上的插值计算一般压力损失。
@@ -4094,7 +4094,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_nominalDensityViscosity_MFLOW;
 
-      record dp_nominalDensityViscosity_IN_con 
+      record dp_nominalDensityViscosity_IN_con
         "函数 dp_nominalDensityViscosity_DP 和 dp_nominalDensityViscosity_MFLOW 的输出记录表"
 
         //通用变量
@@ -4107,7 +4107,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_nominalDensityViscosity_IN_con;
 
-      record dp_nominalDensityViscosity_IN_var 
+      record dp_nominalDensityViscosity_IN_var
         "函数 dp_nominalDensityViscosity_DP 和 dp_nominalDensityViscosity_MFLOW 的输出记录表"
 
         //流体性质变量
@@ -4120,7 +4120,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_nominalDensityViscosity_IN_var;
 
-      function dp_nominalPressureLossLawDensity_DP 
+      function dp_nominalPressureLossLawDensity_DP
         "通用压力损失 | 计算压力损失 | 额定工作点 | 压力损失律（系数和指数） | 密度相关性"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.General;
@@ -4128,32 +4128,32 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //输入记录表
         input
           Modelica.Fluid.Dissipation.PressureLoss.General.dp_nominalPressureLossLawDensity_IN_con 
-          IN_con 
+          IN_con
           "函数 dp_nominalPressureLossLawDensity_DP 的输入记录表" 
           annotation (Dialog(group="常量输入"));
         input
           Modelica.Fluid.Dissipation.PressureLoss.General.dp_nominalPressureLossLawDensity_IN_var 
-          IN_var 
+          IN_var
           "函数 dp_nominalPressureLossLawDensity_DP 的输入记录表" 
           annotation (Dialog(group="变量输入"));
         input SI.MassFlowRate m_flow "质量流量" 
           annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.Pressure DP 
+        output SI.Pressure DP
           "输出函数 dp_nominalPressureLossLawDensity_yesAJac_DP";
 
       protected
         Real exp_density=if IN_con.target ==Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate then 
-                  1 - IN_con.exp else 1 
+                  1 - IN_con.exp else 1
           "密度分数 (rho/rho_nom) 的指数";
         SI.MassFlowRate m_flow_nom=if IN_con.target ==Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate then 
-                  IN_con.m_flow_nom else IN_var.rho*IN_con.V_flow_nom 
+                  IN_con.m_flow_nom else IN_var.rho*IN_con.V_flow_nom
           "工作点额定平均流速";
 
         SI.MassFlowRate m_flow_linear=(0.01*(IN_con.zeta_TOT_nom/IN_var.zeta_TOT)*(
-            IN_con.rho_nom/IN_var.rho)^(exp_density)*(IN_con.A_cross/IN_con.A_cross_nom) 
-            ^(IN_con.exp)*IN_con.m_flow_nom)^(1/IN_con.exp) 
+            IN_con.rho_nom/IN_var.rho)^(exp_density)*(IN_con.A_cross/IN_con.A_cross_nom)
+            ^(IN_con.exp)*IN_con.m_flow_nom)^(1/IN_con.exp)
           "质量流量递减时的近似值起点";
 
         //说明
@@ -4161,19 +4161,19 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       algorithm
         DP := if IN_con.exp > 1.0 or IN_con.exp < 1.0 then 
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                m_flow, 
-                m_flow_linear, 
-                IN_con.exp)*IN_con.dp_nom*(IN_var.zeta_TOT/IN_con.zeta_TOT_nom) 
-          *(IN_var.rho/IN_con.rho_nom)^(exp_density)*(IN_con.A_cross_nom/IN_con.A_cross) 
+                m_flow,
+                m_flow_linear,
+                IN_con.exp)*IN_con.dp_nom*(IN_var.zeta_TOT/IN_con.zeta_TOT_nom)
+          *(IN_var.rho/IN_con.rho_nom)^(exp_density)*(IN_con.A_cross_nom/IN_con.A_cross)
           ^(IN_con.exp)*(1/IN_con.m_flow_nom)^(IN_con.exp) else IN_con.dp_nom*(
           IN_var.zeta_TOT/IN_con.zeta_TOT_nom)*(IN_var.rho/IN_con.rho_nom)^(
-          exp_density)*(IN_con.A_cross_nom/IN_con.A_cross)^(1)*(m_flow/IN_con.m_flow_nom) 
+          exp_density)*(IN_con.A_cross_nom/IN_con.A_cross)^(1)*(m_flow/IN_con.m_flow_nom)
           ^(1);
 
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.General.dp_nominalPressureLossLawDensity_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 根据额定流体变量（例如额定密度）通过插值从一个操作点计算一般压力损失。
@@ -4187,7 +4187,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_nominalPressureLossLawDensity_DP;
 
-      function dp_nominalPressureLossLawDensity_MFLOW 
+      function dp_nominalPressureLossLawDensity_MFLOW
         "通用压力损失 | 计算质量流量 | 额定工作点 | 压力损失律（系数和指数） | 密度相关性"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.General;
@@ -4195,26 +4195,26 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //输入记录表
         input
           Modelica.Fluid.Dissipation.PressureLoss.General.dp_nominalPressureLossLawDensity_IN_con 
-          IN_con 
+          IN_con
           "函数 dp_nominalPressureLossLawDensity_MFLOW 的输入记录表" 
           annotation (Dialog(group="常量输入"));
         input
           Modelica.Fluid.Dissipation.PressureLoss.General.dp_nominalPressureLossLawDensity_IN_var 
-          IN_var 
+          IN_var
           "函数 dp_nominalPressureLossLawDensity_MFLOW 的输入记录表" 
           annotation (Dialog(group="变量输入"));
         input SI.Pressure dp "压降" annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.MassFlowRate M_FLOW 
+        output SI.MassFlowRate M_FLOW
           "输出函数 dp_nominalPressurelosslawDensity_MFLOW";
 
       protected
         Real exp_density=if IN_con.target ==Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate then 
-                  1 - IN_con.exp else 1 
+                  1 - IN_con.exp else 1
           "密度分数 (rho/rho_nom) 的指数";
         SI.MassFlowRate m_flow_nom=if IN_con.target ==Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate then 
-                  IN_con.m_flow_nom else IN_var.rho*IN_con.V_flow_nom 
+                  IN_con.m_flow_nom else IN_var.rho*IN_con.V_flow_nom
           "工作点额定平均流速";
 
         //说明
@@ -4222,18 +4222,18 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       algorithm
         M_FLOW := if IN_con.exp > 1.0 or IN_con.exp < 1.0 then 
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                dp, 
-                0.01*IN_con.dp_nom, 
-                1/IN_con.exp)*IN_con.m_flow_nom*(IN_con.A_cross/IN_con.A_cross_nom) 
-          *(IN_con.rho_nom/IN_var.rho)^(exp_density/IN_con.exp)*((1/IN_con.dp_nom) 
-          *(IN_con.zeta_TOT_nom/IN_var.zeta_TOT))^(1/IN_con.exp) else IN_con.m_flow_nom 
+                dp,
+                0.01*IN_con.dp_nom,
+                1/IN_con.exp)*IN_con.m_flow_nom*(IN_con.A_cross/IN_con.A_cross_nom)
+          *(IN_con.rho_nom/IN_var.rho)^(exp_density/IN_con.exp)*((1/IN_con.dp_nom)
+          *(IN_con.zeta_TOT_nom/IN_var.zeta_TOT))^(1/IN_con.exp) else IN_con.m_flow_nom
           *(IN_con.A_cross/IN_con.A_cross_nom)*(IN_con.rho_nom/IN_var.rho)^(
-          exp_density/1)*((dp/IN_con.dp_nom)*(IN_con.zeta_TOT_nom/IN_var.zeta_TOT)) 
+          exp_density/1)*((dp/IN_con.dp_nom)*(IN_con.zeta_TOT_nom/IN_var.zeta_TOT))
           ^(1/1);
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.General.dp_nominalPressureLossLawDensity_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 根据额定流体变量（例如额定密度）通过插值从一个操作点计算一般压力损失。
@@ -4247,7 +4247,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_nominalPressureLossLawDensity_MFLOW;
 
-      record dp_nominalPressureLossLawDensity_IN_con 
+      record dp_nominalPressureLossLawDensity_IN_con
         "函数 dp_nominalPressureLossLawDensity_DP 和 dp_nominalPressureLossLawDensity_MFLOW 的输入记录表"
 
         //通用变量
@@ -4260,7 +4260,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_nominalPressureLossLawDensity_IN_con;
 
-      record dp_nominalPressureLossLawDensity_IN_var 
+      record dp_nominalPressureLossLawDensity_IN_var
         "函数 dp_nominalPressureLossLawDensity_DP 和 dp_nominalPressureLossLawDensity_MFLOW 的输入记录表"
 
         //通用变量
@@ -4277,7 +4277,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_nominalPressureLossLawDensity_IN_var;
 
-      function dp_pressureLossCoefficient_DP 
+      function dp_pressureLossCoefficient_DP
         "通用压力损失 | 计算压力损失 | 压力损失系数 (zeta_TOT)"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.General;
@@ -4295,22 +4295,22 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.Pressure DP 
+        output SI.Pressure DP
           "输出函数 dp_pressureLossCoefficient_DP";
 
         //说明
 
       algorithm
-        DP := 0.5*IN_var.zeta_TOT* 
+        DP := 0.5*IN_var.zeta_TOT*
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                m_flow, 
-                (IN_con.dp_smooth/(0.5*IN_var.zeta_TOT*IN_var.rho))^0.5*IN_var.rho 
-            *IN_con.A_cross, 
+                m_flow,
+                (IN_con.dp_smooth/(0.5*IN_var.zeta_TOT*IN_var.rho))^0.5*IN_var.rho
+            *IN_con.A_cross,
                 2)/(IN_var.rho*(IN_con.A_cross)^2);
-      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.General.dp_pressureLossCoefficient_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 根据压力损失系数计算一般压力损失。
@@ -4323,7 +4323,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_pressureLossCoefficient_DP;
 
-      function dp_pressureLossCoefficient_MFLOW 
+      function dp_pressureLossCoefficient_MFLOW
         "通用压力损失 | 计算质量流量 | 压力损失系数 (zeta_TOT)"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.General;
@@ -4341,21 +4341,21 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         input SI.Pressure dp "压降" annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.MassFlowRate M_FLOW 
+        output SI.MassFlowRate M_FLOW
           "输出函数 dp_pressureLossCoefficientt_MFLOW";
 
         //说明
 
       algorithm
-        M_FLOW := IN_var.rho*IN_con.A_cross* 
+        M_FLOW := IN_var.rho*IN_con.A_cross*
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                dp, 
-                IN_con.dp_smooth, 
+                dp,
+                IN_con.dp_smooth,
                 0.5)/(0.5*IN_var.zeta_TOT*IN_var.rho)^0.5;
-      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.General.dp_pressureLossCoefficient_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 根据压力损失系数计算一般压力损失。
@@ -4368,7 +4368,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_pressureLossCoefficient_MFLOW;
 
-      record dp_pressureLossCoefficient_IN_con 
+      record dp_pressureLossCoefficient_IN_con
         "函数 dp_pressureLossCoefficient_DP 和 dp_pressureLossCoefficient_MFLOW 的输入记录表"
         extends Modelica.Icons.Record;
 
@@ -4377,7 +4377,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           annotation (Dialog(group="通用变量"));
 
         //线性化
-        SI.Pressure dp_smooth=1 
+        SI.Pressure dp_smooth=1
           "开始线性化以减少压力损失" 
           annotation (Dialog(group="线性化"));
 
@@ -4387,12 +4387,12 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"            ));
       end dp_pressureLossCoefficient_IN_con;
 
-      record dp_pressureLossCoefficient_IN_var 
+      record dp_pressureLossCoefficient_IN_var
         "函数 dp_pressureLossCoefficient_DP 和 dp_pressureLossCoefficient_MFLOW 的输入记录表"
         extends Modelica.Icons.Record;
 
         //通用变量
-        TYP.PressureLossCoefficient zeta_TOT=0.02*1/0.1 
+        TYP.PressureLossCoefficient zeta_TOT=0.02*1/0.1
           "压力损失系数" 
           annotation (Dialog(group="通用变量"));
 
@@ -4406,7 +4406,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_pressureLossCoefficient_IN_var;
 
-      function dp_volumeFlowRate_DP 
+      function dp_volumeFlowRate_DP
         "通用压力损失 | 计算压力损失 | 二次函数 (dp=a*V_flow^2 + b*V_flow)"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.General;
@@ -4431,11 +4431,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real a=abs(IN_con.a);
         Real b=abs(IN_con.b);
 
-        SI.VolumeFlowRate V_flow=m_flow/max(Modelica.Constants.eps, IN_var.rho) 
+        SI.VolumeFlowRate V_flow=m_flow/max(Modelica.Constants.eps, IN_var.rho)
           "体积流量";
-        SI.Pressure dp_min=max(Modelica.Constants.eps, abs(IN_con.dp_min)) 
+        SI.Pressure dp_min=max(Modelica.Constants.eps, abs(IN_con.dp_min))
           "压力损失递减近似值的起点";
-        SI.VolumeFlowRate V_flow_smooth=if a > 0 and b <= 0 then (dp_min/a)^0.5 else 0 
+        SI.VolumeFlowRate V_flow_smooth=if a > 0 and b <= 0 then (dp_min/a)^0.5 else 0
           "开始近似递减体积流量";
 
         //说明
@@ -4446,13 +4446,13 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         // 请注意，如果 b>0 时，该函数将使用参数 b 对零流量进行重新量化。
 
         DP := a*(if a>0 and b<=0 then Dissipation.Utilities.Functions.General.SmoothPower(
-                V_flow, 
-                V_flow_smooth, 
-                2) elseif a>0 and b>0 then V_flow*abs(V_flow) else 0) + b*V_flow;
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+                V_flow,
+                V_flow_smooth,
+                2) else if a>0 and b>0 then V_flow*abs(V_flow) else 0) + b*V_flow;
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.General.dp_volumeFlowRate_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 计算具有体积流量线性和/或二次依赖关系的一般压力损失。<strong>请注意a和b的和必须大于零</strong>。
@@ -4468,7 +4468,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_volumeFlowRate_DP;
 
-      function dp_volumeFlowRate_MFLOW 
+      function dp_volumeFlowRate_MFLOW
         "通用压力损失 | 计算质量流量 | 二次函数 (dp=a*V_flow^2 + b*V_flow)"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.General;
@@ -4486,14 +4486,14 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         input SI.Pressure dp "压降" annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.MassFlowRate M_FLOW 
+        output SI.MassFlowRate M_FLOW
           "输出函数 dp_volumeFlowRate_MFLOW";
 
       protected
         Real a=abs(IN_con.a);
         Real b=abs(IN_con.b);
 
-        SI.Pressure dp_min=max(Modelica.Constants.eps, abs(IN_con.dp_min)) 
+        SI.Pressure dp_min=max(Modelica.Constants.eps, abs(IN_con.dp_min))
           "压力损失递减近似值的起点";
 
         //说明
@@ -4505,16 +4505,16 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         M_FLOW := IN_var.rho*(if a>0 and b<=0 then 
                 Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                (1/a)*dp, 
-                (1/a)*dp_min, 
+                (1/a)*dp,
+                (1/a)*dp_min,
                 0.5) 
-                elseif a>0 and b>0 then 
+                else if a>0 and b>0 then 
                 sign(dp)*(-b/(2*a) + sqrt((b/(2*a))^2 + (1/a)*abs(dp))) 
                 else b*dp);
-      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.General.dp_volumeFlowRate_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 计算具有体积流量线性或二次依赖关系的一般压力损失。<strong>请注意a和b的和必须大于零</strong>。
@@ -4530,14 +4530,14 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_volumeFlowRate_MFLOW;
 
-      record dp_volumeFlowRate_IN_con 
+      record dp_volumeFlowRate_IN_con
         "函数 dp_volumeFlowRate_DP 和 dp_volumeFlowRate_MFLOW 的输入记录表"
 
         //通用变量
         extends 
           Modelica.Fluid.Dissipation.Utilities.Records.General.QuadraticVFLOW;
 
-        SI.Pressure dp_min=0.1 
+        SI.Pressure dp_min=0.1
           "压力损失递减近似值的起点（仅用于 b=0 时）";
 
         annotation (Documentation(info="<html><p>
@@ -4547,7 +4547,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_volumeFlowRate_IN_con;
 
-      record dp_volumeFlowRate_IN_var 
+      record dp_volumeFlowRate_IN_var
         "函数 dp_volumeFlowRate_DP 和 dp_volumeFlowRate_MFLOW 的输入记录表"
         extends Modelica.Icons.Record;
 
@@ -4597,7 +4597,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
     package Orifice "用于计算节流元件压力损失的库"
     extends Modelica.Icons.VariantsPackage;
 
-      function dp_suddenChange_DP 
+      function dp_suddenChange_DP
         "横截面积突变时的节流元件压力损失 | 计算压力损失 | 湍流状态 | 光滑表面 | 任意横截面积 | 无挡板 | 边缘锋利"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
@@ -4605,7 +4605,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Orifice;
 
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -4625,21 +4625,21 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       protected
         Real MIN=Modelica.Constants.eps;
-        SI.ReynoldsNumber Re_min=1 
+        SI.ReynoldsNumber Re_min=1
           "线性平滑的最小雷诺数";
         //限制局部阻力系数 zeta_LOC >> 数值改进
-        TYP.LocalResistanceCoefficient zeta_LOC_min=1e-3 
+        TYP.LocalResistanceCoefficient zeta_LOC_min=1e-3
           "最小局部阻力系数";
 
-        SI.Area A_1=max(MIN, min(IN_con.A_1, IN_con.A_2)) 
+        SI.Area A_1=max(MIN, min(IN_con.A_1, IN_con.A_2))
           "节流元件的小横截面积";
-        SI.Area A_2=max(MIN, max(IN_con.A_1, IN_con.A_2)) 
+        SI.Area A_2=max(MIN, max(IN_con.A_1, IN_con.A_2))
           "节流元件的大横截面积";
-        SI.Length C_1=max(MIN, min(IN_con.C_1, IN_con.C_2)) 
+        SI.Length C_1=max(MIN, min(IN_con.C_1, IN_con.C_2))
           "节流元件小横截面积的周长";
-        SI.Length C_2=max(MIN, max(IN_con.C_1, IN_con.C_2)) 
+        SI.Length C_2=max(MIN, max(IN_con.C_1, IN_con.C_2))
           "节流元件大横截面积的周长";
-        SI.Diameter d_hyd=4*A_1/C_1 
+        SI.Diameter d_hyd=4*A_1/C_1
           "节流元件小横截面积的水力直径";
 
         //突扩：资料来源_1，第 4 节，图 4-1，第 208 页
@@ -4648,10 +4648,10 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         //突缩：资料来源_1，第 4 节，图 4-9，第 216 / 217 页
         //假设突缩时 Re >= 1.0e4
-        TYP.LocalResistanceCoefficient zeta_LOC_con=max(zeta_LOC_min, 0.5*(1 - A_1/ 
+        TYP.LocalResistanceCoefficient zeta_LOC_con=max(zeta_LOC_min, 0.5*(1 - A_1/
             A_2)^0.75);
 
-        SI.Velocity velocity_1=m_flow/(IN_var.rho*A_1) 
+        SI.Velocity velocity_1=m_flow/(IN_var.rho*A_1)
           "较小截面积内的平均速度";
 
         //确定节流元件小横截面积的雷诺数
@@ -4659,29 +4659,29 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         //实际局部阻力系数
         TYP.LocalResistanceCoefficient zeta_LOC=zeta_LOC_exp*SMOOTH(
-            Re_min, 
-            0, 
+            Re_min,
+            0,
             Re) + zeta_LOC_con*SMOOTH(
-            -Re_min, 
-            0, 
+            -Re_min,
+            0,
             Re) + zeta_LOC_min*SMOOTH(
-            0, 
-            Re_min, 
+            0,
+            Re_min,
             abs(Re));
 
         //说明
 
       algorithm
-        DP := zeta_LOC*IN_var.rho/2*(IN_var.eta/IN_var.rho/d_hyd)^2* 
+        DP := zeta_LOC*IN_var.rho/2*(IN_var.eta/IN_var.rho/d_hyd)^2*
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                Re, 
-                Re_min, 
+                Re,
+                Re_min,
                 2);
 
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.Orifice.dp_suddenChange_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 计算在截面积突然改变（突扩或突缩）时的局部压力损失，在湍流流动情况下考虑具有尖角的光滑表面的不可压缩单相流体通过任意形状截面积（正方形、圆形等）的情况。流动方向确定了过渡的类型。在设计流量情况下，将考虑突然膨胀。在流动方向改变时，将考虑突然收缩。
@@ -4694,14 +4694,14 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_suddenChange_DP;
 
-      function dp_suddenChange_MFLOW 
+      function dp_suddenChange_MFLOW
         "横截面积突变时的节流元件压力损失 | 计算质量流量 | 湍流状态 | 光滑表面 | 任意横截面积 | 无挡板 | 边缘锋利"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
         //根据来源对方程进行注释
 
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Orifice;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -4716,19 +4716,19 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         input SI.Pressure dp "压降" annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.MassFlowRate M_FLOW 
+        output SI.MassFlowRate M_FLOW
           "输出函数 dp_suddenChange_MFLOW";
 
       protected
         Real MIN=Modelica.Constants.eps;
         SI.Pressure dp_min=1 "线性平滑的压力损失";
         //限制局部阻力系数 zeta_LOC >> 数值改进
-        TYP.LocalResistanceCoefficient zeta_LOC_min=1e-3 
+        TYP.LocalResistanceCoefficient zeta_LOC_min=1e-3
           "最小局部阻力系数";
 
-        SI.Area A_1=max(MIN, min(IN_con.A_1, IN_con.A_2)) 
+        SI.Area A_1=max(MIN, min(IN_con.A_1, IN_con.A_2))
           "节流元件的小横截面积";
-        SI.Area A_2=max(MIN, max(IN_con.A_1, IN_con.A_2)) 
+        SI.Area A_2=max(MIN, max(IN_con.A_1, IN_con.A_2))
           "节流元件的大横截面积";
 
         //突扩：资料来源_1，第 4 节，图 4-1，第 208 页
@@ -4737,33 +4737,33 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         //突缩：资料来源_1第 4 节，图 4-9，第 216 / 217 页
         //假设突缩时 Re >= 1.0e4
-        TYP.LocalResistanceCoefficient zeta_LOC_con=max(zeta_LOC_min, 0.5*(1 - A_1/ 
+        TYP.LocalResistanceCoefficient zeta_LOC_con=max(zeta_LOC_min, 0.5*(1 - A_1/
             A_2)^0.75);
 
         //实际局部阻力系数
         TYP.LocalResistanceCoefficient zeta_LOC=max(zeta_LOC_min, zeta_LOC_exp*SMOOTH(
-            dp_min, 
-            0, 
+            dp_min,
+            0,
             dp) + zeta_LOC_con*SMOOTH(
-            -dp_min, 
-            0, 
+            -dp_min,
+            0,
             dp)) + zeta_LOC_min*SMOOTH(
-            0, 
-            dp_min, 
+            0,
+            dp_min,
             abs(dp));
 
         //说明
 
       algorithm
-        M_FLOW := IN_var.rho*A_1* 
+        M_FLOW := IN_var.rho*A_1*
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                dp, 
-                dp_min, 
+                dp,
+                dp_min,
                 0.5)*(max(MIN, 2/(IN_var.rho*zeta_LOC)))^0.5;
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.Orifice.dp_suddenChange_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 计算在截面积突然改变（突扩或突缩）时的局部压力损失，在湍流流动情况下考虑具有尖角的光滑表面的不可压缩单相流体通过任意形状截面积（正方形、圆形等）的情况。流动方向确定了过渡的类型。在设计流量情况下，将考虑突然膨胀。在流动方向改变时，将考虑突然收缩。
@@ -4776,7 +4776,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_suddenChange_MFLOW;
 
-      record dp_suddenChange_IN_con 
+      record dp_suddenChange_IN_con
         "函数 dp_suddenChange_DP 和 dp_suddenChange_MFLOW 的输入记录表"
 
         //节流元件变量
@@ -4789,7 +4789,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_suddenChange_IN_con;
 
-      record dp_suddenChange_IN_var 
+      record dp_suddenChange_IN_var
         "函数 dp_suddenChange_DP 和 dp_suddenChange_MFLOW 的输入记录表"
 
         //流体性质变量
@@ -4802,14 +4802,14 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_suddenChange_IN_var;
 
-      function dp_thickEdgedOverall_DP 
+      function dp_thickEdgedOverall_DP
         "厚而尖的节流元件的压力损失 | 计算压力损失 | 整体流态 | 摩擦力的恒定影响 | 任意截面积"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
         //根据来源对方程进行注释
 
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Orifice;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -4831,18 +4831,18 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
       protected
         Real MIN=Modelica.Constants.eps;
 
-        TYP.DarcyFrictionFactor lambda_FRI=0.02 
+        TYP.DarcyFrictionFactor lambda_FRI=0.02
           "根据资料来源_1 假设缩流断面的 Darcy 摩擦因数";
         SI.ReynoldsNumber Re_min=1;
-        SI.ReynoldsNumber Re_lim=1e3 
+        SI.ReynoldsNumber Re_lim=1e3
           "dp 为目标时对层流区的限制";
 
         SI.Area A_0=IN_con.A_0 "缩流断面的横截面积";
-        SI.Area A_1=IN_con.A_1 
+        SI.Area A_1=IN_con.A_1
           "大截面的横截面积";
-        SI.Diameter d_hyd_0=max(MIN, 4*A_0/IN_con.C_0) 
+        SI.Diameter d_hyd_0=max(MIN, 4*A_0/IN_con.C_0)
           "缩流断面的水力直径";
-        SI.Diameter d_hyd_1=max(MIN, 4*A_1/IN_con.C_1) 
+        SI.Diameter d_hyd_1=max(MIN, 4*A_1/IN_con.C_1)
           "大截面积的水力直径";
         SI.Length l=IN_con.L "缩流断面的长度";
         Real l_bar=IN_con.L/d_hyd_0;
@@ -4851,27 +4851,27 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real phi=0.25 + 0.535*min(l_bar, 2.4)^8/(0.05 + min(l_bar, 2.4)^8);
         Real tau=(max(2.4 - l_bar, 0))*10^(-phi);
 
-        TYP.PressureLossCoefficient zeta_TOT_1=max(MIN, (0.5*(1 - A_0/A_1)^0.75 + tau 
-            *(1 - A_0/A_1)^1.375 + (1 - A_0/A_1)^2 + lambda_FRI*l/d_hyd_0)*(A_1/A_0)^ 
-            2) 
+        TYP.PressureLossCoefficient zeta_TOT_1=max(MIN, (0.5*(1 - A_0/A_1)^0.75 + tau
+            *(1 - A_0/A_1)^1.375 + (1 - A_0/A_1)^2 + lambda_FRI*l/d_hyd_0)*(A_1/A_0)^
+            2)
           "与大横截面积流速有关的压力损失系数";
-        SI.Velocity v_0=m_flow/(IN_var.rho*A_0) 
+        SI.Velocity v_0=m_flow/(IN_var.rho*A_0)
           "缩流断面的平均速度";
-        SI.ReynoldsNumber Re=IN_var.rho*v_0*d_hyd_0/max(MIN, IN_var.eta) 
+        SI.ReynoldsNumber Re=IN_var.rho*v_0*d_hyd_0/max(MIN, IN_var.eta)
           "缩流断面的雷诺数";
 
         //说明
 
       algorithm
-        DP := zeta_TOT_1*IN_var.rho/2*(IN_var.eta/IN_var.rho/d_hyd_1)^2* 
+        DP := zeta_TOT_1*IN_var.rho/2*(IN_var.eta/IN_var.rho/d_hyd_1)^2*
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                Re, 
-                Re_min, 
+                Re,
+                Re_min,
                 2)*(d_hyd_1/d_hyd_0*A_0/A_1)^2;
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.Orifice.dp_thickEdgedOverall_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 计算通过具有尖角的厚边缘孔口的整体流动区域的压力损失，通过任意形状截面积（正方形、圆形等）的不可压缩单相流体考虑表面粗糙度的常量影响。
@@ -4884,14 +4884,14 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_thickEdgedOverall_DP;
 
-      function dp_thickEdgedOverall_MFLOW 
+      function dp_thickEdgedOverall_MFLOW
         "厚而尖的节流元件的压力损失 | 计算质量流量 | 整体流态 | 摩擦力的恒定影响 | 任意截面积"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
         //根据来源对方程进行注释
 
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Orifice;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -4907,21 +4907,21 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         input SI.Pressure dp "压降" annotation (Dialog(group="输入"));
 
         //输出变量
-        output SI.MassFlowRate M_FLOW 
+        output SI.MassFlowRate M_FLOW
           "输出函数 dp_thickEdgedOverall_MFLOW";
 
       protected
         Real MIN=Modelica.Constants.eps;
-        TYP.DarcyFrictionFactor lambda_FRI=0.02 
+        TYP.DarcyFrictionFactor lambda_FRI=0.02
           "根据资料来源_1 假设缩流断面的 Darcy 摩擦因数";
-        SI.ReynoldsNumber Re_lim=1e3 
+        SI.ReynoldsNumber Re_lim=1e3
           "dp 为目标时对层流区的限制";
 
         SI.Area A_0=IN_con.A_0 "缩流断面的横截面积";
         SI.Area A_1=IN_con.A_1 "大截面积";
-        SI.Diameter d_hyd_0=max(MIN, 4*A_0/IN_con.C_0) 
+        SI.Diameter d_hyd_0=max(MIN, 4*A_0/IN_con.C_0)
           "缩流断面的水力直径";
-        SI.Diameter d_hyd_1=max(MIN, 4*A_1/IN_con.C_1) 
+        SI.Diameter d_hyd_1=max(MIN, 4*A_1/IN_con.C_1)
           "大截面积的水力直径";
         SI.Length l=IN_con.L "缩流断面的长度";
         Real l_bar=IN_con.L/d_hyd_0;
@@ -4930,23 +4930,23 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real phi=0.25 + 0.535*min(l_bar, 2.4)^8/(0.05 + min(l_bar, 2.4)^8);
         Real tau=(max(2.4 - l_bar, 0))*10^(-phi);
 
-        TYP.PressureLossCoefficient zeta_TOT_1=max(MIN, (0.5*(1 - A_0/A_1)^0.75 + tau 
-            *(1 - A_0/A_1)^1.375 + (1 - A_0/A_1)^2 + lambda_FRI*l/d_hyd_0)*(A_1/A_0)^ 
-            2) 
+        TYP.PressureLossCoefficient zeta_TOT_1=max(MIN, (0.5*(1 - A_0/A_1)^0.75 + tau
+            *(1 - A_0/A_1)^1.375 + (1 - A_0/A_1)^2 + lambda_FRI*l/d_hyd_0)*(A_1/A_0)^
+            2)
           "与大横截面积流速有关的压力损失系数";
 
         //说明
 
       algorithm
-        M_FLOW := IN_var.rho*A_1* 
+        M_FLOW := IN_var.rho*A_1*
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                dp, 
-                IN_con.dp_smooth, 
+                dp,
+                IN_con.dp_smooth,
                 0.5)/(0.5*IN_var.rho*zeta_TOT_1)^0.5;
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.Orifice.dp_thickEdgedOverall_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 计算通过具有尖角的厚边缘孔口的整体流动区域的压力损失，通过任意形状截面积（正方形、圆形等）的不可压缩单相流体考虑表面粗糙度的常量影响。
@@ -4959,7 +4959,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_thickEdgedOverall_MFLOW;
 
-      record dp_thickEdgedOverall_IN_con 
+      record dp_thickEdgedOverall_IN_con
         "函数 dp_thickEdgedOverall_DP 和 dp_thickEdgedOverall_MFLOW 的输入记录表"
 
         //节流元件变量
@@ -4967,7 +4967,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           Modelica.Fluid.Dissipation.Utilities.Records.PressureLoss.Orifice;
 
         //线性化
-        SI.Pressure dp_smooth(min=Modelica.Constants.eps) = 1 
+        SI.Pressure dp_smooth(min=Modelica.Constants.eps) = 1
           "开始线性化以减少压力损失" 
           annotation (Dialog(group="线性化"));
 
@@ -4977,7 +4977,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_thickEdgedOverall_IN_con;
 
-      record dp_thickEdgedOverall_IN_var 
+      record dp_thickEdgedOverall_IN_var
         "函数 dp_thickEdgedOverall_DP 和 dp_thickEdgedOverall_MFLOW 的输入记录表"
 
         //流体性质变量
@@ -5006,11 +5006,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
     end Orifice;
 
-    package StraightPipe 
+    package StraightPipe
       "用于计算直管压力损失的库"
     extends Modelica.Icons.VariantsPackage;
 
-      function dp_laminar_DP 
+      function dp_laminar_DP
         "直管的压力损失 | 计算压力损失 | 层流区 (Hagen-Poiseuille)"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
@@ -5038,17 +5038,17 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         SI.Diameter d_hyd=IN_con.d_hyd "水力直径";
         SI.Area A_cross=PI*IN_con.d_hyd^2/4 "圆形横截面积";
 
-        SI.Velocity velocity=m_flow/max(MIN, IN_var.rho*A_cross) 
+        SI.Velocity velocity=m_flow/max(MIN, IN_var.rho*A_cross)
           "平均速度";
 
         //说明
 
       algorithm
         DP := 32*IN_var.eta*velocity*IN_con.L/d_hyd^2;
-      annotation(Inline=true, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation(Inline=true, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_laminar_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 计算直管中不可压缩单相流体的<strong>层流</strong>流动区域的压力损失。
@@ -5061,7 +5061,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_laminar_DP;
 
-      function dp_laminar_MFLOW 
+      function dp_laminar_MFLOW
         "直管的压力损失 | 计算质量流量 | 层流区 (Hagen-Poiseuille)"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
@@ -5092,10 +5092,10 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       algorithm
         M_FLOW := IN_var.rho*A_cross*(dp*d_hyd^2/(32*IN_var.eta*IN_con.L));
-      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=true, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_laminar_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 计算直管中不可压缩单相流体的<strong>层流</strong>流动区域的压力损失。
@@ -5108,7 +5108,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_laminar_MFLOW;
 
-      record dp_laminar_IN_con 
+      record dp_laminar_IN_con
         "函数 dp_laminar_DP 和 dp_laminar_MFLOW 的输入记录表"
         extends Utilities.Records.PressureLoss.StraightPipe;
 
@@ -5119,7 +5119,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_laminar_IN_con;
 
-      record dp_laminar_IN_var 
+      record dp_laminar_IN_var
         "函数 dp_laminar_DP 和 dp_laminar_MFLOW 的输入记录表"
 
         extends 
@@ -5132,11 +5132,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_laminar_IN_var;
 
-      function dp_overall_DP 
+      function dp_overall_DP
         "直管的压力损失 | 计算压力损失 | 整体流态 | 表面粗糙度"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.StraightPipe;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
         //输入记录表
@@ -5163,41 +5163,41 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         SI.Length perimeter=PI*IN_con.d_hyd "周长";
 
         //资料来源_1: p.81, fig. 2-3, sec 21-22: 流态边界的定义
-        SI.ReynoldsNumber Re_lam_min=1e3 
+        SI.ReynoldsNumber Re_lam_min=1e3
           "层流区的最小雷诺数";
-        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635 
+        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635
           "层流区的最大雷诺数";
-        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754* 
-            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k))) 
+        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754*
+            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k)))
           "雷诺数增大时过渡区的开始（离开层流区）";
 
-        SI.ReynoldsNumber Re= 
+        SI.ReynoldsNumber Re=
             Modelica.Fluid.Dissipation.Utilities.Functions.General.ReynoldsNumber(
-            A_cross, 
-            perimeter, 
-            IN_var.rho, 
-            IN_var.eta, 
+            A_cross,
+            perimeter,
+            IN_var.rho,
+            IN_var.eta,
             m_flow);
 
         dp_laminar_IN_con IN_con_lam(d_hyd=IN_con.d_hyd, L= IN_con.L);
       algorithm
         DP := SMOOTH(
-                Re_lam_min, 
-                Re_lam_max, 
+                Re_lam_min,
+                Re_lam_max,
                 Re)*Dissipation.PressureLoss.StraightPipe.dp_laminar_DP(
-                IN_con_lam, 
-                IN_var, 
+                IN_con_lam,
+                IN_var,
                 m_flow) + SMOOTH(
-                Re_lam_max, 
-                Re_lam_min, 
+                Re_lam_max,
+                Re_lam_min,
                 Re)*Dissipation.PressureLoss.StraightPipe.dp_turbulent_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 m_flow);
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_overall_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 计算直管中不可压缩单相流体的<strong>整体</strong>流动区域的压力损失，考虑表面粗糙度。
@@ -5210,11 +5210,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_overall_DP;
 
-      function dp_overall_MFLOW 
+      function dp_overall_MFLOW
         "直管的压力损失 | 计算质量流量 | 整体流态 | 表面粗糙度"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.StraightPipe;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
         import Modelica.Fluid.Dissipation.Utilities.Types.Roughness;
 
@@ -5236,35 +5236,35 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real MIN=Modelica.Constants.eps;
 
         SI.Diameter d_hyd=max(MIN, IN_con.d_hyd) "水力直径";
-        SI.Area A_cross=max(MIN, PI*IN_con.d_hyd^2/4) 
+        SI.Area A_cross=max(MIN, PI*IN_con.d_hyd^2/4)
           "圆形横截面积";
         Real k=max(MIN, abs(IN_con.K)/IN_con.d_hyd) "相对粗糙度";
 
         //资料来源_1: p.81, fig. 2-3, sec 21-22: 流态边界的定义
-        SI.ReynoldsNumber Re_lam_min=1e3 
+        SI.ReynoldsNumber Re_lam_min=1e3
           "层流区的最小雷诺数";
-        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635 
+        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635
           "层流区的最大雷诺数";
-        SI.ReynoldsNumber Re_turb_min=4e3 
+        SI.ReynoldsNumber Re_turb_min=4e3
           "湍流区的最小雷诺数";
 
-        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754* 
-            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k))) 
+        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754*
+            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k)))
           "雷诺数增大时过渡区的开始（离开层流区）";
 
         //在计算直管压力损失时确定 Darcy 摩擦系数：
         //dp = lambda_FRI*L/d_hyd*(rho/2)*velocity^2 and assuming lambda_FRI == lambda_FRI_calc/Re^2
-        TYP.DarcyFrictionFactor lambda_FRI_calc=2*abs(dp)*d_hyd^3*IN_var.rho/(IN_con.L 
+        TYP.DarcyFrictionFactor lambda_FRI_calc=2*abs(dp)*d_hyd^3*IN_var.rho/(IN_con.L
             *IN_var.eta^2) "Adapted Darcy friction factor";
 
         //资料来源_3: p.Lab 1, eq. 5: 假定为层流状态  (Blasius)，确定 Re 
-        SI.ReynoldsNumber Re_lam=lambda_FRI_calc/64 
+        SI.ReynoldsNumber Re_lam=lambda_FRI_calc/64
           "假设为层流状态的雷诺数";
 
         //资料来源_3: p.Lab 2, eq. 10: 假设为湍流状态  (Colebrook-White)，确定 Re 
-        SI.ReynoldsNumber Re_turb=if IN_con.roughness == Roughness.Neglected then (max(MIN, 
-            lambda_FRI_calc)/0.3164)^(1/1.75) else -2*sqrt(max(lambda_FRI_calc, MIN)) 
-            *Modelica.Math.log10(2.51/sqrt(max(lambda_FRI_calc, MIN)) + k/3.7) 
+        SI.ReynoldsNumber Re_turb=if IN_con.roughness == Roughness.Neglected then (max(MIN,
+            lambda_FRI_calc)/0.3164)^(1/1.75) else -2*sqrt(max(lambda_FRI_calc, MIN))
+            *Modelica.Math.log10(2.51/sqrt(max(lambda_FRI_calc, MIN)) + k/3.7)
           "假设为湍流状态的雷诺数";
 
         //确定实际流态
@@ -5272,35 +5272,35 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //确定湍流区的 Re
         SI.ReynoldsNumber Re_trans=if Re_lam >= Re_lam_leave then 
             Modelica.Fluid.Dissipation.Utilities.Functions.General.CubicInterpolation_Re(
-            Re_check, 
-            Re_lam_leave, 
-            Re_turb_min, 
-            k, 
+            Re_check,
+            Re_lam_leave,
+            Re_turb_min,
+            k,
             lambda_FRI_calc) else 0;
         //确定实际的 Re
-        SI.ReynoldsNumber Re=if Re_lam < Re_lam_leave then Re_lam else if Re_turb > 
+        SI.ReynoldsNumber Re=if Re_lam < Re_lam_leave then Re_lam else if Re_turb >
             Re_turb_min then Re_turb else Re_trans;
 
         dp_laminar_IN_con IN_con_lam(d_hyd=IN_con.d_hyd, L= IN_con.L);
 
       algorithm
         M_FLOW := SMOOTH(
-                Re_lam_min, 
-                Re_turb, 
+                Re_lam_min,
+                Re_turb,
                 Re)*Dissipation.PressureLoss.StraightPipe.dp_laminar_MFLOW(
-                IN_con_lam, 
-                IN_var, 
+                IN_con_lam,
+                IN_var,
                 dp) + SMOOTH(
-                Re_turb, 
-                Re_lam_min, 
+                Re_turb,
+                Re_lam_min,
                 Re)*Dissipation.PressureLoss.StraightPipe.dp_turbulent_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 dp);
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_overall_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 计算直管中不可压缩单相流体的<strong>整体</strong>流动区域的压力损失，考虑表面粗糙度。
@@ -5313,7 +5313,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_overall_MFLOW;
 
-      record dp_overall_IN_con 
+      record dp_overall_IN_con
         "函数 dp_overall_DP 和 dp_overall_MFLOW 的输入记录表"
 
         //直管变量
@@ -5326,7 +5326,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_overall_IN_con;
 
-      record dp_overall_IN_var 
+      record dp_overall_IN_var
         "函数 dp_overall_DP 和 dp_overall_MFLOW 的输入记录表"
 
         //流体性质变量
@@ -5340,7 +5340,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_overall_IN_var;
 
-      function dp_turbulent_DP 
+      function dp_turbulent_DP
         "直管的压力损失 | 计算压力损失 | 湍流区 | 表面粗糙度"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
@@ -5376,15 +5376,15 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real k=max(MIN, abs(IN_con.K)/IN_con.d_hyd) "相对粗糙度";
 
         //资料来源_1: p.81, fig. 2-3, sec 21-22: 流态边界的定义
-        SI.ReynoldsNumber Re_lam_min=1e3 
+        SI.ReynoldsNumber Re_lam_min=1e3
           "层流区的最小雷诺数";
-        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635 
+        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635
           "层流区的最大雷诺数";
-        SI.ReynoldsNumber Re_turb_min=4e3 
+        SI.ReynoldsNumber Re_turb_min=4e3
           "湍流区的最小雷诺数";
 
-        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754* 
-            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k))) 
+        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754*
+            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k)))
           "雷诺数增大时过渡区的开始（离开层流区）";
 
         SI.Velocity velocity=m_flow/(IN_var.rho*A_cross) "平均速度";
@@ -5392,38 +5392,38 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
         //资料来源_2: p.191, eq. 8.4: 确定 Darcy 摩擦系数
         //假设 lambda_FRI == lambda_FRI_calc/Re^2
-        TYP.DarcyFrictionFactor lambda_FRI_smooth=0.3164*Re^(1.75) 
+        TYP.DarcyFrictionFactor lambda_FRI_smooth=0.3164*Re^(1.75)
           "忽略表面粗糙度的 Darcy 摩擦系数 (Blasius)";
         //这里的 lambda_FRI_rough == lambda_FRI*Re^2
-        TYP.DarcyFrictionFactor lambda_FRI_rough=0.25*(max(Re, Re_lam_leave)/ 
-            Modelica.Math.log10(k/3.7 + 5.74/max(Re, Re_lam_leave)^0.9))^2 
+        TYP.DarcyFrictionFactor lambda_FRI_rough=0.25*(max(Re, Re_lam_leave)/
+            Modelica.Math.log10(k/3.7 + 5.74/max(Re, Re_lam_leave)^0.9))^2
           "考虑表面粗糙度的 Darcy 摩擦系数";
         TYP.DarcyFrictionFactor lambda_FRI=if IN_con.roughness == TYP1.Neglected then 
-                  lambda_FRI_smooth else lambda_FRI_rough 
+                  lambda_FRI_smooth else lambda_FRI_rough
           "Darcy 摩擦系数";
         TYP.DarcyFrictionFactor lambda_FRI_calc=if Re < Re_lam_leave then 64/Re else 
             if Re > Re_turb_min then lambda_FRI/Re^2 else 
             Modelica.Fluid.Dissipation.Utilities.Functions.General.CubicInterpolation_lambda(
-            Re, 
-            Re_lam_leave, 
-            Re_turb_min, 
+            Re,
+            Re_lam_leave,
+            Re_turb_min,
             k)/Re^2 "Darcy 摩擦系数";
 
-        TYP.PressureLossCoefficient zeta_TOT=lambda_FRI_calc*IN_con.L/d_hyd 
+        TYP.PressureLossCoefficient zeta_TOT=lambda_FRI_calc*IN_con.L/d_hyd
           "压力损失系数";
 
         //说明
 
       algorithm
-        DP := zeta_TOT*(IN_var.rho/2)* 
+        DP := zeta_TOT*(IN_var.rho/2)*
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-                velocity, 
-                v_min, 
+                velocity,
+                v_min,
                 2);
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(m_flow=Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_turbulent_MFLOW(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 DP)), Documentation(info="<html>
 <p>
 计算直管中不可压缩单相流体的<strong>湍流</strong>流动区域的压力损失，考虑表面粗糙度。
@@ -5436,7 +5436,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_turbulent_DP;
 
-      function dp_turbulent_MFLOW 
+      function dp_turbulent_MFLOW
         "直管的压力损失 | 计算质量流量 | 湍流区 | 表面粗糙度"
         extends Modelica.Icons.Function;
         //资料来源_1: Idelchik, I.E.: HANDBOOK OF HYDRAULIC RESISTANCE, 3rd edition, 2006.
@@ -5470,30 +5470,30 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real k=max(MIN, abs(IN_con.K)/IN_con.d_hyd) "相对粗糙度";
 
         //资料来源_1: p.81, fig. 2-3, sec 21-22: 流态边界的定义
-        SI.ReynoldsNumber Re_lam_min=1e3 
+        SI.ReynoldsNumber Re_lam_min=1e3
           "层流区的最小雷诺数";
-        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635 
+        SI.ReynoldsNumber Re_lam_max=2090*(1/max(0.007, k))^0.0635
           "层流区的最大雷诺数";
-        SI.ReynoldsNumber Re_turb_min=4e3 
+        SI.ReynoldsNumber Re_turb_min=4e3
           "湍流区的最小雷诺数";
 
-        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754* 
-            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k))) 
+        SI.ReynoldsNumber Re_lam_leave=min(Re_lam_max, max(Re_lam_min, 754*
+            Modelica.Math.exp(if k <= 0.007 then 0.0065/0.007 else 0.0065/k)))
           "雷诺数增大时过渡区的开始（离开层流区）";
 
         //在计算直管压力损失时确定 Darcy 摩擦系数：
         //dp = lambda_FRI*L/d_hyd*(rho/2)*velocity^2 并假设 lambda_FRI == lambda_FRI_calc/Re^2
-        TYP.DarcyFrictionFactor lambda_FRI_calc=2*abs(dp)*d_hyd^3*IN_var.rho/(IN_con.L 
+        TYP.DarcyFrictionFactor lambda_FRI_calc=2*abs(dp)*d_hyd^3*IN_var.rho/(IN_con.L
             *IN_var.eta^2) "修正 Darcy 摩擦系数";
 
         //资料来源_3: p.Lab 1, eq. 5: 假设为层流状态(Hagen-Poiseuille)，确定Re
-        SI.ReynoldsNumber Re_lam=lambda_FRI_calc/64 
+        SI.ReynoldsNumber Re_lam=lambda_FRI_calc/64
           "假设为层流状态的雷诺数";
 
         //资料来源_3: p.Lab 2, eq. 10: 假设为湍流状态  (Colebrook-White)，确定 Re 
-        SI.ReynoldsNumber Re_turb=if IN_con.roughness == TYP1.Neglected then (max(MIN, 
-            lambda_FRI_calc)/0.3164)^(1/1.75) else -2*sqrt(max(lambda_FRI_calc, MIN)) 
-            *Modelica.Math.log10(2.51/sqrt(max(lambda_FRI_calc, MIN)) + k/3.7) 
+        SI.ReynoldsNumber Re_turb=if IN_con.roughness == TYP1.Neglected then (max(MIN,
+            lambda_FRI_calc)/0.3164)^(1/1.75) else -2*sqrt(max(lambda_FRI_calc, MIN))
+            *Modelica.Math.log10(2.51/sqrt(max(lambda_FRI_calc, MIN)) + k/3.7)
           "假设为湍流状态的雷诺数";
 
         //确定实际流态
@@ -5501,27 +5501,27 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         //确定湍流区的 Re
         SI.ReynoldsNumber Re_trans=if Re_lam >= Re_lam_leave then 
             Modelica.Fluid.Dissipation.Utilities.Functions.General.CubicInterpolation_Re(
-            Re_check, 
-            Re_lam_leave, 
-            Re_turb_min, 
-            k, 
+            Re_check,
+            Re_lam_leave,
+            Re_turb_min,
+            k,
             lambda_FRI_calc) else 0;
         //确定实际的 Re
-        SI.ReynoldsNumber Re=if Re_lam < Re_lam_leave then Re_lam else if Re_turb > 
+        SI.ReynoldsNumber Re=if Re_lam < Re_lam_leave then Re_lam else if Re_turb >
             Re_turb_min then Re_turb else Re_trans;
 
         //确定速度
-        SI.Velocity velocity=(if dp >= 0 then Re else -Re)*IN_var.eta/(IN_var.rho* 
+        SI.Velocity velocity=(if dp >= 0 then Re else -Re)*IN_var.eta/(IN_var.rho*
             d_hyd) "平均速度";
 
         //说明
 
       algorithm
         M_FLOW := IN_var.rho*A_cross*velocity;
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     inverse(dp=Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_turbulent_DP(
-                IN_con, 
-                IN_var, 
+                IN_con,
+                IN_var,
                 M_FLOW)), Documentation(info="<html>
 <p>
 计算直管中不可压缩单相流体的<strong>湍流</strong>流动区域的压力损失，考虑表面粗糙度。
@@ -5534,10 +5534,10 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_turbulent_MFLOW;
 
-      record dp_turbulent_IN_con 
+      record dp_turbulent_IN_con
         "函数 dp_turbulent_DP 和 dp_turbulent_MFLOW 的输入记录表"
 
-        Modelica.Fluid.Dissipation.Utilities.Types.Roughness roughness=Dissipation.Utilities.Types.Roughness.Neglected 
+        Modelica.Fluid.Dissipation.Utilities.Types.Roughness roughness=Dissipation.Utilities.Types.Roughness.Neglected
           "考虑表面粗糙度的选择" 
           annotation (Dialog(group="直管"));
 
@@ -5552,7 +5552,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_turbulent_IN_con;
 
-      record dp_turbulent_IN_var 
+      record dp_turbulent_IN_var
         "函数 dp_turbulent_DP 和 dp_turbulent_MFLOW 的输入记录表"
 
         extends 
@@ -5564,7 +5564,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"      ));
       end dp_turbulent_IN_var;
 
-      function dp_twoPhaseOverall_DP 
+      function dp_twoPhaseOverall_DP
         "两相流直管的压力损失 | 计算（摩擦、动量、大地）压力损失"
         extends Modelica.Icons.Function;
         //资料来源_1: Friedel,L.:IMPROVED FRICTION PRESSURE DROP CORRELATIONS FOR HORIZONTAL AND VERTICAL TWO PHASE PIPE FLOW, 3R International, Vol. 18, Issue 7, pp. 485-491, 1979
@@ -5594,68 +5594,68 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         Real MIN=Modelica.Constants.eps;
 
         SI.Area A_cross=max(MIN, IN_con.A_cross) "横截面积";
-        SI.Diameter d_hyd=max(MIN, 4*A_cross/max(MIN, IN_con.perimeter)) 
+        SI.Diameter d_hyd=max(MIN, 4*A_cross/max(MIN, IN_con.perimeter))
           "水力直径";
 
         Real mdot_A=abs(m_flow)/A_cross "质量通量";
-        Real xflowEnd=min(1, max(0, abs(IN_var.x_flow_end))) 
+        Real xflowEnd=min(1, max(0, abs(IN_var.x_flow_end)))
           "管道长度末端的质量流量特性";
-        Real xflowSta=min(1, max(0, abs(IN_var.x_flow_sta))) 
+        Real xflowSta=min(1, max(0, abs(IN_var.x_flow_sta)))
           "管道长度起始处的质量流量特性";
-        Real x_flow=(xflowEnd + xflowSta)/2 
+        Real x_flow=(xflowEnd + xflowSta)/2
           "管道长度上的平均质量流量特性";
 
         //资料来源_5: p.17-1 to 17-5, sec. 17.1 to 17.2: 考虑截面空隙率 [epsilon=A_g/(A_g+A_l)]
-        Real epsilon= 
+        Real epsilon=
           Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.VoidFraction(
-            IN_con.voidFractionApproach, 
-            true, 
-            IN_var.rho_g, 
-            IN_var.rho_l, 
+            IN_con.voidFractionApproach,
+            true,
+            IN_var.rho_g,
+            IN_var.rho_l,
             x_flow) "空隙率";
 
         //资料来源_1:考虑到摩擦压力损失与 Friedel 的相关性
         //资料来源_2: 考虑到摩擦压力损失与 Chisholm 的相关性
         SI.Pressure DP_fric=if IN_con.frictionalPressureLoss == TYP.Friedel then 
           Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.dp_twoPhaseFriedel_DP(
-            Modelica.Fluid.Dissipation.Utilities.Records.General.TwoPhaseFlow_con(A_cross=IN_con.A_cross, perimeter=IN_con.perimeter, length=IN_con.length), 
-            Modelica.Fluid.Dissipation.Utilities.Records.General.TwoPhaseFlow_var(rho_g=IN_var.rho_g, rho_l=IN_var.rho_l, eta_g=IN_var.eta_g, eta_l=IN_var.eta_l, sigma=IN_var.sigma, x_flow=IN_var.x_flow), 
+            Modelica.Fluid.Dissipation.Utilities.Records.General.TwoPhaseFlow_con(A_cross=IN_con.A_cross, perimeter=IN_con.perimeter, length=IN_con.length),
+            Modelica.Fluid.Dissipation.Utilities.Records.General.TwoPhaseFlow_var(rho_g=IN_var.rho_g, rho_l=IN_var.rho_l, eta_g=IN_var.eta_g, eta_l=IN_var.eta_l, sigma=IN_var.sigma, x_flow=IN_var.x_flow),
             m_flow) else if IN_con.frictionalPressureLoss == TYP.Chisholm then 
           Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.dp_twoPhaseChisholm_DP(
-            Modelica.Fluid.Dissipation.Utilities.Records.General.TwoPhaseFlow_con(A_cross=IN_con.A_cross, perimeter=IN_con.perimeter, length=IN_con.length), 
-            Modelica.Fluid.Dissipation.Utilities.Records.General.TwoPhaseFlow_var(rho_g=IN_var.rho_g, rho_l=IN_var.rho_l, eta_g=IN_var.eta_g, eta_l=IN_var.eta_l, sigma=IN_var.sigma, x_flow=IN_var.x_flow), 
+            Modelica.Fluid.Dissipation.Utilities.Records.General.TwoPhaseFlow_con(A_cross=IN_con.A_cross, perimeter=IN_con.perimeter, length=IN_con.length),
+            Modelica.Fluid.Dissipation.Utilities.Records.General.TwoPhaseFlow_var(rho_g=IN_var.rho_g, rho_l=IN_var.rho_l, eta_g=IN_var.eta_g, eta_l=IN_var.eta_l, sigma=IN_var.sigma, x_flow=IN_var.x_flow),
             m_flow) else 0 "摩擦压力损失";
 
         //资料来源_3: p.Lba 4, eq. 22: 考虑动量压力损失，假设两相流的非均质方法
         //蒸发 >> 正动量压力损失（假定冷凝时反之）。
         SI.Pressure DP_mom=if IN_con.momentumPressureLoss then 
           Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.dp_twoPhaseMomentum_DP(
-            IN_con.voidFractionApproach, 
-            IN_con.massFlowRateCorrection, 
-            IN_con.A_cross, 
-            IN_con.perimeter, 
-            IN_var.rho_g, 
-            IN_var.rho_l, 
-            IN_var.x_flow_end, 
-            IN_var.x_flow_sta, 
+            IN_con.voidFractionApproach,
+            IN_con.massFlowRateCorrection,
+            IN_con.A_cross,
+            IN_con.perimeter,
+            IN_var.rho_g,
+            IN_var.rho_l,
+            IN_var.x_flow_end,
+            IN_var.x_flow_sta,
             abs(m_flow)) else 0 "动量压力损失";
 
         //资料来源_3: p.Lbb 1, eq. 4:  考虑到大地基准压力损失，假设沿流动长度的空隙率不变
         SI.Pressure DP_geo=if IN_con.geodeticPressureLoss then 
           Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.dp_twoPhaseGeodetic_DP(
-            IN_con.voidFractionApproach, 
-            true, 
-            IN_con.length, 
-            IN_con.phi, 
-            IN_var.rho_g, 
-            IN_var.rho_l, 
+            IN_con.voidFractionApproach,
+            true,
+            IN_con.length,
+            IN_con.phi,
+            IN_var.rho_g,
+            IN_var.rho_l,
             IN_var.x_flow) else 0 "大地基准压力损失";
 
         //说明
       algorithm
         DP := DP_fric + DP_mom + DP_geo;
 
-      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2, 
+      annotation (Inline=false, smoothOrder(normallyConstant=IN_con) = 2,
                     Documentation(info="<html>
 <p>
 计算水平或垂直直管中<strong>两相流</strong>的压力损失，考虑摩擦、动量和重力压力损失。
@@ -5687,22 +5687,22 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_twoPhaseOverall_DP;
 
-      record dp_twoPhaseOverall_IN_con 
+      record dp_twoPhaseOverall_IN_con
         "函数 dp_twoPhaseOverall_DP 的输入记录表"
 
         //选择
         Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseFrictionalPressureLoss 
-          frictionalPressureLoss=Dissipation.Utilities.Types.TwoPhaseFrictionalPressureLoss.Friedel 
+          frictionalPressureLoss=Dissipation.Utilities.Types.TwoPhaseFrictionalPressureLoss.Friedel
           "选择摩擦压力损失方法" 
           annotation (Dialog(group="选择"));
         Modelica.Fluid.Dissipation.Utilities.Types.VoidFractionApproach 
-          voidFractionApproach = Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous 
+          voidFractionApproach = Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous
           "选择空隙率方法" annotation (Dialog(group="选择"));
 
         Boolean momentumPressureLoss=false "考虑到动量压力损失" 
           annotation (Dialog(group="选择"));
-        Boolean massFlowRateCorrection=false 
-          "考虑异质质量流量修正" annotation (Dialog(group= 
+        Boolean massFlowRateCorrection=false
+          "考虑异质质量流量修正" annotation (Dialog(group=
                "选择", enable= momentumPressureLoss));
         Boolean geodeticPressureLoss=false "考虑到大地基准压力损失" 
           annotation (Dialog(group="选择"));
@@ -5719,7 +5719,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_twoPhaseOverall_IN_con;
 
-      record dp_twoPhaseOverall_IN_var 
+      record dp_twoPhaseOverall_IN_var
         "函数 dp_twoPhaseOverall_DP 的输入记录表"
 
         Real x_flow_end=0 "管道长度末端的质量流量特性" 
@@ -5768,11 +5768,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
     package Valve "用于计算阀门压力损失的库"
       extends Modelica.Icons.VariantsPackage;
 
-      function dp_severalGeometryOverall_DP 
+      function dp_severalGeometryOverall_DP
         "阀门的压力损失 | 计算压力损失 | 几种几何形状 | 整体流动"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Valve;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
         import TYP = Modelica.Fluid.Dissipation.Utilities.Types;
 
@@ -5792,81 +5792,81 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         output SI.Pressure DP "压降";
 
       protected
-        type TYP1 = 
+        type TYP1 =
           Modelica.Fluid.Dissipation.Utilities.Types.ValveCoefficient annotation();
         type TYP2 = Modelica.Fluid.Dissipation.Utilities.Types.ValveGeometry annotation();
 
         Real MIN = Modelica.Constants.eps;
 
         SI.Area Av = if IN_con.valveCoefficient == TYP1.AV then IN_con.Av else if 
-          IN_con.valveCoefficient == TYP1.KV then IN_con.Kv * 27.7e-6 else if IN_con.valveCoefficient 
+          IN_con.valveCoefficient == TYP1.KV then IN_con.Kv * 27.7e-6 else if IN_con.valveCoefficient
           == TYP1.CV then IN_con.Cv * 24e-6 else if IN_con.valveCoefficient == TYP1.OP then 
-          IN_con.m_flow_nominal / max(MIN, IN_con.opening_nominal * (IN_con.rho_nominal 
-          * IN_con.dp_nominal) ^ 0.5) else MIN 
+          IN_con.m_flow_nominal / max(MIN, IN_con.opening_nominal * (IN_con.rho_nominal
+          * IN_con.dp_nominal) ^ 0.5) else MIN
           "(公制) 流量系数 Av [Av]=m^2";
 
         TYP.PressureLossCoefficient zeta_bal = SMOOTH(
-          0.05, 
-          0, 
+          0.05,
+          0,
           IN_var.opening) * 10 ^ (-3.8397 * IN_var.opening + 2.9449) + SMOOTH(
-          0, 
-          0.05, 
+          0,
+          0.05,
           IN_var.opening) * IN_con.zeta_TOT_max "球阀";
         TYP.PressureLossCoefficient zeta_dia = SMOOTH(
-          0.05, 
-          0, 
+          0.05,
+          0,
           IN_var.opening) * 10 ^ (2.2596 * exp(-1.8816 * IN_var.opening)) + SMOOTH(
-          0, 
-          0.05, 
+          0,
+          0.05,
           IN_var.opening) * IN_con.zeta_TOT_max "隔膜阀";
         TYP.PressureLossCoefficient zeta_but = SMOOTH(
-          0.05, 
-          0, 
+          0.05,
+          0,
           IN_var.opening) * 619.81 * exp(-7.3211 * IN_var.opening) + SMOOTH(
-          0, 
-          0.05, 
+          0,
+          0.05,
           IN_var.opening) * IN_con.zeta_TOT_max "蝶阀";
         TYP.PressureLossCoefficient zeta_gat = SMOOTH(
-          0.05, 
-          0, 
+          0.05,
+          0,
           IN_var.opening) * 51.45 * exp(-6.046 * IN_var.opening) + SMOOTH(
-          0, 
-          0.05, 
+          0,
+          0.05,
           IN_var.opening) * IN_con.zeta_TOT_max "闸阀";
         TYP.PressureLossCoefficient zeta_slu = SMOOTH(
-          0.05, 
-          0, 
+          0.05,
+          0,
           IN_var.opening) * 248.89 * exp(-7.8265 * IN_var.opening) + SMOOTH(
-          0, 
-          0.05, 
+          0,
+          0.05,
           IN_var.opening) * IN_con.zeta_TOT_max "水闸阀";
 
         TYP.PressureLossCoefficient zeta_TOT = if IN_con.geometry == TYP2.Ball then 
           zeta_bal else if IN_con.geometry == TYP2.Diaphragm then zeta_dia else if 
-          IN_con.geometry == TYP2.Butterfly then zeta_but else if IN_con.geometry 
+          IN_con.geometry == TYP2.Butterfly then zeta_but else if IN_con.geometry
           == TYP2.Gate then zeta_gat else if IN_con.geometry == TYP2.Sluice then 
           zeta_slu else 0 "所选阀门的压力损失系数";
 
-        Real valveCharacteristic = (2 / min(IN_con.zeta_TOT_max, max(MIN, max(IN_con.zeta_TOT_min, 
-          abs(zeta_TOT))))) ^ 0.5 
+        Real valveCharacteristic = (2 / min(IN_con.zeta_TOT_max, max(MIN, max(IN_con.zeta_TOT_min,
+          abs(zeta_TOT))))) ^ 0.5
           "考虑所选阀门开度的阀门特性";
 
-        SI.MassFlowRate m_flow_small = valveCharacteristic * Av * (IN_var.rho) ^ 0.5 * (IN_con.dp_small) 
+        SI.MassFlowRate m_flow_small = valveCharacteristic * Av * (IN_var.rho) ^ 0.5 * (IN_con.dp_small)
           ^ 0.5 "线性化时的质量流量";
 
         //说明
 
       algorithm
-        DP := 1 / ((valveCharacteristic * Av) ^ 2 * IN_var.rho) * 
+        DP := 1 / ((valveCharacteristic * Av) ^ 2 * IN_var.rho) *
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-          m_flow, 
-          m_flow_small, 
+          m_flow,
+          m_flow_small,
           2);
 
-      annotation(Inline = false, smoothOrder(normallyConstant = IN_con) = 2, 
+      annotation(Inline = false, smoothOrder(normallyConstant = IN_con) = 2,
           inverse(m_flow = Modelica.Fluid.Dissipation.PressureLoss.Valve.dp_severalGeometryOverall_MFLOW(
-          IN_con, 
-          IN_var, 
+          IN_con,
+          IN_var,
           DP)), Documentation(info = "<html>
 <p>
 阀门在整体流动状态下，根据其开度计算具有不同几何形状的阀门的压力损失，用于不可压缩和单相流体流动。
@@ -5879,11 +5879,11 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_severalGeometryOverall_DP;
 
-      function dp_severalGeometryOverall_MFLOW 
+      function dp_severalGeometryOverall_MFLOW
         "阀门的压力损失 | 计算质量流量 | 几种几何形状 | 整体流动"
         extends Modelica.Icons.Function;
         import FD = Modelica.Fluid.Dissipation.PressureLoss.Valve;
-        import SMOOTH = 
+        import SMOOTH =
           Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
         import TYP = Modelica.Fluid.Dissipation.Utilities.Types;
 
@@ -5902,77 +5902,77 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
         output SI.MassFlowRate M_FLOW "质量流量";
 
       protected
-        type TYP1 = 
+        type TYP1 =
           Modelica.Fluid.Dissipation.Utilities.Types.ValveCoefficient annotation();
         type TYP2 = Modelica.Fluid.Dissipation.Utilities.Types.ValveGeometry annotation();
 
         Real MIN = Modelica.Constants.eps;
 
         SI.Area Av = if IN_con.valveCoefficient == TYP1.AV then IN_con.Av else if 
-          IN_con.valveCoefficient == TYP1.KV then IN_con.Kv * 27.7e-6 else if IN_con.valveCoefficient 
+          IN_con.valveCoefficient == TYP1.KV then IN_con.Kv * 27.7e-6 else if IN_con.valveCoefficient
           == TYP1.CV then IN_con.Cv * 24e-6 else if IN_con.valveCoefficient == TYP1.OP then 
-          IN_con.m_flow_nominal / max(MIN, IN_con.opening_nominal * (IN_con.rho_nominal 
-          * IN_con.dp_nominal) ^ 0.5) else MIN 
+          IN_con.m_flow_nominal / max(MIN, IN_con.opening_nominal * (IN_con.rho_nominal
+          * IN_con.dp_nominal) ^ 0.5) else MIN
           "(公制) 流量系数 Av [Av]=m^2";
 
         TYP.PressureLossCoefficient zeta_bal = SMOOTH(
-          0.05, 
-          0, 
+          0.05,
+          0,
           IN_var.opening) * 10 ^ (-3.8397 * IN_var.opening + 2.9449) + SMOOTH(
-          0, 
-          0.05, 
+          0,
+          0.05,
           IN_var.opening) * IN_con.zeta_TOT_max "球阀";
         TYP.PressureLossCoefficient zeta_dia = SMOOTH(
-          0.05, 
-          0, 
+          0.05,
+          0,
           IN_var.opening) * 10 ^ (2.2596 * exp(-1.8816 * IN_var.opening)) + SMOOTH(
-          0, 
-          0.05, 
+          0,
+          0.05,
           IN_var.opening) * IN_con.zeta_TOT_max "隔膜阀";
         TYP.PressureLossCoefficient zeta_but = SMOOTH(
-          0.05, 
-          0, 
+          0.05,
+          0,
           IN_var.opening) * 619.81 * exp(-7.3211 * IN_var.opening) + SMOOTH(
-          0, 
-          0.05, 
+          0,
+          0.05,
           IN_var.opening) * IN_con.zeta_TOT_max "蝶阀";
         TYP.PressureLossCoefficient zeta_gat = SMOOTH(
-          0.05, 
-          0, 
+          0.05,
+          0,
           IN_var.opening) * 51.45 * exp(-6.046 * IN_var.opening) + SMOOTH(
-          0, 
-          0.05, 
+          0,
+          0.05,
           IN_var.opening) * IN_con.zeta_TOT_max "闸阀";
         TYP.PressureLossCoefficient zeta_slu = SMOOTH(
-          0.05, 
-          0, 
+          0.05,
+          0,
           IN_var.opening) * 248.89 * exp(-7.8265 * IN_var.opening) + SMOOTH(
-          0, 
-          0.05, 
+          0,
+          0.05,
           IN_var.opening) * IN_con.zeta_TOT_max "水闸阀";
 
         TYP.PressureLossCoefficient zeta_TOT = if IN_con.geometry == TYP2.Ball then 
           zeta_bal else if IN_con.geometry == TYP2.Diaphragm then zeta_dia else if 
-          IN_con.geometry == TYP2.Butterfly then zeta_but else if IN_con.geometry 
+          IN_con.geometry == TYP2.Butterfly then zeta_but else if IN_con.geometry
           == TYP2.Gate then zeta_gat else if IN_con.geometry == TYP2.Sluice then 
           zeta_slu else 0 "所选阀门的压力损失系数";
 
-        Real valveCharacteristic = (2 / min(IN_con.zeta_TOT_max, max(MIN, max(IN_con.zeta_TOT_min, 
-          abs(zeta_TOT))))) ^ 0.5 
+        Real valveCharacteristic = (2 / min(IN_con.zeta_TOT_max, max(MIN, max(IN_con.zeta_TOT_min,
+          abs(zeta_TOT))))) ^ 0.5
           "考虑所选阀门开度的阀门特性";
 
         //说明
 
       algorithm
-        M_FLOW := valveCharacteristic * Av * (IN_var.rho) ^ 0.5 * 
+        M_FLOW := valveCharacteristic * Av * (IN_var.rho) ^ 0.5 *
           Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower(
-          dp, 
-          IN_con.dp_small, 
+          dp,
+          IN_con.dp_small,
           0.5);
-      annotation(Inline = false, smoothOrder(normallyConstant = IN_con) = 2, 
+      annotation(Inline = false, smoothOrder(normallyConstant = IN_con) = 2,
           inverse(dp = Modelica.Fluid.Dissipation.PressureLoss.Valve.dp_severalGeometryOverall_DP(
-          IN_con, 
-          IN_var, 
+          IN_con,
+          IN_var,
           M_FLOW)), Documentation(info = "<html>
 <p>
 阀门在整体流动状态下，根据其开度计算具有不同几何形状的阀门的压力损失，用于不可压缩和单相流体流动。
@@ -5985,16 +5985,16 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 
       end dp_severalGeometryOverall_MFLOW;
 
-      record dp_severalGeometryOverall_IN_con 
+      record dp_severalGeometryOverall_IN_con
         "函数 dp_severalGeometryOverall_DP 和 dp_severalGeometryOverall_MFLOW 的输入记录表"
 
         extends Modelica.Icons.Record;
 
-        Modelica.Fluid.Dissipation.Utilities.Types.ValveGeometry geometry = Dissipation.Utilities.Types.ValveGeometry.Ball 
+        Modelica.Fluid.Dissipation.Utilities.Types.ValveGeometry geometry = Dissipation.Utilities.Types.ValveGeometry.Ball
           "阀门几何形状的选择" annotation(Dialog(group = "阀门"));
         Modelica.Fluid.Dissipation.Utilities.Types.ValveCoefficient 
-          valveCoefficient = 
-          Modelica.Fluid.Dissipation.Utilities.Types.ValveCoefficient.AV 
+          valveCoefficient =
+          Modelica.Fluid.Dissipation.Utilities.Types.ValveCoefficient.AV
           "阀门系数的选择" annotation(Dialog(group = "阀门"));
 
         //valve variables
@@ -6004,24 +6004,24 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
           Dialog(group = "阀门", enable = valveCoefficient == 2));
         Real Cv = Av / 24.6e-6 "（US）流量系数 Cv [Cv]=USG/min" annotation(Dialog(
           group = "阀门", enable = valveCoefficient == 3));
-        SI.Pressure dp_nominal = 1e3 "额定压降" annotation(Dialog(group = 
+        SI.Pressure dp_nominal = 1e3 "额定压降" annotation(Dialog(group =
           "阀门", enable = valveCoefficient == 4));
-        SI.MassFlowRate m_flow_nominal = opening_nominal * Av * (rho_nominal * dp_nominal) ^ 
-          0.5 "额定质量流量" annotation(Dialog(group = "阀门", enable = 
+        SI.MassFlowRate m_flow_nominal = opening_nominal * Av * (rho_nominal * dp_nominal) ^
+          0.5 "额定质量流量" annotation(Dialog(group = "阀门", enable =
           valveCoefficient == 4));
-        SI.Density rho_nominal = 1000 "额定入口密度" annotation(Dialog(group = 
+        SI.Density rho_nominal = 1000 "额定入口密度" annotation(Dialog(group =
           "阀门", enable = valveCoefficient == 4));
-        Real opening_nominal = 0.5 "额定开度" annotation(Dialog(group = "阀门", 
+        Real opening_nominal = 0.5 "额定开度" annotation(Dialog(group = "阀门",
           enable = valveCoefficient == 4));
-        Real zeta_TOT_min = 1e-3 
+        Real zeta_TOT_min = 1e-3
           "全开时最小压力损失系数" 
           annotation(Dialog(group = "阀门"));
-        Real zeta_TOT_max = 1e8 
+        Real zeta_TOT_max = 1e8
           "闭合开口时的最大压力损失系数" 
           annotation(Dialog(group = "阀门"));
 
         //数值方面
-        SI.Pressure dp_small = 0.01 * dp_nominal 
+        SI.Pressure dp_small = 0.01 * dp_nominal
           "对小于 dp_small 的压力损失进行线性化处理" 
           annotation(Dialog(group = "线性化"));
 
@@ -6031,7 +6031,7 @@ Fluid.Dissipation <span style=\"color: rgba(0, 0, 0, 0.9); font-size: 16px;\">�
 </html>"            ));
       end dp_severalGeometryOverall_IN_con;
 
-      record dp_severalGeometryOverall_IN_var 
+      record dp_severalGeometryOverall_IN_var
         "函数 dp_severalGeometryOverall_DP 和 dp_severalGeometryOverall_MFLOW 的输入记录表"
 
         extends Modelica.Icons.Record;
@@ -8871,12 +8871,12 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
     package PressureLoss "用于实用压力损失函数的库"
       extends Modelica.Icons.FunctionsPackage;
 
-    package TwoPhase 
+    package TwoPhase
       "用于计算两相压力损失特性的实用函数库"
       extends Modelica.Icons.FunctionsPackage;
 
 
-          function dp_twoPhaseChisholm_DP 
+          function dp_twoPhaseChisholm_DP
             "根据Chisholm相关性计算直管的两相流摩擦压力损失 | 计算压力损失 | 总体流动状态"
             extends Modelica.Icons.Function;
             // 资料来源_1: Chisholm,D.: 由于在光滑管道和通道中蒸发两相混合物流动引起的摩擦压力梯度，Int. J. Heat Mass Transfer, Vol. 16, pp. 347-358, Pergamon Press 1973
@@ -8900,9 +8900,9 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
 
             Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_overall_IN_con 
               IN_con_1ph(
-              final roughness=Dissipation.Utilities.Types.Roughness.Neglected, 
-              final d_hyd=4*abs(IN_con.A_cross)/max(MIN, abs(IN_con.perimeter)), 
-              final K=0, 
+              final roughness=Dissipation.Utilities.Types.Roughness.Neglected,
+              final d_hyd=4*abs(IN_con.A_cross)/max(MIN, abs(IN_con.perimeter)),
+              final K=0,
               final L=abs(IN_con.length));
 
             Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_overall_IN_var 
@@ -8911,26 +8911,26 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
 
           algorithm
             DP := Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_overall_DP(
-                        IN_con_1ph, 
-                        IN_var_1ph, 
+                        IN_con_1ph,
+                        IN_var_1ph,
                         m_flow)*(
               Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.TwoPhaseMultiplierChisholm(
-                        IN_con, 
-                        IN_var, 
+                        IN_con,
+                        IN_var,
                         m_flow));
 
             annotation (Inline=false);
           end dp_twoPhaseChisholm_DP;
 
-          function dp_twoPhaseFriedel_DP 
+          function dp_twoPhaseFriedel_DP
             "Friedel相关的直管两相流摩擦压力损失 | 计算压力损失 | 总体流动状态"
             extends Modelica.Icons.Function;
             // 资料来源_1: Friedel,L.:IMPROVED FRICTION PRESSURE DROP CORRELATIONS FOR HORIZONTAL AND VERTICAL TWO PHASE PIPE FLOW, 3R International, Vol. 18, Issue 7, pp. 485-491, 1979
             // 资料来源_2: VDI-Waermeatlas, 10th edition, Springer-Verlag, 2006.
 
-            import SMOOTH = 
+            import SMOOTH =
               Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
-            import SMOOTH2 = 
+            import SMOOTH2 =
               Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower;
 
             // 记录表
@@ -8951,49 +8951,49 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
             Real MIN = Modelica.Constants.eps;
 
             SI.Area A_cross = max(MIN, IN_con.A_cross) "横截面积";
-            SI.Diameter d_hyd = max(MIN, 4 * A_cross / max(MIN, IN_con.perimeter)) 
+            SI.Diameter d_hyd = max(MIN, 4 * A_cross / max(MIN, IN_con.perimeter))
               "水力直径";
 
             Real mdot_A = abs(m_flow) / A_cross "质量通量";
-            SI.ReynoldsNumber Re_liq = max(1, mdot_A * d_hyd / max(MIN, IN_var.eta_l)) 
+            SI.ReynoldsNumber Re_liq = max(1, mdot_A * d_hyd / max(MIN, IN_var.eta_l))
               "假设（总）质量通量流动为液体时的雷诺数";
-            SI.ReynoldsNumber Re_lam_leave = 1055 
+            SI.ReynoldsNumber Re_lam_leave = 1055
               "层流区的最大雷诺数（1055）";
-            SI.ReynoldsNumber Re_turb = 1100 
+            SI.ReynoldsNumber Re_turb = 1100
               "湍流区的最小雷诺数（1100）";
-            SI.ReynoldsNumber Re_smooth = m_flow / A_cross * d_hyd / max(MIN, abs(IN_var.eta_l)) 
+            SI.ReynoldsNumber Re_smooth = m_flow / A_cross * d_hyd / max(MIN, abs(IN_var.eta_l))
               "平滑处理后的雷诺数";
-            TYP.DarcyFrictionFactor lambda_FRI_lam = 64 / Re_liq 
+            TYP.DarcyFrictionFactor lambda_FRI_lam = 64 / Re_liq
               "层流区的 Darcy 摩阻系数";
             TYP.DarcyFrictionFactor lambda_FRI_turb = (0.86859 * Modelica.Math.log(max(1, (
-                Re_liq / max(MIN, (1.964 * Modelica.Math.log(Re_liq) - 3.8215))))))^(-2) 
+                Re_liq / max(MIN, (1.964 * Modelica.Math.log(Re_liq) - 3.8215))))))^(-2)
               "湍流区的 Darcy 摩阻系数";
             TYP.DarcyFrictionFactor lambda_FRI = lambda_FRI_lam * SMOOTH(
-                Re_lam_leave, 
-                Re_turb, 
+                Re_lam_leave,
+                Re_turb,
                 Re_liq) + lambda_FRI_turb * SMOOTH(
-                Re_turb, 
-                Re_lam_leave, 
+                Re_turb,
+                Re_lam_leave,
                 Re_liq);
-            TYP.PressureLossCoefficient zeta_FRI = lambda_FRI * IN_con.length / d_hyd 
+            TYP.PressureLossCoefficient zeta_FRI = lambda_FRI * IN_con.length / d_hyd
               "压力损失系数";
-            SI.Pressure DP_liq = zeta_FRI * mdot_A^2 / (2 * max(MIN, IN_var.rho_l)) 
+            SI.Pressure DP_liq = zeta_FRI * mdot_A^2 / (2 * max(MIN, IN_var.rho_l))
               "假设（总）质量通量流动为液体时的摩擦压力损失";
 
           algorithm
             DP := SMOOTH2(
-                        Re_smooth, 
-                        1, 
+                        Re_smooth,
+                        1,
                         0) * DP_liq * (
               Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.TwoPhaseMultiplierFriedel(
-                        IN_con, 
-                        IN_var, 
+                        IN_con,
+                        IN_var,
                         m_flow));
 
               annotation (Inline=false);
           end dp_twoPhaseFriedel_DP;
 
-          function dp_twoPhaseGeodetic_DP 
+          function dp_twoPhaseGeodetic_DP
             "直管两相流的地形压力损失 | 计算压力损失"
             extends Modelica.Icons.Function;
             // 资料来源_1: VDI-Waermeatlas, 10th edition, Springer-Verlag, 2006.
@@ -9002,10 +9002,10 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
 
             input
               Modelica.Fluid.Dissipation.Utilities.Types.VoidFractionApproach 
-              voidFractionApproach = Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous 
+              voidFractionApproach = Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous
               "空隙率计算方法选择";
 
-            input Boolean crossSectionalAveraged = true 
+            input Boolean crossSectionalAveraged = true
               "true:横截面平均空隙率，否则是体积空隙率" 
               annotation (Dialog);
 
@@ -9016,12 +9016,12 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
               annotation (Dialog(group="几何"));
 
             // 流体性质
-            input SI.Density rho_g(min = Modelica.Constants.eps) 
+            input SI.Density rho_g(min = Modelica.Constants.eps)
               "气态相密度" annotation (Dialog(group="流体性质"));
-            input SI.Density rho_l(min = Modelica.Constants.eps) 
+            input SI.Density rho_l(min = Modelica.Constants.eps)
               "液态相密度" annotation (Dialog(group="流体性质"));
             input Real x_flow(
-              min = 0, 
+              min = 0,
               max = 1) = 0 "质量流量特性" 
               annotation (Dialog(group="流体性质"));
 
@@ -9029,12 +9029,12 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
 
           protected
             Real xflow = min(1, max(0, abs(x_flow))) "质量流量特性";
-            Real eps = 
+            Real eps =
                 Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.VoidFraction(
-                voidFractionApproach, 
-                crossSectionalAveraged, 
-                rho_g, 
-                rho_l, 
+                voidFractionApproach,
+                crossSectionalAveraged,
+                rho_g,
+                rho_l,
                 xflow) "空隙率";
 
           algorithm
@@ -9044,7 +9044,7 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
               annotation (Inline=false);
           end dp_twoPhaseGeodetic_DP;
 
-          function dp_twoPhaseMomentum_DP 
+          function dp_twoPhaseMomentum_DP
             "直管两相流的动量压力损失 | 计算压力损失"
             extends Modelica.Icons.Function;
             // 资料来源_1: VDI-Waermeatlas, 10th edition, Springer-Verlag, 2006.
@@ -9053,39 +9053,39 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
 
             import PI = Modelica.Constants.pi;
             import MIN = Modelica.Constants.eps;
-            import SMOOTH = 
+            import SMOOTH =
               Modelica.Fluid.Dissipation.Utilities.Functions.General.SmoothPower;
 
             //选择
             input
               Modelica.Fluid.Dissipation.Utilities.Types.VoidFractionApproach 
-              voidFractionApproach= 
-                Modelica.Fluid.Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous 
+              voidFractionApproach=
+                Modelica.Fluid.Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous
               "空隙率计算方法选择" annotation (Dialog(group="选择"));
 
             //资料来源_3: p.52, eq. 4.6: 通过修正质量流量考虑异质性对动量压力损失的影响
-            input Boolean massFlowRateCorrection=false 
+            input Boolean massFlowRateCorrection=false
               "考虑非均匀质量流量修正" 
               annotation (Dialog(group="选择"));
 
             //几何参数
-            input SI.Area A_cross(min=Modelica.Constants.eps) = PI*0.1^2/4 
+            input SI.Area A_cross(min=Modelica.Constants.eps) = PI*0.1^2/4
               "横截面积" annotation (Dialog(group="几何"));
-            input SI.Length perimeter(min=Modelica.Constants.eps) = PI*0.1 
+            input SI.Length perimeter(min=Modelica.Constants.eps) = PI*0.1
               "周长" 
               annotation (Dialog(group="几何"));
 
             //流体性质
             input SI.Density rho_g(min=Modelica.Constants.eps) "气体密度" 
               annotation (Dialog(group="流体性质"));
-            input SI.Density rho_l(min=Modelica.Constants.eps) 
+            input SI.Density rho_l(min=Modelica.Constants.eps)
               "液体密度" annotation (Dialog(group="流体性质"));
             input Real x_flow_end(
-              min=0, 
+              min=0,
               max=1) = 0 "长度末端的质量流量特性" 
               annotation (Dialog(group="流体性质"));
             input Real x_flow_sta(
-              min=0, 
+              min=0,
               max=1) = 0 "长度起始端的质量流量特性" 
               annotation (Dialog(group="流体性质"));
 
@@ -9098,84 +9098,84 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
             Real MIN=Modelica.Constants.eps;
 
             SI.Area Across=max(MIN, A_cross) "横截面积";
-            SI.Diameter d_hyd=max(MIN, 4*A_cross/max(MIN, perimeter)) 
+            SI.Diameter d_hyd=max(MIN, 4*A_cross/max(MIN, perimeter))
               "水力直径";
 
             Real mdot_A=abs(m_flow)/Across "质量流量";
-            Real xflowEnd=min(1, max(0, abs(x_flow_end))) 
+            Real xflowEnd=min(1, max(0, abs(x_flow_end)))
               "长度末端的质量流量特性";
-            Real xflowSta=min(1, max(0, abs(x_flow_sta))) 
+            Real xflowSta=min(1, max(0, abs(x_flow_sta)))
               "长度起始端的质量流量特性";
-            Real xflowMean=(xflowEnd + xflowSta)/2 
+            Real xflowMean=(xflowEnd + xflowSta)/2
               "长度上平均质量流量分数";
 
-            Real delta_xflow=xflowEnd - xflowSta 
+            Real delta_xflow=xflowEnd - xflowSta
               "末端和起始端质量流量之差（正 >> 蒸发，负 >> 凝结";
 
             //资料来源_2: 考虑空隙率方法
-            Real eps_end= 
+            Real eps_end=
                 Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.VoidFraction(
-                voidFractionApproach, 
-                true, 
-                rho_g, 
-                rho_l, 
+                voidFractionApproach,
+                true,
+                rho_g,
+                rho_l,
                 xflowEnd) "长度末端的空隙率";
-            Real eps_sta= 
+            Real eps_sta=
                 Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.VoidFraction(
-                voidFractionApproach, 
-                true, 
-                rho_g, 
-                rho_l, 
+                voidFractionApproach,
+                true,
+                rho_g,
+                rho_l,
                 xflowSta) "长度起始端的空隙率";
 
             //资料来源_2: p.17-6, eq. 17.3.3: 考虑长度末端和起始端的两相平均密度
-            SI.Density rho_end= 
+            SI.Density rho_end=
                 Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.TwoPhaseDensity(
-                voidFractionApproach, 
-                massFlowRateCorrection, 
-                rho_g, 
-                rho_l, 
-                eps_end, 
+                voidFractionApproach,
+                massFlowRateCorrection,
+                rho_g,
+                rho_l,
+                eps_end,
                 xflowEnd) "长度末端的平均两相密度";
-            SI.Density rho_sta= 
+            SI.Density rho_sta=
                 Modelica.Fluid.Dissipation.Utilities.Functions.PressureLoss.TwoPhase.TwoPhaseDensity(
-                voidFractionApproach, 
-                massFlowRateCorrection, 
-                rho_g, 
-                rho_l, 
-                eps_sta, 
+                voidFractionApproach,
+                massFlowRateCorrection,
+                rho_g,
+                rho_l,
+                eps_sta,
                 xflowSta) "长度起始端的平均两相密度";
 
-            SI.Velocity meanVelEnd=abs(m_flow)/max(MIN, rho_end*A_cross) 
+            SI.Velocity meanVelEnd=abs(m_flow)/max(MIN, rho_end*A_cross)
               "长度末端两相流平均速度";
-            SI.Velocity meanVelSta=abs(m_flow)/max(MIN, rho_sta*A_cross) 
+            SI.Velocity meanVelSta=abs(m_flow)/max(MIN, rho_sta*A_cross)
               "长度起始端两相流平均速度";
 
             //资料来源_3: p.15, eq. 2.26: 考虑非均质方法的速度差异使用滑移比
             Real SR=Dissipation.Utilities.Functions.PressureLoss.TwoPhase.SlipRatio(
-                voidFractionApproach, 
-                rho_g, 
-                rho_l, 
+                voidFractionApproach,
+                rho_g,
+                rho_l,
                 xflowMean) "速度空隙率方法的滑移比";
-            SI.Velocity deltaVelEnd=meanVelEnd*(SR - 1)/(xflowEnd*(SR - 1) + 1) 
+            SI.Velocity deltaVelEnd=meanVelEnd*(SR - 1)/(xflowEnd*(SR - 1) + 1)
               "长度末端两相速度差";
-            SI.Velocity deltaVelSta=meanVelSta*(SR - 1)/(xflowSta*(SR - 1) + 1) 
+            SI.Velocity deltaVelSta=meanVelSta*(SR - 1)/(xflowSta*(SR - 1) + 1)
               "长度起始端两相速
 
 度差"                  ;
 
             //资料来源_3: p.52, eq. 4.6: 考虑修正质量流量的非均质方法
-            SI.MassFlowRate mdotCorEnd=xflowEnd*(1 - xflowEnd)*rho_end*deltaVelEnd*Across 
+            SI.MassFlowRate mdotCorEnd=xflowEnd*(1 - xflowEnd)*rho_end*deltaVelEnd*Across
               "长度末端的修正质量流量";
-            SI.MassFlowRate mdotCorSta=xflowSta*(1 - xflowSta)*rho_sta*deltaVelSta*Across 
+            SI.MassFlowRate mdotCorSta=xflowSta*(1 - xflowSta)*rho_sta*deltaVelSta*Across
               "长度起始端的修正质量流量";
 
             //资料来源_3: p.53, eq. 4.13: 考虑流体相速度差异的质量流量修正的非均质方法计算
             SI.Pressure dp_mom_cor=SMOOTH(
-                delta_xflow, 
-                0.05, 
-                0)*abs(mdot_A*meanVelEnd + mdotCorEnd*deltaVelEnd/Across) - abs(mdot_A* 
-                meanVelSta + mdotCorEnd*deltaVelSta/Across) 
+                delta_xflow,
+                0.05,
+                0)*abs(mdot_A*meanVelEnd + mdotCorEnd*deltaVelEnd/Across) - abs(mdot_A*
+                meanVelSta + mdotCorEnd*deltaVelSta/Across)
               "使用质量流量修正的动量压力损失";
 
           algorithm
@@ -9184,8 +9184,8 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
             //在蒸发时，必须加速速度较慢的液态相至气态相的较高速度
             //出口和入口处的静压差导致蒸发时的正动量压力损失（假设凝结时相反）
             DP_mom := if massFlowRateCorrection then dp_mom_cor else mdot_A^2*SMOOTH(
-              delta_xflow, 
-              0.05, 
+              delta_xflow,
+              0.05,
               0)*abs(1/max(MIN, rho_end) - 1/max(MIN, rho_sta));
 
             annotation (Inline=false, Documentation(revisions="<html>
@@ -9193,14 +9193,14 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
 </html>"                    ));
           end dp_twoPhaseMomentum_DP;
 
-          function TwoPhaseMultiplierFriedel 
+          function TwoPhaseMultiplierFriedel
             "根据 Friedel 计算两相乘子 | 常数质量流量特性 | 水平流动 | 垂直上下流"
             extends Modelica.Icons.Function;
             // 资料来源_1: Friedel,L.:IMPROVED FRICTION PRESSURE DROP CORRELATIONS FOR HORIZONTAL AND VERTICAL TWO PHASE PIPE FLOW, 3R International, Vol. 18, Issue 7, pp. 485-491, 1979
             // 资料来源_2: VDI-Waermeatlas, 10th edition, Springer-Verlag, 2006.
 
             import Modelica.Math.log;
-            import SMOOTH = 
+            import SMOOTH =
               Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
             input
@@ -9220,72 +9220,72 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
             Real MIN=Modelica.Constants.eps;
 
             SI.Area A_cross=max(MIN, IN_con.A_cross) "横截面积";
-            SI.Diameter d_hyd=max(MIN, 4*A_cross/max(MIN, IN_con.perimeter)) 
+            SI.Diameter d_hyd=max(MIN, 4*A_cross/max(MIN, IN_con.perimeter))
               "水力直径";
 
             // 资料来源_2: p.Lba 4, sec. 3.3: 基于常数质量流量特性的相关性(x_flow)，用于增量(dx)
             // 可通过离散化实现整体长度的压力损失（例如，L=n*dx）
             Real mdot_A=abs(m_flow)/A_cross "质量通量";
-            Real x_flow=max(0, min(1, abs(IN_var.x_flow))) 
+            Real x_flow=max(0, min(1, abs(IN_var.x_flow)))
               "质量流量特性";
 
             // 资料来源_1: p.490 (附录): 基于流体性质流动的总质量流量的特征数
-            SI.FroudeNumber Fr_l=max(MIN, mdot_A^2/max(MIN, 9.81*IN_var.rho_l^2*d_hyd)) 
+            SI.FroudeNumber Fr_l=max(MIN, mdot_A^2/max(MIN, 9.81*IN_var.rho_l^2*d_hyd))
               "基于液体流动的弗洛德数";
-            SI.ReynoldsNumber Re_g=max(1, mdot_A*d_hyd/max(MIN, IN_var.eta_g)) 
+            SI.ReynoldsNumber Re_g=max(1, mdot_A*d_hyd/max(MIN, IN_var.eta_g))
               "基于气体流动的雷诺数";
-            SI.ReynoldsNumber Re_l=max(1, mdot_A*d_hyd/max(MIN, IN_var.eta_l)) 
+            SI.ReynoldsNumber Re_l=max(1, mdot_A*d_hyd/max(MIN, IN_var.eta_l))
               "基于液体流动的雷诺数";
-            SI.WeberNumber We_l=max(MIN, mdot_A^2*d_hyd/max(MIN, IN_var.sigma*IN_var.rho_l)) 
+            SI.WeberNumber We_l=max(MIN, mdot_A^2*d_hyd/max(MIN, IN_var.sigma*IN_var.rho_l))
               "基于液体流动的韦伯数";
 
             // 资料来源_1: p.490 (附录): 对假定层流区到假定湍流区的突然变化进行平滑处理（在Re=1055时的数值改进）
-            SI.ReynoldsNumber Re_lam_max=1025 
+            SI.ReynoldsNumber Re_lam_max=1025
               "假定层流区的最大雷诺数";
-            SI.ReynoldsNumber Re_turb_min=1075 
+            SI.ReynoldsNumber Re_turb_min=1075
               "假定湍流区的最小雷诺数";
 
             // 资料来源_2: p.Lbb 2, eq. 9-10: 考虑雷诺数对光滑直管道 Darcy 摩擦系数的影响
             // 基于忽略表面粗糙度的相关性
             // 基于假定总质量流量为气体流动的相关性
-            TYP.DarcyFrictionFactor lambda_lam_g=64/Re_g 
+            TYP.DarcyFrictionFactor lambda_lam_g=64/Re_g
               "假定层流区域的气体 Darcy 摩擦系数";
             TYP.DarcyFrictionFactor lambda_turb_g=1/max(MIN, 0.86859*log(max(1, Re_g/max(
-                MIN, 1.964*log(Re_g) - 3.8215))))^(2) 
+                MIN, 1.964*log(Re_g) - 3.8215))))^(2)
               "假定湍流区域的气体 Darcy 摩擦系数";
             TYP.DarcyFrictionFactor lambda_g=lambda_lam_g*SMOOTH(
-                Re_lam_max, 
-                Re_turb_min, 
+                Re_lam_max,
+                Re_turb_min,
                 Re_g) + lambda_turb_g*SMOOTH(
-                Re_turb_min, 
-                Re_lam_max, 
+                Re_turb_min,
+                Re_lam_max,
                 Re_g) "整体区域的气体 Darcy 摩擦系数";
             // 基于假定总质量流量为液体流动的相关性
-            TYP.DarcyFrictionFactor lambda_lam_l=64/Re_l 
+            TYP.DarcyFrictionFactor lambda_lam_l=64/Re_l
               "假定层流区的液体 Darcy 摩擦系数";
             TYP.DarcyFrictionFactor lambda_turb_l=1/max(MIN, 0.86859*log(max(1, Re_l/max(
-                MIN, 1.964*log(Re_l) - 3.8215))))^(2) 
+                MIN, 1.964*log(Re_l) - 3.8215))))^(2)
               "假定湍流区的液体 Darcy 摩擦系数";
             TYP.DarcyFrictionFactor lambda_l=lambda_lam_l*SMOOTH(
-                Re_lam_max, 
-                Re_turb_min, 
+                Re_lam_max,
+                Re_turb_min,
                 Re_l) + lambda_turb_l*SMOOTH(
-                Re_turb_min, 
-                Re_lam_max, 
+                Re_turb_min,
+                Re_lam_max,
                 Re_l) "整体区域的液体 Darcy 摩擦系数";
 
             Real A=(1 - x_flow)^2 + x_flow^2*(IN_var.rho_l/max(MIN, IN_var.rho_g))*(
                 lambda_g/max(MIN, lambda_l)) "用于两相乘子的加和项";
 
             // 资料来源_1: p.490 (附录): 垂直下流的两相乘子
-            Real phi_vdo=A + 38.5*x_flow^0.76*(1 - x_flow)^0.314*(IN_var.rho_l/max(MIN, 
-                IN_var.rho_g))^0.86*(IN_var.eta_g/max(MIN, IN_var.eta_l))^0.73*(1 - 
+            Real phi_vdo=A + 38.5*x_flow^0.76*(1 - x_flow)^0.314*(IN_var.rho_l/max(MIN,
+                IN_var.rho_g))^0.86*(IN_var.eta_g/max(MIN, IN_var.eta_l))^0.73*(1 -
                 IN_var.eta_g/max(MIN, IN_var.eta_l))^6.84*(1/Fr_l^(0.0001))*(1/We_l^(
                 0.087));
 
             // 资料来源_1: p.490 (附录): 水平和垂直上流的两相乘子（资料来源_2中存在错误）
-            Real phi_vup=A + 3.43*x_flow^0.685*(1 - x_flow)^0.24*(IN_var.rho_l/max(MIN, 
-                IN_var.rho_g))^0.8*(IN_var.eta_g/max(MIN, IN_var.eta_l))^0.22*(1 - IN_var.eta_g 
+            Real phi_vup=A + 3.43*x_flow^0.685*(1 - x_flow)^0.24*(IN_var.rho_l/max(MIN,
+                IN_var.rho_g))^0.8*(IN_var.eta_g/max(MIN, IN_var.eta_l))^0.22*(1 - IN_var.eta_g
                 /max(MIN, IN_var.eta_l))^0.89*(1/Fr_l^(0.048))*(1/We_l^(0.0334));
 
           algorithm
@@ -9294,13 +9294,13 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
               annotation (Inline=false);
           end TwoPhaseMultiplierFriedel;
 
-          function TwoPhaseMultiplierChisholm 
+          function TwoPhaseMultiplierChisholm
             "根据 Chisholm 计算两相乘数 | 常量质量流量特性"
             extends Modelica.Icons.Function;
             //资料来源_1: Chisholm,D.:PRESSURE GRADIENTS DUE TO FRICTION DURING THE FLOW OF EVAPORATING TWO-PHASE MIXTURES IN SMOOTH TUBES AND CHANNELS, Int. J. Heat Mass Transfer, Vol. 16, pp. 347-358, Pergamon Press 1973
             //资料来源_2: VDI-Waermeatlas, 第10版, Springer-Verlag, 2006.
 
-            import SMOOTH = 
+            import SMOOTH =
               Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
             input
@@ -9320,88 +9320,88 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
             Real MIN = Modelica.Constants.eps;
 
             SI.Area A_cross = max(MIN, IN_con.A_cross) "截面积";
-            SI.Diameter d_hyd = max(MIN, 4 * A_cross / max(MIN, IN_con.perimeter)) 
+            SI.Diameter d_hyd = max(MIN, 4 * A_cross / max(MIN, IN_con.perimeter))
               "水力直径";
 
             Real mdot_A = abs(m_flow) / A_cross "质量通量";
-            Real x_flow = max(0, min(1, abs(IN_var.x_flow))) 
+            Real x_flow = max(0, min(1, abs(IN_var.x_flow)))
               "质量流量特性";
 
             //资料来源_1: p.357, Appendix 1: 考虑平滑管道的 Darcy 摩擦系数 (lambda_FRI) 对整体流动区的影响
             Real n_exp = 0.2 "雷诺数的指数 (lambda_FRI= A/Re^n)";
 
             //资料来源_1: p.349, eq. 21: 考虑物理性质的影响 (资料来源_2 中的失败)
-            Real gamma = max(1, abs(IN_var.rho_l / max(MIN, IN_var.rho_g)) ^ 0.5 * (IN_var.eta_g / 
+            Real gamma = max(1, abs(IN_var.rho_l / max(MIN, IN_var.rho_g)) ^ 0.5 * (IN_var.eta_g /
               max(MIN, IN_var.eta_l)) ^ (n_exp / 2));
 
             //资料来源: p. 353, 表2: 考虑质量通量对两相乘数的影响
             Real B_gamma_1 = SMOOTH(
-              450, 
-              550, 
+              450,
+              550,
               mdot_A) * 4.8 + SMOOTH(
-              550, 
-              450, 
+              550,
+              450,
               mdot_A) * 2400 / max(MIN, mdot_A) - SMOOTH(
-              1950, 
-              1850, 
+              1950,
+              1850,
               mdot_A) * 2400 / max(MIN, mdot_A) + SMOOTH(
-              1950, 
-              1850, 
-              mdot_A) * 55 / max(MIN, mdot_A ^ 0.5) 
+              1950,
+              1850,
+              mdot_A) * 55 / max(MIN, mdot_A ^ 0.5)
               "gamma <= 9.5 的系数 B";
             Real B_gamma_2 = SMOOTH(
-              550, 
-              650, 
+              550,
+              650,
               mdot_A) * 520 / max(1, max(9.5, gamma) * mdot_A ^ 0.5) + SMOOTH(
-              650, 
-              550, 
-              mdot_A) * 21 / max(9.5, gamma) 
+              650,
+              550,
+              mdot_A) * 21 / max(9.5, gamma)
               "9.5 <= gamma <= 28 的系数 B";
             Real B_gamma = SMOOTH(
-              9.0, 
-              10, 
+              9.0,
+              10,
               gamma) * B_gamma_1 + SMOOTH(
-              10, 
-              9.0, 
+              10,
+              9.0,
               gamma) * B_gamma_2 - SMOOTH(
-              28.5, 
-              27.7, 
+              28.5,
+              27.7,
               gamma) * B_gamma_2 + SMOOTH(
-              28.5, 
-              27.5, 
-              gamma) * 15000 / max(MIN, gamma ^ 2 * mdot_A ^ 0.5) 
+              28.5,
+              27.5,
+              gamma) * 15000 / max(MIN, gamma ^ 2 * mdot_A ^ 0.5)
               "gamma 的系数 B";
 
             //资料来源_1: p. 350, eq. 24/26: 考虑关于 Chisholm 的两相乘数
           algorithm
-            phi := 1 + (gamma ^ 2 - 1) * (B_gamma * x_flow ^ ((2 - n_exp) / 2) * (1 - x_flow) ^ ((2 - 
+            phi := 1 + (gamma ^ 2 - 1) * (B_gamma * x_flow ^ ((2 - n_exp) / 2) * (1 - x_flow) ^ ((2 -
               n_exp) / 2) + x_flow ^ (2 - n_exp));
 
             annotation(Inline = false);
           end TwoPhaseMultiplierChisholm;
 
-          function TwoPhaseDensity 
+          function TwoPhaseDensity
             "两相流的平均密度计算"
             extends Modelica.Icons.Function;
             //资料来源_1: VDI-Waermeatlas, 第10版, Springer-Verlag, 2006.
             input
               Modelica.Fluid.Dissipation.Utilities.Types.VoidFractionApproach 
-              voidFractionApproach = 
-              Modelica.Fluid.Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous 
+              voidFractionApproach =
+              Modelica.Fluid.Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous
               "空隙率方法的选择" annotation(Dialog(group = "选择"));
 
             //资料来源_3: p.52, eq. 4.6: 考虑通过修正质量流量对动量压降的非均匀效应
-            input Boolean massFlowRateCorrection = false 
+            input Boolean massFlowRateCorrection = false
               "考虑非均匀质量流量修正" 
               annotation(Dialog(group = "选择"));
 
-            input SI.Density rho_g(min = Modelica.Constants.eps) 
+            input SI.Density rho_g(min = Modelica.Constants.eps)
               "气相密度" 
               annotation(Dialog);
-            input SI.Density rho_l(min = Modelica.Constants.eps) 
+            input SI.Density rho_l(min = Modelica.Constants.eps)
               "液相密度" 
               annotation(Dialog);
-            input Real epsilon_A(min = 0, max = 1) 
+            input Real epsilon_A(min = 0, max = 1)
               "空隙率（截面平均）" 
               annotation(Dialog(enable = not (twoPhaseDensityApproach == Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseDensityApproach.Homogeneous)));
             input Real x_flow(min = 0, max = 1) "质量流量特性" annotation(Dialog);
@@ -9410,18 +9410,18 @@ BHRA Fluid Engineering Series，第5卷，1978年。</dd>
           protected
             Real MIN = Modelica.Constants.eps;
 
-            Real epsilonA = min(1, max(0, abs(epsilon_A))) 
+            Real epsilonA = min(1, max(0, abs(epsilon_A)))
               "空隙率（截面平均）";
             Real xflow = min(1, max(0, abs(x_flow))) "质量流量特性";
 
             //资料来源_1: p.Lba 3, eq. 17: 假设均匀方法的平均两相密度
-            SI.Density rho_hom = 1 / max(MIN, x_flow / max(MIN, rho_g) + (1 - x_flow) / max(MIN, 
+            SI.Density rho_hom = 1 / max(MIN, x_flow / max(MIN, rho_g) + (1 - x_flow) / max(MIN,
               rho_l));
             //资料来源_1: p.Lbb 7, 表2: 假设动量通量方法的平均两相密度
-            SI.Density rho_mom = 1 / max(MIN, (x_flow) ^ 2 / max(MIN, rho_g * epsilonA) + (1 - 
+            SI.Density rho_mom = 1 / max(MIN, (x_flow) ^ 2 / max(MIN, rho_g * epsilonA) + (1 -
               x_flow) ^ 2 / max(MIN, rho_l * (1 - epsilonA)));
             //资料来源_1: p.Lbb 7, 表2: 假设来自 Zivi 的动能流方法的平均两相密度（修正公式！）
-            SI.Density rho_kin = 1 / max(MIN, rho_hom * (x_flow ^ 3 / max(MIN, rho_g ^ 2 * epsilonA ^ 2) 
+            SI.Density rho_kin = 1 / max(MIN, rho_hom * (x_flow ^ 3 / max(MIN, rho_g ^ 2 * epsilonA ^ 2)
               + (1 - x_flow) ^ 3 / max(MIN, rho_l ^ 2 * (1 - epsilonA) ^ 2)));
 
           algorithm
@@ -9466,7 +9466,7 @@ Springer Verlag, 第10版, 2006.</dd>
 </html>"                  ));
           end TwoPhaseDensity;
 
-          function VoidFraction 
+          function VoidFraction
             "两相流的（截面）空隙率计算"
             extends Modelica.Icons.Function;
             //资料来源_1: VDI-Waermeatlas, 第10版, Springer-Verlag, 2006.
@@ -9474,19 +9474,19 @@ Springer Verlag, 第10版, 2006.</dd>
 
             input
               Modelica.Fluid.Dissipation.Utilities.Types.VoidFractionApproach 
-              voidFractionApproach = Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous 
+              voidFractionApproach = Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous
               "空隙率方法的选择" annotation(Dialog(group = "选择"));
 
-            input Boolean crossSectionalAveraged = true 
+            input Boolean crossSectionalAveraged = true
               "true:截面平均空隙率，否则为体积空隙率" 
               annotation(Dialog);
 
-            input SI.Density rho_g(min = Modelica.Constants.eps) 
+            input SI.Density rho_g(min = Modelica.Constants.eps)
               "气相密度" annotation(Dialog);
-            input SI.Density rho_l(min = Modelica.Constants.eps) 
+            input SI.Density rho_l(min = Modelica.Constants.eps)
               "液相密度" annotation(Dialog);
             input Real x_flow(
-              min = 0, 
+              min = 0,
               max = 1) = 0 "质量流量特性" annotation(Dialog);
 
             output Real epsilon "空隙率";
@@ -9498,9 +9498,9 @@ Springer Verlag, 第10版, 2006.</dd>
             Real xflow = min(1, max(0, abs(x_flow))) "质量流量特性";
 
             Real SR = Dissipation.Utilities.Functions.PressureLoss.TwoPhase.SlipRatio(
-              voidFractionApproach, 
-              rho_g, 
-              rho_l, 
+              voidFractionApproach,
+              rho_g,
+              rho_l,
               xflow) "空隙率方法的滑移比";
 
             //资料来源_2: p.17-5, eq. 17.2.5: （非均匀）截面空隙率 [epsilon_A=A_g/(A_g+A_l)]
@@ -9522,12 +9522,12 @@ Springer Verlag, 第10版, 2006.</dd>
 
             input
               Modelica.Fluid.Dissipation.Utilities.Types.VoidFractionApproach 
-              voidFractionApproach = Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous 
+              voidFractionApproach = Dissipation.Utilities.Types.VoidFractionApproach.Homogeneous
               "空隙率方法的选择" annotation(Dialog(group = "选择"));
 
-            input SI.Density rho_g(min = Modelica.Constants.eps) 
+            input SI.Density rho_g(min = Modelica.Constants.eps)
               "气相密度" annotation(Dialog);
-            input SI.Density rho_l(min = Modelica.Constants.eps) 
+            input SI.Density rho_l(min = Modelica.Constants.eps)
               "液相密度" annotation(Dialog);
             input Real x_flow = 0 "质量流量特性" annotation(Dialog);
 
@@ -9539,13 +9539,13 @@ Springer Verlag, 第10版, 2006.</dd>
             //资料来源_1: p.Lba 3, sec. 3.2
             Real SR_hom = 1 "均相方法的滑移比";
             //资料来源_2: p.17-6, eq. 17.3.4
-            Real SR_mom = abs(rho_l / max(MIN, rho_g)) ^ 0.5 
+            Real SR_mom = abs(rho_l / max(MIN, rho_g)) ^ 0.5
               "动量通量方法的滑移比（非均匀）";
             //资料来源_2: p.17-7, eq. 17.3.13
-            Real SR_kin = abs(rho_l / max(MIN, rho_g)) ^ (1 / 3) 
+            Real SR_kin = abs(rho_l / max(MIN, rho_g)) ^ (1 / 3)
               "动能方法的滑移比（来自 Zivi，非均匀）";
             //资料来源_2: p.17-10, eq. 17.4.3
-            Real SR_chi = (1 - x_flow * (1 - abs(rho_l) / max(MIN, abs(rho_g)))) ^ 0.5 
+            Real SR_chi = (1 - x_flow * (1 - abs(rho_l) / max(MIN, abs(rho_g)))) ^ 0.5
               "动量通量方法的经验滑移比（来自 Chisholm，非均匀）";
 
           algorithm
@@ -9565,12 +9565,12 @@ Springer Verlag, 第10版, 2006.</dd>
       package HeatTransfer "用于实用换热函数的库"
         extends Modelica.Icons.FunctionsPackage;
 
-      package TwoPhase 
+      package TwoPhase
         "用于计算两相换热特性的实用函数库"
         extends Modelica.Icons.FunctionsPackage;
 
 
-          function kc_twoPhase_condensationHorizontal_KC 
+          function kc_twoPhase_condensationHorizontal_KC
             "直管局部两相传热系数 | 水平冷凝"
             extends Modelica.Icons.Function;
             //资料来源_1: M.M. Shah. 管内膜状冷凝传热的通用关联式. Int. J. Heat Mass Transfer, 第22卷, p.547-556, 1979.
@@ -9583,42 +9583,42 @@ Springer Verlag, 第10版, 2006.</dd>
               Modelica.Fluid.Dissipation.Utilities.Records.HeatTransfer.TwoPhaseFlowHT_IN_var 
               IN_var annotation(Dialog(group = "变量输入"));
 
-            output SI.CoefficientOfHeatTransfer kc 
+            output SI.CoefficientOfHeatTransfer kc
               "局部两相传热系数";
 
           protected
             Real MIN = Modelica.Constants.eps;
 
             SI.Area A_cross = max(MIN, IN_con.A_cross) "横截面积";
-            SI.Diameter d_hyd = max(MIN, 4 * A_cross / max(MIN, IN_con.perimeter)) 
+            SI.Diameter d_hyd = max(MIN, 4 * A_cross / max(MIN, IN_con.perimeter))
               "水力直径";
 
-            Real x_flow = max(0, min(1, abs(IN_var.x_flow))) 
+            Real x_flow = max(0, min(1, abs(IN_var.x_flow)))
               "质量流量特性";
-            Real p_red = max(MIN, abs(IN_var.pressure) / max(MIN, abs(IN_con.p_crit))) 
+            Real p_red = max(MIN, abs(IN_var.pressure) / max(MIN, abs(IN_con.p_crit)))
               "约简压力";
 
-            SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho_l * A_cross) 
+            SI.Velocity velocity = abs(IN_var.m_flow) / max(MIN, IN_var.rho_l * A_cross)
               "平均速度";
-            SI.ReynoldsNumber Re_l = (IN_var.rho_l * velocity * d_hyd / max(MIN, IN_var.eta_l)) 
+            SI.ReynoldsNumber Re_l = (IN_var.rho_l * velocity * d_hyd / max(MIN, IN_var.eta_l))
               "假设液体（总）质量通量的雷诺数";
-            SI.PrandtlNumber Pr_l = abs(IN_var.eta_l * IN_var.cp_l / max(MIN, IN_var.lambda_l)) 
+            SI.PrandtlNumber Pr_l = abs(IN_var.eta_l * IN_var.cp_l / max(MIN, IN_var.lambda_l))
               "假设液体（总）质量通量的普朗特数";
 
             //资料来源_1: p.548, eq. 8: 考虑到 Shah 的两相冷凝乘数
-            SI.CoefficientOfHeatTransfer kc_1ph = 0.023 * Re_l ^ 0.8 * Pr_l ^ 0.4 * IN_var.lambda_l 
+            SI.CoefficientOfHeatTransfer kc_1ph = 0.023 * Re_l ^ 0.8 * Pr_l ^ 0.4 * IN_var.lambda_l
               / d_hyd;
 
           algorithm
-            kc := kc_1ph * ((1 - x_flow) ^ 0.8 + 3.8 * x_flow ^ 0.76 * (1 - x_flow) ^ 0.04 / p_red ^ 
+            kc := kc_1ph * ((1 - x_flow) ^ 0.8 + 3.8 * x_flow ^ 0.76 * (1 - x_flow) ^ 0.04 / p_red ^
               0.38);
-            annotation(Inline = false, smoothOrder = 5, 
+            annotation(Inline = false, smoothOrder = 5,
               Documentation(revisions = "<html>
 <p>2016-04-11 Stefan Wischhusen: 删除了质量流量为零时 Re 的奇点。</p>
 </html>"                        ));
           end kc_twoPhase_condensationHorizontal_KC;
 
-          function kc_twoPhase_boilingVertical_KC 
+          function kc_twoPhase_boilingVertical_KC
             "直管局部两相传热系数 | 垂直沸腾"
             extends Modelica.Icons.Function;
             //资料来源_1: Bejan,A.: 传热手册, Wiley, 2003.
@@ -9632,73 +9632,73 @@ Springer Verlag, 第10版, 2006.</dd>
               Modelica.Fluid.Dissipation.Utilities.Records.HeatTransfer.TwoPhaseFlowHT_IN_var 
               IN_var annotation(Dialog(group = "变量输入"));
 
-            output SI.CoefficientOfHeatTransfer kc 
+            output SI.CoefficientOfHeatTransfer kc
               "局部两相传热系数";
 
           protected
             Real MIN = Modelica.Constants.eps;
 
             SI.Area A_cross = max(MIN, IN_con.A_cross) "横截面积";
-            SI.Diameter d_hyd = max(MIN, 4 * A_cross / max(MIN, IN_con.perimeter)) 
+            SI.Diameter d_hyd = max(MIN, 4 * A_cross / max(MIN, IN_con.perimeter))
               "水力直径";
 
             Real mdot_A = abs(IN_var.m_flow) / A_cross "质量通量";
-            Real x_flow = max(0, min(1, abs(IN_var.x_flow))) 
+            Real x_flow = max(0, min(1, abs(IN_var.x_flow)))
               "质量流量特性";
-            Real p_red = max(MIN, abs(IN_var.pressure) / max(MIN, abs(IN_con.p_crit))) 
+            Real p_red = max(MIN, abs(IN_var.pressure) / max(MIN, abs(IN_con.p_crit)))
               "约简压力";
 
             //资料来源_1: p.674, sec. 9.8.3: 考虑到 Gungor-Winterton 方程的核化和对流沸腾
-            SI.MassFlowRate mdot_l = abs(IN_var.m_flow) * (1 - x_flow) 
+            SI.MassFlowRate mdot_l = abs(IN_var.m_flow) * (1 - x_flow)
               "仅液体的质量流量";
-            SI.Velocity velocity_l = mdot_l / max(MIN, IN_var.rho_l * A_cross) 
+            SI.Velocity velocity_l = mdot_l / max(MIN, IN_var.rho_l * A_cross)
               "假设液体质量流量单独流动的平均速度";
-            SI.ReynoldsNumber Re_l = (IN_var.rho_l * velocity_l * d_hyd / max(MIN, IN_var.eta_l)) 
+            SI.ReynoldsNumber Re_l = (IN_var.rho_l * velocity_l * d_hyd / max(MIN, IN_var.eta_l))
               "假设液体质量流量单独流动的雷诺数";
-            SI.PrandtlNumber Pr_l = abs(IN_var.eta_l * IN_var.cp_l / max(MIN, IN_var.lambda_l)) 
+            SI.PrandtlNumber Pr_l = abs(IN_var.eta_l * IN_var.cp_l / max(MIN, IN_var.lambda_l))
               "假设液体质量流量单独流动的普朗特数";
 
             //资料来源_1: p.674, eq. 9.98: 考虑到 Gungor-Winterton 方程的沸腾数对核化沸腾的影响
             //沸腾数（Bo）定义为实际热通量与完全蒸发液体所需最大热通量之比
-            Real Bo = abs(IN_var.qdot_A) / (max(MIN, mdot_A * IN_var.dh_lg)) 
+            Real Bo = abs(IN_var.qdot_A) / (max(MIN, mdot_A * IN_var.dh_lg))
               "沸腾数";
             //资料来源_1: p.673, eq. 9.94: 考虑到 Chen 方程的 Martinelli 参数
-            Real X_tt = abs(((1 - x_flow) / max(MIN, x_flow)) ^ 0.9 * (IN_var.rho_g / max(MIN, 
-              IN_var.rho_l)) ^ 0.5 * (IN_var.eta_l / max(MIN, IN_var.eta_g)) ^ 0.1) 
+            Real X_tt = abs(((1 - x_flow) / max(MIN, x_flow)) ^ 0.9 * (IN_var.rho_g / max(MIN,
+              IN_var.rho_l)) ^ 0.5 * (IN_var.eta_l / max(MIN, IN_var.eta_g)) ^ 0.1)
               "Martinelli 参数";
 
             //资料来源_1: p.675, eq. 9.105: 考虑到 Gungor-Winterton 方程的强制对流增强因子
-            Real E_fc = 1 + 24000 * Bo ^ 1.16 + 1.37 * (1 / max(MIN, X_tt)) ^ 0.86 
+            Real E_fc = 1 + 24000 * Bo ^ 1.16 + 1.37 * (1 / max(MIN, X_tt)) ^ 0.86
               "强制对流增强因子";
             //资料来源_1: p.675, eq. 9.105: 考虑到Gungor-Winterton方程的核化沸腾抑制因子
-            Real S_nb = 1 / max(MIN, 1 + 1.15e-6 * E_fc ^ 2 * Re_l ^ 1.17) 
+            Real S_nb = 1 / max(MIN, 1 + 1.15e-6 * E_fc ^ 2 * Re_l ^ 1.17)
               "核化沸腾抑制因子";
 
             //资料来源_1: p.672, eq. 9.91: 考虑到 Dittus-Boelter 方程的强制对流沸腾影响
-            SI.CoefficientOfHeatTransfer kc_fc = 0.023 * Re_l ^ 0.8 * Pr_l ^ 0.4 * (IN_var.lambda_l 
-              / d_hyd) 
+            SI.CoefficientOfHeatTransfer kc_fc = 0.023 * Re_l ^ 0.8 * Pr_l ^ 0.4 * (IN_var.lambda_l
+              / d_hyd)
               "假设液体质量流量单独流动的对流传热系数";
             //资料来源_1: p.675, eq. 9.107: 考虑到 Cooper 方程的核化沸腾影响
-            SI.CoefficientOfHeatTransfer kc_nb = 55 * p_red ^ 0.12 * (1 / max(MIN, 
-              Modelica.Math.log10(1 / p_red)) ^ 0.55) * (1 / max(MIN, IN_con.MM) ^ 0.5) * IN_var.qdot_A 
+            SI.CoefficientOfHeatTransfer kc_nb = 55 * p_red ^ 0.12 * (1 / max(MIN,
+              Modelica.Math.log10(1 / p_red)) ^ 0.55) * (1 / max(MIN, IN_con.MM) ^ 0.5) * IN_var.qdot_A
               ^ 0.67 "核化沸腾传热系数";
 
             //资料来源_2: p.354, sec. final equations: 垂直管道的两相传热系数的计算 Gungor-Winterton 方程
           algorithm
             kc := E_fc * kc_fc + S_nb * kc_nb;
-            annotation(Inline = false, smoothOrder = 5, 
+            annotation(Inline = false, smoothOrder = 5,
               Documentation(revisions = "<html>
 <p>2016-04-11 Stefan Wischhusen: 删除了质量流量为零时 Re 的奇点。</p>
 </html>"                        ));
           end kc_twoPhase_boilingVertical_KC;
 
-          function kc_twoPhase_boilingHorizontal_KC 
+          function kc_twoPhase_boilingHorizontal_KC
             "水平沸腾直管的局部两相换热系数"
             extends Modelica.Icons.Function;
             //资料来源_1: Bejan,A.: 热传递手册, Wiley, 2003.
             //资料来源_2: Gungor, K.E. and R.H.S. Winterton: 管内和环流流动沸腾的通用相关性, Int.J. Heat Mass Transfer, Vol.29, p.351-358, 1986.
 
-            import SMOOTH = 
+            import SMOOTH =
               Modelica.Fluid.Dissipation.Utilities.Functions.General.Stepsmoother;
 
             //记录表
@@ -9709,84 +9709,84 @@ Springer Verlag, 第10版, 2006.</dd>
               Modelica.Fluid.Dissipation.Utilities.Records.HeatTransfer.TwoPhaseFlowHT_IN_var 
               IN_var annotation(Dialog(group = "变量输入"));
 
-            output SI.CoefficientOfHeatTransfer kc 
+            output SI.CoefficientOfHeatTransfer kc
               "局部两相换热系数";
 
           protected
             Real MIN = Modelica.Constants.eps;
 
             SI.Area A_cross = max(MIN, IN_con.A_cross) "横截面积";
-            SI.Diameter d_hyd = max(MIN, 4 * A_cross / max(MIN, IN_con.perimeter)) 
+            SI.Diameter d_hyd = max(MIN, 4 * A_cross / max(MIN, IN_con.perimeter))
               "水力直径";
 
             Real mdot_A = abs(IN_var.m_flow) / A_cross "质量流量";
-            Real x_flow = max(0, min(1, abs(IN_var.x_flow))) 
+            Real x_flow = max(0, min(1, abs(IN_var.x_flow)))
               "质量流量特性";
-            Real p_red = max(MIN, abs(IN_var.pressure) / max(MIN, abs(IN_con.p_crit))) 
+            Real p_red = max(MIN, abs(IN_var.pressure) / max(MIN, abs(IN_con.p_crit)))
               "约简压力";
 
             //资料来源_1: p.674, sec. 9.8.3: 考虑 Gungor-Winterton 方程中的核沸腾和对流沸腾
-            SI.MassFlowRate mdot_l = abs(IN_var.m_flow) * (1 - x_flow) 
+            SI.MassFlowRate mdot_l = abs(IN_var.m_flow) * (1 - x_flow)
               "只有液体的质量流量";
-            SI.Velocity velocity_l = mdot_l / max(MIN, IN_var.rho_l * A_cross) 
+            SI.Velocity velocity_l = mdot_l / max(MIN, IN_var.rho_l * A_cross)
               "假设液体质量流量单独流动的平均速度";
-            SI.ReynoldsNumber Re_l = (IN_var.rho_l * velocity_l * d_hyd / max(MIN, IN_var.eta_l)) 
+            SI.ReynoldsNumber Re_l = (IN_var.rho_l * velocity_l * d_hyd / max(MIN, IN_var.eta_l))
               "假设液体质量流量单独流动的雷诺数";
-            SI.PrandtlNumber Pr_l = abs(IN_var.eta_l * IN_var.cp_l / max(MIN, IN_var.lambda_l)) 
+            SI.PrandtlNumber Pr_l = abs(IN_var.eta_l * IN_var.cp_l / max(MIN, IN_var.lambda_l))
               "假设液体质量流率单独流动的普朗特数";
             //资料来源_1: p.352, sec. 术语: 考虑弗洛德数的分层效应
-            SI.FroudeNumber Fr_l = abs(mdot_A ^ 2 / max(MIN, IN_var.rho_l ^ 2 * 9.81 * d_hyd)) 
+            SI.FroudeNumber Fr_l = abs(mdot_A ^ 2 / max(MIN, IN_var.rho_l ^ 2 * 9.81 * d_hyd))
               "假设(总)质量流量作为液体流动的弗洛德数";
 
             //资料来源_1: p.674, eq. 9.98: 考虑沸腾数对核沸腾的热流影响
             //沸腾数(Bo)定义为实际热流到完全蒸发液体所需的最大热流的比值
-            Real Bo = abs(IN_var.qdot_A) / (max(MIN, mdot_A * IN_var.dh_lg)) 
+            Real Bo = abs(IN_var.qdot_A) / (max(MIN, mdot_A * IN_var.dh_lg))
               "沸腾数";
             //资料来源_1: p.673, eq. 9.94: 考虑Chen方程中的Martinelli参数
-            Real X_tt = abs(((1 - x_flow) / max(MIN, x_flow)) ^ 0.9 * (IN_var.rho_g / max(MIN, 
-              IN_var.rho_l)) ^ 0.5 * (IN_var.eta_l / max(MIN, IN_var.eta_g)) ^ 0.1) 
+            Real X_tt = abs(((1 - x_flow) / max(MIN, x_flow)) ^ 0.9 * (IN_var.rho_g / max(MIN,
+              IN_var.rho_l)) ^ 0.5 * (IN_var.eta_l / max(MIN, IN_var.eta_g)) ^ 0.1)
               "Martinelli参数";
 
             //资料来源_1: p.675, eq. 9.105: 考虑Gungor-Winterton方程中的对流增强因子
-            Real E_fc = 1 + 24000 * Bo ^ 1.16 + 1.37 * (1 / max(MIN, X_tt)) ^ 0.86 
+            Real E_fc = 1 + 24000 * Bo ^ 1.16 + 1.37 * (1 / max(MIN, X_tt)) ^ 0.86
               "强迫对流的增强因子";
             //资料来源_1: p.675, eq. 9.105: 考虑Gungor-Winterton方程中的沸腾抑制因子
-            Real S_nb = 1 / max(MIN, 1 + 1.15e-6 * E_fc ^ 2 * Re_l ^ 1.17) 
+            Real S_nb = 1 / max(MIN, 1 + 1.15e-6 * E_fc ^ 2 * Re_l ^ 1.17)
               "核沸腾的抑制因子";
             //资料来源_1: p.680, eq. 9.123: 考虑水平管道对对流增强因子的校正
             Real E_fc_hor = SMOOTH(
-              0.049, 
-              0.051, 
+              0.049,
+              0.051,
               Fr_l) * Fr_l ^ max(0, abs(0.1 - 2 * Fr_l)) + SMOOTH(
-              0.051, 
-              0.049, 
-              0.051, 
-              Fr_l) 
+              0.051,
+              0.049,
+              0.051,
+              Fr_l)
               "水平管道强迫对流增强因子的校正";
             //资料来源_1: p.680, eq. 9.124: 考虑水平管道核沸腾抑制因子的校正
             Real S_nb_hor = SMOOTH(
-              0.049, 
-              0.051, 
+              0.049,
+              0.051,
               Fr_l) * Fr_l ^ 0.5 + SMOOTH(
-              0.051, 
-              0.049, 
-              Fr_l) 
+              0.051,
+              0.049,
+              Fr_l)
               "水平管道核沸腾抑制因子的校正";
 
             //资料来源_1: p.672, eq. 9.91: 考虑Dittus-Boelter方程中的强迫对流沸腾效应
-            SI.CoefficientOfHeatTransfer kc_fc = 0.023 * Re_l ^ 0.8 * Pr_l ^ 0.4 * (IN_var.lambda_l 
-              / d_hyd) 
+            SI.CoefficientOfHeatTransfer kc_fc = 0.023 * Re_l ^ 0.8 * Pr_l ^ 0.4 * (IN_var.lambda_l
+              / d_hyd)
               "假设只有液体质量流量的对流换热系数";
             //资料来源_1: p.675, eq. 9.107: 考虑Cooper方程中的核沸腾效应
-            SI.CoefficientOfHeatTransfer kc_nb = 55 * p_red ^ 0.12 * (1 / max(MIN, 
+            SI.CoefficientOfHeatTransfer kc_nb = 55 * p_red ^ 0.12 * (1 / max(MIN,
               Modelica.Math.log10(1 / p_red)) ^ 0.55) * (1 / max(MIN, IN_con.MM ^ 0.5)) * abs(
-              IN_var.qdot_A) ^ 0.67 
+              IN_var.qdot_A) ^ 0.67
               "核沸腾换热系数";
 
             //资料来源_2: p.354, sec. final equations: 计算水平管道的两相换热系数，参考Gungor-Winterton方程
           algorithm
             kc := E_fc * E_fc_hor * kc_fc + S_nb * S_nb_hor * kc_nb;
-            annotation(Inline = false, smoothOrder = 5, 
+            annotation(Inline = false, smoothOrder = 5,
               Documentation(revisions = "<html>
 <p>2016-04-11 Stefan Wischhusen: 修正了零质量流速率时雷诺数的奇异性。</p>
 </html>"                        ));
@@ -9801,7 +9801,7 @@ Springer Verlag, 第10版, 2006.</dd>
         extends Modelica.Icons.FunctionsPackage;
 
 
-        function CubicInterpolation_Re 
+        function CubicInterpolation_Re
           "Moody 图中过渡区雷诺数的三次 Hermite 样条插值（反向表达式）"
           extends Modelica.Icons.Function;
           import Modelica.Math;
@@ -9840,7 +9840,7 @@ Springer Verlag, 第10版, 2006.</dd>
           // 优先选择对 Re 的优化插值公式，以避免调用 cubicHermite 函数
           // Re := 10^Modelica.Fluid.Utilities.cubicHermite(Math.log10(lambda2), x1, x2, y1, y2, yd1, yd2);
           Re := Re1 * (lambda2 / lambda2_1) ^ (yd1 + dx * (c2 + dx * c3));
-          annotation(Inline = false, smoothOrder = 5, 
+          annotation(Inline = false, smoothOrder = 5,
             Documentation(info = "<html>
 <h4>语法</h4>
 <blockquote><pre>
@@ -9856,7 +9856,7 @@ Modelica.Fluid.UsersGuide.ComponentDefinition.WallFriction</a>（特别是<stron
 </html>"                      ));
         end CubicInterpolation_Re;
 
-        function CubicInterpolation_lambda 
+        function CubicInterpolation_lambda
           "Moody图中过渡区域的修改摩擦系数的三次 Hermite 条插值（直接表达式）"
           extends Modelica.Icons.Function;
           import Modelica.Math;
@@ -9893,7 +9893,7 @@ Modelica.Fluid.UsersGuide.ComponentDefinition.WallFriction</a>（特别是<stron
           // 优先选择对lambda2的优化插值公式，以避免调用 cubicHermite 函数
           // lambda2 := 10^Modelica.Fluid.Utilities.cubicHermite(Math.log10(Re), x1, x2, y1, y2, yd1, yd2);
           lambda2 := 64 * Re1 * (Re / Re1) ^ (yd1 + dx * (c2 + dx * c3));
-          annotation(Inline = false, smoothOrder = 5, 
+          annotation(Inline = false, smoothOrder = 5,
             Documentation(info = "<html>
 <h4>语法</h4>
 <blockquote><pre>
@@ -9910,7 +9910,7 @@ Modelica.Fluid.UsersGuide.ComponentDefinition.WallFriction</a>（特别是<stron
 </html>"                      ));
         end CubicInterpolation_lambda;
 
-        function LambertW 
+        function LambertW
           "求解 f(x) = x exp(x) 的 Lambert w 函数的封闭近似"
           extends Modelica.Icons.Function;
           input Real y "输入 f(x)";
@@ -9924,14 +9924,14 @@ Modelica.Fluid.UsersGuide.ComponentDefinition.WallFriction</a>（特别是<stron
             x := 0.665 * (1 + 0.0195 * xl) * xl + 0.04;
           else
             xl := 0;
-            x := Modelica.Math.log(y - 4.0) - (1.0 - 1.0 / Modelica.Math.log(y)) * 
+            x := Modelica.Math.log(y - 4.0) - (1.0 - 1.0 / Modelica.Math.log(y)) *
               Modelica.Math.log(Modelica.Math.log(y));
           end if;
 
-          assert(y > -1 / Modelica.Math.exp(1), 
+          assert(y > -1 / Modelica.Math.exp(1),
             "Lambert-w函数仅对输入 y > -1/Modelica.Math.exp(1) 有效!");
 
-          annotation(Inline = false, smoothOrder = 5, 
+          annotation(Inline = false, smoothOrder = 5,
             Documentation(info = "<html>
 
 <p>
@@ -9956,7 +9956,7 @@ f(x) = y = x * exp( x )
 </html>"                      ));
         end LambertW;
 
-        function LambertWIter 
+        function LambertWIter
           "求解f(x) = x exp(x)的Lambert w函数的迭代形式"
           extends Modelica.Icons.Function;
           input Real y "输入 f(x)";
@@ -9998,7 +9998,7 @@ f(x) = y = x * exp( x )
           x := w;
           iter := i;
 
-          annotation(Inline = false, smoothOrder = 5, 
+          annotation(Inline = false, smoothOrder = 5,
             Documentation(info = "<html>
 
 <p>
@@ -10020,7 +10020,7 @@ f(x) = y = x * exp( x )
           import MIN = Modelica.Constants.eps;
 
           //流体性质
-          input SI.SpecificHeatCapacityAtConstantPressure cp 
+          input SI.SpecificHeatCapacityAtConstantPressure cp
             "流体在恒定压力下的比热容";
           input SI.DynamicViscosity eta "流体的动力黏度";
           input SI.ThermalConductivity lambda "流体的导热系数";
@@ -10058,7 +10058,7 @@ f(x) = y = x * exp( x )
           annotation (Inline=true, smoothOrder=1);
         end ReynoldsNumber;
 
-        function SmoothPower 
+        function SmoothPower
           "限制函数如果 x>=0 则 y = x^pow 否则 y = -(-x)^pow 的导数"
           extends Modelica.Icons.Function;
           input Real x "输入变量";
@@ -10071,11 +10071,11 @@ f(x) = y = x * exp( x )
           Real C1=(3 - pow)/2*adeltax^(pow - 1);
 
         algorithm
-          y := if x >= adeltax then x^pow else if x <= -adeltax then -(-x)^pow else (C1 
+          y := if x >= adeltax then x^pow else if x <= -adeltax then -(-x)^pow else (C1
              + C3*x*x)*x;
-          annotation (derivative(zeroDerivative=deltax, zeroDerivative=pow)=SmoothPower_der, 
-            Inline=false, 
-            smoothOrder=1, 
+          annotation (derivative(zeroDerivative=deltax, zeroDerivative=pow)=SmoothPower_der,
+            Inline=false,
+            smoothOrder=1,
             Documentation(info="<html>
 <p>
 该函数用于限制在 x=0 处的以下函数的导数：
@@ -10107,7 +10107,7 @@ y = <strong>如果</strong> x &ge; 0 <strong>则</strong> x<sup><strong>pow</str
 </html>"                        ));
         end SmoothPower;
 
-        function SmoothPower_der 
+        function SmoothPower_der
           "函数 SmoothPower 的导数"
           extends Modelica.Icons.Function;
           input Real x "输入变量";
@@ -10150,12 +10150,12 @@ y = <strong>如果</strong> x &ge; 0 <strong>则</strong> x<sup><strong>pow</str
           Real b=-Modelica.Constants.pi/2 - m*nofunc;
 
         algorithm
-          result := if x >= func and func > nofunc or x 
-             <= func and nofunc > func then 1 else if x 
+          result := if x >= func and func > nofunc or x
+             <= func and nofunc > func then 1 else if x
              <= nofunc and func > nofunc or x >= nofunc and nofunc > func then 0 else (1+Modelica.Math.tanh(Modelica.Math.tan(m*x + b)))/2;
           annotation (
-            Inline=false, 
-            derivative=Stepsmoother_der, 
+            Inline=false,
+            derivative=Stepsmoother_der,
             Documentation(info="<html><p>
 该函数用于在定义范围内连续淡化变量输入的影响。它允许在函数输出之间进行可微且平滑的过渡，例如层流和湍流压降或某些范围的相关性。
 </p>
@@ -10202,8 +10202,8 @@ Wischhusen, St.
 
         algorithm
           dresult := if x >= func and func > nofunc or x <= func and nofunc > func or x <= nofunc and func > nofunc or x >= nofunc 
-            and nofunc > func then 0 else (1 - Modelica.Math.tanh(Modelica.Math.tan(m * x + b)) ^ 2) * 
-            (1 + Modelica.Math.tan(m * x + b) ^ 2) * (-m ^ 2 / Modelica.Constants.pi * (dfunc - dnofunc) * x 
+            and nofunc > func then 0 else (1 - Modelica.Math.tanh(Modelica.Math.tan(m * x + b)) ^ 2) *
+            (1 + Modelica.Math.tan(m * x + b) ^ 2) * (-m ^ 2 / Modelica.Constants.pi * (dfunc - dnofunc) * x
             + m * dx + m ^ 2 / Modelica.Constants.pi * (dfunc - dnofunc) * nofunc - m * dnofunc) / 2;
         end Stepsmoother_der;
         annotation();
@@ -10220,135 +10220,135 @@ Wischhusen, St.
         partial model Gap1_d "间隙几何图形"
 
           annotation(Diagram(coordinateSystem(
-            preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
+            preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
             graphics = {
             Rectangle(
-            extent = {{-100, -40}, {60, -60}}, 
-            fillPattern = FillPattern.Forward, 
-            fillColor = {255, 255, 170}, 
-            lineThickness = 1), 
+            extent = {{-100, -40}, {60, -60}},
+            fillPattern = FillPattern.Forward,
+            fillColor = {255, 255, 170},
+            lineThickness = 1),
             Polygon(
-            points = {{60, -40}, {60, -60}, {100, -20}, {100, 0}, {60, -40}}, 
-            lineThickness = 1, 
-            fillColor = {255, 255, 170}, 
-            fillPattern = FillPattern.Forward), 
+            points = {{60, -40}, {60, -60}, {100, -20}, {100, 0}, {60, -40}},
+            lineThickness = 1,
+            fillColor = {255, 255, 170},
+            fillPattern = FillPattern.Forward),
             Rectangle(
-            extent = {{-100, 40}, {60, 20}}, 
-            fillPattern = FillPattern.Forward, 
-            fillColor = {255, 255, 170}, 
-            lineThickness = 1), 
+            extent = {{-100, 40}, {60, 20}},
+            fillPattern = FillPattern.Forward,
+            fillColor = {255, 255, 170},
+            lineThickness = 1),
             Polygon(
-            points = {{60, 40}, {60, 20}, {100, 60}, {100, 80}, {60, 40}}, 
-            lineThickness = 1, 
-            fillColor = {255, 255, 170}, 
-            fillPattern = FillPattern.Forward), 
+            points = {{60, 40}, {60, 20}, {100, 60}, {100, 80}, {60, 40}},
+            lineThickness = 1,
+            fillColor = {255, 255, 170},
+            fillPattern = FillPattern.Forward),
             Polygon(
-            points = {{100, 60}, {100, 0}, {60, 0}, {60, 20}, {100, 60}}, 
-            lineThickness = 1, 
-            fillColor = {255, 255, 255}, 
-            fillPattern = FillPattern.Solid, 
-            pattern = LinePattern.None), 
+            points = {{100, 60}, {100, 0}, {60, 0}, {60, 20}, {100, 60}},
+            lineThickness = 1,
+            fillColor = {255, 255, 255},
+            fillPattern = FillPattern.Solid,
+            pattern = LinePattern.None),
             Polygon(
-            points = {{-100, -40}, {-100, 20}, {60, 20}, {60, 0}, {-60, 0}, {-100, -40}}, 
-            lineThickness = 1, 
-            fillColor = {255, 255, 255}, 
-            fillPattern = FillPattern.Solid, 
-            pattern = LinePattern.None), 
+            points = {{-100, -40}, {-100, 20}, {60, 20}, {60, 0}, {-60, 0}, {-100, -40}},
+            lineThickness = 1,
+            fillColor = {255, 255, 255},
+            fillPattern = FillPattern.Solid,
+            pattern = LinePattern.None),
             Polygon(
-            points = {{-100, 40}, {-60, 80}, {100, 80}, {60, 40}, {-100, 40}}, 
-            lineThickness = 1, 
-            fillColor = {255, 255, 170}, 
-            fillPattern = FillPattern.Forward), 
+            points = {{-100, 40}, {-60, 80}, {100, 80}, {60, 40}, {-100, 40}},
+            lineThickness = 1,
+            fillColor = {255, 255, 170},
+            fillPattern = FillPattern.Forward),
             Line(
-            points = {{-100, 20}, {60, 20}, {100, 60}}, 
-            thickness = 1), 
+            points = {{-100, 20}, {60, 20}, {100, 60}},
+            thickness = 1),
             Line(
-            points = {{-100, -40}, {60, -40}, {100, 0}}, 
-            thickness = 1), 
+            points = {{-100, -40}, {60, -40}, {100, 0}},
+            thickness = 1),
             Line(
-            points = {{20, 80}, {-20, 40}}, 
-            arrow = {Arrow.Filled, Arrow.Filled}, 
-            thickness = 0.5), 
+            points = {{20, 80}, {-20, 40}},
+            arrow = {Arrow.Filled, Arrow.Filled},
+            thickness = 0.5),
             Rectangle(
-            extent = {{-4, 66}, {4, 56}}, 
-            fillColor = {255, 255, 255}, 
-            fillPattern = FillPattern.Solid, 
-            lineThickness = 1, 
-            pattern = LinePattern.None), 
+            extent = {{-4, 66}, {4, 56}},
+            fillColor = {255, 255, 255},
+            fillPattern = FillPattern.Solid,
+            lineThickness = 1,
+            pattern = LinePattern.None),
             Text(
-            extent = {{-10, 66}, {10, 54}}, 
-            textString = "h"), 
+            extent = {{-10, 66}, {10, 54}},
+            textString = "h"),
             Line(
-            points = {{60, -66}, {-100, -66}}, 
-            arrow = {Arrow.Filled, Arrow.Filled}, 
-            thickness = 0.5), 
+            points = {{60, -66}, {-100, -66}},
+            arrow = {Arrow.Filled, Arrow.Filled},
+            thickness = 0.5),
             Rectangle(
-            extent = {{-22, -62}, {-14, -72}}, 
-            fillColor = {255, 255, 255}, 
-            fillPattern = FillPattern.Solid, 
-            lineThickness = 1, 
-            pattern = LinePattern.None), 
+            extent = {{-22, -62}, {-14, -72}},
+            fillColor = {255, 255, 255},
+            fillPattern = FillPattern.Solid,
+            lineThickness = 1,
+            pattern = LinePattern.None),
             Text(
-            extent = {{-28, -62}, {-8, -74}}, 
-            textString = "L"), 
+            extent = {{-28, -62}, {-8, -74}},
+            textString = "L"),
             Polygon(
-            points = {{-100, -40}, {-60, 0}, {100, 0}, {60, -40}, {-100, -40}}, 
-            lineThickness = 1, 
-            fillColor = {255, 255, 170}, 
-            fillPattern = FillPattern.Forward), 
+            points = {{-100, -40}, {-60, 0}, {100, 0}, {60, -40}, {-100, -40}},
+            lineThickness = 1,
+            fillColor = {255, 255, 170},
+            fillPattern = FillPattern.Forward),
             Line(
-            points = {{-80, 20}, {-80, -40}}, 
-            arrow = {Arrow.Filled, Arrow.Filled}, 
-            thickness = 0.5), 
+            points = {{-80, 20}, {-80, -40}},
+            arrow = {Arrow.Filled, Arrow.Filled},
+            thickness = 0.5),
             Rectangle(
-            extent = {{-84, -4}, {-76, -14}}, 
-            fillColor = {255, 255, 255}, 
-            fillPattern = FillPattern.Solid, 
-            pattern = LinePattern.None), 
+            extent = {{-84, -4}, {-76, -14}},
+            fillColor = {255, 255, 255},
+            fillPattern = FillPattern.Solid,
+            pattern = LinePattern.None),
             Text(
-            extent = {{-90, -2}, {-70, -14}}, 
-            textString = "s"), 
+            extent = {{-90, -2}, {-70, -14}},
+            textString = "s"),
             Line(
-            points = {{26, -10}, {-24, -10}}, 
-            arrow = {Arrow.Filled, Arrow.None}, 
-            thickness = 1), 
+            points = {{26, -10}, {-24, -10}},
+            arrow = {Arrow.Filled, Arrow.None},
+            thickness = 1),
             Rectangle(
-            extent = {{-4, -4}, {4, -14}}, 
-            fillColor = {255, 255, 255}, 
-            fillPattern = FillPattern.Solid, 
-            lineThickness = 1, 
-            pattern = LinePattern.None), 
+            extent = {{-4, -4}, {4, -14}},
+            fillColor = {255, 255, 255},
+            fillPattern = FillPattern.Solid,
+            lineThickness = 1,
+            pattern = LinePattern.None),
             Text(
-            extent = {{-10, -2}, {10, -14}}, 
-            textString = "v"), 
+            extent = {{-10, -2}, {10, -14}},
+            textString = "v"),
             Ellipse(
-            extent = {{78, 52}, {82, 48}}, 
-            pattern = LinePattern.None, 
-            lineThickness = 0.5, 
-            fillPattern = FillPattern.Solid), 
+            extent = {{78, 52}, {82, 48}},
+            pattern = LinePattern.None,
+            lineThickness = 0.5,
+            fillPattern = FillPattern.Solid),
             Ellipse(
-            extent = {{78, -28}, {82, -32}}, 
-            pattern = LinePattern.None, 
-            lineThickness = 0.5, 
-            fillPattern = FillPattern.Solid), 
+            extent = {{78, -28}, {82, -32}},
+            pattern = LinePattern.None,
+            lineThickness = 0.5,
+            fillPattern = FillPattern.Solid),
             Line(
-            points = {{80, -28}, {80, 48}}, 
-            arrow = {Arrow.Filled, Arrow.Filled}, 
-            thickness = 0.5), 
+            points = {{80, -28}, {80, 48}},
+            arrow = {Arrow.Filled, Arrow.Filled},
+            thickness = 0.5),
             Rectangle(
-            extent = {{76, 16}, {84, 6}}, 
-            fillColor = {255, 255, 255}, 
-            fillPattern = FillPattern.Solid, 
-            lineThickness = 1, 
-            pattern = LinePattern.None), 
+            extent = {{76, 16}, {84, 6}},
+            fillColor = {255, 255, 255},
+            fillPattern = FillPattern.Solid,
+            lineThickness = 1,
+            pattern = LinePattern.None),
             Text(
-            extent = {{70, 16}, {90, 4}}, 
-            textString = "T_wall"), 
+            extent = {{70, 16}, {90, 4}},
+            textString = "T_wall"),
             Text(
-            extent = {{-30, 36}, {-10, 24}}, 
-            textString = "wall 1"), 
+            extent = {{-30, 36}, {-10, 24}},
+            textString = "wall 1"),
             Text(
-            extent = {{-30, -44}, {-10, -56}}, 
+            extent = {{-30, -44}, {-10, -56}},
             textString = "wall 2")}));
 
         end Gap1_d;
@@ -10356,240 +10356,240 @@ Wischhusen, St.
         partial model HelicalPipe1_d "螺旋管几何图形"
 
           annotation (Diagram(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
+                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics={
                 Line(
-                  points={{-60,82},{-60,-84}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dash), 
+                  points={{-60,82},{-60,-84}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dash),
                 Line(
-                  points={{-62,-26},{60,-36}}, 
-                  thickness=1), 
+                  points={{-62,-26},{60,-36}},
+                  thickness=1),
                 Line(
-                  points={{-62,24},{60,14}}, 
-                  thickness=1), 
+                  points={{-62,24},{60,14}},
+                  thickness=1),
                 Line(
-                  points={{-60,-16},{62,-26}}, 
-                  thickness=1), 
+                  points={{-60,-16},{62,-26}},
+                  thickness=1),
                 Line(
-                  points={{-60,34},{62,24}}, 
-                  thickness=1), 
+                  points={{-60,34},{62,24}},
+                  thickness=1),
                 Ellipse(
-                  extent={{38,64},{78,24}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  extent={{38,64},{78,24}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Ellipse(
-                  extent={{38,14},{78,-26}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  extent={{38,14},{78,-26}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Ellipse(
-                  extent={{-78,24},{-38,-16}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  extent={{-78,24},{-38,-16}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Ellipse(
-                  extent={{-78,-26},{-38,-66}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  extent={{-78,-26},{-38,-66}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Polygon(
-                  points={{-60,-26},{60,-36},{60,-76},{-60,-66},{-60,-26}}, 
-                  lineThickness=0.5, 
-                  fillPattern=FillPattern.Forward, 
-                  fillColor={255,255,170}, 
-                  pattern=LinePattern.None), 
+                  points={{-60,-26},{60,-36},{60,-76},{-60,-66},{-60,-26}},
+                  lineThickness=0.5,
+                  fillPattern=FillPattern.Forward,
+                  fillColor={255,255,170},
+                  pattern=LinePattern.None),
                 Line(
-                  points={{-60,-46},{60,-56}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dash), 
+                  points={{-60,-46},{60,-56}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dash),
                 Polygon(
-                  points={{-60,24},{60,14},{60,-26},{-60,-16},{-60,24}}, 
-                  lineThickness=0.5, 
-                  fillPattern=FillPattern.Forward, 
-                  fillColor={255,255,170}, 
-                  pattern=LinePattern.None), 
+                  points={{-60,24},{60,14},{60,-26},{-60,-16},{-60,24}},
+                  lineThickness=0.5,
+                  fillPattern=FillPattern.Forward,
+                  fillColor={255,255,170},
+                  pattern=LinePattern.None),
                 Line(
-                  points={{-60,4},{60,-6}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dash), 
+                  points={{-60,4},{60,-6}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dash),
                 Ellipse(
-                  extent={{40,-36},{80,-76}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  extent={{40,-36},{80,-76}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Polygon(
-                  points={{-62,74},{58,64},{58,24},{-62,34},{-62,74}}, 
-                  lineThickness=0.5, 
-                  fillPattern=FillPattern.Forward, 
-                  fillColor={255,255,170}, 
-                  pattern=LinePattern.None), 
+                  points={{-62,74},{58,64},{58,24},{-62,34},{-62,74}},
+                  lineThickness=0.5,
+                  fillPattern=FillPattern.Forward,
+                  fillColor={255,255,170},
+                  pattern=LinePattern.None),
                 Line(
-                  points={{-60,54},{60,44}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dash), 
+                  points={{-60,54},{60,44}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dash),
                 Ellipse(
-                  extent={{-80,74},{-40,34}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  extent={{-80,74},{-40,34}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Polygon(
-                  points={{-60,24},{60,64},{60,24},{-60,-16},{-60,24}}, 
-                  lineThickness=0.5, 
-                  fillPattern=FillPattern.Forward, 
-                  fillColor={255,255,170}, 
-                  pattern=LinePattern.None), 
+                  points={{-60,24},{60,64},{60,24},{-60,-16},{-60,24}},
+                  lineThickness=0.5,
+                  fillPattern=FillPattern.Forward,
+                  fillColor={255,255,170},
+                  pattern=LinePattern.None),
                 Line(
-                  points={{8,28},{-8,22}}, 
-                  arrow={Arrow.None,Arrow.Filled}, 
-                  thickness=1), 
+                  points={{8,28},{-8,22}},
+                  arrow={Arrow.None,Arrow.Filled},
+                  thickness=1),
                 Line(
-                  points={{12,-24},{-4,-30}}, 
-                  arrow={Arrow.None,Arrow.Filled}, 
-                  thickness=1), 
+                  points={{12,-24},{-4,-30}},
+                  arrow={Arrow.None,Arrow.Filled},
+                  thickness=1),
                 Polygon(
-                  points={{-60,-26},{60,14},{60,-26},{-60,-66},{-60,-26}}, 
-                  lineThickness=0.5, 
-                  fillPattern=FillPattern.Forward, 
-                  fillColor={255,255,170}, 
-                  pattern=LinePattern.None), 
+                  points={{-60,-26},{60,14},{60,-26},{-60,-66},{-60,-26}},
+                  lineThickness=0.5,
+                  fillPattern=FillPattern.Forward,
+                  fillColor={255,255,170},
+                  pattern=LinePattern.None),
                 Line(
-                  points={{60,24},{-60,-16}}, 
-                  thickness=0.5), 
+                  points={{60,24},{-60,-16}},
+                  thickness=0.5),
                 Line(
-                  points={{60,14},{-60,-26}}, 
-                  thickness=0.5), 
+                  points={{60,14},{-60,-26}},
+                  thickness=0.5),
                 Line(
-                  points={{60,-26},{-60,-66}}, 
-                  thickness=0.5), 
+                  points={{60,-26},{-60,-66}},
+                  thickness=0.5),
                 Line(
-                  points={{-60,74},{60,64}}, 
-                  thickness=0.5), 
+                  points={{-60,74},{60,64}},
+                  thickness=0.5),
                 Line(
-                  points={{-60,24},{60,64}}, 
-                  thickness=0.5), 
+                  points={{-60,24},{60,64}},
+                  thickness=0.5),
                 Line(
-                  points={{-60,-66},{60,-76}}, 
-                  thickness=0.5), 
+                  points={{-60,-66},{60,-76}},
+                  thickness=0.5),
                 Line(
-                  points={{10,-22},{-6,-28}}, 
-                  arrow={Arrow.None,Arrow.Filled}, 
-                  thickness=1), 
+                  points={{10,-22},{-6,-28}},
+                  arrow={Arrow.None,Arrow.Filled},
+                  thickness=1),
                 Ellipse(
-                  extent={{46,-42},{74,-70}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{46,-42},{74,-70}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Ellipse(
-                  extent={{-74,68},{-46,40}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{-74,68},{-46,40}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Line(
-                  points={{-74,78},{-46,78}}, 
-                  arrow={Arrow.Filled,Arrow.Filled}), 
+                  points={{-74,78},{-46,78}},
+                  arrow={Arrow.Filled,Arrow.Filled}),
                 Line(
-                  points={{2,3},{-14,3}}, 
-                  arrow={Arrow.None,Arrow.Filled}, 
-                  thickness=1, 
-                  origin={-38,55}, 
-                  rotation=180), 
+                  points={{2,3},{-14,3}},
+                  arrow={Arrow.None,Arrow.Filled},
+                  thickness=1,
+                  origin={-38,55},
+                  rotation=180),
                 Line(
-                  points={{0,82},{0,-86}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.DashDot), 
+                  points={{0,82},{0,-86}},
+                  thickness=0.5,
+                  pattern=LinePattern.DashDot),
                 Line(
-                  points={{60,-32},{60,-82}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.DashDot), 
+                  points={{60,-32},{60,-82}},
+                  thickness=0.5,
+                  pattern=LinePattern.DashDot),
                 Line(
-                  points={{-60,-82},{60,-82}}, 
-                  arrow={Arrow.Filled,Arrow.Filled}), 
+                  points={{-60,-82},{60,-82}},
+                  arrow={Arrow.Filled,Arrow.Filled}),
                 Rectangle(
-                  extent={{-18,-76},{18,-88}}, 
-                  fillPattern=FillPattern.Solid, 
-                  fillColor={255,255,255}, 
-                  lineThickness=0.5, 
-                  pattern=LinePattern.None), 
+                  extent={{-18,-76},{18,-88}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  lineThickness=0.5,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-14,-76},{12,-86}}, 
-                  textString="d_mean"), 
+                  extent={{-14,-76},{12,-86}},
+                  textString="d_mean"),
                 Line(
-                  points={{46,-56},{88,-56}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.DashDot), 
+                  points={{46,-56},{88,-56}},
+                  thickness=0.5,
+                  pattern=LinePattern.DashDot),
                 Line(
-                  points={{60,18},{60,-30}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.DashDot), 
+                  points={{60,18},{60,-30}},
+                  thickness=0.5,
+                  pattern=LinePattern.DashDot),
                 Line(
-                  points={{46,-6},{88,-6}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.DashDot), 
+                  points={{46,-6},{88,-6}},
+                  thickness=0.5,
+                  pattern=LinePattern.DashDot),
                 Line(
-                  points={{84,-6},{84,-56}}, 
-                  arrow={Arrow.Filled,Arrow.Filled}), 
+                  points={{84,-6},{84,-56}},
+                  arrow={Arrow.Filled,Arrow.Filled}),
                 Rectangle(
-                  extent={{74,-24},{98,-36}}, 
-                  fillPattern=FillPattern.Solid, 
-                  fillColor={255,255,255}, 
-                  lineThickness=0.5, 
-                  pattern=LinePattern.None), 
+                  extent={{74,-24},{98,-36}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  lineThickness=0.5,
+                  pattern=LinePattern.None),
                 Line(
-                  points={{-74,82},{-74,52}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.DashDot), 
+                  points={{-74,82},{-74,52}},
+                  thickness=0.5,
+                  pattern=LinePattern.DashDot),
                 Line(
-                  points={{-46,82},{-46,52}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.DashDot), 
+                  points={{-46,82},{-46,52}},
+                  thickness=0.5,
+                  pattern=LinePattern.DashDot),
                 Text(
-                  extent={{72,-26},{98,-36}}, 
-                  textString="h"), 
+                  extent={{72,-26},{98,-36}},
+                  textString="h"),
                 Rectangle(
-                  extent={{-68,84},{-50,76}}, 
-                  fillPattern=FillPattern.Solid, 
-                  fillColor={255,255,255}, 
-                  lineThickness=0.5, 
-                  pattern=LinePattern.None), 
+                  extent={{-68,84},{-50,76}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  lineThickness=0.5,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-72,86},{-50,78}}, 
-                  textString="d_hyd"), 
+                  extent={{-72,86},{-50,78}},
+                  textString="d_hyd"),
                 Rectangle(
-                  extent={{-36,56},{-30,48}}, 
-                  fillPattern=FillPattern.Solid, 
-                  fillColor={255,255,255}, 
-                  lineThickness=0.5, 
-                  pattern=LinePattern.None), 
+                  extent={{-36,56},{-30,48}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  lineThickness=0.5,
+                  pattern=LinePattern.None),
                 Line(
-                  points={{-40,54},{-40,50}}, 
-                  thickness=1), 
+                  points={{-40,54},{-40,50}},
+                  thickness=1),
                 Text(
-                  extent={{-44,56},{-22,48}}, 
+                  extent={{-44,56},{-22,48}},
                   textString="L")}));
         end HelicalPipe1_d;
 
         partial model Plate1_d "平板的几何图形 1"
 
           annotation (Diagram(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
+                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics={
                 Rectangle(
-                  extent={{-100,10},{100,-10}}, 
-                  fillPattern=FillPattern.Forward, 
-                  fillColor={255,255,170}), 
+                  extent={{-100,10},{100,-10}},
+                  fillPattern=FillPattern.Forward,
+                  fillColor={255,255,170}),
                 Line(
-                  points={{-100,-20},{100,-20}}, 
-                  arrow={Arrow.Filled,Arrow.Filled}), 
+                  points={{-100,-20},{100,-20}},
+                  arrow={Arrow.Filled,Arrow.Filled}),
                 Text(
-                  extent={{-14,-20},{12,-30}}, 
-                  textString="L"), 
+                  extent={{-14,-20},{12,-30}},
+                  textString="L"),
                 Line(
-                  points={{-20,16},{20,16}}, 
-                  arrow={Arrow.None,Arrow.Filled}), 
+                  points={{-20,16},{20,16}},
+                  arrow={Arrow.None,Arrow.Filled}),
                 Text(
-                  extent={{-14,26},{12,16}}, 
+                  extent={{-14,26},{12,16}},
                   textString="velocity")}));
         end Plate1_d;
 
@@ -10598,86 +10598,86 @@ Wischhusen, St.
           annotation (Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
                   Rectangle(
-                  extent={{-100,-20},{60,-40}}, 
-                  fillPattern=FillPattern.Forward, 
-                  fillColor={255,255,170}, 
+                  extent={{-100,-20},{60,-40}},
+                  fillPattern=FillPattern.Forward,
+                  fillColor={255,255,170},
                   lineThickness=0.5),Polygon(
-                  points={{-100,-20},{-60,20},{100,20},{60,-20},{-100,-20}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward, 
+                  points={{-100,-20},{-60,20},{100,20},{60,-20},{-100,-20}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward,
                   lineThickness=0.5),Polygon(
-                  points={{60,-20},{60,-40},{100,0},{100,20},{60,-20}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
+                  points={{60,-20},{60,-40},{100,0},{100,20},{60,-20}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
                   fillPattern=FillPattern.Forward),Line(
-                  points={{-20,0},{20,0}}, 
-                  thickness=1, 
+                  points={{-20,0},{20,0}},
+                  thickness=1,
                   arrow={Arrow.None,Arrow.Filled}),Text(
-                  extent={{-14,10},{12,0}}, 
+                  extent={{-14,10},{12,0}},
                   textString="v"),Line(
-                  points={{-100,-48},{60,-48}}, 
+                  points={{-100,-48},{60,-48}},
                   arrow={Arrow.Filled,Arrow.Filled}),Rectangle(
-                  extent={{-26,-44},{-18,-54}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  lineThickness=1, 
+                  extent={{-26,-44},{-18,-54}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  lineThickness=1,
                   pattern=LinePattern.None),Text(
-                  extent={{-34,-44},{-8,-54}}, 
+                  extent={{-34,-44},{-8,-54}},
                   textString="L")}));
         end Plate2_d;
 
         partial model Channel_i "管道传热图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
-                    fileName= 
+                      100,100}},
+                    fileName=
                       "modelica://Modelica/Resources/Images/Fluid/Dissipation/heatTransfer/channel/icon_channel.png")}));
         end Channel_i;
 
         partial model General_i "一般传热组件图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
-                    fileName= 
+                      100,100}},
+                    fileName=
                       "modelica://Modelica/Resources/Images/Fluid/Dissipation/heatTransfer/general/icon_general.png")}));
         end General_i;
 
-        partial model HeatExchanger_i 
+        partial model HeatExchanger_i
           "换热器传热图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
-                    fileName= 
+                      100,100}},
+                    fileName=
                       "modelica://Modelica/Resources/Images/Fluid/Dissipation/heatTransfer/heatExchanger/icon_heatExchanger.png")}));
         end HeatExchanger_i;
 
         partial model HelicalPipe_i "螺旋管传热图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
-                    fileName= 
+                      100,100}},
+                    fileName=
                       "modelica://Modelica/Resources/Images/Fluid/Dissipation/heatTransfer/helicalPipe/icon_helicalPipe.png")}));
         end HelicalPipe_i;
 
         partial model Plate_i "平板传热图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
+                      100,100}},
                     fileName="modelica://Modelica/Resources/Images/Fluid/Dissipation/heatTransfer/plate/icon_plate.png")}));
         end Plate_i;
 
-        partial model StraightPipe_i 
+        partial model StraightPipe_i
           "直管传热图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
-                    fileName= 
+                      100,100}},
+                    fileName=
                       "modelica://Modelica/Resources/Images/Fluid/Dissipation/heatTransfer/straightPipe/icon_straightPipe.png")}));
 
         end StraightPipe_i;
@@ -10690,88 +10690,88 @@ Wischhusen, St.
         partial model BendEdged_d "直角弯头几何图形"
 
           annotation (Diagram(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
+                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics={
                 Rectangle(
-                  extent={{-100,10},{0,-20}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-100,10},{0,-20}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Polygon(
-                  points={{0,10},{100,-48},{100,-80},{0,-20},{0,10}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  points={{0,10},{100,-48},{100,-80},{0,-20},{0,10}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Ellipse(
-                  extent={{-6,16},{8,2}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{-6,16},{8,2}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Polygon(
-                  points={{0,40},{100,-20},{100,-48},{0,10},{0,40}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  points={{0,40},{100,-20},{100,-48},{0,10},{0,40}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Rectangle(
-                  extent={{-100,40},{0,10}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-100,40},{0,10}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Polygon(
-                  points={{-100,-40},{-100,-20},{0,-20},{0,-40},{-100,-40}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  points={{-100,-40},{-100,-20},{0,-20},{0,-40},{-100,-40}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Polygon(
-                  points={{0,-40},{0,-20},{100,-80},{100,-100},{0,-40}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  points={{0,-40},{0,-20},{100,-80},{100,-100},{0,-40}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Polygon(
-                  points={{0,40},{0,60},{100,0},{100,-20},{0,40}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  points={{0,40},{0,60},{100,0},{100,-20},{0,40}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Polygon(
-                  points={{-100,40},{-100,60},{0,60},{0,40},{-100,40}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  points={{-100,40},{-100,60},{0,60},{0,40},{-100,40}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Line(
-                  points={{0,10},{100,-48}}, 
-                  arrow={Arrow.None,Arrow.Filled}, 
-                  thickness=0.5), 
+                  points={{0,10},{100,-48}},
+                  arrow={Arrow.None,Arrow.Filled},
+                  thickness=0.5),
                 Line(
-                  points={{-100,10},{0,10}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.None}), 
+                  points={{-100,10},{0,10}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.None}),
                 Line(
-                  points={{-78,40},{-78,-20}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}), 
+                  points={{-78,40},{-78,-20}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled}),
                 Rectangle(
-                  extent={{-90,32},{-62,18}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-90,32},{-62,18}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-90,30},{-64,20}}, 
-                  textString="d_hyd"), 
+                  extent={{-90,30},{-64,20}},
+                  textString="d_hyd"),
                 Text(
-                  extent={{-10,20},{16,10}}, 
-                  textString="delta"), 
+                  extent={{-10,20},{16,10}},
+                  textString="delta"),
                 Rectangle(
-                  extent={{-54,18},{-44,2}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-54,18},{-44,2}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-58,14},{-40,4}}, 
-                  textString="L"), 
+                  extent={{-58,14},{-40,4}},
+                  textString="L"),
                 Ellipse(
-                  extent={{-2,6},{0,4}}, 
-                  lineThickness=0.5, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{-2,6},{0,4}},
+                  lineThickness=0.5,
+                  fillPattern=FillPattern.Solid),
                 Line(
-                  points={{-2,4},{2,10}}, 
+                  points={{-2,4},{2,10}},
                   thickness=0.5)}));
 
         end BendEdged_d;
@@ -10779,546 +10779,546 @@ Wischhusen, St.
         partial model Channel_d "管道几何图形"
 
           annotation (Diagram(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
+                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics={
                 Line(
-                  points={{-92,80},{-60,80}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot), 
+                  points={{-92,80},{-60,80}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot),
                 Ellipse(
-                  extent={{20,80},{-20,40}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  extent={{20,80},{-20,40}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Ellipse(
-                  extent={{80,74},{40,46}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  extent={{80,74},{40,46}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Ellipse(
-                  extent={{14,74},{-14,46}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{14,74},{-14,46}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Line(
-                  points={{0,74},{0,46}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}), 
+                  points={{0,74},{0,46}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled}),
                 Rectangle(
-                  extent={{-10,66},{10,56}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-10,66},{10,56}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-9,66},{9,56}}, 
-                  textString="d_cir"), 
+                  extent={{-9,66},{9,56}},
+                  textString="d_cir"),
                 Ellipse(
-                  extent={{-40,80},{-80,40}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  lineThickness=0.5), 
+                  extent={{-40,80},{-80,40}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  lineThickness=0.5),
                 Ellipse(
-                  extent={{-46,74},{-74,46}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  extent={{-46,74},{-74,46}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Line(
-                  points={{0,14},{0,-14}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={-60,36}, 
-                  rotation=90), 
+                  points={{0,14},{0,-14}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={-60,36},
+                  rotation=90),
                 Line(
-                  points={{-92,40},{-60,40}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot), 
+                  points={{-92,40},{-60,40}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot),
                 Line(
-                  points={{-90,80},{-90,40}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}), 
+                  points={{-90,80},{-90,40}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled}),
                 Rectangle(
-                  extent={{-98,64},{-82,54}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-98,64},{-82,54}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-99,65},{-81,55}}, 
-                  textString="D_ann"), 
+                  extent={{-99,65},{-81,55}},
+                  textString="D_ann"),
                 Line(
-                  points={{-16,0},{16,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={-74,46}, 
-                  rotation=270), 
+                  points={{-16,0},{16,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={-74,46},
+                  rotation=270),
                 Line(
-                  points={{-16,0},{16,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={-46,46}, 
-                  rotation=90), 
+                  points={{-16,0},{16,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={-46,46},
+                  rotation=90),
                 Rectangle(
-                  extent={{-68,38},{-52,28}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-68,38},{-52,28}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-69,39},{-51,29}}, 
-                  textString="d_ann"), 
+                  extent={{-69,39},{-51,29}},
+                  textString="d_ann"),
                 Ellipse(
-                  extent={{78,72},{42,48}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{78,72},{42,48}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Line(
-                  points={{-22,0},{22,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={60,60}, 
-                  rotation=90), 
+                  points={{-22,0},{22,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={60,60},
+                  rotation=90),
                 Line(
-                  points={{0,4},{0,-14}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={46,42}, 
-                  rotation=90), 
+                  points={{0,4},{0,-14}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={46,42},
+                  rotation=90),
                 Rectangle(
-                  extent={{46,46},{55,39}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{46,46},{55,39}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{46,46},{55,39}}, 
-                  textString="a_ell"), 
+                  extent={{46,46},{55,39}},
+                  textString="a_ell"),
                 Line(
-                  points={{0,0},{22,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={42,38}, 
-                  rotation=90), 
+                  points={{0,0},{22,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={42,38},
+                  rotation=90),
                 Line(
-                  points={{60,72},{92,72}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot), 
+                  points={{60,72},{92,72}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot),
                 Line(
-                  points={{38,60},{92,60}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot), 
+                  points={{38,60},{92,60}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot),
                 Line(
-                  points={{0,4},{0,-8}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={88,68}, 
-                  rotation=360), 
+                  points={{0,4},{0,-8}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={88,68},
+                  rotation=360),
                 Rectangle(
-                  extent={{82,68},{94,65}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{82,68},{94,65}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{83,69},{95,63}}, 
-                  textString="b_ell"), 
+                  extent={{83,69},{95,63}},
+                  textString="b_ell"),
                 Rectangle(
-                  extent={{-60,24},{-20,-6}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward, 
-                  lineThickness=0.5), 
+                  extent={{-60,24},{-20,-6}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward,
+                  lineThickness=0.5),
                 Rectangle(
-                  extent={{-56,20},{-24,-2}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  lineThickness=0.5), 
+                  extent={{-56,20},{-24,-2}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  lineThickness=0.5),
                 Line(
-                  points={{-16,0},{16,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={-56,-2}, 
-                  rotation=270), 
+                  points={{-16,0},{16,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={-56,-2},
+                  rotation=270),
                 Line(
-                  points={{-16,0},{16,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={-24,-2}, 
-                  rotation=270), 
+                  points={{-16,0},{16,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={-24,-2},
+                  rotation=270),
                 Line(
-                  points={{0,14},{0,-18}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={-42,-14}, 
-                  rotation=90), 
+                  points={{0,14},{0,-18}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={-42,-14},
+                  rotation=90),
                 Rectangle(
-                  extent={{-50,-10},{-30,-20}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-50,-10},{-30,-20}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-48,-9},{-31,-18}}, 
-                  textString="a_rec"), 
+                  extent={{-48,-9},{-31,-18}},
+                  textString="a_rec"),
                 Line(
-                  points={{-16,0},{16,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={-31,20}, 
-                  rotation=360), 
+                  points={{-16,0},{16,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={-31,20},
+                  rotation=360),
                 Line(
-                  points={{-16,0},{16,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={-31,-2}, 
-                  rotation=360), 
+                  points={{-16,0},{16,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={-31,-2},
+                  rotation=360),
                 Line(
-                  points={{0,12},{0,-10}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={-16,10}, 
-                  rotation=180), 
+                  points={{0,12},{0,-10}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={-16,10},
+                  rotation=180),
                 Rectangle(
-                  extent={{-19,15},{0,3}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-19,15},{0,3}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-18,13},{-1,4}}, 
-                  textString="b_rec"), 
+                  extent={{-18,13},{-1,4}},
+                  textString="b_rec"),
                 Polygon(
-                  points={{20,-10},{40,30},{60,-10},{20,-10}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  points={{20,-10},{40,30},{60,-10},{20,-10}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Polygon(
-                  points={{26,-6},{40,22},{54,-6},{26,-6}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  points={{26,-6},{40,22},{54,-6},{26,-6}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Line(
-                  points={{-16,0},{-4,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={26,-22}, 
-                  rotation=270), 
+                  points={{-16,0},{-4,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={26,-22},
+                  rotation=270),
                 Line(
-                  points={{0,20},{0,-8}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={46,-16}, 
-                  rotation=90), 
+                  points={{0,20},{0,-8}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={46,-16},
+                  rotation=90),
                 Line(
-                  points={{-16,0},{-4,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={54,-22}, 
-                  rotation=270), 
+                  points={{-16,0},{-4,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={54,-22},
+                  rotation=270),
                 Line(
-                  points={{-16,0},{12,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={56,22}, 
-                  rotation=360), 
+                  points={{-16,0},{12,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={56,22},
+                  rotation=360),
                 Line(
-                  points={{-16,0},{12,0}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dot, 
-                  origin={56,-6}, 
-                  rotation=360), 
+                  points={{-16,0},{12,0}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dot,
+                  origin={56,-6},
+                  rotation=360),
                 Line(
-                  points={{0,20},{0,-8}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={64,14}, 
-                  rotation=180), 
+                  points={{0,20},{0,-8}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={64,14},
+                  rotation=180),
                 Rectangle(
-                  extent={{55,15},{74,3}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{55,15},{74,3}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{56,13},{73,4}}, 
-                  textString="h_tri"), 
+                  extent={{56,13},{73,4}},
+                  textString="h_tri"),
                 Rectangle(
-                  extent={{31,-11},{50,-23}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{31,-11},{50,-23}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{32,-11},{49,-20}}, 
-                  textString="a_tri"), 
+                  extent={{32,-11},{49,-20}},
+                  textString="a_tri"),
                 Line(
-                  points={{36,14},{38,12},{42,12},{44,14}}, 
-                  thickness=0.5), 
+                  points={{36,14},{38,12},{42,12},{44,14}},
+                  thickness=0.5),
                 Line(
-                  points={{-12,-2},{0,-8}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.None}, 
-                  origin={40,24}, 
-                  rotation=360), 
+                  points={{-12,-2},{0,-8}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.None},
+                  origin={40,24},
+                  rotation=360),
                 Text(
-                  extent={{12,27},{29,18}}, 
+                  extent={{12,27},{29,18}},
                   textString="beta")}));
 
         end Channel_d;
 
-        partial model OrificeSuddenChangeSection_d 
+        partial model OrificeSuddenChangeSection_d
           "截面积突变孔口几何图形"
 
           annotation (Diagram(coordinateSystem(
-                  preserveAspectRatio=false, extent={{-100,-100},{100,100}}), 
+                  preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics={
                 Rectangle(
-                  extent={{-100,60},{100,-60}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Backward), 
+                  extent={{-100,60},{100,-60}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Backward),
                 Rectangle(
-                  extent={{-100,20},{0,-20}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{-100,20},{0,-20}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Rectangle(
-                  extent={{0,40},{100,-42}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{0,40},{100,-42}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Text(
-                  extent={{-80,88},{86,76}}, 
-                  textString="sudden expansion"), 
+                  extent={{-80,88},{86,76}},
+                  textString="sudden expansion"),
                 Text(
-                  extent={{-82,-76},{86,-88}}, 
-                  textString="sudden contraction"), 
+                  extent={{-82,-76},{86,-88}},
+                  textString="sudden contraction"),
                 Line(
-                  points={{-20,0},{20,0}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.None,Arrow.Filled}, 
-                  origin={0,-72}, 
-                  rotation=180), 
+                  points={{-20,0},{20,0}},
+                  thickness=0.5,
+                  arrow={Arrow.None,Arrow.Filled},
+                  origin={0,-72},
+                  rotation=180),
                 Line(
-                  points={{-20,0},{20,0}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={-48,0}, 
-                  rotation=90), 
+                  points={{-20,0},{20,0}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={-48,0},
+                  rotation=90),
                 Line(
-                  points={{-62,0},{20,0}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={52,20}, 
-                  rotation=90), 
+                  points={{-62,0},{20,0}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={52,20},
+                  rotation=90),
                 Rectangle(
-                  extent={{42,6},{62,-8}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{42,6},{62,-8}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{38,4},{64,-6}}, 
-                  textString="A_2"), 
+                  extent={{38,4},{64,-6}},
+                  textString="A_2"),
                 Rectangle(
-                  extent={{-58,6},{-38,-8}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-58,6},{-38,-8}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-62,4},{-36,-6}}, 
-                  textString="A_1"), 
+                  extent={{-62,4},{-36,-6}},
+                  textString="A_1"),
                 Rectangle(
-                  extent={{0,20},{0,-20}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{0,20},{0,-20}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-44,10},{40,2}}, 
-                  textString="design flow direction"), 
+                  extent={{-44,10},{40,2}},
+                  textString="design flow direction"),
                 Line(
-                  points={{-24,-4},{16,-4}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.None,Arrow.Filled}), 
+                  points={{-24,-4},{16,-4}},
+                  thickness=0.5,
+                  arrow={Arrow.None,Arrow.Filled}),
                 Line(
-                  points={{-20,70},{20,70}}, 
-                  thickness=0.5, 
+                  points={{-20,70},{20,70}},
+                  thickness=0.5,
                   arrow={Arrow.None,Arrow.Filled})}));
 
         end OrificeSuddenChangeSection_d;
 
-        partial model OrificeThickEdged_d 
+        partial model OrificeThickEdged_d
           "厚边缩流断面孔几何图形"
 
           annotation (Diagram(coordinateSystem(
-                  preserveAspectRatio=false, extent={{-100,-100},{100,100}}), 
+                  preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics={
                 Rectangle(
-                  extent={{-100,60},{100,-60}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Backward), 
+                  extent={{-100,60},{100,-60}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Backward),
                 Rectangle(
-                  extent={{-40,20},{40,-20}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{-40,20},{40,-20}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Rectangle(
-                  extent={{40,40},{100,-42}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{40,40},{100,-42}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Line(
-                  points={{-20,0},{20,0}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={-48,0}, 
-                  rotation=90), 
+                  points={{-20,0},{20,0}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={-48,0},
+                  rotation=90),
                 Line(
-                  points={{-62,0},{20,0}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={70,20}, 
-                  rotation=90), 
+                  points={{-62,0},{20,0}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={70,20},
+                  rotation=90),
                 Rectangle(
-                  extent={{60,6},{80,-8}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{60,6},{80,-8}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{56,4},{82,-6}}, 
-                  textString="A_1"), 
+                  extent={{56,4},{82,-6}},
+                  textString="A_1"),
                 Rectangle(
-                  extent={{0,20},{0,-20}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{0,20},{0,-20}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Line(
-                  points={{-40,-32},{40,-32}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}), 
+                  points={{-40,-32},{40,-32}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled}),
                 Rectangle(
-                  extent={{-100,40},{-40,-42}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid), 
+                  extent={{-100,40},{-40,-42}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
                 Line(
-                  points={{-62,0},{20,0}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={-70,20}, 
-                  rotation=90), 
+                  points={{-62,0},{20,0}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={-70,20},
+                  rotation=90),
                 Rectangle(
-                  extent={{-80,6},{-60,-8}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-80,6},{-60,-8}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-84,4},{-58,-6}}, 
-                  textString="A_1"), 
+                  extent={{-84,4},{-58,-6}},
+                  textString="A_1"),
                 Line(
-                  points={{-42,0},{-2,0}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}, 
-                  origin={0,22}, 
-                  rotation=90), 
+                  points={{-42,0},{-2,0}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled},
+                  origin={0,22},
+                  rotation=90),
                 Rectangle(
-                  extent={{-2,6},{18,-8}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-2,6},{18,-8}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-14,4},{12,-6}}, 
-                  textString="A_0"), 
+                  extent={{-14,4},{12,-6}},
+                  textString="A_0"),
                 Rectangle(
-                  extent={{-44,20},{-40,-20}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-44,20},{-40,-20}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Rectangle(
-                  extent={{40,20},{44,-20}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{40,20},{44,-20}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Rectangle(
-                  extent={{-4,-28},{4,-38}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-4,-28},{4,-38}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-12,-28},{14,-38}}, 
+                  extent={{-12,-28},{14,-38}},
                   textString="L")}));
         end OrificeThickEdged_d;
 
         partial model StraightPipe_d "直管几何图形"
 
           annotation (Diagram(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
+                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics={
                 Ellipse(
-                  extent={{98,46},{62,-54}}, 
-                  lineThickness=0.5, 
-                  fillPattern=FillPattern.Forward, 
-                  fillColor={255,255,170}), 
+                  extent={{98,46},{62,-54}},
+                  lineThickness=0.5,
+                  fillPattern=FillPattern.Forward,
+                  fillColor={255,255,170}),
                 Polygon(
-                  points={{-80,-54},{-80,46},{80,46},{80,-54},{-80,-54}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward, 
-                  lineThickness=0.5, 
-                  pattern=LinePattern.None), 
+                  points={{-80,-54},{-80,46},{80,46},{80,-54},{-80,-54}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward,
+                  lineThickness=0.5,
+                  pattern=LinePattern.None),
                 Line(
-                  points={{-80,52},{80,52}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}), 
+                  points={{-80,52},{80,52}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled}),
                 Rectangle(
-                  extent={{-4,58},{6,48}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-4,58},{6,48}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-8,58},{10,48}}, 
-                  textString="L"), 
+                  extent={{-8,58},{10,48}},
+                  textString="L"),
                 Ellipse(
-                  extent={{90,26},{70,-34}}, 
-                  pattern=LinePattern.Dash, 
-                  lineThickness=0.5), 
+                  extent={{90,26},{70,-34}},
+                  pattern=LinePattern.Dash,
+                  lineThickness=0.5),
                 Line(
-                  points={{0,26},{0,-34}}, 
-                  thickness=0.5, 
-                  arrow={Arrow.Filled,Arrow.Filled}), 
+                  points={{0,26},{0,-34}},
+                  thickness=0.5,
+                  arrow={Arrow.Filled,Arrow.Filled}),
                 Rectangle(
-                  extent={{-6,-74},{10,-86}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-6,-74},{10,-86}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Ellipse(
-                  extent={{-62,46},{-98,-54}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Forward), 
+                  extent={{-62,46},{-98,-54}},
+                  lineThickness=0.5,
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Forward),
                 Ellipse(
-                  extent={{-70,26},{-90,-34}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  lineThickness=0.5), 
+                  extent={{-70,26},{-90,-34}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  lineThickness=0.5),
                 Line(
-                  points={{-80,46},{80,46}}, 
-                  thickness=0.5), 
+                  points={{-80,46},{80,46}},
+                  thickness=0.5),
                 Line(
-                  points={{-80,-54},{80,-54}}, 
-                  thickness=0.5), 
+                  points={{-80,-54},{80,-54}},
+                  thickness=0.5),
                 Line(
-                  points={{-80,26},{80,26}}, 
-                  pattern=LinePattern.Dash, 
-                  thickness=0.5), 
+                  points={{-80,26},{80,26}},
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),
                 Line(
-                  points={{-80,-34},{80,-34}}, 
-                  thickness=0.5, 
-                  pattern=LinePattern.Dash), 
+                  points={{-80,-34},{80,-34}},
+                  thickness=0.5,
+                  pattern=LinePattern.Dash),
                 Line(
-                  points={{-62,-4},{98,-4}}, 
-                  thickness=0.5), 
+                  points={{-62,-4},{98,-4}},
+                  thickness=0.5),
                 Rectangle(
-                  extent={{-12,2},{10,-8}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
+                  extent={{-12,2},{10,-8}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
                 Text(
-                  extent={{-14,2},{12,-8}}, 
+                  extent={{-14,2},{12,-8}},
                   textString="d_hyd")}));
 
         end StraightPipe_d;
@@ -11326,100 +11326,100 @@ Wischhusen, St.
         partial model Valve_d "阀门图标"
 
           annotation (Diagram(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
+                  preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics={
                 Rectangle(
-                  extent={{-6,-74},{10,-86}}, 
-                  lineThickness=0.5, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
-                Line(points={{-60,0},{-100,0}}, color={0,127,255}), 
+                  extent={{-6,-74},{10,-86}},
+                  lineThickness=0.5,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
+                Line(points={{-60,0},{-100,0}}, color={0,127,255}),
                 Polygon(
-                  points={{-60,50},{-60,-50},{60,-50},{60,50},{-60,50}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
-                Line(points={{60,0},{100,0}}, color={0,127,255}), 
+                  points={{-60,50},{-60,-50},{60,-50},{60,50},{-60,50}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
+                Line(points={{60,0},{100,0}}, color={0,127,255}),
                 Line(
-                  points={{-60,50},{-60,-50},{60,50},{60,-50},{-60,50}}, 
+                  points={{-60,50},{-60,-50},{60,50},{60,-50},{-60,50}},
                   thickness=0.5)}));
 
         end Valve_d;
 
         model FlowModel "Modelica.Fluid 应用程序中流动模型的图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                     -100},{100,100}}), graphics={
                 Polygon(
-                  points={{-60,50},{-60,-50},{60,-50},{60,50},{-60,50}}, 
-                  fillColor={255,255,255}, 
-                  fillPattern=FillPattern.Solid, 
-                  pattern=LinePattern.None), 
-                Line(points={{-60,0},{-100,0}}, color={0,127,255}), 
+                  points={{-60,50},{-60,-50},{60,-50},{60,50},{-60,50}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),
+                Line(points={{-60,0},{-100,0}}, color={0,127,255}),
                 Line(
-                  points={{-60,50},{-60,-50},{60,50},{60,-50},{-60,50}}, 
-                  thickness=0.5), 
+                  points={{-60,50},{-60,-50},{60,50},{60,-50},{-60,50}},
+                  thickness=0.5),
                 Line(points={{60,0},{100,0}}, color={0,127,255})}));
         end FlowModel;
 
         partial model Bend_i "弯管图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
+                      100,100}},
                     fileName="modelica://Modelica/Resources/Images/Fluid/Dissipation/PressureLoss/bend/icon_bend.png")}));
         end Bend_i;
 
         partial model Channel_i "管道图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
-                    fileName= 
+                      100,100}},
+                    fileName=
                       "modelica://Modelica/Resources/Images/Fluid/Dissipation/PressureLoss/channel/icon_channel.png")}));
         end Channel_i;
 
         partial model General_i "一般压降图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
-                    fileName= 
+                      100,100}},
+                    fileName=
                       "modelica://Modelica/Resources/Images/Fluid/Dissipation/PressureLoss/general/icon_general.png")}));
         end General_i;
 
         partial model HeatExchanger_i
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
-                    {100,100}}), graphics={Bitmap(extent={{-100,-100},{100,100}}, 
-                  fileName= 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                    {100,100}}), graphics={Bitmap(extent={{-100,-100},{100,100}},
+                  fileName=
                   "modelica://Modelica/Resources/Images/Fluid/Dissipation/PressureLoss/heatExchanger/icon_heatExchanger.png")}));
         end HeatExchanger_i;
 
         partial model Orifice_i "节流孔图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
-                    fileName= 
+                      100,100}},
+                    fileName=
                       "modelica://Modelica/Resources/Images/Fluid/Dissipation/PressureLoss/orifice/icon_orifice.png")}));
         end Orifice_i;
 
         partial model StraightPipe_i "直管图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
-                    fileName= 
+                      100,100}},
+                    fileName=
                       "modelica://Modelica/Resources/Images/Fluid/Dissipation/PressureLoss/StraightPipe/icon_straightPipe.png")}));
         end StraightPipe_i;
 
         partial model Valve_i "阀门图标"
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics={Bitmap(extent={{-100,-100},{
-                      100,100}}, 
+                      100,100}},
                     fileName="modelica://Modelica/Resources/Images/Fluid/Dissipation/PressureLoss/valve/icon_valve.png")}));
         end Valve_i;
         annotation();
@@ -11432,7 +11432,7 @@ Wischhusen, St.
     extends Modelica.Icons.RecordsPackage;
       package General
         extends Modelica.Icons.RecordsPackage;
-        record PressureLoss 
+        record PressureLoss
           "压力损失的流体性质基础记录"
           extends Modelica.Icons.Record;
 
@@ -11446,7 +11446,7 @@ Wischhusen, St.
         record FluidProperties "流体性质基础记录"
           extends Modelica.Icons.Record;
 
-          SI.SpecificHeatCapacityAtConstantPressure cp 
+          SI.SpecificHeatCapacityAtConstantPressure cp
             "流体在恒定压力下的比热容" 
             annotation(Dialog(group = "流体性质"));
 
@@ -11461,7 +11461,7 @@ Wischhusen, St.
           annotation();
         end FluidProperties;
 
-        record IdealGas_con 
+        record IdealGas_con
           "通用压力损失函数的基础记录 | 理想气体 | 平均密度"
           extends Modelica.Icons.Record;
 
@@ -11469,14 +11469,14 @@ Wischhusen, St.
             annotation(Dialog(group = "通用变量"));
           SI.SpecificHeatCapacity R_s "理想气体的比热容" 
             annotation(Dialog(group = "流体性质"));
-          Real Km = 6824.86 
+          Real Km = 6824.86
             "压力损失定律的系数 [(Pa)^2/{(kg/s)^exp*K}]" 
             annotation(Dialog(group = "通用变量"));
           annotation();
 
         end IdealGas_con;
 
-        record IdealGas_var 
+        record IdealGas_var
           "通用压力损失函数的基础记录 | 理想气体 | 平均密度"
           extends Modelica.Icons.Record;
 
@@ -11490,74 +11490,74 @@ Wischhusen, St.
 
         end IdealGas_var;
 
-        record NominalDensityViscosity 
+        record NominalDensityViscosity
           "通用压力损失函数的基础记录"
 
           extends Modelica.Icons.Record;
 
-          SI.Pressure dp_nom = 2 
+          SI.Pressure dp_nom = 2
             "额定压力损失（在额定质量流率和密度的额定值下）" 
             annotation(Dialog(group = "通用变量"));
           Real exp = 2 "压力损失定律的指数" 
             annotation(Dialog(group = "通用变量"));
-          SI.MassFlowRate m_flow_nom = 1 
+          SI.MassFlowRate m_flow_nom = 1
             "额定质量流率（在压力损失和密度的额定值下）" 
             annotation(Dialog(group = "通用变量"));
-          SI.Density rho_nom 
+          SI.Density rho_nom
             "额定密度（在质量流率和压力损失的额定值下）" 
             annotation(Dialog(group = "通用变量"));
           Real exp_eta = 1 "动力黏度依赖的指数" 
             annotation(Dialog(group = "通用变量"));
-          SI.DynamicViscosity eta_nom 
+          SI.DynamicViscosity eta_nom
             "在额定压力损失下的动力黏度" 
             annotation(Dialog(group = "通用变量"));
           annotation();
 
         end NominalDensityViscosity;
 
-        record NominalPressureLossLawDensity_con 
+        record NominalPressureLossLawDensity_con
           "通用压力损失函数的基础记录"
 
           extends Modelica.Icons.Record;
 
           //额定质量流率
           Modelica.Fluid.Dissipation.Utilities.Types.MassOrVolumeFlowRate 
-            target = Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate 
+            target = Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate
             "MassFlowRate == 使用额定质量流率 | VolumeFlowRate == 使用额定体积流率" 
             annotation(Dialog(group = "通用变量"));
 
           SI.Area A_cross = A_cross_nom "横截面积" 
             annotation(Dialog(group = "通用变量"));
-          SI.Area A_cross_nom = Modelica.Constants.pi * 0.1 ^ 2 / 4 
+          SI.Area A_cross_nom = Modelica.Constants.pi * 0.1 ^ 2 / 4
             "额定横截面积" 
             annotation(Dialog(group = "通用变量"));
 
-          SI.Pressure dp_nom = 2 
+          SI.Pressure dp_nom = 2
             "额定压力损失（在额定质量流率和密度的额定值下）" 
             annotation(Dialog(group = "通用变量"));
-          SI.MassFlowRate m_flow_nom = 1 
+          SI.MassFlowRate m_flow_nom = 1
             "额定质量流率（在压力损失和密度的额定值下）" 
-            annotation(Dialog(group = "通用变量", enable = target == 
+            annotation(Dialog(group = "通用变量", enable = target ==
             Modelica.Fluid.Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate));
           Real exp = 2 "压力损失定律的指数" 
             annotation(Dialog(group = "通用变量"));
 
-          SI.VolumeFlowRate V_flow_nom = m_flow_nom / rho_nom 
+          SI.VolumeFlowRate V_flow_nom = m_flow_nom / rho_nom
             "额定体积流率（在压力损失和密度的额定值下）" 
-            annotation(Dialog(group = "通用变量", enable = target == 
+            annotation(Dialog(group = "通用变量", enable = target ==
             Modelica.Fluid.Dissipation.Utilities.Types.MassOrVolumeFlowRate.VolumeFlowRate));
-          SI.Density rho_nom 
+          SI.Density rho_nom
             "额定密度（在质量流率和压力损失的额定值下）" 
             annotation(Dialog(group = "通用变量"));
 
-          Types.PressureLossCoefficient zeta_TOT_nom = 0.02 * 1 / 0.1 
+          Types.PressureLossCoefficient zeta_TOT_nom = 0.02 * 1 / 0.1
             "额定压力损失系数（对于额定值）" 
             annotation(Dialog(group = "通用变量"));
           annotation();
 
         end NominalPressureLossLawDensity_con;
 
-        record NominalPressureLossLawDensity_var 
+        record NominalPressureLossLawDensity_var
           "通用压力损失函数的基础记录"
 
           extends Modelica.Icons.Record;
@@ -11568,7 +11568,7 @@ Wischhusen, St.
 
         end NominalPressureLossLawDensity_var;
 
-        record QuadraticVFLOW 
+        record QuadraticVFLOW
           "通用压力损失函数的基础记录 | 二次函数 (dp=a*Vdot^2 + b*Vdot)"
 
           extends Modelica.Icons.Record;
@@ -11614,18 +11614,18 @@ Wischhusen, St.
           annotation();
         end TwoPhaseFlow_var;
 
-        record IdealGas 
+        record IdealGas
           "通用压力损失函数的基础记录 | 理想气体 | 平均密度"
           extends Modelica.Icons.Record;
 
-          parameter Real exp(min = Modelica.Constants.eps) = 2 
+          parameter Real exp(min = Modelica.Constants.eps) = 2
             "压力损失定律的指数" 
             annotation(Dialog(group = "通用变量"));
-          parameter SI.SpecificHeatCapacity R_s(min = 1) 
+          parameter SI.SpecificHeatCapacity R_s(min = 1)
             "理想气体的比热容" 
             annotation(Dialog(group = "流体性质"));
 
-          Real Km(min = Modelica.Constants.eps) = R_s * (2e3) / ((10) ^ exp / rho_m) 
+          Real Km(min = Modelica.Constants.eps) = R_s * (2e3) / ((10) ^ exp / rho_m)
             "压力损失定律的系数 [(Pa)^2/{(kg/s)^exp*K}]" 
             annotation(Dialog(group = "通用变量"));
           SI.Density rho_m = p_m / (R_s * T_m) "理想气体的平均密度" 
@@ -11638,45 +11638,45 @@ Wischhusen, St.
 
         end IdealGas;
 
-        record NominalPressureLossLawDensity 
+        record NominalPressureLossLawDensity
           "通用压力损失函数的基础记录"
 
           extends Modelica.Icons.Record;
 
           //额定质量流率
           Modelica.Fluid.Dissipation.Utilities.Types.MassOrVolumeFlowRate 
-            target = Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate 
+            target = Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate
             "MassFlowRate == 使用额定质量流率 | VolumeFlowRate == 使用额定体积流率" 
             annotation(Dialog(group = "通用变量"));
 
           parameter SI.Area A_cross = A_cross_nom "横截面积" 
             annotation(Dialog(group = "通用变量"));
-          parameter SI.Area A_cross_nom = Modelica.Constants.pi * 0.1 ^ 2 / 4 
+          parameter SI.Area A_cross_nom = Modelica.Constants.pi * 0.1 ^ 2 / 4
             "额定横截面积" 
             annotation(Dialog(group = "通用变量"));
 
-          parameter SI.Pressure dp_nom(min = Modelica.Constants.eps) = 2 
+          parameter SI.Pressure dp_nom(min = Modelica.Constants.eps) = 2
             "额定压力损失（在额定质量流率和密度的额定值下）" 
             annotation(Dialog(group = "通用变量"));
-          parameter SI.MassFlowRate m_flow_nom(min = Modelica.Constants.eps) = 1 
+          parameter SI.MassFlowRate m_flow_nom(min = Modelica.Constants.eps) = 1
             "额定质量流率（在压力损失和密度的额定值下）" 
-            annotation(Dialog(group = "通用变量", enable = target == 
+            annotation(Dialog(group = "通用变量", enable = target ==
             Modelica.Fluid.Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate));
-          parameter Real exp(min = Modelica.Constants.eps) = 2 
+          parameter Real exp(min = Modelica.Constants.eps) = 2
             "压力损失定律的指数" 
             annotation(Dialog(group = "通用变量"));
 
-          SI.VolumeFlowRate V_flow_nom(min = Modelica.Constants.eps) = m_flow_nom / rho_nom 
+          SI.VolumeFlowRate V_flow_nom(min = Modelica.Constants.eps) = m_flow_nom / rho_nom
             "额定体积流率（在压力损失和密度的额定值下）" 
-            annotation(Dialog(group = "通用变量", enable = not (target == 
+            annotation(Dialog(group = "通用变量", enable = not (target ==
             Modelica.Fluid.Dissipation.Utilities.Types.MassOrVolumeFlowRate.MassFlowRate)));
-          SI.Density rho_nom(min = Modelica.Constants.eps) 
+          SI.Density rho_nom(min = Modelica.Constants.eps)
             "额定密度（在质量流率和压力损失的额定值下）" 
             annotation(Dialog(group = "通用变量"));
 
-          Types.PressureLossCoefficient zeta_TOT = zeta_TOT_nom 
+          Types.PressureLossCoefficient zeta_TOT = zeta_TOT_nom
             "压力损失系数" annotation(Dialog(group = "通用变量"));
-          parameter Types.PressureLossCoefficient zeta_TOT_nom = 0.02 * 1 / 0.1 
+          parameter Types.PressureLossCoefficient zeta_TOT_nom = 0.02 * 1 / 0.1
             "额定压力损失系数（对于额定值）" 
             annotation(Dialog(group = "通用变量"));
           annotation();
@@ -11688,7 +11688,7 @@ Wischhusen, St.
 
           SI.Density rho_l "液体的密度" 
             annotation(Dialog(group = "流体性质"));
-          SI.Density rho_g "气体的密度" annotation(Dialog(group = 
+          SI.Density rho_g "气体的密度" annotation(Dialog(group =
             "流体性质", enable = (KC == 1 or KC == 2)));
           SI.DynamicViscosity eta_l "液体的动力黏度" 
             annotation(Dialog(group = "流体性质"));
@@ -11696,7 +11696,7 @@ Wischhusen, St.
             Dialog(group = "流体性质", enable = (KC == 1 or KC == 2)));
           SI.MassFraction x = 0.5 "蒸汽的质量分数" 
             annotation(Dialog(group = "流体性质"));
-          SI.SurfaceTension sigma "表面张力" annotation(Dialog(group = 
+          SI.SurfaceTension sigma "表面张力" annotation(Dialog(group =
             "流体性质", enable = DP_fric == 1));
           Real n = 0.25 "Blasius 方程中的指数 (0.2-0.25)" annotation(Dialog(
             group = "其他", enable = DP_fric == 2));
@@ -11711,12 +11711,12 @@ Wischhusen, St.
           extends Modelica.Icons.Record;
 
           //选择
-          Modelica.Fluid.Dissipation.Utilities.Types.kc_evenGap target = Dissipation.Utilities.Types.kc_evenGap.DevBoth 
+          Modelica.Fluid.Dissipation.Utilities.Types.kc_evenGap target = Dissipation.Utilities.Types.kc_evenGap.DevBoth
             "计算的目标变量" annotation(Dialog(group = "均匀间隙"));
 
           SI.Length h = 0.1 "横截面积的高度" 
             annotation(Dialog(group = "均匀间隙"));
-          SI.Length s = 0.05 
+          SI.Length s = 0.05
             "横截面积中平行板之间的距离" 
             annotation(Dialog(group = "均匀间隙"));
           SI.Length L = 1 "间隙的溢流长度" annotation(Dialog(group = "均匀间隙"));
@@ -11727,7 +11727,7 @@ Wischhusen, St.
           extends Modelica.Icons.Record;
 
           //选择
-          Modelica.Fluid.Dissipation.Utilities.Types.kc_general target = Dissipation.Utilities.Types.kc_general.Finest 
+          Modelica.Fluid.Dissipation.Utilities.Types.kc_general target = Dissipation.Utilities.Types.kc_general.Finest
             "目标相关性" annotation(Dialog(group = "通用变量"));
 
           //几何
@@ -11769,14 +11769,14 @@ Wischhusen, St.
           annotation();
         end StraightPipe;
 
-        record TwoPhaseFlowHT_IN_con 
+        record TwoPhaseFlowHT_IN_con
           "两相传热系数的基本记录"
           extends Modelica.Icons.Record;
 
           //选择
           Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget 
-            target = 
-            Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilHor 
+            target =
+            Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilHor
             "在管道中 (水平/垂直) 沸腾或 (水平) 冷凝的选择" 
             annotation(Dialog(group = "选择"));
 
@@ -11785,8 +11785,8 @@ Wischhusen, St.
           SI.Length perimeter = Modelica.Constants.pi * 0.1 "湿周" 
             annotation(Dialog(group = "几何"));
 
-          Modelica.Fluid.Dissipation.Utilities.Types.MolarMass_gpmol MM = 18.02 
-            "流体的摩尔质量" annotation(Dialog(group = 
+          Modelica.Fluid.Dissipation.Utilities.Types.MolarMass_gpmol MM = 18.02
+            "流体的摩尔质量" annotation(Dialog(group =
             "流体性质", enable = if target == Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilHor 
             or target == Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilVer then 
             true else false));
@@ -11802,24 +11802,24 @@ by Stefan Wischhusen:<br>
 </html>"          ));
         end TwoPhaseFlowHT_IN_con;
 
-        record TwoPhaseFlowHT_IN_var 
+        record TwoPhaseFlowHT_IN_var
           "两相传热系数的基本记录"
           extends Modelica.Icons.Record;
 
           //选择
           Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget 
-            target = 
-            Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilHor 
+            target =
+            Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilHor
             "在管道中 (水平/垂直) 沸腾或 (水平) 冷凝的选择" 
             annotation(Dialog(group = "选择"));
 
           //fluid properties
-          SI.SpecificHeatCapacityAtConstantPressure cp_l 
+          SI.SpecificHeatCapacityAtConstantPressure cp_l
             "液体的定压比热容" 
             annotation(Dialog(group = "流体性质"));
           SI.ThermalConductivity lambda_l "液体的热导率" 
             annotation(Dialog(group = "流体性质"));
-          SI.Density rho_g "气体的密度" annotation(Dialog(group = 
+          SI.Density rho_g "气体的密度" annotation(Dialog(group =
             "流体性质", enable = if target == Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilHor 
             or target == Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilVer then 
             true else false));
@@ -11835,14 +11835,14 @@ by Stefan Wischhusen:<br>
           SI.Pressure pressure "流体的平均压力" 
             annotation(Dialog(group = "流体性质"));
           SI.SpecificEnthalpy dh_lg "流体的汽化焓" 
-            annotation(Dialog(group = "流体性质", enable = if target == 
+            annotation(Dialog(group = "流体性质", enable = if target ==
             Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilHor 
             or target == Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilVer then 
             true else false));
 
           //输入变量
           SI.MassFlowRate m_flow "质量流量" annotation(Dialog(group = "输入"));
-          SI.HeatFlux qdot_A = 0 "沸腾时的热流量" annotation(Dialog(group = "输入", 
+          SI.HeatFlux qdot_A = 0 "沸腾时的热流量" annotation(Dialog(group = "输入",
             enable = if target == Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilHor 
             or target == Modelica.Fluid.Dissipation.Utilities.Types.TwoPhaseHeatTransferTarget.BoilVer then 
             true else false));
@@ -11867,8 +11867,8 @@ by Stefan Wischhusen:<br>
           extends Modelica.Icons.Record;
 
           Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow 
-            geometry = 
-            Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Circular 
+            geometry =
+            Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Circular
             "内部流体几何形状选择" annotation(Dialog(group = "通道"));
 
           SI.Length K = 0 "粗糙度（表面凹凸的平均高度）" 
@@ -11877,36 +11877,36 @@ by Stefan Wischhusen:<br>
 
           //几何变量
           //环形(1)
-          SI.Diameter d_ann = d_cir "小直径" annotation(Dialog(group = 
+          SI.Diameter d_ann = d_cir "小直径" annotation(Dialog(group =
             "环形横截面积", enable = geometry == Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Annular));
-          SI.Diameter D_ann = 2 * d_ann "大直径" annotation(Dialog(group = 
+          SI.Diameter D_ann = 2 * d_ann "大直径" annotation(Dialog(group =
             "环形横截面积", enable = geometry == Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Annular));
           //圆形(2)
-          SI.Diameter d_cir = 0.1 "内径" annotation(Dialog(group = 
+          SI.Diameter d_cir = 0.1 "内径" annotation(Dialog(group =
             "圆形横截面积", enable = geometry == Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Circular));
           //椭圆形(3)
           SI.Length a_ell = (3 / 4) * d_cir "长基线的一半长度" annotation(
-            Dialog(group = "椭圆形横截面积", enable = geometry == 
+            Dialog(group = "椭圆形横截面积", enable = geometry ==
             Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Elliptical));
           SI.Length b_ell = 0.5 * a_ell "短基线的一半长度" annotation(Dialog(
-            group = "椭圆形横截面积", enable = geometry == 
+            group = "椭圆形横截面积", enable = geometry ==
             Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Elliptical));
           //矩形(4)
-          SI.Length a_rec = d_cir "水平长度" annotation(Dialog(group = 
-            "矩形横截面积", enable = geometry == 
+          SI.Length a_rec = d_cir "水平长度" annotation(Dialog(group =
+            "矩形横截面积", enable = geometry ==
             Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Rectangular));
-          SI.Length b_rec = a_rec "垂直长度" annotation(Dialog(group = 
-            "矩形横截面积", enable = geometry == 
+          SI.Length b_rec = a_rec "垂直长度" annotation(Dialog(group =
+            "矩形横截面积", enable = geometry ==
             Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Rectangular));
           //三角形(5)
           SI.Length a_tri = d_cir * (1 + 2 ^ 0.5) "底边长度" annotation(Dialog(
-            group = "矩形横截面积", enable = geometry == 
+            group = "矩形横截面积", enable = geometry ==
             Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Rectangular));
-          SI.Length h_tri = 0.5 * a_tri 
+          SI.Length h_tri = 0.5 * a_tri
             "与底边垂直的顶角高度" 
-            annotation(Dialog(group = "三角形横截面积", enable = geometry 
+            annotation(Dialog(group = "三角形横截面积", enable = geometry
             == Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Isosceles));
-          SI.Angle beta = 90 * PI / 180 "顶角" annotation(Dialog(group = 
+          SI.Angle beta = 90 * PI / 180 "顶角" annotation(Dialog(group =
             "三角形横截面积", enable = geometry == Modelica.Fluid.Dissipation.Utilities.Types.GeometryOfInternalFlow.Isosceles));
           annotation();
         end Geometry;
@@ -11932,12 +11932,12 @@ by Stefan Wischhusen:<br>
           extends Modelica.Icons.Record;
 
           //目标变量
-          Modelica.Fluid.Dissipation.Utilities.Types.PressureLossTarget target = Dissipation.Utilities.Types.PressureLossTarget.PressureLoss 
+          Modelica.Fluid.Dissipation.Utilities.Types.PressureLossTarget target = Dissipation.Utilities.Types.PressureLossTarget.PressureLoss
             "计算目标变量" annotation(Dialog(group = "输入"));
 
-          SI.Pressure dp = 0 "压力损失" annotation(Dialog(group = "输入", enable = 
+          SI.Pressure dp = 0 "压力损失" annotation(Dialog(group = "输入", enable =
             target == Modelica.Fluid.Dissipation.Utilities.Types.PressureLossTarget.pressureLoss));
-          SI.MassFlowRate m_flow = 0 "质量流量" annotation(Dialog(group = "输入", 
+          SI.MassFlowRate m_flow = 0 "质量流量" annotation(Dialog(group = "输入",
             enable = target == Modelica.Fluid.Dissipation.Utilities.Types.PressureLossTarget.massFlowRate));
           annotation();
 
@@ -11957,26 +11957,26 @@ by Stefan Wischhusen:<br>
           extends Modelica.Icons.Record;
 
           //T型管变量
-          Boolean united_converging_cross_section = true 
+          Boolean united_converging_cross_section = true
             "true:A_cross_total = 2*A_cross_branch，否则 A_cross_total > 2*A_cross_branch" 
             annotation(Dialog(group = "T型管"));
-          Boolean velocity_reference_branches = true 
+          Boolean velocity_reference_branches = true
             "true:相对于速度的各通道压力损失系数，否则相对于总速度" 
             annotation(Dialog(group = "T型管"));
 
           Integer alpha = 90 "分支角度" annotation(Dialog(group = "T型管"));
 
-          SI.Diameter d_hyd[3] = ones(3) * 0.1 
+          SI.Diameter d_hyd[3] = ones(3) * 0.1
             "通道的水力直径 [侧面，直通，整体]" 
             annotation(Dialog(group = "T型管"));
 
           //限制条件
-          SI.MassFlowRate m_flow_min = 1e-3 
+          SI.MassFlowRate m_flow_min = 1e-3
             "用于平滑反向流体流动的限制条件" 
             annotation(Dialog(group = "限制条件"));
           SI.Velocity v_max = 2e2 "最大流体流速的限制条件" 
             annotation(Dialog(group = "限制条件"));
-          Real zeta_TOT_max = 1e3 
+          Real zeta_TOT_max = 1e3
             "压力损失系数最大值的限制条件" 
             annotation(Dialog(group = "限制条件"));
           annotation();
@@ -11988,10 +11988,10 @@ by Stefan Wischhusen:<br>
           SI.Angle alpha = PI * 45 / 180 "扩散角度" 
             annotation(Dialog(group = "扩散器"));
 
-          SI.Area A_1 = PI * 0.01 ^ 2 / 4 
+          SI.Area A_1 = PI * 0.01 ^ 2 / 4
             "扩散器段前的小恒定横截面积" 
             annotation(Dialog(group = "扩散器"));
-          SI.Area A_2 = 2 * A_1 
+          SI.Area A_2 = 2 * A_1
             "扩散器段后的大恒定横截面积" 
             annotation(Dialog(group = "扩散器"));
           SI.Length C_1 = PI * 0.01 "扩散器段前的小周长" 
@@ -12002,18 +12002,18 @@ by Stefan Wischhusen:<br>
             annotation(Dialog(group = "扩散器"));
           SI.Length L_2 = L_1 "扩散器段后的直管长度" 
             annotation(Dialog(group = "扩散器"));
-          SI.Length L_d = L_1 
+          SI.Length L_d = L_1
             "扩散器段长度（与整体流体流动平行）" 
             annotation(Dialog(group = "扩散器"));
 
           //数值方面
-          SI.Pressure dp_small = 1 
+          SI.Pressure dp_small = 1
             "小于 dp_small 的压力损失的线性化" 
             annotation(Dialog(group = "数值方面"));
-          Real zeta_TOT_min = 1e-3 
+          Real zeta_TOT_min = 1e-3
             "无限雷诺数的最小压力损失系数" 
             annotation(Dialog(group = "数值方面"));
-          Real zeta_TOT_max = 1e8 
+          Real zeta_TOT_max = 1e8
             "雷诺数趋近于零时的最大压力损失系数" 
             annotation(Dialog(group = "数值方面"));
           annotation();
@@ -12022,11 +12022,11 @@ by Stefan Wischhusen:<br>
         record EdgedBend "弯管输入"
           extends Modelica.Icons.Record;
 
-          SI.Diameter d_hyd(min = Modelica.Constants.eps) = 0.1 
+          SI.Diameter d_hyd(min = Modelica.Constants.eps) = 0.1
             "水力直径" 
             annotation(Dialog(group = "弯管"));
           SI.Angle delta = 90 * PI / 180 "转向角度" annotation(Dialog(group = "弯管"));
-          SI.Length K = 0 
+          SI.Length K = 0
             "粗糙度（表面凹凸的绝对平均高度）" annotation(Dialog(group = "弯管"));
           annotation();
 
@@ -12054,103 +12054,103 @@ by Stefan Wischhusen:<br>
     package Types "类型库"
       extends Modelica.Icons.TypesPackage;
       type DarcyFrictionFactor = Modelica.Icons.TypeReal(
-        final quantity = 
-        "Darcy 摩擦系数 | lambda_fri = zeta_fri / (length/diameter)", 
-        final unit = "1", 
-        min = 0, 
+        final quantity =
+        "Darcy 摩擦系数 | lambda_fri = zeta_fri / (length/diameter)",
+        final unit = "1",
+        min = 0,
         max = 1111) annotation();
       type FrictionalResistanceCoefficient = Modelica.Icons.TypeReal(
-        final quantity = "摩擦阻力系数 | zeta_fri", 
-        final unit = "1", 
-        min = 0, 
+        final quantity = "摩擦阻力系数 | zeta_fri",
+        final unit = "1",
+        min = 0,
         max = 1111) annotation();
       type LocalResistanceCoefficient = Modelica.Icons.TypeReal(
-        final quantity = "局部阻力系数 | zeta_loc", 
-        final unit = "1", 
-        min = 0, 
+        final quantity = "局部阻力系数 | zeta_loc",
+        final unit = "1",
+        min = 0,
         max = 1111) annotation();
       type PressureLossCoefficient = Modelica.Icons.TypeReal(
-        final quantity = "压力损失系数 | zeta_tot = zeta_loc + zeta_fri", 
-        final unit = "1", 
-        min = 0, 
+        final quantity = "压力损失系数 | zeta_tot = zeta_loc + zeta_fri",
+        final unit = "1",
+        min = 0,
         max = 1111) annotation();
       type TwoPhaseFrictionalPressureLoss = enumeration(
-        Friedel "Friedel 关于摩擦压力损失的相关性", 
+        Friedel "Friedel 关于摩擦压力损失的相关性",
         Chisholm "Chisholm 关于摩擦压力损失的相关性") annotation();
       type Roughness = enumeration(
-        Neglected "忽略表面粗糙度", 
+        Neglected "忽略表面粗糙度",
         Considered "考虑表面粗糙度") annotation();
       type TwoPhaseHeatTransferTarget = enumeration(
-        BoilHor "水平沸腾", 
-        BoilVer "垂直沸腾", 
+        BoilHor "水平沸腾",
+        BoilVer "垂直沸腾",
         CondHor "水平冷凝") annotation();
       type PressureLossTarget = enumeration(
-        PressureLoss "从质量流速计算压力损失", 
+        PressureLoss "从质量流速计算压力损失",
         MassFlowRate "从压力损失计算质量流速") annotation();
       type GeometryOfInternalFlow = enumeration(
-        Annular "环形几何", 
-        Circular "圆形几何", 
-        Elliptical "椭圆形几何", 
-        Rectangular "矩形几何", 
+        Annular "环形几何",
+        Circular "圆形几何",
+        Elliptical "椭圆形几何",
+        Rectangular "矩形几何",
         Isosceles "等腰三角形几何") annotation();
       type kc_evenGap = enumeration(
-        DevOne 
-        "在一个侧面处于流动发展的层流区域，同时在一侧传热", 
-        DevBoth 
-        "在两侧都处于流动发展的层流区域，同时在两侧传热", 
-        UndevOne 
-        "处于流动和传热起始的层流区域，在一侧传热", 
-        UndevBoth 
+        DevOne
+        "在一个侧面处于流动发展的层流区域，同时在一侧传热",
+        DevBoth
+        "在两侧都处于流动发展的层流区域，同时在两侧传热",
+        UndevOne
+        "处于流动和传热起始的层流区域，在一侧传热",
+        UndevBoth
         "处于流动和传热起始的层流区域，在两侧传热") annotation();
 
       type kc_general = enumeration(
-        Rough "对 Dittus/Boelter (1930) 最粗糙的近似", 
-        Middle "对 Sieder/Tate (1936) 中等的近似", 
+        Rough "对 Dittus/Boelter (1930) 最粗糙的近似",
+        Middle "对 Sieder/Tate (1936) 中等的近似",
         Finest "对 Gnielinski (1976) 最精确的近似") annotation();
       type HeatTransferBoundary = enumeration(
-        UWTuDFF "在发展流体流动中的均匀壁温度（UWT+DFF）", 
-        UHFuDFF "在发展流体流动中的均匀热流密度（UHF+DFF）", 
-        UWTuUFF 
-        "在未发展流体流动中的均匀壁温度（UWT+UFF）", 
+        UWTuDFF "在发展流体流动中的均匀壁温度（UWT+DFF）",
+        UHFuDFF "在发展流体流动中的均匀热流密度（UHF+DFF）",
+        UWTuUFF
+        "在未发展流体流动中的均匀壁温度（UWT+UFF）",
         UHFuUFF "在未发展流体流动中的均匀热流密度（UHF+UFF）") annotation();
 
       type MassOrVolumeFlowRate = enumeration(
-        MassFlowRate "质量流量", 
+        MassFlowRate "质量流量",
         VolumeFlowRate "体积流量") annotation();
       type VoidFractionApproach = enumeration(
-        Homogeneous "均相方法", 
-        Momentum "动量流方法（非均匀）", 
-        Energy "基于 Zivi 的动能流方法（非均匀）", 
-        Chisholm 
+        Homogeneous "均相方法",
+        Momentum "动量流方法（非均匀）",
+        Energy "基于 Zivi 的动能流方法（非均匀）",
+        Chisholm
         "基于 Chisholm 的经验动量流方法（非均匀）") annotation();
 
       type OrificeGeometry = enumeration(
-        SharpEdged "节流孔入口的锐缘形状", 
-        ThickEdged "节流孔入口的厚边缘形状", 
-        TiltedEdged "节流孔入口的倾斜边缘形状", 
+        SharpEdged "节流孔入口的锐缘形状",
+        ThickEdged "节流孔入口的厚边缘形状",
+        TiltedEdged "节流孔入口的倾斜边缘形状",
         RoundedEdged "节流孔入口的圆角边缘形状") annotation();
       type ValveGeometry = enumeration(
-        Ball "球阀", 
-        Diaphragm "隔膜阀", 
-        Butterfly "蝶阀", 
-        Gate "闸阀", 
+        Ball "球阀",
+        Diaphragm "隔膜阀",
+        Butterfly "蝶阀",
+        Gate "闸阀",
         Sluice "水门阀") annotation();
       type ValveCoefficient = enumeration(
-        AV "Av（公制）流量系数", 
-        KV "Kv（公制）流量系数", 
-        CV "Cv（US）流量系数", 
+        AV "Av（公制）流量系数",
+        KV "Kv（公制）流量系数",
+        CV "Cv（US）流量系数",
         OP "由操作点定义的 Av") annotation();
       type FluidFlowRegime = enumeration(
-        Laminar "层流流体流动区域", 
-        Overall "总体流体流动区域", 
+        Laminar "层流流体流动区域",
+        Overall "总体流体流动区域",
         Turbulent "湍流流体流动区域") annotation();
       type HTXGeometry_flatTubes = enumeration(
-        LouverFin "隔条鳍片", 
+        LouverFin "隔条鳍片",
         RectangularFin "矩形偏移条鳍片") annotation();
       type HTXGeometry_roundTubes = enumeration(
-        PlainFin "平鳍片", 
-        LouverFin "散热鳍片", 
-        SlitFin "开缝鳍片", 
+        PlainFin "平鳍片",
+        LouverFin "散热鳍片",
+        SlitFin "开缝鳍片",
         WavyFin "波浪鳍片（人字形波浪鳍片）") annotation();
 
       type MolarMass_gpmol = Real(final quantity = "摩尔质量", final unit = "g/mol") annotation();

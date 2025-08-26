@@ -5,25 +5,25 @@ model BalancingStar "平衡非对称星形连接负载"
   parameter SI.Voltage V=100 "电源电压";
   parameter SI.Frequency f=50 "电源频率";
   parameter SI.Resistance R=10 "负载电阻";
-  parameter SI.Inductance L=(R*sqrt(3))/(2*Modelica.Constants.pi*f) 
+  parameter SI.Inductance L=(R*sqrt(3))/(2*Modelica.Constants.pi*f)
     "负载电感";
-  parameter SI.Capacitance C=1/(R*sqrt(3))/(2*Modelica.Constants.pi*f) 
+  parameter SI.Capacitance C=1/(R*sqrt(3))/(2*Modelica.Constants.pi*f)
     "负载电容";
-  output SI.ComplexCurrent i[m]={resistor.i, inductor.i, capacitor.i} 
+  output SI.ComplexCurrent i[m]={resistor.i, inductor.i, capacitor.i}
     "相电流";
   QuasiStatic.Polyphase.Sources.VoltageSource voltageSource(
-    m=m, 
-    f=f, 
-    V=fill(V, m), 
-    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
+    m=m,
+    f=f,
+    V=fill(V, m),
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
     gamma(fixed=true, start=0)) annotation (Placement(transformation(
-        origin={-80,-20}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-80,-20},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   QuasiStatic.Polyphase.Basic.Star star(m=m) annotation (Placement(
         transformation(
-        origin={-80,-50}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-80,-50},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   QuasiStatic.SinglePhase.Basic.Ground ground 
     annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
@@ -45,33 +45,33 @@ model BalancingStar "平衡非对称星形连接负载"
     annotation (Placement(transformation(extent={{30,40},{50,60}})));
   QuasiStatic.Polyphase.Basic.Star star2(m=m) annotation (Placement(
         transformation(
-        origin={90,-50}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={90,-50},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   QuasiStatic.Polyphase.Basic.PlugToPin_n plugToPin_n1(m=m, k=1) annotation (
       Placement(transformation(
-        origin={70,50}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={70,50},
+        extent={{-10,-10},{10,10}},
         rotation=180)));
   QuasiStatic.Polyphase.Basic.PlugToPin_n plugToPin_n2(k=2, m=m) annotation (
       Placement(transformation(
-        origin={70,10}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={70,10},
+        extent={{-10,-10},{10,10}},
         rotation=180)));
   QuasiStatic.Polyphase.Basic.PlugToPin_n plugToPin_n3(k=3, m=m) annotation (
       Placement(transformation(
-        origin={70,-30}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={70,-30},
+        extent={{-10,-10},{10,10}},
         rotation=180)));
   QuasiStatic.SinglePhase.Sensors.CurrentSensor currentSensor0 annotation (
       Placement(transformation(
-        origin={-30,-60}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-30,-60},
+        extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.ComplexBlocks.ComplexMath.ComplexToPolar complexToPolar[m] 
     annotation (Placement(transformation(
-        origin={-30,-20}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-30,-20},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
 equation
   connect(ground.pin, star.pin_n) 
@@ -84,7 +84,7 @@ equation
     annotation (Line(points={{-50,10},{-40,10}}, color={85,170,255}));
   connect(powerSensor.voltageP, powerSensor.currentP) annotation (Line(
         points={{-60,20},{-70,20},{-70,10}}, color={85,170,255}));
-  connect(powerSensor.voltageN, star.plug_p) annotation (Line(points={{-60, 
+  connect(powerSensor.voltageN, star.plug_p) annotation (Line(points={{-60,
           0},{-60,-40},{-80,-40}}, color={85,170,255}));
   connect(currentSensor.plug_n, plugToPin_p2.plug_p) 
     annotation (Line(points={{-20,10},{8,10}}, color={85,170,255}));
@@ -104,9 +104,9 @@ equation
     annotation (Line(points={{50,10},{68,10}}, color={85,170,255}));
   connect(resistor.pin_n, plugToPin_n3.pin_n) 
     annotation (Line(points={{50,-30},{68,-30}}, color={85,170,255}));
-  connect(plugToPin_n1.plug_n, star2.plug_p) annotation (Line(points={{72,50},{90, 
+  connect(plugToPin_n1.plug_n, star2.plug_p) annotation (Line(points={{72,50},{90,
           50},{90,-40}}, color={85,170,255}));
-  connect(plugToPin_n2.plug_n, star2.plug_p) annotation (Line(points={{72,10},{90, 
+  connect(plugToPin_n2.plug_n, star2.plug_p) annotation (Line(points={{72,10},{90,
           10},{90,-40}}, color={85,170,255}));
   connect(plugToPin_n3.plug_n, star2.plug_p) annotation (Line(points={{72,-30},{
           90,-30},{90,-40}}, color={85,170,255}));
@@ -123,6 +123,6 @@ equation
 <p>
 P.Vaske，Berechnung von Drehstromschaltungen（德语，多相电路的计算），Teubner 1973年，第42页，例18
 </p>
-</html>"), 
+</html>"),
        experiment(StopTime=1.0, Interval=0.001));
 end BalancingStar;

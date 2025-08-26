@@ -12,8 +12,8 @@ model Motor "r3电机的模型，包括电流控制器"
     annotation(Placement(transformation(extent = {{90, -10}, {110, 10}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage Vs 
     annotation(Placement(transformation(
-    origin = {-80, -40}, 
-    extent = {{-10, 10}, {10, -10}}, 
+    origin = {-80, -40},
+    extent = {{-10, 10}, {10, -10}},
     rotation = 270)));
   Modelica.Electrical.Analog.Ideal.IdealOpAmp power 
     annotation(Placement(transformation(extent = {{40, 50}, {60, 70}})));
@@ -23,17 +23,17 @@ model Motor "r3电机的模型，包括电流控制器"
     annotation(Placement(transformation(extent = {{30, -10}, {50, 10}})));
   Modelica.Electrical.Analog.Basic.Inductor La(L = (250 / (2 * D * w))) 
     annotation(Placement(transformation(
-    origin = {80, 30}, 
-    extent = {{-10, -10}, {10, 10}}, 
+    origin = {80, 30},
+    extent = {{-10, -10}, {10, 10}},
     rotation = 270)));
   Modelica.Electrical.Analog.Basic.Resistor Ra(R = 250) 
     annotation(Placement(transformation(
-    origin = {80, 60}, 
-    extent = {{-10, -10}, {10, 10}}, 
+    origin = {80, 60},
+    extent = {{-10, -10}, {10, 10}},
     rotation = 270)));
   Modelica.Electrical.Analog.Basic.Resistor Rd2(R = 100) 
-    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, 
-    rotation = 90, 
+    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}},
+    rotation = 90,
     origin = {-80, -10})));
   Modelica.Electrical.Analog.Basic.Capacitor C(C = 0.004 * D / w) 
     annotation(Placement(transformation(extent = {{0, 60}, {20, 80}})));
@@ -47,20 +47,20 @@ model Motor "r3电机的模型，包括电流控制器"
     annotation(Placement(transformation(extent = {{41, 82}, {56, 98}})));
   Modelica.Electrical.Analog.Basic.Resistor Rp2(R = 50) 
     annotation(Placement(transformation(
-    origin = {20, 90}, 
-    extent = {{-8, -8}, {8, 8}}, 
+    origin = {20, 90},
+    extent = {{-8, -8}, {8, 8}},
     rotation = 180)));
   Modelica.Electrical.Analog.Basic.Resistor Rd4(R = 100) 
     annotation(Placement(transformation(extent = {{-50, 0}, {-30, 20}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage hall2 
     annotation(Placement(transformation(
-    origin = {-60, -40}, 
-    extent = {{10, 10}, {-10, -10}}, 
+    origin = {-60, -40},
+    extent = {{10, 10}, {-10, -10}},
     rotation = 90)));
   Modelica.Electrical.Analog.Basic.Resistor Rd3(R = 100) 
     annotation(Placement(transformation(
-    origin = {-60, -10}, 
-    extent = {{-10, -10}, {10, 10}}, 
+    origin = {-60, -10},
+    extent = {{-10, -10}, {10, 10}},
     rotation = 90)));
   Modelica.Electrical.Analog.Basic.Ground g1 
     annotation(Placement(transformation(extent = {{-90, -74}, {-70, -54}})));
@@ -70,25 +70,25 @@ model Motor "r3电机的模型，包括电流控制器"
     annotation(Placement(transformation(extent = {{-30, -20}, {-10, 0}})));
   Modelica.Electrical.Analog.Sensors.CurrentSensor hall1 
     annotation(Placement(transformation(
-    origin = {20, -40}, 
-    extent = {{-10, -10}, {10, 10}}, 
+    origin = {20, -40},
+    extent = {{-10, -10}, {10, 10}},
     rotation = 270)));
   Modelica.Electrical.Analog.Basic.Ground g4 
     annotation(Placement(transformation(extent = {{10, -74}, {30, -54}})));
   Modelica.Electrical.Analog.Basic.Ground g5 
     annotation(Placement(transformation(
-    origin = {-6, 90}, 
-    extent = {{-10, -10}, {10, 10}}, 
+    origin = {-6, 90},
+    extent = {{-10, -10}, {10, 10}},
     rotation = 270)));
   Modelica.Mechanics.Rotational.Sensors.AngleSensor phi 
     annotation(Placement(transformation(
-    origin = {80, -40}, 
-    extent = {{-10, -10}, {10, 10}}, 
+    origin = {80, -40},
+    extent = {{-10, -10}, {10, 10}},
     rotation = 270)));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speed 
     annotation(Placement(transformation(
-    origin = {50, -40}, 
-    extent = {{-10, -10}, {10, 10}}, 
+    origin = {50, -40},
+    extent = {{-10, -10}, {10, 10}},
     rotation = 270)));
   Modelica.Mechanics.Rotational.Components.Inertia Jmotor(
     J = J) 
@@ -144,35 +144,35 @@ equation
   connect(OpI.p1, diff.n2) annotation(Line(points = {{0, 38}, {0, 30}, {-50, 30}, {-50, 34}}, color = {0, 0, 255}));
   connect(Jmotor.flange_b, flange_motor) 
     annotation(Line(
-    points = {{90, 0}, {100, 0}}, 
-    color = {128, 128, 128}, 
+    points = {{90, 0}, {100, 0}},
+    color = {128, 128, 128},
     thickness = 0.5));
   connect(phi.phi, axisControlBus.motorAngle) 
     annotation(Line(points = {{80, -51}, {80, -99.9}, {0.1, -99.9}}, color = {0, 0, 127}), Text(
-    string = "%second", 
-    index = 1, 
+    string = "%second",
+    index = 1,
     extent = {{6, -3}, {6, -3}}));
   connect(speed.w, axisControlBus.motorSpeed) 
     annotation(Line(points = {{50, -51}, {50, -98}, {0.1, -98}, {0.1, -99.9}}, color = {0, 0, 127}), Text(
-    string = "%second", 
-    index = 1, 
+    string = "%second",
+    index = 1,
     extent = {{6, -3}, {6, -3}}));
   connect(hall1.i, axisControlBus.current) 
     annotation(Line(points = {{9, -40}, {0, -40}, {0, -100}, {0.1, -100}, {0.1, -99.9}}, color = {0, 0, 127}), Text(
-    string = "%second", 
-    index = 2, 
+    string = "%second",
+    index = 2,
     extent = {{0, 3}, {0, 3}}));
   connect(hall1.i, convert1.u) annotation(Line(points = {{9, -40}, {-22.8, -40}}, color = {0, 0, 127}));
-  connect(convert1.y, hall2.v) annotation(Line(points = {{-36.6, -40}, {-48, -40}}, 
+  connect(convert1.y, hall2.v) annotation(Line(points = {{-36.6, -40}, {-48, -40}},
     color = {0, 0, 127}));
   connect(convert2.u, axisControlBus.current_ref) 
-    annotation(Line(points = {{-62.8, -91}, {-50, -91}, {-50, -100}, {0.1, -100}, {0.1, -99.9}}, 
-    color = {0, 0, 127}), 
+    annotation(Line(points = {{-62.8, -91}, {-50, -91}, {-50, -100}, {0.1, -100}, {0.1, -99.9}},
+    color = {0, 0, 127}),
     Text(
-    string = "%second", 
-    index = 1, 
+    string = "%second",
+    index = 1,
     extent = {{6, 3}, {6, 3}}));
-  connect(convert2.y, Vs.v) annotation(Line(points = {{-76.6, -91}, {-100, -91}, {-100, -40}, {-92, -40}}, 
+  connect(convert2.y, Vs.v) annotation(Line(points = {{-76.6, -91}, {-100, -91}, {-100, -40}, {-92, -40}},
     color = {0, 0, 127}));
   connect(emf.flange, Jmotor.flange_a) annotation(Line(
     points = {{50, 0}, {70, 0}}));
@@ -182,11 +182,11 @@ equation
 关节1的电机给出了默认值。
 电机输入的是期望电流(实际电流与电机产生的转矩成正比)。
 </p>
-</html>"), 
+</html>"),
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {Text(
-    extent = {{-150, 110}, {150, 70}}, 
-    textString = "%name", 
+    extent = {{-150, 110}, {150, 70}},
+    textString = "%name",
     textColor = {0, 0, 255})}));
 end Motor;

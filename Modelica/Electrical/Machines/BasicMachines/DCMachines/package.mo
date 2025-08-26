@@ -9,7 +9,7 @@ package DCMachines "直流电机模型"
 <li>DC_ElectricalExcited: 带电励磁或分开励磁的直流电机</li>
 <li>DC_SeriesExcited: 带串联励磁的直流电机</li>
 </ul>
-</html>", 
+</html>",
       revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

@@ -2,7 +2,7 @@
 class Discrimination "机器模型的区分"
   extends Modelica.Icons.Information;
   annotation (
-    preferredView="info", 
+    preferredView="info",
     Documentation(info="<html>
   <table>
   <thead>

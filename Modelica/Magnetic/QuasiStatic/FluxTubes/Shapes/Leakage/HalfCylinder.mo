@@ -3,9 +3,9 @@ model HalfCylinder "通过半圆柱体边缘的泄漏通量"
 
   extends BaseClasses.Leakage;
 
-  parameter SI.Length l=0.1 
+  parameter SI.Length l=0.1
   "轴向长度与通量正交(圆柱极=2*pi*r, r>>边间距离)" 
-    annotation (Dialog(group="Parameters", groupImage= 
+    annotation (Dialog(group="Parameters", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Leakage/HalfCylinder.png"));
 
 equation

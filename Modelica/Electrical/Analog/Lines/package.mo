@@ -27,13 +27,13 @@ Christoph Clau&szlig;
 Copyright &copy; 1998-2020, Modelica Association and contributors
 </p>
 </html>"), Icon(graphics={
-        Line(points={{-60,50},{-90,50}}), 
+        Line(points={{-60,50},{-90,50}}),
         Rectangle(
-          extent={{-60,60},{60,-60}}), 
-        Line(points={{-60,-50},{-90,-50}}), 
-        Line(points={{36,20},{-36,20}}), 
-        Line(points={{-36,40},{-36,0}}), 
-        Line(points={{36,40},{36,0}}), 
-        Line(points={{60,50},{90,50}}), 
+          extent={{-60,60},{60,-60}}),
+        Line(points={{-60,-50},{-90,-50}}),
+        Line(points={{36,20},{-36,20}}),
+        Line(points={{-36,40},{-36,0}}),
+        Line(points={{36,40},{36,0}}),
+        Line(points={{60,50},{90,50}}),
         Line(points={{60,-50},{90,-50}})}));
 end Lines;

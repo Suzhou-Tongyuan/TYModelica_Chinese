@@ -15,7 +15,7 @@ package Blocks "空间矢量转换块"
 空间矢量被定义为长度为2的向量，
 第一个元素表示空间矢量的实部，第二个元素表示空间矢量的虚部。
 </p>
-</html>", 
+</html>",
       revisions="<html>
   <dl>
   <dt><strong>主要作者：</strong></dt>

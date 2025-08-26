@@ -1,42 +1,42 @@
 ﻿within Modelica.Mechanics.MultiBody.Parts;
-model PointMass 
+model PointMass
   "忽略了刚体旋转和转动惯量张量的刚体(具有6个潜在状态变量)"
 
   import Modelica.Mechanics.MultiBody.Types;
-  Interfaces.Frame_a frame_a 
+  Interfaces.Frame_a frame_a
     "固定在质心点的坐标系" annotation(Placement(
     transformation(extent = {{-16, -16}, {16, 16}})));
-  parameter Boolean animation = true 
+  parameter Boolean animation = true
     "=true，如果要启用动画(显示球体)";
   parameter SI.Mass m(min = 0) "质点的质量";
-  input SI.Diameter sphereDiameter = world.defaultBodyDiameter 
+  input SI.Diameter sphereDiameter = world.defaultBodyDiameter
     "球体直径" annotation(Dialog(
-    tab = "动画", 
-    group = "如果animation=true", 
+    tab = "动画",
+    group = "如果animation=true",
     enable = animation));
-  input Types.Color sphereColor = Modelica.Mechanics.MultiBody.Types.Defaults.BodyColor 
+  input Types.Color sphereColor = Modelica.Mechanics.MultiBody.Types.Defaults.BodyColor
     "球体颜色" annotation(Dialog(
-    colorSelector = true, 
-    tab = "动画", 
-    group = "如果animation=true", 
+    colorSelector = true,
+    tab = "动画",
+    group = "如果animation=true",
     enable = animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
     "环境光的反射(=0：光线完全被吸收)" 
     annotation(Dialog(
-    tab = "动画", 
-    group = "如果animation=true", 
+    tab = "动画",
+    group = "如果animation=true",
     enable = animation));
-  parameter StateSelect stateSelect = StateSelect.avoid 
+  parameter StateSelect stateSelect = StateSelect.avoid
     "使用frame_a.r_0、v_0(=der(frame_a.r_0))作为状态的优先级" 
     annotation(Dialog(tab = "高级"));
 
-  SI.Position r_0[3](start = {0, 0, 0}, each stateSelect = stateSelect) 
+  SI.Position r_0[3](start = {0, 0, 0}, each stateSelect = stateSelect)
     "从全局坐标系原点到frame_a坐标系原点的位置矢量，以全局坐标系为基础解析" 
     annotation(Dialog(group = "初始值", showStartAttribute = true));
-  SI.Velocity v_0[3](start = {0, 0, 0}, each stateSelect = stateSelect) 
+  SI.Velocity v_0[3](start = {0, 0, 0}, each stateSelect = stateSelect)
     "frame_a的绝对速度，以全局坐标系为基础解析(=der(r_0))" 
     annotation(Dialog(group = "初始值", showStartAttribute = true));
-  SI.Acceleration a_0[3](start = {0, 0, 0}) 
+  SI.Acceleration a_0[3](start = {0, 0, 0})
     "frame_a的绝对加速度，以全局坐标系为基础解析(=der(v_0))" 
     annotation(Dialog(group = "初始值", showStartAttribute = true));
 protected
@@ -44,16 +44,16 @@ protected
 
   // 动画声明
   Visualizers.Advanced.Shape sphere(
-    shapeType = "sphere", 
-    color = sphereColor, 
-    specularCoefficient = specularCoefficient, 
-    length = sphereDiameter, 
-    width = sphereDiameter, 
-    height = sphereDiameter, 
-    lengthDirection = {1, 0, 0}, 
-    widthDirection = {0, 1, 0}, 
-    r_shape = -{1, 0, 0} * sphereDiameter / 2, 
-    r = frame_a.r_0, 
+    shapeType = "sphere",
+    color = sphereColor,
+    specularCoefficient = specularCoefficient,
+    length = sphereDiameter,
+    width = sphereDiameter,
+    height = sphereDiameter,
+    lengthDirection = {1, 0, 0},
+    widthDirection = {0, 1, 0},
+    r_shape = -{1, 0, 0} * sphereDiameter / 2,
+    r = frame_a.r_0,
     R = frame_a.R) if world.enableAnimation and animation;
 equation
   // 如果可能的话，不要将连接器用作根
@@ -82,19 +82,19 @@ equation
   frame_a.f = m * Frames.resolve2(frame_a.R, a_0 - world.gravityAcceleration(
     r_0));
   annotation(Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
     Text(
-    extent = {{150, -90}, {-150, -60}}, 
-    textString = "m=%m"), 
+    extent = {{150, -90}, {-150, -60}},
+    textString = "m=%m"),
     Text(
-    extent = {{-150, 100}, {150, 60}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255}), 
+    extent = {{-150, 100}, {150, 60}},
+    textString = "%name",
+    textColor = {0, 0, 255}),
     Ellipse(
-    extent = {{-50, 50}, {50, -50}}, 
-    lineColor = {0, 24, 48}, 
-    fillPattern = FillPattern.Sphere, 
+    extent = {{-50, 50}, {50, -50}},
+    lineColor = {0, 24, 48},
+    fillPattern = FillPattern.Sphere,
     fillColor = {0, 127, 255})}), Documentation(info = "<html>
 <p>
 转动惯量张量被忽略的<strong>刚体</strong>。

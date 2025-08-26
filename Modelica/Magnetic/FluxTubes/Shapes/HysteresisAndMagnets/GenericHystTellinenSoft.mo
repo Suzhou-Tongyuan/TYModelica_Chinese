@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
-model GenericHystTellinenSoft 
+model GenericHystTellinenSoft
   "基于Tellinen模型和简单tanh()函数的具有软磁滞回的通用磁通管"
   // 对话组滞后
   parameter SI.MagneticFluxDensity Js = 1.8 "饱和偏振" annotation (Dialog(group="Hysteresis", groupImage="modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/HysteresisAndMagnets/GenericHystTellinenSoft/SoftMagneticHysteresis2.png"));
@@ -28,9 +28,9 @@ equation
 </td>
 </tr>
 </table>
-</html>"), 
+</html>"),
      Icon(graphics={Text(
-          extent={{40,0},{40,-30}}, 
-          textColor={255,128,0}, 
+          extent={{40,0},{40,-30}},
+          textColor={255,128,0},
           textString="TS")}));
 end GenericHystTellinenSoft;

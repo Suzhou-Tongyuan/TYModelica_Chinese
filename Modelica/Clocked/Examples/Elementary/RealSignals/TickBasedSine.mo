@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.Examples.Elementary.RealSignals;
-model TickBasedSine 
+model TickBasedSine
   "使用基于时钟刻度的正弦信号源模块示例"
    extends Modelica.Icons.Example;
 Modelica.Clocked.RealSignals.Sampler.AssignClock assignClock1 
@@ -8,24 +8,24 @@ Modelica.Clocked.ClockSignals.Clocks.PeriodicRealClock
   periodicClock1(period=0.1) 
   annotation (Placement(transformation(extent={{-70,-18},{-58,-6}})));
 Modelica.Clocked.RealSignals.TickBasedSources.Sine sine(
-  periodTicks=10, 
-  periodOffset=2, 
+  periodTicks=10,
+  periodOffset=2,
     startTick=4) 
   annotation (Placement(transformation(extent={{-72,20},{-52,40}})));
 Modelica.Blocks.Sources.Sine sineRef(
-  f=1, 
-  phase=1/5*(2*Modelica.Constants.pi), 
+  f=1,
+  phase=1/5*(2*Modelica.Constants.pi),
   startTime=0.3) 
   annotation (Placement(transformation(extent={{-72,58},{-52,78}})));
 equation
 
 connect(periodicClock1.y, assignClock1.clock) annotation (Line(
-    points={{-57.4,-12},{-18,-12},{-18,22.8}}, 
-    color={175,175,175}, 
-    pattern=LinePattern.Dot, 
+    points={{-57.4,-12},{-18,-12},{-18,22.8}},
+    color={175,175,175},
+    pattern=LinePattern.Dot,
     thickness=0.5));
 connect(sine.y, assignClock1.u)       annotation (Line(
-    points={{-51,30},{-25.2,30}}, 
+    points={{-51,30},{-25.2,30}},
     color={0,0,127}));
 annotation (experiment(StopTime=1.0), Documentation(info="<html>
 <p>

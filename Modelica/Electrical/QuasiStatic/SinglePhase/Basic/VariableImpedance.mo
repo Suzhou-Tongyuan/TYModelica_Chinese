@@ -9,11 +9,11 @@ model VariableImpedance "单相可变阻抗"
   extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(T=T_ref);
   Modelica.ComplexBlocks.Interfaces.ComplexInput Z_ref "可变复阻抗" 
     annotation (Placement(transformation(
-        origin={0,120}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={0,120},
+        extent={{-20,-20},{20,20}},
         rotation=270), iconTransformation(
-        extent={{-20,-20},{20,20}}, 
-        rotation=270, 
+        extent={{-20,-20},{20,20}},
+        rotation=270,
         origin={0,120})));
   parameter Boolean frequencyDependent = false "如果为真，考虑频率依赖性" 
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
@@ -24,31 +24,31 @@ model VariableImpedance "单相可变阻抗"
   SI.Resistance R_ref=real(Z_ref) "阻抗的电阻性分量，电阻";
   SI.Reactance X_ref=imag(Z_ref) "阻抗的反应性分量，电抗";
 equation
-  assert((1 + alpha_ref*(T_heatPort - T_ref)) >= Modelica.Constants.eps, 
+  assert((1 + alpha_ref*(T_heatPort - T_ref)) >= Modelica.Constants.eps,
     "模型范围外的温度！");
   R_actual = R_ref*(1 + alpha_ref*(T_heatPort - T_ref));
   X_actual = X_ref * (if not frequencyDependent then 1 else 
     (if X_ref>=0 then omega/(2*Modelica.Constants.pi*f_ref) else 2*Modelica.Constants.pi*f_ref/omega));
   v = Complex(R_actual, X_actual) * i;
   LossPower = real(v*conj(i));
-  annotation (defaultComponentName="impedance", 
+  annotation (defaultComponentName="impedance",
     Icon(graphics={
-        Line(points={{60,0},{90,0}}, color={85,170,255}), 
-        Line(points={{-90,0},{-60,0}}, color={85,170,255}), 
+        Line(points={{60,0},{90,0}}, color={85,170,255}),
+        Line(points={{-90,0},{-60,0}}, color={85,170,255}),
         Rectangle(
-          extent={{-70,30},{70,-30}}, 
-          lineColor={85,170,255}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-70,30},{70,-30}},
+          lineColor={85,170,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Polygon(
-          points={{-70,-30},{70,30},{70,-30},{-70,-30}}, 
-          lineColor={85,170,255}, 
-          fillColor={85,170,255}, 
-          fillPattern=FillPattern.Solid), 
+          points={{-70,-30},{70,30},{70,-30},{-70,-30}},
+          lineColor={85,170,255},
+          fillColor={85,170,255},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,90},{150,50}}, 
-          textString="%name", 
-          textColor={0,0,255})}), 
+          extent={{-150,90},{150,50}},
+          textString="%name",
+          textColor={0,0,255})}),
     Documentation(info="<html>
 
 <p>阻抗模型表示电阻和电感或电容器的<strong>串联</strong>连接。<br>

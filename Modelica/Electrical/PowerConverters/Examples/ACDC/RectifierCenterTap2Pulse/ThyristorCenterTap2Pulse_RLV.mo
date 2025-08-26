@@ -1,11 +1,11 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.RectifierCenterTap2Pulse;
-model ThyristorCenterTap2Pulse_RLV 
+model ThyristorCenterTap2Pulse_RLV
   "带中心点和电阻电感负载的双脉冲可控硅整流器及电压"
   extends ExampleTemplates.ThyristorCenterTap2Pulse(pulse2(
         constantFiringAngle=constantFiringAngle));
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
-  parameter SI.Angle constantFiringAngle=30*pi/180 
+  parameter SI.Angle constantFiringAngle=30*pi/180
     "触发角";
   parameter SI.Resistance R=20 "负载电阻";
   parameter SI.Inductance L=1 "负载电感" 
@@ -13,18 +13,18 @@ model ThyristorCenterTap2Pulse_RLV
   parameter SI.Voltage VDC=-120 "直流负载偏置电压";
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
       Placement(transformation(
-        origin={30,30}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={30,30},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
-  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0, 
+  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0,
         fixed=true)) annotation (Placement(transformation(
-        origin={30,0}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={30,0},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
-  Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V= 
+  Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
         VDC) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={30,-30})));
 equation
   connect(resistor.n, inductor.p) annotation (Line(
@@ -37,9 +37,9 @@ equation
       points={{30,40},{-10,40},{-10,40},{-20,40}}, color={0,0,255}));
   annotation (
     experiment(
-      StopTime=0.1, 
-      Tolerance=1e-06, 
-      Interval=0.0002), 
+      StopTime=0.1,
+      Tolerance=1e-06,
+      Interval=0.0002),
     Documentation(info="<html>
 <p>该示例展示了带有R-L负载的受控中心点双脉冲整流器，其中包括直流电压源。该示例中的额外直流电压源可以产生负平均负载电压。</p>
 

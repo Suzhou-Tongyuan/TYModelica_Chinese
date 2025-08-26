@@ -10,10 +10,10 @@ connector Plug "具有m个引脚的电气多相插头"
 通常情况下，连接器 PositivePlug用于电气组件的正极，连接器NegativePlug用于负极。<br>
 连接器Plug是一个复合连接器，包含m个引脚(Modelica.Electrical.Analog.Interfaces.Pin)。
 </p>
-</html>"), 
-       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
+</html>"),
+       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={Text(
-          extent={{-100,-99},{100,-179}}, 
-          textColor={0,0,255}, 
+          extent={{-100,-99},{100,-179}},
+          textColor={0,0,255},
           textString="%name")}));
 end Plug;

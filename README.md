@@ -15,17 +15,23 @@
 
 ## 2. 使用说明
 ### 2.1 模型库适配版本
-&emsp;&emsp;同元基础库中文版可在Sysplorer 2023a、Sysplorer 2023b、Sysplorer 2024a、Sysplorer 2024b、Sysplorer 2025a中正常加载使用。
+&emsp;&emsp;同元基础库中文版可在Sysplorer 2023a、Sysplorer 2023b、Sysplorer 2024a、Sysplorer 2024b、Sysplorer 2025a、Sysplorer 2025b 中正常加载使用。
 ### 2.2 模型库发布规则
 &emsp;&emsp;同元基础库中文版模型沿用Modelica协会的3-Clause BSD许可协议。此Modelica软件包为免费软件包，使用完全由您自行承担风险；根据3-Clause BSD许可证条款，您可以对其进行再分发和/或修改。有关许可条件（包括免责声明），请访问：https://modelica.org/licenses/modelica-3-clause-bsd。
 ### 2.3 模型库使用步骤
 &emsp;&emsp;从Mohub下载Modelica.mol文件后，即可在MWORKS.Sysplorer中使用同元基础库中文版。
 1.打开Sysplorer软件，卸载Modelica标准库；
-![卸载](assets/img.png)
+<p align="center">
+  <img src="/mohub/resource/question/image_1745200640527.png" width="1000">
+</p>
 2.加载同元基础库中文版，切换至用户模型，正常使用；
-![加载](assets/img_1.png)
+<p align="center">
+  <img src="/mohub/resource/question/image_1745564784897.png" width="1000">
+</p>
 3.用户模型中的模型描述、文档浏览器界面以及参数面板界面等均完成汉化。
-![描述](assets/img_2.png)
+<p align="center">
+  <img src="/mohub/resource/question/image_1745201684697.png" width="1000">
+</p>
 
 ## 3. 未来的翻译改进方向
 
@@ -37,6 +43,12 @@
 **V0.0.1，2025-04-21 09:26**
 - 初始版本
 
+**V0.0.2，2025-08-22 16:30**
+- 适配到同元基础库的2025b版本
+- 优化翻译
+
+## 使用许可
+本模型库版权由[Tongyuan]版权所有，未经许可，不得用于商业用途。
 
 [Tongyuan]: <http://mohub.net/user/6/repo>
 

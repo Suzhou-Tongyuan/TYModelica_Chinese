@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function from_Q 
+function from_Q
   "从四元数方向对象Q返回方向对象R"
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q 
+  input Quaternions.Orientation Q
     "将坐标系1旋转到坐标系2的四元数方向对象";
-  input SI.AngularVelocity w[3] 
+  input SI.AngularVelocity w[3]
     "坐标系2相对于坐标系1的角速度，在坐标系2下解析";
   output Orientation R "将坐标系1旋转到坐标系2的方向对象";
 algorithm
@@ -13,8 +13,8 @@ algorithm
     skew(Q[1:3]));
 */
   R := Orientation([2*(Q[1]*Q[1] + Q[4]*Q[4]) - 1, 2*(Q[1]*Q[2] + Q[3]*Q[4]),
-     2*(Q[1]*Q[3] - Q[2]*Q[4]); 2*(Q[2]*Q[1] - Q[3]*Q[4]), 2*(Q[2]*Q[2] + Q[4] 
-    *Q[4]) - 1, 2*(Q[2]*Q[3] + Q[1]*Q[4]); 2*(Q[3]*Q[1] + Q[2]*Q[4]), 2*(Q[3] 
+     2*(Q[1]*Q[3] - Q[2]*Q[4]); 2*(Q[2]*Q[1] - Q[3]*Q[4]), 2*(Q[2]*Q[2] + Q[4]
+    *Q[4]) - 1, 2*(Q[2]*Q[3] + Q[1]*Q[4]); 2*(Q[3]*Q[1] + Q[2]*Q[4]), 2*(Q[3]
     *Q[2] - Q[1]*Q[4]), 2*(Q[3]*Q[3] + Q[4]*Q[4]) - 1],w= w);
   annotation(Inline=true, Documentation(info="<html>
 <h4>语法</h4>

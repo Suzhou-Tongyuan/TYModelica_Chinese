@@ -1,13 +1,13 @@
 ﻿within Modelica.Mechanics.Rotational.Sensors;
-model TorqueSensor 
+model TorqueSensor
   "测量两个一维转动接口之间扭矩的理想传感器（= flange_a.tau）"
 
   extends Rotational.Interfaces.PartialRelativeSensor;
-  Modelica.Blocks.Interfaces.RealOutput tau(unit="N.m") 
+  Modelica.Blocks.Interfaces.RealOutput tau(unit="N.m")
     "一维转动接口flange_a和flange_b上的扭矩（tau = flange_a.tau = -flange_b.tau）作为输出信号" 
     annotation (Placement(transformation(
-        origin={-80,-110}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={-80,-110},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
 
 equation
@@ -22,15 +22,15 @@ equation
 
 （用于进一步使用Modelica.Blocks库中的块进行处理）。
 </p>
-</html>"), 
+</html>"),
        Icon(
-    coordinateSystem(preserveAspectRatio=true, 
-      extent={{-100.0,-100.0},{100.0,100.0}}), 
+    coordinateSystem(preserveAspectRatio=true,
+      extent={{-100.0,-100.0},{100.0,100.0}}),
       graphics={
-    Line(points={{-80.0,-100.0},{-80.0,0.0}}, 
-      color={0,0,127}), 
+    Line(points={{-80.0,-100.0},{-80.0,0.0}},
+      color={0,0,127}),
         Text(
-          extent={{-50,-14},{50,-54}}, 
-          textColor={64,64,64}, 
+          extent={{-50,-14},{50,-54}},
+          textColor={64,64,64},
           textString="N.m")}));
 end TorqueSensor;

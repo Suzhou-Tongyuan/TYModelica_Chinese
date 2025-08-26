@@ -3,7 +3,7 @@ package Dy "变压器：一次侧D / 二次侧y"
   extends Modelica.Icons.VariantsPackage;
   annotation (Documentation(info="<html>
 这个包含了所有可能矢量组中主D连接/次级y连接的变压器。
-</html>", 
+</html>",
     revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

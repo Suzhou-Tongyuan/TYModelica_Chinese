@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.InductionMachines;
-model IMC_withLosses 
+model IMC_withLosses
   "感应电机与鼠笼和损耗"
   extends Modelica.Icons.Example;
   constant Integer m=3 "相数";
@@ -16,24 +16,24 @@ protected
   parameter SI.Power lossNominal=PsNominal-PNominal "名义上的损失";
   parameter Real etaNominal=0.9049 "名义上的效率";
   parameter SI.Frequency fNominal=aimcData.fsNominal "标称频率";
-  parameter SI.AngularVelocity wNominal=from_rpm(1462.5) 
+  parameter SI.AngularVelocity wNominal=from_rpm(1462.5)
     "额定速度";
-  parameter SI.Torque TNominal=PNominal/wNominal 
+  parameter SI.Torque TNominal=PNominal/wNominal
     "额定转矩";
-  parameter SI.Temperature TempNominal=from_degC(90) 
+  parameter SI.Temperature TempNominal=from_degC(90)
     "名义上的温度";
   SI.Power Pel=electricalPowerSensor.P;
   SI.ReactivePower Qel=electricalPowerSensor.Q;
   SI.ApparentPower Sel=sqrt(Pel^2 + Qel^2);
-  parameter Real Ptable[:]={1E-6,1845,3549,5325,7521,9372,11010,12930, 
+  parameter Real Ptable[:]={1E-6,1845,3549,5325,7521,9372,11010,12930,
       14950,16360,18500,18560,20180,22170} "实测功率数据表";
-  parameter Real Itable[:]={11.0,11.20,12.27,13.87,16.41,18.78,21.07, 
+  parameter Real Itable[:]={11.0,11.20,12.27,13.87,16.41,18.78,21.07,
       23.92,27.05,29.40,32.85,32.95,35.92,39.35} "测量电流数据表";
-  parameter Real wtable[:]=from_rpm({1500,1496,1493,1490,1486,1482,1479,1475,1471, 
+  parameter Real wtable[:]=from_rpm({1500,1496,1493,1490,1486,1482,1479,1475,1471,
       1467,1462,1462,1458,1453}) "Table of measured speed data";
-  parameter Real ctable[:]={0.085,0.327,0.506,0.636,0.741,0.797,0.831, 
+  parameter Real ctable[:]={0.085,0.327,0.506,0.636,0.741,0.797,0.831,
       0.857,0.875,0.887,0.896,0.896,0.902,0.906} "测量功率因数数据表";
-  parameter Real etable[:]={0,0.7250,0.8268,0.8698,0.8929,0.9028,0.9064, 
+  parameter Real etable[:]={0,0.7250,0.8268,0.8698,0.8929,0.9028,0.9064,
       0.9088,0.9089,0.9070,0.9044,0.9043,0.9008,0.8972} "测量效率数据表";
 public
   output SI.Power Pmech=powerSensor.power "机械输出";
@@ -50,53 +50,53 @@ public
   output Real eff_sim=if noEvent(abs(Pel) > Modelica.Constants.small) then Pmech/Pel else 0 "模拟的效率";
   output Real eff_meas=combiTable1Ds.y[4] "测量效率";
   Magnetic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage aimc(
-    p=aimcData.p, 
-    fsNominal=aimcData.fsNominal, 
-    TsRef=aimcData.TsRef, 
-    alpha20s(displayUnit="1/K") = aimcData.alpha20s, 
-    Jr=aimcData.Jr, 
-    Js=aimcData.Js, 
-    frictionParameters=aimcData.frictionParameters, 
-    phiMechanical(fixed=true), 
-    statorCoreParameters=aimcData.statorCoreParameters, 
-    strayLoadParameters=aimcData.strayLoadParameters, 
-    TrRef=aimcData.TrRef, 
-    TsOperational=TempNominal, 
-    TrOperational=TempNominal, 
-    wMechanical(fixed=true, start=2*pi*aimcData.fsNominal/aimcData.p), 
-    Rs=aimcData.Rs*m/3, 
-    Lssigma=aimcData.Lssigma*m/3, 
-    Lszero=aimcData.Lszero*m/3, 
-    Lm=aimcData.Lm*m/3, 
-    Lrsigma=aimcData.Lrsigma*m/3, 
-    Rr=aimcData.Rr*m/3, 
-    effectiveStatorTurns=aimcData.effectiveStatorTurns, 
+    p=aimcData.p,
+    fsNominal=aimcData.fsNominal,
+    TsRef=aimcData.TsRef,
+    alpha20s(displayUnit="1/K") = aimcData.alpha20s,
+    Jr=aimcData.Jr,
+    Js=aimcData.Js,
+    frictionParameters=aimcData.frictionParameters,
+    phiMechanical(fixed=true),
+    statorCoreParameters=aimcData.statorCoreParameters,
+    strayLoadParameters=aimcData.strayLoadParameters,
+    TrRef=aimcData.TrRef,
+    TsOperational=TempNominal,
+    TrOperational=TempNominal,
+    wMechanical(fixed=true, start=2*pi*aimcData.fsNominal/aimcData.p),
+    Rs=aimcData.Rs*m/3,
+    Lssigma=aimcData.Lssigma*m/3,
+    Lszero=aimcData.Lszero*m/3,
+    Lm=aimcData.Lm*m/3,
+    Lrsigma=aimcData.Lrsigma*m/3,
+    Rr=aimcData.Rr*m/3,
+    effectiveStatorTurns=aimcData.effectiveStatorTurns,
     alpha20r=aimcData.alpha20r) 
     annotation (Placement(transformation(extent={{-20,60},{0,80}})));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(
       terminalConnection="D") 
     annotation (Placement(transformation(extent={{-20,76},{0,96}})));
   Modelica.Electrical.Machines.Sensors.ElectricalPowerSensor electricalPowerSensor 
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-40, 
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-40,
             90})));
   Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensor 
-    annotation (Placement(transformation(origin={-70,90}, extent={{-10,10},{10, 
+    annotation (Placement(transformation(origin={-70,90}, extent={{-10,10},{10,
             -10}})));
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage(
-    final m=m, 
-    f=fill(fNominal, m), 
+    final m=m,
+    f=fill(fNominal, m),
     V=fill(sqrt(2/3)*VNominal, m)) annotation (Placement(transformation(
-        origin={-90,70}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-90,70},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
       Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=90, 
+        extent={{10,-10},{-10,10}},
+        rotation=90,
         origin={-90,40})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-90,10}, 
+        origin={-90,10},
         extent={{-10,-10},{10,10}})));
   Modelica.Mechanics.Rotational.Sensors.PowerSensor powerSensor 
     annotation (Placement(transformation(extent={{10,60},{30,80}})));
@@ -107,40 +107,40 @@ public
   Modelica.Blocks.Math.Gain gain(k=-1) 
     annotation (Placement(transformation(extent={{70,0},{90,20}})));
   Modelica.Blocks.Continuous.PI PI(
-    k=0.01, 
-    T=0.01, 
+    k=0.01,
+    T=0.01,
     initType=Modelica.Blocks.Types.Init.InitialState) 
     annotation (Placement(transformation(extent={{40,0},{60,20}})));
   Modelica.Blocks.Math.Feedback feedback 
     annotation (Placement(transformation(extent={{10,20},{30,0}})));
   Modelica.Blocks.Sources.Ramp ramp(
-    height=1.2*PNominal, 
-    offset=0, 
-    startTime=4.5, 
+    height=1.2*PNominal,
+    offset=0,
+    startTime=4.5,
     duration=5.5) 
     annotation (Placement(transformation(extent={{-20,0},{0,20}})));
-  Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(table={{Ptable[j], 
-        Itable[j],wtable[j],ctable[j],etable[j]} for j in 1:size(Ptable, 
+  Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(table={{Ptable[j],
+        Itable[j],wtable[j],ctable[j],etable[j]} for j in 1:size(Ptable,
         1)}, smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative) 
     annotation (Placement(transformation(extent={{40,30},{60,50}})));
   parameter
     Modelica.Electrical.Machines.Utilities.ParameterRecords.IM_SquirrelCageData 
     aimcData(
-    statorCoreParameters(PRef=410, VRef=387.9), 
-    Jr=0.12, 
-    Rs=0.56, 
-    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Copper, 
+    statorCoreParameters(PRef=410, VRef=387.9),
+    Jr=0.12,
+    Rs=0.56,
+    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Copper,
 
-    Lssigma=1.52/(2*pi*fNominal), 
-    frictionParameters(PRef=180, wRef=wNominal), 
+    Lssigma=1.52/(2*pi*fNominal),
+    frictionParameters(PRef=180, wRef=wNominal),
     strayLoadParameters(
-      PRef=0.005*sqrt(3)*VNominal*INominal*pfNominal, 
-      IRef=INominal/sqrt(3), 
-      wRef=wNominal), 
-    Lm=66.4/(2*pi*fNominal), 
-    Lrsigma=2.31/(2*pi*fNominal), 
-    Rr=0.42, 
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Aluminium) 
+      PRef=0.005*sqrt(3)*VNominal*INominal*pfNominal,
+      IRef=INominal/sqrt(3),
+      wRef=wNominal),
+    Lm=66.4/(2*pi*fNominal),
+    Lrsigma=2.31/(2*pi*fNominal),
+    Rr=0.42,
+    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Aluminium)
     "感应电机数据" 
     annotation (Placement(transformation(extent={{-60,12},{-40,32}})));
 
@@ -164,11 +164,11 @@ equation
       points={{-60,90},{-60,90},{-54,90},{-54,90},{-50,90},{-50,90}},     color={0,0,255}));
 
   connect(electricalPowerSensor.plug_nv, star.plug_p) annotation (Line(
-      points={{-40,80},{-40,80},{-40,50},{-90,50}}, 
+      points={{-40,80},{-40,80},{-40,50},{-90,50}},
                                   color={0,0,255}));
   connect(electricalPowerSensor.plug_ni, terminalBox.plugSupply) 
     annotation (Line(
-      points={{-30,90},{-30,90},{-10,90},{-10,90},{-10,90},{-10,82}}, 
+      points={{-30,90},{-30,90},{-10,90},{-10,90},{-10,90},{-10,82}},
                                   color={0,0,255}));
   connect(aimc.flange, powerSensor.flange_a) annotation (Line(
       points={{0,70},{10,70}}));
@@ -180,7 +180,7 @@ equation
       points={{91,10},{100,10},{100,70},{92,70}}, color={0,0,127}));
   connect(sineVoltage.plug_p, currentQuasiRMSSensor.plug_p) annotation (
       Line(
-      points={{-90,80},{-90,80},{-90,90},{-88,90},{-88,90},{-80,90}}, 
+      points={{-90,80},{-90,80},{-90,90},{-88,90},{-88,90},{-80,90}},
                                   color={0,0,255}));
   connect(powerSensor.power, feedback.u2) annotation (Line(
       points={{12,59},{12,40},{20,40},{20,18}},  color={0,0,127}));
@@ -193,7 +193,7 @@ equation
   connect(powerSensor.power, combiTable1Ds.u) annotation (Line(
       points={{12,59},{12,40},{38,40}},   color={0,0,127}));
   annotation (
-    experiment(StopTime=5.0, Interval=1E-4, Tolerance=1e-06), 
+    experiment(StopTime=5.0, Interval=1E-4, Tolerance=1e-06),
     Documentation(info="<html>
 <ul>
 <li>模拟5秒:机器以标称速度启动，在机器中积累焊剂.</li>

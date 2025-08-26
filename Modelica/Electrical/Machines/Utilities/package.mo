@@ -4,7 +4,7 @@ package Utilities "测试用的辅助模型库"
 
   annotation (Documentation(info="<html>
 该库包含用于测试示例的实用组件。
-</html>", 
+</html>",
         revisions="<html>
 <dl>
   <dt><strong>主要作者:</strong></dt>

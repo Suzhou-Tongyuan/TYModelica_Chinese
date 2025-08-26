@@ -91,7 +91,7 @@ equation
     vS = 0;
   end if;
   LossPower = vcb * icb / br_t + veb * ieb / bf_t + (icb - ieb) * qbk * (C.v - E.v);
-  annotation(defaultComponentName = "pnp", 
+  annotation(defaultComponentName = "pnp",
     Documentation(info = "<html>
 <p>这个模型是根据Ebers-Moll理论的简单PNP型双极结型晶体管模型。
 </p>
@@ -117,26 +117,26 @@ Bf  Br  Is     Vak  Tauf    Taur  Ccs   Cje     Cjc     Phie  Me   PHic   Mc    
        Christoph Clauss<br>创建<br>
        </li>
 </ul>
-</html>"), 
+</html>"),
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-20, 40}, {-20, -40}}, color = {0, 0, 255}), 
-    Line(points = {{-20, 0}, {-100, 0}}, color = {0, 0, 255}), 
-    Line(points = {{91, 60}, {30, 60}}, color = {0, 0, 255}), 
-    Line(points = {{30, 60}, {-20, 10}}, color = {0, 0, 255}), 
-    Line(points = {{-20, -10}, {30, -60}}, color = {0, 0, 255}), 
-    Line(points = {{30, -60}, {91, -60}}, color = {0, 0, 255}), 
+    Line(points = {{-20, 40}, {-20, -40}}, color = {0, 0, 255}),
+    Line(points = {{-20, 0}, {-100, 0}}, color = {0, 0, 255}),
+    Line(points = {{91, 60}, {30, 60}}, color = {0, 0, 255}),
+    Line(points = {{30, 60}, {-20, 10}}, color = {0, 0, 255}),
+    Line(points = {{-20, -10}, {30, -60}}, color = {0, 0, 255}),
+    Line(points = {{30, -60}, {91, -60}}, color = {0, 0, 255}),
     Polygon(
-    points = {{-20, -10}, {-5, -17}, {-13, -25}, {-20, -10}}, 
-    fillColor = {0, 0, 255}, 
-    fillPattern = FillPattern.Solid, 
-    lineColor = {0, 0, 255}), 
-    Text(extent = {{-150, 130}, {150, 90}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255}), 
-    Line(points = {{0, 0}, {90, 0}}, 
-    color = {0, 0, 255}, 
-    pattern = LinePattern.Dash, 
+    points = {{-20, -10}, {-5, -17}, {-13, -25}, {-20, -10}},
+    fillColor = {0, 0, 255},
+    fillPattern = FillPattern.Solid,
+    lineColor = {0, 0, 255}),
+    Text(extent = {{-150, 130}, {150, 90}},
+    textString = "%name",
+    textColor = {0, 0, 255}),
+    Line(points = {{0, 0}, {90, 0}},
+    color = {0, 0, 255},
+    pattern = LinePattern.Dash,
     visible = useSubstrate)}));
 end PNP;

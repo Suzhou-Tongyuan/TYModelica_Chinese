@@ -1053,11 +1053,11 @@ Martin Otter、Katrin Prölß、 Christoph Richter、Michael Sielemann、Mike Ti
   end UsersGuide;
 
   annotation(Icon(graphics = {
-    Polygon(points = {{-70, 26}, {68, -44}, {68, 26}, {2, -10}, {-70, -42}, {-70, 26}}), 
-    Line(points = {{2, 42}, {2, -10}}), 
+    Polygon(points = {{-70, 26}, {68, -44}, {68, 26}, {2, -10}, {-70, -42}, {-70, 26}}),
+    Line(points = {{2, 42}, {2, -10}}),
     Rectangle(
-    extent = {{-18, 50}, {22, 42}}, 
-    fillPattern = FillPattern.Solid)}), preferredView = "info", 
+    extent = {{-18, 50}, {22, 42}},
+    fillPattern = FillPattern.Solid)}), preferredView = "info",
     Documentation(info = "<html><p>
 <strong> &nbsp; &nbsp; &nbsp; &nbsp;Modelica.Fluid</strong>库是一个<strong>开源</strong>的Modelica包，为模拟容器、管道、流体机械、阀门和接头系统中的 <strong>1维热流体流动</strong>提供建模组件。 其独特优势在于实现了组件方程、介质模型、压损关联式与热关联式之间的解耦设计。 所有组件均基于Modelica.Media 库中的介质模型构建，这意味着该库可兼容处理可压缩/不可压缩介质，单组分/多组分介质以及单相/多相介质等多种流体类型。
 </p>

@@ -1,60 +1,60 @@
 ﻿within Modelica.Mechanics.MultiBody.Forces;
-model Torque 
+model Torque
   "两个坐标系之间作用的力矩，由3个输入信号定义，并在world坐标系、frame_a、frame_b或frame_resolve中解析"
   import Modelica.Units.Conversions.to_unit1;
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialTwoFrames;
   Interfaces.Frame_resolve frame_resolve if 
-    resolveInFrame == Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_resolve 
+    resolveInFrame == Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_resolve
     "输入信号可选择在此坐标系中解析" 
     annotation(Placement(transformation(
-    origin = {40, 100}, 
-    extent = {{-16, -16}, {16, 16}}, 
+    origin = {40, 100},
+    extent = {{-16, -16}, {16, 16}},
     rotation = 90)));
 
-  Modelica.Blocks.Interfaces.RealInput torque[3](each final quantity = "Torque", each final unit = "N.m") 
+  Modelica.Blocks.Interfaces.RealInput torque[3](each final quantity = "Torque", each final unit = "N.m")
     "在由resolveInFrame定义的坐标系中解析的力矩的x、y、z坐标" 
     annotation(Placement(transformation(
-    origin = {-60, 120}, 
-    extent = {{-20, -20}, {20, 20}}, 
+    origin = {-60, 120},
+    extent = {{-20, -20}, {20, 20}},
     rotation = 270)));
   parameter Boolean animation = true "= true, 如果应启用动画";
   parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB 
-    resolveInFrame = 
-    Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_b 
+    resolveInFrame =
+    Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_b
     "解析输入力的坐标系(1: 全局坐标系，2: frame_a，3: frame_b，4: frame_resolve)";
-  input SI.Diameter connectionLineDiameter = world.defaultArrowDiameter 
+  input SI.Diameter connectionLineDiameter = world.defaultArrowDiameter
     "连接frame_a和frame_b的线的直径" 
     annotation(Dialog(group = "如果 animation = true", enable = animation));
 
-  input Types.Color torqueColor = Modelica.Mechanics.MultiBody.Types.Defaults.TorqueColor 
+  input Types.Color torqueColor = Modelica.Mechanics.MultiBody.Types.Defaults.TorqueColor
     "力矩箭头的颜色" 
     annotation(Dialog(colorSelector = true, group = "如果 animation = true", enable = animation));
 
-  input Types.Color connectionLineColor = Modelica.Mechanics.MultiBody.Types.Defaults.SensorColor 
+  input Types.Color connectionLineColor = Modelica.Mechanics.MultiBody.Types.Defaults.SensorColor
     "连接frame_a和frame_b的线的颜色" 
     annotation(Dialog(colorSelector = true, group = "如果 animation = true", enable = animation));
 
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
     "环境光的反射系数(= 0: 光完全被吸收)" 
     annotation(Dialog(group = "如果 animation = true", enable = animation));
 protected
   Visualizers.Advanced.DoubleArrow torqueArrow(
-    color = torqueColor, 
-    specularCoefficient = specularCoefficient, 
-    R = frame_b.R, 
-    r = frame_b.r_0, 
-    quantity = Modelica.Mechanics.MultiBody.Types.VectorQuantity.Torque, 
-    headAtOrigin = true, 
+    color = torqueColor,
+    specularCoefficient = specularCoefficient,
+    R = frame_b.R,
+    r = frame_b.r_0,
+    quantity = Modelica.Mechanics.MultiBody.Types.VectorQuantity.Torque,
+    headAtOrigin = true,
     r_head = -frame_b.t) if world.enableAnimation and animation;
   Visualizers.Advanced.Shape connectionLine(
-    shapeType = "cylinder", 
-    lengthDirection = to_unit1(basicTorque.r_0), 
-    widthDirection = {0, 1, 0}, 
-    length = Modelica.Math.Vectors.length(basicTorque.r_0), 
-    width = connectionLineDiameter, 
-    height = connectionLineDiameter, 
-    color = connectionLineColor, 
-    specularCoefficient = specularCoefficient, 
+    shapeType = "cylinder",
+    lengthDirection = to_unit1(basicTorque.r_0),
+    widthDirection = {0, 1, 0},
+    length = Modelica.Math.Vectors.length(basicTorque.r_0),
+    width = connectionLineDiameter,
+    height = connectionLineDiameter,
+    color = connectionLineColor,
+    specularCoefficient = specularCoefficient,
     r = frame_a.r_0) if world.enableAnimation and animation;
 
 public
@@ -66,56 +66,56 @@ protected
     annotation(Placement(transformation(extent = {{34, 10}, {54, 30}})));
 equation
   connect(basicTorque.frame_a, frame_a) annotation(Line(
-    points = {{-8, 0}, {-100, 0}}, 
-    color = {95, 95, 95}, 
+    points = {{-8, 0}, {-100, 0}},
+    color = {95, 95, 95},
     thickness = 0.5));
   connect(basicTorque.frame_b, frame_b) annotation(Line(
-    points = {{12, 0}, {100, 0}}, 
-    color = {95, 95, 95}, 
+    points = {{12, 0}, {100, 0}},
+    color = {95, 95, 95},
     thickness = 0.5));
   connect(basicTorque.torque, torque) annotation(Line(
     points = {{-4, 12}, {-4, 60}, {-60, 60}, {-60, 120}}, color = {0, 0, 127}));
   connect(basicTorque.frame_resolve, frame_resolve) annotation(Line(
-    points = {{6, 10}, {6, 60}, {40, 60}, {40, 100}}, 
-    color = {95, 95, 95}, 
+    points = {{6, 10}, {6, 60}, {40, 60}, {40, 100}},
+    color = {95, 95, 95},
     pattern = LinePattern.Dot));
   connect(zeroPosition.frame_resolve, basicTorque.frame_resolve) annotation(
     Line(
-    points = {{34, 20}, {20, 20}, {20, 10}, {6, 10}}, 
-    color = {95, 95, 95}, 
+    points = {{34, 20}, {20, 20}, {20, 10}, {6, 10}},
+    color = {95, 95, 95},
     pattern = LinePattern.Dot));
   annotation(
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
     100}}), graphics = {
     Rectangle(
-    extent = {{-98, 99}, {99, -98}}, 
-    lineColor = {255, 255, 255}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-98, 99}, {99, -98}},
+    lineColor = {255, 255, 255},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
     Text(
-    extent = {{-59, 55}, {72, 30}}, 
-    textColor = {192, 192, 192}, 
-    textString = "resolve"), 
+    extent = {{-59, 55}, {72, 30}},
+    textColor = {192, 192, 192},
+    textString = "resolve"),
     Text(
-    extent = {{-150, -30}, {150, -70}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255}), 
+    extent = {{-150, -30}, {150, -70}},
+    textString = "%name",
+    textColor = {0, 0, 255}),
     Polygon(
-    points = {{100, 20}, {84, 52}, {69, 39}, {100, 20}}, 
-    fillPattern = FillPattern.Solid), 
+    points = {{100, 20}, {84, 52}, {69, 39}, {100, 20}},
+    fillPattern = FillPattern.Solid),
     Line(
-    points = {{40, 100}, {76, 46}}, 
-    color = {95, 95, 95}, 
-    pattern = LinePattern.Dot), 
+    points = {{40, 100}, {76, 46}},
+    color = {95, 95, 95},
+    pattern = LinePattern.Dot),
     Polygon(
-    points = {{-99, 20}, {-86, 53}, {-70, 42}, {-99, 20}}, 
-    fillPattern = FillPattern.Solid), 
+    points = {{-99, 20}, {-86, 53}, {-70, 42}, {-99, 20}},
+    fillPattern = FillPattern.Solid),
     Line(
-    points = {{-60, 100}, {40, 100}}, 
-    color = {95, 95, 95}, 
-    pattern = LinePattern.Dot), 
-    Line(points = {{-79, 47}, {-70, 61}, {-59, 72}, {-45, 81}, {-32, 84}, {-20, 85}}), 
-    Line(points = {{77, 45}, {66, 60}, {55, 69}, {49, 74}, {41, 80}, {31, 84}, {20, 85}})}), 
+    points = {{-60, 100}, {40, 100}},
+    color = {95, 95, 95},
+    pattern = LinePattern.Dot),
+    Line(points = {{-79, 47}, {-70, 61}, {-59, 72}, {-45, 81}, {-32, 84}, {-20, 85}}),
+    Line(points = {{77, 45}, {66, 60}, {55, 69}, {49, 74}, {41, 80}, {31, 84}, {20, 85}})}),
     Documentation(info = "<html>
 <p>
 <strong>torque</strong>连接器的<strong>3</strong>个信号被解释为作用在与此组件的frame_b连接的坐标系连接器上的<strong>力矩</strong>的x、y和z坐标。

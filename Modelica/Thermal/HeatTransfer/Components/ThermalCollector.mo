@@ -12,32 +12,32 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
         Text(
-          extent={{-150,-30},{150,-70}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,-30},{150,-70}},
+          textString="%name",
+          textColor={0,0,255}),
         Text(
-          extent={{-150,80},{150,50}}, 
-          textString="m=%m"), 
+          extent={{-150,80},{150,50}},
+          textString="m=%m"),
         Line(
-          points={{0,90},{0,40}}, 
-          color={181,0,0}), 
+          points={{0,90},{0,40}},
+          color={181,0,0}),
         Rectangle(
-          extent={{-60,40},{60,30}}, 
-          lineColor={181,0,0}, 
-          fillColor={181,0,0}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-60,40},{60,30}},
+          lineColor={181,0,0},
+          fillColor={181,0,0},
+          fillPattern=FillPattern.Solid),
         Line(
-          points={{-60,30},{0,-30},{0,-90}}, 
-          color={181,0,0}), 
+          points={{-60,30},{0,-30},{0,-90}},
+          color={181,0,0}),
         Line(
-          points={{0,-30},{-20,30}}, 
-          color={181,0,0}), 
+          points={{0,-30},{-20,30}},
+          color={181,0,0}),
         Line(
-          points={{0,-30},{20,30}}, 
-          color={181,0,0}), 
+          points={{0,-30},{20,30}},
+          color={181,0,0}),
         Line(
-          points={{0,-30},{60,30}}, 
-          color={181,0,0})}), 
+          points={{0,-30},{60,30}},
+          color={181,0,0})}),
     Documentation(info="<html><p>
 本模型实现m个热接口的热流量向单一热接口汇聚传输。
 </p>

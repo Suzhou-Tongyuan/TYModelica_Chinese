@@ -4,20 +4,20 @@ model VoltageSource "恒定多相交流电压源"
   import Modelica.ComplexMath.j;
   import Modelica.ComplexMath.exp;
   parameter SI.Frequency f(start=1) "源的频率";
-  parameter SI.Voltage V[m](start=fill(1, m)) 
+  parameter SI.Voltage V[m](start=fill(1, m))
     "源的有效值电压";
   parameter SI.Angle phi[m]=-
-      Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m) 
+      Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m)
     "源的相位移";
 equation
   omega = 2*Modelica.Constants.pi*f;
   v = {V[k]*exp(j*phi[k]) for k in 1:m};
   annotation (
     Icon(graphics={
-        Line(points={{-50,0},{50,0}}, color={85,170,255}), 
-        Line(points={{-70,30},{-70,10}}, color={85,170,255}), 
-        Line(points={{-80,20},{-60,20}}, color={85,170,255}), 
-        Line(points={{60,20},{80,20}}, color={85,170,255})}), 
+        Line(points={{-50,0},{50,0}}, color={85,170,255}),
+        Line(points={{-70,30},{-70,10}}, color={85,170,255}),
+        Line(points={{-80,20},{-60,20}}, color={85,170,255}),
+        Line(points={{60,20},{80,20}}, color={85,170,255})}),
     Documentation(info="<html>
 
 <p>

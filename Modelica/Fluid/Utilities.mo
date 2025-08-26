@@ -1,5 +1,5 @@
 ﻿within Modelica.Fluid;
-package Utilities 
+package Utilities
   "用于构建流体组件的公用模型(不得直接使用)"
   extends Modelica.Icons.UtilitiesPackage;
 
@@ -24,9 +24,9 @@ package Utilities
 
     for i in 1:nX loop
       assert(X_boundary[i] >= 0.0, "
-介质中的边界质量分数错误 \"" 
+介质中的边界质量分数错误 \""
   + mediumName + "\" 模型中 \"" + modelName + "\":
-边界值 X_boundary(" 
+边界值 X_boundary("
                               + String(i) + ") = " + String(
         X_boundary[i]) + "
 是负的，必须是正的。
@@ -40,22 +40,22 @@ package Utilities
           i]) + " \"" + substanceNames[i] + "\"\n";
        end for;
        Modelica.Utilities.Streams.error(
-          "介质中的边界质量分数 \"" + mediumName + "\" 模型中 \"" + modelName + "\"\n" + 
-          "的总和不等于 1，相反，sum(X_boundary) = " + String(sum(X_boundary)) + ":\n" 
+          "介质中的边界质量分数 \"" + mediumName + "\" 模型中 \"" + modelName + "\"\n" +
+          "的总和不等于 1，相反，sum(X_boundary) = " + String(sum(X_boundary)) + ":\n"
           + X_str);
     end if;
   end checkBoundary;
 
-  function regRoot 
+  function regRoot
     "具有原点处导数有限的反对称平方根近似"
     extends Modelica.Icons.Function;
     input Real x;
-    input Real delta=0.01 
+    input Real delta=0.01
       "sqrt(abs(x))*sgn(x) 的显著偏差范围";
     output Real y;
   algorithm
     y := x/(x*x+delta*delta)^0.25;
-    annotation(derivative(zeroDerivative=delta)=regRoot_der, 
+    annotation(derivative(zeroDerivative=delta)=regRoot_der,
       Documentation(info="<html><p>
  &nbsp;该函数近似于 sqrt(abs(x))*sgn(x)，使得在 x=0 处的导数为有限且平滑。
 </p>
@@ -84,7 +84,7 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
     dy := dx*0.5*(x*x+2*delta*delta)/((x*x+delta*delta)^1.25);
 
   annotation (Documentation(info="<html>
-</html>"  , 
+</html>"  ,
         revisions="<html>
 <ul>
 <li><em>15 Mar 2005</em>
@@ -94,7 +94,7 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
 </html>"  ));
   end regRoot_der;
 
-  function regSquare 
+  function regSquare
     "具有原点处导数非零的反对称平方近似"
     extends Modelica.Icons.Function;
     input Real x;
@@ -121,7 +121,7 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
 </html>"));
   end regSquare;
 
-  function regPow 
+  function regPow
     "具有原点处导数非零的反对称幂近似"
     extends Modelica.Icons.Function;
     input Real x;
@@ -146,7 +146,7 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
 </html>"));
   end regPow;
 
-  function regRoot2 
+  function regRoot2
     "带不连续因子的反对称近似平方根，使一阶导数有限且连续"
 
     extends Modelica.Icons.Function;
@@ -161,7 +161,7 @@ by <a href=\"mailto:francesco.casella@polimi.it\">Francesco Casella</a>:<br>
     Real sqrt_k1 = if k1 > 0 then sqrt(k1) else 0;
     Real sqrt_k2 = if k2 > 0 then sqrt(k2) else 0;
   public
-    encapsulated function regRoot2_utility 
+    encapsulated function regRoot2_utility
       "使用两个三阶多项式进行插值，并在 x=0 处预设导数值"
       import Modelica;
       extends Modelica.Icons.Function;
@@ -321,18 +321,18 @@ by <a href=\"mailto:Martin.Otter@DLR.de\">Martin Otter</a>:<br>
 </html>"));
   end regRoot2;
 
-  function regSquare2 
+  function regSquare2
     "带不连续因子的反对称近似平方，使一阶导数不为零且连续"
     extends Modelica.Icons.Function;
     input Real x "横坐标值";
-    input Real x_small(min=0)=0.01 
+    input Real x_small(min=0)=0.01
       "|x| <= x_small 时的函数近似值";
     input Real k1(min=0)=1 "y = (if x>=0 then k1 else k2)*x*|x|";
     input Real k2(min=0)=1 "y = (if x>=0 then k1 else k2)*x*|x|";
     input Boolean use_yd0 = false "true：使用 yd0";
     input Real yd0(min=0)=1 "x=0 时的预期导数： dy/dx = yd0";
     output Real y "纵坐标值";
-  encapsulated function regSquare2_utility 
+  encapsulated function regSquare2_utility
       "使用两个三阶多项式进行插值，并在 x=0 处预设导数值"
       import Modelica;
       extends Modelica.Icons.Function;
@@ -433,13 +433,13 @@ by <a href=\"mailto:Martin.Otter@DLR.de\">Martin Otter</a>:<br>
 </html>"));
   end regSquare2;
 
-  function regStep 
+  function regStep
     "一般阶跃函数的近似值，使其特征保持连续且可微"
     extends Modelica.Icons.Function;
     input Real x "横坐标值";
     input Real y1 "x > 0 时的纵坐标值";
     input Real y2 "x < 0 时的纵坐标值";
-    input Real x_small(min=0) = 1e-5 
+    input Real x_small(min=0) = 1e-5
       "步长为-x_small <= x <= x_small时的近似值； 需要 x_small >= 0";
     output Real y "近似纵坐标值 y = if x > 0 then y1 else y2";
   algorithm
@@ -470,7 +470,7 @@ by <a href=\"mailto:Michael.Sielemann@dlr.de\">Michael Sielemann</a>:<br>
 </html>"));
   end regStep;
 
-  function evaluatePoly3_derivativeAtZero 
+  function evaluatePoly3_derivativeAtZero
     "求解经过原点且具有预设导数的三阶多项式"
     extends Modelica.Icons.Function;
     input Real x "多项式的评估值";
@@ -507,7 +507,7 @@ by <a href=\"mailto:Michael.Sielemann@dlr.de\">Michael Sielemann</a>:<br>
     input Real y1d "x1 处的导数";
 
     output Real y "纵坐标值";
-    output Real c 
+    output Real c
       "两个三次多项式之间的线性斜率，如果使用单个三次多项式，则为假线性斜率";
 
   protected
@@ -529,18 +529,18 @@ by <a href=\"mailto:Michael.Sielemann@dlr.de\">Michael Sielemann</a>:<br>
     Real const3 "右侧三次方的积分常数";
     Real aux01;
     Real aux02;
-    Boolean useSingleCubicPolynomial=false 
+    Boolean useSingleCubicPolynomial=false
       "表示覆盖进一步的逻辑并使用单个多项式";
   algorithm
     // 检查参数： 数据点位置
-    assert(x0 < x1, "regFun3(): 数据点排序不当 (x0 = " + 
+    assert(x0 < x1, "regFun3(): 数据点排序不当 (x0 = " +
       String(x0) + " > x1 = " + String(x1) + ")，请翻转争论点。");
     // 检查参数： 数据点导数
     if y0d*y1d >= 0 then
       // 数据点上的导数可实现同单调插值，则与此无关
     else
       // 严格来说，数据点上的导数不允许同单调插值，但它们在数值上可能为零，因此可以这样断言
-      assert(abs(y0d)<Modelica.Constants.eps or abs(y1d)<Modelica.Constants.eps, "regFun3(): 数据点的导数不允许共单调插值，因为两者都不为零，符号相反，且绝对值大于机械 eps (y0d = " + 
+      assert(abs(y0d)<Modelica.Constants.eps or abs(y1d)<Modelica.Constants.eps, "regFun3(): 数据点的导数不允许共单调插值，因为两者都不为零，符号相反，且绝对值大于机械 eps (y0d = " +
       String(y0d) + ", y1d = " + String(y1d) + ")，请更正论点。");
     end if;
 
@@ -557,19 +557,19 @@ by <a href=\"mailto:Michael.Sielemann@dlr.de\">Michael Sielemann</a>:<br>
       y := y0 + (x-x0)*(y0d + (x-x0)/h0*( (-2*y0d-y1d+3*Delta0) + (x-x0)*(y0d+y1d-2*Delta0)/h0));
       // 将 x:=(x0+x1)/2 处的三次斜率设为 "假线性斜率"。
       aux01 := (x0 + x1)/2;
-      c := 3*(y0d + y1d - 2*Delta0)*(aux01 - x0)^2/h0^2 + 2*(-2*y0d - y1d + 3*Delta0)*(aux01 - x0)/h0 
+      c := 3*(y0d + y1d - 2*Delta0)*(aux01 - x0)^2/h0^2 + 2*(-2*y0d - y1d + 3*Delta0)*(aux01 - x0)/h0
          + y0d;
     else
       // 点 (x0,y0) 和 (x1,y1) 不在水平线上，且 S0 的拐点不在正负无穷远处
       // 进行实际插值
-      xstar := 1/3*(-3*x0*y0d - 3*x0*y1d + 6*x0*Delta0 - 2*h0*y0d - h0*y1d + 3*h0* 
+      xstar := 1/3*(-3*x0*y0d - 3*x0*y1d + 6*x0*Delta0 - 2*h0*y0d - h0*y1d + 3*h0*
         Delta0)/(-y0d - y1d + 2*Delta0);
       mu := xstar - x0;
       eta := x1 - xstar;
-      omega := 3*(y0d + y1d - 2*Delta0)*(xstar - x0)^2/h0^2 + 2*(-2*y0d - y1d + 3* 
+      omega := 3*(y0d + y1d - 2*Delta0)*(xstar - x0)^2/h0^2 + 2*(-2*y0d - y1d + 3*
         Delta0)*(xstar - x0)/h0 + y0d;
 
-      aux01 := 0.25*sign(Delta0)*min(abs(omega), abs(Delta0)) 
+      aux01 := 0.25*sign(Delta0)*min(abs(omega), abs(Delta0))
         "斜率 c(如果不使用三次多项式 S0)";
       if abs(y0d - y1d) <= 100*Modelica.Constants.eps then
         // y0 == y1(数值和符号相等)，则解决不确定的 0/0
@@ -586,7 +586,7 @@ by <a href=\"mailto:Michael.Sielemann@dlr.de\">Michael Sielemann</a>:<br>
           if (y1d + y0d - 2*Delta0) >= 0 then 1 else -1)*Modelica.Constants.inf;
       else
         // 目前无需看守
-        aux02 := (6*Delta0*(y1d + y0d - 3/2*Delta0) - y1d*y0d - y1d^2 - y0d^2)/(3* 
+        aux02 := (6*Delta0*(y1d + y0d - 3/2*Delta0) - y1d*y0d - y1d^2 - y0d^2)/(3*
           (y1d + y0d - 2*Delta0));
       end if;
 
@@ -644,7 +644,7 @@ by <a href=\"mailto:Michael.Sielemann@dlr.de\">Michael Sielemann</a>:<br>
         y := y0 + (x-x0)*(y0d + (x-x0)/h0*( (-2*y0d-y1d+3*Delta0) + (x-x0)*(y0d+y1d-2*Delta0)/h0));
         // 将 x:=(x0+x1)/2 处的三次斜率设为 "假线性斜率"。
         aux01 := (x0 + x1)/2;
-        c := 3*(y0d + y1d - 2*Delta0)*(aux01 - x0)^2/h0^2 + 2*(-2*y0d - y1d + 3*Delta0)*(aux01 - x0)/h0 
+        c := 3*(y0d + y1d - 2*Delta0)*(aux01 - x0)^2/h0^2 + 2*(-2*y0d - y1d + 3*Delta0)*(aux01 - x0)/h0
            + y0d;
       end if;
     end if;
@@ -739,7 +739,7 @@ by <a href=\"mailto:Michael.Sielemann@dlr.de\">Michael Sielemann</a>:<br>
 </html>"        ));
   end cubicHermite;
 
-  function cubicHermite_withDerivative 
+  function cubicHermite_withDerivative
     "评估三次 Hermite 样条曲线，返回函数值及其导数"
     extends Modelica.Icons.Function;
 

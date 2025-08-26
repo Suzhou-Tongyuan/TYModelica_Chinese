@@ -3,14 +3,14 @@ model IdealDiode "理想二极管"
   extends Modelica.Electrical.Analog.Interfaces.IdealSemiconductor;
 equation
   off = s < 0;
-  annotation(defaultComponentName = "diode", 
+  annotation(defaultComponentName = "diode",
     Documentation(info = "<html>
 <p>这是一个理想二极管，具体查看
 <a href=\"modelica://Modelica.Electrical.Analog.Interfaces.IdealSemiconductor\">IdealSemiconductor</a><br>
 当voltage&gt;Vknee二极管导通<br>
 反之则截止.
 </p>
-</html>", 
+</html>",
     revisions = "<html>
 <ul>
 <li><em>2016年2月7日</em>

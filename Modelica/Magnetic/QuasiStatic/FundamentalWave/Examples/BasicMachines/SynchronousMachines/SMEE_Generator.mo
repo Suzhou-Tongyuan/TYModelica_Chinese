@@ -1,18 +1,18 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FundamentalWave.Examples.BasicMachines.SynchronousMachines;
-model SMEE_Generator 
+model SMEE_Generator
   "作为发电机工作的电励磁同步电机"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m=3 "定子相数" annotation(Evaluate=true);
-  parameter SI.Voltage VsNominal=100 
+  parameter SI.Voltage VsNominal=100
     "每相标称均方根电压";
   parameter SI.Frequency fsNominal=smeeData.fsNominal "标称频率";
-  parameter SI.AngularVelocity w= 
+  parameter SI.AngularVelocity w=
       Modelica.Units.Conversions.from_rpm(1499) "额定速度";
   parameter SI.Current Ie=19 "励磁电流";
-  parameter SI.Current Ie0=10 
+  parameter SI.Current Ie0=10
     "初始励磁电流";
-  parameter SI.Angle gamma0(displayUnit="deg") = 0 
+  parameter SI.Angle gamma0(displayUnit="deg") = 0
     "转子初始位移角";
   SI.Angle thetaQS=rotorAngleQS.rotorDisplacementAngle "转子位移角，准静态";
   SI.Angle theta=rotorAngle.rotorDisplacementAngle "转子位移角，瞬态";
@@ -23,118 +23,118 @@ model SMEE_Generator
      Placement(transformation(extent={{-50,-30},{-70,-10}})));
   Modelica.Electrical.Analog.Basic.Ground grounde annotation (Placement(
         transformation(
-        origin={-90,-20}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-90,-20},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage(
-    final m=m, 
-    final V=fill(VsNominal*sqrt(2), m), 
+    final m=m,
+    final V=fill(VsNominal*sqrt(2), m),
     final f=fill(fsNominal, m)) annotation (Placement(
         transformation(extent={{-20,-30},{-40,-10}})));
   Modelica.Electrical.Polyphase.Sensors.PowerSensor powerSensor(m=m) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={0,-34})));
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBoxM(
       terminalConnection="Y", m=m) 
     annotation (Placement(transformation(extent={{-10,-64},{10,-44}})));
   Magnetic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited 
     smee(
-    phiMechanical(start=-(Modelica.Constants.pi + gamma0)/smee.p, fixed=true), 
-    Jr=0.29, 
-    Js=0.29, 
-    p=2, 
-    fsNominal=smeeData.fsNominal, 
-    TsRef=smeeData.TsRef, 
-    alpha20s(displayUnit="1/K") = smeeData.alpha20s, 
-    Lrsigmad=smeeData.Lrsigmad, 
-    Lrsigmaq=smeeData.Lrsigmaq, 
-    Rrd=smeeData.Rrd, 
-    Rrq=smeeData.Rrq, 
-    TrRef=smeeData.TrRef, 
-    alpha20r(displayUnit="1/K") = smeeData.alpha20r, 
-    VsNominal=smeeData.VsNominal, 
-    IeOpenCircuit=smeeData.IeOpenCircuit, 
-    Re=smeeData.Re, 
-    TeRef=smeeData.TeRef, 
-    alpha20e(displayUnit="1/K") = smeeData.alpha20e, 
-    statorCoreParameters(VRef=100), 
-    strayLoadParameters(IRef=100), 
-    brushParameters(ILinear=0.01), 
-    ir(each fixed=true), 
-    useDamperCage=false, 
-    m=m, 
-    frictionParameters(PRef=0), 
-    Rs=smeeData.Rs*m/3, 
-    Lssigma=smeeData.Lssigma*m/3, 
-    Lmd=smeeData.Lmd*m/3, 
-    Lmq=smeeData.Lmq*m/3, 
-    effectiveStatorTurns=smeeData.effectiveStatorTurns, 
-    TsOperational=293.15, 
-    TrOperational=293.15, 
-    TeOperational=293.15, 
+    phiMechanical(start=-(Modelica.Constants.pi + gamma0)/smee.p, fixed=true),
+    Jr=0.29,
+    Js=0.29,
+    p=2,
+    fsNominal=smeeData.fsNominal,
+    TsRef=smeeData.TsRef,
+    alpha20s(displayUnit="1/K") = smeeData.alpha20s,
+    Lrsigmad=smeeData.Lrsigmad,
+    Lrsigmaq=smeeData.Lrsigmaq,
+    Rrd=smeeData.Rrd,
+    Rrq=smeeData.Rrq,
+    TrRef=smeeData.TrRef,
+    alpha20r(displayUnit="1/K") = smeeData.alpha20r,
+    VsNominal=smeeData.VsNominal,
+    IeOpenCircuit=smeeData.IeOpenCircuit,
+    Re=smeeData.Re,
+    TeRef=smeeData.TeRef,
+    alpha20e(displayUnit="1/K") = smeeData.alpha20e,
+    statorCoreParameters(VRef=100),
+    strayLoadParameters(IRef=100),
+    brushParameters(ILinear=0.01),
+    ir(each fixed=true),
+    useDamperCage=false,
+    m=m,
+    frictionParameters(PRef=0),
+    Rs=smeeData.Rs*m/3,
+    Lssigma=smeeData.Lssigma*m/3,
+    Lmd=smeeData.Lmd*m/3,
+    Lmq=smeeData.Lmq*m/3,
+    effectiveStatorTurns=smeeData.effectiveStatorTurns,
+    TsOperational=293.15,
+    TrOperational=293.15,
+    TeOperational=293.15,
     sigmae=smeeData.sigmae*m/3) 
     annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
   FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited 
     smeeQS(
-    p=2, 
-    fsNominal=smeeData.fsNominal, 
-    TsRef=smeeData.TsRef, 
-    alpha20s(displayUnit="1/K") = smeeData.alpha20s, 
-    Jr=0.29, 
-    Js=0.29, 
-    frictionParameters(PRef=0), 
-    statorCoreParameters(PRef=0, VRef=100), 
-    strayLoadParameters(PRef=0, IRef=100), 
-    Lrsigmad=smeeData.Lrsigmad, 
-    Rrd=smeeData.Rrd, 
-    Rrq=smeeData.Rrq, 
-    alpha20r(displayUnit="1/K") = smeeData.alpha20r, 
-    VsNominal=smeeData.VsNominal, 
-    IeOpenCircuit=smeeData.IeOpenCircuit, 
-    Re=smeeData.Re, 
-    TeRef=smeeData.TeRef, 
-    alpha20e(displayUnit="1/K") = smeeData.alpha20e, 
-    brushParameters(V=0, ILinear=0.01), 
-    Lrsigmaq=smeeData.Lrsigmaq, 
-    TrRef=smeeData.TrRef, 
-    useDamperCage=false, 
-    m=m, 
-    gammar(fixed=true, start=pi/2), 
-    gamma(fixed=true, start=-pi/2), 
-    Rs=smeeData.Rs*m/3, 
-    Lssigma=smeeData.Lssigma*m/3, 
-    Lmd=smeeData.Lmd*m/3, 
-    Lmq=smeeData.Lmq*m/3, 
-    TsOperational=293.15, 
-    effectiveStatorTurns=smeeData.effectiveStatorTurns, 
-    TrOperational=293.15, 
+    p=2,
+    fsNominal=smeeData.fsNominal,
+    TsRef=smeeData.TsRef,
+    alpha20s(displayUnit="1/K") = smeeData.alpha20s,
+    Jr=0.29,
+    Js=0.29,
+    frictionParameters(PRef=0),
+    statorCoreParameters(PRef=0, VRef=100),
+    strayLoadParameters(PRef=0, IRef=100),
+    Lrsigmad=smeeData.Lrsigmad,
+    Rrd=smeeData.Rrd,
+    Rrq=smeeData.Rrq,
+    alpha20r(displayUnit="1/K") = smeeData.alpha20r,
+    VsNominal=smeeData.VsNominal,
+    IeOpenCircuit=smeeData.IeOpenCircuit,
+    Re=smeeData.Re,
+    TeRef=smeeData.TeRef,
+    alpha20e(displayUnit="1/K") = smeeData.alpha20e,
+    brushParameters(V=0, ILinear=0.01),
+    Lrsigmaq=smeeData.Lrsigmaq,
+    TrRef=smeeData.TrRef,
+    useDamperCage=false,
+    m=m,
+    gammar(fixed=true, start=pi/2),
+    gamma(fixed=true, start=-pi/2),
+    Rs=smeeData.Rs*m/3,
+    Lssigma=smeeData.Lssigma*m/3,
+    Lmd=smeeData.Lmd*m/3,
+    Lmq=smeeData.Lmq*m/3,
+    TsOperational=293.15,
+    effectiveStatorTurns=smeeData.effectiveStatorTurns,
+    TrOperational=293.15,
     TeOperational=293.15) annotation (Placement(transformation(extent={
             {-10,20},{10,40}})));
   Modelica.Electrical.Analog.Basic.Ground groundr annotation (Placement(
         transformation(
-        origin={-50,-88}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-50,-88},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Ground groundrQS annotation (
       Placement(transformation(
-        origin={-50,12}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-50,12},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Analog.Sources.RampCurrent rampCurrent(
-    duration=0.1, 
-    I=Ie - Ie0, 
+    duration=0.1,
+    I=Ie - Ie0,
     offset=Ie0) annotation (Placement(transformation(
-        origin={-30,-70}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-30,-70},
+        extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Electrical.Analog.Sources.RampCurrent rampCurrentQS(
-    duration=0.1, 
-    I=Ie - Ie0, 
+    duration=0.1,
+    I=Ie - Ie0,
     offset=Ie0) annotation (Placement(transformation(
-        origin={-28,30}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-28,30},
+        extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Electrical.Machines.Sensors.MechanicalPowerSensor 
     mechanicalPowerSensor annotation (Placement(transformation(extent={{50,-80},{70,-60}})));
@@ -149,88 +149,88 @@ model SMEE_Generator
   parameter
     Modelica.Electrical.Machines.Utilities.SynchronousMachineData 
     smeeData(
-    SNominal=30e3, 
-    VsNominal=100, 
-    fsNominal=50, 
-    IeOpenCircuit=10, 
-    x0=0.1, 
-    xd=1.6, 
-    xdTransient=0.1375, 
-    xdSubtransient=0.121428571, 
-    xqSubtransient=0.148387097, 
-    Ta=0.014171268, 
-    Td0Transient=0.261177343, 
-    Td0Subtransient=0.006963029, 
-    Tq0Subtransient=0.123345081, 
-    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero, 
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero, 
-    alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero, 
-    xq=1.1, 
-    TsSpecification=293.15, 
-    TsRef=293.15, 
-    TrSpecification=293.15, 
-    TrRef=293.15, 
-    TeSpecification=293.15, 
+    SNominal=30e3,
+    VsNominal=100,
+    fsNominal=50,
+    IeOpenCircuit=10,
+    x0=0.1,
+    xd=1.6,
+    xdTransient=0.1375,
+    xdSubtransient=0.121428571,
+    xqSubtransient=0.148387097,
+    Ta=0.014171268,
+    Td0Transient=0.261177343,
+    Td0Subtransient=0.006963029,
+    Tq0Subtransient=0.123345081,
+    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
+    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
+    alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
+    xq=1.1,
+    TsSpecification=293.15,
+    TsRef=293.15,
+    TrSpecification=293.15,
+    TrRef=293.15,
+    TeSpecification=293.15,
     TeRef=293.15) "Synchronous machine data" 
     annotation (Placement(transformation(extent={{70,70},{90,90}})));
 
   Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource 
     voltageSourceQS(
-    m=m, 
+    m=m,
     phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(
-        m), 
-    V=fill(VsNominal, m), 
+        m),
+    V=fill(VsNominal, m),
     f=fsNominal) annotation (Placement(transformation(
-        origin={-30,80}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-30,80},
+        extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starQS(m=m) 
     annotation (Placement(transformation(
-        origin={-60,80}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-60,80},
+        extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground 
     groundeQS annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-90,80})));
   Modelica.Electrical.QuasiStatic.Polyphase.Sensors.PowerSensor 
     powerSensorQS(m=m) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={0,66})));
   Utilities.MultiTerminalBox terminalBoxQS(m=m, terminalConnection="Y") 
     annotation (Placement(transformation(extent={{-10,36},{10,56}})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star 
-    starMachineQS(m= 
+    starMachineQS(m=
         Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(
                                                                     m)) 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=180, 
+        extent={{-10,10},{10,-10}},
+        rotation=180,
         origin={-20,50})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground 
     groundMachineQS annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-50,50})));
-  Modelica.Electrical.Machines.Sensors.RotorDisplacementAngle rotorAngle(m=m, p= 
+  Modelica.Electrical.Machines.Sensors.RotorDisplacementAngle rotorAngle(m=m, p=
         smee.p) annotation (Placement(transformation(
-        origin={30,-70}, 
-        extent={{-10,10},{10,-10}}, 
+        origin={30,-70},
+        extent={{-10,10},{10,-10}},
         rotation=270)));
   Sensors.RotorDisplacementAngle rotorAngleQS(m=m, p=smeeQS.p) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=90, 
+        extent={{10,-10},{-10,10}},
+        rotation=90,
         origin={30,30})));
   Modelica.Electrical.Analog.Basic.Ground groundMachine annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        origin={-50,-50}, 
+        extent={{-10,-10},{10,10}},
+        origin={-50,-50},
         rotation=270)));
-  Modelica.Electrical.Polyphase.Basic.Star starMachine(final m= 
+  Modelica.Electrical.Polyphase.Basic.Star starMachine(final m=
         Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m)) 
-    annotation (Placement(transformation(extent={{10,-10},{-10,10}}, origin={-20, 
+    annotation (Placement(transformation(extent={{10,-10},{-10,10}}, origin={-20,
             -50})));
 initial equation
   sum(smee.is) = 0;
@@ -243,33 +243,33 @@ equation
     annotation (Line(points={{-50,-20},{-40,-20}}, color={0,0,255}));
   connect(mechanicalPowerSensorQS.flange_b, constantSpeedQS.flange) 
     annotation (Line(points={{70,30},{80,30}}));
-  connect(rampCurrentQS.p, groundrQS.p) annotation (Line(points={{-28, 
+  connect(rampCurrentQS.p, groundrQS.p) annotation (Line(points={{-28,
           20},{-34,20},{-34,12},{-40,12}}, color={0,0,255}));
-  connect(rampCurrentQS.p, smeeQS.pin_en) annotation (Line(points={{-28, 
+  connect(rampCurrentQS.p, smeeQS.pin_en) annotation (Line(points={{-28,
           20},{-20,20},{-20,24},{-10,24}}, color={0,0,255}));
-  connect(rampCurrentQS.n, smeeQS.pin_ep) annotation (Line(points={{-28, 
+  connect(rampCurrentQS.n, smeeQS.pin_ep) annotation (Line(points={{-28,
           40},{-20,40},{-20,36},{-10,36}}, color={0,0,255}));
   connect(smee.flange, mechanicalPowerSensor.flange_a) 
     annotation (Line(points={{10,-70},{50,-70}}));
   connect(mechanicalPowerSensor.flange_b, constantSpeed.flange) 
     annotation (Line(points={{70,-70},{80,-70}}));
-  connect(rampCurrent.p, groundr.p) annotation (Line(points={{-30,-80}, 
-          {-36,-80},{-36,-88},{-38,-88},{-38,-88},{-40,-88},{-40,-88}}, 
+  connect(rampCurrent.p, groundr.p) annotation (Line(points={{-30,-80},
+          {-36,-80},{-36,-88},{-38,-88},{-38,-88},{-40,-88},{-40,-88}},
         color={0,0,255}));
-  connect(rampCurrent.p, smee.pin_en) annotation (Line(points={{-30,-80}, 
+  connect(rampCurrent.p, smee.pin_en) annotation (Line(points={{-30,-80},
           {-20,-80},{-20,-76},{-10,-76}}, color={0,0,255}));
-  connect(rampCurrent.n, smee.pin_ep) annotation (Line(points={{-30,-60}, 
+  connect(rampCurrent.n, smee.pin_ep) annotation (Line(points={{-30,-60},
           {-20,-60},{-20,-64},{-10,-64}}, color={0,0,255}));
   connect(smee.plug_sn, terminalBoxM.plug_sn) 
     annotation (Line(points={{-6,-60},{-6,-60}}, color={0,0,255}));
   connect(smee.plug_sp, terminalBoxM.plug_sp) 
     annotation (Line(points={{6,-60},{6,-60}}, color={0,0,255}));
-  connect(groundeQS.pin, starQS.pin_n) annotation (Line(points={{-80,80}, 
+  connect(groundeQS.pin, starQS.pin_n) annotation (Line(points={{-80,80},
           {-80,80},{-70,80}}, color={85,170,255}));
   connect(starQS.plug_p, voltageSourceQS.plug_n) annotation (Line(
         points={{-50,80},{-50,80},{-40,80}}, color={85,170,255}));
   connect(voltageSourceQS.plug_p, powerSensorQS.currentP) annotation (
-      Line(points={{-20,80},{-20,80},{0,80},{0,76}}, 
+      Line(points={{-20,80},{-20,80},{0,80},{0,76}},
         color={85,170,255}));
   connect(powerSensorQS.voltageP, powerSensorQS.currentP) annotation (
       Line(points={{10,66},{10,76},{0,76}}, color={85,170,255}));
@@ -285,21 +285,21 @@ equation
   connect(powerSensor.nc, terminalBoxM.plugSupply) 
     annotation (Line(points={{0,-44},{0,-58}}, color={0,0,255}));
   connect(terminalBoxQS.plug_sn, smeeQS.plug_sn) annotation (Line(
-      points={{-6,40},{-6,40}}, 
+      points={{-6,40},{-6,40}},
       color={85,170,255}));
   connect(terminalBoxQS.plug_sp, smeeQS.plug_sp) annotation (Line(
-      points={{6,40},{6,40}}, 
+      points={{6,40},{6,40}},
       color={85,170,255}));
   connect(powerSensorQS.currentN, terminalBoxQS.plugSupply) annotation (
      Line(
-      points={{0,56},{0,42}}, 
+      points={{0,56},{0,42}},
       color={85,170,255}));
   connect(starMachineQS.pin_n, groundMachineQS.pin) annotation (Line(
-      points={{-30,50},{-40,50}}, 
+      points={{-30,50},{-40,50}},
       color={85,170,255}));
   connect(starMachineQS.plug_p, terminalBoxQS.starpoint) annotation (
       Line(
-      points={{-10,50},{-10,42},{-10,42}}, 
+      points={{-10,50},{-10,42},{-10,42}},
       color={85,170,255}));
   connect(smee.flange, rotorAngle.flange) annotation (Line(points={{10,-70},{20,-70}}));
   connect(rotorAngle.plug_p, smee.plug_sp) annotation (Line(points={{24,-60},{6,-60}}, color={0,0,255}));
@@ -312,9 +312,9 @@ equation
   connect(starMachine.plug_p, terminalBoxM.starpoint) annotation (Line(points={{-10,-50},{-10,-54},{-10,-58},{-10,-58}},color={0,0,255}));
   annotation (
     experiment(
-      StopTime=30, 
-      Interval=1E-3, 
-      Tolerance=1e-06), 
+      StopTime=30,
+      Interval=1E-3,
+      Tolerance=1e-06),
     Documentation(info="<html>
 <p>
 本例比较了电激同步电机的时间暂态模型和准静态模型。
@@ -332,16 +332,16 @@ equation
 </ul>
 
 <p>由于转子转差很低，因此瞬态和准静态电磁转矩几乎相等.</p>
-</html>"), 
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
-            -100},{100,100}}), 
+</html>"),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{100,100}}),
                          graphics={         Text(
-                  extent={{20,8},{100,0}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Solid, 
-                  textStyle={TextStyle.Bold}, 
+                  extent={{20,8},{100,0}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Solid,
+                  textStyle={TextStyle.Bold},
           textString="%m phase quasi-static"),     Text(
-          extent={{20,-92},{100,-100}}, 
-                  textStyle={TextStyle.Bold}, 
+          extent={{20,-92},{100,-100}},
+                  textStyle={TextStyle.Bold},
                   textString="%m phase transient")}));
 end SMEE_Generator;

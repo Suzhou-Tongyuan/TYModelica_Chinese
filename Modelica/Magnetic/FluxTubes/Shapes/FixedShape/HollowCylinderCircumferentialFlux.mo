@@ -1,13 +1,13 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
-model HollowCylinderCircumferentialFlux 
+model HollowCylinderCircumferentialFlux
   "具有周向通量的空心圆柱体;固定的形状;线性或非线性材料特性"
 
   extends BaseClasses.FixedShape;
   extends Modelica.Magnetic.FluxTubes.Icons.HollowCylinderCircumferentialFlux;
   import Modelica.Constants.pi;
   parameter SI.Length l=0.02 "宽度（与通量方向正交）" 
-    annotation (Dialog(group= 
-          "Fixed geometry", groupImage= 
+    annotation (Dialog(group=
+          "Fixed geometry", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Circumferential.png"));
   parameter SI.Radius r_i=0.01 "空心圆柱体的内半径" 
     annotation (Dialog(group="Fixed geometry"));

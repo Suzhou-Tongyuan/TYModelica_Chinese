@@ -1,11 +1,11 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FundamentalWave.Interfaces;
 partial model TwoPortElementary "部分两个端口用于图形化编程"
-  SI.AngularVelocity omega=der(port_p.reference.gamma) 
+  SI.AngularVelocity omega=der(port_p.reference.gamma)
     "参考角速度 (= der(port_p.reference.gamma))";
-  FundamentalWave.Interfaces.PositiveMagneticPort port_p 
+  FundamentalWave.Interfaces.PositiveMagneticPort port_p
     "基波机的正准静态磁口" annotation (Placement(
         transformation(extent={{-110,-10},{-90,10}})));
-  FundamentalWave.Interfaces.NegativeMagneticPort port_n 
+  FundamentalWave.Interfaces.NegativeMagneticPort port_n
     "基波机的负准静态磁口" annotation (Placement(
         transformation(extent={{90,-10},{110,10}})));
 equation

@@ -2,50 +2,50 @@
 model UnsymmetricalLoad "非对称三相负载"
   extends Modelica.Icons.Example;
   import Modelica.ComplexMath.abs;
-  output SI.Current i1_d=symmetricalComponents_1.abs_y[1] 
+  output SI.Current i1_d=symmetricalComponents_1.abs_y[1]
     "带中性直流分量";
-  output SI.Current i1_i=symmetricalComponents_1.abs_y[2] 
+  output SI.Current i1_i=symmetricalComponents_1.abs_y[2]
     "带中性反向分量";
-  output SI.Current i1_0=symmetricalComponents_1.abs_y[3] 
+  output SI.Current i1_0=symmetricalComponents_1.abs_y[3]
     "带中性零分量";
-  output SI.Current i1_n=abs(currentSensorN.i) 
+  output SI.Current i1_n=abs(currentSensorN.i)
     "带中性，中性电流";
-  output SI.Current i2_d=symmetricalComponents_2.abs_y[1] 
+  output SI.Current i2_d=symmetricalComponents_2.abs_y[1]
     "无中性，直流分量";
-  output SI.Current i2_i=symmetricalComponents_2.abs_y[2] 
+  output SI.Current i2_i=symmetricalComponents_2.abs_y[2]
     "无中性，反向分量";
-  output SI.Current i2_0=symmetricalComponents_2.abs_y[3] 
+  output SI.Current i2_0=symmetricalComponents_2.abs_y[3]
     "无中性，零分量";
-  output SI.Voltage v2_n=abs(voltageSensorN.v) 
+  output SI.Voltage v2_n=abs(voltageSensorN.v)
     "无中性，中性电压";
 
   Sources.VoltageSource voltageSource1(
-    m=3, 
-    f=50, 
-    V=fill(400/sqrt(3), 3), 
+    m=3,
+    f=50,
+    V=fill(400/sqrt(3), 3),
     gamma(fixed=true, start=0)) 
                             annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-70,80})));
   Basic.Star star1_1(m=3) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-70,50})));
   SinglePhase.Basic.Ground ground1 
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
   Sources.VoltageSource voltageSource2(
-    m=3, 
-    f=50, 
-    V=fill(400/sqrt(3), 3), 
+    m=3,
+    f=50,
+    V=fill(400/sqrt(3), 3),
     gamma(fixed=true, start=0)) 
                             annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-70,-20})));
   Basic.Star star2_1(m=3) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-70,-50})));
   SinglePhase.Basic.Ground ground2 
     annotation (Placement(transformation(extent={{-80,-100},{-60,-80}})));
@@ -53,15 +53,15 @@ model UnsymmetricalLoad "非对称三相负载"
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   Blocks.SymmetricalComponents symmetricalComponents_1(m=3) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-50,50})));
   Sensors.CurrentSensor currentSensor2(m=3) 
     annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
   Blocks.SymmetricalComponents symmetricalComponents_2(m=3) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-50,-50})));
   SinglePhase.Basic.Resistor resistor1_1(R_ref=110) 
     annotation (Placement(transformation(extent={{-10,80},{10,100}})));
@@ -92,12 +92,12 @@ model UnsymmetricalLoad "非对称三相负载"
   Basic.PlugToPins_n plugToPins_n_2(m=3) 
     annotation (Placement(transformation(extent={{72,0},{52,-20}})));
   Basic.Star star1_2(m=3) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={80,50})));
   Basic.Star star2_2(m=3) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={80,-50})));
   SinglePhase.Sensors.CurrentSensor currentSensorN 
     annotation (Placement(transformation(extent={{70,30},{50,10}})));
@@ -108,13 +108,13 @@ equation
     annotation (Line(points={{-70,70},{-70,65},{-70,60}}, color={85,170,255}));
   connect(star1_1.pin_n, ground1.pin) 
     annotation (Line(points={{-70,40},{-70,20}}, color={85,170,255}));
-  connect(voltageSource2.plug_n, star2_1.plug_p) annotation (Line(points={{-70,-30}, 
+  connect(voltageSource2.plug_n, star2_1.plug_p) annotation (Line(points={{-70,-30},
           {-70,-35},{-70,-40}}, color={85,170,255}));
   connect(star2_1.pin_n, ground2.pin) 
     annotation (Line(points={{-70,-60},{-70,-80}}, color={85,170,255}));
   connect(voltageSource1.plug_p, currentSensor1.plug_p) 
     annotation (Line(points={{-70,90},{-65,90},{-60,90}}, color={85,170,255}));
-  connect(voltageSource2.plug_p, currentSensor2.plug_p) annotation (Line(points= 
+  connect(voltageSource2.plug_p, currentSensor2.plug_p) annotation (Line(points=
          {{-70,-10},{-65,-10},{-60,-10}}, color={85,170,255}));
   connect(resistor1_2.pin_n, inductor1_2.pin_p) 
     annotation (Line(points={{10,70},{20,70}}, color={85,170,255}));
@@ -126,35 +126,35 @@ equation
     annotation (Line(points={{10,-30},{20,-30}}, color={85,170,255}));
   connect(resistor2_3.pin_n, capacitor2_3.pin_n) 
     annotation (Line(points={{10,-50},{10,-60},{10,-70}}, color={85,170,255}));
-  connect(resistor2_3.pin_p, capacitor2_3.pin_p) annotation (Line(points={{-10,-50}, 
+  connect(resistor2_3.pin_p, capacitor2_3.pin_p) annotation (Line(points={{-10,-50},
           {-10,-70},{-10,-70}}, color={85,170,255}));
   connect(currentSensor1.plug_n, plugToPins_p_1.plug_p) 
     annotation (Line(points={{-40,90},{-36,90},{-32,90}}, color={85,170,255}));
-  connect(currentSensor2.plug_n, plugToPins_p_2.plug_p) annotation (Line(points= 
+  connect(currentSensor2.plug_n, plugToPins_p_2.plug_p) annotation (Line(points=
          {{-40,-10},{-32,-10},{-32,-10}}, color={85,170,255}));
-  connect(plugToPins_p_1.pin_p[1], resistor1_1.pin_p) annotation (Line(points={{-28, 
+  connect(plugToPins_p_1.pin_p[1], resistor1_1.pin_p) annotation (Line(points={{-28,
           90.6667},{-19,90},{-10,90}}, color={85,170,255}));
   connect(plugToPins_p_1.pin_p[2], resistor1_2.pin_p) annotation (Line(points={{
           -28,90},{-18,90},{-18,70},{-10,70}}, color={85,170,255}));
-  connect(plugToPins_p_1.pin_p[3], resistor1_3.pin_p) annotation (Line(points={{-28, 
+  connect(plugToPins_p_1.pin_p[3], resistor1_3.pin_p) annotation (Line(points={{-28,
           89.3333},{-22,89.3333},{-22,50},{-10,50}}, color={85,170,255}));
-  connect(plugToPins_p_2.pin_p[1], resistor2_1.pin_p) annotation (Line(points={{-28, 
+  connect(plugToPins_p_2.pin_p[1], resistor2_1.pin_p) annotation (Line(points={{-28,
           -9.33333},{-20,-9.33333},{-20,-10},{-10,-10}}, color={85,170,255}));
   connect(plugToPins_p_2.pin_p[2], resistor2_2.pin_p) annotation (Line(points={{
           -28,-10},{-18,-10},{-18,-30},{-10,-30}}, color={85,170,255}));
-  connect(plugToPins_p_2.pin_p[3], resistor2_3.pin_p) annotation (Line(points={{-28, 
+  connect(plugToPins_p_2.pin_p[3], resistor2_3.pin_p) annotation (Line(points={{-28,
           -10.6667},{-22,-10.6667},{-22,-50},{-10,-50}}, color={85,170,255}));
-  connect(plugToPins_n_1.pin_n[1], resistor1_1.pin_n) annotation (Line(points={{58, 
+  connect(plugToPins_n_1.pin_n[1], resistor1_1.pin_n) annotation (Line(points={{58,
           90.6667},{34,90},{10,90}}, color={85,170,255}));
   connect(plugToPins_n_1.pin_n[2], inductor1_2.pin_n) annotation (Line(points={{
           58,90},{48,90},{48,70},{40,70}}, color={85,170,255}));
-  connect(plugToPins_n_1.pin_n[3], resistor1_3.pin_n) annotation (Line(points={{58, 
+  connect(plugToPins_n_1.pin_n[3], resistor1_3.pin_n) annotation (Line(points={{58,
           89.3333},{52,89.3333},{52,50},{10,50}}, color={85,170,255}));
-  connect(plugToPins_n_2.pin_n[1], resistor2_1.pin_n) annotation (Line(points={{60, 
+  connect(plugToPins_n_2.pin_n[1], resistor2_1.pin_n) annotation (Line(points={{60,
           -9.33333},{36,-10},{10,-10}}, color={85,170,255}));
   connect(plugToPins_n_2.pin_n[2], inductor2_2.pin_n) annotation (Line(points={{
           60,-10},{48,-10},{48,-30},{40,-30}}, color={85,170,255}));
-  connect(plugToPins_n_2.pin_n[3], resistor2_3.pin_n) annotation (Line(points={{60, 
+  connect(plugToPins_n_2.pin_n[3], resistor2_3.pin_n) annotation (Line(points={{60,
           -10.6667},{52,-10.6667},{52,-50},{10,-50}}, color={85,170,255}));
   connect(plugToPins_n_1.plug_n, star1_2.plug_p) 
     annotation (Line(points={{62,90},{80,90},{80,60}}, color={85,170,255}));
@@ -176,6 +176,6 @@ equation
 <p>
 这个例子展示了一个非对称负载，在上面是带中性连接（单相电流传感器测量中性电流），在下面是没有中性连接（单相电压传感器测量中性位移）。
 </p>
-</html>"), 
+</html>"),
   experiment(StopTime=1.0, Interval=0.001));
 end UnsymmetricalLoad;

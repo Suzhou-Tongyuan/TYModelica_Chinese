@@ -1,5 +1,5 @@
 ﻿within Modelica;
-package ComplexMath 
+package ComplexMath
   "复数函数库(例如sin、cos)和复数向量、矩阵运算函数库"
   extends Modelica.Icons.Package;
   final constant Complex j = Complex(0, 1) "虚数单位";
@@ -10,7 +10,7 @@ package ComplexMath
     function norm "返回复数向量的p-范数"
       extends Modelica.Icons.Function;
       input Complex v[:] "向量";
-      input Real p(min = 1) = 2 
+      input Real p(min = 1) = 2
         "p-范数类型(常用：1、2或Modelica.Constants.inf)";
       output Real result "向量v的p-范数";
 
@@ -116,7 +116,7 @@ v = {2, -4, -2, -1};
 </html>"      ));
     end length;
 
-    function normalize 
+    function normalize
       "返回归一化的复数向量，使得其长度为 1，并且防止零向量出现除零错误"
       extends Modelica.Icons.Function;
       input Complex v[:] "向量";
@@ -193,9 +193,9 @@ Vectors.<strong>reverse</strong>(v);
     function sort "对复数向量的元素进行排序"
       extends Modelica.Icons.Function;
       input Complex v[:] "待排序向量";
-      input Boolean ascending = true 
+      input Boolean ascending = true
         "如果等于true则按升序排列，否则按降序排列";
-      input Boolean sortFrequency = true 
+      input Boolean sortFrequency = true
         "= true，则先对虚值排序，再对实值排序；= false，则对绝对值排序";
       output Complex sorted_v[size(v, 1)] = v "排序后的向量";
       output Integer indices[size(v, 1)] = 1:size(v, 1) "sorted_v = v[indices]";
@@ -482,13 +482,13 @@ Vectors.<strong>reverse</strong>(v);
   function arg "复数的相位角"
     extends Modelica.Icons.Function;
     input Complex c "复数";
-    input Modelica.Units.SI.Angle phi0 = 0 
+    input Modelica.Units.SI.Angle phi0 = 0
       "相位角phi的取值范围: -pi < phi-phi0 < pi";
     output Modelica.Units.SI.Angle phi "复数c的相位角";
   algorithm
     phi := Modelica.Math.atan3(
-      c.im, 
-      c.re, 
+      c.im,
+      c.re,
       phi0);
     annotation(Inline = true, Documentation(info = "<html>
 <p>该函数返回输入复数的实数参数，即其角度。</p>
@@ -639,16 +639,16 @@ Vectors.<strong>reverse</strong>(v);
 这个包包含了用于处理复数的<strong>基本数学函数</strong>(例如sin(..))，以及用于处理复数向量的函数。
 </p>
 
-</html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, 
+</html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}},
     preserveAspectRatio = false), graphics = {
-    Line(points = {{32, -86}, {32, 88}}, color = {175, 175, 175}), 
-    Line(points = {{-84, 2}, {88, 2}}, color = {175, 175, 175}), 
+    Line(points = {{32, -86}, {32, 88}}, color = {175, 175, 175}),
+    Line(points = {{-84, 2}, {88, 2}}, color = {175, 175, 175}),
     Line(
-    points = {{-50, 75}, {-5, 30}}), 
+    points = {{-50, 75}, {-5, 30}}),
     Line(
-    points = {{-50, 30}, {-5, 75}}), 
+    points = {{-50, 30}, {-5, 75}}),
     Line(
-    points = {{-50, -30}, {-5, -75}}), 
+    points = {{-50, -30}, {-5, -75}}),
     Line(
     points = {{-50, -75}, {-5, -30}})}));
 

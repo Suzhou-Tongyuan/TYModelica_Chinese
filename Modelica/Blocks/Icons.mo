@@ -6,13 +6,13 @@ package Icons "模块图标"
     annotation(
       Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
       100, 100}}), graphics = {Rectangle(
-      extent = {{-100, -100}, {100, 100}}, 
-      lineColor = {0, 0, 127}, 
-      fillColor = {255, 255, 255}, 
+      extent = {{-100, -100}, {100, 100}},
+      lineColor = {0, 0, 127},
+      fillColor = {255, 255, 255},
       fillPattern = FillPattern.Solid), Text(
-      extent = {{-150, 150}, {150, 110}}, 
-      textString = "%name", 
-      textColor = {0, 0, 255})}), 
+      extent = {{-150, 150}, {150, 110}},
+      textString = "%name",
+      textColor = {0, 0, 255})}),
       Documentation(info = "<html>
 <p>
 只有输入/输出块基本图标(无声明、无方程)的模块。
@@ -27,13 +27,13 @@ Modelica.Blocks包中的大多数模块都直接或间接继承自此模块。
     annotation(
       Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
       100, 100}}), graphics = {Rectangle(
-      extent = {{-100, -100}, {100, 100}}, 
-      lineColor = {255, 0, 255}, 
-      fillColor = {255, 255, 255}, 
+      extent = {{-100, -100}, {100, 100}},
+      lineColor = {255, 0, 255},
+      fillColor = {255, 255, 255},
       fillPattern = FillPattern.Solid), Text(
-      extent = {{-150, 150}, {150, 110}}, 
-      textString = "%name", 
-      textColor = {0, 0, 255})}), 
+      extent = {{-150, 150}, {150, 110}},
+      textString = "%name",
+      textColor = {0, 0, 255})}),
       Documentation(info = "<html>
 <p>
 仅包含输入/输出的基本图标的布尔模块(无声明、无方程)。
@@ -42,19 +42,19 @@ Modelica.Blocks包中的大多数模块都直接或间接继承自此模块。
 
   end BooleanBlock;
 
-  partial block DiscreteBlock 
+  partial block DiscreteBlock
     "离散模块组件图标的图形布局"
 
-    annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+    annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
       -100}, {100, 100}}), graphics = {Rectangle(
-      extent = {{-100, -100}, {100, 100}}, 
-      lineColor = {0, 0, 127}, 
-      fillColor = {223, 211, 169}, 
-      borderPattern = BorderPattern.Raised, 
+      extent = {{-100, -100}, {100, 100}},
+      lineColor = {0, 0, 127},
+      fillColor = {223, 211, 169},
+      borderPattern = BorderPattern.Raised,
       fillPattern = FillPattern.Solid), Text(
-      extent = {{-150, 150}, {150, 110}}, 
-      textString = "%name", 
-      textColor = {0, 0, 255})}), 
+      extent = {{-150, 150}, {150, 110}},
+      textString = "%name",
+      textColor = {0, 0, 255})}),
       Documentation(info = "<html>
 <p>
 一个仅包含基本输入/输出图标的离散模块(无声明，无方程)，
@@ -65,15 +65,15 @@ Modelica.Blocks包中的大多数模块都直接或间接继承自此模块。
 
   partial block IntegerBlock "整数模块的基本图形布局"
 
-    annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+    annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
       -100}, {100, 100}}), graphics = {Rectangle(
-      extent = {{-100, -100}, {100, 100}}, 
-      lineColor = {255, 127, 0}, 
-      fillColor = {255, 255, 255}, 
+      extent = {{-100, -100}, {100, 100}},
+      lineColor = {255, 127, 0},
+      fillColor = {255, 255, 255},
       fillPattern = FillPattern.Solid), Text(
-      extent = {{-150, 150}, {150, 110}}, 
-      textString = "%name", 
-      textColor = {0, 0, 255})}), 
+      extent = {{-150, 150}, {150, 110}},
+      textString = "%name",
+      textColor = {0, 0, 255})}),
       Documentation(info = "<html>
 <p>
 一个仅包含基本输入/输出图标的整数模块(无声明，无方程)。
@@ -83,14 +83,14 @@ Modelica.Blocks包中的大多数模块都直接或间接继承自此模块。
 
   partial block PartialBooleanBlock "逻辑模块的基本图形布局"
 
-    annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+    annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
       -100}, {100, 100}}), graphics = {Rectangle(
-      extent = {{-100, 100}, {100, -100}}, 
-      fillColor = {210, 210, 210}, 
-      fillPattern = FillPattern.Solid, 
+      extent = {{-100, 100}, {100, -100}},
+      fillColor = {210, 210, 210},
+      fillPattern = FillPattern.Solid,
       borderPattern = BorderPattern.Raised), Text(
-      extent = {{-150, 150}, {150, 110}}, 
-      textString = "%name", 
+      extent = {{-150, 150}, {150, 110}},
+      textString = "%name",
       textColor = {0, 0, 255})}), Documentation(info = "<html>
 <p>
 一个仅包含基本输入/输出图标的布尔模块(无声明，无方程)， 

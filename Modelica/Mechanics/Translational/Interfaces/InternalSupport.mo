@@ -1,23 +1,23 @@
 ﻿within Modelica.Mechanics.Translational.Interfaces;
-model InternalSupport 
+model InternalSupport
   "适配器模型，用于条件支撑连接器"
-  input SI.Force f 
+  input SI.Force f
     "外部支撑力（必须通过在使用 InternalSupport 的模型中进行力平衡计算; = flange.f)";
   SI.Position s "外部支撑位置（= flange.s）";
-  Flange_a flange 
+  Flange_a flange
     "内部支撑一维平动接口（必须连接到带有 useSupport=true 的条件支撑连接器和带有 useSupport=false 的条件固定模型）" 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
   flange.f = f;
   flange.s = s;
-  annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
+  annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
             -100},{100,100}}), graphics={Text(
-              extent={{-200,80},{200,40}}, 
-              textColor={0,0,255}, 
+              extent={{-200,80},{200,40}},
+              textColor={0,0,255},
               textString="%name"),Rectangle(
-              extent={{-20,20},{20,-20}}, 
-              lineColor={0,127,0}, 
-              fillColor={175,190,175}, 
+              extent={{-20,20},{20,-20}},
+              lineColor={0,127,0},
+              fillColor={175,190,175},
               fillPattern=FillPattern.Solid)}), Documentation(info="<html><p>
 这是一个适配器模型，用于在组件中利用条件<a href=\"modelica://Modelica.Mechanics.Translational.Interfaces.Support\" target=\"\">support connector</a>。 它可以应用于基于文本（基于方程的）和基于图形定义的组件：
 </p>

@@ -1,24 +1,24 @@
 ﻿within Modelica.Magnetic.FluxTubes.Examples.MovingCoilActuator;
-model ForceStrokeBehaviour 
+model ForceStrokeBehaviour
   "恒定电流下渗透模型的力-行程特性"
 
   extends Modelica.Icons.Example;
 
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(extent={{-70,-30},{-50,-10}})));
-  FluxTubes.Examples.MovingCoilActuator.Components.PermeanceActuator actuator(x(start=0), 
+  FluxTubes.Examples.MovingCoilActuator.Components.PermeanceActuator actuator(x(start=0),
       material=Material.HardMagnetic.PlasticNdFeB()) annotation (
       Placement(transformation(extent={{-30,0},{-10,20}})));
   Modelica.Electrical.Analog.Sources.ConstantCurrent source(I=3) 
     annotation (Placement(transformation(
-        origin={-60,10}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-60,10},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Blocks.Sources.Ramp sweepX(
-    height=7.99e-3, 
-    duration=8, 
-    offset=-3.995e-3, 
-    startTime=-4) annotation (Placement(transformation(extent={{70,0},{50, 
+    height=7.99e-3,
+    duration=8,
+    offset=-3.995e-3,
+    startTime=-4) annotation (Placement(transformation(extent={{70,0},{50,
             20}})));
   Modelica.Mechanics.Translational.Sources.Position feedX(exact=true) 
     annotation (Placement(transformation(extent={{30,0},{10,20}})));
@@ -31,26 +31,26 @@ model ForceStrokeBehaviour
         0.00505; 0.001, -9.4732, -9.63435, 0.00524; 0.0015, -9.44143, -9.59825,
         0.00543; 0.002, -9.39915, -9.55226, 0.00562; 0.0025, -9.33166, -9.47988,
         0.00581; 0.003, -9.23707, -9.38112, 0.006; 0.0035, -9.09497, -9.23417,
-        0.00619; 0.004, -8.91839, -9.05337, 0.00638]) 
+        0.00619; 0.004, -8.91839, -9.05337, 0.00638])
     "第 1 栏：位置，第 2 栏：非线性定子铁芯受力，第 3 栏：mu_rFe=const.=1000 时的受力，第 4 栏：mu_rFe=const.=1000 时的电感。" 
     annotation (Placement(transformation(extent={{50,30},{70,50}})));
 equation
   connect(ground.p, source.n) 
     annotation (Line(points={{-60,-10},{-60,0}}, color={0,0,255}));
-  connect(source.n, actuator.n) annotation (Line(points={{-60,0},{-46,0},{-46,0},{-30,0}}, 
+  connect(source.n, actuator.n) annotation (Line(points={{-60,0},{-46,0},{-46,0},{-30,0}},
                             color={0,0,255}));
-  connect(source.p, actuator.p) annotation (Line(points={{-60,20},{-46,20},{-46,20},{-30,20}}, 
+  connect(source.p, actuator.p) annotation (Line(points={{-60,20},{-46,20},{-46,20},{-30,20}},
                               color={0,0,255}));
   connect(sweepX.y, feedX.s_ref) 
     annotation (Line(points={{49,10},{32,10}}, color={0,0,127}));
   connect(feedX.flange, actuator.flange) 
     annotation (Line(points={{10,10},{-10,10}}, color={0,127,0}));
   connect(feedX.s_ref, comparisonWithFEA.u) 
-    annotation (Line(points={{32,10},{40,10},{40,40},{48,40}}, 
+    annotation (Line(points={{32,10},{40,10},{40,40},{48,40}},
                                                        color={0,0,127}));
   annotation (experiment(
-      StartTime=-4, 
-      StopTime=4, 
+      StartTime=-4,
+      StopTime=4,
       Tolerance=1e-007), Documentation(info="<html>
 <p>
 看一下<a href=\"modelica://Modelica.Magnetic.FluxTubes.Examples.MovingCoilActuator.Components. ConstantActuator\">ConstantActuator</a> 和<a href=\"modelica://Modelica.Magnetic.FluxTubes.Examples.MovingCoilActuator.Components. PermeanceActuator\">PermeanceActuator</a> 两个转换器模型的解释.<br>

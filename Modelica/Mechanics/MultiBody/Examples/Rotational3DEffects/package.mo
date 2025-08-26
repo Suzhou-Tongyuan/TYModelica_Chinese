@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Examples;
-package Rotational3DEffects "单缸发动机基础模型演示一维旋转元件的使用，包含所有三维效应"
+package Rotational3DEffects "单缸发动机基础模型演示一维转动元件的使用，包含所有三维效应"
   extends Modelica.Icons.ExamplesPackage;
 
   annotation (Documentation(info="<html>

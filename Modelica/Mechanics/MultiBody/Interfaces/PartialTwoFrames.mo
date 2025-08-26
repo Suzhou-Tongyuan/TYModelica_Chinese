@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Interfaces;
-partial model PartialTwoFrames 
+partial model PartialTwoFrames
   "提供两个坐标系连接器+外部world+确保组件被连接的断言的组件基础模型"
 
   Interfaces.Frame_a frame_a "坐标系a，固定在具有一个局部力和局部力矩的组件上" annotation(Placement(transformation(extent = {{-116, -16}, {-84, 16}})));
@@ -7,20 +7,20 @@ partial model PartialTwoFrames
 protected
   outer Modelica.Mechanics.MultiBody.World world;
 equation
-  assert(cardinality(frame_a) > 0, 
+  assert(cardinality(frame_a) > 0,
     "组件的连接器frame_a未被连接");
-  assert(cardinality(frame_b) > 0, 
+  assert(cardinality(frame_b) > 0,
     "组件的连接器frame_b未被连接");
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {Text(
-    extent = {{-136, -25}, {-100, -50}}, 
-    textColor = {128, 128, 128}, 
+    extent = {{-136, -25}, {-100, -50}},
+    textColor = {128, 128, 128},
     textString = "a"), Text(
-    extent = {{100, -25}, {136, -50}}, 
-    textColor = {128, 128, 128}, 
-    textString = "b")}), 
+    extent = {{100, -25}, {136, -50}},
+    textColor = {128, 128, 128},
+    textString = "b")}),
     Documentation(info = "<html>
 <p>
 这个部分模型提供两个坐标系连接器，world对象访问和一个断言来检查两个坐标系连接器是否被连接。

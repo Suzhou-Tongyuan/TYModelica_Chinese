@@ -16,7 +16,7 @@ model Impedance "单相线性阻抗"
   final parameter SI.Resistance R_ref=real(Z_ref) "阻抗的电阻成分，电阻";
   final parameter SI.Reactance X_ref=imag(Z_ref) "阻抗的反应性成分，电抗";
 equation
-  assert((1 + alpha_ref*(T_heatPort - T_ref)) >= Modelica.Constants.eps, 
+  assert((1 + alpha_ref*(T_heatPort - T_ref)) >= Modelica.Constants.eps,
     "温度超出模型范围！");
   R_actual = R_ref*(1 + alpha_ref*(T_heatPort - T_ref));
   X_actual = X_ref * (if not frequencyDependent then 1 else 
@@ -25,22 +25,22 @@ equation
   LossPower = real(v*conj(i));
 
   annotation (Icon(graphics={
-        Line(points={{60,0},{90,0}}, color={85,170,255}), 
-        Line(points={{-90,0},{-60,0}}, color={85,170,255}), 
+        Line(points={{60,0},{90,0}}, color={85,170,255}),
+        Line(points={{-90,0},{-60,0}}, color={85,170,255}),
         Rectangle(
-          extent={{-70,30},{70,-30}}, 
-          lineColor={85,170,255}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-70,30},{70,-30}},
+          lineColor={85,170,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Polygon(
-          points={{-70,-30},{70,30},{70,-30},{-70,-30}}, 
-          lineColor={85,170,255}, 
-          fillColor={85,170,255}, 
-          fillPattern=FillPattern.Solid), 
+          points={{-70,-30},{70,30},{70,-30},{-70,-30}},
+          lineColor={85,170,255},
+          fillColor={85,170,255},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,90},{150,50}}, 
-          textString="%name", 
-          textColor={0,0,255})}), 
+          extent={{-150,90},{150,50}},
+          textString="%name",
+          textColor={0,0,255})}),
       Documentation(info="<html>
 
 <p>阻抗模型表示电阻和电感器或电容器的串联连接。<br>

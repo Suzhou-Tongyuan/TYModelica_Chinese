@@ -8,22 +8,22 @@ model SinglePhaseTransformerWithHysteresis1
     annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor1(R=0.05) annotation (Placement(transformation(extent={{-70,10},{-50,30}})));
   Modelica.Electrical.Analog.Sources.SineVoltage vSource(f=400, V=8) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-80,0})));
   Basic.ElectroMagneticConverterWithLeakageInductance winding2(N=10, i(fixed=true)) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=180, 
+        extent={{-10,10},{10,-10}},
+        rotation=180,
         origin={30,0})));
   Modelica.Electrical.Analog.Basic.Resistor resistor2(R=2) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={62,20})));
   Modelica.Electrical.Analog.Basic.Ground el_ground2 
     annotation (Placement(transformation(extent={{50,-40},{70,-20}})));
   Shapes.HysteresisAndMagnets.GenericHystTellinenTable core(
-    asc(fixed=false), 
-    mat=FluxTubes.Material.HysteresisTableData.M330_50A(), 
-    includeEddyCurrents=true, 
-    l=0.2, 
-    A=5e-4, 
+    asc(fixed=false),
+    mat=FluxTubes.Material.HysteresisTableData.M330_50A(),
+    includeEddyCurrents=true,
+    l=0.2,
+    A=5e-4,
     MagRel(start=0.5, fixed=true)) 
     annotation (Placement(transformation(extent={{-10,10},{10,30}})));
 initial equation

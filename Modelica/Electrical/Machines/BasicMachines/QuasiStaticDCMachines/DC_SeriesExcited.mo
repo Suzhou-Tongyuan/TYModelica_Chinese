@@ -1,6 +1,6 @@
 ﻿within Modelica.Electrical.Machines.BasicMachines.QuasiStaticDCMachines;
 model DC_SeriesExcited "准静态串励线性直流电机"
-  extends Machines.BasicMachines.DCMachines.DC_SeriesExcited(final quasiStatic= 
+  extends Machines.BasicMachines.DCMachines.DC_SeriesExcited(final quasiStatic=
         true);
   extends Machines.Icons.QuasiStaticMachine;
   annotation (defaultComponentName="dcse", Documentation(info="<html>

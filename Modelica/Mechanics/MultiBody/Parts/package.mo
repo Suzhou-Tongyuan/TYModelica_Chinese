@@ -85,13 +85,13 @@ package Parts "刚性组件，如具有质量和转动惯量的体和无质量�
 预定义类型<strong>MultiBody.Types.Color</strong>包含MultiBody库中使用的颜色的菜单定义(这将被颜色编辑器替代)。
 </p>
 </html>"), Icon(graphics={Rectangle(
-          extent={{-80,28},{2,-16}}, 
-          lineColor={95,95,95}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          fillColor={215,215,215}, 
+          extent={{-80,28},{2,-16}},
+          lineColor={95,95,95},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={215,215,215},
           radius=10), Ellipse(
-          extent={{-8,52},{86,-42}}, 
-          lineColor={95,95,95}, 
-          fillPattern=FillPattern.Sphere, 
+          extent={{-8,52},{86,-42}},
+          lineColor={95,95,95},
+          fillPattern=FillPattern.Sphere,
           fillColor={215,215,215})}));
 end Parts;

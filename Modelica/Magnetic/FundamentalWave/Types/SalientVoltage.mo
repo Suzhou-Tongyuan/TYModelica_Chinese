@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Types;
-record SalientVoltage = Salient (redeclare SI.Voltage d, 
+record SalientVoltage = Salient (redeclare SI.Voltage d,
       redeclare SI.Voltage q) "典型电压" annotation (
     Documentation(info="<html>
 <p>表示电压相量 d 轴和 q 轴的类型.</p>

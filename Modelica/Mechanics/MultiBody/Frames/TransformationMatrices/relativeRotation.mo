@@ -1,11 +1,11 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
 function relativeRotation "返回相对方向对象"
   extends Modelica.Icons.Function;
-  input TransformationMatrices.Orientation T1 
+  input TransformationMatrices.Orientation T1
     "将坐标系0旋转至坐标系1的方向对象";
-  input TransformationMatrices.Orientation T2 
+  input TransformationMatrices.Orientation T2
     "将坐标系0旋转至坐标系2的方向对象";
-  output TransformationMatrices.Orientation T_rel 
+  output TransformationMatrices.Orientation T_rel
     "将坐标系1旋转至坐标系2的方向对象";
 algorithm
   T_rel := T2*transpose(T1);

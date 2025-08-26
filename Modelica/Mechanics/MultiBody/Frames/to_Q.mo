@@ -1,12 +1,12 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function to_Q 
+function to_Q
   "从方向对象R返回四元数方向对象Q"
 
   extends Modelica.Icons.Function;
   input Orientation R "将坐标系1旋转到坐标系2的方向对象";
-  input Quaternions.Orientation Q_guess=Quaternions.nullRotation() 
+  input Quaternions.Orientation Q_guess=Quaternions.nullRotation()
     "输出Q的猜测值(有2个解决方案；选择离Q_guess更近的那个)";
-  output Quaternions.Orientation Q 
+  output Quaternions.Orientation Q
     "将坐标系1旋转到坐标系2的四元数方向对象";
 algorithm
   Q := Quaternions.from_T(R.T, Q_guess);

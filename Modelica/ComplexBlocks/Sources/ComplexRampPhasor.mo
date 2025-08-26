@@ -11,7 +11,7 @@ block ComplexRampPhasor "生成一个幅值呈斜坡变化且角度恒定的相�
   parameter Modelica.Units.SI.Time duration(min = 0.0, start = 1) "斜坡持续时间(= 0.0为一个台阶)";
   Real magnitude "复相位的实际幅度";
 equation
-  assert(not useLogRamp or (magnitude1 > eps and magnitude2 > eps), 
+  assert(not useLogRamp or (magnitude1 > eps and magnitude2 > eps),
     "ComplexRampPhasor: 当useLogRamp = true时，magnitude1和magnitude2必须大于eps");
   magnitude = if not useLogRamp then 
     magnitude1 + (if time < startTime then 
@@ -29,33 +29,33 @@ equation
 
   y = magnitude * Modelica.ComplexMath.exp(Complex(0, phi));
 
-  annotation(defaultComponentName = "complexRamp", 
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
+  annotation(defaultComponentName = "complexRamp",
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
     -100}, {100, 100}}), graphics = {Line(
-    points = {{0, -8}, {24, 12}}, 
-    color = {85, 170, 255}), 
+    points = {{0, -8}, {24, 12}},
+    color = {85, 170, 255}),
     Polygon(
-    points = {{38, 24}, {17, 15}, {26, 4}, {38, 24}}, 
-    lineColor = {85, 170, 255}, 
-    fillColor = {85, 170, 255}, 
+    points = {{38, 24}, {17, 15}, {26, 4}, {38, 24}},
+    lineColor = {85, 170, 255},
+    fillColor = {85, 170, 255},
     fillPattern = FillPattern.Solid), Line(
-    points = {{0, 8}, {60, 58}}, 
-    color = {85, 170, 255}), 
+    points = {{0, 8}, {60, 58}},
+    color = {85, 170, 255}),
     Polygon(
-    points = {{76, 72}, {55, 63}, {64, 52}, {76, 72}}, 
-    lineColor = {85, 170, 255}, 
-    fillColor = {85, 170, 255}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
-    Line(points = {{0, -80}, {0, 68}}, 
+    points = {{76, 72}, {55, 63}, {64, 52}, {76, 72}},
+    lineColor = {85, 170, 255},
+    fillColor = {85, 170, 255},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
+    Line(points = {{0, -80}, {0, 68}},
     color = {192, 192, 192}), Polygon(
-    points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
+    points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
     fillPattern = FillPattern.Solid), Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
     fillPattern = FillPattern.Solid)}), Documentation(info = "<html>
 <p>
 输出y是一个复数相位，其角度恒定而幅值是一个斜坡函数。

@@ -19,23 +19,23 @@ Modelica.Blocks.MathInteger.Sum sum(nu=2)
   annotation (Placement(transformation(extent={{2,24},{14,36}})));
 equation
   connect(periodicClock.y, sample1.clock) annotation (Line(
-      points={{-55.4,0},{-42,0},{-42,22.8}}, 
-      color={175,175,175}, 
-      pattern=LinePattern.Dot, 
+      points={{-55.4,0},{-42,0},{-42,22.8}},
+      color={175,175,175},
+      pattern=LinePattern.Dot,
       thickness=0.5));
   connect(table.y, sample1.u) 
     annotation (Line(points={{-59,30},{-49.2,30}}, color={255,127,0}));
-  connect(sample1.y, upSample1.u) annotation (Line(points={{-35.4,30},{-32,30}, 
+  connect(sample1.y, upSample1.u) annotation (Line(points={{-35.4,30},{-32,30},
           {-32,40},{-27.2,40}}, color={255,127,0}));
-  connect(sample1.y, upSample2.u) annotation (Line(points={{-35.4,30},{-32,30}, 
+  connect(sample1.y, upSample2.u) annotation (Line(points={{-35.4,30},{-32,30},
           {-32,20},{-27.2,20}}, color={255,127,0}));
 connect(upSample1.y, sum.u[1]) annotation (Line(
-    points={{-13.4,40},{-6,40},{-6,32.1},{2,32.1}}, 
+    points={{-13.4,40},{-6,40},{-6,32.1},{2,32.1}},
     color={255,127,0}));
 connect(upSample2.y, sum.u[2]) annotation (Line(
-    points={{-13.4,20},{-6,20},{-6,27.9},{2,27.9}}, 
+    points={{-13.4,20},{-6,20},{-6,27.9},{2,27.9}},
     color={255,127,0}));
-  annotation (experiment(StopTime=0.09), 
+  annotation (experiment(StopTime=0.09),
   Documentation(info="<html>
 <p>
 模块文件的基本范例 

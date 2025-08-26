@@ -13,7 +13,7 @@ package BasicMachines "基本机械模型"
 </ul>
 </p>
 <p>感应电机模型使用SpacePhasors库。</p>
-</html>", 
+</html>",
         revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>
@@ -56,32 +56,32 @@ package BasicMachines "基本机械模型"
   <li> v2.2.0 2011/02/10 Anton Haumer<br>
        为所有机器准备了条件热端口</li>
   </ul>
-</html>"), 
+</html>"),
          Icon(coordinateSystem(extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
-          origin={2.835,10}, 
-          fillColor={0,128,255}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          extent={{-60,-60},{60,60}}), 
+          origin={2.835,10},
+          fillColor={0,128,255},
+          fillPattern=FillPattern.HorizontalCylinder,
+          extent={{-60,-60},{60,60}}),
         Rectangle(
-          origin={2.835,10}, 
-          fillColor={128,128,128}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          extent={{-80,-60},{-60,60}}), 
+          origin={2.835,10},
+          fillColor={128,128,128},
+          fillPattern=FillPattern.HorizontalCylinder,
+          extent={{-80,-60},{-60,60}}),
         Rectangle(
-          origin={2.835,10}, 
-          fillColor={95,95,95}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          extent={{60,-10},{80,10}}), 
+          origin={2.835,10},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.HorizontalCylinder,
+          extent={{60,-10},{80,10}}),
         Rectangle(
-          origin={2.835,10}, 
-          lineColor={95,95,95}, 
-          fillColor={95,95,95}, 
-          fillPattern=FillPattern.Solid, 
-          extent={{-60,50},{20,70}}), 
+          origin={2.835,10},
+          lineColor={95,95,95},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid,
+          extent={{-60,50},{20,70}}),
         Polygon(
-          origin={2.835,10}, 
-          fillPattern=FillPattern.Solid, 
+          origin={2.835,10},
+          fillPattern=FillPattern.Solid,
           points={{-70,-90},{-60,-90},{-30,-20},{20,-20},{50,-90},{60,-90},{
               60,-100},{-70,-100},{-70,-90}})}));
 end BasicMachines;

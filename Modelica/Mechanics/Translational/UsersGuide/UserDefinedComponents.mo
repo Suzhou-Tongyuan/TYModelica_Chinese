@@ -3,7 +3,7 @@ class UserDefinedComponents "用户自定义的组件"
   extends Modelica.Icons.Information;
 
   annotation (
-    DocumentationClass=true, 
+    DocumentationClass=true,
     Documentation(info="<html><p>
 本节提供了一些文字解释，以定义与此包中元素兼容的自定义一维传动组件。 通过从以下基类之一继承来定义一个新组件会很便捷，这些基类定义在子库 <a href=\"modelica://Modelica.Mechanics.Translational.Interfaces\" target=\"\">Interfaces</a>中：
 </p>

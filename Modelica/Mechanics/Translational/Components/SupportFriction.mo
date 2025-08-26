@@ -3,9 +3,9 @@ model SupportFriction "支撑组件中的库仑摩擦"
   extends Modelica.Mechanics.Translational.Interfaces.PartialElementaryTwoFlangesAndSupport2;
   extends Modelica.Thermal.HeatTransfer.Interfaces.PartialElementaryConditionalHeatPortWithoutT;
 
-  parameter Real f_pos[:, 2]=[0, 1] 
+  parameter Real f_pos[:, 2]=[0, 1]
     "作为绝对速度 [m/s] 函数的正向滑动摩擦特性 [N] (v>=0)";
-  parameter Real peak(final min=1) = 1 
+  parameter Real peak(final min=1) = 1
     "在 v==0 时最大摩擦力的峰值 (f0_max = peak*f_pos[1,2])";
   extends Translational.Interfaces.PartialFriction;
 
@@ -16,9 +16,9 @@ model SupportFriction "支撑组件中的库仑摩擦"
 equation
   // 常量辅助变量
   f0 = Modelica.Math.Vectors.interpolate(
-        f_pos[:, 1], 
-        f_pos[:, 2], 
-        0, 
+        f_pos[:, 1],
+        f_pos[:, 2],
+        0,
         1);
   f0_max = peak*f0;
   free = false;
@@ -108,66 +108,66 @@ maximum_static_friction = <strong>peak</strong> * sliding_friction(v=0)  (<stron
     IEEE Transactions on Automatic Control, Vol. 40, No. 3, pp. 419-425.<br><br></dd>
 </dl>
 
-</html>"), 
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
+</html>"),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
       graphics={
         Polygon(
-          points={{-50,-50},{-10,-90},{-10,-100},{10,-100},{10,-90},{50,-50},{-50,-50}}, 
-          lineColor={95,95,95}, 
-          fillColor={131,175,131}, 
-          fillPattern=FillPattern.Solid), 
+          points={{-50,-50},{-10,-90},{-10,-100},{10,-100},{10,-90},{50,-50},{-50,-50}},
+          lineColor={95,95,95},
+          fillColor={131,175,131},
+          fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{-48,-10},{-28,-30}}, 
-          lineColor={0,127,0}, 
-          fillPattern=FillPattern.Sphere, 
-          fillColor={255,255,255}), 
+          extent={{-48,-10},{-28,-30}},
+          lineColor={0,127,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={255,255,255}),
         Ellipse(
-          extent={{-10,-10},{10,-30}}, 
-          lineColor={0,127,0}, 
-          fillPattern=FillPattern.Sphere, 
-          fillColor={255,255,255}), 
+          extent={{-10,-10},{10,-30}},
+          lineColor={0,127,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={255,255,255}),
         Ellipse(
-          extent={{30,-10},{50,-30}}, 
-          lineColor={0,127,0}, 
-          fillPattern=FillPattern.Sphere, 
-          fillColor={255,255,255}), 
+          extent={{30,-10},{50,-30}},
+          lineColor={0,127,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={255,255,255}),
         Ellipse(
-          extent={{-50,30},{-30,10}}, 
-          lineColor={0,127,0}, 
-          fillPattern=FillPattern.Sphere, 
-          fillColor={255,255,255}), 
+          extent={{-50,30},{-30,10}},
+          lineColor={0,127,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={255,255,255}),
         Ellipse(
-          extent={{-10,30},{10,10}}, 
-          lineColor={0,127,0}, 
-          fillPattern=FillPattern.Sphere, 
-          fillColor={255,255,255}), 
+          extent={{-10,30},{10,10}},
+          lineColor={0,127,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={255,255,255}),
         Ellipse(
-          extent={{30,30},{50,10}}, 
-          lineColor={0,127,0}, 
-          fillPattern=FillPattern.Sphere, 
-          fillColor={255,255,255}), 
+          extent={{30,30},{50,10}},
+          lineColor={0,127,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={255,255,255}),
         Rectangle(
-          extent={{-90,10},{90,-10}}, 
-          lineColor={0,127,0}, 
-          fillColor={160,215,160}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-90,10},{90,-10}},
+          lineColor={0,127,0},
+          fillColor={160,215,160},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,100},{150,60}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,100},{150,60}},
+          textString="%name",
+          textColor={0,0,255}),
         Polygon(
-          points={{-60,30},{60,30},{60,20},{80,20},{80,50},{-80,50},{-80,20},{-60,20},{-60,30}}, 
-          lineColor={95,95,95}, 
-          fillPattern=FillPattern.Solid, 
-          fillColor={131,175,131}), 
+          points={{-60,30},{60,30},{60,20},{80,20},{80,50},{-80,50},{-80,20},{-60,20},{-60,30}},
+          lineColor={95,95,95},
+          fillPattern=FillPattern.Solid,
+          fillColor={131,175,131}),
         Line(
-          visible=useHeatPort, 
-          points={{-100,-100},{-100,-20},{0,-20}}, 
-          color={191,0,0}, 
-          pattern=LinePattern.Dot), 
+          visible=useHeatPort,
+          points={{-100,-100},{-100,-20},{0,-20}},
+          color={191,0,0},
+          pattern=LinePattern.Dot),
         Polygon(
-          points={{-60,-30},{60,-30},{60,-20},{80,-20},{80,-50},{-80,-50},{-80,-20},{-60,-20},{-60,-30}}, 
-          lineColor={95,95,95}, 
-          fillPattern=FillPattern.Solid, 
+          points={{-60,-30},{60,-30},{60,-20},{80,-20},{80,-50},{-80,-50},{-80,-20},{-60,-20},{-60,-30}},
+          lineColor={95,95,95},
+          fillPattern=FillPattern.Solid,
           fillColor={131,175,131})}));
 end SupportFriction;

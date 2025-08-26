@@ -2,10 +2,10 @@
 function random "伪随机数生成器"
   extends Modelica.Icons.Function;
 
-  input Integer seedIn[3] 
+  input Integer seedIn[3]
     "定义随机数序列的整数向量，例如 {23,87,187}";
   output Real x "0到1之间的随机数";
-  output Integer seedOut[3] 
+  output Integer seedOut[3]
     "修改后的种子，用于下一次调用random()";
 algorithm
   seedOut[1] := rem((171 * seedIn[1]), 30269);
@@ -89,7 +89,7 @@ http://www.python.org/doc/current/lib/module-random.html
 <p>
 <em>此Modelica函数是<strong>免费</strong>软件；可以根据BSD-3-Clause许可证条款重新分发和/或修改。</em>
 </p>
-</html>", 
+</html>",
     revisions = "<html>
 <p>2019-05-20: 在与Hubertus Tummescheit协商后，将许可证更改为BSD-3-Clause。</p>
 </html>"));

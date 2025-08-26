@@ -4,11 +4,11 @@ model Clutch"基于库仑摩擦的离合器"
   extends 
     Modelica.Mechanics.Rotational.Interfaces.PartialCompliantWithRelativeStates;
 
-  parameter Real mu_pos[:, 2]=[0, 0.5] 
+  parameter Real mu_pos[:, 2]=[0, 0.5]
     "正向滑动摩擦系数 [-] 作为 w_rel [rad/s] 的函数（w_rel>=0）";
-  parameter Real peak(final min=1) = 1 
+  parameter Real peak(final min=1) = 1
     "在 w==0 时 mu 的最大值峰值（mu0_max = peak*mu_pos[1,2])";
-  parameter Real cgeo(final min=0) = 1 
+  parameter Real cgeo(final min=0) = 1
     "包含摩擦分布假设的几何常数";
   parameter SI.Force fn_max(final min=0, start=1) "最大法向力";
 
@@ -18,11 +18,11 @@ model Clutch"基于库仑摩擦的离合器"
 
   Real mu0 "当 w=0 时的摩擦系数和正向滑动";
   SI.Force fn "法向力 (fn=fn_max*f_normalized)";
-  Modelica.Blocks.Interfaces.RealInput f_normalized 
+  Modelica.Blocks.Interfaces.RealInput f_normalized
     "归一化力信号 0..1 (法向力 = fn_max*f_normalized; 当 > 0 时离合器已接合)" 
     annotation (Placement(transformation(
-        origin={0,110}, 
-        extent={{20,-20},{-20,20}}, 
+        origin={0,110},
+        extent={{20,-20},{-20,20}},
         rotation=90)));
 
 equation
@@ -52,15 +52,15 @@ equation
       -Modelica.Math.Vectors.interpolate(mu_pos[:,1], mu_pos[:,2], -w_rel, 1));
   lossPower = tau*w_relfric;
   annotation (Icon(
-      coordinateSystem(preserveAspectRatio=true, 
-        extent={{-100,-100},{100,100}}), 
+      coordinateSystem(preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}}),
         graphics={
-      Text(extent={{-150,-110},{150,-70}}, 
-        textString="%name", 
-        textColor={0,0,255}), 
-      Line(visible=useHeatPort, 
-        points={{-100,-100},{-100,-40},{0,-40}}, 
-        color={191,0,0}, 
+      Text(extent={{-150,-110},{150,-70}},
+        textString="%name",
+        textColor={0,0,255}),
+      Line(visible=useHeatPort,
+        points={{-100,-100},{-100,-40},{0,-40}},
+        color={191,0,0},
         pattern=LinePattern.Dot)}), Documentation(info="<html><p>
 这个组件模拟了<strong>离合器</strong>，即一个有两个一维转动接口的组件，在这两个一维转动接口之间存在摩擦，并且通过法向力将这些一维转动接口压在一起。 法向力fn必须以标准化形式作为输入信号f_normalized提供（0≤ fnormalized≤1），fn=fn_max*f_normalized，其中fn_max必须作为参数提供。离合器中的摩擦系统按如下建模：
 </p>

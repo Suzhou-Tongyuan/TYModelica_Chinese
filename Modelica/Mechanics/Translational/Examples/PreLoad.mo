@@ -4,49 +4,49 @@ model PreLoad "使用ElastoGap模型预载一个滑阀"
   extends Modelica.Icons.Example;
 
   Translational.Components.ElastoGap innerContactA(
-    c=1000e3, 
-    d=250, 
+    c=1000e3,
+    d=250,
     s_rel0=0.001) annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
   Translational.Components.ElastoGap innerContactB(
-    c=1000e3, 
-    d=250, 
+    c=1000e3,
+    d=250,
     s_rel0=0.001) annotation (Placement(transformation(extent={{50,0},{70,20}})));
   Translational.Components.Mass spool(
-    L=0.19, 
-    m=0.150, 
-    s(start=0.01475, fixed=true), 
+    L=0.19,
+    m=0.150,
+    s(start=0.01475, fixed=true),
     v(fixed=true)) annotation (Placement(transformation(extent={{10,-70},{50,-30}})));
   Translational.Components.Fixed fixedLe(s0=-0.0955) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-90,70})));
   Translational.Components.Mass springPlateA(
-    m=10e-3, 
-    L=0.002, 
-    s(start=-0.093, fixed=true), 
+    m=10e-3,
+    L=0.002,
+    s(start=-0.093, fixed=true),
     v(fixed=true)) annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
   Translational.Components.Mass springPlateB(
-    m=10e-3, 
-    s(start=-0.06925, fixed=true), 
-    L=0.002, 
+    m=10e-3,
+    s(start=-0.06925, fixed=true),
+    L=0.002,
     v(fixed=true)) annotation (Placement(transformation(extent={{20,40},{40,60}})));
   Translational.Components.Spring spring(c=20e3, s_rel0=0.025) annotation (
       Placement(transformation(extent={{-10,40},{10,60}})));
   Translational.Components.ElastoGap outerContactA(
-    c=1000e3, 
-    d=250, 
+    c=1000e3,
+    d=250,
     s_rel0=0.0015) annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
   Translational.Components.ElastoGap outerContactB(
-    c=1000e3, 
-    d=250, 
+    c=1000e3,
+    d=250,
     s_rel0=0.0015) annotation (Placement(transformation(extent={{50,40},{70,60}})));
   Translational.Components.Rod rod1(L=0.007) annotation (Placement(
         transformation(extent={{-40,10},{-20,30}})));
   Translational.Components.Damper friction(d=2500) annotation (Placement(
         transformation(
-        origin={-80,30}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-80,30},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Translational.Sources.Force force annotation (Placement(transformation(
           extent={{-38,-60},{-18,-40}})));
@@ -63,48 +63,48 @@ model PreLoad "使用ElastoGap模型预载一个滑阀"
 equation
   connect(outerContactA.flange_b, springPlateA.flange_a) 
     annotation (Line(points={{-50,50},{-40,50}}, color={0,127,0}));
-  connect(springPlateA.flange_b, spring.flange_a) annotation (Line(points={{-20,50},{-10,50}}, 
+  connect(springPlateA.flange_b, spring.flange_a) annotation (Line(points={{-20,50},{-10,50}},
                                        color={0,127,0}));
   connect(spring.flange_b, springPlateB.flange_a) 
     annotation (Line(points={{10,50},{20,50}}, color={0,127,0}));
   connect(springPlateB.flange_b, outerContactB.flange_a) 
     annotation (Line(points={{40,50},{50,50}},         color={0,127,0}));
   connect(outerContactB.flange_b, housing.flange_b) 
-    annotation (Line(points={{70,50},{80,50},{80,70},{10,70}}, 
+    annotation (Line(points={{70,50},{80,50},{80,70},{10,70}},
                                                        color={0,127,0}));
-  connect(springPlateA.flange_b, rod1.flange_a) annotation (Line(points={{-20,50},{-20,32},{-40,32},{-40,20}}, 
+  connect(springPlateA.flange_b, rod1.flange_a) annotation (Line(points={{-20,50},{-20,32},{-40,32},{-40,20}},
                                            color={0,127,0}));
-  connect(innerContactA.flange_a, rod3.flange_a) annotation (Line(points={{-70,10},{-80,10},{-80,-10},{-40,-10}}, 
+  connect(innerContactA.flange_a, rod3.flange_a) annotation (Line(points={{-70,10},{-80,10},{-80,-10},{-40,-10}},
                                              color={0,127,0}));
-  connect(innerContactA.flange_b, rod1.flange_b) annotation (Line(points={{-50,10},{-20,10},{-20,20}}, 
+  connect(innerContactA.flange_b, rod1.flange_b) annotation (Line(points={{-50,10},{-20,10},{-20,20}},
                                       color={0,127,0}));
   connect(rod2.flange_a, innerContactB.flange_a) 
     annotation (Line(points={{20,20},{20,10},{50,10}}, color={0,127,0}));
   connect(rod4.flange_b, innerContactB.flange_b) 
-    annotation (Line(points={{40,-10},{80,-10},{80,10},{70,10}}, 
+    annotation (Line(points={{40,-10},{80,-10},{80,10},{70,10}},
                                                      color={0,127,0}));
   connect(friction.flange_b, rod3.flange_a) 
-    annotation (Line(points={{-80,20},{-80,-10},{-40,-10}}, 
+    annotation (Line(points={{-80,20},{-80,-10},{-40,-10}},
                                                         color={0,127,0}));
   connect(rod3.flange_b, rod4.flange_a) 
-    annotation (Line(points={{-20,-10},{20,-10}}, 
+    annotation (Line(points={{-20,-10},{20,-10}},
                                               color={0,127,0}));
-  connect(rod2.flange_b, springPlateB.flange_a) annotation (Line(points={{40,20},{40,32},{20,32},{20,50}}, 
+  connect(rod2.flange_b, springPlateB.flange_a) annotation (Line(points={{40,20},{40,32},{20,32},{20,50}},
                                            color={0,127,0}));
   connect(spool.flange_a, rod4.flange_a) 
-    annotation (Line(points={{10,-50},{0,-50},{0,-10},{20,-10}}, 
+    annotation (Line(points={{10,-50},{0,-50},{0,-10},{20,-10}},
                                                     color={0,127,0}));
-  connect(sineForce.y, force.f) annotation (Line(points={{-57,-50},{-40,-50}}, 
+  connect(sineForce.y, force.f) annotation (Line(points={{-57,-50},{-40,-50}},
                       color={0,0,127}));
   connect(force.flange, spool.flange_a) annotation (Line(
       points={{-18,-50},{10,-50}},color={0,127,0}));
   connect(outerContactA.flange_a, fixedLe.flange) annotation (Line(
-      points={{-70,50},{-80,50},{-80,70},{-90,70}}, 
+      points={{-70,50},{-80,50},{-80,70},{-90,70}},
                                            color={0,127,0}));
   connect(housing.flange_a, fixedLe.flange) annotation (Line(
       points={{-10,70},{-90,70}}, color={0,127,0}));
   connect(friction.flange_a, fixedLe.flange) annotation (Line(
-      points={{-80,40},{-80,70},{-90,70}}, 
+      points={{-80,40},{-80,70},{-90,70}},
                                   color={0,127,0}));
   annotation (
     Documentation(info="<html>
@@ -131,6 +131,6 @@ equation
 <div>
 <img src=\"modelica://Modelica/Resources/Images/Mechanics/Translational/Examples/PreLoad2.png\" alt=\"Preload 2\">
 </div>
-</html>"), 
+</html>"),
     experiment(StopTime=100, Interval=0.1));
 end PreLoad;

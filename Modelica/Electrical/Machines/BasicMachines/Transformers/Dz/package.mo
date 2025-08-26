@@ -4,7 +4,7 @@ package Dz "变压器：主D/次Zig-Zag"
 
   annotation (Documentation(info="<html>
 <p>该库含有主D连接/次Zig-Zag连接的所有可能矢量组的变压器。</p>
-</html>", 
+</html>",
     revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

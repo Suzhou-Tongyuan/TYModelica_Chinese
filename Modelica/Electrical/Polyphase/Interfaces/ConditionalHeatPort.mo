@@ -1,13 +1,13 @@
 ﻿within Modelica.Electrical.Polyphase.Interfaces;
-partial model ConditionalHeatPort 
+partial model ConditionalHeatPort
   "部分模型，包含有条件的热端口，以描述通过热网络的功率损失"
   parameter Integer mh(min=1) = 3 "热端口数量=相数";
-  parameter Boolean useHeatPort=false 
+  parameter Boolean useHeatPort=false
     "=true，如果所有热端口均启用" annotation (
-    Evaluate=true, 
-    HideResult=true, 
+    Evaluate=true,
+    HideResult=true,
     choices(checkBox=true));
-  parameter SI.Temperature T[mh]=fill(293.15, mh) 
+  parameter SI.Temperature T[mh]=fill(293.15, mh)
     "如果useHeatPort=false，则为固定设备温度" 
     annotation (Dialog(enable=not useHeatPort));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort[mh] if 
@@ -18,7 +18,7 @@ partial model ConditionalHeatPort
 <ul>
 <li><em>2009年8月26日</em>，由Anton Haumer最初实现</li>
 </ul>
-</html>", 
+</html>",
       info="<html>
 <p>
 该部分模型提供有条件的热端口，用于连接到热网络。

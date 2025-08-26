@@ -17,7 +17,7 @@ equation
        由Christoph Clauss<br>创建<br>
        </li>
 </ul>
-</html>", 
+</html>",
         info="<html>
 <p>电流源部分模型通过提供引脚、偏移量和startTime参数来准备电流源，这些参数在所有电流源中都是相同的。源行为是从Modelica.Blocks信号源中通过继承和利用可替换模型获得的。
 </p>

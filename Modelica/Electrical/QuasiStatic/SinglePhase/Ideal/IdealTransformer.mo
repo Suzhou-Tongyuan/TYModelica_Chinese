@@ -10,11 +10,11 @@ model IdealTransformer "理想变压器"
   SI.Angle arg_v1=Modelica.ComplexMath.arg(v1) "复电压v1的幅角";
   SI.Current abs_i1=Modelica.ComplexMath.abs(i1) "复电流i1的幅值";
   SI.Angle arg_i1=Modelica.ComplexMath.arg(i1) "复电流i1的幅角";
-  SI.ActivePower P1=Modelica.ComplexMath.real(v1* 
+  SI.ActivePower P1=Modelica.ComplexMath.real(v1*
       Modelica.ComplexMath.conj(i1)) "1侧有功功率";
-  SI.ReactivePower Q1=Modelica.ComplexMath.imag(v1* 
+  SI.ReactivePower Q1=Modelica.ComplexMath.imag(v1*
       Modelica.ComplexMath.conj(i1)) "1侧无功功率";
-  SI.ApparentPower S1=Modelica.ComplexMath.abs(v1* 
+  SI.ApparentPower S1=Modelica.ComplexMath.abs(v1*
       Modelica.ComplexMath.conj(i1)) "1侧复视在功率的幅值";
   Real pf1=cos(Modelica.ComplexMath.arg(Complex(P1, Q1))) "1侧功率因数";
 
@@ -22,25 +22,25 @@ model IdealTransformer "理想变压器"
   SI.Angle arg_v2=Modelica.ComplexMath.arg(v2) "复电压v2的幅角";
   SI.Current abs_i2=Modelica.ComplexMath.abs(i2) "复电流i2的幅值";
   SI.Angle arg_i2=Modelica.ComplexMath.arg(i2) "复电流i2的幅角";
-  SI.ActivePower P2=Modelica.ComplexMath.real(v2* 
+  SI.ActivePower P2=Modelica.ComplexMath.real(v2*
       Modelica.ComplexMath.conj(i2)) "2侧有功功率";
-  SI.ReactivePower Q2=Modelica.ComplexMath.imag(v2* 
+  SI.ReactivePower Q2=Modelica.ComplexMath.imag(v2*
       Modelica.ComplexMath.conj(i2)) "2侧无功功率";
-  SI.ApparentPower S2=Modelica.ComplexMath.abs(v2* 
+  SI.ApparentPower S2=Modelica.ComplexMath.abs(v2*
       Modelica.ComplexMath.conj(i2)) "2侧复视在功率的幅值";
   Real pf2=cos(Modelica.ComplexMath.arg(Complex(P2, Q2))) "2侧功率因数";
 
   QuasiStatic.SinglePhase.Interfaces.PositivePin pin_p1 "主正引脚" 
-    annotation (Placement(transformation(extent={{-110,90},{-90,110}}), 
+    annotation (Placement(transformation(extent={{-110,90},{-90,110}}),
         iconTransformation(extent={{-110,90},{-90,110}})));
-  QuasiStatic.SinglePhase.Interfaces.PositivePin pin_p2 
-    "副正引脚" annotation (Placement(transformation(extent={{90, 
+  QuasiStatic.SinglePhase.Interfaces.PositivePin pin_p2
+    "副正引脚" annotation (Placement(transformation(extent={{90,
             90},{110,110}}), iconTransformation(extent={{90,90},{110,110}})));
   QuasiStatic.SinglePhase.Interfaces.NegativePin pin_n1 "主负引脚" 
-    annotation (Placement(transformation(extent={{-110,-110},{-90,-90}}), 
+    annotation (Placement(transformation(extent={{-110,-110},{-90,-90}}),
         iconTransformation(extent={{-110,-110},{-90,-90}})));
-  QuasiStatic.SinglePhase.Interfaces.NegativePin pin_n2 
-    "副负引脚" annotation (Placement(transformation(extent={{90,-108}, 
+  QuasiStatic.SinglePhase.Interfaces.NegativePin pin_n2
+    "副负引脚" annotation (Placement(transformation(extent={{90,-108},
             {110,-88}}), iconTransformation(extent={{90,-108},{110,-88}})));
 equation
   // 电流平衡
@@ -55,121 +55,121 @@ equation
   pin_p2.reference.gamma = pin_n2.reference.gamma;
   Connections.branch(pin_p1.reference, pin_p2.reference);
   pin_p1.reference.gamma = pin_p2.reference.gamma;
-  annotation (defaultComponentName="transformer", 
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
+  annotation (defaultComponentName="transformer",
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Text(
-          extent={{-100,10},{0,-10}}, 
-          textColor={0,0,255}, 
-          textString="1=主"), 
+          extent={{-100,10},{0,-10}},
+          textColor={0,0,255},
+          textString="1=主"),
         Text(
-          extent={{0,10},{100,-10}}, 
-          textColor={0,0,255}, 
-          textString="2=副"), 
+          extent={{0,10},{100,-10}},
+          textColor={0,0,255},
+          textString="2=副"),
         Polygon(
-          points={{-120,53},{-110,50},{-120,47},{-120,53}}, 
-          lineColor={160,160,164}, 
-          fillColor={160,160,164}, 
-          fillPattern=FillPattern.Solid), 
-        Line(points={{-136,50},{-111,50}}, color={160,160,164}), 
+          points={{-120,53},{-110,50},{-120,47},{-120,53}},
+          lineColor={160,160,164},
+          fillColor={160,160,164},
+          fillPattern=FillPattern.Solid),
+        Line(points={{-136,50},{-111,50}}, color={160,160,164}),
         Text(
-          extent={{-136,53},{-119,68}}, 
-          textColor={160,160,164}, 
-          textString="i1"), 
-        Line(points={{-136,-49},{-111,-49}}, color={160,160,164}), 
+          extent={{-136,53},{-119,68}},
+          textColor={160,160,164},
+          textString="i1"),
+        Line(points={{-136,-49},{-111,-49}}, color={160,160,164}),
         Polygon(
-          points={{-126,-46},{-136,-49},{-126,-52},{-126,-46}}, 
-          lineColor={160,160,164}, 
-          fillColor={160,160,164}, 
-          fillPattern=FillPattern.Solid), 
+          points={{-126,-46},{-136,-49},{-126,-52},{-126,-46}},
+          lineColor={160,160,164},
+          fillColor={160,160,164},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-127,-46},{-110,-31}}, 
-          textColor={160,160,164}, 
-          textString="i1"), 
+          extent={{-127,-46},{-110,-31}},
+          textColor={160,160,164},
+          textString="i1"),
         Polygon(
-          points={{127,-47},{137,-50},{127,-53},{127,-47}}, 
-          lineColor={160,160,164}, 
-          fillColor={160,160,164}, 
-          fillPattern=FillPattern.Solid), 
-        Line(points={{111,-50},{136,-50}}, color={160,160,164}), 
+          points={{127,-47},{137,-50},{127,-53},{127,-47}},
+          lineColor={160,160,164},
+          fillColor={160,160,164},
+          fillPattern=FillPattern.Solid),
+        Line(points={{111,-50},{136,-50}}, color={160,160,164}),
         Text(
-          extent={{112,-44},{128,-29}}, 
-          textColor={160,160,164}, 
-          textString="i2"), 
+          extent={{112,-44},{128,-29}},
+          textColor={160,160,164},
+          textString="i2"),
         Text(
-          extent={{118,52},{135,67}}, 
-          textString="i2"), 
+          extent={{118,52},{135,67}},
+          textString="i2"),
         Polygon(
-          points={{120,53},{110,50},{120,47},{120,53}}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          fillColor={160,160,164}), 
-        Line(points={{111,50},{136,50}})}), 
+          points={{120,53},{110,50},{120,47},{120,53}},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={160,160,164}),
+        Line(points={{111,50},{136,50}})}),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={
         Text(
-          extent={{-100,20},{-60,-20}}, 
-          textColor={85,170,255}, 
-          textString="1"), 
+          extent={{-100,20},{-60,-20}},
+          textColor={85,170,255},
+          textString="1"),
         Text(
-          extent={{60,20},{100,-20}}, 
-          textColor={85,170,255}, 
-          textString="2"), 
-        Line(points={{-40,60},{-40,100},{-90,100}}, color={85,170,255}), 
-        Line(points={{40,60},{40,100},{90,100}}, color={85,170,255}), 
-        Line(points={{-40,-60},{-40,-100},{-90,-100}}, color={85,170,255}), 
-        Line(points={{40,-60},{40,-100},{90,-100}}, color={85,170,255}), 
+          extent={{60,20},{100,-20}},
+          textColor={85,170,255},
+          textString="2"),
+        Line(points={{-40,60},{-40,100},{-90,100}}, color={85,170,255}),
+        Line(points={{40,60},{40,100},{90,100}}, color={85,170,255}),
+        Line(points={{-40,-60},{-40,-100},{-90,-100}}, color={85,170,255}),
+        Line(points={{40,-60},{40,-100},{90,-100}}, color={85,170,255}),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={-33,45}, 
-          rotation=270), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={-33,45},
+          rotation=270),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={-33,15}, 
-          rotation=270), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={-33,15},
+          rotation=270),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={-33,-15}, 
-          rotation=270), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={-33,-15},
+          rotation=270),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={-33,-45}, 
-          rotation=270), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={-33,-45},
+          rotation=270),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={33,45}, 
-          rotation=90), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={33,45},
+          rotation=90),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={33,15}, 
-          rotation=90), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={33,15},
+          rotation=90),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={33,-15}, 
-          rotation=90), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={33,-15},
+          rotation=90),
         Line(
-          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}}, 
-          color={85,170,255}, 
-          smooth=Smooth.Bezier, 
-          origin={33,-45}, 
-          rotation=90), 
+          points={{-15,-7},{-14,-1},{-7,7},{7,7},{14,-1},{15,-7}},
+          color={85,170,255},
+          smooth=Smooth.Bezier,
+          origin={33,-45},
+          rotation=90),
         Text(
-          extent={{-150,149},{150,109}}, 
-          textString="%name", 
-          textColor={0,0,255})}), 
+          extent={{-150,149},{150,109}},
+          textString="%name",
+          textColor={0,0,255})}),
     Documentation(info="<html>
 <p>
 理想变压器是一个没有磁化的两端口电路元件。电压和电流理想地转换：
@@ -180,7 +180,7 @@ i2 = -i1*n;
 </pre></blockquote>
 <p>
 其中<code>n</code>是一个叫做变比的实数。</p>
-</html>", 
+</html>",
       revisions="<html>
 <h5>2014-01-02, Christian Kral</h5>
 <ul>

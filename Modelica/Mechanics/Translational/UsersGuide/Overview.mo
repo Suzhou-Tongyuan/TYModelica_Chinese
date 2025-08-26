@@ -3,7 +3,7 @@ class Overview "概述"
   extends Modelica.Icons.Information;
 
   annotation (
-    DocumentationClass=true, 
+    DocumentationClass=true,
     Documentation(info="<html>
 
 <p>

@@ -1,18 +1,18 @@
 ﻿within Modelica.Magnetic.FluxTubes.Basic;
-model EddyCurrent 
+model EddyCurrent
   "用于导电磁通管中涡流的建模"
 
   extends Interfaces.TwoPort;
   extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
     final T=273.15);
 
-  parameter Boolean useConductance = false 
+  parameter Boolean useConductance = false
     "用电导率代替几何数据和 rho" 
     annotation(Evaluate=true, choices(checkBox=true));
-  parameter SI.Conductance G(min=0) = 1/0.098e-6 
+  parameter SI.Conductance G(min=0) = 1/0.098e-6
     "等效损耗电导 G=A/rho/l" 
     annotation(Dialog(enable=useConductance),Evaluate=true);
-  parameter SI.Resistivity rho=0.098e-6 
+  parameter SI.Resistivity rho=0.098e-6
     "通量管材料的电阻率（默认值：20 摄氏度时为铁）" 
     annotation(Dialog(enable=not useConductance));
   parameter SI.Length l=1 "涡流路径的平均长度" 
@@ -20,7 +20,7 @@ model EddyCurrent
   parameter SI.Area A=1 "涡流路径横截面积" 
     annotation(Dialog(enable=not useConductance));
 
-  final parameter SI.Resistance R=rho*l/A 
+  final parameter SI.Resistance R=rho*l/A
     "涡流路径的电阻" 
     annotation(Dialog(enable=not useConductance));
 
@@ -29,23 +29,23 @@ equation
   V_m =(if useConductance then G else 1/R) * der(Phi);
   //涡流导致的磁性网络中的磁电压降
   annotation (Icon(coordinateSystem(
-      preserveAspectRatio=false, 
+      preserveAspectRatio=false,
       extent={{-100,-100},{100,100}}), graphics={
       Rectangle(
-        extent={{-70,30},{70,-30}}, 
-        lineColor={255,128,0}, 
-        fillColor={255,255,255}, 
-        fillPattern=FillPattern.Solid), 
-      Line(points={{-70,0},{-90,0}}, color={255,128,0}), 
-      Line(points={{70,0},{90,0}}, color={255,128,0}), 
+        extent={{-70,30},{70,-30}},
+        lineColor={255,128,0},
+        fillColor={255,255,255},
+        fillPattern=FillPattern.Solid),
+      Line(points={{-70,0},{-90,0}}, color={255,128,0}),
+      Line(points={{70,0},{90,0}}, color={255,128,0}),
       Rectangle(
-        extent={{-70,30},{70,-30}}, 
-        lineColor={255,128,0}, 
-        fillColor={255,128,0}, 
-        fillPattern=FillPattern.Solid), 
+        extent={{-70,30},{70,-30}},
+        lineColor={255,128,0},
+        fillColor={255,128,0},
+        fillPattern=FillPattern.Solid),
       Text(
-        extent={{-150,50},{150,90}}, 
-        textString="%name", 
+        extent={{-150,50},{150,90}},
+        textString="%name",
         textColor={0,0,255})}), Documentation(info="<html>
 <p>
 当磁通量随时间变化时，导电磁通管中会产生涡流。除了磁通管的磁阻造成的电压降之外，这还会导致磁电压降。涡流分量可视为变压器只有一匝的短路次级绕组。其电阻可根据涡流路径的几何形状和电阻率计算得出.

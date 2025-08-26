@@ -2,7 +2,7 @@
 function inverseRotation "返回逆方向对象"
   extends Modelica.Icons.Function;
   input Orientation R "将坐标系1旋转到坐标系2的方向对象";
-  output Orientation R_inv 
+  output Orientation R_inv
     "将坐标系2旋转到坐标系1的方向对象";
 algorithm
   R_inv := Orientation(T=transpose(R.T), w=-resolve1(R, R.w));

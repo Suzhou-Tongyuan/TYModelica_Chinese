@@ -2,7 +2,7 @@
 package Common "理想气体模型的通用库与数据"
   extends Modelica.Icons.Package;
 
-  record DataRecord 
+  record DataRecord
     "基于NASA来源的理想气体性质系数数据记录"
     extends Modelica.Icons.Record;
     String name "理想气体的名称";
@@ -40,23 +40,23 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
 </html>"    ));
   end DataRecord;
 
-  partial package SingleGasNasa 
+  partial package SingleGasNasa
     "基于NASA来源的理想气体的介质模型"
 
     extends Interfaces.PartialPureSubstance(
-      ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pT, 
-    redeclare final record FluidConstants = 
-      Modelica.Media.Interfaces.Types.IdealGas.FluidConstants, 
-      mediumName = data.name, 
-      substanceNames = {data.name}, 
-      singleState = false, 
-      Temperature(min = 200, max = 6000, start = 500, nominal = 500), 
+      ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pT,
+    redeclare final record FluidConstants =
+      Modelica.Media.Interfaces.Types.IdealGas.FluidConstants,
+      mediumName = data.name,
+      substanceNames = {data.name},
+      singleState = false,
+      Temperature(min = 200, max = 6000, start = 500, nominal = 500),
       SpecificEnthalpy(start = if Functions.referenceChoice == ReferenceEnthalpy.ZeroAt0K then data.H0 else 
-      if Functions.referenceChoice == ReferenceEnthalpy.UserDefined then Functions.h_offset else 0, nominal = 1.0e5), 
-      Density(start = 10, nominal = 10), 
+      if Functions.referenceChoice == ReferenceEnthalpy.UserDefined then Functions.h_offset else 0, nominal = 1.0e5),
+      Density(start = 10, nominal = 10),
       AbsolutePressure(start = 10e5, nominal = 10e5));
 
-    redeclare record extends ThermodynamicState 
+    redeclare record extends ThermodynamicState
       "理想气体的热力学状态变量"
       AbsolutePressure p "介质的绝对压力";
       Temperature T "介质的温度";
@@ -66,14 +66,14 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
     import Modelica.Math;
     import Modelica.Media.Interfaces.Choices.ReferenceEnthalpy;
 
-    constant IdealGases.Common.DataRecord data 
+    constant IdealGases.Common.DataRecord data
       "理想气体物质的数据记录";
 
     constant FluidConstants[nS] fluidConstants "流体的常数数据";
 
     redeclare model extends BaseProperties(
-      T(stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default), 
-      p(stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default)) 
+      T(stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default),
+      p(stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default))
       "理想气体介质的基本属性"
       annotation();
     equation
@@ -84,9 +84,9 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       MM = data.MM;
       R_s = data.R_s;
       h = Modelica.Media.IdealGases.Common.Functions.h_T(
-        data, T, 
-        Modelica.Media.IdealGases.Common.Functions.excludeEnthalpyOfFormation, 
-        Modelica.Media.IdealGases.Common.Functions.referenceChoice, 
+        data, T,
+        Modelica.Media.IdealGases.Common.Functions.excludeEnthalpyOfFormation,
+        Modelica.Media.IdealGases.Common.Functions.referenceChoice,
         Modelica.Media.IdealGases.Common.Functions.h_offset);
       u = h - R_s * T;
 
@@ -97,7 +97,7 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       state.p = p;
     end BaseProperties;
 
-    redeclare function setState_pTX 
+    redeclare function setState_pTX
       "根据 p、T 和组分 X 计算热力学状态"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -109,7 +109,7 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       annotation(Inline = true, smoothOrder = 2);
     end setState_pTX;
 
-    redeclare function setState_phX 
+    redeclare function setState_phX
       "根据 p、h 和组分 X 计算热力学状态"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -121,7 +121,7 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       annotation(Inline = true, smoothOrder = 2);
     end setState_phX;
 
-    redeclare function setState_psX 
+    redeclare function setState_psX
       "根据 p、s 和组分 X 计算热力学状态"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -133,7 +133,7 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       annotation(Inline = true, smoothOrder = 2);
     end setState_psX;
 
-    redeclare function setState_dTX 
+    redeclare function setState_dTX
       "根据 d, T 和组分 X 计算热力状态"
       extends Modelica.Icons.Function;
       input Density d "密度";
@@ -145,10 +145,10 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       annotation(Inline = true, smoothOrder = 2);
     end setState_dTX;
 
-    redeclare function extends setSmoothState 
+    redeclare function extends setSmoothState
       "计算热力状态，使其平滑近似：如果 x > 0 则为 state_a，否则为 state_b"
     algorithm
-      state := ThermodynamicState(p = Media.Common.smoothStep(x, state_a.p, state_b.p, x_small), 
+      state := ThermodynamicState(p = Media.Common.smoothStep(x, state_a.p, state_b.p, x_small),
         T = Media.Common.smoothStep(x, state_a.T, state_b.T, x_small));
       annotation(Inline = true, smoothOrder = 2);
     end setSmoothState;
@@ -179,7 +179,7 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       annotation(Inline = true, smoothOrder = 2);
     end specificEnthalpy;
 
-    redeclare function extends specificInternalEnergy 
+    redeclare function extends specificInternalEnergy
       "计算比内能"
       extends Modelica.Icons.Function;
     algorithm
@@ -204,7 +204,7 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       annotation(Inline = true, smoothOrder = 2);
     end specificGibbsEnergy;
 
-    redeclare function extends specificHelmholtzEnergy 
+    redeclare function extends specificHelmholtzEnergy
       "计算比亥姆霍兹能"
       extends Modelica.Icons.Function;
     algorithm
@@ -213,7 +213,7 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       annotation(Inline = true, smoothOrder = 2);
     end specificHelmholtzEnergy;
 
-    redeclare function extends specificHeatCapacityCp 
+    redeclare function extends specificHeatCapacityCp
       "计算定压比热容"
     algorithm
       cp := Modelica.Media.IdealGases.Common.Functions.cp_T(
@@ -221,7 +221,7 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       annotation(Inline = true, smoothOrder = 2);
     end specificHeatCapacityCp;
 
-    redeclare function extends specificHeatCapacityCv 
+    redeclare function extends specificHeatCapacityCv
       "根据温度和气体数据计算定容比热容"
     algorithm
       cv := Modelica.Media.IdealGases.Common.Functions.cp_T(
@@ -243,68 +243,68 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       annotation(Inline = true, smoothOrder = 2);
     end velocityOfSound;
 
-    function isentropicEnthalpyApproximation 
+    function isentropicEnthalpyApproximation
       "根据上游属性和下游压力近似计算等熵焓"
       extends Modelica.Icons.Function;
       input SI.Pressure p2 "下游压力";
       input ThermodynamicState state "上游位置的属性";
-      input Boolean exclEnthForm = Functions.excludeEnthalpyOfFormation 
+      input Boolean exclEnthForm = Functions.excludeEnthalpyOfFormation
         "如果为真，则不包括生成焓 Hf 在比焓 h 中";
-      input ReferenceEnthalpy refChoice = Functions.referenceChoice 
+      input ReferenceEnthalpy refChoice = Functions.referenceChoice
         "参考焓的选择";
-      input SpecificEnthalpy h_off = Functions.h_offset 
+      input SpecificEnthalpy h_off = Functions.h_offset
         "用户定义的参考焓偏移，如果 referenceChoice = UserDefined";
       output SI.SpecificEnthalpy h_is "等熵焓";
     protected
       IsentropicExponent gamma = isentropicExponent(state) "等熵指数";
     algorithm
       h_is := Modelica.Media.IdealGases.Common.Functions.h_T(
-        data, state.T, exclEnthForm, refChoice, h_off) + 
+        data, state.T, exclEnthForm, refChoice, h_off) +
         gamma / (gamma - 1.0) * state.p / density(state) * ((p2 / state.p) ^ ((gamma - 1) / gamma) - 1.0);
       annotation(Inline = true, smoothOrder = 2);
     end isentropicEnthalpyApproximation;
 
     redeclare function extends isentropicEnthalpy "计算等熵焓"
-      input Boolean exclEnthForm = Functions.excludeEnthalpyOfFormation 
+      input Boolean exclEnthForm = Functions.excludeEnthalpyOfFormation
         "如果为真，则不包括生成焓 Hf 在比焓 h 中";
-      input ReferenceEnthalpy refChoice = Functions.referenceChoice 
+      input ReferenceEnthalpy refChoice = Functions.referenceChoice
         "参考焓的选择";
-      input SpecificEnthalpy h_off = Functions.h_offset 
+      input SpecificEnthalpy h_off = Functions.h_offset
         "用户定义的参考焓偏移，如果 referenceChoice = UserDefined";
     algorithm
       h_is := isentropicEnthalpyApproximation(p_downstream, refState, exclEnthForm, refChoice, h_off);
       annotation(Inline = true, smoothOrder = 2);
     end isentropicEnthalpy;
 
-    redeclare function extends isobaricExpansionCoefficient 
+    redeclare function extends isobaricExpansionCoefficient
       "计算等压膨胀系数 beta"
     algorithm
       beta := 1 / state.T;
       annotation(Inline = true, smoothOrder = 2);
     end isobaricExpansionCoefficient;
 
-    redeclare function extends isothermalCompressibility 
+    redeclare function extends isothermalCompressibility
       "计算等温压缩系数"
     algorithm
       kappa := 1.0 / state.p;
       annotation(Inline = true, smoothOrder = 2);
     end isothermalCompressibility;
 
-    redeclare function extends density_derp_T 
+    redeclare function extends density_derp_T
       "计算在恒定温度下密度对压力的偏导数"
     algorithm
       ddpT := 1 / (state.T * data.R_s);
       annotation(Inline = true, smoothOrder = 2);
     end density_derp_T;
 
-    redeclare function extends density_derT_p 
+    redeclare function extends density_derT_p
       "计算在恒定压力下密度对温度的偏导数"
     algorithm
       ddTp := -state.p / (state.T * state.T * data.R_s);
       annotation(Inline = true, smoothOrder = 2);
     end density_derT_p;
 
-    redeclare function extends density_derX 
+    redeclare function extends density_derX
       "计算在恒定压力和温度下密度对质量分数的偏导数"
     algorithm
       dddX := fill(0, nX);
@@ -313,30 +313,30 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
 
     redeclare replaceable function extends dynamicViscosity "动力黏度"
     algorithm
-      assert(fluidConstants[1].hasCriticalData, 
+      assert(fluidConstants[1].hasCriticalData,
         "无法计算 dynamicViscosity: 对于物质 \"" + mediumName + "\" 没有临界数据。");
-      assert(fluidConstants[1].hasDipoleMoment, 
+      assert(fluidConstants[1].hasDipoleMoment,
         "无法计算 dynamicViscosity: 对于物质 \"" + mediumName + "\" 没有临界数据。");
       eta := Modelica.Media.IdealGases.Common.Functions.dynamicViscosityLowPressure(
-        state.T, 
-        fluidConstants[1].criticalTemperature, 
-        fluidConstants[1].molarMass, 
-        fluidConstants[1].criticalMolarVolume, 
-        fluidConstants[1].acentricFactor, 
+        state.T,
+        fluidConstants[1].criticalTemperature,
+        fluidConstants[1].molarMass,
+        fluidConstants[1].criticalMolarVolume,
+        fluidConstants[1].acentricFactor,
         fluidConstants[1].dipoleMoment);
       annotation(smoothOrder = 2);
     end dynamicViscosity;
 
-    redeclare replaceable function extends thermalConductivity 
+    redeclare replaceable function extends thermalConductivity
       "气体的导热系数"
       //  input IdealGases.Common.DataRecord data "理想气体数据";
-      input Integer method = Functions.methodForThermalConductivity 
+      input Integer method = Functions.methodForThermalConductivity
         "1: Eucken 方法, 2: 修正 Eucken 方法";
     algorithm
-      assert(fluidConstants[1].hasCriticalData, 
+      assert(fluidConstants[1].hasCriticalData,
         "计算 thermalConductivity 失败：物质 \"" + mediumName + "\" 没有临界数据。");
       lambda := Modelica.Media.IdealGases.Common.Functions.thermalConductivityEstimate(
-        specificHeatCapacityCp(state), 
+        specificHeatCapacityCp(state),
         dynamicViscosity(state), method = method, data = data);
       annotation(smoothOrder = 2);
     end thermalConductivity;
@@ -393,7 +393,7 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
 
     // 下面的函数并不是严格必需的，只是为了兼容性而存在
 
-    function dynamicViscosityLowPressure 
+    function dynamicViscosityLowPressure
       "低压气体的动力黏度"
       extends Modelica.Icons.Function;
       input SI.Temperature T "气体温度";
@@ -401,26 +401,26 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
       input SI.MolarMass M "气体的摩尔质量";
       input SI.MolarVolume Vc "气体的临界摩尔体积";
       input Real w "气体的离心因子";
-      input Modelica.Media.Interfaces.Types.DipoleMoment mu 
+      input Modelica.Media.Interfaces.Types.DipoleMoment mu
         "气体分子的偶极矩";
       input Real k = 0.0 "高极性物质的特殊修正";
-      output Modelica.Media.Interfaces.Types.DynamicViscosity eta 
+      output Modelica.Media.Interfaces.Types.DynamicViscosity eta
         "气体的动力黏度";
     protected
-      parameter Real Const1_SI = 40.785 * 10 ^ (-9.5) 
+      parameter Real Const1_SI = 40.785 * 10 ^ (-9.5)
         "将 eta 公式中的常数转换为 SI 单位";
-      parameter Real Const2_SI = 131.3 / 1000.0 
+      parameter Real Const2_SI = 131.3 / 1000.0
         "将 mur 公式中的常数转换为 SI 单位";
-      Real mur = Const2_SI * mu / sqrt(Vc * Tc) 
+      Real mur = Const2_SI * mu / sqrt(Vc * Tc)
         "气体分子的无量纲偶极矩";
-      Real Fc = 1 - 0.2756 * w + 0.059035 * mur ^ 4 + k 
+      Real Fc = 1 - 0.2756 * w + 0.059035 * mur ^ 4 + k
         "考虑气体分子形状和极性的因素";
       Real Tstar "由下面方程定义的无量纲温度";
       Real Ov "气体的黏度碰撞积分";
 
     algorithm
       eta := Functions.dynamicViscosityLowPressure(T, Tc, M, Vc, w, mu, k);
-      annotation(smoothOrder = 2, 
+      annotation(smoothOrder = 2,
         Documentation(info = "<html>
 <p>
 所使用的公式基于 Chung 等人的方法（1984年，1988年），参考文献[1]第9章。
@@ -447,21 +447,21 @@ h(T)和s0(T)的多项式是通过从cp(T)的积分导出的，并包含定义参
 </html>"    ));
     end dynamicViscosityLowPressure;
 
-    function thermalConductivityEstimate 
+    function thermalConductivityEstimate
       "多原子气体的导热系数（Eucken和Modified Eucken相关性）"
       extends Modelica.Icons.Function;
-      input Modelica.Media.Interfaces.Types.SpecificHeatCapacity Cp 
+      input Modelica.Media.Interfaces.Types.SpecificHeatCapacity Cp
         "定压热容";
-      input Modelica.Media.Interfaces.Types.DynamicViscosity eta 
+      input Modelica.Media.Interfaces.Types.DynamicViscosity eta
         "动力黏度";
-      input Integer method(min = 1, max = 2) = 1 
+      input Integer method(min = 1, max = 2) = 1
         "1: Eucken 方法, 2: 修正 Eucken 方法";
       input IdealGases.Common.DataRecord data "理想气体数据";
-      output Modelica.Media.Interfaces.Types.ThermalConductivity lambda 
+      output Modelica.Media.Interfaces.Types.ThermalConductivity lambda
         "导热系数 [W/(m.k)]";
     algorithm
       lambda := Functions.thermalConductivityEstimate(Cp, eta, method, data);
-      annotation(smoothOrder = 2, 
+      annotation(smoothOrder = 2,
         Documentation(info="<html><p>
 此函数提供了两种类似的方法来估算多原子气体的导热系数。 Eucken 方法（method == 1）在低温下给出良好结果， 但在高温下会低估导热系数（lambda）的值。<br> 修正 Eucken 方法（method == 2）在高温下给出 良好结果，但在低温下会高估导热系数（lambda）的值。
 </p>
@@ -541,13 +541,13 @@ SO3
 <br>
 </p>
 </html>"));
-    redeclare function extends density_derp_h 
+    redeclare function extends density_derp_h
       "返回温度恒定条件下密度对压力的偏导数"
     algorithm
       ddph := 1/(state.T*data.R_s);
       annotation(Inline=true,smoothOrder=2);
     end density_derp_h;
-    redeclare function extends density_derh_p 
+    redeclare function extends density_derh_p
       "返回压力恒定条件下密度对温度的偏导数"
     algorithm
       ddhp := -state.p / (state.T * state.T * data.R_s * specificHeatCapacityCp(state));
@@ -555,22 +555,22 @@ SO3
     end density_derh_p;
   end SingleGasNasa;
 
-  partial package MixtureGasNasa 
+  partial package MixtureGasNasa
     "基于NASA资料来源的理想气体混合物的介质模型"
 
     import Modelica.Math;
     import Modelica.Media.Interfaces.Choices.ReferenceEnthalpy;
 
     extends Modelica.Media.Interfaces.PartialMixtureMedium(
-      ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pTX, 
-      substanceNames = data[:].name, 
-      reducedX = false, 
-      singleState = false, 
-      reference_X = fill(1 / nX, nX), 
+      ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pTX,
+      substanceNames = data[:].name,
+      reducedX = false,
+      singleState = false,
+      reference_X = fill(1 / nX, nX),
       SpecificEnthalpy(start = if referenceChoice == ReferenceEnthalpy.ZeroAt0K then 3e5 else 
-      if referenceChoice == ReferenceEnthalpy.UserDefined then h_offset else 0, nominal = 1.0e5), 
-      Density(start = 10, nominal = 10), 
-      AbsolutePressure(start = 10e5, nominal = 10e5), 
+      if referenceChoice == ReferenceEnthalpy.UserDefined then h_offset else 0, nominal = 1.0e5),
+      Density(start = 10, nominal = 10),
+      AbsolutePressure(start = 10e5, nominal = 10e5),
       Temperature(min = 200, max = 6000, start = 500, nominal = 500));
 
     redeclare record extends ThermodynamicState "热力状态变量"
@@ -580,15 +580,15 @@ SO3
     //   redeclare record extends FluidConstants "流体常数"
     //   end FluidConstants;
 
-    constant Modelica.Media.IdealGases.Common.DataRecord[:] data 
+    constant Modelica.Media.IdealGases.Common.DataRecord[:] data
       "理想气体物质的数据记录";
     // ={Common.SingleGasesData.N2,Common.SingleGasesData.O2}
 
-    constant Boolean excludeEnthalpyOfFormation = true 
+    constant Boolean excludeEnthalpyOfFormation = true
       "= true，则焓不包括生成焓 Hf";
-    constant ReferenceEnthalpy referenceChoice = ReferenceEnthalpy.ZeroAt0K 
+    constant ReferenceEnthalpy referenceChoice = ReferenceEnthalpy.ZeroAt0K
       "焓的基准选择";
-    constant SpecificEnthalpy h_offset = 0.0 
+    constant SpecificEnthalpy h_offset = 0.0
       "如果 referenceChoice = UserDefined，用户定义的焓基准偏移";
 
     //   constant FluidConstants[nX] fluidConstants
@@ -596,10 +596,10 @@ SO3
     constant MolarMass[nX] MMX = data[:].MM "组分的摩尔质量";
     constant Integer methodForThermalConductivity(min = 1, max = 2) = 1;
     redeclare replaceable model extends BaseProperties(
-      T(stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default), 
-      p(stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default), 
-      Xi(each stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default), 
-      final standardOrderComponents = true) 
+      T(stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default),
+      p(stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default),
+      Xi(each stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default),
+      final standardOrderComponents = true)
       "基类属性 (p, d, T, h, u, R_s, MM, X 和 NASA 混合气体的 Xi)"
       annotation();
     equation
@@ -619,7 +619,7 @@ SO3
       state.X = if fixedX then reference_X else X;
     end BaseProperties;
 
-    redeclare function setState_pTX 
+    redeclare function setState_pTX
       "返回热力状态，作为 p, T 和组分 X 的函数"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压强";
@@ -632,7 +632,7 @@ SO3
       annotation(Inline = true, smoothOrder = 2);
     end setState_pTX;
 
-    redeclare function setState_phX 
+    redeclare function setState_phX
       "返回热力状态，作为 p, h 和组分 X 的函数"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压强";
@@ -645,7 +645,7 @@ SO3
       annotation(Inline = true, smoothOrder = 2);
     end setState_phX;
 
-    redeclare function setState_psX 
+    redeclare function setState_psX
       "返回热力状态，作为 p, s 和组分 X 的函数"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压强";
@@ -658,7 +658,7 @@ SO3
       annotation(Inline = true, smoothOrder = 2);
     end setState_psX;
 
-    redeclare function setState_dTX 
+    redeclare function setState_dTX
       "返回热力状态，作为 d, T 和组分 X 的函数"
       extends Modelica.Icons.Function;
       input Density d "密度";
@@ -671,11 +671,11 @@ SO3
       annotation(Inline = true, smoothOrder = 2);
     end setState_dTX;
 
-    redeclare function extends setSmoothState 
+    redeclare function extends setSmoothState
       "返回热力状态，以便平滑地逼近：如果 x > 0 则为 state_a 否则为 state_b"
     algorithm
-      state := ThermodynamicState(p = Media.Common.smoothStep(x, state_a.p, state_b.p, x_small), 
-        T = Media.Common.smoothStep(x, state_a.T, state_b.T, x_small), 
+      state := ThermodynamicState(p = Media.Common.smoothStep(x, state_a.p, state_b.p, x_small),
+        T = Media.Common.smoothStep(x, state_a.T, state_b.T, x_small),
         X = Media.Common.smoothStep(x, state_a.X, state_b.X, x_small));
       annotation(Inline = true, smoothOrder = 2);
     end setSmoothState;
@@ -705,7 +705,7 @@ SO3
       annotation(Inline = true, smoothOrder = 2);
     end specificEnthalpy;
 
-    redeclare function extends specificInternalEnergy 
+    redeclare function extends specificInternalEnergy
       "计算比内能"
       extends Modelica.Icons.Function;
     algorithm
@@ -727,7 +727,7 @@ SO3
       annotation(Inline = true, smoothOrder = 2);
     end specificGibbsEnergy;
 
-    redeclare function extends specificHelmholtzEnergy 
+    redeclare function extends specificHelmholtzEnergy
       "计算比亥姆霍兹能"
       extends Modelica.Icons.Function;
     algorithm
@@ -739,18 +739,18 @@ SO3
       import Modelica.Media.Interfaces.Choices;
       extends Modelica.Icons.Function;
       input SI.Temperature T "温度";
-      input MassFraction X[nX] = reference_X 
+      input MassFraction X[nX] = reference_X
         "气体混合物的独立质量分数";
-      input Boolean exclEnthForm = excludeEnthalpyOfFormation 
+      input Boolean exclEnthForm = excludeEnthalpyOfFormation
         "=true，比焓中不包括形成焓 Hf";
       input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy 
-        refChoice = referenceChoice 
+        refChoice = referenceChoice
         "参考焓的选择";
-      input SI.SpecificEnthalpy h_off = h_offset 
+      input SI.SpecificEnthalpy h_off = h_offset
         "如果 referenceChoice = UserDefined，用户定义的参考焓偏移";
       output SI.SpecificEnthalpy h "温度 T 下的比焓";
     algorithm
-      h := (if fixedX then reference_X else X) * 
+      h := (if fixedX then reference_X else X) *
         {Modelica.Media.IdealGases.Common.Functions.h_T(
         data[i], T, exclEnthForm, refChoice, h_off) for i in 1:nX};
       annotation(Inline = false, smoothOrder = 2);
@@ -761,12 +761,12 @@ SO3
       extends Modelica.Icons.Function;
       input SI.Temperature T "温度";
       input MassFraction X[nX] "气体混合物的独立质量分数";
-      input Boolean exclEnthForm = excludeEnthalpyOfFormation 
+      input Boolean exclEnthForm = excludeEnthalpyOfFormation
         "=true，比焓中不包括形成焓 Hf";
       input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy 
-        refChoice = referenceChoice 
+        refChoice = referenceChoice
         "参考焓的选择";
-      input SI.SpecificEnthalpy h_off = h_offset 
+      input SI.SpecificEnthalpy h_off = h_offset
         "如果 referenceChoice = UserDefined，用户定义的参考焓偏移";
       input Real dT "温度导数";
       input Real dX[nX] "独立质量分数导数";
@@ -776,7 +776,7 @@ SO3
         dT * sum((Modelica.Media.IdealGases.Common.Functions.cp_T(
         data[i], T) * reference_X[i]) for i in 1:nX) else 
         dT * sum((Modelica.Media.IdealGases.Common.Functions.cp_T(
-        data[i], T) * X[i]) for i in 1:nX) + 
+        data[i], T) * X[i]) for i in 1:nX) +
         sum((Modelica.Media.IdealGases.Common.Functions.h_T(
         data[i], T) * dX[i]) for i in 1:nX);
       annotation(Inline = false, smoothOrder = 1);
@@ -788,7 +788,7 @@ SO3
       annotation(Inline = true, smoothOrder = 3);
     end gasConstant;
 
-    redeclare function extends specificHeatCapacityCp 
+    redeclare function extends specificHeatCapacityCp
       "计算定压比热容"
     algorithm
       cp := {Modelica.Media.IdealGases.Common.Functions.cp_T(
@@ -796,7 +796,7 @@ SO3
       annotation(Inline = true, smoothOrder = 1);
     end specificHeatCapacityCp;
 
-    redeclare function extends specificHeatCapacityCv 
+    redeclare function extends specificHeatCapacityCv
       "计算温度和气体数据下的定容比热容"
     algorithm
       cv := {Modelica.Media.IdealGases.Common.Functions.cp_T(
@@ -814,7 +814,7 @@ SO3
       annotation(Inline = true, smoothOrder = 2);
     end MixEntropy;
 
-    function s_TX 
+    function s_TX
       "计算比熵的温度依赖部分"
       extends Modelica.Icons.Function;
       input Temperature T "温度";
@@ -840,7 +840,7 @@ SO3
       annotation(Inline = true, smoothOrder = 2);
     end velocityOfSound;
 
-    function isentropicEnthalpyApproximation 
+    function isentropicEnthalpyApproximation
       "计算 h_is 的近似方法，基于上游性质和下游压力"
       extends Modelica.Icons.Function;
       input AbsolutePressure p2 "下游压力";
@@ -855,16 +855,16 @@ SO3
     algorithm
       X := if reducedX then cat(1, state.X, {1 - sum(state.X)}) else state.X;
       h_component := {Modelica.Media.IdealGases.Common.Functions.h_T(
-        data[i], state.T, excludeEnthalpyOfFormation, 
+        data[i], state.T, excludeEnthalpyOfFormation,
         referenceChoice, h_offset) for i in 1:nX};
       h := h_component * X;
-      h_is := h + gamma / (gamma - 1.0) * (state.T * gasConstant(state)) * 
+      h_is := h + gamma / (gamma - 1.0) * (state.T * gasConstant(state)) *
         ((p2 / state.p) ^ ((gamma - 1) / gamma) - 1.0);
       annotation(smoothOrder = 2);
     end isentropicEnthalpyApproximation;
 
     redeclare function extends isentropicEnthalpy "计算等熵焓"
-      input Boolean exact = false 
+      input Boolean exact = false
         "是否使用精确或近似版本的标志";
     algorithm
       h_is := if exact then specificEnthalpy_psX(p_downstream, specificEntropy(refState), refState.X) else 
@@ -872,7 +872,7 @@ SO3
       annotation(Inline = true, smoothOrder = 2);
     end isentropicEnthalpy;
 
-    function gasMixtureViscosity 
+    function gasMixtureViscosity
       "计算低压气体混合物的黏性（Wilke 方法）"
       extends Modelica.Icons.Function;
       input MoleFraction[:] yi "摩尔分数";
@@ -883,9 +883,9 @@ SO3
       Real fi[size(yi, 1),size(yi, 1)];
     algorithm
       for i in 1:size(eta, 1) loop
-        assert(fluidConstants[i].hasDipoleMoment, "流体常数 " + fluidConstants[i].chemicalFormula + 
+        assert(fluidConstants[i].hasDipoleMoment, "流体常数 " + fluidConstants[i].chemicalFormula +
           " 的偶极矩未知。无法计算黏度。");
-        assert(fluidConstants[i].hasCriticalData, "流体常数 " + fluidConstants[i].chemicalFormula + 
+        assert(fluidConstants[i].hasCriticalData, "流体常数 " + fluidConstants[i].chemicalFormula +
           " 的临界数据未知。无法计算黏度。");
         for j in 1:size(eta, 1) loop
           if i == 1 then
@@ -899,7 +899,7 @@ SO3
       end for;
       etam := sum(yi[i] * eta[i] / sum(yi[j] * fi[i,j] for j in 1:size(eta, 1)) for i in 1:size(eta, 1));
 
-      annotation(smoothOrder = 2, 
+      annotation(smoothOrder = 2,
         Documentation(info = "<html>
 
 <p>
@@ -916,28 +916,28 @@ Wilke 的近似方法即使对于脂肪族醇的极性-极性气体混合物也�
 </html>"  ));
     end gasMixtureViscosity;
 
-    redeclare replaceable function extends dynamicViscosity 
+    redeclare replaceable function extends dynamicViscosity
       "计算混合物动力黏度"
     protected
       DynamicViscosity[nX] etaX "组分动力黏度";
     algorithm
       for i in 1:nX loop
         etaX[i] := Modelica.Media.IdealGases.Common.Functions.dynamicViscosityLowPressure(
-          state.T, 
-          fluidConstants[i].criticalTemperature, 
-          fluidConstants[i].molarMass, 
-          fluidConstants[i].criticalMolarVolume, 
-          fluidConstants[i].acentricFactor, 
+          state.T,
+          fluidConstants[i].criticalTemperature,
+          fluidConstants[i].molarMass,
+          fluidConstants[i].criticalMolarVolume,
+          fluidConstants[i].acentricFactor,
           fluidConstants[i].dipoleMoment);
       end for;
-      eta := gasMixtureViscosity(massToMoleFractions(state.X, 
-        fluidConstants[:].molarMass), 
-        fluidConstants[:].molarMass, 
+      eta := gasMixtureViscosity(massToMoleFractions(state.X,
+        fluidConstants[:].molarMass),
+        fluidConstants[:].molarMass,
         etaX);
       annotation(smoothOrder = 2);
     end dynamicViscosity;
 
-    function mixtureViscosityChung 
+    function mixtureViscosityChung
       "不通过组分黏性计算气体混合物的黏性（Chung 等人的规则）"
       extends Modelica.Icons.Function;
 
@@ -952,7 +952,7 @@ Wilke 的近似方法即使对于脂肪族醇的极性-极性气体混合物也�
       output DynamicViscosity etaMixture "混合物黏度 (Pa.s)";
     protected
       constant Real[size(y, 1)] Vc = Vcrit * 1000000 "临界容积 (cm3/mol)";
-      constant Real[size(y, 1)] M = MolecularWeights * 1000 
+      constant Real[size(y, 1)] M = MolecularWeights * 1000
         "摩尔质量 (g/mol)";
       Integer n = size(y, 1) "混合元素数量";
       Real sigmam3 "混合物 sigma3 (单位：埃)";
@@ -963,7 +963,7 @@ Wilke 的近似方法即使对于脂肪族醇的极性-极性气体混合物也�
       Real Mij[size(y, 1),size(y, 1)];
       Real wm "偏心因子";
       Real wij[size(y, 1),size(y, 1)];
-      Real kappam 
+      Real kappam
         "高度极性物质（如醇类和酸类）的相关性";
       Real kappaij[size(y, 1),size(y, 1)];
       Real mum;
@@ -1009,7 +1009,7 @@ Wilke 的近似方法即使对于脂肪族醇的极性-极性气体混合物也�
       etam := 26.69 * Fcm * (Mm * T) ^ (1 / 2) / (sigmam3 ^ (2 / 3) * omegav) "eq. (1)";
       etaMixture := etam * 1e-7;  // 从microPoise到Pa.s的转换
 
-      annotation(smoothOrder = 2, 
+      annotation(smoothOrder = 2,
         Documentation(info = "<html>
 
 <p>
@@ -1122,7 +1122,7 @@ Fundam., 23: 3 ()1984).<br>
 </html>"      ));
     end mixtureViscosityChung;
 
-    function lowPressureThermalConductivity 
+    function lowPressureThermalConductivity
       "计算低压气体混合物的导热系数（Mason 和 Saxena 修改）"
       extends Modelica.Icons.Function;
 
@@ -1131,7 +1131,7 @@ Fundam., 23: 3 ()1984).<br>
       input Temperature[size(y, 1)] Tc "临界温度";
       input AbsolutePressure[size(y, 1)] Pc "临界压力";
       input MolarMass[size(y, 1)] M "摩尔质量";
-      input ThermalConductivity[size(y, 1)] lambda 
+      input ThermalConductivity[size(y, 1)] lambda
         "纯气体的导热系数";
       output ThermalConductivity lambdam "气体混合物的导热系数";
     protected
@@ -1146,14 +1146,14 @@ Fundam., 23: 3 ()1984).<br>
       end for;
       for i in 1:size(y, 1) loop
         for j in 1:size(y, 1) loop
-          A[i,j] := epsilon * (1 + (gamma[j] * (Math.exp(0.0464 * Tr[i]) - Math.exp(-0.2412 * Tr[i])) / 
-            (gamma[i] * (Math.exp(0.0464 * Tr[j]) - Math.exp(-0.2412 * Tr[j])))) ^ (1 / 2) * (M[i] / M[j]) ^ (1 / 4)) ^ 2 / 
+          A[i,j] := epsilon * (1 + (gamma[j] * (Math.exp(0.0464 * Tr[i]) - Math.exp(-0.2412 * Tr[i])) /
+            (gamma[i] * (Math.exp(0.0464 * Tr[j]) - Math.exp(-0.2412 * Tr[j])))) ^ (1 / 2) * (M[i] / M[j]) ^ (1 / 4)) ^ 2 /
             (8 * (1 + M[i] / M[j])) ^ (1 / 2);
         end for;
       end for;
       lambdam := sum(y[i] * lambda[i] / (sum(y[j] * A[i,j] for j in 1:size(y, 1))) for i in 1:size(y, 1));
 
-      annotation(smoothOrder = 2, 
+      annotation(smoothOrder = 2,
         Documentation(info="<html><p>
 该函数应用了 Masson 和 Saxena 对 Wassiljewa 方程的修改，用于计算 n 元素的气体混合物在低压下的导热系数。
 </p>
@@ -1163,9 +1163,9 @@ Fundam., 23: 3 ()1984).<br>
 </html>"  ));
     end lowPressureThermalConductivity;
 
-    redeclare replaceable function extends thermalConductivity 
+    redeclare replaceable function extends thermalConductivity
       "计算低压气体混合物的导热系数"
-      input Integer method = methodForThermalConductivity 
+      input Integer method = methodForThermalConductivity
         "计算单组分导热系数的方法";
     protected
       ThermalConductivity[nX] lambdaX "组分导热系数";
@@ -1173,39 +1173,39 @@ Fundam., 23: 3 ()1984).<br>
       SpecificHeatCapacity[nX] cp "组分热容";
     algorithm
       for i in 1:nX loop
-        assert(fluidConstants[i].hasCriticalData, "临界数据 " + fluidConstants[i].chemicalFormula + 
+        assert(fluidConstants[i].hasCriticalData, "临界数据 " + fluidConstants[i].chemicalFormula +
           " 未知。无法计算导热系数。");
         eta[i] := Modelica.Media.IdealGases.Common.Functions.dynamicViscosityLowPressure(
-          state.T, 
-          fluidConstants[i].criticalTemperature, 
-          fluidConstants[i].molarMass, 
-          fluidConstants[i].criticalMolarVolume, 
-          fluidConstants[i].acentricFactor, 
+          state.T,
+          fluidConstants[i].criticalTemperature,
+          fluidConstants[i].molarMass,
+          fluidConstants[i].criticalMolarVolume,
+          fluidConstants[i].acentricFactor,
           fluidConstants[i].dipoleMoment);
         cp[i] := Modelica.Media.IdealGases.Common.Functions.cp_T(
           data[i], state.T);
         lambdaX[i] := Modelica.Media.IdealGases.Common.Functions.thermalConductivityEstimate(
-          Cp = cp[i], eta = 
+          Cp = cp[i], eta =
           eta[i], method = method, data = data[i]);
       end for;
-      lambda := lowPressureThermalConductivity(massToMoleFractions(state.X, 
-        fluidConstants[:].molarMass), 
-        state.T, 
-        fluidConstants[:].criticalTemperature, 
-        fluidConstants[:].criticalPressure, 
-        fluidConstants[:].molarMass, 
+      lambda := lowPressureThermalConductivity(massToMoleFractions(state.X,
+        fluidConstants[:].molarMass),
+        state.T,
+        fluidConstants[:].criticalTemperature,
+        fluidConstants[:].criticalPressure,
+        fluidConstants[:].molarMass,
         lambdaX);
       annotation(smoothOrder = 2);
     end thermalConductivity;
 
-    redeclare function extends isobaricExpansionCoefficient 
+    redeclare function extends isobaricExpansionCoefficient
       "计算定压膨胀系数 beta"
     algorithm
       beta := 1 / state.T;
       annotation(Inline = true, smoothOrder = 2);
     end isobaricExpansionCoefficient;
 
-    redeclare function extends isothermalCompressibility 
+    redeclare function extends isothermalCompressibility
       "计算等温压缩系数"
     algorithm
       kappa := 1.0 / state.p;
@@ -1218,7 +1218,7 @@ Fundam., 23: 3 ()1984).<br>
       annotation(Inline = true, smoothOrder = 2);
     end density_derp_T;
 
-    redeclare function extends density_derT_p 
+    redeclare function extends density_derT_p
       "计算密度对温度在恒压条件下的导数"
     algorithm
       ddTp := -state.p / (state.T * state.T * gasConstant(state));
@@ -1245,12 +1245,12 @@ Fundam., 23: 3 ()1984).<br>
       extends Modelica.Icons.Function;
       input SpecificEnthalpy h "比焓";
       input MassFraction[nX] X "成分的质量分数";
-      input Boolean exclEnthForm = excludeEnthalpyOfFormation 
+      input Boolean exclEnthForm = excludeEnthalpyOfFormation
         "=true，比焓 h 中不包括生成焓 Hf";
       input Modelica.Media.Interfaces.Choices.ReferenceEnthalpy 
-        refChoice = referenceChoice 
+        refChoice = referenceChoice
         "基准焓的选择";
-      input SI.SpecificEnthalpy h_off = h_offset 
+      input SI.SpecificEnthalpy h_off = h_offset
         "如果 referenceChoice = UserDefined，用户定义的基准焓偏移量";
       output Temperature T "温度";
 
@@ -1273,7 +1273,7 @@ Fundam., 23: 3 ()1984).<br>
       annotation(inverse(h = h_TX(T, X, exclEnthForm, refChoice, h_off)));
     end T_hX;
 
-    function T_psX 
+    function T_psX
       "通过压力、比熵和质量分数计算温度"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -1299,7 +1299,7 @@ Fundam., 23: 3 ()1984).<br>
     end T_psX;
 
   protected
-    function specificEntropyOfpTX 
+    function specificEntropyOfpTX
       "通过压力、温度和质量分数计算比熵"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -1309,7 +1309,7 @@ Fundam., 23: 3 ()1984).<br>
     protected
       Real[nX] Y(each unit = "mol/mol") = massToMoleFractions(X, data.MM) "摩尔分数";
     algorithm
-      s := s_TX(T, X) - sum(X[i] * Modelica.Constants.R / MMX[i] * 
+      s := s_TX(T, X) - sum(X[i] * Modelica.Constants.R / MMX[i] *
         (if X[i] < Modelica.Constants.eps then Y[i] else 
         Modelica.Math.log(Y[i] * p / reference_p)) for i in 1:nX);
       annotation(Inline = true, smoothOrder = 2);
@@ -1339,13 +1339,13 @@ equilibrium compositions and applications. Part 1: Analysis
 </p>
 </html>"  ));
   public
-  redeclare function extends density_derp_h 
+  redeclare function extends density_derp_h
         "在恒温条件下返回密度对压力的导数"
       algorithm
         ddph := 1 / (state.T * gasConstant(state));
         annotation(Inline = true, smoothOrder = 2);
       end density_derp_h;
-    redeclare function extends density_derh_p 
+    redeclare function extends density_derh_p
       "在恒压条件下返回密度对温度的导数"
     algorithm
       ddhp := -state.p / (state.T * state.T * gasConstant(state) * specificHeatCapacityCp(state));

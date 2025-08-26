@@ -7,19 +7,19 @@ model Permeance "典型的磁导"
 equation
   (pi/2)*G_m.d*V_m.re = Phi.re;
   (pi/2)*G_m.q*V_m.im = Phi.im;
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
                                   Rectangle(
-              extent={{-70,30},{70,-30}}, 
-              lineColor={255,170,85}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid),Line(points={{-96,0},{-70,0}}, 
-          color={255,170,85}),Line(points={{70,0},{96,0}}, color={255,170, 
-          85}), 
+              extent={{-70,30},{70,-30}},
+              lineColor={255,170,85},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(points={{-96,0},{-70,0}},
+          color={255,170,85}),Line(points={{70,0},{96,0}}, color={255,170,
+          85}),
         Text(
-          extent={{150,90},{-150,50}}, 
-          textColor={0,0,255}, 
-          textString="%name")}), 
+          extent={{150,90},{-150,50}},
+          textColor={0,0,255},
+          textString="%name")}),
                   Documentation(info="<html>
 <p>
 显著磁导率模拟了复磁位差之间的关系

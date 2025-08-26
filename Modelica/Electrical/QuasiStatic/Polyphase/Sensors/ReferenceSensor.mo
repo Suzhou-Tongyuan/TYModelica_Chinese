@@ -24,10 +24,10 @@ equation
 <a href=\"modelica://Modelica.Electrical.QuasiStatic.Polyphase.Sensors.MultiSensor\">多功能传感器</a>
 </p>
 
-</html>"), 
+</html>"),
        Icon(graphics={
         Text(
-          extent={{-30,-10},{30,-70}}, 
-          textColor={64,64,64}, 
+          extent={{-30,-10},{30,-70}},
+          textColor={64,64,64},
           textString="弧度"), Line(points={{70,0},{100,0}}, color={0,0,127})}));
 end ReferenceSensor;

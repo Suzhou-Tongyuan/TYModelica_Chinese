@@ -4,7 +4,7 @@ package Sensors "机器建模传感器"
 
   annotation (Documentation(info="<html>
 此包含传感器在模拟机器时非常有用。
-</html>", 
+</html>",
         revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

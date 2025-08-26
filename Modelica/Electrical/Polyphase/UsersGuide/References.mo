@@ -1,7 +1,7 @@
 ﻿within Modelica.Electrical.Polyphase.UsersGuide;
 class References "参考文献"
   extends Modelica.Icons.References;
-  annotation (preferredView="info", 
+  annotation (preferredView="info",
     DocumentationClass=true, Documentation(info="<html>
 
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">

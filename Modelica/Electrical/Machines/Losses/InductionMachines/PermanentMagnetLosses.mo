@@ -1,10 +1,10 @@
 ﻿within Modelica.Electrical.Machines.Losses.InductionMachines;
-model PermanentMagnetLosses 
+model PermanentMagnetLosses
   "依赖于电流和速度的永磁体损耗模型"
   extends Machines.Interfaces.FlangeSupport;
   import Modelica.Electrical.Polyphase.Functions.quasiRMS;
   parameter Integer m(min=1) = 3 "相数" annotation(Evaluate=true);
-  parameter Machines.Losses.PermanentMagnetLossParameters permanentMagnetLossParameters 
+  parameter Machines.Losses.PermanentMagnetLossParameters permanentMagnetLossParameters
     "永磁体损耗参数";
   extends 
     Modelica.Thermal.HeatTransfer.Interfaces.PartialElementaryConditionalHeatPortWithoutT(
@@ -15,13 +15,13 @@ equation
   if (permanentMagnetLossParameters.PRef <= 0) then
     tau = 0;
   else
-    tau = -permanentMagnetLossParameters.tauRef*(permanentMagnetLossParameters.c + (1 - permanentMagnetLossParameters.c)* 
-      (iRMS/permanentMagnetLossParameters.IRef)^permanentMagnetLossParameters.power_I)* 
+    tau = -permanentMagnetLossParameters.tauRef*(permanentMagnetLossParameters.c + (1 - permanentMagnetLossParameters.c)*
+      (iRMS/permanentMagnetLossParameters.IRef)^permanentMagnetLossParameters.power_I)*
       sign(w)*(abs(w)/permanentMagnetLossParameters.wRef)^permanentMagnetLossParameters.power_w;
   end if;
   lossPower = -tau*w;
-  annotation (defaultComponentName="magnetLoss", 
-    Icon(graphics={Ellipse(extent={{-40,-40},{40,40}}, 
+  annotation (defaultComponentName="magnetLoss",
+    Icon(graphics={Ellipse(extent={{-40,-40},{40,40}},
           lineColor={200,0,0})}), Documentation(info="<html>
 <p>
 永磁体损耗模型依赖于电流和速度。

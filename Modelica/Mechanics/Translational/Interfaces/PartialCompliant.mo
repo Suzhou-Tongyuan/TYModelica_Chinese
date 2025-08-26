@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.Translational.Interfaces;
-partial model PartialCompliant 
+partial model PartialCompliant
   "两个一维平动接口的弹性连接"
   extends Translational.Interfaces.PartialTwoFlanges;
-  SI.Position s_rel(start=0) 
+  SI.Position s_rel(start=0)
     "相对距离 (= flange_b.s - flange_a.s)";
-  SI.Force f 
+  SI.Force f
     "一维平动之间的力 (沿一维平动轴向正向为正)";
 
 equation

@@ -1,7 +1,7 @@
 ﻿within Modelica.Math;
 package BooleanVectors "布尔向量运算函数库"
  extends Modelica.Icons.Package;
-function allTrue 
+function allTrue
     "如果布尔输入向量的所有元素都为真('与')，则返回true"
   extends Modelica.Icons.Function;
   input Boolean b[:] "布尔向量";
@@ -48,7 +48,7 @@ algorithm
 </html>"));
 end allTrue;
 
-function andTrue 
+function andTrue
     "如果布尔输入向量的所有元素都为真('与')，则返回true"
   extends Modelica.Icons.Function;
   input Boolean b[:] "布尔向量";
@@ -95,7 +95,7 @@ algorithm
 </html>"));
 end andTrue;
 
-function anyTrue 
+function anyTrue
     "如果布尔输入向量中至少有一个元素为真('或')，则返回true"
 
   extends Modelica.Icons.Function;
@@ -177,12 +177,12 @@ algorithm
 </html>"));
 end countTrue;
 
-function enumerate 
+function enumerate
     "枚举布尔向量中的真元素(0表示假元素)"
   extends Modelica.Icons.Function;
 
   input Boolean b[:] "布尔向量";
-  output Integer enumerated[size(b, 1)] 
+  output Integer enumerated[size(b, 1)]
       "b中真元素的索引(递增顺序；0表示假元素)";
 
   protected
@@ -226,7 +226,7 @@ algorithm
 </html>"));
 end enumerate;
 
-function firstTrueIndex 
+function firstTrueIndex
     "返回布尔向量的第一个真元素的索引"
   extends Modelica.Icons.Function;
   input Boolean b[:] "布尔向量";
@@ -326,7 +326,7 @@ algorithm
 </html>"));
 end index;
 
-function oneTrue 
+function oneTrue
     "如果布尔输入向量中只有一个元素为真(\"xor\")，则返回true"
   extends Modelica.Icons.Function;
 
@@ -378,12 +378,12 @@ end oneTrue;
 这个库提供了对向量进行操作的函数，这些函数的输入参数是布尔向量。
 </p>
 </html>"), Icon(graphics={Rectangle(
-          extent={{-16,62},{14,14}}, 
-          lineColor={255,0,255}, 
-          fillColor={255,0,255}, 
+          extent={{-16,62},{14,14}},
+          lineColor={255,0,255},
+          fillColor={255,0,255},
           fillPattern=FillPattern.Solid), Rectangle(
-          extent={{-16,-18},{14,-66}}, 
-          lineColor={255,0,255}, 
-          fillColor={255,0,255}, 
+          extent={{-16,-18},{14,-66}},
+          lineColor={255,0,255},
+          fillColor={255,0,255},
           fillPattern=FillPattern.Solid)}));
 end BooleanVectors;

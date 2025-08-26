@@ -9,16 +9,16 @@ model Battery "简单电池模型"
     annotation (Placement(transformation(extent={{-70,110},{-50,90}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-90,80})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=V0) 
     annotation (Placement(transformation(extent={{10,50},{-10,70}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=Ri) 
     annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={60,70})));
 equation
   connect(ground.p, pin_n) 
@@ -31,33 +31,33 @@ equation
     annotation (Line(points={{60,80},{60,100}}, color={0,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                         Text(
-        extent={{-120,-100},{120,-140}}, 
-        textString="%name", 
+        extent={{-120,-100},{120,-140}},
+        textString="%name",
         textColor={0,0,255}),           Text(
-        extent={{-100,-60},{100,-80}}, 
-        textColor={0,0,255}, 
-          textString="V0=%V0"), 
-        Rectangle(extent={{-70,90},{-50,80}}, lineColor={28,108,200}), 
+        extent={{-100,-60},{100,-80}},
+        textColor={0,0,255},
+          textString="V0=%V0"),
+        Rectangle(extent={{-70,90},{-50,80}}, lineColor={28,108,200}),
         Rectangle(
-          extent={{50,90},{70,80}}, 
-          lineColor={28,108,200}, 
-          fillColor={0,0,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{50,90},{70,80}},
+          lineColor={28,108,200},
+          fillColor={0,0,255},
+          fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-100,80},{100,-40}}, 
-          lineColor={28,108,200}, 
-          fillColor={0,0,255}, 
-          fillPattern=FillPattern.Solid, 
-          radius=10), 
+          extent={{-100,80},{100,-40}},
+          lineColor={28,108,200},
+          fillColor={0,0,255},
+          fillPattern=FillPattern.Solid,
+          radius=10),
         Rectangle(
-          extent={{-92,72},{-4,-32}}, 
-          lineColor={28,108,200}, 
-          fillColor={215,215,215}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-92,72},{-4,-32}},
+          lineColor={28,108,200},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{4,72},{92,-32}}, 
-          lineColor={28,108,200}, 
-          fillColor={215,215,215}, 
+          extent={{4,72},{92,-32}},
+          lineColor={28,108,200},
+          fillColor={215,215,215},
           fillPattern=FillPattern.Solid)}),    Documentation(info="<html>
 <p>
 这是一个简单的直流电源模型，由恒定的直流电压和内阻组成。

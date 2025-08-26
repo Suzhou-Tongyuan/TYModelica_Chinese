@@ -1,15 +1,15 @@
 ﻿within Modelica.Clocked.RealSignals.Sampler.Utilities;
-block UpSample 
+block UpSample
   "将时钟化的实数输入信号进行升采样，并将其作为时钟化的输出信号提供"
 
-  parameter Boolean inferFactor = true 
+  parameter Boolean inferFactor = true
     "= true, 如果上采样因子由推断得出" annotation(Evaluate = true, choices(checkBox = true));
-  parameter Integer factor(min = 1) = 1 
+  parameter Integer factor(min = 1) = 1
     "上采样因子>= 1(如果inferFactor=false)" annotation(Evaluate = true, Dialog(enable = not inferFactor));
-  Modelica.Blocks.Interfaces.RealInput u 
+  Modelica.Blocks.Interfaces.RealInput u
     "时钟化实数输入信号的连接器" 
     annotation(Placement(transformation(extent = {{-140, -20}, {-100, 20}})));
-  Modelica.Blocks.Interfaces.RealOutput y 
+  Modelica.Blocks.Interfaces.RealOutput y
     "时钟化实数输出信号的连接器（y的时钟比u的时钟快）" 
     annotation(Placement(transformation(extent = {{100, -10}, {120, 10}})));
 protected
@@ -34,78 +34,78 @@ equation
   end when;
 
   annotation(
-    defaultComponentName = "upSample1", 
+    defaultComponentName = "upSample1",
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
-    extent = {{-100, -100}, {100, 100}}, 
-    initialScale = 0.06), 
+    preserveAspectRatio = true,
+    extent = {{-100, -100}, {100, 100}},
+    initialScale = 0.06),
     graphics = {
     Line(
-    points = {{-78, -60}, {40, -60}, {40, 0}, {40, 0}}, 
-    color = {215, 215, 215}, 
-    pattern = LinePattern.Dot), Line(points = {{-80, -60}, {-40, -60}, {-40, -60}, {-40, 0}, 
-    {-40, 0}, {0, 0}, {40, 0}, {40, 80}, {40, 80}, {40, 80}, {80, 80}, {80, 0}, {80, 0}, 
-    {100, 0}}, color = {0, 0, 127}, 
+    points = {{-78, -60}, {40, -60}, {40, 0}, {40, 0}},
+    color = {215, 215, 215},
+    pattern = LinePattern.Dot), Line(points = {{-80, -60}, {-40, -60}, {-40, -60}, {-40, 0},
+    {-40, 0}, {0, 0}, {40, 0}, {40, 80}, {40, 80}, {40, 80}, {80, 80}, {80, 0}, {80, 0},
+    {100, 0}}, color = {0, 0, 127},
     pattern = LinePattern.Dot), Line(
-    points = {{-80, -60}, {-80, 0}, {-100, 0}}, 
-    color = {0, 0, 127}, 
-    pattern = LinePattern.Dot), 
+    points = {{-80, -60}, {-80, 0}, {-100, 0}},
+    color = {0, 0, 127},
+    pattern = LinePattern.Dot),
     Ellipse(
-    extent = {{-95, -45}, {-65, -75}}, 
-    lineColor = {0, 0, 127}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-95, -45}, {-65, -75}},
+    lineColor = {0, 0, 127},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{-83, -57}, {-77, -63}}, 
-    lineColor = {0, 0, 127}, 
-    fillColor = {0, 0, 127}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-83, -57}, {-77, -63}},
+    lineColor = {0, 0, 127},
+    fillColor = {0, 0, 127},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{25, 96}, {55, 66}}, 
-    lineColor = {0, 0, 127}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{25, 96}, {55, 66}},
+    lineColor = {0, 0, 127},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{37, 83}, {43, 77}}, 
-    lineColor = {0, 0, 127}, 
-    fillColor = {0, 0, 127}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{37, 83}, {43, 77}},
+    lineColor = {0, 0, 127},
+    fillColor = {0, 0, 127},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{-55, 16}, {-25, -14}}, 
-    lineColor = {0, 0, 127}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-55, 16}, {-25, -14}},
+    lineColor = {0, 0, 127},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{-6, 16}, {24, -14}}, 
-    lineColor = {0, 0, 127}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-6, 16}, {24, -14}},
+    lineColor = {0, 0, 127},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{64, 16}, {94, -14}}, 
-    lineColor = {0, 0, 127}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{64, 16}, {94, -14}},
+    lineColor = {0, 0, 127},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
     Text(
-    visible = not inferFactor, 
-    extent = {{-150, -100}, {150, -140}}, 
-    textString = "%factor", 
-    textColor = {0, 0, 0}), 
+    visible = not inferFactor,
+    extent = {{-150, -100}, {150, -140}},
+    textString = "%factor",
+    textColor = {0, 0, 0}),
     Line(
-    points = {{80, 80}, {120, 80}}, 
-    color = {215, 215, 215}, 
-    pattern = LinePattern.Dot), 
+    points = {{80, 80}, {120, 80}},
+    color = {215, 215, 215},
+    pattern = LinePattern.Dot),
     Polygon(
-    points = {{25, 0}, {5, 20}, {5, 10}, {-25, 10}, {-25, -10}, {5, -10}, {5, -20}, 
-    {25, 0}}, 
-    fillColor = {95, 95, 95}, 
-    fillPattern = FillPattern.Solid, 
-    lineColor = {95, 95, 95}, 
-    origin = {-71, 52}, 
-    rotation = 90), 
+    points = {{25, 0}, {5, 20}, {5, 10}, {-25, 10}, {-25, -10}, {5, -10}, {5, -20},
+    {25, 0}},
+    fillColor = {95, 95, 95},
+    fillPattern = FillPattern.Solid,
+    lineColor = {95, 95, 95},
+    origin = {-71, 52},
+    rotation = 90),
     Text(
-    extent = {{-150, 150}, {150, 110}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255})}), 
+    extent = {{-150, 150}, {150, 110}},
+    textString = "%name",
+    textColor = {0, 0, 255})}),
     Documentation(info="<html><p style=\"text-align: start;\">该模块将时钟化的实数输入信号 u 进行升采样，并将其作为时钟化的输出信号 y 提供。
 </p>
 <p style=\"text-align: start;\">更具体地说：y 的时钟频率是 u 时钟频率的 factor 倍。在 u 时钟的每次跳变时，y 的值被设置为 u 的值，而在 y 时钟的中间跳变时，y 的值被设置为零。y 时钟的第一次激活与 u 时钟的第一次激活同时发生。默认情况下，升采样因子是自动推导的，也就是说，它必须在其他地方定义。如果参数 <strong>inferFactor</strong> = false，则升采样因子由整数参数 <strong>factor</strong> 定义。

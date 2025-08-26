@@ -4,57 +4,57 @@ model IMC_Conveyor "感应电机与鼠笼和变频器驱动的输送机"
   import Modelica.Constants.pi;
   parameter Integer m=3 "相数" annotation(Evaluate=true);
   constant SI.Frequency unitFrequency=1 annotation(HideResult=true);
-  parameter SI.Voltage VNominal=100 
+  parameter SI.Voltage VNominal=100
     "每相标称均方根电压";
-  parameter SI.Frequency fNominal=imcData.fsNominal 
+  parameter SI.Frequency fNominal=imcData.fsNominal
     "标称频率";
-  parameter SI.AngularVelocity wNominal=2*pi*fNominal/imcData.p 
+  parameter SI.AngularVelocity wNominal=2*pi*fNominal/imcData.p
     "额定速度";
   parameter SI.Torque TLoad=161.4 "额定负载扭矩";
-  parameter SI.Inertia JLoad=0.29 
+  parameter SI.Inertia JLoad=0.29
     "载荷的转动惯量";
   parameter SI.Length r=0.05 "传输半径";
   Magnetic.QuasiStatic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage 
     imcQS(
-    p=imcData.p, 
-    fsNominal=imcData.fsNominal, 
-    TsRef=imcData.TsRef, 
-    alpha20s(displayUnit="1/K") = imcData.alpha20s, 
-    Jr=imcData.Jr, 
-    Js=imcData.Js, 
-    frictionParameters=imcData.frictionParameters, 
-    wMechanical(fixed=true), 
-    gammar(fixed=true, start=pi/2), 
-    gamma(fixed=true, start=-pi/2), 
-    statorCoreParameters=imcData.statorCoreParameters, 
-    strayLoadParameters=imcData.strayLoadParameters, 
-    TrRef=imcData.TrRef, 
-    Rs=imcData.Rs*m/3, 
-    Lssigma=imcData.Lssigma*m/3, 
-    Lm=imcData.Lm*m/3, 
-    Lrsigma=imcData.Lrsigma*m/3, 
-    Rr=imcData.Rr*m/3, 
-    m=m, 
-    TsOperational=293.15, 
-    effectiveStatorTurns=imcData.effectiveStatorTurns, 
-    alpha20r=imcData.alpha20r, 
+    p=imcData.p,
+    fsNominal=imcData.fsNominal,
+    TsRef=imcData.TsRef,
+    alpha20s(displayUnit="1/K") = imcData.alpha20s,
+    Jr=imcData.Jr,
+    Js=imcData.Js,
+    frictionParameters=imcData.frictionParameters,
+    wMechanical(fixed=true),
+    gammar(fixed=true, start=pi/2),
+    gamma(fixed=true, start=-pi/2),
+    statorCoreParameters=imcData.statorCoreParameters,
+    strayLoadParameters=imcData.strayLoadParameters,
+    TrRef=imcData.TrRef,
+    Rs=imcData.Rs*m/3,
+    Lssigma=imcData.Lssigma*m/3,
+    Lm=imcData.Lm*m/3,
+    Lrsigma=imcData.Lrsigma*m/3,
+    Rr=imcData.Rr*m/3,
+    m=m,
+    TsOperational=293.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
+    alpha20r=imcData.alpha20r,
     TrOperational=293.15) 
     annotation (Placement(transformation(extent={{60,10},{40,30}})));
   Modelica.Electrical.QuasiStatic.Polyphase.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensorQS(m=m) 
     annotation (Placement(transformation(extent={{20,100},{40,80}})));
   Modelica.Blocks.Sources.CombiTimeTable dutyCycle(
-    table=[0,0; 1,1; 4,1; 5,0; 10,0; 11,-1; 14,-1; 15,0; 20,0], 
+    table=[0,0; 1,1; 4,1; 5,0; 10,0; 11,-1; 14,-1; 15,0; 20,0],
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) 
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   Utilities.VfController vfControllerQS(
-    final m=m, 
-    VNominal=VNominal, 
+    final m=m,
+    VNominal=VNominal,
     fNominal=fNominal) annotation (Placement(transformation(extent={{-20,40},{0,60}})));
   Modelica.Electrical.QuasiStatic.Polyphase.Sources.VariableVoltageSource signalVoltageQS(final m=m) 
     annotation (Placement(transformation(origin={0,90}, extent={{10,10},{-10,-10}})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starQS(final m=m) annotation (Placement(transformation(extent={{-40,80},{-60,100}})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundQS annotation (Placement(transformation(
-        origin={-70,70}, 
+        origin={-70,70},
         extent={{-10,-10},{10,10}})));
   Utilities.MultiTerminalBox terminalBoxQS(terminalConnection="Y", m=m) annotation (Placement(transformation(extent={{60,26},{40,46}})));
   parameter
@@ -67,59 +67,59 @@ model IMC_Conveyor "感应电机与鼠笼和变频器驱动的输送机"
     annotation (Placement(transformation(extent={{32,10},{12,30}})));
   Modelica.Mechanics.Translational.Components.Mass massQS(m=JLoad/r^2) 
     annotation (Placement(transformation(extent={{0,10},{-20,30}})));
-  Modelica.Mechanics.Translational.Sources.SignForce signForceQS(v0(displayUnit 
+  Modelica.Mechanics.Translational.Sources.SignForce signForceQS(v0(displayUnit
         ="m/s") = 0.01*wNominal*r, f_nominal=-TLoad/r) 
     annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground groundMachineQS 
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={90, 
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={90,
             10})));
-  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starMachineQS(m= 
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star starMachineQS(m=
         Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m)) 
     annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}}, 
-        rotation=180, 
+        extent={{10,10},{-10,-10}},
+        rotation=180,
         origin={80,32})));
   Magnetic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage imc(
-    p=imcData.p, 
-    fsNominal=imcData.fsNominal, 
-    TsRef=imcData.TsRef, 
-    alpha20s(displayUnit="1/K") = imcData.alpha20s, 
-    Jr=imcData.Jr, 
-    Js=imcData.Js, 
-    frictionParameters=imcData.frictionParameters, 
-    phiMechanical(fixed=true), 
-    wMechanical(fixed=true), 
-    statorCoreParameters=imcData.statorCoreParameters, 
-    strayLoadParameters=imcData.strayLoadParameters, 
-    TrRef=imcData.TrRef, 
-    Rs=imcData.Rs*m/3, 
-    Lssigma=imcData.Lssigma*m/3, 
-    Lszero=imcData.Lszero*m/3, 
-    Lm=imcData.Lm*m/3, 
-    Lrsigma=imcData.Lrsigma*m/3, 
-    Rr=imcData.Rr*m/3, 
-    m=m, 
-    TsOperational=293.15, 
-    effectiveStatorTurns=imcData.effectiveStatorTurns, 
-    alpha20r=imcData.alpha20r, 
+    p=imcData.p,
+    fsNominal=imcData.fsNominal,
+    TsRef=imcData.TsRef,
+    alpha20s(displayUnit="1/K") = imcData.alpha20s,
+    Jr=imcData.Jr,
+    Js=imcData.Js,
+    frictionParameters=imcData.frictionParameters,
+    phiMechanical(fixed=true),
+    wMechanical(fixed=true),
+    statorCoreParameters=imcData.statorCoreParameters,
+    strayLoadParameters=imcData.strayLoadParameters,
+    TrRef=imcData.TrRef,
+    Rs=imcData.Rs*m/3,
+    Lssigma=imcData.Lssigma*m/3,
+    Lszero=imcData.Lszero*m/3,
+    Lm=imcData.Lm*m/3,
+    Lrsigma=imcData.Lrsigma*m/3,
+    Rr=imcData.Rr*m/3,
+    m=m,
+    TsOperational=293.15,
+    effectiveStatorTurns=imcData.effectiveStatorTurns,
+    alpha20r=imcData.alpha20r,
     TrOperational=293.15) 
     annotation (Placement(transformation(extent={{60,-90},{40,-70}})));
   Modelica.Electrical.Polyphase.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensor(m=m) 
     annotation (Placement(transformation(extent={{20,0},{40,-20}})));
   Modelica.Electrical.Machines.Utilities.VfController 
                                              vfController(
-    final m=m, 
-    VNominal=VNominal, 
+    final m=m,
+    VNominal=VNominal,
     fNominal=fNominal) annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
   Modelica.Electrical.Polyphase.Sources.SignalVoltage signalVoltage(
       final m=m) annotation (Placement(transformation(
-        origin={0,-10}, 
+        origin={0,-10},
         extent={{10,10},{-10,-10}})));
   Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
       Placement(transformation(extent={{-40,-20},{-60,0}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-70,-30}, 
+        origin={-70,-30},
         extent={{-10,-10},{10,10}})));
   Modelica.Electrical.Machines.Utilities.MultiTerminalBox terminalBox(
       terminalConnection="Y", m=m) 
@@ -137,11 +137,11 @@ model IMC_Conveyor "感应电机与鼠笼和变频器驱动的输送机"
                                             signForce(                           v0(
         displayUnit="m/s") = 0.01*wNominal*r, f_nominal=-TLoad/r) 
     annotation (Placement(transformation(extent={{-50,-90},{-30,-70}})));
-  Modelica.Electrical.Polyphase.Basic.Star starMachine(final m= 
+  Modelica.Electrical.Polyphase.Basic.Star starMachine(final m=
         Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m)) 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=180, 
+        extent={{10,-10},{-10,10}},
+        rotation=180,
         origin={80,-68})));
   Modelica.Electrical.Analog.Basic.Ground groundMachine annotation (Placement(
         transformation(origin={90,-90}, extent={{-10,-10},{10,10}})));
@@ -169,10 +169,10 @@ equation
   connect(signalVoltage.plug_n,star. plug_p) 
     annotation (Line(points={{-10,-10},{-40,-10}},    color={0,0,255}));
   connect(star.pin_n,ground. p) 
-    annotation (Line(points={{-60,-10},{-70,-10},{-70,-20}}, 
+    annotation (Line(points={{-60,-10},{-70,-10},{-70,-20}},
                                                  color={0,0,255}));
   connect(vfController.y,signalVoltage. v) 
-    annotation (Line(points={{-9,-50},{0,-50},{0,-22}}, 
+    annotation (Line(points={{-9,-50},{0,-50},{0,-22}},
                                                 color={0,0,255}));
   connect(signalVoltage.plug_p,currentQuasiRMSSensor. plug_p) 
     annotation (Line(points={{10,-10},{20,-10}},    color={0,0,255}));
@@ -182,7 +182,7 @@ equation
   connect(terminalBox.plug_sn, imc.plug_sn) annotation (Line(points={{56,-70},{56,-70}}, color={0,0,255}));
   connect(terminalBox.plug_sp, imc.plug_sp) annotation (Line(points={{44,-70},{44,-70}}, color={0,0,255}));
   connect(vfController.u,gain. y) 
-    annotation (Line(points={{-32,-50},{-39,-50}}, 
+    annotation (Line(points={{-32,-50},{-39,-50}},
                                                  color={0,0,127}));
   connect(imc.flange, idealGearR2T.flangeR) annotation (Line(points={{40,-80},{32,-80}}));
   connect(idealGearR2T.flangeT,mass. flange_a) 
@@ -206,16 +206,16 @@ equation
 <li>imc|imcQS.tauElectrical: 机转矩</li>
 </ul>
 <p>使用默认机器参数.</p>
-</html>"), 
+</html>"),
     Diagram(graphics={
         Text(
-          extent={{20,60},{100,52}}, 
-                  textStyle={TextStyle.Bold}, 
-          textString="%m phase quasi-static"), 
+          extent={{20,60},{100,52}},
+                  textStyle={TextStyle.Bold},
+          textString="%m phase quasi-static"),
                                             Text(
-                  extent={{20,-40},{100,-48}}, 
-                  fillColor={255,255,170}, 
-                  fillPattern=FillPattern.Solid, 
-                  textStyle={TextStyle.Bold}, 
+                  extent={{20,-40},{100,-48}},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Solid,
+                  textStyle={TextStyle.Bold},
           textString="%m phase transient")}));
 end IMC_Conveyor;

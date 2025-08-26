@@ -1,10 +1,10 @@
 ﻿within Modelica.Electrical.Machines.Interfaces.InductionMachines;
-record PowerBalanceSMEE 
+record PowerBalanceSMEE
   "电励磁同步电机功率平衡"
   extends 
     Machines.Interfaces.InductionMachines.PartialPowerBalanceInductionMachines(
-      final lossPowerTotal=lossPowerStatorWinding + lossPowerStatorCore + 
-        lossPowerRotorCore + lossPowerStrayLoad + lossPowerFriction + 
+      final lossPowerTotal=lossPowerStatorWinding + lossPowerStatorCore +
+        lossPowerRotorCore + lossPowerStrayLoad + lossPowerFriction +
         lossPowerRotorWinding + lossPowerExcitation + lossPowerBrush);
   SI.Power lossPowerRotorWinding "转子铜损";
   SI.Power powerExcitation "电励磁功率";

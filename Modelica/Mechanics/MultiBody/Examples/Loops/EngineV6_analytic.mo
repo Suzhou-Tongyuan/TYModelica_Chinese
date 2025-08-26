@@ -1,49 +1,49 @@
 ﻿within Modelica.Mechanics.MultiBody.Examples.Loops;
-model EngineV6_analytic 
+model EngineV6_analytic
   "V6发动机，具有6个气缸、6个平面运动环、1个自由度以及对运动环的解析处理"
 
   extends Modelica.Icons.Example;
   parameter Boolean animation=true "= true, 如果要启用动画效果";
   output Modelica.Units.NonSI.AngularVelocity_rpm 
-    engineSpeed_rpm= 
+    engineSpeed_rpm=
          Modelica.Units.Conversions.to_rpm(load.w) "发动机转速";
-  output SI.Torque engineTorque = filter.u 
+  output SI.Torque engineTorque = filter.u
     "发动机产生的扭矩";
-  output SI.Torque filteredEngineTorque = filter.y 
+  output SI.Torque filteredEngineTorque = filter.y
     "发动机产生的过滤扭矩";
 
-  inner Modelica.Mechanics.MultiBody.World world(animateWorld=false, 
+  inner Modelica.Mechanics.MultiBody.World world(animateWorld=false,
       animateGravity =                                                              false) 
     annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
-  Utilities.EngineV6_analytic engine(redeclare model Cylinder = 
+  Utilities.EngineV6_analytic engine(redeclare model Cylinder =
         Modelica.Mechanics.MultiBody.Examples.Loops.Utilities.Cylinder_analytic_CAD) 
     annotation (Placement(transformation(extent={{-40,0},{0,40}})));
   Modelica.Mechanics.Rotational.Components.Inertia load(
                                              phi(
-      start=0, 
+      start=0,
       fixed=true), w(
-      start=10, 
-      fixed=true), 
-    stateSelect=StateSelect.always, 
+      start=10,
+      fixed=true),
+    stateSelect=StateSelect.always,
     J=1) annotation (Placement(transformation(
           extent={{40,10},{60,30}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque load2(
-                                                 tau_nominal=-100, w_nominal= 
-        200, 
+                                                 tau_nominal=-100, w_nominal=
+        200,
     useSupport=false) 
              annotation (Placement(transformation(extent={{90,10},{70,30}})));
   Rotational.Sensors.TorqueSensor torqueSensor 
     annotation (Placement(transformation(extent={{10,10},{30,30}})));
   Blocks.Continuous.CriticalDamping filter(
-    n=2, 
-    initType=Modelica.Blocks.Types.Init.SteadyState, 
+    n=2,
+    initType=Modelica.Blocks.Types.Init.SteadyState,
     f=5) annotation (Placement(transformation(extent={{30,-20},{50,0}})));
 equation
 
   connect(world.frame_b, engine.frame_a) 
     annotation (Line(
-      points={{-60,-10},{-20,-10},{-20,-0.2}}, 
-      color={95,95,95}, 
+      points={{-60,-10},{-20,-10},{-20,-0.2}},
+      color={95,95,95},
       thickness=0.5));
   connect(load2.flange, load.flange_b) 
     annotation (Line(points={{70,20},{60,20}}));
@@ -51,7 +51,7 @@ equation
     annotation (Line(points={{10,20},{2,20}}));
   connect(torqueSensor.flange_b, load.flange_a) 
     annotation (Line(points={{30,20},{40,20}}));
-  connect(torqueSensor.tau, filter.u) annotation (Line(points={{12,9},{12,-10},{28,-10}}, 
+  connect(torqueSensor.tau, filter.u) annotation (Line(points={{12,9},{12,-10},{28,-10}},
                      color={0,0,127}));
   annotation (
     Documentation(info="<html><p>

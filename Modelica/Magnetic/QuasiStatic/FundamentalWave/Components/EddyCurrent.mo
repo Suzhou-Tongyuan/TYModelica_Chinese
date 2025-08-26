@@ -1,18 +1,18 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FundamentalWave.Components;
-model EddyCurrent 
+model EddyCurrent
   "正弦磁场条件下的恒定损耗模型"
   import Modelica.Constants.pi;
   constant Complex j=Complex(0, 1);
   extends Interfaces.TwoPort;
-  parameter SI.Conductance G(min=0) 
+  parameter SI.Conductance G(min=0)
     "等效对称损耗电导";
   extends 
     Modelica.Thermal.HeatTransfer.Interfaces.PartialElementaryConditionalHeatPort(
       final T=273.15);
-  SI.AngularVelocity omega=der(port_p.reference.gamma) 
+  SI.AngularVelocity omega=der(port_p.reference.gamma)
     "角速度";
 equation
-  lossPower = (pi/2)*Modelica.ComplexMath.imag(omega*V_m* 
+  lossPower = (pi/2)*Modelica.ComplexMath.imag(omega*V_m*
     Modelica.ComplexMath.conj(Phi));
   // 损耗功率的替代计算方法
   // lossPower = -(pi/2)*Modelica.ComplexMath.real(j*omega*V_m*Modelica.ComplexMath.conj(Phi));
@@ -24,18 +24,18 @@ equation
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={Rectangle(
-              extent={{-70,30},{70,-30}}, 
-              lineColor={255,170,85}, 
-              fillColor={255,170,85}, 
-              fillPattern=FillPattern.Solid),Line(points={{-96,0},{-70,0}}, 
-          color={255,170,85}),Line(points={{70,0},{96,0}}, color={255,170,85}), 
+              extent={{-70,30},{70,-30}},
+              lineColor={255,170,85},
+              fillColor={255,170,85},
+              fillPattern=FillPattern.Solid),Line(points={{-96,0},{-70,0}},
+          color={255,170,85}),Line(points={{70,0},{96,0}}, color={255,170,85}),
                                   Text(
-              extent={{0,-40},{0,-80}}, 
-              textString="G=%G"), 
+              extent={{0,-40},{0,-80}},
+              textString="G=%G"),
         Text(
-          extent={{150,90},{-150,50}}, 
-          textColor={0,0,255}, 
-          textString="%name")}), 
+          extent={{150,90},{-150,50}},
+          textColor={0,0,255},
+          textString="%name")}),
     Documentation(info="<html>
 <p>
 考虑基波效应的涡流损耗模型根据

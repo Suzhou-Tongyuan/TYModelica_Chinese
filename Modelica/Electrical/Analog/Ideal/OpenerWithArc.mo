@@ -2,19 +2,19 @@
 model OpenerWithArc "带电弧效应的理想开路开关模型"
 
   extends Modelica.Electrical.Analog.Interfaces.IdealSwitchWithArc;
-  Modelica.Blocks.Interfaces.BooleanInput control 
+  Modelica.Blocks.Interfaces.BooleanInput control
     "false=> p--n连接，true=>开关打开" annotation(Placement(
     transformation(
-    origin = {0, 110}, 
-    extent = {{-10, -10}, {10, 10}}, 
+    origin = {0, 110},
+    extent = {{-10, -10}, {10, 10}},
     rotation = 270)));
 equation
   off = control;
-  annotation(defaultComponentName = "switch", 
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
+  annotation(defaultComponentName = "switch",
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
     100}}), graphics = {
-    Line(points = {{40, 20}, {40, 0}}, color = {0, 0, 255}), 
-    Line(points = {{40, 40}, {32, 30}, {48, 26}, {40, 20}}, color = {255, 0, 0})}), 
+    Line(points = {{40, 20}, {40, 0}}, color = {0, 0, 255}),
+    Line(points = {{40, 40}, {32, 30}, {48, 26}, {40, 20}}, color = {255, 0, 0})}),
     Documentation(info = "<html>
 
 
@@ -24,7 +24,7 @@ equation
 <p>
 如果对电弧效应存在疑惑，请查看：<a href=\"modelica://Modelica.Electrical.Analog.Interfaces.IdealSwitchWithArc\">IdealSwitchWithArc</a>
 </p>
-</html>", 
+</html>",
     revisions = "<html>
 <ul>
 <li><em>2016年2月7日</em>

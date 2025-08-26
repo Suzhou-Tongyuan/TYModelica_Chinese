@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function from_Q 
-  "从四元数方向对象 Q 返回方向对象 T"
+function from_Q
+  "从四元数方向对象Q返回方向对象T"
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q 
+  input Quaternions.Orientation Q
     "将坐标系2旋转到坐标系1的四元数方向对象";
-  output TransformationMatrices.Orientation T 
+  output TransformationMatrices.Orientation T
     "将坐标系2旋转到坐标系1的方向对象";
 algorithm
   T := [2*(Q[1]*Q[1] + Q[4]*Q[4]) - 1, 2*(Q[1]*Q[2] + Q[3]*Q[4]), 2*(Q[1]*Q[3] - Q[2]*Q[4]);

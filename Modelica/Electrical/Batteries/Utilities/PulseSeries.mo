@@ -18,24 +18,24 @@ protected
 equation
   on1 = oneTrue({time >= Tstart1[k] and time < Tstart1[k] + T1 for k in 1:n1});
   on2 = oneTrue({time >= Tstart2[k] and time < Tstart2[k] + T2 for k in 1:n1});
-  y= offset + (if on1 then amplitude1 elseif on2 then amplitude2 else 0);
+  y= offset + (if on1 then amplitude1 else if on2 then amplitude2 else 0);
   annotation (Icon(graphics={
         Line(
-          points={{-100,0},{-80,0}}, 
-          color={0,0,0}, 
-          pattern=LinePattern.Dash), 
-        Line(points={{-10,0},{-10,-60},{10,-60},{10,0},{20,0}}, color={0,0,0}), 
-        Line(points={{-50,0},{-50,60},{-40,60},{-40,0},{-20,0}}, color={0,0,0}), 
+          points={{-100,0},{-80,0}},
+          color={0,0,0},
+          pattern=LinePattern.Dash),
+        Line(points={{-10,0},{-10,-60},{10,-60},{10,0},{20,0}}, color={0,0,0}),
+        Line(points={{-50,0},{-50,60},{-40,60},{-40,0},{-20,0}}, color={0,0,0}),
         Line(
-          points={{-20,0},{-10,0}}, 
-          color={0,0,0}, 
-          pattern=LinePattern.Dash), 
-        Line(points={{-80,0},{-80,60},{-70,60},{-70,0},{-50,0}}, color={0,0,0}), 
-        Line(points={{20,0},{20,-60},{40,-60},{40,0},{50,0}}, color={0,0,0}), 
-        Line(points={{50,0},{50,-60},{70,-60},{70,0},{80,0}}, color={0,0,0}), 
+          points={{-20,0},{-10,0}},
+          color={0,0,0},
+          pattern=LinePattern.Dash),
+        Line(points={{-80,0},{-80,60},{-70,60},{-70,0},{-50,0}}, color={0,0,0}),
+        Line(points={{20,0},{20,-60},{40,-60},{40,0},{50,0}}, color={0,0,0}),
+        Line(points={{50,0},{50,-60},{70,-60},{70,0},{80,0}}, color={0,0,0}),
         Line(
-          points={{80,0},{100,0}}, 
-          color={0,0,0}, 
+          points={{80,0},{100,0}},
+          color={0,0,0},
           pattern=LinePattern.Dash)}), Documentation(info="<html>
 <p>
 从<code>time=startTime</code>开始，首先发出一系列由<code>n1</code>个幅度为<code>amplitude1</code>、持续时间为<code>T1</code>、每个脉冲之间暂停时间为<code>Tp1</code>的脉冲。<br>

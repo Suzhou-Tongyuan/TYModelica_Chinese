@@ -37,7 +37,7 @@ equation
   auxp = exp(aux);
 
   LossPower = i * v;
-  annotation(defaultComponentName = "diode", 
+  annotation(defaultComponentName = "diode",
     Documentation(info = "<html>
 <p>简单二极管是一个电气一端口模型，该模型有一个热端口(热端口定义在Modelica.Thermal库中)。该模型二极管本身和并联电阻<em>R</em>组成。如果<em>useTemperatureDependency</em>设置为true，则二极管公式为：
 </p>
@@ -62,7 +62,7 @@ i = Ids (e      - 1).
 <br>
 模型中热能=<em>i*v</em>。
 </p>
-</html>", 
+</html>",
     revisions = "<html>
 <ul>
 <li><em> March 11, 2009   </em>
@@ -72,29 +72,29 @@ i = Ids (e      - 1).
        Christoph Clauss<br>创建<br>
        </li>
 </ul>
-</html>"), 
+</html>"),
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
     Polygon(
-    points = {{30, 0}, {-30, 40}, {-30, -40}, {30, 0}}, 
-    lineColor = {0, 0, 255}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-90, 0}, {40, 0}}, color = {0, 0, 255}), 
-    Line(points = {{40, 0}, {90, 0}}, color = {0, 0, 255}), 
-    Line(points = {{30, 40}, {30, -40}}, color = {0, 0, 255}), 
+    points = {{30, 0}, {-30, 40}, {-30, -40}, {30, 0}},
+    lineColor = {0, 0, 255},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-90, 0}, {40, 0}}, color = {0, 0, 255}),
+    Line(points = {{40, 0}, {90, 0}}, color = {0, 0, 255}),
+    Line(points = {{30, 40}, {30, -40}}, color = {0, 0, 255}),
     Text(
-    extent = {{-150, -40}, {150, -80}}, 
-    textString = "Vt=%Vt", 
-    visible = not useTemperatureDependency), 
+    extent = {{-150, -40}, {150, -80}},
+    textString = "Vt=%Vt",
+    visible = not useTemperatureDependency),
     Text(
-    extent = {{-150, 90}, {150, 50}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255}), 
+    extent = {{-150, 90}, {150, 50}},
+    textString = "%name",
+    textColor = {0, 0, 255}),
     Line(
-    visible = useHeatPort, 
-    points = {{0, -100}, {0, -20}}, 
-    color = {127, 0, 0}, 
+    visible = useHeatPort,
+    points = {{0, -100}, {0, -20}},
+    color = {127, 0, 0},
     pattern = LinePattern.Dot)}));
 end Diode;

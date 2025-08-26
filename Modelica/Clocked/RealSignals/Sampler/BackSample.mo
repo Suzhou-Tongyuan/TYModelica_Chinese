@@ -1,71 +1,71 @@
 ﻿within Modelica.Clocked.RealSignals.Sampler;
-block BackSample 
-  "将实数输入信号的时钟向后移动（并访问新时钟下的最新输入值）"
+block BackSample
+  "将实数输入信号的时钟向后移动(并访问新时钟下的最新输入值)"
   parameter Integer backCounter(min=0)=0 "移位公式的分子" 
         annotation(Evaluate=true, Dialog(group="将第一个时钟激活时间移至'移位计数器/分辨率*interval(u)'秒的位置"));
   parameter Integer resolution(min=1)=1 "移位公式的分母" 
         annotation(Evaluate=true, Dialog(group="将第一个时钟激活时间移至'移位计数器/分辨率*interval(u)'秒的位置"));
-  parameter Real y_start=0 
+  parameter Real y_start=0
     "输入 u 的第一个时钟周期之前的输出 y 值";
 
-  Modelica.Blocks.Interfaces.RealInput u(start=y_start) 
+  Modelica.Blocks.Interfaces.RealInput u(start=y_start)
     "时钟实数输入信号连接器" 
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Interfaces.RealOutput y 
+  Modelica.Blocks.Interfaces.RealOutput y
     "时钟实数输出信号连接器（y 的时钟比 u 的时钟快）" 
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 equation
   y = backSample(u,backCounter,resolution);
 
   annotation (
-   defaultComponentName="backSample1", 
+   defaultComponentName="backSample1",
    Icon(coordinateSystem(
-        preserveAspectRatio=true, 
-        extent={{-100,-100},{100,100}}, 
-        initialScale=0.06), 
-                     graphics={Line(points={{20,-50},{60,-50},{60,50}}, 
-                                 color={0,0,127}, 
-          pattern=LinePattern.Dot), 
-                               Line(points={{-80,-50},{-40,-50},{-40,50}}, 
-                                 color={0,0,127}, 
-          pattern=LinePattern.Dot), 
+        preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}},
+        initialScale=0.06),
+                     graphics={Line(points={{20,-50},{60,-50},{60,50}},
+                                 color={0,0,127},
+          pattern=LinePattern.Dot),
+                               Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                 color={0,0,127},
+          pattern=LinePattern.Dot),
         Ellipse(
-          extent={{-90,-40},{-70,-60}}, 
-          lineColor={0,0,127}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-90,-40},{-70,-60}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{-50,60},{-30,40}}, 
-          lineColor={0,0,127}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-50,60},{-30,40}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Polygon(
-          points={{-16,0},{4,20},{4,10},{34,10},{34,-10},{4,-10},{4,-20},{-16,0}}, 
-          fillColor={95,95,95}, 
-          fillPattern=FillPattern.Solid, 
-          lineColor={95,95,95}), 
+          points={{-16,0},{4,20},{4,10},{34,10},{34,-10},{4,-10},{4,-20},{-16,0}},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid,
+          lineColor={95,95,95}),
         Ellipse(
-          extent={{10,-40},{30,-60}}, 
-          lineColor={0,0,127}, 
-          fillColor={0,0,127}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{10,-40},{30,-60}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{50,60},{70,40}}, 
-          lineColor={0,0,127}, 
-          fillColor={0,0,127}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{50,60},{70,40}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,-100},{150,-140}}, 
-          textColor={0,0,0}, 
-          textString="y_start=%y_start"), 
+          extent={{-150,-100},{150,-140}},
+          textColor={0,0,0},
+          textString="y_start=%y_start"),
         Text(
-          extent={{-150,-150},{150,-190}}, 
-          textColor={0,0,0}, 
-          textString="%backCounter/%resolution"), 
+          extent={{-150,-150},{150,-190}},
+          textColor={0,0,0},
+          textString="%backCounter/%resolution"),
         Text(
-          extent={{-150,150},{150,110}}, 
-          textString="%name", 
-          textColor={0,0,255})}), 
+          extent={{-150,150},{150,110}},
+          textString="%name",
+          textColor={0,0,255})}),
     Documentation(info="<html><p>
 该模块将输出 y 的时钟第一次激活按周期的分数 backCounter/resolution 进行偏移（对于非周期信号，则按上一个间隔的分数进行偏移），并使其发生在 u 时钟第一次激活之前。输出 y 被设置为输入 u 的最后一个可用值。在这里，<strong>backCounter</strong> 和 <strong>resolution</strong> 是正整数参数。
 </p>

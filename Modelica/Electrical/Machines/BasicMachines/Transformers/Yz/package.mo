@@ -4,7 +4,7 @@ package Yz "变压器：主接Y/次级接zig-zag"
 
   annotation (Documentation(info="<html>
 该库含有主接Y/次级接zig-zag的变压器，涵盖了所有可能的矢量组。
-</html>", 
+</html>",
     revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

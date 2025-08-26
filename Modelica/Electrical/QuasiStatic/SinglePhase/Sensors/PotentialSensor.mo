@@ -25,11 +25,11 @@ equation
 <a href=\"modelica://Modelica.Electrical.QuasiStatic.SinglePhase.Sensors.MultiSensor\">MultiSensor</a>
 </p>
 
-</html>"), 
+</html>"),
        Icon(graphics={
         Text(
-          extent={{-30,-10},{30,-70}}, 
-          textColor={64,64,64}, 
-          textString="V"), 
+          extent={{-30,-10},{30,-70}},
+          textColor={64,64,64},
+          textString="V"),
         Line(points={{100,0},{70,0}}, color={85,170,255})}));
 end PotentialSensor;

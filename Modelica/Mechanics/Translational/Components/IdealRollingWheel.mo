@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.Translational.Components;
-model IdealRollingWheel 
+model IdealRollingWheel
   "简单的不考虑惯性的理想滚动轮的一维模型"
   extends Modelica.Mechanics.Rotational.Components.IdealRollingWheel;
   annotation (

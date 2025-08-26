@@ -1,39 +1,39 @@
 ﻿within Modelica.Clocked.RealSignals.Sampler;
-block Hold 
-  "保持时钟实数输入信号，并将其作为连续时间输出信号（零阶保持）"
-extends Clocked.RealSignals.Interfaces.PartialSISOHold;
+block Hold
+  "保持时钟实数输入信号，并将其作为连续时间输出信号(零阶保持)"
+  extends Clocked.RealSignals.Interfaces.PartialSISOHold;
 
 equation
-    y = hold(u);
+  y = hold(u);
 
-  annotation (
-    defaultComponentName="hold1", 
+  annotation(
+    defaultComponentName = "hold1",
     Icon(coordinateSystem(
-        preserveAspectRatio=true, 
-        extent={{-100,-100},{100,100}}, 
-        initialScale=0.06), 
-                     graphics={
-        Ellipse(
-          extent={{-70,-30},{-50,-50}}, 
-          lineColor={0,0,127}, 
-          fillColor={0,0,127}, 
-          fillPattern=FillPattern.Solid), 
-        Ellipse(
-          extent={{-30,28},{-10,8}}, 
-          lineColor={0,0,127}, 
-          fillColor={0,0,127}, 
-          fillPattern=FillPattern.Solid), 
-        Ellipse(
-          extent={{10,70},{30,50}}, 
-          lineColor={0,0,127}, 
-          fillColor={0,0,127}, 
-          fillPattern=FillPattern.Solid), 
-        Ellipse(
-          extent={{50,10},{70,-10}}, 
-          lineColor={0,0,127}, 
-          fillColor={0,0,127}, 
-          fillPattern=FillPattern.Solid)}), 
-    Documentation(info="<html><p>
+    preserveAspectRatio = true,
+    extent = {{-100, -100}, {100, 100}},
+    initialScale = 0.06),
+    graphics = {
+    Ellipse(
+    extent = {{-70, -30}, {-50, -50}},
+    lineColor = {0, 0, 127},
+    fillColor = {0, 0, 127},
+    fillPattern = FillPattern.Solid),
+    Ellipse(
+    extent = {{-30, 28}, {-10, 8}},
+    lineColor = {0, 0, 127},
+    fillColor = {0, 0, 127},
+    fillPattern = FillPattern.Solid),
+    Ellipse(
+    extent = {{10, 70}, {30, 50}},
+    lineColor = {0, 0, 127},
+    fillColor = {0, 0, 127},
+    fillPattern = FillPattern.Solid),
+    Ellipse(
+    extent = {{50, 10}, {70, -10}},
+    lineColor = {0, 0, 127},
+    fillColor = {0, 0, 127},
+    fillPattern = FillPattern.Solid)}),
+    Documentation(info = "<html><p>
 <span style=\"color: rgb(51, 51, 51);\">该模块使用零阶保持器保持时钟化的实数输入信号 u，并将其作为连续时间输出信号 y。输入信号的时钟是由推断得出的（即，它需要在时钟化分区的其他地方定义）</span>
 </p>
 <p>

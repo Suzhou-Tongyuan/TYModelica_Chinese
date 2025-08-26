@@ -1,56 +1,56 @@
 ﻿within Modelica.Media.Air;
-package ReferenceAir 
+package ReferenceAir
   "ReferenceAir:基于亥姆霍兹状态方程的详细干空气模型,工作范围(130... 2000K,0...2000MPa)"
   extends Modelica.Icons.VariantsPackage;
 
   constant Modelica.Media.Interfaces.Types.TwoPhase.FluidConstants 
     airConstants(
-    chemicalFormula = "N2+O2+Ar", 
-    structureFormula = "N2+O2+Ar", 
-    casRegistryNumber = "1", 
-    iupacName = "air", 
-    molarMass = 0.02896546, 
-    criticalTemperature = 132.5306, 
-    criticalPressure = 3.786e6, 
-    criticalMolarVolume = 0.02896546 / 342.68, 
-    triplePointTemperature = 63.05 "From N2", 
-    triplePointPressure = 0.1253e5 "From N2", 
-    normalBoilingPoint = 78.903, 
-    meltingPoint = 0, 
-    acentricFactor = 0.0335, 
-    dipoleMoment = 0.0, 
-    hasCriticalData = true, 
-    hasFundamentalEquation = true, 
-    hasAccurateViscosityData = true, 
+    chemicalFormula = "N2+O2+Ar",
+    structureFormula = "N2+O2+Ar",
+    casRegistryNumber = "1",
+    iupacName = "air",
+    molarMass = 0.02896546,
+    criticalTemperature = 132.5306,
+    criticalPressure = 3.786e6,
+    criticalMolarVolume = 0.02896546 / 342.68,
+    triplePointTemperature = 63.05 "From N2",
+    triplePointPressure = 0.1253e5 "From N2",
+    normalBoilingPoint = 78.903,
+    meltingPoint = 0,
+    acentricFactor = 0.0335,
+    dipoleMoment = 0.0,
+    hasCriticalData = true,
+    hasFundamentalEquation = true,
+    hasAccurateViscosityData = true,
     hasAcentricFactor = true);
 
   type MolarHeatCapacity = SI.MolarHeatCapacity(
-    min = 0, 
-    max = 3.e5, 
-    nominal = 3.e1, 
-    start = 3.e1) 
+    min = 0,
+    max = 3.e5,
+    nominal = 3.e1,
+    start = 3.e1)
     "具有介质特定属性的摩尔热容类型" annotation();
 
 protected
   type MolarDensity = Real(
-    final quantity = "MolarDensity", 
-    final unit = "mol/m3", 
+    final quantity = "MolarDensity",
+    final unit = "mol/m3",
     min = 0) annotation();
 
   type IsothermalExpansionCoefficient = Real(
-    min = 0, 
-    max = 1e8, 
+    min = 0,
+    max = 1e8,
     unit = "1") annotation();
 
 public
-  package Air_ph 
+  package Air_ph
     "ReferenceAir.Air_ph: 详细的干空气模型 (130...2000 K),显式表达 p 和 h"
     extends Modelica.Icons.MaterialProperty;
     extends Modelica.Media.Air.ReferenceAir.Air_Base(
-      ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.ph, 
+      ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.ph,
 
-      final ph_explicit = true, 
-      final dT_explicit = false, 
+      final ph_explicit = true,
+      final dT_explicit = false,
       final pT_explicit = false);
 
     annotation(Documentation(info = "<html>
@@ -61,14 +61,14 @@ public
 </html>"));
   end Air_ph;
 
-  package Air_pT 
+  package Air_pT
     "ReferenceAir.Air_pT: 详细的干空气模型 (130...2000 K),显式表达 p 和 T"
     extends Modelica.Icons.MaterialProperty;
     extends Modelica.Media.Air.ReferenceAir.Air_Base(
-      ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pT, 
+      ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pT,
 
-      final ph_explicit = false, 
-      final dT_explicit = false, 
+      final ph_explicit = false,
+      final dT_explicit = false,
       final pT_explicit = true);
 
     annotation(Documentation(info = "<html>
@@ -80,14 +80,14 @@ public
   end Air_pT;
 
 public
-  package Air_dT 
+  package Air_dT
     "ReferenceAir.Air_dT: 详细的干空气模型 (130...2000 K),显式表达 d 和 T"
     extends Modelica.Icons.MaterialProperty;
     extends Modelica.Media.Air.ReferenceAir.Air_Base(
-      ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.dTX, 
+      ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.dTX,
 
-      final ph_explicit = false, 
-      final dT_explicit = true, 
+      final ph_explicit = false,
+      final dT_explicit = true,
       final pT_explicit = false);
 
     annotation(Documentation(info = "<html>
@@ -98,31 +98,31 @@ public
 </html>"));
   end Air_dT;
 
-partial package Air_Base 
+partial package Air_Base
     "使用 Lemmon 等人的状态方程计算的干空气性质"
 
     extends Modelica.Media.Interfaces.PartialPureSubstance(
-      mediumName = "Air", 
-      substanceNames = {"air"}, 
-      singleState = false, 
-      SpecificEnthalpy(start = 1.0e5, nominal = 5.0e5), 
-      Density(start = 1.0, nominal = 1.2), 
+      mediumName = "Air",
+      substanceNames = {"air"},
+      singleState = false,
+      SpecificEnthalpy(start = 1.0e5, nominal = 5.0e5),
+      Density(start = 1.0, nominal = 1.2),
       AbsolutePressure(
-      start = 1e5, 
-      nominal = 1e5, 
-      min = 1.0, 
-      max = 2000e6), 
+      start = 1e5,
+      nominal = 1e5,
+      min = 1.0,
+      max = 2000e6),
       Temperature(
-      start = 273.15, 
-      nominal = 293.15, 
-      min = 130, 
+      start = 273.15,
+      nominal = 293.15,
+      min = 130,
       max = 2000));
 
-    constant Boolean ph_explicit 
+    constant Boolean ph_explicit
       "如果是显式的压力和比焓，则为 true";
-    constant Boolean dT_explicit 
+    constant Boolean dT_explicit
       "如果是显式的密度和温度，则为 true";
-    constant Boolean pT_explicit 
+    constant Boolean pT_explicit
       "如果是显式的压力和温度，则为 true";
 
     redeclare record extends ThermodynamicState "热力学状态"
@@ -135,13 +135,13 @@ partial package Air_Base
 
     redeclare model extends BaseProperties(
       h(stateSelect = if ph_explicit and preferredMediumStates then StateSelect.prefer 
-      else StateSelect.default), 
+      else StateSelect.default),
       d(stateSelect = if dT_explicit and preferredMediumStates then StateSelect.prefer 
-      else StateSelect.default), 
+      else StateSelect.default),
       T(stateSelect = if (pT_explicit or dT_explicit) and preferredMediumStates 
-      then StateSelect.prefer else StateSelect.default), 
+      then StateSelect.prefer else StateSelect.default),
       p(stateSelect = if (pT_explicit or ph_explicit) and preferredMediumStates 
-      then StateSelect.prefer else StateSelect.default)) 
+      then StateSelect.prefer else StateSelect.default))
       "空气的基本性质"
       annotation();
 
@@ -165,7 +165,7 @@ partial package Air_Base
       d = state.d;
     end BaseProperties;
 
-    redeclare function density_ph 
+    redeclare function density_ph
       "根据压力和比焓计算密度"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -176,7 +176,7 @@ partial package Air_Base
       annotation(Inline = true);
     end density_ph;
 
-    redeclare function temperature_ph 
+    redeclare function temperature_ph
       "根据压力和比焓计算温度"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -187,7 +187,7 @@ partial package Air_Base
       annotation(Inline = true);
     end temperature_ph;
 
-    redeclare function temperature_ps 
+    redeclare function temperature_ps
       "根据压力和比熵计算温度"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -198,7 +198,7 @@ partial package Air_Base
       annotation(Inline = true);
     end temperature_ps;
 
-    redeclare function density_ps 
+    redeclare function density_ps
       "根据压力和比熵计算密度"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -209,7 +209,7 @@ partial package Air_Base
       annotation(Inline = true);
     end density_ps;
 
-    redeclare function pressure_dT 
+    redeclare function pressure_dT
       "根据密度和温度计算压力"
       extends Modelica.Icons.Function;
       input Density d "密度";
@@ -220,7 +220,7 @@ partial package Air_Base
       annotation(Inline = true);
     end pressure_dT;
 
-    redeclare function specificEnthalpy_dT 
+    redeclare function specificEnthalpy_dT
       "根据密度和温度计算比焓"
       extends Modelica.Icons.Function;
       input Density d "密度";
@@ -231,7 +231,7 @@ partial package Air_Base
       annotation(Inline = true);
     end specificEnthalpy_dT;
 
-    redeclare function specificEnthalpy_pT 
+    redeclare function specificEnthalpy_pT
       "根据压力和温度计算比焓"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -242,7 +242,7 @@ partial package Air_Base
       annotation(Inline = true);
     end specificEnthalpy_pT;
 
-    redeclare function specificEnthalpy_ps 
+    redeclare function specificEnthalpy_ps
       "根据压力和比熵计算比焓"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -253,7 +253,7 @@ partial package Air_Base
       annotation(Inline = true);
     end specificEnthalpy_ps;
 
-    redeclare function density_pT 
+    redeclare function density_pT
       "根据压力和温度计算密度"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";
@@ -265,14 +265,14 @@ partial package Air_Base
       annotation(Inline = true);
     end density_pT;
 
-    redeclare function extends dynamicViscosity 
+    redeclare function extends dynamicViscosity
       "计算热力状态记录的动力黏度"
     algorithm
       eta := Air_Utilities.Transport.eta_dT(state.d, state.T);
       annotation(Inline = true);
     end dynamicViscosity;
 
-    redeclare function extends thermalConductivity 
+    redeclare function extends thermalConductivity
       "计算空气的导热系数"
     algorithm
       lambda := Air_Utilities.Transport.lambda_dT(state.d, state.T);
@@ -304,21 +304,21 @@ partial package Air_Base
       annotation(Inline = true);
     end specificEnthalpy;
 
-    redeclare function extends specificInternalEnergy 
+    redeclare function extends specificInternalEnergy
       "计算比内能"
     algorithm
       u := state.h - state.p / state.d;
       annotation(Inline = true);
     end specificInternalEnergy;
 
-    redeclare function extends specificGibbsEnergy 
+    redeclare function extends specificGibbsEnergy
       "计算比吉布斯能"
     algorithm
       g := state.h - state.T * specificEntropy(state);
       annotation(Inline = true);
     end specificGibbsEnergy;
 
-    redeclare function extends specificHelmholtzEnergy 
+    redeclare function extends specificHelmholtzEnergy
       "计算比亥姆霍兹能"
     algorithm
       f := state.h - state.p / state.d - state.T * specificEntropy(state);
@@ -337,7 +337,7 @@ partial package Air_Base
       end if;
     end specificEntropy;
 
-    redeclare function extends specificHeatCapacityCp 
+    redeclare function extends specificHeatCapacityCp
       "空气在恒压下的比热容"
       annotation();
     algorithm
@@ -350,7 +350,7 @@ partial package Air_Base
       end if;
     end specificHeatCapacityCp;
 
-    redeclare function extends specificHeatCapacityCv 
+    redeclare function extends specificHeatCapacityCv
       "空气在恒容下的比热容"
       annotation();
     algorithm
@@ -363,7 +363,7 @@ partial package Air_Base
       end if;
     end specificHeatCapacityCv;
 
-    redeclare function extends isentropicExponent 
+    redeclare function extends isentropicExponent
       "计算等熵指数"
       annotation();
     algorithm
@@ -376,7 +376,7 @@ partial package Air_Base
       end if;
     end isentropicExponent;
 
-    redeclare function extends isothermalCompressibility 
+    redeclare function extends isothermalCompressibility
       "空气的等温压缩系数"
       annotation();
     algorithm
@@ -389,7 +389,7 @@ partial package Air_Base
       end if;
     end isothermalCompressibility;
 
-    redeclare function extends isobaricExpansionCoefficient 
+    redeclare function extends isobaricExpansionCoefficient
       "空气的等压膨胀系数"
       annotation();
     algorithm
@@ -402,7 +402,7 @@ partial package Air_Base
       end if;
     end isobaricExpansionCoefficient;
 
-    redeclare function extends velocityOfSound 
+    redeclare function extends velocityOfSound
       "根据热力状态记录计算声速"
       annotation();
 
@@ -416,14 +416,14 @@ partial package Air_Base
       end if;
     end velocityOfSound;
 
-    redeclare function extends density_derh_p 
+    redeclare function extends density_derh_p
       "密度对比焓的导数"
     algorithm
       ddhp := Air_Utilities.ddhp(state.p, state.h);
       annotation(Inline = true);
     end density_derh_p;
 
-    redeclare function extends density_derp_h 
+    redeclare function extends density_derp_h
       "密度对压力的导数"
     algorithm
       ddph := Air_Utilities.ddph(state.p, state.h);
@@ -442,84 +442,84 @@ partial package Air_Base
     //     ddpT := IF97_Utilities.ddpT(state.p, state.h, state.phase);
     //   end density_derp_T;
 
-    redeclare function extends setState_dTX 
+    redeclare function extends setState_dTX
       "根据密度和温度计算空气的热力状态"
 
     algorithm
       state := ThermodynamicState(
-        d = d, 
-        T = T, 
-        h = specificEnthalpy_dT(d, T), 
+        d = d,
+        T = T,
+        h = specificEnthalpy_dT(d, T),
         p = pressure_dT(d, T));
       annotation(Inline = true);
     end setState_dTX;
 
-    redeclare function extends setState_phX 
+    redeclare function extends setState_phX
       "根据压力和焓计算空气的热力状态"
     algorithm
       state := ThermodynamicState(
-        d = density_ph(p, h), 
-        T = temperature_ph(p, h), 
-        h = h, 
+        d = density_ph(p, h),
+        T = temperature_ph(p, h),
+        h = h,
         p = p);
       annotation(Inline = true);
     end setState_phX;
 
-    redeclare function extends setState_psX 
+    redeclare function extends setState_psX
       "根据压力和熵计算空气的热力状态"
     algorithm
       state := ThermodynamicState(
-        d = density_ps(p, s), 
-        T = temperature_ps(p, s), 
-        h = specificEnthalpy_ps(p, s), 
+        d = density_ps(p, s),
+        T = temperature_ps(p, s),
+        h = specificEnthalpy_ps(p, s),
         p = p);
       annotation(Inline = true);
     end setState_psX;
 
-    redeclare function extends setState_pTX 
+    redeclare function extends setState_pTX
       "根据压力和温度计算空气的热力状态"
     algorithm
       state := ThermodynamicState(
-        d = density_pT(p, T), 
-        T = T, 
-        h = specificEnthalpy_pT(p, T), 
+        d = density_pT(p, T),
+        T = T,
+        h = specificEnthalpy_pT(p, T),
         p = p);
       annotation(Inline = true);
     end setState_pTX;
 
-    redeclare function extends setSmoothState 
+    redeclare function extends setSmoothState
       "计算热力状态，使其平滑近似：如果 x > 0 则为 state_a，否则为 state_b"
       import Modelica.Media.Common.smoothStep;
 
     algorithm
       state := ThermodynamicState(
         p = smoothStep(
-        x, 
-        state_a.p, 
-        state_b.p, 
-        x_small), 
+        x,
+        state_a.p,
+        state_b.p,
+        x_small),
         h = smoothStep(
-        x, 
-        state_a.h, 
-        state_b.h, 
-        x_small), 
+        x,
+        state_a.h,
+        state_b.h,
+        x_small),
         d = density_ph(smoothStep(
-        x, 
-        state_a.p, 
-        state_b.p, 
+        x,
+        state_a.p,
+        state_b.p,
         x_small), smoothStep(
-        x, 
-        state_a.h, 
-        state_b.h, 
-        x_small)), 
+        x,
+        state_a.h,
+        state_b.h,
+        x_small)),
         T = temperature_ph(smoothStep(
-        x, 
-        state_a.p, 
-        state_b.p, 
+        x,
+        state_a.p,
+        state_b.p,
         x_small), smoothStep(
-        x, 
-        state_a.h, 
-        state_b.h, 
+        x,
+        state_a.h,
+        state_b.h,
         x_small)));
       annotation(Inline = true);
     end setSmoothState;
@@ -527,13 +527,13 @@ partial package Air_Base
     redeclare function extends isentropicEnthalpy
     algorithm
       h_is := specificEnthalpy_psX(
-        p_downstream, 
-        specificEntropy(refState), 
+        p_downstream,
+        specificEntropy(refState),
         reference_X);
       annotation(Inline = true);
     end isentropicEnthalpy;
 
-    redeclare function extends molarMass 
+    redeclare function extends molarMass
       "计算介质的摩尔质量"
     algorithm
       MM := Modelica.Media.Air.ReferenceAir.airConstants.molarMass;
@@ -564,7 +564,7 @@ partial package Air_Base
 </html>"));
   end Air_Base;
 
-  package Air_Utilities 
+  package Air_Utilities
     "高精度干空气属性的低级和公用计算"
     extends Modelica.Icons.UtilitiesPackage;
 
@@ -573,35 +573,35 @@ partial package Air_Base
       extends Modelica.Icons.BasesPackage;
 
       constant Modelica.Media.Common.FundamentalConstants Constants(
-        final R_bar = 8.31451, 
-        final R_s = 287.117, 
-        final MM = 28.9586E-003, 
-        final rhored = 10447.7, 
-        final Tred = 132.6312, 
-        final pred = 3785020, 
-        h_off = 1589557.62320524, 
+        final R_bar = 8.31451,
+        final R_s = 287.117,
+        final MM = 28.9586E-003,
+        final rhored = 10447.7,
+        final Tred = 132.6312,
+        final pred = 3785020,
+        h_off = 1589557.62320524,
         s_off = 6610.41237132543);
 
       function Helmholtz "亥姆霍兹状态方程"
         extends Modelica.Icons.Function;
         input SI.Density d "密度";
         input SI.Temperature T "温度 (K)";
-        output Modelica.Media.Common.HelmholtzDerivs f 
+        output Modelica.Media.Common.HelmholtzDerivs f
           "无量纲亥姆霍兹函数及其对 delta 和 tau 的导数";
 
       protected
-        final constant Real[13] N_0 = {0.605719400E-007, -0.210274769E-004, -0.158860716E-003, 
-          -0.13841928076E002, 0.17275266575E002, -0.195363420E-003, 
-          0.2490888032E001, 0.791309509, 0.212236768, 0.197938904, 
+        final constant Real[13] N_0 = {0.605719400E-007, -0.210274769E-004, -0.158860716E-003,
+          -0.13841928076E002, 0.17275266575E002, -0.195363420E-003,
+          0.2490888032E001, 0.791309509, 0.212236768, 0.197938904,
           0.2536365E002, 0.1690741E002, 0.8731279E002};
-        final constant Real[19] N = {0.118160747229, 0.713116392079, -0.161824192067E001, 
-          0.714140178971E-001, -0.865421396646E-001, 0.134211176704, 
-          0.112626704218E-001, -0.420533228842E-001, 0.349008431982E-001, 
-          0.164957183186E-003, -0.101365037912, -0.173813690970, -0.472103183731E-001, 
-          -0.122523554253E-001, -0.146629609713, -0.316055879821E-001, 
+        final constant Real[19] N = {0.118160747229, 0.713116392079, -0.161824192067E001,
+          0.714140178971E-001, -0.865421396646E-001, 0.134211176704,
+          0.112626704218E-001, -0.420533228842E-001, 0.349008431982E-001,
+          0.164957183186E-003, -0.101365037912, -0.173813690970, -0.472103183731E-001,
+          -0.122523554253E-001, -0.146629609713, -0.316055879821E-001,
           0.233594806142E-003, 0.148287891978E-001, -0.938782884667E-002};
         final constant Integer[19] i = {1, 1, 1, 2, 3, 3, 4, 4, 4, 6, 1, 3, 5, 6, 1, 3, 11, 1, 3};
-        final constant Real[19] j = {0, 0.33, 1.01, 0, 0, 0.15, 0, 0.2, 0.35, 1.35, 1.6, 
+        final constant Real[19] j = {0, 0.33, 1.01, 0, 0, 0.15, 0, 0.2, 0.35, 1.35, 1.6,
           0.8, 0.95, 1.25, 3.6, 6, 3.25, 3.5, 15};
         final constant Integer[19] l = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3};
         annotation();
@@ -611,7 +611,7 @@ partial package Air_Base
         f.T := T;
         f.R_s := ReferenceAir.Air_Utilities.Basic.Constants.R_s;
         //约简密度
-        f.delta := d / (ReferenceAir.Air_Utilities.Basic.Constants.MM * 
+        f.delta := d / (ReferenceAir.Air_Utilities.Basic.Constants.MM *
           ReferenceAir.Air_Utilities.Basic.Constants.rhored);
         //倒数约简温度
         f.tau := ReferenceAir.Air_Utilities.Basic.Constants.Tred / T;
@@ -622,8 +622,8 @@ partial package Air_Base
         for k in 1:5 loop
           f.f := f.f + N_0[k] * f.tau ^ (k - 4);
         end for;
-        f.f := f.f + log(f.delta) + N_0[6] * f.tau * sqrt(f.tau) + N_0[7] * log(f.tau) 
-          + N_0[8] * log(1 - exp(-N_0[11] * f.tau)) + N_0[9] * log(1 - exp(-N_0[12] 
+        f.f := f.f + log(f.delta) + N_0[6] * f.tau * sqrt(f.tau) + N_0[7] * log(f.tau)
+          + N_0[8] * log(1 - exp(-N_0[11] * f.tau)) + N_0[9] * log(1 - exp(-N_0[12]
           * f.tau)) + N_0[10] * log(2 / 3 + exp(N_0[13] * f.tau));
         //残差部分
         for k in 1:10 loop
@@ -642,7 +642,7 @@ partial package Air_Base
           f.fdelta := f.fdelta + i[k] * N[k] * f.delta ^ (i[k] - 1) * f.tau ^ j[k];
         end for;
         for k in 11:19 loop
-          f.fdelta := f.fdelta + N[k] * f.delta ^ (i[k] - 1) * f.tau ^ j[k] * exp(-f.delta 
+          f.fdelta := f.fdelta + N[k] * f.delta ^ (i[k] - 1) * f.tau ^ j[k] * exp(-f.delta
             ^ l[k]) * (i[k] - l[k] * f.delta ^ l[k]);
         end for;
 
@@ -652,12 +652,12 @@ partial package Air_Base
         f.fdeltadelta := -1 / f.delta ^ 2;
         //残差部分
         for k in 1:10 loop
-          f.fdeltadelta := f.fdeltadelta + i[k] * (i[k] - 1) * N[k] * f.delta ^ (i[k] 
+          f.fdeltadelta := f.fdeltadelta + i[k] * (i[k] - 1) * N[k] * f.delta ^ (i[k]
             - 2) * f.tau ^ j[k];
         end for;
         for k in 11:19 loop
-          f.fdeltadelta := f.fdeltadelta + N[k] * f.delta ^ (i[k] - 2) * f.tau ^ j[k] 
-            * exp(-f.delta ^ l[k]) * ((i[k] - l[k] * f.delta ^ l[k]) * (i[k] - 1 - l[k] * 
+          f.fdeltadelta := f.fdeltadelta + N[k] * f.delta ^ (i[k] - 2) * f.tau ^ j[k]
+            * exp(-f.delta ^ l[k]) * ((i[k] - l[k] * f.delta ^ l[k]) * (i[k] - 1 - l[k] *
             f.delta ^ l[k]) - l[k] ^ 2 * f.delta ^ l[k]);
         end for;
 
@@ -668,14 +668,14 @@ partial package Air_Base
           f.ftau := f.ftau + (k - 4) * N_0[k] * f.tau ^ (k - 5);
         end for;
         f.ftau := f.ftau + 1.5 * N_0[6] * sqrt(f.tau) + N_0[7] / f.tau + N_0[8] * N_0
-          [11] / (exp(N_0[11] * f.tau) - 1) + N_0[9] * N_0[12] / (exp(N_0[12] * f.tau) 
+          [11] / (exp(N_0[11] * f.tau) - 1) + N_0[9] * N_0[12] / (exp(N_0[12] * f.tau)
           - 1) + N_0[10] * N_0[13] / (2 / 3 * exp(-N_0[13] * f.tau) + 1);
         //残差部分
         for k in 1:10 loop
           f.ftau := f.ftau + j[k] * N[k] * f.delta ^ i[k] * f.tau ^ (j[k] - 1);
         end for;
         for k in 11:19 loop
-          f.ftau := f.ftau + j[k] * N[k] * f.delta ^ i[k] * f.tau ^ (j[k] - 1) * exp(-f.delta 
+          f.ftau := f.ftau + j[k] * N[k] * f.delta ^ i[k] * f.tau ^ (j[k] - 1) * exp(-f.delta
             ^ l[k]);
         end for;
 
@@ -685,10 +685,10 @@ partial package Air_Base
         for k in 1:3 loop
           f.ftautau := f.ftautau + (k - 4) * (k - 5) * N_0[k] * f.tau ^ (k - 6);
         end for;
-        f.ftautau := f.ftautau + 0.75 * N_0[6] / sqrt(f.tau) - N_0[7] / f.tau ^ 2 - 
-          N_0[8] * N_0[11] ^ 2 * exp(N_0[11] * f.tau) / (exp(N_0[11] * f.tau) - 1) ^ 2 - 
-          N_0[9] * N_0[12] ^ 2 * exp(N_0[12] * f.tau) / (exp(N_0[12] * f.tau) - 1) ^ 2 + 2 / 
-          3 * N_0[10] * N_0[13] ^ 2 * exp(-N_0[13] * f.tau) / (2 / 3 * exp(-N_0[13] * f.tau) + 
+        f.ftautau := f.ftautau + 0.75 * N_0[6] / sqrt(f.tau) - N_0[7] / f.tau ^ 2 -
+          N_0[8] * N_0[11] ^ 2 * exp(N_0[11] * f.tau) / (exp(N_0[11] * f.tau) - 1) ^ 2 -
+          N_0[9] * N_0[12] ^ 2 * exp(N_0[12] * f.tau) / (exp(N_0[12] * f.tau) - 1) ^ 2 + 2 /
+          3 * N_0[10] * N_0[13] ^ 2 * exp(-N_0[13] * f.tau) / (2 / 3 * exp(-N_0[13] * f.tau) +
           1) ^ 2;
 
         //残差部分
@@ -704,7 +704,7 @@ partial package Air_Base
         f.fdeltatau := 0;
         //残差部分（理想气体部分为零）
         for k in 1:10 loop
-          f.fdeltatau := f.fdeltatau + i[k] * j[k] * N[k] * f.delta ^ (i[k] - 1) * f.tau 
+          f.fdeltatau := f.fdeltatau + i[k] * j[k] * N[k] * f.delta ^ (i[k] - 1) * f.tau
             ^ (j[k] - 1);
         end for;
         for k in 11:19 loop
@@ -738,9 +738,9 @@ partial package Air_Base
         Integer i = 0 "循环计数器";
         Real dp "压力差";
         SI.Density deld "密度步长";
-        Modelica.Media.Common.HelmholtzDerivs f 
+        Modelica.Media.Common.HelmholtzDerivs f
           "无量纲的亥姆霍兹函数及其对 delta 和 tau 的导数";
-        Modelica.Media.Common.NewtonDerivatives_pT nDerivs 
+        Modelica.Media.Common.NewtonDerivatives_pT nDerivs
           "牛顿迭代中需要的导数";
         Boolean found = false "迭代成功的标志";
         annotation();
@@ -780,9 +780,9 @@ partial package Air_Base
         Real det "方向导数的行列式";
         Real deld "d 方向上的牛顿步长";
         Real delt "T 方向上的牛顿步长";
-        Modelica.Media.Common.HelmholtzDerivs f 
+        Modelica.Media.Common.HelmholtzDerivs f
           "无量纲的亥姆霍兹函数及其对 delta 和 tau 的导数";
-        Modelica.Media.Common.NewtonDerivatives_ph nDerivs 
+        Modelica.Media.Common.NewtonDerivatives_ph nDerivs
           "牛顿迭代中需要的导数";
         Boolean found = false "迭代成功的标志";
         annotation();
@@ -797,7 +797,7 @@ partial package Air_Base
         while ((i < 100) and not found) loop
           f := Basic.Helmholtz(d, T);
           nDerivs := Modelica.Media.Common.Helmholtz_ph(f);
-          dh := nDerivs.h - ReferenceAir.Air_Utilities.Basic.Constants.h_off 
+          dh := nDerivs.h - ReferenceAir.Air_Utilities.Basic.Constants.h_off
             - h;
           dp := nDerivs.p - p;
           if ((abs(dh) <= delh) and (abs(dp) <= delp)) then
@@ -830,9 +830,9 @@ partial package Air_Base
         Real det "方向导数的行列式";
         Real deld "d 方向上的牛顿步长";
         Real delt "T 方向上的牛顿步长";
-        Modelica.Media.Common.HelmholtzDerivs f 
+        Modelica.Media.Common.HelmholtzDerivs f
           "无量纲的亥姆霍兹函数及其对 delta 和 tau 的导数";
-        Modelica.Media.Common.NewtonDerivatives_ps nDerivs 
+        Modelica.Media.Common.NewtonDerivatives_ps nDerivs
           "牛顿迭代中需要的导数";
         Boolean found = false "迭代成功的标志";
         annotation();
@@ -846,7 +846,7 @@ partial package Air_Base
         while ((i < 100) and not found) loop
           f := Basic.Helmholtz(d, T);
           nDerivs := Modelica.Media.Common.Helmholtz_ps(f);
-          ds := nDerivs.s - ReferenceAir.Air_Utilities.Basic.Constants.s_off 
+          ds := nDerivs.s - ReferenceAir.Air_Utilities.Basic.Constants.s_off
             - s;
           dp := nDerivs.p - p;
           if ((abs(ds) <= dels) and (abs(dp) <= delp)) then
@@ -873,10 +873,10 @@ partial package Air_Base
         output SI.DynamicViscosity eta "动力黏度";
 
       protected
-        Real delta = d / (ReferenceAir.Air_Utilities.Basic.Constants.MM * 
-          ReferenceAir.Air_Utilities.Basic.Constants.rhored) 
+        Real delta = d / (ReferenceAir.Air_Utilities.Basic.Constants.MM *
+          ReferenceAir.Air_Utilities.Basic.Constants.rhored)
           "约简密度";
-        Real tau = ReferenceAir.Air_Utilities.Basic.Constants.Tred / T 
+        Real tau = ReferenceAir.Air_Utilities.Basic.Constants.Tred / T
           "倒数约简温度";
         Real Omega "碰撞积分";
         SI.DynamicViscosity eta_0 = 0 "稀薄气体黏度";
@@ -893,7 +893,7 @@ partial package Air_Base
         Omega := exp(
           Modelica.Math.Polynomials.evaluate(
           {b[5], b[4], b[3], b[2], b[1]}, log(T / 103.3)));
-        eta_0 := 0.0266958 * sqrt(1000 * ReferenceAir.Air_Utilities.Basic.Constants.MM 
+        eta_0 := 0.0266958 * sqrt(1000 * ReferenceAir.Air_Utilities.Basic.Constants.MM
           * T) / (0.36 ^ 2 * Omega);
         for i in 1:5 loop
           eta_r := eta_r + (Nvis[i] * (tau ^ tvis[i]) * (delta ^ dvis[i]) * exp(-
@@ -902,7 +902,7 @@ partial package Air_Base
         eta := (eta_0 + eta_r) * 1E-006;
       end eta_dT;
 
-      function lambda_dT 
+      function lambda_dT
         "计算导热系数作为 d 和 T 的函数"
         extends Modelica.Icons.Function;
         input SI.Density d "密度";
@@ -910,12 +910,12 @@ partial package Air_Base
         output SI.ThermalConductivity lambda "导热系数";
 
       protected
-        Modelica.Media.Common.HelmholtzDerivs f 
+        Modelica.Media.Common.HelmholtzDerivs f
           "无量纲的亥姆霍兹函数及其对 delta 和 tau 的导数";
         SI.ThermalConductivity lambda_0 = 0 "稀薄气体导热系数";
-        SI.ThermalConductivity lambda_r = 0 
+        SI.ThermalConductivity lambda_r = 0
           "剩余流体导热系数";
-        SI.ThermalConductivity lambda_c = 0 
+        SI.ThermalConductivity lambda_c = 0
           "导热系数临界增强";
         Real Omega "碰撞积分";
         SI.DynamicViscosity eta_0 = 0 "稀薄气体黏度";
@@ -929,7 +929,7 @@ partial package Air_Base
         Real cv;
         Real cp;
         final constant Real[5] b = {0.431, -0.4623, 0.08406, 0.005341, -0.00331};
-        final constant Real[9] Ncon = {1.308, 1.405, -1.036, 8.743, 14.76, -16.62, 
+        final constant Real[9] Ncon = {1.308, 1.405, -1.036, 8.743, 14.76, -16.62,
           3.793, -6.142, -0.3778};
         final constant Real[9] tcon = {0.0, -1.1, -0.3, 0.1, 0.0, 0.5, 2.7, 0.3, 1.3};
         final constant Integer[9] dcon = {0, 0, 0, 1, 2, 3, 7, 7, 11};
@@ -941,10 +941,10 @@ partial package Air_Base
         //在参考温度 265.262 下的 chi_tilde
         f := Basic.Helmholtz(d, 265.262);
         pddTref := ReferenceAir.Air_Utilities.Basic.Constants.R_bar * 265.262 * (
-          1 + 2 * f.delta * (f.fdelta - 1 / f.delta) + f.delta ^ 2 * (f.fdeltadelta + 1 
+          1 + 2 * f.delta * (f.fdelta - 1 / f.delta) + f.delta ^ 2 * (f.fdeltadelta + 1
           / f.delta ^ 2));
-        xiref := ReferenceAir.Air_Utilities.Basic.Constants.pred * (d / 
-          ReferenceAir.Air_Utilities.Basic.Constants.MM) / ReferenceAir.Air_Utilities.Basic.Constants.rhored 
+        xiref := ReferenceAir.Air_Utilities.Basic.Constants.pred * (d /
+          ReferenceAir.Air_Utilities.Basic.Constants.MM) / ReferenceAir.Air_Utilities.Basic.Constants.rhored
           ^ 2 / pddTref;
         //计算给定状态下的 f
         f := Basic.Helmholtz(d, T);
@@ -952,10 +952,10 @@ partial package Air_Base
           Modelica.Math.Polynomials.evaluate(
           {b[5], b[4], b[3], b[2], b[1]}, log(T / 103.3)));
         //动力黏度的理想气体部分
-        eta_0 := 0.0266958 * sqrt(1000 * ReferenceAir.Air_Utilities.Basic.Constants.MM 
+        eta_0 := 0.0266958 * sqrt(1000 * ReferenceAir.Air_Utilities.Basic.Constants.MM
           * T) / (0.36 ^ 2 * Omega);
         //导热系数的理想气体部分
-        lambda_0 := Ncon[1] * eta_0 + Ncon[2] * f.tau ^ tcon[2] + Ncon[3] * f.tau ^ 
+        lambda_0 := Ncon[1] * eta_0 + Ncon[2] * f.tau ^ tcon[2] + Ncon[3] * f.tau ^
           tcon[3];
         //导热系数的剩余部分
         for i in 4:9 loop
@@ -963,11 +963,11 @@ partial package Air_Base
             gammacon[i] * f.delta ^ lcon[i]);
         end for;
         //在恒定温度下对 d 的 p 导数
-        pddT := ReferenceAir.Air_Utilities.Basic.Constants.R_s * T * (1 + 2 * f.delta 
+        pddT := ReferenceAir.Air_Utilities.Basic.Constants.R_s * T * (1 + 2 * f.delta
           * (f.fdelta - 1 / f.delta) + f.delta ^ 2 * (f.fdeltadelta + 1 / f.delta ^ 2));
         //给定状态下的 chi_tilde
-        xi := ReferenceAir.Air_Utilities.Basic.Constants.pred * (d / ReferenceAir.Air_Utilities.Basic.Constants.MM) 
-          / ReferenceAir.Air_Utilities.Basic.Constants.rhored ^ 2 / (pddT * 
+        xi := ReferenceAir.Air_Utilities.Basic.Constants.pred * (d / ReferenceAir.Air_Utilities.Basic.Constants.MM)
+          / ReferenceAir.Air_Utilities.Basic.Constants.rhored ^ 2 / (pddT *
           ReferenceAir.Air_Utilities.Basic.Constants.MM);
         //导热系数临界增强
         xi := xi - xiref * 265.262 / T;
@@ -976,18 +976,18 @@ partial package Air_Base
         else
           xi := 0.11 * (xi / 0.055) ^ (0.63 / 1.2415);
           //在恒定压力下对 T 的 p 导数
-          pdTp := ReferenceAir.Air_Utilities.Basic.Constants.R_s * d * (1 + f.delta 
+          pdTp := ReferenceAir.Air_Utilities.Basic.Constants.R_s * d * (1 + f.delta
             * (f.fdelta - 1 / f.delta) - f.delta * f.tau * f.fdeltatau);
           //比定容热容
           cv := ReferenceAir.Air_Utilities.Basic.Constants.R_s * (-f.tau * f.tau * f.ftautau);
           //比定压热容
           cp := cv + T * pdTp * pdTp / (d * d * pddT);
-          Omega_tilde := 2 / Modelica.Constants.pi * ((cp - cv) / cp * atan(xi / 0.31) 
+          Omega_tilde := 2 / Modelica.Constants.pi * ((cp - cv) / cp * atan(xi / 0.31)
             + cv / cp * xi / 0.31);
-          Omega_0_tilde := 2 / Modelica.Constants.pi * (1 - exp(-1 / ((0.31 / xi) + 1 
-            / 3 * (xi / 0.31) ^ 2 * (ReferenceAir.Air_Utilities.Basic.Constants.rhored 
+          Omega_0_tilde := 2 / Modelica.Constants.pi * (1 - exp(-1 / ((0.31 / xi) + 1
+            / 3 * (xi / 0.31) ^ 2 * (ReferenceAir.Air_Utilities.Basic.Constants.rhored
             / (d / ReferenceAir.Air_Utilities.Basic.Constants.MM)) ^ 2)));
-          lambda_c := d * cp * 1.380658E-023 * 1.01 * T / (6 * Modelica.Constants.pi * xi * 
+          lambda_c := d * cp * 1.380658E-023 * 1.01 * T / (6 * Modelica.Constants.pi * xi *
             eta_dT(d, T)) * (Omega_tilde - Omega_0_tilde) * 1E012;
         end if;
         lambda := (lambda_0 + lambda_r + lambda_c) / 1000;
@@ -1001,7 +1001,7 @@ partial package Air_Base
       input SI.SpecificEntropy s "比熵";
       output Common.AuxiliaryProperties aux "辅助记录";
     protected
-      Modelica.Media.Common.HelmholtzDerivs f 
+      Modelica.Media.Common.HelmholtzDerivs f
         "无量纲的亥姆霍兹函数及其对 delta 和 tau 的导数";
       annotation();
     algorithm
@@ -1009,9 +1009,9 @@ partial package Air_Base
       aux.s := s;
       aux.R_s := ReferenceAir.Air_Utilities.Basic.Constants.R_s;
       (aux.rho,aux.T) := Inverses.dTofps(
-        p = p, 
-        s = s, 
-        delp = iter.delp, 
+        p = p,
+        s = s,
+        delp = iter.delp,
         dels = iter.dels);
       f := Basic.Helmholtz(aux.rho, aux.T);
       aux.h := aux.R_s * aux.T * (f.tau * f.ftau + f.delta * f.fdelta) - ReferenceAir.Air_Utilities.Basic.Constants.h_off;
@@ -1023,7 +1023,7 @@ partial package Air_Base
       aux.vt := aux.pt / (aux.rho * aux.rho * aux.pd);
     end airBaseProp_ps;
 
-    function rho_props_ps 
+    function rho_props_ps
       "密度作为压力和比熵的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1043,12 +1043,12 @@ partial package Air_Base
       annotation();
     algorithm
       rho := rho_props_ps(
-        p, 
-        s, 
+        p,
+        s,
         Air_Utilities.airBaseProp_ps(p, s));
     end rho_ps;
 
-    function T_props_ps 
+    function T_props_ps
       "温度作为压力和比熵的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1068,12 +1068,12 @@ partial package Air_Base
       annotation();
     algorithm
       T := T_props_ps(
-        p, 
-        s, 
+        p,
+        s,
         Air_Utilities.airBaseProp_ps(p, s));
     end T_ps;
 
-    function h_props_ps 
+    function h_props_ps
       "比焓作为压力和温度的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1093,8 +1093,8 @@ partial package Air_Base
       annotation();
     algorithm
       h := h_props_ps(
-        p, 
-        s, 
+        p,
+        s,
         Air_Utilities.airBaseProp_ps(p, s));
     end h_ps;
 
@@ -1104,7 +1104,7 @@ partial package Air_Base
       input SI.SpecificEnthalpy h "比焓";
       output Common.AuxiliaryProperties aux "辅助记录";
     protected
-      Modelica.Media.Common.HelmholtzDerivs f 
+      Modelica.Media.Common.HelmholtzDerivs f
         "无量纲的亥姆霍兹函数及其对 delta 和 tau 的导数";
       Integer error "逆迭代的错误标志";
       annotation();
@@ -1113,9 +1113,9 @@ partial package Air_Base
       aux.h := h;
       aux.R_s := ReferenceAir.Air_Utilities.Basic.Constants.R_s;
       (aux.rho,aux.T) := Inverses.dTofph(
-        p, 
-        h, 
-        delp = iter.delp, 
+        p,
+        h,
+        delp = iter.delp,
         delh = iter.delh);
       f := Basic.Helmholtz(aux.rho, aux.T);
       aux.s := aux.R_s * (f.tau * f.ftau - f.f) - ReferenceAir.Air_Utilities.Basic.Constants.s_off;
@@ -1127,7 +1127,7 @@ partial package Air_Base
       aux.vt := aux.pt / (aux.rho * aux.rho * aux.pd);
     end airBaseProp_ph;
 
-    function rho_props_ph 
+    function rho_props_ph
       "密度作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1137,8 +1137,8 @@ partial package Air_Base
     algorithm
       rho := aux.rho;
       annotation(
-        derivative(noDerivative = aux) = rho_ph_der, 
-        Inline = false, 
+        derivative(noDerivative = aux) = rho_ph_der,
+        Inline = false,
         LateInline = true);
     end rho_props_ph;
 
@@ -1150,8 +1150,8 @@ partial package Air_Base
       annotation();
     algorithm
       rho := rho_props_ph(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
     end rho_ph;
 
@@ -1165,12 +1165,12 @@ partial package Air_Base
       output Real rho_der "密度的导数";
       annotation();
     algorithm
-      rho_der := ((aux.rho * (aux.cv * aux.rho + aux.pt)) / (aux.rho * aux.rho * aux.pd 
-        * aux.cv + aux.T * aux.pt * aux.pt)) * p_der + (-aux.rho * aux.rho * aux.pt / (aux.rho 
+      rho_der := ((aux.rho * (aux.cv * aux.rho + aux.pt)) / (aux.rho * aux.rho * aux.pd
+        * aux.cv + aux.T * aux.pt * aux.pt)) * p_der + (-aux.rho * aux.rho * aux.pt / (aux.rho
         * aux.rho * aux.pd * aux.cv + aux.T * aux.pt * aux.pt)) * h_der;
     end rho_ph_der;
 
-    function T_props_ph 
+    function T_props_ph
       "温度作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1180,8 +1180,8 @@ partial package Air_Base
     algorithm
       T := aux.T;
       annotation(
-        derivative(noDerivative = aux) = T_ph_der, 
-        Inline = false, 
+        derivative(noDerivative = aux) = T_ph_der,
+        Inline = false,
         LateInline = true);
     end T_props_ph;
 
@@ -1193,8 +1193,8 @@ partial package Air_Base
       annotation();
     algorithm
       T := T_props_ph(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
     end T_ph;
 
@@ -1208,12 +1208,12 @@ partial package Air_Base
       output Real T_der "温度的导数";
       annotation();
     algorithm
-      T_der := ((-aux.rho * aux.pd + aux.T * aux.pt) / (aux.rho * aux.rho * aux.pd * aux.cv 
-        + aux.T * aux.pt * aux.pt)) * p_der + ((aux.rho * aux.rho * aux.pd) / (aux.rho * 
+      T_der := ((-aux.rho * aux.pd + aux.T * aux.pt) / (aux.rho * aux.rho * aux.pd * aux.cv
+        + aux.T * aux.pt * aux.pt)) * p_der + ((aux.rho * aux.rho * aux.pd) / (aux.rho *
         aux.rho * aux.pd * aux.cv + aux.T * aux.pt * aux.pt)) * h_der;
     end T_ph_der;
 
-    function s_props_ph 
+    function s_props_ph
       "比熵作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1223,12 +1223,12 @@ partial package Air_Base
     algorithm
       s := aux.s;
       annotation(
-        derivative(noDerivative = aux) = s_ph_der, 
-        Inline = false, 
+        derivative(noDerivative = aux) = s_ph_der,
+        Inline = false,
         LateInline = true);
     end s_props_ph;
 
-    function s_ph 
+    function s_ph
       "比熵作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1237,12 +1237,12 @@ partial package Air_Base
       annotation();
     algorithm
       s := s_props_ph(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
     end s_ph;
 
-    function s_ph_der 
+    function s_ph_der
       "比熵作为压力和比焓的导数函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1256,119 +1256,119 @@ partial package Air_Base
       s_der := -1 / (aux.rho * aux.T) * p_der + 1 / aux.T * h_der;
     end s_ph_der;
 
-    function cv_props_ph 
+    function cv_props_ph
       "定容比热作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.SpecificHeatCapacity cv 
+      output SI.SpecificHeatCapacity cv
         "定容比热";
     algorithm
       cv := aux.cv;
       annotation(Inline = false, LateInline = true);
     end cv_props_ph;
 
-    function cv_ph 
+    function cv_ph
       "定容比热作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
-      output SI.SpecificHeatCapacity cv 
+      output SI.SpecificHeatCapacity cv
         "定容比热";
       annotation();
     algorithm
       cv := cv_props_ph(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
     end cv_ph;
 
-    function cp_props_ph 
+    function cp_props_ph
       "定压比热作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.SpecificHeatCapacity cp 
+      output SI.SpecificHeatCapacity cp
         "定压比热";
     algorithm
       cp := aux.cp;
       annotation(Inline = false, LateInline = true);
     end cp_props_ph;
 
-    function cp_ph 
+    function cp_ph
       "定压比热作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
-      output SI.SpecificHeatCapacity cp 
+      output SI.SpecificHeatCapacity cp
         "定压比热";
       annotation();
     algorithm
       cp := cp_props_ph(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
     end cp_ph;
 
-    function beta_props_ph 
+    function beta_props_ph
       "等压膨胀系数作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.RelativePressureCoefficient beta 
+      output SI.RelativePressureCoefficient beta
         "等压膨胀系数";
     algorithm
       beta := aux.pt / (aux.rho * aux.pd);
       annotation(Inline = false, LateInline = true);
     end beta_props_ph;
 
-    function beta_ph 
+    function beta_ph
       "等压膨胀系数作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
-      output SI.RelativePressureCoefficient beta 
+      output SI.RelativePressureCoefficient beta
         "等压膨胀系数";
       annotation();
     algorithm
       beta := beta_props_ph(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
     end beta_ph;
 
-    function kappa_props_ph 
+    function kappa_props_ph
       "等温压缩系数作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.IsothermalCompressibility kappa 
+      output SI.IsothermalCompressibility kappa
         "等温压缩系数";
     algorithm
       kappa := 1 / (aux.rho * aux.pd);
       annotation(Inline = false, LateInline = true);
     end kappa_props_ph;
 
-    function kappa_ph 
+    function kappa_ph
       "等温压缩系数作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
-      output SI.IsothermalCompressibility kappa 
+      output SI.IsothermalCompressibility kappa
         "等温压缩系数";
       annotation();
     algorithm
       kappa := kappa_props_ph(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
     end kappa_ph;
 
-    function velocityOfSound_props_ph 
+    function velocityOfSound_props_ph
       "声速作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1388,12 +1388,12 @@ partial package Air_Base
       annotation();
     algorithm
       a := velocityOfSound_props_ph(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
     end velocityOfSound_ph;
 
-    function isentropicExponent_props_ph 
+    function isentropicExponent_props_ph
       "等熵指数作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1401,12 +1401,12 @@ partial package Air_Base
       input Common.AuxiliaryProperties aux "辅助记录";
       output Real gamma "等熵指数";
     algorithm
-      gamma := 1 / (aux.rho * p) * ((aux.pd * aux.cv * aux.rho * aux.rho + aux.pt * aux.pt * 
+      gamma := 1 / (aux.rho * p) * ((aux.pd * aux.cv * aux.rho * aux.rho + aux.pt * aux.pt *
         aux.T) / (aux.cv));
       annotation(Inline = false, LateInline = true);
     end isentropicExponent_props_ph;
 
-    function isentropicExponent_ph 
+    function isentropicExponent_ph
       "等熵指数作为压力和比焓的函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1414,8 +1414,8 @@ partial package Air_Base
       output Real gamma "等熵指数";
     algorithm
       gamma := isentropicExponent_props_ph(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
       annotation(Inline = false, LateInline = true);
     end isentropicExponent_ph;
@@ -1425,10 +1425,10 @@ partial package Air_Base
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.DerDensityByPressure ddph 
+      output SI.DerDensityByPressure ddph
         "密度对压力的导数";
     algorithm
-      ddph := ((aux.rho * (aux.cv * aux.rho + aux.pt)) / (aux.rho * aux.rho * aux.pd * 
+      ddph := ((aux.rho * (aux.cv * aux.rho + aux.pt)) / (aux.rho * aux.rho * aux.pd *
         aux.cv + aux.T * aux.pt * aux.pt));
       annotation(Inline = false, LateInline = true);
     end ddph_props;
@@ -1437,13 +1437,13 @@ partial package Air_Base
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
-      output SI.DerDensityByPressure ddph 
+      output SI.DerDensityByPressure ddph
         "密度对压力的导数";
       annotation();
     algorithm
       ddph := ddph_props(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
     end ddph;
 
@@ -1452,10 +1452,10 @@ partial package Air_Base
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.DerDensityByEnthalpy ddhp 
+      output SI.DerDensityByEnthalpy ddhp
         "密度对比焓的导数";
     algorithm
-      ddhp := -aux.rho * aux.rho * aux.pt / (aux.rho * aux.rho * aux.pd * aux.cv + aux.T * 
+      ddhp := -aux.rho * aux.rho * aux.pt / (aux.rho * aux.rho * aux.pd * aux.cv + aux.T *
         aux.pt * aux.pt);
       annotation(Inline = false, LateInline = true);
     end ddhp_props;
@@ -1464,24 +1464,24 @@ partial package Air_Base
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.SpecificEnthalpy h "比焓";
-      output SI.DerDensityByEnthalpy ddhp 
+      output SI.DerDensityByEnthalpy ddhp
         "密度对比焓的导数";
       annotation();
     algorithm
       ddhp := ddhp_props(
-        p, 
-        h, 
+        p,
+        h,
         Air_Utilities.airBaseProp_ph(p, h));
     end ddhp;
 
-    function airBaseProp_pT 
+    function airBaseProp_pT
       "空气的中间属性记录（p 和 T 为首选状态）"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.Temperature T "温度";
       output Common.AuxiliaryProperties aux "辅助记录";
     protected
-      Modelica.Media.Common.HelmholtzDerivs f 
+      Modelica.Media.Common.HelmholtzDerivs f
         "无量纲亥姆霍兹函数及其对 delta 和 tau 的导数";
       annotation();
     algorithm
@@ -1489,8 +1489,8 @@ partial package Air_Base
       aux.T := T;
       aux.R_s := ReferenceAir.Air_Utilities.Basic.Constants.R_s;
       (aux.rho) := Inverses.dofpT(
-        p = p, 
-        T = T, 
+        p = p,
+        T = T,
         delp = iter.delp);
       f := Basic.Helmholtz(aux.rho, T);
       aux.h := aux.R_s * T * (f.tau * f.ftau + f.delta * f.fdelta) - ReferenceAir.Air_Utilities.Basic.Constants.h_off;
@@ -1512,8 +1512,8 @@ partial package Air_Base
     algorithm
       rho := aux.rho;
       annotation(
-        derivative(noDerivative = aux) = rho_pT_der, 
-        Inline = false, 
+        derivative(noDerivative = aux) = rho_pT_der,
+        Inline = false,
         LateInline = true);
     end rho_props_pT;
 
@@ -1525,8 +1525,8 @@ partial package Air_Base
       annotation();
     algorithm
       rho := rho_props_pT(
-        p, 
-        T, 
+        p,
+        T,
         Air_Utilities.airBaseProp_pT(p, T));
     end rho_pT;
 
@@ -1543,7 +1543,7 @@ partial package Air_Base
       rho_der := (1 / aux.pd) * p_der - (aux.pt / aux.pd) * T_der;
     end rho_pT_der;
 
-    function h_props_pT 
+    function h_props_pT
       "压力和温度的比焓函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1553,12 +1553,12 @@ partial package Air_Base
     algorithm
       h := aux.h;
       annotation(
-        derivative(noDerivative = aux) = h_pT_der, 
-        Inline = false, 
+        derivative(noDerivative = aux) = h_pT_der,
+        Inline = false,
         LateInline = true);
     end h_props_pT;
 
-    function h_pT 
+    function h_pT
       "压力和温度的比焓函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1567,12 +1567,12 @@ partial package Air_Base
       annotation();
     algorithm
       h := h_props_pT(
-        p, 
-        T, 
+        p,
+        T,
         Air_Utilities.airBaseProp_pT(p, T));
     end h_pT;
 
-    function h_pT_der 
+    function h_pT_der
       "h_pT 的导数函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1583,12 +1583,12 @@ partial package Air_Base
       output Real h_der "比焓导数";
       annotation();
     algorithm
-      h_der := ((-aux.rho * aux.pd + T * aux.pt) / (aux.rho * aux.rho * aux.pd)) * p_der 
-        + ((aux.rho * aux.rho * aux.pd * aux.cv + aux.T * aux.pt * aux.pt) / (aux.rho * 
+      h_der := ((-aux.rho * aux.pd + T * aux.pt) / (aux.rho * aux.rho * aux.pd)) * p_der
+        + ((aux.rho * aux.rho * aux.pd * aux.cv + aux.T * aux.pt * aux.pt) / (aux.rho *
         aux.rho * aux.pd)) * T_der;
     end h_pT_der;
 
-    function s_props_pT 
+    function s_props_pT
       "压力和温度的比熵函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1600,7 +1600,7 @@ partial package Air_Base
       annotation(Inline = false, LateInline = true);
     end s_props_pT;
 
-    function s_pT 
+    function s_pT
       "压力和温度的比熵函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1609,124 +1609,124 @@ partial package Air_Base
       annotation();
     algorithm
       s := s_props_pT(
-        p, 
-        T, 
+        p,
+        T,
         Air_Utilities.airBaseProp_pT(p, T));
     end s_pT;
 
-    function cv_props_pT 
+    function cv_props_pT
       "压力和温度的定容比热函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.Temperature T "温度";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.SpecificHeatCapacity cv 
+      output SI.SpecificHeatCapacity cv
         "定容比热";
     algorithm
       cv := aux.cv;
       annotation(Inline = false, LateInline = true);
     end cv_props_pT;
 
-    function cv_pT 
+    function cv_pT
       "压力和温度的定容比热函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.Temperature T "温度";
-      output SI.SpecificHeatCapacity cv 
+      output SI.SpecificHeatCapacity cv
         "定容比热";
       annotation();
     algorithm
       cv := cv_props_pT(
-        p, 
-        T, 
+        p,
+        T,
         Air_Utilities.airBaseProp_pT(p, T));
     end cv_pT;
 
-    function cp_props_pT 
+    function cp_props_pT
       "压力和温度的定压比热函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.Temperature T "温度";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.SpecificHeatCapacity cp 
+      output SI.SpecificHeatCapacity cp
         "定压比热";
     algorithm
       cp := aux.cp;
       annotation(Inline = false, LateInline = true);
     end cp_props_pT;
 
-    function cp_pT 
+    function cp_pT
       "压力和温度的定压比热函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.Temperature T "温度";
-      output SI.SpecificHeatCapacity cp 
+      output SI.SpecificHeatCapacity cp
         "定压比热";
       annotation();
     algorithm
       cp := cp_props_pT(
-        p, 
-        T, 
+        p,
+        T,
         Air_Utilities.airBaseProp_pT(p, T));
     end cp_pT;
 
-    function beta_props_pT 
+    function beta_props_pT
       "压力和温度的等压膨胀系数函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.Temperature T "温度";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.RelativePressureCoefficient beta 
+      output SI.RelativePressureCoefficient beta
         "等压膨胀系数";
     algorithm
       beta := aux.pt / (aux.rho * aux.pd);
       annotation(Inline = false, LateInline = true);
     end beta_props_pT;
 
-    function beta_pT 
+    function beta_pT
       "压力和温度的等压膨胀系数函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.Temperature T "温度";
-      output SI.RelativePressureCoefficient beta 
+      output SI.RelativePressureCoefficient beta
         "等压膨胀系数";
       annotation();
     algorithm
       beta := beta_props_pT(
-        p, 
-        T, 
+        p,
+        T,
         Air_Utilities.airBaseProp_pT(p, T));
     end beta_pT;
 
-    function kappa_props_pT 
+    function kappa_props_pT
       "压力和温度的等温压缩系数函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.Temperature T "温度";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.IsothermalCompressibility kappa 
+      output SI.IsothermalCompressibility kappa
         "等温压缩系数";
     algorithm
       kappa := 1 / (aux.rho * aux.pd);
       annotation(Inline = false, LateInline = true);
     end kappa_props_pT;
 
-    function kappa_pT 
+    function kappa_pT
       "压力和温度的等温压缩系数函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
       input SI.Temperature T "温度";
-      output SI.IsothermalCompressibility kappa 
+      output SI.IsothermalCompressibility kappa
         "等温压缩系数";
       annotation();
     algorithm
       kappa := kappa_props_pT(
-        p, 
-        T, 
+        p,
+        T,
         Air_Utilities.airBaseProp_pT(p, T));
     end kappa_pT;
 
-    function velocityOfSound_props_pT 
+    function velocityOfSound_props_pT
       "压力和温度的声速函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1734,12 +1734,12 @@ partial package Air_Base
       input Common.AuxiliaryProperties aux "辅助记录";
       output SI.Velocity a "声速";
     algorithm
-      a := sqrt(max(0, (aux.pd * aux.rho * aux.rho * aux.cv + aux.pt * aux.pt * aux.T) / 
+      a := sqrt(max(0, (aux.pd * aux.rho * aux.rho * aux.cv + aux.pt * aux.pt * aux.T) /
         (aux.rho * aux.rho * aux.cv)));
       annotation(Inline = false, LateInline = true);
     end velocityOfSound_props_pT;
 
-    function velocityOfSound_pT 
+    function velocityOfSound_pT
       "压力和温度的声速函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1748,12 +1748,12 @@ partial package Air_Base
       annotation();
     algorithm
       a := velocityOfSound_props_pT(
-        p, 
-        T, 
+        p,
+        T,
         Air_Utilities.airBaseProp_pT(p, T));
     end velocityOfSound_pT;
 
-    function isentropicExponent_props_pT 
+    function isentropicExponent_props_pT
       "压力和温度的等熵指数函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1761,12 +1761,12 @@ partial package Air_Base
       input Common.AuxiliaryProperties aux "辅助记录";
       output Real gamma "等熵指数";
     algorithm
-      gamma := 1 / (aux.rho * p) * ((aux.pd * aux.cv * aux.rho * aux.rho + aux.pt * aux.pt * 
+      gamma := 1 / (aux.rho * p) * ((aux.pd * aux.cv * aux.rho * aux.rho + aux.pt * aux.pt *
         aux.T) / (aux.cv));
       annotation(Inline = false, LateInline = true);
     end isentropicExponent_props_pT;
 
-    function isentropicExponent_pT 
+    function isentropicExponent_pT
       "压力和温度的等熵指数函数"
       extends Modelica.Icons.Function;
       input SI.Pressure p "压力";
@@ -1775,19 +1775,19 @@ partial package Air_Base
       annotation();
     algorithm
       gamma := isentropicExponent_props_pT(
-        p, 
-        T, 
+        p,
+        T,
         Air_Utilities.airBaseProp_pT(p, T));
     end isentropicExponent_pT;
 
-    function airBaseProp_dT 
+    function airBaseProp_dT
       "空气的中间属性记录（d 和 T 为首选状态）"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
       input SI.Temperature T "温度";
       output Common.AuxiliaryProperties aux "辅助记录";
     protected
-      Modelica.Media.Common.HelmholtzDerivs f 
+      Modelica.Media.Common.HelmholtzDerivs f
         "无量纲的亥姆霍兹函数和关于 delta 和 tau 的导数";
       annotation();
     algorithm
@@ -1806,7 +1806,7 @@ partial package Air_Base
       aux.vt := aux.pt / (aux.rho * aux.rho * aux.pd);
     end airBaseProp_dT;
 
-    function h_props_dT 
+    function h_props_dT
       "密度和温度的比焓函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
@@ -1816,8 +1816,8 @@ partial package Air_Base
     algorithm
       h := aux.h;
       annotation(
-        derivative(noDerivative = aux) = h_dT_der, 
-        Inline = false, 
+        derivative(noDerivative = aux) = h_dT_der,
+        Inline = false,
         LateInline = true);
     end h_props_dT;
 
@@ -1829,8 +1829,8 @@ partial package Air_Base
       annotation();
     algorithm
       h := h_props_dT(
-        d, 
-        T, 
+        d,
+        T,
         Air_Utilities.airBaseProp_dT(d, T));
     end h_dT;
 
@@ -1844,7 +1844,7 @@ partial package Air_Base
       output Real h_der "比焓的导数";
       annotation();
     algorithm
-      h_der := ((-d * aux.pd + T * aux.pt) / (d * d)) * d_der + ((aux.cv * d + aux.pt) / d) 
+      h_der := ((-d * aux.pd + T * aux.pt) / (d * d)) * d_der + ((aux.cv * d + aux.pt) / d)
         * T_der;
     end h_dT_der;
 
@@ -1857,8 +1857,8 @@ partial package Air_Base
     algorithm
       p := aux.p;
       annotation(
-        derivative(noDerivative = aux) = p_dT_der, 
-        Inline = false, 
+        derivative(noDerivative = aux) = p_dT_der,
+        Inline = false,
         LateInline = true);
     end p_props_dT;
 
@@ -1870,8 +1870,8 @@ partial package Air_Base
       annotation();
     algorithm
       p := p_props_dT(
-        d, 
-        T, 
+        d,
+        T,
         Air_Utilities.airBaseProp_dT(d, T));
     end p_dT;
 
@@ -1888,7 +1888,7 @@ partial package Air_Base
       p_der := aux.pd * d_der + aux.pt * T_der;
     end p_dT_der;
 
-    function s_props_dT 
+    function s_props_dT
       "密度和温度的比熵函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
@@ -1900,7 +1900,7 @@ partial package Air_Base
       annotation(Inline = false, LateInline = true);
     end s_props_dT;
 
-    function s_dT 
+    function s_dT
       "密度和温度的温度函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
@@ -1909,124 +1909,124 @@ partial package Air_Base
       annotation();
     algorithm
       s := s_props_dT(
-        d, 
-        T, 
+        d,
+        T,
         Air_Utilities.airBaseProp_dT(d, T));
     end s_dT;
 
-    function cv_props_dT 
+    function cv_props_dT
       "常压下密度和温度的定容比热函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
       input SI.Temperature T "温度";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.SpecificHeatCapacity cv 
+      output SI.SpecificHeatCapacity cv
         "定容比热";
     algorithm
       cv := aux.cv;
       annotation(Inline = false, LateInline = true);
     end cv_props_dT;
 
-    function cv_dT 
+    function cv_dT
       "常压下密度和温度的定容比热函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
       input SI.Temperature T "温度";
-      output SI.SpecificHeatCapacity cv 
+      output SI.SpecificHeatCapacity cv
         "定容比热";
       annotation();
     algorithm
       cv := cv_props_dT(
-        d, 
-        T, 
+        d,
+        T,
         Air_Utilities.airBaseProp_dT(d, T));
     end cv_dT;
 
-    function cp_props_dT 
+    function cp_props_dT
       "常压下密度和温度的定压比热函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
       input SI.Temperature T "温度";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.SpecificHeatCapacity cp 
+      output SI.SpecificHeatCapacity cp
         "定压比热";
     algorithm
       cp := aux.cp;
       annotation(Inline = false, LateInline = true);
     end cp_props_dT;
 
-    function cp_dT 
+    function cp_dT
       "常压下密度和温度的定压比热函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
       input SI.Temperature T "温度";
-      output SI.SpecificHeatCapacity cp 
+      output SI.SpecificHeatCapacity cp
         "定压比热";
       annotation();
     algorithm
       cp := cp_props_dT(
-        d, 
-        T, 
+        d,
+        T,
         Air_Utilities.airBaseProp_dT(d, T));
     end cp_dT;
 
-    function beta_props_dT 
+    function beta_props_dT
       "密度和温度的等压膨胀系数函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
       input SI.Temperature T "温度";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.RelativePressureCoefficient beta 
+      output SI.RelativePressureCoefficient beta
         "等压膨胀系数";
     algorithm
       beta := aux.pt / (aux.rho * aux.pd);
       annotation(Inline = false, LateInline = true);
     end beta_props_dT;
 
-    function beta_dT 
+    function beta_dT
       "密度和温度的等压膨胀系数函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
       input SI.Temperature T "温度";
-      output SI.RelativePressureCoefficient beta 
+      output SI.RelativePressureCoefficient beta
         "等压膨胀系数";
       annotation();
     algorithm
       beta := beta_props_dT(
-        d, 
-        T, 
+        d,
+        T,
         Air_Utilities.airBaseProp_dT(d, T));
     end beta_dT;
 
-    function kappa_props_dT 
+    function kappa_props_dT
       "密度和温度的等温压缩系数函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
       input SI.Temperature T "温度";
       input Common.AuxiliaryProperties aux "辅助记录";
-      output SI.IsothermalCompressibility kappa 
+      output SI.IsothermalCompressibility kappa
         "等温压缩系数";
     algorithm
       kappa := 1 / (aux.rho * aux.pd);
       annotation(Inline = false, LateInline = true);
     end kappa_props_dT;
 
-    function kappa_dT 
+    function kappa_dT
       "密度和温度的等温压缩系数函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
       input SI.Temperature T "温度";
-      output SI.IsothermalCompressibility kappa 
+      output SI.IsothermalCompressibility kappa
         "等温压缩系数";
       annotation();
     algorithm
       kappa := kappa_props_dT(
-        d, 
-        T, 
+        d,
+        T,
         Air_Utilities.airBaseProp_dT(d, T));
     end kappa_dT;
 
-    function velocityOfSound_props_dT 
+    function velocityOfSound_props_dT
       "密度和温度的声速函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
@@ -2034,12 +2034,12 @@ partial package Air_Base
       input Common.AuxiliaryProperties aux "辅助记录";
       output SI.Velocity a "声速";
     algorithm
-      a := sqrt(max(0, ((aux.pd * aux.rho * aux.rho * aux.cv + aux.pt * aux.pt * aux.T) 
+      a := sqrt(max(0, ((aux.pd * aux.rho * aux.rho * aux.cv + aux.pt * aux.pt * aux.T)
         / (aux.rho * aux.rho * aux.cv))));
       annotation(Inline = false, LateInline = true);
     end velocityOfSound_props_dT;
 
-    function velocityOfSound_dT 
+    function velocityOfSound_dT
       "密度和温度的声速函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
@@ -2048,12 +2048,12 @@ partial package Air_Base
       annotation();
     algorithm
       a := velocityOfSound_props_dT(
-        d, 
-        T, 
+        d,
+        T,
         Air_Utilities.airBaseProp_dT(d, T));
     end velocityOfSound_dT;
 
-    function isentropicExponent_props_dT 
+    function isentropicExponent_props_dT
       "密度和温度的函数绝热指数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
@@ -2061,12 +2061,12 @@ partial package Air_Base
       input Common.AuxiliaryProperties aux "辅助记录";
       output Real gamma "绝热指数";
     algorithm
-      gamma := 1 / (aux.rho * aux.p) * ((aux.pd * aux.cv * aux.rho * aux.rho + aux.pt * aux.pt 
+      gamma := 1 / (aux.rho * aux.p) * ((aux.pd * aux.cv * aux.rho * aux.rho + aux.pt * aux.pt
         * aux.T) / (aux.cv));
       annotation(Inline = false, LateInline = true);
     end isentropicExponent_props_dT;
 
-    function isentropicExponent_dT 
+    function isentropicExponent_dT
       "密度和温度的绝热指数函数"
       extends Modelica.Icons.Function;
       input SI.Density d "密度";
@@ -2075,14 +2075,14 @@ partial package Air_Base
       annotation();
     algorithm
       gamma := isentropicExponent_props_dT(
-        d, 
-        T, 
+        d,
+        T,
         Air_Utilities.airBaseProp_dT(d, T));
     end isentropicExponent_dT;
 
   package ThermoFluidSpecial
       extends Modelica.Icons.FunctionsPackage;
-      function air_ph 
+      function air_ph
         "使用 p, h 作为状态计算动态仿真属性的属性记录"
         extends Modelica.Icons.Function;
         input SI.Pressure p "压力";
@@ -2090,22 +2090,22 @@ partial package Air_Base
         output Modelica.Media.Common.ThermoFluidSpecial.ThermoProperties_ph 
           pro "动态仿真的属性记录";
       protected
-        Modelica.Media.Common.HelmholtzDerivs f 
+        Modelica.Media.Common.HelmholtzDerivs f
           "无量纲亥姆霍兹函数及其对 delta 和 tau 的导数";
         SI.Temperature T "温度";
         SI.Density d "密度";
         annotation();
       algorithm
         (d,T) := Air_Utilities.Inverses.dTofph(
-          p = p, 
-          h = h, 
-          delp = 1.0e-7, 
+          p = p,
+          h = h,
+          delp = 1.0e-7,
           delh = 1.0e-6);
         f := Air_Utilities.Basic.Helmholtz(d, T);
         pro := Modelica.Media.Common.ThermoFluidSpecial.helmholtzToProps_ph(f);
       end air_ph;
 
-      function air_dT 
+      function air_dT
         "使用 d 和 T 作为动态状态计算动态仿真属性的属性记录"
         extends Modelica.Icons.Function;
         input SI.Density d "密度";
@@ -2114,7 +2114,7 @@ partial package Air_Base
           pro "动态仿真的属性记录";
       protected
         SI.Pressure p "压力";
-        Modelica.Media.Common.HelmholtzDerivs f 
+        Modelica.Media.Common.HelmholtzDerivs f
           "无量纲亥姆霍兹函数及其对 delta 和 tau 的导数";
         annotation();
       algorithm
@@ -2122,7 +2122,7 @@ partial package Air_Base
         pro := Modelica.Media.Common.ThermoFluidSpecial.helmholtzToProps_dT(f);
       end air_dT;
 
-      function air_pT 
+      function air_pT
         "使用 p 和 T 作为动态状态计算动态仿真属性的属性记录"
         extends Modelica.Icons.Function;
         input SI.Pressure p "压力";
@@ -2131,13 +2131,13 @@ partial package Air_Base
           pro "动态仿真的属性记录";
       protected
         SI.Density d "密度";
-        Modelica.Media.Common.HelmholtzDerivs f 
+        Modelica.Media.Common.HelmholtzDerivs f
           "无量纲亥姆霍兹函数及其对 delta 和 tau 的导数";
         annotation();
       algorithm
         d := Modelica.Media.Air.ReferenceAir.Air_Utilities.Inverses.dofpT(
-          p = p, 
-          T = T, 
+          p = p,
+          T = T,
           delp = 1e-7);
         f := Air_Utilities.Basic.Helmholtz(d, T);
         pro := Modelica.Media.Common.ThermoFluidSpecial.helmholtzToProps_pT(f);

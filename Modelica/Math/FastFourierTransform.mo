@@ -1,45 +1,45 @@
 ﻿within Modelica.Math;
-package FastFourierTransform 
+package FastFourierTransform
   "快速傅立叶变换 (FFT) 函数库"
   extends Modelica.Icons.Package;
   import Modelica.Units.SI;
 
-  package Examples 
+  package Examples
     "演示 Math.FastFourierTransform 函数用法的示例"
     extends Modelica.Icons.ExamplesPackage;
 
-    model RealFFT1 
+    model RealFFT1
       "演示在仿真过程中使用FFT计算(并在文件中存储振幅和相位)"
       import Modelica.Constants.pi;
       extends Modelica.Icons.Example;
-      parameter SI.Frequency f_max = 4 
+      parameter SI.Frequency f_max = 4
         "最高关注频率";
-      parameter SI.Frequency f_resolution = 0.2 
+      parameter SI.Frequency f_resolution = 0.2
         "频率分辨率";
       parameter SI.Frequency f1 = 2 "正弦波频率";
       parameter SI.Frequency f2 = 3 "余弦频率";
-      parameter String FFT_resultFileName = "RealFFT1_resultFFT.mat" 
+      parameter String FFT_resultFileName = "RealFFT1_resultFFT.mat"
         "文件中的 FFT 将存储为 [f,A,Phi]，其中 f 单位为[Hz]，A 为振幅，Phi 为相位，单位为[rad]。";
-      final parameter Integer nfi = max(1,min(integer(ceil(f_max/f_resolution))+1,nf)) 
+      final parameter Integer nfi = max(1,min(integer(ceil(f_max/f_resolution))+1,nf))
         "相关频率范围内的频率点数量（仅到 f_max）。";
-      final parameter SI.Frequency fi[nfi](each fixed=false) 
+      final parameter SI.Frequency fi[nfi](each fixed=false)
         "相关频点的 FFT 频率";
-      Real y(final start=0, final fixed=true) 
+      Real y(final start=0, final fixed=true)
         "计算 FFT 的信号";
-      final output Real Ai[nfi](each start=0, each fixed=true) 
+      final output Real Ai[nfi](each start=0, each fixed=true)
         "相关频点的 FFT 振幅";
-      final output Real Phii[nfi](each start=0, each fixed=true) 
+      final output Real Phii[nfi](each start=0, each fixed=true)
         "相关频点的 FFT 相位";
-      output Integer info(final start=0, final fixed=true) 
+      output Integer info(final start=0, final fixed=true)
         "FFT 计算的信息标志；= 0：FFT 计算成功";
 
     protected
       parameter Integer ns = realFFTsamplePoints(f_max, f_resolution, f_max_factor=5)"FFT点数";
-      parameter SI.Frequency f_max_FFT = f_resolution*div(ns, 2) 
+      parameter SI.Frequency f_max_FFT = f_resolution*div(ns, 2)
         "FFT 使用的最大频率";
       parameter Integer nf = div(ns,2) + 1 "频率点数";
       parameter SI.Time Ts = 1/(2*f_max_FFT) "抽样期";
-      parameter SI.Time T = (ns - 1)*Ts 
+      parameter SI.Time T = (ns - 1)*Ts
         "一次 FFT 计算的模拟时间";
 
       Integer iTick(start=0, fixed=true);
@@ -63,7 +63,7 @@ package FastFourierTransform
          end if;
       end when;
 
-      annotation (experiment(StopTime=6), preferredView="text", 
+      annotation (experiment(StopTime=6), preferredView="text",
         Documentation(revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th>Date</th> <th align=\"left\">Description</th></tr>
@@ -74,7 +74,7 @@ package FastFourierTransform
 马丁-R-库恩和马丁-奥特
 (<a href=\"http://www.dlr.de/rmc/sr/en\">DLR Institute of System Dynamics and Control</a>.</td></tr>
 </table>
-</html>"                      , 
+</html>"                      ,
       info="<html>
 <p>
 在这个例子中，信号y
@@ -112,36 +112,36 @@ fi[16] = 3,  Ai[16] = 1.5; // 余弦的频率/振幅
 </html>"                      ));
     end RealFFT1;
 
-    model RealFFT2 
+    model RealFFT2
       "演示在仿真期间使用FFT计算的示例(并且仅在文件中存储振幅)"
       import Modelica.Constants.pi;
       extends Modelica.Icons.Example;
-      parameter SI.Frequency f_max = 4 
+      parameter SI.Frequency f_max = 4
         "最大感兴趣频率";
-      parameter SI.Frequency f_resolution = 0.2 
+      parameter SI.Frequency f_resolution = 0.2
         "频率分辨率";
       parameter SI.Frequency f1 = 2 "正弦频率";
       parameter SI.Frequency f2 = 3 "余弦频率";
-      parameter String FFT_resultFileName = "RealFFT2_resultFFT.mat" 
+      parameter String FFT_resultFileName = "RealFFT2_resultFFT.mat"
         "文件，其中FFT将存储为[f,A,Phi]，其中f在[Hz]中，A是振幅，Phi在[rad]中是相位";
-      final parameter Integer nfi = max(1,min(integer(ceil(f_max/f_resolution))+1,nf)) 
+      final parameter Integer nfi = max(1,min(integer(ceil(f_max/f_resolution))+1,nf))
         "感兴趣频率范围的频率点数(仅限f_max)";
-      final parameter SI.Frequency fi[nfi](each fixed=false) 
+      final parameter SI.Frequency fi[nfi](each fixed=false)
         "感兴趣频率点的FFT频率";
-      Real y(final start=0, final fixed=true) 
+      Real y(final start=0, final fixed=true)
         "用来计算FFT的信号";
-      final output Real Ai[nfi](each start=0, each fixed=true) 
+      final output Real Ai[nfi](each start=0, each fixed=true)
         "感兴趣频率点的FFT幅值";
-      output Integer info(final start=0, final fixed=true) 
+      output Integer info(final start=0, final fixed=true)
         "FFT计算的信息标志;= 0: FFT计算成功";
 
     protected
       parameter Integer ns = realFFTsamplePoints(f_max, f_resolution, f_max_factor=5)"FFT点数";
-      parameter SI.Frequency f_max_FFT = f_resolution*div(ns, 2) 
+      parameter SI.Frequency f_max_FFT = f_resolution*div(ns, 2)
         "FFT使用的最大频率";
       parameter Integer nf = div(ns,2) + 1 "频率点数";
       parameter SI.Time Ts = 1/(2*f_max_FFT) "样品时间";
-      parameter SI.Time T = (ns - 1)*Ts 
+      parameter SI.Time T = (ns - 1)*Ts
         "一次FFT计算的仿真时间";
 
       Integer iTick(start=0, fixed=true);
@@ -165,7 +165,7 @@ fi[16] = 3,  Ai[16] = 1.5; // 余弦的频率/振幅
          end if;
       end when;
 
-      annotation (experiment(StopTime=6), preferredView="text", 
+      annotation (experiment(StopTime=6), preferredView="text",
         Documentation(revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th>Date</th> <th align=\"left\">Description</th></tr>
@@ -176,7 +176,7 @@ fi[16] = 3,  Ai[16] = 1.5; // 余弦的频率/振幅
 马丁·库恩和马丁·奥特
 (<a href=\"http://www.dlr.de/rmc/sr/en\">DLR Institute of System Dynamics and Control</a>.</td></tr>
 </table>
-</html>"          , 
+</html>"          ,
       info="<html>
 <p>
 这是一个与 <a href=\"modelica://Modelica.Math.FastFourierTransform.Examples.RealFFT1\">Examples.RealFFT1</a>相同的示例。
@@ -197,13 +197,13 @@ fi[16] = 3,  Ai[16] = 1.5; // 余弦的频率/振幅
 </html>"  ));
   end Examples;
 
-  function realFFTinfo 
+  function realFFTinfo
     "打印给定f_max和f_resolution的实FFT信息"
     extends Modelica.Icons.Function;
     import Modelica.Utilities.Streams.print;
     input SI.Frequency f_max "最高频率";
     input SI.Frequency f_resolution "频率分辨率";
-    input Integer f_max_factor(min=1)=5 
+    input Integer f_max_factor(min=1)=5
       "最大FFT频率 >= f_max*f_max_factor(采样频率 = 2* 最大 FFT 频率)";
   protected
     Integer ns = realFFTsamplePoints(f_max, f_resolution, f_max_factor);
@@ -226,9 +226,9 @@ fi[16] = 3,  Ai[16] = 1.5; // 余弦的频率/振幅
     print("    Number of sample points    = " + String(ns) + " (= 2^"+String(e2)+"*3^"+String(e3)+"*5^"+String(e5)+")");
     print("    Sampling frequency         = " + String(fs) + " Hz (= " + String(f_resolution) + "*" + String(ns) + ")");
     print("    Sampling period            = " + String(Ts) + " s (= " + "1/" + String(fs) + ")");
-    print("    Maximum FFT frequency      = " + String(f_max_used) + " Hz (= " + String(f_resolution) + "*" + String(ns) + "/2; " 
-                                                                   + "f={0," + String(f_resolution) + "," 
-                                                                   + String(2*f_resolution) + ",...," 
+    print("    Maximum FFT frequency      = " + String(f_max_used) + " Hz (= " + String(f_resolution) + "*" + String(ns) + "/2; "
+                                                                   + "f={0," + String(f_resolution) + ","
+                                                                   + String(2*f_resolution) + ",...,"
                                                                    + String(f_max_used) + "} Hz)");
     print("    Number of frequency points = " + String(nf) + " (= " + String(ns) + "/2+1)");
     print("    Simulation time            = " + String(T) + " s");
@@ -242,7 +242,7 @@ fi[16] = 3,  Ai[16] = 1.5; // 余弦的频率/振幅
    马丁-R-库恩和马丁-奥特
    (<a href=\"http://www.dlr.de/rmc/sr/en\">DLR Institute of System Dynamics and Control</a>.</td></tr>
 </table>
-</html>"    , 
+</html>"    ,
         info="<html>
 <h4>语法</h4>
 
@@ -293,9 +293,9 @@ Calculated:
      extends Modelica.Icons.Function;
      input SI.Frequency f_max "最高关注频率";
      input SI.Frequency f_resolution "频率分辨率";
-     input Integer f_max_factor(min=1)=5 
+     input Integer f_max_factor(min=1)=5
       "最大 FFT 频率 >= f_max*f_max_factor（采样频率 = 2* 最大 FFT 频率）";
-     output Integer ns 
+     output Integer ns
       "可表示为 ns = 2^i*3^j*5^k 且 ns 为偶数的样本点数";
   protected
      Integer ns1;
@@ -331,7 +331,7 @@ Calculated:
  马丁-R-库恩和马丁-奥特
  (<a href=\"http://www.dlr.de/rmc/sr/en\">DLR Institute of System Dynamics and Control</a>.</td></tr>
 </table>
-</html>"      , 
+</html>"      ,
       info="<html>
 <h4>语法</h4>
 
@@ -409,11 +409,11 @@ ns = 5760
 
   function realFFT "实FFT的返回幅度和相位矢量"
     extends Modelica.Icons.Function;
-    input Real  u[:] 
+    input Real  u[:]
       "需要计算FFT的信号(size(nu,1)必须是偶数，并且应该是2,3,5的整数倍，即size(nu,1) = 2^a*3^b*5^c，其中a,b,c integer >= 0)";
-    input Integer nfi 
+    input Integer nfi
       "应以幅度和相位返回的频率点数(通常为:nfi = max(1,min(integer(ceil(f_max/f_resolution))+1,nf));最大可能的值是nfi=div(size(u,1)，2)+1)";
-    output Integer info 
+    output Integer info
       "信息标志(0:FFT计算，1:nu不是偶数，3:另一个错误)";
     output Real amplitudes[nfi] "FFT的振幅";
     output Real phases[nfi] "FFT的相位[deg]";
@@ -455,7 +455,7 @@ ns = 5760
    Martin R. Kuhn and Martin Otter
    (<a href=\"http://www.dlr.de/rmc/sr/en\">DLR Institute of System Dynamics and Control</a>.</td></tr>
 </table>
-</html>"      , 
+</html>"      ,
       info="<html>
 <h4>语法</h4>
 
@@ -541,16 +541,16 @@ which is a complete example where an FFT is computed during simulation and store
     import Modelica.Units.Conversions.to_deg;
     import Modelica.Utilities.Streams.writeRealMatrix;
     input Real t_computed "计算FFT的时间瞬间";
-    input String fileName 
+    input String fileName
       "存储FFT的文件(如果存在，则删除后重新创建)";
     input SI.Frequency f_max "最大频率";
     input Real amplitudes[:] "FFT的振幅";
-    input Real phases[:] = fill(0.0, 0) 
+    input Real phases[:] = fill(0.0, 0)
       "FFT的相位(要么不提供参数，要么提供与振幅相同长度的矢量)";
-    input String format = "4" 
+    input String format = "4"
       "MATLAB MAT-file version: \"4\" -> v4, \"6\" -> v6, \"7\" -> v7" 
-      annotation(choices(choice = "4" "MATLAB v4 MAT-file", 
-      choice = "6" "MATLAB v6 MAT-file", 
+      annotation(choices(choice = "4" "MATLAB v4 MAT-file",
+      choice = "6" "MATLAB v6 MAT-file",
       choice = "7" "MATLAB v7 MAT-file"));
     output Boolean success "= true，如果成功";
   protected
@@ -634,14 +634,14 @@ success = <strong>realFFTwriteToFile</strong>(t_computed, fileName, f_max, ampli
 </html>"    ));
   end realFFTwriteToFile;
 
-  package Internal 
+  package Internal
     "不应由用户直接使用的内部库"
     extends Modelica.Icons.InternalPackage;
     pure function rawRealFFT "计算原始的快速傅立叶变换为实际信号向量"
       extends Modelica.Icons.Function;
-      input Real  u[:] 
+      input Real  u[:]
         "需要计算FFT的信号(size(nu,1)必须是偶数，并且应该是2,3,5的整数倍，即size(nu,1) = 2^a*3^b*5^c，其中a,b,c integer >= 0)";
-      output Integer info 
+      output Integer info
         "信息标志(0:FFT计算，1:nu不是偶数，2:网络错误，3:另一个错误)";
       output Real amplitudes[div(size(u,1),2)+1] "FFT的振幅";
       output Real phases[    div(size(u,1),2)+1] "FFT的相位";
@@ -659,7 +659,7 @@ success = <strong>realFFTwriteToFile</strong>(t_computed, fileName, f_max, ampli
 马丁·库恩和马丁·奥特
 (<a href=\"http://www.dlr.de/rmc/sr/en\">DLR Institute of System Dynamics and Control</a>.</td></tr>
 </table>
-</html>"            , 
+</html>"            ,
       info="<html>
 <h4>语法</h4>
 
@@ -761,7 +761,7 @@ Download from:
 马丁·库恩和马丁·奥特
 (<a href=\"http://www.dlr.de/rmc/sr/en\">DLR Institute of System Dynamics and Control</a>.</td></tr>
 </table>
-</html>"            , 
+</html>"            ,
       info="<html>
 <h4>语法</h4>
 
@@ -840,7 +840,7 @@ y = 5 + 3*sin(2*pi*2) + 1.5*cos(2*pi*3)
      <a href=\"http://www.ep.liu.se/ecp/118/053/ecp15118491.pdf\">http://www.ep.liu.se/ecp/118/053/ecp15118491.pdf</a>
      </dd>
 </dl>
-</html>", 
+</html>",
       revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th>日期</th> <th align=\"left\">说明</th></tr>
@@ -852,8 +852,8 @@ y = 5 + 3*sin(2*pi*2) + 1.5*cos(2*pi*3)
      (<a href=\"http://www.dlr.de/rmc/sr/en\">DLR Institute of System Dynamics and Control</a>.</td></tr>
 </table>
 </html>"), Icon(graphics={
-        Line(points={{-60,20},{-60,-80}}, color={95,95,95}), 
-        Line(points={{-20,60},{-20,-80}}, color={95,95,95}), 
-        Line(points={{20,40},{20,-80}}, color={95,95,95}), 
+        Line(points={{-60,20},{-60,-80}}, color={95,95,95}),
+        Line(points={{-20,60},{-20,-80}}, color={95,95,95}),
+        Line(points={{20,40},{20,-80}}, color={95,95,95}),
         Line(points={{60,-20},{60,-80}}, color={95,95,95})}));
 end FastFourierTransform;

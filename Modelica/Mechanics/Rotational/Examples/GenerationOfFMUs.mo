@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.Rotational.Examples;
-model GenerationOfFMUs 
+model GenerationOfFMUs
   "演示生成FMU(功能模拟单元)的变体的示例"
   extends Modelica.Icons.Example;
 
@@ -15,8 +15,8 @@ model GenerationOfFMUs
     springDamper(c=1e4, d=100) 
     annotation (Placement(transformation(extent={{20,-20},{40,0}})));
   Modelica.Mechanics.Rotational.Components.Inertia inertia2a(
-    J=1.1, 
-    phi(fixed=true, start=0), 
+    J=1.1,
+    phi(fixed=true, start=0),
     w(fixed=true, start=0)) 
     annotation (Placement(transformation(extent={{-30,-20},{-10,0}})));
   Modelica.Mechanics.Rotational.Sources.Torque torque2 
@@ -25,8 +25,8 @@ model GenerationOfFMUs
     torqueToAngle2a(use_a=false) 
     annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
   Modelica.Mechanics.Rotational.Components.Inertia inertia2b(
-    J=2.2, 
-    phi(fixed=true, start=0), 
+    J=2.2,
+    phi(fixed=true, start=0),
     w(fixed=true, start=0)) 
     annotation (Placement(transformation(extent={{70,-20},{90,0}})));
   Components.TorqueToAngleAdaptor 
@@ -35,9 +35,9 @@ model GenerationOfFMUs
   Modelica.Mechanics.Rotational.Examples.Utilities.Spring spring(c=1e4) 
     annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
   Modelica.Mechanics.Rotational.Components.Inertia inertia3a(
-    J=1.1, 
-    phi(fixed=true, start=0), 
-    w(fixed=true, start=0)) annotation (Placement(transformation(extent= 
+    J=1.1,
+    phi(fixed=true, start=0),
+    w(fixed=true, start=0)) annotation (Placement(transformation(extent=
            {{-30,-80},{-10,-60}})));
   Modelica.Mechanics.Rotational.Sources.Torque   force3 
     annotation (Placement(transformation(extent={{-60,-80},{-40,-60}})));
@@ -45,8 +45,8 @@ model GenerationOfFMUs
     torqueToAngle3a(use_w=false, use_a=false) 
     annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
   Modelica.Mechanics.Rotational.Components.Inertia inertia3b(
-    J=2.2, 
-    phi(fixed=true, start=0), 
+    J=2.2,
+    phi(fixed=true, start=0),
     w(fixed=true, start=0)) 
     annotation (Placement(transformation(extent={{70,-80},{90,-60}})));
   Components.TorqueToAngleAdaptor 
@@ -63,9 +63,9 @@ equation
     annotation (Line(points={{21,47},{38,47}}, color={0,0,127}));
   connect(inverseInertia.tau, directInertia.tau) 
     annotation (Line(points={{39,42},{22,42}}, color={0,0,127}));
-  connect(sine1.y, torque2.tau) annotation (Line(points={{-79,50},{-70, 
+  connect(sine1.y, torque2.tau) annotation (Line(points={{-79,50},{-70,
           50},{-70,-10},{-62,-10}}, color={0,0,127}));
-  connect(sine1.y, force3.tau) annotation (Line(points={{-79,50},{-70, 
+  connect(sine1.y, force3.tau) annotation (Line(points={{-79,50},{-70,
           50},{-70,-70},{-62,-70}}, color={0,0,127}));
   connect(torqueToAngle2b.flange, inertia2b.flange_a) 
     annotation (Line(points={{62,-10},{70,-10}}));
@@ -81,7 +81,7 @@ equation
     annotation (Line(points={{62,-70},{70,-70}}));
   connect(torqueToAngle2a.phi, springDamper.phi1) 
     annotation (Line(points={{3,-2},{18,-2}}, color={0,0,127}));
-  connect(torqueToAngle2a.w, springDamper.w1) annotation (Line(points={{3, 
+  connect(torqueToAngle2a.w, springDamper.w1) annotation (Line(points={{3,
           -7},{10.5,-7},{10.5,-7},{18,-7}}, color={0,0,127}));
   connect(torqueToAngle2a.tau, springDamper.tau1) 
     annotation (Line(points={{4,-18},{19,-18}}, color={0,0,127}));
@@ -89,7 +89,7 @@ equation
     annotation (Line(points={{41,-18},{56,-18}}, color={0,0,127}));
   connect(springDamper.phi2, torqueToAngle2b.phi) 
     annotation (Line(points={{42,-2},{57,-2}}, color={0,0,127}));
-  connect(springDamper.w2, torqueToAngle2b.w) annotation (Line(points={{42, 
+  connect(springDamper.w2, torqueToAngle2b.w) annotation (Line(points={{42,
           -7},{50,-7},{50,-7},{57,-7}}, color={0,0,127}));
   connect(torqueToAngle3a.phi, spring.phi1) 
     annotation (Line(points={{3,-62},{18,-62}}, color={0,0,127}));

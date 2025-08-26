@@ -3,19 +3,19 @@ partial model IdealSwitchWithArc "带简单电弧效应的理想开关"
   extends Modelica.Electrical.Analog.Interfaces.OnePort;
   parameter SI.Resistance Ron = 1E-5 "闭合开关电阻";
 
-  parameter SI.Conductance Goff = 1E-5 
+  parameter SI.Conductance Goff = 1E-5
     "打开开关导纳";
   parameter SI.Voltage V0(start = 30) "初始电弧电压";
-  parameter SI.VoltageSlope dVdt(start = 10E3) 
+  parameter SI.VoltageSlope dVdt(start = 10E3)
     "电弧电压斜率";
   parameter SI.Voltage Vmax(start = 60) "最大电弧电压";
   extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
   Boolean off(start = true) "指示关闭状态(但可能未完全熄灭)";
 protected
-  Boolean quenched(start = true, fixed = true) 
+  Boolean quenched(start = true, fixed = true)
     "指示熄灭的电弧(如果开关关闭)";
 
-  discrete SI.Time tSwitch(start = -Modelica.Constants.inf, fixed = true) 
+  discrete SI.Time tSwitch(start = -Modelica.Constants.inf, fixed = true)
     "最后一次关闭开关的时间点";
 equation
   when edge(off) then
@@ -33,32 +33,32 @@ equation
   end if;
   LossPower = v * i;
   annotation(
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
     100}}), graphics = {
-    Ellipse(extent = {{-44, 4}, {-36, -4}}, lineColor = {0, 0, 255}), 
-    Line(points = {{-90, 0}, {-44, 0}}, color = {0, 0, 255}), 
-    Line(points = {{-37, 2}, {40, 40}}, color = {0, 0, 255}), 
-    Line(points = {{40, 0}, {90, 0}}, color = {0, 0, 255}), 
+    Ellipse(extent = {{-44, 4}, {-36, -4}}, lineColor = {0, 0, 255}),
+    Line(points = {{-90, 0}, {-44, 0}}, color = {0, 0, 255}),
+    Line(points = {{-37, 2}, {40, 40}}, color = {0, 0, 255}),
+    Line(points = {{40, 0}, {90, 0}}, color = {0, 0, 255}),
     Text(
-    extent = {{-150, 90}, {150, 50}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255})}), 
-    Diagram(graphics = {Line(points = {{-60, 60}, {-60, -60}, {60, -60}}, color = {0, 0, 255}), 
+    extent = {{-150, 90}, {150, 50}},
+    textString = "%name",
+    textColor = {0, 0, 255})}),
+    Diagram(graphics = {Line(points = {{-60, 60}, {-60, -60}, {60, -60}}, color = {0, 0, 255}),
     Line(points = {{-60, -60}, {-40, -60}, {-40, -40}, {-20, 40}, {40, 40}}), Text(
-    extent = {{30, -60}, {50, -70}}, 
+    extent = {{30, -60}, {50, -70}},
     textString = "time"), Text(
-    extent = {{-60, 60}, {-20, 50}}, 
+    extent = {{-60, 60}, {-20, 50}},
     textString = "voltage"), Text(
-    extent = {{-60, -30}, {-40, -40}}, 
+    extent = {{-60, -30}, {-40, -40}},
     textString = "V0"), Text(
-    extent = {{-50, 40}, {-30, 30}}, 
+    extent = {{-50, 40}, {-30, 30}},
     textString = "Vmax"), Text(
-    extent = {{-40, 10}, {-20, 0}}, 
+    extent = {{-40, 10}, {-20, 0}},
     textString = "dVdt"), Polygon(
-    points = {{-60, 60}, {-62, 52}, {-58, 52}, {-60, 60}}, 
+    points = {{-60, 60}, {-62, 52}, {-58, 52}, {-60, 60}},
     fillPattern = FillPattern.Solid), Polygon(
-    points = {{60, -60}, {54, -58}, {54, -62}, {60, -60}}, 
-    fillPattern = FillPattern.Solid)}), 
+    points = {{60, -60}, {54, -58}, {54, -62}, {60, -60}},
+    fillPattern = FillPattern.Solid)}),
     Documentation(info = "<html>
 <p>
 该模型基于<a href=\"modelica://Modelica.Electrical.Analog.Interfaces.IdealSwitch\">IdealSwitch</a>搭建。
@@ -91,7 +91,7 @@ V0   |   +
 <strong>请注意：</strong>
 如果使用了HeatPort=true，则<strong>不会</strong>模拟电气行为的温度依赖性。参数的值在整个温度范围内保持不变。这意味着，即使环境温度发生变化，电路元件的电气参数(如电阻、电容、电感等)也不会发生变化。
 </p>
-</html>", 
+</html>",
     revisions = "<html>
 <ul>
 <li><em>June, 2009   </em>

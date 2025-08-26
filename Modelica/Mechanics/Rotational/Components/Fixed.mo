@@ -10,15 +10,15 @@ equation
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
         Text(
-          extent={{-150,-90},{150,-130}}, 
-          textColor={0,0,255}, 
-          textString="%name"), 
-        Line(points={{-80,-40},{80,-40}}), 
-        Line(points={{80,-40},{40,-80}}), 
-        Line(points={{40,-40},{0,-80}}), 
-        Line(points={{0,-40},{-40,-80}}), 
-        Line(points={{-40,-40},{-80,-80}}), 
-        Line(points={{0,-40},{0,-10}})}), 
+          extent={{-150,-90},{150,-130}},
+          textColor={0,0,255},
+          textString="%name"),
+        Line(points={{-80,-40},{80,-40}}),
+        Line(points={{80,-40},{40,-80}}),
+        Line(points={{40,-40},{0,-80}}),
+        Line(points={{0,-40},{-40,-80}}),
+        Line(points={{-40,-40},{-80,-80}}),
+        Line(points={{0,-40},{0,-10}})}),
     Documentation(info="<html>
 <p>
 一维转动机械系统的<strong>一维转动接口</strong>在<strong>轴承座</strong>中的角度<strong>固定</strong>在角度phi0处。

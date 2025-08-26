@@ -1,9 +1,9 @@
 ﻿within Modelica.Utilities;
-package Examples 
+package Examples
   "示例演示如何使用Modelica.Utilities"
   extends Modelica.Icons.ExamplesPackage;
 
-  function calculator 
+  function calculator
     "计算器，用于计算包含+、-、*、/、()、sin()、cos()、tan()、sqrt()、asin()、acos()、atan()、exp()、log()、pi的简单表达式"
     import Modelica.Utilities.Strings;
     extends Modelica.Icons.Function;
@@ -52,7 +52,7 @@ calculator(\"sin(pi/6)\");  // returns 0.5
 </html>"        ));
   end calculator;
 
-  function expression 
+  function expression
     "表达式解释器，返回表达式后的当前位置(表达式可以包含 +、-、*、/、()、sin()、cos()、tan()、sqrt()、asin()、acos()、atan()、exp()、log()、pi)"
     import Modelica.Utilities.Types;
     import Modelica.Utilities.Strings;
@@ -61,9 +61,9 @@ calculator(\"sin(pi/6)\");  // returns 0.5
 
     extends Modelica.Icons.Function;
     input String string "被评估的表达式";
-    input Integer startIndex = 1 
+    input Integer startIndex = 1
       "从字符 startIndex 开始扫描表达式";
-    input String message = "" 
+    input String message = ""
       "如果扫描不成功，错误信息中使用的信息";
     output Real result "表达的价值";
     output Integer nextIndex "扫描表达式后的索引";
@@ -140,7 +140,7 @@ calculator(\"sin(pi/6)\");  // returns 0.5
             result := Math.tan(result);
           elseif functionName == "sqrt" then
             if result < 0.0 then
-              Strings.syntaxError(string, startIndex, "调用参数 \"sqrt(" + String(result) + ")\" 为负数.\n" + 
+              Strings.syntaxError(string, startIndex, "调用参数 \"sqrt(" + String(result) + ")\" 为负数.\n" +
                 "这个计算器不支持虚数.\n" + message);
             end if;
             result := sqrt(result);
@@ -271,7 +271,7 @@ expression(\"sin(pi/6)\");  // returns 0.5
   function readRealParameter "从文件中读取实型参数的值"
     extends Modelica.Icons.Function;
     input String fileName "文件名称" annotation(Dialog(
-      loadSelector(filter = "Text files (*.txt)", 
+      loadSelector(filter = "Text files (*.txt)",
       caption = "Open file in which Real parameters are present")));
     input String name "参数名称";
     output Real result "文件中参数的实际值";
@@ -320,7 +320,7 @@ expression(\"sin(pi/6)\");  // returns 0.5
     if not found then
       Streams.error("参数 \"" + name + "\" 文件中未找到 \"" + fileName + "\"");
     end if;
-    annotation(Documentation(info = 
+    annotation(Documentation(info =
       "<html>
 <h4>语法</h4>
 <blockquote><pre>
@@ -356,21 +356,21 @@ readRealParameter(\"test.txt\", \"w_rel0\")
 </html>"        ));
   end readRealParameter;
 
-  model readRealParameterModel 
+  model readRealParameterModel
     "演示Examples.readRealParameter/.expression的用法"
 
     extends Modelica.Icons.Example;
 
     parameter String file = Modelica.Utilities.Files.loadResource(
-      "modelica://Modelica/Resources/Data/Utilities/Examples_readRealParameters.txt") 
+      "modelica://Modelica/Resources/Data/Utilities/Examples_readRealParameters.txt")
       "存储数据的文件" 
-      annotation(Dialog(loadSelector(filter = "Text files (*.txt)", 
+      annotation(Dialog(loadSelector(filter = "Text files (*.txt)",
       caption = "Open text file to read parameters of the form \"name = value\"")));
-    parameter Modelica.Units.SI.Inertia J = readRealParameter(file, "J") 
+    parameter Modelica.Units.SI.Inertia J = readRealParameter(file, "J")
       "惯性";
-    parameter Modelica.Units.SI.Angle phi_rel0 = readRealParameter(file, "phi_rel0") 
+    parameter Modelica.Units.SI.Angle phi_rel0 = readRealParameter(file, "phi_rel0")
       "相对的角";
-    parameter Modelica.Units.SI.AngularVelocity w_rel0 = readRealParameter(file, "w_rel0") 
+    parameter Modelica.Units.SI.AngularVelocity w_rel0 = readRealParameter(file, "w_rel0")
       "相对角速度";
   equation
     when terminal() then
@@ -385,7 +385,7 @@ readRealParameter(\"test.txt\", \"w_rel0\")
 </html>"  ), experiment(StopTime = 1.01));
   end readRealParameterModel;
 
-  model WriteRealMatrixToFile 
+  model WriteRealMatrixToFile
     "演示函数Streams.writeRealMatrix的用法"
     extends Modelica.Icons.Example;
     parameter Real A[3,2] = [11, 12;
@@ -412,7 +412,7 @@ readRealParameter(\"test.txt\", \"w_rel0\")
 </html>"    ));
   end WriteRealMatrixToFile;
 
-  model ReadRealMatrixFromFile 
+  model ReadRealMatrixFromFile
     "演示函数Streams.readRealMatrix的用法"
     import Modelica.Utilities.Streams.print;
     extends Modelica.Icons.Example;

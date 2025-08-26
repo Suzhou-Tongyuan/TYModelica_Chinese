@@ -3,15 +3,15 @@ model Yy06 "变压器Yy6"
   extends Machines.Interfaces.PartialBasicTransformer(final VectorGroup="Yy06");
   Modelica.Electrical.Polyphase.Basic.Star star1(final m=m) 
     annotation (Placement(transformation(
-        origin={-10,-80}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-10,-80},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Analog.Interfaces.NegativePin starpoint1 
     annotation (Placement(transformation(extent={{-60,-110},{-40,-90}})));
   Modelica.Electrical.Polyphase.Basic.Star star2(final m=m) 
     annotation (Placement(transformation(
-        origin={10,-80}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={10,-80},
+        extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Electrical.Analog.Interfaces.NegativePin starpoint2 
     annotation (Placement(transformation(extent={{40,-110},{60,-90}})));

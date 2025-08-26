@@ -3,21 +3,21 @@ package CompressibleLiquids "可压缩液体模型"
   extends Modelica.Icons.VariantsPackage;
   package Common "可压缩液体的基础类"
     extends Modelica.Icons.Package;
-    partial package LinearWater_pT 
+    partial package LinearWater_pT
       "线性可压缩液态水模型的基类"
       extends Media.Interfaces.PartialLinearFluid(
-        constantJacobian=true, 
-        reference_d=Modelica.Media.Water.StandardWater.density(state), 
-        reference_h=Modelica.Media.Water.StandardWater.specificEnthalpy(state), 
-        reference_s=Modelica.Media.Water.StandardWater.specificEntropy(state), 
-        cp_const=Modelica.Media.Water.StandardWater.specificHeatCapacityCp(state), 
-        beta_const= 
-            Modelica.Media.Water.StandardWater.isobaricExpansionCoefficient(state), 
+        constantJacobian=true,
+        reference_d=Modelica.Media.Water.StandardWater.density(state),
+        reference_h=Modelica.Media.Water.StandardWater.specificEnthalpy(state),
+        reference_s=Modelica.Media.Water.StandardWater.specificEntropy(state),
+        cp_const=Modelica.Media.Water.StandardWater.specificHeatCapacityCp(state),
+        beta_const=
+            Modelica.Media.Water.StandardWater.isobaricExpansionCoefficient(state),
         kappa_const=Modelica.Media.Water.StandardWater.isothermalCompressibility(
-            state), 
+            state),
         MM_const=Modelica.Media.Water.StandardWater.molarMass(state));
 
-      constant Modelica.Media.Water.StandardWater.ThermodynamicState state= 
+      constant Modelica.Media.Water.StandardWater.ThermodynamicState state=
           Modelica.Media.Water.StandardWater.setState_pT(reference_p, reference_T);
       annotation();
     end LinearWater_pT;
@@ -26,16 +26,16 @@ package CompressibleLiquids "可压缩液体模型"
 
   package LinearColdWater "具有线性可压缩性的冷水模型"
     extends Media.Interfaces.PartialLinearFluid(
-      mediumName="Linear cold water", 
-      constantJacobian=true, 
-      reference_p=101325, 
-      reference_T=278.15, 
-      reference_d=997.05, 
-      reference_h=104929, 
-      reference_s=100.0, 
-      cp_const=4181.9, 
-      beta_const=2.5713e-4, 
-      kappa_const=4.5154e-10, 
+      mediumName="Linear cold water",
+      constantJacobian=true,
+      reference_p=101325,
+      reference_T=278.15,
+      reference_d=997.05,
+      reference_h=104929,
+      reference_s=100.0,
+      cp_const=4181.9,
+      beta_const=2.5713e-4,
+      kappa_const=4.5154e-10,
       MM_const=0.018015268);
 
   redeclare function extends dynamicViscosity "水的动力黏度"
@@ -44,7 +44,7 @@ package CompressibleLiquids "可压缩液体模型"
     eta := 1.5e-3;
   end dynamicViscosity;
 
-  redeclare function extends thermalConductivity 
+  redeclare function extends thermalConductivity
       "水的导热系数"
     annotation();
   algorithm
@@ -54,11 +54,11 @@ package CompressibleLiquids "可压缩液体模型"
 
   end LinearColdWater;
 
-  package LinearWater_pT_Ambient 
+  package LinearWater_pT_Ambient
     "线性可压缩性液态水模型,压力为 1.01325 bar,温度为25摄氏度"
     extends Modelica.Media.CompressibleLiquids.Common.LinearWater_pT(
-      mediumName="Liquid linear water", 
-      reference_p = 101325, 
+      mediumName="Liquid linear water",
+      reference_p = 101325,
       reference_T = 298.15);
   redeclare function extends dynamicViscosity "水的动力黏度"
     annotation();
@@ -66,7 +66,7 @@ package CompressibleLiquids "可压缩液体模型"
     eta := 8.9e-4;
   end dynamicViscosity;
 
-  redeclare function extends thermalConductivity 
+  redeclare function extends thermalConductivity
       "水的导热系数"
     annotation();
   algorithm

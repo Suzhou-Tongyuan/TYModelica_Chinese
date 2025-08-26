@@ -1,19 +1,19 @@
 ﻿within Modelica.Mechanics.MultiBody.Visualizers.Advanced;
-model Surface 
+model Surface
   "可视化可移动的、参数化的曲面；曲面特性由一个函数提供"
   extends Modelica.Mechanics.MultiBody.Icons.Surface;
   extends Modelica.Utilities.Internal.PartialModelicaServices.Animation.PartialSurface;
   extends ModelicaServices.Animation.Surface;
   annotation (Icon(graphics={Polygon(
-          points={{-102,40},{-98,92},{28,-8},{96,146},{104,-118},{-18,-34},{-52, 
-              -130},{-102,40}}, 
-          lineColor={0,0,255}, 
-          smooth=Smooth.Bezier, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          points={{-102,40},{-98,92},{28,-8},{96,146},{104,-118},{-18,-34},{-52,
+              -130},{-102,40}},
+          lineColor={0,0,255},
+          smooth=Smooth.Bezier,
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,140},{150,100}}, 
-          textColor={0,0,255}, 
+          extent={{-150,140},{150,100}},
+          textColor={0,0,255},
           textString="%name")}), Documentation(info="<html>
 <p>
 模型<strong>Surface</strong>定义了三维空间中的可移动、参数化表面，用于动画显示。

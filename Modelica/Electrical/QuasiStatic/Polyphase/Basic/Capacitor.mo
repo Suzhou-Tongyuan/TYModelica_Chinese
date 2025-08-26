@@ -1,30 +1,30 @@
 ﻿within Modelica.Electrical.QuasiStatic.Polyphase.Basic;
 model Capacitor "多相线性电容"
   extends Interfaces.TwoPlug;
-  parameter SI.Capacitance C[m](start=fill(1, m)) 
+  parameter SI.Capacitance C[m](start=fill(1, m))
     "电容";
   QuasiStatic.SinglePhase.Basic.Capacitor capacitor[m](final C=C) 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
-  connect(plugToPins_p.pin_p, capacitor.pin_p) annotation (Line(points={{-68, 
-          0},{-53.5,0},{-53.5,0},{-39,0},{-39,0},{-10,0}}, color={85,170, 
+  connect(plugToPins_p.pin_p, capacitor.pin_p) annotation (Line(points={{-68,
+          0},{-53.5,0},{-53.5,0},{-39,0},{-39,0},{-10,0}}, color={85,170,
           255}));
-  connect(capacitor.pin_n, plugToPins_n.pin_n) annotation (Line(points={{10, 
+  connect(capacitor.pin_n, plugToPins_n.pin_n) annotation (Line(points={{10,
           0},{39,0},{39,0},{68,0}}, color={85,170,255}));
   annotation (Icon(graphics={Text(
-              extent={{150,-80},{-150,-40}}, 
-              textString="m=%m"), 
+              extent={{150,-80},{-150,-40}},
+              textString="m=%m"),
         Text(
-          extent={{-150,90},{150,50}}, 
-              textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,90},{150,50}},
+              textString="%name",
+          textColor={0,0,255}),
         Line(
-          points={{-6,28},{-6,-28}}, 
-          color={85,170,255}), 
+          points={{-6,28},{-6,-28}},
+          color={85,170,255}),
         Line(
-          points={{6,28},{6,-28}}, 
-          color={85,170,255}), 
-                             Line(points={{-90,0},{-6,0}}, color={85,170,255}), 
+          points={{6,28},{6,-28}},
+          color={85,170,255}),
+                             Line(points={{-90,0},{-6,0}}, color={85,170,255}),
           Line(points={{6,0},{90,0}}, color={85,170,255})}), Documentation(info="<html>
 <p>
 线性电容器通过 <code><u>i</u></code> 与 <code><u>v</u></code> 之间的复电流和复电压连接，

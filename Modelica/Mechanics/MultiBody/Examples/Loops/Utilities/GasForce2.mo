@@ -5,9 +5,9 @@ model GasForce2 "内燃机气缸内气体压力的粗略估计"
   extends Modelica.Mechanics.Translational.Interfaces.PartialCompliant;
   parameter SI.Length L "气缸长度";
   parameter SI.Length d "气缸直径";
-  parameter SI.Volume k0 = 0.01 
+  parameter SI.Volume k0 = 0.01
     "体积V = k0 + k1*(1-x), with x = 1 - s_rel/L";
-  parameter SI.Volume k1 = 1 
+  parameter SI.Volume k1 = 1
     "体积V = k0 + k1*(1-x), with x = 1 - s_rel/L";
   parameter SI.HeatCapacity k = 1 "气体常数 (p*V = k*T)";
 
@@ -43,76 +43,76 @@ equation
   dens = press / (R_air * T);
   press * V = k * T;
 
-  assert(s_rel >= -1e-12, "flange_b.s - flange_a.s (= " + String(s_rel, 
-    significantDigits = 14) + ") >= 0 required for GasForce2 component.\n" + 
+  assert(s_rel >= -1e-12, "flange_b.s - flange_a.s (= " + String(s_rel,
+    significantDigits = 14) + ") >= 0 required for GasForce2 component.\n" +
     "Most likely, the component has to be flipped.");
-  assert(s_rel <= L + 1e-12, " flange_b.s - flange_a.s (= " + String(s_rel, 
-    significantDigits = 14) + ") <= L (= " + String(L, significantDigits = 14) + 
-    ") required for GasForce2 component.\n" + 
+  assert(s_rel <= L + 1e-12, " flange_b.s - flange_a.s (= " + String(s_rel,
+    significantDigits = 14) + ") <= L (= " + String(L, significantDigits = 14) +
+    ") required for GasForce2 component.\n" +
     "Most likely, parameter L is not correct.");
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
     Rectangle(
-    extent = {{-90, 50}, {90, -50}}, 
-    fillColor = {215, 215, 215}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-90, 50}, {90, -50}},
+    fillColor = {215, 215, 215},
+    fillPattern = FillPattern.Solid),
     Polygon(
-    points = {{-50, 4}, {-65, 4}, {-65, 15}, {-90, 0}, {-65, -15}, {-65, -4}, {-50, -4}, {-50, 4}}, 
-    lineColor = {255, 0, 0}, 
-    fillColor = {255, 0, 0}, 
-    fillPattern = FillPattern.Solid), 
+    points = {{-50, 4}, {-65, 4}, {-65, 15}, {-90, 0}, {-65, -15}, {-65, -4}, {-50, -4}, {-50, 4}},
+    lineColor = {255, 0, 0},
+    fillColor = {255, 0, 0},
+    fillPattern = FillPattern.Solid),
     Text(
-    extent = {{-135, 44}, {-99, 19}}, 
-    textColor = {128, 128, 128}, 
-    textString = "a"), 
+    extent = {{-135, 44}, {-99, 19}},
+    textColor = {128, 128, 128},
+    textString = "a"),
     Text(
-    extent = {{97, 40}, {133, 15}}, 
-    textColor = {128, 128, 128}, 
-    textString = "b"), 
+    extent = {{97, 40}, {133, 15}},
+    textColor = {128, 128, 128},
+    textString = "b"),
     Polygon(
-    points = {{50, 4}, {70, 4}, {65, 4}, {65, 15}, {90, 0}, {65, -15}, {65, -4}, {50, -4}, {50, 4}}, 
-    lineColor = {255, 0, 0}, 
-    fillColor = {255, 0, 0}, 
-    fillPattern = FillPattern.Solid), 
+    points = {{50, 4}, {70, 4}, {65, 4}, {65, 15}, {90, 0}, {65, -15}, {65, -4}, {50, -4}, {50, 4}},
+    lineColor = {255, 0, 0},
+    fillColor = {255, 0, 0},
+    fillPattern = FillPattern.Solid),
     Text(
-    extent = {{-150, 100}, {150, 60}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255}), 
-    Line(points = {{-50, -100}, {30, -100}}), 
+    extent = {{-150, 100}, {150, 60}},
+    textString = "%name",
+    textColor = {0, 0, 255}),
+    Line(points = {{-50, -100}, {30, -100}}),
     Polygon(
-    points = {{60, -100}, {30, -90}, {30, -110}, {60, -100}}, 
-    lineColor = {128, 128, 128}, 
-    fillColor = {128, 128, 128}, 
-    fillPattern = FillPattern.Solid), 
+    points = {{60, -100}, {30, -90}, {30, -110}, {60, -100}},
+    lineColor = {128, 128, 128},
+    fillColor = {128, 128, 128},
+    fillPattern = FillPattern.Solid),
     Polygon(
-    points = {{-30, -22}, {-13.9727, -29.1797}, {10, -30}, {54, -32}, {70, -30}, {70, -26}, {48, -22}, {14, -16}, {-4, -8}, {-18, 4}, {-24, 22}, {-28, 38}, {-30, 28}, {-32, 8}, {-32, -4}, {-30, -22}}, 
-    lineColor = {95, 95, 95}, 
-    smooth = Smooth.Bezier), 
-    Line(points = {{-46, -40}, {76, -40}}, color = {135, 135, 135}), 
-    Line(points = {{-40, -46}, {-40, 40}}, color = {135, 135, 135}), 
-    Text(extent = {{-140, -60}, {140, -90}}, textString = "L=%L")}), 
+    points = {{-30, -22}, {-13.9727, -29.1797}, {10, -30}, {54, -32}, {70, -30}, {70, -26}, {48, -22}, {14, -16}, {-4, -8}, {-18, 4}, {-24, 22}, {-28, 38}, {-30, 28}, {-32, 8}, {-32, -4}, {-30, -22}},
+    lineColor = {95, 95, 95},
+    smooth = Smooth.Bezier),
+    Line(points = {{-46, -40}, {76, -40}}, color = {135, 135, 135}),
+    Line(points = {{-40, -46}, {-40, 40}}, color = {135, 135, 135}),
+    Text(extent = {{-140, -60}, {140, -90}}, textString = "L=%L")}),
     Diagram(
     coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
     Rectangle(
-    extent = {{-90, 50}, {90, -50}}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-90, 50}, {90, -50}},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
     Polygon(
-    points = {{12, 5}, {70, 5}, {65, 5}, {65, 16}, {90, 1}, {65, -14}, {65, -3}, {12, -3}, 
-    {12, 5}}, 
-    lineColor = {255, 0, 0}, 
-    fillColor = {255, 0, 0}, 
-    fillPattern = FillPattern.Solid), 
+    points = {{12, 5}, {70, 5}, {65, 5}, {65, 16}, {90, 1}, {65, -14}, {65, -3}, {12, -3},
+    {12, 5}},
+    lineColor = {255, 0, 0},
+    fillColor = {255, 0, 0},
+    fillPattern = FillPattern.Solid),
     Polygon(
-    points = {{-13, 5}, {-16, 5}, {-65, 5}, {-65, 16}, {-90, 1}, {-65, -14}, {-65, -3}, 
-    {-13, -3}, {-13, 5}}, 
-    lineColor = {255, 0, 0}, 
-    fillColor = {255, 0, 0}, 
-    fillPattern = FillPattern.Solid)}), 
+    points = {{-13, 5}, {-16, 5}, {-65, 5}, {-65, 16}, {-90, 1}, {-65, -14}, {-65, -3},
+    {-13, -3}, {-13, 5}},
+    lineColor = {255, 0, 0},
+    fillColor = {255, 0, 0},
+    fillPattern = FillPattern.Solid)}),
     Documentation(info = "<html><p>
 <span style=\"color: rgb(5, 7, 59);\">内燃机气缸内的气体压力是根据两个一维接口之间的相对距离来计算的。要求s_rel = flange_b.s - flange_a.s的取值范围在</span>
 </p>

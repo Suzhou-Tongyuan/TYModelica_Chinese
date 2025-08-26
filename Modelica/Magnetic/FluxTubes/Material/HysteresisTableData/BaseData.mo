@@ -49,7 +49,7 @@ record BaseData "滞回表数据"
     200, 0.7993;
     300, 0.8000;
     1000, 0.8000;
-    10000000, 0.8000] 
+    10000000, 0.8000]
     "Table data of the rising (lower) branch of the hysteresis envelope curve (H, B)";
 
   parameter Real[:,:] tabfal=[
@@ -98,7 +98,7 @@ record BaseData "滞回表数据"
     200, 0.8000;
     300, 0.8000;
     1000, 0.8000;
-    10000000, 0.8000] 
+    10000000, 0.8000]
     "Table data of the falling (upper) branch of the hysteresis envelope curve (H, B)";
   parameter SI.Conductivity sigma = 1 "Electric conductivity";
   annotation (Documentation(info="<html>

@@ -12,14 +12,14 @@ equation
   R_m = 1/G_m;
 
   annotation (Icon(coordinateSystem(
-      preserveAspectRatio=false, 
+      preserveAspectRatio=false,
       extent={{-100,-100},{100,100}}), graphics={
       Text(
-        extent={{-150,50},{150,90}}, 
-        textString="%name", 
+        extent={{-150,50},{150,90}},
+        textString="%name",
         textColor={0,0,255})}), Documentation(info="<html>
 <p>
-请参考<a href=\"modelica://Modelica.Magnetic.FluxTubes.Shapes.Leakage\">Shapes.Leakage</a>子包的描述来使用这个部分模型。.
+请参考<a href=\"modelica://Modelica.Magnetic.FluxTubes.Shapes.Leakage\">Shapes.Leakage</a>子包的描述来使用这个抽象模型。
 </p>
 </html>"));
 end Leakage;

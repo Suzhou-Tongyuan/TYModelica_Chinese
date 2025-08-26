@@ -3,15 +3,15 @@ partial model RelativeSensorElementary "基本偏压/偏流传感器"
   extends Modelica.Icons.RoundSensor;
   extends TwoPlugElementary;
   annotation (Icon(graphics={
-        Line(points={{-70,0},{-94,0}}, color={85,170,255}), 
-        Line(points={{70,0},{94,0}}, color={85,170,255}), 
-        Line(points={{0,-70},{0,-80},{0,-90},{0,-100}}, color={85,170,255}), 
+        Line(points={{-70,0},{-94,0}}, color={85,170,255}),
+        Line(points={{70,0},{94,0}}, color={85,170,255}),
+        Line(points={{0,-70},{0,-80},{0,-90},{0,-100}}, color={85,170,255}),
         Text(
-          extent={{150,-100},{-150,-70}}, 
-          textString="m=%m"), 
+          extent={{150,-100},{-150,-70}},
+          textString="m=%m"),
         Text(
-          textColor={0,0,255}, 
-          extent={{-150,80},{150,120}}, 
+          textColor={0,0,255},
+          extent={{-150,80},{150,120}},
           textString="%name")}), Documentation(info="<html>
 <p>
 相对传感器部分模型依赖于

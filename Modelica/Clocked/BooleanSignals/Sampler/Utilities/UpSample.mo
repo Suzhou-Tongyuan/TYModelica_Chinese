@@ -1,9 +1,9 @@
 ﻿within Modelica.Clocked.BooleanSignals.Sampler.Utilities;
-block UpSample 
-  "对时钟驱动的布尔输入信号进行上采样，并将其作为时钟驱动的输出信号提供。"
-  parameter Boolean inferFactor = true 
+block UpSample
+  "对时钟驱动的布尔输入信号进行上采样，并将其作为时钟驱动的输出信号提供"
+  parameter Boolean inferFactor = true
     "= true，如果上采样因子是推导出来的" annotation(Evaluate = true, choices(checkBox = true));
-  parameter Integer factor(min = 1) = 1 
+  parameter Integer factor(min = 1) = 1
     "上采样因子 >= 1（如果inferFactor=false）" annotation(Evaluate = true, Dialog(enable = not inferFactor));
   Modelica.Blocks.Interfaces.BooleanInput 
     u "时钟布尔输入信号的连接器" 
@@ -33,76 +33,76 @@ equation
   end when;
 
   annotation(
-    defaultComponentName = "upSample1", 
+    defaultComponentName = "upSample1",
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
-    extent = {{-100, -100}, {100, 100}}, 
-    initialScale = 0.06), 
+    preserveAspectRatio = true,
+    extent = {{-100, -100}, {100, 100}},
+    initialScale = 0.06),
     graphics = {
     Line(
-    points = {{-78, -60}, {40, -60}, {40, 0}, {40, 0}}, 
-    color = {215, 215, 215}, 
-    pattern = LinePattern.Dot), Line(points = {{-80, -60}, {-40, -60}, {-40, -60}, {-40, 0}, 
-    {-40, 0}, {0, 0}, {40, 0}, {40, 80}, {40, 80}, {40, 80}, {80, 80}, {80, 0}, {80, 0}, 
-    {100, 0}}, color = {255, 0, 255}, 
+    points = {{-78, -60}, {40, -60}, {40, 0}, {40, 0}},
+    color = {215, 215, 215},
+    pattern = LinePattern.Dot), Line(points = {{-80, -60}, {-40, -60}, {-40, -60}, {-40, 0},
+    {-40, 0}, {0, 0}, {40, 0}, {40, 80}, {40, 80}, {40, 80}, {80, 80}, {80, 0}, {80, 0},
+    {100, 0}}, color = {255, 0, 255},
     pattern = LinePattern.Dot), Line(
-    points = {{-80, -60}, {-80, 0}, {-100, 0}}, 
-    color = {255, 0, 255}, 
-    pattern = LinePattern.Dot), 
+    points = {{-80, -60}, {-80, 0}, {-100, 0}},
+    color = {255, 0, 255},
+    pattern = LinePattern.Dot),
     Text(
-    extent = {{-200, 175}, {200, 110}}, 
-    textColor = {0, 0, 255}, 
-    textString = "%name"), 
+    extent = {{-200, 175}, {200, 110}},
+    textColor = {0, 0, 255},
+    textString = "%name"),
     Ellipse(
-    extent = {{-95, -45}, {-65, -75}}, 
-    lineColor = {255, 0, 255}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-95, -45}, {-65, -75}},
+    lineColor = {255, 0, 255},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{-83, -57}, {-77, -63}}, 
-    lineColor = {255, 0, 255}, 
-    fillColor = {255, 0, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-83, -57}, {-77, -63}},
+    lineColor = {255, 0, 255},
+    fillColor = {255, 0, 255},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{25, 96}, {55, 66}}, 
-    lineColor = {255, 0, 255}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{25, 96}, {55, 66}},
+    lineColor = {255, 0, 255},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{37, 83}, {43, 77}}, 
-    lineColor = {255, 0, 255}, 
-    fillColor = {255, 0, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{37, 83}, {43, 77}},
+    lineColor = {255, 0, 255},
+    fillColor = {255, 0, 255},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{-55, 16}, {-25, -14}}, 
-    lineColor = {255, 0, 255}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-55, 16}, {-25, -14}},
+    lineColor = {255, 0, 255},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{-6, 16}, {24, -14}}, 
-    lineColor = {255, 0, 255}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
+    extent = {{-6, 16}, {24, -14}},
+    lineColor = {255, 0, 255},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
     Ellipse(
-    extent = {{64, 16}, {94, -14}}, 
-    lineColor = {255, 0, 255}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
-    Text(visible = not inferFactor, 
-    extent = {{-200, -80}, {200, -145}}, 
-    textString = "%factor"), 
+    extent = {{64, 16}, {94, -14}},
+    lineColor = {255, 0, 255},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
+    Text(visible = not inferFactor,
+    extent = {{-200, -80}, {200, -145}},
+    textString = "%factor"),
     Line(
-    points = {{80, 80}, {120, 80}}, 
-    color = {215, 215, 215}, 
-    pattern = LinePattern.Dot), 
+    points = {{80, 80}, {120, 80}},
+    color = {215, 215, 215},
+    pattern = LinePattern.Dot),
     Polygon(
-    points = {{25, 0}, {5, 20}, {5, 10}, {-25, 10}, {-25, -10}, {5, -10}, {5, -20}, 
-    {25, 0}}, 
-    fillColor = {95, 95, 95}, 
-    fillPattern = FillPattern.Solid, 
-    lineColor = {95, 95, 95}, 
-    origin = {-71, 52}, 
-    rotation = 90)}), 
+    points = {{25, 0}, {5, 20}, {5, 10}, {-25, 10}, {-25, -10}, {5, -10}, {5, -20},
+    {25, 0}},
+    fillColor = {95, 95, 95},
+    fillPattern = FillPattern.Solid,
+    lineColor = {95, 95, 95},
+    origin = {-71, 52},
+    rotation = 90)}),
     Documentation(info = "<html>
 <p>
 这个布尔信号块的工作原理类似于对应的实数信号块（见 

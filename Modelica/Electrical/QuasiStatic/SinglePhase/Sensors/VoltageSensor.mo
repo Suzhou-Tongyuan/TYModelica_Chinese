@@ -3,11 +3,11 @@ model VoltageSensor "电压传感器"
   extends Modelica.Electrical.QuasiStatic.SinglePhase.Interfaces.RelativeSensorElementary;
   Modelica.ComplexBlocks.Interfaces.ComplexOutput v(re(unit = "V"), im(unit = "V")) "复电压" annotation (Placement(
         transformation(
-        origin={0,-110}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={0,-110},
+        extent={{-10,-10},{10,10}},
         rotation=270), iconTransformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={0,-110})));
   SI.Voltage abs_v=Modelica.ComplexMath.abs(v) "复电压的幅值";
   SI.Angle arg_v=Modelica.ComplexMath.arg(v) "复电压的幅角";
@@ -32,12 +32,12 @@ equation
 <a href=\"modelica://Modelica.Electrical.QuasiStatic.SinglePhase.Sensors.MultiSensor\">MultiSensor</a>
 </p>
 
-</html>"), 
+</html>"),
        Icon(graphics={
         Text(
-          extent={{-30,-10},{30,-70}}, 
-          textColor={64,64,64}, 
-          textString="V"), 
-        Line(points={{-100,0},{-70,0}}, color={85,170,255}), 
+          extent={{-30,-10},{30,-70}},
+          textColor={64,64,64},
+          textString="V"),
+        Line(points={{-100,0},{-70,0}}, color={85,170,255}),
         Line(points={{70,0},{100,0}},   color={85,170,255})}));
 end VoltageSensor;

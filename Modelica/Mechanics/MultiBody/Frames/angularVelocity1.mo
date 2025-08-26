@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function angularVelocity1 
+function angularVelocity1
   "从方向对象返回在坐标系1中解析的角速度"
 
   extends Modelica.Icons.Function;
   input Orientation R "将坐标系1旋转到坐标系2的方向对象";
-  output SI.AngularVelocity w[3] 
+  output SI.AngularVelocity w[3]
     "相对于坐标系1解析的坐标系2的角速度，解析在坐标系1中";
 algorithm
   w := resolve1(R, R.w);

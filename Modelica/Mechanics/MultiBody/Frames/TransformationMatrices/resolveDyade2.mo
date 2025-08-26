@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function resolveDyade2 
+function resolveDyade2
   "将二阶张量从坐标系1转换到坐标系2"
   extends Modelica.Icons.Function;
-  input TransformationMatrices.Orientation T 
+  input TransformationMatrices.Orientation T
     "旋转坐标系1至坐标系2的方向对象";
   input Real D1[3, 3] "在坐标系1中解析的二阶张量";
   output Real D2[3, 3] "在坐标系2中解析的二阶张量";

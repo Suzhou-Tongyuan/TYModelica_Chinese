@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Types;
-record SalientPermeance = Salient (redeclare SI.Permeance d, 
+record SalientPermeance = Salient (redeclare SI.Permeance d,
       redeclare SI.Permeance q) "典型渗透率" 
   annotation (Documentation(info="<html>
 <p>表示磁阻的 d 轴和 q 轴相对于基波的类型.</p>

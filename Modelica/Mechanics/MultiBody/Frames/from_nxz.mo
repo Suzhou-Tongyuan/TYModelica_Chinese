@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function from_nxz 
+function from_nxz
   "返回从n_x和n_z矢量确定的固定方向对象"
   extends Modelica.Icons.Function;
-  input Real n_x[3](each final unit="1") 
+  input Real n_x[3](each final unit="1")
     "在坐标系1中解析的指向坐标系2的x轴方向的矢量";
-  input Real n_z[3](each final unit="1") 
+  input Real n_z[3](each final unit="1")
     "在坐标系1中解析的指向坐标系2的z轴方向的矢量";
   output Orientation R "将坐标系1旋转到坐标系2的方向对象";
 algorithm

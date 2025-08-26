@@ -6,27 +6,27 @@ model Differentiator "微分放大器"
   Modelica.Electrical.Analog.Basic.Ground ground 
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   Sources.TrapezoidVoltage vIn(
-    V=2*Vin, 
-    rising=0.2/f, 
-    width=0.3/f, 
-    falling=0.2/f, 
-    period=1/f, 
-    nperiod=-1, 
-    offset=-Vin, 
+    V=2*Vin,
+    rising=0.2/f,
+    width=0.3/f,
+    falling=0.2/f,
+    period=1/f,
+    nperiod=-1,
+    offset=-Vin,
     startTime=-(vIn.rising + vIn.width/2)) 
     annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-40,0})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor vOut annotation (Placement(
         transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=270, 
+        extent={{-10,10},{10,-10}},
+        rotation=270,
         origin={40,0})));
   OpAmpCircuits.Der der_(
-    k=2, 
-    f=f, 
+    k=2,
+    f=f,
     v(fixed=true)) 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
@@ -43,10 +43,10 @@ equation
   annotation (Documentation(info="<html>
 <p>这是一个(反相)微分放大器。用户在仿真时可在仿真页面勾选电阻R和电容C后查看仿真结果。其中电容C的数值由电路的时间常数或者频率响应决定。</p>
 <p>请注意：<code>vOut</code>为输出负电压的值。</p>
-</html>"), 
+</html>"),
     experiment(
-      StartTime=0, 
-      StopTime=1, 
-      Tolerance=1e-006, 
+      StartTime=0,
+      StopTime=1,
+      Tolerance=1e-006,
       Interval=0.001));
 end Differentiator;

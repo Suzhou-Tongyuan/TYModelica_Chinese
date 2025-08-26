@@ -1,14 +1,14 @@
 ﻿within Modelica.Thermal.HeatTransfer.Interfaces;
-partial model PartialConditionalHeatPort 
+partial model PartialConditionalHeatPort
   "基类模型(包含条件式HeatPort以耗散损耗，适用于图形建模，即拖拽式建模)"
   parameter Boolean useHeatPort = false "= true，如果启用了热端口" 
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter SI.Temperature T=293.15 
+  parameter SI.Temperature T=293.15
     "如果useHeatPort = false，设备温度固定不变" 
     annotation(Dialog(enable=not useHeatPort));
-  HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatPort 
+  HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatPort
     "以热量形式输送损耗的可选端口" 
-    annotation (Placement(transformation(extent={{-110,-110},{-90,-90}}), 
+    annotation (Placement(transformation(extent={{-110,-110},{-90,-90}}),
         iconTransformation(extent={{-110,-110},{-90,-90}})));
   HeatTransfer.Sources.FixedTemperature fixedTemperature(final T=T) if not 
     useHeatPort 

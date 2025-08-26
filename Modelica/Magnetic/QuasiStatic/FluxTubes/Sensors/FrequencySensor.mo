@@ -11,10 +11,10 @@ equation
 该传感器可用于测量参考系统的频率。
 准静磁系统的角频率积分等于参考角.
 </p>
-</html>"), 
+</html>"),
        Icon(graphics={
         Text(
-          extent={{-30,-10},{30,-70}}, 
-          textColor={64,64,64}, 
+          extent={{-30,-10},{30,-70}},
+          textColor={64,64,64},
           textString="Hz")}));
 end FrequencySensor;

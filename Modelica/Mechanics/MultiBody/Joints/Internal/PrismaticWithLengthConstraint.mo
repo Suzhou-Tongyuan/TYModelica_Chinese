@@ -1,62 +1,62 @@
 ﻿within Modelica.Mechanics.MultiBody.Joints.Internal;
-model PrismaticWithLengthConstraint 
+model PrismaticWithLengthConstraint
   "从长度约束计算的平动距离的平移副(1个自由度，无潜在状态变量)"
 
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialTwoFrames;
-  Modelica.Mechanics.Translational.Interfaces.Flange_a axis 
+  Modelica.Mechanics.Translational.Interfaces.Flange_a axis
     "驱动运动副的一维平动一维接口" 
     annotation (Placement(transformation(extent={{70,80},{90,60}})));
-  Modelica.Mechanics.Translational.Interfaces.Flange_b bearing 
+  Modelica.Mechanics.Translational.Interfaces.Flange_b bearing
     "驱动轴承的一维平动一维接口" 
     annotation (Placement(transformation(extent={{-30,80},{-50,60}})));
-  Modelica.Blocks.Interfaces.RealInput position_a[3](each final quantity="Length", each final unit="m") 
+  Modelica.Blocks.Interfaces.RealInput position_a[3](each final quantity="Length", each final unit="m")
     "长度约束的frame_a到frame_a端的位置矢量，在平动体运动副的frame_a中解析" 
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-  Modelica.Blocks.Interfaces.RealInput position_b[3](each final quantity="Length", each final unit="m") 
+  Modelica.Blocks.Interfaces.RealInput position_b[3](each final quantity="Length", each final unit="m")
     "长度约束的frame_b到frame_b端的位置矢量，在平动体运动副的frame_b中解析" 
     annotation (Placement(transformation(extent={{140,-80},{100,-40}})));
 
   parameter Boolean animation=true "=true，则启用动画";
   parameter SI.Position length(start=1) "长度约束的固定长度";
-  parameter Modelica.Mechanics.MultiBody.Types.Axis n={1,0,0} 
+  parameter Modelica.Mechanics.MultiBody.Types.Axis n={1,0,0}
     "在frame_a中解析的平动轴(与frame_b中的相同)" 
     annotation (Evaluate=true);
-  parameter SI.Position s_offset=0 
+  parameter SI.Position s_offset=0
     "相对距离偏移(frame_a和frame_b之间的距离=s(t)+s_offset)";
-  parameter SI.Position s_guess=0 
+  parameter SI.Position s_guess=0
     "选择配置，使得在初始时间|s(t0)-s_guess|最小";
-  parameter Types.Axis boxWidthDirection={0,1,0} 
+  parameter Types.Axis boxWidthDirection={0,1,0}
     "长方体宽度方向的矢量，在frame_a中解析" 
-    annotation (Evaluate=true, Dialog(tab="动画", group= 
+    annotation (Evaluate=true, Dialog(tab="动画", group=
           "如果animation=true", enable=animation));
-  parameter SI.Distance boxWidth=world.defaultJointWidth 
+  parameter SI.Distance boxWidth=world.defaultJointWidth
     "平动体运动副长方体的宽度" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
   parameter SI.Distance boxHeight=boxWidth "平动体运动副长方体的高度" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
-  input Types.Color boxColor=Modelica.Mechanics.MultiBody.Types.Defaults.JointColor 
+  input Types.Color boxColor=Modelica.Mechanics.MultiBody.Types.Defaults.JointColor
     "平动体运动副长方体的颜色" 
     annotation (Dialog(colorSelector=true, tab="动画", group="如果animation=true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
     "环境光的反射(=0：光被完全吸收)" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
 
-  final parameter Boolean positiveBranch(fixed=false) 
+  final parameter Boolean positiveBranch(fixed=false)
     "非线性约束方程的两个解之一的选择";
-final parameter Real e[3](each final unit="1")=Modelica.Math.Vectors.normalizeWithAssert(n) 
+final parameter Real e[3](each final unit="1")=Modelica.Math.Vectors.normalizeWithAssert(n)
     "沿着平动轴方向的单位矢量，在frame_a中解析";
-SI.Position s 
+SI.Position s
     "frame_a和frame_b沿轴n的相对距离=s+s_offset)";
-SI.Position distance 
+SI.Position distance
     "frame_a和frame_b沿轴n的相对距离";
-SI.Position r_rel_a[3] 
+SI.Position r_rel_a[3]
     "从frame_a到frame_b的位置矢量，在frame_a中解析";
 SI.Force f "=axis.f(轴上的驱动力)";
 
 protected
-SI.Position r_a[3]=position_a 
+SI.Position r_a[3]=position_a
     "从frame_a到长度约束的frame_a端的位置矢量，在平动体运动副的frame_a中解析";
-SI.Position r_b[3]=position_b 
+SI.Position r_b[3]=position_b
     "从frame_b到长度约束的frame_b端的位置矢量，在平动体运动副的frame_b中解析";
 SI.Position rbra[3] "=rb-ra";
 Real B "方程的系数B：s*s+B*s+C=0";
@@ -67,29 +67,29 @@ Real k1a(start=1);
 Real k1b;
 
 Visualizers.Advanced.Shape box(
-    shapeType="box", 
-    color=boxColor, 
-    specularCoefficient=specularCoefficient, 
-    length=if noEvent(abs(s + s_offset) > 1.e-6) then s + s_offset else 1.e-6, 
-    width=boxWidth, 
-    height=boxHeight, 
-    lengthDirection=e, 
-    widthDirection=boxWidthDirection, 
-    r=frame_a.r_0, 
+    shapeType="box",
+    color=boxColor,
+    specularCoefficient=specularCoefficient,
+    length=if noEvent(abs(s + s_offset) > 1.e-6) then s + s_offset else 1.e-6,
+    width=boxWidth,
+    height=boxHeight,
+    lengthDirection=e,
+    widthDirection=boxWidthDirection,
+    r=frame_a.r_0,
     R=frame_a.R) if world.enableAnimation and animation;
 
 public
-function selectBranch 
+function selectBranch
     "确定距离初始角度为0的最近的分支"
     extends Modelica.Icons.Function;
 input SI.Length L "长度约束的长度";
-input Real e[3](each final unit="1") 
+input Real e[3](each final unit="1")
     "沿平动轴的单位矢量，解析在frame_a中(在frame_b中相同)";
-input SI.Position d_guess 
+input SI.Position d_guess
     "选择配置，使得在初始时间|d-d_guess|最小(d：frame_a原点到frame_b原点的距离)";
-input SI.Position r_a[3] 
+input SI.Position r_a[3]
     "从frame_a到长度约束的frame_a端的位置矢量，在平动体运动副的frame_a中解析";
-input SI.Position r_b[3] 
+input SI.Position r_b[3]
     "从frame_b到长度约束的frame_b端的位置矢量，在平动体运动副的frame_b中解析";
 output Boolean positiveBranch "初始解的分支";
 
@@ -183,44 +183,44 @@ assert(noEvent(k1a > 1e-10), "
   distance = -k1 + (if positiveBranch then k2 else -k2);
   annotation (
     Icon(coordinateSystem(
-        preserveAspectRatio=true, 
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
-          extent={{-30,-40},{100,30}}, 
-          pattern=LinePattern.None, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid, 
-          lineColor={0,0,255}), 
-        Rectangle(extent={{-30,40},{100,-40}}), 
+          extent={{-30,-40},{100,30}},
+          pattern=LinePattern.None,
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid,
+          lineColor={0,0,255}),
+        Rectangle(extent={{-30,40},{100,-40}}),
         Rectangle(
-          extent={{-100,-60},{-30,50}}, 
-          pattern=LinePattern.None, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid, 
-          lineColor={0,0,255}), 
+          extent={{-100,-60},{-30,50}},
+          pattern=LinePattern.None,
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid,
+          lineColor={0,0,255}),
         Rectangle(
-          extent={{-100,50},{-30,60}}, 
-          pattern=LinePattern.None, 
-          fillPattern=FillPattern.Solid, 
-          lineColor={0,0,255}), 
+          extent={{-100,50},{-30,60}},
+          pattern=LinePattern.None,
+          fillPattern=FillPattern.Solid,
+          lineColor={0,0,255}),
         Rectangle(
-          extent={{-30,30},{100,40}}, 
-          pattern=LinePattern.None, 
-          fillPattern=FillPattern.Solid, 
-          lineColor={0,0,255}), 
+          extent={{-30,30},{100,40}},
+          pattern=LinePattern.None,
+          fillPattern=FillPattern.Solid,
+          lineColor={0,0,255}),
         Text(
-          extent={{-136,-170},{140,-113}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
-        Rectangle(extent={{-100,60},{-30,-60}}), 
-        Line(points={{100,-40},{100,-60}}, color={0,0,255}), 
+          extent={{-136,-170},{140,-113}},
+          textString="%name",
+          textColor={0,0,255}),
+        Rectangle(extent={{-100,60},{-30,-60}}),
+        Line(points={{100,-40},{100,-60}}, color={0,0,255}),
         Rectangle(
-          extent={{100,40},{90,80}}, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{100,40},{90,80}},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-136,-116},{153,-77}}, 
-          textString="n=%n")}), 
+          extent={{-136,-116},{153,-77}},
+          textString="n=%n")}),
     Documentation(info="<html>
 <p>
 该运动副使得frame_b沿着在frame_a中固定的轴n进行平动。

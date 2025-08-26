@@ -1,18 +1,18 @@
 ﻿within Modelica.Clocked.ClockSignals.Clocks.Rotational;
-block RotationalClock 
+block RotationalClock
   "每当观察到的输入角度发生变化时，基于给定的旋转间隔（作为可变输入）生成时钟跳变的事件时钟"
   extends PartialRotationalClock;
 
-  Modelica.Blocks.Interfaces.RealInput trigger_interval(unit = "rad") 
+  Modelica.Blocks.Interfaces.RealInput trigger_interval(unit = "rad")
     "输入角度必须变化达到的能触发下一个时钟跳变的旋转间隔" 
     annotation (Placement(transformation(extent = {{-140,40},{-100,80}})));
 
   ClockSignals.Clocks.EventClock y_clock(
-    useSolver = useSolver, 
+    useSolver = useSolver,
     solverMethod = solverMethod) 
     annotation (Placement(transformation(
-      extent = {{10,-10},{-10,10}}, 
-      rotation = 90, 
+      extent = {{10,-10},{-10,10}},
+      rotation = 90,
       origin = {70,-10})));
   RealSignals.Sampler.SampleClocked update_offset 
     annotation (Placement(transformation(extent = {{-78,-8},{-62,8}})));
@@ -36,94 +36,94 @@ block RotationalClock
     annotation (Placement(transformation(extent = {{-76,-54},{-64,-66}})));
 
 algorithm
-  assert(trigger_interval > 0 or trigger_interval < 0, 
+  assert(trigger_interval > 0 or trigger_interval < 0,
     "旋转时钟的旋转间隔必须大于零。");
 
 equation
   connect(angle, update_offset.u) 
     annotation (Line(
-      points = {{-120,0},{-79.6,0}}, 
+      points = {{-120,0},{-79.6,0}},
       color = {0,0,127}));
   connect(y_clock.y, update_offset.clock) 
     annotation (Line(
-      points = {{70,-21},{70,-30},{-70,-30},{-70,-9.6}}, 
-      color = {175,175,175}, 
-      pattern = LinePattern.Dot, 
+      points = {{70,-21},{70,-30},{-70,-30},{-70,-9.6}},
+      color = {175,175,175},
+      pattern = LinePattern.Dot,
       thickness = 0.5));
   connect(update_offset.y, angular_offset.u) 
     annotation (Line(
-      points = {{-61.2,0},{-49.6,0}}, 
+      points = {{-61.2,0},{-49.6,0}},
       color = {0,0,127}));
   connect(angular_offset.y,sub. u2) 
     annotation (Line(
-      points = {{-31.2,0},{-20,0},{-20,24},{-12,24}}, 
+      points = {{-31.2,0},{-20,0},{-20,24},{-12,24}},
       color = {0,0,127}));
   connect(less.y, y_clock.u) 
     annotation (Line(
-      points = {{81,38},{90,38},{90,10},{70,10},{70,2}}, 
+      points = {{81,38},{90,38},{90,10},{70,10},{70,2}},
       color = {255,0,255}));
   connect(y_clock.y, y) 
     annotation (Line(
-      points = {{70,-21},{70,-30},{90,-30},{90,0},{110,0}}, 
-      color = {175,175,175}, 
-      pattern = LinePattern.Dot, 
+      points = {{70,-21},{70,-30},{90,-30},{90,0},{110,0}},
+      color = {175,175,175},
+      pattern = LinePattern.Dot,
       thickness = 0.5));
   connect(sub.y, abs1.u) 
     annotation (Line(
-      points = {{11,30},{18,30}}, 
+      points = {{11,30},{18,30}},
       color = {0,0,127}));
   connect(angle, sub.u1) 
     annotation (Line(
-      points = {{-120,0},{-90,0},{-90,36},{-12,36}}, 
+      points = {{-120,0},{-90,0},{-90,36},{-12,36}},
       color = {0,0,127}));
   connect(trigger_interval, abs2.u) 
     annotation (Line(
-      points = {{-120,60},{18,60}}, 
+      points = {{-120,60},{18,60}},
       color = {0,0,127}));
   connect(abs1.y, less.u2) 
     annotation (Line(
-      points = {{41,30},{58,30}}, 
+      points = {{41,30},{58,30}},
       color = {0,0,127}));
   connect(abs2.y, less.u1) 
     annotation (Line(
-      points = {{41,60},{52,60},{52,38},{58,38}}, 
+      points = {{41,60},{52,60},{52,38},{58,38}},
       color = {0,0,127}));
   connect(direction_sign.y, cast.u) 
     annotation (Line(
-      points = {{-29,-60},{-12,-60}}, 
+      points = {{-29,-60},{-12,-60}},
       color = {0,0,127}));
   connect(cast.y, changed.u) 
     annotation (Line(
-      points = {{11,-60},{50,-60},{50,-80},{58,-80}}, 
+      points = {{11,-60},{50,-60},{50,-80},{58,-80}},
       color = {255,127,0}));
   connect(y_clock.y, update_direction.clock) 
     annotation (Line(
-      points = {{70,-21},{70,-30},{-70,-30},{-70,-52.8}}, 
-      color = {175,175,175}, 
-      pattern = LinePattern.Dot, 
+      points = {{70,-21},{70,-30},{-70,-30},{-70,-52.8}},
+      color = {175,175,175},
+      pattern = LinePattern.Dot,
       thickness = 0.5));
   connect(update_direction.y, direction_sign.u) 
     annotation (Line(
-      points = {{-63.4,-60},{-52,-60}}, 
+      points = {{-63.4,-60},{-52,-60}},
       color = {0,0,127}));
   connect(sub.y, update_direction.u) 
     annotation (Line(
-      points = {{11,30},{14,30},{14,-20},{-90,-20},{-90,-60},{-77.2,-60}}, 
+      points = {{11,30},{14,30},{14,-20},{-90,-20},{-90,-60},{-77.2,-60}},
       color = {0,0,127}));
   connect(changed.y, direction_changed) 
     annotation (Line(
-      points = {{81,-80},{110,-80}}, 
+      points = {{81,-80},{110,-80}},
       color = {255,0,255}));
   connect(cast.y, direction) 
     annotation (Line(
-      points = {{11,-60},{50,-60},{50,-40},{110,-40}}, 
+      points = {{11,-60},{50,-60},{50,-40},{110,-40}},
       color = {255,127,0}));
 
   annotation (
     Icon(graphics={
       Line(
-        points = {{-100,60},{-90,60},{-80,60}}, 
-        color = {0,0,127})}), 
+        points = {{-100,60},{-90,60},{-80,60}},
+        color = {0,0,127})}),
     Documentation(info="<html>
     对于一个简单的例子，请参见
     <a href=\"modelica://Modelica.Clocked.Examples.Elementary.ClockSignals.RotationalSample\">rotational sampling example</a>.

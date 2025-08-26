@@ -9,31 +9,31 @@ model VariableResistor "单相可变电阻"
   SI.Resistance R_actual "电阻 = R_ref*(1 + alpha_ref*(heatPort.T - T_ref))";
   Modelica.Blocks.Interfaces.RealInput R_ref(unit="Ohm") "可变电阻" 
                           annotation (Placement(transformation(
-        origin={0,120}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={0,120},
+        extent={{-20,-20},{20,20}},
         rotation=270), iconTransformation(
-        extent={{-20,-20},{20,20}}, 
-        rotation=270, 
+        extent={{-20,-20},{20,20}},
+        rotation=270,
         origin={0,120})));
 equation
-  assert((1 + alpha_ref*(T_heatPort - T_ref)) >= Modelica.Constants.eps, 
+  assert((1 + alpha_ref*(T_heatPort - T_ref)) >= Modelica.Constants.eps,
     "模型范围外的温度！");
   R_actual = R_ref*(1 + alpha_ref*(T_heatPort - T_ref));
   v = R_actual*i;
   LossPower = real(v*conj(i));
-  annotation (defaultComponentName="resistor", 
+  annotation (defaultComponentName="resistor",
     Icon(graphics={
-        Line(points={{60,0},{90,0}}, color={85,170,255}), 
-        Line(points={{-90,0},{-60,0}}, color={85,170,255}), 
+        Line(points={{60,0},{90,0}}, color={85,170,255}),
+        Line(points={{-90,0},{-60,0}}, color={85,170,255}),
         Rectangle(
-          extent={{-70,30},{70,-30}}, 
-          lineColor={85,170,255}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-70,30},{70,-30}},
+          lineColor={85,170,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,90},{150,50}}, 
-          textString="%name", 
-          textColor={0,0,255})}), 
+          extent={{-150,90},{150,50}},
+          textString="%name",
+          textColor={0,0,255})}),
     Documentation(info="<html>
 
 <p>

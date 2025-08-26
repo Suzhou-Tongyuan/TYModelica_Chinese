@@ -1,12 +1,12 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.Leakage;
-model QuarterCylinder 
+model QuarterCylinder
 "通过四分之一圆柱体从一个边缘到另一个平面的泄漏磁通量"
 
   extends BaseClasses.Leakage;
 
-  parameter SI.Length l=0.1 
+  parameter SI.Length l=0.1
   "轴向长度与通量正交(圆柱极=2*pi*r, r>>边与面之间的距离)" 
-    annotation (Dialog(group="Parameters", groupImage= 
+    annotation (Dialog(group="Parameters", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Leakage/QuarterCylinder.png"));
 equation
   G_m = mu_0*0.52*l;

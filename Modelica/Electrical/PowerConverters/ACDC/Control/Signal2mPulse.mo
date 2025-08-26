@@ -3,118 +3,118 @@ block Signal2mPulse "用于控制2*m脉冲整流器的通用控制器"
   import Modelica.Constants.pi;
   extends PowerConverters.Icons.Control;
   parameter Integer m(final min=1) = 3 "相数" annotation(Evaluate=true);
-  parameter Boolean useConstantFiringAngle=true 
+  parameter Boolean useConstantFiringAngle=true
     "使用恒定触发角而不是信号输入" annotation(Dialog(enable=useConstantFiringAngle));
   parameter SI.Angle constantFiringAngle=0 "触发角" 
     annotation(Dialog(enable=useConstantFiringAngle));
   parameter Boolean useFilter=true "启用滤波器使用" 
     annotation(Dialog(tab="Filter"));
   parameter SI.Frequency f=50 "频率";
-  parameter SI.Frequency fCut=2*f 
+  parameter SI.Frequency fCut=2*f
     "滤波器截止频率" 
     annotation(Dialog(tab="Filter", enable=useFilter));
-  parameter SI.Voltage vStart[m]=zeros(m) 
+  parameter SI.Voltage vStart[m]=zeros(m)
     "滤波器输出的起始电压" 
     annotation(Dialog(tab="Filter", enable=useFilter));
   Modelica.Blocks.Interfaces.RealInput firingAngle(unit="rad") if not 
     useConstantFiringAngle "触发角" annotation(Placement(
         transformation(
-        extent={{20,-20},{-20,20}}, 
-        rotation=270, 
+        extent={{20,-20},{-20,20}},
+        rotation=270,
         origin={0,-120})));
   parameter SI.Angle firingAngleMax(
-    final min=0, final max=pi) = Modelica.Constants.pi 
+    final min=0, final max=pi) = Modelica.Constants.pi
     "最大触发角";
   parameter SI.Angle firingAngleMin(
-    final min=0, final max=pi) = 0 
+    final min=0, final max=pi) = 0
     "最小触发角";
-  Modelica.Blocks.Sources.Constant constantconstantFiringAngle(final k= 
+  Modelica.Blocks.Sources.Constant constantconstantFiringAngle(final k=
         constantFiringAngle) if useConstantFiringAngle annotation (
       Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=180, 
+        extent={{10,-10},{-10,10}},
+        rotation=180,
         origin={-30,-80})));
-  Modelica.Blocks.Logical.GreaterThreshold positiveThreshold[m](threshold= 
+  Modelica.Blocks.Logical.GreaterThreshold positiveThreshold[m](threshold=
        zeros(m)) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={-60,-20})));
-  Modelica.Blocks.Logical.LessThreshold negativeThreshold[m](threshold= 
+  Modelica.Blocks.Logical.LessThreshold negativeThreshold[m](threshold=
         zeros(m)) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={60,-20})));
   Modelica.Blocks.Logical.Timer timerPositive[m] annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={-60,10})));
   Modelica.Blocks.Logical.Timer timerNegative[m] annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={60,10})));
   Modelica.Blocks.Logical.Greater greaterPositive[m] annotation (
       Placement(transformation(
-        extent={{10,10},{-10,-10}}, 
-        rotation=270, 
+        extent={{10,10},{-10,-10}},
+        rotation=270,
         origin={-60,80})));
   Modelica.Blocks.Logical.Greater greaterNegative[m] annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={60,80})));
   Modelica.Blocks.Interfaces.BooleanOutput fire_p[m] annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=90, 
+        extent={{-10,-10},{10,10}},
+        rotation=90,
         origin={-60,110})));
   Modelica.Blocks.Interfaces.BooleanOutput fire_n[m] annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=90, 
+        extent={{-10,-10},{10,10}},
+        rotation=90,
         origin={60,110})));
   Modelica.Blocks.Math.Gain gain(final k=1/pi)     annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={0,10})));
   Modelica.Blocks.Routing.Replicator replicator(final nout=m) annotation (
      Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={0,40})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=min(firingAngleMax, pi), 
+  Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=min(firingAngleMax, pi),
       final uMin=max(firingAngleMin, 0)) 
                                        annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={0,-20})));
   Modelica.Blocks.Interfaces.RealInput v[m](each unit="V") "电压" annotation (
       Placement(transformation(
-        extent={{-20,-20},{20,20}}, 
+        extent={{-20,-20},{20,20}},
         origin={-120,0})));
   Filter filter[m](
-    each final f=f, 
-    each final fCut=fCut, 
+    each final f=f,
+    each final fCut=fCut,
     yStart=vStart) if useFilter annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={-80,-80})));
   Modelica.Blocks.Routing.RealPassThrough realPassThrough[m] if not 
     useFilter "在滤波器关闭时通过" annotation (Placement(transformation(extent={{-90,-60},{-70,-40}})));
   Modelica.Blocks.Math.Gain gainPositive[m](each final k=2*f) annotation (
       Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={-60,40})));
   Modelica.Blocks.Math.Gain gainNegative[m](each final k=2*f) annotation (
       Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=270, 
+        extent={{10,-10},{-10,10}},
+        rotation=270,
         origin={60,40})));
 equation
-  assert(firingAngleMax>firingAngleMin, 
+  assert(firingAngleMax>firingAngleMin,
     "Signal2mPulse: firingAngleMax has to be greater than firingAngleMin");
   connect(positiveThreshold.y, timerPositive.u) annotation (Line(
       points={{-60,-9},{-60,-2}}, color={255,0,255}));
@@ -141,7 +141,7 @@ equation
   connect(filter.y, positiveThreshold.u) annotation (Line(
       points={{-69,-80},{-60,-80},{-60,-32}},color={0,0,127}));
   connect(filter.y, negativeThreshold.u) annotation (Line(
-      points={{-69,-80},{-60,-80},{-60,-50},{60,-50},{60,-32}}, 
+      points={{-69,-80},{-60,-80},{-60,-50},{60,-50},{60,-32}},
                     color={0,0,127}));
   connect(realPassThrough.u, v) annotation (Line(
       points={{-92,-50},{-100,-50},{-100,0},{-120,0}}, color={0,0,127}));
@@ -157,20 +157,20 @@ equation
     annotation (Line(points={{60,51},{60,68}}, color={0,0,127}));
   connect(timerNegative.y, gainNegative.u) 
     annotation (Line(points={{60,21},{60,28}}, color={0,0,127}));
-  annotation (defaultComponentName="adaptor", 
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
+  annotation (defaultComponentName="adaptor",
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}),graphics={Line(
-                points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40}, 
-            {-40,-60}}, 
+                points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},
+            {-40,-60}},
                 color={255,0,255}),Line(
-                points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20, 
-            -60}}, 
+                points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,
+            -60}},
                 color={255,0,255}),Text(
-                extent={{-40,60},{40,0}}, 
-                textColor={255,0,255}, 
-                textString="2*%m%")}), 
+                extent={{-40,60},{40,0}},
+                textColor={255,0,255},
+                textString="2*%m%")}),
     Documentation(revisions="<html>
-</html>", 
+</html>",
     info="<html>
 
 <p>

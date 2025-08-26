@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.Examples.Elementary.IntegerSignals;
-model SampleVectorizedAndClocked 
+model SampleVectorizedAndClocked
   "整数信号采样矢量化和时钟模块示例"
    extends Modelica.Icons.Example;
 
@@ -16,15 +16,15 @@ model SampleVectorizedAndClocked
     annotation (Placement(transformation(extent={{-80,-2},{-60,18}})));
 equation
   connect(periodicClock.y, sample1.clock) annotation (Line(
-      points={{-15.4,0},{-8,0},{-8,22.8}}, 
-      color={175,175,175}, 
-      pattern=LinePattern.Dot, 
+      points={{-15.4,0},{-8,0},{-8,22.8}},
+      color={175,175,175},
+      pattern=LinePattern.Dot,
       thickness=0.5));
-  connect(step1.y, sample1.u[1]) annotation (Line(points={{-59,8},{-38,8},{-38, 
+  connect(step1.y, sample1.u[1]) annotation (Line(points={{-59,8},{-38,8},{-38,
           29.4},{-15.2,29.4}}, color={255,127,0}));
-  connect(step2.y, sample1.u[2]) annotation (Line(points={{-59,40},{-38,40},{-38, 
+  connect(step2.y, sample1.u[2]) annotation (Line(points={{-59,40},{-38,40},{-38,
           30.6},{-15.2,30.6}}, color={255,127,0}));
-  annotation (experiment(StopTime=0.2), 
+  annotation (experiment(StopTime=0.2),
   Documentation(info="<html>
 <p>
 模块文件的基本范例 

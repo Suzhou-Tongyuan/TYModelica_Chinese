@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
-function inverseRotation 
+function inverseRotation
   "返回逆四元数方向的对象"
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q 
+  input Quaternions.Orientation Q
     "将坐标系 1旋转到坐标系 2的四元数方向对象";
-  output Quaternions.Orientation Q_inv 
+  output Quaternions.Orientation Q_inv
     "将坐标系 2旋转到坐标系 1的四元数方向对象";
 algorithm
   Q_inv := {-Q[1],-Q[2],-Q[3],Q[4]};

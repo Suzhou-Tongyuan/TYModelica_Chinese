@@ -1,5 +1,5 @@
 ﻿within Modelica.Fluid;
-model System 
+model System
   "系统属性和默认值(环境、流向、初始化)"
 
   package Medium = Modelica.Media.Interfaces.PartialMedium "默认介质" 
@@ -51,45 +51,45 @@ initial equation
   //       + " Please update the model to new system.use_eps_Re = true  (see system, Advanced tab). ***",
   //       level=AssertionLevel.warning);
   annotation (
-    defaultComponentName="system", 
-    defaultComponentPrefixes="inner", 
+    defaultComponentName="system",
+    defaultComponentPrefixes="inner",
     missingInnerMessage="
 您的模型使用了外部的 system 组件，但没有定义内部的 system 组件。
-为了进行模拟，请将 Modelica.Fluid.System 拖入您的模型以指定系统属性。", 
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100, 
+为了进行模拟，请将 Modelica.Fluid.System 拖入您的模型以指定系统属性。",
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={
         Rectangle(
-          extent={{-100,100},{100,-100}}, 
-          lineColor={0,0,255}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-100,100},{100,-100}},
+          lineColor={0,0,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{-150,150},{150,110}}, 
-          textColor={0,0,255}, 
-          textString="%name"), 
-        Line(points={{-86,-30},{82,-30}}), 
-        Line(points={{-82,-68},{-52,-30}}), 
-        Line(points={{-48,-68},{-18,-30}}), 
-        Line(points={{-14,-68},{16,-30}}), 
-        Line(points={{22,-68},{52,-30}}), 
-        Line(points={{74,84},{74,14}}), 
+          extent={{-150,150},{150,110}},
+          textColor={0,0,255},
+          textString="%name"),
+        Line(points={{-86,-30},{82,-30}}),
+        Line(points={{-82,-68},{-52,-30}}),
+        Line(points={{-48,-68},{-18,-30}}),
+        Line(points={{-14,-68},{16,-30}}),
+        Line(points={{22,-68},{52,-30}}),
+        Line(points={{74,84},{74,14}}),
         Polygon(
-          points={{60,14},{88,14},{74,-18},{60,14}}, 
-          fillPattern=FillPattern.Solid), 
+          points={{60,14},{88,14},{74,-18},{60,14}},
+          fillPattern=FillPattern.Solid),
         Text(
-          extent={{16,20},{60,-18}}, 
-          textString="g"), 
+          extent={{16,20},{60,-18}},
+          textString="g"),
         Text(
-          extent={{-90,82},{74,50}}, 
-          textString="defaults"), 
+          extent={{-90,82},{74,50}},
+          textString="defaults"),
         Line(
-          points={{-82,14},{-42,-20},{2,30}}, 
-          thickness=0.5), 
+          points={{-82,14},{-42,-20},{2,30}},
+          thickness=0.5),
         Ellipse(
-          extent={{-10,40},{12,18}}, 
-          pattern=LinePattern.None, 
-          fillColor={255,0,0}, 
-          fillPattern=FillPattern.Solid)}), 
+          extent={{-10,40},{12,18}},
+          pattern=LinePattern.None,
+          fillColor={255,0,0},
+          fillPattern=FillPattern.Solid)}),
     Documentation(info="<html><p>
 每个流体模型都需要一个系统组件来提供全系统设置，如环境条件和总体建模假设。 系统设置通过 “inner/outer”机制传递到流体模型中。
 </p>

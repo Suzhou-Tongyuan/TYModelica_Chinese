@@ -14,20 +14,20 @@ equation
   if (strayLoadParameters.PRef <= 0) then
     tau = 0;
   else
-    tau = -strayLoadParameters.tauRef*(iRMS/strayLoadParameters.IRef)^2* 
+    tau = -strayLoadParameters.tauRef*(iRMS/strayLoadParameters.IRef)^2*
       sign(w)*(abs(w)/strayLoadParameters.wRef)^strayLoadParameters.power_w;
   end if;
   lossPower = -tau*w;
-  annotation (defaultComponentName="strayLoss", Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+  annotation (defaultComponentName="strayLoss", Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={Rectangle(
-          extent={{-70,30},{70,-30}}, 
-          lineColor={85,170,255}, 
+          extent={{-70,30},{70,-30}},
+          lineColor={85,170,255},
           pattern=LinePattern.Dot), Line(
-          points={{-102,0},{100,0}}, 
-          color={85,170,255}), 
+          points={{-102,0},{100,0}},
+          color={85,170,255}),
         Text(
-          extent={{-150,90},{150,50}}, 
-          textColor={0,0,255}, 
+          extent={{-150,90},{150,50}},
+          textColor={0,0,255},
           textString="%name")}), Documentation(info="<html>
 <p>
 杂散负载损耗的建模与 EN 60034-2 和 IEEE 512 标准类似，即取决于电流的平方、

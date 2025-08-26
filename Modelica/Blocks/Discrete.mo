@@ -1,5 +1,5 @@
 ﻿within Modelica.Blocks;
-package Discrete 
+package Discrete
   "具有固定采样周期的离散输入/输出模块库"
 
   extends Modelica.Icons.Package;
@@ -13,23 +13,23 @@ package Discrete
     end when;
     annotation(
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Ellipse(lineColor = {0, 0, 127}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid, 
-      extent = {{25.0, -10.0}, {45.0, 10.0}}), 
-      Line(points = {{-100.0, 0.0}, {-45.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Line(points = {{45.0, 0.0}, {100.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Line(points = {{-35.0, 0.0}, {30.0, 35.0}}, 
-      color = {0, 0, 127}), 
-      Ellipse(lineColor = {0, 0, 127}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid, 
-      extent = {{-45.0, -10.0}, {-25.0, 10.0}})}), 
+      Ellipse(lineColor = {0, 0, 127},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid,
+      extent = {{25.0, -10.0}, {45.0, 10.0}}),
+      Line(points = {{-100.0, 0.0}, {-45.0, 0.0}},
+      color = {0, 0, 127}),
+      Line(points = {{45.0, 0.0}, {100.0, 0.0}},
+      color = {0, 0, 127}),
+      Line(points = {{-35.0, 0.0}, {30.0, 35.0}},
+      color = {0, 0, 127}),
+      Ellipse(lineColor = {0, 0, 127},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid,
+      extent = {{-45.0, -10.0}, {-25.0, 10.0}})}),
       Documentation(info="<html><p>
 以参数<strong>采样周期</strong>定义的采样率对连续输入信号进行采样。
 </p>
@@ -50,11 +50,11 @@ package Discrete
     y = pre(ySample);
     annotation(
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-78.0, -42.0}, {-52.0, -42.0}, {-52.0, 0.0}, {-26.0, 0.0}, {-26.0, 24.0}, {-6.0, 24.0}, {-6.0, 64.0}, {18.0, 64.0}, {18.0, 20.0}, {38.0, 20.0}, {38.0, 0.0}, {44.0, 0.0}, {44.0, 0.0}, {62.0, 0.0}}, 
-      color = {0, 0, 127})}), 
+      Line(points = {{-78.0, -42.0}, {-52.0, -42.0}, {-52.0, 0.0}, {-26.0, 0.0}, {-26.0, 24.0}, {-6.0, 24.0}, {-6.0, 64.0}, {18.0, 64.0}, {18.0, 20.0}, {38.0, 20.0}, {38.0, 0.0}, {44.0, 0.0}, {44.0, 0.0}, {62.0, 0.0}},
+      color = {0, 0, 127})}),
       Documentation(info="<html><p>
 <span style=\"color: rgb(51, 51, 51);\">输出在采样时刻与采样的输入信号相同，并在采样点期间保持输出为最后一个采样时刻的值。</span>
 </p>
@@ -86,13 +86,13 @@ package Discrete
     y = pre_uSample + pre(c) * (time - tSample);
     annotation(
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-79.0, -41.0}, {-59.0, -33.0}, {-40.0, 1.0}, {-20.0, 9.0}, {0.0, 63.0}, {21.0, 20.0}, {41.0, 10.0}, {60.0, 20.0}}, 
-      color = {0, 0, 127}), 
-      Line(points = {{60.0, 20.0}, {81.0, 10.0}}, 
-      color = {0, 0, 127})}), 
+      Line(points = {{-79.0, -41.0}, {-59.0, -33.0}, {-40.0, 1.0}, {-20.0, 9.0}, {0.0, 63.0}, {21.0, 20.0}, {41.0, 10.0}, {60.0, 20.0}},
+      color = {0, 0, 127}),
+      Line(points = {{60.0, 20.0}, {81.0, 10.0}},
+      color = {0, 0, 127})}),
       Documentation(info="<html><p>
 输出信号是对最后两个采样输入信号值的外推值。
 </p>
@@ -120,16 +120,16 @@ z</code></pre><p>
 也就是说，输出信号y就是前一个采样瞬间的输入信号u。 在第二个采样瞬间之前， 输出y与参数y_start相同。
 </p>
 </html>"), Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{-30.0, 0.0}, {30.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Text(textColor = {0, 0, 127}, 
-      extent = {{-90.0, 10.0}, {90.0, 90.0}}, 
-      textString = "1"), 
-      Text(textColor = {0, 0, 127}, 
-      extent = {{-90.0, -90.0}, {90.0, -10.0}}, 
+      Line(points = {{-30.0, 0.0}, {30.0, 0.0}},
+      color = {0, 0, 127}),
+      Text(textColor = {0, 0, 127},
+      extent = {{-90.0, 10.0}, {90.0, 90.0}},
+      textString = "1"),
+      Text(textColor = {0, 0, 127},
+      extent = {{-90.0, -90.0}, {90.0, -10.0}},
       textString = "z")}));
   end UnitDelay;
   block UnitDelayImproved "单位延迟块改进版本"
@@ -140,10 +140,10 @@ z</code></pre><p>
     output Real x[N](start = 0, fixed=true);
 
     Modelica.Blocks.Interfaces.RealInput u 
-      annotation (Placement(transformation(origin={-120,0}, 
+      annotation (Placement(transformation(origin={-120,0},
   extent={{-20,-20},{20,20}})));
     Modelica.Blocks.Interfaces.RealOutput y 
-      annotation (Placement(transformation(origin={110,2.220446049250313e-16}, 
+      annotation (Placement(transformation(origin={110,2.220446049250313e-16},
   extent={{-10,-10},{10,10}})));
   protected
     Real xext[N+1](each start=0, each fixed=true);
@@ -177,16 +177,16 @@ y = --- * u
 <br>
 </p>
 </html>"  ), Icon(
-      coordinateSystem(preserveAspectRatio=true, 
-        extent={{-100.0,-100.0},{100.0,100.0}}), 
+      coordinateSystem(preserveAspectRatio=true,
+        extent={{-100.0,-100.0},{100.0,100.0}}),
         graphics={
-      Line(points={{-30.0,0.0},{30.0,0.0}}, 
-        color={0,0,127}), 
-      Text(textColor={0,0,127}, 
-        extent={{-90.0,10.0},{90.0,90.0}}, 
-        textString="1"), 
-      Text(textColor={0,0,127}, 
-        extent={{-90.0,-90.0},{90.0,-10.0}}, 
+      Line(points={{-30.0,0.0},{30.0,0.0}},
+        color={0,0,127}),
+      Text(textColor={0,0,127},
+        extent={{-90.0,10.0},{90.0,90.0}},
+        textString="1"),
+      Text(textColor={0,0,127},
+        extent={{-90.0,-90.0},{90.0,-10.0}},
         textString="z")}));
   end UnitDelayImproved;
   block BooleanUnitDelay "布尔接口的单位延迟块"
@@ -218,20 +218,20 @@ z
 也就是说，输出信号y是前一个采样时刻的输入信号u。在第二个采样时刻之前，输出y与参数yStart相同。
 </p>
 
-</html>"  ), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, 
-      preserveAspectRatio = true, 
-      grid = {2, 2}), graphics = {Line(origin = {0, 0}, 
-      points = {{-30, 0}, {30, 0}}, 
-      color = {255, 0, 255}), Text(origin = {0, 50}, 
-      lineColor = {255, 0, 255}, 
-      extent = {{-90, -40}, {90, 40}}, 
-      textString = "1", 
-      textStyle = {TextStyle.None}, 
-      textColor = {255, 0, 255}), Text(origin = {0, -50}, 
-      lineColor = {255, 0, 255}, 
-      extent = {{-90, -40}, {90, 40}}, 
-      textString = "z", 
-      textStyle = {TextStyle.None}, 
+</html>"  ), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}},
+      preserveAspectRatio = true,
+      grid = {2, 2}), graphics = {Line(origin = {0, 0},
+      points = {{-30, 0}, {30, 0}},
+      color = {255, 0, 255}), Text(origin = {0, 50},
+      lineColor = {255, 0, 255},
+      extent = {{-90, -40}, {90, 40}},
+      textString = "1",
+      textStyle = {TextStyle.None},
+      textColor = {255, 0, 255}), Text(origin = {0, -50},
+      lineColor = {255, 0, 255},
+      extent = {{-90, -40}, {90, 40}},
+      textString = "z",
+      textStyle = {TextStyle.None},
       textColor = {255, 0, 255})}));
   end BooleanUnitDelay;
   block IntergerUnitDelay "整数接口的单位延迟块"
@@ -263,20 +263,20 @@ y = --- * u
 也就是说，输出信号y是前一个采样时刻的输入信号u。在第二个采样时刻之前，输出y与参数yStart相同。
 </p>
 
-</html>"  ), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, 
-      preserveAspectRatio = true, 
-      grid = {2, 2}), graphics = {Line(origin = {0, 0}, 
-      points = {{-30, 0}, {30, 0}}, 
-      color = {255, 127, 0}), Text(origin = {0, 50}, 
-      lineColor = {255, 127, 0}, 
-      extent = {{-90, -40}, {90, 40}}, 
-      textString = "1", 
-      textStyle = {TextStyle.None}, 
-      textColor = {255, 127, 0}), Text(origin = {0, -50}, 
-      lineColor = {255, 127, 0}, 
-      extent = {{-90, -40}, {90, 40}}, 
-      textString = "z", 
-      textStyle = {TextStyle.None}, 
+</html>"  ), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}},
+      preserveAspectRatio = true,
+      grid = {2, 2}), graphics = {Line(origin = {0, 0},
+      points = {{-30, 0}, {30, 0}},
+      color = {255, 127, 0}), Text(origin = {0, 50},
+      lineColor = {255, 127, 0},
+      extent = {{-90, -40}, {90, 40}},
+      textString = "1",
+      textStyle = {TextStyle.None},
+      textColor = {255, 127, 0}), Text(origin = {0, -50},
+      lineColor = {255, 127, 0},
+      extent = {{-90, -40}, {90, 40}},
+      textString = "z",
+      textStyle = {TextStyle.None},
       textColor = {255, 127, 0})}));
   end IntergerUnitDelay;
 
@@ -284,7 +284,7 @@ y = --- * u
     parameter Real b[:] = {1} "传递函数的分子系数";
     parameter Real a[:] = {1} "传递函数的分母系数";
     extends Interfaces.DiscreteSISO;
-    output Real x[size(a, 1) - 1](each start = 0, each fixed = true) 
+    output Real x[size(a, 1) - 1](each start = 0, each fixed = true)
       "从控制模块规范形式的传递函数状态";
   protected
     parameter Integer nb = size(b, 1) "传递函数的分子大小";
@@ -317,10 +317,13 @@ y = --- * u
       Documentation(info = "<html><p>
 <strong>离散传递函数</strong> 模块定义输入信号u与输出信号y之间的传递函数， 分子为nb-1阶， 分母为na-1阶。
 </p>
-<pre><code >b(1)*z^(nb-1) + b(2)*z^(nb-2) + ... + b(nb)
+<blockquote><pre>
+       b(1)*z^(nb-1) + b(2)*z^(nb-2) + ... + b(nb)
 y(z) = -------------------------------------------- * u(z)
-a(1)*z^(na-1) + a(2)*z^(na-2) + ... + a(na)</code></pre><p>
-状态变量<strong>x</strong> 按照<strong>控制模块规范</strong>形式定义。 状态的初始值可以设置为<strong>x</strong>的起始值。
+       a(1)*z^(na-1) + a(2)*z^(na-2) + ... + a(na)
+</pre></blockquote>
+<p>
+状态变量<strong>x</strong>按照<strong>控制模块规范</strong>形式定义。状态的初始值可以设置为<strong>x</strong>的起始值。
 </p>
 <p>
 示例:
@@ -328,9 +331,12 @@ a(1)*z^(na-1) + a(2)*z^(na-2) + ... + a(na)</code></pre><p>
 <pre><code >Blocks.Discrete.TransferFunction g(b = {2,4}, a = {1,3});</code></pre><p>
 得到传递函数如下：
 </p>
-<pre><code >2*z + 4
+<blockquote><pre>
+     2*z + 4
 y = --------- * u
-z + 3</code></pre><p>
+      z + 3
+</pre></blockquote>
+<p>
 <br>
 </p>
 </html>"  , revisions = "<html>
@@ -343,27 +349,110 @@ by <a href=\"http://www.dynasim.se\">Hans Olsson</a>:<br>
 by <a href=\"http://www.robotic.dlr.de/Martin.Otter/\">Martin Otter</a>:<br>
 该模型基于Dieter Moormann和Hilding Elmqvist的相应模型实现。</li>
 </ul>
-</html>"  ), 
+</html>"  ),
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Line(points = {{82.0, 0.0}, {-84.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Text(textColor = {0, 0, 127}, 
-      extent = {{-92.0, 12.0}, {86.0, 92.0}}, 
-      textString = "b(z)"), 
-      Text(textColor = {0, 0, 127}, 
-      extent = {{-90.0, -90.0}, {90.0, -12.0}}, 
+      Line(points = {{82.0, 0.0}, {-84.0, 0.0}},
+      color = {0, 0, 127}),
+      Text(textColor = {0, 0, 127},
+      extent = {{-92.0, 12.0}, {86.0, 92.0}},
+      textString = "b(z)"),
+      Text(textColor = {0, 0, 127},
+      extent = {{-90.0, -90.0}, {90.0, -12.0}},
       textString = "a(z)")}));
   end TransferFunction;
+  block TransferFunctionDia "离散传递函数模块，动态图标显示"
+    parameter Real b[:] = {1} "传递函数的分子系数";
+    parameter Real a[:] = {1} "传递函数的分母系数";
+    extends Interfaces.DiscreteSISO;
+    output Real x[size(a, 1) - 1](each start = 0, each fixed = true)
+      "从控制模块规范形式的传递函数状态";
+  protected
+    parameter Integer nb = size(b, 1) "传递函数的分子大小";
+    parameter Integer na = size(a, 1) "传递函数的分母大小";
+    Real x1(start = 0, fixed = true);
+    Real xext[size(a, 1)](each start = 0, each fixed = true);
+
+  equation
+    when sampleTrigger then
+      /* 按照控制器规范形式定义状态变量x */
+      x1 = (u - a[2:size(a, 1)] * pre(x)) / a[1];
+      xext = vector([x1; pre(x)]);
+      x = xext[1:size(x, 1)];
+      y = vector([zeros(na - nb, 1); b]) * xext;
+    end when;
+    /* 这是一个非抽样方程，上面有两个单独的when子句。
+    这打破了没有直接条款的反馈循环，
+    因为在这种情况下，
+    y与x1无关(只取决于pre(x))。
+    */
+    /* 使用Modelica1.3语义的对应(更简单)版本：
+    equation
+    when sampleTrigger then
+    [x; xn] = [x1; pre(x)];
+    [u] = transpose([a])*[x1; pre(x)];
+    [y] = transpose([zeros(na - nb, 1); b])*[x1; pre(x)];
+    end when;
+    */
+    annotation(
+      Documentation(info = "<html><p>
+<strong>离散传递函数</strong> 模块定义输入信号u与输出信号y之间的传递函数， 分子为nb-1阶， 分母为na-1阶。
+</p>
+<blockquote><pre>
+       b(1)*z^(nb-1) + b(2)*z^(nb-2) + ... + b(nb)
+y(z) = -------------------------------------------- * u(z)
+       a(1)*z^(na-1) + a(2)*z^(na-2) + ... + a(na)
+</pre></blockquote>
+<p>
+状态变量<strong>x</strong>按照<strong>控制模块规范</strong>形式定义。状态的初始值可以设置为<strong>x</strong>的起始值。
+</p>
+<p>
+示例:
+</p>
+<pre><code >Blocks.Discrete.TransferFunction g(b = {2,4}, a = {1,3});</code></pre><p>
+得到传递函数如下：
+</p>
+<blockquote><pre>
+     2*z + 4
+y = --------- * u
+      z + 3
+</pre></blockquote>
+<p>
+<br>
+</p>
+</html>"  , revisions = "<html>
+<p><strong>Release Notes:</strong></p>
+<ul>
+<li><em>November 15, 2000</em>
+by <a href=\"http://www.dynasim.se\">Hans Olsson</a>:<br>
+转换为Modelica 1.4的when语义，并特别注意避免不必要的代数环路。</li>
+<li><em>June 18, 2000</em>
+by <a href=\"http://www.robotic.dlr.de/Martin.Otter/\">Martin Otter</a>:<br>
+该模型基于Dieter Moormann和Hilding Elmqvist的相应模型实现。</li>
+</ul>
+</html>"  ),
+      Icon(
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
+      graphics = {
+      Line(points = {{82.0, 0.0}, {-84.0, 0.0}},
+      color = {0, 0, 127}),
+      Text(textColor = {0, 0, 127},
+      extent = {{-92.0, 12.0}, {86.0, 92.0}},
+      textString = "%{b(polynomial_z)}"),
+      Text(textColor = {0, 0, 127},
+      extent = {{-90.0, -90.0}, {90.0, -12.0}},
+      textString = "%{a(polynomial_z)}")}));
+  end TransferFunctionDia;
 
   block StateSpace "离散状态空间模块"
-    parameter Real A[:,size(A, 1)] = [1, 0; 0, 1] 
+    parameter Real A[:,size(A, 1)] = [1, 0; 0, 1]
       "状态空间模型的矩阵A";
     parameter Real B[size(A, 1),:] = [1; 1] "状态空间模型的矩阵B";
     parameter Real C[:,size(A, 1)] = [1, 1] "状态空间模型的矩阵C";
-    parameter Real D[size(C, 1),size(B, 2)] = zeros(size(C, 1), size(B, 2)) 
+    parameter Real D[size(C, 1),size(B, 2)] = zeros(size(C, 1), size(B, 2))
       "状态空间模型的矩阵D";
 
     extends Interfaces.DiscreteMIMO(final nin = size(B, 2), final nout = size(C, 1));
@@ -406,27 +495,27 @@ y[1]   = [0.1  2.0] * [         ] + [0  0] * [    ]
 <br>
 </p>
 </html>"), Icon(coordinateSystem(
-      preserveAspectRatio = true, 
+      preserveAspectRatio = true,
       extent = {{-100, -100}, {100, 100}}), graphics = {
       Text(
-      extent = {{-90, 15}, {-15, 90}}, 
-      textString = "A", 
-      textColor = {0, 0, 127}), 
+      extent = {{-90, 15}, {-15, 90}},
+      textString = "A",
+      textColor = {0, 0, 127}),
       Text(
-      extent = {{15, 15}, {90, 90}}, 
-      textString = "B", 
-      textColor = {0, 0, 127}), 
+      extent = {{15, 15}, {90, 90}},
+      textString = "B",
+      textColor = {0, 0, 127}),
       Text(
-      extent = {{-52, 28}, {54, -20}}, 
-      textString = "z", 
-      textColor = {0, 0, 127}), 
+      extent = {{-52, 28}, {54, -20}},
+      textString = "z",
+      textColor = {0, 0, 127}),
       Text(
-      extent = {{-90, -15}, {-15, -90}}, 
-      textString = "C", 
-      textColor = {0, 0, 127}), 
+      extent = {{-90, -15}, {-15, -90}},
+      textString = "C",
+      textColor = {0, 0, 127}),
       Text(
-      extent = {{15, -15}, {90, -90}}, 
-      textString = "D", 
+      extent = {{15, -15}, {90, -90}},
+      textString = "D",
       textColor = {0, 0, 127})}));
   end StateSpace;
 
@@ -437,13 +526,13 @@ y[1]   = [0.1  2.0] * [         ] + [0  0] * [    ]
     Modelica.Blocks.Interfaces.RealInput u "带实数输入信号的连接器" 
       annotation(Placement(
       transformation(extent = {{-140, -20}, {-100, 20}})));
-    Modelica.Blocks.Interfaces.RealOutput y 
+    Modelica.Blocks.Interfaces.RealOutput y
       "带实数输出信号的连接器" annotation(Placement(
       transformation(extent = {{100, -10}, {120, 10}})));
     Modelica.Blocks.Interfaces.BooleanInput trigger "触发输入" annotation(Placement(
       transformation(
-      origin = {0, -118}, 
-      extent = {{-20, -20}, {20, 20}}, 
+      origin = {0, -118},
+      extent = {{-20, -20}, {20, 20}},
       rotation = 90)));
   equation
     when trigger then
@@ -453,25 +542,25 @@ y[1]   = [0.1  2.0] * [         ] + [0  0] * [    ]
     y = y_start;
     annotation(
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Ellipse(lineColor = {0, 0, 127}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid, 
-      extent = {{25.0, -10.0}, {45.0, 10.0}}), 
-      Line(points = {{-100.0, 0.0}, {-45.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Line(points = {{45.0, 0.0}, {100.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Line(points = {{0.0, -100.0}, {0.0, -26.0}}, 
-      color = {255, 0, 255}), 
-      Line(points = {{-35.0, 0.0}, {28.0, -48.0}}, 
-      color = {0, 0, 127}), 
-      Ellipse(lineColor = {0, 0, 127}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid, 
-      extent = {{-45.0, -10.0}, {-25.0, 10.0}})}), 
+      Ellipse(lineColor = {0, 0, 127},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid,
+      extent = {{25.0, -10.0}, {45.0, 10.0}}),
+      Line(points = {{-100.0, 0.0}, {-45.0, 0.0}},
+      color = {0, 0, 127}),
+      Line(points = {{45.0, 0.0}, {100.0, 0.0}},
+      color = {0, 0, 127}),
+      Line(points = {{0.0, -100.0}, {0.0, -26.0}},
+      color = {255, 0, 255}),
+      Line(points = {{-35.0, 0.0}, {28.0, -48.0}},
+      color = {0, 0, 127}),
+      Ellipse(lineColor = {0, 0, 127},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid,
+      extent = {{-45.0, -10.0}, {-25.0, 10.0}})}),
       Documentation(info = "<html>
 <p>
 每当触发输入信号上升(即触发由<strong>false</strong>变<strong>true</strong>)时，
@@ -483,20 +572,20 @@ y[1]   = [0.1  2.0] * [         ] + [0  0] * [    ]
 </html>"  ));
   end TriggeredSampler;
 
-  block TriggeredMax 
+  block TriggeredMax
     "计算触发时刻连续信号的最大绝对值"
 
     extends Modelica.Blocks.Icons.DiscreteBlock;
     Modelica.Blocks.Interfaces.RealInput u "带实数输入信号的连接器" 
       annotation(Placement(transformation(
       extent = {{-140, -20}, {-100, 20}})));
-    Modelica.Blocks.Interfaces.RealOutput y 
+    Modelica.Blocks.Interfaces.RealOutput y
       "带实数输出信号的连接器" annotation(Placement(
       transformation(extent = {{100, -10}, {120, 10}})));
     Modelica.Blocks.Interfaces.BooleanInput trigger annotation(Placement(
       transformation(
-      origin = {0, -118}, 
-      extent = {{-20, -20}, {20, 20}}, 
+      origin = {0, -118},
+      extent = {{-20, -20}, {20, 20}},
       rotation = 90)));
   equation
     when trigger then
@@ -506,28 +595,28 @@ y[1]   = [0.1  2.0] * [         ] + [0  0] * [    ]
     y = 0;
     annotation(
       Icon(
-      coordinateSystem(preserveAspectRatio = true, 
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
+      coordinateSystem(preserveAspectRatio = true,
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
       graphics = {
-      Ellipse(lineColor = {0, 0, 127}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid, 
-      extent = {{25.0, -10.0}, {45.0, 10.0}}), 
-      Line(points = {{-100.0, 0.0}, {-45.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Line(points = {{45.0, 0.0}, {100.0, 0.0}}, 
-      color = {0, 0, 127}), 
-      Line(points = {{0.0, -100.0}, {0.0, -26.0}}, 
-      color = {255, 0, 255}), 
-      Line(points = {{-35.0, 0.0}, {28.0, -48.0}}, 
-      color = {0, 0, 127}), 
-      Text(extent = {{-86.0, 24.0}, {82.0, 82.0}}, 
-      color = {0, 0, 127}, 
-      textString = "max"), 
-      Ellipse(lineColor = {0, 0, 127}, 
-      fillColor = {255, 255, 255}, 
-      fillPattern = FillPattern.Solid, 
-      extent = {{-45.0, -10.0}, {-25.0, 10.0}})}), 
+      Ellipse(lineColor = {0, 0, 127},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid,
+      extent = {{25.0, -10.0}, {45.0, 10.0}}),
+      Line(points = {{-100.0, 0.0}, {-45.0, 0.0}},
+      color = {0, 0, 127}),
+      Line(points = {{45.0, 0.0}, {100.0, 0.0}},
+      color = {0, 0, 127}),
+      Line(points = {{0.0, -100.0}, {0.0, -26.0}},
+      color = {255, 0, 255}),
+      Line(points = {{-35.0, 0.0}, {28.0, -48.0}},
+      color = {0, 0, 127}),
+      Text(extent = {{-86.0, 24.0}, {82.0, 82.0}},
+      color = {0, 0, 127},
+      textString = "max"),
+      Ellipse(lineColor = {0, 0, 127},
+      fillColor = {255, 255, 255},
+      fillPattern = FillPattern.Solid,
+      extent = {{-45.0, -10.0}, {-25.0, 10.0}})}),
       Documentation(info = "<html>
 <p>
 每当触发输入信号上升
@@ -565,18 +654,18 @@ y[1]   = [0.1  2.0] * [         ] + [0  0] * [    ]
        Hilding Elmqvist.</li>
 </ul>
 </html>"), Icon(graphics = {
-    Line(points = {{-88, 0}, {-45, 0}}, color = {95, 95, 95}), 
+    Line(points = {{-88, 0}, {-45, 0}}, color = {95, 95, 95}),
     Ellipse(
-    lineColor = {95, 95, 95}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid, 
-    extent = {{-45, -10}, {-25, 10}}), 
-    Line(points = {{-35, 0}, {24, 52}}, color = {95, 95, 95}), 
+    lineColor = {95, 95, 95},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid,
+    extent = {{-45, -10}, {-25, 10}}),
+    Line(points = {{-35, 0}, {24, 52}}, color = {95, 95, 95}),
     Ellipse(
-    lineColor = {95, 95, 95}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid, 
-    extent = {{25, -10}, {45, 10}}), 
+    lineColor = {95, 95, 95},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid,
+    extent = {{25, -10}, {45, 10}}),
     Line(points = {{45, 0}, {82, 0}}, color = {95, 95, 95})}));
   model SlidingModeController "基于迟滞的滑模控制"
 
@@ -588,45 +677,45 @@ y[1]   = [0.1  2.0] * [         ] + [0  0] * [    ]
   parameter Real Ts(start = 0.02, unit = 1) "连续块执行之间的块采样时间，以s为单位。在执行过程中，块产生输出，并在适当的情况下更新其内部状态 ";
 
     Modelica.Blocks.Interfaces.RealInput r "Plant系统参考信号" 
-      annotation (Placement(transformation(origin={-120.131,39.5511}, 
+      annotation (Placement(transformation(origin={-120.131,39.5511},
   extent={{-20,-20},{20,20}})));
     Modelica.Blocks.Interfaces.RealInput y "Plant系统输出信号" 
-      annotation (Placement(transformation(origin={-120.132,-40.6601}, 
+      annotation (Placement(transformation(origin={-120.132,-40.6601},
   extent={{-20,-20},{20,20}})));
     Modelica.Blocks.Interfaces.RealOutput u "控制系统输出信号" 
-      annotation (Placement(transformation(origin={110.152,5.41254e-5}, 
+      annotation (Placement(transformation(origin={110.152,5.41254e-5},
   extent={{-10,-10},{10,10}})));
     Modelica.Blocks.Math.Feedback feedback 
-      annotation (Placement(transformation(origin={-68.0132,39.5512}, 
+      annotation (Placement(transformation(origin={-68.0132,39.5512},
   extent={{-10,-10},{10,10}})));
     Modelica.Blocks.Discrete.TransferFunction transferFunction(samplePeriod=Ts,b={1, -1},a=Ts * {1, 0}) 
-      annotation (Placement(transformation(origin={-30.605,2.13064}, 
+      annotation (Placement(transformation(origin={-30.605,2.13064},
   extent={{-10,-10},{10,10}})));
     Modelica.Blocks.Math.Add add 
-      annotation (Placement(transformation(origin={8.13199,33.637}, 
+      annotation (Placement(transformation(origin={8.13199,33.637},
   extent={{-10,-10},{10,10}})));
     Modelica.Blocks.Nonlinear.Relay relay(ov=uplim,cv=lowlim,op=band/2,cp=-band/2) 
-      annotation (Placement(transformation(origin={51.0099,33.6369}, 
+      annotation (Placement(transformation(origin={51.0099,33.6369},
   extent={{-10,-10},{10,10}})));
     Modelica.Blocks.Math.Gain gain(k=lambda) 
-      annotation (Placement(transformation(origin={-26.7131,39.7914}, 
+      annotation (Placement(transformation(origin={-26.7131,39.7914},
   extent={{-10,-10},{10,10}})));
-    annotation(Icon(coordinateSystem(extent={{-100,-100},{100,100}}, 
-  grid={2,2}),graphics = {Text(origin={-77,39.5511}, 
-  lineColor={0,0,127}, 
-  extent={{-39,36.6633},{39,-36.6633}}, 
-  textString="r", 
-  textStyle={TextStyle.None}, 
-  textColor={0,0,127}), Text(origin={-77,-28.9901}, 
-  lineColor={0,0,127}, 
-  extent={{-39,31.67},{39,-31.67}}, 
-  textString="y", 
-  textStyle={TextStyle.None}, 
-  textColor={0,0,127}), Text(origin={74.5,5.41254e-5}, 
-  lineColor={0,0,127}, 
-  extent={{-32.5,36.663325},{32.5,-36.6633}}, 
-  textString="u", 
-  textStyle={TextStyle.None}, 
+    annotation(Icon(coordinateSystem(extent={{-100,-100},{100,100}},
+  grid={2,2}),graphics = {Text(origin={-77,39.5511},
+  lineColor={0,0,127},
+  extent={{-39,36.6633},{39,-36.6633}},
+  textString="r",
+  textStyle={TextStyle.None},
+  textColor={0,0,127}), Text(origin={-77,-28.9901},
+  lineColor={0,0,127},
+  extent={{-39,31.67},{39,-31.67}},
+  textString="y",
+  textStyle={TextStyle.None},
+  textColor={0,0,127}), Text(origin={74.5,5.41254e-5},
+  lineColor={0,0,127},
+  extent={{-32.5,36.663325},{32.5,-36.6633}},
+  textString="u",
+  textStyle={TextStyle.None},
   textColor={0,0,127})}),Documentation(info="<html><p style=\"text-align: start;\">滑模控制器块实现基于迟滞的滑模控制（SMC）。
 </p>
 <p style=\"text-align: start;\">滑模控制器的结构如下：
@@ -653,36 +742,36 @@ U(s)     Ts z</code></pre><p style=\"text-align: start;\">注意:
 </html>"));
     equation
     connect(r, feedback.u1) 
-    annotation(Line(origin={-118.525,39.6568}, 
-  points={{-1.60666,-0.105663},{42.5116,-0.105663},{42.5116,-0.1056}}, 
+    annotation(Line(origin={-118.525,39.6568},
+  points={{-1.60666,-0.105663},{42.5116,-0.105663},{42.5116,-0.1056}},
   color={0,0,127}));
     connect(feedback.u2, y) 
-    annotation(Line(origin={-114.525,-0.343234}, 
-  points={{46.5116,31.8944},{46.5116,-40.3168},{-5.60702,-40.3168}}, 
+    annotation(Line(origin={-114.525,-0.343234},
+  points={{46.5116,31.8944},{46.5116,-40.3168},{-5.60702,-40.3168}},
   color={0,0,127}));
     connect(transferFunction.u, feedback.y) 
-    annotation(Line(origin={-41.5248,8.65677}, 
-  points={{-1.08023,-6.52613},{-7.5082,-6.52613},{-7.5082,30.89443},{-17.4884,30.89443}}, 
+    annotation(Line(origin={-41.5248,8.65677},
+  points={{-1.08023,-6.52613},{-7.5082,-6.52613},{-7.5082,30.89443},{-17.4884,30.89443}},
   color={0,0,127}),__MWORKS(BlockSystem(NamedSignal)));
     connect(transferFunction.y, add.u2) 
-    annotation(Line(origin={16.4752,2.65677}, 
-  points={{-36.0802,-0.526126},{-25.8878,-0.526126},{-25.8878,24.98023},{-20.34321,24.98023}}, 
+    annotation(Line(origin={16.4752,2.65677},
+  points={{-36.0802,-0.526126},{-25.8878,-0.526126},{-25.8878,24.98023},{-20.34321,24.98023}},
   color={0,0,127}));
     connect(add.y, relay.u) 
-    annotation(Line(origin={54.4752,35.6568}, 
-  points={{-35.3433,-2.01981},{-15.4786,-2.01981},{-15.4786,-2.09378}}, 
+    annotation(Line(origin={54.4752,35.6568},
+  points={{-35.3433,-2.01981},{-15.4786,-2.01981},{-15.4786,-2.09378}},
   color={0,0,127}));
     connect(relay.y, u) 
-    annotation(Line(origin={133.475,34.6568}, 
-  points={{-71.4132,-1.01985},{-53.6334,-1.01985},{-53.6334,-34.6567},{-23.3232,-34.6567}}, 
+    annotation(Line(origin={133.475,34.6568},
+  points={{-71.4132,-1.01985},{-53.6334,-1.01985},{-53.6334,-34.6567},{-23.3232,-34.6567}},
   color={0,0,127}));
     connect(gain.y, add.u1) 
-    annotation(Line(origin={-10,39}, 
-  points={{-5.71306,0.791352},{6.13199,0.791352},{6.13199,0.637}}, 
+    annotation(Line(origin={-10,39},
+  points={{-5.71306,0.791352},{6.13199,0.791352},{6.13199,0.637}},
   color={0,0,127}));
     connect(gain.u, feedback.y) 
-    annotation(Line(origin={-49,39}, 
-  points={{10.2869,0.791352},{-10.0132,0.791352},{-10.0132,0.5512}}, 
+    annotation(Line(origin={-49,39},
+  points={{10.2869,0.791352},{-10.0132,0.791352},{-10.0132,0.5512}},
   color={0,0,127}),__MWORKS(BlockSystem(NamedSignal)));
     end SlidingModeController;
 end Discrete;

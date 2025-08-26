@@ -1,13 +1,13 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
-function absoluteRotation 
+function absoluteRotation
   "返回另一个绝对四元数方向对象的绝对四元数方向对象"
 
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q1 
+  input Quaternions.Orientation Q1
     "将坐标系0旋转到坐标系1的四元数方向对象";
-  input Quaternions.Orientation Q_rel 
+  input Quaternions.Orientation Q_rel
     "将坐标系1旋转到坐标系2的相对四元数方向对象";
-  output Quaternions.Orientation Q2 
+  output Quaternions.Orientation Q2
     "将坐标系0旋转到坐标系2的四元数方向对象";
 algorithm
   Q2 := [Q_rel[4], Q_rel[3], -Q_rel[2], Q_rel[1]; -Q_rel[3], Q_rel[4],

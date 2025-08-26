@@ -276,33 +276,33 @@ Zeunerstra&szlig;e 38<br />
       extends Modelica.Icons.Example;
 
       Semiconductors.M_PMOS mp(modelcard(
-          RD=0, 
-          RS=0, 
-          CBD=0, 
+          RD=0,
+          RS=0,
+          CBD=0,
           CBS=0), Sinternal(start=0),IC=-1e40) 
         annotation (Placement(transformation(extent={{-14,8},{6,28}})));
       Semiconductors.M_NMOS mn(modelcard(
-          RD=0, 
-          RS=0, 
-          CBD=0, 
+          RD=0,
+          RS=0,
+          CBD=0,
           CBS=0), IC=-1e40) 
         annotation (Placement(transformation(extent={{-14,-34},{6,-14}})));
       Basic.Ground ground 
         annotation (Placement(transformation(extent={{-14,-60},{6,-40}})));
       Sources.V_pulse vin(
-        V2=5, 
-        TD=4e-12, 
-        TR=0.1e-12, 
-        TF=0.1e-12, 
-        PW=1e-12, 
+        V2=5,
+        TD=4e-12,
+        TR=0.1e-12,
+        TF=0.1e-12,
+        PW=1e-12,
         PER=2e-12) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-40,-16})));
       Sources.V_pulse v(V2=5, TR=0.1e-12) annotation (Placement(
             transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={40,-4})));
     equation
       connect(mn.D, mp.S) annotation (Line(
@@ -317,16 +317,16 @@ Zeunerstra&szlig;e 38<br />
           points={{-4,-34},{-4,-40}}));
       connect(v.p, mp.D) annotation (Line(
           points={{40,6},{40,28},{-4,28}}, color={0,0,255}));
-      connect(v.n, ground.p) annotation (Line(points={{40,-14},{40,-40},{-4,-40}}, 
+      connect(v.n, ground.p) annotation (Line(points={{40,-14},{40,-40},{-4,-40}},
             color={0,0,255}));
       connect(vin.p, mp.G) annotation (Line(
           points={{-40,-6},{-40,17.9},{-14,17.9}}, color={0,0,255}));
-      connect(vin.n, ground.p) annotation (Line(points={{-40,-26},{-40,-40},{-4, 
+      connect(vin.n, ground.p) annotation (Line(points={{-40,-26},{-40,-40},{-4,
               -40}}, color={0,0,255}));
       annotation (experiment(
-          StopTime=1e-11, 
-          Interval=5e-15, 
-          Tolerance=1e-7), 
+          StopTime=1e-11,
+          Interval=5e-15,
+          Tolerance=1e-7),
         Documentation(info="<html>
 <p>反相器是由PMOS和NMOS晶体管组成的电路。其任务是将输入电压从高电势转换为低电势，反之亦然。</p>
 <p>示例的仿真时长为1e-11秒。示例会在特定界面显示输入电压vin.p.v以及输出电压mp.S.v的图像。图像显示输入电压被反相。</p>
@@ -337,17 +337,17 @@ Zeunerstra&szlig;e 38<br />
 </html>"      ));
     end Inverter;
 
-    model InvertersApartRecord 
+    model InvertersApartRecord
       "使用不同的模型参数实例的两个反相器"
       extends Modelica.Icons.Example;
 
-      Basic.Ground ground annotation (Placement(transformation(extent={{-38,-80}, 
+      Basic.Ground ground annotation (Placement(transformation(extent={{-38,-80},
                 {-18,-60}})));
     //--------------------------------------------------------------------------------------------------------------
     /*独立记录：对于电路中的每个晶体管，都可以通过记录模型卡片参数的实例来提供记录*/
-      parameter Semiconductors.ModelcardMOS MPmos(GAMMA=0.37, CBD=0, CBS=0) 
+      parameter Semiconductors.ModelcardMOS MPmos(GAMMA=0.37, CBD=0, CBS=0)
         "MPmos的指定模型卡片MOS"; //记录模型卡片的实例
-      parameter Semiconductors.ModelcardMOS MNmos(GAMMA=0.37, LAMBDA=0.02, CBD=0, CBS=0) 
+      parameter Semiconductors.ModelcardMOS MNmos(GAMMA=0.37, LAMBDA=0.02, CBD=0, CBS=0)
         "MNmos的指定模型卡片MOS"; //记录模型卡片的实例
       Semiconductors.M_PMOS mp1(modelcard=MPmos, IC=-1e40) 
                 annotation (Placement(transformation(extent={{-38,20},{-18,40}})));
@@ -359,71 +359,71 @@ Zeunerstra&szlig;e 38<br />
                 annotation (Placement(transformation(extent={{2,-30},{22,-10}})));
     //--------------------------------------------------------------------------------------------------------------
 
-      Basic.C_Capacitor c1(C=1e-5, 
-        IC=0, 
+      Basic.C_Capacitor c1(C=1e-5,
+        IC=0,
         UIC=true) 
         annotation (Placement(transformation(
-            origin={-8,-30}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={-8,-30},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
-      Basic.C_Capacitor c2(C=1e-5, 
-        IC=0, 
+      Basic.C_Capacitor c2(C=1e-5,
+        IC=0,
         UIC=true) 
         annotation (Placement(transformation(
-            origin={34,-30}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={34,-30},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
 
       Sources.V_pulse vin(
-        V2=5, 
-        TD=2, 
+        V2=5,
+        TD=2,
         TR=1) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-60,-32})));
       Sources.V_pulse v(V2=5, TR=1) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={60,-32})));
     equation
-      connect(mp1.B, mp1.D) annotation (Line(points={{-18,30},{-18,40},{-28, 
+      connect(mp1.B, mp1.D) annotation (Line(points={{-18,30},{-18,40},{-28,
               40}}, color={0,0,255}));
       connect(mn1.S, ground.p) 
         annotation (Line(points={{-28,-30},{-28,-60}}, color={0,0,255}));
       connect(mp1.S, mn1.D) 
         annotation (Line(points={{-28,20},{-28,-10}}, color={0,0,255}));
       connect(mn1.G, mp1.G) annotation (Line(points={{-38,-20.1},{-38,29.9}}, color={0,0,255}));
-      connect(mn1.B, mn1.S) annotation (Line(points={{-18,-20},{-18,-30},{-28, 
+      connect(mn1.B, mn1.S) annotation (Line(points={{-18,-20},{-18,-30},{-28,
               -30}}, color={0,0,255}));
       connect(mp2.B, mp2.D) annotation (Line(points={{22,30},{22,40},{12,40}}, color={0,0,255}));
-      connect(mn2.S, ground.p) annotation (Line(points={{12,-30},{12,-60},{-28, 
+      connect(mn2.S, ground.p) annotation (Line(points={{12,-30},{12,-60},{-28,
               -60}}, color={0,0,255}));
       connect(mp2.S, mn2.D) 
         annotation (Line(points={{12,20},{12,-10}}, color={0,0,255}));
       connect(mn2.G, mp2.G) annotation (Line(points={{2,-20.1},{2,29.9}}, color={0,0,255}));
-      connect(mn2.B, mn2.S) annotation (Line(points={{22,-20},{22,-30},{12, 
+      connect(mn2.B, mn2.S) annotation (Line(points={{22,-20},{22,-30},{12,
               -30}}, color={0,0,255}));
       connect(mp2.G, mn1.D) annotation (Line(points={{2,29.9},{2,0},{-28,0},{
               -28,-10}}, color={0,0,255}));
       connect(c1.p, mn1.D) annotation (Line(points={{-8,-20},{-8,0},{-28,0},{
               -28,-10}}, color={0,0,255}));
-      connect(mn2.D, c2.p) annotation (Line(points={{12,-10},{12,0},{34,0},{34, 
+      connect(mn2.D, c2.p) annotation (Line(points={{12,-10},{12,0},{34,0},{34,
               -20}}, color={0,0,255}));
-      connect(c2.n, ground.p) annotation (Line(points={{34,-40},{34,-60},{-28, 
+      connect(c2.n, ground.p) annotation (Line(points={{34,-40},{34,-60},{-28,
               -60}}, color={0,0,255}));
-      connect(c1.n, ground.p) annotation (Line(points={{-8,-40},{-8,-60},{-28, 
+      connect(c1.n, ground.p) annotation (Line(points={{-8,-40},{-8,-60},{-28,
               -60}}, color={0,0,255}));
       connect(mp1.G, vin.p) annotation (Line(
           points={{-38,29.9},{-60,29.9},{-60,-32}}, color={0,0,255}));
-      connect(vin.n, ground.p) annotation (Line(points={{-60,-42},{-60,-60},{-28, 
+      connect(vin.n, ground.p) annotation (Line(points={{-60,-42},{-60,-60},{-28,
               -60}}, color={0,0,255}));
       connect(v.p, mp2.D) annotation (Line(
           points={{60,-32},{60,40},{12,40}}, color={0,0,255}));
       connect(mp1.D, mp2.D) annotation (Line(
           points={{-28,40},{12,40}}, color={0,0,255}));
-      connect(v.n, ground.p) annotation (Line(points={{60,-42},{60,-60},{-28,-60}}, 
+      connect(v.n, ground.p) annotation (Line(points={{60,-42},{60,-60},{-28,-60}},
             color={0,0,255}));
-      annotation (experiment(StopTime=5), 
+      annotation (experiment(StopTime=5),
         Documentation(info="<html>
 <p>反相器是由PMOS和NMOS组成的电路。其任务是将输入电压从高电势转换为低电势，反之亦然。这个电路<em>InverterApartModel</em>包含两个反相器。第一个反相器的输入电压几乎等于第二个反相器的输出电压。电容引起了一些差异。</p>
 
@@ -439,11 +439,11 @@ Zeunerstra&szlig;e 38<br />
 </html>"      ));
     end InvertersApartRecord;
 
-    model InvertersExtendedModel 
+    model InvertersExtendedModel
       "具有MOS模型的两个反相器(MOS模型的延申)"
       extends Modelica.Icons.Example;
 
-      Basic.Ground ground annotation (Placement(transformation(extent={{-40,-80}, 
+      Basic.Ground ground annotation (Placement(transformation(extent={{-40,-80},
                 {-20,-60}})));
     //--------------------------------------------------------------------------------------------------------------
     /*扩展模型：针对每组技术参数，必须定义一个独立的模型。每个晶体管都扩展
@@ -471,31 +471,31 @@ Zeunerstra&szlig;e 38<br />
       MNmos mn2(IC=-1e40) annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
     //--------------------------------------------------------------------------------------------------------------
 
-      Basic.C_Capacitor c1(C=1e-5, 
-        IC=0, 
+      Basic.C_Capacitor c1(C=1e-5,
+        IC=0,
         UIC=true) 
         annotation (Placement(transformation(
-            origin={-10,-30}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={-10,-30},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
-      Basic.C_Capacitor c2(C=1e-5, 
-        IC=0, 
+      Basic.C_Capacitor c2(C=1e-5,
+        IC=0,
         UIC=true) 
         annotation (Placement(transformation(
-            origin={32,-30}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={32,-30},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
 
       Sources.V_pulse vin(
-        V2=5, 
-        TD=2, 
+        V2=5,
+        TD=2,
         TR=1) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-60,-22})));
       Sources.V_pulse v(V2=5, TR=1) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={56,-22})));
     equation
       connect(mp1.B, mp1.D) annotation (Line(points={{-20,30},{-20,40},{-30,40}}, color={0,0,255}));
@@ -515,21 +515,21 @@ Zeunerstra&szlig;e 38<br />
       connect(c1.p, mn1.D) annotation (Line(points={{-10,-20},{-10,0},{-30,0},{
               -30,-10}}, color={0,0,255}));
       connect(mn2.D, c2.p) annotation (Line(points={{10,-10},{10,0},{32,0},{32,-20}}, color={0,0,255}));
-      connect(c2.n, ground.p) annotation (Line(points={{32,-40},{32,-60},{-30, 
+      connect(c2.n, ground.p) annotation (Line(points={{32,-40},{32,-60},{-30,
               -60}}, color={0,0,255}));
-      connect(c1.n, ground.p) annotation (Line(points={{-10,-40},{-10,-60},{-30, 
+      connect(c1.n, ground.p) annotation (Line(points={{-10,-40},{-10,-60},{-30,
               -60}}, color={0,0,255}));
       connect(vin.p, mp1.G) annotation (Line(
           points={{-60,-12},{-60,26},{-40,26},{-40,29.9}}, color={0,0,255}));
-      connect(vin.n, ground.p) annotation (Line(points={{-60,-32},{-60,-60},{-30, 
+      connect(vin.n, ground.p) annotation (Line(points={{-60,-32},{-60,-60},{-30,
               -60}}, color={0,0,255}));
       connect(v.p, mp2.D) annotation (Line(
           points={{56,-12},{56,40},{10,40}}, color={0,0,255}));
       connect(mp2.D, mp1.D) annotation (Line(
           points={{10,40},{-30,40}}, color={0,0,255}));
-      connect(v.n, ground.p) annotation (Line(points={{56,-32},{56,-60},{-30,-60}}, 
+      connect(v.n, ground.p) annotation (Line(points={{56,-32},{56,-60},{-30,-60}},
             color={0,0,255}));
-      annotation (experiment(StopTime=5), 
+      annotation (experiment(StopTime=5),
         Documentation(info="<html>
 <p>反相器是由PMOS和NMOS组成的电路。其任务是将输入电压从高电势转换为低电势，反之亦然。这个电路<em>InverterExtendedModel</em>包含两个反相器。第一个反相器的输入电压几乎等于第二个反相器的输出电压。电容引起了一些差异。</p>
 <p>为了查看电路的典型行为，用户应该在特定界面通过勾选输入电压和输出电压查看相关图像。此外，用户也能观察第一个反相器的输出电压，以对该示例的工作性能有新的认识。示例的仿真时长为5秒。</p>
@@ -545,16 +545,16 @@ Zeunerstra&szlig;e 38<br />
 </html>"          ));
     end InvertersExtendedModel;
 
-    model FourInverters 
+    model FourInverters
       "四个使用MOSFET级别1的反相器，使用私有记录作为模型卡片"
       extends Modelica.Icons.Example;
 
-      Basic.Ground ground annotation (Placement(transformation(extent={{-74,-80}, 
+      Basic.Ground ground annotation (Placement(transformation(extent={{-74,-80},
                 {-54,-60}})));
 
-      parameter Semiconductors.ModelcardMOS modp(CBD=0, CBS=0) 
+      parameter Semiconductors.ModelcardMOS modp(CBD=0, CBS=0)
         "私有PMOS模型卡片";
-      parameter Semiconductors.ModelcardMOS modn(CBD=0, CBS=0) 
+      parameter Semiconductors.ModelcardMOS modn(CBD=0, CBS=0)
         "私有NMOS模型卡片";
 
       Semiconductors.M_PMOS mp1(modelcard=modp, IC=-1e40) 
@@ -573,80 +573,80 @@ Zeunerstra&szlig;e 38<br />
                 annotation (Placement(transformation(extent={{46,20},{66,40}})));
       Semiconductors.M_NMOS mn4(modelcard=modn, IC=-1e40) 
                 annotation (Placement(transformation(extent={{46,-30},{66,-10}})));
-      Basic.C_Capacitor c1(C=10e-6, 
-        IC=0, 
+      Basic.C_Capacitor c1(C=10e-6,
+        IC=0,
         UIC=true) 
         annotation (Placement(transformation(
-            origin={-44,-30}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={-44,-30},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
-      Basic.C_Capacitor c2(C=10e-6, 
-        IC=0, 
+      Basic.C_Capacitor c2(C=10e-6,
+        IC=0,
         UIC=true) 
         annotation (Placement(transformation(
-            origin={-2,-30}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={-2,-30},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
-      Basic.C_Capacitor c3(C=10e-6, 
-        IC=0, 
+      Basic.C_Capacitor c3(C=10e-6,
+        IC=0,
         UIC=true) 
         annotation (Placement(transformation(
-            origin={36,-30}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={36,-30},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
-      Basic.C_Capacitor c4(C=10e-6, 
-        IC=0, 
+      Basic.C_Capacitor c4(C=10e-6,
+        IC=0,
         UIC=true) 
         annotation (Placement(transformation(
-            origin={76,-30}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={76,-30},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
       Sources.V_pulse vin(
-        V2=5, 
-        TD=2, 
+        V2=5,
+        TD=2,
         TR=1) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-86,-42})));
       Sources.V_pulse v(V2=5, TR=1) annotation (
           Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={92,-48})));
     equation
-      connect(mp1.B, mp1.D) annotation (Line(points={{-54,30},{-54,40},{-64, 
+      connect(mp1.B, mp1.D) annotation (Line(points={{-54,30},{-54,40},{-64,
               40}}, color={0,0,255}));
       connect(mn1.S, ground.p) 
         annotation (Line(points={{-64,-30},{-64,-60}}, color={0,0,255}));
       connect(mp1.S, mn1.D) 
         annotation (Line(points={{-64,20},{-64,-10}}, color={0,0,255}));
       connect(mn1.G, mp1.G) annotation (Line(points={{-74,-20.1},{-74,29.9}}, color={0,0,255}));
-      connect(mn1.B, mn1.S) annotation (Line(points={{-54,-20},{-54,-30},{-64, 
+      connect(mn1.B, mn1.S) annotation (Line(points={{-54,-20},{-54,-30},{-64,
               -30}}, color={0,0,255}));
-      connect(mp2.B, mp2.D) annotation (Line(points={{-14,30},{-14,40},{-24, 
+      connect(mp2.B, mp2.D) annotation (Line(points={{-14,30},{-14,40},{-24,
               40}}, color={0,0,255}));
       connect(mn2.S, ground.p) annotation (Line(points={{-24,-30},{-24,-60},{
               -64,-60}}, color={0,0,255}));
       connect(mp2.S, mn2.D) 
         annotation (Line(points={{-24,20},{-24,-10}}, color={0,0,255}));
       connect(mn2.G, mp2.G) annotation (Line(points={{-34,-20.1},{-34,29.9}}, color={0,0,255}));
-      connect(mn2.B, mn2.S) annotation (Line(points={{-14,-20},{-14,-30},{-24, 
+      connect(mn2.B, mn2.S) annotation (Line(points={{-14,-20},{-14,-30},{-24,
               -30}}, color={0,0,255}));
-      connect(c1.p, mn1.D) annotation (Line(points={{-44,-20},{-44,0},{-64,0}, 
+      connect(c1.p, mn1.D) annotation (Line(points={{-44,-20},{-44,0},{-64,0},
               {-64,-10}}, color={0,0,255}));
       connect(mn2.D, c2.p) annotation (Line(points={{-24,-10},{-24,0},{-2,0},{
               -2,-20}}, color={0,0,255}));
-      connect(c2.n, ground.p) annotation (Line(points={{-2,-40},{-2,-60},{-64, 
+      connect(c2.n, ground.p) annotation (Line(points={{-2,-40},{-2,-60},{-64,
               -60}}, color={0,0,255}));
-      connect(c1.n, ground.p) annotation (Line(points={{-44,-40},{-44,-60},{-64, 
+      connect(c1.n, ground.p) annotation (Line(points={{-44,-40},{-44,-60},{-64,
               -60}}, color={0,0,255}));
-      connect(c3.n, ground.p) annotation (Line(points={{36,-40},{36,-60},{-64, 
+      connect(c3.n, ground.p) annotation (Line(points={{36,-40},{36,-60},{-64,
               -60}}, color={0,0,255}));
-      connect(c4.n, ground.p) annotation (Line(points={{76,-40},{76,-60},{-64, 
+      connect(c4.n, ground.p) annotation (Line(points={{76,-40},{76,-60},{-64,
               -60}}, color={0,0,255}));
-      connect(mn4.B, mn4.S) annotation (Line(points={{66,-20},{66,-30},{56, 
+      connect(mn4.B, mn4.S) annotation (Line(points={{66,-20},{66,-30},{56,
               -30}}, color={0,0,255}));
-      connect(mn3.B, mn3.S) annotation (Line(points={{26,-20},{26,-30},{16, 
+      connect(mn3.B, mn3.S) annotation (Line(points={{26,-20},{26,-30},{16,
               -30}}, color={0,0,255}));
       connect(mp3.B, mp3.D) annotation (Line(points={{26,30},{26,40},{16,40}}, color={0,0,255}));
       connect(mp4.B, mp4.D) annotation (Line(points={{66,30},{66,40},{56,40}}, color={0,0,255}));
@@ -654,29 +654,29 @@ Zeunerstra&szlig;e 38<br />
         annotation (Line(points={{16,20},{16,-10}}, color={0,0,255}));
       connect(mp4.S, mn4.D) 
         annotation (Line(points={{56,20},{56,-10}}, color={0,0,255}));
-      connect(mn3.S, ground.p) annotation (Line(points={{16,-30},{16,-60},{-64, 
+      connect(mn3.S, ground.p) annotation (Line(points={{16,-30},{16,-60},{-64,
               -60}}, color={0,0,255}));
-      connect(mn4.S, ground.p) annotation (Line(points={{56,-30},{56,-60},{-64, 
+      connect(mn4.S, ground.p) annotation (Line(points={{56,-30},{56,-60},{-64,
               -60}}, color={0,0,255}));
-      connect(c3.p, mn3.D) annotation (Line(points={{36,-20},{36,0},{16,0},{16, 
+      connect(c3.p, mn3.D) annotation (Line(points={{36,-20},{36,0},{16,0},{16,
               -10}}, color={0,0,255}));
-      connect(c4.p, mn4.D) annotation (Line(points={{76,-20},{76,0},{56,0},{56, 
+      connect(c4.p, mn4.D) annotation (Line(points={{76,-20},{76,0},{56,0},{56,
               -10}}, color={0,0,255}));
-      connect(c2.p, mn3.G) annotation (Line(points={{-2,-20},{2,-20},{2,-20.1}, 
+      connect(c2.p, mn3.G) annotation (Line(points={{-2,-20},{2,-20},{2,-20.1},
               {6,-20.1}}, color={0,0,255}));
       connect(mn3.G, mp3.G) annotation (Line(points={{6,-20.1},{6,29.9}}, color={0,0,255}));
-      connect(c3.p, mn4.G) annotation (Line(points={{36,-20},{41,-20},{41, 
+      connect(c3.p, mn4.G) annotation (Line(points={{36,-20},{41,-20},{41,
               -20.1},{46,-20.1}}, color={0,0,255}));
       connect(mn4.G, mp4.G) annotation (Line(points={{46,-20.1},{46,29.9}}, color={0,0,255}));
-      connect(c1.p, mn2.G) annotation (Line(points={{-44,-20},{-39,-20},{-39, 
+      connect(c1.p, mn2.G) annotation (Line(points={{-44,-20},{-39,-20},{-39,
               -20.1},{-34,-20.1}}, color={0,0,255}));
       connect(vin.p, mn1.G) annotation (Line(
           points={{-86,-32},{-86,0},{-74,0},{-74,-20.1}}, color={0,0,255}));
-      connect(vin.n, ground.p) annotation (Line(points={{-86,-52},{-86,-60},{-64, 
+      connect(vin.n, ground.p) annotation (Line(points={{-86,-52},{-86,-60},{-64,
               -60}}, color={0,0,255}));
       connect(v.p, mp4.D) annotation (Line(
           points={{92,-38},{92,40},{56,40}}, color={0,0,255}));
-      connect(v.n, ground.p) annotation (Line(points={{92,-58},{92,-60},{-64,-60}}, 
+      connect(v.n, ground.p) annotation (Line(points={{92,-58},{92,-60},{-64,-60}},
             color={0,0,255}));
       connect(mp3.D, mp4.D) annotation (Line(
           points={{16,40},{56,40}}, color={0,0,255}));
@@ -684,7 +684,7 @@ Zeunerstra&szlig;e 38<br />
           points={{-24,40},{16,40}}, color={0,0,255}));
       connect(mp1.D, mp2.D) annotation (Line(
           points={{-64,40},{-24,40}}, color={0,0,255}));
-      annotation (experiment(StopTime=5), 
+      annotation (experiment(StopTime=5),
         Documentation(info="<html>
 <p>这个包含四个反相器的电路设计能用于展示MOS晶体管模型的功能。要查看电路的行为，用户应该在特定界面查看每个反相器的输出电压(mp1.S.v、mp2.S.v、mp3.S.v、mp4.S.v)。第二个和第四个反相器的输出电压以及第一个反相器的输入电压具有相同的电势。第一个和第三个反相器的输出电压与反相器2和4相反。</p>
 <p>该示例的仿真时长为5秒。示例在仿真结束后的输出以下结果变量的图像：mp1.S.v、mp2.S.v、mp3.S.v和mp4.S.v</p>
@@ -699,8 +699,8 @@ Zeunerstra&szlig;e 38<br />
       extends Modelica.Icons.Example;
 
       Semiconductors.M_PMOS mp1(
-        L=2e-5, 
-        W=1e-5, 
+        L=2e-5,
+        W=1e-5,
         modelcard(PHI=0.7, CBD=0, CBS=0), Sinternal(start=0), IC=-1e40) annotation (Placement(transformation(
               extent={{-22,24},{-2,44}})));
       Semiconductors.M_PMOS mp2(modelcard(PHI=0.7,CBD=0, CBS=0), IC=-1e40) 
@@ -711,66 +711,66 @@ Zeunerstra&szlig;e 38<br />
       Semiconductors.M_NMOS mn1(modelcard(CBD=0, CBS=0), IC=-1e40) annotation (Placement(transformation(
               extent={{-24,-10},{-4,10}})));
       Sources.V_constant vconstant(V=5) annotation (Placement(
-            transformation(extent={{-10,-10},{10,10}}, 
-                                                     rotation=270, 
+            transformation(extent={{-10,-10},{10,10}},
+                                                     rotation=270,
             origin={62,34})));
-      Basic.Ground ground annotation (Placement(transformation(extent={{20,-100}, 
+      Basic.Ground ground annotation (Placement(transformation(extent={{20,-100},
                 {40,-80}})));
       Sources.V_pulse vin1(
-        TR=1e-9, 
-        TF=1e-9, 
-        V2=5, 
-        TD=2e-8, 
-        PW=4e-8, 
+        TR=1e-9,
+        TF=1e-9,
+        V2=5,
+        TD=2e-8,
+        PW=4e-8,
         PER=8e-8) annotation (Placement(transformation(
-            origin={-50,24}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={-50,24},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
       Sources.V_pulse vin2(
-        V2=5, 
-        TR=1e-9, 
-        TF=1e-9, 
-        TD=1e-8, 
-        PW=4e-8, 
+        V2=5,
+        TR=1e-9,
+        TF=1e-9,
+        TD=1e-8,
+        PW=4e-8,
         PER=8e-8) annotation (Placement(transformation(
-            origin={-52,-44}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={-52,-44},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
 
     equation
       connect(mp1.B, mp1.D) annotation (Line(points={{-2,34},{-2,44},{
               -12,44}}, color={0,0,255}));
-      connect(mp2.B, mp2.D) annotation (Line(points={{44,34},{44,44}, 
+      connect(mp2.B, mp2.D) annotation (Line(points={{44,34},{44,44},
               {34,44}}, color={0,0,255}));
-      connect(vconstant.p, mp2.D) annotation (Line(points={{62,44},{62,44}, 
+      connect(vconstant.p, mp2.D) annotation (Line(points={{62,44},{62,44},
               {34,44}}, color={0,0,255}));
       connect(mp2.D, mp1.D) 
         annotation (Line(points={{34,44},{-12,44}}, color={0,0,255}));
-      connect(mp1.G, mn1.G) annotation (Line(points={{-22,33.9},{-22, 
+      connect(mp1.G, mn1.G) annotation (Line(points={{-22,33.9},{-22,
               16},{-24,16},{-24,-0.1}}, color={0,0,255}));
-      connect(mp1.G, vin1.p) annotation (Line(points={{-22,33.9},{-38,33.9}, 
+      connect(mp1.G, vin1.p) annotation (Line(points={{-22,33.9},{-38,33.9},
               {-38,34},{-50,34}}, color={0,0,255}));
       connect(vin1.n, ground.p) annotation (Line(points={{-50,14},{-62,14},{
               -62,-80},{30,-80}}, color={0,0,255}));
-      connect(mp2.G, mn2.G) annotation (Line(points={{24,33.9},{24,14}, 
+      connect(mp2.G, mn2.G) annotation (Line(points={{24,33.9},{24,14},
               {-32,14},{-32,-34.1},{-24,-34.1}}, color={0,0,255}));
-      connect(mn2.G, vin2.p) annotation (Line(points={{-24,-34.1},{-38, 
+      connect(mn2.G, vin2.p) annotation (Line(points={{-24,-34.1},{-38,
               -34.1},{-38,-34},{-52,-34}}, color={0,0,255}));
       connect(vin2.n, ground.p) annotation (Line(points={{-52,-54},{-52,-80},{
               30,-80}}, color={0,0,255}));
-      connect(mn2.S, ground.p) annotation (Line(points={{-14,-44},{-14,-80}, 
+      connect(mn2.S, ground.p) annotation (Line(points={{-14,-44},{-14,-80},
               {30,-80}}, color={0,0,255}));
       connect(mn1.B, mn2.B) 
         annotation (Line(points={{-4,0},{-4,-34}}, color={0,0,255}));
-      connect(mn2.B, mn2.S) annotation (Line(points={{-4,-34},{-4,-44}, 
+      connect(mn2.B, mn2.S) annotation (Line(points={{-4,-34},{-4,-44},
               {-14,-44}}, color={0,0,255}));
       connect(mn1.S, mn2.D) 
         annotation (Line(points={{-14,-10},{-14,-24}}, color={0,0,255}));
       connect(mp1.S, mn1.D) 
         annotation (Line(points={{-12,24},{-12,18},{-14,18},{-14,10}}, color={0,0,255}));
-      connect(mp2.S, mn1.D) annotation (Line(points={{34,24},{34,10}, 
+      connect(mp2.S, mn1.D) annotation (Line(points={{34,24},{34,10},
               {-14,10}}, color={0,0,255}));
-      connect(vconstant.n, ground.p) annotation (Line(points={{62,24},{62,-80}, 
+      connect(vconstant.n, ground.p) annotation (Line(points={{62,24},{62,-80},
               {30,-80}}, color={0,0,255}));
       annotation (Documentation(info="<html>
 <p>在几乎每个电子学中，基本电路“nand”都被使用。Nand 包含两个PMOS和两个NMOS。用户可以在图形模式下看到错误的接线。当且仅当两个输入电压具有高电位时，输出电压才具有低电位，否则输出电压具有高电位。</p>
@@ -807,7 +807,7 @@ Zeunerstra&szlig;e 38<br />
 <ul>
 <li><em>2009年5月</em>由Kristin Majetta创建</li>
 </ul>
-</html>"              ), 
+</html>"              ),
         experiment(StopTime=2e-007));
     end Nand;
 
@@ -815,92 +815,92 @@ Zeunerstra&szlig;e 38<br />
       extends Modelica.Icons.Example;
 
       Semiconductors.M_PMOS mp1(modelcard(
-          RD=1e-4, 
-          RS=1e-4, 
-          CBD=1e-5, 
-          CBS=1e-5, 
-          CGSO=1e-5, 
-          CGDO=1e-5, 
+          RD=1e-4,
+          RS=1e-4,
+          CBD=1e-5,
+          CBS=1e-5,
+          CGSO=1e-5,
+          CGDO=1e-5,
           CGBO=1e-5), Dinternal(start=0,fixed=true), Sinternal(start=0,fixed=true), IC=-1e40) 
         annotation (Placement(transformation(
               extent={{-16,24},{4,44}})));
       Semiconductors.M_PMOS mp2(modelcard(
-          RD=1e-4, 
-          RS=1e-4, 
-          CBD=1e-5, 
-          CBS=1e-5, 
-          CGSO=1e-5, 
-          CGDO=1e-5, 
+          RD=1e-4,
+          RS=1e-4,
+          CBD=1e-5,
+          CBS=1e-5,
+          CGSO=1e-5,
+          CGDO=1e-5,
           CGBO=1e-5), Dinternal(start=0,fixed=true), Sinternal(start=0,fixed=true), IC=-1e40) 
         annotation (Placement(transformation(
               extent={{-16,-6},{4,14}})));
       Semiconductors.M_NMOS mn1(modelcard(
-          RD=1e-4, 
-          RS=1e-4, 
-          CBD=1e-5, 
-          CBS=1e-5, 
-          CGSO=1e-5, 
-          CGDO=1e-5, 
+          RD=1e-4,
+          RS=1e-4,
+          CBD=1e-5,
+          CBS=1e-5,
+          CGSO=1e-5,
+          CGDO=1e-5,
           CGBO=1e-5), Dinternal(start=0,fixed=true), Sinternal(start=0,fixed=true), IC=-1e40) 
         annotation (Placement(transformation(
               extent={{-16,-44},{4,-24}})));
       Semiconductors.M_NMOS mn2(modelcard(
-          RD=1e-4, 
-          RS=1e-4, 
-          CBD=1e-5, 
-          CBS=1e-5, 
-          CGSO=1e-5, 
-          CGDO=1e-5, 
+          RD=1e-4,
+          RS=1e-4,
+          CBD=1e-5,
+          CBS=1e-5,
+          CGSO=1e-5,
+          CGDO=1e-5,
           CGBO=1e-5), Dinternal(start=0,fixed=true), Sinternal(start=0,fixed=true), IC=-1e40) 
         annotation (Placement(transformation(
               extent={{32,-44},{52,-24}})));
       Basic.Ground ground 
-        annotation (Placement(transformation(extent={{28,-100}, 
+        annotation (Placement(transformation(extent={{28,-100},
                 {48,-80}})));
       Sources.V_pulse vin1(
-        V2=5, 
-        TR=0.001, 
-        TF=0.001, 
-        PW=2, 
-        PER=10, 
+        V2=5,
+        TR=0.001,
+        TF=0.001,
+        PW=2,
+        PER=10,
         TD=2) 
         annotation (Placement(transformation(
-            origin={-42,24}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={-42,24},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
       Sources.V_pulse vin2(
-        V2=5, 
-        TR=0.001, 
-        TF=0.001, 
-        PW=2, 
-        PER=10, 
+        V2=5,
+        TR=0.001,
+        TF=0.001,
+        PW=2,
+        PER=10,
         TD=1) 
         annotation (Placement(transformation(
-            origin={-44,-44}, 
-            extent={{-10,-10},{10,10}}, 
+            origin={-44,-44},
+            extent={{-10,-10},{10,10}},
             rotation=270)));
       Sources.V_pulse v(
-        TD=0.5, 
-        TR=0.1, 
+        TD=0.5,
+        TR=0.1,
         V2=5) 
         annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={62,34})));
     equation
       connect(mn1.B, mn1.S) annotation (Line(points={{4,-34},{4,-44},{
               -6,-44}}, color={0,0,255}));
-      connect(mn2.B, mn2.S) annotation (Line(points={{52,-34},{52,-44}, 
+      connect(mn2.B, mn2.S) annotation (Line(points={{52,-34},{52,-44},
               {42,-44}}, color={0,0,255}));
-      connect(mn2.S, ground.p) annotation (Line(points={{42,-44},{38,-44}, 
+      connect(mn2.S, ground.p) annotation (Line(points={{42,-44},{38,-44},
               {38,-80}}, color={0,0,255}));
       connect(mn1.S, ground.p) annotation (Line(points={{-6,-44},{-6,-80},{
               38,-80}}, color={0,0,255}));
-      connect(vin2.p, mn1.G) annotation (Line(points={{-44,-34},{-29, 
+      connect(vin2.p, mn1.G) annotation (Line(points={{-44,-34},{-29,
               -34},{-29,-34.1},{-16,-34.1}}, color={0,0,255}));
-      connect(vin2.n, ground.p) annotation (Line(points={{-44,-54},{-44,-80}, 
+      connect(vin2.n, ground.p) annotation (Line(points={{-44,-54},{-44,-80},
               {38,-80}}, color={0,0,255}));
-      connect(vin1.p, mp1.G) annotation (Line(points={{-42,34},{-29,34}, 
+      connect(vin1.p, mp1.G) annotation (Line(points={{-42,34},{-29,34},
               {-29,33.9},{-16,33.9}}, color={0,0,255}));
       connect(vin1.n, ground.p) annotation (Line(points={{-42,14},{-64,14},{
               -64,-80},{38,-80}}, color={0,0,255}));
@@ -908,9 +908,9 @@ Zeunerstra&szlig;e 38<br />
         annotation (Line(points={{-6,24},{-6,14}}, color={0,0,255}));
       connect(mp2.S, mn1.D) annotation (Line(points={{-6,-6},{-6,-24}}, color={0,0,255}));
       connect(mn2.D, mn1.D) annotation (Line(points={{42,-24},{-6,-24}}, color={0,0,255}));
-      connect(vin2.p, mp2.G) annotation (Line(points={{-44,-34},{-44,4}, 
+      connect(vin2.p, mp2.G) annotation (Line(points={{-44,-34},{-44,4},
               {-16,4},{-16,3.9}}, color={0,0,255}));
-      connect(vin1.p, mn2.G) annotation (Line(points={{-42,34},{-28,34}, 
+      connect(vin1.p, mn2.G) annotation (Line(points={{-42,34},{-28,34},
               {-28,-18},{32,-18},{32,-34.1}}, color={0,0,255}));
       connect(mp1.B, mp1.D) annotation (Line(
           points={{4,34},{4,44},{-6,44}}, color={0,0,255}));
@@ -918,7 +918,7 @@ Zeunerstra&szlig;e 38<br />
           points={{4,4},{4,34}}, color={0,0,255}));
       connect(v.p, mp1.D) annotation (Line(
           points={{62,44},{-6,44}}, color={0,0,255}));
-      connect(v.n, ground.p) annotation (Line(points={{62,24},{62,-80},{38,-80}}, 
+      connect(v.n, ground.p) annotation (Line(points={{62,24},{62,-80},{38,-80}},
             color={0,0,255}));
       annotation (Documentation(info="<html>
 <p>几乎在每个电子器件中都使用基本电路“nor”。一个与非门包含两个PMOS和两个NMOS。用户可以在图形模式下可以看到错误的布线。仅当两个输入电压具有低电位时，输出电压才具有高电位，否则输出电压具有低电位。</p>
@@ -955,7 +955,7 @@ Zeunerstra&szlig;e 38<br />
 <ul>
 <li><em>2009年3月</em>由Kristin Majetta创建</li>
 </ul>
-</html>"          ), 
+</html>"          ),
         experiment(StopTime=5));
     end Nor;
 
@@ -964,53 +964,53 @@ Zeunerstra&szlig;e 38<br />
 
       Semiconductors.D_DIODE D1(IC=-1e40, SENS_AREA=false,modelcarddiode(CJO=1e-7),pin(start=0, fixed=true)) 
         annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
+            extent={{-10,-10},{10,10}},
             origin={0,14})));
       Semiconductors.D_DIODE D3(IC=-1e40, SENS_AREA=false,modelcarddiode(CJO=1e-7), n(v(start=0, fixed=true))) 
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={20,-8})));
       Semiconductors.D_DIODE D4(IC=-1e40, SENS_AREA=false,modelcarddiode(CJO=1e-7)) 
         annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
+            extent={{-10,-10},{10,10}},
             origin={1,-30})));
       Semiconductors.D_DIODE D2(IC=-1e40, SENS_AREA=false,modelcarddiode(CJO=1e-7)) 
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-20,-8})));
       Semiconductors.R_Resistor rout(R=10) 
         annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=90, 
+            extent={{-10,-10},{10,10}},
+            rotation=90,
             origin={42,-7})));
       Sources.V_sin vsin(VA=10, FREQ=200) 
         annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-44,-8})));
       Basic.Ground ground 
         annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
     equation
-      connect(D1.n, D3.p) annotation (Line(points={{10,14},{20,14},{20,2}}, 
+      connect(D1.n, D3.p) annotation (Line(points={{10,14},{20,14},{20,2}},
             color={0,0,255}));
       connect(D2.p, D1.p) annotation (Line(
           points={{-20,2},{-20,14},{-10,14}}, color={0,0,255}));
-      connect(D4.n, D3.n) annotation (Line(points={{11,-30},{20,-30},{20,-18}}, 
+      connect(D4.n, D3.n) annotation (Line(points={{11,-30},{20,-30},{20,-18}},
             color={0,0,255}));
       connect(D4.p, D2.n) annotation (Line(
           points={{-9,-30},{-20,-30},{-20,-18}}, color={0,0,255}));
       connect(D4.p, ground.p) annotation (Line(
           points={{-9,-30},{-20,-30},{-20,-40}}, color={0,0,255}));
-      connect(vsin.n, ground.p) annotation (Line(points={{-44,-18},{-44,-40},{-20, 
+      connect(vsin.n, ground.p) annotation (Line(points={{-44,-18},{-44,-40},{-20,
               -40}}, color={0,0,255}));
-      connect(D4.n, rout.p) annotation (Line(points={{11,-30},{42,-30},{42,-17}}, 
+      connect(D4.n, rout.p) annotation (Line(points={{11,-30},{42,-30},{42,-17}},
             color={0,0,255}));
       connect(rout.n, D1.p) annotation (Line(
           points={{42,3},{42,26},{-20,26},{-20,14},{-10,14}}, color={0,0,255}));
       connect(D3.p, vsin.p) annotation (Line(
           points={{20,2},{20,40},{-44,40},{-44,2}}, color={0,0,255}));
       annotation (
-        experiment(StopTime=0.025), 
+        experiment(StopTime=0.025),
         Documentation(info="<html>
 <p>Graetz整流器电路用于展示二极管的工作行为。</p>
 <p>该示例的仿真时长为0.025秒。然后在特定界面会显示输入电压vsin.p.v的图像。rout.p.v电压是整流后的结果，大部分情况下处于正范围内脉动。</p>
@@ -1026,38 +1026,38 @@ Zeunerstra&szlig;e 38<br />
 
       Basic.R_Resistor r(R=1000) annotation (Placement(
             transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=90, 
+            extent={{-10,-10},{10,10}},
+            rotation=90,
             origin={-36,20})));
       Basic.C_Capacitor c(
-        C=1e-7, 
-        IC=0, 
+        C=1e-7,
+        IC=0,
         UIC=true) 
         annotation (Placement(transformation(extent={{-32,0},{-12,20}})));
       Basic.C_Capacitor c1(
-        C=1e-7, 
-        IC=0, 
+        C=1e-7,
+        IC=0,
         UIC=true) 
         annotation (Placement(transformation(extent={{24,0},{44,20}})));
       Basic.R_Resistor r1(R=22000) annotation (Placement(
             transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=90, 
+            extent={{-10,-10},{10,10}},
+            rotation=90,
             origin={-6,20})));
       Basic.R_Resistor r2(R=22000) annotation (Placement(
             transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=90, 
+            extent={{-10,-10},{10,10}},
+            rotation=90,
             origin={18,20})));
       Basic.R_Resistor r3(R=1000) annotation (Placement(
             transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=90, 
+            extent={{-10,-10},{10,10}},
+            rotation=90,
             origin={50,20})));
       Semiconductors.Q_NPNBJT T1(modelcard(CJE=1e-9, CJC=1e-9), vbe(start=0, fixed=true)) 
         annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=180, 
+            extent={{-10,-10},{10,10}},
+            rotation=180,
             origin={-30,-24})));
       Semiconductors.Q_NPNBJT T2(modelcard(CJE=1e-9, CJC=1e-9), vbe(start=0, fixed=true)) 
         annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
@@ -1067,18 +1067,18 @@ Zeunerstra&szlig;e 38<br />
         annotation (Placement(transformation(extent={{50,-60},{70,-40}})));
       Basic.R_Resistor r4(R=10000) annotation (
           Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={64,-2})));
       Sources.V_pulse v(
-        V2=8, 
-        TD=0.0005, 
-        TR=0.01, 
-        PW=1000, 
-        PER=1000, 
+        V2=8,
+        TD=0.0005,
+        TR=0.01,
+        PW=1000,
+        PER=1000,
         TF=0) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-68,20})));
 
     equation
@@ -1117,7 +1117,7 @@ Zeunerstra&szlig;e 38<br />
       connect(v.n, ground1.p) annotation (Line(
           points={{-68,10},{-68,-14}}, color={0,0,255}));
       annotation (
-        experiment(StopTime=0.025), 
+        experiment(StopTime=0.025),
         Documentation(info="<html>
 <p>振荡器电路演示了BJT晶体管的使用。</p>
 <p>示例的仿真时长为0.025秒。在特定界面用户可以观察到v.p.v的数值上升到5V。此外，用户还能观察到r4.p.v在仿真启动后它开始振荡。</p>
@@ -1134,70 +1134,70 @@ Zeunerstra&szlig;e 38<br />
         annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
       Modelica.Electrical.Spice3.Sources.V_sin sineVoltage(VA=220, FREQ=50) 
         annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-90,20})));
       Modelica.Electrical.Spice3.Basic.R_Resistor R1(R=1) 
         annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
       Modelica.Electrical.Spice3.Basic.L_Inductor L1(L=1, UIC=false) 
                            annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-40,40})));
       Modelica.Electrical.Spice3.Basic.L_Inductor L2(L=0.01) 
                               annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}}, 
-            rotation=270, 
+            extent={{-10,10},{10,-10}},
+            rotation=270,
             origin={20,60})));
       Modelica.Electrical.Spice3.Basic.R_Resistor R2(R=1) annotation (Placement(
             transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=180, 
+            extent={{-10,-10},{10,10}},
+            rotation=180,
             origin={42,80})));
       Modelica.Electrical.Spice3.Basic.K_CoupledInductors k1(k=0.1) 
         annotation (Placement(transformation(extent={{-20,50},{0,70}})));
       Modelica.Electrical.Spice3.Basic.R_Resistor R3(R=1000) annotation (Placement(
             transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={60,50})));
       Modelica.Electrical.Spice3.Basic.C_Capacitor C1(
-        C=1e-6, 
-        IC=0, 
+        C=1e-6,
+        IC=0,
         UIC=true) annotation (
           Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={80,50})));
       Modelica.Electrical.Spice3.Basic.L_Inductor L3(L=0.01) 
                               annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}}, 
-            rotation=270, 
+            extent={{-10,10},{10,-10}},
+            rotation=270,
             origin={20,-40})));
       Modelica.Electrical.Spice3.Basic.R_Resistor R4(R=1) annotation (Placement(
             transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=180, 
+            extent={{-10,-10},{10,10}},
+            rotation=180,
             origin={42,-20})));
       Modelica.Electrical.Spice3.Basic.R_Resistor R5(R=1000) annotation (Placement(
             transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={60,-50})));
       Modelica.Electrical.Spice3.Basic.C_Capacitor C2(
-        C=2.e-3, 
-        IC=0, 
+        C=2.e-3,
+        IC=0,
         UIC=true) annotation (
           Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+            extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={80,-50})));
       Modelica.Electrical.Spice3.Basic.K_CoupledInductors k2(k=0.05) 
         annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
       Modelica.Electrical.Spice3.Basic.K_CoupledInductors k3(k=0.05) 
                                   annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=90, 
+            extent={{-10,-10},{10,10}},
+            rotation=90,
             origin={6,10})));
     equation
       connect(sineVoltage.n, ground.p) annotation (Line(
@@ -1245,7 +1245,7 @@ Zeunerstra&szlig;e 38<br />
       connect(L1.ICP, k1.inductiveCouplePin1) annotation (Line(
           points={{-31.6,40},{-28,40},{-28,60},{-20,60}}, color={170,85,255}));
       annotation (
-        experiment(StopTime=0.2), 
+        experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>耦合电感器电路展示了如何使用Basic库中的K_CoupledInductors组件将不同的电感器进行耦合。
 </p>
@@ -1271,16 +1271,16 @@ Zeunerstra&szlig;e 38<br />
       Modelica.Electrical.Spice3.Basic.Ground ground 
         annotation (Placement(transformation(extent={{-54,-26},{-34,-6}})));
       Modelica.Electrical.Spice3.Sources.V_constant UDD(V=10) 
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-10,60})));
       Modelica.Electrical.Spice3.Sources.V_constant U0(V=2) 
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-72,38})));
       Modelica.Electrical.Spice3.Sources.V_sin v_sin(FREQ=10, VA=2) 
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
-            rotation=270, 
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+            rotation=270,
             origin={-66,4})));
     equation
       connect(J2.D, J1.S) annotation (Line(
@@ -1309,8 +1309,8 @@ Zeunerstra&szlig;e 38<br />
 <li><em>2011年8月</em>，Kristin Majetta创建</li>
 </ul>
 </html>"      ),experiment(
-          StopTime=0.2, 
-          Interval=2e-4, 
+          StopTime=0.2,
+          Interval=2e-4,
           Tolerance=1e-007));
     end CascodeCircuit;
 
@@ -1376,8 +1376,8 @@ Zeunerstra&szlig;e 38<br />
       connect(VIE.p, n41); // 连接常数电压源正极
       connect(VIE.n, n42); // 连接常数电压源负极
 
-      annotation (experiment(StopTime=1, Interval=0.001, 
-          Tolerance=1e-005), 
+      annotation (experiment(StopTime=1, Interval=0.001,
+          Tolerance=1e-005),
           Documentation(info="<html>
 <p>这个差分对模型是SPICE3版本e3用户手册中描述的五个基准电路之一(请参阅Spice3库的信息)。</p>
 <p>差分对电路以差分模式运行。这意味着仅在一个晶体管上施加的输入电压VIN被放大。为了理解这种行为，建议用户对示例进行仿真，并观察从t=0到t=1秒时输入电压\"VIN.p.v\" 和被放大的输出电压\"OutputVoltage\"。</p>
@@ -1440,7 +1440,7 @@ RE 4 8 10K<br>
       connect(VIDS.p, n3); // 连接常数电压源正极
       connect(VIDS.n, n1); // 连接常数电压源负极
 
-      annotation (experiment(StopTime=1e-007, Interval=1e-009), 
+      annotation (experiment(StopTime=1e-007, Interval=1e-009),
         Documentation(info="<html>
 <p>这个MOS输出特性模型是SPICE3版本e3用户手册中描述的五个基准电路之一(请参阅Spice3库的信息)。</p>
 <p>该电路非常简单，由一个N型MOS场效应晶体管级联组成，该晶体管与栅极和漏极处的电压源相连，而漏极电压源提供工作电压。为理解这一特性，建议用户从示例仿真开始后观察到t=1e-7秒时相关变量的图像，并观察栅极电压(\"VGS.p.v\")和晶体管电流(\"M1.D.i\")的变化趋势。可以看到，随着栅极电压的增加，电流增加，这意味着晶体管的导电性增加。相反的情况发生在栅极电压减小的情况下。</p>
@@ -1491,9 +1491,9 @@ M1 1 2 0 0 MOD1 L=4U W=6U AD=10P AS=10P<br>
       connect(RC.n, n4); // 连接电阻端口2
 
       annotation (experiment(
-          StopTime=1e-007, 
-          Interval=1e-010, 
-          Tolerance=1e-008), 
+          StopTime=1e-007,
+          Interval=1e-010,
+          Tolerance=1e-008),
         Documentation(info="<html>
 <p>这个RTL反相器模型是SPICE3版本e3用户手册中描述的五个基准电路之一(请参阅Spice3库的信息)。</p>
 <p>这个简单的RTL反相器(电阻-晶体管逻辑)用于反转输入电压，这意味着如果输入电压为低电位，则输出电压为高电位，反之亦然。为了理解这种行为，建议用户可以观察示例在t=0到t=1e-7秒时相关变量的图像，并观察输入电压(VIN.p.v)和输出电压(Q1.C.v)。</p>
@@ -1513,7 +1513,7 @@ RC 3 4 1K<br>
 </html>"      ));
     end Spice3BenchmarkRtlInverter;
 
-    model Spice3BenchmarkFourBitBinaryAdder 
+    model Spice3BenchmarkFourBitBinaryAdder
       "加法器-4位全与非门二进制加法器"
       extends Modelica.Icons.Example;
 
@@ -1844,199 +1844,199 @@ RC 3 4 1K<br>
       Modelica.Electrical.Spice3.Sources.V_pulse VIN3B( V1=0, V2=3, TD=0, TR=1e-008, TF=1e-008, PW=3.2e-007, PER=1.6e-006);
       Modelica.Electrical.Spice3.Sources.V_pulse VIN4A( V1=0, V2=3, TD=0, TR=1e-008, TF=1e-008, PW=6.4e-007, PER=3.2e-006);
       Modelica.Electrical.Spice3.Sources.V_pulse VIN4B( V1=0, V2=3, TD=0, TR=1e-008, TF=1e-008, PW=1.28e-006, PER=6.4e-006);
-      FOURBIT X1( X1(   X1( X1( Q1(vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbc(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true),vbe(start=0))), 
-                            X2( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))), 
-                            X3( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true))), 
-                            X4( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true))), 
-                            X5( Q1(vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbc(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true))), 
-                            X6( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0))), 
-                            X7( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true), vbc(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X8( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0),vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))), 
-                            X9( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                RC(v(start=0)))), 
-                         X2(X1( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=false)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbc(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true))), 
-                            X2( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X3( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X4( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))), 
-                            X5( Q1(vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true))), 
-                            X6( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true))), 
-                            X7( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X8( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true),vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))), 
-                            X9( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                RC(v(start=0))))), 
-                  X2(   X1( X1( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbc(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true))), 
-                            X2( Q1(vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X3( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X4( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))), 
-                            X5( Q1(vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true))), 
-                            X6( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true))), 
-                            X7( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X8( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))), 
-                            X9( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                RC(v(start=0)))), 
-                        X2( X1( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbc(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X2( Q1(vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X3( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X4( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))), 
-                            X5( Q1(vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true))), 
-                            X6( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbe(start=0, fixed=true))), 
-                            X7( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                RC(v(start=0))), 
-                            X8( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))), 
-                            X9( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
-                                Q4(Binternal(start=0),icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)), 
+      FOURBIT X1( X1(   X1( X1( Q1(vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbc(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true),vbe(start=0))),
+                            X2( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))),
+                            X3( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true))),
+                            X4( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true))),
+                            X5( Q1(vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbc(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true))),
+                            X6( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0))),
+                            X7( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true), vbc(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X8( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0),vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))),
+                            X9( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                RC(v(start=0)))),
+                         X2(X1( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=false)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbc(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true))),
+                            X2( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X3( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X4( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))),
+                            X5( Q1(vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true))),
+                            X6( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true))),
+                            X7( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X8( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true),vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))),
+                            X9( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                RC(v(start=0))))),
+                  X2(   X1( X1( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbc(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true))),
+                            X2( Q1(vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X3( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X4( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))),
+                            X5( Q1(vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true))),
+                            X6( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true))),
+                            X7( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X8( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))),
+                            X9( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                RC(v(start=0)))),
+                        X2( X1( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbc(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X2( Q1(vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X3( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X4( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))),
+                            X5( Q1(vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true))),
+                            X6( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbe(start=0, fixed=true))),
+                            X7( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                RC(v(start=0))),
+                            X8( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))),
+                            X9( Q1(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q2(vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q3(Binternal(start=0), icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
+                                Q4(Binternal(start=0),icapbe(start=0), vbc(start=0, fixed=true), vbe(start=0, fixed=true)),
                                 Q5(vbc(start=0, fixed=true), vbe(start=0, fixed=true))))));
 
       Modelica.Electrical.Spice3.Basic.R_Resistor RBIT0(R=1000);
@@ -2109,7 +2109,7 @@ RC 3 4 1K<br>
       connect(RCOUT.p, n13);
       connect(RCOUT.n, n0);
 
-      annotation (experiment(StopTime=1e-006, Interval=1e-009), 
+      annotation (experiment(StopTime=1e-006, Interval=1e-009),
         Documentation(info="<html>
 <p>这个四位二进制加法器模型是SPICE3 Version e3用户手册中描述的五个基准电路之一(请参阅Spice3库的信息)。
 </p>
@@ -2260,8 +2260,8 @@ print v(11) v(12) v(13)
     model Ground "接地节点"
 
       Modelica.Electrical.Analog.Interfaces.Pin p "地引脚" annotation (Placement(transformation(
-            origin={0,100}, 
-            extent={{10,-10},{-10,10}}, 
+            origin={0,100},
+            extent={{10,-10},{-10,10}},
             rotation=270)));
     equation
       p.v = 0;
@@ -2274,25 +2274,25 @@ print v(11) v(12) v(13)
 SPICE没有地节点(质量)的元件。在SPICE网表中，地由节点号0指定。
 这个Modelica SPICE库要求用这个地元件描述地节点。
 </p>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(
-            preserveAspectRatio=true, 
+            preserveAspectRatio=true,
             extent={{-100,-100},{100,100}}), graphics={
             Line(
-              points={{0,100},{0,40}}, 
-              color={0,0,255}), 
+              points={{0,100},{0,40}},
+              color={0,0,255}),
             Line(
-              points={{-60,40},{60,40}}, 
-              color={0,0,255}), 
+              points={{-60,40},{60,40}},
+              color={0,0,255}),
             Line(
-              points={{-40,20},{40,20}}, 
-              color={0,0,255}), 
+              points={{-40,20},{40,20}},
+              color={0,0,255}),
             Line(
-              points={{-20,0},{20,0}}, 
-              color={0,0,255}), 
+              points={{-20,0},{20,0}},
+              color={0,0,255}),
             Text(
-              extent={{-150,-14},{150,-54}}, 
-              textColor={0,0,255}, 
+              extent={{-150,-14},{150,-54}},
+              textColor={0,0,255},
               textString="%name")}));
     end Ground;
 
@@ -2307,21 +2307,21 @@ SPICE没有地节点(质量)的元件。在SPICE网表中，地由节点号0指�
 理想电阻通过<em>i*R=v</em> 将分支电压<em>v</em>与分支电流<em>i</em>连接起来。
 电阻<em>R</em>允许为正、零或负。
 </p>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
             Rectangle(
-              extent={{-70,30},{70,-30}}, 
-              lineColor={0,0,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
-            Line(points={{-90,0},{-70,0}}, color={0,0,255}), 
-            Line(points={{70,0},{90,0}}, color={0,0,255}), 
-            Text(extent={{-150,-40},{150,-80}}, textString="R=%R"), 
+              extent={{-70,30},{70,-30}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-90,0},{-70,0}}, color={0,0,255}),
+            Line(points={{70,0},{90,0}}, color={0,0,255}),
+            Text(extent={{-150,-40},{150,-80}}, textString="R=%R"),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textString="%name", 
+              extent={{-150,90},{150,50}},
+              textString="%name",
               textColor={0,0,255})}));
     end R_Resistor;
 
@@ -2329,7 +2329,7 @@ SPICE没有地节点(质量)的元件。在SPICE网表中，地由节点号0指�
       extends Modelica.Electrical.Analog.Interfaces.OnePort;
       parameter Types.Capacitance C(start=0) "电容";
       parameter SI.Voltage IC=0 "电压的初始值" annotation(Dialog(enable=UIC));
-      parameter Boolean UIC=false 
+      parameter Boolean UIC=false
         "使用初始条件：如果使用初始条件，则为true";
     protected
       SI.Voltage vinternal "电容器电压";
@@ -2348,22 +2348,22 @@ SPICE没有地节点(质量)的元件。在SPICE网表中，地由节点号0指�
 电容<em>C</em>允许为正、零或负。
 </p>
 </html>"      ), Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
             Line(
-              points={{-6,28},{-6,-28}}, 
-              color={0,0,255}), 
+              points={{-6,28},{-6,-28}},
+              color={0,0,255}),
             Line(
-              points={{6,28},{6,-28}}, 
-              color={0,0,255}), 
-            Line(points={{-90,0},{-6,0}}, 
-              color={0,0,255}), 
-            Line(points={{6,0},{90,0}}, 
-              color={0,0,255}), 
-            Text(extent={{-150,-40},{150,-80}}, textString="C=%C"), 
+              points={{6,28},{6,-28}},
+              color={0,0,255}),
+            Line(points={{-90,0},{-6,0}},
+              color={0,0,255}),
+            Line(points={{6,0},{90,0}},
+              color={0,0,255}),
+            Text(extent={{-150,-40},{150,-80}}, textString="C=%C"),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textString="%name", 
+              extent={{-150,90},{150,50}},
+              textString="%name",
               textColor={0,0,255})}));
     end C_Capacitor;
 
@@ -2374,13 +2374,13 @@ SPICE没有地节点(质量)的元件。在SPICE网表中，地由节点号0指�
       parameter Boolean UIC=false "使用初始条件";
       SI.Current iinternal;
 
-      Modelica.Electrical.Spice3.Interfaces.InductiveCouplePinOut ICP 
+      Modelica.Electrical.Spice3.Interfaces.InductiveCouplePinOut ICP
         "用于耦合电感的引脚" 
-        annotation (Placement(transformation(extent={{-20,-20},{20,20}}, 
-            rotation=-90, 
-            origin={0,80}), 
-            iconTransformation(extent={{-16,-16},{16,16}}, 
-            rotation=270, 
+        annotation (Placement(transformation(extent={{-20,-20},{20,20}},
+            rotation=-90,
+            origin={0,80}),
+            iconTransformation(extent={{-16,-16},{16,16}},
+            rotation=270,
             origin={0,84})));
 
     initial equation
@@ -2398,49 +2398,49 @@ SPICE没有地节点(质量)的元件。在SPICE网表中，地由节点号0指�
       annotation (
         Documentation(info="<html>
 <p>理想电感器通过<em>v=L*di/dt</em> 将分支电压<em>v</em>与分支电流<em>i</em>连接起来。电感<em>L</em>允许为正、零或负。</p>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
-            Line(points={{60,0},{90,0}}, 
-              color={0,0,255}), 
-            Line(points={{-90,0},{-60,0}}, 
-              color={0,0,255}), 
-            Text(extent={{-150,-40},{150,-80}}, textString="L=%L"), 
+            Line(points={{60,0},{90,0}},
+              color={0,0,255}),
+            Line(points={{-90,0},{-60,0}},
+              color={0,0,255}),
+            Text(extent={{-150,-40},{150,-80}}, textString="L=%L"),
             Text(
-              extent={{-150,80},{150,40}}, 
-              textString="%name", 
-              textColor={0,0,255}), 
+              extent={{-150,80},{150,40}},
+              textString="%name",
+              textColor={0,0,255}),
             Line(
-              points={{-60,0},{-59,6},{-52,14},{-38,14},{-31,6},{-30,0}}, 
-              color={0,0,255}, 
-              smooth=Smooth.Bezier), 
+              points={{-60,0},{-59,6},{-52,14},{-38,14},{-31,6},{-30,0}},
+              color={0,0,255},
+              smooth=Smooth.Bezier),
             Line(
-              points={{-30,0},{-29,6},{-22,14},{-8,14},{-1,6},{0,0}}, 
-              color={0,0,255}, 
-              smooth=Smooth.Bezier), 
+              points={{-30,0},{-29,6},{-22,14},{-8,14},{-1,6},{0,0}},
+              color={0,0,255},
+              smooth=Smooth.Bezier),
             Line(
-              points={{0,0},{1,6},{8,14},{22,14},{29,6},{30,0}}, 
-              color={0,0,255}, 
-              smooth=Smooth.Bezier), 
+              points={{0,0},{1,6},{8,14},{22,14},{29,6},{30,0}},
+              color={0,0,255},
+              smooth=Smooth.Bezier),
             Line(
-              points={{30,0},{31,6},{38,14},{52,14},{59,6},{60,0}}, 
-              color={0,0,255}, 
+              points={{30,0},{31,6},{38,14},{52,14},{59,6},{60,0}},
+              color={0,0,255},
               smooth=Smooth.Bezier)}));
     end L_Inductor;
 
     model K_CoupledInductors "通过耦合系数的感应耦合"
       parameter Real k(start=0, min=0, max=1) "耦合系数";
-      Modelica.Electrical.Spice3.Interfaces.InductiveCouplePinIn inductiveCouplePin1 
+      Modelica.Electrical.Spice3.Interfaces.InductiveCouplePinIn inductiveCouplePin1
         "感应耦合的耦合引脚" 
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-      Modelica.Electrical.Spice3.Interfaces.InductiveCouplePinIn inductiveCouplePin2 
+      Modelica.Electrical.Spice3.Interfaces.InductiveCouplePinIn inductiveCouplePin2
         "感应耦合的耦合引脚" 
-          annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
-            rotation=180, 
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+            rotation=180,
             origin={100,0}), iconTransformation(
-            extent={{-10,-10},{10,10}}, 
-            rotation=180, 
+            extent={{-10,-10},{10,10}},
+            rotation=180,
             origin={100,0})));
     SI.Inductance M "互感";
     equation
@@ -2450,22 +2450,22 @@ SPICE没有地节点(质量)的元件。在SPICE网表中，地由节点号0指�
       inductiveCouplePin1.v = - M*inductiveCouplePin2.di;
       inductiveCouplePin2.v = - M*inductiveCouplePin1.di;
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), 
+                -100,-100},{100,100}}),
                        graphics={
             Polygon(
-              points={{-60,0},{0,20},{60,0},{0,-20},{-60,0}}, 
-              lineColor={170,85,255}), 
+              points={{-60,0},{0,20},{60,0},{0,-20},{-60,0}},
+              lineColor={170,85,255}),
             Line(
-              points={{-60,0},{-96,0},{-98,0}}, 
-              color={170,85,255}), 
+              points={{-60,0},{-96,0},{-98,0}},
+              color={170,85,255}),
             Line(
-              points={{60,0},{100,0}}, 
-              color={170,85,255}), 
+              points={{60,0},{100,0}},
+              color={170,85,255}),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name"), 
-            Text(extent={{-150,-40},{150,-80}}, textString="k=%k")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name"),
+            Text(extent={{-150,-40},{150,-80}}, textString="k=%k")}),
         Documentation(info="<html>
 <p>
 <code>K_CoupledInductors</code>是一个允许两个电感进行耦合的组件。<code>k</code>是耦合系数，必须在[0,1]范围内。
@@ -2511,26 +2511,26 @@ NC- -> n1.v
 VALUE -> gain
 </pre></blockquote>
 </html>"      ), Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
             Rectangle(
-              extent={{-70,70},{70,-70}}, 
-              lineColor={0,0,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
+              extent={{-70,70},{70,-70}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
             Text(
-              extent={{-150,-80},{150,-120}}, 
-              textString="%name", 
-              textColor={0,0,255}), 
-            Line(points={{-90,50},{-30,50}}, color={0,0,255}), 
-            Line(points={{-30,-50},{-90,-50}}, color={0,0,255}), 
-            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}), 
-            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}), 
-            Line(points={{-20,60},{20,60}}, color={0,0,255}), 
+              extent={{-150,-80},{150,-120}},
+              textString="%name",
+              textColor={0,0,255}),
+            Line(points={{-90,50},{-30,50}}, color={0,0,255}),
+            Line(points={{-30,-50},{-90,-50}}, color={0,0,255}),
+            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}),
+            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}),
+            Line(points={{-20,60},{20,60}}, color={0,0,255}),
             Polygon(
-              points={{20,60},{10,63},{10,57},{20,60}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
+              points={{20,60},{10,63},{10,57},{20,60}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
               fillPattern=FillPattern.Solid)}));
     end E_VCV;
 
@@ -2563,28 +2563,28 @@ NC- -> n1.v
 VALUE->transConductance
 </pre></blockquote>
 </html>"      ), Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
             Rectangle(
-              extent={{-70,70},{70,-70}}, 
-              lineColor={0,0,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
+              extent={{-70,70},{70,-70}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
             Text(
-              extent={{-150,-80},{150,-120}}, 
-              textString="%name", 
-              textColor={0,0,255}), 
-            Line(points={{-90,50},{-30,50}}, color={0,0,255}), 
-            Line(points={{-30,-50},{-90,-50}}, color={0,0,255}), 
-            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}), 
-            Line(points={{-20,60},{20,60}}, color={0,0,255}), 
+              extent={{-150,-80},{150,-120}},
+              textString="%name",
+              textColor={0,0,255}),
+            Line(points={{-90,50},{-30,50}}, color={0,0,255}),
+            Line(points={{-30,-50},{-90,-50}}, color={0,0,255}),
+            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}),
+            Line(points={{-20,60},{20,60}}, color={0,0,255}),
             Polygon(
-              points={{20,60},{10,63},{10,57},{20,60}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid), 
-            Line(points={{90,50},{30,50},{30,20}}, color={0,0,255}), 
-            Line(points={{90,-50},{30,-50},{30,-20}}, color={0,0,255}), 
+              points={{20,60},{10,63},{10,57},{20,60}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{90,50},{30,50},{30,20}}, color={0,0,255}),
+            Line(points={{90,-50},{30,-50},{30,-20}}, color={0,0,255}),
             Line(points={{10,0},{50,0}}, color={0,0,255})}));
     end G_VCC;
 
@@ -2627,27 +2627,27 @@ NV--&gt;n1.i
 <blockquote><pre>
 VALUE-&gt;transResistance
 </pre></blockquote>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
             Rectangle(
-              extent={{-70,70},{70,-70}}, 
-              lineColor={0,0,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
+              extent={{-70,70},{70,-70}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
             Text(
-              extent={{-150,-80},{150,-120}}, 
-              textString="%name", 
-              textColor={0,0,255}), 
-            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}), 
-            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}), 
-            Line(points={{-20,60},{20,60}}, color={0,0,255}), 
+              extent={{-150,-80},{150,-120}},
+              textString="%name",
+              textColor={0,0,255}),
+            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}),
+            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}),
+            Line(points={{-20,60},{20,60}}, color={0,0,255}),
             Polygon(
-              points={{20,60},{10,63},{10,57},{20,60}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid), 
+              points={{20,60},{10,63},{10,57},{20,60}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid),
             Line(points={{-90,50},{-30,50},{-30,-50},{-90,-50}}, color={0,0,255})}));
     end H_CCV;
 
@@ -2700,38 +2700,38 @@ NV- -&gt; n1.i
 <blockquote><pre>
 VALUE -&gt; gain
 </pre></blockquote>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
             Rectangle(
-              extent={{-70,70},{70,-70}}, 
-              lineColor={0,0,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
-            Line(points={{-100,50},{-30,50},{-30,-50},{-100,-50}}, color={0,0,255}), 
+              extent={{-70,70},{70,-70}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-100,50},{-30,50},{-30,-50},{-100,-50}}, color={0,0,255}),
             Text(
-              extent={{-150,-80},{150,-120}}, 
-              textString="%name", 
-              textColor={0,0,255}), 
-            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}), 
-            Line(points={{-20,60},{20,60}}, color={0,0,255}), 
+              extent={{-150,-80},{150,-120}},
+              textString="%name",
+              textColor={0,0,255}),
+            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}),
+            Line(points={{-20,60},{20,60}}, color={0,0,255}),
             Polygon(
-              points={{20,60},{10,63},{10,57},{20,60}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid), 
-            Line(points={{90,50},{30,50},{30,20}}, color={0,0,255}), 
-            Line(points={{91,-50},{30,-50},{30,-20}}, color={0,0,255}), 
+              points={{20,60},{10,63},{10,57},{20,60}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{90,50},{30,50},{30,20}}, color={0,0,255}),
+            Line(points={{91,-50},{30,-50},{30,-20}}, color={0,0,255}),
             Line(points={{10,0},{50,0}}, color={0,0,255})}));
     end F_CCC;
 
-    annotation(preferredView="info", 
+    annotation(preferredView="info",
   Documentation(info="<html>
 <p>这个库包含了SPICE3模型的基本组件。组件名的首字母表示了SPICE名称，例如，<strong>R</strong>_Resistor: <strong>R</strong>是SPICE中电阻元件的名称，这种表示方式一般在SPICE网表中使用。</p>
 
 
-</html>"  , 
+</html>"  ,
      revisions="<html>
 <dl>
 <dt>
@@ -2756,11 +2756,11 @@ Christoph Clau&szlig;
     model M_PMOS "PMOS MOSFET器件"
       extends Modelica.Electrical.Spice3.Internal.MOS(
                               final mtype=1);
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics={Polygon(
-              points={{60,0},{40,5},{40,-5},{60,0}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
+              points={{60,0},{40,5},{40,-5},{60,0}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
               fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <p>模型M_PMOS是具有固定级别1的P通道MOSFET晶体管(Shichman-Hodges)模型</p>
 <p>来自Semiconductors库的模型能访问存储了所有所需的函数、记录和数据的Repository库，这些数据用于半导体模型。</p>
@@ -2775,11 +2775,11 @@ Christoph Clau&szlig;
     model M_NMOS "NMOS MOSFET器件"
       extends Modelica.Electrical.Spice3.Internal.MOS(
                               final mtype=0);
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics={Polygon(
-              points={{40,0},{60,5},{60,-5},{40,0}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
+              points={{40,0},{60,5},{60,-5},{40,0}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
               fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <p>模型M_NMOS是具有固定级别1的N通道MOSFET晶体管(Shichman-Hodges模型)</p>
 <p>来自Semiconductors库的模型能直接访问存储了所有所需的函数、记录和数据的Repository库，这些数据能用于半导体模型。</p>
@@ -2803,12 +2803,12 @@ Christoph Clau&szlig;
     model M_NMOS2 "NMOS MOSFET器件"
       extends Modelica.Electrical.Spice3.Internal.MOS2(
                               final mtype=0);
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics={Polygon(
-              points={{40,0},{60,5},{60,-5},{40,0}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid)}), 
+              points={{40,0},{60,5},{60,-5},{40,0}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid)}),
         Documentation(info="<html>
 <p>模型M_NMOS是一个固定为级别2的N通道MOSFET晶体管：</p>
 <p>该模型从Semiconductors库中访问Internal库，其中存储和建模了所有必要的函数、记录和数据，这些数据对于半导体模型是必需的。</p>
@@ -2823,12 +2823,12 @@ Christoph Clau&szlig;
     model M_PMOS2 "PMOS MOSFET器件"
       extends Modelica.Electrical.Spice3.Internal.MOS2(
                               final mtype=1);
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics={Polygon(
-              points={{60,0},{40,5},{40,-5},{60,0}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid)}), 
+              points={{60,0},{40,5},{40,-5},{60,0}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid)}),
         Documentation(info="<html>
 <p>模型M_PMOS是一个固定为级别2的P通道MOSFET晶体管：</p>
 <p>该模型能从Semiconductors库中访问Internal库，它存储和建模了所有必要的函数、记录和数据，这些数据对于半导体模型是必需的。</p>
@@ -2853,12 +2853,12 @@ Christoph Clau&szlig;
      extends Modelica.Electrical.Spice3.Internal.BJT2(
                             final TBJT=1);
 
-      annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
+      annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Polygon(
-              points={{8,-68},{2,-55},{-4,-62},{8,-68}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid)}), 
+              points={{8,-68},{2,-55},{-4,-62},{8,-68}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid)}),
         Documentation(info="<html>
 <p>模型Q_NPNBJT是NPN双极晶体管模型：它是Gummel-Poon修改后的模型。</p>
 <p>来自Semiconductors库的模型能直接访问Internal库，其中存储和建模了所有所需的函数，</p>
@@ -2876,12 +2876,12 @@ Christoph Clau&szlig;
      extends Modelica.Electrical.Spice3.Internal.BJT2(
                             final TBJT=-1);
 
-      annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
+      annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Polygon(
-              points={{0,-60},{14,-67},{8,-74},{0,-60}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid)}), 
+              points={{0,-60},{14,-67},{8,-74},{0,-60}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid)}),
         Documentation(info="<html>
 <p>模型Q_PNPBJT是PNP双极晶体管模型：它是Gummel-Poon修改后的模型。</p>
 <p>来自Semiconductors库的模型能直接访问Internal库，其中存储和建模了所有所需的函数，</p>
@@ -2917,12 +2917,12 @@ Christoph Clau&szlig;
 <li><em>2011年9月</em>由Sandra B&ouml;hme修订</li>
 <li><em>2009年8月</em>由Kristin Majetta创建</li>
 </ul>
-</html>"      ), 
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
+</html>"      ),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Polygon(
-              points={{8,-68},{2,-55},{-4,-62},{8,-68}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
+              points={{8,-68},{2,-55},{-4,-62},{8,-68}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
               fillPattern=FillPattern.Solid)}));
 
     end J_PJFJFET;
@@ -2940,16 +2940,16 @@ Christoph Clau&szlig;
 <li><em>2011年9月</em>由Sandra B&ouml;hme修订</li>
 <li><em>2009年8月</em>由Kristin Majetta创建</li>
 </ul>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Polygon(
-              points={{8,-68},{2,-55},{-4,-62},{8,-68}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
+              points={{8,-68},{2,-55},{-4,-62},{8,-68}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
               fillPattern=FillPattern.Solid)}));
 
     end J_NJFJFET;
 
-    record ModelcardJFET 
+    record ModelcardJFET
       "用于JFET型号参数规范的记录"
       extends Modelica.Icons.Record;
       extends Modelica.Electrical.Spice3.Internal.ModelcardJFET;
@@ -2997,7 +2997,7 @@ Christoph Clau&szlig;
 </html>"      ));
     end R_Resistor;
 
-    record ModelcardRESISTOR 
+    record ModelcardRESISTOR
       "用于规范模型卡参数的记录"
       extends Modelica.Icons.Record;
       extends Modelica.Electrical.Spice3.Internal.ModelcardR;
@@ -3007,7 +3007,7 @@ Christoph Clau&szlig;
 </html>"          ));
     end ModelcardRESISTOR;
 
-    model C_Capacitor 
+    model C_Capacitor
       "半导体电容器"
       extends Modelica.Electrical.Spice3.Internal.C_SEMI;
       annotation (
@@ -3023,7 +3023,7 @@ Christoph Clau&szlig;
 </html>"      ));
     end C_Capacitor;
 
-    record ModelcardCAPACITOR 
+    record ModelcardCAPACITOR
       "用于半导体电容器模型的模型卡参数的记录"
       extends Modelica.Icons.Record;
       extends Modelica.Electrical.Spice3.Internal.ModelcardC;
@@ -3032,7 +3032,7 @@ Christoph Clau&szlig;
 <p>在典型的SPICE3模型卡中，存储了所谓的技术参数。这些参数通常与电路中的多个半导体器件有关，例如整个电路的温度。</p>
 </html>"          ));
     end ModelcardCAPACITOR;
-    annotation(preferredView="info", 
+    annotation(preferredView="info",
       Documentation(info="<html>
 <p>该库含有SPICE3中可用的半导体器件模型及其模型卡。用户应用该库中的模型。</p>
 
@@ -3053,28 +3053,28 @@ Christoph Clau&szlig;
       v = V;
       annotation (
         Icon(coordinateSystem(
-        preserveAspectRatio=false, 
+        preserveAspectRatio=false,
         extent={{-100,-100},{100,100}}), graphics={
             Ellipse(
-              extent={{-50,50},{50,-50}}, 
-              lineColor={0,0,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
-            Line(points={{-90,0},{-50,0}}, color={0,0,255}), 
-            Line(points={{-50,0},{50,0}}, color={0,0,255}), 
-            Line(points={{50,0},{90,0}}, color={0,0,255}), 
+              extent={{-50,50},{50,-50}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-90,0},{-50,0}}, color={0,0,255}),
+            Line(points={{-50,0},{50,0}}, color={0,0,255}),
+            Line(points={{50,0},{90,0}}, color={0,0,255}),
             Text(
-              extent={{-120,60},{-20,0}}, 
-              textColor={0,0,255}, 
-              textString="+"), 
+              extent={{-120,60},{-20,0}},
+              textColor={0,0,255},
+              textString="+"),
             Text(
-              extent={{20,60},{120,0}}, 
-              textColor={0,0,255}, 
-              textString="-"), 
+              extent={{20,60},{120,0}},
+              textColor={0,0,255},
+              textString="-"),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name")}),
     Documentation(info="<html>
 <p>V_constant源是一个简单的恒定电压源，用于提供理想的恒定电压，该电压由参数提供。</p>
 </html>"        ));
@@ -3090,37 +3090,37 @@ Christoph Clau&szlig;
       parameter SI.Damping THETA=0.0 "阻尼系数";
     equation
         assert(FREQ>0, "频率小于或等于零");
-        v = VO + (if time < TD then 0 else VA* 
-        Modelica.Math.exp(-(time - TD)*THETA)*Modelica.Math.sin(2*pi 
+        v = VO + (if time < TD then 0 else VA*
+        Modelica.Math.exp(-(time - TD)*THETA)*Modelica.Math.sin(2*pi
         *FREQ*(time - TD)));
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics={
             Text(
-              extent={{-120,60},{-20,0}}, 
-              textColor={0,0,255}, 
-              textString="+"), 
+              extent={{-120,60},{-20,0}},
+              textColor={0,0,255},
+              textString="+"),
             Text(
-              extent={{20,60},{120,0}}, 
-              textColor={0,0,255}, 
-              textString="-"), 
+              extent={{20,60},{120,0}},
+              textColor={0,0,255},
+              textString="-"),
              Ellipse(
-               extent={{-50,50},{50,-50}}, 
-               lineColor={0,0,255}, 
-               fillColor={255,255,255}, 
-               fillPattern=FillPattern.Solid), 
-             Line(points={{-90,0},{50,0}}, color={0,0,255}), 
-             Line(points={{50,0},{90,0}}, color={0,0,255}), 
-            Line(points={{-80,4},{-75.2,36.3},{-72,54.3},{-68.7,68.5},{-65.5, 
+               extent={{-50,50},{50,-50}},
+               lineColor={0,0,255},
+               fillColor={255,255,255},
+               fillPattern=FillPattern.Solid),
+             Line(points={{-90,0},{50,0}}, color={0,0,255}),
+             Line(points={{50,0},{90,0}}, color={0,0,255}),
+            Line(points={{-80,4},{-75.2,36.3},{-72,54.3},{-68.7,68.5},{-65.5,
                   78.2},{-62.3,83.3},{-59.1,83.6},{-55.9,79.3},{-52.7,71.1},{
-                  -48.6,56.2},{-43,29.8},{-35,-9.9},{-30.2,-29.7},{-26.1,-41.9}, 
+                  -48.6,56.2},{-43,29.8},{-35,-9.9},{-30.2,-29.7},{-26.1,-41.9},
                   {-22.1,-49.2},{-18.1,-51.3},{-14.1,-48.5},{-10.1,-41.3},{
                   -5.23,-28.1},{8.44,17.7},{13.3,30.4},{18.1,38.8},{22.1,42},{
                   26.9,41.2},{31.8,35.8},{38.2,23.4},{51.1,-6.5},{57.5,-17.2},{
-                  63.1,-21.9},{68.7,-21.9},{75.2,-16.5},{80,-9.8}}, 
-                                                         color={192,192,192}), 
+                  63.1,-21.9},{68.7,-21.9},{75.2,-16.5},{80,-9.8}},
+                                                         color={192,192,192}),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
               textString="%name")}),  Documentation(info="<html>
 <p>阻尼正弦源</p>
 <h4>注意</h4>
@@ -3144,39 +3144,39 @@ Christoph Clau&szlig;
     equation
     v = V1 + (if (time < TD1) then 0 else if (time < (TD2)) then 
               (V2-V1)*(1 - Modelica.Math.exp(-(time - TD1)/TAU1)) else 
-              (V2-V1)*(1 - Modelica.Math.exp(-(time - TD1)/TAU1)) + 
+              (V2-V1)*(1 - Modelica.Math.exp(-(time - TD1)/TAU1)) +
               (V1-V2)*(1 - Modelica.Math.exp(-(time - TD2)/TAU2)));
       annotation (
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
             Text(
-              extent={{-120,60},{-20,0}}, 
-              textColor={0,0,255}, 
-              textString="+"), 
+              extent={{-120,60},{-20,0}},
+              textColor={0,0,255},
+              textString="+"),
             Text(
-              extent={{20,60},{120,0}}, 
-              textColor={0,0,255}, 
-              textString="-"), 
+              extent={{20,60},{120,0}},
+              textColor={0,0,255},
+              textString="-"),
              Ellipse(
-               extent={{-50,50},{50,-50}}, 
-               lineColor={0,0,255}, 
-               fillColor={255,255,255}, 
-               fillPattern=FillPattern.Solid), 
-             Line(points={{-90,0},{50,0}}, color={0,0,255}), 
-             Line(points={{50,0},{90,0}}, color={0,0,255}), 
+               extent={{-50,50},{50,-50}},
+               lineColor={0,0,255},
+               fillColor={255,255,255},
+               fillPattern=FillPattern.Solid),
+             Line(points={{-90,0},{50,0}}, color={0,0,255}),
+             Line(points={{50,0},{90,0}}, color={0,0,255}),
             Line(points={{-70,-48},{-67.2,-33.3},{-64.3,-20.1},{-60.8,-5.6},{
-                  -57.3,7},{-53.7,17.92},{-49.5,29.18},{-45.3,38.7},{-40.3,48}, 
-                  {-34.6,56.5},{-28.3,64.1},{-21.2,70.6},{-12.7,76.3},{-2.1, 
+                  -57.3,7},{-53.7,17.92},{-49.5,29.18},{-45.3,38.7},{-40.3,48},
+                  {-34.6,56.5},{-28.3,64.1},{-21.2,70.6},{-12.7,76.3},{-2.1,
                   81.2},{0,82},{2.12,69.5},{4.95,54.7},{7.78,41.8},{10,31},{
                   14.14,18.3},{17.68,8},{21.9,-2.2},{26.2,-10.6},{31.1,-18.5},{
-                  36.8,-25.4},{43.1,-31.3},{50.9,-36.5},{60.8,-40.8},{70,-43.4}}, 
+                  36.8,-25.4},{43.1,-31.3},{50.9,-36.5},{60.8,-40.8},{70,-43.4}},
                                                                       color={
-                  192,192,192}), 
+                  192,192,192}),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name")}),
         Documentation(info="<html>
 <p>上升和下降指数源。</p>
 <h4>注意</h4>
@@ -3200,9 +3200,9 @@ Christoph Clau&szlig;
 
     protected
       parameter SI.Time Trising=TR "一个周期内上升阶段的结束时间";
-      parameter SI.Time Twidth=Trising + PW 
+      parameter SI.Time Twidth=Trising + PW
         "一个周期内宽度阶段的结束时间";
-      parameter SI.Time Tfalling=Twidth + TF 
+      parameter SI.Time Tfalling=Twidth + TF
         "一个周期内下降阶段的结束时间";
       SI.Time T0(final start=TD, fixed=true) "当前周期的起始时间";
       Integer counter(start=-1, fixed=true) "周期计数器";
@@ -3214,36 +3214,36 @@ Christoph Clau&szlig;
         counter2 = pre(counter);
         counter = pre(counter) - (if pre(counter) > 0 then 1 else 0);
       end when;
-      v = V1 + (if (time < TD or counter2 == 0 or time >= T0 + 
-        Tfalling) then 0 else if (time < T0 + Trising) then (time - T0)* 
+      v = V1 + (if (time < TD or counter2 == 0 or time >= T0 +
+        Tfalling) then 0 else if (time < T0 + Trising) then (time - T0)*
         (V2-V1)/Trising else if (time < T0 + Twidth) then V2-V1 else 
         (T0 + Tfalling - time)*(V2-V1)/(Tfalling - Twidth));
 
       annotation (
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
             Text(
-              extent={{-120,60},{-20,0}}, 
-              textColor={0,0,255}, 
-              textString="+"), 
+              extent={{-120,60},{-20,0}},
+              textColor={0,0,255},
+              textString="+"),
             Text(
-              extent={{20,60},{120,0}}, 
-              textColor={0,0,255}, 
-              textString="-"), 
+              extent={{20,60},{120,0}},
+              textColor={0,0,255},
+              textString="-"),
              Ellipse(
-               extent={{-50,50},{50,-50}}, 
-               lineColor={0,0,255}, 
-               fillColor={255,255,255}, 
-               fillPattern=FillPattern.Solid), 
-             Line(points={{-90,0},{50,0}}, color={0,0,255}), 
-             Line(points={{50,0},{90,0}}, color={0,0,255}), 
-            Line(points={{-86,-74},{-65,-74},{-35,66},{-4,66},{25,-74},{46,-74}, 
-                  {75,66}}, color={192,192,192}), 
+               extent={{-50,50},{50,-50}},
+               lineColor={0,0,255},
+               fillColor={255,255,255},
+               fillPattern=FillPattern.Solid),
+             Line(points={{-90,0},{50,0}}, color={0,0,255}),
+             Line(points={{50,0},{90,0}}, color={0,0,255}),
+            Line(points={{-86,-74},{-65,-74},{-35,66},{-4,66},{25,-74},{46,-74},
+                  {75,66}}, color={192,192,192}),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name")}),
         Documentation(info="<html>
 <p>周期性脉冲源，周期数不受限制。</p>
 <p>单个脉冲由以下表格描述：</p>
@@ -3321,7 +3321,7 @@ Christoph Clau&szlig;
 
     model V_pwl "分段线性电压源"
       extends Modelica.Electrical.Analog.Interfaces.OnePort;
-      parameter Real table[:, :]=[0, 0; 1, 1; 2, 4] 
+      parameter Real table[:, :]=[0, 0; 1, 1; 2, 4]
         "表格矩阵(时间=第一列，电压=第二列)";
     protected
       parameter Integer x= size(table,1);
@@ -3334,30 +3334,30 @@ Christoph Clau&szlig;
       v = tab.y;
       annotation (
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
             Text(
-              extent={{-120,60},{-20,0}}, 
-              textColor={0,0,255}, 
-              textString="+"), 
+              extent={{-120,60},{-20,0}},
+              textColor={0,0,255},
+              textString="+"),
             Text(
-              extent={{20,60},{120,0}}, 
-              textColor={0,0,255}, 
-              textString="-"), 
+              extent={{20,60},{120,0}},
+              textColor={0,0,255},
+              textString="-"),
              Ellipse(
-               extent={{-50,50},{50,-50}}, 
-               lineColor={0,0,255}, 
-               fillColor={255,255,255}, 
-               fillPattern=FillPattern.Solid), 
-             Line(points={{-90,0},{50,0}}, color={0,0,255}), 
-             Line(points={{50,0},{90,0}}, color={0,0,255}), 
-                                   Line(points={{-40,-50},{-40,70},{60,70},{60, 
+               extent={{-50,50},{50,-50}},
+               lineColor={0,0,255},
+               fillColor={255,255,255},
+               fillPattern=FillPattern.Solid),
+             Line(points={{-90,0},{50,0}}, color={0,0,255}),
+             Line(points={{50,0},{90,0}}, color={0,0,255}),
+                                   Line(points={{-40,-50},{-40,70},{60,70},{60,
                   -50},{-40,-50},{-40,-20},{60,-20},{60,10},{-40,10},{-40,40},{
-                  60,40},{60,70},{10,70},{10,-51}}, color={192,192,192}), 
+                  60,40},{60,70},{10,70},{10,-51}}, color={192,192,192}),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name")}),
         Documentation(info="<html>
 <p>该模型通过给定的表格中的<strong>线性插值</strong>生成电压。时间点和电压值存储在矩阵<strong>table[i,j]</strong>中，其中第一列 table[:,1] 包含时间点，第二列包含要插值的电压。表格插值具有以下特性：</p>
 <ul>
@@ -3396,31 +3396,31 @@ table = [0  0
       v = VO + VA *Modelica.Math.sin( 2 *pi * FC *time + MDI *Modelica.Math.sin(2 *pi *FS *time));
       annotation (
         Icon(coordinateSystem(
-            preserveAspectRatio=true, 
+            preserveAspectRatio=true,
             extent={{-100,-100},{100,100}}), graphics={
             Text(
-              extent={{-120,60},{-20,0}}, 
-              textColor={0,0,255}, 
-              textString="+"), 
+              extent={{-120,60},{-20,0}},
+              textColor={0,0,255},
+              textString="+"),
             Text(
-              extent={{20,60},{120,0}}, 
-              textColor={0,0,255}, 
-              textString="-"), 
+              extent={{20,60},{120,0}},
+              textColor={0,0,255},
+              textString="-"),
              Ellipse(
-               extent={{-50,50},{50,-50}}, 
-               lineColor={0,0,255}, 
-               fillColor={255,255,255}, 
-               fillPattern=FillPattern.Solid), 
-             Line(points={{-90,0},{50,0}}, color={0,0,255}), 
-             Line(points={{50,0},{90,0}}, color={0,0,255}), 
+               extent={{-50,50},{50,-50}},
+               lineColor={0,0,255},
+               fillColor={255,255,255},
+               fillPattern=FillPattern.Solid),
+             Line(points={{-90,0},{50,0}}, color={0,0,255}),
+             Line(points={{50,0},{90,0}}, color={0,0,255}),
             Text(
-              extent={{-60,-50},{60,-90}}, 
-              textColor={0,0,255}, 
-              textString="SFFM"), 
+              extent={{-60,-50},{60,-90}},
+              textColor={0,0,255},
+              textString="SFFM"),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name")}),
         Documentation(info="<html>
 <p>单频率频率调制源产生频率为FC的载波信号。该信号由信号频率FS进行调制。具体请查看Modelica文本中的公式。</p>
 <h4>注意</h4>
@@ -3438,25 +3438,25 @@ table = [0  0
       i = I;
       annotation (
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
             Ellipse(
-              extent={{-50,50},{50,-50}}, 
-              lineColor={0,0,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
-            Line(points={{-90,0},{-50,0}}, color={0,0,255}), 
-            Line(points={{50,0},{90,0}}, color={0,0,255}), 
-            Line(points={{0,-50},{0,50}}, color={0,0,255}), 
+              extent={{-50,50},{50,-50}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-90,0},{-50,0}}, color={0,0,255}),
+            Line(points={{50,0},{90,0}}, color={0,0,255}),
+            Line(points={{0,-50},{0,50}}, color={0,0,255}),
                                                       Polygon(
-             points={{90,0},{60,10},{60,-10},{90,0}}, 
-             lineColor={0,0,255}, 
-             fillColor={0,0,255}, 
-             fillPattern=FillPattern.Solid), 
+             points={{90,0},{60,10},{60,-10},{90,0}},
+             lineColor={0,0,255},
+             fillColor={0,0,255},
+             fillPattern=FillPattern.Solid),
            Text(
-             extent={{-150,90},{150,50}}, 
-             textColor={0,0,255}, 
-              textString="%name")}), 
+             extent={{-150,90},{150,50}},
+             textColor={0,0,255},
+              textString="%name")}),
         Documentation(info="<html>
 <p>I_constant源是一个简单的常数电流源，用于提供理想的恒定电流，其值由一个参数提供。</p>
 </html>"       ));
@@ -3472,38 +3472,38 @@ table = [0  0
       parameter SI.Damping THETA=0.0 "阻尼系数";
     equation
         assert(FREQ>0, "频率小于或等于零");
-        i = IO + (if time < TD then 0 else IA* 
-        Modelica.Math.exp(-(time - TD)*THETA)*Modelica.Math.sin(2*pi 
+        i = IO + (if time < TD then 0 else IA*
+        Modelica.Math.exp(-(time - TD)*THETA)*Modelica.Math.sin(2*pi
         *FREQ*(time - TD)));
       annotation (
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={Polygon(
-              points={{90,0},{60,10},{60,-10},{90,0}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid), 
+              points={{90,0},{60,10},{60,-10},{90,0}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid),
              Ellipse(
-               extent={{-50,50},{50,-50}}, 
-               lineColor={0,0,255}, 
-               fillColor={255,255,255}, 
-               fillPattern=FillPattern.Solid), 
-             Line(points={{-90,0},{-50,0}}, color={0,0,255}), 
-             Line(points={{50,0},{90,0}}, color={0,0,255}), 
-             Line(points={{0,-50},{0,50}}, color={0,0,255}), 
-                                   Line(points={{-77,-12},{-72.2,20.3},{-69, 
+               extent={{-50,50},{50,-50}},
+               lineColor={0,0,255},
+               fillColor={255,255,255},
+               fillPattern=FillPattern.Solid),
+             Line(points={{-90,0},{-50,0}}, color={0,0,255}),
+             Line(points={{50,0},{90,0}}, color={0,0,255}),
+             Line(points={{0,-50},{0,50}}, color={0,0,255}),
+                                   Line(points={{-77,-12},{-72.2,20.3},{-69,
                   38.3},{-65.7,52.5},{-62.5,62.2},{-59.3,67.3},{-56.1,67.6},{
-                  -52.9,63.3},{-49.7,55.1},{-45.6,40.2},{-40,13.8},{-32,-25.9}, 
+                  -52.9,63.3},{-49.7,55.1},{-45.6,40.2},{-40,13.8},{-32,-25.9},
                   {-27.2,-45.7},{-23.1,-57.9},{-19.1,-65.2},{-15.1,-67.3},{
-                  -11.1,-64.5},{-7.1,-57.3},{-2.23,-44.1},{11.44,1.7},{16.3, 
-                  14.4},{21.1,22.8},{25.1,26},{29.9,25.2},{34.8,19.8},{41.2,7.4}, 
-                  {54.1,-22.5},{60.5,-33.2},{66.1,-37.9},{71.7,-37.9},{78.2, 
-                  -32.5},{83,-25.8}}, 
-                color={192,192,192}), 
+                  -11.1,-64.5},{-7.1,-57.3},{-2.23,-44.1},{11.44,1.7},{16.3,
+                  14.4},{21.1,22.8},{25.1,26},{29.9,25.2},{34.8,19.8},{41.2,7.4},
+                  {54.1,-22.5},{60.5,-33.2},{66.1,-37.9},{71.7,-37.9},{78.2,
+                  -32.5},{83,-25.8}},
+                color={192,192,192}),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name")}),
         Documentation(info="<html>
 <p>阻尼正弦源</p>
 <h4>注意</h4>
@@ -3525,36 +3525,36 @@ table = [0  0
     equation
     i = I1 + (if (time < TD1) then 0 else if (time < (TD2)) then 
               (I2-I1)*(1 - Modelica.Math.exp(-(time - TD1)/TAU1)) else 
-              (I2-I1)*(1 - Modelica.Math.exp(-(time - TD1)/TAU1)) + 
+              (I2-I1)*(1 - Modelica.Math.exp(-(time - TD1)/TAU1)) +
               (I1-I2)*(1 - Modelica.Math.exp(-(time - TD2)/TAU2)));
       annotation (
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={Polygon(
-              points={{90,0},{60,10},{60,-10},{90,0}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid), 
+              points={{90,0},{60,10},{60,-10},{90,0}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid),
              Ellipse(
-               extent={{-50,50},{50,-50}}, 
-               lineColor={0,0,255}, 
-               fillColor={255,255,255}, 
-               fillPattern=FillPattern.Solid), 
-             Line(points={{-89,0},{-50,0}}, color={0,0,255}), 
-             Line(points={{50,0},{91,0}}, color={0,0,255}), 
-             Line(points={{0,-50},{0,50}}, color={0,0,255}), 
-                                   Line(points={{-79,-53},{-76.2,-38.3},{-73.3, 
+               extent={{-50,50},{50,-50}},
+               lineColor={0,0,255},
+               fillColor={255,255,255},
+               fillPattern=FillPattern.Solid),
+             Line(points={{-89,0},{-50,0}}, color={0,0,255}),
+             Line(points={{50,0},{91,0}}, color={0,0,255}),
+             Line(points={{0,-50},{0,50}}, color={0,0,255}),
+                                   Line(points={{-79,-53},{-76.2,-38.3},{-73.3,
                   -25.1},{-69.8,-10.6},{-66.3,2},{-62.7,12.92},{-58.5,24.18},{
-                  -54.3,33.7},{-49.3,43},{-43.6,51.5},{-37.3,59.1},{-30.2,65.6}, 
+                  -54.3,33.7},{-49.3,43},{-43.6,51.5},{-37.3,59.1},{-30.2,65.6},
                   {-21.7,71.3},{-11.1,76.2},{-9,77},{-6.88,64.5},{-4.05,49.7},{
                   -1.22,36.8},{1.606,25.45},{5.14,13.3},{8.68,3},{12.9,-7.2},{
-                  17.2,-15.6},{22.1,-23.5},{27.8,-30.4},{34.1,-36.3},{41.9, 
-                  -41.5},{51.8,-45.8},{61,-48.4}}, 
-                                           color={192,192,192}), 
+                  17.2,-15.6},{22.1,-23.5},{27.8,-30.4},{34.1,-36.3},{41.9,
+                  -41.5},{51.8,-45.8},{61,-48.4}},
+                                           color={192,192,192}),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name")}),
         Documentation(info="<html>
 <p>上升和下降指数源。</p>
 <h4>注意</h4>
@@ -3578,9 +3578,9 @@ table = [0  0
 
     protected
       parameter SI.Time Trising = TR "一个周期内上升阶段的结束时间";
-      parameter SI.Time Twidth = Trising + PW 
+      parameter SI.Time Twidth = Trising + PW
         "一个周期内宽度阶段的结束时间";
-      parameter SI.Time Tfalling = Twidth + TF 
+      parameter SI.Time Tfalling = Twidth + TF
         "一个周期内下降阶段的结束时间";
       SI.Time T0(final start=TD, fixed=true) "电流周期的开始时间";
       Integer counter(start=-1) "周期计数器";
@@ -3592,33 +3592,33 @@ table = [0  0
         counter2 = pre(counter);
         counter = pre(counter) - (if pre(counter) > 0 then 1 else 0);
       end when;
-      i = I1 + (if (time < TD or counter2 == 0 or time >= T0 + 
-        Tfalling) then 0 else if (time < T0 + Trising) then (time - T0)* 
+      i = I1 + (if (time < TD or counter2 == 0 or time >= T0 +
+        Tfalling) then 0 else if (time < T0 + Trising) then (time - T0)*
         (I2-I1)/Trising else if (time < T0 + Twidth) then I2-I1 else 
         (T0 + Tfalling - time)*(I2-I1)/(Tfalling - Twidth));
 
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, 
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false,
               extent={{-100,-100},{100,100}}), graphics={
                                   Polygon(
-              points={{90,0},{60,10},{60,-10},{90,0}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid), 
+              points={{90,0},{60,10},{60,-10},{90,0}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid),
              Ellipse(
-               extent={{-50,50},{50,-50}}, 
-               lineColor={0,0,255}, 
-               fillColor={255,255,255}, 
-               fillPattern=FillPattern.Solid), 
-             Line(points={{-90,0},{-50,0}}, color={0,0,255}), 
-             Line(points={{50,0},{90,0}}, color={0,0,255}), 
-             Line(points={{0,-50},{0,50}}, color={0,0,255}), 
-                                    Line(points={{-85,-60}, 
-                  {-64,-60},{-34,80},{-3,80},{26,-60},{47,-60},{76,80}}, color= 
-                  {192,192,192}), 
+               extent={{-50,50},{50,-50}},
+               lineColor={0,0,255},
+               fillColor={255,255,255},
+               fillPattern=FillPattern.Solid),
+             Line(points={{-90,0},{-50,0}}, color={0,0,255}),
+             Line(points={{50,0},{90,0}}, color={0,0,255}),
+             Line(points={{0,-50},{0,50}}, color={0,0,255}),
+                                    Line(points={{-85,-60},
+                  {-64,-60},{-34,80},{-3,80},{26,-60},{47,-60},{76,80}}, color=
+                  {192,192,192}),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name")}),
         Documentation(info="<html>
 <p>具有不受限制的周期数量的周期性脉冲源。</p>
 <p>单个脉冲由以下表格描述：</p>
@@ -3696,7 +3696,7 @@ table = [0  0
 
     model I_pwl "分段线性电流源"
       extends Modelica.Electrical.Analog.Interfaces.OnePort;
-      parameter Real table[:, :] = [0, 0; 1, 1; 2, 4] 
+      parameter Real table[:, :] = [0, 0; 1, 1; 2, 4]
         "表格矩阵(时间=第一列，电流=第二列)";
     protected
       parameter Integer x = size(table, 1);
@@ -3709,28 +3709,28 @@ table = [0  0
       i = tab.y;
       annotation (
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
              Ellipse(
-               extent={{-50,50},{50,-50}}, 
-               lineColor={0,0,255}, 
-               fillColor={255,255,255}, 
-               fillPattern=FillPattern.Solid), 
-             Line(points={{-90,0},{-50,0}}, color={0,0,255}), 
-             Line(points={{50,0},{90,0}}, color={0,0,255}), 
-             Line(points={{0,-50},{0,50}}, color={0,0,255}), 
-             Line(points={{-44,-39},{-44,81},{56,81},{56, 
-                  -39},{-44,-39},{-44,-9},{56,-9},{56,21},{-44,21},{-44,51},{56, 
-                  51},{56,81},{6,81},{6,-40}}, color={192,192,192}), 
+               extent={{-50,50},{50,-50}},
+               lineColor={0,0,255},
+               fillColor={255,255,255},
+               fillPattern=FillPattern.Solid),
+             Line(points={{-90,0},{-50,0}}, color={0,0,255}),
+             Line(points={{50,0},{90,0}}, color={0,0,255}),
+             Line(points={{0,-50},{0,50}}, color={0,0,255}),
+             Line(points={{-44,-39},{-44,81},{56,81},{56,
+                  -39},{-44,-39},{-44,-9},{56,-9},{56,21},{-44,21},{-44,51},{56,
+                  51},{56,81},{6,81},{6,-40}}, color={192,192,192}),
              Polygon(
-              points={{90,0},{60,10},{60,-10},{90,0}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid), 
+              points={{90,0},{60,10},{60,-10},{90,0}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name")}),
         Documentation(info="<html>
 <p>该模型通过给定表格中的<strong>线性插值</strong>生成电流。时间点和电流值存储在矩阵<strong>table[i,j]</strong>中，其中第一列 table[:,1] 包含时间点，第二列包含要插值的电流。表格插值具有以下属性：</p>
 
@@ -3770,29 +3770,29 @@ table = [0  0
       i = IO + IA * Modelica.Math.sin(2 * pi * FC * time + MDI * Modelica.Math.sin(2 * pi * FS * time));
       annotation (
         Icon(coordinateSystem(
-            preserveAspectRatio=false, 
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics={
              Ellipse(
-               extent={{-50,50},{50,-50}}, 
-               lineColor={0,0,255}, 
-               fillColor={255,255,255}, 
-               fillPattern=FillPattern.Solid), 
-             Line(points={{50,0},{90,0}}, color={0,0,255}), 
-             Line(points={{-90,0},{-50,0}}, color={0,0,255}), 
-             Line(points={{0,-50},{0,50}}, color={0,0,255}), 
+               extent={{-50,50},{50,-50}},
+               lineColor={0,0,255},
+               fillColor={255,255,255},
+               fillPattern=FillPattern.Solid),
+             Line(points={{50,0},{90,0}}, color={0,0,255}),
+             Line(points={{-90,0},{-50,0}}, color={0,0,255}),
+             Line(points={{0,-50},{0,50}}, color={0,0,255}),
                                   Polygon(
-              points={{90,0},{60,10},{60,-10},{90,0}}, 
-              lineColor={0,0,255}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid), 
+              points={{90,0},{60,10},{60,-10},{90,0}},
+              lineColor={0,0,255},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid),
             Text(
-              extent={{-60,-50},{60,-90}}, 
-              textColor={0,0,255}, 
-              textString="SFFM"), 
+              extent={{-60,-50},{60,-90}},
+              textColor={0,0,255},
+              textString="SFFM"),
             Text(
-              extent={{-150,90},{150,50}}, 
-              textColor={0,0,255}, 
-              textString="%name")}), 
+              extent={{-150,90},{150,50}},
+              textColor={0,0,255},
+              textString="%name")}),
         Documentation(info="<html>
 <p>单频率调制源产生频率为FC的载波信号。该信号由信号频率FS进行调制。请参阅Modelica文本中的公式。</p>
 <h4>注意</h4>
@@ -3803,7 +3803,7 @@ table = [0  0
 </html>"        ));
     end I_sffm;
 
-    annotation(preferredView="info", Documentation(info= 
+    annotation(preferredView="info", Documentation(info=
                    "<html>
 <p>这个库包含了SPICE源的定义文件。</p>
 <p><strong>注意：</strong>关于参数的默认值，SPICE3和Modelica之间存在差异。因此建议对<strong>所有</strong>源的参数进行明确指定。</p>
@@ -3816,7 +3816,7 @@ table = [0  0
 </html>"    ));
   end Sources;
 
-  package Additionals 
+  package Additionals
     "一些有用的附加模型，例如，来自SPICE2的多项式源"
       extends Modelica.Icons.Package;
 
@@ -3926,21 +3926,21 @@ table = [0  0
 </html>"      ));
     end poly;
 
-    model E_VCV_POLY 
+    model E_VCV_POLY
       "多项式电压控制电压源(类似于SPICE2)"
 
       parameter Integer N(final min=1) = 1 "控制电压的数量";
       parameter Real coeff[:] = {1} "多项式系数";
-      Modelica.Electrical.Analog.Interfaces.PositivePin p 
+      Modelica.Electrical.Analog.Interfaces.PositivePin p
         "被控端口(通常右侧)的正引脚(电压降v2.v>n2.v为正)" annotation (Placement(
-            transformation(extent={{110,40},{90,60}}), 
+            transformation(extent={{110,40},{90,60}}),
             iconTransformation(extent={{110,40},{90,60}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin n 
+      Modelica.Electrical.Analog.Interfaces.NegativePin n
         "被控端口(通常右侧)的负引脚" annotation (Placement(
-            transformation(extent={{90,-60},{110,-40}}), 
+            transformation(extent={{90,-60},{110,-40}}),
             iconTransformation(extent={{90,-60},{110,-40}})));
 
-      Modelica.Electrical.Analog.Interfaces.PositivePin pc[2*N] 
+      Modelica.Electrical.Analog.Interfaces.PositivePin pc[2*N]
         "控制引脚向量(通常左侧)" 
             annotation (Placement(transformation(
               extent={{-90,-80},{-70,80}}), iconTransformation(extent={
@@ -3960,26 +3960,26 @@ table = [0  0
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics={
             Rectangle(
-              extent={{-70,70},{70,-70}}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid, 
-              lineColor={0,0,255}), 
+              extent={{-70,70},{70,-70}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,255}),
             Text(
-              extent={{-100,-62},{99,-112}}, 
-              textString="%name", 
-              textColor={0,0,255}), 
-            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}), 
-            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}), 
-            Line(points={{-20,50},{20,50}}, color={0,0,255}), 
+              extent={{-100,-62},{99,-112}},
+              textString="%name",
+              textColor={0,0,255}),
+            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}),
+            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}),
+            Line(points={{-20,50},{20,50}}, color={0,0,255}),
             Polygon(
-              points={{20,50},{10,53},{10,47},{20,50}}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid, 
-              lineColor={0,0,255}), 
+              points={{20,50},{10,53},{10,47},{20,50}},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,255}),
             Text(
-              extent={{-54,-26},{22,-60}}, 
-              textColor={0,0,255}, 
-              textString="VCV")}), 
+              extent={{-54,-26},{22,-60}},
+              textColor={0,0,255},
+              textString="VCV")}),
         Documentation(info="<html>
 <p>多项式源是一个SPICE2模型，也被其他SPICE派生版本所称知。</p>
 <p>非线性电压控制电压源。被控端口引脚p2和n2之间的“右”端口电压(=p2.v-n2.v)通过左端口引脚向量pc[:]上的电压通过以下方式控制：</p>
@@ -4029,21 +4029,21 @@ P0, P1 -&gt; polynomial coefficients name.coeff(coeff={P0,P1,...})
 </html>"      ));
     end E_VCV_POLY;
 
-    model G_VCC_POLY 
+    model G_VCC_POLY
       "多项式电压控制电流源(类似于SPICE2)"
 
       parameter Integer N(final min=1) = 1 "控制电压的数量";
       parameter Real coeff[:] = {1} "多项式系数";
-      Modelica.Electrical.Analog.Interfaces.PositivePin p 
+      Modelica.Electrical.Analog.Interfaces.PositivePin p
         "右端口的正引脚(电压降v2.v>n2.v为正)" annotation (Placement(
-            transformation(extent={{110,40},{90,60}}), 
+            transformation(extent={{110,40},{90,60}}),
             iconTransformation(extent={{110,40},{90,60}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin n 
+      Modelica.Electrical.Analog.Interfaces.NegativePin n
         "右端口的负引脚" annotation (Placement(
-            transformation(extent={{90,-60},{110,-40}}), 
+            transformation(extent={{90,-60},{110,-40}}),
             iconTransformation(extent={{90,-60},{110,-40}})));
 
-      Modelica.Electrical.Analog.Interfaces.PositivePin pc[2*N] 
+      Modelica.Electrical.Analog.Interfaces.PositivePin pc[2*N]
         "控制引脚向量" 
             annotation (Placement(transformation(
               extent={{-90,-80},{-70,80}}), iconTransformation(extent={
@@ -4063,26 +4063,26 @@ P0, P1 -&gt; polynomial coefficients name.coeff(coeff={P0,P1,...})
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics={
             Rectangle(
-              extent={{-70,70},{70,-70}}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid, 
-              lineColor={0,0,255}), 
+              extent={{-70,70},{70,-70}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,255}),
             Text(
-              extent={{-100,-62},{99,-112}}, 
-              textString="%name", 
-              textColor={0,0,255}), 
-            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}), 
-            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}), 
-            Line(points={{-20,50},{20,50}}, color={0,0,255}), 
+              extent={{-100,-62},{99,-112}},
+              textString="%name",
+              textColor={0,0,255}),
+            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}),
+            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}),
+            Line(points={{-20,50},{20,50}}, color={0,0,255}),
             Polygon(
-              points={{20,50},{10,53},{10,47},{20,50}}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid, 
-              lineColor={0,0,255}), 
+              points={{20,50},{10,53},{10,47},{20,50}},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,255}),
             Text(
-              extent={{-60,-24},{16,-58}}, 
-              textColor={0,0,255}, 
-              textString="VCC")}), 
+              extent={{-60,-24},{16,-58}},
+              textColor={0,0,255},
+              textString="VCC")}),
         Documentation(info="<html>
 <p>多项式源是一个SPICE2模型，也被其他SPICE派生版本所称知。</p>
 <p>非线性电压控制电流源。右端口引脚p2上的电流(=p2.i)由左端口引脚向量pc[:]上的电压通过以下方式控制：</p>
@@ -4140,21 +4140,21 @@ P0, P1 -&gt; polynomial coefficients name.coeff(coeff={P0,P1,...})
 </html>"          ));
     end G_VCC_POLY;
 
-    model H_CCV_POLY 
+    model H_CCV_POLY
       "多项式电流控制电压源(类似于SPICE2)"
 
       parameter Integer N(final min=1) = 1 "控制电压的数量";
       parameter Real coeff[:] = {1} "多项式的系数";
-      Modelica.Electrical.Analog.Interfaces.PositivePin p 
+      Modelica.Electrical.Analog.Interfaces.PositivePin p
         "右侧端口的正极(对于正电压降v2，p2.v>n2.v)" annotation (Placement(
-            transformation(extent={{110,40},{90,60}}), 
+            transformation(extent={{110,40},{90,60}}),
             iconTransformation(extent={{110,40},{90,60}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin n 
+      Modelica.Electrical.Analog.Interfaces.NegativePin n
         "右侧端口的负极" annotation (Placement(
-            transformation(extent={{90,-60},{110,-40}}), 
+            transformation(extent={{90,-60},{110,-40}}),
             iconTransformation(extent={{90,-60},{110,-40}})));
 
-      Modelica.Electrical.Analog.Interfaces.PositivePin pc[2*N] 
+      Modelica.Electrical.Analog.Interfaces.PositivePin pc[2*N]
         "控制引脚的引脚向量" 
             annotation (Placement(transformation(
               extent={{-90,-80},{-70,80}}), iconTransformation(extent={
@@ -4175,26 +4175,26 @@ P0, P1 -&gt; polynomial coefficients name.coeff(coeff={P0,P1,...})
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics={
             Rectangle(
-              extent={{-70,70},{70,-70}}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid, 
-              lineColor={0,0,255}), 
+              extent={{-70,70},{70,-70}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,255}),
             Text(
-              extent={{-100,-62},{99,-112}}, 
-              textString="%name", 
-              textColor={0,0,255}), 
-            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}), 
-            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}), 
-            Line(points={{-20,50},{20,50}}, color={0,0,255}), 
+              extent={{-100,-62},{99,-112}},
+              textString="%name",
+              textColor={0,0,255}),
+            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}),
+            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}),
+            Line(points={{-20,50},{20,50}}, color={0,0,255}),
             Polygon(
-              points={{20,50},{10,53},{10,47},{20,50}}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid, 
-              lineColor={0,0,255}), 
+              points={{20,50},{10,53},{10,47},{20,50}},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,255}),
             Text(
-              extent={{-60,-26},{16,-60}}, 
-              textColor={0,0,255}, 
-              textString="CCV")}), 
+              extent={{-60,-26},{16,-60}},
+              textColor={0,0,255},
+              textString="CCV")}),
         Documentation(info="<html>
 <p>多项式源是SPICE2模型，在其他SPICE派生版本中被称为多项式源。</p>
 <p>非线性电流控制电压源。右侧端口p2和n2之间的电压(=p2.v-n2.v)由左侧端口引脚pc上的电流向量(=pc.i)控制：</p>
@@ -4288,21 +4288,21 @@ P0, P1 -&gt; 多项式系数 name.coeff(coeff={P0,P1,...})
 </html>"      ));
     end H_CCV_POLY;
 
-    model F_CCC_POLY 
+    model F_CCC_POLY
       "多项式电流控制电流源(类似于SPICE2)"
 
       parameter Integer N(final min=1) = 1 "控制电压的数量";
       parameter Real coeff[:] = {1} "多项式的系数";
-      Modelica.Electrical.Analog.Interfaces.PositivePin p 
+      Modelica.Electrical.Analog.Interfaces.PositivePin p
         "右侧端口的正极(对于正电压降v2，p2.v>n2.v)" annotation (Placement(
-            transformation(extent={{110,40},{90,60}}), 
+            transformation(extent={{110,40},{90,60}}),
             iconTransformation(extent={{110,40},{90,60}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin n 
+      Modelica.Electrical.Analog.Interfaces.NegativePin n
         "右侧端口的负极" annotation (Placement(
-            transformation(extent={{90,-60},{110,-40}}), 
+            transformation(extent={{90,-60},{110,-40}}),
             iconTransformation(extent={{90,-60},{110,-40}})));
 
-      Modelica.Electrical.Analog.Interfaces.PositivePin pc[2*N] 
+      Modelica.Electrical.Analog.Interfaces.PositivePin pc[2*N]
         "控制引脚的引脚向量" 
             annotation (Placement(transformation(
               extent={{-90,-80},{-70,80}}), iconTransformation(extent={
@@ -4323,26 +4323,26 @@ P0, P1 -&gt; 多项式系数 name.coeff(coeff={P0,P1,...})
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics={
             Rectangle(
-              extent={{-70,70},{70,-70}}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid, 
-              lineColor={0,0,255}), 
+              extent={{-70,70},{70,-70}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,255}),
             Text(
-              extent={{-100,-62},{99,-112}}, 
-              textString="%name", 
-              textColor={0,0,255}), 
-            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}), 
-            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}), 
-            Line(points={{-20,50},{20,50}}, color={0,0,255}), 
+              extent={{-100,-62},{99,-112}},
+              textString="%name",
+              textColor={0,0,255}),
+            Line(points={{100,50},{30,50},{30,-50},{100,-50}}, color={0,0,255}),
+            Ellipse(extent={{10,20},{50,-20}}, lineColor={0,0,255}),
+            Line(points={{-20,50},{20,50}}, color={0,0,255}),
             Polygon(
-              points={{20,50},{10,53},{10,47},{20,50}}, 
-              fillColor={0,0,255}, 
-              fillPattern=FillPattern.Solid, 
-              lineColor={0,0,255}), 
+              points={{20,50},{10,53},{10,47},{20,50}},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,255}),
             Text(
-              extent={{-60,-24},{16,-58}}, 
-              textColor={0,0,255}, 
-              textString="CCC")}), 
+              extent={{-60,-24},{16,-58}},
+              textColor={0,0,255},
+              textString="CCC")}),
         Documentation(info="<html>
 <p>多项式源是 SPICE2 模型，在其他 SPICE 派生版本中也被称为。</p>
 <p>非线性电流控制电流源。在端口 p2(=p2.i)的“右侧”，其电流由端口 pc[:] 上的电流向量“左侧”控制：</p>
@@ -4429,24 +4429,24 @@ P0,P1-&gt;多项式系数name.coeff(coeff={P0,P1,...})
 
     extends Modelica.Icons.InterfacesPackage;
 
-    partial model TwoPortControlledSources 
+    partial model TwoPortControlledSources
       "具有两个电气端口的组件，包括电流"
       SI.Voltage v1 "控制端口上的电压降";
       SI.Voltage v2 "受控端口上的电压降";
-      SI.Current i1 
+      SI.Current i1
         "从控制端口的正极到负极流动的电流";
-      SI.Current i2 
+      SI.Current i2
         "从受控端口的正极到负极流动的电流";
-      Modelica.Electrical.Analog.Interfaces.PositivePin p1 
+      Modelica.Electrical.Analog.Interfaces.PositivePin p1
         "控制端口的正极" annotation (Placement(
             transformation(extent={{-110,40},{-90,60}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin n1 
+      Modelica.Electrical.Analog.Interfaces.NegativePin n1
         "控制端口的负极" annotation (Placement(
             transformation(extent={{-90,-60},{-110,-40}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin p2 
+      Modelica.Electrical.Analog.Interfaces.PositivePin p2
         "受控端口的正极" annotation (Placement(
             transformation(extent={{110,40},{90,60}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin n2 
+      Modelica.Electrical.Analog.Interfaces.NegativePin n2
         "受控端口的负极" annotation (Placement(
             transformation(extent={{90,-60},{110,-40}})));
     equation
@@ -4462,39 +4462,39 @@ P0,P1-&gt;多项式系数name.coeff(coeff={P0,P1,...})
 </html>"        ));
     end TwoPortControlledSources;
 
-    connector InductiveCouplePinIn 
+    connector InductiveCouplePinIn
       "通过K耦合电感的引脚，K获取电感的值"
       input SI.Inductance L;
       SI.CurrentSlope di "di/dt";
       flow SI.Voltage v;
       annotation (Icon(graphics={Polygon(
-              points={{0,0},{0,100},{100,0},{0,-100},{0,-100},{0,0}}, 
-              lineColor={170,85,255}, 
-              fillColor={170,85,255}, 
+              points={{0,0},{0,100},{100,0},{0,-100},{0,-100},{0,0}},
+              lineColor={170,85,255},
+              fillColor={170,85,255},
               fillPattern=FillPattern.Solid)}));
     end InductiveCouplePinIn;
 
-    connector InductiveCouplePinOut 
+    connector InductiveCouplePinOut
       "通过K耦合电感的引脚，K设置电感的值"
       output SI.Inductance L;
       SI.CurrentSlope di "di/dt";
       flow SI.Voltage v;
       annotation (Icon(graphics={Polygon(
-              points={{-100,0},{0,100},{0,0},{0,-100},{-2,-98},{-100,0}}, 
-              lineColor={170,85,255}, 
-              fillColor={170,85,255}, 
+              points={{-100,0},{0,100},{0,0},{0,-100},{-2,-98},{-100,0}},
+              lineColor={170,85,255},
+              fillColor={170,85,255},
               fillPattern=FillPattern.Solid)}));
     end InductiveCouplePinOut;
 
-    partial model ConditionalSubstrate 
+    partial model ConditionalSubstrate
       "包含条件基板节点的部分模型"
 
-      parameter Boolean useSubstrateNode = false 
+      parameter Boolean useSubstrateNode = false
         "= true，如果SubstrateNode已启用" 
       annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
       Modelica.Electrical.Analog.Interfaces.PositivePin S(v = substrateVoltage, i = -substrateCurrent) if useSubstrateNode 
         annotation (Placement(
-            transformation(extent={{90,0},{110,20}}), 
+            transformation(extent={{90,0},{110,20}}),
             iconTransformation(extent={{90,-10}, {110,10}})
           ));
       SI.Voltage substrateVoltage;
@@ -4509,7 +4509,7 @@ P0,P1-&gt;多项式系数name.coeff(coeff={P0,P1,...})
 <li><em>2009年2月17日</em>
 Christoph Clauss创建</li>
 </ul>
-</html>"        , 
+</html>"        ,
           info="<html>
 <p>
 此部分模型提供了一个条件性的加热端口，用于连接到热网络。
@@ -4524,7 +4524,7 @@ Christoph Clauss创建</li>
 </p>
 </html>"        ));
     end ConditionalSubstrate;
-    annotation(preferredView="info", 
+    annotation(preferredView="info",
         Documentation(info="<html>
 <p>SPICE3库使用Modelica.Electrical.Analog接口。此Interfaces库中仅包含SPICE3库中使用的特殊部分模型。</p>
 </html>"    ));
@@ -4538,14 +4538,14 @@ Christoph Clauss创建</li>
     type GapEnergyPerEnergy = Real (final quantity="Energy per Energy", final unit="eV/J") "能量/能量" annotation();
     type PerVolume = Real (final quantity="PerVolume", final unit="1/m3") "/体积" annotation();
     type InverseElectricCurrent = Real (final quantity="InverseElectricCurrent", final unit="1/A") "电流的倒数" annotation();
-    type ElectricFieldStrength_cm = Real (final quantity="ElectricFieldStrength", 
+    type ElectricFieldStrength_cm = Real (final quantity="ElectricFieldStrength",
           final unit="V/cm") "电场强度" annotation();
     annotation (Documentation(info="<html>
 <p>Types库包含在Spice3中模型中所需的单位。</p>
 </html>"  ));
   end Types;
 
-  package Internal 
+  package Internal
     "从C++Spice库派生的函数和记录的集合"
     extends Modelica.Icons.InternalPackage;
 
@@ -4561,7 +4561,7 @@ Christoph Clauss创建</li>
     Modelica.Electrical.Analog.Interfaces.PositivePin B "衬底节点" annotation (Placement(transformation(
               extent={{90,-10},{110,10}})));
 
-    parameter Integer mtype(start = 0) 
+    parameter Integer mtype(start = 0)
         "MOSFET 类型: 0-N 通道, 1- P通道";
     parameter SI.Length L =  1e-4 "长度";
     parameter SI.Length W =  1e-4 "宽度";
@@ -4571,58 +4571,58 @@ Christoph Clauss创建</li>
     parameter SI.Length PS =  0 "源极结周长";
     parameter Real NRD = 1 "漏极扩散方块数";
     parameter Real NRS = 1 "源极扩散方块数";
-    parameter Integer OFF = 0 
+    parameter Integer OFF = 0
         "可选的初始条件: 0-未使用IC, 1-使用IC, 尚未实现";
-    parameter SI.Voltage IC( start = -1e40) 
+    parameter SI.Voltage IC( start = -1e40)
         "初始条件值, 尚未实现";
     parameter Modelica.Units.NonSI.Temperature_degC TEMP = 27 "器件工作温度";
 
     parameter ModelcardMOS modelcard "MOSFET 模型卡片" annotation(Evaluate=true);
     constant SpiceConstants C "SPICE 仿真器的常数";
-    final parameter Mos1.Mos1ModelLineParams p = Mos1.mos1RenameParameters(modelcard, C) 
+    final parameter Mos1.Mos1ModelLineParams p = Mos1.mos1RenameParameters(modelcard, C)
         "模型线参数" annotation(Evaluate=true);
     final parameter Mosfet.Mosfet m = Mos1.mos1RenameParametersDev(
-      modelcard, 
-      mtype, 
-      W, 
-      L, 
-      AS, 
-      AS, 
-      PD, 
-      PS, 
-      NRD, 
-      NRS, 
-      OFF, 
-      IC, 
+      modelcard,
+      mtype,
+      W,
+      L,
+      AS,
+      AS,
+      PD,
+      PS,
+      NRD,
+      NRS,
+      OFF,
+      IC,
       TEMP) "重命名参数" annotation(Evaluate=true);
-    final parameter Integer m_type = if (m.m_bPMOS > 0.5) then -1 else 1 
+    final parameter Integer m_type = if (m.m_bPMOS > 0.5) then -1 else 1
         "晶体管类型";
     final parameter Mos.MosModelLineVariables vp = Mos1.mos1ModelLineParamsInitEquations(
-          p, 
-          C, 
+          p,
+          C,
           m_type) "模型线变量";
     final parameter Mos1.Mos1Calc c1 = Mos.mosCalcInitEquations(
-          p, 
-          C, 
-          vp, 
+          p,
+          C,
+          vp,
           m) "预计算参数";
     final parameter Mos1.Mos1Calc c2 = Mos.mosCalcCalcTempDependencies(
-          p, 
-          C, 
-          vp, 
-          m, 
-          c1, 
+          p,
+          C,
+          vp,
+          m,
+          c1,
           m_type) "预计算参数";
 
     Mos.CurrrentsCapacitances cc;
     parameter Mos.CurrrentsCapacitances cc_ = Mos.mosCalcNoBypassCode(
-    m, 
-    m_type, 
-    c2, 
-    p, 
-    C, 
-    vp, 
-    m_bInit, 
+    m,
+    m_type,
+    c2,
+    p,
+    C,
+    vp,
+    m_bInit,
     {0, 0, 0, 0}) annotation (Evaluate = true);
 
     constant Boolean m_bInit = false;
@@ -4650,13 +4650,13 @@ Christoph Clauss创建</li>
     vGS = G.v - S.v;
 
     cc = Mos.mosCalcNoBypassCode(
-      m, 
-      m_type, 
-      c2, 
-      p, 
-      C, 
-      vp, 
-      m_bInit, 
+      m,
+      m_type,
+      c2,
+      p,
+      C,
+      vp,
+      m_bInit,
       {G.v, B.v, Dinternal, Sinternal});
 
     // 漏极和源极电阻
@@ -4719,67 +4719,67 @@ Christoph Clauss创建</li>
 <ul>
 <li><em>2008年3月</em>Kristin Majetta<br>创建</li>
 </ul>
-</html>"    ), 
+</html>"    ),
         Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{
                 100,100}}), graphics={
-            Line(points={{0,92},{0,40},{-12,40},{-12,-40},{0,-40},{0,-94}}, 
-                color={0,0,255}), 
-            Line(points={{-92,0},{-20,0}}, color={0,0,255}), 
-            Line(points={{-12,0},{94,0}}, color={0,0,255}), 
-            Line(points={{-20,40},{-20,-40}}, color={0,0,255}), 
+            Line(points={{0,92},{0,40},{-12,40},{-12,-40},{0,-40},{0,-94}},
+                color={0,0,255}),
+            Line(points={{-92,0},{-20,0}}, color={0,0,255}),
+            Line(points={{-12,0},{94,0}}, color={0,0,255}),
+            Line(points={{-20,40},{-20,-40}}, color={0,0,255}),
             Text(
-              extent={{8,-34},{92,-86}}, 
-              textColor={0,0,255}, 
+              extent={{8,-34},{92,-86}},
+              textColor={0,0,255},
               textString="%name")}));
   end MOS;
 
      record ModelcardMOS "带有技术参数的记录(.model文件)"
        extends Modelica.Icons.Record;
        parameter SI.Voltage VTO=-1e40 "零偏阈值电压，默认为0";
-       parameter SI.Transconductance KP=-1e40 
+       parameter SI.Transconductance KP=-1e40
         "跨导参数，默认为2e-5";
        parameter Real GAMMA=-1e40 "衬底阈值参数，默认为0";
        parameter SI.Voltage PHI=-1e40 "表面电势，默认为0.6";  //衬底Sperrschicht电势
-       parameter SI.InversePotential LAMBDA=0 
+       parameter SI.InversePotential LAMBDA=0
         "通道长度调制，默认为0";
        parameter SI.Resistance RD=-1e40 "漏极欧姆电阻，默认为0";
        parameter SI.Resistance RS=-1e40 "源极欧姆电阻，默认为0";
-       parameter Types.Capacitance CBD=-1e40 
+       parameter Types.Capacitance CBD=-1e40
         "零偏B-D结电容，默认为0";
-       parameter Types.Capacitance CBS=-1e40 
+       parameter Types.Capacitance CBS=-1e40
         "零偏B-S结电容，默认为0";
        parameter SI.Current IS=1e-14 "衬底结饱和电流";
        parameter SI.Voltage PB=0.8 "衬底结电势";
-       parameter SI.Permittivity CGSO=0.0 
+       parameter SI.Permittivity CGSO=0.0
         "单位通道宽度的栅源重叠电容";
-       parameter SI.Permittivity CGDO=0.0 
+       parameter SI.Permittivity CGDO=0.0
         "单位通道宽度的栅漏重叠电容";
-       parameter SI.Permittivity CGBO=0.0 
+       parameter SI.Permittivity CGBO=0.0
         "单位通道宽度的栅衬底重叠电容";
-       parameter SI.Resistance RSH=0.0 
+       parameter SI.Resistance RSH=0.0
         "漏极和源极扩散片电阻";
-       parameter SI.CapacitancePerArea CJ=0.0 
+       parameter SI.CapacitancePerArea CJ=0.0
         "单位结面积的零偏衬底结底部电容";
        parameter Real MJ=0.5 "衬底结底部分级系数";
-       parameter SI.Permittivity CJSW=0.0 
+       parameter SI.Permittivity CJSW=0.0
         "单位结周长的零偏结侧壁电容";
        parameter Real MJSW=0.5 "衬底结侧壁分级系数";
-       parameter SI.CurrentDensity JS=0.0 
+       parameter SI.CurrentDensity JS=0.0
         "单位结面积的衬底结饱和电流";
        parameter SI.Length TOX=-1e40 "氧化层厚度，默认为1e-7";
        parameter Real NSUB=-1e40 "衬底掺杂，默认为0";
-       parameter Modelica.Units.NonSI.PerArea_cm NSS=0.0 
+       parameter Modelica.Units.NonSI.PerArea_cm NSS=0.0
         "表面态密度";
-       parameter Real TPG=1.0 
+       parameter Real TPG=1.0
         "栅极材料类型：+1与衬底相反，-1与衬底相同，0铝栅";
        parameter SI.Length LD=0.0 "侧向扩散";
-       parameter Modelica.Units.NonSI.Area_cmPerVoltageSecond UO=600 
+       parameter Modelica.Units.NonSI.Area_cmPerVoltageSecond UO=600
         "表面迁移率";
        parameter Real KF=0 "闪烁噪声系数";
        parameter Real AF=1.0 "闪烁噪声指数";
-       parameter Real FC=0.5 
+       parameter Real FC=0.5
         "正向偏置耗尽电容公式的系数";
-       parameter Modelica.Units.NonSI.Temperature_degC TNOM=27 
+       parameter Modelica.Units.NonSI.Temperature_degC TNOM=27
         "参数测量温度，默认为27";
        constant Integer LEVEL=1 "模型级别：Shichman-Hodges";
        annotation (Documentation(info="<html>
@@ -4803,7 +4803,7 @@ Christoph Clauss创建</li>
                                           annotation (Placement(transformation(
               extent={{90,-10},{110,10}})));
 
-    parameter Integer mtype(start = 0) 
+    parameter Integer mtype(start = 0)
         "MOSFET类型: 0-N通道, 1-P通道";
     parameter SI.Length L = 1e-4 "长度";
     parameter SI.Length W = 1e-4 "宽度";
@@ -4814,16 +4814,16 @@ Christoph Clauss创建</li>
     parameter Real NRD = 1 "漏极扩散区域的方块数量";
     parameter Real NRS = 1 "源极扩散区域的方块数量";
   //--------------------------------------------------------------------------------------
-    parameter Integer OFF(min=0, max=1) = 0 
+    parameter Integer OFF(min=0, max=1) = 0
         "可选初始条件: 0-未使用IC，1-使用IC，尚未实现";
   //--------------------------------------------------------------------------------------
-    parameter SI.Voltage IC_VDS = -1e40 
+    parameter SI.Voltage IC_VDS = -1e40
         "初始条件值(VDS，尚未实现)";
-    parameter SI.Voltage IC_VGS = -1e40 
+    parameter SI.Voltage IC_VGS = -1e40
         "初始条件值(VGS，尚未实现)";
-    parameter SI.Voltage IC_VBS = -1e40 
+    parameter SI.Voltage IC_VBS = -1e40
         "初始条件值(VBS，尚未实现)";
-    parameter Boolean UIC = false 
+    parameter Boolean UIC = false
         "使用初始条件: 如果使用初始条件，则为true";
     parameter Modelica.Units.NonSI.Temperature_degC TEMP = 27 "器件的工作温度";
 
@@ -4831,46 +4831,46 @@ Christoph Clauss创建</li>
                             modelcard "MOSFET 模型卡" 
                 annotation(Evaluate=true);
 
-    final parameter Spice3.Internal.Mos2.Mos2ModelLineParams p= 
+    final parameter Spice3.Internal.Mos2.Mos2ModelLineParams p=
           Spice3.Internal.Mos2.mos2RenameParametersRevised(
           modelcard) "模型线参数" 
                       annotation(Evaluate=true);
 
-    final parameter Spice3.Internal.Mosfet.Mosfet m= 
+    final parameter Spice3.Internal.Mosfet.Mosfet m=
           Spice3.Internal.Mosfet.mosfetRenameParametersDev(
-            W, 
-            L, 
-            AD, 
-            AS, 
-            PD, 
-            PS, 
-            NRD, 
-            NRS, 
-            OFF, 
-            IC_VDS, 
-            IC_VGS, 
-            IC_VBS, 
-            UIC, 
+            W,
+            L,
+            AD,
+            AS,
+            PD,
+            PS,
+            NRD,
+            NRS,
+            OFF,
+            IC_VDS,
+            IC_VGS,
+            IC_VBS,
+            UIC,
             TEMP) "重命名参数" 
                                   annotation(Evaluate=true);
-    final parameter Spice3.Internal.Mosfet.Mosfet m1= 
+    final parameter Spice3.Internal.Mosfet.Mosfet m1=
           Spice3.Internal.Mosfet.mosfetInitEquations(m);
 
-    final parameter Integer m_type = if (m.m_bPMOS > 0.5) then -1 else 1 
+    final parameter Integer m_type = if (m.m_bPMOS > 0.5) then -1 else 1
         "晶体管类型";
 
     final parameter Spice3.Internal.Mos2.Mos2ModelLineParams 
-        p1= 
+        p1=
           Spice3.Internal.Mos2.mos2ModelLineParamsInitEquationsRevised(
            p, m_type) "模型线变量";
-    final parameter Spice3.Internal.Mos2.Mos2Calc c11= 
+    final parameter Spice3.Internal.Mos2.Mos2Calc c11=
           Spice3.Internal.Mos.mos2CalcInitEquationsRevised(
           p1, m1) "预计算参数";
-    final parameter Spice3.Internal.Mos2.Mos2Calc c22= 
+    final parameter Spice3.Internal.Mos2.Mos2Calc c22=
           Spice3.Internal.Mos.mos2CalcCalcTempDependenciesRevised(
-            p1, 
-            m1, 
-            c11, 
+            p1,
+            m1,
+            c11,
             m_type) "预计算参数";
 
     Spice3.Internal.Mos.CurrrentsCapacitances cc;
@@ -4896,20 +4896,20 @@ Christoph Clauss创建</li>
     SI.Current icGD;
 
   //-------------------------------obsolete-----------------------------------------------------------------------------------------------
-    parameter SI.Voltage IC( start = -1e40) 
+    parameter SI.Voltage IC( start = -1e40)
         "初始条件值，尚未实现";
 
   //-------------------------------------------------------------------------------------------------------------------------------------
 
     final parameter Spice3.Internal.Mos2.Mos2Calc 
                                    c1=Spice3.Internal.Mos.mos2CalcInitEquationsRevised(
-             p, 
+             p,
              m) "预计算参数";
     final parameter Spice3.Internal.Mos2.Mos2Calc 
                                    c2=Spice3.Internal.Mos.mos2CalcCalcTempDependenciesRevised(
-             p, 
-             m, 
-             c1, 
+             p,
+             m,
+             c1,
              m_type) "预计算参数";
 
     final parameter Spice3.Internal.Mos2.Mos2ModelLineParams 
@@ -4917,18 +4917,18 @@ Christoph Clauss创建</li>
           modelcard) "模型线参数" 
                       annotation(Evaluate=true);
 
-    constant Spice3.Internal.SpiceConstants C 
+    constant Spice3.Internal.SpiceConstants C
         "SPICE模拟器的通用常数";
   equation
     assert( NRD > 0, "漏极的长度必须大于零");
     assert( NRS > 0, "源极的长度必须大于零");
 
       cc = Spice3.Internal.Mos.mos2CalcNoBypassCodeRevised(
-          m1, 
-          m_type, 
-          c22, 
-          p1, 
-          m_bInit, 
+          m1,
+          m_type,
+          c22,
+          p1,
+          m_bInit,
           {G.v,B.v,Dinternal,Sinternal});
     // 电压
     // --------
@@ -4954,9 +4954,9 @@ Christoph Clauss创建</li>
 
     // 电流
     // --------
-      ibsgmin = Spice3.Internal.SpiceConstants.CKTgmin*(B.v - 
+      ibsgmin = Spice3.Internal.SpiceConstants.CKTgmin*(B.v -
         Sinternal);
-      ibdgmin = Spice3.Internal.SpiceConstants.CKTgmin*(B.v - 
+      ibdgmin = Spice3.Internal.SpiceConstants.CKTgmin*(B.v -
         Dinternal);
     G.i =  icGB + icGD + icGS;
     B.i = cc.iBD + cc.iBS+ ibdgmin + ibsgmin -icGB + icBD + icBS;
@@ -4975,17 +4975,17 @@ Christoph Clauss创建</li>
 <ul>
 <li><em>January 2009</em>Kristin Majetta创建</li>
 </ul>
-</html>"    ), 
+</html>"    ),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
                 100,100}}), graphics={
-            Line(points={{0,92},{0,40},{-12,40},{-12,-40},{0,-40},{0,-94}}, 
-                color={0,0,255}), 
-            Line(points={{-92,0},{-20,0}}, color={0,0,255}), 
-            Line(points={{-12,0},{94,0}}, color={0,0,255}), 
-            Line(points={{-20,40},{-20,-40}}, color={0,0,255}), 
+            Line(points={{0,92},{0,40},{-12,40},{-12,-40},{0,-40},{0,-94}},
+                color={0,0,255}),
+            Line(points={{-92,0},{-20,0}}, color={0,0,255}),
+            Line(points={{-12,0},{94,0}}, color={0,0,255}),
+            Line(points={{-20,40},{-20,-40}}, color={0,0,255}),
             Text(
-              extent={{8,-34},{92,-86}}, 
-              textColor={0,0,255}, 
+              extent={{8,-34},{92,-86}},
+              textColor={0,0,255},
               textString="%name")}));
   end MOS2;
 
@@ -4993,15 +4993,15 @@ Christoph Clauss创建</li>
       extends Modelica.Icons.Record;
       extends Spice3.Internal.ModelcardMOS(MJSW = 0.33);
 
-      parameter Modelica.Units.NonSI.PerArea_cm NFS = 0.0 
+      parameter Modelica.Units.NonSI.PerArea_cm NFS = 0.0
         "快速表面态密度";
       parameter SI.Length XJ = 0.0 "冶金结深度";
-      parameter Types.ElectricFieldStrength_cm UCRIT = 1e4 
+      parameter Types.ElectricFieldStrength_cm UCRIT = 1e4
         "用于迁移率退化的临界场(仅适用于MOS2)";
-      parameter Real UEXP = 0.0 
+      parameter Real UEXP = 0.0
         "迁移率退化中的临界场指数(仅适用于MOS2)";
       parameter SI.Velocity VMAX = 0.0 "载流子的最大漂移速度";
-      parameter Real NEFF = 1.0 
+      parameter Real NEFF = 1.0
         "总通道电荷(固定和移动)系数(仅适用于MOS2)";
       parameter Real DELTA = 0.0 "阈值电压上的宽度效应";
 
@@ -5014,60 +5014,60 @@ Christoph Clauss创建</li>
     model BJT2 "双极晶体管"
 
       Modelica.Electrical.Analog.Interfaces.PositivePin B "基极节点" 
-        annotation (Placement(transformation(extent={{-108,-10},{-88,10}}), 
+        annotation (Placement(transformation(extent={{-108,-10},{-88,10}}),
             iconTransformation(extent={{-106,-10},{-86,10}})));
       Modelica.Electrical.Analog.Interfaces.PositivePin C "集电极节点" 
-        annotation (Placement(transformation(extent={{10,88},{30,108}}), 
+        annotation (Placement(transformation(extent={{10,88},{30,108}}),
             iconTransformation(extent={{20,90},{40,110}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin E "发射极节点" 
-        annotation (Placement(transformation(extent={{10,-108},{30,-88}}), 
+        annotation (Placement(transformation(extent={{10,-108},{30,-88}}),
             iconTransformation(extent={{20,-110},{40,-90}})));
       extends Spice3.Interfaces.ConditionalSubstrate;
       parameter Real TBJT( start = 1) "晶体管类型(NPN=1,PNP=-1)";
       parameter Real AREA = 1.0 "面积因子";
-      parameter Boolean OFF = false 
+      parameter Boolean OFF = false
         "可选的初始条件：false-未使用IC，true-使用IC，尚未实现";
-      parameter SI.Voltage IC_VBE = -1e40 
+      parameter SI.Voltage IC_VBE = -1e40
         "初始条件值(VBC，尚未实现)";
-      parameter SI.Voltage IC_VCE = -1e40 
+      parameter SI.Voltage IC_VCE = -1e40
         "初始条件值(VBE，尚未实现)";
-      parameter Boolean UIC = false 
+      parameter Boolean UIC = false
         "使用初始条件：true，如果使用了初始条件";
       parameter Modelica.Units.NonSI.Temperature_degC TEMP = 27 "器件的工作温度";
-      parameter Boolean SENS_AREA = false 
+      parameter Boolean SENS_AREA = false
         "请求相对于面积的敏感性的标志，尚未实现";
 
       parameter Modelica.Electrical.Spice3.Internal.ModelcardBJT2 
                              modelcard "BJT模型卡" annotation(Evaluate=true);
 
-      final parameter Spice3.Internal.Bjt.BjtModelLineParams p= 
-          Spice3.Internal.Bjt.bjtRenameParameters(modelcard, 
+      final parameter Spice3.Internal.Bjt.BjtModelLineParams p=
+          Spice3.Internal.Bjt.bjtRenameParameters(modelcard,
           TBJT) "模型线参数" annotation(Evaluate=true);
-      final parameter Spice3.Internal.Bjt.Bjt dev= 
+      final parameter Spice3.Internal.Bjt.Bjt dev=
           Spice3.Internal.Bjt.bjtRenameParametersDev(
-            AREA, 
-            OFF, 
-            IC_VBE, 
-            IC_VCE, 
-            UIC, 
-            SENS_AREA, 
+            AREA,
+            OFF,
+            IC_VBE,
+            IC_VCE,
+            UIC,
+            SENS_AREA,
             TEMP) "重命名的参数" annotation(Evaluate=true);
-      final parameter Spice3.Internal.Bjt.BjtModelLineParams p1= 
-          Spice3.Internal.Bjt.bjtModelLineInitEquations(p) 
+      final parameter Spice3.Internal.Bjt.BjtModelLineParams p1=
+          Spice3.Internal.Bjt.bjtModelLineInitEquations(p)
         "模型线变量";
-      final parameter Spice3.Internal.Bjt.Bjt dev1= 
-          Spice3.Internal.Bjt.bjtInitEquations(dev, p1) 
+      final parameter Spice3.Internal.Bjt.Bjt dev1=
+          Spice3.Internal.Bjt.bjtInitEquations(dev, p1)
         "预计算参数";
-      final parameter Spice3.Internal.Bjt.BjtCalc c= 
-          Spice3.Internal.Bjt.bjtCalcTempDependencies(dev1, p1) 
+      final parameter Spice3.Internal.Bjt.BjtCalc c=
+          Spice3.Internal.Bjt.bjtCalcTempDependencies(dev1, p1)
         "预计算参数";
 
       constant Boolean m_bInit = false;
       Spice3.Internal.Bjt.CurrentsCapacitances cc;
       parameter Spice3.Internal.Bjt.CurrentsCapacitances cc_ = Spice3.Internal.Bjt.bjtNoBypassCode(
-        dev1, 
-        p1, 
-        c, 
+        dev1,
+        p1,
+        c,
         {0, 0, 0, 0, 0, 0}) annotation (Evaluate = true);
       SI.Voltage Cinternal;    // 内部集电极节点
       SI.Voltage Binternal;    // 内部基极节点
@@ -5089,9 +5089,9 @@ Christoph Clauss创建</li>
 
     equation
       cc = Spice3.Internal.Bjt.bjtNoBypassCode(
-          dev1, 
-          p1, 
-          c, 
+          dev1,
+          p1,
+          c,
           {C.v,B.v,E.v,Cinternal,Binternal,Einternal});
 
       // 电压
@@ -5147,24 +5147,24 @@ Christoph Clauss创建</li>
       0 = - ibcgmin - ibegmin + irb - cc.iBC - cc.iBE - cc.iBCN - cc.iBEN -icapbc - icapbe - icaptt; // 内部节点 Binternal 的电流和
       substrateCurrent = icapcs;
       annotation (
-        Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
+        Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={
             Line(
-              points={{-20,60},{-20,-60}}, 
-              color={0,0,255}), 
+              points={{-20,60},{-20,-60}},
+              color={0,0,255}),
             Line(
-              points={{-20,0},{-86,0}}, 
-              color={0,0,255}), 
+              points={{-20,0},{-86,0}},
+              color={0,0,255}),
             Line(
-              points={{34,94},{-20,40}}, 
-              color={0,0,255}), 
+              points={{34,94},{-20,40}},
+              color={0,0,255}),
             Line(
-              points={{-20,-40},{32,-92}}, 
-              color={0,0,255}), 
+              points={{-20,-40},{32,-92}},
+              color={0,0,255}),
             Text(
-              extent={{-94,56},{206,16}}, 
-              textString="%name", 
-              textColor={0,0,255})}), 
+              extent={{-94,56},{206,16}},
+              textString="%name",
+              textColor={0,0,255})}),
         Documentation(info="<html>
 <p>双极晶体管模型，包括NPN和PNP</p>
 <p>库“Internal”不供用户访问。其中存储了该库的半导体模型建模所需的所有函数、记录和数据。</p>
@@ -5182,10 +5182,10 @@ Christoph Clauss创建</li>
       parameter Real BF = 100.00 "理想最大正向增益F";
       parameter Real NF = 1.0 "正向电流发射系数F";
       parameter Real NE = 1.5 "B-E泄漏发射系数";
-      parameter SI.Current ISE = -1e40 
+      parameter SI.Current ISE = -1e40
         "B-E泄漏饱和电流，默认值 = 0";
       constant Real C2 = -1e40 "废弃参数名称，默认值=0";
-      parameter SI.Current ISC = -1e40 
+      parameter SI.Current ISC = -1e40
         "B-C泄漏饱和电流，默认值=0";
       constant Real C4 = -1e40 "废弃参数名称，默认值=0";
       parameter Real BR = 1.0 "理想最大反向增益";
@@ -5217,7 +5217,7 @@ Christoph Clauss创建</li>
       parameter SI.Voltage VJS=0.75 "基底结内建电位";
       parameter Real MJS = 0.0 "基底结分级系数";
       parameter Real XTB = 0.0 "正向和反向增益温度指数";
-      parameter SI.GapEnergy EG=1.11 
+      parameter SI.GapEnergy EG=1.11
         "IS温度效应对IS的能隙";
       parameter Real XTI = 3.0 "IS的温度指数";
       parameter Real KF = 0.0 "闪烁噪声系数";
@@ -5239,54 +5239,54 @@ Christoph Clauss创建</li>
     Modelica.Electrical.Analog.Interfaces.NegativePin S "源极节点" annotation (Placement(
             transformation(extent={{-10,-110},{10,-90}})));
 
-    parameter Integer mtype( start = 0) 
+    parameter Integer mtype( start = 0)
         "JFET类型: 0-N通道, 1-P通道";
-    parameter Real AREA( start = 1) 
+    parameter Real AREA( start = 1)
         "并联连接的相同元件数量";
-    parameter Boolean OFF = false 
+    parameter Boolean OFF = false
         "可选的初始条件: 0-未使用IC, 1-使用IC，但尚未实现";
-    parameter SI.Voltage IC_VDS = -1e40 
+    parameter SI.Voltage IC_VDS = -1e40
         "初始条件值(VDS，尚未实现）";
-    parameter SI.Voltage IC_VGS = -1e40 
+    parameter SI.Voltage IC_VGS = -1e40
         "初始条件值(VGS，尚未实现）";
-    parameter Boolean UIC = false 
+    parameter Boolean UIC = false
         "使用初始条件: true表示使用初始条件";
     parameter Modelica.Units.NonSI.Temperature_degC TEMP=27 "设备的工作温度";
 
-    parameter Modelica.Electrical.Spice3.Internal.ModelcardJFET modelcard 
+    parameter Modelica.Electrical.Spice3.Internal.ModelcardJFET modelcard
         "JFET模型卡" annotation(Evaluate=true);
-    final parameter Modelica.Electrical.Spice3.Internal.Jfet.JfetModelLine p= 
-          Modelica.Electrical.Spice3.Internal.Jfet.jfetRenameParameters(modelcard) 
+    final parameter Modelica.Electrical.Spice3.Internal.Jfet.JfetModelLine p=
+          Modelica.Electrical.Spice3.Internal.Jfet.jfetRenameParameters(modelcard)
         "模型行参数" annotation(Evaluate=true);
-    final parameter Modelica.Electrical.Spice3.Internal.Fet.Fet m= 
+    final parameter Modelica.Electrical.Spice3.Internal.Fet.Fet m=
           Modelica.Electrical.Spice3.Internal.Fet.fetRenameParametersDev(
-            AREA, 
-            OFF, 
-            IC_VDS, 
-            IC_VGS, 
-            UIC, 
+            AREA,
+            OFF,
+            IC_VDS,
+            IC_VGS,
+            UIC,
             TEMP) "重命名的参数" annotation(Evaluate=true);
 
-    final parameter Integer m_type = if (mtype > 0.5) then -1 else 1 
+    final parameter Integer m_type = if (mtype > 0.5) then -1 else 1
         "晶体管类型";
     //    enum fet_type{NFET=1, PFET=-1};
 
-    final parameter Modelica.Electrical.Spice3.Internal.Jfet.JfetModelLine p1= 
-          Modelica.Electrical.Spice3.Internal.Jfet.jfetInitEquations(m, p) 
+    final parameter Modelica.Electrical.Spice3.Internal.Jfet.JfetModelLine p1=
+          Modelica.Electrical.Spice3.Internal.Jfet.jfetInitEquations(m, p)
         "预计算参数";
-    final parameter Modelica.Electrical.Spice3.Internal.Jfet.JfetModelLine p2= 
-          Modelica.Electrical.Spice3.Internal.Jfet.jfetModelLineInitEquations(p1) 
+    final parameter Modelica.Electrical.Spice3.Internal.Jfet.JfetModelLine p2=
+          Modelica.Electrical.Spice3.Internal.Jfet.jfetModelLineInitEquations(p1)
         "模型行变量";
-    final parameter Modelica.Electrical.Spice3.Internal.Fet.Fet m1= 
-          Modelica.Electrical.Spice3.Internal.Jfet.jfetCalcTempDependencies(m, p2) 
+    final parameter Modelica.Electrical.Spice3.Internal.Fet.Fet m1=
+          Modelica.Electrical.Spice3.Internal.Jfet.jfetCalcTempDependencies(m, p2)
         "预计算参数";
     Modelica.Electrical.Spice3.Internal.Fet.CurrrentsCapacitances cc;
     parameter Modelica.Electrical.Spice3.Internal.Fet.CurrrentsCapacitances cc_ = Modelica.Electrical.Spice3.Internal.Jfet.jfetNoBypassCode(
-    m1, 
-    p2, 
-    m_type, 
-    m_bInit, 
-    {0, 0, 0})annotation (Evaluate = true);
+    m1,
+    p2,
+    m_type,
+    m_bInit,
+    {0, 0, 0}) annotation (Evaluate = true);
 
     constant Boolean m_bInit = false;
 
@@ -5304,10 +5304,10 @@ Christoph Clauss创建</li>
 
   equation
       cc = Modelica.Electrical.Spice3.Internal.Jfet.jfetNoBypassCode(
-          m1, 
-          p2, 
-          m_type, 
-          m_bInit, 
+          m1,
+          p2,
+          m_type,
+          m_bInit,
           {G.v,Dinternal,Sinternal});
 
     // 电压
@@ -5337,9 +5337,9 @@ Christoph Clauss创建</li>
 
     // 电流
     // --------
-      igsgmin = Modelica.Electrical.Spice3.Internal.SpiceConstants.CKTgmin*(G.v - 
+      igsgmin = Modelica.Electrical.Spice3.Internal.SpiceConstants.CKTgmin*(G.v -
         Sinternal);
-      igdgmin = Modelica.Electrical.Spice3.Internal.SpiceConstants.CKTgmin*(G.v - 
+      igdgmin = Modelica.Electrical.Spice3.Internal.SpiceConstants.CKTgmin*(G.v -
         Dinternal);
     G.i = icGD + icGS + cc.iGD + igdgmin + cc.iGS + igsgmin;
     D.i = ird;
@@ -5357,36 +5357,36 @@ Christoph Clauss创建</li>
 <ul>
 <li><em>2008年3月</em>由Kristin Majetta<br>创建</li>
 </ul>
-</html>"      ), 
+</html>"      ),
         Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{
                 100,100}}), graphics={
-            Line(points={{0,92},{0,40},{-12,40},{-12,-40},{0,-40},{0,-94}}, 
-                color={0,0,255}), 
-            Line(points={{-92,0},{-20,0}}, color={0,0,255}), 
-            Line(points={{-20,40},{-20,-40}}, color={0,0,255}), 
+            Line(points={{0,92},{0,40},{-12,40},{-12,-40},{0,-40},{0,-94}},
+                color={0,0,255}),
+            Line(points={{-92,0},{-20,0}}, color={0,0,255}),
+            Line(points={{-20,40},{-20,-40}}, color={0,0,255}),
             Text(
-              extent={{8,-34},{96,-54}}, 
-              textColor={0,0,255}, 
+              extent={{8,-34},{96,-54}},
+              textColor={0,0,255},
               textString="%name")}));
   end JFET;
 
     record ModelcardJFET "记录技术参数(.model)"
     extends Modelica.Icons.Record;
-      parameter Types.Capacitance CGS=-1e40 
+      parameter Types.Capacitance CGS=-1e40
         "零偏置G-S结电容，默认为0";
-      parameter Types.Capacitance CGD=-1e40 
+      parameter Types.Capacitance CGD=-1e40
         "零偏置G-D结电容，默认为0";
       parameter SI.Current IS=1e-14 "PN结的饱和电流";
-      parameter Real FC=0.5 
+      parameter Real FC=0.5
         "正向偏置耗尽电容公式的系数";
       parameter SI.Resistance RD=-1e40 "漏极欧姆电阻，默认为0";
       parameter SI.Resistance RS=-1e40 "源极欧姆电阻，默认为0";
       parameter Modelica.Units.NonSI.Temperature_degC TNOM=27 "参数测量温度";
       parameter SI.Voltage VTO=-1e40 "零偏置阈值电压，默认为-2";
-      parameter SI.InversePotential B=-1e40 
+      parameter SI.InversePotential B=-1e40
         "掺杂剂变化参数，默认为1";
       parameter Real BETA=-1e40 "输出导纳参数，默认为1e-4";
-      parameter SI.InversePotential LAMBDA=0 
+      parameter SI.InversePotential LAMBDA=0
         "通道长度调制，默认为0";
       parameter SI.Voltage PB=1.0 "PN结的结电位";
       parameter Real AF=1.0 "闪烁噪声指数";
@@ -5413,44 +5413,44 @@ Christoph Clauss创建</li>
        annotation();
      algorithm
         (, m_dCap) := Diode.diodeNoBypassCode(
-         in_p, 
-         in_dp, 
-         in_c, 
-         in_m, 
-         in_m_mbInit, 
+         in_p,
+         in_dp,
+         in_c,
+         in_m,
+         in_m_mbInit,
          {0, 0});
      end diodeNoBypassCode_;
 
      parameter Real AREA = 1 "面积因子";
-     parameter Boolean OFF = false 
+     parameter Boolean OFF = false
         "可选的初始条件：false - 未使用IC，true - 使用IC，尚未实现";
-     parameter SI.Voltage IC( start = -1e40) 
+     parameter SI.Voltage IC( start = -1e40)
         "初始条件值（VD，尚未实现";
      parameter Modelica.Units.NonSI.Temperature_degC TEMP = 27 "器件的工作温度";
-     parameter Boolean SENS_AREA( start = false) 
+     parameter Boolean SENS_AREA( start = false)
         "请求WRT区域的灵敏度的标志，尚未实现";
 
      parameter ModelcardDIODE modelcarddiode "DIODE模型卡" annotation(Evaluate=true);
      constant SpiceConstants C "SPICE模拟器的常规常数";
-     final parameter Diode.DiodeModelLineParams param= 
-          Diode.diodeRenameParameters(modelcarddiode, C) 
+     final parameter Diode.DiodeModelLineParams param=
+          Diode.diodeRenameParameters(modelcarddiode, C)
         "模型线参数";
      final parameter Diode.DiodeParams dp=Diode.diodeRenameParametersDev(
-             TEMP, 
-             AREA, 
-             IC, 
-             OFF, 
+             TEMP,
+             AREA,
+             IC,
+             OFF,
              SENS_AREA) "重命名的参数" 
                       annotation(Evaluate=true);
-     final parameter Model.Model m=Diode.diodeRenameParametersDevTemp(TEMP) 
+     final parameter Model.Model m=Diode.diodeRenameParametersDevTemp(TEMP)
         "重命名的参数" 
                  annotation(Evaluate=true);
-     final parameter Diode.DiodeVariables c1=Diode.diodeInitEquations(param) 
+     final parameter Diode.DiodeVariables c1=Diode.diodeInitEquations(param)
         "预计算的值";
      final parameter Diode.DiodeCalc c2=Diode.diodeCalcTempDependencies(
-             param, 
-             dp, 
-             m, 
+             param,
+             dp,
+             m,
              c1) "预计算的值";
      constant Boolean m_mbInit = false;
 
@@ -5460,19 +5460,19 @@ Christoph Clauss创建</li>
      Real pin;
      Real ir;
      Real igmin;
-     parameter Real m_dCap_ = diodeNoBypassCode_(param, 
-        dp, 
-        c2, 
-        m, 
+     parameter Real m_dCap_ = diodeNoBypassCode_(param,
+        dp,
+        c2,
+        m,
         m_mbInit);
 
    equation
       (cc,m_dCap) = Diode.diodeNoBypassCode(
-           param, 
-           dp, 
-           c2, 
-           m, 
-           m_mbInit, 
+           param,
+           dp,
+           c2,
+           m,
+           m_mbInit,
            {pin,n.v});
 
      //电容器的电流
@@ -5496,19 +5496,19 @@ Christoph Clauss创建</li>
 
      annotation (
        Icon(graphics={
-            Line(points={{90,0},{-90,0}}, color={0,0,255}), 
+            Line(points={{90,0},{-90,0}}, color={0,0,255}),
            Polygon(
-             points={{30,0},{-30,40},{-30,-40},{30,0}}, 
-             lineColor={0,0,255}, 
-             fillColor={255,255,255}, 
-             fillPattern=FillPattern.Solid), 
-           Line(points={{-90,0},{40,0}}, color={0,0,255}), 
-           Line(points={{40,0},{90,0}}, color={0,0,255}), 
-           Line(points={{30,40},{30,-40}}, color={0,0,255}), 
+             points={{30,0},{-30,40},{-30,-40},{30,0}},
+             lineColor={0,0,255},
+             fillColor={255,255,255},
+             fillPattern=FillPattern.Solid),
+           Line(points={{-90,0},{40,0}}, color={0,0,255}),
+           Line(points={{40,0},{90,0}}, color={0,0,255}),
+           Line(points={{30,40},{30,-40}}, color={0,0,255}),
            Text(
-             extent={{-154,100},{146,60}}, 
-             textString="%name", 
-             textColor={0,0,255})}), 
+             extent={{-154,100},{146,60}},
+             textString="%name",
+             textColor={0,0,255})}),
        Documentation(info="<html>
 <p>二极管模型</p>
 <p>The package Repository is not for user access. There all function, records and data are stored, that are needed for the semiconductor models of the package Semiconductors.</p>
@@ -5546,26 +5546,26 @@ Christoph Clauss创建</li>
     model R_SEMI "半导体电阻器"
 
       extends Modelica.Electrical.Analog.Interfaces.OnePort;
-      parameter SI.Resistance R= -1e40 
+      parameter SI.Resistance R= -1e40
         "电阻，如果指定，几何信息将被覆盖";
       parameter Modelica.Units.NonSI.Temperature_degC TEMP = -1e40 "电阻的温度";
       parameter SI.Length L = -1e40 "电阻的长度";
-      parameter SI.Length W = -1e40 
+      parameter SI.Length W = -1e40
         "电阻的宽度，默认为 DEFW(模型卡)";
-      parameter Boolean SENS_AREA= false 
+      parameter Boolean SENS_AREA= false
         "用于灵敏度分析的参数，尚未实现";
       parameter ModelcardR modelcard "电阻模型卡";
       constant SpiceConstants C "SPICE模拟器的常数";
-      final parameter Rsemiconductor.ResistorModelLineParams lp= 
-          Rsemiconductor.resistorRenameParameters(modelcard, C) 
+      final parameter Rsemiconductor.ResistorModelLineParams lp=
+          Rsemiconductor.resistorRenameParameters(modelcard, C)
         "模型线参数";
-      final parameter Rsemiconductor.ResistorParams rp= 
+      final parameter Rsemiconductor.ResistorParams rp=
           Rsemiconductor.resistorRenameParametersDev(
-              R, 
-              W, 
-              L, 
-              TEMP, 
-              SENS_AREA, 
+              R,
+              W,
+              L,
+              TEMP,
+              SENS_AREA,
               C) "重命名参数";
 
         Rsemiconductor.ResistorVariables vp;
@@ -5573,32 +5573,32 @@ Christoph Clauss创建</li>
     algorithm
       vp := Rsemiconductor.resistorInitEquations(rp, lp);
 
-      (vp.m_dConduct,vp.m_dCond_dTemp) := 
+      (vp.m_dConduct,vp.m_dCond_dTemp) :=
         Modelica.Electrical.Spice3.Internal.Functions.resDepTemp(
-            vp.m_dResist, 
-            rp.m_dTemp, 
-            lp.m_dTnom, 
-            lp.m_dTC1, 
+            vp.m_dResist,
+            rp.m_dTemp,
+            lp.m_dTnom,
+            lp.m_dTC1,
             lp.m_dTC2);
 
      i :=vp.m_dConduct*v;
 
-      annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
+      annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={
             Rectangle(
-              extent={{-70,28},{70,-32}}, 
-              lineColor={0,0,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
+              extent={{-70,28},{70,-32}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
             Line(
-              points={{-70,0},{-90,0}}, 
-              color={0,0,255}), 
+              points={{-70,0},{-90,0}},
+              color={0,0,255}),
             Line(
-              points={{70,0},{90,0}}, 
-              color={0,0,255}), 
+              points={{70,0},{90,0}},
+              color={0,0,255}),
             Text(
-              extent={{-150,64},{150,24}}, 
-              textString="%name", 
+              extent={{-150,64},{150,24}},
+              textString="%name",
               textColor={0,0,255})}),Documentation(revisions="<html>
 <dl>
 <dt><em>2009年4月</em></dt>
@@ -5612,12 +5612,12 @@ Christoph Clauss创建</li>
 
     record ModelcardR "记录技术参数(.model)"
       extends Modelica.Icons.Record;
-      parameter SI.LinearTemperatureCoefficientResistance TC1 = 0.0 
+      parameter SI.LinearTemperatureCoefficientResistance TC1 = 0.0
         "一阶温度系数";
-      parameter SI.QuadraticTemperatureCoefficientResistance TC2 = 0.0 
+      parameter SI.QuadraticTemperatureCoefficientResistance TC2 = 0.0
         "二阶温度系数";
       parameter SI.Resistance RSH = -1e40 "片上电阻";
-      parameter Modelica.Units.NonSI.Temperature_degC TNOM = -1e40 
+      parameter Modelica.Units.NonSI.Temperature_degC TNOM = -1e40
         "参数测量温度，默认为27";
       parameter SI.Length DEFW = 1e-5 "默认器件宽度";
       parameter SI.Length NARROW = 0 "由于侧蚀而导致的电阻缩窄";
@@ -5629,31 +5629,31 @@ Christoph Clauss创建</li>
 
     model C_SEMI "半导体电容器(.model)"
       extends Modelica.Electrical.Analog.Interfaces.OnePort;
-      parameter Types.Capacitance C = -1e40 
+      parameter Types.Capacitance C = -1e40
         "电容，如果指定了，几何信息将被覆盖";
       parameter Modelica.Units.NonSI.Temperature_degC TEMP = 27 "电容器的温度";
       parameter SI.Length  L(start = 0) "电容器的长度";
-      parameter SI.Length  W = -1e40 
+      parameter SI.Length  W = -1e40
         "电容器的宽度，默认为DEFW（模型卡）";
-      parameter Boolean SENS_AREA = false 
+      parameter Boolean SENS_AREA = false
         "用于灵敏度分析的参数，尚未实现";
       parameter SI.Voltage IC = 0 "初始值" annotation(Dialog(enable=UIC));
-      parameter Boolean UIC = false 
+      parameter Boolean UIC = false
         "使用初始条件：如果使用了初始条件，则为true";
-      parameter Modelica.Electrical.Spice3.Internal.ModelcardC modelcard 
+      parameter Modelica.Electrical.Spice3.Internal.ModelcardC modelcard
         "电容器模型卡";
       final parameter
-        Modelica.Electrical.Spice3.Internal.Csemiconductor.CapacitorModelLineParams lp= 
+        Modelica.Electrical.Spice3.Internal.Csemiconductor.CapacitorModelLineParams lp=
           Modelica.Electrical.Spice3.Internal.Csemiconductor.capacitorRenameParameters(
            modelcard) "模型线参数";
       final parameter
-        Modelica.Electrical.Spice3.Internal.Csemiconductor.Capacitor               cp= 
+        Modelica.Electrical.Spice3.Internal.Csemiconductor.Capacitor               cp=
           Modelica.Electrical.Spice3.Internal.Csemiconductor.capacitorRenameParametersDev(
-              C, 
-              W, 
-              L, 
-              TEMP, 
-              SENS_AREA, 
+              C,
+              W,
+              L,
+              TEMP,
+              SENS_AREA,
               lp) "重命名参数";
 
       Modelica.Electrical.Spice3.Internal.Csemiconductor.Capacitor vp;
@@ -5679,22 +5679,22 @@ Christoph Clauss创建</li>
       vinternal := p.v - n.v;
       i         := vp.m_dCapac*der(vinternal);
 
-      annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
+      annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={
             Line(
-              points={{-14,28},{-14,-28}}, 
-              color={0,0,255}, 
-              thickness=0.5), 
+              points={{-14,28},{-14,-28}},
+              color={0,0,255},
+              thickness=0.5),
             Line(
-              points={{14,28},{14,-28}}, 
-              color={0,0,255}, 
-              thickness=0.5), 
-            Line(points={{-90,0},{-14,0}}, color={0,0,255}), 
-            Line(points={{14,0},{90,0}}, color={0,0,255}), 
+              points={{14,28},{14,-28}},
+              color={0,0,255},
+              thickness=0.5),
+            Line(points={{-90,0},{-14,0}}, color={0,0,255}),
+            Line(points={{14,0},{90,0}}, color={0,0,255}),
             Text(
-              extent={{-130,-40},{134,-60}}, 
-              textString="C=%C"), 
-            Text(extent={{-138,42},{136,62}}, textString="%name")}), 
+              extent={{-130,-40},{134,-60}},
+              textString="C=%C"),
+            Text(extent={{-138,42},{136,62}}, textString="%name")}),
                                      Documentation(revisions="<html>
 <ul>
 <li><em>2009年4月</em>，Kristin Majetta
@@ -5708,9 +5708,9 @@ Christoph Clauss创建</li>
 
     record ModelcardC "技术参数记录"
       extends Modelica.Icons.Record;
-      parameter SI.CapacitancePerArea CJ = 0.0 
+      parameter SI.CapacitancePerArea CJ = 0.0
         "结底电容F/米2";
-      parameter SI.Permittivity CJSW = 0.0 
+      parameter SI.Permittivity CJSW = 0.0
         "结侧电容F/米";
       parameter SI.Length  DEFW=1e-5 "默认器件宽度";
       parameter SI.Length  NARROW=0 "由侧蚀造成的变窄";
@@ -5775,7 +5775,7 @@ Christoph Clauss创建</li>
     extends Modelica.Icons.InternalPackage;
 
 
-      function junctionPotDepTemp 
+      function junctionPotDepTemp
         "结节电势的温度依赖性"
         extends Modelica.Icons.Function;
 
@@ -5793,11 +5793,11 @@ Christoph Clauss创建</li>
         constant SI.Voltage unitVoltage = 1;
 
       algorithm
-        phibtemp := 
+        phibtemp :=
           Modelica.Electrical.Spice3.Internal.Functions.energyGapDepTemp(temp);
-        phibtnom := 
+        phibtnom :=
           Modelica.Electrical.Spice3.Internal.Functions.energyGapDepTemp(tnom);
-        vt := Spice3.Internal.SpiceConstants.CONSTKoverQ* 
+        vt := Spice3.Internal.SpiceConstants.CONSTKoverQ*
           temp;
         ret := (phi0 - phibtnom*(unitVoltage/unitGapEnergy)) * temp / tnom + phibtemp*(unitVoltage/unitGapEnergy) + vt * 3 * Modelica.Math.log( tnom / temp);
 
@@ -5806,7 +5806,7 @@ Christoph Clauss创建</li>
 </html>"          ));
       end junctionPotDepTemp;
 
-      function saturationCurDepTempSPICE3MOSFET 
+      function saturationCurDepTempSPICE3MOSFET
         "饱和电流的温度依赖性"
       extends Modelica.Icons.Function;
         input SI.Current satcur0 "饱和电流";
@@ -5824,13 +5824,13 @@ Christoph Clauss创建</li>
         constant SI.Voltage unitVoltage = 1;
 
       algorithm
-        vt := Spice3.Internal.SpiceConstants.CONSTKoverQ* 
+        vt := Spice3.Internal.SpiceConstants.CONSTKoverQ*
           temp;
-        vtnom := Spice3.Internal.SpiceConstants.CONSTKoverQ* 
+        vtnom := Spice3.Internal.SpiceConstants.CONSTKoverQ*
           tnom;
-        energygaptnom := 
+        energygaptnom :=
           Modelica.Electrical.Spice3.Internal.Functions.energyGapDepTemp(tnom);
-        energygaptemp := 
+        energygaptemp :=
           Modelica.Electrical.Spice3.Internal.Functions.energyGapDepTemp(temp);
         ret           := satcur0 * exp( energygaptnom*(unitVoltage/unitGapEnergy) / vtnom - energygaptemp*(unitVoltage/unitGapEnergy) / vt);
 
@@ -5851,7 +5851,7 @@ Christoph Clauss创建</li>
         SI.Voltage vte;
 
       algorithm
-        vte := Spice3.Internal.SpiceConstants.CONSTKoverQ* 
+        vte := Spice3.Internal.SpiceConstants.CONSTKoverQ*
           temp*ncoeff;
         ret := vte * Modelica.Math.log( vte / (sqrt(2) * satcur));
         ret := if ( ret > 1e10) then  1e10 else ret;
@@ -5861,7 +5861,7 @@ Christoph Clauss创建</li>
 </html>"          ));
       end junctionVCrit;
 
-      function junctionParamDepTempSPICE3 
+      function junctionParamDepTempSPICE3
         "结温度依赖的结参数"
       extends Modelica.Icons.Function;
         input SI.Voltage phi0 "开路电势";
@@ -5889,17 +5889,17 @@ Christoph Clauss创建</li>
         Real gmanew;
 
       algorithm
-        phibtemp := 
+        phibtemp :=
           Modelica.Electrical.Spice3.Internal.Functions.energyGapDepTemp(temp);
-        phibtnom := 
+        phibtnom :=
           Modelica.Electrical.Spice3.Internal.Functions.energyGapDepTemp(tnom);
         vt          := Spice3.Internal.SpiceConstants.CONSTKoverQ * temp;
         vtnom       := Spice3.Internal.SpiceConstants.CONSTKoverQ * tnom;
-        arg         := -phibtemp/(2*Modelica.Constants.k*temp) + 
+        arg         := -phibtemp/(2*Modelica.Constants.k*temp) +
                        1.1150877/(Modelica.Constants.k*(2*Spice3.Internal.SpiceConstants.REFTEMP));
         fact2       := temp/Spice3.Internal.SpiceConstants.REFTEMP;
         pbfact      := -2*vt*(1.5*Modelica.Math.log(fact2)+Spice3.Internal.SpiceConstants.CHARGE*arg);
-        arg1        := -phibtnom/(Modelica.Constants.k*2*tnom) + 
+        arg1        := -phibtnom/(Modelica.Constants.k*2*tnom) +
                        1.1150877/(2*Modelica.Constants.k*Spice3.Internal.SpiceConstants.REFTEMP);
         fact1       := tnom/Spice3.Internal.SpiceConstants.REFTEMP;
         pbfact1     := -2 * vtnom*(1.5*Modelica.Math.log(fact1)+Spice3.Internal.SpiceConstants.CHARGE*arg1);
@@ -5907,8 +5907,8 @@ Christoph Clauss创建</li>
         junctionpot := pbfact+fact2*pbo;
         gmaold      := (phi0 -pbo)/pbo;
         gmanew      := (junctionpot-pbo)/pbo;
-        junctioncap := cap0 / 
-                       (1+mcoeff* (400e-6*(tnom-Spice3.Internal.SpiceConstants.REFTEMP)-gmaold))  * 
+        junctioncap := cap0 /
+                       (1+mcoeff* (400e-6*(tnom-Spice3.Internal.SpiceConstants.REFTEMP)-gmaold))  *
                        (1+mcoeff* (400e-6*(temp-Spice3.Internal.SpiceConstants.REFTEMP)-gmanew));
 
         annotation (Documentation(info="<html>
@@ -5940,7 +5940,7 @@ Christoph Clauss创建</li>
 </html>"          ));
       end junctionCapCoeffs;
 
-    function junction2SPICE3MOSFETRevised 
+    function junction2SPICE3MOSFETRevised
         "结电流和导纳计算"
     extends Modelica.Icons.Function;
       input SI.Voltage voltage "输入电压";
@@ -6022,7 +6022,7 @@ Christoph Clauss创建</li>
       else
         czof2  := capin / f2;
         capout := czof2 * (f3 + mj * voltage / phij);
-        charge := capin * f1 + czof2 * 
+        charge := capin * f1 + czof2 *
                   (f3 * (voltage - depcap) + (mj / (2 * phij)) * (voltage ^ 2 - depcap ^ 2));
       end if;
 
@@ -6049,7 +6049,7 @@ Christoph Clauss创建</li>
     algorithm
       vt := Spice3.Internal.SpiceConstants.CONSTKoverQ * temp;
       vte := emissioncoeff * vt;
-      ret := satcur0 * exp(((temp / tnom) - 1) * energygap / vte 
+      ret := satcur0 * exp(((temp / tnom) - 1) * energygap / vte
              + satcurexp / emissioncoeff * Modelica.Math.log(temp / tnom));
 
     annotation (Documentation(info="<html>
@@ -6157,7 +6157,7 @@ Christoph Clauss创建</li>
 </html>"        ));
     end junction3;
 
-    function junctionCapTransTime 
+    function junctionCapTransTime
       "PN结电容的传输时间计算"
       extends Modelica.Icons.Function;
     input Types.Capacitance capin "输入电容";
@@ -6177,13 +6177,13 @@ Christoph Clauss创建</li>
 
     algorithm
         (capout,charge) := junctionCapRevised(
-              capin, 
-              voltage, 
-              depcap, 
-              mj, 
-              phij, 
-              f1, 
-              f2, 
+              capin,
+              voltage,
+              depcap,
+              mj,
+              phij,
+              f1,
+              f2,
               f3);
       capout := capout + transittime * conduct;
       charge := charge + transittime * current;
@@ -6283,7 +6283,7 @@ Christoph Clauss创建</li>
 </html>"        ));
     end resDepGeom;
 
-    function saturationCurDepTempSPICE3JFET 
+    function saturationCurDepTempSPICE3JFET
       "饱和电流的温度依赖性"
       extends Modelica.Icons.Function;
     input SI.Current satcur0 "饱和电流";
@@ -6313,7 +6313,7 @@ Christoph Clauss创建</li>
       annotation();
 
     algorithm
-      out := cap0 * (width - narrow) * (length - narrow) 
+      out := cap0 * (width - narrow) * (length - narrow)
              + capsw0 * 2 * ((length - narrow) + (width - narrow));
     end capDepGeom;
 
@@ -6324,7 +6324,7 @@ Christoph Clauss创建</li>
 
     algorithm
     ret := Spice3.Internal.MaterialParameters.EnergyGapSi - (
-      Spice3.Internal.MaterialParameters.FirstBandCorrFactorSi 
+      Spice3.Internal.MaterialParameters.FirstBandCorrFactorSi
       *temp*temp)/(temp + Spice3.Internal.MaterialParameters.SecondBandCorrFactorSi);
 
     annotation (Documentation(info="<html>
@@ -6437,7 +6437,7 @@ Christoph Clauss创建</li>
 </html>"                  ));
       end limitJunctionVoltageRevised;
 
-      function initJunctionVoltagesRevised 
+      function initJunctionVoltagesRevised
         "选择结电压处理方式"
         extends Modelica.Icons.Function;
         output Boolean ret;
@@ -6460,7 +6460,7 @@ Christoph Clauss创建</li>
 
     record Model "设备温度"
       extends Modelica.Icons.Record;
-      SI.Temperature m_dTemp(start = SpiceConstants.CKTnomTemp) 
+      SI.Temperature m_dTemp(start = SpiceConstants.CKTnomTemp)
           "TEMP，设备温度";
         annotation (Documentation(info="<html>
 <p>包含了设备温度，其默认值为27°C。</p>
@@ -6482,9 +6482,9 @@ Christoph Clauss创建</li>
 
         SI.Length m_len(start = 1e-4) "L，通道区域长度";
         SI.Length m_width(start = 1e-4) "W，通道区域宽度";
-        SI.Area m_drainArea(start= Spice3.Internal.SpiceConstants.CKTdefaultMosAD) 
+        SI.Area m_drainArea(start= Spice3.Internal.SpiceConstants.CKTdefaultMosAD)
           "AD，漏极扩散区域";
-        SI.Area m_sourceArea(start= Spice3.Internal.SpiceConstants.CKTdefaultMosAS) 
+        SI.Area m_sourceArea(start= Spice3.Internal.SpiceConstants.CKTdefaultMosAS)
           "AS，源极扩散区域";
         Real m_drainSquares(start = 1.0) "NRD，漏极方面积";
         Real m_sourceSquares(start = 1.0) "NRS，源极方面积";
@@ -6512,30 +6512,30 @@ Christoph Clauss创建</li>
 
       record MosfetModelLineParams "用于Mosfet模型线参数的记录"
         extends Modelica.Icons.Record;
-         Real m_jctSatCurDensity(start = 0.0) 
+         Real m_jctSatCurDensity(start = 0.0)
           "JS，漏极饱和电流密度，输入-使用tSatCurDens";
-         SI.Resistance m_sheetResistance(start = 0.0) 
+         SI.Resistance m_sheetResistance(start = 0.0)
           "RSH，片上电阻";
-         Real m_bulkJctPotential(start = 0.8) 
+         Real m_bulkJctPotential(start = 0.8)
           "PB，衬底结势垒，输入-使用tBulkPot";
-         SI.LinearTemperatureCoefficient m_bulkJctBotGradingCoeff(start = 0.5) 
+         SI.LinearTemperatureCoefficient m_bulkJctBotGradingCoeff(start = 0.5)
           "MJ，底部分级系数";    //单位由maj检查
-         SI.LinearTemperatureCoefficient m_bulkJctSideGradingCoeff(start = 0.5) 
+         SI.LinearTemperatureCoefficient m_bulkJctSideGradingCoeff(start = 0.5)
           "MJSW，侧向分级系数";    //单位由 maj 检查
-         Real m_oxideThickness(start = 1.0e-7) 
+         Real m_oxideThickness(start = 1.0e-7)
           "TOX，氧化层厚度，单位：微米";
        //--------------------------废弃------------------------
          Real m_oxideThicknessIsGiven "TOX，IsGiven 值";
       //-----------------------------------------------------------
-         Real m_gateSourceOverlapCapFactor(start= 0.0) 
+         Real m_gateSourceOverlapCapFactor(start= 0.0)
           "CGS0，栅源重叠电容系数";
-         Real m_gateDrainOverlapCapFactor(start= 0.0) 
+         Real m_gateDrainOverlapCapFactor(start= 0.0)
           "CGD0，栅漏重叠电容系数";
-         Real m_gateBulkOverlapCapFactor(start= 0.0) 
+         Real m_gateBulkOverlapCapFactor(start= 0.0)
           "CGB0，栅垒重叠电容系数";
-         Real m_fNcoef(start = 0.0) 
+         Real m_fNcoef(start = 0.0)
           "KF，闪烁噪声系数";
-        Real m_fNexp(start = 1.0) 
+        Real m_fNexp(start = 1.0)
           "AF，闪烁噪声指数";
         Real m_mjswIsGiven "MJSW，给定值标志";
         Real m_cgsoIsGiven "CGSO，给定值标志";
@@ -6643,7 +6643,7 @@ Christoph Clauss创建</li>
 </html>"            ));
       end getNumberOfElectricalPins;
 
-      function mosfetRenameParametersDev 
+      function mosfetRenameParametersDev
         "设备参数重命名为内部名称"
         extends Modelica.Icons.Function;
         input SI.Length  W "通道宽度";
@@ -6654,18 +6654,18 @@ Christoph Clauss创建</li>
         input SI.Length  PS "源极结周长";
         input Real NRD "漏极扩散区域个数";
         input Real NRS "源极扩散区域个数";
-        input Integer OFF 
+        input Integer OFF
           "可选的初始条件：0-不使用IC，1-使用 IC，但尚未实现";
-        input SI.Voltage IC_VDS 
+        input SI.Voltage IC_VDS
           "初始条件值VDS，但尚未实现";
-        input SI.Voltage IC_VGS 
+        input SI.Voltage IC_VGS
           "初始条件值VGS，但尚未实现";
-        input SI.Voltage IC_VBS 
+        input SI.Voltage IC_VBS
           "初始条件值VBS，但尚未实现";
         input Boolean UIC "使用初始条件，UIC";
         input Modelica.Units.NonSI.Temperature_degC TEMP "温度";
 
-        output Modelica.Electrical.Spice3.Internal.Mosfet.Mosfet dev 
+        output Modelica.Electrical.Spice3.Internal.Mosfet.Mosfet dev
           "输出记录 Mosfet";
 
       algorithm
@@ -6679,24 +6679,24 @@ Christoph Clauss创建</li>
         dev.m_drainPerimeter  := PD "PD，漏极周长";
         dev.m_sourcePerimeter := PS "PS，源极周长";
 
-        dev.m_dICVDSIsGiven := if (IC_VDS > -1e40) then 1 else 0 
+        dev.m_dICVDSIsGiven := if (IC_VDS > -1e40) then 1 else 0
           "IC_VDS 是否给定值";
-        dev.m_dICVDS := if (IC_VDS > -1e40) then IC_VDS else 0 
+        dev.m_dICVDS := if (IC_VDS > -1e40) then IC_VDS else 0
           "VDS 的初始条件";
 
-        dev.m_dICVGSIsGiven := if (IC_VGS > -1e40) then 1 else 0 
+        dev.m_dICVGSIsGiven := if (IC_VGS > -1e40) then 1 else 0
           "IC_VGS 是否给定值";
-        dev.m_dICVGS := if (IC_VGS > -1e40) then IC_VGS else 0 
+        dev.m_dICVGS := if (IC_VGS > -1e40) then IC_VGS else 0
           "VGS 的初始条件";
 
-        dev.m_dICVBSIsGiven := if (IC_VBS > -1e40) then 1 else 0 
+        dev.m_dICVBSIsGiven := if (IC_VBS > -1e40) then 1 else 0
           "IC_VBS 是否给定值";
-        dev.m_dICVBS := if (IC_VBS > -1e40) then IC_VBS else 0 
+        dev.m_dICVBS := if (IC_VBS > -1e40) then IC_VBS else 0
           "VBS 的初始条件";
 
         dev.m_off   := OFF "非零表示设备关闭进行直流分析";
         dev.m_uic   := UIC "使用初始条件";
-        dev.m_dTemp := TEMP + Spice3.Internal.SpiceConstants.CONSTCtoK 
+        dev.m_dTemp := TEMP + Spice3.Internal.SpiceConstants.CONSTCtoK
           "设备温度";
 
         annotation (Documentation(info="<html>
@@ -6716,31 +6716,31 @@ mosfetRenameParametersDev将外部(用户提供的)设备参数分配给内部�
       extends Modelica.Icons.InternalPackage;
 
 
-      record MosModelLineParams 
+      record MosModelLineParams
         "用于MOSFET模型线参数的记录(用于级别1、2、3和6)"
         extends Spice3.Internal.Mosfet.MosfetModelLineParams;
 
          Real m_oxideCapFactor(      start = 0.0) "氧化物容量系数";
-         SI.Voltage m_vt0(                 start = 0.0) 
+         SI.Voltage m_vt0(                 start = 0.0)
           "VTO，阈值电压";
          Real m_vtOIsGiven "VTO 是否给定值";
-         Types.Capacitance m_capBD(               start = 0.0) 
+         Types.Capacitance m_capBD(               start = 0.0)
           "CBD，漏极-漏极结电容";
          Real m_capBDIsGiven "CapBD 是否给定值";
-         Types.Capacitance m_capBS(               start = 0.0) 
+         Types.Capacitance m_capBS(               start = 0.0)
           "CBS，漏极-源极结电容";
          Real m_capBSIsGiven "CapBS 是否给定值";
-         SI.CapacitancePerArea m_bulkCapFactor(       start = 0.0) 
+         SI.CapacitancePerArea m_bulkCapFactor(       start = 0.0)
           "CJ，单位面积底部结电容";
          Real m_bulkCapFactorIsGiven "Bulk cap factor 是否给定值";
-         SI.Permittivity m_sideWallCapFactor(   start = 0.0) 
+         SI.Permittivity m_sideWallCapFactor(   start = 0.0)
           "CJSW，侧壁调制系数";
-         Real m_fwdCapDepCoeff(      start = 0.5) 
+         Real m_fwdCapDepCoeff(      start = 0.5)
           "FC，正向偏置结拟合参数";
-         SI.Voltage m_phi(                 start = 0.6) 
+         SI.Voltage m_phi(                 start = 0.6)
           "PHI，表面势";
          Real m_phiIsGiven "Phi 是否给定值";
-         SI.Voltage m_gamma(               start = 0.0) 
+         SI.Voltage m_gamma(               start = 0.0)
           "GAMMA，阈值参数";
          Real m_gammaIsGiven "Gamma 是否给定值";
          SI.InversePotential m_lambda "沟道长度调制";
@@ -6750,23 +6750,23 @@ mosfetRenameParametersDev将外部(用户提供的)设备参数分配给内部�
          Modelica.Units.NonSI.PerArea_cm 
           m_surfaceStateDensity(start = 0.0) "NSS，表面态密度";
          //-----------------已过时--------------------------------------------
-         Real m_surfaceStateDensityIsGiven(start=0) 
+         Real m_surfaceStateDensityIsGiven(start=0)
           "surfaceStateDensityIsGivenValue";
          //---------------------------------------------------------------------
          Modelica.Units.NonSI.Area_cmPerVoltageSecond 
           m_surfaceMobility( start = 600.0) "UO，表面迁移率";
          SI.Length m_latDiff(             start = 0.0) "LD，横向扩散";
-         SI.Current m_jctSatCur(           start = 1.0e-14) 
+         SI.Current m_jctSatCur(           start = 1.0e-14)
           "IS，漏极饱和电流";
-         SI.Resistance m_drainResistance(     start = 0) 
+         SI.Resistance m_drainResistance(     start = 0)
           "RD，漏极欧姆电阻";
          Real m_drainResistanceIsGiven "漏极电阻 是否给定值";
-         SI.Resistance m_sourceResistance(    start = 0) 
+         SI.Resistance m_sourceResistance(    start = 0)
           "RS，源极欧姆电阻";
          Real m_sourceResistanceIsGiven "源极电阻 是否给定值";
          SI.Transconductance m_transconductance "输入 - 使用 tTransconductance";
          Real m_transconductanceIsGiven "Transconductance 是否给定值";
-         SI.Temperature m_tnom(start=Spice3.Internal.SpiceConstants.CKTnomTemp) 
+         SI.Temperature m_tnom(start=Spice3.Internal.SpiceConstants.CKTnomTemp)
           "TNOM，参数测量温度";
 
         annotation (Documentation(info="<html>
@@ -6774,7 +6774,7 @@ mosfetRenameParametersDev将外部(用户提供的)设备参数分配给内部�
 </html>"            ));
       end MosModelLineParams;
 
-      record MosModelLineVariables 
+      record MosModelLineVariables
         "用于MOSFET模型线变量的记录(用于级别1)"
         extends Modelica.Icons.Record;
         Real m_oxideCapFactor;
@@ -6867,15 +6867,15 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
       function mosCalcInitEquations "MOSFET参数的初始预计算(级别1)"
         extends Modelica.Icons.Function;
-        input Spice3.Internal.Mos1.Mos1ModelLineParams in_p 
+        input Spice3.Internal.Mos1.Mos1ModelLineParams in_p
           "用于MOS1的模型线参数输入记录";
-        input Spice3.Internal.SpiceConstants in_C 
+        input Spice3.Internal.SpiceConstants in_C
           "SPICE常数的输入记录";
         input MosModelLineVariables in_vp "模型线变量的输入记录";
-        input Spice3.Internal.Mosfet.Mosfet in_m 
+        input Spice3.Internal.Mosfet.Mosfet in_m
           "MOSFET参数的输入记录";
 
-        output Spice3.Internal.Mos1.Mos1Calc out_c 
+        output Spice3.Internal.Mos1.Mos1Calc out_c
           "计算出的Mos1记录";
 
       algorithm
@@ -6962,20 +6962,20 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"                  ));
       end mosCalcInitEquations;
 
-      function mosCalcCalcTempDependencies 
+      function mosCalcCalcTempDependencies
         "与温度相关的预计算"
         extends Modelica.Icons.Function;
-        input Spice3.Internal.Mos1.Mos1ModelLineParams in_p 
+        input Spice3.Internal.Mos1.Mos1ModelLineParams in_p
           "输入MOS1模型线参数记录";
-        input Spice3.Internal.SpiceConstants in_C 
+        input Spice3.Internal.SpiceConstants in_C
           "输入SPICE常数记录";
         input MosModelLineVariables in_vp "输入模型线变量记录";
-        input Spice3.Internal.Mosfet.Mosfet in_m 
+        input Spice3.Internal.Mosfet.Mosfet in_m
           "输入MOSFET参数记录";
         input Spice3.Internal.Mos1.Mos1Calc in_c "输入Mos1Calc记录";
         input Integer in_m_type "MOS晶体管的类型";
 
-        output Spice3.Internal.Mos1.Mos1Calc out_c 
+        output Spice3.Internal.Mos1.Mos1Calc out_c
           "包含计算值的输出记录";
 
       protected
@@ -6993,87 +6993,87 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         out_c.m_tSurfMob          := in_p.m_surfaceMobility / ratio4;
 
-        out_c.m_tPhi := 
+        out_c.m_tPhi :=
           Spice3.Internal.Functions.junctionPotDepTemp(
-                in_vp.m_phi, 
-                in_m.m_dTemp, 
+                in_vp.m_phi,
+                in_m.m_dTemp,
                 in_p.m_tnom);
 
-        out_c.m_tVbi := in_vp.m_vt0 - in_m_type*(in_vp.m_gamma*sqrt(in_vp.m_phi)) 
+        out_c.m_tVbi := in_vp.m_vt0 - in_m_type*(in_vp.m_gamma*sqrt(in_vp.m_phi))
            + 0.5*(Spice3.Internal.Functions.energyGapDepTemp_old(
-          in_p.m_tnom) - 
-          Spice3.Internal.Functions.energyGapDepTemp_old(               in_m.m_dTemp)) 
+          in_p.m_tnom) -
+          Spice3.Internal.Functions.energyGapDepTemp_old(               in_m.m_dTemp))
            + in_m_type*0.5*(out_c.m_tPhi - in_vp.m_phi);
         out_c.m_tVto := out_c.m_tVbi + in_m_type * in_vp.m_gamma * sqrt(out_c.m_tPhi);
 
         out_c.m_tBulkPot := Spice3.Internal.Functions.junctionPotDepTemp(
-                in_p.m_bulkJctPotential, 
-                in_m.m_dTemp, 
+                in_p.m_bulkJctPotential,
+                in_m.m_dTemp,
                 in_p.m_tnom);
         out_c.m_tDepCap  := in_p.m_fwdCapDepCoeff * out_c.m_tBulkPot;
 
        if (in_p.m_jctSatCurDensity == 0.0 or in_m.m_sourceArea == 0.0 or in_m.m_drainArea == 0.0) then
-          out_c.m_tDrainSatCur := 
+          out_c.m_tDrainSatCur :=
             Spice3.Internal.Functions.saturationCurDepTempSPICE3MOSFET(
-                  in_p.m_jctSatCur, 
-                  in_m.m_dTemp, 
+                  in_p.m_jctSatCur,
+                  in_m.m_dTemp,
                   in_p.m_tnom);
           out_c.m_tSourceSatCur := out_c.m_tDrainSatCur;
-          out_c.m_VBScrit := 
+          out_c.m_VBScrit :=
             Spice3.Internal.Functions.junctionVCrit(
-                  in_m.m_dTemp, 
-                  1.0, 
+                  in_m.m_dTemp,
+                  1.0,
                   out_c.m_tSourceSatCur);
           out_c.m_VBDcrit       := out_c.m_VBScrit;
         else
-          out_c.m_tSatCurDens := 
+          out_c.m_tSatCurDens :=
             Spice3.Internal.Functions.saturationCurDepTempSPICE3MOSFET(
-                  in_p.m_jctSatCurDensity, 
-                  in_m.m_dTemp, 
+                  in_p.m_jctSatCurDensity,
+                  in_m.m_dTemp,
                   in_p.m_tnom);
           out_c.m_tDrainSatCur  := out_c.m_tSatCurDens * in_m.m_drainArea;
           out_c.m_tSourceSatCur := out_c.m_tSatCurDens * in_m.m_sourceArea;
-          out_c.m_VBScrit := 
+          out_c.m_VBScrit :=
             Spice3.Internal.Functions.junctionVCrit(
-                  in_m.m_dTemp, 
-                  1.0, 
+                  in_m.m_dTemp,
+                  1.0,
                   out_c.m_tSourceSatCur);
-          out_c.m_VBDcrit := 
+          out_c.m_VBDcrit :=
             Spice3.Internal.Functions.junctionVCrit(
-                  in_m.m_dTemp, 
-                  1.0, 
+                  in_m.m_dTemp,
+                  1.0,
                   out_c.m_tDrainSatCur);
         end if;
 
         if ( not (in_p.m_capBDIsGiven > 0.5) or not (in_p.m_capBSIsGiven > 0.5)) then
-          (res,out_c.m_tCj) := 
+          (res,out_c.m_tCj) :=
             Spice3.Internal.Functions.junctionParamDepTempSPICE3(
-                  in_p.m_bulkJctPotential, 
-                  in_p.m_bulkCapFactor, 
-                  in_p.m_bulkJctBotGradingCoeff, 
-                  in_m.m_dTemp, 
+                  in_p.m_bulkJctPotential,
+                  in_p.m_bulkCapFactor,
+                  in_p.m_bulkJctBotGradingCoeff,
+                  in_m.m_dTemp,
                   in_p.m_tnom);
-          (res,out_c.m_tCjsw) := 
+          (res,out_c.m_tCjsw) :=
             Spice3.Internal.Functions.junctionParamDepTempSPICE3(
-                  in_p.m_bulkJctPotential, 
-                  in_p.m_sideWallCapFactor, 
-                  in_p.m_bulkJctSideGradingCoeff, 
-                  in_m.m_dTemp, 
+                  in_p.m_bulkJctPotential,
+                  in_p.m_sideWallCapFactor,
+                  in_p.m_bulkJctSideGradingCoeff,
+                  in_m.m_dTemp,
                   in_p.m_tnom);
-          (out_c.m_f1s,out_c.m_f2s,out_c.m_f3s) := 
+          (out_c.m_f1s,out_c.m_f2s,out_c.m_f3s) :=
             Spice3.Internal.Functions.junctionCapCoeffs(
-                  in_p.m_bulkJctSideGradingCoeff, 
-                  in_p.m_fwdCapDepCoeff, 
+                  in_p.m_bulkJctSideGradingCoeff,
+                  in_p.m_fwdCapDepCoeff,
                   out_c.m_tBulkPot);
         end if;
 
         if (in_p.m_capBDIsGiven > 0.5) then
-          (res,out_c.m_tCBDb) := 
+          (res,out_c.m_tCBDb) :=
             Spice3.Internal.Functions.junctionParamDepTempSPICE3(
-                  in_p.m_bulkJctPotential, 
-                  in_p.m_capBD, 
-                  in_p.m_bulkJctBotGradingCoeff, 
-                  in_m.m_dTemp, 
+                  in_p.m_bulkJctPotential,
+                  in_p.m_capBD,
+                  in_p.m_bulkJctBotGradingCoeff,
+                  in_m.m_dTemp,
                   in_p.m_tnom);
           out_c.m_tCBDs          := 0.0;
         else
@@ -7082,22 +7082,22 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         end if;
 
         if (in_p.m_capBSIsGiven > 0.5) then
-          (res,out_c.m_tCBSb) := 
+          (res,out_c.m_tCBSb) :=
             Spice3.Internal.Functions.junctionParamDepTempSPICE3(
-                  in_p.m_bulkJctPotential, 
-                  in_p.m_capBS, 
-                  in_p.m_bulkJctBotGradingCoeff, 
-                  in_m.m_dTemp, 
+                  in_p.m_bulkJctPotential,
+                  in_p.m_capBS,
+                  in_p.m_bulkJctBotGradingCoeff,
+                  in_m.m_dTemp,
                   in_p.m_tnom);
           out_c.m_tCBSs          := 0.0;
         else
           out_c.m_tCBSb := out_c.m_tCj * in_m.m_sourceArea;
           out_c.m_tCBSs := out_c.m_tCjsw * in_m.m_sourcePerimeter;
         end if;
-        (out_c.m_f1b,out_c.m_f2b,out_c.m_f3b) := 
+        (out_c.m_f1b,out_c.m_f2b,out_c.m_f3b) :=
           Spice3.Internal.Functions.junctionCapCoeffs(
-                in_p.m_bulkJctBotGradingCoeff, 
-                in_p.m_fwdCapDepCoeff, 
+                in_p.m_bulkJctBotGradingCoeff,
+                in_p.m_fwdCapDepCoeff,
                 out_c.m_tBulkPot);
         out_c.m_dVt := in_m.m_dTemp*Spice3.Internal.SpiceConstants.CONSTKoverQ;
 
@@ -7106,16 +7106,16 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"            ));
       end mosCalcCalcTempDependencies;
 
-      function mosCalcNoBypassCode 
+      function mosCalcNoBypassCode
         "电流和电容的计算(级别1)"
         extends Modelica.Icons.Function;
-        input Spice3.Internal.Mosfet.Mosfet in_m 
+        input Spice3.Internal.Mosfet.Mosfet in_m
           "输入MOSFET参数记录";
         input Integer in_m_type "MOS晶体管的类型";
         input Spice3.Internal.Mos1.Mos1Calc in_c "输入Mos1Calc记录";
-        input Spice3.Internal.Mos1.Mos1ModelLineParams in_p 
+        input Spice3.Internal.Mos1.Mos1ModelLineParams in_p
           "输入MOS1模型线参数记录";
-        input Spice3.Internal.SpiceConstants in_C 
+        input Spice3.Internal.SpiceConstants in_C
           "输入SPICE常数记录";
         input MosModelLineVariables in_vp "输入模型线变量记录";
         input Boolean in_m_bInit;
@@ -7141,7 +7141,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         int_c.m_vbs := in_m_type * (in_m_pVoltageValues[2] - in_m_pVoltageValues[4]);  // ( B , SP)
         int_c.m_vds := in_m_type * (in_m_pVoltageValues[3] - in_m_pVoltageValues[4]);  // ( DP, SP)
 
-        if (Spice3.Internal.SpiceRoot.useInitialConditions()) and (in_m.m_dICVBSIsGiven 
+        if (Spice3.Internal.SpiceRoot.useInitialConditions()) and (in_m.m_dICVBSIsGiven
           > 0.5) then
           int_c.m_vbs := in_m_type * in_m.m_dICVBS;
         elseif (
@@ -7176,18 +7176,18 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         vgb := int_c.m_vgs - int_c.m_vbs;
 
-        (int_c.m_cbd,int_c.m_gbd) := 
+        (int_c.m_cbd,int_c.m_gbd) :=
           Spice3.Internal.Functions.junction2SPICE3MOSFETRevised(
-          vbd, 
-          in_m.m_dTemp, 
-          1.0, 
+          vbd,
+          in_m.m_dTemp,
+          1.0,
           int_c.m_tDrainSatCur);
         out_cc.iBD := in_m_type * int_c.m_cbd;
-        (int_c.m_cbs,int_c.m_gbs) := 
+        (int_c.m_cbs,int_c.m_gbs) :=
           Spice3.Internal.Functions.junction2SPICE3MOSFETRevised(
-          int_c.m_vbs, 
-          in_m.m_dTemp, 
-          1.0, 
+          int_c.m_vbs,
+          in_m.m_dTemp,
+          1.0,
           int_c.m_tSourceSatCur);
         out_cc.iBS := in_m_type * int_c.m_cbs;
 
@@ -7196,23 +7196,23 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         if (int_c.m_mode == 1) then
 
           int_c := Spice3.Internal.Mos1.drainCur(
-            int_c.m_vbs, 
-            int_c.m_vgs, 
-            int_c.m_vds, 
-            int_c, 
-            in_p, 
-            in_C, 
-            in_vp, 
+            int_c.m_vbs,
+            int_c.m_vgs,
+            int_c.m_vds,
+            int_c,
+            in_p,
+            in_C,
+            in_vp,
             in_m_type);
         else
           int_c := Spice3.Internal.Mos1.drainCur(
-            vbd, 
-            vgd, 
-            -int_c.m_vds, 
-            int_c, 
-            in_p, 
-            in_C, 
-            in_vp, 
+            vbd,
+            vgd,
+            -int_c.m_vds,
+            int_c,
+            in_p,
+            in_C,
+            in_vp,
             in_m_type);
         end if;
 
@@ -7223,51 +7223,51 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         int_c.m_chargebss := 0.0;
         int_c.m_capbds := 0.0;
         int_c.m_chargebds := 0.0;
-        (int_c.m_capbsb,int_c.m_chargebsb) := 
+        (int_c.m_capbsb,int_c.m_chargebsb) :=
           Spice3.Internal.Functions.junctionCapRevised(
-          int_c.m_tCBSb, 
-          int_c.m_vbs, 
-          int_c.m_tDepCap, 
-          in_p.m_bulkJctBotGradingCoeff, 
-          int_c.m_tBulkPot, 
-          int_c.m_f1b, 
-          int_c.m_f2b, 
+          int_c.m_tCBSb,
+          int_c.m_vbs,
+          int_c.m_tDepCap,
+          in_p.m_bulkJctBotGradingCoeff,
+          int_c.m_tBulkPot,
+          int_c.m_f1b,
+          int_c.m_f2b,
           int_c.m_f3b);
 
-        (int_c.m_capbdb,int_c.m_chargebdb) := 
+        (int_c.m_capbdb,int_c.m_chargebdb) :=
           Spice3.Internal.Functions.junctionCapRevised(
-          int_c.m_tCBDb, 
-          vbd, 
-          int_c.m_tDepCap, 
-          in_p.m_bulkJctBotGradingCoeff, 
-          int_c.m_tBulkPot, 
-          int_c.m_f1b, 
-          int_c.m_f2b, 
+          int_c.m_tCBDb,
+          vbd,
+          int_c.m_tDepCap,
+          in_p.m_bulkJctBotGradingCoeff,
+          int_c.m_tBulkPot,
+          int_c.m_f1b,
+          int_c.m_f2b,
           int_c.m_f3b);
 
         if (not (in_p.m_capBSIsGiven > 0.5)) then
-          (int_c.m_capbss,int_c.m_chargebss) := 
+          (int_c.m_capbss,int_c.m_chargebss) :=
             Spice3.Internal.Functions.junctionCapRevised(
-            int_c.m_tCBSs, 
-            int_c.m_vbs, 
-            int_c.m_tDepCap, 
-            in_p.m_bulkJctSideGradingCoeff, 
-            int_c.m_tBulkPot, 
-            int_c.m_f1s, 
-            int_c.m_f2s, 
+            int_c.m_tCBSs,
+            int_c.m_vbs,
+            int_c.m_tDepCap,
+            in_p.m_bulkJctSideGradingCoeff,
+            int_c.m_tBulkPot,
+            int_c.m_f1s,
+            int_c.m_f2s,
             int_c.m_f3s);
         end if;
 
         if (not (in_p.m_capBDIsGiven > 0.5)) then
-          (int_c.m_capbds,int_c.m_chargebds) := 
+          (int_c.m_capbds,int_c.m_chargebds) :=
             Spice3.Internal.Functions.junctionCapRevised(
-            int_c.m_tCBDs, 
-            vbd, 
-            int_c.m_tDepCap, 
-            in_p.m_bulkJctSideGradingCoeff, 
-            int_c.m_tBulkPot, 
-            int_c.m_f1s, 
-            int_c.m_f2s, 
+            int_c.m_tCBDs,
+            vbd,
+            int_c.m_tDepCap,
+            in_p.m_bulkJctSideGradingCoeff,
+            int_c.m_tBulkPot,
+            int_c.m_f1s,
+            int_c.m_f2s,
             int_c.m_f3s);
         end if;
 
@@ -7362,15 +7362,15 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"            ));
       end mosCalcDEVqmeyer;
 
-      function mos2CalcInitEquationsRevised 
+      function mos2CalcInitEquationsRevised
         "MOSFET初始预计算(级别2)"
         extends Modelica.Icons.Function;
-        input Spice3.Internal.Mos2.Mos2ModelLineParams in_p 
+        input Spice3.Internal.Mos2.Mos2ModelLineParams in_p
           "输入记录Mos2值";
-        input Spice3.Internal.Mosfet.Mosfet in_m 
+        input Spice3.Internal.Mosfet.Mosfet in_m
           "输入记录MOSFET参数";
 
-        output Spice3.Internal.Mos2.Mos2Calc out_c 
+        output Spice3.Internal.Mos2.Mos2Calc out_c
           "输出记录Mos2计算的值";
 
       algorithm
@@ -7405,17 +7405,17 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"                  ));
       end mos2CalcInitEquationsRevised;
 
-      function mos2CalcCalcTempDependenciesRevised 
+      function mos2CalcCalcTempDependenciesRevised
         "与温度相关的预计算"
         extends Modelica.Icons.Function;
-        input Spice3.Internal.Mos2.Mos2ModelLineParams in_p 
+        input Spice3.Internal.Mos2.Mos2ModelLineParams in_p
           "输出记录os1计算的值";
-        input Spice3.Internal.Mosfet.Mosfet in_m 
+        input Spice3.Internal.Mosfet.Mosfet in_m
           "输入记录MOSFET参数";
         input Spice3.Internal.Mos2.Mos2Calc in_c "输入记录Mos2Calc";
         input Integer in_m_type "MOS晶体管的类型";
 
-        output Spice3.Internal.Mos2.Mos2Calc out_c 
+        output Spice3.Internal.Mos2.Mos2Calc out_c
           "带有计算值的输出记录";
 
       protected
@@ -7437,82 +7437,82 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         // 计算结势
         out_c.m_tPhi := Spice3.Internal.Functions.junctionPotDepTemp(
-          in_p.m_phi, 
-          in_m.m_dTemp, 
+          in_p.m_phi,
+          in_m.m_dTemp,
           in_p.m_tnom);
 
         // 计算内建电压
         out_c.m_tVbi := in_p.m_vt0 - in_m_type*(in_p.m_gamma*sqrt(in_p.m_phi)) + 0.5*(
-          Spice3.Internal.Functions.energyGapDepTemp(in_p.m_tnom) - 
+          Spice3.Internal.Functions.energyGapDepTemp(in_p.m_tnom) -
           Spice3.Internal.Functions.energyGapDepTemp(in_m.m_dTemp)) + in_m_type*0.5*(
           out_c.m_tPhi - in_p.m_phi);
         out_c.m_tVto := out_c.m_tVbi + in_m_type * in_p.m_gamma * sqrt(out_c.m_tPhi);
 
         // 计算体势
         out_c.m_tBulkPot := Spice3.Internal.Functions.junctionPotDepTemp(
-          in_p.m_bulkJctPotential, 
-          in_m.m_dTemp, 
+          in_p.m_bulkJctPotential,
+          in_m.m_dTemp,
           in_p.m_tnom);
         out_c.m_tDepCap  := in_p.m_fwdCapDepCoeff * out_c.m_tBulkPot;
 
         // 如果未给出电容值，则计算电容
         if (in_p.m_jctSatCurDensity == 0.0 or in_m.m_sourceArea == 0.0 or in_m.m_drainArea == 0.0) then
           out_c.m_tDrainSatCur := Spice3.Internal.Functions.saturationCurDepTempSPICE3MOSFET(
-            in_p.m_jctSatCur, 
-            in_m.m_dTemp, 
+            in_p.m_jctSatCur,
+            in_m.m_dTemp,
             in_p.m_tnom);
           out_c.m_tSourceSatCur := out_c.m_tDrainSatCur;
           out_c.m_VBScrit := Spice3.Internal.Functions.junctionVCrit(
-            in_m.m_dTemp, 
-            1.0, 
+            in_m.m_dTemp,
+            1.0,
             out_c.m_tSourceSatCur);
           out_c.m_VBDcrit       := out_c.m_VBScrit;
         else
-          out_c.m_tSatCurDens := 
+          out_c.m_tSatCurDens :=
             Spice3.Internal.Functions.saturationCurDepTempSPICE3MOSFET(
-            in_p.m_jctSatCurDensity, 
-            in_m.m_dTemp, 
+            in_p.m_jctSatCurDensity,
+            in_m.m_dTemp,
             in_p.m_tnom);
           out_c.m_tDrainSatCur  := out_c.m_tSatCurDens * in_m.m_drainArea;
           out_c.m_tSourceSatCur := out_c.m_tSatCurDens * in_m.m_sourceArea;
           out_c.m_VBScrit := Spice3.Internal.Functions.junctionVCrit(
-            in_m.m_dTemp, 
-            1.0, 
+            in_m.m_dTemp,
+            1.0,
             out_c.m_tSourceSatCur);
           out_c.m_VBDcrit := Spice3.Internal.Functions.junctionVCrit(
-            in_m.m_dTemp, 
-            1.0, 
+            in_m.m_dTemp,
+            1.0,
             out_c.m_tDrainSatCur);
         end if;
 
         // 如果未给出电容，则计算电容值
         if ( not (in_p.m_capBDIsGiven > 0.5) or not (in_p.m_capBSIsGiven > 0.5)) then
           (res,out_c.m_tCj) := Spice3.Internal.Functions.junctionParamDepTempSPICE3(
-            in_p.m_bulkJctPotential, 
-            in_p.m_bulkCapFactor, 
-            in_p.m_bulkJctBotGradingCoeff, 
-            in_m.m_dTemp, 
+            in_p.m_bulkJctPotential,
+            in_p.m_bulkCapFactor,
+            in_p.m_bulkJctBotGradingCoeff,
+            in_m.m_dTemp,
             in_p.m_tnom);
           (res,out_c.m_tCjsw) := Spice3.Internal.Functions.junctionParamDepTempSPICE3(
-            in_p.m_bulkJctPotential, 
-            in_p.m_sideWallCapFactor, 
-            in_p.m_bulkJctSideGradingCoeff, 
-            in_m.m_dTemp, 
+            in_p.m_bulkJctPotential,
+            in_p.m_sideWallCapFactor,
+            in_p.m_bulkJctSideGradingCoeff,
+            in_m.m_dTemp,
             in_p.m_tnom);
-          (out_c.m_f1s,out_c.m_f2s,out_c.m_f3s) := 
+          (out_c.m_f1s,out_c.m_f2s,out_c.m_f3s) :=
             Spice3.Internal.Functions.junctionCapCoeffs(
-            in_p.m_bulkJctSideGradingCoeff, 
-            in_p.m_fwdCapDepCoeff, 
+            in_p.m_bulkJctSideGradingCoeff,
+            in_p.m_fwdCapDepCoeff,
             out_c.m_tBulkPot);
         end if;
 
         // 如果已给出电容，则直接使用
         if (in_p.m_capBDIsGiven > 0.5) then
           (res,out_c.m_tCBDb) := Spice3.Internal.Functions.junctionParamDepTempSPICE3(
-            in_p.m_bulkJctPotential, 
-            in_p.m_capBD, 
-            in_p.m_bulkJctBotGradingCoeff, 
-            in_m.m_dTemp, 
+            in_p.m_bulkJctPotential,
+            in_p.m_capBD,
+            in_p.m_bulkJctBotGradingCoeff,
+            in_m.m_dTemp,
             in_p.m_tnom);
           out_c.m_tCBDs          := 0.0;
         else
@@ -7523,20 +7523,20 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         // 如果已给出电容，则直接使用
         if (in_p.m_capBSIsGiven > 0.5) then
           (res,out_c.m_tCBSb) := Spice3.Internal.Functions.junctionParamDepTempSPICE3(
-            in_p.m_bulkJctPotential, 
-            in_p.m_capBS, 
-            in_p.m_bulkJctBotGradingCoeff, 
-            in_m.m_dTemp, 
+            in_p.m_bulkJctPotential,
+            in_p.m_capBS,
+            in_p.m_bulkJctBotGradingCoeff,
+            in_m.m_dTemp,
             in_p.m_tnom);
           out_c.m_tCBSs          := 0.0;
         else
           out_c.m_tCBSb := out_c.m_tCj * in_m.m_sourceArea;
           out_c.m_tCBSs := out_c.m_tCjsw * in_m.m_sourcePerimeter;
         end if;
-        (out_c.m_f1b,out_c.m_f2b,out_c.m_f3b) := 
+        (out_c.m_f1b,out_c.m_f2b,out_c.m_f3b) :=
           Spice3.Internal.Functions.junctionCapCoeffs(
-          in_p.m_bulkJctBotGradingCoeff, 
-          in_p.m_fwdCapDepCoeff, 
+          in_p.m_bulkJctBotGradingCoeff,
+          in_p.m_fwdCapDepCoeff,
           out_c.m_tBulkPot);
         out_c.m_dVt := in_m.m_dTemp*Spice3.Internal.SpiceConstants.CONSTKoverQ;
 
@@ -7545,26 +7545,26 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"            ));
       end mos2CalcCalcTempDependenciesRevised;
 
-      function mos2CalcNoBypassCodeRevised 
+      function mos2CalcNoBypassCodeRevised
         "计算电流和电容(级别2)"
         extends Modelica.Icons.Function;
-        input Spice3.Internal.Mosfet.Mosfet in_m 
+        input Spice3.Internal.Mosfet.Mosfet in_m
           "输入记录MOSFET参数";
         input Integer in_m_type "MOS 晶体管的类型";
         input Spice3.Internal.Mos2.Mos2Calc in_c "输入记录 Mos2Calc";
-        input Spice3.Internal.Mos2.Mos2ModelLineParams in_p 
+        input Spice3.Internal.Mos2.Mos2ModelLineParams in_p
           "输入记录模型线参数";
         input Boolean in_m_bInit;
         input SI.Voltage[4] in_m_pVoltageValues; // 栅、扩散、漏极、源极
 
-        output Modelica.Electrical.Spice3.Internal.Mos.CurrrentsCapacitances out_cc 
+        output Modelica.Electrical.Spice3.Internal.Mos.CurrrentsCapacitances out_cc
           "计算得到的电流和电容";
 
       protected
         SI.Voltage vbd "漏极-扩散电压";
         SI.Voltage vgd "栅-漏极电压";
         SI.Voltage vgb "栅-扩散电压";
-        Modelica.Electrical.Spice3.Internal.Mos.DEVqmeyer qm 
+        Modelica.Electrical.Spice3.Internal.Mos.DEVqmeyer qm
           "Qmeyer电容";
         Spice3.Internal.Mos2.Mos2Calc int_c "记录Mos2Calc";
         Real hlp;
@@ -7615,15 +7615,15 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         vgb := int_c.m_vgs - int_c.m_vbs;
 
         (int_c.m_cbd,int_c.m_gbd) := Spice3.Internal.Functions.junction2SPICE3MOSFETRevised(
-          vbd, 
-          in_m.m_dTemp, 
-          1.0, 
+          vbd,
+          in_m.m_dTemp,
+          1.0,
           int_c.m_tDrainSatCur);
         out_cc.iBD                := in_m_type * int_c.m_cbd;
         (int_c.m_cbs,int_c.m_gbs) := Spice3.Internal.Functions.junction2SPICE3MOSFETRevised(
-          int_c.m_vbs, 
-          in_m.m_dTemp, 
-          1.0, 
+          int_c.m_vbs,
+          in_m.m_dTemp,
+          1.0,
           int_c.m_tSourceSatCur);
         out_cc.iBS                := in_m_type * int_c.m_cbs;
 
@@ -7631,21 +7631,21 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         if (int_c.m_mode == 1) then
           int_c := Spice3.Internal.Mos2.drainCurRevised(
-            int_c.m_vbs, 
-            int_c.m_vgs, 
-            int_c.m_vds, 
-            in_m, 
-            int_c, 
-            in_p, 
+            int_c.m_vbs,
+            int_c.m_vgs,
+            int_c.m_vds,
+            in_m,
+            int_c,
+            in_p,
             in_m_type);
         else
           int_c := Spice3.Internal.Mos2.drainCurRevised(
-            vbd, 
-            vgd, 
-            -int_c.m_vds, 
-            in_m, 
-            int_c, 
-            in_p, 
+            vbd,
+            vgd,
+            -int_c.m_vds,
+            in_m,
+            int_c,
+            in_p,
             in_m_type);
         end if;
         out_cc.idrain := in_m_type * int_c.m_cdrain * int_c.m_mode;
@@ -7655,46 +7655,46 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         int_c.m_capbds    := 0.0;
         int_c.m_chargebds := 0.0;
         (int_c.m_capbsb,int_c.m_chargebsb) := Spice3.Internal.Functions.junctionCapRevised(
-          int_c.m_tCBSb, 
-          int_c.m_vbs, 
-          int_c.m_tDepCap, 
-          in_p.m_bulkJctBotGradingCoeff, 
-          int_c.m_tBulkPot, 
-          int_c.m_f1b, 
-          int_c.m_f2b, 
+          int_c.m_tCBSb,
+          int_c.m_vbs,
+          int_c.m_tDepCap,
+          in_p.m_bulkJctBotGradingCoeff,
+          int_c.m_tBulkPot,
+          int_c.m_f1b,
+          int_c.m_f2b,
           int_c.m_f3b);
 
         (int_c.m_capbdb,int_c.m_chargebdb) := Spice3.Internal.Functions.junctionCapRevised(
-          int_c.m_tCBDb, 
-          vbd, 
-          int_c.m_tDepCap, 
-          in_p.m_bulkJctBotGradingCoeff, 
-          int_c.m_tBulkPot, 
-          int_c.m_f1b, 
-          int_c.m_f2b, 
+          int_c.m_tCBDb,
+          vbd,
+          int_c.m_tDepCap,
+          in_p.m_bulkJctBotGradingCoeff,
+          int_c.m_tBulkPot,
+          int_c.m_f1b,
+          int_c.m_f2b,
           int_c.m_f3b);
 
         if (not (in_p.m_capBSIsGiven > 0.5)) then
           (int_c.m_capbss,int_c.m_chargebss) := Spice3.Internal.Functions.junctionCapRevised(
-            int_c.m_tCBSs, 
-            int_c.m_vbs, 
-            int_c.m_tDepCap, 
-            in_p.m_bulkJctSideGradingCoeff, 
-            int_c.m_tBulkPot, 
-            int_c.m_f1s, 
-            int_c.m_f2s, 
+            int_c.m_tCBSs,
+            int_c.m_vbs,
+            int_c.m_tDepCap,
+            in_p.m_bulkJctSideGradingCoeff,
+            int_c.m_tBulkPot,
+            int_c.m_f1s,
+            int_c.m_f2s,
             int_c.m_f3s);
         end if;
 
         if (not (in_p.m_capBDIsGiven > 0.5)) then
           (int_c.m_capbds,int_c.m_chargebds) := Spice3.Internal.Functions.junctionCapRevised(
-            int_c.m_tCBDs, 
-            vbd, 
-            int_c.m_tDepCap, 
-            in_p.m_bulkJctSideGradingCoeff, 
-            int_c.m_tBulkPot, 
-            int_c.m_f1s, 
-            int_c.m_f2s, 
+            int_c.m_tCBDs,
+            vbd,
+            int_c.m_tDepCap,
+            in_p.m_bulkJctSideGradingCoeff,
+            int_c.m_tBulkPot,
+            int_c.m_f1s,
+            int_c.m_f2s,
             int_c.m_f3s);
         end if;
 
@@ -7703,15 +7703,15 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         if (int_c.m_mode > 0) then
           qm := Modelica.Electrical.Spice3.Internal.Mos.mosCalcDEVqmeyer(
-                  int_c.m_vgs, 
-                  vgd, 
-                  vgb, 
+                  int_c.m_vgs,
+                  vgd,
+                  vgb,
                   int_c);
         else
           qm := Modelica.Electrical.Spice3.Internal.Mos.mosCalcDEVqmeyer(
-                  vgd, 
-                  int_c.m_vgs, 
-                  vgb, 
+                  vgd,
+                  int_c.m_vgs,
+                  vgb,
                   int_c);
           // Inverser Betrieb -> Drain und Source vertauschen
           // Tausch der Spannungen bei Aufruf von DEVqmeyer
@@ -7743,10 +7743,10 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
     package Mos1 "MOSFET级别1的记录和函数"
       extends Modelica.Icons.InternalPackage;
 
-      record Mos1ModelLineParams 
+      record Mos1ModelLineParams
         "MOSFET模型线参数记录(用于级别1)"
         extends Mos.MosModelLineParams(
-         m_lambda( start = 0.0), 
+         m_lambda( start = 0.0),
          m_transconductance( start = 2.0e-5));
 
         annotation (Documentation(info="<html>
@@ -7764,12 +7764,12 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
       function mos1ModelLineParamsInitEquations "初始预计算"
         extends Modelica.Icons.Function;
-        input Mos1ModelLineParams in_p 
+        input Mos1ModelLineParams in_p
           "输入记录MOS1的模型线参数";
         input SpiceConstants in_C "Spice常数";
         input Integer in_m_type "MOS晶体管的类型";
 
-        output Mos.MosModelLineVariables out_v 
+        output Mos.MosModelLineVariables out_v
           "输出记录模型线变量";
 
       protected
@@ -7818,7 +7818,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
                 end if;
                 wkfngs := wkfng - (3.25 +0.5  * egfet1 + fermis);
                 if (not (in_p.m_gammaIsGiven > 0.5)) then
-                  out_v.m_gamma := sqrt(2 * 11.70 * 8.854214871e-12 * SpiceConstants.CHARGE * 
+                  out_v.m_gamma := sqrt(2 * 11.70 * 8.854214871e-12 * SpiceConstants.CHARGE *
                                    in_p.m_substrateDoping * 1e6 / out_v.m_oxideCapFactor);         // (cm**3/m**3)
                 end if;
                 if (not (in_p.m_vtOIsGiven > 0.5)) then
@@ -7842,10 +7842,10 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         input SI.Voltage vds;
 
         input Mos1Calc in_c "输入记录Mos1Calc";
-        input Mos1ModelLineParams in_p 
+        input Mos1ModelLineParams in_p
           "用于MOS1的输入记录模型线参数";
         input SpiceConstants in_C "Spice常数";
-        input Mos.MosModelLineVariables in_vp 
+        input Mos.MosModelLineVariables in_vp
           "输入记录模型线变量";
         input Integer in_m_type "MOS晶体管的类型";
 
@@ -7908,7 +7908,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         input ModelcardMOS ex "带有技术参数的模型卡";
         input SpiceConstants con "Spice常数";
 
-        output Mos.MosModelLineParams intern 
+        output Mos.MosModelLineParams intern
           "输出记录模型线参数";
 
       algorithm
@@ -7933,9 +7933,9 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
             intern.m_bulkCapFactorIsGiven := if          (ex.CJ > -1e40) then 1 else 0;
           intern.m_bulkCapFactor := if         (ex.CJ > -1e40) then ex.CJ else 0;
 
-          intern.m_sideWallCapFactor := ex.CJSW 
+          intern.m_sideWallCapFactor := ex.CJSW
           "每米结周长的零偏二极管侧壁电容(默认0)";
-          intern.m_fwdCapDepCoeff := ex.FC 
+          intern.m_fwdCapDepCoeff := ex.FC
           "正向偏压耗尽电容公式的系数(默认0.5)";
 
           intern.m_phiIsGiven := if          (ex.PHI > -1e40) then 1 else 0;
@@ -7944,20 +7944,20 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
            intern.m_gammaIsGiven := if          (ex.GAMMA > -1e40) then 1 else 0;
           intern.m_gamma := if         (ex.GAMMA > -1e40) then ex.GAMMA else 0;
 
-          intern.m_lambda := ex.LAMBDA 
+          intern.m_lambda := ex.LAMBDA
           "1/V 通道长度调制 (默认0)";
 
           intern.m_substrateDopingIsGiven := if          (ex.NSUB > -1e40) then 1 else 0;
           intern.m_substrateDoping := if         (ex.NSUB > -1e40) then ex.NSUB else 0;
 
-          intern.m_gateType := ex.TPG 
+          intern.m_gateType := ex.TPG
           "栅极材料类型：+1相反于衬底，-1与衬底相同，0铝栅 (默认1)";
-          intern.m_surfaceStateDensity := ex.NSS 
+          intern.m_surfaceStateDensity := ex.NSS
           "每平方厘米表面态密度 (默认0)";
-          intern.m_surfaceMobility := ex.UO 
+          intern.m_surfaceMobility := ex.UO
           "每平方厘米每秒表面迁移率 (默认600)";
           intern.m_latDiff := ex.LD "横向扩散(默认0)";
-          intern.m_jctSatCur := ex.IS 
+          intern.m_jctSatCur := ex.IS
           "体结饱和电流(默认1e-14)";
 
           intern.m_drainResistanceIsGiven := if 
@@ -7973,28 +7973,28 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
           intern.m_transconductanceIsGiven := if          (ex.KP > -1e40) then 1 else 0;
           intern.m_transconductance := if         (ex.KP > -1e40) then ex.KP else 2e-5;
 
-          intern.m_tnom := if (ex.TNOM > -1e40) then ex.TNOM + SpiceConstants.CONSTCtoK else 300.15 
+          intern.m_tnom := if (ex.TNOM > -1e40) then ex.TNOM + SpiceConstants.CONSTCtoK else 300.15
           "参数测量温度(默认27摄氏度)";
 
-         intern.m_jctSatCurDensity := ex.JS 
+         intern.m_jctSatCurDensity := ex.JS
           "每平方米结区域的体结饱和电流(默认0)";
-         intern.m_sheetResistance := ex.RSH 
+         intern.m_sheetResistance := ex.RSH
           "欧姆漏极和源极扩散片电阻(默认0)";
-         intern.m_bulkJctPotential := ex.PB 
+         intern.m_bulkJctPotential := ex.PB
           "V 体结电势(默认0.8)";
-         intern.m_bulkJctBotGradingCoeff := ex.MJ 
+         intern.m_bulkJctBotGradingCoeff := ex.MJ
           "体结底部分级系数(默认0.5)";
-         intern.m_bulkJctSideGradingCoeff := ex.MJSW 
+         intern.m_bulkJctSideGradingCoeff := ex.MJSW
           "体结侧壁分级系数(默认0.5)";
 
          intern.m_oxideThicknessIsGiven := if          (ex.TOX > -1e40) then 1 else 0;
           intern.m_oxideThickness := if         (ex.TOX > -1e40) then ex.TOX else 0;
 
-         intern.m_gateSourceOverlapCapFactor := ex.CGSO 
+         intern.m_gateSourceOverlapCapFactor := ex.CGSO
           "每米通道宽度的栅源重叠电容(默认0)";
-         intern.m_gateDrainOverlapCapFactor := ex.CGDO 
+         intern.m_gateDrainOverlapCapFactor := ex.CGDO
           "每米通道宽度的栅漏重叠电容(默认0)";
-         intern.m_gateBulkOverlapCapFactor := ex.CGBO 
+         intern.m_gateBulkOverlapCapFactor := ex.CGBO
           "每米通道宽度的栅衬重叠电容(默认0)";
          intern.m_fNcoef := ex.KF "闪烁噪声系数(默认0)";
          intern.m_fNexp := ex.AF "闪烁噪声指数(默认1)";
@@ -8004,7 +8004,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"                ));
       end mos1RenameParameters;
 
-      function mos1RenameParametersDev 
+      function mos1RenameParametersDev
         "将设备参数重命名为内部名称"
         extends Modelica.Icons.Function;
         input ModelcardMOS ex;
@@ -8017,7 +8017,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         input SI.Length PS "源极结周长";
         input Real NRD "漏极扩散区的方块数";
         input Real NRS "源极扩散区的方块数";
-        input Integer OFF 
+        input Integer OFF
           "可选的初始条件：0-未使用IC，1-使用IC，尚未实现";
         input Real IC "初始条件值，尚未实现";
         input Modelica.Units.NonSI.Temperature_degC TEMP "温度";
@@ -8035,19 +8035,19 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         dev.m_drainPerimeter := PD "PD，漏极周长";
         dev.m_sourcePerimeter := PS "PS，源极周长";
 
-          dev.m_dICVDSIsGiven := if          (IC > -1e40) then 1 else 0 
+          dev.m_dICVDSIsGiven := if          (IC > -1e40) then 1 else 0
           "ICVDS是否给定值";
-          dev.m_dICVDS := if         (IC > -1e40) then IC else 0 
+          dev.m_dICVDS := if         (IC > -1e40) then IC else 0
           "VDS的初始条件";
 
-          dev.m_dICVGSIsGiven := if          (IC > -1e40) then 1 else 0 
+          dev.m_dICVGSIsGiven := if          (IC > -1e40) then 1 else 0
           "ICVGS是否给定值";
-          dev.m_dICVGS := if         (IC > -1e40) then IC else 0 
+          dev.m_dICVGS := if         (IC > -1e40) then IC else 0
           "VGS的初始条件";
 
-          dev.m_dICVBSIsGiven := if          (IC > -1e40) then 1 else 0 
+          dev.m_dICVBSIsGiven := if          (IC > -1e40) then 1 else 0
           "ICVBS是否给定值";
-          dev.m_dICVBS := if         (IC > -1e40) then IC else 0 
+          dev.m_dICVBS := if         (IC > -1e40) then IC else 0
           "VBS的初始条件";
 
         dev.m_off := OFF "非零表示设备在直流分析中关闭";
@@ -8072,24 +8072,24 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
       extends Modelica.Icons.InternalPackage;
 
 
-      record Mos2ModelLineParams 
+      record Mos2ModelLineParams
         "用于MOSFET模型线参数的记录(用于级别2)"
         extends Spice3.Internal.Mos.MosModelLineParams(
-          m_lambda(start=0.0), 
-          m_transconductance(start=2.0e-5), 
-          m_bulkJctSideGradingCoeff(start=0.33), 
+          m_lambda(start=0.0),
+          m_transconductance(start=2.0e-5),
+          m_bulkJctSideGradingCoeff(start=0.33),
           m_oxideThickness(start=1.0e-7));
 
         Real m_narrowFactor( start = 0.0) "DELTA，门限电压的宽度效应";
         Real m_critFieldExp( start = 0.0) "UEXP，迁移率退化的临界场指数";
-        Types.ElectricFieldStrength_cm m_critField( start = 1.0e4) 
+        Types.ElectricFieldStrength_cm m_critField( start = 1.0e4)
           "UCRIT，迁移率退化的临界场";
-        SI.Velocity m_maxDriftVel( start = 0.0) 
+        SI.Velocity m_maxDriftVel( start = 0.0)
           "VMAX，最大载流子漂移速度";
         SI.Length m_junctionDepth( start = 0.0) "XJ，结深度";
-        SI.Charge m_channelCharge( start = 1.0) 
+        SI.Charge m_channelCharge( start = 1.0)
           "NEFF，总通道电荷系数";
-        Modelica.Units.NonSI.PerArea_cm m_fastSurfaceStateDensity( start = 0.0) 
+        Modelica.Units.NonSI.PerArea_cm m_fastSurfaceStateDensity( start = 0.0)
           "NFS，快速表面态密度";
         Real m_xd; // 单位 m/V(-0.5) -> m/Wurzel V
         annotation (Documentation(info="<html>
@@ -8097,7 +8097,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"                      ));
       end Mos2ModelLineParams;
 
-      record Mos2ModelLineVariables 
+      record Mos2ModelLineVariables
         "用于MOSFET模型线变量的记录(用于级别2)"
         extends Spice3.Internal.Mos.MosModelLineVariables;
 
@@ -8120,11 +8120,11 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
       function mos2ModelLineParamsInitEquationsRevised "初始预计算"
         extends Modelica.Icons.Function;
-        input Modelica.Electrical.Spice3.Internal.Mos2.Mos2ModelLineParams in_p 
+        input Modelica.Electrical.Spice3.Internal.Mos2.Mos2ModelLineParams in_p
           "输入用于MOS2的模型线参数记录";
         input Integer in_m_type "MOS晶体管类型";
 
-        output Modelica.Electrical.Spice3.Internal.Mos2.Mos2ModelLineParams out_p 
+        output Modelica.Electrical.Spice3.Internal.Mos2.Mos2ModelLineParams out_p
           "输入用于MOS2的模型线参数记录";
 
       protected
@@ -8140,7 +8140,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         out_p := in_p;
 
         vtnom := out_p.m_tnom * Spice3.Internal.SpiceConstants.CONSTKoverQ;
-        egfet1 := Spice3.Internal.MaterialParameters.EnergyGapSi - (Modelica.Electrical.Spice3.Internal.MaterialParameters.FirstBandCorrFactorSi 
+        egfet1 := Spice3.Internal.MaterialParameters.EnergyGapSi - (Modelica.Electrical.Spice3.Internal.MaterialParameters.FirstBandCorrFactorSi
           * out_p.m_tnom * out_p.m_tnom) / (out_p.m_tnom + Spice3.Internal.MaterialParameters.SecondBandCorrFactorSi);
         out_p.m_oxideCapFactor := Spice3.Internal.SpiceConstants.EPSOX / out_p.m_oxideThickness;
 
@@ -8151,7 +8151,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         if (out_p.m_substrateDopingIsGiven > 0.5) then
           if (out_p.m_substrateDoping * 1.0e6 > Modelica.Electrical.Spice3.Internal.MaterialParameters.IntCondCarrDensity) then
             if (not (out_p.m_phiIsGiven > 0.5)) then
-              out_p.m_phi := 2 * vtnom * Modelica.Math.log(out_p.m_substrateDoping * 1.0e6 
+              out_p.m_phi := 2 * vtnom * Modelica.Math.log(out_p.m_substrateDoping * 1.0e6
                 / Spice3.Internal.MaterialParameters.IntCondCarrDensity);
               out_p.m_phi := max(0.1, out_p.m_phi);
             end if;
@@ -8163,18 +8163,18 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
             end if;
             wkfngs := wkfng - (3.25 + 0.5 * egfet1 + fermis);
             if (not (out_p.m_gammaIsGiven > 0.5)) then
-              out_p.m_gamma := sqrt(2.0 * Spice3.Internal.SpiceConstants.EPSSIL * 
-                Spice3.Internal.SpiceConstants.CHARGE * out_p.m_substrateDoping * 1.0e6) 
+              out_p.m_gamma := sqrt(2.0 * Spice3.Internal.SpiceConstants.EPSSIL *
+                Spice3.Internal.SpiceConstants.CHARGE * out_p.m_substrateDoping * 1.0e6)
                 / out_p.m_oxideCapFactor;
             end if;
             if (not (out_p.m_vtOIsGiven > 0.5)) then
-              vfb := wkfngs - out_p.m_surfaceStateDensity * 1.0e4 * Spice3.Internal.SpiceConstants.CHARGE 
+              vfb := wkfngs - out_p.m_surfaceStateDensity * 1.0e4 * Spice3.Internal.SpiceConstants.CHARGE
                 / out_p.m_oxideCapFactor;
               out_p.m_vt0 := vfb + in_m_type * (out_p.m_gamma * sqrt(out_p.m_phi) + out_p.m_phi);
             else
               vfb := out_p.m_vt0 - in_m_type * (out_p.m_gamma * sqrt(out_p.m_phi) + out_p.m_phi);
             end if;
-            out_p.m_xd := sqrt((Spice3.Internal.SpiceConstants.EPSSIL + Spice3.Internal.SpiceConstants.EPSSIL) 
+            out_p.m_xd := sqrt((Spice3.Internal.SpiceConstants.EPSSIL + Spice3.Internal.SpiceConstants.EPSSIL)
               / (Spice3.Internal.SpiceConstants.CHARGE * out_p.m_substrateDoping * 1.0e6));
           else
             out_p.m_substrateDoping := 0.0;
@@ -8182,8 +8182,8 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         end if;
 
         if (not (out_p.m_bulkCapFactorIsGiven > 0.5)) then
-          out_p.m_bulkCapFactor := sqrt(Spice3.Internal.SpiceConstants.EPSSIL * 
-            Spice3.Internal.SpiceConstants.CHARGE * out_p.m_substrateDoping * 1e6 / (2 
+          out_p.m_bulkCapFactor := sqrt(Spice3.Internal.SpiceConstants.EPSSIL *
+            Spice3.Internal.SpiceConstants.CHARGE * out_p.m_substrateDoping * 1e6 / (2
             * out_p.m_bulkJctPotential));
         end if;
 
@@ -8199,13 +8199,13 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         input SI.Voltage vds "漏极-源极电压";
 
         input Spice3.Internal.Mosfet.Mosfet in_m "MOSFET记录";
-        input Modelica.Electrical.Spice3.Internal.Mos2.Mos2Calc in_c 
+        input Modelica.Electrical.Spice3.Internal.Mos2.Mos2Calc in_c
           "输入记录Mos2Calc";
-        input Modelica.Electrical.Spice3.Internal.Mos2.Mos2ModelLineParams in_p 
+        input Modelica.Electrical.Spice3.Internal.Mos2.Mos2ModelLineParams in_p
           "MOS2模型线参数的输入记录";
         input Integer in_m_type "MOS晶体管的类型";
 
-        output Modelica.Electrical.Spice3.Internal.Mos2.Mos2Calc out_c 
+        output Modelica.Electrical.Spice3.Internal.Mos2.Mos2Calc out_c
           "输出记录Mos2Calc";
 
       protected
@@ -8363,7 +8363,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
           d2bdb2 := -dbrgdb * tmp;
         end if;
 
-        factor := 0.125*in_p.m_narrowFactor*2.0*Modelica.Constants.pi*Spice3.Internal.SpiceConstants.EPSSIL 
+        factor := 0.125*in_p.m_narrowFactor*2.0*Modelica.Constants.pi*Spice3.Internal.SpiceConstants.EPSSIL
           /out_c.m_capOx*out_c.m_lEff;
 
         eta    := 1.0 + factor;
@@ -8395,10 +8395,10 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
             tmp    := 0.5 / out_c.m_lEff;
             dbargs := tmp * dbxws / args;
             dbargd := tmp * dbxwd / argd;
-            dasdb2 := -in_p.m_xd * (d2sdb2 + dsrgdb * dsrgdb * in_p.m_xd 
+            dasdb2 := -in_p.m_xd * (d2sdb2 + dsrgdb * dsrgdb * in_p.m_xd
                       / (in_p.m_junctionDepth * argxs)) / (out_c.m_lEff * args);
-            daddb2 := -in_p.m_xd * (d2bdb2 + dbrgdb * dbrgdb * in_p.m_xd 
-                      / (in_p.m_junctionDepth * argxd)) 
+            daddb2 := -in_p.m_xd * (d2bdb2 + dbrgdb * dbrgdb * in_p.m_xd
+                      / (in_p.m_junctionDepth * argxd))
                       / (out_c.m_lEff * argd);
             dgddb2 := -0.5 * in_p.m_gamma * (dasdb2 + daddb2);
           end if;
@@ -8419,7 +8419,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         vth           := out_c.m_von;
         out_c.m_vdsat := 0.0;
         if ( in_p.m_fastSurfaceStateDensity <> 0.0 and out_c.m_capOx <> 0.0) then
-          cfs := Spice3.Internal.SpiceConstants.CHARGE*in_p.m_fastSurfaceStateDensity* 
+          cfs := Spice3.Internal.SpiceConstants.CHARGE*in_p.m_fastSurfaceStateDensity*
             1.0e4;
           cdonco       := -(gamasd * dsrgdb + dgddvb * sarg) + factor;
           xn           := 1.0 + cfs / out_c.m_capOx * in_m.m_width * out_c.m_lEff + cdonco;
@@ -8490,7 +8490,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
             out_c.m_vdsat := (vgsx - vbin) / eta + gammd2 * (1.0 - arg) / 2.0;
             out_c.m_vdsat := max( out_c.m_vdsat, 0.0);
             dsdvgs        := (1.0 - 1.0 / arg) / eta;
-            dsdvbs        := (gammad * (1.0 - arg) + 2.0 * argv / (gammad * arg)) 
+            dsdvbs        := (gammad * (1.0 - arg) + 2.0 * argv / (gammad * arg))
                              / eta * dgdvbs + 1.0 / arg + factor * dsdvgs;
           end if;
         else
@@ -8528,11 +8528,11 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
           sig2[4] := -1.0;
 
           if (p1 < 0) then
-            y3 := 2.0 * exp( Modelica.Math.log( sqrt( s2 / 4.0 + p0)) / 3.0) 
+            y3 := 2.0 * exp( Modelica.Math.log( sqrt( s2 / 4.0 + p0)) / 3.0)
                   * cos( Modelica.Math.atan( -2.0 * p2 / s1) / 3.0) + b1 / 3.0;
           else
-            y3 := exp( Modelica.Math.log( abs( -s1 / 2.0 + p2)) / 3.0) 
-                  + exp( Modelica.Math.log( abs( -s1 / 2.0 - p2)) / 3.0) 
+            y3 := exp( Modelica.Math.log( abs( -s1 / 2.0 + p2)) / 3.0)
+                  + exp( Modelica.Math.log( abs( -s1 / 2.0 - p2)) / 3.0)
                   + b1 / 3.0;
           end if;
 
@@ -8610,7 +8610,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
             vl     := in_p.m_maxDriftVel *out_c. m_lEff;
             dfunds := vl * dqdsat - ueff * vqchan;
             dfundg := (vl - ueff * out_c.m_vdsat) / eta;
-            dfundb := -vl * (1.0 + dqdsat - factor / eta) + ueff * 
+            dfundb := -vl * (1.0 + dqdsat - factor / eta) + ueff *
                (gdbdvs - dgdvbs * bodys / 1.5) / eta;
             dsdvgs := -dfundg / dfunds;
             dsdvbs := -dfundb / dfunds;
@@ -8696,7 +8696,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
           if (vds < out_c.m_vdsat) then
             gdson := gdson + didvds;
           end if;
-          gbson := -cdson * dldvbs / clfact + beta1 * 
+          gbson := -cdson * dldvbs / clfact + beta1 *
                    (dodvbs * vdson + factor * vdson - dgdvbs * body / 1.5 - gdbdv);
           if (vds > out_c.m_vdsat) then
             gbson := gbson + didvds * dsdvbs;
@@ -8717,20 +8717,20 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
           arg            := out_c.m_cdrain * (dudvgs / ufact - dldvgs / clfact);
           out_c.m_gm     := arg + beta1 * vds;
           arg            := out_c.m_cdrain * (dudvds / ufact - dldvds / clfact);
-          out_c.m_gds    := arg + beta1 * (vgs - vbin - eta * 
+          out_c.m_gds    := arg + beta1 * (vgs - vbin - eta *
                             vds - gammad * barg - dgdvds * body / 1.5);
           arg            := out_c.m_cdrain * (dudvbs / ufact - dldvbs / clfact);
           out_c.m_gmbs   := arg - beta1 * (gdbdv + dgdvbs * body / 1.5 - factor * vds);
         else
           // saturation region
-          out_c.m_cdrain := beta1 * ((vgs - vbin - eta * 
+          out_c.m_cdrain := beta1 * ((vgs - vbin - eta *
                            out_c.m_vdsat / 2.0) * out_c.m_vdsat - gammad * bodys / 1.5);
           arg            := out_c.m_cdrain * (dudvgs / ufact - dldvgs / clfact);
-          out_c.m_gm     := arg + beta1 * out_c.m_vdsat 
+          out_c.m_gm     := arg + beta1 * out_c.m_vdsat
                            + beta1 * (vgs - vbin - eta * out_c.m_vdsat - gammad * bsarg) * dsdvgs;
           out_c.m_gds    := -out_c.m_cdrain * dldvds / clfact - beta1 * dgdvds * bodys / 1.5;
           arg            := out_c.m_cdrain * (dudvbs / ufact - dldvbs / clfact);
-          out_c.m_gmbs   := arg - beta1 * (gdbdvs + dgdvbs * bodys / 1.5 - factor * out_c.m_vdsat) 
+          out_c.m_gmbs   := arg - beta1 * (gdbdvs + dgdvbs * bodys / 1.5 - factor * out_c.m_vdsat)
                            + beta1 *  (vgs - vbin - eta * out_c.m_vdsat - gammad * bsarg) * dsdvbs;
         end if;
 
@@ -8739,13 +8739,13 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"                ));
       end drainCurRevised;
 
-      function mos2RenameParametersRevised 
+      function mos2RenameParametersRevised
         "参数重命名为内部名称"
         extends Modelica.Icons.Function;
-        input Spice3.Internal.ModelcardMOS2 ex 
+        input Spice3.Internal.ModelcardMOS2 ex
           "带有技术参数的模型卡";
 
-        output Modelica.Electrical.Spice3.Internal.Mos2.Mos2ModelLineParams intern 
+        output Modelica.Electrical.Spice3.Internal.Mos2.Mos2ModelLineParams intern
           "输出记录模型线参数";
 
       algorithm
@@ -8807,7 +8807,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"                ));
       end mos2RenameParametersRevised;
 
-      function mos2RenameParametersDev 
+      function mos2RenameParametersDev
         "将设备参数重命名为内部名称"
         extends Modelica.Icons.Function;
         input Spice3.Internal.ModelcardMOS2 ex; // 带有技术参数的模型卡
@@ -8821,7 +8821,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         input SI.Length PS "源极周长";
         input Real NRD "漏极方格长度";
         input Real NRS "源极方格长度";
-        input Integer OFF 
+        input Integer OFF
           "可选的初始条件：0-不使用 IC，1-使用 IC，尚未实现";
         input Real IC "初始条件值，尚未实现";
         input Modelica.Units.NonSI.Temperature_degC TEMP "温度";
@@ -8877,19 +8877,19 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         SI.Time m_transitTime( start = 0.0) "TT, 过渡时间";
         Types.Capacitance m_junctionCap( start = 0.0) "CJO, 结电容";
         SI.Voltage m_junctionPot( start = 1.0) "VJ, 结电位";
-        SI.LinearTemperatureCoefficient m_gradingCoeff( start = 0.5) 
+        SI.LinearTemperatureCoefficient m_gradingCoeff( start = 0.5)
           "M, 掺杂系数";
-        SI.ActivationEnergy m_activationEnergy( start = 1.11) 
+        SI.ActivationEnergy m_activationEnergy( start = 1.11)
           "EG, 激活能";
-        Real m_saturationCurrentExp( start = 3.0) 
+        Real m_saturationCurrentExp( start = 3.0)
           "XTI, 饱和电流温度指数";
-        Real m_depletionCapCoeff( start = 0.5) 
+        Real m_depletionCapCoeff( start = 0.5)
           "FC, 正偏结拟合参数";
         SI.Voltage m_breakdownVoltage "BV, 反向击穿电压";
         Real m_pBvIsGiven "BV是给定值";
-        SI.Current m_breakdownCurrent( start = 1.0e-3) 
+        SI.Current m_breakdownCurrent( start = 1.0e-3)
           "IBV, 反向击穿电流";
-        SI.Temperature m_nomTemp( start=SpiceConstants.CKTnomTemp) 
+        SI.Temperature m_nomTemp( start=SpiceConstants.CKTnomTemp)
           "TNOM, 参数测量温度";
         Real m_fNcoef( start = 0.0) "KF, 闪烁噪声系数";
         Real m_fNexp( start = 1.0) "AF, 闪烁噪声指数";
@@ -8918,7 +8918,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         Boolean m_bOff(start = false) "OFF, 初始关闭状态";
         SI.Voltage m_dIC(start = 0.0) "IC, 初始设备电压";
         Real m_pIcIsGiven "IC是给定值";
-        Boolean m_bSensArea(start = false) 
+        Boolean m_bSensArea(start = false)
           "SENS_AREA, 请求相对于面积的灵敏度标志";
 
         annotation (Documentation(info="<html>
@@ -8961,13 +8961,13 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"            ));
       end CurrentsCapacitances;
 
-      function diodeModelLineInitEquations 
+      function diodeModelLineInitEquations
         "模型线参数的初始预计算"
         extends Modelica.Icons.Function;
-        input DiodeModelLineParams in_p 
+        input DiodeModelLineParams in_p
           "带有二极管模型线参数的输入记录";
 
-        output DiodeModelLineVariables out_v 
+        output DiodeModelLineVariables out_v
           "带有二极管模型线变量的输出记录";
 
       algorithm
@@ -8993,7 +8993,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
       function diodeInitEquations "初始计算"
         extends Modelica.Icons.Function;
-        input DiodeModelLineParams in_p 
+        input DiodeModelLineParams in_p
           "带有二极管模型线参数的输入记录";
 
         output DiodeVariables out_v "带有二极管变量的输出记录";
@@ -9013,7 +9013,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
       function diodeCalcTempDependencies "温度依赖性计算"
         extends Modelica.Icons.Function;
-        input DiodeModelLineParams in_p 
+        input DiodeModelLineParams in_p
           "二极管模型线参数的输入记录";
         input DiodeParams in_dp "二极管参数的输入记录";
         input Model.Model in_m "模型的输入记录";
@@ -9022,40 +9022,40 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         output DiodeCalc out_c "带有计算值的输出记录";
 
       algorithm
-        (out_c.m_tJctPot,out_c.m_tJctCap) := 
+        (out_c.m_tJctPot,out_c.m_tJctCap) :=
           Modelica.Electrical.Spice3.Internal.Functions.junctionParamDepTempSPICE3(
-                in_p.m_junctionPot, 
-                in_p.m_junctionCap, 
-                in_p.m_gradingCoeff, 
-                in_m.m_dTemp, 
+                in_p.m_junctionPot,
+                in_p.m_junctionCap,
+                in_p.m_gradingCoeff,
+                in_m.m_dTemp,
                 in_p.m_nomTemp); // 计算结势和结电容的温度依赖性
         out_c.m_tJctCap := in_dp.m_area * out_c.m_tJctCap; // 结电容乘以面积
-        (out_c.m_tF1,out_c.m_f2,out_c.m_f3) := 
+        (out_c.m_tF1,out_c.m_f2,out_c.m_f3) :=
           Modelica.Electrical.Spice3.Internal.Functions.junctionCapCoeffs(
-                in_p.m_gradingCoeff, 
-                in_p.m_depletionCapCoeff, 
+                in_p.m_gradingCoeff,
+                in_p.m_depletionCapCoeff,
                 out_c.m_tJctPot); // 计算结电容系数
-        out_c.m_tSatCur := 
+        out_c.m_tSatCur :=
           Modelica.Electrical.Spice3.Internal.Functions.saturationCurDepTempSPICE3(
-                in_p.m_satCur, 
-                in_m.m_dTemp, 
-                in_p.m_nomTemp, 
-                in_p.m_emissionCoeff, 
-                in_p.m_activationEnergy, 
+                in_p.m_satCur,
+                in_m.m_dTemp,
+                in_p.m_nomTemp,
+                in_p.m_emissionCoeff,
+                in_p.m_activationEnergy,
                 in_p.m_saturationCurrentExp); // 计算饱和电流的温度依赖性
-        out_c.m_tVcrit := 
+        out_c.m_tVcrit :=
           Modelica.Electrical.Spice3.Internal.Functions.junctionVCrit(
-                in_m.m_dTemp, 
-                in_p.m_emissionCoeff, 
+                in_m.m_dTemp,
+                in_p.m_emissionCoeff,
                 out_c.m_tSatCur); // 计算临界电压
         out_c.m_dVte := in_m.m_dTemp*SpiceConstants.CONSTKoverQ*in_p.m_emissionCoeff; // 计算热电压
         if (in_v.m_pBvIsGiven > 0.5) then
-          out_c.m_tBrkdwnV := 
+          out_c.m_tBrkdwnV :=
             Modelica.Electrical.Spice3.Internal.Functions.junctionVoltage23SPICE3(
-                  in_p.m_breakdownVoltage, 
-                  in_p.m_breakdownCurrent, 
-                  out_c.m_tSatCur, 
-                  in_m.m_dTemp, 
+                  in_p.m_breakdownVoltage,
+                  in_p.m_breakdownCurrent,
+                  out_c.m_tSatCur,
+                  in_m.m_dTemp,
                   in_p.m_emissionCoeff); // 如果给定了击穿电压，则计算击穿电压
         end if;
         out_c.m_tSatCur := in_dp.m_area * out_c.m_tSatCur; // 饱和电流乘以面积
@@ -9067,7 +9067,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
       function diodeNoBypassCode "电流计算"
         extends Modelica.Icons.Function;
-        input DiodeModelLineParams in_p 
+        input DiodeModelLineParams in_p
           "二极管模型线参数的输入记录";
         input DiodeParams in_dp "二极管参数的输入记录";
         input DiodeCalc in_c "DiodeCalc的输入记录";
@@ -9075,7 +9075,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         input Boolean in_m_mbInit;
         input SI.Voltage[2] in_m_pVoltageValues; /* DPP, DN */
 
-        output CurrentsCapacitances out_cc 
+        output CurrentsCapacitances out_cc
           "带有计算得到的电流和电容的输出记录";
 
         output Types.Capacitance m_dCap "输出电容";
@@ -9101,36 +9101,36 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         end if;
 
         if (in_p.m_pBvIsGiven > 0.5) then // 如果给定了击穿电压
-          (out_cc.m_dCurrent,m_dCond) := 
+          (out_cc.m_dCurrent,m_dCond) :=
             Modelica.Electrical.Spice3.Internal.Functions.junction3(
-                  m_dPNVoltage, 
-                  in_m.m_dTemp, 
-                  in_p.m_emissionCoeff, 
-                  in_c.m_tSatCur, 
+                  m_dPNVoltage,
+                  in_m.m_dTemp,
+                  in_p.m_emissionCoeff,
+                  in_c.m_tSatCur,
                   in_c.m_tBrkdwnV);
         else
-          (out_cc.m_dCurrent,m_dCond) := 
+          (out_cc.m_dCurrent,m_dCond) :=
             Modelica.Electrical.Spice3.Internal.Functions.junction2(
-                  m_dPNVoltage, 
-                  in_m.m_dTemp, 
-                  in_p.m_emissionCoeff, 
+                  m_dPNVoltage,
+                  in_m.m_dTemp,
+                  in_p.m_emissionCoeff,
                   in_c.m_tSatCur);
         end if;
 
          m_dCurrent := out_cc.m_dCurrent; // 电流赋值
 
-        (m_dCap,m_dCharge) := 
+        (m_dCap,m_dCharge) :=
           Modelica.Electrical.Spice3.Internal.Functions.junctionCapTransTime(
-                in_c.m_tJctCap, 
-                m_dPNVoltage, 
-                in_c.m_tJctPot*in_p.m_depletionCapCoeff, 
-                in_p.m_gradingCoeff, 
-                in_p.m_junctionPot, 
-                in_c.m_tF1, 
-                in_c.m_f2, 
-                in_c.m_f3, 
-                in_p.m_transitTime, 
-                m_dCond, 
+                in_c.m_tJctCap,
+                m_dPNVoltage,
+                in_c.m_tJctPot*in_p.m_depletionCapCoeff,
+                in_p.m_gradingCoeff,
+                in_p.m_junctionPot,
+                in_c.m_tF1,
+                in_c.m_f2,
+                in_c.m_f3,
+                in_p.m_transitTime,
+                m_dCond,
                 m_dCurrent); // 电容计算
 
         annotation (Documentation(info="<html>
@@ -9142,7 +9142,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
       function diodeCalcAdditionalValues "额外值的计算"
         extends Modelica.Icons.Function;
         input DiodeVariables in_v "带有二极管变量的输入记录";
-        input DiodeModelLineParams in_p 
+        input DiodeModelLineParams in_p
           "带有二极管模型线参数的输入记录";
         input DiodeParams in_dp "带有二极管参数的输入记录";
         input SI.Voltage[2] in_m_pVoltageValues; /* DP, DPP */
@@ -9162,7 +9162,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         input ModelcardDIODE ex "带有技术参数的模型卡";
         input SpiceConstants con "Spice常数";
 
-        output DiodeModelLineParams intern 
+        output DiodeModelLineParams intern
           "输出记录，二极管模型线参数";
 
       algorithm
@@ -9199,9 +9199,9 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         input SI.Temperature TEMP "温度";
         input Real AREA "面积因子";
         input Real IC "初始条件值(VD，尚未实现";
-        input Boolean OFF 
+        input Boolean OFF
           "可选的初始条件：false-IC未使用，true-使用IC，尚未实现";
-        input Boolean SENS_AREA 
+        input Boolean SENS_AREA
           "请求相对于面积的敏感度的标志，尚未实现";
 
         output DiodeParams dev "输出记录，带有计算得到的二极管参数";
@@ -9239,7 +9239,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"      ));
     end Diode;
 
-    package Rsemiconductor 
+    package Rsemiconductor
       "半导体电阻器模型的记录和函数"
         extends Modelica.Icons.InternalPackage;
 
@@ -9252,7 +9252,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         Real m_dWidthIsGiven "宽度为给定值";
         SI.Length m_dLength "长度";
         Real m_dLengthIsGiven "长度为给定值";
-        Boolean m_bSensResist( start = false) 
+        Boolean m_bSensResist( start = false)
           "请求相对于电阻的敏感度的标志";
         Modelica.Units.NonSI.Temperature_degC m_dTemp(start = 27) "电阻器件温度";
 
@@ -9293,7 +9293,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         input ModelcardR ex "带有技术参数的模型卡";
         input SpiceConstants con "Spice常数";
 
-        output ResistorModelLineParams intern 
+        output ResistorModelLineParams intern
           "带有电阻器模型线参数的输出记录";
 
       algorithm
@@ -9320,7 +9320,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         input SI.Length W "宽度";
         input SI.Length L "长度";
         input Modelica.Units.NonSI.Temperature_degC TEMP "温度";
-        input Boolean SENS_AREA 
+        input Boolean SENS_AREA
           "用于敏感性分析的参数，尚未实现";
 
        input SpiceConstants con "SPICE常数";
@@ -9363,7 +9363,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
       function resistorInitEquations "初始计算"
         extends Modelica.Icons.Function;
         input ResistorParams in_p "输入电阻参数记录";
-        input ResistorModelLineParams in_p2 
+        input ResistorModelLineParams in_p2
           "输入电阻模型线参数记录";
         output ResistorVariables out "输出电阻变量记录";
 
@@ -9384,11 +9384,11 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
                                  //默认宽度
             end if;
 
-            (out.m_dResist) := 
+            (out.m_dResist) :=
               Modelica.Electrical.Spice3.Internal.Functions.resDepGeom(
-                    in_p2.m_dRsh, 
-                    out.m_dWidth, 
-                    in_p.m_dLength, 
+                    in_p2.m_dRsh,
+                    out.m_dWidth,
+                    in_p.m_dLength,
                     in_p2.m_dNarrow);
                                 //电阻值
           else
@@ -9448,17 +9448,17 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         extends Modelica.Icons.Record;
         Real m_type( start = 1) "器件类型：1=n，-1=p";
 
-        SI.Temperature m_tnom(start=Spice3.Internal.SpiceConstants.CKTnomTemp) 
+        SI.Temperature m_tnom(start=Spice3.Internal.SpiceConstants.CKTnomTemp)
           "TNOM，参数测量温度";
         SI.Current m_satCur(start=1.0e-16) "IS，饱和电流";
         Real m_betaF( start = 100.0) "BF，理想前向增益";
         Real m_emissionCoeffF(  start = 1.0) "NF，前向发射系数";
-        Real m_leakBEemissionCoeff( start = 1.5) 
+        Real m_leakBEemissionCoeff( start = 1.5)
           "NE，B-E泄漏发射系数";
-        SI.Current m_leakBEcurrent(start=0.) 
+        SI.Current m_leakBEcurrent(start=0.)
           "ISE，B-E泄漏饱和电流";
         Real m_c2( start = 0.) "C2，已废弃的参数名称";
-        SI.Current m_leakBCcurrent(start=0.) 
+        SI.Current m_leakBCcurrent(start=0.)
           "ISC，B-C泄漏饱和电流";
         Real m_c4( start = 0.) "C4，已废弃的参数名称";
         Real m_leakBEcurrentIsGiven;
@@ -9467,53 +9467,53 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         Real m_c4IsGiven;
         Real m_betaR( start = 1.0) "BR，理想反向增益";
         Real m_emissionCoeffR( start = 1.0) "NR，反向发射系数";
-        Real m_leakBCemissionCoeff( start = 2.0) 
+        Real m_leakBCemissionCoeff( start = 2.0)
           "NC，B-C泄漏发射系数";
         SI.Voltage m_earlyVoltF(start=0.0) "VAF，前向早期电压";
-        SI.Current m_rollOffF(start=0.0) 
+        SI.Current m_rollOffF(start=0.0)
           "IKF，前向增益下降角频率";
         SI.Voltage m_earlyVoltR(start=0.0) "VAR，反向早期电压";
-        SI.Current m_rollOffR(start=0.0) 
+        SI.Current m_rollOffR(start=0.0)
           "IKR，反向增益下降角频率";
         SI.Resistance m_emitterResist(start=0.0) "RE，发射极电阻";
         SI.Resistance m_collectorResist(start=0.0) "RC，集电极电阻";
-        SI.Current m_baseCurrentHalfResist(start=0.0) 
+        SI.Current m_baseCurrentHalfResist(start=0.0)
           "IRB，基极电阻=(rb+rbm)/2 的电流";
         SI.Resistance m_baseResist(start=0.0) "RB，零偏基极电阻";
         SI.Resistance m_minBaseResist(start=0.0) "RBM，最小基极电阻";
         Real m_minBaseResistIsGiven;
-        Types.Capacitance m_depletionCapBE(start=0.0) 
+        Types.Capacitance m_depletionCapBE(start=0.0)
           "CJE，零偏B-E耗尽电容";
         SI.Voltage m_potentialBE(start=0.75) "VJE，B-E内建电势";
         Real m_junctionExpBE( start = 0.33) "MJE，B-E内建电势";
         SI.Time m_transitTimeF(start=0.0) "TF，理想前向过渡时间";
-        Real m_transitTimeBiasCoeffF( start = 0.0) 
+        Real m_transitTimeBiasCoeffF( start = 0.0)
           "XTF，TF的偏压系数";
-        SI.Current m_transitTimeHighCurrentF(start=0.0) 
+        SI.Current m_transitTimeHighCurrentF(start=0.0)
           "ITF，TF的高电流依赖";
-        SI.Voltage m_transitTimeFVBC(start=0.0) 
+        SI.Voltage m_transitTimeFVBC(start=0.0)
           "VTF，给定VBC依赖的电压";
         SI.Frequency m_excessPhase(start=0.0) "PTF，过剩相位";
-        Types.Capacitance m_depletionCapBC(start=0.0) 
+        Types.Capacitance m_depletionCapBC(start=0.0)
           "CJC，零偏B-C耗尽电容";
         SI.Voltage m_potentialBC(start=0.75) "VJC，B-C内建电势";
-        Real m_junctionExpBC( start = 0.33) 
+        Real m_junctionExpBC( start = 0.33)
           "MJC，B-C结分级系数";
-        Real m_baseFractionBCcap( start = 1.0) 
+        Real m_baseFractionBCcap( start = 1.0)
           "XCJC，B-C电容到内部基极的比例";
         SI.Time m_transitTimeR(start=0.0) "TR，理想反向过渡时间";
         Types.Capacitance m_capCS(start=0.0) "CJS，零偏C-S电容";
-        SI.Voltage m_potentialSubstrate(start=0.75) 
+        SI.Voltage m_potentialSubstrate(start=0.75)
           "VJS，零偏C-S电势";
-        Real m_exponentialSubstrate( start = 0.0) 
+        Real m_exponentialSubstrate( start = 0.0)
           "MJS，基板结分级系数";
         Real m_betaExp( start = 0.0) "XTB，前向和反向增益的温度系数";
-        SI.GapEnergy m_energyGap(start=1.11) 
+        SI.GapEnergy m_energyGap(start=1.11)
           "EG，IS温度依赖的能隙";
         Real m_tempExpIS( start = 3.0) "XTI，IS的温度指数";
         Real m_fNcoef( start = 0.0) "KF，闪烁噪声系数";
         Real m_fNexp( start = 1.0) "AF，闪烁噪声指数";
-        Real m_depletionCapCoeff( start = 0.5) 
+        Real m_depletionCapCoeff( start = 0.5)
           "FC，正偏结拟合参数";
 
         SI.Conductance m_collectorConduct(start=0.0);
@@ -9618,10 +9618,10 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
       function bjtModelLineInitEquations "初始计算"
         extends Modelica.Icons.Function;
-        input BjtModelLineParams in_p 
+        input BjtModelLineParams in_p
           "带有Bjt模型线参数的输入记录";
 
-        output BjtModelLineParams out_p 
+        output BjtModelLineParams out_p
           "带有Bjt模型线变量的输出记录";
 
       algorithm
@@ -9654,7 +9654,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         if (out_p.m_transitTimeFVBC <> 0) then
           out_p.m_transitTimeVBCFactor := 1 / (out_p.m_transitTimeFVBC * 1.44);
         end if;
-        out_p.m_excessPhaseFactor := (out_p.m_excessPhase/(180.0/ 
+        out_p.m_excessPhaseFactor := (out_p.m_excessPhase/(180.0/
           Modelica.Constants.pi))*out_p.m_transitTimeF;
         if (out_p.m_depletionCapCoeff > 0.9999) then
           out_p.m_depletionCapCoeff := 0.9999;
@@ -9667,7 +9667,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
       function bjtInitEquations "初始计算"
         extends Modelica.Icons.Function;
         input Bjt in_p "输入记录Bjt";
-        input BjtModelLineParams in_pml 
+        input BjtModelLineParams in_pml
           "带有Bjt模型线参数的输入记录";
 
         output Bjt out_v "带有Bjt的输出记录";
@@ -9689,7 +9689,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
       function bjtCalcTempDependencies "温度依赖性计算"
         extends Modelica.Icons.Function;
         input Bjt in_p3 "输入记录Bjt";
-        input BjtModelLineParams in_p 
+        input BjtModelLineParams in_p
           "带有Bjt模型线参数的输入记录";
 
         output BjtCalc out_c "输出记录BjtCalc";
@@ -9715,13 +9715,13 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         vt := in_p3.m_dTemp*Spice3.Internal.SpiceConstants.CONSTKoverQ;
         fact2 := in_p3.m_dTemp/Spice3.Internal.SpiceConstants.REFTEMP;
 
-        egfet := Spice3.Internal.MaterialParameters.EnergyGapSi - (Spice3.Internal.MaterialParameters.FirstBandCorrFactorSi 
+        egfet := Spice3.Internal.MaterialParameters.EnergyGapSi - (Spice3.Internal.MaterialParameters.FirstBandCorrFactorSi
           *in_p3.m_dTemp*in_p3.m_dTemp)/(in_p3.m_dTemp + Spice3.Internal.MaterialParameters.SecondBandCorrFactorSi);
 
-        arg := -egfet/(2*Spice3.Internal.SpiceConstants.CONSTboltz*in_p3.m_dTemp) 
-           + Spice3.Internal.MaterialParameters.BandCorrFactorT300/(Spice3.Internal.SpiceConstants.CONSTboltz 
+        arg := -egfet/(2*Spice3.Internal.SpiceConstants.CONSTboltz*in_p3.m_dTemp)
+           + Spice3.Internal.MaterialParameters.BandCorrFactorT300/(Spice3.Internal.SpiceConstants.CONSTboltz
           *(Spice3.Internal.SpiceConstants.REFTEMP + Spice3.Internal.SpiceConstants.REFTEMP));
-        pbfact := -2*vt*(1.5*Modelica.Math.log(fact2) + Spice3.Internal.SpiceConstants.CHARGE 
+        pbfact := -2*vt*(1.5*Modelica.Math.log(fact2) + Spice3.Internal.SpiceConstants.CHARGE
           *arg);
 
         ratlog  := Modelica.Math.log(in_p3.m_dTemp/in_p.m_tnom);
@@ -9735,9 +9735,9 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         out_c.m_tSatCur    := in_p.m_satCur * factor * in_p3.m_area;
         out_c.m_tBetaF     := in_p.m_betaF * bfactor;
         out_c.m_tBetaR     := in_p.m_betaR * bfactor;
-        out_c.m_tBEleakCur := in_p.m_leakBEcurrent * exp(factlog / in_p.m_leakBEemissionCoeff) / bfactor 
+        out_c.m_tBEleakCur := in_p.m_leakBEcurrent * exp(factlog / in_p.m_leakBEemissionCoeff) / bfactor
                               * in_p3.m_area;
-        out_c.m_tBCleakCur := in_p.m_leakBCcurrent * exp(factlog / in_p.m_leakBCemissionCoeff) / bfactor 
+        out_c.m_tBCleakCur := in_p.m_leakBCcurrent * exp(factlog / in_p.m_leakBCemissionCoeff) / bfactor
                               * in_p3.m_area;
 
         out_c.m_tBEcap := in_p.m_depletionCapBE/(1 + in_p.m_junctionExpBE*(4e-4*(
@@ -9746,7 +9746,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         gmanew := (out_c.m_tBEpot - pbo) / pbo;
 
-        out_c.m_tBEcap := out_c.m_tBEcap*(1 + in_p.m_junctionExpBE*(4e-4*(in_p3.m_dTemp 
+        out_c.m_tBEcap := out_c.m_tBEcap*(1 + in_p.m_junctionExpBE*(4e-4*(in_p3.m_dTemp
            - Spice3.Internal.SpiceConstants.REFTEMP) - gmanew));
 
         pbo    := (in_p.m_potentialBC - pbfact) / fact1;
@@ -9758,27 +9758,27 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         gmanew := (out_c.m_tBCpot - pbo) / pbo;
 
-        out_c.m_tBCcap := out_c.m_tBCcap*(1 + in_p.m_junctionExpBC*(4e-4*(in_p3.m_dTemp 
+        out_c.m_tBCcap := out_c.m_tBCcap*(1 + in_p.m_junctionExpBC*(4e-4*(in_p3.m_dTemp
            - Spice3.Internal.SpiceConstants.REFTEMP) - gmanew));
 
         out_c.m_tDepCapBE := in_p.m_depletionCapCoeff * out_c.m_tBEpot;
         out_c.m_tDepCapBC := in_p.m_depletionCapCoeff * out_c.m_tBCpot;
-        out_c.m_tVcrit := vt*Modelica.Math.log(vt/(Spice3.Internal.SpiceConstants.CONSTroot2 
+        out_c.m_tVcrit := vt*Modelica.Math.log(vt/(Spice3.Internal.SpiceConstants.CONSTroot2
           *in_p.m_satCur));
         out_c.m_dVt       := vt;
 
         // 计算依赖于面积因子的参数
         out_c.m_tBEcap := out_c.m_tBEcap * in_p3.m_area;
         out_c.m_tBCcap := out_c.m_tBCcap * in_p3.m_area;
-        (out_c.m_tF1c,out_c.m_f2c,out_c.m_f3c) := 
+        (out_c.m_tF1c,out_c.m_f2c,out_c.m_f3c) :=
           Spice3.Internal.Functions.junctionCapCoeffs(
-            in_p.m_junctionExpBC, 
-            in_p.m_depletionCapCoeff, 
+            in_p.m_junctionExpBC,
+            in_p.m_depletionCapCoeff,
             out_c.m_tBCpot);
-        (out_c.m_tF1e,out_c.m_f2e,out_c.m_f3e) := 
+        (out_c.m_tF1e,out_c.m_f2e,out_c.m_f3e) :=
           Spice3.Internal.Functions.junctionCapCoeffs(
-            in_p.m_junctionExpBE, 
-            in_p.m_depletionCapCoeff, 
+            in_p.m_junctionExpBE,
+            in_p.m_depletionCapCoeff,
             out_c.m_tBEpot);
 
         annotation (Documentation(info="<html>
@@ -9789,13 +9789,13 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
       function bjtNoBypassCode "电流计算"
         extends Modelica.Icons.Function;
         input Bjt in_p3 "输入记录Bjt";
-        input BjtModelLineParams in_p 
+        input BjtModelLineParams in_p
           "带有Bjt模型线参数的输入记录";
         input BjtCalc in_c "输入记录BjtCalc";
         input SI.Voltage[6] in_m_pVoltageValues;
                                                    /* 1 Col; 2 Base; 3 Emit; 4 ColP; 5 BaseP; 6 EmitP */
 
-        output CurrentsCapacitances out_cc 
+        output CurrentsCapacitances out_cc
           "带有计算出的电流和电容的输出记录";
 
       protected
@@ -9884,20 +9884,20 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         // 简并极间的电流
         (cbe,gbe,cben,gben) := Spice3.Internal.Functions.junction2SPICE3BJT(
-            vbe, 
-            in_p3.m_dTemp, 
-            in_p.m_emissionCoeffF, 
-            in_p.m_leakBEemissionCoeff, 
-            in_c.m_tSatCur, 
+            vbe,
+            in_p3.m_dTemp,
+            in_p.m_emissionCoeffF,
+            in_p.m_leakBEemissionCoeff,
+            in_c.m_tSatCur,
             in_c.m_tBEleakCur);
         out_cc.iBE  := in_p.m_type * cbe / in_c.m_tBetaF;
         out_cc.iBEN := in_p.m_type * cben;
         (cbc,gbc,cbcn,gbcn) := Spice3.Internal.Functions.junction2SPICE3BJT(
-            vbc, 
-            in_p3.m_dTemp, 
-            in_p.m_emissionCoeffR, 
-            in_p.m_leakBCemissionCoeff, 
-            in_c.m_tSatCur, 
+            vbc,
+            in_p3.m_dTemp,
+            in_p.m_emissionCoeffR,
+            in_p.m_leakBCemissionCoeff,
+            in_c.m_tSatCur,
             in_c.m_tBCleakCur);
         out_cc.iBC  := in_p.m_type * cbc / in_c.m_tBetaR;
         out_cc.iBCN := in_p.m_type * cbcn;
@@ -9942,7 +9942,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
           arg1  := arg2 * arg1;
           denom := 1 + arg1 + arg2;
           arg3  := arg1 / denom;
-          cc    := (bcex0 * (1 + step / laststep + arg2) - 
+          cc    := (bcex0 * (1 + step / laststep + arg2) -
                    bcex1 * step / laststep) / denom;
           cex   := cbe * arg3;
           gex   := gbe * arg3;
@@ -10000,41 +10000,41 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         out_cc.captt := captt; // (BaseP, ColP)
 
         (out_cc.capbe,chargebe) := Spice3.Internal.Functions.junctionCapTransTime(
-            in_c.m_tBEcap, 
-            vbe, 
-            in_c.m_tDepCapBE, 
-            in_p.m_junctionExpBE, 
-            in_c.m_tBEpot, 
-            in_c.m_tF1e, 
-            in_c.m_f2e, 
-            in_c.m_f3e, 
-            in_p.m_transitTimeF, 
-            gbe, 
+            in_c.m_tBEcap,
+            vbe,
+            in_c.m_tDepCapBE,
+            in_p.m_junctionExpBE,
+            in_c.m_tBEpot,
+            in_c.m_tF1e,
+            in_c.m_f2e,
+            in_c.m_f3e,
+            in_p.m_transitTimeF,
+            gbe,
             cbe);
 
         aux1 := in_c.m_tBCcap*in_p.m_baseFractionBCcap;
         (out_cc.capbc,chargebc) := Spice3.Internal.Functions.junctionCapTransTime(
-            aux1, 
-            vbc, 
-            in_c.m_tDepCapBC, 
-            in_p.m_junctionExpBC, 
-            in_c.m_tBCpot, 
-            in_c.m_tF1c, 
-            in_c.m_f2c, 
-            in_c.m_f3c, 
-            in_p.m_transitTimeR, 
-            gbc, 
+            aux1,
+            vbc,
+            in_c.m_tDepCapBC,
+            in_p.m_junctionExpBC,
+            in_c.m_tBCpot,
+            in_c.m_tF1c,
+            in_c.m_f2c,
+            in_c.m_f3c,
+            in_p.m_transitTimeR,
+            gbc,
             cbc);
 
         aux2:= in_c.m_tBCcap*(1. - in_p.m_baseFractionBCcap);
         (out_cc.capbx,chargebx) := Spice3.Internal.Functions.junctionCapRevised(
-            aux2, 
-            vbx, 
-            in_c.m_tDepCapBC, 
-            in_p.m_junctionExpBC, 
-            in_c.m_tBCpot, 
-            in_c.m_tF1c, 
-            in_c.m_f2c, 
+            aux2,
+            vbx,
+            in_c.m_tDepCapBC,
+            in_p.m_junctionExpBC,
+            in_c.m_tBCpot,
+            in_c.m_tF1c,
+            in_c.m_f2c,
             in_c.m_f3c);
 
         out_cc.capcs := 0;
@@ -10045,11 +10045,11 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
           sarg := exp(-in_p.m_exponentialSubstrate*Modelica.Math.log(
             arg));
           out_cc.capcs := in_p3.m_CScap * sarg;
-          chargecs     := in_p.m_potentialSubstrate * in_p3.m_CScap * 
+          chargecs     := in_p.m_potentialSubstrate * in_p3.m_CScap *
                          (1-arg*sarg)/(1-in_p.m_exponentialSubstrate);
         else
           out_cc.capcs := in_p3.m_CScap * (1 + in_p.m_exponentialSubstrate * vcs / in_p.m_potentialSubstrate);
-          chargecs     := vcs * in_p3.m_CScap *(1+in_p.m_exponentialSubstrate*vcs/ 
+          chargecs     := vcs * in_p3.m_CScap *(1+in_p.m_exponentialSubstrate*vcs/
                                        (2*in_p.m_potentialSubstrate));
         end if;
 
@@ -10067,11 +10067,11 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         extends Modelica.Icons.Function;
 
         input Modelica.Electrical.Spice3.Internal.ModelcardBJT2 
-                                           ex 
+                                           ex
           "包含技术参数的模型卡片";
         input Real TBJT;
 
-        output BjtModelLineParams intern 
+        output BjtModelLineParams intern
           "带有Bjt模型线参数的输出记录";
 
       algorithm
@@ -10163,12 +10163,12 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         extends Modelica.Icons.Function;
 
         input Real AREA "面积因子";
-        input Boolean OFF 
+        input Boolean OFF
           "可选的初始条件：false-未使用 IC，true-使用IC，尚未实现";
         input SI.Voltage IC_VBE "初始条件值，尚未实现";
         input SI.Voltage IC_VCE "初始条件值，尚未实现";
         input Boolean UIC "使用初始条件，UIC";
-        input Boolean SENS_AREA 
+        input Boolean SENS_AREA
           "敏感性分析标志，尚未实现";
         input Modelica.Units.NonSI.Temperature_degC TEMP "温度";
 
@@ -10186,7 +10186,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         dev.m_uic := UIC;
         dev.m_bSensArea := SENS_AREA;
-        dev.m_dTemp := TEMP + Spice3.Internal.SpiceConstants.CONSTCtoK 
+        dev.m_dTemp := TEMP + Spice3.Internal.SpiceConstants.CONSTCtoK
           "器件温度";
 
         dev.m_transitTimeHighCurrentF := 0;
@@ -10286,17 +10286,17 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </html>"            ));
       end CurrrentsCapacitances;
 
-    function fetRenameParametersDev 
+    function fetRenameParametersDev
         "设备参数重命名为内部名称"
 
     extends Modelica.Icons.Function; // 扩展函数图标
 
       input Real AREA "平行连接相同元素的数量";
-      input Boolean OFF 
+      input Boolean OFF
           "可选的初始条件：0-未使用IC，1-使用IC，尚未实现";
-      input SI.Voltage IC_VDS 
+      input SI.Voltage IC_VDS
           "初始条件值VDS，尚未实现";
-      input SI.Voltage IC_VGS 
+      input SI.Voltage IC_VGS
           "初始条件值VGS，尚未实现";
       input Boolean UIC "使用初始条件，UIC";
       input Modelica.Units.NonSI.Temperature_degC TEMP "温度";
@@ -10524,7 +10524,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         end calculateGateCap;
 
-        function jfetCalcTempDependencies 
+        function jfetCalcTempDependencies
         "与温度相关的预计算"
         extends Modelica.Icons.Function; // 扩展函数图标
 
@@ -10537,7 +10537,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         algorithm
           out_f := in_f;
 
-          (out_f.m_tGatePot,out_f.m_tCGS) := 
+          (out_f.m_tGatePot,out_f.m_tCGS) :=
             Modelica.Electrical.Spice3.Internal.Functions.junctionParamDepTempSPICE3(
                   in_fm.m_gatePotential, // 栅极电势
                   in_fm.m_capGS, // 栅-源电容
@@ -10545,7 +10545,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
                   out_f.m_dTemp, // 温度
                   in_fm.m_tnom); // 标称温度
           out_f.m_tCGS := out_f.m_area * out_f.m_tCGS; // 调整面积
-          (out_f.m_tGatePot,out_f.m_tCGD) := 
+          (out_f.m_tGatePot,out_f.m_tCGD) :=
             Modelica.Electrical.Spice3.Internal.Functions.junctionParamDepTempSPICE3(
                   in_fm.m_gatePotential, // 栅极电势
                   in_fm.m_capGD, // 栅-漏电容
@@ -10553,13 +10553,13 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
                   out_f.m_dTemp, // 温度
                   in_fm.m_tnom); // 标称温度
           out_f.m_tCGD := out_f.m_area * out_f.m_tCGD; // 调整面积
-          (out_f.m_f1,out_f.m_f2,out_f.m_f3) := 
+          (out_f.m_f1,out_f.m_f2,out_f.m_f3) :=
             Modelica.Electrical.Spice3.Internal.Functions.junctionCapCoeffs(
                   0.5, // 系数
                   in_fm.m_depletionCapCoeff, // 耗尽电容系数
                   out_f.m_tGatePot); // 栅极电势
 
-          out_f.m_tSatCur := 
+          out_f.m_tSatCur :=
             Modelica.Electrical.Spice3.Internal.Functions.saturationCurDepTempSPICE3JFET(
                   in_fm.m_gateSatCurrent, // 栅-源电流
                   out_f.m_dTemp, // 温度
@@ -10573,18 +10573,18 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         end jfetCalcTempDependencies;
 
-        function jfetNoBypassCode 
+        function jfetNoBypassCode
         "电流和电容的计算"
         extends Modelica.Icons.Function; // 扩展函数图标
 
-          input Modelica.Electrical.Spice3.Internal.Fet.Fet in_f 
+          input Modelica.Electrical.Spice3.Internal.Fet.Fet in_f
           "输入记录fet参数";
           input JfetModelLine in_fm "输入记录模型线参数";
           input Integer in_m_type "MOS 晶体管的类型";
           input Boolean in_m_bInit; // 是否初始化
           input SI.Voltage[3] in_m_pVoltageValues; // 栅极、漏极、源极
 
-          output Modelica.Electrical.Spice3.Internal.Fet.CurrrentsCapacitances out_cc 
+          output Modelica.Electrical.Spice3.Internal.Fet.CurrrentsCapacitances out_cc
           "计算得到的电流和电容";
 
         protected
@@ -10616,26 +10616,26 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
             end if;
           end if;
 
-          int_f.m_vgs := 
+          int_f.m_vgs :=
             Modelica.Electrical.Spice3.Internal.SpiceRoot.limitJunctionVoltageRevised(int_f.m_vgs);
-          int_f.m_vgd := 
+          int_f.m_vgd :=
             Modelica.Electrical.Spice3.Internal.SpiceRoot.limitJunctionVoltageRevised(int_f.m_vgd);
           int_f.m_vds := int_f.m_vgs - int_f.m_vgd;
 
           //////////////////////////////////////////////////////////////////////
           // 节点电流
-          (int_f.m_cgd,int_f.m_ggd) := 
+          (int_f.m_cgd,int_f.m_ggd) :=
             Modelica.Electrical.Spice3.Internal.Functions.junction2(
-                  int_f.m_vgd, 
-                  int_f.m_dTemp, 
-                  1.0, 
+                  int_f.m_vgd,
+                  int_f.m_dTemp,
+                  1.0,
                   int_f.m_tSatCur);
           out_cc.iGD := in_m_type * int_f.m_cgd;
-          (int_f.m_cgs,int_f.m_ggs) := 
+          (int_f.m_cgs,int_f.m_ggs) :=
             Modelica.Electrical.Spice3.Internal.Functions.junction2(
-                  int_f.m_vgs, 
-                  int_f.m_dTemp, 
-                  1.0, 
+                  int_f.m_vgs,
+                  int_f.m_dTemp,
+                  1.0,
                   int_f.m_tSatCur);
           out_cc.iGS := in_m_type * int_f.m_cgs;
 
@@ -10643,20 +10643,20 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
           // 通道电流计算
           // 由实际实例计算值
           int_f := drainCur(
-                      int_f.m_vds, 
-                      int_f.m_vgs, 
-                      int_f.m_vgd, 
-                      int_f, 
+                      int_f.m_vds,
+                      int_f.m_vgs,
+                      int_f.m_vgd,
+                      int_f,
                       in_fm);
           out_cc.idrain := in_m_type * int_f.m_cdrain;
 
           //////////////////////////////////////////////////////////////////////
           // 通道电荷计算
           if (not in_m_bInit) then
-            (int_f.m_capgs,int_f.m_chargegs,int_f.m_capgd,int_f.m_chargegd) 
+            (int_f.m_capgs,int_f.m_chargegs,int_f.m_capgd,int_f.m_chargegd)
               := calculateGateCap(
-                        int_f, 
-                        int_f.m_vgs, 
+                        int_f,
+                        int_f.m_vgs,
                         int_f.m_vgd);
             out_cc.cGD := if (in_m_bInit) then -1e40 else int_f.m_capgd;
             out_cc.cGS := if (in_m_bInit) then -1e40 else int_f.m_capgs;
@@ -10667,7 +10667,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         function jfetRenameParameters "参数重命名为内部名称"
         extends Modelica.Icons.Function; // 扩展函数图标
 
-          input Modelica.Electrical.Spice3.Internal.ModelcardJFET ex 
+          input Modelica.Electrical.Spice3.Internal.ModelcardJFET ex
           "带有技术参数的模型卡";
 
           output JfetModelLine intern "输出记录模型线参数";
@@ -10724,13 +10724,13 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
             Real m_dCapIsGiven "电容器给定的值";
             SI.Length  m_dWidth(start=0) "宽度";
             SI.Length  m_dLength(start=0) "长度";
-            Boolean m_bSensCapac( start = false) 
+            Boolean m_bSensCapac( start = false)
           "请求关于电容器的灵敏度的标志";
           annotation();
 
         end Capacitor;
 
-        record CapacitorModelLineParams 
+        record CapacitorModelLineParams
         "电容器模型线参数的记录"
           extends Modelica.Icons.Record;
 
@@ -10745,7 +10745,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
         function capacitorInitEquations"电容器初始化方程"
         extends Modelica.Icons.Function;
           input Capacitor in_p "带有电容器参数的输入记录";
-          input CapacitorModelLineParams in_p2 
+          input CapacitorModelLineParams in_p2
           "带有电容器模型线参数的输入记录";
 
           output Capacitor out "带有电容器变量的输出记录";
@@ -10757,10 +10757,10 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
           if (in_p.m_dCapIsGiven < 0.5) then
             if (abs(in_p.m_dLength)>1e-18 and abs(in_p2.m_dCj)>1e-25) then
               out.m_dCapac := Modelica.Electrical.Spice3.Internal.Functions.capDepGeom(
-                      in_p2.m_dCj, 
-                      in_p2.m_dCjsw, 
-                      out.m_dWidth, 
-                      in_p.m_dLength, 
+                      in_p2.m_dCj,
+                      in_p2.m_dCjsw,
+                      out.m_dWidth,
+                      in_p.m_dLength,
                       in_p2.m_dNarrow);
             end if;
           end if;
@@ -10769,10 +10769,10 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 
         function capacitorRenameParameters"对电容器的参数进行重命名操作"
         extends Modelica.Icons.Function;
-          input Modelica.Electrical.Spice3.Internal.ModelcardC ex 
+          input Modelica.Electrical.Spice3.Internal.ModelcardC ex
           "带有技术参数的模型卡";
 
-          output CapacitorModelLineParams intern 
+          output CapacitorModelLineParams intern
           "带有电容器模型线参数的输出记录";
           annotation();
 
@@ -10790,7 +10790,7 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
           input SI.Length  W "宽度";
           input SI.Length  L "长度";
           input Modelica.Units.NonSI.Temperature_degC TEMP "温度";
-          input Boolean SENS_AREA 
+          input Boolean SENS_AREA
           "用于灵敏度分析的参数，尚未实现";
           input CapacitorModelLineParams p;
 
@@ -10825,8 +10825,8 @@ MosCalc包含了进一步的MOSFET变量(用于级别1、2、3和6)。
 </p>
 
 </html>"), Icon(graphics={
-          Line(points={{-20,40},{-20,-40}}), 
-          Line(points={{-90,0},{-20,0}}), 
-          Line(points={{0,0},{90,0}}), 
+          Line(points={{-20,40},{-20,-40}}),
+          Line(points={{-90,0},{-20,0}}),
+          Line(points={{0,0},{90,0}}),
           Line(points={{20,90},{20,40},{0,40},{0,-40},{20,-40},{20,-90}})}));
 end Spice3;

@@ -1,17 +1,17 @@
 ﻿within Modelica.Clocked.Examples.Elementary.RealSignals;
-model SampleWithADeffects 
+model SampleWithADeffects
   "实信号 SampleWithADeffects 模块示例"
    extends Modelica.Icons.Example;
 
-  Modelica.Blocks.Sources.Sine sine(f=2, 
-    startTime=0, 
+  Modelica.Blocks.Sources.Sine sine(f=2,
+    startTime=0,
     amplitude=0.95) 
     annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
   Modelica.Clocked.RealSignals.Sampler.SampleWithADeffects sample1(
-    noisy=true, 
-    limited=true, 
-    quantized=true, 
-    yMax=0.8, 
+    noisy=true,
+    limited=true,
+    quantized=true,
+    yMax=0.8,
     redeclare
       Modelica.Clocked.RealSignals.Sampler.Utilities.Internal.UniformNoise 
       noise(noiseMax=0.2)) 
@@ -27,11 +27,11 @@ equation
   connect(sample1.y, assignClock.u) 
     annotation (Line(points={{-33.4,30},{-23.2,30}}, color={0,0,127}));
   connect(periodicClock.y, assignClock.clock) annotation (Line(
-      points={{-29.4,4},{-16,4},{-16,22.8}}, 
-      color={175,175,175}, 
-      pattern=LinePattern.Dot, 
+      points={{-29.4,4},{-16,4},{-16,22.8}},
+      color={175,175,175},
+      pattern=LinePattern.Dot,
       thickness=0.5));
-  annotation (experiment(StopTime=0.2), 
+  annotation (experiment(StopTime=0.2),
     Documentation(info="<html>
 <p>
 生成一个用于区模块文档的示例图

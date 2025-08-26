@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.MultiBody.Interfaces;
-partial model PartialForce 
+partial model PartialForce
   "用于力元件的基础模型(在子类中提供frame_b.f和frame_b.t)"
   extends PartialTwoFrames;
-  SI.Position r_rel_b[3] 
+  SI.Position r_rel_b[3]
     "从frame_a原点到frame_b原点的位置矢量，在frame_b中解析";
 equation
   // 计算frame_a和frame_b之间相对位置矢量

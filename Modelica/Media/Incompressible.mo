@@ -1,5 +1,5 @@
 ﻿within Modelica.Media;
-package Incompressible 
+package Incompressible
   "温度依存特性介质模型,由表格或多项式定义"
   extends Modelica.Icons.VariantsPackage;
   import Modelica.Constants;
@@ -10,22 +10,22 @@ package Incompressible
 
     package Glycol47 "1,2-Propylene glycol, 47% 与水的混合物"
       extends TableBased(
-        mediumName = "Glycol-Water 47%", 
-        T_min = Cv.from_degC(-30), T_max = Cv.from_degC(100), 
-        TinK = false, T0 = 273.15, 
-        tableDensity = 
+        mediumName = "Glycol-Water 47%",
+        T_min = Cv.from_degC(-30), T_max = Cv.from_degC(100),
+        TinK = false, T0 = 273.15,
+        tableDensity =
         [-30, 1066; -20, 1062; -10, 1058; 0, 1054;
-        20, 1044; 40, 1030; 60, 1015; 80, 999; 100, 984], 
-        tableHeatCapacity = 
+        20, 1044; 40, 1030; 60, 1015; 80, 999; 100, 984],
+        tableHeatCapacity =
         [-30, 3450; -20, 3490; -10, 3520; 0, 3560;
-        20, 3620; 40, 3690; 60, 3760; 80, 3820; 100, 3890], 
-        tableConductivity = 
+        20, 3620; 40, 3690; 60, 3760; 80, 3820; 100, 3890],
+        tableConductivity =
         [-30, 0.397; -20, 0.396; -10, 0.395; 0, 0.395;
-        20, 0.394; 40, 0.393; 60, 0.392; 80, 0.391; 100, 0.390], 
-        tableViscosity = 
+        20, 0.394; 40, 0.393; 60, 0.392; 80, 0.391; 100, 0.390],
+        tableViscosity =
         [-30, 0.160; -20, 0.0743; -10, 0.0317; 0, 0.0190;
-        20, 0.00626; 40, 0.00299; 60, 0.00162; 80, 0.00110; 100, 0.00081], 
-        tableVaporPressure = 
+        20, 0.00626; 40, 0.00299; 60, 0.00162; 80, 0.00110; 100, 0.00081],
+        tableVaporPressure =
         [0, 500; 20, 1.9e3; 40, 5.3e3; 60, 16e3; 80, 37e3; 100, 80e3]);
       annotation(Documentation(info = "<html>
 
@@ -34,21 +34,21 @@ package Incompressible
 
     package Essotherm650 "Essotherm 导热油"
       extends TableBased(
-        mediumName = "Essotherm 650", 
-        T_min = Cv.from_degC(0), T_max = Cv.from_degC(320), 
-        TinK = false, T0 = 273.15, 
-        tableDensity = 
+        mediumName = "Essotherm 650",
+        T_min = Cv.from_degC(0), T_max = Cv.from_degC(320),
+        TinK = false, T0 = 273.15,
+        tableDensity =
         [0, 909; 20, 897; 40, 884; 60, 871; 80, 859; 100, 846;
-        150, 813; 200, 781; 250, 748; 300, 715; 320, 702], 
-        tableHeatCapacity = 
+        150, 813; 200, 781; 250, 748; 300, 715; 320, 702],
+        tableHeatCapacity =
         [0, 1770; 20, 1850; 40, 1920; 60, 1990; 80, 2060; 100, 2130;
-        150, 2310; 200, 2490; 250, 2670; 300, 2850; 320, 2920], 
-        tableConductivity = 
+        150, 2310; 200, 2490; 250, 2670; 300, 2850; 320, 2920],
+        tableConductivity =
         [0, 0.1302; 20, 0.1288; 40, 0.1274; 60, 0.1260; 80, 0.1246; 100, 0.1232;
-        150, 0.1197; 200, 0.1163; 250, 0.1128; 300, 0.1093; 320, 0.1079], 
+        150, 0.1197; 200, 0.1163; 250, 0.1128; 300, 0.1093; 320, 0.1079],
         tableViscosity = [0, 14370; 20, 1917; 40, 424; 60, 134; 80, 54.5;
-        100, 26.64; 150, 7.47; 200, 3.22; 250, 1.76; 300, 1.10; 320, 0.94], 
-        tableVaporPressure = 
+        100, 26.64; 150, 7.47; 200, 3.22; 250, 1.76; 300, 1.10; 320, 0.94],
+        tableVaporPressure =
         [160, 3; 180, 10; 200, 40; 220, 100; 240, 300; 260, 600;
         280, 1600; 300, 3e3; 320, 5.5e3]);
       annotation(Documentation(info = "<html>
@@ -125,39 +125,39 @@ package Incompressible
 
     extends Modelica.Media.Interfaces.PartialMedium(
       ThermoStates = if enthalpyOfT then Modelica.Media.Interfaces.Choices.IndependentVariables.T 
-      else Modelica.Media.Interfaces.Choices.IndependentVariables.pT, 
-      final reducedX = true, 
-      final fixedX = true, 
-      mediumName = "tableMedium", 
-    redeclare record ThermodynamicState = Common.BaseProps_Tpoly, 
-      singleState = true, 
-      reference_p = 1.013e5, 
+      else Modelica.Media.Interfaces.Choices.IndependentVariables.pT,
+      final reducedX = true,
+      final fixedX = true,
+      mediumName = "tableMedium",
+    redeclare record ThermodynamicState = Common.BaseProps_Tpoly,
+      singleState = true,
+      reference_p = 1.013e5,
       Temperature(min = T_min, max = T_max));
     // 在实际介质中设置的常数
-    constant Boolean enthalpyOfT = true 
+    constant Boolean enthalpyOfT = true
       "如果焓只是温度 T 的函数（忽略了压力依赖性），则为 true";
-    constant Boolean densityOfT = size(tableDensity, 1) > 1 
+    constant Boolean densityOfT = size(tableDensity, 1) > 1
       "如果密度是温度的函数，则为 true";
-    constant SI.Temperature T_min 
+    constant SI.Temperature T_min
       "介质模型有效的最低温度";
-    constant SI.Temperature T_max 
+    constant SI.Temperature T_max
       "介质模型有效的最高温度";
     constant Temperature T0 = 273.15 "参考温度";
     constant SpecificEnthalpy h0 = 0 "在 T0, reference_p处的参考焓";
     constant SpecificEntropy s0 = 0 "在 T0, reference_p处的参考熵";
     constant MolarMass MM_const = 0.1 "摩尔质量";
     constant Integer npol = 2 "用于拟合的多项式的次数";
-    constant Integer npolDensity = npol 
+    constant Integer npolDensity = npol
       "用于拟合 rho(T) 的多项式的次数";
-    constant Integer npolHeatCapacity = npol 
+    constant Integer npolHeatCapacity = npol
       "用于拟合 Cp(T) 的多项式的次数";
-    constant Integer npolViscosity = npol 
+    constant Integer npolViscosity = npol
       "用于拟合 eta(T) 的多项式的次数";
-    constant Integer npolVaporPressure = npol 
+    constant Integer npolVaporPressure = npol
       "用于拟合 pVap(T) 的多项式的次数";
-    constant Integer npolConductivity = npol 
+    constant Integer npolConductivity = npol
       "用于拟合 lambda(T) 的多项式的次数";
-    constant Integer neta = size(tableViscosity, 1) 
+    constant Integer neta = size(tableViscosity, 1)
       "用于粘度的数据点数";
     constant Real[:,2] tableDensity "rho(T) 表";
     constant Real[:,2] tableHeatCapacity "Cp(T) 表";
@@ -166,13 +166,13 @@ package Incompressible
     constant Real[:,2] tableConductivity "lambda(T) 表";
     //    constant Real[:] TK=tableViscosity[:,1]+T0*ones(neta) "黏度温度";
     constant Boolean TinK "如果 T[K]，开尔文用于表温度，则为 true";
-    constant Boolean hasDensity = not (size(tableDensity, 1) == 0) 
+    constant Boolean hasDensity = not (size(tableDensity, 1) == 0)
       "如果表 tableDensity 存在，则为 true";
-    constant Boolean hasHeatCapacity = not (size(tableHeatCapacity, 1) == 0) 
+    constant Boolean hasHeatCapacity = not (size(tableHeatCapacity, 1) == 0)
       "如果表 tableHeatCapacity 存在，则为 true";
-    constant Boolean hasViscosity = not (size(tableViscosity, 1) == 0) 
+    constant Boolean hasViscosity = not (size(tableViscosity, 1) == 0)
       "如果表 tableViscosity 存在，则为 true";
-    constant Boolean hasVaporPressure = not (size(tableVaporPressure, 1) == 0) 
+    constant Boolean hasVaporPressure = not (size(tableVaporPressure, 1) == 0)
       "如果表 tableVaporPressure 存在，则为 true";
     final constant Real invTK[neta] = if size(tableViscosity, 1) > 0 then 
       (if TinK then 1 ./ tableViscosity[:,1] else 1 ./ Cv.from_degC(tableViscosity[:,1])) else fill(0, neta);
@@ -204,21 +204,21 @@ package Incompressible
     end invertTemp;
 
     redeclare model extends BaseProperties(
-      final standardOrderComponents = true, 
-      p_bar = Cv.to_bar(p), 
-      T_degC(start = T_start - 273.15) = Cv.to_degC(T), 
-      T(start = T_start, 
-      stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default)) 
+      final standardOrderComponents = true,
+      p_bar = Cv.to_bar(p),
+      T_degC(start = T_start - 273.15) = Cv.to_degC(T),
+      T(start = T_start,
+      stateSelect = if preferredMediumStates then StateSelect.prefer else StateSelect.default))
       "T 相关介质的基本特性"
 
       SI.SpecificHeatCapacity cp "比热容";
       parameter SI.Temperature T_start = 298.15 "初始温度";
     equation
-      assert(hasDensity, "介质 " + mediumName + 
+      assert(hasDensity, "介质 " + mediumName +
         " 未分配 tableDensity 时无法使用。");
-      assert(T >= T_min and T <= T_max, "温度 T (= " + String(T) + 
-        " K) 不在介质模型 \"" 
-        + mediumName + "\" 所需的允许范围内 (" + String(T_min) + 
+      assert(T >= T_min and T <= T_max, "温度 T (= " + String(T) +
+        " K) 不在介质模型 \""
+        + mediumName + "\" 所需的允许范围内 (" + String(T_min) +
         " K <= T <= " + String(T_max) + " K)。");
       R_s = Modelica.Constants.R / MM_const;
       cp = Polynomials.evaluate(poly_Cp, if TinK then T else T_degC);
@@ -250,14 +250,14 @@ package Incompressible
 </html>"));
     end BaseProperties;
 
-    redeclare function extends setState_pTX 
+    redeclare function extends setState_pTX
       "根据压力和温度计算状态记录"
     algorithm
       state := ThermodynamicState(p = p, T = T);
       annotation(smoothOrder = 3);
     end setState_pTX;
 
-    redeclare function extends setState_dTX 
+    redeclare function extends setState_dTX
       "根据压力和温度计算状态记录"
       annotation();
     algorithm
@@ -275,7 +275,7 @@ package Incompressible
       annotation(smoothOrder = 3);
     end setState_pT;
 
-    redeclare function extends setState_phX 
+    redeclare function extends setState_phX
       "根据压力和比焓计算状态记录"
     algorithm
       state := ThermodynamicState(p = p, T = T_ph(p, h));
@@ -292,7 +292,7 @@ package Incompressible
       annotation(Inline = true, smoothOrder = 3);
     end setState_ph;
 
-    redeclare function extends setState_psX 
+    redeclare function extends setState_psX
       "根据压力和比熵计算状态记录"
     algorithm
       state := ThermodynamicState(p = p, T = T_ps(p, s));
@@ -309,49 +309,49 @@ package Incompressible
       annotation(Inline = true, smoothOrder = 3);
     end setState_ps;
 
-    redeclare function extends setSmoothState 
+    redeclare function extends setSmoothState
       "计算热力学状态，使其平滑地逼近：如果 x > 0，则计算 state_a，否则计算 state_b"
     algorithm
-      state := ThermodynamicState(p = Media.Common.smoothStep(x, state_a.p, state_b.p, x_small), 
+      state := ThermodynamicState(p = Media.Common.smoothStep(x, state_a.p, state_b.p, x_small),
         T = Media.Common.smoothStep(x, state_a.T, state_b.T, x_small));
       annotation(Inline = true, smoothOrder = 3);
     end setSmoothState;
 
-    redeclare function extends specificHeatCapacityCv 
+    redeclare function extends specificHeatCapacityCv
       "介质在定容（或定压）条件下的比热容"
 
     algorithm
-      assert(hasHeatCapacity, "介质 " 
+      assert(hasHeatCapacity, "介质 "
         + mediumName + " 的比热容 Cv 未定义。");
       cv := Polynomials.evaluate(poly_Cp, if TinK then state.T else state.T - 273.15);
       annotation(smoothOrder = 2);
     end specificHeatCapacityCv;
 
-    redeclare function extends specificHeatCapacityCp 
+    redeclare function extends specificHeatCapacityCp
       "介质在定容（或定压）条件下的比热容"
 
     algorithm
-      assert(hasHeatCapacity, "介质 " 
+      assert(hasHeatCapacity, "介质 "
         + mediumName + " 的比热容 Cv 未定义。");
       cp := Polynomials.evaluate(poly_Cp, if TinK then state.T else state.T - 273.15);
       annotation(smoothOrder = 2);
     end specificHeatCapacityCp;
 
-    redeclare function extends dynamicViscosity 
+    redeclare function extends dynamicViscosity
       "根据热力学状态记录计算动力黏度"
 
     algorithm
-      assert(size(tableViscosity, 1) > 0, "介质 " 
+      assert(size(tableViscosity, 1) > 0, "介质 "
         + mediumName + " 的动力黏度 eta 未定义。");
       eta := Math.exp(Polynomials.evaluate(poly_eta, 1 / state.T));
       annotation(smoothOrder = 2);
     end dynamicViscosity;
 
-    redeclare function extends thermalConductivity 
+    redeclare function extends thermalConductivity
       "根据热力学状态记录计算导热系数"
 
     algorithm
-      assert(size(tableConductivity, 1) > 0, "介质 " 
+      assert(size(tableConductivity, 1) > 0, "介质 "
         + mediumName + " 的导热系数 lambda 未定义。");
       lambda := Polynomials.evaluate(poly_lam, if TinK then state.T else Cv.to_degC(state.T));
       annotation(smoothOrder = 2);
@@ -364,19 +364,19 @@ package Incompressible
     algorithm
       s := s0 + (if TinK then 
         Polynomials.integralValue(poly_Cp[1:npol], T, T0) else 
-        Polynomials.integralValue(poly_Cp[1:npol], Cv.to_degC(T), Cv.to_degC(T0))) 
-        + Modelica.Math.log(T / T0) * 
+        Polynomials.integralValue(poly_Cp[1:npol], Cv.to_degC(T), Cv.to_degC(T0)))
+        + Modelica.Math.log(T / T0) *
         Polynomials.evaluate(poly_Cp, if TinK then 0 else Modelica.Constants.T_zero);
       annotation(Inline = true, smoothOrder = 2);
     end s_T;
 
-    redeclare function extends specificEntropy 
+    redeclare function extends specificEntropy
       "根据热力学状态记录计算比熵"
 
     protected
       Integer npol = size(poly_Cp, 1) - 1;
     algorithm
-      assert(hasHeatCapacity, "比熵 s(T) 未定义于介质 " 
+      assert(hasHeatCapacity, "比熵 s(T) 未定义于介质 "
         + mediumName + " 中。");
       s := s_T(state.T);
       annotation(smoothOrder = 2);
@@ -414,8 +414,8 @@ package Incompressible
     algorithm
       h := h0 + Polynomials.integralValue(poly_Cp, if TinK then T else Cv.to_degC(T), if TinK then 
         T0 else Cv.to_degC(T0)) + (p - reference_p) / Polynomials.evaluate(poly_rho, if TinK then 
-        T else Cv.to_degC(T)) 
-        * (if densityOfT then (1 + T / Polynomials.evaluate(poly_rho, if TinK then T else Cv.to_degC(T)) 
+        T else Cv.to_degC(T))
+        * (if densityOfT then (1 + T / Polynomials.evaluate(poly_rho, if TinK then T else Cv.to_degC(T))
         * Polynomials.derivativeValue(poly_rho, if TinK then T else Cv.to_degC(T))) else 1.0);
       annotation(smoothOrder = 2);
     end h_pT;
@@ -430,35 +430,35 @@ package Incompressible
       annotation(Inline = true, smoothOrder = 2);
     end density_T;
 
-    redeclare function extends temperature 
+    redeclare function extends temperature
       "根据热力学状态记录计算温度"
     algorithm
       T := state.T;
       annotation(Inline = true, smoothOrder = 2);
     end temperature;
 
-    redeclare function extends pressure 
+    redeclare function extends pressure
       "根据热力学状态记录计算压力"
     algorithm
       p := state.p;
       annotation(Inline = true, smoothOrder = 2);
     end pressure;
 
-    redeclare function extends density 
+    redeclare function extends density
       "根据热力学状态记录计算密度"
     algorithm
       d := Polynomials.evaluate(poly_rho, if TinK then state.T else Cv.to_degC(state.T));
       annotation(Inline = true, smoothOrder = 2);
     end density;
 
-    redeclare function extends specificEnthalpy 
+    redeclare function extends specificEnthalpy
       "根据热力学状态记录计算比焓"
     algorithm
       h := specificEnthalpyOfT(state.p, state.T);
       annotation(Inline = true, smoothOrder = 2);
     end specificEnthalpy;
 
-    redeclare function extends specificInternalEnergy 
+    redeclare function extends specificInternalEnergy
       "根据热力学状态记录计算比内能"
     algorithm
       u := specificEnthalpyOfT(state.p, state.T) - (if singleState then reference_p else state.p) / density(state);
@@ -509,7 +509,7 @@ package Incompressible
     end T_ps;
 
   protected
-    function specificEnthalpyOfT 
+    function specificEnthalpyOfT
       "根据压力和温度计算比焓，考虑 enthalpyOfT 标志"
       extends Modelica.Icons.Function;
       input AbsolutePressure p "压力";

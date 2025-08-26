@@ -3,7 +3,7 @@ function relativeRotation "返回相对方向对象"
   extends Modelica.Icons.Function;
   input Orientation R1 "将坐标系0旋转到坐标系1的方向对象";
   input Orientation R2 "将坐标系0旋转到坐标系2的方向对象";
-  output Orientation R_rel 
+  output Orientation R_rel
     "将坐标系1旋转到坐标系2的方向对象";
 algorithm
   R_rel := Orientation(T=R2.T*transpose(R1.T), w=R2.w - resolve2(R2, resolve1(

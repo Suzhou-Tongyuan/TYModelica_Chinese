@@ -5,9 +5,9 @@ package Streams "读取文件和写入文件"
   impure function print "打印字符串到终端或文件"
     extends Modelica.Icons.Function;
     input String string="" "要打印的字符串";
-    input String fileName="" 
+    input String fileName=""
       "要打印的文件(空字符串是终端)" 
-                 annotation(Dialog(saveSelector(filter="Text files (*.txt)", 
+                 annotation(Dialog(saveSelector(filter="Text files (*.txt)",
                         caption="Text file to store the output of print(..)")));
   external "C" ModelicaInternal_print(string, fileName) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaInternal.h\"", Library="ModelicaExternalC");
     annotation (Documentation(info="<html>
@@ -42,11 +42,11 @@ Streams.print(\"x = \" + String(y), \"mytestfile.txt\");
 </html>"  ));
   end print;
 
-  function readFile 
+  function readFile
     "读取文件的内容并以字符串向量的形式返回"
     extends Modelica.Icons.Function;
     input String fileName "要读取的文件的名称" 
-                 annotation(Dialog(loadSelector(filter="Text files (*.txt)", 
+                 annotation(Dialog(loadSelector(filter="Text files (*.txt)",
                         caption="Open text file for reading")));
     output String stringVector[countLines(fileName)] "文件内容";
     external "C" ModelicaInternal_readFile(fileName,stringVector,size(stringVector,1)) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaInternal.h\"", Library="ModelicaExternalC");
@@ -68,11 +68,11 @@ stringVector = Streams.<strong>readFile</strong>(fileName)
   function readLine "从文件中读取一行文本并以字符串形式返回"
     extends Modelica.Icons.Function;
     input String fileName "要读取的文件的名称" 
-                        annotation(Dialog(loadSelector(filter="Text files (*.txt)", 
+                        annotation(Dialog(loadSelector(filter="Text files (*.txt)",
                         caption="Open text file for reading")));
     input Integer lineNumber(min=1) "要读取的行数";
     output String string "文本行";
-    output Boolean endOfFile 
+    output Boolean endOfFile
       "如果为true，则在尝试读取行时到达文件结束";
    external "C" string=  ModelicaInternal_readLine(fileName,lineNumber,endOfFile) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaInternal.h\"", Library="ModelicaExternalC");
     annotation (Documentation(info="<html>
@@ -98,7 +98,7 @@ stringVector = Streams.<strong>readFile</strong>(fileName)
   function countLines "返回文件中的行数"
     extends Modelica.Icons.Function;
     input String fileName "要读取的文件的名称" 
-                       annotation(Dialog(loadSelector(filter="Text files (*.txt)", 
+                       annotation(Dialog(loadSelector(filter="Text files (*.txt)",
                         caption="Open text file for counting lines")));
 
     output Integer numberOfLines "文件中的行数";
@@ -150,7 +150,7 @@ Streams.error(\"x (= \" + String(x) + \")\\nhas to be in the range 0 .. 1\");
   impure function close "关闭文件"
     extends Modelica.Icons.Function;
     input String fileName "要关闭的文件名" 
-                 annotation(Dialog(loadSelector(filter="Text files (*.txt)", 
+                 annotation(Dialog(loadSelector(filter="Text files (*.txt)",
                         caption="Close text file")));
     external "C" ModelicaStreams_closeFile(fileName) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaInternal.h\"", Library="ModelicaExternalC");
     annotation (Documentation(info="<html>
@@ -206,7 +206,7 @@ dim = Streams.<strong>readMatrixSize</strong>(fileName, matrixName)
     input String matrixName "文件中2D Real数组的名称/标识符";
     input Integer nrow "2D Real数组的行数";
     input Integer ncol "2D Real数组的列数";
-    input Boolean verboseRead = true 
+    input Boolean verboseRead = true
       "= true:打印信息消息;= false:无提示信息";
     output Real matrix[nrow, ncol] "二维实阵";
     external "C" ModelicaIO_readRealMatrix(fileName, matrixName, matrix, size(matrix, 1), size(matrix, 2), verboseRead) 
@@ -248,8 +248,8 @@ matrix = Streams.<strong>readRealMatrix</strong>(fileName, matrixName, nrow, nco
     input Real matrix[:,:] "二维实阵";
     input Boolean append = false "向文件追加值";
     input String format = "4" "MATLAB MAT文件版本: \"4\" -> v4, \"6\" -> v6, \"7\" -> v7" 
-      annotation(choices(choice="4" "MATLAB v4 MAT file", 
-                         choice="6" "MATLAB v6 MAT file", 
+      annotation(choices(choice="4" "MATLAB v4 MAT file",
+                         choice="6" "MATLAB v6 MAT file",
                          choice="7" "MATLAB v7 MAT file"));
     output Boolean success "成功则为真";
     external "C" success = ModelicaIO_writeRealMatrix(fileName, matrixName, matrix, size(matrix, 1), size(matrix, 2), append, format) 

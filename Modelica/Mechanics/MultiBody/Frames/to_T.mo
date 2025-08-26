@@ -2,7 +2,7 @@
 function to_T "从方向对象R返回转换矩阵 T"
   extends Modelica.Icons.Function;
   input Orientation R "将坐标系1旋转到坐标系2的方向对象";
-  output Real T[3, 3] 
+  output Real T[3, 3]
     "将向量从坐标系1转换到坐标系2的转换矩阵(v2=T*v1)";
 algorithm
   T := R.T;

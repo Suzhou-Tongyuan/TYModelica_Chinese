@@ -1,7 +1,7 @@
 ﻿within Modelica.Thermal.HeatTransfer.Examples;
 model TwoMasses "简单的导热示例"
   extends Modelica.Icons.Example;
-  parameter SI.Temperature T_final_K(fixed=false) 
+  parameter SI.Temperature T_final_K(fixed=false)
     "预计最终温度";
   HeatTransfer.Components.HeatCapacitor mass1(C=15, T(start=373.15, fixed=true)) 
     annotation (Placement(transformation(extent={{-100,20},{-40,80}})));
@@ -14,13 +14,13 @@ model TwoMasses "简单的导热示例"
   HeatTransfer.Celsius.TemperatureSensor Tsensor2 
     annotation (Placement(transformation(extent={{60,-80},{20,-40}})));
 equation
-  connect(mass1.port, conduction.port_a) annotation (Line(points={{-70,20}, 
+  connect(mass1.port, conduction.port_a) annotation (Line(points={{-70,20},
           {-70,10},{-30,10}}, color={191,0,0}));
   connect(conduction.port_b, mass2.port) annotation (Line(points={{30,10},{
           70,10},{70,20}}, color={191,0,0}));
-  connect(mass1.port, Tsensor1.port) annotation (Line(points={{-70,20},{-70, 
+  connect(mass1.port, Tsensor1.port) annotation (Line(points={{-70,20},{-70,
           -60},{-60,-60}}, color={191,0,0}));
-  connect(mass2.port, Tsensor2.port) annotation (Line(points={{70,20},{70, 
+  connect(mass2.port, Tsensor2.port) annotation (Line(points={{70,20},{70,
           -60},{60,-60}}, color={191,0,0}));
 initial equation
   T_final_K = (mass1.T*mass1.C + mass2.T*mass2.C)/(mass1.C + mass2.C);
@@ -36,6 +36,6 @@ initial equation
 mass1.T, mass2.T, T_final_K 或
 Tsensor1.T, Tsensor2.T, T_final_degC
 </p>
-</html>"), 
+</html>"),
     experiment(StopTime=1.0, Interval=0.001));
 end TwoMasses;

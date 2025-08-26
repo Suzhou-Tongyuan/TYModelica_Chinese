@@ -4,7 +4,7 @@ package Losses "电机损耗模型"
 
   annotation(Documentation(info = "<html>
 本库含有机器模型中使用的损耗模型及其参数记录。
-</html>", 
+</html>",
     revisions = "<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

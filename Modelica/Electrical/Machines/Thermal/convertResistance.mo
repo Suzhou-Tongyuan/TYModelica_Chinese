@@ -1,10 +1,10 @@
 ﻿within Modelica.Electrical.Machines.Thermal;
-function convertResistance 
+function convertResistance
   "将电阻从参考温度转换为实际温度"
   extends Modelica.Icons.Function;
   input SI.Resistance RRef "TRef 处的电阻";
   input SI.Temperature TRef "参考温度";
-  input SI.LinearTemperatureCoefficient alpha20 
+  input SI.LinearTemperatureCoefficient alpha20
     "20°C 处的温度系数";
   input SI.Temperature T "实际温度";
   output SI.Resistance R "T 处的实际电阻";

@@ -1,14 +1,14 @@
 ﻿within Modelica.Mechanics.MultiBody.Forces.Internal;
-function standardGravityAcceleration 
+function standardGravityAcceleration
   "标准重力场(无/平行/点场)"
   extends Modelica.Icons.Function;
   extends Modelica.Mechanics.MultiBody.Interfaces.partialGravityAcceleration;
   import Modelica.Mechanics.MultiBody.Types.GravityTypes;
   input GravityTypes gravityType "重力场类型" annotation(Dialog);
-  input SI.Acceleration g[3] 
+  input SI.Acceleration g[3]
     "如果 gravityType 等于 UniformGravity，则常重力加速度在全局坐标系中分解。" 
     annotation(Dialog);
-  input Real mu(unit="m3/s2") 
+  input Real mu(unit="m3/s2")
     "如果 gravityType 等于 PointGravity，则为点重力场的场常数" annotation(Dialog);
 algorithm
 gravity := if gravityType == GravityTypes.UniformGravity then g else 

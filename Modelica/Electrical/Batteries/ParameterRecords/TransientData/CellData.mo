@@ -4,7 +4,7 @@ record CellData "瞬态电池单元的参数"
   extends Modelica.Electrical.Batteries.Icons.TransientCellRecord;
   parameter Integer nRC=1 "RC元件的数量" 
     annotation (Dialog(group="RC元件"), Evaluate=true);
-  parameter RCData rcData[nRC]= 
+  parameter RCData rcData[nRC]=
     {Modelica.Electrical.Batteries.ParameterRecords.TransientData.RCData(R=0, C=0)} "RC元件的参数" 
     annotation (Dialog(group="RC元件"), Placement(transformation(extent={{-10,0},{10,20}})));
   annotation(defaultComponentPrefixes="parameter", Documentation(info="<html>

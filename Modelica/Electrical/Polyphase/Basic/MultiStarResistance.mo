@@ -14,8 +14,8 @@ model MultiStarResistance "星形电阻连接"
           extent={{-10,-10},{10,10}}, origin={50,0})));
   Modelica.Electrical.Analog.Interfaces.NegativePin pin annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=180, 
+        extent={{-10,-10},{10,10}},
+        rotation=180,
         origin={100,0})));
 equation
   connect(plug, multiStar.plug_p) annotation (Line(
@@ -25,32 +25,32 @@ equation
   connect(resistor.plug_n, star.plug_p) annotation (Line(
       points={{10,0},{10,0},{34,0},{34,0},{40,0},{40,0}}, color={0,0,255}));
   connect(star.pin_n, pin) annotation (Line(
-      points={{60,0},{60,0},{98,0},{98,0},{100,0},{100, 
+      points={{60,0},{60,0},{98,0},{98,0},{100,0},{100,
           0}}, color={0,0,255}));
-  annotation (defaultComponentName="multiStar", 
+  annotation (defaultComponentName="multiStar",
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={
         Line(
-          points={{-40,40},{0,0},{40,40},{0,0},{0,-40}}, 
-          color={0,0,255}, 
-          origin={-60,0}, 
-          rotation=90), 
+          points={{-40,40},{0,0},{40,40},{0,0},{0,-40}},
+          color={0,0,255},
+          origin={-60,0},
+          rotation=90),
         Rectangle(
-          extent={{-10,20},{10,-20}}, 
-          lineColor={0,0,255}, 
-          rotation=90), 
+          extent={{-10,20},{10,-20}},
+          lineColor={0,0,255},
+          rotation=90),
         Line(
-          points={{-40,40},{0,0},{40,40},{0,0},{0,-40}}, 
-          color={0,0,255}, 
-          origin={60,0}, 
-          rotation=90), 
+          points={{-40,40},{0,0},{40,40},{0,0},{0,-40}},
+          color={0,0,255},
+          origin={60,0},
+          rotation=90),
         Text(
-          extent={{-150,-90},{150,-50}}, 
-          textString="R=%R"), 
+          extent={{-150,-90},{150,-50}},
+          textString="R=%R"),
         Text(
-          extent={{-150,60},{150,100}}, 
-          textString="%name", 
-          textColor={0,0,255})}), 
+          extent={{-150,60},{150,100}},
+          textString="%name",
+          textColor={0,0,255})}),
     Documentation(info="<html>
 <p>
 星点通过电阻连接。需要使用此模型来操作具有偶数相数的多相系统，以避免基础系统星点的理想连接；参见<a href=\"modelica://Modelica.Magnetic.FundamentalWave.UsersGuide.Polyphase\">多相指南</a>。

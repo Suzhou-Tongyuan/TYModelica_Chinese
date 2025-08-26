@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.ExampleTemplates;
-partial model ThyristorCenterTap2mPulse 
+partial model ThyristorCenterTap2mPulse
   "2*m脉冲晶闸管中心点整流器模板"
   extends Icons.ExampleTemplate;
   import Modelica.Constants.pi;
@@ -11,57 +11,57 @@ partial model ThyristorCenterTap2mPulse
         transformation(extent={{-90,-100},{-70,-80}})));
   Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
      Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-100,-10})));
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage_p(
-    final m=m, 
-    V=fill(sqrt(2)*Vrms, m), 
+    final m=m,
+    V=fill(sqrt(2)*Vrms, m),
     phase=-
-        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
+        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
     f=fill(f, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-70,10})));
   PowerConverters.ACDC.ThyristorCenterTap2mPulse rectifier(final m=m) 
     annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor 
     annotation (Placement(transformation(
-        origin={50,10}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={50,10},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
   Modelica.Blocks.Math.Mean meanVoltage(f=2*m*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={80,40})));
   Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f=2*m*f) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={80,10})));
   Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=180, 
+        extent={{-10,10},{10,-10}},
+        rotation=180,
         origin={0,-50})));
   Modelica.Blocks.Math.Mean meanCurrent(f=2*m*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={80,-70})));
   PowerConverters.ACDC.Control.VoltageCenterTap2mPulse pulse2m(
-    m=m, 
-    f=f, 
+    m=m,
+    f=f,
     useFilter=false) annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}}, 
-        rotation=180, 
+        extent={{10,10},{-10,-10}},
+        rotation=180,
         origin={-30,0})));
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage_n(
-    final m=m, 
-    V=fill(sqrt(2)*Vrms, m), 
+    final m=m,
+    V=fill(sqrt(2)*Vrms, m),
     phase=-
-        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
+        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
     f=fill(f, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-70,-20})));
 equation
   connect(star.pin_n, ground.p) annotation (Line(
@@ -79,10 +79,10 @@ equation
   connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
       points={{-36,11},{-36,28}}, color={255,0,255}));
   connect(pulse2m.ac, sineVoltage_p.plug_p) annotation (Line(
-      points={{-40,0},{-46,0},{-46,46},{-70,46},{-70, 
+      points={{-40,0},{-46,0},{-46,46},{-70,46},{-70,
           20}}, color={0,0,255}));
   connect(sineVoltage_p.plug_n, sineVoltage_n.plug_p) annotation (Line(
-      points={{-70,0},{-70, 
+      points={{-70,0},{-70,
           -10}}, color={0,0,255}));
   connect(sineVoltage_n.plug_n, rectifier.ac_n) annotation (Line(
       points={{-70,-30},{-70,-40},{-50,-40},{-50,34},{-40,34}}, color={0,0,255}));

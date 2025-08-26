@@ -2,38 +2,38 @@
 model IdealTriac "理想双向可控硅(基于理想晶闸管)"
 
   parameter SI.Resistance Ron(final min = 0) = 1e-5 "关闭状态下双向可控硅的电阻";
-  parameter SI.Conductance Goff(final min = 0) = 1e-5 
+  parameter SI.Conductance Goff(final min = 0) = 1e-5
     "未触发双向可控硅的导通电阻";
   parameter SI.Voltage Vknee(
-    final min = 0, 
+    final min = 0,
     start = 0) = 0.8 "正相和负相的阈值电压";
 
   parameter SI.Resistance Rdis = 100 "抗干扰电阻";
   parameter SI.Capacitance Cdis = 0.005 "抗干扰能力";
 
   Modelica.Electrical.Analog.Ideal.IdealThyristor idealThyristor(
-    Ron = Ron, 
-    Goff = Goff, 
+    Ron = Ron,
+    Goff = Goff,
     Vknee = Vknee) annotation(Placement(transformation(
-    extent = {{-10, -10}, {10, 10}}, 
+    extent = {{-10, -10}, {10, 10}},
     origin = {-10, 32})));
   Modelica.Electrical.Analog.Ideal.IdealThyristor idealThyristor1(
-    Ron = Ron, 
-    Goff = Goff, 
+    Ron = Ron,
+    Goff = Goff,
     Vknee = Vknee) annotation(Placement(transformation(
-    extent = {{-10, -10}, {10, 10}}, 
-    rotation = 180, 
+    extent = {{-10, -10}, {10, 10}},
+    rotation = 180,
     origin = {-10, -32})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R = Rdis) 
     annotation(Placement(transformation(extent = {{-60, -10}, {-40, 10}})));
   Modelica.Electrical.Analog.Basic.Capacitor capacitor(C = Cdis) 
     annotation(Placement(transformation(extent = {{20, -10}, {40, 10}})));
   Modelica.Blocks.Interfaces.BooleanInput fire1 "Gate" 
-    annotation(Placement(transformation(extent = {{-14, -14}, {14, 14}}, 
-    rotation = 90, 
+    annotation(Placement(transformation(extent = {{-14, -14}, {14, 14}},
+    rotation = 90,
     origin = {-100, -114}), iconTransformation(
-    extent = {{-14, -14}, {14, 14}}, 
-    rotation = 90, 
+    extent = {{-14, -14}, {14, 14}},
+    rotation = 90,
     origin = {-100, -114})));
   Modelica.Electrical.Analog.Interfaces.NegativePin n "Cathode" 
     annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
@@ -59,32 +59,32 @@ equation
     points = {{-100, 0}, {-90, 0}, {-90, 40}, {-20, 40}, {-20, 32}}, color = {0, 0, 255}));
   connect(idealThyristor1.p, p) annotation(Line(
     points = {{0, -32}, {0, -40}, {80, -40}, {80, 0}, {100, 0}}, color = {0, 0, 255}));
-  annotation(defaultComponentName = "triac", 
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+  annotation(defaultComponentName = "triac",
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
     {100, 100}}), graphics = {
     Text(
-    extent = {{-150, 130}, {150, 90}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255}), 
+    extent = {{-150, 130}, {150, 90}},
+    textString = "%name",
+    textColor = {0, 0, 255}),
     Line(
-    points = {{-100, -100}, {-100, -80}}, 
-    color = {255, 0, 255}, 
-    pattern = LinePattern.Dash), 
-    Line(points = {{-40, -70}, {-40, 70}}, color = {0, 0, 255}), 
-    Line(points = {{40, -72}, {40, 70}}, color = {0, 0, 255}), 
-    Polygon(points = {{-40, -70}, {40, -30}, {-40, 10}, {-40, -70}}, 
-    lineColor = {0, 0, 
-    255}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
-    Polygon(points = {{40, -10}, {-40, 30}, {40, 70}, {40, -10}}, lineColor = {0, 0, 
-    255}, 
-    fillColor = {255, 255, 255}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-40, 0}, {-90, 0}}, color = {0, 0, 255}), 
-    Line(points = {{100, 0}, {40, 0}}, color = {0, 0, 255}), 
-    Line(points = {{-100, -100}, {-100, -60}, {-40, -30}}, 
-    color = {255, 0, 255})}), 
+    points = {{-100, -100}, {-100, -80}},
+    color = {255, 0, 255},
+    pattern = LinePattern.Dash),
+    Line(points = {{-40, -70}, {-40, 70}}, color = {0, 0, 255}),
+    Line(points = {{40, -72}, {40, 70}}, color = {0, 0, 255}),
+    Polygon(points = {{-40, -70}, {40, -30}, {-40, 10}, {-40, -70}},
+    lineColor = {0, 0,
+    255},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
+    Polygon(points = {{40, -10}, {-40, 30}, {40, 70}, {40, -10}}, lineColor = {0, 0,
+    255},
+    fillColor = {255, 255, 255},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-40, 0}, {-90, 0}}, color = {0, 0, 255}),
+    Line(points = {{100, 0}, {40, 0}}, color = {0, 0, 255}),
+    Line(points = {{-100, -100}, {-100, -60}, {-40, -30}},
+    color = {255, 0, 255})}),
     Documentation(info = "<html>
 <p>这是基于理想三极管模型的理想三极开关模型。
 </p>
@@ -132,7 +132,7 @@ equation
 
 </ul>
 <p>额外信息：这个模型基于Modelica.Electrical.Analog.Ideal.IdealThyristor搭建。</p>
-</html>", 
+</html>",
     revisions = "<html>
 <ul>
 <li><em>2009年11月25日</em>

@@ -1,19 +1,19 @@
 ﻿within Modelica.Mechanics.Translational.Interfaces;
-partial model PartialCompliantWithRelativeStates 
+partial model PartialCompliantWithRelativeStates
   "两个一维平动接口的相对状态弹性连接的基础模型，其中相对位置和相对速度用作状态"
 
-  parameter StateSelect stateSelect=StateSelect.prefer 
+  parameter StateSelect stateSelect=StateSelect.prefer
     "优先使用 s_rel 和 v_rel 作为状态" 
     annotation (HideResult=true, Dialog(tab="高级"));
-  parameter SI.Distance s_nominal=1e-4 
+  parameter SI.Distance s_nominal=1e-4
     "s_rel 的标称值 (用于缩放)" 
     annotation (Dialog(tab="高级"));
 
   SI.Position s_rel(
-    start=0, 
-    stateSelect=stateSelect, 
+    start=0,
+    stateSelect=stateSelect,
     nominal=s_nominal) "相对距离 (= flange_b.s - flange_a.s)";
-  SI.Velocity v_rel(start=0, stateSelect=stateSelect) 
+  SI.Velocity v_rel(start=0, stateSelect=stateSelect)
     "相对速度(= der(s_rel))";
 
   SI.Force f "一维平动接口之间的力 (= flange_b.f)";

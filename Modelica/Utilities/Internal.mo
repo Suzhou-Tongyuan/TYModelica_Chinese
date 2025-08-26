@@ -1,9 +1,9 @@
 ﻿within Modelica.Utilities;
-package Internal 
+package Internal
   "用户通常不应直接使用的内部组件"
   extends Modelica.Icons.InternalPackage;
   import Modelica.Units.SI;
-partial package PartialModelicaServices 
+partial package PartialModelicaServices
     "需要特定工具实施的组件接口"
     extends Modelica.Icons.InternalPackage;
   package Animation "三维动画的模型和函数"
@@ -13,25 +13,25 @@ partial package PartialModelicaServices
         import Modelica.Mechanics.MultiBody.Frames;
         import Modelica.Mechanics.MultiBody.Types;
 
-        parameter Types.ShapeType shapeType = "box" 
+        parameter Types.ShapeType shapeType = "box"
           "形状类型(box、球体、圆柱体、圆管、锥体、管道、梁、齿轮、弹簧, <external shape>)" annotation(Evaluate = true);
-        input Frames.Orientation R = Frames.nullRotation() 
+        input Frames.Orientation R = Frames.nullRotation()
           "姿态对象，用于将世界坐标系旋转到体坐标系中" annotation(Dialog);
-        input SI.Position r[3] = {0, 0, 0} 
+        input SI.Position r[3] = {0, 0, 0}
           "从世界坐标系原点到体坐标系原点的位置矢量，在世界坐标系中解析" annotation(Dialog);
-        input SI.Position r_shape[3] = {0, 0, 0} 
+        input SI.Position r_shape[3] = {0, 0, 0}
           "从体坐标系原点到形状原点的位置矢量，在体坐标系中解析" annotation(Dialog);
-        input Real lengthDirection[3](each final unit = "1") = {1, 0, 0} 
+        input Real lengthDirection[3](each final unit = "1") = {1, 0, 0}
           "长度方向上的矢量，在体坐标系中解析" annotation(Dialog);
-        input Real widthDirection[3](each final unit = "1") = {0, 1, 0} 
+        input Real widthDirection[3](each final unit = "1") = {0, 1, 0}
           "宽度方向上的矢量，在体坐标系中解析" annotation(Dialog);
         input SI.Length length = 0 "视觉对象的长度" annotation(Dialog);
         input SI.Length width = 0 "视觉对象的宽度" annotation(Dialog);
         input SI.Length height = 0 "视觉对象的高度" annotation(Dialog);
-        input Types.ShapeExtra extra = 0.0 
+        input Types.ShapeExtra extra = 0.0
           "部分形状类型的附加尺寸数据" annotation(Dialog);
         input Real color[3] = {255, 0, 0} "形状颜色" annotation(Dialog(colorSelector = true));
-        input Types.SpecularCoefficient specularCoefficient = 0.7 
+        input Types.SpecularCoefficient specularCoefficient = 0.7
           "环境光的反射(= 0：光被完全吸收)" annotation(Dialog);
 
         annotation(
@@ -48,15 +48,15 @@ partial package PartialModelicaServices
         import Modelica.Mechanics.MultiBody.Types;
         import Modelica.Mechanics.MultiBody.Frames;
 
-        input Frames.Orientation R = Frames.nullRotation() 
+        input Frames.Orientation R = Frames.nullRotation()
           "姿态对象，用于将世界坐标系旋转到矢量坐标系中" annotation(Dialog);
-        input SI.Position r[3] = {0, 0, 0} 
+        input SI.Position r[3] = {0, 0, 0}
           "从世界坐标系原点到矢量坐标系原点的位置矢量，在世界坐标系中解析" annotation(Dialog);
-        input Real coordinates[3] = {0, 0, 0} 
+        input Real coordinates[3] = {0, 0, 0}
           "在矢量坐标系中解析的矢量坐标" annotation(Dialog);
-        input Types.Color color = Types.Defaults.ArrowColor 
+        input Types.Color color = Types.Defaults.ArrowColor
           "矢量的颜色" annotation(Dialog(colorSelector = true));
-        input Types.SpecularCoefficient specularCoefficient = 0.7 
+        input Types.SpecularCoefficient specularCoefficient = 0.7
           "描述反射环境光的材料属性(= 0表示光被完全吸收)" annotation(Dialog);
         parameter Types.VectorQuantity quantity = Types.VectorQuantity.Force "坐标值所表示的量";
         input Boolean headAtOrigin = false "= true，如果矢量指向矢量坐标系的原点" annotation(Dialog);
@@ -76,17 +76,17 @@ partial package PartialModelicaServices
         import Modelica.Mechanics.MultiBody.Frames;
         import Modelica.Mechanics.MultiBody.Types;
 
-        input Frames.Orientation R = Frames.nullRotation() 
+        input Frames.Orientation R = Frames.nullRotation()
           "将世界坐标系旋转到曲面坐标系的姿态对象" 
           annotation(Dialog(group = "Surface frame"));
-        input SI.Position r_0[3] = {0, 0, 0} 
+        input SI.Position r_0[3] = {0, 0, 0}
           "从世界坐标系原点到曲面坐标系原点的位置矢量，在世界坐标系中解析" 
           annotation(Dialog(group = "Surface frame"));
 
         parameter Integer nu = 2 "u维中的点数" annotation(Dialog(group = "Surface properties"));
         parameter Integer nv = 2 "v维中的点数" annotation(Dialog(group = "Surface properties"));
-        replaceable function surfaceCharacteristic = 
-          Modelica.Mechanics.MultiBody.Interfaces.partialSurfaceCharacteristic 
+        replaceable function surfaceCharacteristic =
+          Modelica.Mechanics.MultiBody.Interfaces.partialSurfaceCharacteristic
           "定义表面特征的函数" 
           annotation(choicesAllMatching = true, Dialog(group = "Surface properties"));
 
@@ -95,7 +95,7 @@ partial package PartialModelicaServices
         parameter Boolean multiColoredSurface = false "= true: 为每个曲面点定义颜色" 
           annotation(Dialog(group = "Material properties"), choices(checkBox = true));
         input Real color[3] = {255, 0, 0} "表面颜色" annotation(Dialog(colorSelector = true, group = "Material properties", enable = not multiColoredSurface));
-        input Types.SpecularCoefficient specularCoefficient = 0.7 
+        input Types.SpecularCoefficient specularCoefficient = 0.7
           "环境光的反射(= 0：光被完全吸收)" 
           annotation(Dialog(group = "Material properties"));
         input Real transparency = 0 "形状的透明度：0(=不透明)、......、 1(=完全透明)" 
@@ -113,7 +113,7 @@ partial package PartialModelicaServices
 
   package ExternalReferences "访问外部资源的函数"
     extends Modelica.Icons.InternalPackage;
-    partial function PartialLoadResource 
+    partial function PartialLoadResource
         "工具特定函数接口，用于返回URI或本地文件名的绝对路径名"
       extends Modelica.Icons.Function;
       input String uri "URI或本地文件名";
@@ -156,7 +156,7 @@ Modelica标准库需要<strong>工具特定的实现</strong>。
 </html>"));
 end PartialModelicaServices;
 
-package FileSystem 
+package FileSystem
     "内部包，作为文件系统接口的外部函数"
  extends Modelica.Icons.InternalPackage;
 
@@ -197,7 +197,7 @@ package FileSystem
   external "C" ModelicaInternal_removeFile(fileName) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaInternal.h\"", Library="ModelicaExternalC");
   end removeFile;
 
-  impure function copyFile 
+  impure function copyFile
       "复制现有文件(C函数'fopen', 'fread', 'fwrite', 'fclose')"
     extends Modelica.Icons.Function;
     input String fromName "要复制的文件名";
@@ -206,24 +206,24 @@ package FileSystem
   external "C" ModelicaInternal_copyFile(fromName, toName) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaInternal.h\"", Library="ModelicaExternalC");
   end copyFile;
 
-  function readDirectory 
+  function readDirectory
       "读取目录名称(POSIX函数opendir, readdir, closedir)"
     extends Modelica.Icons.Function;
-    input String directory 
+    input String directory
         "所需信息的目录名称";
-    input Integer nNames 
+    input Integer nNames
         "返回的文件名数量（通过 getNumberOfFiles 查询）";
-    output String names[nNames] 
+    output String names[nNames]
         "所有文件和目录名，从所需目录开始，顺序不限";
     annotation();
     external "C" ModelicaInternal_readDirectory(directory,nNames,names) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaInternal.h\"", Library="ModelicaExternalC");
   end readDirectory;
 
-    function getNumberOfFiles 
+    function getNumberOfFiles
       "获取目录中文件和目录的数量(POSIX函数opendir, readdir, closedir)"
       extends Modelica.Icons.Function;
       input String directory "目录名称";
-      output Integer result 
+      output Integer result
         "'directory'中的文件和目录数量";
       annotation();
     external "C" result = ModelicaInternal_getNumberOfFiles(directory) annotation(IncludeDirectory = "modelica://Modelica/Resources/C-Sources", Include = "#include \"ModelicaInternal.h\"", Library = "ModelicaExternalC");

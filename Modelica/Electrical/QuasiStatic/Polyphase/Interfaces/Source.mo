@@ -7,19 +7,19 @@ equation
   Connections.root(plug_p.reference);
   annotation (
     Icon(graphics={Ellipse(
-              extent={{-50,50},{50,-50}}, 
-              lineColor={85,170,255}, 
-              fillColor={255,255,255}, 
-              fillPattern=FillPattern.Solid), 
-        Line(points={{-90,0},{-50,0}}, color={85,170,255}), 
-        Line(points={{50,0},{90,0}}, color={85,170,255}), 
+              extent={{-50,50},{50,-50}},
+              lineColor={85,170,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+        Line(points={{-90,0},{-50,0}}, color={85,170,255}),
+        Line(points={{50,0},{90,0}}, color={85,170,255}),
         Text(
-          extent={{160,-100},{-160,-60}}, 
-          textString="m=%m"), 
+          extent={{160,-100},{-160,-60}},
+          textString="m=%m"),
                            Text(
-              extent={{-150,60},{150,100}}, 
-              textString="%name", 
-              textColor={0,0,255})}), 
+              extent={{-150,60},{150,100}},
+              textString="%name",
+              textColor={0,0,255})}),
     Documentation(info="<html>
 <p>
 该源部分模型依赖于

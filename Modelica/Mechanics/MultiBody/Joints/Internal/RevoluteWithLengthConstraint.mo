@@ -1,62 +1,62 @@
 ﻿within Modelica.Mechanics.MultiBody.Joints.Internal;
-model RevoluteWithLengthConstraint 
+model RevoluteWithLengthConstraint
   "转动副，其旋转角度由长度约束计算(1个自由度，无潜在状态变量)"
 
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialTwoFrames;
-  Modelica.Mechanics.Rotational.Interfaces.Flange_a axis 
+  Modelica.Mechanics.Rotational.Interfaces.Flange_a axis
     "驱动运动副的一维旋转一维接口" 
     annotation (Placement(transformation(extent={{10,90},{-10,110}})));
-  Modelica.Mechanics.Rotational.Interfaces.Flange_b bearing 
+  Modelica.Mechanics.Rotational.Interfaces.Flange_b bearing
     "传动轴承的一维旋转一维接口" 
     annotation (Placement(transformation(extent={{-50,90},{-70,110}})));
 
-  Modelica.Blocks.Interfaces.RealInput position_a[3](each final quantity="Length", each final unit="m") 
+  Modelica.Blocks.Interfaces.RealInput position_a[3](each final quantity="Length", each final unit="m")
     "从frame_a到约束长度的frame_a侧的位置矢量，在转动副的frame_a中解析" 
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-  Modelica.Blocks.Interfaces.RealInput position_b[3](each final quantity="Length", each final unit="m") 
+  Modelica.Blocks.Interfaces.RealInput position_b[3](each final quantity="Length", each final unit="m")
     "从frame_b到约束长度的frame_b侧的位置矢量，在转动副的frame_b中解析" 
     annotation (Placement(transformation(extent={{140,-80},{100,-40}})));
 
   parameter Boolean animation=true "=true，则启用动画";
-  parameter SI.Position lengthConstraint(start=1) 
+  parameter SI.Position lengthConstraint(start=1)
     "长度约束的固定长度";
-  parameter Modelica.Mechanics.MultiBody.Types.Axis n={0,0,1} 
+  parameter Modelica.Mechanics.MultiBody.Types.Axis n={0,0,1}
     "旋转轴在frame_a中的分辨率(与frame_b相同)" 
     annotation (Evaluate=true);
-  parameter Modelica.Units.NonSI.Angle_deg phi_offset=0 
+  parameter Modelica.Units.NonSI.Angle_deg phi_offset=0
     "相对角度偏移(角度=phi+from_deg(phi_offset))";
-  parameter Modelica.Units.NonSI.Angle_deg phi_guess=0 
+  parameter Modelica.Units.NonSI.Angle_deg phi_guess=0
     "选择配置，使初始时间|phi-from_deg(phi_guess)|最小化";
-  parameter SI.Distance cylinderLength=world.defaultJointLength 
+  parameter SI.Distance cylinderLength=world.defaultJointLength
     "表示运动副轴的圆柱体的长度" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
-  parameter SI.Distance cylinderDiameter=world.defaultJointWidth 
+  parameter SI.Distance cylinderDiameter=world.defaultJointWidth
     "表示运动副轴的圆柱体的直径" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
-  input Types.Color cylinderColor=Modelica.Mechanics.MultiBody.Types.Defaults.JointColor 
+  input Types.Color cylinderColor=Modelica.Mechanics.MultiBody.Types.Defaults.JointColor
     "表示运动副轴的圆柱体的颜色" 
     annotation (Dialog(colorSelector=true, tab="动画", group="如果animation=true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
     "环境光的反射(=0：光被完全吸收)" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
 
- final parameter Boolean positiveBranch(fixed=false) 
+ final parameter Boolean positiveBranch(fixed=false)
     "根据phi_guess，选择非线性约束方程的两个解中的一个";
 
-final parameter Real e[3](each final unit="1")=Modelica.Math.Vectors.normalizeWithAssert(n) 
+final parameter Real e[3](each final unit="1")=Modelica.Math.Vectors.normalizeWithAssert(n)
     "旋转轴方向的单位矢量，在转动副的frame_a中解析";
 
 SI.Angle phi "转动副的旋转角度";
-Frames.Orientation R_rel 
+Frames.Orientation R_rel
     "从frame_a到frame_b的相对方向对象";
-SI.Angle angle 
+SI.Angle angle
     "=phi+from_deg(phi_offset)(frame_a和frame_b之间的相对旋转角度)";
 SI.Torque tau "=axis.tau(轴上的驱动扭矩)";
 
 protected
-SI.Position r_a[3]=position_a 
+SI.Position r_a[3]=position_a
     "从frame_a到约束长度的frame_a侧的位置矢量，在转动副的frame_a中解析";
-SI.Position r_b[3]=position_b 
+SI.Position r_b[3]=position_b
     "从frame_b到约束长度的frame_b侧的位置矢量，在转动副的frame_b中解析";
 Real e_r_a "r_a在e上的投影";
 Real e_r_b "r_b在e上的投影";
@@ -71,30 +71,30 @@ Real kcos_angle "=k1*cos(angle)";
 Real ksin_angle "=k1*sin(angle)";
 
   Visualizers.Advanced.Shape cylinder(
-    shapeType="cylinder", 
-    color=cylinderColor, 
-    specularCoefficient=specularCoefficient, 
-    length=cylinderLength, 
-    width=cylinderDiameter, 
-    height=cylinderDiameter, 
-    lengthDirection=e, 
-    widthDirection={0,1,0}, 
-    r_shape=-e*(cylinderLength/2), 
-    r=frame_a.r_0, 
+    shapeType="cylinder",
+    color=cylinderColor,
+    specularCoefficient=specularCoefficient,
+    length=cylinderLength,
+    width=cylinderDiameter,
+    height=cylinderDiameter,
+    lengthDirection=e,
+    widthDirection={0,1,0},
+    r_shape=-e*(cylinderLength/2),
+    r=frame_a.r_0,
     R=frame_a.R) if world.enableAnimation and animation;
 
 public
- function selectBranch 
+ function selectBranch
     "确定距离初始角度=0最近的支路"
     extends Modelica.Icons.Function;
     input SI.Length L "长度约束的长度";
-    input Real e[3](each final unit="1") 
+    input Real e[3](each final unit="1")
       "绕轴的单位矢量，解析为frame_a(=frame_b中相同)";
-    input SI.Angle angle_guess 
+    input SI.Angle angle_guess
       "选择配置，使得在初始时间|angle-angle_guess|最小(angle=0：frame_a和frame_b重合)";
-    input SI.Position r_a[3] 
+    input SI.Position r_a[3]
       "从约束的长度运动副的frame_a到frame_a一侧的位置矢量，解析为revolute运动副的frame_a";
-    input SI.Position r_b[3] 
+    input SI.Position r_b[3]
       "从frame_b到约束的长度运动副的frame_b一侧的位置矢量，解析为revolute运动副的frame_b";
     output Boolean positiveBranch "初始解的支路";
   protected
@@ -184,7 +184,7 @@ public
     end if;
   end selectBranch;
 initial equation
-  positiveBranch = selectBranch(lengthConstraint, e, Cv.from_deg(phi_offset 
+  positiveBranch = selectBranch(lengthConstraint, e, Cv.from_deg(phi_offset
      + phi_guess), r_a, r_b);
 equation
   Connections.branch(frame_a.R, frame_b.R);  // 连接旋转参考系
@@ -231,54 +231,54 @@ equation
   angle = Modelica.Math.atan2(ksin_angle, kcos_angle);
   annotation (
     Icon(coordinateSystem(
-        preserveAspectRatio=true, 
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
-          extent={{-30,10},{10,-10}}, 
-          lineColor={64,64,64}, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-30,10},{10,-10}},
+          lineColor={64,64,64},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-100,-60},{-30,60}}, 
-          lineColor={64,64,64}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          fillColor={255,255,255}, 
-          radius=10), 
+          extent={{-100,-60},{-30,60}},
+          lineColor={64,64,64},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={255,255,255},
+          radius=10),
         Rectangle(
-          extent={{30,-60},{100,60}}, 
-          lineColor={64,64,64}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          fillColor={255,255,255}, 
-          radius=10), 
+          extent={{30,-60},{100,60}},
+          lineColor={64,64,64},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={255,255,255},
+          radius=10),
         Text(
-          extent={{-139,-168},{137,-111}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
-        Rectangle(extent={{-100,60},{-30,-60}}, lineColor={64,64,64}, radius=10), 
-        Rectangle(extent={{30,60},{100,-60}}, lineColor={64,64,64}, radius=10), 
+          extent={{-139,-168},{137,-111}},
+          textString="%name",
+          textColor={0,0,255}),
+        Rectangle(extent={{-100,60},{-30,-60}}, lineColor={64,64,64}, radius=10),
+        Rectangle(extent={{30,60},{100,-60}}, lineColor={64,64,64}, radius=10),
         Text(
-          extent={{-142,-108},{147,-69}}, 
-          textString="n=%n"), 
-        Line(points={{-60,60},{-60,90}}), 
-        Line(points={{-20,70},{-60,70}}), 
-        Line(points={{-20,80},{-20,60}}), 
-        Line(points={{20,80},{20,60}}), 
-        Line(points={{20,70},{41,70}}), 
+          extent={{-142,-108},{147,-69}},
+          textString="n=%n"),
+        Line(points={{-60,60},{-60,90}}),
+        Line(points={{-20,70},{-60,70}}),
+        Line(points={{-20,80},{-20,60}}),
+        Line(points={{20,80},{20,60}}),
+        Line(points={{20,70},{41,70}}),
         Polygon(
-          points={{-9,30},{10,30},{30,50},{-29,50},{-9,30}}, 
-          lineColor={64,64,64}, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid), 
+          points={{-9,30},{10,30},{30,50},{-29,50},{-9,30}},
+          lineColor={64,64,64},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
         Polygon(
-          points={{10,30},{30,50},{30,-51},{10,-31},{10,30}}, 
-          lineColor={64,64,64}, 
-          fillColor={192,192,192}, 
-          fillPattern=FillPattern.Solid), 
+          points={{10,30},{30,50},{30,-51},{10,-31},{10,30}},
+          lineColor={64,64,64},
+          fillColor={192,192,192},
+          fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-10,90},{10,50}}, 
-          lineColor={64,64,64}, 
-          fillPattern=FillPattern.VerticalCylinder, 
-          fillColor={192,192,192})}), 
+          extent={{-10,90},{10,50}},
+          lineColor={64,64,64},
+          fillPattern=FillPattern.VerticalCylinder,
+          fillColor={192,192,192})}),
     Documentation(info="<html>
 <p>
 坐标系_b绕轴n旋转的接头，该轴在坐标系_a中固定。

@@ -1,16 +1,16 @@
 ﻿within Modelica.Electrical.Machines.Losses.DCMachines;
 model Core "核心损耗模型"
   extends Modelica.Electrical.Analog.Interfaces.OnePort;
-  parameter Machines.Losses.CoreParameters coreParameters(m=1) 
+  parameter Machines.Losses.CoreParameters coreParameters(m=1)
     "电枢核心损耗";
   extends 
     Modelica.Thermal.HeatTransfer.Interfaces.PartialElementaryConditionalHeatPortWithoutT(
       useHeatPort=false);
-  input SI.AngularVelocity w 
+  input SI.AngularVelocity w
     "再磁化角速度" annotation (Dialog(group="损耗"));
   SI.Conductance Gc "可变核心损耗导纳";
 protected
-  SI.AngularVelocity wLimit=noEvent(max(noEvent(abs(w)), 
+  SI.AngularVelocity wLimit=noEvent(max(noEvent(abs(w)),
       coreParameters.wMin)) "有限的角速度";
 equation
   if (coreParameters.PRef <= 0) then
@@ -23,15 +23,15 @@ equation
   end if;
   lossPower = v*i;
   annotation (Icon(graphics={Rectangle(
-                extent={{-70,30},{70,-30}}, 
-                lineColor={0,0,255}, 
-                fillColor={255,255,255}, 
-                fillPattern=FillPattern.Solid),Line(points={{70,0},{90,0}}), 
-          Line(points={{-90,0},{-70,0}}),Line(points={{-70,10},{70,10}}, 
-          color={0,0,255}),Line(points={{-70,-30},{70,-30}}, color={0,0,255}), 
+                extent={{-70,30},{70,-30}},
+                lineColor={0,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),Line(points={{70,0},{90,0}}),
+          Line(points={{-90,0},{-70,0}}),Line(points={{-70,10},{70,10}},
+          color={0,0,255}),Line(points={{-70,-30},{70,-30}}, color={0,0,255}),
           Line(points={{-70,-10},{70,-10}}, color={0,0,255}),Text(
-                extent={{-150,90},{150,50}}, 
-                textColor={0,0,255}, 
+                extent={{-150,90},{150,50}},
+                textColor={0,0,255},
                 textString="%name")}), Documentation(info="<html>
 <p>
 核心损耗可以分为<em>涡流</em>和<em>磁滞</em>损耗。因此，总核心损耗可以表示为

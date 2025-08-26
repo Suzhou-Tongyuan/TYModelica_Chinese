@@ -10,12 +10,12 @@ model ShowTransferFunction "测试复数传递函数模块"
   Real dB = 20 * log10(complexToPolar.len) "以分贝为单位的传递函数幅度";
   Modelica.Units.SI.Angle phi(displayUnit = "deg") = complexToPolar.phi "传递函数参数";
   Modelica.Blocks.Sources.LogFrequencySweep logFrequencySweep(
-    duration = 1, 
-    wMin = wMin, 
+    duration = 1,
+    wMin = wMin,
     wMax = wMax) annotation(Placement(transformation(extent = {{-80, -40}, {-60, -20}})));
   Modelica.ComplexBlocks.Sources.ComplexConstant const(k(re = 1, im = 0)) 
     annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
-  Modelica.ComplexBlocks.ComplexMath.TransferFunction transferFunction(b = b, 
+  Modelica.ComplexBlocks.ComplexMath.TransferFunction transferFunction(b = b,
     a = a) 
     annotation(Placement(transformation(extent = {{-40, -10}, {-20, 10}})));
   Modelica.ComplexBlocks.ComplexMath.ComplexToPolar complexToPolar 
@@ -28,7 +28,7 @@ equation
   connect(transferFunction.y, complexToPolar.u) 
     annotation(Line(points = {{-19, 0}, {-2, 0}}, color = {85, 170, 255}));
   annotation(
-    experiment(StopTime = 1, Interval = 0.001), Documentation(info = 
+    experiment(StopTime = 1, Interval = 0.001), Documentation(info =
     "<html>
 <p>这个例子展示了由其传递函数定义的PT2的响应</p>
 <blockquote><pre>

@@ -11,23 +11,23 @@ equation
   port_p.reference.gamma = port_n.reference.gamma;
   omega = der(port_p.reference.gamma);
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
-            {100,100}}), 
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+            {100,100}}),
                    graphics={
         Text(
-          extent={{150,60},{-150,100}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{150,60},{-150,100}},
+          textString="%name",
+          textColor={0,0,255}),
         Line(
-          points={{-90,0},{-50,0}}, 
-          color={255,170,85}), 
+          points={{-90,0},{-50,0}},
+          color={255,170,85}),
         Line(
-          points={{50,0},{90,0}}, 
-          color={255,170,85}), 
+          points={{50,0},{90,0}},
+          color={255,170,85}),
         Ellipse(
-          extent={{-50,50},{50,-50}}, 
-          lineColor={255,170,85}, 
-          fillColor={255,255,255}, 
+          extent={{-50,50},{50,-50}},
+          lineColor={255,170,85},
+          fillColor={255,255,255},
           fillPattern=FillPattern.Solid)}),            Documentation(info="<html>
 <p>
 源模型提供一个正负磁端口。此外，这个模型包含一个基本图标

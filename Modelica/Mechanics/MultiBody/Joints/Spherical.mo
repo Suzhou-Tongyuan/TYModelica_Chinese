@@ -1,107 +1,107 @@
 ﻿within Modelica.Mechanics.MultiBody.Joints;
-model Spherical 
+model Spherical
   "球副(3个约束和无潜在状态变量，或3个自由度和3个状态变量)"
 
   import Modelica.Mechanics.MultiBody.Frames;
 
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialTwoFrames;
-  parameter Boolean animation=true 
+  parameter Boolean animation=true
     "=true，是否启用动画(显示球体)";
-  parameter SI.Distance sphereDiameter=world.defaultJointLength 
+  parameter SI.Distance sphereDiameter=world.defaultJointLength
     "代表球副的球体直径" 
     annotation (Dialog(group="如果animation=true", enable=animation));
-  input Types.Color sphereColor=Modelica.Mechanics.MultiBody.Types.Defaults.JointColor 
+  input Types.Color sphereColor=Modelica.Mechanics.MultiBody.Types.Defaults.JointColor
     "代表球副的球体颜色" 
     annotation (Dialog(colorSelector=true, group="如果animation=true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
     "环境光的反射(=0：光被完全吸收)" 
     annotation (Dialog(group="如果animation=true", enable=animation));
 
-  parameter Boolean angles_fixed = false 
+  parameter Boolean angles_fixed = false
     "=true，如果angles_start被用作初始值，否则用作猜测值" 
     annotation(Evaluate=true, choices(checkBox=true), Dialog(tab="初始化"));
-  parameter SI.Angle angles_start[3]={0,0,0} 
+  parameter SI.Angle angles_start[3]={0,0,0}
     "将frame_a绕'sequence_start'轴旋转到frame_b的角度的初始值" 
     annotation (Dialog(tab="初始化"));
-  parameter Types.RotationSequence sequence_start={1,2,3} 
+  parameter Types.RotationSequence sequence_start={1,2,3}
     "将frame_a旋转到frame_b的旋转顺序，初始时间" 
     annotation (Evaluate=true, Dialog(tab="初始化"));
 
-  parameter Boolean w_rel_a_fixed = false 
+  parameter Boolean w_rel_a_fixed = false
     "=true，如果w_rel_a_start被用作初始值，否则用作猜测值" 
     annotation(Evaluate=true, choices(checkBox=true), Dialog(tab="初始化"));
-  parameter SI.AngularVelocity w_rel_a_start[3]={0,0,0} 
+  parameter SI.AngularVelocity w_rel_a_start[3]={0,0,0}
     "frame_b相对于frame_a的角速度的初始值，相对于frame_a" 
     annotation (Dialog(tab="初始化"));
 
-  parameter Boolean z_rel_a_fixed = false 
+  parameter Boolean z_rel_a_fixed = false
     "=true，如果z_rel_a_start被用作初始值，否则用作猜测值" 
     annotation(Evaluate=true, choices(checkBox=true), Dialog(tab="初始化"));
-  parameter SI.AngularAcceleration z_rel_a_start[3]={0,0,0} 
+  parameter SI.AngularAcceleration z_rel_a_start[3]={0,0,0}
     "角加速度z_rel_a的初始值=der(w_rel_a)" 
     annotation (Dialog(tab="初始化"));
 
-  parameter Boolean enforceStates=false 
+  parameter Boolean enforceStates=false
     "=true，如果球副的相对变量将被用作状态变量(StateSelect.always)" 
     annotation (Evaluate=true, Dialog(tab="高级"));
-  parameter Boolean useQuaternions=true 
+  parameter Boolean useQuaternions=true
     "=true，如果使用四元数作为状态变量，否则使用3个角度作为状态变量(假设enforceStates=true)" 
     annotation (Evaluate=true, Dialog(tab="高级", enable=enforceStates));
-  parameter Types.RotationSequence sequence_angleStates={1,2,3} 
+  parameter Types.RotationSequence sequence_angleStates={1,2,3}
     "将frame_a旋转到frame_b的旋转顺序，使用作为状态变量的3个角度" 
      annotation (Evaluate=true, Dialog(tab="高级", enable=enforceStates 
            and not useQuaternions));
 
-  final parameter Frames.Orientation R_rel_start= 
-      Frames.axesRotations(sequence_start, angles_start, zeros(3)) 
+  final parameter Frames.Orientation R_rel_start=
+      Frames.axesRotations(sequence_start, angles_start, zeros(3))
     "初始时间时从frame_a到frame_b的方向对象";
 
 protected
   Visualizers.Advanced.Shape sphere(
-    shapeType="sphere", 
-    color=sphereColor, 
-    specularCoefficient=specularCoefficient, 
-    length=sphereDiameter, 
-    width=sphereDiameter, 
-    height=sphereDiameter, 
-    lengthDirection={1,0,0}, 
-    widthDirection={0,1,0}, 
-    r_shape={-0.5,0,0}*sphereDiameter, 
-    r=frame_a.r_0, 
+    shapeType="sphere",
+    color=sphereColor,
+    specularCoefficient=specularCoefficient,
+    length=sphereDiameter,
+    width=sphereDiameter,
+    height=sphereDiameter,
+    lengthDirection={1,0,0},
+    widthDirection={0,1,0},
+    r_shape={-0.5,0,0}*sphereDiameter,
+    r=frame_a.r_0,
     R=frame_a.R) if world.enableAnimation and animation;
 
 // 如果不使用四元数，则声明四元数(虚拟值)
-parameter Frames.Quaternions.Orientation Q_start= 
-            Modelica.Mechanics.MultiBody.Frames.to_Q(R_rel_start) 
+parameter Frames.Quaternions.Orientation Q_start=
+            Modelica.Mechanics.MultiBody.Frames.to_Q(R_rel_start)
     "初始时间时从frame_a到frame_b的四元数方向对象";
 Frames.Quaternions.Orientation Q(start=Q_start, each stateSelect=if 
         enforceStates and useQuaternions then StateSelect.prefer else 
-        StateSelect.never) 
+        StateSelect.never)
     "从frame_a到frame_b的四元数方向对象(如果不使用四元数作为状态，则为虚拟值)";
 
 // 三个角度的声明
-parameter SI.Angle phi_start[3]=if sequence_start[1] == 
+parameter SI.Angle phi_start[3]=if sequence_start[1] ==
       sequence_angleStates[1] and sequence_start[2] == sequence_angleStates[2] 
        and sequence_start[3] == sequence_angleStates[3] then angles_start else 
-       Frames.axesRotationsAngles(R_rel_start, sequence_angleStates) 
+       Frames.axesRotationsAngles(R_rel_start, sequence_angleStates)
     "初始时间的可能角度状态";
 SI.Angle phi[3](start=phi_start, each stateSelect=if enforceStates and not 
-        useQuaternions then StateSelect.always else StateSelect.never) 
+        useQuaternions then StateSelect.always else StateSelect.never)
     "虚拟值或将frame_a旋转到frame_b的三个角度";
 SI.AngularVelocity phi_d[3](each stateSelect=if enforceStates and not 
-        useQuaternions then StateSelect.always else StateSelect.never) 
+        useQuaternions then StateSelect.always else StateSelect.never)
     "=der(phi)";
 SI.AngularAcceleration phi_dd[3] "=der(phi_d)";
 
 // 其他声明
-SI.AngularVelocity w_rel[3](start=Frames.resolve2(R_rel_start, w_rel_a_start), 
+SI.AngularVelocity w_rel[3](start=Frames.resolve2(R_rel_start, w_rel_a_start),
         fixed = fill(w_rel_a_fixed,3), each stateSelect=if 
         enforceStates and useQuaternions then StateSelect.always else 
-        StateSelect.never) 
+        StateSelect.never)
     "虚拟值或frame_b相对于frame_a的相对角速度，解析在frame_b中";
-Frames.Orientation R_rel 
+Frames.Orientation R_rel
     "虚拟值或从frame_a到frame_b的相对方向对象";
-Frames.Orientation R_rel_inv 
+Frames.Orientation R_rel_inv
     "虚拟值或从frame_b到frame_a的相对方向对象";
 
 initial equation
@@ -173,7 +173,7 @@ equation
   zeros(3) = frame_a.f + Frames.resolveRelative(frame_b.f, frame_b.R, frame_a.R);
 
   if w_rel_a_fixed or z_rel_a_fixed then
-    w_rel = Frames.angularVelocity2(frame_b.R) - Frames.resolve2(frame_b.R, 
+    w_rel = Frames.angularVelocity2(frame_b.R) - Frames.resolve2(frame_b.R,
       Frames.angularVelocity1(frame_a.R));
   else
     w_rel = zeros(3);
@@ -216,38 +216,38 @@ end if;
 <div>
 <img src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/Joints/Spherical.png\">
 </div>
-</html>"), 
+</html>"),
          Icon(coordinateSystem(
-        preserveAspectRatio=true, 
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={
         Ellipse(
-          extent={{-70,-70},{70,70}}, 
-          fillPattern=FillPattern.Sphere, 
-          fillColor={192,192,192}), 
+          extent={{-70,-70},{70,70}},
+          fillPattern=FillPattern.Sphere,
+          fillColor={192,192,192}),
         Ellipse(
-          extent={{-49,-50},{51,50}}, 
-          lineColor={128,128,128}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-49,-50},{51,50}},
+          lineColor={128,128,128},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{30,70},{71,-68}}, 
-          lineColor={255,255,255}, 
-          fillColor={255,255,255}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{30,70},{71,-68}},
+          lineColor={255,255,255},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-100,10},{-68,-10}}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          fillColor={192,192,192}), 
+          extent={{-100,10},{-68,-10}},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={192,192,192}),
         Rectangle(
-          extent={{23,10},{100,-10}}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          fillColor={192,192,192}), 
+          extent={{23,10},{100,-10}},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={192,192,192}),
         Ellipse(
-          extent={{-24,25},{26,-25}}, 
-          fillPattern=FillPattern.Sphere, 
-          fillColor={160,160,164}), 
+          extent={{-24,25},{26,-25}},
+          fillPattern=FillPattern.Sphere,
+          fillColor={160,160,164}),
         Text(
-          extent={{-150,-115},{150,-75}}, 
-          textString="%name", 
+          extent={{-150,-115},{150,-75}},
+          textString="%name",
           textColor={0,0,255})}));
 end Spherical;

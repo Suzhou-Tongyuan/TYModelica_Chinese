@@ -1,78 +1,78 @@
 ﻿within Modelica.Electrical.Machines.Examples.DCMachines;
-model DCPM_QuasiStatic 
+model DCPM_QuasiStatic
   "测试示例：比较DCPM电机瞬态和准静态"
   extends Modelica.Icons.Example;
   parameter SI.Voltage Va=100 "实际电枢电压";
   parameter SI.Voltage Ve=100 "实际励磁电压";
-  parameter SI.AngularVelocity w0= 
+  parameter SI.AngularVelocity w0=
       Modelica.Units.Conversions.from_rpm(1500) "空载转速";
   parameter SI.Torque TLoad=63.66 "额定负载转矩";
-  parameter SI.Inertia JLoad=0.15 
+  parameter SI.Inertia JLoad=0.15
     "负载的转动惯量";
   Machines.BasicMachines.DCMachines.DC_PermanentMagnet dcpm1(
-    VaNominal=dcpmData.VaNominal, 
-    IaNominal=dcpmData.IaNominal, 
-    wNominal=dcpmData.wNominal, 
-    TaNominal=dcpmData.TaNominal, 
-    Ra=dcpmData.Ra, 
-    TaRef=dcpmData.TaRef, 
-    La=dcpmData.La, 
-    Jr=dcpmData.Jr, 
-    useSupport=false, 
-    Js=dcpmData.Js, 
-    frictionParameters=dcpmData.frictionParameters, 
-    coreParameters=dcpmData.coreParameters, 
-    strayLoadParameters=dcpmData.strayLoadParameters, 
-    brushParameters=dcpmData.brushParameters, 
-    phiMechanical(fixed=true), 
-    ia(fixed=true), 
-    TaOperational=293.15, 
-    alpha20a=dcpmData.alpha20a, 
+    VaNominal=dcpmData.VaNominal,
+    IaNominal=dcpmData.IaNominal,
+    wNominal=dcpmData.wNominal,
+    TaNominal=dcpmData.TaNominal,
+    Ra=dcpmData.Ra,
+    TaRef=dcpmData.TaRef,
+    La=dcpmData.La,
+    Jr=dcpmData.Jr,
+    useSupport=false,
+    Js=dcpmData.Js,
+    frictionParameters=dcpmData.frictionParameters,
+    coreParameters=dcpmData.coreParameters,
+    strayLoadParameters=dcpmData.strayLoadParameters,
+    brushParameters=dcpmData.brushParameters,
+    phiMechanical(fixed=true),
+    ia(fixed=true),
+    TaOperational=293.15,
+    alpha20a=dcpmData.alpha20a,
     wMechanical(fixed=true, start=w0)) 
     annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage armatureVoltage(V=Va) 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=90, 
+        extent={{10,-10},{-10,10}},
+        rotation=90,
         origin={-80,50})));
   Modelica.Electrical.Analog.Basic.Ground groundArmature annotation (
       Placement(transformation(
-        origin={-80,20}, 
+        origin={-80,20},
         extent={{-10,-10},{10,10}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia1(J=JLoad) 
     annotation (Placement(transformation(extent={{10,20},{30,40}})));
-  Modelica.Mechanics.Rotational.Sources.Torque loadTorque1(useSupport= 
-        false) annotation (Placement(transformation(extent={{60,20},{40, 
+  Modelica.Mechanics.Rotational.Sources.Torque loadTorque1(useSupport=
+        false) annotation (Placement(transformation(extent={{60,20},{40,
             40}})));
   Modelica.Blocks.Sources.Pulse pulse(
-    amplitude=-1.5*TLoad, 
-    offset=0, 
+    amplitude=-1.5*TLoad,
+    offset=0,
     period=1) 
     annotation (Placement(transformation(extent={{100,-10},{80,10}})));
   Machines.BasicMachines.QuasiStaticDCMachines.DC_PermanentMagnet dcpm2(
-    VaNominal=dcpmData.VaNominal, 
-    IaNominal=dcpmData.IaNominal, 
-    wNominal=dcpmData.wNominal, 
-    TaNominal=dcpmData.TaNominal, 
-    Ra=dcpmData.Ra, 
-    TaRef=dcpmData.TaRef, 
-    La=dcpmData.La, 
-    Jr=dcpmData.Jr, 
-    useSupport=false, 
-    Js=dcpmData.Js, 
-    frictionParameters=dcpmData.frictionParameters, 
-    coreParameters=dcpmData.coreParameters, 
-    strayLoadParameters=dcpmData.strayLoadParameters, 
-    brushParameters=dcpmData.brushParameters, 
-    phiMechanical(fixed=true), 
-    wMechanical(fixed=true, start=w0), 
-    TaOperational=293.15, 
+    VaNominal=dcpmData.VaNominal,
+    IaNominal=dcpmData.IaNominal,
+    wNominal=dcpmData.wNominal,
+    TaNominal=dcpmData.TaNominal,
+    Ra=dcpmData.Ra,
+    TaRef=dcpmData.TaRef,
+    La=dcpmData.La,
+    Jr=dcpmData.Jr,
+    useSupport=false,
+    Js=dcpmData.Js,
+    frictionParameters=dcpmData.frictionParameters,
+    coreParameters=dcpmData.coreParameters,
+    strayLoadParameters=dcpmData.strayLoadParameters,
+    brushParameters=dcpmData.brushParameters,
+    phiMechanical(fixed=true),
+    wMechanical(fixed=true, start=w0),
+    TaOperational=293.15,
     alpha20a=dcpmData.alpha20a) 
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia2(J=JLoad) 
     annotation (Placement(transformation(extent={{10,-40},{30,-20}})));
-  Modelica.Mechanics.Rotational.Sources.Torque loadTorque2(useSupport= 
-        false) annotation (Placement(transformation(extent={{60,-40},{40, 
+  Modelica.Mechanics.Rotational.Sources.Torque loadTorque2(useSupport=
+        false) annotation (Placement(transformation(extent={{60,-40},{40,
             -20}})));
   parameter Utilities.ParameterRecords.DcPermanentMagnetData dcpmData "DC机器数据" 
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));

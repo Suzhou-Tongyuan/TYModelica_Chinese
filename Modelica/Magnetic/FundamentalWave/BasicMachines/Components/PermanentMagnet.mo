@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FundamentalWave.BasicMachines.Components;
-model PermanentMagnet 
+model PermanentMagnet
   "永磁体由磁势差表示"
   extends Magnetic.FundamentalWave.Sources.ConstantMagneticPotentialDifference;
   extends 

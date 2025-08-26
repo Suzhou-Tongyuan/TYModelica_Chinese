@@ -18,7 +18,7 @@ package QuasiStaticDCMachines "准静态直流电机模型"
 请参阅<a href=\"modelica://Modelica.Electrical.QuasiStatic\">QuasiStatic Library</a>，
 在那里，例如，<code>L*der(i)</code> 被 <code>j*omega*L*(I_re+j*I_im)</code> 替换。
 </p>
-</html>", 
+</html>",
       revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

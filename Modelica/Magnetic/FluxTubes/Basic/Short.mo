@@ -3,12 +3,12 @@ model Short "短路分支"
   extends Interfaces.TwoPortElementary;
   equation
   connect(port_p, port_n) annotation(Line(points = {{-100, 0}, {-1, 0}, {-1, 0}, {100, 0}}, color = {255, 128, 0}));
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, 
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,
     -100}, {100, 100}}), graphics = {
-    Line(points = {{-100, 0}, {100, 0}}, color = {255, 128, 0}), 
+    Line(points = {{-100, 0}, {100, 0}}, color = {255, 128, 0}),
     Text(
-    extent = {{-150, 50}, {150, 90}}, 
-    textColor = {0, 0, 255}, 
+    extent = {{-150, 50}, {150, 90}},
+    textColor = {0, 0, 255},
     textString = "%name")}), Documentation(
     info = "<html>
 <p>

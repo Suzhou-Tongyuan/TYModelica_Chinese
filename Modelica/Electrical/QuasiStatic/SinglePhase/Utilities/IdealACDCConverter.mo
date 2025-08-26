@@ -17,16 +17,16 @@ model IdealACDCConverter "理想交直流变换器"
   SI.Current iDC=pin_pDC.i "直流电流";
   SI.Power pDC=vDC*iDC "直流功率";
   Interfaces.PositivePin pin_pQS annotation (Placement(transformation(
-          extent={{-110,110},{-90,90}}), iconTransformation(extent={{-110, 
+          extent={{-110,110},{-90,90}}), iconTransformation(extent={{-110,
             110},{-90,90}})));
   Interfaces.NegativePin pin_nQS annotation (Placement(transformation(
-          extent={{-110,-110},{-90,-90}}), iconTransformation(extent={{-110, 
+          extent={{-110,-110},{-90,-90}}), iconTransformation(extent={{-110,
             -110},{-90,-90}})));
   Modelica.Electrical.Analog.Interfaces.PositivePin pin_pDC annotation (
       Placement(transformation(extent={{90,110},{110,90}}), iconTransformation(
           extent={{90,110},{110,90}})));
   Modelica.Electrical.Analog.Interfaces.NegativePin pin_nDC annotation (
-      Placement(transformation(extent={{90,-110},{110,-90}}), 
+      Placement(transformation(extent={{90,-110},{110,-90}}),
         iconTransformation(extent={{90,-110},{110,-90}})));
 equation
   //准静态电路平衡
@@ -43,25 +43,25 @@ equation
   qQS = 0;
   annotation (defaultComponentName="rectifier", Icon(graphics={
         Line(
-          points={{2,40},{70,40},{2,40},{70,-50},{2,-50},{2,40},{2,-50}}, 
-          color={0,0,255}), 
+          points={{2,40},{70,40},{2,40},{70,-50},{2,-50},{2,40},{2,-50}},
+          color={0,0,255}),
         Text(
-          extent={{50,30},{100,0}}, 
-          textColor={0,0,255}, 
-          textString="直流"), 
+          extent={{50,30},{100,0}},
+          textColor={0,0,255},
+          textString="直流"),
         Line(
-          points={{-2,40},{-2,40},{-70,40},{-2,40},{-70,-50},{-2,-50},{-2,40},{-2,-50}}, 
-          color={85,170,255}), 
+          points={{-2,40},{-2,40},{-70,40},{-2,40},{-70,-50},{-2,-50},{-2,40},{-2,-50}},
+          color={85,170,255}),
         Text(
-          extent={{-90,30},{-40,0}}, 
-          textColor={85,170,255}, 
-          textString="准静态"), 
+          extent={{-90,30},{-40,0}},
+          textColor={85,170,255},
+          textString="准静态"),
         Text(
-          extent={{-150,90},{150,50}}, 
-          textColor={0,0,255}, 
-          textString="%name"), 
+          extent={{-150,90},{150,50}},
+          textColor={0,0,255},
+          textString="%name"),
         Text(
-          extent={{-150,-50},{150,-90}}, 
+          extent={{-150,-50},{150,-90}},
           textString="%conversionFactor")}), Documentation(info="<html>
 <p>
 这是一个理想的交直流变换器，基于准静态电路和直流侧之间的功率平衡。

@@ -4,11 +4,11 @@ block TransferFunction "离散时间传递函数模块"
   parameter Real b[:]={1} "传递函数的分子系数";
   parameter Real a[:] "传递函数的分母系数";
 
-  output Real x[size(a, 1) - 1](each start=0.0) 
+  output Real x[size(a, 1) - 1](each start=0.0)
     "控制器规范形式的状态矢量";
 protected
   parameter Integer nb=size(b, 1) "传递函数分子的大小";
-  parameter Integer na=size(a, 1) 
+  parameter Integer na=size(a, 1)
     "传递函数分母的大小";
   Real x1;
   Real xext[size(a, 1)];
@@ -79,32 +79,32 @@ y = --------- * u
     Realized based on a corresponding model of Dieter Moormann
     and Hilding Elmqvist.</li>
 </ul>
-</html>"), 
+</html>"),
     Icon(coordinateSystem(
-        preserveAspectRatio=false, 
+        preserveAspectRatio=false,
         extent={{-100,-100},{100,100}}), graphics={
-        Line(points={{82,0},{-84,0}}, color={0,0,127}), 
+        Line(points={{82,0},{-84,0}}, color={0,0,127}),
         Text(
-          extent={{-92,92},{86,12}}, 
-          textColor={0,0,127}, 
-          textString="b(z)"), 
+          extent={{-92,92},{86,12}},
+          textColor={0,0,127},
+          textString="b(z)"),
         Text(
-          extent={{-90,-12},{90,-90}}, 
-          textColor={0,0,127}, 
-          textString="a(z)")}), 
+          extent={{-90,-12},{90,-90}},
+          textColor={0,0,127},
+          textString="a(z)")}),
     Diagram(coordinateSystem(
-        preserveAspectRatio=true, 
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={
-        Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,0,255}), 
+        Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,0,255}),
         Line(
-          points={{40,0},{-44,0}}, 
-          thickness=0.5), 
+          points={{40,0},{-44,0}},
+          thickness=0.5),
         Text(
-          extent={{-54,54},{54,4}}, 
-          textString="b(z)"), 
+          extent={{-54,54},{54,4}},
+          textString="b(z)"),
         Text(
-          extent={{-54,-6},{56,-56}}, 
-          textString="a(z)"), 
-        Line(points={{-100,0},{-60,0}}, color={0,0,255}), 
+          extent={{-54,-6},{56,-56}},
+          textString="a(z)"),
+        Line(points={{-100,0},{-60,0}}, color={0,0,255}),
         Line(points={{60,0},{100,0}}, color={0,0,255})}));
 end TransferFunction;

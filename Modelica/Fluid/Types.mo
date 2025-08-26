@@ -3,13 +3,13 @@ package Types "流体模型的常见类型"
   extends Modelica.Icons.TypesPackage;
 
   type HydraulicConductance = Modelica.Icons.TypeReal (
-      final quantity="HydraulicConductance", 
+      final quantity="HydraulicConductance",
       final unit="kg/(s.Pa)") "水力传导率" annotation();
   type HydraulicResistance = Modelica.Icons.TypeReal (
-      final quantity="HydraulicResistance", 
+      final quantity="HydraulicResistance",
       final unit="Pa.s/kg") "水力阻力" annotation();
 
-  type Roughness = Modelica.Icons.TypeReal (final quantity="Length", final unit="m", displayUnit="mm", min=0) 
+  type Roughness = Modelica.Icons.TypeReal (final quantity="Length", final unit="m", displayUnit="mm", min=0)
     "管道粗糙度" 
     annotation (Documentation(info="<html>
 <p>
@@ -61,13 +61,13 @@ package Types "流体模型的常见类型"
 </dl>
 </html>"  ));
   type Dynamics = enumeration(
-    DynamicFreeInitial 
-    "动态平衡，初始猜测值", 
-    FixedInitial "动态平衡，固定初始值", 
-    SteadyStateInitial 
-    "动态平衡，带猜测值的稳态初始值", 
+    DynamicFreeInitial
+    "动态平衡，初始猜测值",
+    FixedInitial "动态平衡，固定初始值",
+    SteadyStateInitial
+    "动态平衡，带猜测值的稳态初始值",
 
-    SteadyState "稳态平衡，初始猜测值") 
+    SteadyState "稳态平衡，初始猜测值")
     "用枚举法明确平衡方程" 
     annotation(Documentation(info = "<html>
 <p>
@@ -178,10 +178,10 @@ Medium.singleState 是介质属性，用于定义介质是否仅有一种状态�
 </html>"  ));
 
   type CvTypes = enumeration(
-    Av "（公制）流量系数 Av", 
-    Kv "（公制）流量系数 Kv", 
-    Cv "（US）流量系数 Cv", 
-    OpPoint "由工作点确定的 Av") 
+    Av "（公制）流量系数 Av",
+    Kv "（公制）流量系数 Kv",
+    Cv "（US）流量系数 Cv",
+    OpPoint "由工作点确定的 Av")
     "枚举阀门流量系数" annotation(
     Documentation(info = "<html>
 
@@ -216,9 +216,9 @@ Medium.singleState 是介质属性，用于定义介质是否仅有一种状态�
 </html>"      ));
 
   type PortFlowDirection = enumeration(
-    Entering "流体只进入", 
-    Leaving "流体只流出", 
-    Bidirectional "流体流动不受限制 (可反向流动)") 
+    Entering "流体只进入",
+    Leaving "流体只流出",
+    Bidirectional "流体流动不受限制 (可反向流动)")
     "枚举是否允许反向流动" annotation(
     Documentation(info = "<html>
 
@@ -248,10 +248,10 @@ Medium.singleState 是介质属性，用于定义介质是否仅有一种状态�
 </html>"  ));
 
   type ModelStructure = enumeration(
-      av_vb "port_a - 容积 - 流动模型 - 容积 - port_b", 
-      a_v_b "port_a - 流动模型 - 容积 - 流动模型 - port_b", 
-      av_b "port_a - 容积 - 流动模型 - port_b", 
-      a_vb "port_a - 流动模型 - 容积 - port_b") 
+      av_vb "port_a - 容积 - 流动模型 - 容积 - port_b",
+      a_v_b "port_a - 流动模型 - 容积 - 流动模型 - port_b",
+      av_b "port_a - 容积 - 流动模型 - port_b",
+      a_vb "port_a - 流动模型 - 容积 - port_b")
     "枚举离散管道模型中的模型结构" 
     annotation (Documentation(info="<html>
 
@@ -293,14 +293,14 @@ Medium.singleState 是介质属性，用于定义介质是否仅有一种状态�
 </p>
 
 </html>"  ));
-  type CheckValveHomotopyType = enumeration(Open, Closed, NoHomotopy) 
+  type CheckValveHomotopyType = enumeration(Open, Closed, NoHomotopy)
    "枚举止回阀同伦" 
     annotation (Documentation(info="<html>
 <p>如果知道止回阀是打开还是关闭，就可以简化初始化过程。</p>
 <p>如果对单向阀一无所知，选择 <strong>NoHomotopy</strong> 会很有用。</p>
 </html>"    ));
 
-  annotation (preferredView="info", 
+  annotation (preferredView="info",
               Documentation(info="<html>
 
 </html>"));

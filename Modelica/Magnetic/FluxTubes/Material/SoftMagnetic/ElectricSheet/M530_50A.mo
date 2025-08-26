@@ -1,10 +1,10 @@
 ﻿within Modelica.Magnetic.FluxTubes.Material.SoftMagnetic.ElectricSheet;
 record M530_50A "M530-50A (1.0813) @ 50Hz"
   extends FluxTubes.Material.SoftMagnetic.BaseData(
-    mu_i=2120, 
-    B_myMax=1.25, 
-    c_a=12400, 
-    c_b=1.6, 
+    mu_i=2120,
+    B_myMax=1.25,
+    c_a=12400,
+    c_b=1.6,
     n=13.5);
   annotation (Documentation(info="<html>
 <p>

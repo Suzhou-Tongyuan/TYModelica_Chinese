@@ -1,12 +1,12 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.DCAC.ExampleTemplates;
-partial model SinglePhaseTwoLevel 
+partial model SinglePhaseTwoLevel
   "包括控制的单相二级逆变器"
   extends Icons.ExampleTemplate;
   parameter SI.Frequency f=1000 "开关频率";
   Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage_n(
       V=50) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-70,10})));
   PowerConverters.DCAC.SinglePhase2Level inverter(useHeatPort=false) 
     annotation (Placement(transformation(extent={{-50,20},{-30,40}})));
@@ -14,32 +14,32 @@ partial model SinglePhaseTwoLevel
     annotation (Placement(transformation(extent={{10,-80},{-10,-60}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=270, 
+        extent={{-10,10},{10,-10}},
+        rotation=270,
         origin={70,-10})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=180, 
+        extent={{-10,-10},{10,10}},
+        rotation=180,
         origin={-90,40})));
-  PowerConverters.DCDC.Control.SignalPWM signalPWM(useConstantDutyCycle=false, 
-      f=f) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
+  PowerConverters.DCDC.Control.SignalPWM signalPWM(useConstantDutyCycle=false,
+      f=f) annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           origin={-40,-20})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage_p(
       V=50) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-70,50})));
   Modelica.Blocks.Sources.Sine sine(f=50) annotation (Placement(
         transformation(extent={{-30,-64},{-50,-44}})));
   Modelica.Blocks.Math.Harmonic fundamentalWaveVoltage(f=f, k=1) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=90, 
+        extent={{-10,-10},{10,10}},
+        rotation=90,
         origin={90,50})));
   Modelica.Blocks.Math.Harmonic fundamentalWaveCurrent(f=f, k=1) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={30,-90})));
 equation
   connect(voltageSensor.n, currentSensor.p) annotation (Line(

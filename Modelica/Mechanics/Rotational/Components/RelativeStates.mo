@@ -1,18 +1,18 @@
 ﻿within Modelica.Mechanics.Rotational.Components;
 model RelativeStates "相对状态变量的定义"
   extends Rotational.Interfaces.PartialTwoFlanges;
-  parameter StateSelect stateSelect=StateSelect.prefer 
+  parameter StateSelect stateSelect=StateSelect.prefer
     "优先使用相对角度和相对速度作为状态";
   parameter SI.Angle phi_nominal(
-    displayUnit="rad", 
+    displayUnit="rad",
     min=0.0) = 1.0 "相对角度的标称值（用于缩放）";
 
   SI.Angle phi_rel(
-start=0, 
-stateSelect=stateSelect, 
+start=0,
+stateSelect=stateSelect,
 nominal=if phi_nominal >= Modelica.Constants.eps then phi_nominal else 
 1) "用作状态变量的相对旋转角度";
-SI.AngularVelocity w_rel(start=0, stateSelect=stateSelect) 
+SI.AngularVelocity w_rel(start=0, stateSelect=stateSelect)
 "用作状态变量的相对角速度";
 SI.AngularAcceleration a_rel(start=0) "用作状态变量的相对角加速度";
 
@@ -49,56 +49,56 @@ Modelica.Mechanics.Rotational.Components.Inertia模型的绝对角度和绝对�
 <a href=\"modelica://Modelica.Mechanics.Rotational.UsersGuide.StateSelection\">State Selection</a>
 的讨论请见Rotation库中的用户指南
 </p>
-</html>"), 
+</html>"),
     Icon(
-    coordinateSystem(preserveAspectRatio=true, 
-      extent={{-100.0,-100.0},{100.0,100.0}}), 
+    coordinateSystem(preserveAspectRatio=true,
+      extent={{-100.0,-100.0},{100.0,100.0}}),
       graphics={
-    Line(points={{-100,0},{100,0}}, 
-      pattern=LinePattern.Dot), 
+    Line(points={{-100,0},{100,0}},
+      pattern=LinePattern.Dot),
     Ellipse(
-      lineColor={52,219,218}, 
-      fillColor={52,219,218}, 
-      fillPattern=FillPattern.Solid, 
-      extent={{-40.0,-40.0},{40.0,40.0}}), 
-    Text(textColor={0,0,255}, 
-      extent={{-40,-40},{40,40}}, 
-      textString="S"), 
+      lineColor={52,219,218},
+      fillColor={52,219,218},
+      fillPattern=FillPattern.Solid,
+      extent={{-40.0,-40.0},{40.0,40.0}}),
+    Text(textColor={0,0,255},
+      extent={{-40,-40},{40,40}},
+      textString="S"),
     Text(
-      extent={{-150,90},{150,50}}, 
-      textString="%name", 
-      textColor={0,0,255})}), 
+      extent={{-150,90},{150,50}},
+      textString="%name",
+      textColor={0,0,255})}),
     Diagram(coordinateSystem(
-        preserveAspectRatio=true, 
+        preserveAspectRatio=true,
         extent={{-100,-100},{100,100}}), graphics={Ellipse(
-          extent={{-40,40},{40,-40}}, 
-          lineColor={52,219,218}, 
-          fillColor={52,219,218}, 
-          fillPattern=FillPattern.Solid), 
+          extent={{-40,40},{40,-40}},
+          lineColor={52,219,218},
+          fillColor={52,219,218},
+          fillPattern=FillPattern.Solid),
             Text(
-              extent={{-40,40},{40,-40}}, 
-              textString="S", 
+              extent={{-40,40},{40,-40}},
+              textString="S",
               textColor={0,0,255}),Line(
-              points={{40,0},{96,0}}, 
-              pattern=LinePattern.Dash),Line(points={{-100,-10},{-100,-80}}, 
+              points={{40,0},{96,0}},
+              pattern=LinePattern.Dash),Line(points={{-100,-10},{-100,-80}},
           color={160,160,164}),Line(points={{100,-10},{100,-80}}, color={
           160,160,164}),Polygon(
-              points={{80,-65},{80,-55},{100,-60},{80,-65}}, 
-              lineColor={160,160,164}, 
-              fillColor={160,160,164}, 
-              fillPattern=FillPattern.Solid),Line(points={{-100,-60},{80,-60}}, 
+              points={{80,-65},{80,-55},{100,-60},{80,-65}},
+              lineColor={160,160,164},
+              fillColor={160,160,164},
+              fillPattern=FillPattern.Solid),Line(points={{-100,-60},{80,-60}},
           color={160,160,164}),Text(
-              extent={{-30,-70},{30,-90}}, 
-              textString="w_rel", 
+              extent={{-30,-70},{30,-90}},
+              textString="w_rel",
               textColor={0,0,255}),Line(points={{-76,80},{-5,80}}, color={
           128,128,128}),Polygon(
-              points={{14,80},{-6,85},{-6,75},{14,80}}, 
-              lineColor={128,128,128}, 
-              fillColor={128,128,128}, 
+              points={{14,80},{-6,85},{-6,75},{14,80}},
+              lineColor={128,128,128},
+              fillColor={128,128,128},
               fillPattern=FillPattern.Solid),Text(
-              extent={{18,87},{86,74}}, 
-              textColor={128,128,128}, 
+              extent={{18,87},{86,74}},
+              textColor={128,128,128},
               textString="rotation axis"),Line(
-              points={{-96,0},{-40,0}}, 
+              points={{-96,0},{-40,0}},
               pattern=LinePattern.Dash)}));
 end RelativeStates;

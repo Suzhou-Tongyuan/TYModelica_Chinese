@@ -1,74 +1,74 @@
 ﻿within Modelica.Mechanics.MultiBody.Parts;
-model Rotor1D 
+model Rotor1D
     "一维转动惯量附在三维物体上(如果world.driveTrainMechanics3D = true，则考虑三维动态效应)"
 
-  parameter Boolean animation=true 
+  parameter Boolean animation=true
     "=true，如果启用动画(显示转子为圆柱体)";
-  parameter SI.Inertia J(min=0,start=1) 
+  parameter SI.Inertia J(min=0,start=1)
     "绕其旋转轴的转子转动惯量";
-  parameter Modelica.Mechanics.MultiBody.Types.Axis n={1,0,0} 
+  parameter Modelica.Mechanics.MultiBody.Types.Axis n={1,0,0}
     "在frame_a中解析的旋转轴" 
       annotation (Evaluate=true);
-  parameter SI.Position r_center[3]=zeros(3) 
+  parameter SI.Position r_center[3]=zeros(3)
     "从frame_a原点到圆柱体中心的位置矢量" 
     annotation (Dialog(
-      tab="动画", 
-      group="如果animation=true", 
+      tab="动画",
+      group="如果animation=true",
       enable=animation));
-  parameter SI.Distance cylinderLength=2*world.defaultJointLength 
+  parameter SI.Distance cylinderLength=2*world.defaultJointLength
     "代表转子的圆柱体的长度" 
     annotation (Dialog(
-      tab="动画", 
-      group="如果animation=true", 
+      tab="动画",
+      group="如果animation=true",
       enable=animation));
-  parameter SI.Distance cylinderDiameter=2*world.defaultJointWidth 
+  parameter SI.Distance cylinderDiameter=2*world.defaultJointWidth
     "代表转子的圆柱体的直径" 
     annotation (Dialog(
-      tab="动画", 
-      group="如果animation=true", 
+      tab="动画",
+      group="如果animation=true",
       enable=animation));
-  input Modelica.Mechanics.MultiBody.Types.Color cylinderColor=Modelica.Mechanics.MultiBody.Types.Defaults.RodColor 
+  input Modelica.Mechanics.MultiBody.Types.Color cylinderColor=Modelica.Mechanics.MultiBody.Types.Defaults.RodColor
     "代表转子的圆柱体的颜色" 
     annotation (Dialog(
-      colorSelector=true, 
-      tab="动画", 
-      group="如果animation=true", 
+      colorSelector=true,
+      tab="动画",
+      group="如果animation=true",
       enable=animation));
   input Modelica.Mechanics.MultiBody.Types.SpecularCoefficient 
-    specularCoefficient=world.defaultSpecularCoefficient 
+    specularCoefficient=world.defaultSpecularCoefficient
     "环境光的反射(=0：光完全被吸收)" 
     annotation (Dialog(
-      tab="动画", 
-      group="如果animation=true", 
+      tab="动画",
+      group="如果animation=true",
       enable=animation));
-  parameter StateSelect stateSelect=StateSelect.default 
+  parameter StateSelect stateSelect=StateSelect.default
     "使用转子角度(phi)和转子速度(w)作为状态的优先级" 
     annotation (Dialog(tab="高级"));
-  parameter Boolean exact=true 
+  parameter Boolean exact=true
     "=true，如果进行精确计算；false，如果忽略轴承对转子加速度的影响以避免代数回路" 
     annotation (Evaluate=true, Dialog(tab="高级"));
 
- SI.Angle phi(start=0, stateSelect=stateSelect) 
+ SI.Angle phi(start=0, stateSelect=stateSelect)
     "转子相对于frame_a的旋转角度(=flange_a.phi=flange_b.phi)";
-SI.AngularVelocity w(start=0, stateSelect=stateSelect) 
+SI.AngularVelocity w(start=0, stateSelect=stateSelect)
     "转子相对于frame_a的角速度";
-SI.AngularAcceleration a(start=0) 
+SI.AngularAcceleration a(start=0)
     "转子相对于frame_a的角加速度";
 
-Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a 
+Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a
     "(左)驱动一维接口(一维接口轴指向局部平面内)" 
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-Modelica.Mechanics.Rotational.Interfaces.Flange_b flange_b 
+Modelica.Mechanics.Rotational.Interfaces.Flange_b flange_b
     "(右)被动一维接口(一维接口轴指向局部平面外)" 
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a if world.driveTrainMechanics3D 
+Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a if world.driveTrainMechanics3D
     "转子壳体固定的参考坐标系(如果world.driveTrainMechanics3D=false，则移除连接器)" 
     annotation (Placement(transformation(
-        origin={0,-100}, 
-        extent={{-20,-20},{20,20}}, 
+        origin={0,-100},
+        extent={{-20,-20},{20,20}},
         rotation=90)));
 
-encapsulated model RotorWith3DEffects 
+encapsulated model RotorWith3DEffects
     "一维转动惯量附在三维物体上(如果world.driveTrainMechanics3D = true，则考虑三维动态效应)"
 
     import Modelica;
@@ -76,99 +76,99 @@ encapsulated model RotorWith3DEffects
     import Modelica.Mechanics.MultiBody.Frames;
     import Modelica.Mechanics.MultiBody.Types;
 
-    parameter Boolean animation=true 
+    parameter Boolean animation=true
         "=true，如果启用动画(显示转子为圆柱体)";
-    parameter SI.Inertia J(min=0) = 1 
+    parameter SI.Inertia J(min=0) = 1
         "绕其旋转轴的转子转动惯量";
-    parameter Types.Axis n={1,0,0} 
+    parameter Types.Axis n={1,0,0}
         "在frame_a中解析的旋转轴";
-    parameter SI.Position r_center[3]=zeros(3) 
+    parameter SI.Position r_center[3]=zeros(3)
         "从frame_a原点到圆柱体中心的位置矢量" 
         annotation (Dialog(
-            tab="动画", 
-            group="如果animation=true", 
+            tab="动画",
+            group="如果animation=true",
             enable=animation));
-    parameter SI.Distance cylinderLength=2*world.defaultJointLength 
+    parameter SI.Distance cylinderLength=2*world.defaultJointLength
         "代表转子的圆柱体的长度" 
         annotation (Dialog(
-            tab="动画", 
-            group="如果animation=true", 
+            tab="动画",
+            group="如果animation=true",
             enable=animation));
-    parameter SI.Distance cylinderDiameter=2*world.defaultJointWidth 
+    parameter SI.Distance cylinderDiameter=2*world.defaultJointWidth
         "代表转子的圆柱体的直径" 
         annotation (Dialog(
-            tab="动画", 
-            group="如果animation=true", 
+            tab="动画",
+            group="如果animation=true",
             enable=animation));
-    input Types.Color cylinderColor=Modelica.Mechanics.MultiBody.Types.Defaults.RodColor 
+    input Types.Color cylinderColor=Modelica.Mechanics.MultiBody.Types.Defaults.RodColor
         "代表转子的圆柱体的颜色" 
         annotation (Dialog(
-            colorSelector=true, 
-            tab="动画", 
-            group="如果animation=true", 
+            colorSelector=true,
+            tab="动画",
+            group="如果animation=true",
             enable=animation));
-    input Types.SpecularCoefficient specularCoefficient=world.defaultSpecularCoefficient 
+    input Types.SpecularCoefficient specularCoefficient=world.defaultSpecularCoefficient
         "环境光的反射(=0：光完全被吸收)" 
         annotation (Dialog(
-            tab="动画", 
-            group="如果animation=true", 
+            tab="动画",
+            group="如果animation=true",
             enable=animation));
-    parameter StateSelect stateSelect=StateSelect.default 
+    parameter StateSelect stateSelect=StateSelect.default
         "使用转子角度(phi)和转子速度(w)作为状态的优先级" 
         annotation (Dialog(tab="高级"));
-    parameter Boolean exact=true 
+    parameter Boolean exact=true
         "=true，如果进行精确计算；false，如果忽略轴承对转子加速度的影响以避免代数回路" 
         annotation (Evaluate=true, Dialog(tab="高级"));
 
-    SI.AngularVelocity w_a[3] 
+    SI.AngularVelocity w_a[3]
       "frame_a中解析的角速度";
 
-SI.Angle phi(start=0, final stateSelect=stateSelect) 
+SI.Angle phi(start=0, final stateSelect=stateSelect)
       "转子相对于frame_a的旋转角度(=flange_a.phi=flange_b.phi)" 
       annotation (Dialog(showStartAttribute=true));
 
-SI.AngularVelocity w(start=0, stateSelect=stateSelect) 
+SI.AngularVelocity w(start=0, stateSelect=stateSelect)
       "转子相对于frame_a的角速度" 
       annotation (Dialog(showStartAttribute=true));
-SI.AngularAcceleration a(start=0) 
+SI.AngularAcceleration a(start=0)
       "转子相对于frame_a的角加速度" 
       annotation (Dialog(showStartAttribute=true));
 
-Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a 
+Modelica.Mechanics.Rotational.Interfaces.Flange_a flange_a
       "(左)驱动一维接口(一维接口轴指向局部平面内)" 
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-Modelica.Mechanics.Rotational.Interfaces.Flange_b flange_b 
+Modelica.Mechanics.Rotational.Interfaces.Flange_b flange_b
       "(右)被动一维接口(一维接口轴指向局部平面外)" 
       annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a 
+Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a
       "固定转子壳体的参考坐标系" 
       annotation (Placement(
           transformation(
-          origin={0,-100}, 
-          extent={{-20,-20},{20,20}}, 
+          origin={0,-100},
+          extent={{-20,-20},{20,20}},
           rotation=90)));
 
   protected
     outer Modelica.Mechanics.MultiBody.World world;
-    parameter Real e[3](each final unit="1")= 
-      Modelica.Math.Vectors.normalizeWithAssert(n) 
+    parameter Real e[3](each final unit="1")=
+      Modelica.Math.Vectors.normalizeWithAssert(n)
       "转子轴方向的单位矢量，解析在frame_a中";
     parameter SI.Inertia nJ[3]=J*e;
     Modelica.Mechanics.MultiBody.Visualizers.Advanced.Shape cylinder(
-      shapeType="cylinder", 
-      color=cylinderColor, 
-      specularCoefficient=specularCoefficient, 
-      length=cylinderLength, 
-      width=cylinderDiameter, 
-      height=cylinderDiameter, 
-      lengthDirection=n, 
-      widthDirection={0,1,0}, 
-      extra=1, 
-      r_shape=r_center - e*(cylinderLength/2), 
-      r=frame_a.r_0, 
+      shapeType="cylinder",
+      color=cylinderColor,
+      specularCoefficient=specularCoefficient,
+      length=cylinderLength,
+      width=cylinderDiameter,
+      height=cylinderDiameter,
+      lengthDirection=n,
+      widthDirection={0,1,0},
+      extra=1,
+      r_shape=r_center - e*(cylinderLength/2),
+      r=frame_a.r_0,
       R=Frames.absoluteRotation(frame_a.R, Frames.planarRotation(
-              e, 
-              phi, 
+              e,
+              phi,
               0))) if world.enableAnimation and animation;
 
   equation
@@ -222,76 +222,76 @@ annotation (Documentation(info="<html>
 <strong>参考文献</strong><br><span style=\"font-variant:small-caps\">Schweiger</span>,Christian;<span style=\"font-variant:small-caps\">Otter</span>,Martin:<a href=\"https://www.modelica.org/events/Conference2003/papers/h06_Schweiger_powertrains_v5.pdf\">模拟一维动力传动系统的三维机械效应</a>。
 在：<em>第三届国际Modelica会议论文集</em>。
 林雪平：Modelica协会和林雪平大学，2003年11月3-4日，第149-158页</p>
-</html>"), 
+</html>"),
 
-         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
+         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={
           Rectangle(
-            extent={{-100,10},{100,-10}}, 
-            lineColor={64,64,64}, 
-            fillPattern=FillPattern.HorizontalCylinder, 
-            fillColor={192,192,192}), 
-          Line(points={{-80,-25},{-60,-25}}), 
-          Line(points={{60,-25},{80,-25}}), 
-          Line(points={{-70,-25},{-70,-70}}), 
-          Line(points={{70,-25},{70,-70}}), 
-          Line(points={{-80,25},{-60,25}}), 
-          Line(points={{60,25},{80,25}}), 
-          Line(points={{-70,45},{-70,25}}), 
-          Line(points={{70,45},{70,25}}), 
-          Line(points={{-70,-70},{70,-70}}), 
+            extent={{-100,10},{100,-10}},
+            lineColor={64,64,64},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={192,192,192}),
+          Line(points={{-80,-25},{-60,-25}}),
+          Line(points={{60,-25},{80,-25}}),
+          Line(points={{-70,-25},{-70,-70}}),
+          Line(points={{70,-25},{70,-70}}),
+          Line(points={{-80,25},{-60,25}}),
+          Line(points={{60,25},{80,25}}),
+          Line(points={{-70,45},{-70,25}}),
+          Line(points={{70,45},{70,25}}),
+          Line(points={{-70,-70},{70,-70}}),
           Rectangle(
-            extent={{-50,50},{50,-50}}, 
-            lineColor={64,64,64}, 
-            fillPattern=FillPattern.HorizontalCylinder, 
-            fillColor={255,255,255}, 
-            radius=10), 
+            extent={{-50,50},{50,-50}},
+            lineColor={64,64,64},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={255,255,255},
+            radius=10),
           Rectangle(
-            extent={{-50,50},{50,-50}}, 
-            lineColor={64,64,64}, 
-            radius=10), 
+            extent={{-50,50},{50,-50}},
+            lineColor={64,64,64},
+            radius=10),
           Text(
-            extent={{-148,112},{152,72}}, 
-            textString="%name=%J", 
-            textColor={0,0,255}), 
+            extent={{-148,112},{152,72}},
+            textString="%name=%J",
+            textColor={0,0,255}),
           Line(points={{0,-70},{0,-100}})}));
   end RotorWith3DEffects;
 
 protected
   outer Modelica.Mechanics.MultiBody.World world;
-  parameter Real e[3](each final unit="1")= 
-    Modelica.Math.Vectors.normalizeWithAssert(n) 
+  parameter Real e[3](each final unit="1")=
+    Modelica.Math.Vectors.normalizeWithAssert(n)
     "Unitvectorindirectionofrotoraxis,resolvedinframe_a";
   Modelica.Mechanics.MultiBody.Visualizers.Advanced.Shape cylinder(
-    shapeType="cylinder", 
-    color=cylinderColor, 
-    specularCoefficient=specularCoefficient, 
-    length=cylinderLength, 
-    width=cylinderDiameter, 
-    height=cylinderDiameter, 
-    lengthDirection=n, 
-    widthDirection={0,1,0}, 
-    extra=1, 
-    r_shape=r_center - e*(cylinderLength/2), 
-    r=zeros(3), 
+    shapeType="cylinder",
+    color=cylinderColor,
+    specularCoefficient=specularCoefficient,
+    length=cylinderLength,
+    width=cylinderDiameter,
+    height=cylinderDiameter,
+    lengthDirection=n,
+    widthDirection={0,1,0},
+    extra=1,
+    r_shape=r_center - e*(cylinderLength/2),
+    r=zeros(3),
     R=Modelica.Mechanics.MultiBody.Frames.planarRotation(
-          e, 
-          phi, 
+          e,
+          phi,
           0)) if world.enableAnimation and animation and not world.driveTrainMechanics3D;
 
-  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=J, stateSelect= 
+  Modelica.Mechanics.Rotational.Components.Inertia inertia(J=J, stateSelect=
         StateSelect.never) if not world.driveTrainMechanics3D annotation (
       Placement(transformation(extent={{-20,-20},{20,20}})));
   RotorWith3DEffects rotorWith3DEffects(
-    animation=animation, 
-    J=J, 
-    n=n, 
-    r_center=r_center, 
-    cylinderLength=cylinderLength, 
-    cylinderDiameter=cylinderDiameter, 
-    cylinderColor=cylinderColor, 
-    specularCoefficient=specularCoefficient, 
-    exact=exact, 
+    animation=animation,
+    J=J,
+    n=n,
+    r_center=r_center,
+    cylinderLength=cylinderLength,
+    cylinderDiameter=cylinderDiameter,
+    cylinderColor=cylinderColor,
+    specularCoefficient=specularCoefficient,
+    exact=exact,
     stateSelect=StateSelect.never) if world.driveTrainMechanics3D annotation (
      Placement(transformation(extent={{-20,-80},{20,-40}})));
 equation
@@ -308,8 +308,8 @@ equation
   connect(rotorWith3DEffects.flange_a, flange_a) annotation (Line(
       points={{-20,-60},{-60,-60},{-60,0},{-100,0}}));
   connect(rotorWith3DEffects.frame_a, frame_a) annotation (Line(
-      points={{0,-80},{0,-100}}, 
-      color={95,95,95}, 
+      points={{0,-80},{0,-100}},
+      color={95,95,95},
       thickness=0.5));
   annotation (Documentation(info="<html>
 <p>
@@ -335,39 +335,39 @@ equation
 在：<em>第三届国际Modelica会议论文集</em>。
 林雪平：Modelica协会和林雪平大学，2003年11月3-4日，第149-158页</p>
 
-</html>"), 
-         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
+</html>"),
+         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
             {100,100}}), graphics={
         Rectangle(
-          extent={{-100,10},{100,-10}}, 
-          lineColor={64,64,64}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          fillColor={192,192,192}), 
-        Line(points={{-80,-25},{-60,-25}}), 
-        Line(points={{60,-25},{80,-25}}), 
-        Line(points={{-70,-25},{-70,-70}}), 
-        Line(points={{70,-25},{70,-70}}), 
-        Line(points={{-80,25},{-60,25}}), 
-        Line(points={{60,25},{80,25}}), 
-        Line(points={{-70,45},{-70,25}}), 
-        Line(points={{70,45},{70,25}}), 
-        Line(points={{-70,-70},{70,-70}}), 
+          extent={{-100,10},{100,-10}},
+          lineColor={64,64,64},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={192,192,192}),
+        Line(points={{-80,-25},{-60,-25}}),
+        Line(points={{60,-25},{80,-25}}),
+        Line(points={{-70,-25},{-70,-70}}),
+        Line(points={{70,-25},{70,-70}}),
+        Line(points={{-80,25},{-60,25}}),
+        Line(points={{60,25},{80,25}}),
+        Line(points={{-70,45},{-70,25}}),
+        Line(points={{70,45},{70,25}}),
+        Line(points={{-70,-70},{70,-70}}),
         Rectangle(
-          extent={{-50,50},{50,-50}}, 
-          lineColor={64,64,64}, 
-          fillPattern=FillPattern.HorizontalCylinder, 
-          fillColor={255,255,255}, 
-          radius=10), 
+          extent={{-50,50},{50,-50}},
+          lineColor={64,64,64},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={255,255,255},
+          radius=10),
         Rectangle(
-          extent={{-50,50},{50,-50}}, 
-          lineColor={64,64,64}, 
-          radius=10), 
+          extent={{-50,50},{50,-50}},
+          lineColor={64,64,64},
+          radius=10),
         Text(
-          extent={{-150,125},{150,85}}, 
-          textColor={0,0,255}, 
-          textString="%name"), 
-        Line(points={{0,-70},{0,-100}}), 
+          extent={{-150,125},{150,85}},
+          textColor={0,0,255},
+          textString="%name"),
+        Line(points={{0,-70},{0,-100}}),
         Text(
-          extent={{-150,80},{150,50}}, 
+          extent={{-150,80},{150,50}},
           textString="%J")}));
 end Rotor1D;

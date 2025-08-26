@@ -2,49 +2,49 @@
 model DC_PermanentMagnet "永磁直流电机"
   extends Machines.Interfaces.PartialBasicDCMachine(
     final ViNominal=VaNominal - Machines.Thermal.convertResistance(
-        Ra, 
-        TaRef, 
-        alpha20a, 
+        Ra,
+        TaRef,
+        alpha20a,
         TaNominal)*IaNominal - Machines.Losses.DCMachines.brushVoltageDrop(
-        brushParameters, IaNominal), 
-    final psi_eNominal=Lme*IeNominal, 
+        brushParameters, IaNominal),
+    final psi_eNominal=Lme*IeNominal,
     redeclare final Machines.Thermal.DCMachines.ThermalAmbientDCPM 
-      thermalAmbient(final Tpm=TpmOperational), 
-    redeclare final Machines.Interfaces.DCMachines.ThermalPortDCPM thermalPort, 
+      thermalAmbient(final Tpm=TpmOperational),
+    redeclare final Machines.Interfaces.DCMachines.ThermalPortDCPM thermalPort,
 
     redeclare final Machines.Interfaces.DCMachines.ThermalPortDCPM 
-      internalThermalPort, 
+      internalThermalPort,
     redeclare final Machines.Interfaces.DCMachines.PowerBalanceDCPM 
-      powerBalance(final lossPowerPermanentMagnet=0), 
+      powerBalance(final lossPowerPermanentMagnet=0),
     core(final w=airGapDC.w));
-  final parameter SI.Temperature TpmOperational=293.15 
+  final parameter SI.Temperature TpmOperational=293.15
     "永磁体的工作温度" 
     annotation (Dialog(group="操作温度"));
   Machines.BasicMachines.Components.AirGapDC airGapDC(
-    final turnsRatio=turnsRatio, 
-    final Le=Lme, 
-    final quasiStatic=quasiStatic) annotation (Placement(transformation(extent= 
+    final turnsRatio=turnsRatio,
+    final Le=Lme,
+    final quasiStatic=quasiStatic) annotation (Placement(transformation(extent=
             {{-10,-10},{10,10}}, rotation=270)));
   Modelica.Electrical.Analog.Basic.Ground eGround annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-20,-30})));
   Modelica.Electrical.Analog.Sources.ConstantCurrent ie(I=IeNominal) 
     annotation (Placement(transformation(
-        origin={0,-40}, 
+        origin={0,-40},
         extent={{-10,-10},{10,10}})));
 protected
-  constant SI.Inductance Lme=1 
+  constant SI.Inductance Lme=1
     "励磁电感";
-  constant SI.Current IeNominal=1 
+  constant SI.Current IeNominal=1
     "等效励磁电流";
 equation
   connect(eGround.p, ie.p) annotation (Line(points={{-10,-30},{-10,-30},{
           -10,-40}}, color={0,0,255}));
   connect(airGapDC.pin_ep, ie.n) 
     annotation (Line(points={{10,-10},{10,-40}}, color={0,0,255}));
-  connect(airGapDC.pin_en, eGround.p) annotation (Line(points={{-10,-10}, 
+  connect(airGapDC.pin_en, eGround.p) annotation (Line(points={{-10,-10},
           {-10,-20},{-10,-30}}, color={0,0,255}));
   connect(airGapDC.pin_ap, la.n) annotation (Line(
       points={{10,10},{10,60}}, color={0,0,255}));
@@ -55,15 +55,15 @@ equation
   connect(airGapDC.pin_an, brush.p) annotation (Line(
       points={{-10,10},{-10,60}}, color={0,0,255}));
   annotation (
-    defaultComponentName="dcpm", 
+    defaultComponentName="dcpm",
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={Rectangle(
-          extent={{-130,10},{-100,-10}}, 
-          fillColor={0,255,0}, 
+          extent={{-130,10},{-100,-10}},
+          fillColor={0,255,0},
           fillPattern=FillPattern.Solid), Rectangle(
-          extent={{-100,10},{-70,-10}}, 
-          fillColor={255,0,0}, 
-          fillPattern=FillPattern.Solid)}), 
+          extent={{-100,10},{-70,-10}},
+          fillColor={255,0,0},
+          fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
 <p><strong>永磁直流电机模型。</strong><br>
 电枢电阻和电感直接建模在电枢引脚上，然后使用<em>AirGapDC</em>模型。永磁激励通过恒定的等效励磁电流馈入AirGapDC进行建模。该电机模型考虑以下损耗效应：

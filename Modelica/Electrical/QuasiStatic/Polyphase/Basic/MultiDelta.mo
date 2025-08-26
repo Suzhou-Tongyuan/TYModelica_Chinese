@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.QuasiStatic.Polyphase.Basic;
-model MultiDelta 
+model MultiDelta
   "多相系统的三角形连接"
   import Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems;
   import Modelica.Utilities.Streams.print;
@@ -31,24 +31,24 @@ equation
       connect(plugToPins_n.pin_n[(k - 1)*mBasic + j], plugToPins_p.pin_p[(k - 2)*mBasic + j + kP]);
     end for;
   end for;
-  connect(plug_p, plugToPins_p.plug_p) annotation (Line(points={{-100,0},{-93, 
+  connect(plug_p, plugToPins_p.plug_p) annotation (Line(points={{-100,0},{-93,
           0},{-86,0},{-72,0}}, color={85,170,255}));
-  connect(plugToPins_n.plug_n, plug_n) annotation (Line(points={{72,0},{79, 
+  connect(plugToPins_n.plug_n, plug_n) annotation (Line(points={{72,0},{79,
           0},{79,0},{86,0},{86,0},{100,0}}, color={85,170,255}));
   annotation (Icon(graphics={Line(
-              points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}}, 
-              color={85,170,255}, 
-              thickness=0.5), Line(points={{-90,0},{-44,0}}, color={85,170,255}), 
+              points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}},
+              color={85,170,255},
+              thickness=0.5), Line(points={{-90,0},{-44,0}}, color={85,170,255}),
           Line(points={{80,0},{90,0}}, color={85,170,255}),Line(
-              points={{-36,74},{-36,-64},{83,6},{-36,74},{-36,73}}, 
-              color={85,170,255}, 
-              thickness=0.5), 
+              points={{-36,74},{-36,-64},{83,6},{-36,74},{-36,73}},
+              color={85,170,255},
+              thickness=0.5),
         Text(
-          extent={{-150,70},{150,110}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,70},{150,110}},
+          textString="%name",
+          textColor={0,0,255}),
         Text(
-          extent={{-150,-110},{150,-70}}, 
+          extent={{-150,-110},{150,-70}},
           textString="m=%m")}), Documentation(info="<html>
 <p>
 多基系统组成的多相电路的Delta（多边形）连接（参见

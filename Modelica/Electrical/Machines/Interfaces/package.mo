@@ -4,7 +4,7 @@ package Interfaces "空间矢量连接器和电机基类"
 
   annotation (Documentation(info="<html>
 此包包含空间相量连接器和用于机器模型的部分模型。
-</html>", 
+</html>",
         revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

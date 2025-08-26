@@ -60,7 +60,7 @@ package Semiconductors "半导体器件，如二极管、MOS和双极晶体管"
 <p>大多数半导体器件都包含一个条件热端口，该热端口默认情况下是不活跃的。如果激活了该热端口，损耗功率将被计算并用于热网络。半导体器件的加热变体提供了使用热端口温度进行电气计算的功能。这意味着为了实现真正的热电相互作用，必须使用加热器件模型。
 </p>
 
-</html>", 
+</html>",
     revisions = "<html>
 <dl>
 <dt>
@@ -78,10 +78,10 @@ Christoph Clau&szlig;
 </dd>
 </dl>
 </html>"), Icon(graphics = {
-    Line(points = {{-20, 0}, {-90, 0}}), 
-    Line(points = {{-20, 60}, {-20, -60}}), 
-    Line(points = {{20, 68}, {-20, 28}}), 
-    Line(points = {{80, 68}, {20, 68}}), 
-    Line(points = {{-20, -30}, {20, -70}}), 
+    Line(points = {{-20, 0}, {-90, 0}}),
+    Line(points = {{-20, 60}, {-20, -60}}),
+    Line(points = {{20, 68}, {-20, 28}}),
+    Line(points = {{80, 68}, {20, 68}}),
+    Line(points = {{-20, -30}, {20, -70}}),
     Line(points = {{20, -70}, {80, -70}})}));
 end Semiconductors;

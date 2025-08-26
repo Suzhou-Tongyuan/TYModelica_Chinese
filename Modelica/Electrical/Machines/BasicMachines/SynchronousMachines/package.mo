@@ -21,7 +21,7 @@ package SynchronousMachines "同步电机模型"
     虚轴=q轴</li>
 <li>磁轮感应的电压(d轴)位于q轴。</li>
 </ul>
-</html>", 
+</html>",
       revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

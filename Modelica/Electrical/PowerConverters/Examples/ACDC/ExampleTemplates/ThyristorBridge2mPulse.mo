@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.ExampleTemplates;
-partial model ThyristorBridge2mPulse 
+partial model ThyristorBridge2mPulse
   "2*m脉冲桥式晶闸管整流器模板"
   extends Icons.ExampleTemplate;
   import Modelica.Constants.pi;
@@ -8,49 +8,49 @@ partial model ThyristorBridge2mPulse
   parameter SI.Frequency f=50 "频率";
 
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage(
-    final m=m, 
-    V=fill(sqrt(2)*Vrms, m), 
+    final m=m,
+    V=fill(sqrt(2)*Vrms, m),
     phase=-
-        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
+        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
     f=fill(f, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-80,-30})));
   PowerConverters.ACDC.ThyristorBridge2mPulse rectifier(final m=m) 
     annotation (Placement(transformation(extent={{-40,24},{-20,44}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor 
     annotation (Placement(transformation(
-        origin={50,10}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={50,10},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
   Modelica.Blocks.Math.Mean meanVoltage(f=2*m*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={80,40})));
   Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f=2*m*f) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={80,10})));
   Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=180, 
+        extent={{-10,10},{10,-10}},
+        rotation=180,
         origin={0,-40})));
   Modelica.Blocks.Math.Mean meanCurrent(f=2*m*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={80,-60})));
   PowerConverters.ACDC.Control.VoltageBridge2mPulse pulse2m(
-    m=m, 
-    f=f, 
+    m=m,
+    f=f,
     useFilter=false) annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}}, 
-        rotation=180, 
+        extent={{10,10},{-10,-10}},
+        rotation=180,
         origin={-30,0})));
   Modelica.Electrical.Polyphase.Basic.MultiStarResistance 
     multiStarResistance(final m=m) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-80,-60})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(extent={{-90,-100},{-70,-80}})));

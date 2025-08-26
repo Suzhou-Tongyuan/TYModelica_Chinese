@@ -1,5 +1,5 @@
 ﻿within Modelica.Thermal.HeatTransfer.Examples;
-model GenerationOfFMUs 
+model GenerationOfFMUs
   "演示生成 FMU(Functional Mock-up Units)变体的示例"
   extends Modelica.Icons.Example;
 
@@ -11,18 +11,18 @@ model GenerationOfFMUs
     annotation (Placement(transformation(extent={{40,40},{60,60}})));
   HeatTransfer.Examples.Utilities.Conduction conductor(G=10) 
     annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
-  HeatTransfer.Components.HeatCapacitor capacitor3a(C=1.1, T(fixed=true, start= 
+  HeatTransfer.Components.HeatCapacitor capacitor3a(C=1.1, T(fixed=true, start=
           293.15)) 
     annotation (Placement(transformation(extent={{-30,-70},{-10,-50}})));
   HeatTransfer.Sources.PrescribedHeatFlow heatFlow3 
     annotation (Placement(transformation(extent={{-60,-80},{-40,-60}})));
-  HeatTransfer.Components.GeneralHeatFlowToTemperatureAdaptor heatFlowToTemperature3a(use_pder= 
+  HeatTransfer.Components.GeneralHeatFlowToTemperatureAdaptor heatFlowToTemperature3a(use_pder=
         false) 
     annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
-  HeatTransfer.Components.HeatCapacitor capacitor3b(C=2.2, T(fixed=true, start= 
+  HeatTransfer.Components.HeatCapacitor capacitor3b(C=2.2, T(fixed=true, start=
           293.15)) 
     annotation (Placement(transformation(extent={{70,-70},{90,-50}})));
-  HeatTransfer.Components.GeneralHeatFlowToTemperatureAdaptor heatFlowToTemperature3b(use_pder= 
+  HeatTransfer.Components.GeneralHeatFlowToTemperatureAdaptor heatFlowToTemperature3b(use_pder=
         false) 
     annotation (Placement(transformation(extent={{70,-80},{50,-60}})));
 equation
@@ -40,7 +40,7 @@ equation
     annotation (Line(points={{3,-62},{18,-62}}, color={0,0,127}));
   connect(conductor.T2,heatFlowToTemperature3b. p) 
     annotation (Line(points={{42,-62},{57,-62}}, color={0,0,127}));
-  connect(sine1.y, heatFlow3.Q_flow) annotation (Line(points={{-79,50},{-70,50}, 
+  connect(sine1.y, heatFlow3.Q_flow) annotation (Line(points={{-79,50},{-70,50},
           {-70,-70},{-60,-70}}, color={0,0,127}));
   connect(heatFlow3.port, capacitor3a.port) 
     annotation (Line(points={{-40,-70},{-20,-70}}, color={191,0,0}));
@@ -48,7 +48,7 @@ equation
     annotation (Line(points={{-20,-70},{-2,-70}}, color={191,0,0}));
   connect(heatFlowToTemperature3b.heatPort, capacitor3b.port) 
     annotation (Line(points={{62,-70},{80,-70}}, color={191,0,0}));
-  connect(directCapacity.derT, inverseCapacity.derT) annotation (Line(points={{21, 
+  connect(directCapacity.derT, inverseCapacity.derT) annotation (Line(points={{21,
           53},{28.5,53},{28.5,53},{38,53}}, color={0,0,127}));
   annotation (experiment(StopTime=1, Interval=0.001), Documentation(info="<html><p>
 这个例子演示了如何从各种热传递组件生成输入/输出模块(例如，以一个形式 FMU - <a href=\"https://fmi-standard.org\" target=\"\">Functional Mock-up Unit</a>&nbsp; ) 。目标是从Modelica导出这样一个输入/输出模块，并导入到另一个建模环境中。关键问题在于，在导出之前，必须了解该组件在目标环境中的使用方式。根据目标用途，接口中的不同法兰变量需要具有输入或输出因果关系。请注意，此示例模型可用于测试 Modelica 工具的 FMU 导出/导入功能。只需将图标中标记为“toFMU”的组件导出为 FMU，并将其导入回来。然后，模型应该仍然可以正常工作，并给出与纯 Modelica 模型相同的结果。

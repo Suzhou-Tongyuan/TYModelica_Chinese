@@ -19,6 +19,6 @@ equation
 <a href=\"modelica://Modelica.Mechanics.Translational.Sources.Accelerate\">Sources.Accelerate</a>
 通过预定义的加速度移动质量块。
 </p>
-</html>"), 
+</html>"),
        experiment(StopTime=1.0, Interval=0.001));
 end Accelerate;

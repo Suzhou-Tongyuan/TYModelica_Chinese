@@ -1,64 +1,64 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.InductionMachines;
-model IMC_Conveyor 
+model IMC_Conveyor
   "感应电机与鼠笼和变频器驱动的输送机"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   constant Integer m=3 "相数";
   constant SI.Frequency unitFrequency=1 annotation(HideResult=true);
-  parameter SI.Voltage VNominal=100 
+  parameter SI.Voltage VNominal=100
     "每相标称均方根电压";
-  parameter SI.Frequency fNominal=aimcData.fsNominal 
+  parameter SI.Frequency fNominal=aimcData.fsNominal
     "标称频率";
-  parameter SI.AngularVelocity wNominal=2*pi*fNominal/aimcData.p 
+  parameter SI.AngularVelocity wNominal=2*pi*fNominal/aimcData.p
     "额定速度";
   parameter SI.Torque TLoad=161.4 "额定负载扭矩";
-  parameter SI.Inertia JLoad=0.29 
+  parameter SI.Inertia JLoad=0.29
     "载荷的转动惯量";
   parameter SI.Length r=0.05 "传输半径";
   Magnetic.FundamentalWave.BasicMachines.InductionMachines.IM_SquirrelCage aimc(
-    p=aimcData.p, 
-    fsNominal=aimcData.fsNominal, 
-    TsRef=aimcData.TsRef, 
-    alpha20s(displayUnit="1/K") = aimcData.alpha20s, 
-    Jr=aimcData.Jr, 
-    Js=aimcData.Js, 
-    frictionParameters=aimcData.frictionParameters, 
-    phiMechanical(fixed=true), 
-    wMechanical(fixed=true), 
-    statorCoreParameters=aimcData.statorCoreParameters, 
-    strayLoadParameters=aimcData.strayLoadParameters, 
-    TrRef=aimcData.TrRef, 
-    Rs=aimcData.Rs*m/3, 
-    Lssigma=aimcData.Lssigma*m/3, 
-    Lszero=aimcData.Lszero*m/3, 
-    Lm=aimcData.Lm*m/3, 
-    Lrsigma=aimcData.Lrsigma*m/3, 
-    Rr=aimcData.Rr*m/3, 
-    TsOperational=293.15, 
-    effectiveStatorTurns=aimcData.effectiveStatorTurns, 
-    alpha20r=aimcData.alpha20r, 
+    p=aimcData.p,
+    fsNominal=aimcData.fsNominal,
+    TsRef=aimcData.TsRef,
+    alpha20s(displayUnit="1/K") = aimcData.alpha20s,
+    Jr=aimcData.Jr,
+    Js=aimcData.Js,
+    frictionParameters=aimcData.frictionParameters,
+    phiMechanical(fixed=true),
+    wMechanical(fixed=true),
+    statorCoreParameters=aimcData.statorCoreParameters,
+    strayLoadParameters=aimcData.strayLoadParameters,
+    TrRef=aimcData.TrRef,
+    Rs=aimcData.Rs*m/3,
+    Lssigma=aimcData.Lssigma*m/3,
+    Lszero=aimcData.Lszero*m/3,
+    Lm=aimcData.Lm*m/3,
+    Lrsigma=aimcData.Lrsigma*m/3,
+    Rr=aimcData.Rr*m/3,
+    TsOperational=293.15,
+    effectiveStatorTurns=aimcData.effectiveStatorTurns,
+    alpha20r=aimcData.alpha20r,
     TrOperational=293.15) 
     annotation (Placement(transformation(extent={{60,10},{40,30}})));
   Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensor 
     annotation (Placement(transformation(extent={{20,100},{40,80}})));
   Modelica.Blocks.Sources.CombiTimeTable dutyCycle(
-    table=[0,0; 1,1; 4,1; 5,0; 10,0; 11,-1; 14,-1; 15,0; 20,0], 
+    table=[0,0; 1,1; 4,1; 5,0; 10,0; 11,-1; 14,-1; 15,0; 20,0],
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) 
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
   Modelica.Electrical.Machines.Utilities.VfController vfController(
-    final m=m, 
-    VNominal=VNominal, 
+    final m=m,
+    VNominal=VNominal,
     fNominal=fNominal) 
     annotation (Placement(transformation(extent={{-30,40},{-10,60}})));
   Modelica.Electrical.Polyphase.Sources.SignalVoltage signalVoltage(
       final m=m) annotation (Placement(transformation(
-        origin={0,90}, 
+        origin={0,90},
         extent={{10,10},{-10,-10}})));
   Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
       Placement(transformation(extent={{-40,80},{-60,100}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-70,70}, 
+        origin={-70,70},
         extent={{-10,-10},{10,10}})));
   Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(
       terminalConnection="Y") 
@@ -73,7 +73,7 @@ model IMC_Conveyor
     annotation (Placement(transformation(extent={{32,10},{12,30}})));
   Modelica.Mechanics.Translational.Components.Mass mass(m=JLoad/r^2) 
     annotation (Placement(transformation(extent={{0,10},{-20,30}})));
-  Modelica.Mechanics.Translational.Sources.SignForce signForce(v0(displayUnit= 
+  Modelica.Mechanics.Translational.Sources.SignForce signForce(v0(displayUnit=
           "m/s") = 0.01*wNominal*r, f_nominal=-TLoad/r) 
     annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
 initial equation
@@ -83,10 +83,10 @@ equation
   connect(signalVoltage.plug_n, star.plug_p) 
     annotation (Line(points={{-10,90},{-40,90}},      color={0,0,255}));
   connect(star.pin_n, ground.p) 
-    annotation (Line(points={{-60,90},{-70,90},{-70,80}}, 
+    annotation (Line(points={{-60,90},{-70,90},{-70,80}},
                                                  color={0,0,255}));
   connect(vfController.y, signalVoltage.v) 
-    annotation (Line(points={{-9,50},{0,50},{0,78}}, 
+    annotation (Line(points={{-9,50},{0,50},{0,78}},
                                                 color={0,0,255}));
   connect(signalVoltage.plug_p, currentQuasiRMSSensor.plug_p) 
     annotation (Line(points={{10,90},{20,90}},      color={0,0,255}));

@@ -30,7 +30,7 @@ package Math "数学函数库(例如sin、cos)和向量、矩阵运算函数库"
           if v[i] >= 0 then
             s := s + " ";
           end if;
-          s := s + String(v[i], significantDigits = significantDigits) + 
+          s := s + String(v[i], significantDigits = significantDigits) +
             Strings.repeat(significantDigits + 8 - Strings.length(String(abs(v[i]))));
 
           s := s + "\n";
@@ -85,9 +85,9 @@ toString(v,\"vv\",1);
       extends Modelica.Icons.Function;
       input Real v1[:] "第一个向量";
       input Real v2[:] "第二个向量(长度可能与v1不同)";
-      input Real eps(min = 0) = 0 
+      input Real eps(min = 0) = 0
         "如果abs(e1-e2) <= eps，则两个向量中的两个元素e1和e2相同";
-      output Boolean result 
+      output Boolean result
         "= true，如果两个向量具有相同的长度和元素";
 
     protected
@@ -143,7 +143,7 @@ result := Vectors.isEqual(v1,v3,0.1); // = true
     function norm "返回向量的p-范数"
       extends Modelica.Icons.Function;
       input Real v[:] "实型向量";
-      input Real p(min = 1) = 2 
+      input Real p(min = 1) = 2
         "p-范数类型(常用：1、2或Modelica.Constants.inf)";
       output Real result = 0.0 "向量v的p-范数";
     protected
@@ -215,7 +215,7 @@ v = {2, -4, -2, -1};
 </html>"                    ));
     end norm;
 
-    function length 
+    function length
       "返回向量的长度(如果执行进一步的符号处理，比使用norm()好)"
       extends Modelica.Icons.Function;
       input Real v[:] "实型向量";
@@ -246,11 +246,11 @@ v = {2, -4, -2, -1};
 </html>"    ));
     end length;
 
-    function normalize 
+    function normalize
       "返回归一化的向量，使得其长度为 1，并且防止零向量出现除零错误"
       extends Modelica.Icons.Function;
       input Real v[:] "实型向量";
-      input Real eps(min = 0.0) = 100 * Modelica.Constants.eps 
+      input Real eps(min = 0.0) = 100 * Modelica.Constants.eps
         "如果|v| < eps则result = v/eps";
       output Real result[size(v, 1)] "输入向量v归一化为length = 1";
 
@@ -288,7 +288,7 @@ Vectors.<strong>normalize</strong>(v,eps=100*Modelica.Constants.eps);
 </html>"                            ));
     end normalize;
 
-    function normalizeWithAssert 
+    function normalizeWithAssert
       "返回归一化的向量，使长度为1(触发零向量断言)"
       import Modelica.Math.Vectors.length;
       extends Modelica.Icons.Function;
@@ -299,7 +299,7 @@ Vectors.<strong>normalize</strong>(v,eps=100*Modelica.Constants.eps);
       assert(length(v) > 0.0, "向量v = {0,0,0}应归一化(= v/sqrt(v*v))，但这导致会除零错误。\n提供一个非零向量!");
       result := v / length(v);
       annotation(
-        Inline = true, 
+        Inline = true,
         Documentation(info = "<html>
 <h4>语法</h4>
 <blockquote><pre>
@@ -352,7 +352,7 @@ Vectors.<strong>reverse</strong>(v);
     function sort "按升序或降序对向量元素排序"
       extends Modelica.Icons.Function;
       input Real v[:] "要排序的实型向量";
-      input Boolean ascending = true 
+      input Boolean ascending = true
         "= true，如果升序，否则降序";
       output Real sorted_v[size(v, 1)] = v "排序后的向量";
       output Integer indices[size(v, 1)] = 1:size(v, 1) "sorted_v = v[indices]";
@@ -430,9 +430,9 @@ Vectors.<strong>reverse</strong>(v);
       extends Modelica.Icons.Function;
       input Real e "搜索 e";
       input Real v[:] "真实矢量";
-      input Real eps(min = 0) = 0 
+      input Real eps(min = 0) = 0
         "如果 abs(e-v[i]) <= eps，元素 e 等于向量 v 的元素 v[i]";
-      output Integer result 
+      output Integer result
         "v[result] = e（e 的首次出现）；如果未找到，则 result=0";
     protected
       Integer i;
@@ -479,7 +479,7 @@ result := Vectors.find(e2,v,eps=0.1);  // = <strong>3</strong>
 
     function interpolate "对向量进行线性插值"
       extends Modelica.Icons.Function;
-      input Real x[:] 
+      input Real x[:]
         "横坐标表向量(要求严格单调递增的值)";
       input Real y[size(x, 1)] "纵坐标表向量";
       input Real xi "期望的横坐标值";
@@ -525,7 +525,7 @@ result := Vectors.find(e2,v,eps=0.1);  // = <strong>3</strong>
         iNew := i;
       end if;
 
-      annotation(smoothOrder(normallyConstant = x, normallyConstant = y) = 100, 
+      annotation(smoothOrder(normallyConstant = x, normallyConstant = y) = 100,
         Documentation(info = "<html>
 <h4>语法</h4>
 <blockquote><pre>
@@ -559,7 +559,7 @@ Real y[:]  = {10, 20, 30, 40, 50, 60};
 
     function relNodePositions "返回节点相对位置向量(0...1)"
       extends Modelica.Icons.Function;
-      input Integer nNodes 
+      input Integer nNodes
         "节点数(包括位于左和右位置的节点)";
       output Real xsi[nNodes] "节点的相对位置";
     protected
@@ -651,20 +651,20 @@ xsi = relNodePositions(7);  // xsi = {0, 0.1, 0.3, 0.5, 0.7, 0.9, 1}
 
 <h4>See also</h4>
 <a href=\"modelica://Modelica.Math.Matrices\">Matrices</a>
-</html>"    ), 
+</html>"    ),
       Icon(graphics = {Rectangle(
-      extent = {{-16, 66}, {14, 18}}, 
-      lineColor = {95, 95, 95}, 
-      fillColor = {175, 175, 175}, 
+      extent = {{-16, 66}, {14, 18}},
+      lineColor = {95, 95, 95},
+      fillColor = {175, 175, 175},
       fillPattern = FillPattern.Solid), Rectangle(
-      extent = {{-16, -14}, {14, -62}}, 
-      lineColor = {95, 95, 95}, 
-      fillColor = {175, 175, 175}, 
+      extent = {{-16, -14}, {14, -62}},
+      lineColor = {95, 95, 95},
+      fillColor = {175, 175, 175},
       fillPattern = FillPattern.Solid)}));
-    package Utilities 
+    package Utilities
       "不应直接由用户使用的工具函数"
       extends Modelica.Icons.UtilitiesPackage;
-      function householderVector 
+      function householderVector
         "计算归一化的householder向量，将向量a反射到向量b上"
         extends Modelica.Icons.Function;
         import Modelica.Math.Vectors.norm;
@@ -678,9 +678,9 @@ xsi = relNodePositions(7);  // xsi = {0, 0.1, 0.3, 0.5, 0.7, 0.9, 1}
         Real alpha;
 
       algorithm
-        assert(norm_b > 0, 
+        assert(norm_b > 0,
           "Vector b in function householderVector is zero vector, but at least one element should be different from zero");
-        assert(norm_a > 0, 
+        assert(norm_a > 0,
           "Vector a in function householderVector is zero vector, but at least one element should be different from zero");
         alpha := if norm(a + norm_a / norm_b * b, 2) > norm(a - norm_a / norm_b * b, 2) 
           then norm_a / norm_b else -norm_a / norm_b;
@@ -747,7 +747,7 @@ u = householderVector(a,b);    // {0.837, -0.478, -0.239, -0.119}
 </html>"));
       end householderVector;
 
-      function householderReflection 
+      function householderReflection
         "用正交向量 u 在平面上反射一个向量 a"
         extends Modelica.Icons.Function;
         import Modelica.Math.Vectors;
@@ -816,17 +816,17 @@ u = {0.837, -0.478, -0.239, -0.119};
 </html>"                  ));
       end householderReflection;
 
-      encapsulated function roots 
+      encapsulated function roots
         "计算假定最高系数不为零的多项式的零点"
         import Modelica.Math.Matrices;
         import Modelica;
         extends Modelica.Icons.Function;
-        input Real p[:] 
+        input Real p[:]
           "具有多项式系数的向量p[1]*x^n +p[2]*x^(n-1) +p[n]*x +p[n-1]";
         output Real roots[max(0, size(p, 1) - 1),2] = fill(
-          0, 
-          max(0, size(p, 1) - 1), 
-          2) 
+          0,
+          max(0, size(p, 1) - 1),
+          2)
           "根[:，1]和根[:，2]是多项式p根的实部和虚部";
       protected
         Integer np = size(p, 1);
@@ -835,9 +835,9 @@ u = {0.837, -0.478, -0.239, -0.119};
         Real ev[max(size(p, 1) - 1, 0),2] "特征值";
       algorithm
         if n > 0 then
-          assert(abs(p[1]) > 0, 
-            "Computing the roots of a polynomial with function \"Modelica.Math.Vectors.Utilities.roots\"\n" 
-            + 
+          assert(abs(p[1]) > 0,
+            "Computing the roots of a polynomial with function \"Modelica.Math.Vectors.Utilities.roots\"\n"
+            +
             "failed because the first element of the coefficient vector is zero, but should not be.");
 
           // 伴生矩阵
@@ -898,10 +898,10 @@ r = <strong>roots</strong>({1,2,3});
   end Vectors;
 
   package Matrices "矩阵运算函数库"
-    package Examples 
+    package Examples
       "演示Math.Matrices函数用法的示例"
       extends Modelica.Icons.ExamplesPackage;
-      function solveLinearEquations 
+      function solveLinearEquations
         "演示线性方程组的解法"
         extends Modelica.Icons.Function;
         import Modelica.Utilities.Streams.print;
@@ -962,7 +962,7 @@ r = <strong>roots</strong>({1,2,3});
 
       input Real M[:,:] "实数矩阵";
       input String name = "" "用于打印的独立变量名";
-      input Integer significantDigits = 6 
+      input Integer significantDigits = 6
         "显示的有效位数";
       output String s = "" "矩阵M的字符串表达式";
     protected
@@ -983,7 +983,7 @@ r = <strong>roots</strong>({1,2,3});
             if M[i,j] >= 0 then
               s := s + " ";
             end if;
-            s := s + String(M[i,j], significantDigits = significantDigits) + 
+            s := s + String(M[i,j], significantDigits = significantDigits) +
               Strings.repeat(significantDigits + 8 - Strings.length(String(abs(M[
               i,j]))));
           end for;
@@ -1034,9 +1034,9 @@ toString(A,\"A\",1);
       extends Modelica.Icons.Function;
       input Real M1[:,:] "第一矩阵";
       input Real M2[:,:] "第二矩阵（大小可能与M1不同）";
-      input Real eps(min = 0) = 0 
+      input Real eps(min = 0) = 0
         "如果abs(e1-e2) <= eps，则两个矩阵的两个元素e1和e2相同";
-      output Boolean result 
+      output Boolean result
         "= true，如果矩阵具有相同大小和相同元素";
 
     protected
@@ -1094,7 +1094,7 @@ result := Matrices.isEqual(M1,M3,0.1); // = true
 </html>"));
     end isEqual;
 
-    function solve 
+    function solve
       "解实数线性方程组A*x=b，其中b是一个向量(使用带部分主元选择的高斯消元法)"
 
       extends Modelica.Icons.Function;
@@ -1149,7 +1149,7 @@ x := Matrices.solve(A,b);  // x = {3,2,1}
 </html>"        ));
     end solve;
 
-    function solve2 
+    function solve2
       "解实系数线性方程组A*X = B，使用B矩阵(带部分选主元的高斯消元法)"
 
       extends Modelica.Icons.Function;
@@ -1211,14 +1211,14 @@ X := Matrices.solve2(A, B);  /* X = [3, 6;
 </html>"                ));
     end solve2;
 
-    function leastSquares 
+    function leastSquares
       "解线性方程A * x = b(如果可能则精确求解，否则采用最小二乘法求解；A可能是非方阵且可能是秩亏的)"
       extends Modelica.Icons.Function;
       input Real A[:,:] "Matrix A";
       input Real b[size(A, 1)] "Vector b";
-      input Real rcond = 100 * Modelica.Constants.eps 
+      input Real rcond = 100 * Modelica.Constants.eps
         "估计A的秩的倒数条件数";
-      output Real x[size(A, 2)] 
+      output Real x[size(A, 2)]
         "向量x使得min|A*x-b|^2如果size(A,1) >= size(A,2)或min|x|^2 and A*x=b，如果size(A,1) < size(A,2)";
       output Integer rank "A的秩";
     protected
@@ -1227,12 +1227,12 @@ X := Matrices.solve2(A, B);  /* X = [3, 6;
     algorithm
       if min(size(A)) > 0 then
         (xx,info,rank) := LAPACK.dgelsy_vec(
-          A, 
-          b, 
+          A,
+          b,
           rcond);
         x := xx[1:size(A, 2)];
-        assert(info == 0, 
-          "Solving an overdetermined or underdetermined linear system\n" + 
+        assert(info == 0,
+          "Solving an overdetermined or underdetermined linear system\n" +
           "of equations with function \"Matrices.leastSquares\" failed.");
       else
         x := fill(0.0, size(A, 2));
@@ -1349,14 +1349,14 @@ x = P * Z' [ inv(T11)*Q1'*b ]
 </html>"        ));
     end leastSquares;
 
-    function leastSquares2 
+    function leastSquares2
       "解线性方程A * X = B(如果可能则精确解，否则以最小二乘法解；A可能是非方阵并且可能是秩亏的)"
       extends Modelica.Icons.Function;
       input Real A[:,:] "矩阵A";
       input Real B[size(A, 1),:] "矩阵B";
-      input Real rcond = 100 * Modelica.Constants.eps 
+      input Real rcond = 100 * Modelica.Constants.eps
         "估计A秩的倒数条件数";
-      output Real X[size(A, 2),size(B, 2)] 
+      output Real X[size(A, 2),size(B, 2)]
         "矩阵X使得min|A*X-B|^2如果size(A,1) >= size(A,2)，或min|X|^2和A*X=B，如果size(A,1) < size(A,2)";
       output Integer rank "A的秩";
     protected
@@ -1364,8 +1364,8 @@ x = P * Z' [ inv(T11)*Q1'*b ]
       Real XX[max(size(A, 1), size(A, 2)),size(B, 2)];
     algorithm
       (XX,info,rank) := LAPACK.dgelsy(
-        A, 
-        B, 
+        A,
+        B,
         rcond);
       X := XX[1:size(A, 2),:];
       assert(info == 0, "超定或欠定线性方程组的求解
@@ -1484,7 +1484,7 @@ X = P * Z' [ inv(T11)*Q1'*B ]
 </html>"                        ));
     end leastSquares2;
 
-    function equalityLeastSquares 
+    function equalityLeastSquares
       "解线性等式约束最小二乘问题"
       extends Modelica.Icons.Function;
       input Real A[:,:] "最小化|A*x - A |^2";
@@ -1496,17 +1496,17 @@ X = P * Z' [ inv(T11)*Q1'*B ]
     protected
       Integer info;
     algorithm
-      assert(size(A, 2) >= size(B, 1) and size(A, 2) <= size(A, 1) + size(B, 1), 
-        "It is required that size(B,1) <= size(A,2) <= size(A,1) + size(B,1)\n" 
-        + 
-        "This relationship is not fulfilled, since the matrices are declared as:\n" 
-        + "  A[" + String(size(A, 1)) + "," + String(size(A, 2)) + "], B[" + 
+      assert(size(A, 2) >= size(B, 1) and size(A, 2) <= size(A, 1) + size(B, 1),
+        "It is required that size(B,1) <= size(A,2) <= size(A,1) + size(B,1)\n"
+        +
+        "This relationship is not fulfilled, since the matrices are declared as:\n"
+        + "  A[" + String(size(A, 1)) + "," + String(size(A, 2)) + "], B[" +
         String(size(B, 1)) + "," + String(size(B, 2)) + "]\n");
 
       (x,info) := LAPACK.dgglse_vec(
-        A, 
-        a, 
-        B, 
+        A,
+        a,
+        B,
         b);
 
       assert(info == 0, "求解线性等式约束下的最小二乘问题
@@ -1544,9 +1544,9 @@ size(B,1) &le; size(A,2) &le; size(A,1) + size(B,1)
     pure function LU "方形或矩形矩阵的LU分解"
       extends Modelica.Icons.Function;
       input Real A[:,:] "方形或矩形矩阵";
-      output Real LU[size(A, 1),size(A, 2)] = A 
+      output Real LU[size(A, 1),size(A, 2)] = A
         "L,U因子(与LU_solve(..)一起使用)";
-      output Integer pivots[min(size(A, 1), size(A, 2))] 
+      output Integer pivots[min(size(A, 1), size(A, 2))]
         "枢轴索引(与LU_solve(..)一起使用)";
       output Integer info "信息";
     protected
@@ -1554,11 +1554,11 @@ size(B,1) &le; size(A,2) &le; size(A,1) + size(B,1)
       Integer n = size(A, 2);
       Integer lda = max(1, size(A, 1));
     external "FORTRAN 77" dgetrf(
-      m, 
-      n, 
-      LU, 
-      lda, 
-      pivots, 
+      m,
+      n,
+      LU,
+      lda,
+      pivots,
       info) annotation(Library = "lapack");
 
     annotation(Documentation(info = "<html>
@@ -1621,11 +1621,11 @@ x2 := Matrices.LU_solve(LU, pivots, b2);  // x2 = {1,0,2}
 </html>"    ));
     end LU;
 
-    function LU_solve 
+    function LU_solve
       "解带有右侧向量b和LU分解(使用LU(..))的实系数线性方程组P*L*U*x=b"
 
       extends Modelica.Icons.Function;
-      input Real LU[:,size(LU, 1)] 
+      input Real LU[:,size(LU, 1)]
         "L,U矩阵的因子。lu(…)对于一个方阵";
       input Integer pivots[size(LU, 1)] "矩阵的轴心指数。lu (..)";
       input Real b[size(LU, 1)] "右边向量P*L*U*x=b";
@@ -1638,8 +1638,8 @@ x2 := Matrices.LU_solve(LU, pivots, b2);  // x2 = {1,0,2}
 是否奇异，即不存在唯一解."        );
       end for;
       x := LAPACK.dgetrs_vec(
-        LU, 
-        pivots, 
+        LU,
+        pivots,
         b);
       annotation(Documentation(info = "<html>
 <h4>语法</h4>
@@ -1692,15 +1692,15 @@ x2 := Matrices.LU_solve(LU, pivots, b2);  // x2 = {1,0,2}
 </html>"        ));
     end LU_solve;
 
-    function LU_solve2 
+    function LU_solve2
       "解带有右侧矩阵B和LU分解(使用LU(..))的实系数线性方程组P*L*U*X=B"
 
       extends Modelica.Icons.Function;
-      input Real LU[:,size(LU, 1)] 
+      input Real LU[:,size(LU, 1)]
         "L,U矩阵的因子。lu(…)对于一个方阵";
       input Integer pivots[size(LU, 1)] "矩阵的轴心指数。lu (..)";
       input Real B[size(LU, 1),:] "右边的矩阵P*L*U*X=B";
-      output Real X[size(B, 1),size(B, 2)] 
+      output Real X[size(B, 1),size(B, 2)]
         "解矩阵使P*L*U*X = B";
 
     algorithm
@@ -1710,8 +1710,8 @@ x2 := Matrices.LU_solve(LU, pivots, b2);  // x2 = {1,0,2}
 是否奇异，即不存在唯一解."    );
       end for;
       X := Modelica.Math.Matrices.LAPACK.dgetrs(
-        LU, 
-        pivots, 
+        LU,
+        pivots,
         B);
       annotation(Documentation(info = "<html>
 <h4>语法</h4>
@@ -1772,14 +1772,14 @@ X2 := Matrices.LU_solve2(LU, pivots, B2);  /* X2 = [1, 2;
 </html>"    ));
     end LU_solve2;
 
-    function eigenValues 
+    function eigenValues
       "返回实数表示的实数非对称矩阵的特征值和特征向量"
 
       extends Modelica.Icons.Function;
       input Real A[:,size(A, 1)] "矩阵";
-      output Real eigenvalues[size(A, 1),2] 
+      output Real eigenvalues[size(A, 1),2]
         "矩阵A的特征值(Re:第一列，Im:第二列)";
-      output Real eigenvectors[size(A, 1),size(A, 2)] 
+      output Real eigenvectors[size(A, 1),size(A, 2)]
         "实值特征向量矩阵";
 
     protected
@@ -1842,13 +1842,13 @@ eval := Matrices.eigenValues(A);  // eval = [-0.618, 0;
 </p></html>"    ));
     end eigenValues;
 
-    function eigenValueMatrix 
+    function eigenValueMatrix
       "返回矩阵A的特征值的实值块对角矩阵J(A=V*J*Vinv)"
 
       extends Modelica.Icons.Function;
-      input Real eigenValues[:,2] 
+      input Real eigenValues[:,2]
         "特征值从函数特征值(..)(Re:第一列，Im:第二列)";
-      output Real J[size(eigenValues, 1),size(eigenValues, 1)] 
+      output Real J[size(eigenValues, 1),size(eigenValues, 1)]
         "具有特征值的实值块对角矩阵(Re: 1x1块，Im: 2x2块)";
 
     protected
@@ -1893,14 +1893,14 @@ J[i+1, i+1] := eigenvalues[i+1,1];
 </html>"        ));
     end eigenValueMatrix;
 
-    function singularValues 
+    function singularValues
       "返回奇异值和左、右奇异向量"
       extends Modelica.Icons.Function;
       input Real A[:,:] "矩阵";
       output Real sigma[min(size(A, 1), size(A, 2))] "奇异值";
-      output Real U[size(A, 1),size(A, 1)] = identity(size(A, 1)) 
+      output Real U[size(A, 1),size(A, 1)] = identity(size(A, 1))
         "左正交矩阵";
-      output Real VT[size(A, 2),size(A, 2)] = identity(size(A, 2)) 
+      output Real VT[size(A, 2),size(A, 2)] = identity(size(A, 2))
         "转置的右正交矩阵";
 
     protected
@@ -1955,14 +1955,14 @@ Sigma = [8.33,    0,    0, 0;
 </html>"            ));
     end singularValues;
 
-    function QR 
+    function QR
       "返回带有可选列主元素的方阵的QR分解(A(:,p) = Q*R)"
 
       extends Modelica.Icons.Function;
       input Real A[:,:] "大小为(A,1) >=大小为(A,2)的矩形矩阵";
-      input Boolean pivoting = true 
+      input Boolean pivoting = true
         "= true，如果执行列透视。True为默认值";
-      output Real Q[size(A, 1),size(A, 2)] 
+      output Real Q[size(A, 1),size(A, 2)]
         "具有使Q*R=A的正交列的矩形矩阵[:，p]";
       output Real R[size(A, 2),size(A, 2)] "平方上三角矩阵";
       output Integer p[size(A, 2)] "列排列向量";
@@ -1972,7 +1972,7 @@ Sigma = [8.33,    0,    0, 0;
       Integer ncol = size(A, 2);
       Real tau[size(A, 2)];
     algorithm
-      assert(nrow >= ncol, "\nInput matrix A[" + String(nrow) + "," + String(ncol) 
+      assert(nrow >= ncol, "\nInput matrix A[" + String(nrow) + "," + String(ncol)
         + "] has more columns than rows.
 This is not allowed when calling Modelica.Math.Matrices.QR(A)."            );
       if pivoting then
@@ -2057,20 +2057,20 @@ Real R[3,3];
       output Real U[size(A, 1),size(A, 2)] "变换矩阵";
 
     protected
-      Real V[size(A, 1),size(A, 2)] 
+      Real V[size(A, 1),size(A, 2)]
         "V = [v1、v2 . .vn-1,0]和vi是定义初等反射镜的向量";
-      Real tau[max(0, size(A, 1) - 1)] 
+      Real tau[max(0, size(A, 1) - 1)]
         "初等反射器的标量因子";
 
     algorithm
       (H,V,tau) := Matrices.Utilities.toUpperHessenberg(
-        A, 
-        1, 
+        A,
+        1,
         size(A, 1));
       U := Matrices.LAPACK.dorghr(
-        V, 
-        1, 
-        size(A, 1), 
+        V,
+        1,
+        size(A, 1),
         tau);
       annotation(Documentation(info = "<html>
 
@@ -2128,7 +2128,7 @@ U*H*transpose(U) = [1.0, 2.0, 3.0;
 </html>"    ));
     end hessenberg;
 
-    function realSchur 
+    function realSchur
       "返回方阵A的实Schur形式(rsf)S，其中A =QZ*S*QZ'"
       extends Modelica.Icons.Function;
       import Modelica.Math.Matrices;
@@ -2138,9 +2138,9 @@ U*H*transpose(U) = [1.0, 2.0, 3.0;
     public
       output Real S[size(A, 1),size(A, 2)] "A的实舒尔形式";
       output Real QZ[size(A, 1),size(A, 2)] "舒尔向量矩阵";
-      output Real alphaReal[size(A, 1)] 
+      output Real alphaReal[size(A, 1)]
         "eigenvalue=alphaReal+i*alphaImag的实部";
-      output Real alphaImag[size(A, 1)] 
+      output Real alphaImag[size(A, 1)]
         "eigenvalue=alphaReal+i*alphaImag的虚部";
 
     protected
@@ -2226,15 +2226,15 @@ Real alphaImag[3];
 </html>"                ));
     end realSchur;
 
-    function cholesky 
+    function cholesky
       "返回对称正定矩阵的Cholesky分解"
       extends Modelica.Icons.Function;
       import Modelica.Math.Matrices.LAPACK;
       input Real A[:,size(A, 1)] "对称正定矩阵";
-      input Boolean upper = true 
+      input Boolean upper = true
         "= true，如果应该返回右Cholesky因子(上三角形)";
 
-      output Real H[size(A, 1),size(A, 2)] 
+      output Real H[size(A, 1),size(A, 2)]
         "当A = U'*U或A = L*L'时，choolesky因子U (upper=true)或L (upper=false)";
 
     protected
@@ -2246,17 +2246,17 @@ Real alphaImag[3];
         (H,info) := LAPACK.dpotrf(A, upper);
       else
         H := fill(
-          0, 
-          0, 
+          0,
+          0,
           0);
         info := 0;
       end if;
       if info < 0 then
-        assert(info == 0, 
-          "Cholesky factorization failed in function \"Matrices.cholesky\" due to illegal value of input " 
+        assert(info == 0,
+          "Cholesky factorization failed in function \"Matrices.cholesky\" due to illegal value of input "
           + String(info) + " for LAPACK routine DPOTRF");
       else
-        assert(info == 0, 
+        assert(info == 0,
           "Cholesky factorization failed in function \"Matrices.cholesky\" since matrix A is not positive definite");
       end if;
 
@@ -2329,13 +2329,13 @@ transpose(H)*H = [1.0,  6.0,   1;
 </html>"            ));
     end cholesky;
 
-    function balance 
+    function balance
       "返回矩阵A的平衡形式以改善A的状态"
       extends Modelica.Icons.Function;
       input Real A[:,size(A, 1)];
       output Real D[size(A, 1)] "对角线(D)=T是变换矩阵，使得
 B = inv(T)*A*T的条件小于A"                ;
-      output Real B[size(A, 1),size(A, 1)] 
+      output Real B[size(A, 1),size(A, 1)]
         "Balanced matrix (= inv(diagonal(D))*A*diagonal(D) )";
     protected
       Integer na = size(A, 1);
@@ -2442,15 +2442,15 @@ which based on the <code>balance</code> function from EISPACK.
 </html>"                ));
     end balance;
 
-    function balanceABC 
+    function balanceABC
       "返回系统[A,B;C,0]的平衡形式，通过状态变换改善其条件数"
       extends Modelica.Icons.Function;
       input Real A[:,size(A, 1)] "系统矩阵A";
-      input Real B[size(A, 1),:] = fill(0.0, size(A, 1), 0) 
+      input Real B[size(A, 1),:] = fill(0.0, size(A, 1), 0)
         "系统矩阵B(不需要存在)";
-      input Real C[:,size(A, 1)] = fill(0.0, 0, size(A, 1)) 
+      input Real C[:,size(A, 1)] = fill(0.0, 0, size(A, 1))
         "系统矩阵C(不需要存在)";
-      output Real scale[size(A, 1)] 
+      output Real scale[size(A, 1)]
         "对角线(尺度)=T使得[inv(T)*A*T, inv(T)*B;C*T, 0]的条件小于[A,B;C,0]";
       output Real As[size(A, 1),size(A, 1)] "平衡矩阵 A (= inv(T)*A*T )";
       output Real Bs[size(A, 1),size(B, 2)] "平衡矩阵 B (= inv(T)*B )";
@@ -2592,7 +2592,7 @@ which is based on the <code>balance</code> function from EISPACK.
 </html>"            ));
     end balanceABC;
 
-    function trace 
+    function trace
       "返回矩阵A的迹，即对角线元素的和"
       extends Modelica.Icons.Function;
 
@@ -2630,7 +2630,7 @@ r = 2.0
 </html>"                ));
     end trace;
 
-    function det 
+    function det
       "返回矩阵的行列式(通过LU分解计算；尽量避免使用det(..))"
 
       extends Modelica.Icons.Function;
@@ -2715,11 +2715,11 @@ x = inv(A)*b，因为这样更有效更可靠。
 </html>"            ));
     end inv;
 
-    function rank 
+    function rank
       "返回矩形矩阵的秩(用奇异值计算)"
       extends Modelica.Icons.Function;
       input Real A[:,:] "矩阵";
-      input Real eps = 0 
+      input Real eps = 0
         "如果eps > 0，则根据eps检查奇异值;否则eps=max(size(A))*norm(A)*Modelica.Constants. eps";
       output Integer result "矩阵A的秩";
 
@@ -2767,12 +2767,12 @@ result = Matrices.<strong>rank</strong>(A,eps=0);
 </html>"            ));
     end rank;
 
-    function conditionNumber 
+    function conditionNumber
       "返回矩阵A的条件数norm(A)*norm(inv(A))"
       extends Modelica.Icons.Function;
 
       input Real A[:,:] "输入矩阵";
-      input Real p(min = 1) = 2 
+      input Real p(min = 1) = 2
         "p-范数类型(只允许: 1, 2 or Modelica.Constants.inf)";
       output Real result = 0.0 "矩阵A的条件数";
 
@@ -2975,12 +2975,12 @@ nullity = 1
     function rcond "返回矩阵的倒数条件数"
       extends Modelica.Icons.Function;
       input Real A[:,size(A, 1)] "平方实矩阵";
-      input Boolean inf = false 
+      input Boolean inf = false
         "如果使用无穷范数为真，如果使用1范数为假";
       output Real rcond "A的倒数条件数";
       output Integer info "信息";
     protected
-      Real LU[size(A, 1),size(A, 1)] 
+      Real LU[size(A, 1),size(A, 1)]
         "矩阵A的LU分解，由gettrf返回";
       Real anorm "矩阵A范数";
       String normspec = if inf then "I" else "1" "指定norm 1或inf";
@@ -2990,8 +2990,8 @@ nullity = 1
         (LU,,info) := Modelica.Math.Matrices.LAPACK.dgetrf(A);
         anorm := Modelica.Math.Matrices.LAPACK.dlange(A, normspec);
         (rcond,info) := Modelica.Math.Matrices.LAPACK.dgecon(
-          LU, 
-          inf, 
+          LU,
+          inf,
           anorm);
       else
         rcond := Modelica.Constants.inf;
@@ -3038,7 +3038,7 @@ r = 0.3333
     function norm "返回矩阵的p-范数"
       extends Modelica.Icons.Function;
       input Real A[:,:] "输入矩阵";
-      input Real p(min = 1) = 2 
+      input Real p(min = 1) = 2
         "p-范数类型(只允许: 1, 2 or Modelica.Constants.inf)";
       output Real result = 0.0 "矩阵A的p-norm";
     protected
@@ -3152,7 +3152,7 @@ r = 3.162;
 </html>"            ));
     end frobeniusNorm;
 
-    function exp 
+    function exp
       "通过带缩放和平衡的自适应泰勒级数展开，返回矩阵的指数"
 
       extends Modelica.Icons.Function;
@@ -3296,7 +3296,7 @@ H. D. Joos, G. Grübel:
 </html>"    ));
     end exp;
 
-    function integralExp 
+    function integralExp
       "返回一个矩阵的指数和指数积分"
 
       extends Modelica.Icons.Function;
@@ -3466,7 +3466,7 @@ y(k) = C*x(k) + D*u(k)
 </html>"            ));
     end integralExp;
 
-    function integralExpT 
+    function integralExpT
       "返回一个矩阵的指数、指数积分、以及指数的时间加权积分"
 
       extends Modelica.Icons.Function;
@@ -3545,14 +3545,14 @@ x(k+1) = phi*x(k) + gamma*u(k) + gamma1/T*(u(k+1) - u(k))
     //
     // protected
 
-    function continuousLyapunov 
+    function continuousLyapunov
       "返回连续时间Lyapunov方程X*A + A'*X = C的解X"
       extends Modelica.Icons.Function;
       import Modelica.Math.Matrices;
 
       input Real A[:,size(A, 1)] "方阵A在 X*A + A'*X = C";
       input Real C[size(A, 1),size(A, 2)] "方阵C在X*A + A'*X = C";
-      input Boolean ATisSchur = false 
+      input Boolean ATisSchur = false
         "= true，如果转置(A)已经是实舒尔形式";
       input Real eps = Modelica.Math.Matrices.norm(A, 1) * 10 * 1e-15 "宽容每股收益";
 
@@ -3573,7 +3573,7 @@ x(k+1) = phi*x(k) + gamma*u(k) + gamma1/T*(u(k+1) - u(k))
       Integer k;
 
     public
-      output Real X[size(A, 1),size(A, 2)] 
+      output Real X[size(A, 1),size(A, 2)]
         "李雅普诺夫方程X*A + A'*X = C的解X";
     protected
       Real tempX[size(A, 1)];
@@ -3613,8 +3613,8 @@ x(k+1) = phi*x(k) + gamma*u(k) + gamma1/T*(u(k+1) - u(k))
           // 利用Kronecker积和vec算子方法求解2x2 Schur凹凸的2nx2n方程
           R2 := [R11, R12; R21, R22];
           c := cat(
-            1, 
-            D[:,n - 1], 
+            1,
+            D[:,n - 1],
             D[:,n]);
           y := Matrices.solve(R2, c);
           X[:,n - 1] := y[1:n];
@@ -3662,8 +3662,8 @@ x(k+1) = phi*x(k) + gamma*u(k) + gamma1/T*(u(k+1) - u(k))
             end for;
             //CC := D[:, k - 1:k] - X[:, k + 1:n]*transpose(R[k - 1:k, k + 1:n]);
             c := cat(
-              1, 
-              CC[:,1], 
+              1,
+              CC[:,1],
               CC[:,2]);
             y := Matrices.solve(R2, c);
             X[:,k - 1] := y[1:n];
@@ -3694,8 +3694,8 @@ x(k+1) = phi*x(k) + gamma*u(k) + gamma1/T*(u(k+1) - u(k))
         X[1,1] := C[1,1] / (2 * A[1,1]);
       else
         X := fill(
-          0, 
-          0, 
+          0,
+          0,
           0);
       end if;
 
@@ -3778,7 +3778,7 @@ X = [1.633, -0.761,  0.575, -0.656;
 </html>"                ));
     end continuousLyapunov;
 
-    function continuousSylvester 
+    function continuousSylvester
       "返回连续时间Sylvester方程A*X + X*B = C的解X"
       extends Modelica.Icons.Function;
       import Modelica.Math.Matrices;
@@ -3788,7 +3788,7 @@ X = [1.633, -0.761,  0.575, -0.656;
       input Real C[size(A, 1),size(B, 2)] "矩阵C";
       input Boolean AisSchur = false "= true，如果A已经有实舒尔形式";
       input Boolean BisSchur = false "= true，如果B已经有实舒尔形式";
-      output Real X[size(A, 1),size(B, 2)] 
+      output Real X[size(A, 1),size(B, 2)]
         "连续Sylvester方程的解";
 
     protected
@@ -3820,8 +3820,8 @@ X = [1.633, -0.761,  0.575, -0.656;
         Chat := if AisSchur and BisSchur then C else if AisSchur then C * V else 
           if BisSchur then transpose(U) * C else transpose(U) * C * V;
         (X,scale,info) := Matrices.LAPACK.dtrsyl(
-          S, 
-          T, 
+          S,
+          T,
           Chat);
         assert(info == 0, "用矩阵求解Sylvester方程。西尔维斯特没有成功.\n
                   The value of info is "             + String(info) + ", but should be zero. A value unequal to zero means:\n
@@ -3829,12 +3829,12 @@ X = [1.633, -0.761,  0.575, -0.656;
           = 1: A and B have common or very close eigenvalues; perturbed
                values were used to solve the equation (but the matrices
                A and B are unchanged)."            );
-        X := if AisSchur and BisSchur then scale * X else if AisSchur then scale * X * 
+        X := if AisSchur and BisSchur then scale * X else if AisSchur then scale * X *
           transpose(V) else if BisSchur then scale * U * X else scale * U * X * transpose(V);
       else
         X := fill(
-          0, 
-          n, 
+          0,
+          n,
           m);
       end if;
 
@@ -3927,16 +3927,16 @@ X = [0.0,  0.0,  1.0;
 </ul>
 </html>"            ));
     end continuousSylvester;
-    function continuousRiccati 
+    function continuousRiccati
       "返回连续时间代数Riccati方程A'*X + X*A - X*B*inv(R)*B'*X + Q = 0的解X"
       extends Modelica.Icons.Function;
       import Modelica.Math.Matrices;
 
       input Real A[:,size(A, 1)] "CARE中的方阵A";
       input Real B[size(A, 1),:] "CARE中的矩阵B";
-      input Real R[size(B, 2),size(B, 2)] = identity(size(B, 2)) 
+      input Real R[size(B, 2),size(B, 2)] = identity(size(B, 2))
         "CARE中的矩阵R";
-      input Real Q[size(A, 1),size(A, 1)] = identity(size(A, 1)) 
+      input Real Q[size(A, 1),size(A, 1)] = identity(size(A, 1))
         "CARE中的矩阵Q";
       input Boolean refine = false "为后续细化";
 
@@ -3954,18 +3954,18 @@ X = [0.0,  0.0,  1.0;
 
     public
       output Real X[size(A, 1),size(A, 2)] "CARE的稳定解";
-      output Real alphaReal[2 * size(A, 1)] 
+      output Real alphaReal[2 * size(A, 1)]
         "eigenvalue=alphaReal+i*alphaImag的实部";
-      output Real alphaImag[2 * size(A, 1)] 
+      output Real alphaImag[2 * size(A, 1)]
         "eigenvalue=alphaReal+i*alphaImag的虚部";
     algorithm
       if n > 1 then
         (H_RSF,Z,alphaReal,alphaImag) := Modelica.Math.Matrices.realSchur(H);
         (H_RSF,Z,alphaReal,alphaImag) := Matrices.Utilities.reorderRSF(
-          H_RSF, 
-          Z, 
-          alphaReal, 
-          alphaImag, 
+          H_RSF,
+          Z,
+          alphaReal,
+          alphaImag,
           true);
 
         Z11 := Z[1:n,1:n];
@@ -3974,22 +3974,22 @@ X = [0.0,  0.0,  1.0;
 
           (X,info) := Matrices.LAPACK.dgesvx(Z11, transpose(Z21));
           //该函数不需要像 solve2 在使用 //  X := transpose(Matrices.solve2(transpose(Z11), transpose(Z21)));
-          assert(info == 0, 
+          assert(info == 0,
             "Solving a linear system of equations with function \"Matrices.LAPACK.dgesvx\" is not possible, because the system has either no or infinitely many solutions (input A is singular).");
           X := transpose(X);
 
           if refine then
             X := Modelica.Math.Matrices.Utilities.continuousRiccatiIterative(
-              A, 
-              B, 
-              R, 
-              Q, 
+              A,
+              B,
+              R,
+              Q,
               X);
           end if;
         else
           X := fill(
-            0, 
-            size(Z21, 1), 
+            0,
+            size(Z21, 1),
             size(Z11, 1));
         end if;
 
@@ -4000,8 +4000,8 @@ X = [0.0,  0.0,  1.0;
         end if;
       else
         X := fill(
-          0, 
-          0, 
+          0,
+          0,
           0);
       end if;
 
@@ -4117,18 +4117,18 @@ X = [2.0, 1.0;
 </html>"                        ));
     end continuousRiccati;
 
-    function discreteLyapunov 
+    function discreteLyapunov
       "返回离散时间Lyapunov方程A'*X*A + sgn*X = C的解X"
       extends Modelica.Icons.Function;
       import Modelica.Math.Matrices;
 
       input Real A[:,size(A, 1)] "方阵A (A'*X) *A + sgn*X = C";
-      input Real C[size(A, 1),size(A, 2)] 
+      input Real C[size(A, 1),size(A, 2)]
         "方阵C (A'*X) *A + sgn*X = C";
-      input Boolean ATisSchur = false 
+      input Boolean ATisSchur = false
         "= true，如果转置(A)已经是实舒尔形式";
       input Integer sgn = 1 "指定A'*X*A + sgn*X = C中的符号";
-      input Real eps = Matrices.norm(A, 1) * 10 * Modelica.Constants.eps 
+      input Real eps = Matrices.norm(A, 1) * 10 * Modelica.Constants.eps
         "容忍度 eps";
 
     protected
@@ -4146,15 +4146,15 @@ X = [2.0, 1.0;
       Boolean crit;
 
     public
-      output Real X[size(A, 1),size(A, 2)] 
+      output Real X[size(A, 1),size(A, 2)]
         "李雅普诺夫方程 A'*X*A + sgn*X = C 的解 X";
     protected
       Real tempX[size(A, 1)];
       Real temp;
 
     algorithm
-      assert(sgn == 1 or sgn == -1, 
-        "Input sgn in function Math.Matrices.discreteLyapunov() must be 1 or -1, however it is " 
+      assert(sgn == 1 or sgn == -1,
+        "Input sgn in function Math.Matrices.discreteLyapunov() must be 1 or -1, however it is "
         + String(sgn));
       X := zeros(n, n);
       k := n;
@@ -4209,8 +4209,8 @@ X = [2.0, 1.0;
               R22[i,i] := R22[i,i] + sgn;
             end for;
             y := Matrices.solve([R11, R[k - 1,k] * R; R[k,k - 1] * R, R22], cat(
-              1, 
-              g, 
+              1,
+              g,
               w));
             X[:,k - 1] := y[1:n];
             X[:,k] := y[n + 1:2 * n];
@@ -4227,8 +4227,8 @@ X = [2.0, 1.0;
         X[1,1] := C[1,1] / (A[1,1] * A[1,1] + sgn);
       else
         X := fill(
-          0, 
-          0, 
+          0,
+          0,
           0);
       end if;
 
@@ -4320,14 +4320,14 @@ X  = [7.5735,   -3.1426,  2.7205, -2.5958;
 </html>"                    ));
     end discreteLyapunov;
 
-    function discreteSylvester 
+    function discreteSylvester
       "返回离散时间Sylvester方程A*X*B + sgn*X = C的解"
       extends Modelica.Icons.Function;
       import Modelica.Math.Matrices;
 
       input Real A[:,size(A, 1)] "方阵A中的A*X*B + sgn*X = C";
       input Real B[:,size(B, 1)] "方阵B在A*X*B + sgn*X = C";
-      input Real C[size(A, 2),size(B, 1)] 
+      input Real C[size(A, 2),size(B, 1)]
         "矩形矩阵C在A*X*B + sgn*X = C";
       input Boolean AisHess = false "= true，如果A已经是海森伯格形式";
       input Boolean BTisSchur = false "= true，如果B'已经是实舒尔形式";
@@ -4341,7 +4341,7 @@ X  = [7.5735,   -3.1426,  2.7205, -2.5958;
       Real U[size(A, 1),size(A, 1)] "变换矩阵 U 为 H=U'AU";
       Real S[size(B, 1),size(B, 1)] "RSF 形式的 B, i.e., S=Z'BZ";
       Real Z[size(B, 1),size(B, 1)] "变换矩阵 Z 用于 S=Z'BZ";
-      Real F[size(A, 1),size(B, 1)] 
+      Real F[size(A, 1),size(B, 1)]
         "右边 C 的适当变换，F=U'*C*Z";
 
       Real R22[size(A, 1),size(A, 1)];
@@ -4354,15 +4354,15 @@ X  = [7.5735,   -3.1426,  2.7205, -2.5958;
       Boolean crit;
 
     public
-      output Real X[size(A, 2),size(B, 1)] 
+      output Real X[size(A, 2),size(B, 1)]
         "离散西尔维斯特方程 A*X*B + sgn*X = C 的解";
     protected
       Real tempX[size(A, 1)];
       Real temp;
 
     algorithm
-      assert(sgn == 1 or sgn == -1, 
-        "Input sgn in function Math.Matrices.discreteLyapunov() must be 1 or -1, however it is " 
+      assert(sgn == 1 or sgn == -1,
+        "Input sgn in function Math.Matrices.discreteLyapunov() must be 1 or -1, however it is "
         + String(sgn));
       X := zeros(n, m);
       k := m;
@@ -4438,8 +4438,8 @@ X  = [7.5735,   -3.1426,  2.7205, -2.5958;
               R22[i,i] := R22[i,i] + sgn;
             end for;
             y := Matrices.solve([R11, S[k,k - 1] * H; S[k - 1,k] * H, R22], cat(
-              1, 
-              g, 
+              1,
+              g,
               w));
             // 求解 X 中两列的一个共轭复极对
             X[:,k - 1] := y[1:n];
@@ -4450,7 +4450,7 @@ X  = [7.5735,   -3.1426,  2.7205, -2.5958;
 
         // 与原形式相对应的 X 变换
         if not (AisHess and BTisSchur) then
-          X := if AisHess then X * transpose(Z) else if BTisSchur then U * X else U * X 
+          X := if AisHess then X * transpose(Z) else if BTisSchur then U * X else U * X
             * transpose(Z);
         end if;
 
@@ -4459,8 +4459,8 @@ X  = [7.5735,   -3.1426,  2.7205, -2.5958;
         X[1,1] := C[1,1] / (A[1,1] * B[1,1] + sgn);
       else
         X := fill(
-          0, 
-          0, 
+          0,
+          0,
           0);
       end if;
 
@@ -4548,15 +4548,15 @@ X = [2.0,   3.0,   6.0;
 </html>"                    ));
     end discreteSylvester;
 
-    function discreteRiccati 
+    function discreteRiccati
       "返回离散时间代数Riccati方程A'*X*A - X - A'*X*B*inv(R + B'*X*B)*B'*X*A + Q = 0的解"
       extends Modelica.Icons.Function;
       import Modelica.Math.Matrices;
       input Real A[:,size(A, 1)] "DARE中的方阵A";
       input Real B[size(A, 1),:] "DARE中的矩阵B";
-      input Real R[size(B, 2),size(B, 2)] = identity(size(B, 2)) 
+      input Real R[size(B, 2),size(B, 2)] = identity(size(B, 2))
         "DARE中的矩阵R";
-      input Real Q[size(A, 1),size(A, 1)] = identity(size(A, 1)) 
+      input Real Q[size(A, 1),size(A, 1)] = identity(size(A, 1))
         "DARE中的矩阵Q";
       input Boolean refine = false "为后续细化";
 
@@ -4579,26 +4579,26 @@ X = [2.0,   3.0,   6.0;
       Integer info;
 
     public
-      output Real X[size(A, 1),size(A, 2)] 
+      output Real X[size(A, 1),size(A, 2)]
         "与有序rsf相关的舒尔向量的正交矩阵";
-      output Real alphaReal[2 * size(A, 1)] 
+      output Real alphaReal[2 * size(A, 1)]
         "eigenvalue=alphaReal+i*alphaImag的实部";
-      output Real alphaImag[2 * size(A, 1)] 
+      output Real alphaImag[2 * size(A, 1)]
         "eigenvalue=alphaReal+i*alphaImag的虚部";
     algorithm
       (LU,p) := Modelica.Math.Matrices.LU(AT);
       H21 := Modelica.Math.Matrices.LU_solve2(
-        LU, 
-        p, 
+        LU,
+        p,
         -Q);
       H22 := Modelica.Math.Matrices.LU_solve2(
-        LU, 
-        p, 
+        LU,
+        p,
         identity(n));
       (LU,p) := Modelica.Math.Matrices.LU(A);
       H12 := Modelica.Math.Matrices.LU_solve2(
-        LU, 
-        p, 
+        LU,
+        p,
         -G);
       H12 := transpose(H12);
       H11 := A - H12 * Q;
@@ -4606,10 +4606,10 @@ X = [2.0,   3.0,   6.0;
       (H_RSF,Z,alphaReal,alphaImag) := Modelica.Math.Matrices.realSchur(H);
       // 把H化成舒尔式
       (H_RSF,Z,alphaReal,alphaImag) := Matrices.Utilities.reorderRSF(
-        H_RSF, 
-        Z, 
-        alphaReal, 
-        alphaImag, 
+        H_RSF,
+        Z,
+        alphaReal,
+        alphaImag,
         false);
       // 有序舒尔形式
       Z11 := Z[1:n,1:n];
@@ -4625,16 +4625,16 @@ X = [2.0,   3.0,   6.0;
 
         if refine then
           X := Modelica.Math.Matrices.Utilities.discreteRiccatiIterative(
-            A, 
-            B, 
-            R, 
-            Q, 
+            A,
+            B,
+            R,
+            Q,
             X);
         end if;
       else
         X := fill(
-          0, 
-          size(Z21, 1), 
+          0,
+          size(Z21, 1),
           size(Z11, 1));
       end if;
 
@@ -4765,15 +4765,15 @@ X = [14.5623, 9.7082;
 </html>"            ));
     end discreteRiccati;
 
-    function sort 
+    function sort
       "按升序或降序对矩阵的行或列进行排序"
       extends Modelica.Icons.Function;
       input Real M[:,:] "待排序矩阵";
       input Boolean sortRows = true "= true，如果行被排序，否则为列";
-      input Boolean ascending = true 
+      input Boolean ascending = true
         "= true，如果是升序，否则是降序";
       output Real sorted_M[size(M, 1),size(M, 2)] = M "排序矩阵";
-      output Integer indices[if sortRows then size(M, 1) else size(M, 2)] 
+      output Integer indices[if sortRows then size(M, 1) else size(M, 2)]
         "sorted_M = if sortRows then M[indices,:] else M[:,indices]";
 
       /* shellsort算法;应该在以后改进 */
@@ -5001,11 +5001,11 @@ A_fud  = [-1, 2, -3;
 </html>"                ));
     end flipUpDown;
 
-    package LAPACK 
+    package LAPACK
       "LAPACK库的接口(通常不应该直接使用，而只能通过Modelica.Math.Matrices间接使用)"
       extends Modelica.Icons.FunctionsPackage;
 
-      pure function dgeev 
+      pure function dgeev
         "计算实非对称矩阵A的特征值和(右)特征向量"
 
         extends Modelica.Icons.Function;
@@ -5023,19 +5023,19 @@ A_fud  = [-1, 2, -3;
         Real work[12 * size(A, 1)];
 
       external "FORTRAN 77" dgeev(
-        "N", 
-        "V", 
-        n, 
-        Awork, 
-        n, 
-        eigenReal, 
-        eigenImag, 
-        dummy, 
-        ldvl, 
-        eigenVectors, 
-        n, 
-        work, 
-        lwork, 
+        "N",
+        "V",
+        n,
+        Awork,
+        n,
+        eigenReal,
+        eigenImag,
+        dummy,
+        ldvl,
+        eigenVectors,
+        n,
+        work,
+        lwork,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "这个函数不是LAPACK函数gegev的完整接口,
 但是这样称呼它只有特征值和正确的特征向量
@@ -5139,7 +5139,7 @@ INFO    (输出)的整数
 "    ));
       end dgeev;
 
-      pure function dgeev_eigenValues 
+      pure function dgeev_eigenValues
         "计算实非对称矩阵A的特征值"
 
         extends Modelica.Icons.Function;
@@ -5164,19 +5164,19 @@ INFO    (输出)的整数
       特征向量，n, work, lwork, info)
       */
       external "FORTRAN 77" dgeev(
-        "N", 
-        "N", 
-        n, 
-        Awork, 
-        n, 
-        EigenReal, 
-        EigenImag, 
-        EigenvectorsL, 
-        n, 
-        EigenvectorsL, 
-        n, 
-        work, 
-        lwork, 
+        "N",
+        "N",
+        n,
+        Awork,
+        n,
+        EigenReal,
+        EigenImag,
+        EigenvectorsL,
+        n,
+        EigenvectorsL,
+        n,
+        work,
+        lwork,
         info) annotation(Library = "lapack");
 
       annotation(Documentation(info = "Lapack文档
@@ -5278,7 +5278,7 @@ INFO    (输出) INTEGER
 "    ));
       end dgeev_eigenValues;
 
-      pure function dgelsy 
+      pure function dgelsy
         "计算一个缺秩a的实线性最小二乘问题的最小范数解"
 
         extends Modelica.Icons.Function;
@@ -5286,9 +5286,9 @@ INFO    (输出) INTEGER
         input Real B[size(A, 1),:];
         input Real rcond = 0.0 "估计秩的倒数条件数";
         output Real X[max(size(A, 1), size(A, 2)),size(B, 2)] = cat(
-          1, 
-          B, 
-          zeros(max(nrow, ncol) - nrow, nrhs)) 
+          1,
+          B,
+          zeros(max(nrow, ncol) - nrow, nrhs))
           "解决方案是第一个大小(A,2)行的";
         output Integer info;
         output Integer rank "A的有效等级";
@@ -5303,18 +5303,18 @@ INFO    (输出) INTEGER
         Integer jpvt[size(A, 2)] = zeros(ncol);
 
       external "FORTRAN 77" dgelsy(
-        nrow, 
-        ncol, 
-        nrhs, 
-        Awork, 
-        nrow, 
-        X, 
-        nx, 
-        jpvt, 
-        rcond, 
-        rank, 
-        work, 
-        lwork, 
+        nrow,
+        ncol,
+        nrhs,
+        Awork,
+        nrow,
+        X,
+        nx,
+        jpvt,
+        rcond,
+        rank,
+        work,
+        lwork,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack文档
 目的
@@ -5422,7 +5422,7 @@ INFO    (输出) INTEGER
 "    ));
       end dgelsy;
 
-      pure function dgelsy_vec 
+      pure function dgelsy_vec
         "计算一个缺秩a的实线性最小二乘问题的最小范数解"
 
         extends Modelica.Icons.Function;
@@ -5430,9 +5430,9 @@ INFO    (输出) INTEGER
         input Real b[size(A, 1)];
         input Real rcond = 0.0 "估计秩的倒数条件数";
         output Real x[max(size(A, 1), size(A, 2))] = cat(
-          1, 
-          b, 
-          zeros(max(nrow, ncol) - nrow)) 
+          1,
+          b,
+          zeros(max(nrow, ncol) - nrow))
           "解决方案是在第一个大小(A,2)行";
         output Integer info;
         output Integer rank "A的有效等级";
@@ -5447,18 +5447,18 @@ INFO    (输出) INTEGER
         Integer jpvt[size(A, 2)] = zeros(ncol);
 
       external "FORTRAN 77" dgelsy(
-        nrow, 
-        ncol, 
-        nrhs, 
-        Awork, 
-        nrow, 
-        x, 
-        nx, 
-        jpvt, 
-        rcond, 
-        rank, 
-        work, 
-        lwork, 
+        nrow,
+        ncol,
+        nrhs,
+        Awork,
+        nrow,
+        x,
+        nx,
+        jpvt,
+        rcond,
+        rank,
+        work,
+        lwork,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack文档
 目的
@@ -5570,15 +5570,15 @@ INFO    (输出) INTEGER
 "    ));
       end dgelsy_vec;
 
-      pure function dgels_vec 
+      pure function dgels_vec
         "用b向量求解过定或欠定实线性方程A*x=b"
 
         extends Modelica.Icons.Function;
         input Real A[:,:];
         input Real b[size(A, 1)];
         output Real x[max(size(A, 1), size(A, 2))] = cat(
-          1, 
-          b, 
+          1,
+          b,
           zeros(nx - nrow)) "Solution is in first size(A,2) rows";
         output Integer info;
       protected
@@ -5591,16 +5591,16 @@ INFO    (输出) INTEGER
         Real Awork[size(A, 1),size(A, 2)] = A;
 
       external "FORTRAN 77" dgels(
-        "N", 
-        nrow, 
-        ncol, 
-        nrhs, 
-        Awork, 
-        nrow, 
-        x, 
-        nx, 
-        work, 
-        lwork, 
+        "N",
+        nrow,
+        ncol,
+        nrhs,
+        Awork,
+        nrow,
+        x,
+        nx,
+        work,
+        lwork,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack文档
 目的
@@ -5702,7 +5702,7 @@ INFO    (输出) INTEGER
 "    ));
       end dgels_vec;
 
-      pure function dgesv 
+      pure function dgesv
         "用B矩阵求解线性方程组A*X=B"
         extends Modelica.Icons.Function;
         input Real A[:,size(A, 1)];
@@ -5718,13 +5718,13 @@ INFO    (输出) INTEGER
         Integer ipiv[size(A, 1)];
 
       external "FORTRAN 77" dgesv(
-        n, 
-        nrhs, 
-        Awork, 
-        lda, 
-        ipiv, 
-        X, 
-        ldb, 
+        n,
+        nrhs,
+        Awork,
+        lda,
+        ipiv,
+        X,
+        ldb,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack文档
 目的
@@ -5771,7 +5771,7 @@ INFO    (输出) INTEGER
 "    ));
       end dgesv;
 
-      pure function dgesv_vec 
+      pure function dgesv_vec
         "用b向量求解线性方程组A*x=b"
         extends Modelica.Icons.Function;
         input Real A[:,size(A, 1)];
@@ -5787,13 +5787,13 @@ INFO    (输出) INTEGER
         Integer ipiv[size(A, 1)];
 
       external "FORTRAN 77" dgesv(
-        n, 
-        nrhs, 
-        Awork, 
-        lda, 
-        ipiv, 
-        x, 
-        ldb, 
+        n,
+        nrhs,
+        Awork,
+        lda,
+        ipiv,
+        x,
+        ldb,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "
 功能与LAPACK相同。Dgesv，但是右边是一个向量而不是矩阵。
@@ -5801,7 +5801,7 @@ INFO    (输出) INTEGER
 "    ));
       end dgesv_vec;
 
-      pure function dgglse_vec 
+      pure function dgglse_vec
         "求解一个线性等式约束的最小二乘问题"
         extends Modelica.Icons.Function;
         input Real A[:,:] "最小化 |A*x - c|^2";
@@ -5822,18 +5822,18 @@ INFO    (输出) INTEGER
         Real work[size(A, 2) + size(B, 1) + max(size(A, 1), max(size(A, 2), size(B, 1))) * 5];
 
       external "FORTRAN 77" dgglse(
-        nrow_A, 
-        ncol_A, 
-        nrow_B, 
-        Awork, 
-        nrow_A, 
-        Bwork, 
-        nrow_B, 
-        cwork, 
-        dwork, 
-        x, 
-        work, 
-        lwork, 
+        nrow_A,
+        ncol_A,
+        nrow_B,
+        Awork,
+        nrow_A,
+        Bwork,
+        nrow_B,
+        cwork,
+        dwork,
+        x,
+        work,
+        lwork,
         info) annotation(Library = "lapack");
 
       annotation(Documentation(info = "Lapack文档
@@ -5931,7 +5931,7 @@ rank((A)) < N;最小二乘解不能
 "    ));
       end dgglse_vec;
 
-      pure function dgtsv 
+      pure function dgtsv
         "用B矩阵和三对角线A求解线性方程组A*X=B"
 
         extends Modelica.Icons.Function;
@@ -5950,13 +5950,13 @@ rank((A)) < N;最小二乘解不能
         Real subdiagwork[size(subdiag, 1)] = subdiag;
 
       external "FORTRAN 77" dgtsv(
-        n, 
-        nrhs, 
-        subdiagwork, 
-        diagwork, 
-        superdiagwork, 
-        X, 
-        ldb, 
+        n,
+        nrhs,
+        subdiagwork,
+        diagwork,
+        superdiagwork,
+        X,
+        ldb,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack文档
 目的
@@ -6010,7 +6010,7 @@ INFO    (输出) INTEGER
 "    ));
       end dgtsv;
 
-      pure function dgtsv_vec 
+      pure function dgtsv_vec
         "求解具有向量b和三对角线A的线性方程组A*x=b"
 
         extends Modelica.Icons.Function;
@@ -6029,13 +6029,13 @@ INFO    (输出) INTEGER
         Real subdiagwork[size(subdiag, 1)] = subdiag;
 
       external "FORTRAN 77" dgtsv(
-        n, 
-        nrhs, 
-        subdiagwork, 
-        diagwork, 
-        superdiagwork, 
-        x, 
-        ldb, 
+        n,
+        nrhs,
+        subdiagwork,
+        diagwork,
+        superdiagwork,
+        x,
+        ldb,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "
 功能与LAPACK相同。Dgtsv，但是右边是一个向量而不是矩阵。
@@ -6043,7 +6043,7 @@ INFO    (输出) INTEGER
 "    ));
       end dgtsv_vec;
 
-      pure function dgbsv 
+      pure function dgbsv
         "用B矩阵求解线性方程组A*X=B"
         extends Modelica.Icons.Function;
         input Integer n "方程数";
@@ -6060,15 +6060,15 @@ INFO    (输出) INTEGER
         Integer ipiv[n];
 
       external "FORTRAN 77" dgbsv(
-        n, 
-        kLower, 
-        kUpper, 
-        nrhs, 
-        Awork, 
-        ldab, 
-        ipiv, 
-        X, 
-        n, 
+        n,
+        kLower,
+        kUpper,
+        nrhs,
+        Awork,
+        ldab,
+        ipiv,
+        X,
+        n,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack文档
 目的
@@ -6153,7 +6153,7 @@ M = N = 6, KL = 2, KU = 1:
 "    ));
       end dgbsv;
 
-      pure function dgbsv_vec 
+      pure function dgbsv_vec
         "用 a b 向量求解实数线性方程组 A*x=b"
         extends Modelica.Icons.Function;
         input Integer n "方程式数量";
@@ -6170,15 +6170,15 @@ M = N = 6, KL = 2, KU = 1:
         Integer ipiv[n];
 
       external "FORTRAN 77" dgbsv(
-        n, 
-        kLower, 
-        kUpper, 
-        nrhs, 
-        Awork, 
-        ldab, 
-        ipiv, 
-        x, 
-        n, 
+        n,
+        kLower,
+        kUpper,
+        nrhs,
+        Awork,
+        ldab,
+        ipiv,
+        x,
+        n,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "
 与函数 LAPACK.dgbsv 相同，但右侧是向量而不是矩阵。
@@ -6201,19 +6201,19 @@ M = N = 6, KL = 2, KU = 1:
         Real work[5 * size(A, 1) + 5 * size(A, 2)];
 
       external "FORTRAN 77" dgesvd(
-        "A", 
-        "A", 
-        m, 
-        n, 
-        Awork, 
-        m, 
-        sigma, 
-        U, 
-        m, 
-        VT, 
-        n, 
-        work, 
-        lwork, 
+        "A",
+        "A",
+        m,
+        n,
+        Awork,
+        m,
+        sigma,
+        U,
+        m,
+        VT,
+        n,
+        work,
+        lwork,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -6345,19 +6345,19 @@ INFO    (输出) INTEGER
         Real work[5 * size(A, 1) + 5 * size(A, 2)];
 
       external "FORTRAN 77" dgesvd(
-        "N", 
-        "N", 
-        m, 
-        n, 
-        Awork, 
-        m, 
-        sigma, 
-        U, 
-        m, 
-        VT, 
-        n, 
-        work, 
-        lwork, 
+        "N",
+        "N",
+        m,
+        n,
+        Awork,
+        m,
+        sigma,
+        U,
+        m,
+        VT,
+        n,
+        work,
+        lwork,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack文档
 目的
@@ -6478,7 +6478,7 @@ INFO    (输出) INTEGER
 "    ));
       end dgesvd_sigma;
 
-      pure function dgetrf 
+      pure function dgetrf
         "计算正方形或矩形矩阵 A 的 LU 因式分解（A = P*L*U）"
 
         extends Modelica.Icons.Function;
@@ -6492,11 +6492,11 @@ INFO    (输出) INTEGER
         Integer lda = max(1, size(A, 1));
 
       external "FORTRAN 77" dgetrf(
-        m, 
-        n, 
-        LU, 
-        lda, 
-        pivots, 
+        m,
+        n,
+        LU,
+        lda,
+        pivots,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -6544,11 +6544,11 @@ INFO    (输出) INTEGER
 "    ));
       end dgetrf;
 
-      pure function dgetrs 
+      pure function dgetrs
         "用 dgetrf 的 LU 分解求解线性方程组"
 
         extends Modelica.Icons.Function;
-        input Real LU[:,size(LU, 1)] 
+        input Real LU[:,size(LU, 1)]
           "正方形矩阵 dgetrf 的 LU 因式分解";
         input Integer pivots[size(LU, 1)] "dgetrf 的枢轴向量";
         input Real B[size(LU, 1),:] "右边矩阵 B";
@@ -6562,14 +6562,14 @@ INFO    (输出) INTEGER
         Integer ldb = max(1, size(B, 1));
 
       external "FORTRAN 77" dgetrs(
-        "N", 
-        n, 
-        nrhs, 
-        work, 
-        lda, 
-        pivots, 
-        X, 
-        ldb, 
+        "N",
+        n,
+        nrhs,
+        work,
+        lda,
+        pivots,
+        X,
+        ldb,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -6620,11 +6620,11 @@ INFO    (输出) INTEGER
 "    ));
       end dgetrs;
 
-      pure function dgetrs_vec 
+      pure function dgetrs_vec
         "用 dgetrf 的 LU 分解求解线性方程组"
 
         extends Modelica.Icons.Function;
-        input Real LU[:,size(LU, 1)] 
+        input Real LU[:,size(LU, 1)]
           "正方形矩阵 dgetrf 的 LU 因式分解";
         input Integer pivots[size(LU, 1)] "dgetrf 的枢轴向量";
         input Real b[size(LU, 1)] "右侧矢量 b";
@@ -6639,14 +6639,14 @@ INFO    (输出) INTEGER
         Integer ldb = max(1, size(b, 1));
 
       external "FORTRAN 77" dgetrs(
-        "N", 
-        n, 
-        nrhs, 
-        work, 
-        lda, 
-        pivots, 
-        x, 
-        ldb, 
+        "N",
+        n,
+        nrhs,
+        work,
+        lda,
+        pivots,
+        x,
+        ldb,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -6696,11 +6696,11 @@ INFO    (输出) INTEGER
 "    ));
       end dgetrs_vec;
 
-      pure function dgetri 
+      pure function dgetri
         "使用 dgetrf 中的 LU 因式分解计算矩阵的逆值"
 
         extends Modelica.Icons.Function;
-        input Real LU[:,size(LU, 1)] 
+        input Real LU[:,size(LU, 1)]
           "正方形矩阵 dgetrf 的 LU 因式分解";
         input Integer pivots[size(LU, 1)] "dgetrf 的枢轴向量";
         output Real inv[size(LU, 1),size(LU, 2)] = LU "矩阵 P*L*U 的逆";
@@ -6709,17 +6709,17 @@ INFO    (输出) INTEGER
       protected
         Integer n = size(LU, 1);
         Integer lda = max(1, size(LU, 1));
-        Integer lwork = max(1, min(10, size(LU, 1)) * size(LU, 1)) 
+        Integer lwork = max(1, min(10, size(LU, 1)) * size(LU, 1))
           "工作阵列长度";
         Real work[max(1, min(10, size(LU, 1)) * size(LU, 1))];
 
       external "FORTRAN 77" dgetri(
-        n, 
-        inv, 
-        lda, 
-        pivots, 
-        work, 
-        lwork, 
+        n,
+        inv,
+        lda,
+        pivots,
+        work,
+        lwork,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -6775,9 +6775,9 @@ INFO    (输出) INTEGER
         extends Modelica.Icons.Function;
         input Real A[:,:] "正方形或矩形矩阵";
         input Integer lwork = max(1, 3 * size(A, 2) + 1) "工作阵列长度";
-        output Real QR[size(A, 1),size(A, 2)] = A 
+        output Real QR[size(A, 1),size(A, 2)] = A
           "QR 因式分解打包格式";
-        output Real tau[min(size(A, 1), size(A, 2))] 
+        output Real tau[min(size(A, 1), size(A, 2))]
           "Q 基本反射体的标量因子";
         output Integer p[size(A, 2)] = zeros(size(A, 2)) "枢轴向量";
         output Integer info;
@@ -6788,14 +6788,14 @@ INFO    (输出) INTEGER
         Real work[lwork] "工作阵列";
 
       external "FORTRAN 77" dgeqp3(
-        m, 
-        ncol, 
-        QR, 
-        lda, 
-        p, 
-        tau, 
-        work, 
-        lwork, 
+        m,
+        ncol,
+        QR,
+        lda,
+        p,
+        tau,
+        work,
+        lwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -6872,12 +6872,12 @@ X. Sun, Computer Science Dept., Duke University, USA
 "    ));
       end dgeqp3;
 
-      pure function dorgqr 
+      pure function dorgqr
         "生成一个实正交矩阵 Q，其定义为 dgeqrf 返回的基本反射器的乘积"
 
         extends Modelica.Icons.Function;
         input Real QR[:,:] "来自 dgeqrf 的 QR";
-        input Real tau[min(size(QR, 1), size(QR, 2))] 
+        input Real tau[min(size(QR, 1), size(QR, 2))]
           "Q 基本反射体的标量因子";
         output Real Q[size(QR, 1),size(QR, 2)] = QR "正交矩阵 Q";
         output Integer info;
@@ -6887,19 +6887,19 @@ X. Sun, Computer Science Dept., Duke University, USA
         Integer n = size(QR, 2);
         Integer k = size(tau, 1);
         Integer lda = max(1, size(Q, 1));
-        Integer lwork = max(1, min(10, size(QR, 2)) * size(QR, 2)) 
+        Integer lwork = max(1, min(10, size(QR, 2)) * size(QR, 2))
           "工作阵列长度";
         Real work[max(1, min(10, size(QR, 2)) * size(QR, 2))];
 
       external "FORTRAN 77" dorgqr(
-        m, 
-        n, 
-        k, 
-        Q, 
-        lda, 
-        tau, 
-        work, 
-        lwork, 
+        m,
+        n,
+        k,
+        Q,
+        lda,
+        tau,
+        work,
+        lwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -6959,16 +6959,16 @@ INFO    (输出) INTEGER
 "    ));
       end dorgqr;
 
-      pure function dgees 
+      pure function dgees
         "计算实非对称矩阵 A 的实舒尔体 T，以及舒尔向量矩阵 Z 和特征值"
         extends Modelica.Icons.Function;
 
         input Real A[:,size(A, 1)] "正方形矩阵";
         output Real T[size(A, 1),size(A, 2)] = A "A = Z*T*Z' 的实数舒尔形式";
-        output Real Z[size(A, 1),size(A, 1)] 
+        output Real Z[size(A, 1),size(A, 1)]
           "舒尔向量正交矩阵 Z";
         output Real eval_real[size(A, 1)] "A 的特征向量实部";
-        output Real eval_imag[size(A, 1)] 
+        output Real eval_imag[size(A, 1)]
           "A 的特征向量的虚部";
         output Integer info;
 
@@ -6982,20 +6982,20 @@ INFO    (输出) INTEGER
         Boolean bwork[size(A, 1)];
 
       external "FORTRAN 77" dgees(
-        "V", 
-        "N", 
-        dummyFunctionPointerNotUsed, 
-        n, 
-        T, 
-        lda, 
-        sdim, 
-        eval_real, 
-        eval_imag, 
-        Z, 
-        lda, 
-        work, 
-        lwork, 
-        bwork, 
+        "V",
+        "N",
+        dummyFunctionPointerNotUsed,
+        n,
+        T,
+        lda,
+        sdim,
+        eval_real,
+        eval_imag,
+        Z,
+        lda,
+        work,
+        lwork,
+        bwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -7139,32 +7139,32 @@ INFO    (输出) INTEGER
         output Real Qo[:,:] = Q "重新排序的舒尔向量";
         output Real wr[size(T, 2)] "重排特征值，实部";
         output Real wi[size(T, 2)] "重排特征值，虚部";
-        output Integer m 
+        output Integer m
           "所选特征值所跨不变子空间的维数";
-        output Real s 
+        output Real s
           "倒数条件数的下限。工作===V 不引用";
-        output Real sep 
+        output Real sep
           "指定不变子空间的估计倒数条件数";
         output Integer info;
 
       external "FORTRAN 77" dtrsen(
-        job, 
-        compq, 
-        select, 
-        n, 
-        To, 
-        ldt, 
-        Qo, 
-        ldq, 
-        wr, 
-        wi, 
-        m, 
-        s, 
-        sep, 
-        work, 
-        lwork, 
-        iwork, 
-        liwork, 
+        job,
+        compq,
+        select,
+        n,
+        To,
+        ldt,
+        Qo,
+        ldq,
+        wr,
+        wi,
+        m,
+        s,
+        sep,
+        work,
+        lwork,
+        iwork,
+        liwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -7371,12 +7371,12 @@ I(m) 是 m 乘 m 的同位矩阵，kprod 表示 Kronecker
 "    ));
       end dtrsen;
 
-      pure function dgesvx 
+      pure function dgesvx
         "求解实数线性方程组 op(A)*X=B，其中 op(A) 根据布尔输入 transposed 的值确定为矩阵 A 或其转置 A'。"
         extends Modelica.Icons.Function;
         input Real A[:,size(A, 1)] "实正方形矩阵 A";
         input Real B[size(A, 1),:] "实数矩阵 B";
-        input Boolean transposed = true 
+        input Boolean transposed = true
           "= true，如果要解的方程是 A'*X=B";
         output Real X[size(A, 1),size(B, 2)] "解决方案矩阵";
         output Integer info;
@@ -7400,27 +7400,27 @@ I(m) 是 m 乘 m 的同位矩阵，kprod 表示 Kronecker
         String equed = " ";
 
       external "FORTRAN 77" dgesvx(
-        "N", 
-        transA, 
-        n, 
-        nrhs, 
-        Awork, 
-        lda, 
-        AF, 
-        lda, 
-        ipiv, 
-        equed, 
-        R, 
-        C, 
-        Bwork, 
-        lda, 
-        X, 
-        lda, 
-        rcond, 
-        ferr, 
-        berr, 
-        work, 
-        iwork, 
+        "N",
+        transA,
+        n,
+        nrhs,
+        Awork,
+        lda,
+        AF,
+        lda,
+        ipiv,
+        equed,
+        R,
+        C,
+        Bwork,
+        lda,
+        X,
+        lda,
+        rcond,
+        ferr,
+        berr,
+        work,
+        iwork,
         info) annotation(Library = "lapack");
       annotation(Documentation(info="<html><p>
 Lapack 文档<br>用途<br>=======<br><br>DGESVX 使用 LU 因式分解来计算实数线性方程组的解。<br>线性方程组的解<br> A * X = B,<br>其中 A 是 N 乘 N 矩阵，X 和 B 是 N 乘 NRHS 矩阵.<br><br>还提供了解的误差范围和条件估计值<br>提供.<br><br>说明<br>===========<br><br>执行以下步骤:<br><br>1. 如果 FACT = \\'E\\'，则计算实际缩放因子，以平衡系统。<br> 系统:<br> &nbsp; &nbsp;TRANS = \\'N\\': &nbsp;diag(R)*A*diag(C) &nbsp; &nbsp; *inv(diag(C))*X = diag(R)*B<br> &nbsp; &nbsp;TRANS = \\'T\\': (diag(R)*A*diag(C))**T *inv(diag(R))*X = diag(C)*B<br> &nbsp; &nbsp;TRANS = \\'C\\': (diag(R)*A*diag(C))**H *inv(diag(R))*X = diag(C)*B<br> 系统是否平衡取决于矩阵 A 的缩放比例。<br> 矩阵 A 的缩放比例，但如果使用平衡，A 将被 diag(R)*A*diag(C)<br> 被 diag(R)*A*diag(C)覆盖，B 被 diag(R)*B（如果 TRANS=\\'N\\'）<br> 或 diag(C)*B（如果 TRANS=\\'T\\'或\\'C\\'）。.<br><br>2. 如果 FACT = \\'N\\' 或 \\'E\\'，则使用 LU 分解将矩阵 A 分解为<br> 矩阵 A 的因式分解（如果 FACT = \\'E\\'，则在平衡后）为<br> &nbsp; &nbsp;A = P * L * U,<br> 其中，P 是置换矩阵，L 是单位下三角矩阵，U 是上三角矩阵。<br> 矩阵，U 是上三角.<br><br>3. 如果某个 U(i,i)=0 使得 U 恰好是奇异值，那么例程会以 INFO = i 返回。<br> 则例程以 INFO = i 返回。<br> 来估计矩阵 A 的条件数。 如果<br> 条件数的倒数小于机器精度、<br> 则返回 INFO = N+1 作为警告，但例程仍会继续求解 X 并计算误差。<br> 求解 X 并计算误差边界，如下所述.<br><br>4. 利用分解形式求解方程组 X 的.<br><br>5. 应用迭代精化来改进计算出的解<br> 矩阵，并为其计算误差边界和后向误差估计值<br> 的.<br><br>6. 如果使用了平衡，矩阵 X 将被预乘以<br> diag(C)（如果 TRANS=\\'N\\'）或 diag(R)（如果 TRANS=\\'T\\'或 \\'C\\'）进行预乘，以便在平衡之前求解原始系统。<br> 使其在均衡之前求解原始系统.<br><br>论据<br>=========<br><br>FACT &nbsp; &nbsp;(输入) CHARACTER*1<br> &nbsp; &nbsp; &nbsp;指定是否在输入时提供矩阵 A 的分解形式。<br> &nbsp; &nbsp; &nbsp;如果不提供，则在对矩阵 A 进行因子化之前是否应<br> &nbsp; &nbsp; &nbsp;平衡后再进行因子化.<br> &nbsp; &nbsp; &nbsp;= \\'F\\': &nbsp;输入时，AF 和 IPIV 包含 A 的分解形式。<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;如果 EQUED 不为 \\'N\\'，则矩阵 A 已用 R 和 C 给出的缩放因子均衡化。<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;用 R 和 C 给出的缩放因子进行平衡。<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;不修改 A、AF 和 IPIV.<br> &nbsp; &nbsp; &nbsp;= \\'N\\': &nbsp;矩阵 A 将被复制到 AF 并进行分解.<br> &nbsp; &nbsp; &nbsp;= \\'E\\': &nbsp;必要时将对矩阵 A 进行平衡，然后<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;复制到 AF 并进行因式分解.<br><br>TRANS &nbsp; (输入) CHARACTER*1<br> &nbsp; &nbsp; &nbsp;指定方程组的形式:<br> &nbsp; &nbsp; &nbsp;= \\'N\\': &nbsp;A * X = B &nbsp; &nbsp; (无转置)<br> &nbsp; &nbsp; &nbsp;= \\'T\\': &nbsp;A**T * X = B &nbsp;(转置)<br> &nbsp; &nbsp; &nbsp;= \\'C\\': &nbsp;A**H * X = B &nbsp;(转置)<br><br>N &nbsp; &nbsp; &nbsp; (输入) INTEGER<br> &nbsp; &nbsp; &nbsp;线性方程的个数，即矩阵 A 的阶数<br> &nbsp; &nbsp; &nbsp;矩阵 A. &nbsp;N &gt;= 0.<br><br>NRHS &nbsp; &nbsp;(输入) INTEGER<br> &nbsp; &nbsp; &nbsp;右边的数量，即矩阵 B 和 X 的列数<br> &nbsp; &nbsp; &nbsp;矩阵 B 和 X. &nbsp;NRHS &gt;= 0.<br><br>A &nbsp; &nbsp; &nbsp; (输入/输出) DOUBLE PRECISION array, dimension (LDA,N)<br> &nbsp; &nbsp; &nbsp;输入 N 乘 N 矩阵 A。 如果 FACT = \\'F\\'，而 EQUED<br> &nbsp; &nbsp; &nbsp;不是 \\'N\\'，则 A 必须已被 R 和/或 C 中的比例因子平衡。<br> &nbsp; &nbsp; &nbsp;如果 FACT = \\'F\\' 或 \\'N\\'，或者 EQUED = \\'N\\'，则 A 不会被修改。<br> &nbsp; &nbsp; &nbsp;或 FACT = \\'E\\'且 EQUED = \\'N\\'，则 A 不会被修改。.<br><br> &nbsp; &nbsp; &nbsp;退出时，如果 EQUED .ne. \\'N\\'，A 的缩放比例如下:<br> &nbsp; &nbsp; &nbsp;EQUED = \\'R\\': &nbsp;A := diag(R) * A<br> &nbsp; &nbsp; &nbsp;EQUED = \\'C\\': &nbsp;A := A * diag(C)<br> &nbsp; &nbsp; &nbsp;EQUED = \\'B\\': &nbsp;A := diag(R) * A * diag(C).<br><br>LDA &nbsp; &nbsp; (输入) INTEGER<br> &nbsp; &nbsp; &nbsp;数组 A 的前向维度. &nbsp;LDA &gt;= max(1,N).<br><br>AF &nbsp; &nbsp; &nbsp;(输入或输出) DOUBLE PRECISION array, dimension (LDAF,N)<br> &nbsp; &nbsp; &nbsp;如果 FACT = \\'F\\'，则 AF 是一个输入参数，输入时<br> &nbsp; &nbsp; &nbsp;包含由 DGETRF 计算出的因式分解中的因数 L 和 U<br> &nbsp; &nbsp; &nbsp;A = P*L*U 由 DGETRF 计算得出。 如果 EQUED .ne. \\'N\\'，则<br> &nbsp; &nbsp; &nbsp;AF 是平衡矩阵 A 的因式分解形式.<br><br> &nbsp; &nbsp; &nbsp;如果 FACT = \\'N\\'，则 AF 是输出参数，退出时<br> &nbsp; &nbsp; &nbsp;返回原矩阵 A 的因数分解 A = P*L*U 中的因数 L 和 U<br> &nbsp; &nbsp; &nbsp;的因子 L 和 U.<br><br> &nbsp; &nbsp; &nbsp;如果 FACT = \\'E\\'，则 AF 是输出参数，退出时<br> &nbsp; &nbsp; &nbsp;返回均衡矩阵 A 的因数分解 A = P*L*U 中的因数 L 和 U（有关 A 的说明，请参见 A 的说明）。<br> &nbsp; &nbsp; &nbsp;的因数分解 A = P*L*U 中的因数 L 和 U（关于平衡矩阵 A 的形式，请参阅<br> &nbsp; &nbsp; &nbsp;平衡矩阵的形式）。.<br><br>LDAF &nbsp; &nbsp;(输入) INTEGER<br> &nbsp; &nbsp; &nbsp;数组 AF 的前导维数. &nbsp;LDAF &gt;= max(1,N).<br><br>IPIV &nbsp; &nbsp;(输入或输出) INTEGER array, dimension (N)<br> &nbsp; &nbsp; &nbsp;如果 FACT = \\'F\\'，则 IPIV 是一个输入参数，在输入时<br> &nbsp; &nbsp; &nbsp;包含 DGETRF 计算出的因式分解 A = P*L*U 的枢轴索引；矩阵的第 i 行被交换。<br> &nbsp; &nbsp; &nbsp;中的枢轴索引；矩阵的第 i 行与 IPIV(i) 行交换。<br> &nbsp; &nbsp; &nbsp;行 IPIV(i).<br><br> &nbsp; &nbsp; &nbsp;如果 FACT = \\'N\\'，则 IPIV 是一个输出参数，在退出时<br> &nbsp; &nbsp; &nbsp;包含原矩阵 A 的因式分解 A = P*L*U 中的枢轴索引<br> &nbsp; &nbsp; &nbsp;的因式分解中的枢轴索引。.<br><br> &nbsp; &nbsp; &nbsp;如果 FACT = \\'E\\'，则 IPIV 是输出参数，在退出时<br> &nbsp; &nbsp; &nbsp;包含均衡矩阵 A = P*L*U 的因式分解中的枢轴索引<br> &nbsp; &nbsp; &nbsp;的均衡矩阵 A.<br><br>EQUED &nbsp; (输入或输出) CHARACTER*1<br> &nbsp; &nbsp; &nbsp;指定平衡的形式.<br> &nbsp; &nbsp; &nbsp;= \\'N\\': &nbsp;无平衡（如果 FACT = \\'N\\'，则始终为真）.<br> &nbsp; &nbsp; &nbsp;= \\'R\\': &nbsp;行平衡，即 A 已被预乘以<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;diag(R).<br> &nbsp; &nbsp; &nbsp;= \\'C\\': &nbsp;列平衡，即 A 已被 diag(C)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;乘以 diag(C).<br> &nbsp; &nbsp; &nbsp;= \\'B\\': &nbsp;行平衡和列平衡，即 A 被 diag(R) * A * diag(C)<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;替换为 diag(R) * A * diag(C).<br> &nbsp; &nbsp; &nbsp;如果 FACT = \\'F\\'，EQUED 是输入参数；否则，它是输出参数。<br> &nbsp; &nbsp; &nbsp;输出参数.<br><br>R &nbsp; &nbsp; &nbsp; (输入或输出) DOUBLE PRECISION array, dimension (N)<br> &nbsp; &nbsp; &nbsp;如果 EQUED = \\'R\\' 或 \\'B\\'，A 的左边乘以 diag(R)。<br> &nbsp; &nbsp; &nbsp;在左边乘以 diag(R)；如果 EQUED = \\'N\\' 或 \\'C\\'，则 R<br> &nbsp; &nbsp; &nbsp;则不会被访问。 如果 FACT = \\'F\\'，R 是输入参数；<br> &nbsp; &nbsp; &nbsp;否则，R 是输出参数。 如果 FACT = \\'F\\'，且<br> &nbsp; &nbsp; &nbsp;EQUED = \\'R\\' 或 \\'B\\'，则 R 的每个元素必须是正数.<br><br>C &nbsp; &nbsp; &nbsp; (输入或输出) DOUBLE PRECISION array, dimension (N)<br> &nbsp; &nbsp; &nbsp;如果 EQUED = \\'C\\' 或 \\'B\\'，则 A 右乘以 diag(C)；如果 EQUED = \\'N\\' 或 \\'R\\'，则 C<br> &nbsp; &nbsp; &nbsp;右乘以 diag(C)；如果 EQUED = \\'N\\' 或 \\'R\\'，则不访问 C<br> &nbsp; &nbsp; &nbsp;不会被访问。 如果 FACT = \\'F\\'，C 是输入参数；<br> &nbsp; &nbsp; &nbsp;否则，C 是输出参数。 如果 FACT = \\'F\\'，且<br> &nbsp; &nbsp; &nbsp;EQUED = \\'C\\' 或 \\'B\\'，则 C 的每个元素必须是正数.<br><br>B &nbsp; &nbsp; &nbsp; (输入/输出) DOUBLE PRECISION array, dimension (LDB,NRHS)<br> &nbsp; &nbsp; &nbsp;输入时，是 N-by-NRHS 右边矩阵 B。<br> &nbsp; &nbsp; &nbsp;退出时<br> &nbsp; &nbsp; &nbsp;如果 EQUED = \\'N\\'，则不修改 B；<br> &nbsp; &nbsp; &nbsp;如果 TRANS = \\'N\\'，且 EQUED = \\'R\\' 或 \\'B\\'，则 B 被覆盖为<br> &nbsp; &nbsp; &nbsp;diag(R)*B 覆盖 B；<br> &nbsp; &nbsp; &nbsp;如果 TRANS = \\'T\\' 或 \\'C\\'，且 EQUED = \\'C\\' 或 \\'B\\'，则 B 将被 diag(C)*B 改写<br> &nbsp; &nbsp; &nbsp;被 diag(C)*B 覆盖.<br><br>LDB &nbsp; &nbsp; (输入) INTEGER<br> &nbsp; &nbsp; &nbsp;数组 B 的前向维度. &nbsp;LDB &gt;= max(1,N).<br><br>X &nbsp; &nbsp; &nbsp; (输出) DOUBLE PRECISION array, dimension (LDX,NRHS)<br> &nbsp; &nbsp; &nbsp;如果 INFO = 0 或 INFO = N+1，原方程组的 N-by-NRHS 解矩阵 X<br> &nbsp; &nbsp; &nbsp;是原方程组的 N-by-NRHS 解矩阵 X。 请注意，如果 EQUED .ne<br> &nbsp; &nbsp; &nbsp;如果 EQUED .ne. \\'N\\'，则退出时 A 和 B 会被修改，而<br> &nbsp; &nbsp; &nbsp;如果 TRANS = \\'N\\'，且<br> &nbsp; &nbsp; &nbsp;EQUED=\\'C\\'或\\'B\\'，或 inv(diag(R))*X（如果 TRANS=\\'T\\'或\\'C<br> &nbsp; &nbsp; &nbsp;且 EQUED = \\'R\\' 或 \\'B\\' 时，则 inv(diag(R) *X.<br><br>LDX &nbsp; &nbsp; (输入) INTEGER<br> &nbsp; &nbsp; &nbsp;数组 X 的前向维度. &nbsp;LDX &gt;= max(1,N).<br><br>RCOND &nbsp; (输出) DOUBLE PRECISION<br> &nbsp; &nbsp; &nbsp;矩阵 A 的倒数条件数的估计值<br> &nbsp; &nbsp; &nbsp;A 的倒数条件数的估计值。 如果 RCOND 小于<br> &nbsp; &nbsp; &nbsp;如果 RCOND 小于机器精度（尤其是 RCOND = 0 时），矩阵<br> &nbsp; &nbsp; &nbsp;是工作精度的奇异值。 这种情况<br> &nbsp; &nbsp; &nbsp;返回代码为 INFO &gt; 0.<br><br>FERR &nbsp; &nbsp;(输出) DOUBLE PRECISION array, dimension (NRHS)<br> &nbsp; &nbsp; &nbsp;每个解法向量的估计前向误差边界<br> &nbsp; &nbsp; &nbsp;X(j)（解矩阵 X 的第 j 列）。<br> &nbsp; &nbsp; &nbsp;如果 XTRUE 是与 X(j) 相对应的真实解，那么 FERR(j)<br> &nbsp; &nbsp; &nbsp;是对 (X(j) - X(j) - X(j) 中最大元素大小的估计上限。<br> &nbsp; &nbsp; &nbsp;(X(j) - XTRUE) 中最大元素的大小除以<br> &nbsp; &nbsp; &nbsp;的估计上限。 该估计值与<br> &nbsp; &nbsp; &nbsp;的估计值一样可靠，而且几乎总是略微高估真实误差。<br> &nbsp; &nbsp; &nbsp;高估真实误差.<br><br>BERR &nbsp; &nbsp;(输出) DOUBLE PRECISION array, dimension (NRHS)<br> &nbsp; &nbsp; &nbsp;每个解的分量相对后向误差<br> &nbsp; &nbsp; &nbsp;向量 X(j)的分量相对后向误差（即<br> &nbsp; &nbsp; &nbsp;的最小相对变化）。.<br><br>WORK &nbsp; &nbsp;(工作区/输出) DOUBLE PRECISION array, dimension (4*N)<br> &nbsp; &nbsp; &nbsp;退出时，WORK(1) 包含倒数枢轴增长<br> &nbsp; &nbsp; &nbsp;因子 norm(A)/norm(U)。使用 最大绝对元素规范。<br> &nbsp; &nbsp; &nbsp;使用。如果 WORK(1) 远远小于 1，那么<br> &nbsp; &nbsp; &nbsp;平衡）矩阵 A 的 LU 因式分解的稳定性就会很差。<br> &nbsp; &nbsp; &nbsp;的稳定性就会很差。这也意味着解 X、条件<br> &nbsp; &nbsp; &nbsp;估算器 RCOND 和前向误差约束 FERR 可能不可靠。<br> &nbsp; &nbsp; &nbsp;不可靠。如果因式分解在 0 0: &nbsp;如果 INFO = i，并且 i 是<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;= N: &nbsp;U(i,i) 恰好为零。 因式分解已经完成<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 已经完成，但因子 U 恰好是<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 奇异，因此无法计算解和误差边界。<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 无法计算。返回 RCOND = 0。<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= N+1：U 是非奇异值，但 RCOND 小于机器值<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 精度，即矩阵的奇异<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 到工作精度。 然而<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 解和误差边界的计算，因为<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 在很多情况下<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 计算出的解可能比<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RCOND 的值更精确.<br>
@@ -7428,7 +7428,7 @@ Lapack 文档<br>用途<br>=======<br><br>DGESVX 使用 LU 因式分解来计算
 </html>"      ));
       end dgesvx;
 
-      pure function dtrsyl 
+      pure function dtrsyl
         "求解实希尔维斯特矩阵方程 op(A)*X + X*op(B) = scale*C 或 op(A)*X - X*op(B) = scale*C"
         extends Modelica.Icons.Function;
 
@@ -7439,7 +7439,7 @@ Lapack 文档<br>用途<br>=======<br><br>DGESVX 使用 LU 因式分解来计算
         input Boolean tranA = false "= true，如果 op(A)=A'";
         input Boolean tranB = false "= true，如果 op(B)=B'";
         input Integer isgn = 1 "指定方程中的符号，+1 或 -1";
-        output Real X[size(C, 1),size(C, 2)] = C 
+        output Real X[size(C, 1),size(C, 2)] = C
           "西尔维斯特方程的解法";
         output Real scale "比例系数";
         output Integer info;
@@ -7452,18 +7452,18 @@ Lapack 文档<br>用途<br>=======<br><br>DGESVX 使用 LU 因式分解来计算
         Integer ldb = max(1, n);
 
       external "FORTRAN 77" dtrsyl(
-        trana, 
-        tranb, 
-        isgn, 
-        m, 
-        n, 
-        A, 
-        lda, 
-        B, 
-        ldb, 
-        X, 
-        lda, 
-        scale, 
+        trana,
+        tranb,
+        isgn,
+        m,
+        n,
+        A,
+        lda,
+        B,
+        ldb,
+        X,
+        lda,
+        scale,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -7543,21 +7543,21 @@ INFO    (输出) INTEGER
 "    ));
       end dtrsyl;
 
-      pure function dhseqr 
+      pure function dhseqr
         "使用针对海森伯形式矩阵的 lapack 例程 DHSEQR 计算矩阵 H 的特征值"
         extends Modelica.Icons.Function;
 
         input Real H[:,size(H, 1)] "具有海森伯形式的矩阵 H";
-        input Boolean eigenValuesOnly = true 
+        input Boolean eigenValuesOnly = true
           "= true，如果只计算特征值，否则也计算舒尔形式";
         input String compz = "N" "指定舒尔向量的计算方法";
         input Real Z[:,:] = H "矩阵 Z";
-        output Real alphaReal[size(H, 1)] 
+        output Real alphaReal[size(H, 1)]
           "alpha 的实部（特征值=（alphaReal+i*alphaImag）";
-        output Real alphaImag[size(H, 1)] 
+        output Real alphaImag[size(H, 1)]
           "alpha 的虚部（特征值=（alphaReal+i*alphaImag）";
         output Integer info;
-        output Real Ho[:,:] = H 
+        output Real Ho[:,:] = H
           "舒尔分解（若仅特征值===false，否则未指定）";
         output Real Zo[:,:] = Z;
         output Real work[3 * max(1, size(H, 1))];
@@ -7568,23 +7568,23 @@ INFO    (输出) INTEGER
         Integer ilo = 1;
         Integer ihi = n;
         Integer ldh = max(n, 1);
-        Integer lwork = 3 * max(1, size(H, 1)) 
+        Integer lwork = 3 * max(1, size(H, 1))
           "dhseqr 中使用的 dwork 数组的尺寸";
 
       external "FORTRAN 77" dhseqr(
-        job, 
-        compz, 
-        n, 
-        ilo, 
-        ihi, 
-        Ho, 
-        ldh, 
-        alphaReal, 
-        alphaImag, 
-        Zo, 
-        ldh, 
-        work, 
-        lwork, 
+        job,
+        compz,
+        n,
+        ilo,
+        ihi,
+        Ho,
+        ldh,
+        alphaReal,
+        alphaImag,
+        Zo,
+        ldh,
+        work,
+        lwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info="<html><p>
 Lapack 文档<br>用途<br>=======<br><br>DHSEQR 可以计算海森伯矩阵 H 的特征值，以及舒尔分解矩阵 T 和 Z 的特征值。<br>的特征值，以及可选的舒尔分解矩阵 T 和 Z 的特征值<br>H = Z T Z**T，其中 T 是上准三角形矩阵（舒尔形式），Z 是舒尔向量的正交矩阵.<br><br>可选择将 Z 后乘以输入的正交矩阵 Q，这样该例程就能给出舒尔因式分解。<br>矩阵 Q，这样该例程就能给出矩阵 A 的舒尔因式分解。<br>矩阵 A 的舒尔因式分解。<br>的矩阵 A 进行舒尔因式分解：A = Q*H*Q**T = (QZ)*T*(QZ)**T.<br><br>论据<br>=========<br><br>JOB &nbsp; (输入) CHARACTER*1<br> &nbsp; &nbsp;= \\\\'E\\\\': &nbsp;只计算特征值;<br> &nbsp; &nbsp;= \\\\'S\\\\': &nbsp;计算特征值和舒尔形式 T.<br><br>COMPZ (输入) CHARACTER*1<br> &nbsp; &nbsp;= \\\\'N\\\\': &nbsp;不计算舒尔向量;<br> &nbsp; &nbsp;= \\\\'I\\\\': &nbsp;Z 被初始化为单位矩阵，H 的舒尔向量矩阵 Z<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;返回 H 的舒尔向量矩阵 Z;<br> &nbsp; &nbsp;= \\\\'V\\\\': &nbsp;Z 的入口必须包含一个正交矩阵 Q，并且<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;返回乘积 Q*Z.<br><br>N &nbsp; &nbsp; (输入) INTEGER<br> &nbsp; &nbsp;矩阵 H 的阶数. &nbsp;N &gt;= 0.<br><br>ILO &nbsp; (输入) INTEGER<br>IHI &nbsp; (输入) INTEGER<br> &nbsp; &nbsp;假设 H 的行列 1:ILO-1 和列 IHI+1:N 已经是上三角形。<br> &nbsp; &nbsp;和列 1:ILO-1 和 IHI+1:N 已是上三角形。ILO 和 IHI 通常<br> &nbsp; &nbsp;通常由之前调用 DGEBAL 时设置，然后在 DGEBAL 输出的矩阵还原为荷叶边矩阵时传递给 DGEHRD。<br> &nbsp; &nbsp;当 DGEBAL 输出的矩阵还原为海森伯形式时，再将其传递给 DGEHRD<br> &nbsp; &nbsp;形式。否则 ILO 和 IHI 应分别设置为 1 和 N。<br> &nbsp; &nbsp;分别设置为 1 和 N。 如果 N&gt;0，则 1&lt;=ILO&lt;=IHI&lt;=N。<br> &nbsp; &nbsp;如果 N = 0，则 ILO = 1，IHI = 0.<br><br>H &nbsp; &nbsp; (输入/输出) DOUBLE PRECISION array, dimension (LDH,N)<br> &nbsp; &nbsp;输入时，是上海森堡矩阵 H。<br> &nbsp; &nbsp;退出时，如果 INFO = 0 且 JOB = \\\\'S\\\\'，则 H 包含舒尔分解的上准三角形矩阵 T。<br> &nbsp; &nbsp;上准三角形矩阵 T 的舒尔分解（舒尔形式<br> &nbsp; &nbsp;(舒尔形式）；2 乘 2 的对角线块（对应于<br> &nbsp; &nbsp;对角块（对应于特征值的复共轭对）以标准形式返回。<br> &nbsp; &nbsp;标准形式返回，H(i,i) = H(i+1,i+1) 和<br> &nbsp; &nbsp;H(i+1,i)*H(i,i+1)&lt;0.<br> &nbsp; &nbsp;则在退出时不指定 H 的内容。 (当 INFO&gt;0 时<br> &nbsp; &nbsp;的输出值）。<br> &nbsp; &nbsp;的描述中给出）。<br><br> &nbsp; &nbsp;与早期版本的 DHSEQR 不同，该子程序可以<br> &nbsp; &nbsp;在 i&gt;j 和 j = 1、2、...时，显式 H(i,j) = 0 ILO-1<br> &nbsp; &nbsp;或 j = IHI+1, IHI+2, ... N.<br>LDH &nbsp; (输入) INTEGER<br> &nbsp; &nbsp;数组 H 的前向维度. LDH &gt;= max(1,N).<br><br>WR &nbsp; &nbsp;(输出) DOUBLE PRECISION array, dimension (N)<br>WI &nbsp; &nbsp;(输出) DOUBLE PRECISION array, dimension (N)<br> &nbsp; &nbsp;分别是计算出的特征值的实部和虚部。<br> &nbsp; &nbsp;的实部和虚部。如果计算出的两个特征值是一对复<br> &nbsp; &nbsp;如果两个特征值被计算为一对复共轭，它们将被存储在<br> &nbsp; &nbsp;WR 和 WI 中的连续元素，例如第 i 个和第 (i+1)th 个元素，WI(i) &gt; 0，WI(i+1) &lt; 0。<br> &nbsp; &nbsp;如果 JOB = \\\\'S\\\\'，特征值的存储顺序与对角线上的顺序相同。<br> &nbsp; &nbsp;与 H 中返回的舒尔表格对角线上的特征值顺序相同。<br> &nbsp; &nbsp;中的对角线顺序存储，WR(i) = H(i,i)，如果 H(i:i+1,i:i+1) 是一个 2-by-2<br> &nbsp; &nbsp;对角块，则 WI(i) = sqrt(-H(i+1,i)*H(i,i+1)) 和<br> &nbsp; &nbsp;WI(i+1) = -WI(i).<br><br>Z &nbsp; &nbsp; (输入/输出) DOUBLE PRECISION array, dimension (LDZ,N)<br> &nbsp; &nbsp;如果 COMPZ = \\\\'N\\\\'，则不引用 Z。<br> &nbsp; &nbsp;如果 COMPZ = \\\\'I\\\\'，则在进入和退出时无需设置 Z、<br> &nbsp; &nbsp;如果 INFO = 0，则 Z 包含 H 的舒尔向量的正交矩阵 Z。<br> &nbsp; &nbsp;如果 COMPZ = \\\\'V\\\\'，入口 Z 必须包含一个 N-by-N 矩阵 Q。<br> &nbsp; &nbsp;如果 COMPZ = \\\\'V\\\\'，Z 的入口必须包含一个 N 乘 N 的矩阵 Q，假定它等于单位矩阵。<br> &nbsp; &nbsp;子矩阵 Z（ILO:IHI,ILO:IHI）除外。退出时<br> &nbsp; &nbsp;如果 INFO = 0，则 Z 包含 Q*Z。<br> &nbsp; &nbsp;通常 Q 是 DORGHR<br> &nbsp; &nbsp;生成的正交矩阵。<br> &nbsp; &nbsp;当 INFO&gt;0 时 Z 的输出值在下面的 INFO 说明中给出）。<br> &nbsp; &nbsp;的说明中给出）。<br><br>LDZ &nbsp; (输入) INTEGER<br> &nbsp; &nbsp;如果 COMPZ = \\\\'I\\\\' 或<br> &nbsp; &nbsp;则 LDZ&gt;=MAX(1,N) 。 否则，LDZ&gt;=1.<br><br>WORK &nbsp;(工作区/输出) DOUBLE PRECISION array, dimension (LWORK)<br> &nbsp; &nbsp;退出时，如果 INFO = 0，WORK(1) 将返回 LWORK 的最优值估计值。<br> &nbsp; &nbsp;的最优值.<br><br>LWORK (输入) INTEGER<br> &nbsp; &nbsp;数组 WORK 的维数。 LWORK &gt;= max(1,N)<br> &nbsp; &nbsp;就足够了，它能提供非常好的<br> &nbsp; &nbsp;最佳性能。 不过，要达到最佳性能，LWORK 可能需要大到 11*N<br> &nbsp; &nbsp;才能达到最佳性能。 工作区<br> &nbsp; &nbsp;查询来确定最佳工作区<br> &nbsp; &nbsp;大小.<br><br> &nbsp; &nbsp;如果 LWORK =-1，则 DHSEQR 会进行工作区查询。<br> &nbsp; &nbsp;在这种情况下，DHSEQR 会检查输入参数并<br> &nbsp; &nbsp;估算给定值 N、ILO 和 IHI 的最佳工作区大小。<br> &nbsp; &nbsp;值的最佳工作区大小。 估算结果将在<br> &nbsp; &nbsp;在 WORK(1) 中返回。 XERBLA 不会发出与 LWORK 有关的错误信息。<br> &nbsp; &nbsp;XERBLA 不会发出与 LWORK 有关的错误信息。 H 和 Z 均未被访问.<br><br>INFO &nbsp;(输出) INTEGER<br> &nbsp; &nbsp;= 0: 成功退出<br> &nbsp; &nbsp;&lt; 0: 如果 INFO = -i，说明第 i 个参数的值不合法。<br> &nbsp; &nbsp; &nbsp; &nbsp; 值<br> &nbsp; &nbsp;&gt; 0: 如果 INFO = i，则 DHSEQR 计算所有特征值失败。<br> &nbsp; &nbsp; &nbsp; &nbsp; 特征值。 WR 和 WI 的元素 1:ilo-1 和 i+1:n<br> &nbsp; &nbsp; &nbsp; &nbsp; 和 WI 中的元素 1:ilo-1 和 i+1:n 包含已成功计算的特征值。<br> &nbsp; &nbsp; &nbsp; &nbsp; 成功计算的特征值。 (计算失败的情况很少见）。<br><br> &nbsp; &nbsp; &nbsp; &nbsp; 如果 INFO &gt; 0 且 JOB = \\\\'E\\\\'，那么退出时<br> &nbsp; &nbsp; &nbsp; &nbsp; 则在退出时，剩余的未求和特征值为上海森伯矩阵行的特征值和<br> &nbsp; &nbsp; &nbsp; &nbsp; 值。<br> &nbsp; &nbsp; &nbsp; &nbsp; 列的特征值。<br> &nbsp; &nbsp; &nbsp; &nbsp; 的特征值.<br><br> &nbsp; &nbsp; &nbsp; &nbsp; 如果 INFO &gt; 0 且 JOB = \\\\'S\\\\'，则在退出时<br><br> &nbsp; &nbsp;(*) &nbsp;(initial value of H)*U &nbsp;= U*(final value of H)<br><br> &nbsp; &nbsp; &nbsp; &nbsp; 其中 U 是一个正交矩阵。 最终<br> &nbsp; &nbsp; &nbsp; &nbsp; H 的最终值是上黑森伯格和准三角形的<br> &nbsp; &nbsp; &nbsp; &nbsp; 行和列 INFO+1 至 IHI.<br><br> &nbsp; &nbsp; &nbsp; &nbsp; 如果 INFO &gt; 0 且 COMPZ = \\\\'V\\\\'，则在退出时<br><br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (final value of Z) &nbsp;= &nbsp;(initial value of Z)*U<br><br> &nbsp; &nbsp; &nbsp; &nbsp; 其中 U 是 (*) 中的正交矩阵（与 JOB 值无关）。<br> &nbsp; &nbsp; &nbsp; &nbsp; 的数值）。<br><br> &nbsp; &nbsp; &nbsp; &nbsp; 如果 INFO &gt; 0 且 COMPZ = \\\\'I\\\\'，则退出时<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (Z 的最终值）= U<br> &nbsp; &nbsp; &nbsp; &nbsp; 其中 U 是 (*) 中的正交矩阵（无论<br> &nbsp; &nbsp; &nbsp; &nbsp; 的正交矩阵）。<br><br> &nbsp; &nbsp; &nbsp; &nbsp; 如果 INFO &gt; 0 且 COMPZ = \\\\'N\\\\'，则不会访问 Z<br> &nbsp; &nbsp; &nbsp; &nbsp; 访问.<br>
@@ -7605,11 +7605,11 @@ Lapack 文档<br>用途<br>=======<br><br>DHSEQR 可以计算海森伯矩阵 H �
         Real work[lda];
 
       external "FORTRAN 77" anorm = dlange(
-        norm, 
-        m, 
-        n, 
-        A, 
-        lda, 
+        norm,
+        m,
+        n,
+        A,
+        lda,
         work) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -7665,12 +7665,12 @@ WORK    (工作区) DOUBLE PRECISION array, dimension (MAX(1,LWORK)),
 
       end dlange;
 
-      pure function dgecon 
+      pure function dgecon
         "估计一般实矩阵 A 的条件数倒数"
         extends Modelica.Icons.Function;
 
         input Real LU_of_A[:,:] "实矩阵 A 的 LU 因式分解";
-        input Boolean inf = false 
+        input Boolean inf = false
           "使用无穷规范时为 true，使用 1 规范时为 false";
         input Real anorm "A 的常模";
         output Real rcond "A 的互易条件数";
@@ -7683,14 +7683,14 @@ WORK    (工作区) DOUBLE PRECISION array, dimension (MAX(1,LWORK)),
         String norm = if inf then "I" else "1";
 
       external "FORTRAN 77" dgecon(
-        norm, 
-        n, 
-        LU_of_A, 
-        lda, 
-        anorm, 
-        rcond, 
-        work, 
-        iwork, 
+        norm,
+        n,
+        LU_of_A,
+        lda,
+        anorm,
+        rcond,
+        work,
+        iwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -7741,18 +7741,18 @@ INFO    (输出) INTEGER
 "    ));
       end dgecon;
 
-      pure function dgehrd 
+      pure function dgehrd
         "通过正交相似变换，将实数普通矩阵 A 还原为上海森堡形式 H：  Q' * A * Q = H"
         extends Modelica.Icons.Function;
 
         input Real A[:,size(A, 1)];
-        input Integer ilo = 1 
+        input Integer ilo = 1
           "原矩阵不是上三角形式的最低指数";
-        input Integer ihi = size(A, 1) 
+        input Integer ihi = size(A, 1)
           "原矩阵不是上三角形式的最高指数";
-        output Real Aout[size(A, 1),size(A, 2)] = A 
+        output Real Aout[size(A, 1),size(A, 2)] = A
           "在上三角和第一对角线中包含海森伯形式，在第一对角线下方包含基本反射器，它表示（与阵列 tau）正交矩阵 Q 的乘积";
-        output Real tau[max(size(A, 1), 1) - 1] 
+        output Real tau[max(size(A, 1), 1) - 1]
           "基本反射器的标量系数";
         output Integer info;
       protected
@@ -7762,14 +7762,14 @@ INFO    (输出) INTEGER
         Real work[max(1, 3 * size(A, 1))];
 
       external "FORTRAN 77" dgehrd(
-        n, 
-        ilo, 
-        ihi, 
-        Aout, 
-        lda, 
-        tau, 
-        work, 
-        lwork, 
+        n,
+        ilo,
+        ihi,
+        Aout,
+        lda,
+        tau,
+        work,
+        lwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info="<html><p>
 <strong>Lapack 文档<br>用途<br>=======<br><br>DGEHRD 通过正交相似变换将实数一般矩阵 A 还原为上海森堡形式 H。<br>正交相似变换： &nbsp;Q\\\\\\' * A * Q = H .<br><br>论据<br>=========<br><br>N &nbsp; &nbsp; &nbsp; (输入) INTEGER<br> &nbsp; &nbsp; &nbsp;矩阵 A 的阶数. &nbsp;N &gt;= 0.<br><br>ILO &nbsp; &nbsp; (输入) INTEGER<br>IHI &nbsp; &nbsp; (输入) INTEGER<br> &nbsp; &nbsp; &nbsp;假设 A 的行列 1:ILO-1 和列 IHI+1:N 已经是上三角形。<br> &nbsp; &nbsp; &nbsp;和列 1:ILO-1 和 IHI+1:N 已是上三角形。ILO 和 IHI<br> &nbsp; &nbsp; &nbsp;通常由之前调用 DGEBAL 设置，否则应分别设置为 1 和 N。<br> &nbsp; &nbsp; &nbsp;分别设置为 1 和 N。参见更多详情。<br> &nbsp; &nbsp; &nbsp;1 &lt;= ILO &lt;= IHI &lt;= N，如果 N &gt; 0；ILO=1 和 IHI=0，如果 N=0.<br><br>A &nbsp; &nbsp; &nbsp; (输入/输出) DOUBLE PRECISION array, dimension (LDA,N)<br> &nbsp; &nbsp; &nbsp;输入时，是要缩小的 N 乘 N 的普通矩阵。<br> &nbsp; &nbsp; &nbsp;退出时，A 的上三角和第一对角线将被上海森伯矩阵 H 所覆盖。<br> &nbsp; &nbsp; &nbsp;的上三角和第一个对角线用上层海森堡矩阵 H 覆盖，而<br> &nbsp; &nbsp; &nbsp;第一个子对角线以下的元素用数组 TAU 覆盖、<br> &nbsp; &nbsp; &nbsp;表示正交矩阵 Q，是基本<br> &nbsp; &nbsp; &nbsp;反射器的乘积。更多详情.<br><br>LDA &nbsp; &nbsp; (输入) INTEGER<br> &nbsp; &nbsp; &nbsp;数组 A 的前向维度. &nbsp;LDA &gt;= max(1,N).<br><br>TAU &nbsp; &nbsp; (输出) DOUBLE PRECISION array, dimension (N-1)<br> &nbsp; &nbsp; &nbsp;基本反射器的标量因数（见更多<br> &nbsp; &nbsp; &nbsp;详细信息）。TAU 的元素 1:ILO-1 和 IHI:N-1 设置为<br> &nbsp; &nbsp; &nbsp;为零.<br><br>WORK &nbsp; &nbsp;(工作区/输出) DOUBLE PRECISION array, dimension (LWORK)<br> &nbsp; &nbsp; &nbsp;退出时，如果 INFO = 0，WORK(1) 将返回最优 LWORK.<br><br>LWORK &nbsp; (输入) INTEGER<br> &nbsp; &nbsp; &nbsp;数组 WORK 的长度。 LWORK &gt;= max(1,N)。<br> &nbsp; &nbsp; &nbsp;为获得最佳性能，LWORK &gt;= N*NB，其中 NB 是<br> &nbsp; &nbsp; &nbsp;最佳块大小.<br><br> &nbsp; &nbsp; &nbsp;如果 LWORK =-1，则假定是工作区查询；例程<br> &nbsp; &nbsp; &nbsp;例程只计算工作数组的最佳大小，并将该值作为工作数组的第一个条目返回。<br> &nbsp; &nbsp; &nbsp;作为 WORK 数组的第一个条目返回，XERBLA 不会发出与 LWORK 有关的错误信息。<br> &nbsp; &nbsp; &nbsp;XERBLA 不会发出与 LWORK 有关的错误信息.<br><br>INFO &nbsp; &nbsp;(输出) INTEGER<br> &nbsp; &nbsp; &nbsp;= 0: &nbsp;成功退出<br> &nbsp; &nbsp; &nbsp;&lt; 0: &nbsp;如果 INFO = -i，则第 i 个参数为非法值.<br><br>更多详情<br>===============<br><br>矩阵 Q 表示为（ihi-ilo）基本<br>反射器<br><br> Q = H(ilo) H(ilo+1) . . . H(ihi-1).<br><br>每个 H(i) 的形式为<br><br> H(i) = I - tau * v * v\\\\\\'<br><br>其中，tau 是实数标量，v 是实数矢量，其中<br>v(1:i)=0，v(i+1)=1，v(ihi+1:n)=0；v(i+2:ihi)在退出时存储在 A(i+2:ihi,i) 中。<br>退出时，v(i+2:ihi,i) 保存在 A(i+2:ihi,i)，tau 保存在 TAU(i).<br><br>下面的例子说明了 A 的内容，其中<br>n = 7、ilo = 2 和 ihi = 6:<br><br>on entry, &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;on exit,<br><br>( a &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a ) &nbsp; &nbsp;( &nbsp;a &nbsp; a &nbsp; h &nbsp; h &nbsp; h &nbsp; h &nbsp; a )<br>( &nbsp; &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a ) &nbsp; &nbsp;( &nbsp; &nbsp; &nbsp;a &nbsp; h &nbsp; h &nbsp; h &nbsp; h &nbsp; a )<br>( &nbsp; &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a ) &nbsp; &nbsp;( &nbsp; &nbsp; &nbsp;h &nbsp; h &nbsp; h &nbsp; h &nbsp; h &nbsp; h )<br>( &nbsp; &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a ) &nbsp; &nbsp;( &nbsp; &nbsp; &nbsp;v2 &nbsp;h &nbsp; h &nbsp; h &nbsp; h &nbsp; h )<br>( &nbsp; &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a ) &nbsp; &nbsp;( &nbsp; &nbsp; &nbsp;v2 &nbsp;v3 &nbsp;h &nbsp; h &nbsp; h &nbsp; h )<br>( &nbsp; &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a &nbsp; a ) &nbsp; &nbsp;( &nbsp; &nbsp; &nbsp;v2 &nbsp;v3 &nbsp;v4 &nbsp;h &nbsp; h &nbsp; h )<br>( &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a ) &nbsp; &nbsp;( &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;a )<br><br>其中，a 表示原始矩阵 A 的元素，h 表示上海森伯矩阵 H 的修正元素，vi 表示原始矩阵 A 的元素。<br>表示上海森堡矩阵 H 的修正元素，vi 表示定义 H(i) 的向量的元素。<br>定义 H(i) 的向量的元素.<br></strong>
@@ -7781,9 +7781,9 @@ INFO    (输出) INTEGER
         extends Modelica.Icons.Function;
 
         input Real A[:,:] "正方形或矩形矩阵";
-        output Real Aout[size(A, 1),size(A, 2)] = A 
+        output Real Aout[size(A, 1),size(A, 2)] = A
           "阵列的上三角包含上梯形矩阵 R；对角线以下的元素与阵列 TAU 一起，表示正交矩阵 Q，是基本反射器的乘积";
-        output Real tau[min(size(A, 1), size(A, 2))] 
+        output Real tau[min(size(A, 1), size(A, 2))]
           "基本反射器的标量系数";
         output Integer info;
         output Real work[3 * max(1, size(A, 2))];
@@ -7794,13 +7794,13 @@ INFO    (输出) INTEGER
         Integer lwork = 3 * max(1, n);
 
       external "FORTRAN 77" dgeqrf(
-        m, 
-        n, 
-        Aout, 
-        lda, 
-        tau, 
-        work, 
-        lwork, 
+        m,
+        n,
+        Aout,
+        lda,
+        tau,
+        work,
+        lwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -7868,20 +7868,20 @@ v(1:i-1)=0，v(i)=1；v(i+1:m) 在退出时存储在 A(i+1:m,i) 中、
 "    ));
       end dgeqrf;
 
-      pure function dgeevx 
+      pure function dgeevx
         "使用 lapack 例程 dgeevx 计算矩阵 A 的特征值和（实）左右特征向量"
         extends Modelica.Icons.Function;
 
         input Real A[:,size(A, 1)];
-        output Real alphaReal[size(A, 1)] 
+        output Real alphaReal[size(A, 1)]
           "alpha 的实部（特征值=（alphaReal+i*alphaImag）";
-        output Real alphaImag[size(A, 1)] 
+        output Real alphaImag[size(A, 1)]
           "alpha 的虚部（特征值=（alphaReal+i*alphaImag）";
-        output Real lEigenVectors[size(A, 1),size(A, 1)] 
+        output Real lEigenVectors[size(A, 1),size(A, 1)]
           "矩阵 A 的左特征向量";
-        output Real rEigenVectors[size(A, 1),size(A, 1)] 
+        output Real rEigenVectors[size(A, 1),size(A, 1)]
           "矩阵 A 的右特征向量";
-        output Real AS[size(A, 1),size(A, 2)] = A 
+        output Real AS[size(A, 1),size(A, 2)] = A
           "AS 是输入矩阵 A 的平衡版本的实数舒尔形式";
         output Integer info;
       protected
@@ -7897,28 +7897,28 @@ v(1:i-1)=0，v(i)=1；v(i+1:m) 在退出时存储在 A(i+1:m,i) 中、
         Integer iwork[1];
 
       external "FORTRAN 77" dgeevx(
-        "B", 
-        "V", 
-        "V", 
-        "E", 
-        n, 
-        AS, 
-        n, 
-        alphaReal, 
-        alphaImag, 
-        lEigenVectors, 
-        n, 
-        rEigenVectors, 
-        n, 
-        ilo, 
-        ihi, 
-        scale, 
-        abnrm, 
-        rconde, 
-        rcondv, 
-        work, 
-        lwork, 
-        iwork, 
+        "B",
+        "V",
+        "V",
+        "E",
+        n,
+        AS,
+        n,
+        alphaReal,
+        alphaImag,
+        lEigenVectors,
+        n,
+        rEigenVectors,
+        n,
+        ilo,
+        ihi,
+        scale,
+        abnrm,
+        rconde,
+        rcondv,
+        work,
+        lwork,
+        iwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -8114,26 +8114,26 @@ INFO    (输出) INTEGER
         Integer lda = max(1, size(A, 1));
         Integer ldu = max(1, size(A, 1));
         Integer ldvt = max(1, size(A, 2));
-        Integer lwork = max(1, 3 * (3 * min(size(A, 1), size(A, 2)) * min(size(A, 1), 
+        Integer lwork = max(1, 3 * (3 * min(size(A, 1), size(A, 2)) * min(size(A, 1),
           size(A, 2)) + max(max(size(A, 1), size(A, 2)), 4 * min(size(A, 1), size(
           A, 2)) * min(size(A, 1), size(A, 2)) + 4 * min(size(A, 1), size(A, 2)))));
         Integer iwork = max(1, 8 * min(size(A, 1), size(A, 2)));
         Real work[max(1, 3 * (3 * min(size(A, 1), size(A, 2)) * min(size(A, 1), size(A, 2)) + max(max(size(A, 1), size(A, 2)), 4 * min(size(A, 1), size(A, 2)) * min(size(A, 1), size(A, 2)) + 4 * min(size(A, 1), size(A, 2)))))];
 
       external "FORTRAN 77" dgesdd(
-        "A", 
-        m, 
-        n, 
-        Awork, 
-        lda, 
-        sigma, 
-        U, 
-        ldu, 
-        VT, 
-        ldvt, 
-        work, 
-        lwork, 
-        iwork, 
+        "A",
+        m,
+        n,
+        Awork,
+        lda,
+        sigma,
+        U,
+        ldu,
+        VT,
+        ldvt,
+        work,
+        lwork,
+        iwork,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -8263,21 +8263,21 @@ INFO    (输出) INTEGER
 "    ));
       end dgesdd;
 
-      pure function dggev 
+      pure function dggev
         "计算 (A,B) 系统的广义特征值以及左右特征向量"
         extends Modelica.Icons.Function;
 
         input Real A[:,size(A, 1)];
         input Real B[size(A, 1),size(A, 1)];
-        input Integer nA = size(A, 1) 
+        input Integer nA = size(A, 1)
           "矩阵 A 和 B 的实际尺寸（计算 A[1:nA,1:nA]，B[1:nA,1:nA]）。";
-        output Real alphaReal[size(A, 1)] 
+        output Real alphaReal[size(A, 1)]
           "alpha 的实部（特征值=（alphaReal+i*alphaImag）/beta）";
         output Real alphaImag[size(A, 1)] "阿尔法的虚部";
         output Real beta[size(A, 1)] "特征值的分母";
-        output Real lEigenVectors[size(A, 1),size(A, 1)] 
+        output Real lEigenVectors[size(A, 1),size(A, 1)]
           "矩阵 A 的左特征向量";
-        output Real rEigenVectors[size(A, 1),size(A, 1)] 
+        output Real rEigenVectors[size(A, 1),size(A, 1)]
           "矩阵 A 的右特征向量";
 
         output Integer info;
@@ -8290,22 +8290,22 @@ INFO    (输出) INTEGER
         Integer lda = max(1, n);
 
       external "FORTRAN 77" dggev(
-        "V", 
-        "V", 
-        nA, 
-        Awork, 
-        lda, 
-        Bwork, 
-        lda, 
-        alphaReal, 
-        alphaImag, 
-        beta, 
-        lEigenVectors, 
-        lda, 
-        rEigenVectors, 
-        lda, 
-        work, 
-        lwork, 
+        "V",
+        "V",
+        nA,
+        Awork,
+        lda,
+        Bwork,
+        lda,
+        alphaReal,
+        alphaImag,
+        beta,
+        lEigenVectors,
+        lda,
+        rEigenVectors,
+        lda,
+        work,
+        lwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -8431,19 +8431,19 @@ INFO    (输出) INTEGER
 "    ));
       end dggev;
 
-      pure function dggevx 
+      pure function dggevx
         "使用 lapack 例程 dggevx 计算 (A,B) 系统的广义特征值"
         extends Modelica.Icons.Function;
 
         input Real A[:,size(A, 1)];
         input Real B[size(A, 1),size(A, 1)];
-        output Real alphaReal[size(A, 1)] 
+        output Real alphaReal[size(A, 1)]
           "alpha 的实部（特征值=（alphaReal+i*alphaImag）/beta）";
         output Real alphaImag[size(A, 1)] "阿尔法的虚部";
         output Real beta[size(A, 1)] "特征值的分母";
-        output Real lEigenVectors[size(A, 1),size(A, 1)] 
+        output Real lEigenVectors[size(A, 1),size(A, 1)]
           "矩阵 A 的左特征向量";
-        output Real rEigenVectors[size(A, 1),size(A, 1)] 
+        output Real rEigenVectors[size(A, 1),size(A, 1)]
           "矩阵 A 的右特征向量";
 
         output Integer info;
@@ -8464,34 +8464,34 @@ INFO    (输出) INTEGER
         Integer bwork[size(A, 1)];
 
       external "FORTRAN 77" dggevx(
-        "B", 
-        "V", 
-        "V", 
-        "B", 
-        n, 
-        A, 
-        lda, 
-        B, 
-        lda, 
-        alphaReal, 
-        alphaImag, 
-        beta, 
-        lEigenVectors, 
-        lda, 
-        rEigenVectors, 
-        lda, 
-        ilo, 
-        ihi, 
-        lscale, 
-        rscale, 
-        abnrm, 
-        bbnrm, 
-        rconde, 
-        rcondv, 
-        work, 
-        lwork, 
-        iwork, 
-        bwork, 
+        "B",
+        "V",
+        "V",
+        "B",
+        n,
+        A,
+        lda,
+        B,
+        lda,
+        alphaReal,
+        alphaImag,
+        beta,
+        lEigenVectors,
+        lda,
+        rEigenVectors,
+        lda,
+        ilo,
+        ihi,
+        lscale,
+        rscale,
+        abnrm,
+        bbnrm,
+        rconde,
+        rcondv,
+        work,
+        lwork,
+        iwork,
+        bwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -8739,7 +8739,7 @@ INFO    (输出) INTEGER
 
         input Real A[:,size(A, 1)];
         input Real B[size(A, 1),size(A, 1)];
-        output Real alphaReal[size(A, 1)] 
+        output Real alphaReal[size(A, 1)]
           "alpha 的实部（特征值=（alphaReal+i*alphaImag）/beta）";
         output Real alphaImag[size(A, 1)] "阿尔法的虚部";
         output Real beta[size(A, 1)] "特征值的分母";
@@ -8755,30 +8755,30 @@ INFO    (输出) INTEGER
         Real Bwork[size(A, 1),size(A, 1)] = B;
         Integer lda = max(1, n);
         Real Q[1,n] = fill(
-          0, 
-          1, 
+          0,
+          1,
           n);
 
       external "FORTRAN 77" dhgeqz(
-        "E", 
-        "N", 
-        "N", 
-        n, 
-        ilo, 
-        ihi, 
-        Awork, 
-        lda, 
-        Bwork, 
-        lda, 
-        alphaReal, 
-        alphaImag, 
-        beta, 
-        Q, 
-        1, 
-        Q, 
-        1, 
-        work, 
-        lwork, 
+        "E",
+        "N",
+        "N",
+        n,
+        ilo,
+        ihi,
+        Awork,
+        lda,
+        Bwork,
+        lda,
+        alphaReal,
+        alphaImag,
+        beta,
+        Q,
+        1,
+        Q,
+        1,
+        work,
+        lwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -8973,7 +8973,7 @@ IITER  -- 计数自上次更改 ILAST 后运行的迭代次数。
 "    ));
       end dhgeqz;
 
-      pure function dormhr 
+      pure function dormhr
         "用 Q * C 或 C * Q 或 Q' * C 或 C * Q' 覆盖一般实数 M-N 矩阵 C，其中 Q 是 dgehrd 返回的正交矩阵"
         extends Modelica.Icons.Function;
 
@@ -8982,11 +8982,11 @@ IITER  -- 计数自上次更改 ILAST 后运行的迭代次数。
         input Real tau[if side == "L" then size(C, 2) - 1 else size(C, 1) - 1];
         input String side = "L";
         input String trans = "N";
-        input Integer ilo = 1 
+        input Integer ilo = 1
           "原矩阵不是上三角形式的最低指数";
-        input Integer ihi = if side == "L" then size(C, 1) else size(C, 2) 
+        input Integer ihi = if side == "L" then size(C, 1) else size(C, 2)
           "原矩阵不是上三角形式的最高指数";
-        output Real Cout[size(C, 1),size(C, 2)] = C 
+        output Real Cout[size(C, 1),size(C, 2)] = C
           "在上三角和第一对角线中包含海森伯形式，在第一对角线下方包含基本反射器，它表示（与阵列 tau）正交矩阵 Q 的乘积";
 
         output Integer info;
@@ -8999,19 +8999,19 @@ IITER  -- 计数自上次更改 ILAST 后运行的迭代次数。
         Real work[max(1, 2 * size(A, 2))];
 
       external "FORTRAN 77" dormhr(
-        side, 
-        trans, 
-        m, 
-        n, 
-        ilo, 
-        ihi, 
-        A, 
-        lda, 
-        tau, 
-        Cout, 
-        ldc, 
-        work, 
-        lwork, 
+        side,
+        trans,
+        m,
+        n,
+        ilo,
+        ihi,
+        A,
+        lda,
+        tau,
+        Cout,
+        ldc,
+        work,
+        lwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -9101,7 +9101,7 @@ INFO    (输出) INTEGER
 "    ));
       end dormhr;
 
-      pure function dormqr 
+      pure function dormqr
         "用 Q * C 或 C * Q 或 Q' * C 或 C * Q' 覆盖一般实数 M-N 矩阵 C，其中 Q 是 QR 因式分解的正交矩阵，由 dgeqrf 返回"
         extends Modelica.Icons.Function;
 
@@ -9111,7 +9111,7 @@ INFO    (输出) INTEGER
         input String side = "L";
         input String trans = "N";
 
-        output Real Cout[size(C, 1),size(C, 2)] = C 
+        output Real Cout[size(C, 1),size(C, 2)] = C
           "包含 Q*C 或 Q**T*C 或 C*Q**T 或 C*Q";
 
         output Integer info;
@@ -9125,18 +9125,18 @@ INFO    (输出) INTEGER
         Real work[if side == "L" then max(1, size(C, 2)) else max(1, size(C, 1))];
 
       external "FORTRAN 77" dormqr(
-        side, 
-        trans, 
-        m, 
-        n, 
-        k, 
-        A, 
-        lda, 
-        tau, 
-        Cout, 
-        ldc, 
-        work, 
-        lwork, 
+        side,
+        trans,
+        m,
+        n,
+        k,
+        A,
+        lda,
+        tau,
+        Cout,
+        ldc,
+        work,
+        lwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -9223,19 +9223,19 @@ INFO    (输出) INTEGER
 "    ));
       end dormqr;
 
-      pure function dtrevc 
+      pure function dtrevc
         "计算实上准三角形矩阵 T 的右和/或左特征向量"
         extends Modelica.Icons.Function;
 
         input Real T[:,size(T, 1)] "上准三角矩阵";
         input String side = "R" "指定哪些特征向量";
         input String howmny = "B" "指定多少个特征向量";
-        input Real Q[size(T, 1),size(T, 1)] 
+        input Real Q[size(T, 1),size(T, 1)]
           "DHSEQR 返回的舒尔向量正交矩阵 Q";
 
-        output Real lEigenVectors[size(T, 1),size(T, 1)] = Q 
+        output Real lEigenVectors[size(T, 1),size(T, 1)] = Q
           "矩阵 T 的左特征向量";
-        output Real rEigenVectors[size(T, 1),size(T, 1)] = Q 
+        output Real rEigenVectors[size(T, 1),size(T, 1)] = Q
           "矩阵 T 的右特征向量";
         output Integer info;
 
@@ -9248,19 +9248,19 @@ INFO    (输出) INTEGER
         Real work[3 * size(T, 1)];
 
       external "FORTRAN 77" dtrevc(
-        side, 
-        howmny, 
-        select, 
-        n, 
-        T, 
-        ldt, 
-        lEigenVectors, 
-        ldvl, 
-        rEigenVectors, 
-        ldvr, 
-        n, 
-        n, 
-        work, 
+        side,
+        howmny,
+        select,
+        n,
+        T,
+        ldt,
+        lEigenVectors,
+        ldvl,
+        rEigenVectors,
+        ldvr,
+        n,
+        n,
+        work,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -9391,7 +9391,7 @@ INFO    (输出) INTEGER
 "    ));
       end dtrevc;
 
-      pure function dpotrf 
+      pure function dpotrf
         "计算实对称正定矩阵 A 的 Cholesky 因式分解"
         extends Modelica.Icons.Function;
 
@@ -9405,10 +9405,10 @@ INFO    (输出) INTEGER
         Integer n = size(A, 1);
         Integer lda = max(1, n);
       external "FORTRAN 77" dpotrf(
-        uplo, 
-        n, 
-        Acholesky, 
-        lda, 
+        uplo,
+        n,
+        Acholesky,
+        lda,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -9458,7 +9458,7 @@ INFO    (输出) INTEGER
 "    ));
       end dpotrf;
 
-      pure function dtrsm 
+      pure function dtrsm
         "求解其中一个矩阵方程 op( A )*X = alpha*B 或 X*op( A ) = alpha*B，其中 A 为三角矩阵。BLAS 例程"
         extends Modelica.Icons.Function;
 
@@ -9468,10 +9468,10 @@ INFO    (输出) INTEGER
         input Boolean right = true "= true，如果 A 是右乘法";
         input Boolean upper = true "= true，如果 A 是上三角";
         input Boolean trans = false "= true，如果 op(A) 表示 transposed(A)";
-        input Boolean unitTriangular = false 
+        input Boolean unitTriangular = false
           "= true，如果 A 是单位三角形，即 A 的所有对角元素都等于 1";
 
-        output Real X[size(B, 1),size(B, 2)] = B 
+        output Real X[size(B, 1),size(B, 2)] = B
           "矩阵 Bout=alpha*op( A )*B, 或 B := alpha*B*op( A )";
       protected
         String side = if right then "R" else "L";
@@ -9484,16 +9484,16 @@ INFO    (输出) INTEGER
         Integer ldb = max(1, m) "B 的第一个维度";
 
       external "FORTRAN 77" dtrsm(
-        side, 
-        uplo, 
-        transA, 
-        diag, 
-        m, 
-        n, 
-        alpha, 
-        A, 
-        lda, 
-        X, 
+        side,
+        uplo,
+        transA,
+        diag,
+        m,
+        n,
+        alpha,
+        A,
+        lda,
+        X,
         ldb) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -9608,19 +9608,19 @@ LDB    - INTEGER.
 "    ));
       end dtrsm;
 
-      pure function dorghr 
+      pure function dorghr
         "生成一个实正交矩阵 Q，它被定义为 N 阶 IHI-ILO 基本反射器的乘积，如 DGEHRD 所返回的那样"
         extends Modelica.Icons.Function;
 
-        input Real A[:,size(A, 1)] 
+        input Real A[:,size(A, 1)]
           "带基本反射器的正方形矩阵";
-        input Integer ilo = 1 
+        input Integer ilo = 1
           "原始矩阵不是上三角形式的最低索引 - ilo 必须与前一次调用 DGEHRD 时的值相同";
-        input Integer ihi = size(A, 1) 
+        input Integer ihi = size(A, 1)
           "原始矩阵不是上三角形式的最高指数 - ihi 必须与 DGEHRD 上一次调用的值相同";
-        input Real tau[max(0, size(A, 1) - 1)] 
+        input Real tau[max(0, size(A, 1) - 1)]
           "基本反射器的标量系数";
-        output Real Aout[size(A, 1),size(A, 2)] = A 
+        output Real Aout[size(A, 1),size(A, 2)] = A
           "正交矩阵是基本反射器的结果";
         output Integer info;
       protected
@@ -9630,14 +9630,14 @@ LDB    - INTEGER.
         Real work[max(1, 3 * size(A, 1))];
 
       external "FORTRAN 77" dorghr(
-        n, 
-        ilo, 
-        ihi, 
-        Aout, 
-        lda, 
-        tau, 
-        work, 
-        lwork, 
+        n,
+        ilo,
+        ihi,
+        Aout,
+        lda,
+        tau,
+        work,
+        lwork,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -9725,7 +9725,7 @@ This package contains a direct interface to the LAPACK subroutines
         extends Modelica.Icons.Function;
         input Real A[:,size(A, 1)];
         input Real B[size(A, 1),size(A, 1)];
-        output Real alphaReal[size(A, 1)] 
+        output Real alphaReal[size(A, 1)]
           "alpha 的实部（特征值=（alphaReal+i*alphaImag）/beta）";
         output Real alphaImag[size(A, 1)] "阿尔法的虚部";
         output Real beta[size(A, 1)] "特征值的分母";
@@ -9742,22 +9742,22 @@ This package contains a direct interface to the LAPACK subroutines
         Real dummy2[1,1];
 
       external "FORTRAN 77" dgegv(
-        "N", 
-        "N", 
-        n, 
-        Awork, 
-        n, 
-        Bwork, 
-        n, 
-        alphaReal, 
-        alphaImag, 
-        beta, 
-        dummy1, 
-        ldvl, 
-        dummy2, 
-        ldvr, 
-        work, 
-        lwork, 
+        "N",
+        "N",
+        n,
+        Awork,
+        n,
+        Bwork,
+        n,
+        alphaReal,
+        alphaImag,
+        beta,
+        dummy1,
+        ldvl,
+        dummy2,
+        ldvr,
+        work,
+        lwork,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -9960,7 +9960,7 @@ DL*PL*A*PR*DR、DL*PL*B*PR*DR 这对对角矩阵的元素接近于 1（开始元
 Golub & van Loan 著，约翰霍普金斯大学出版社出版。
 "    ));
       end dgegv;
-      function dgelsx 
+      function dgelsx
         "计算实数线性最小二乘问题的最小规范解，其 A"
 
         extends Modelica.Icons.Function;
@@ -9968,9 +9968,9 @@ Golub & van Loan 著，约翰霍普金斯大学出版社出版。
         input Real B[size(A, 1),:];
         input Real rcond = 0.0 "估计等级的互易条件数";
         output Real X[max(size(A, 1), size(A, 2)),size(B, 2)] = cat(
-          1, 
-          B, 
-          zeros(max(nrow, ncol) - nrow, nrhs)) 
+          1,
+          B,
+          zeros(max(nrow, ncol) - nrow, nrhs))
           "解决方案在第一个 size(A,2) 行中";
         output Integer info;
         output Integer rank "A 级有效等级";
@@ -9984,17 +9984,17 @@ Golub & van Loan 著，约翰霍普金斯大学出版社出版。
         Integer jpvt[size(A, 2)] = zeros(ncol);
 
       external "FORTRAN 77" dgelsx(
-        nrow, 
-        ncol, 
-        nrhs, 
-        Awork, 
-        nrow, 
-        X, 
-        nx, 
-        jpvt, 
-        rcond, 
-        rank, 
-        work, 
+        nrow,
+        ncol,
+        nrhs,
+        Awork,
+        nrow,
+        X,
+        nx,
+        jpvt,
+        rcond,
+        rank,
+        work,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -10090,7 +10090,7 @@ INFO    (输出) INTEGER
   < 0:  如果 INFO = -i，则第 i 个参数为非法值
 "    ));
       end dgelsx;
-      function dgelsx_vec 
+      function dgelsx_vec
         "计算实数线性最小二乘问题的最小规范解，其 A"
 
         extends Modelica.Icons.Function;
@@ -10098,9 +10098,9 @@ INFO    (输出) INTEGER
         input Real b[size(A, 1)];
         input Real rcond = 0.0 "估计等级的互易条件数";
         output Real x[max(size(A, 1), size(A, 2))] = cat(
-          1, 
-          b, 
-          zeros(max(nrow, ncol) - nrow)) 
+          1,
+          b,
+          zeros(max(nrow, ncol) - nrow))
           "解在第一个 size(A,2) 行中";
         output Integer info;
         output Integer rank "A 级有效等级";
@@ -10114,17 +10114,17 @@ INFO    (输出) INTEGER
         Integer jpvt[size(A, 2)] = zeros(ncol);
 
       external "FORTRAN 77" dgelsx(
-        nrow, 
-        ncol, 
-        nrhs, 
-        Awork, 
-        nrow, 
-        x, 
-        nx, 
-        jpvt, 
-        rcond, 
-        rank, 
-        work, 
+        nrow,
+        ncol,
+        nrhs,
+        Awork,
+        nrow,
+        x,
+        nx,
+        jpvt,
+        rcond,
+        rank,
+        work,
         info) annotation(Library = "lapack");
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -10219,14 +10219,14 @@ INFO    (输出) INTEGER
   < 0:  如果 INFO = -i，则第 i 个参数为非法值
 "    ));
       end dgelsx_vec;
-      function dgeqpf 
+      function dgeqpf
         "计算带列支点的正方形或矩形矩阵 A 的 QR 因式分解 (A(:,p) = Q*R)"
 
         extends Modelica.Icons.Function;
         input Real A[:,:] "正方形或矩形矩阵";
-        output Real QR[size(A, 1),size(A, 2)] = A 
+        output Real QR[size(A, 1),size(A, 2)] = A
           "打包格式的 QR 因式分解";
-        output Real tau[min(size(A, 1), size(A, 2))] 
+        output Real tau[min(size(A, 1), size(A, 2))]
           "Q 基本反射体的标量因子";
         output Integer p[size(A, 2)] = zeros(size(A, 2)) "枢轴向量";
         output Integer info;
@@ -10237,13 +10237,13 @@ INFO    (输出) INTEGER
         Real work[3 * size(A, 2)] "工作阵列";
 
       external "FORTRAN 77" dgeqpf(
-        m, 
-        ncol, 
-        QR, 
-        lda, 
-        p, 
-        tau, 
-        work, 
+        m,
+        ncol,
+        QR,
+        lda,
+        p,
+        tau,
+        work,
         info) annotation(Library = {"lapack"});
       annotation(Documentation(info = "Lapack 文档
 用途
@@ -10311,30 +10311,30 @@ jpvt(j) = i
       end dgeqpf;
     end LAPACK;
 
-    package Utilities 
+    package Utilities
       "用户不应直接使用的实用函数"
       extends Modelica.Icons.UtilitiesPackage;
 
-      function continuousRiccatiIterative 
+      function continuousRiccatiIterative
         "用牛顿法精确寻线迭代求解连续代数黎卡提方程"
         extends Modelica.Icons.Function;
 
         import Modelica.Math.Matrices;
 
-        input Real A[:,size(A, 1)] 
+        input Real A[:,size(A, 1)]
           "里卡提方程矩阵 A X*A + A'*X -X*G*X +Q = 0";
         input Real B[size(A, 1),:] "G 中的矩阵 B = B*inv(R)*B'";
-        input Real R[size(B, 2),size(B, 2)] = identity(size(B, 2)) 
+        input Real R[size(B, 2),size(B, 2)] = identity(size(B, 2))
           "矩阵 R 在 G = B*inv(R)*B'";
-        input Real Q[size(A, 1),size(A, 2)] = identity(size(A, 1)) 
+        input Real Q[size(A, 1),size(A, 2)] = identity(size(A, 1))
           "里卡提方程矩阵 Q X*A + A'*X -X*G*X +Q = 0";
-        input Real X0[size(A, 1),size(A, 2)] = identity(size(A, 1)) 
+        input Real X0[size(A, 1),size(A, 2)] = identity(size(A, 1))
           "X*A + A'*X -X*G*X +Q = 0 的初始近似解";
         input Integer maxSteps = 10 "最大迭代步数";
-        input Real eps = Matrices.frobeniusNorm(A) * 1e-9 
+        input Real eps = Matrices.frobeniusNorm(A) * 1e-9
           "停止标准的容差";
 
-        output Real X[size(X0, 1),size(X0, 2)] 
+        output Real X[size(X0, 1),size(X0, 2)]
           "里卡提方程 X*A + A'*X -X*G*X +Q = 0 的解 X";
         output Real r "X*A + A'*X - X*G*X + Q 的常模，精确解为零";
 
@@ -10379,8 +10379,8 @@ jpvt(j) = i
           r := 0;
         else
           X := fill(
-            0, 
-            0, 
+            0,
+            0,
             0);
           r := 0;
         end if;
@@ -10495,7 +10495,7 @@ X0=identity(4);
 </html>"));
       end continuousRiccatiIterative;
 
-      function discreteRiccatiIterative 
+      function discreteRiccatiIterative
         "采用精确线性搜索求解离散代数Riccati方程的牛顿法"
         extends Modelica.Icons.Function;
 
@@ -10503,14 +10503,14 @@ X0=identity(4);
 
         input Real A[:,size(A, 1)] "离散Riccati方程的矩阵A";
         input Real B[size(A, 1),:] "离散Riccati方程的矩阵B";
-        input Real R[size(B, 2),size(B, 2)] = identity(size(B, 2)) 
+        input Real R[size(B, 2),size(B, 2)] = identity(size(B, 2))
           "离散Riccati方程的矩阵R";
-        input Real Q[size(A, 1),size(A, 2)] = identity(size(A, 1)) 
+        input Real Q[size(A, 1),size(A, 2)] = identity(size(A, 1))
           "离散Riccati方程的矩阵Q";
-        input Real X0[size(A, 1),size(A, 2)] = identity(size(A, 1)) 
+        input Real X0[size(A, 1),size(A, 2)] = identity(size(A, 1))
           "离散Riccati方程初始近似解";
         input Integer maxSteps = 10 "最大迭代步骤数";
-        input Real eps = Matrices.frobeniusNorm(A) * 1e-9 
+        input Real eps = Matrices.frobeniusNorm(A) * 1e-9
           "停止准则公差";
 
         output Real X[size(X0, 1),size(X0, 2)];
@@ -10542,8 +10542,8 @@ X0=identity(4);
             Ak := A - B * Hk * Xk * A;
             Rk := AT * Xk * A - Xk + Q - AT * Xk * B * Hk * Xk * A;
             Nk := Modelica.Math.Matrices.discreteLyapunov(
-              A = Ak, 
-              C = -Rk, 
+              A = Ak,
+              C = -Rk,
               sgn = -1);
             Vk := transpose(Ak) * Nk * B * Hk * Nk * Ak;
             tk := Modelica.Math.Matrices.Utilities.findLocal_tk(Rk, Vk);
@@ -10552,12 +10552,12 @@ X0=identity(4);
             Xk := Xk + tk * Nk;
           end while;
           X := Xk;
-          r := Matrices.frobeniusNorm(AT * X * A - X + Q - AT * X * B * Matrices.solve2(R 
+          r := Matrices.frobeniusNorm(AT * X * A - X + Q - AT * X * B * Matrices.solve2(R
             + BT * X * B, BT) * X * A);
         else
           X := fill(
-            0, 
-            0, 
+            0,
+            0,
             0);
           r := 0;
         end if;
@@ -10666,7 +10666,7 @@ by Marcus Baur, DLR-RM</li>
 </html>"));
       end discreteRiccatiIterative;
 
-      function toUpperHessenberg 
+      function toUpperHessenberg
         "通过正交相似变换将实方阵A转换为上Hessenberg矩阵H：Q' * A * Q = H"
         extends Modelica.Icons.Function;
 
@@ -10674,15 +10674,15 @@ by Marcus Baur, DLR-RM</li>
         import Modelica.Math.Matrices.LAPACK;
 
         input Real A[:,size(A, 1)] "方阵A";
-        input Integer ilo = 1 
+        input Integer ilo = 1
           "原始矩阵不是上三角形式的最低指标";
-        input Integer ihi = size(A, 1) 
+        input Integer ihi = size(A, 1)
           "原始矩阵不是上三角形式的最高指标";
         output Real H[size(A, 1),size(A, 2)] "上海森伯格形式";
-        output Real V[size(A, 1),size(A, 2)] 
+        output Real V[size(A, 1),size(A, 2)]
           "V=[v1,v2,..vn-1,0] vi是定义初等反射器的向量";
 
-        output Real tau[max(0, size(A, 1) - 1)] 
+        output Real tau[max(0, size(A, 1) - 1)]
           "初等反射器的标量因子";
         output Integer info "函数调用成功的信息";
 
@@ -10758,7 +10758,7 @@ by Marcus Baur, DLR-RM</li>
 </html>"                        ));
       end toUpperHessenberg;
 
-      function eigenvaluesHessenberg 
+      function eigenvaluesHessenberg
         "计算上海森堡阵的特征值"
         extends Modelica.Icons.Function;
 
@@ -10768,9 +10768,9 @@ by Marcus Baur, DLR-RM</li>
         output Real ev[size(H, 1),2] "特征值";
         output Integer info = 0;
       protected
-        Real alphaReal[size(H, 1)] 
+        Real alphaReal[size(H, 1)]
           "alpha的实部(eigenvalue=(alphaReal+i*alphaImag))";
-        Real alphaImag[size(H, 1)] 
+        Real alphaImag[size(H, 1)]
           "alpha的虚部(eigenvalue=(alphaReal+i*alphaImag))";
       algorithm
         if size(H, 1) > 0 then
@@ -10827,7 +10827,7 @@ ev := Matrices.Utilities.eigenvaluesHessenberg(A);
 </html>"      ));
       end eigenvaluesHessenberg;
 
-      function reorderRSF 
+      function reorderRSF
         "将实Schur形式重新排序为稳定和不稳定特征值的簇"
         extends Modelica.Icons.Function;
 
@@ -10835,11 +10835,11 @@ ev := Matrices.Utilities.eigenvaluesHessenberg(A);
 
         input Real T[:,:] "实舒尔形式";
         input Real Q[:,size(T, 2)] "舒尔向量矩阵";
-        input Real alphaReal[size(T, 1)] 
+        input Real alphaReal[size(T, 1)]
           "特征值的实部=alphaReal+i*alphaImag";
-        input Real alphaImag[size(T, 1)] 
+        input Real alphaImag[size(T, 1)]
           "特征值的虚部=alphaReal+i*alphaImag";
-        input Boolean iscontinuous = true 
+        input Boolean iscontinuous = true
           "= true，如果对应系统是连续的。离散系统为False";
 
         output Real To[size(T, 1),size(T, 2)] "重新排序舒尔形式";
@@ -10867,10 +10867,10 @@ ev := Matrices.Utilities.eigenvaluesHessenberg(A);
         end if;
 
         (To,Qo,wr,wi) := LAPACK.dtrsen(
-          "E", 
-          "V", 
-          select, 
-          T, 
+          "E",
+          "V",
+          select,
+          T,
           Q);
 
         annotation(Documentation(info="<html><h4>语法</h4><p>
@@ -10914,7 +10914,7 @@ To := Matrices.Utilities.reorderRSF(T,identity(4),{-1, 2, -3, 6},{0, 0, 0, 0}, t
 </html>"));
       end reorderRSF;
 
-      function findLocal_tk 
+      function findLocal_tk
         "找到一个局部极小器tk来定义连续迭代和离散迭代中步骤tk*Nk的长度"
         extends Modelica.Icons.Function;
 
@@ -10939,7 +10939,7 @@ To := Matrices.Utilities.reorderRSF(T,identity(4),{-1, 2, -3, 6},{0, 0, 0, 0}, t
         gamma_k := Matrices.trace(Vk * Vk);
 
         if gamma_k > Modelica.Constants.eps then
-          p := Polynomials.roots({4 * gamma_k, 6 * beta_k, 2 * (alpha_k - 2 * beta_k), 
+          p := Polynomials.roots({4 * gamma_k, 6 * beta_k, 2 * (alpha_k - 2 * beta_k),
             -2 * alpha_k});
           h := false;
           for i1 in 1:3 loop
@@ -11003,7 +11003,7 @@ by Marcus Baur, DLR-RM</li>
 这些函数通常对最终用户没有什么用处。
 </p>
 </html>"            ));
-      function householderReflection 
+      function householderReflection
         "反映矩阵A的每个向量A=[a_1, a_2, ..., a_n]在正交向量u的平面上"
         extends Modelica.Icons.Function;
         import Modelica.Math.Vectors;
@@ -11084,7 +11084,7 @@ by Marcus Baur, DLR-RM</li>
 </ul>
 </html>"));
       end householderReflection;
-      function householderSimilarityTransformation 
+      function householderSimilarityTransformation
         "用对称户矩阵S = I - 2u*u'对矩阵A进行相似性变换S*A*S"
         extends Modelica.Icons.Function;
 
@@ -11100,7 +11100,7 @@ by Marcus Baur, DLR-RM</li>
         Integer i;
       algorithm
         if na > 0 then
-          S := -2 * matrix(u) * transpose(matrix(u)) / (Vectors.length(u) * 
+          S := -2 * matrix(u) * transpose(matrix(u)) / (Vectors.length(u) *
             Vectors.length(u));
           for i in 1:na loop
             S[i,i] := 1.0 + S[i,i];
@@ -11108,8 +11108,8 @@ by Marcus Baur, DLR-RM</li>
           SAS := S * A * S;
         else
           SAS := fill(
-            0.0, 
-            0, 
+            0.0,
+            0,
             0);
         end if;
 
@@ -11325,50 +11325,50 @@ by Marcus Baur, DLR-RM</li>
 
 </html>"    ), Icon(graphics = {
       Rectangle(
-      extent = {{-60, 66}, {-30, 18}}, 
-      lineColor = {95, 95, 95}, 
-      fillColor = {175, 175, 175}, 
-      fillPattern = FillPattern.Solid), 
+      extent = {{-60, 66}, {-30, 18}},
+      lineColor = {95, 95, 95},
+      fillColor = {175, 175, 175},
+      fillPattern = FillPattern.Solid),
       Rectangle(
-      extent = {{28, 66}, {58, 18}}, 
-      lineColor = {95, 95, 95}, 
-      fillColor = {175, 175, 175}, 
-      fillPattern = FillPattern.Solid), 
+      extent = {{28, 66}, {58, 18}},
+      lineColor = {95, 95, 95},
+      fillColor = {175, 175, 175},
+      fillPattern = FillPattern.Solid),
       Rectangle(
-      extent = {{-60, -18}, {-30, -66}}, 
-      lineColor = {95, 95, 95}, 
-      fillColor = {175, 175, 175}, 
-      fillPattern = FillPattern.Solid), 
+      extent = {{-60, -18}, {-30, -66}},
+      lineColor = {95, 95, 95},
+      fillColor = {175, 175, 175},
+      fillPattern = FillPattern.Solid),
       Rectangle(
-      extent = {{28, -18}, {58, -66}}, 
-      lineColor = {95, 95, 95}, 
-      fillColor = {175, 175, 175}, 
+      extent = {{28, -18}, {58, -66}},
+      lineColor = {95, 95, 95},
+      fillColor = {175, 175, 175},
       fillPattern = FillPattern.Solid)}));
   end Matrices;
 
   package Icons "数学库图标"
     extends Modelica.Icons.IconsPackage;
 
-    partial function AxisLeft 
+    partial function AxisLeft
       "数学函数的基本图标，y轴在左侧"
 
       annotation(
-        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
+        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
         100}}), graphics = {
         Rectangle(
-        extent = {{-100, 100}, {100, -100}}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
-        Line(points = {{-80, -80}, {-80, 68}}, color = {192, 192, 192}), 
+        extent = {{-100, 100}, {100, -100}},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
+        Line(points = {{-80, -80}, {-80, 68}}, color = {192, 192, 192}),
         Polygon(
-        points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 90}}, 
-        lineColor = {192, 192, 192}, 
-        fillColor = {192, 192, 192}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 90}},
+        lineColor = {192, 192, 192},
+        fillColor = {192, 192, 192},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-150, 150}, {150, 110}}, 
-        textString = "%name", 
-        textColor = {0, 0, 255})}), 
+        extent = {{-150, 150}, {150, 110}},
+        textString = "%name",
+        textColor = {0, 0, 255})}),
         Documentation(info = "<html>
 <p>
 数学函数图标，由左侧的y轴组成。预计会添加x轴和函数绘图。
@@ -11376,26 +11376,26 @@ by Marcus Baur, DLR-RM</li>
 </html>"    ));
     end AxisLeft;
 
-    partial function AxisCenter 
+    partial function AxisCenter
       "数学函数的基本图标，y轴在中心"
 
       annotation(
-        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
+        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
         100}}), graphics = {
         Rectangle(
-        extent = {{-100, 100}, {100, -100}}, 
-        fillColor = {255, 255, 255}, 
-        fillPattern = FillPattern.Solid), 
-        Line(points = {{0, -80}, {0, 68}}, color = {192, 192, 192}), 
+        extent = {{-100, 100}, {100, -100}},
+        fillColor = {255, 255, 255},
+        fillPattern = FillPattern.Solid),
+        Line(points = {{0, -80}, {0, 68}}, color = {192, 192, 192}),
         Polygon(
-        points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}}, 
-        lineColor = {192, 192, 192}, 
-        fillColor = {192, 192, 192}, 
-        fillPattern = FillPattern.Solid), 
+        points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}},
+        lineColor = {192, 192, 192},
+        fillColor = {192, 192, 192},
+        fillPattern = FillPattern.Solid),
         Text(
-        extent = {{-150, 150}, {150, 110}}, 
-        textString = "%name", 
-        textColor = {0, 0, 255})}), 
+        extent = {{-150, 150}, {150, 110}},
+        textString = "%name",
+        textColor = {0, 0, 255})}),
         Documentation(info = "<html>
 <p>
 数学函数图标，中间有一个y轴。预计会添加一个x轴并绘制函数图。
@@ -11410,7 +11410,7 @@ by Marcus Baur, DLR-RM</li>
     extends Modelica.Icons.Function;
     input Real s1 "第一个标量";
     input Real s2 "第二个标量";
-    input Real eps(min = 0) = 0 
+    input Real eps(min = 0) = 0
       "如果abs(s1-s2) <= eps，则两个标量相等";
     output Boolean result "= true，如果标量相等";
   algorithm
@@ -11456,23 +11456,23 @@ Math.<strong>isEqual</strong>(s1, s2, eps=0);
   external "builtin" y = sin(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, 0}, {-68.7, 34.2}, {-61.5, 53.1}, {-55.1, 66.4}, {-49.4, 74.6}, 
-    {-43.8, 79.1}, {-38.2, 79.8}, {-32.6, 76.6}, {-26.9, 69.7}, {-21.3, 59.4}, 
-    {-14.9, 44.1}, {-6.83, 21.2}, {10.1, -30.8}, {17.3, -50.2}, {23.7, -64.2}, 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, 0}, {-68.7, 34.2}, {-61.5, 53.1}, {-55.1, 66.4}, {-49.4, 74.6},
+    {-43.8, 79.1}, {-38.2, 79.8}, {-32.6, 76.6}, {-26.9, 69.7}, {-21.3, 59.4},
+    {-14.9, 44.1}, {-6.83, 21.2}, {10.1, -30.8}, {17.3, -50.2}, {23.7, -64.2},
     {29.3, -73.1}, {35, -78.4}, {40.6, -80}, {46.2, -77.6}, {51.9, -71.5}, {
-    57.5, -61.9}, {63.9, -47.2}, {72, -24.8}, {80, 0}}), 
+    57.5, -61.9}, {63.9, -47.2}, {72, -24.8}, {80, 0}}),
     Text(
-    extent = {{12, 84}, {84, 36}}, 
-    textColor = {192, 192, 192}, 
-    textString = "sin")}), 
+    extent = {{12, 84}, {84, 36}},
+    textColor = {192, 192, 192},
+    textString = "sin")}),
     Documentation(info = "<html>
 <p>
 该函数返回y = sin(u)，其中-&infin; &lt; u &lt; &infin;：
@@ -11492,23 +11492,23 @@ Math.<strong>isEqual</strong>(s1, s2, eps=0);
   external "builtin" y = cos(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, 80}, {-74.4, 78.1}, {-68.7, 72.3}, {-63.1, 63}, {-56.7, 48.7}, 
-    {-48.6, 26.6}, {-29.3, -32.5}, {-22.1, -51.7}, {-15.7, -65.3}, {-10.1, -73.8}, 
-    {-4.42, -78.8}, {1.21, -79.9}, {6.83, -77.1}, {12.5, -70.6}, {18.1, -60.6}, 
-    {24.5, -45.7}, {32.6, -23}, {50.3, 31.3}, {57.5, 50.7}, {63.9, 64.6}, {69.5, 
-    73.4}, {75.2, 78.6}, {80, 80}}), 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, 80}, {-74.4, 78.1}, {-68.7, 72.3}, {-63.1, 63}, {-56.7, 48.7},
+    {-48.6, 26.6}, {-29.3, -32.5}, {-22.1, -51.7}, {-15.7, -65.3}, {-10.1, -73.8},
+    {-4.42, -78.8}, {1.21, -79.9}, {6.83, -77.1}, {12.5, -70.6}, {18.1, -60.6},
+    {24.5, -45.7}, {32.6, -23}, {50.3, 31.3}, {57.5, 50.7}, {63.9, 64.6}, {69.5,
+    73.4}, {75.2, 78.6}, {80, 80}}),
     Text(
-    extent = {{-36, 82}, {36, 34}}, 
-    textColor = {192, 192, 192}, 
-    textString = "cos")}), 
+    extent = {{-36, 82}, {36, 34}},
+    textColor = {192, 192, 192},
+    textString = "cos")}),
     Documentation(info = "<html>
 <p>
 此函数返回y = cos(u)，其中-&infin; &lt; u &lt; &infin;:
@@ -11528,22 +11528,22 @@ Math.<strong>isEqual</strong>(s1, s2, eps=0);
   external "builtin" y = tan(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, -80}, {-78.4, -68.4}, {-76.8, -59.7}, {-74.4, -50}, {-71.2, -40.9}, 
-    {-67.1, -33}, {-60.7, -24.8}, {-51.1, -17.2}, {-35.8, -9.98}, {-4.42, -1.07}, 
-    {33.4, 9.12}, {49.4, 16.2}, {59.1, 23.2}, {65.5, 30.6}, {70.4, 39.1}, {73.6, 
-    47.4}, {76, 56.1}, {77.6, 63.8}, {80, 80}}), 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, -80}, {-78.4, -68.4}, {-76.8, -59.7}, {-74.4, -50}, {-71.2, -40.9},
+    {-67.1, -33}, {-60.7, -24.8}, {-51.1, -17.2}, {-35.8, -9.98}, {-4.42, -1.07},
+    {33.4, 9.12}, {49.4, 16.2}, {59.1, 23.2}, {65.5, 30.6}, {70.4, 39.1}, {73.6,
+    47.4}, {76, 56.1}, {77.6, 63.8}, {80, 80}}),
     Text(
-    extent = {{-90, 72}, {-18, 24}}, 
-    textColor = {192, 192, 192}, 
-    textString = "tan")}), 
+    extent = {{-90, 72}, {-18, 24}},
+    textColor = {192, 192, 192},
+    textString = "tan")}),
     Documentation(info = "<html>
 <p>
 此函数返回y = tan(u)，其中 -&infin; &lt; u &lt; &infin;
@@ -11564,21 +11564,21 @@ Math.<strong>isEqual</strong>(s1, s2, eps=0);
   external "builtin" y = asin(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, -80}, {-79.2, -72.8}, {-77.6, -67.5}, {-73.6, -59.4}, {-66.3, 
-    -49.8}, {-53.5, -37.3}, {-30.2, -19.7}, {37.4, 24.8}, {57.5, 40.8}, {68.7, 
-    52.7}, {75.2, 62.2}, {77.6, 67.5}, {80, 80}}), 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, -80}, {-79.2, -72.8}, {-77.6, -67.5}, {-73.6, -59.4}, {-66.3,
+    -49.8}, {-53.5, -37.3}, {-30.2, -19.7}, {37.4, 24.8}, {57.5, 40.8}, {68.7,
+    52.7}, {75.2, 62.2}, {77.6, 67.5}, {80, 80}}),
     Text(
-    extent = {{-88, 78}, {-16, 30}}, 
-    textColor = {192, 192, 192}, 
-    textString = "asin")}), 
+    extent = {{-88, 78}, {-16, 30}},
+    textColor = {192, 192, 192},
+    textString = "asin")}),
     Documentation(info = "<html>
 <p>
 该函数返回y = asin(u)，其中-1 &le; u &le; +1:
@@ -11598,21 +11598,21 @@ Math.<strong>isEqual</strong>(s1, s2, eps=0);
   external "builtin" y = acos(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, -80}, {68, -80}}, color = {192, 192, 192}), 
+    Line(points = {{-90, -80}, {68, -80}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, 80}, {-79.2, 72.8}, {-77.6, 67.5}, {-73.6, 59.4}, {-66.3, 
-    49.8}, {-53.5, 37.3}, {-30.2, 19.7}, {37.4, -24.8}, {57.5, -40.8}, {68.7, -52.7}, 
-    {75.2, -62.2}, {77.6, -67.5}, {80, -80}}), 
+    points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, 80}, {-79.2, 72.8}, {-77.6, 67.5}, {-73.6, 59.4}, {-66.3,
+    49.8}, {-53.5, 37.3}, {-30.2, 19.7}, {37.4, -24.8}, {57.5, -40.8}, {68.7, -52.7},
+    {75.2, -62.2}, {77.6, -67.5}, {80, -80}}),
     Text(
-    extent = {{-86, -14}, {-14, -62}}, 
-    textColor = {192, 192, 192}, 
-    textString = "acos")}), 
+    extent = {{-86, -14}, {-14, -62}},
+    textColor = {192, 192, 192},
+    textString = "acos")}),
     Documentation(info = "<html>
 <p>
 该函数返回y = acos(u)，其中-1 &le; u &le; +1:
@@ -11632,22 +11632,22 @@ Math.<strong>isEqual</strong>(s1, s2, eps=0);
   external "builtin" y = atan(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, -80}, {-52.7, -75.2}, {-37.4, -69.7}, {-26.9, -63}, {-19.7, -55.2}, 
-    {-14.1, -45.8}, {-10.1, -36.4}, {-6.03, -23.9}, {-1.21, -5.06}, {5.23, 21}, 
-    {9.25, 34.1}, {13.3, 44.2}, {18.1, 52.9}, {24.5, 60.8}, {33.4, 67.6}, {47, 
-    73.6}, {69.5, 78.6}, {80, 80}}), 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, -80}, {-52.7, -75.2}, {-37.4, -69.7}, {-26.9, -63}, {-19.7, -55.2},
+    {-14.1, -45.8}, {-10.1, -36.4}, {-6.03, -23.9}, {-1.21, -5.06}, {5.23, 21},
+    {9.25, 34.1}, {13.3, 44.2}, {18.1, 52.9}, {24.5, 60.8}, {33.4, 67.6}, {47,
+    73.6}, {69.5, 78.6}, {80, 80}}),
     Text(
-    extent = {{-86, 68}, {-14, 20}}, 
-    textColor = {192, 192, 192}, 
-    textString = "atan")}), 
+    extent = {{-86, 68}, {-14, 20}},
+    textColor = {192, 192, 192},
+    textString = "atan")}),
     Documentation(info = "<html>
 <p>
 此函数返回y = atan(u)，其中-&infin; &lt; u &lt; &infin;:
@@ -11668,25 +11668,25 @@ Math.<strong>isEqual</strong>(s1, s2, eps=0);
   external "builtin" y = atan2(u1, u2);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{0, -80}, {8.93, -67.2}, {17.1, -59.3}, {27.3, -53.6}, {42.1, -49.4}, 
-    {69.9, -45.8}, {80, -45.1}}), 
-    Line(points = {{-80, -34.9}, {-46.1, -31.4}, {-29.4, -27.1}, {-18.3, -21.5}, {-10.3, 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{0, -80}, {8.93, -67.2}, {17.1, -59.3}, {27.3, -53.6}, {42.1, -49.4},
+    {69.9, -45.8}, {80, -45.1}}),
+    Line(points = {{-80, -34.9}, {-46.1, -31.4}, {-29.4, -27.1}, {-18.3, -21.5}, {-10.3,
     -14.5}, {-2.03, -3.17}, {7.97, 11.6}, {15.5, 19.4}, {24.3, 25}, {39, 30}, {
-    62.1, 33.5}, {80, 34.9}}), 
-    Line(points = {{-80, 45.1}, {-45.9, 48.7}, {-29.1, 52.9}, {-18.1, 58.6}, {-10.2, 
-    65.8}, {-1.82, 77.2}, {0, 80}}), 
+    62.1, 33.5}, {80, 34.9}}),
+    Line(points = {{-80, 45.1}, {-45.9, 48.7}, {-29.1, 52.9}, {-18.1, 58.6}, {-10.2,
+    65.8}, {-1.82, 77.2}, {0, 80}}),
     Text(
-    extent = {{-90, -46}, {-18, -94}}, 
-    textColor = {192, 192, 192}, 
-    textString = "atan2")}), 
+    extent = {{-90, -46}, {-18, -94}},
+    textColor = {192, 192, 192},
+    textString = "atan2")}),
     Documentation(info = "<html>
 <p>
 这个函数返回y = atan2(u1, u2)，其中tan(y) = u1/u2，且y在-pi &lt; y &le; pi范围内。
@@ -11700,7 +11700,7 @@ u2可以为零，前提是u1不为零。通常，u1、u2的形式为u1 = sin(y)�
 </html>"            ));
   end atan2;
 
-  function atan3 
+  function atan3
     "四象限反正切(选择最接近给定角度y0的解)"
     import Modelica.Constants.pi;
     extends Modelica.Math.Icons.AxisCenter;
@@ -11727,25 +11727,25 @@ u2可以为零，前提是u1不为零。通常，u1、u2的形式为u1 = sin(y)�
     end if;
     annotation(
       Icon(coordinateSystem(
-      preserveAspectRatio = true, 
+      preserveAspectRatio = true,
       extent = {{-100, -100}, {100, 100}}), graphics = {
-      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
       Polygon(
-      points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid), 
-      Line(points = {{0, -80}, {8.93, -67.2}, {17.1, -59.3}, {27.3, -53.6}, {42.1, -49.4}, 
-      {69.9, -45.8}, {80, -45.1}}), 
-      Line(points = {{-80, -34.9}, {-46.1, -31.4}, {-29.4, -27.1}, {-18.3, -21.5}, {-10.3, 
+      points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid),
+      Line(points = {{0, -80}, {8.93, -67.2}, {17.1, -59.3}, {27.3, -53.6}, {42.1, -49.4},
+      {69.9, -45.8}, {80, -45.1}}),
+      Line(points = {{-80, -34.9}, {-46.1, -31.4}, {-29.4, -27.1}, {-18.3, -21.5}, {-10.3,
       -14.5}, {-2.03, -3.17}, {7.97, 11.6}, {15.5, 19.4}, {24.3, 25}, {39, 30}, {
-      62.1, 33.5}, {80, 34.9}}), 
-      Line(points = {{-80, 45.1}, {-45.9, 48.7}, {-29.1, 52.9}, {-18.1, 58.6}, {-10.2, 
-      65.8}, {-1.82, 77.2}, {0, 80}}), 
+      62.1, 33.5}, {80, 34.9}}),
+      Line(points = {{-80, 45.1}, {-45.9, 48.7}, {-29.1, 52.9}, {-18.1, 58.6}, {-10.2,
+      65.8}, {-1.82, 77.2}, {0, 80}}),
       Text(
-      extent = {{-90, -46}, {-18, -94}}, 
-      textColor = {192, 192, 192}, 
-      textString = "atan3")}), 
+      extent = {{-90, -46}, {-18, -94}},
+      textColor = {192, 192, 192},
+      textString = "atan3")}),
       Documentation(info = "<html>
 <p>
 这个函数返回y = <strong>atan3</strong>(u1, u2, y0)，使得<strong>tan</strong>(y) = u1/u2并且y的取值范围是：-pi &lt; y - y0 &le; pi。<br>
@@ -11770,22 +11770,22 @@ u2可能是零，前提是u1不为零。与Modelica.Math.atan2(..)的区别是�
   external "builtin" y = sinh(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, -80}, {-76, -65.4}, {-71.2, -51.4}, {-65.5, -38.8}, {-59.1, -28.1}, 
-    {-51.1, -18.7}, {-41.4, -11.4}, {-27.7, -5.5}, {-4.42, -0.653}, {24.5, 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, -80}, {-76, -65.4}, {-71.2, -51.4}, {-65.5, -38.8}, {-59.1, -28.1},
+    {-51.1, -18.7}, {-41.4, -11.4}, {-27.7, -5.5}, {-4.42, -0.653}, {24.5,
     4.57}, {39, 10.1}, {49.4, 17.2}, {57.5, 25.9}, {63.9, 35.8}, {69.5, 47.4}, {
-    74.4, 60.4}, {78.4, 73.8}, {80, 80}}), 
+    74.4, 60.4}, {78.4, 73.8}, {80, 80}}),
     Text(
-    extent = {{-88, 80}, {-16, 32}}, 
-    textColor = {192, 192, 192}, 
-    textString = "sinh")}), 
+    extent = {{-88, 80}, {-16, 32}},
+    textColor = {192, 192, 192},
+    textString = "sinh")}),
     Documentation(info = "<html>
 <p>
 此函数返回y = sinh(u)，其中-&infin; &lt; u &lt; &infin;：
@@ -11805,24 +11805,24 @@ u2可能是零，前提是u1不为零。与Modelica.Math.atan2(..)的区别是�
   external "builtin" y = cosh(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, -86.083}, {68, -86.083}}, color = {192, 192, 192}), 
+    Line(points = {{-90, -86.083}, {68, -86.083}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, -86.083}, {68, -78.083}, {68, -94.083}, {90, -86.083}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, 80}, {-77.6, 61.1}, {-74.4, 39.3}, {-71.2, 20.7}, {-67.1, 
-    1.29}, {-63.1, -14.6}, {-58.3, -29.8}, {-52.7, -43.5}, {-46.2, -55.1}, {-39, 
+    points = {{90, -86.083}, {68, -78.083}, {68, -94.083}, {90, -86.083}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, 80}, {-77.6, 61.1}, {-74.4, 39.3}, {-71.2, 20.7}, {-67.1,
+    1.29}, {-63.1, -14.6}, {-58.3, -29.8}, {-52.7, -43.5}, {-46.2, -55.1}, {-39,
     -64.3}, {-30.2, -71.7}, {-18.9, -77.1}, {-4.42, -79.9}, {10.9, -79.1}, {
     23.7, -75.2}, {34.2, -68.7}, {42.2, -60.6}, {48.6, -51.2}, {54.3, -40}, {
     59.1, -27.5}, {63.1, -14.6}, {67.1, 1.29}, {71.2, 20.7}, {74.4, 39.3}, {
-    77.6, 61.1}, {80, 80}}), 
+    77.6, 61.1}, {80, 80}}),
     Text(
-    extent = {{4, 66}, {66, 20}}, 
-    textColor = {192, 192, 192}, 
-    textString = "cosh")}), 
+    extent = {{4, 66}, {66, 20}},
+    textColor = {192, 192, 192},
+    textString = "cosh")}),
     Documentation(info = "<html>
 <p>
 此函数返回y = cosh(u)，其中-&infin; &lt; u &lt; &infin;：
@@ -11842,22 +11842,22 @@ u2可能是零，前提是u1不为零。与Modelica.Math.atan2(..)的区别是�
   external "builtin" y = tanh(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, -80}, {-47.8, -78.7}, {-35.8, -75.7}, {-27.7, -70.6}, {-22.1, 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, -80}, {-47.8, -78.7}, {-35.8, -75.7}, {-27.7, -70.6}, {-22.1,
     -64.2}, {-17.3, -55.9}, {-12.5, -44.3}, {-7.64, -29.2}, {-1.21, -4.82}, {
-    6.83, 26.3}, {11.7, 42}, {16.5, 54.2}, {21.3, 63.1}, {26.9, 69.9}, {34.2, 75}, 
-    {45.4, 78.4}, {72, 79.9}, {80, 80}}), 
+    6.83, 26.3}, {11.7, 42}, {16.5, 54.2}, {21.3, 63.1}, {26.9, 69.9}, {34.2, 75},
+    {45.4, 78.4}, {72, 79.9}, {80, 80}}),
     Text(
-    extent = {{-88, 72}, {-16, 24}}, 
-    textColor = {192, 192, 192}, 
-    textString = "tanh")}), 
+    extent = {{-88, 72}, {-16, 24}},
+    textColor = {192, 192, 192},
+    textString = "tanh")}),
     Documentation(info = "<html>
 <p>
 此函数返回y = tanh(u)，其中-&infin; &lt; u &lt; &infin;：
@@ -11878,21 +11878,21 @@ u2可能是零，前提是u1不为零。与Modelica.Math.atan2(..)的区别是�
     y := Modelica.Math.log(u + sqrt(u * u + 1));
     annotation(
       Icon(coordinateSystem(
-      preserveAspectRatio = true, 
+      preserveAspectRatio = true,
       extent = {{-100, -100}, {100, 100}}), graphics = {
-      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
       Polygon(
-      points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid), 
-      Line(points = {{-80, -80}, {-56.7, -68.4}, {-39.8, -56.8}, {-26.9, -44.7}, {-17.3, 
-      -32.4}, {-9.25, -19}, {9.25, 19}, {17.3, 32.4}, {26.9, 44.7}, {39.8, 56.8}, 
-      {56.7, 68.4}, {80, 80}}), 
+      points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid),
+      Line(points = {{-80, -80}, {-56.7, -68.4}, {-39.8, -56.8}, {-26.9, -44.7}, {-17.3,
+      -32.4}, {-9.25, -19}, {9.25, 19}, {17.3, 32.4}, {26.9, 44.7}, {39.8, 56.8},
+      {56.7, 68.4}, {80, 80}}),
       Text(
-      extent = {{-90, 80}, {-6, 26}}, 
-      textColor = {192, 192, 192}, 
-      textString = "asinh")}), 
+      extent = {{-90, 80}, {-6, 26}},
+      textColor = {192, 192, 192},
+      textString = "asinh")}),
       Documentation(info = "<html>
 <p>
 此函数返回输入参数u的面积双曲正弦(area hyperbolic sine)值。作为sinh(..)的反函数，asinh(u)是唯一的，并且对输入参数u没有任何限制
@@ -11911,26 +11911,26 @@ u2可能是零，前提是u1不为零。与Modelica.Math.atan2(..)的区别是�
     output Real y "因变量y = acosh(u)";
 
   algorithm
-    assert(u >= 1.0, "输入参数 u (= " + String(u) + 
+    assert(u >= 1.0, "输入参数 u (= " + String(u) +
       ") of acosh(u) must be >= 1.0");
     y := Modelica.Math.log(u + sqrt(u * u - 1));
     annotation(
       Icon(coordinateSystem(
-      preserveAspectRatio = true, 
+      preserveAspectRatio = true,
       extent = {{-100, -100}, {100, 100}}), graphics = {
-      Line(points = {{-90, -80}, {68, -80}}, color = {192, 192, 192}), 
+      Line(points = {{-90, -80}, {68, -80}}, color = {192, 192, 192}),
       Polygon(
-      points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}}, 
-      lineColor = {192, 192, 192}, 
-      fillColor = {192, 192, 192}, 
-      fillPattern = FillPattern.Solid), 
-      Line(points = {{-66, -80}, {-65.2, -66}, {-64.4, -60.3}, {-62.8, -52.2}, {-60.4, -43.4}, 
-      {-56.4, -32.4}, {-49.9, -19.3}, {-41.1, -5.65}, {-29, 8.8}, {-12.9, 23.8}, 
-      {7.97, 39.2}, {35.3, 55}, {69.9, 70.8}, {94, 80}}), 
+      points = {{90, -80}, {68, -72}, {68, -88}, {90, -80}},
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid),
+      Line(points = {{-66, -80}, {-65.2, -66}, {-64.4, -60.3}, {-62.8, -52.2}, {-60.4, -43.4},
+      {-56.4, -32.4}, {-49.9, -19.3}, {-41.1, -5.65}, {-29, 8.8}, {-12.9, 23.8},
+      {7.97, 39.2}, {35.3, 55}, {69.9, 70.8}, {94, 80}}),
       Text(
-      extent = {{-14, 2}, {76, -54}}, 
-      textColor = {192, 192, 192}, 
-      textString = "arcosh")}), 
+      extent = {{-14, 2}, {76, -54}},
+      textColor = {192, 192, 192},
+      textString = "arcosh")}),
       Documentation(info = "<html>
 <p>
 此函数返回输入参数u的面积双曲余弦(area hyperbolic cosine)值。
@@ -11959,21 +11959,21 @@ u的有效范围是
   external "builtin" y = exp(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, -80.3976}, {68, -80.3976}}, color = {192, 192, 192}), 
+    Line(points = {{-90, -80.3976}, {68, -80.3976}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, -80.3976}, {68, -72.3976}, {68, -88.3976}, {90, -80.3976}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, -80}, {-31, -77.9}, {-6.03, -74}, {10.9, -68.4}, {23.7, -61}, 
+    points = {{90, -80.3976}, {68, -72.3976}, {68, -88.3976}, {90, -80.3976}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, -80}, {-31, -77.9}, {-6.03, -74}, {10.9, -68.4}, {23.7, -61},
     {34.2, -51.6}, {43, -40.3}, {50.3, -27.8}, {56.7, -13.5}, {62.3, 2.23}, {
-    67.1, 18.6}, {72, 38.2}, {76, 57.6}, {80, 80}}), 
+    67.1, 18.6}, {72, 38.2}, {76, 57.6}, {80, 80}}),
     Text(
-    extent = {{-86, 50}, {-14, 2}}, 
-    textColor = {192, 192, 192}, 
-    textString = "exp")}), 
+    extent = {{-86, 50}, {-14, 2}},
+    textColor = {192, 192, 192},
+    textString = "exp")}),
     Documentation(info = "<html>
 <p>
 该函数返回y = exp(u)，其中-&infin; &lt; u &lt; &infin;:
@@ -11993,21 +11993,21 @@ u的有效范围是
   external "builtin" y = log(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-80, -80}, {-79.2, -50.6}, {-78.4, -37}, {-77.6, -28}, {-76.8, -21.3}, 
-    {-75.2, -11.4}, {-72.8, -1.31}, {-69.5, 8.08}, {-64.7, 17.9}, {-57.5, 28}, 
-    {-47, 38.1}, {-31.8, 48.1}, {-10.1, 58}, {22.1, 68}, {68.7, 78.1}, {80, 80}}), 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-80, -80}, {-79.2, -50.6}, {-78.4, -37}, {-77.6, -28}, {-76.8, -21.3},
+    {-75.2, -11.4}, {-72.8, -1.31}, {-69.5, 8.08}, {-64.7, 17.9}, {-57.5, 28},
+    {-47, 38.1}, {-31.8, 48.1}, {-10.1, 58}, {22.1, 68}, {68.7, 78.1}, {80, 80}}),
     Text(
-    extent = {{-6, -24}, {66, -72}}, 
-    textColor = {192, 192, 192}, 
-    textString = "log")}), 
+    extent = {{-6, -24}, {66, -72}},
+    textColor = {192, 192, 192},
+    textString = "log")}),
     Documentation(info = "<html>
 <p>
 此函数返回y = log(10)(u的自然对数)、其中u &gt; 0：
@@ -12027,21 +12027,21 @@ u的有效范围是
   external "builtin" y = log10(u);
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true, 
+    preserveAspectRatio = true,
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+    Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
     Polygon(
-    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}}, 
-    lineColor = {192, 192, 192}, 
-    fillColor = {192, 192, 192}, 
-    fillPattern = FillPattern.Solid), 
-    Line(points = {{-79.8, -80}, {-79.2, -50.6}, {-78.4, -37}, {-77.6, -28}, {-76.8, -21.3}, 
-    {-75.2, -11.4}, {-72.8, -1.31}, {-69.5, 8.08}, {-64.7, 17.9}, {-57.5, 28}, 
-    {-47, 38.1}, {-31.8, 48.1}, {-10.1, 58}, {22.1, 68}, {68.7, 78.1}, {80, 80}}), 
+    points = {{90, 0}, {68, 8}, {68, -8}, {90, 0}},
+    lineColor = {192, 192, 192},
+    fillColor = {192, 192, 192},
+    fillPattern = FillPattern.Solid),
+    Line(points = {{-79.8, -80}, {-79.2, -50.6}, {-78.4, -37}, {-77.6, -28}, {-76.8, -21.3},
+    {-75.2, -11.4}, {-72.8, -1.31}, {-69.5, 8.08}, {-64.7, 17.9}, {-57.5, 28},
+    {-47, 38.1}, {-31.8, 48.1}, {-10.1, 58}, {22.1, 68}, {68.7, 78.1}, {80, 80}}),
     Text(
-    extent = {{-30, -22}, {60, -70}}, 
-    textColor = {192, 192, 192}, 
-    textString = "log10")}), 
+    extent = {{-30, -22}, {60, -70}},
+    textColor = {192, 192, 192},
+    textString = "log10")}),
     Documentation(info = "<html>
 <p>
 此函数返回y = log10(u)、其中u &gt; 0：
@@ -12053,11 +12053,11 @@ u的有效范围是
 </html>"  ));
   end log10;
 
-  annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
-    {100, 100}}), graphics = {Line(points = {{-80, 0}, {-68.7, 34.2}, {-61.5, 53.1}, 
+  annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
+    {100, 100}}), graphics = {Line(points = {{-80, 0}, {-68.7, 34.2}, {-61.5, 53.1},
     {-55.1, 66.4}, {-49.4, 74.6}, {-43.8, 79.1}, {-38.2, 79.8}, {-32.6, 76.6}, {
-    -26.9, 69.7}, {-21.3, 59.4}, {-14.9, 44.1}, {-6.83, 21.2}, {10.1, -30.8}, {17.3, 
-    -50.2}, {23.7, -64.2}, {29.3, -73.1}, {35, -78.4}, {40.6, -80}, {46.2, -77.6}, 
+    -26.9, 69.7}, {-21.3, 59.4}, {-14.9, 44.1}, {-6.83, 21.2}, {10.1, -30.8}, {17.3,
+    -50.2}, {23.7, -64.2}, {29.3, -73.1}, {35, -78.4}, {40.6, -80}, {46.2, -77.6},
     {51.9, -71.5}, {57.5, -61.9}, {63.9, -47.2}, {72, -24.8}, {80, 0}}, color = {
     0, 0, 0}, smooth = Smooth.Bezier)}), Documentation(info = "<html>
 <p>

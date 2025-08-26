@@ -1,12 +1,12 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.Force;
-model LeakageAroundPoles 
+model LeakageAroundPoles
   "圆柱形或棱柱形磁极周围的漏磁通管"
 
   extends BaseClasses.Force;
   SI.Length l=s "轴向长度（通量方向）" annotation (Dialog(
-        group="Variable geometry", groupImage= 
+        group="Variable geometry", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/LeakageAroundPoles.png"));
-  parameter SI.Length w=0.1 
+  parameter SI.Length w=0.1
     "与通量正交的宽度；圆柱形磁极情况下通量管的平均周长";
   parameter SI.Radius r=0.01 "泄漏场半径";
 

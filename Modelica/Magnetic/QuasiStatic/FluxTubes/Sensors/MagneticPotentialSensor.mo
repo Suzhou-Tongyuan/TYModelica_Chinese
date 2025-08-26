@@ -5,15 +5,15 @@ model MagneticPotentialSensor "潜在的传感器"
         transformation(extent={{100,-10},{120,10}})));
 equation
   y = port.V_m;
-  annotation (defaultComponentName="magPotentialSensor", 
+  annotation (defaultComponentName="magPotentialSensor",
   Documentation(info="<html>
 <p>
 该传感器可用于测量准静态磁系统中的复磁势<code>V_m</code>.
 </p>
-</html>"), 
+</html>"),
     Icon(graphics={
         Text(
-          extent={{-30,-10},{30,-70}}, 
-          textColor={64,64,64}, 
+          extent={{-30,-10},{30,-70}},
+          textColor={64,64,64},
           textString="A"), Line(points={{70,0},{100,0}}, color={85,170,255})}));
 end MagneticPotentialSensor;

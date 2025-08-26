@@ -3,20 +3,20 @@ connector PositiveMagneticPort "基波机的正准静态磁口"
   extends FundamentalWave.Interfaces.MagneticPort;
   Modelica.Electrical.QuasiStatic.Types.Reference reference "参考";
   annotation (
-    defaultComponentName="port_p", 
+    defaultComponentName="port_p",
     Diagram(graphics={Text(
-          extent={{-100,100},{100,60}}, 
-          textColor={255,170,85}, 
+          extent={{-100,100},{100,60}},
+          textColor={255,170,85},
           textString="%name"), Ellipse(
-          extent={{-40,40},{40,-40}}, 
-          lineColor={255,170,85}, 
-          fillColor={255,170,85}, 
-          fillPattern=FillPattern.Solid)}), 
+          extent={{-40,40},{40,-40}},
+          lineColor={255,170,85},
+          fillColor={255,170,85},
+          fillPattern=FillPattern.Solid)}),
     Icon(graphics={Ellipse(
-          extent={{-100,100},{100,-100}}, 
-          lineColor={255,170,85}, 
-          fillColor={255,170,85}, 
-          fillPattern=FillPattern.Solid)}), 
+          extent={{-100,100},{100,-100}},
+          lineColor={255,170,85},
+          fillColor={255,170,85},
+          fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
 
 <p>

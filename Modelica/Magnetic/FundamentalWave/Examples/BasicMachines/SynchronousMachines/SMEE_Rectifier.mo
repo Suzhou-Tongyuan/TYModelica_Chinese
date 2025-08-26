@@ -1,85 +1,85 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines;
-model SMEE_Rectifier 
+model SMEE_Rectifier
   "测试示例： 带整流器的电励磁同步电机"
 
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   constant Integer m=3 "阶段数";
-  parameter SI.AngularVelocity wNominal=2*pi*smeeData.fsNominal 
+  parameter SI.AngularVelocity wNominal=2*pi*smeeData.fsNominal
       /smee.p "标称速度";
-  parameter SI.Voltage VDC0=sqrt(2*3)*smeeData.VsNominal 
+  parameter SI.Voltage VDC0=sqrt(2*3)*smeeData.VsNominal
     "空载直流电压";
-  parameter SI.Resistance RLoad=VDC0^2/smeeData.SNominal 
+  parameter SI.Resistance RLoad=VDC0^2/smeeData.SNominal
     "负载阻力";
-  parameter SI.Voltage Ve0=smee.IeOpenCircuit* 
+  parameter SI.Voltage Ve0=smee.IeOpenCircuit*
       Modelica.Electrical.Machines.Thermal.convertResistance(
-            smee.Re, 
-            smee.TeRef, 
-            smee.alpha20e, 
+            smee.Re,
+            smee.TeRef,
+            smee.alpha20e,
             smee.TeOperational) "No load excitation voltage";
   parameter Real k=2*Ve0/smeeData.VsNominal "电压控制器：增益";
-  parameter SI.Time Ti=smeeData.Td0Transient/2 
+  parameter SI.Time Ti=smeeData.Td0Transient/2
     "电压控制器：积分时间常数";
   Magnetic.FundamentalWave.BasicMachines.SynchronousMachines.SM_ElectricalExcited 
     smee(
-    fsNominal=smeeData.fsNominal, 
-    TsRef=smeeData.TsRef, 
-    Lrsigmad=smeeData.Lrsigmad, 
-    Lrsigmaq=smeeData.Lrsigmaq, 
-    Rrd=smeeData.Rrd, 
-    Rrq=smeeData.Rrq, 
-    TrRef=smeeData.TrRef, 
-    VsNominal=smeeData.VsNominal, 
-    IeOpenCircuit=smeeData.IeOpenCircuit, 
-    Re=smeeData.Re, 
-    TeRef=smeeData.TeRef, 
-    sigmae=smeeData.sigmae, 
-    useDamperCage=true, 
-    p=2, 
-    Jr=0.29, 
-    Js=0.29, 
-    statorCoreParameters(VRef=100), 
-    strayLoadParameters(IRef=100), 
-    brushParameters(ILinear=0.01), 
-    ir(each fixed=true), 
-    Rs=smeeData.Rs*m/3, 
-    Lssigma=smeeData.Lssigma*m/3, 
-    Lmd=smeeData.Lmd*m/3, 
-    Lmq=smeeData.Lmq*m/3, 
-    TsOperational=293.15, 
-    alpha20s=smeeData.alpha20s, 
-    effectiveStatorTurns=smeeData.effectiveStatorTurns, 
-    alpha20r=smeeData.alpha20r, 
-    TrOperational=293.15, 
-    TeOperational=293.15, 
+    fsNominal=smeeData.fsNominal,
+    TsRef=smeeData.TsRef,
+    Lrsigmad=smeeData.Lrsigmad,
+    Lrsigmaq=smeeData.Lrsigmaq,
+    Rrd=smeeData.Rrd,
+    Rrq=smeeData.Rrq,
+    TrRef=smeeData.TrRef,
+    VsNominal=smeeData.VsNominal,
+    IeOpenCircuit=smeeData.IeOpenCircuit,
+    Re=smeeData.Re,
+    TeRef=smeeData.TeRef,
+    sigmae=smeeData.sigmae,
+    useDamperCage=true,
+    p=2,
+    Jr=0.29,
+    Js=0.29,
+    statorCoreParameters(VRef=100),
+    strayLoadParameters(IRef=100),
+    brushParameters(ILinear=0.01),
+    ir(each fixed=true),
+    Rs=smeeData.Rs*m/3,
+    Lssigma=smeeData.Lssigma*m/3,
+    Lmd=smeeData.Lmd*m/3,
+    Lmq=smeeData.Lmq*m/3,
+    TsOperational=293.15,
+    alpha20s=smeeData.alpha20s,
+    effectiveStatorTurns=smeeData.effectiveStatorTurns,
+    alpha20r=smeeData.alpha20r,
+    TrOperational=293.15,
+    TeOperational=293.15,
     alpha20e=smeeData.alpha20e) 
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   parameter Modelica.Electrical.Machines.Utilities.SynchronousMachineData smeeData(
-    SNominal=30e3, 
-    VsNominal=100, 
-    fsNominal=50, 
-    IeOpenCircuit=10, 
-    x0=0.1, 
-    xd=1.6, 
-    xq=1.6, 
-    xdTransient=0.1375, 
-    xdSubtransient=0.121428571, 
-    xqSubtransient=0.148387097, 
-    Ta=0.014171268, 
-    Td0Transient=0.261177343, 
-    Td0Subtransient=0.006963029, 
-    Tq0Subtransient=0.123345081, 
-    TsSpecification=293.15, 
-    TsRef=293.15, 
-    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero, 
+    SNominal=30e3,
+    VsNominal=100,
+    fsNominal=50,
+    IeOpenCircuit=10,
+    x0=0.1,
+    xd=1.6,
+    xq=1.6,
+    xdTransient=0.1375,
+    xdSubtransient=0.121428571,
+    xqSubtransient=0.148387097,
+    Ta=0.014171268,
+    Td0Transient=0.261177343,
+    Td0Subtransient=0.006963029,
+    Tq0Subtransient=0.123345081,
+    TsSpecification=293.15,
+    TsRef=293.15,
+    alpha20s(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
 
-    TrSpecification=293.15, 
-    TrRef=293.15, 
-    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero, 
+    TrSpecification=293.15,
+    TrRef=293.15,
+    alpha20r(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero,
 
-    TeSpecification=293.15, 
-    TeRef=293.15, 
-    alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero) 
+    TeSpecification=293.15,
+    TeRef=293.15,
+    alpha20e(displayUnit="1/K") = Modelica.Electrical.Machines.Thermal.Constants.alpha20Zero)
     "同步机器数据" 
     annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
 
@@ -88,8 +88,8 @@ model SMEE_Rectifier
     annotation (Placement(transformation(extent={{0,-24},{20,-4}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-20,60}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-20,60},
+        extent={{-10,-10},{10,10}},
         rotation=90)));
   Modelica.Mechanics.Rotational.Sources.Speed speed 
     annotation (Placement(transformation(extent={{50,-40},{30,-20}})));
@@ -97,85 +97,85 @@ model SMEE_Rectifier
     annotation (Placement(transformation(extent={{80,-40},{60,-20}})));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={30,-50})));
-  Modelica.Blocks.Math.Gain setPointGain(k=(smeeData.VsNominal/wNominal)/ 
+  Modelica.Blocks.Math.Gain setPointGain(k=(smeeData.VsNominal/wNominal)/
         unitMagneticFlux) 
     annotation (Placement(transformation(extent={{-50,-90},{-70,-70}})));
   Modelica.Blocks.Continuous.LimPID voltageController(
-    controllerType=Modelica.Blocks.Types.SimpleController.PI, 
-    k=k, 
-    Ti=Ti, 
-    yMax=2.5*Ve0, 
-    yMin=0, 
-    initType=Modelica.Blocks.Types.Init.InitialState, 
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=k,
+    Ti=Ti,
+    yMax=2.5*Ve0,
+    yMin=0,
+    initType=Modelica.Blocks.Types.Init.InitialState,
     Td=0.001) 
     annotation (Placement(transformation(extent={{-70,-20},{-50,-40}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage excitationVoltage 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}}, 
-        rotation=90, 
+        extent={{10,-10},{-10,10}},
+        rotation=90,
         origin={-30,-30})));
   Modelica.Electrical.Analog.Basic.Ground groundExcitation annotation (
       Placement(transformation(
-        origin={-30,-60}, 
+        origin={-30,-60},
         extent={{-10,-10},{10,10}})));
   Modelica.Electrical.Polyphase.Basic.Star star1(m=m) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=180, 
+        extent={{-10,-10},{10,10}},
+        rotation=180,
         origin={-20,90})));
   Modelica.Electrical.Polyphase.Ideal.IdealDiode idealDiode1(
-    m=m, 
-    Ron=fill(1E-5, m), 
-    Goff=fill(1E-5, m), 
+    m=m,
+    Ron=fill(1E-5, m),
+    Goff=fill(1E-5, m),
     Vknee=fill(0, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=90, 
+        extent={{-10,-10},{10,10}},
+        rotation=90,
         origin={0,80})));
   Modelica.Electrical.Polyphase.Ideal.IdealDiode idealDiode2(
-    m=m, 
-    Ron=fill(1E-5, m), 
-    Goff=fill(1E-5, m), 
+    m=m,
+    Ron=fill(1E-5, m),
+    Goff=fill(1E-5, m),
     Vknee=fill(0, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=90, 
+        extent={{-10,-10},{10,10}},
+        rotation=90,
         origin={0,40})));
   Modelica.Electrical.Polyphase.Basic.Star star2(m=m) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=180, 
+        extent={{-10,-10},{10,10}},
+        rotation=180,
         origin={-20,30})));
   Modelica.Electrical.Analog.Basic.Capacitor capacitor1(C=2*10E-6, v(
         fixed=true, start=0)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-40,80})));
   Modelica.Electrical.Analog.Basic.Capacitor capacitor2(C=2*10E-6, v(
         fixed=true, start=0)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-40,40})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=RLoad) annotation (
      Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-50,60})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=270, 
+        extent={{-10,10},{10,-10}},
+        rotation=270,
         origin={-80,60})));
   Modelica.Blocks.Continuous.Filter filter(
-    analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping, 
-    filterType=Modelica.Blocks.Types.FilterType.LowPass, 
-    order=2, 
-    f_cut=20, 
-    gain=1/sqrt(2*3), 
+    analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping,
+    filterType=Modelica.Blocks.Types.FilterType.LowPass,
+    order=2,
+    f_cut=20,
+    gain=1/sqrt(2*3),
     normalized=true) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-60,0})));
 protected
   constant SI.MagneticFlux unitMagneticFlux=1 

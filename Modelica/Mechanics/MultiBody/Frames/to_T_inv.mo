@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function to_T_inv 
+function to_T_inv
   "从方向对象R返回逆转换矩阵T_inv"
   extends Modelica.Icons.Function;
-  input Orientation R 
+  input Orientation R
     "将坐标系1旋转到坐标系2的方向对象";
-  output Real T_inv[3, 3] 
+  output Real T_inv[3, 3]
     "将向量从坐标系2转换到坐标系1的逆转换矩阵(v1=T_inv*v2)";
 algorithm
   T_inv := transpose(R.T);

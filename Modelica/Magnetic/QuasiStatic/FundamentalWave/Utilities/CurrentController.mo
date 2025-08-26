@@ -2,7 +2,7 @@
 model CurrentController "电流控制器"
   parameter Integer m=3 "阶段数" annotation(Evaluate=true);
   parameter Integer p "磁极对数";
-  parameter SI.Angle gamma0=0 
+  parameter SI.Angle gamma0=0
     "电动转子角度的偏移量";
   Modelica.Blocks.Interfaces.RealInput id_rms annotation (Placement(
         transformation(extent={{-140,40},{-100,80}})));
@@ -10,15 +10,15 @@ model CurrentController "电流控制器"
         transformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Interfaces.RealInput phi annotation (Placement(
         transformation(
-        origin={0,-120}, 
-        extent={{20,-20},{-20,20}}, 
+        origin={0,-120},
+        extent={{20,-20},{-20,20}},
         rotation=270)));
   Modelica.Blocks.Math.Gain toGamma(k=p) annotation (Placement(
         transformation(
-        origin={0,-70}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={0,-70},
+        extent={{10,-10},{-10,10}},
         rotation=270)));
-  Modelica.ComplexBlocks.Interfaces.ComplexOutput I[m] 
+  Modelica.ComplexBlocks.Interfaces.ComplexOutput I[m]
     "多相电流相位" 
     annotation (Placement(transformation(extent={{100,30},{120,50}})));
   Modelica.Blocks.Interfaces.RealOutput gamma(unit="rad") "信号源参考角" 
@@ -31,8 +31,8 @@ model CurrentController "电流控制器"
     annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
   Modelica.Blocks.Sources.Constant const(final k=gamma0) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=90, 
+        extent={{-10,-10},{10,10}},
+        rotation=90,
         origin={30,-70})));
 equation
   connect(phi, toGamma.u) 
@@ -51,21 +51,21 @@ equation
       points={{-120,-60},{-60,-60},{-60,34},{-42,34}}, color={85,170,255}));
   connect(realToComplex.y, singleToMultiPhase.u) annotation (Line(
       points={{-19,40},{18,40}}, color={85,170,255}));
-  annotation (defaultComponentName="currentController", 
+  annotation (defaultComponentName="currentController",
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={Rectangle(
-              extent={{-100,100},{100,-100}}, 
-              fillColor={255,255,255}, 
+              extent={{-100,100},{100,-100}},
+              fillColor={255,255,255},
               fillPattern=FillPattern.Solid),Text(
-              extent={{-100,60},{20,40}}, 
-              textColor={0,0,255}, 
+              extent={{-100,60},{20,40}},
+              textColor={0,0,255},
               textString="id_rms"),Text(
-              extent={{-100,-40},{20,-60}}, 
-              textColor={0,0,255}, 
+              extent={{-100,-40},{20,-60}},
+              textColor={0,0,255},
               textString="iq_rms"),     Text(
-        extent={{-150,150},{150,110}}, 
-        textString="%name", 
-        textColor={0,0,255})}), 
+        extent={{-150,150},{150,110}},
+        textString="%name",
+        textColor={0,0,255})}),
     Documentation(info="<html>
 <p>
 这是一个简单的电流控制器。

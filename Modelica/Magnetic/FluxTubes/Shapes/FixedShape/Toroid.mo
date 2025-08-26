@@ -1,12 +1,12 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
-model Toroid 
+model Toroid
   "具有圆形截面的环面;固定的形状;线性或非线性材料特性"
 
   extends BaseClasses.FixedShape;
   extends Modelica.Magnetic.FluxTubes.Icons.Toroid;
   import Modelica.Constants.pi;
   parameter SI.Radius r=0.1 "环形半径（中间）" 
-    annotation (Dialog(group="Fixed geometry", groupImage= 
+    annotation (Dialog(group="Fixed geometry", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Toroid.png"));
   parameter SI.Radius d=0.01 "圆柱形磁芯直径" 
     annotation (Dialog(group="Fixed geometry"));

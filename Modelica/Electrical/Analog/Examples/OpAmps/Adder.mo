@@ -7,18 +7,18 @@ model Adder "反相加法器"
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   Sources.SineVoltage vIn1(V=Vin, f=f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-60,0})));
   Sources.ConstantVoltage vIn2(V=Vin) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-40,-10})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor vOut annotation (Placement(
         transformation(
-        extent={{10,10},{-10,-10}}, 
-        rotation=270, 
+        extent={{10,10},{-10,-10}},
+        rotation=270,
         origin={40,0})));
   OpAmpCircuits.Add add(p1_2(i(start=0))) 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -40,10 +40,10 @@ equation
   annotation (Documentation(info="<html>
 <p>这是一个反相加法器。</p>
 <p>请注意：<code>vOut</code>测量了反相负电压。</p>
-</html>"), 
+</html>"),
     experiment(
-      StartTime=0, 
-      StopTime=1, 
-      Tolerance=1e-006, 
+      StartTime=0,
+      StopTime=1,
+      Tolerance=1e-006,
       Interval=0.001));
 end Adder;

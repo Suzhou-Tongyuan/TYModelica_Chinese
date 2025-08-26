@@ -15,9 +15,9 @@ model Sensors "用于平移系统的传感器"
   Translational.Sensors.PositionSensor positionSensor2 annotation (
       Placement(transformation(extent={{60,10},{80,30}})));
   Translational.Components.Mass mass(
-    L=1, 
-    s(fixed=true), 
-    v(fixed=true), 
+    L=1,
+    s(fixed=true),
+    v(fixed=true),
     m=1) annotation (Placement(transformation(extent={{30,10},{50,30}})));
   Translational.Sources.Force force annotation (Placement(transformation(
           extent={{-70,10},{-50,30}})));
@@ -29,13 +29,13 @@ equation
   connect(forceSensor.flange_a, force.flange) annotation (Line(
       points={{-40,20},{-50,20}}, color={0,127,0}));
   connect(mass.flange_a, positionSensor1.flange) annotation (Line(
-      points={{30,20},{20,20},{20,-10},{60,-10}}, 
+      points={{30,20},{20,20},{20,-10},{60,-10}},
                                         color={0,127,0}));
   connect(mass.flange_a, speedSensor1.flange) annotation (Line(
-      points={{30,20},{20,20},{20,-40},{60,-40}}, 
+      points={{30,20},{20,20},{20,-40},{60,-40}},
                                           color={0,127,0}));
   connect(mass.flange_a, accSensor1.flange) annotation (Line(
-      points={{30,20},{20,20},{20,-70},{60,-70}}, 
+      points={{30,20},{20,20},{20,-70},{60,-70}},
                                           color={0,127,0}));
   connect(mass.flange_b, positionSensor2.flange) annotation (Line(
       points={{50,20},{60,20}}, color={0,127,0}));
@@ -59,6 +59,6 @@ acceleration a in m/s2
 在此示例中，测得的速度和加速度与传感器连接到的一维平动接口无关。相反，测得的位置取决于一维平动接口（flange_a 或 flange_b）和组件的长度&nbsp;<var>L</var>。
 可通过绘制 <code>positionSensor1.s</code>、<code>positionSensor2.s</code> 和 <code>mass.s</code> 来查看差异。
 </p>
-</html>"), 
+</html>"),
        experiment(StopTime=1.0, Interval=0.001));
 end Sensors;

@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.Rotational.Interfaces;
-partial model PartialTwoFlanges 
+partial model PartialTwoFlanges
   "具有两个一维转动接口的组件的部分模型"
 
   Flange_a flange_a "一维转动接口a" annotation (Placement(

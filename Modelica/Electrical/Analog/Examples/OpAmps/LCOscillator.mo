@@ -13,7 +13,7 @@ model LCOscillator "LC振荡器"
   parameter Real gamma=(1 - A)/(2*R*C) "特征参数";
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={20,-50}, 
+        origin={20,-50},
         extent={{-10,-10},{10,10}})));
   Modelica.Electrical.Analog.Ideal.IdealizedOpAmpLimited opAmp 
     annotation (Placement(transformation(extent={{-50,10},{-30,-10}})));
@@ -21,27 +21,27 @@ model LCOscillator "LC振荡器"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Electrical.Analog.Basic.Resistor r2(R=R2, i(start=0)) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={-20,-20})));
   Modelica.Electrical.Analog.Basic.Resistor r1(R=R1) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={0,-40})));
   Modelica.Electrical.Analog.Basic.Capacitor c(C=C, v(start=VAmp, fixed=true)) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={40,-20})));
   Modelica.Electrical.Analog.Basic.Inductor l(L=L, i(fixed=true, start=0)) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={20,-20})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor vOut annotation (Placement(
         transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=270, 
+        extent={{-10,10},{10,-10}},
+        rotation=270,
         origin={60,-20})));
 equation
   connect(opAmp.out, r.p) annotation (Line(
@@ -71,10 +71,10 @@ equation
   annotation (Documentation(info="<html>
 <p>这是一个LC振荡器，构建时参考的参考文献为：</p>
 <p>U. Tietze and C. Schenk, Halbleiter-Schaltungstechnik (German), 11th edition, Springer 1999, Chapter 14.1</p>
-</html>"), 
+</html>"),
     experiment(
-      StartTime=0, 
-      StopTime=0.01, 
-      Tolerance=0.0001, 
+      StartTime=0,
+      StopTime=0.01,
+      Tolerance=0.0001,
       Interval=1e-005));
 end LCOscillator;

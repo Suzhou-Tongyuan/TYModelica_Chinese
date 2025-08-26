@@ -1,5 +1,5 @@
 ﻿within Modelica;
-package Constants 
+package Constants
   "数学常数和自然常数库(例如pi、eps、R、sigma)"
 
   extends Modelica.Icons.Package;
@@ -11,17 +11,17 @@ package Constants
   final constant Real pi = 2 * Modelica.Math.asin(1.0);  // 3.14159265358979;
   final constant Real D2R = pi / 180 "角度到弧度";
   final constant Real R2D = 180 / pi "弧度到角度";
-  final constant Real gamma = 0.57721566490153286061 
+  final constant Real gamma = 0.57721566490153286061
     "参见 http://en.wikipedia.org/wiki/Euler_constant";
 
   // 机器相关常数
-  final constant Real eps = ModelicaServices.Machine.eps 
+  final constant Real eps = ModelicaServices.Machine.eps
     "1.0 + eps = 1.0的最大数字";
-  final constant Real small = ModelicaServices.Machine.small 
+  final constant Real small = ModelicaServices.Machine.small
     "可在机器上表示small和-small的最小数";
-  final constant Real inf = ModelicaServices.Machine.inf 
+  final constant Real inf = ModelicaServices.Machine.inf
     "可在机器上表示inf和-inf的最大实数";
-  final constant Integer Integer_inf = ModelicaServices.Machine.Integer_inf 
+  final constant Integer Integer_inf = ModelicaServices.Machine.Integer_inf
     "可在机器上表示Integer_inf和-Integer_inf的最大整数";
 
   // 自然常数
@@ -33,27 +33,27 @@ package Constants
   // 其中alpha是实验精细结构常数，
   // 该值来自 https://physics.nist.gov/cuu/pdf/wall_2018.pdf
   final constant SI.Velocity c = 299792458 "真空中的光速";
-  final constant SI.Acceleration g_n = 9.80665 
+  final constant SI.Acceleration g_n = 9.80665
     "地球上的标准重力加速度";
-  final constant Real G(final unit = "m3/(kg.s2)") = 6.67430e-11 
+  final constant Real G(final unit = "m3/(kg.s2)") = 6.67430e-11
     "牛顿万有引力常数";
   final constant SI.ElectricCharge q = 1.602176634e-19 "元电荷";
-  final constant SI.FaradayConstant F = q * N_A 
+  final constant SI.FaradayConstant F = q * N_A
     "法拉第常数，C/mol";
-  final constant Real h(final unit = "J.s") = 6.62607015e-34 
+  final constant Real h(final unit = "J.s") = 6.62607015e-34
     "普朗克常数";
-  final constant Real k(final unit = "J/K") = 1.380649e-23 
+  final constant Real k(final unit = "J/K") = 1.380649e-23
     "玻尔兹曼常数";
-  final constant Real R(final unit = "J/(mol.K)") = k * N_A 
+  final constant Real R(final unit = "J/(mol.K)") = k * N_A
     "摩尔气体常数";
-  final constant Real sigma(final unit = "W/(m2.K4)") = 2 * pi ^ 5 * k ^ 4 / (15 * h ^ 3 * c ^ 2) 
+  final constant Real sigma(final unit = "W/(m2.K4)") = 2 * pi ^ 5 * k ^ 4 / (15 * h ^ 3 * c ^ 2)
     "斯蒂芬-玻尔兹曼常数";
-  final constant Real N_A(final unit = "1/mol") = 6.02214076e23 
+  final constant Real N_A(final unit = "1/mol") = 6.02214076e23
     "阿伏加德罗常数";
   final constant Real mu_0(final unit = "N/A2") = 4 * pi * 1.00000000055e-7 "磁常数";
-  final constant Real epsilon_0(final unit = "F/m") = 1 / (mu_0 * c * c) 
+  final constant Real epsilon_0(final unit = "F/m") = 1 / (mu_0 * c * c)
     "电常数";
-  final constant NonSI.Temperature_degC T_zero = -273.15 
+  final constant NonSI.Temperature_degC T_zero = -273.15
     "绝对零度温度";
   annotation(
     Documentation(info = "<html>
@@ -111,27 +111,27 @@ package Constants
 <li><em>1997年11月15日</em>
        由<a href=\"http://www.robotic.dlr.de/Martin.Otter/\">Martin Otter</a>实现。</li>
 </ul>
-</html>"), 
+</html>"),
     Icon(coordinateSystem(extent = {{-100.0, -100.0}, {100.0, 100.0}}), graphics = {
     Polygon(
-    origin = {-9.2597, 25.6673}, 
-    fillColor = {102, 102, 102}, 
-    pattern = LinePattern.None, 
-    fillPattern = FillPattern.Solid, 
-    points = {{48.017, 11.336}, {48.017, 11.336}, {10.766, 11.336}, {-25.684, 10.95}, {-34.944, -15.111}, {-34.944, -15.111}, {-32.298, -15.244}, {-32.298, -15.244}, {-22.112, 0.168}, {11.292, 0.234}, {48.267, -0.097}, {48.267, -0.097}}, 
-    smooth = Smooth.Bezier), 
+    origin = {-9.2597, 25.6673},
+    fillColor = {102, 102, 102},
+    pattern = LinePattern.None,
+    fillPattern = FillPattern.Solid,
+    points = {{48.017, 11.336}, {48.017, 11.336}, {10.766, 11.336}, {-25.684, 10.95}, {-34.944, -15.111}, {-34.944, -15.111}, {-32.298, -15.244}, {-32.298, -15.244}, {-22.112, 0.168}, {11.292, 0.234}, {48.267, -0.097}, {48.267, -0.097}},
+    smooth = Smooth.Bezier),
     Polygon(
-    origin = {-19.9923, -8.3993}, 
-    fillColor = {102, 102, 102}, 
-    pattern = LinePattern.None, 
-    fillPattern = FillPattern.Solid, 
-    points = {{3.239, 37.343}, {3.305, 37.343}, {-0.399, 2.683}, {-16.936, -20.071}, {-7.808, -28.604}, {6.811, -22.519}, {9.986, 37.145}, {9.986, 37.145}}, 
-    smooth = Smooth.Bezier), 
+    origin = {-19.9923, -8.3993},
+    fillColor = {102, 102, 102},
+    pattern = LinePattern.None,
+    fillPattern = FillPattern.Solid,
+    points = {{3.239, 37.343}, {3.305, 37.343}, {-0.399, 2.683}, {-16.936, -20.071}, {-7.808, -28.604}, {6.811, -22.519}, {9.986, 37.145}, {9.986, 37.145}},
+    smooth = Smooth.Bezier),
     Polygon(
-    origin = {23.753, -11.5422}, 
-    fillColor = {102, 102, 102}, 
-    pattern = LinePattern.None, 
-    fillPattern = FillPattern.Solid, 
-    points = {{-10.873, 41.478}, {-10.873, 41.478}, {-14.048, -4.162}, {-9.352, -24.8}, {7.912, -24.469}, {16.247, 0.27}, {16.247, 0.27}, {13.336, 0.071}, {13.336, 0.071}, {7.515, -9.983}, {-3.134, -7.271}, {-2.671, 41.214}, {-2.671, 41.214}}, 
+    origin = {23.753, -11.5422},
+    fillColor = {102, 102, 102},
+    pattern = LinePattern.None,
+    fillPattern = FillPattern.Solid,
+    points = {{-10.873, 41.478}, {-10.873, 41.478}, {-14.048, -4.162}, {-9.352, -24.8}, {7.912, -24.469}, {16.247, 0.27}, {16.247, 0.27}, {13.336, 0.071}, {13.336, 0.071}, {7.515, -9.983}, {-3.134, -7.271}, {-2.671, 41.214}, {-2.671, 41.214}},
     smooth = Smooth.Bezier)}));
 end Constants;

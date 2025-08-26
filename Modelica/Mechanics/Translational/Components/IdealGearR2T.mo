@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.Translational.Components;
-model IdealGearR2T 
+model IdealGearR2T
   "将旋转运动转换为平移运动的变速箱"
   extends Modelica.Mechanics.Rotational.Components.IdealGearR2T;
   annotation (

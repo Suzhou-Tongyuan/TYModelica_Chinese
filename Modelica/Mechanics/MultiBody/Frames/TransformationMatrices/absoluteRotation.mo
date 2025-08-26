@@ -1,13 +1,13 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function absoluteRotation 
+function absoluteRotation
   "从另一个绝对方向对象和一个相对方向对象返回绝对方向对象"
 
   extends Modelica.Icons.Function;
-  input TransformationMatrices.Orientation T1 
+  input TransformationMatrices.Orientation T1
     "将坐标系0旋转至坐标系1的方向对象";
-  input TransformationMatrices.Orientation T_rel 
+  input TransformationMatrices.Orientation T_rel
     "将坐标系1旋转至坐标系2的相对方向对象";
-  output TransformationMatrices.Orientation T2 
+  output TransformationMatrices.Orientation T2
     "将坐标系0旋转至坐标系2的绝对方向对象";
 algorithm
   T2 := T_rel*T1;

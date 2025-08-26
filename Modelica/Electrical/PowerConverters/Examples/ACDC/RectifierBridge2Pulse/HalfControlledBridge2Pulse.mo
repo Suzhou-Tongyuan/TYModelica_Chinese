@@ -1,60 +1,60 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.RectifierBridge2Pulse;
-model HalfControlledBridge2Pulse 
+model HalfControlledBridge2Pulse
   "具有电阻负载的双脉冲半控制桥整流器"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter SI.Voltage Vrms=110 "有效值供电电压";
   parameter SI.Frequency f=50 "频率";
-  parameter SI.Angle constantFiringAngle=30*pi/180 
+  parameter SI.Angle constantFiringAngle=30*pi/180
     "导通角";
   parameter SI.Resistance R=20 "负载电阻";
 
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-80,-50}, 
+        origin={-80,-50},
         extent={{-10,-10},{10,10}})));
-  Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage(V=sqrt(2)* 
+  Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage(V=sqrt(2)*
         Vrms, f=f) annotation (Placement(transformation(
-        origin={-80,20}, 
-        extent={{-10,-10},{10,10}}, 
+        origin={-80,20},
+        extent={{-10,-10},{10,10}},
         rotation=-90)));
-  PowerConverters.ACDC.HalfControlledBridge2Pulse rectifier(useHeatPort=false, 
+  PowerConverters.ACDC.HalfControlledBridge2Pulse rectifier(useHeatPort=false,
       offStart_p1=true) 
     annotation (Placement(transformation(extent={{-40,24},{-20,44}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor 
     annotation (Placement(transformation(
-        origin={50,10}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={50,10},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
   Modelica.Blocks.Math.Mean meanVoltage(f=2*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={80,40})));
   Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f=2*f) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={80,10})));
   Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}}, 
-        rotation=180, 
+        extent={{-10,10},{10,-10}},
+        rotation=180,
         origin={0,-40})));
   Modelica.Blocks.Math.Mean meanCurrent(f=2*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}}, 
+        extent={{-10,-10},{10,10}},
         origin={80,-60})));
   PowerConverters.ACDC.Control.VoltageBridge2Pulse pulse2(
-    f=f, 
-    useFilter=false, 
+    f=f,
+    useFilter=false,
     constantFiringAngle=constantFiringAngle) annotation (Placement(
         transformation(
-        extent={{10,10},{-10,-10}}, 
-        rotation=180, 
+        extent={{10,10},{-10,-10}},
+        rotation=180,
         origin={-30,-2})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
       Placement(transformation(
-        origin={30,30}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={30,30},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
 equation
   connect(meanCurrent.u, currentSensor.i) annotation (Line(
@@ -89,9 +89,9 @@ equation
       points={{30,40},{-20,40}}, color={0,0,255}));
   annotation (
     experiment(
-      StopTime=0.1, 
-      Tolerance=1e-06, 
-      Interval=0.0002), 
+      StopTime=0.1,
+      Tolerance=1e-06,
+      Interval=0.0002),
     Documentation(info="<html>
 <p>这个示例展示了具有电阻负载的双脉冲半控制桥整流器。在电阻负载的情况下，半控制桥显示与完全控制桥相同的输出电压。</p>
 

@@ -1,29 +1,29 @@
 ﻿within Modelica.Electrical.Analog.Ideal;
 model AD_Converter "简单n位转换器(模拟至数字)"
   import L = Modelica.Electrical.Digital.Interfaces.Logic;
-  Modelica.Electrical.Analog.Interfaces.PositivePin p 
+  Modelica.Electrical.Analog.Interfaces.PositivePin p
     "电气正引脚(输入)" annotation(Placement(transformation(
-    extent = {{-110, 90}, {-90, 110}}), 
+    extent = {{-110, 90}, {-90, 110}}),
     iconTransformation(extent = {{-110, 90}, {-90, 110}})));
-  Modelica.Electrical.Analog.Interfaces.NegativePin n 
+  Modelica.Electrical.Analog.Interfaces.NegativePin n
     "电气负引脚(输入)" annotation(Placement(transformation(
-    extent = {{-110, -110}, {-90, -90}}), 
+    extent = {{-110, -110}, {-90, -90}}),
     iconTransformation(
     extent = {{-110, -110}, {-90, -90}})));
   Modelica.Electrical.Digital.Interfaces.DigitalOutput y[N] "数字(信号)输出" 
-    annotation(Placement(transformation(extent = {{100, -10}, {120, 10}}), 
+    annotation(Placement(transformation(extent = {{100, -10}, {120, 10}}),
     iconTransformation(extent = {{100, -10}, {120, 10}})));
   Modelica.Electrical.Digital.Interfaces.DigitalInput trig "触发输入" 
-    annotation(Placement(transformation(extent = {{-8, 90}, {12, 110}}), 
+    annotation(Placement(transformation(extent = {{-8, 90}, {12, 110}}),
     iconTransformation(
-    extent = {{-10, -10}, {10, 10}}, 
-    rotation = -90, 
+    extent = {{-10, -10}, {10, 10}},
+    rotation = -90,
     origin = {0, 100})));
-  parameter Integer N(final min = 1, start = 8) 
+  parameter Integer N(final min = 1, start = 8)
     "位分辨率-输出信号宽度";
   parameter SI.Voltage VRefHigh(start = 10) "高参考电压";
 
-  parameter SI.Voltage VRefLow(final max = VRefHigh, start = 0) 
+  parameter SI.Voltage VRefLow(final max = VRefHigh, start = 0)
     "低参考电压";
   parameter SI.Resistance Rin(start = 10 ^ 6) "输入电阻";
   Integer z(start = 0, fixed = true);
@@ -36,7 +36,7 @@ initial algorithm
 
 algorithm
   when (trig == L.'1' or trig == L.'H') then
-    z := if u > VRefLow then integer((u - VRefLow) / (VRefHigh - VRefLow) * (2 ^ N 
+    z := if u > VRefLow then integer((u - VRefLow) / (VRefHigh - VRefLow) * (2 ^ N
       - 1) + 0.5) else 0;
     for i in 1:N loop
       y[i] := if mod(z, 2) > 0 then L.'1' else L.'0';
@@ -63,7 +63,7 @@ equation
 </p>
 
 
-</html>", 
+</html>",
     revisions = "<html>
 <ul>
 <li><em>2009年10月13日</em>
@@ -71,22 +71,22 @@ equation
        </li>
 </ul>
 
-</html>"), 
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+</html>"),
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
     {100, 100}}), graphics = {
-    Rectangle(extent = {{-100, 100}, {100, -100}}, 
-    lineColor = {0, 0, 255}), 
+    Rectangle(extent = {{-100, 100}, {100, -100}},
+    lineColor = {0, 0, 255}),
     Polygon(
-    points = {{-98, -100}, {100, 98}, {100, -100}, {-98, -100}}, 
-    lineColor = {0, 0, 255}, 
-    fillColor = {127, 0, 127}, 
-    fillPattern = FillPattern.Solid), 
+    points = {{-98, -100}, {100, 98}, {100, -100}, {-98, -100}},
+    lineColor = {0, 0, 255},
+    fillColor = {127, 0, 127},
+    fillPattern = FillPattern.Solid),
     Text(
-    extent = {{-60, 50}, {60, 10}}, 
-    textColor = {0, 0, 255}, 
-    textString = "%n-bit"), 
+    extent = {{-60, 50}, {60, 10}},
+    textColor = {0, 0, 255},
+    textString = "%n-bit"),
     Text(
-    extent = {{-60, -10}, {60, -50}}, 
-    textColor = {0, 0, 255}, 
+    extent = {{-60, -10}, {60, -50}},
+    textColor = {0, 0, 255},
     textString = "ADC")}));
 end AD_Converter;

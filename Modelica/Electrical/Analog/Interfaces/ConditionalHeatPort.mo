@@ -1,13 +1,13 @@
 ﻿within Modelica.Electrical.Analog.Interfaces;
-partial model ConditionalHeatPort 
+partial model ConditionalHeatPort
   "部分模型中包含一个可选热端口(用以描述热网络中功耗)"
   parameter Boolean useHeatPort = false "=true，当heatPort=enabled" 
     annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
-  parameter SI.Temperature T = 293.15 
+  parameter SI.Temperature T = 293.15
     "修正后设备温度，当useHeatPort=false" annotation(Dialog(enable = not useHeatPort));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(final T = T_heatPort, final Q_flow = -LossPower) if useHeatPort 
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(final T = T_heatPort, final Q_flow = -LossPower) if useHeatPort
     "可选热端口" 
-    annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}), 
+    annotation(Placement(transformation(extent = {{-10, -110}, {10, -90}}),
     iconTransformation(extent = {{-10, -110}, {10, -90}})));
   SI.Power LossPower "Loss power leaving component via heatPort";
   SI.Temperature T_heatPort "热端口的温度";
@@ -22,7 +22,7 @@ equation
        由Christoph Clauss<br>创建<br>
        </li>
 </ul>
-</html>", 
+</html>",
     info = "<html>
 <p>这个部分模型提供了一个条件性加热端口，用于连接到热网络。
 </p>

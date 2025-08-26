@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Polyphase.Functions;
-function numberOfSymmetricBaseSystems 
+function numberOfSymmetricBaseSystems
   "确定m相对称系统的对称基本系统数量"
   extends Modelica.Icons.Function; // 使用函数图标
   input Integer m=3 "相数"; // 输入参数为相数，默认为3

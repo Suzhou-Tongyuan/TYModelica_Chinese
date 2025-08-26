@@ -1,11 +1,11 @@
 ﻿within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
-model GenericHystTellinenTable 
+model GenericHystTellinenTable
   "基于 Tellinen 模型和表格数据的通用铁磁滞后磁通管"
 
-  parameter FluxTubes.Material.HysteresisTableData.BaseData mat= 
+  parameter FluxTubes.Material.HysteresisTableData.BaseData mat=
     FluxTubes.Material.HysteresisTableData.BaseData() "材料特性" 
     annotation (choicesAllMatching=true, Dialog(group="Hysteresis"));
-  parameter Real K = 1 
+  parameter Real K = 1
     "饱和区的滞后斜率 (K*mu_0)" annotation(Dialog(group="Hysteresis"));
 
   extends BaseClasses.GenericHysteresisTellinen(      mu0=mu_0*K, sigma=mat.sigma);
@@ -15,11 +15,11 @@ protected
   parameter SI.MagneticFluxDensity eps = unitT*mat.tabris[size(mat.tabris,1),2]/1000;
 
   Modelica.Blocks.Tables.CombiTable1Dv tabris(
-    table=mat.tabris, 
+    table=mat.tabris,
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative);
 
   Modelica.Blocks.Tables.CombiTable1Dv tabfal(
-    table=mat.tabfal, 
+    table=mat.tabfal,
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative);
 
 equation
@@ -30,9 +30,9 @@ equation
   hystF = unitT*tabfal.y[1]+mu0*Hstat+eps;
 
   annotation (defaultComponentName="core", Icon(graphics={Text(
-          extent={{40,0},{40,-30}}, 
-          textColor={255,128,0}, 
-          textString="TT")}), 
+          extent={{40,0},{40,-30}},
+          textColor={255,128,0},
+          textString="TT")}),
     Documentation(info="<html>
 
 <p>

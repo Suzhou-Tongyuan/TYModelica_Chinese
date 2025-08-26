@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Types;
-record SalientCurrent = Salient (redeclare SI.Current d, 
+record SalientCurrent = Salient (redeclare SI.Current d,
       redeclare SI.Current q) "典型电流" annotation (
     Documentation(info="<html>
 <p>表示电流相量 d 轴和 q 轴的类型.</p>

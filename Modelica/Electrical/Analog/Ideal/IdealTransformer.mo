@@ -2,9 +2,9 @@
 model IdealTransformer "理想变压器的铁心(考虑变压器铁心是否磁化)"
   extends Modelica.Electrical.Analog.Interfaces.TwoPort;
   parameter Real n(start = 1) "一次侧与二次侧的电压之比";
-  parameter Boolean considerMagnetization = false 
+  parameter Boolean considerMagnetization = false
     "考虑磁化的选择";
-  parameter SI.Inductance Lm1(start = 1) 
+  parameter SI.Inductance Lm1(start = 1)
     "主迁回感应电抗(主磁涡流阻抗)" 
     annotation(Dialog(enable = considerMagnetization));
 protected
@@ -20,7 +20,7 @@ equation
     im1 = 0;
   end if;
   v1 = n * v2;
-  annotation(defaultComponentName = "transformer", 
+  annotation(defaultComponentName = "transformer",
     Documentation(info = "<html>
 <p>
 理想变压器是一个双端口电路元件；在考虑布尔参数的情况下，如果<code>considerMagnetization=false</code>，则其特征由以下方程式描述：
@@ -60,7 +60,7 @@ M  = Lm1/n         \"互感\";
 <p>
 在能量转换过程中，需要决定漏磁如何在设备的输入和输出部分之间分配。
 
-</html>", 
+</html>",
     revisions = "<html>
 <ul>
 <li><em>2009年3月11日</em>
@@ -71,72 +71,72 @@ M  = Lm1/n         \"互感\";
        </li>
 </ul>
 
-</html>"), 
-    Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 
+</html>"),
+    Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100,
     100}}), graphics = {
-    Text(extent = {{-150, -110}, {150, -150}}, textString = "n=%n"), 
+    Text(extent = {{-150, -110}, {150, -150}}, textString = "n=%n"),
     Text(
-    extent = {{-100, 20}, {-60, -20}}, 
-    textColor = {0, 0, 255}, 
-    textString = "1"), 
+    extent = {{-100, 20}, {-60, -20}},
+    textColor = {0, 0, 255},
+    textString = "1"),
     Text(
-    extent = {{60, 20}, {100, -20}}, 
-    textColor = {0, 0, 255}, 
-    textString = "2"), 
+    extent = {{60, 20}, {100, -20}},
+    textColor = {0, 0, 255},
+    textString = "2"),
     Text(
-    extent = {{-150, 150}, {150, 110}}, 
-    textString = "%name", 
-    textColor = {0, 0, 255}), 
-    Line(points = {{-40, 60}, {-40, 100}, {-90, 100}}, color = {0, 0, 255}), 
-    Line(points = {{40, 60}, {40, 100}, {90, 100}}, color = {0, 0, 255}), 
-    Line(points = {{-40, -60}, {-40, -100}, {-90, -100}}, color = {0, 0, 255}), 
-    Line(points = {{40, -60}, {40, -100}, {90, -100}}, color = {0, 0, 255}), 
+    extent = {{-150, 150}, {150, 110}},
+    textString = "%name",
+    textColor = {0, 0, 255}),
+    Line(points = {{-40, 60}, {-40, 100}, {-90, 100}}, color = {0, 0, 255}),
+    Line(points = {{40, 60}, {40, 100}, {90, 100}}, color = {0, 0, 255}),
+    Line(points = {{-40, -60}, {-40, -100}, {-90, -100}}, color = {0, 0, 255}),
+    Line(points = {{40, -60}, {40, -100}, {90, -100}}, color = {0, 0, 255}),
     Line(
-    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}}, 
-    color = {0, 0, 255}, 
-    smooth = Smooth.Bezier, 
-    origin = {-33, 45}, 
-    rotation = 270), 
+    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}},
+    color = {0, 0, 255},
+    smooth = Smooth.Bezier,
+    origin = {-33, 45},
+    rotation = 270),
     Line(
-    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}}, 
-    color = {0, 0, 255}, 
-    smooth = Smooth.Bezier, 
-    origin = {-33, 15}, 
-    rotation = 270), 
+    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}},
+    color = {0, 0, 255},
+    smooth = Smooth.Bezier,
+    origin = {-33, 15},
+    rotation = 270),
     Line(
-    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}}, 
-    color = {0, 0, 255}, 
-    smooth = Smooth.Bezier, 
-    origin = {-33, -15}, 
-    rotation = 270), 
+    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}},
+    color = {0, 0, 255},
+    smooth = Smooth.Bezier,
+    origin = {-33, -15},
+    rotation = 270),
     Line(
-    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}}, 
-    color = {0, 0, 255}, 
-    smooth = Smooth.Bezier, 
-    origin = {-33, -45}, 
-    rotation = 270), 
+    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}},
+    color = {0, 0, 255},
+    smooth = Smooth.Bezier,
+    origin = {-33, -45},
+    rotation = 270),
     Line(
-    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}}, 
-    color = {0, 0, 255}, 
-    smooth = Smooth.Bezier, 
-    origin = {33, 45}, 
-    rotation = 90), 
+    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}},
+    color = {0, 0, 255},
+    smooth = Smooth.Bezier,
+    origin = {33, 45},
+    rotation = 90),
     Line(
-    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}}, 
-    color = {0, 0, 255}, 
-    smooth = Smooth.Bezier, 
-    origin = {33, 15}, 
-    rotation = 90), 
+    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}},
+    color = {0, 0, 255},
+    smooth = Smooth.Bezier,
+    origin = {33, 15},
+    rotation = 90),
     Line(
-    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}}, 
-    color = {0, 0, 255}, 
-    smooth = Smooth.Bezier, 
-    origin = {33, -15}, 
-    rotation = 90), 
+    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}},
+    color = {0, 0, 255},
+    smooth = Smooth.Bezier,
+    origin = {33, -15},
+    rotation = 90),
     Line(
-    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}}, 
-    color = {0, 0, 255}, 
-    smooth = Smooth.Bezier, 
-    origin = {33, -45}, 
+    points = {{-15, -7}, {-14, -1}, {-7, 7}, {7, 7}, {14, -1}, {15, -7}},
+    color = {0, 0, 255},
+    smooth = Smooth.Bezier,
+    origin = {33, -45},
     rotation = 90)}));
 end IdealTransformer;

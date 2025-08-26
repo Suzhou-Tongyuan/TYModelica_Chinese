@@ -8,8 +8,8 @@ model AronSensor "用于有功功率的三相传感器"
         transformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.RealOutput power(unit="W") "主动功率" annotation (
       Placement(transformation(
-        origin={0,-110}, 
-        extent={{10,-10},{-10,10}}, 
+        origin={0,-110},
+        extent={{10,-10},{-10,10}},
         rotation=90)));
   Basic.PlugToPins_p plugToPins_p(final m=m) 
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
@@ -20,27 +20,27 @@ model AronSensor "用于有功功率的三相传感器"
   Modelica.Electrical.Analog.Sensors.PowerSensor powerSensor3 
     annotation (Placement(transformation(extent={{20,-30},{40,-50}})));
   Modelica.Blocks.Math.Add add annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}}, 
-        rotation=270, 
+        extent={{-10,-10},{10,10}},
+        rotation=270,
         origin={0,-70})));
 equation
   connect(plug_p, plugToPins_p.plug_p) 
     annotation (Line(points={{-100,0},{-72,0}}, color={0,0,255}));
   connect(plugToPins_n.plug_n, plug_n) 
     annotation (Line(points={{72,0},{100,0}}, color={0,0,255}));
-  connect(plugToPins_p.pin_p[1], powerSensor1.pc) annotation (Line(points={{-68,0}, 
+  connect(plugToPins_p.pin_p[1], powerSensor1.pc) annotation (Line(points={{-68,0},
           {-68,40},{-40,40}},            color={0,0,255}));
   connect(powerSensor1.pc, powerSensor1.pv) 
     annotation (Line(points={{-40,40},{-40,50},{-30,50}}, color={0,0,255}));
-  connect(powerSensor1.nc, plugToPins_n.pin_n[1]) annotation (Line(points={{-20,40}, 
+  connect(powerSensor1.nc, plugToPins_n.pin_n[1]) annotation (Line(points={{-20,40},
           {68,40},{68,0}},            color={0,0,255}));
   connect(plugToPins_p.pin_p[2], plugToPins_n.pin_n[2]) 
     annotation (Line(points={{-68,0},{68,0}}, color={0,0,255}));
-  connect(plugToPins_p.pin_p[3], powerSensor3.pc) annotation (Line(points={{-68,0}, 
+  connect(plugToPins_p.pin_p[3], powerSensor3.pc) annotation (Line(points={{-68,0},
           {-68,-40},{20,-40}},            color={0,0,255}));
   connect(powerSensor3.pc, powerSensor3.pv) 
     annotation (Line(points={{20,-40},{20,-50},{30,-50}}, color={0,0,255}));
-  connect(powerSensor3.nc, plugToPins_n.pin_n[3]) annotation (Line(points={{40,-40}, 
+  connect(powerSensor3.nc, plugToPins_n.pin_n[3]) annotation (Line(points={{40,-40},
           {68,-40},{68,0}},        color={0,0,255}));
   connect(powerSensor1.nv, plugToPins_p.pin_p[2]) 
     annotation (Line(points={{-30,30},{-30,0},{-68,0}}, color={0,0,255}));
@@ -48,25 +48,25 @@ equation
     annotation (Line(points={{30,-30},{30,0},{-68,0}}, color={0,0,255}));
   connect(add.y, power) 
     annotation (Line(points={{0,-81},{0,-110}}, color={0,0,127}));
-  connect(powerSensor1.power, add.u2) annotation (Line(points={{-40,29},{-40,-50}, 
+  connect(powerSensor1.power, add.u2) annotation (Line(points={{-40,29},{-40,-50},
           {-6,-50},{-6,-58}}, color={0,0,127}));
-  connect(powerSensor3.power, add.u1) annotation (Line(points={{20,-29},{20,-20}, 
+  connect(powerSensor3.power, add.u1) annotation (Line(points={{20,-29},{20,-20},
           {6,-20},{6,-58}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
-                            Line(points={{100,0},{-100,0}}, color={0,0,255}), 
-                                       Line(points={{0,-100}, 
-          {0,-70}}, color={0,0,127}), 
+                            Line(points={{100,0},{-100,0}}, color={0,0,255}),
+                                       Line(points={{0,-100},
+          {0,-70}}, color={0,0,127}),
         Text(
-          extent={{150,-100},{-150,-70}}, 
-          textString="m=%m"), 
+          extent={{150,-100},{-150,-70}},
+          textString="m=%m"),
         Text(
-          extent={{-150,80},{150,120}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,80},{150,120}},
+          textString="%name",
+          textColor={0,0,255}),
         Text(
-          extent={{-30,-10},{30,-70}}, 
-          textColor={64,64,64}, 
+          extent={{-30,-10},{30,-70}},
+          textColor={64,64,64},
           textString="W")}),      Documentation(info="<html>
 <p>包含两个<a href=\"modelica://Modelica.Electrical.Analog.Sensors.PowerSensor\">功率计</a>，用于测量三相系统中的总有功功率。</p>
 <p>此设备仅适用于没有中性线的三相系统。</p>

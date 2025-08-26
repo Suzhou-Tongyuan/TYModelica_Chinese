@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Internal;
-function maxWithoutEvent 
+function maxWithoutEvent
   "输入参数的最大值，无需区分事件和功能"
   extends Modelica.Icons.Function;
   input Real u1;
@@ -8,8 +8,8 @@ function maxWithoutEvent
 algorithm
   y := if u1 > u2 then u1 else u2;
   annotation (
-    Inline=false, 
-    derivative=maxWithoutEvent_d, 
+    Inline=false,
+    derivative=maxWithoutEvent_d,
     Documentation(info="<html>
 <h4>语法</h4>
 <blockquote><pre>

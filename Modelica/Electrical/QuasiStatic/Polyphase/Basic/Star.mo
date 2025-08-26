@@ -11,26 +11,26 @@ equation
   for j in 1:m loop
     connect(plugToPins_p.pin_p[j], pin_n);
   end for;
-  connect(plug_p, plugToPins_p.plug_p) annotation (Line(points={{-100,0},{-93, 
+  connect(plug_p, plugToPins_p.plug_p) annotation (Line(points={{-100,0},{-93,
           0},{-86,0},{-72,0}}, color={85,170,255}));
   annotation (Icon(graphics={Line(
-              points={{80,0},{0,0}}, 
-              color={85,170,255}, 
+              points={{80,0},{0,0}},
+              color={85,170,255},
               thickness=0.5),Line(
-              points={{0,0},{-39,68}}, 
-              color={85,170,255}, 
+              points={{0,0},{-39,68}},
+              color={85,170,255},
               thickness=0.5),Line(
-              points={{0,0},{-38,-69}}, 
-              color={85,170,255}, 
-              thickness=0.5), Line(points={{-90,0},{-40,0}}, color={85,170,255}), 
-          Line(points={{80,0},{90,0}}, color={85,170,255}), 
+              points={{0,0},{-38,-69}},
+              color={85,170,255},
+              thickness=0.5), Line(points={{-90,0},{-40,0}}, color={85,170,255}),
+          Line(points={{80,0},{90,0}}, color={85,170,255}),
         Text(
-          extent={{-150,70},{150,110}}, 
-          textString="%name", 
-          textColor={0,0,255}), 
+          extent={{-150,70},{150,110}},
+          textString="%name",
+          textColor={0,0,255}),
         Text(
-          extent={{-150,-110},{150,-70}}, 
-          textString="m=%m")}), 
+          extent={{-150,-110},{150,-70}},
+          textString="m=%m")}),
       Documentation(info="<html>
 <p>
 多相电路的星形（Y型）连接。星点处的电势相同。
