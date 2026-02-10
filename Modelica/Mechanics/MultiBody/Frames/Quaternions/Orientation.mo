@@ -1,24 +1,24 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
-type Orientation
+type Orientation 
   "定义使用四元数从坐标系21旋转到坐标系2的方向类型 {p1,p2,p3,p0}"
 
   extends Internal.QuaternionBase;
 
-  encapsulated function equalityConstraint
+  encapsulated function equalityConstraint 
     "返回约束残差，以表达两个坐标系具有相同的四元数方向"
 
     import Modelica;
     import Modelica.Mechanics.MultiBody.Frames.Quaternions;
     extends Modelica.Icons.Function;
-    input Quaternions.Orientation Q1
+    input Quaternions.Orientation Q1 
       "将坐标系0旋转到坐标系1的四元数方向对象";
-    input Quaternions.Orientation Q2
+    input Quaternions.Orientation Q2 
       "将坐标系0旋转到坐标系2的四元数方向对象";
-    output Real residue[3]
+    output Real residue[3] 
       "如果Q1和Q2相同(相对变换的前三个元素为{0,0,0}表示空旋转，由atan2保护，使镜像解无效";
   algorithm
-    residue := { Modelica.Math.atan2({ Q1[4],  Q1[3], -Q1[2], -Q1[1]}*Q2, Q1*Q2),
-                 Modelica.Math.atan2({-Q1[3],  Q1[4],  Q1[1], -Q1[2]}*Q2, Q1*Q2),
+    residue := { Modelica.Math.atan2({ Q1[4],  Q1[3], -Q1[2], -Q1[1]}*Q2, Q1*Q2), 
+                 Modelica.Math.atan2({-Q1[3],  Q1[4],  Q1[1], -Q1[2]}*Q2, Q1*Q2), 
                  Modelica.Math.atan2({ Q1[2], -Q1[1],  Q1[4], -Q1[3]}*Q2, Q1*Q2)};
     annotation(Inline=true, Documentation(info="<html>
 <h4>语法</h4>

@@ -12,16 +12,16 @@ model ForceAndTorque "演示组件ForceAndTorque的用法"
   Forces.ForceAndTorque forceAndTorque(
     resolveInFrame=Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_resolve) 
     annotation (Placement(transformation(extent={{60,50},{40,30}})));
-  Joints.Revolute revolute2(n={0,1,0},
-    phi(fixed=true),
+  Joints.Revolute revolute2(n={0,1,0}, 
+    phi(fixed=true), 
     w(fixed=true)) annotation (Placement(transformation(
-        origin={-20,20},
-        extent={{-10,-10},{10,10}},
+        origin={-20,20}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Blocks.Sources.Constant torque[3](k={-100,100,0}) 
     annotation (Placement(transformation(
-        origin={40,-10},
-        extent={{10,-10},{-10,10}},
+        origin={40,-10}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=270)));
   Joints.Revolute revolute1(phi(fixed=true), w(fixed=true)) 
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
@@ -29,42 +29,42 @@ model ForceAndTorque "演示组件ForceAndTorque的用法"
     annotation (Placement(transformation(extent={{100,30},{80,50}})));
   Modelica.Blocks.Sources.Constant force[3](k={0,1000,0}) 
     annotation (Placement(transformation(
-        origin={80,-10},
-        extent={{10,-10},{-10,10}},
+        origin={80,-10}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=270)));
 equation
   connect(revolute2.frame_b, body.frame_a) annotation (Line(
-      points={{-20,30},{-20,40},{0,40}},
-      color={95,95,95},
+      points={{-20,30},{-20,40},{0,40}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(forceAndTorque.frame_b, body.frame_b) 
     annotation (Line(
-      points={{40,40},{20,40}},
-      color={95,95,95},
+      points={{40,40},{20,40}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(fixed1.frame_b, revolute1.frame_a) 
     annotation (Line(
-      points={{-80,0},{-60,0}},
-      color={95,95,95},
+      points={{-80,0},{-60,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(revolute1.frame_b, revolute2.frame_a) 
     annotation (Line(
-      points={{-40,0},{-20,0},{-20,10}},
-      color={95,95,95},
+      points={{-40,0},{-20,0},{-20,10}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(fixed2.frame_b, forceAndTorque.frame_a) 
     annotation (Line(
-      points={{80,40},{60,40}},
-      color={95,95,95},
+      points={{80,40},{60,40}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(fixedRotation.frame_a, fixed1.frame_b) annotation (Line(
-      points={{-20,-30},{-71,-30},{-71,0},{-80,0}},
-      color={95,95,95},
+      points={{-20,-30},{-71,-30},{-71,0},{-80,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(forceAndTorque.frame_resolve, fixedRotation.frame_b) annotation (Line(
-      points={{42,30},{20,30},{20,-30},{0,-30}},
-      color={95,95,95},
-      pattern=LinePattern.Dot,
+      points={{42,30},{20,30},{20,-30},{0,-30}}, 
+      color={95,95,95}, 
+      pattern=LinePattern.Dot, 
       thickness=0.5));
   connect(force.y, forceAndTorque.force) annotation (Line(
       points={{80,1},{80,10},{58,10},{58,28}}, color={0,0,127}));

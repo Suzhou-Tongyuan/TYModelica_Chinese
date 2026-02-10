@@ -4,24 +4,24 @@ connector FlowPort_b "空心流体接口(下游使用)"
   extends FluidHeatFlow.Interfaces.FlowPort;
 annotation (Documentation(info="<html>
 <p>与FlowPort相同，但图标可以区分流量方向。</p>
-</html>"),
-  Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+</html>"), 
+  Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
             100}}), graphics={Rectangle(
-          extent={{-100,100},{100,-100}},
-          lineColor={255,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid), Ellipse(extent={{-98,98},{98,-98}},
+          extent={{-100,100},{100,-100}}, 
+          lineColor={255,0,0}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), Ellipse(extent={{-98,98},{98,-98}}, 
             lineColor={0,0,255})}), Diagram(coordinateSystem(
-          preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+          preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
         graphics={
         Rectangle(
-          extent={{-50,50},{50,-50}},
-          lineColor={255,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Ellipse(extent={{-48,48},{48,-48}}, lineColor={0,0,255}),
+          extent={{-50,50},{50,-50}}, 
+          lineColor={255,0,0}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
+        Ellipse(extent={{-48,48},{48,-48}}, lineColor={0,0,255}), 
         Text(
-          extent={{-100,110},{100,50}},
-          textColor={0,0,255},
+          extent={{-100,110},{100,50}}, 
+          textColor={0,0,255}, 
           textString="%name")}));
 end FlowPort_b;

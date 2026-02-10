@@ -1,18 +1,18 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FluxTubes.Sensors.Transient;
-model Permeability
+model Permeability 
 "通过磁通和磁位差确定磁导率"
 
-  parameter SI.Area A
+  parameter SI.Area A 
   "被通量穿透的截面面积";
-  parameter SI.Length l
+  parameter SI.Length l 
   "与磁电位差有关的长度";
 
   Modelica.Blocks.Interfaces.RealInput Phi(unit="Wb") "磁通" 
                     annotation (Placement(
         transformation(extent={{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.RealInput V_m(unit="A")
+  Modelica.Blocks.Interfaces.RealInput V_m(unit="A") 
   "磁位差" annotation (
-      Placement(transformation(extent={{-140,-80},
+      Placement(transformation(extent={{-140,-80}, 
             {-100,-40}})));
   Modelica.Blocks.Interfaces.RealOutput mu(unit="H/m") "绝对磁导率" 
                    annotation (Placement(
@@ -31,16 +31,16 @@ equation
   end if;
 
   annotation ( Icon(
-        coordinateSystem(preserveAspectRatio=false),
+        coordinateSystem(preserveAspectRatio=false), 
         graphics={Rectangle(
-          extent={{-100,100},{100,-100}},
-          lineColor={0,0,127},
-          fillColor={255,255,255},
+          extent={{-100,100},{100,-100}}, 
+          lineColor={0,0,127}, 
+          fillColor={255,255,255}, 
           fillPattern=FillPattern.Solid), Text(
-          extent={{60,-60},{-60,60}},
-          fillColor={255,170,85},
-          fillPattern=FillPattern.Solid,
-          textString="μ")}),
+          extent={{60,-60},{-60,60}}, 
+          fillColor={255,170,85}, 
+          fillPattern=FillPattern.Solid, 
+          textString="μ")}), 
   Documentation(info="<html>
 <p>该模型根据两个实际输入确定绝对渗透率和相对渗透率:</p>
 <ul>

@@ -16,7 +16,7 @@ class ReleaseNotes "发布说明"
   <li> 修复了IdealPump模型中的一个错误</li>
   <li> 添加了一个简单的开放式水箱模型</li>
   <li> 添加了一个简单的活塞/气缸模型</li>
-  <li> 添加了更多媒体</li>
+  <li> 添加了更多介质</li>
   <li> 添加了更多示例</li>
   </ul>
 
@@ -38,7 +38,7 @@ class ReleaseNotes "发布说明"
 
   <h5>1.6.5, 2007-08-26 (Anton Haumer)</h5>
   <ul>
-  <li> 修复了 SimpleFriction 中的单元错误</li>
+  <li> 修复了SimpleFriction中的单元错误</li>
   </ul>
 
   <h5>1.6.4, 2007-08-24 (Anton Haumer)</h5>
@@ -48,7 +48,7 @@ class ReleaseNotes "发布说明"
 
   <h5>1.6.3, 2007-08-21 (Anton Haumer)</h5>
   <ul>
-  <li> Improved documentation</li>
+  <li> 改进文件</li>
   </ul>
 
   <h5>1.6.2, 2007-08-20 (Anton Haumer)</h5>
@@ -75,13 +75,13 @@ class ReleaseNotes "发布说明"
   <h5>1.4.3 Beta 2005-06-20 (Anton Haumer)</h5>
   <ul>
   <li> 混合/半线性测试</li>
-  <li>新测试范例： OneMass</li>
-  <li>新测试范例： TwoMass</li>
+  <li>新测试示例：OneMass</li>
+  <li>新测试示例：TwoMass</li>
   </ul>
 
   <h5>1.4.2 Beta, 2005-06-18 (Anton Haumer)</h5>
   <ul>
-  <li> 新测试范例： ParallelPumpDropOut</li>
+  <li> 新测试示例：ParallelPumpDropOut</li>
   </ul>
 
   <h5>1.4.0, 2005-06-13 (Anton Haumer)</h5>
@@ -91,13 +91,13 @@ class ReleaseNotes "发布说明"
 
   <h5>1.3.3 Beta, 2005-06-07 (Anton Haumer)</h5>
   <ul>
-  <li> 更正了 simpleFlow 的用法</li>
+  <li> 更正了simpleFlow的用法</li>
   </ul>
 
   <h5>1.3.1 Beta, 2005/06/04 Anton Haumer</h5>
   <ul>
-  <li>新范例： PumpAndValve</li>
-  <li>新范例： PumpDropOut</li>
+  <li>新示例：PumpAndValve</li>
+  <li>新示例：PumpDropOut</li>
   </ul>
 
   <h5>1.3.0 Beta, 2005-06-02 (Anton Haumer)</h5>

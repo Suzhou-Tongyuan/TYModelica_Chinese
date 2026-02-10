@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.IntegerSignals.Sampler;
-block Sample
+block Sample 
   "采样连续时间整数输入信号，并将其作为时钟输出信号(推断时钟)"
   extends Clocked.IntegerSignals.Interfaces.PartialSISOSampler;
 
@@ -7,16 +7,16 @@ equation
   y = sample(u);
 
   annotation(
-    defaultComponentName = "sample1",
+    defaultComponentName = "sample1", 
     Icon(coordinateSystem(
-    preserveAspectRatio = false,
-    extent = {{-100, -100}, {100, 100}},
-    initialScale = 0.06),
+    preserveAspectRatio = false, 
+    extent = {{-100, -100}, {100, 100}}, 
+    initialScale = 0.06), 
     graphics = {
     Text(
-    extent = {{-150, 90}, {150, 50}},
-    textColor = {0, 0, 255},
-    textString = "%name")}),
+    extent = {{-150, 90}, {150, 50}}, 
+    textColor = {0, 0, 255}, 
+    textString = "%name")}), 
     Documentation(info = "<html>
 <p>
 该整数信号模块的工作原理与相应的实数信号模块类似

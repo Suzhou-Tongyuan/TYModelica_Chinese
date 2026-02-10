@@ -15,22 +15,22 @@ equation
     connect(plugToPins_n.pin_n[j], plugToPins_p.pin_p[j + 1]);
   end for;
   connect(plugToPins_n.pin_n[m], plugToPins_p.pin_p[1]);
-  connect(plug_p, plugToPins_p.plug_p) annotation (Line(points={{-100,0},{-93,
+  connect(plug_p, plugToPins_p.plug_p) annotation (Line(points={{-100,0},{-93, 
           0},{-86,0},{-72,0}}, color={85,170,255}));
-  connect(plugToPins_n.plug_n, plug_n) annotation (Line(points={{72,0},{79,
+  connect(plugToPins_n.plug_n, plug_n) annotation (Line(points={{72,0},{79, 
           0},{79,0},{86,0},{86,0},{100,0}}, color={85,170,255}));
   annotation (Icon(graphics={Line(
-              points={{-40,68},{-40,-70},{79,0},{-40,68},{-40,67}},
-              color={85,170,255},
-              thickness=0.5), Line(points={{-90,0},{-40,0}}, color={85,170,255}),
-          Line(points={{80,0},{90,0}}, color={85,170,255}),
+              points={{-40,68},{-40,-70},{79,0},{-40,68},{-40,67}}, 
+              color={85,170,255}, 
+              thickness=0.5), Line(points={{-90,0},{-40,0}}, color={85,170,255}), 
+          Line(points={{80,0},{90,0}}, color={85,170,255}), 
         Text(
-          extent={{-150,70},{150,110}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,70},{150,110}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-150,-110},{150,-70}},
-          textString="m=%m")}),
+          extent={{-150,-110},{150,-70}}, 
+          textString="m=%m")}), 
       Documentation(info="<html>
 <p>
 多相电路的Delta（多边形）连接。

@@ -6,16 +6,16 @@ equation
   Connections.root(pin_p.reference);
   annotation (Icon(graphics={
         Ellipse(
-          extent={{-50,50},{50,-50}},
-          lineColor={85,170,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-50,50},{50,-50}}, 
+          lineColor={85,170,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Text(
-          extent={{150,60},{-150,100}},
-          textString="%name",
-          textColor={0,0,255}),
-        Line(points={{-90,0},{-50,0}}, color={85,170,255}),
-        Line(points={{50,0},{90,0}}, color={85,170,255})}),
+          extent={{150,60},{-150,100}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
+        Line(points={{-90,0},{-50,0}}, color={85,170,255}), 
+        Line(points={{50,0},{90,0}}, color={85,170,255})}), 
                                         Documentation(info="<html>
 <p>
 该源部分模型依赖于

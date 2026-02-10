@@ -1,16 +1,16 @@
 ﻿within Modelica.Clocked.Examples.SimpleControlledDrive;
-model ClockedWith_AD_DA_Effects
+model ClockedWith_AD_DA_Effects 
   "带有离散控制器和模拟 AD 和 DA 效果的简单可控驱动器"
  extends Modelica.Icons.Example;
 
-  Modelica.Mechanics.Rotational.Components.Inertia load(J=10,
-    phi(fixed=true, start=0),
+  Modelica.Mechanics.Rotational.Components.Inertia load(J=10, 
+    phi(fixed=true, start=0), 
     w(fixed=true, start=0)) 
     annotation (Placement(transformation(extent={{87,0},{107,20}})));
   Modelica.Mechanics.Rotational.Sensors.SpeedSensor speed       annotation (
      Placement(transformation(
-        extent={{-10,-10},{6,6}},
-        rotation=-90,
+        extent={{-10,-10},{6,6}}, 
+        rotation=-90, 
         origin={117,-15})));
   Modelica.Blocks.Sources.Ramp ramp(duration=2) 
     annotation (Placement(transformation(extent={{-111,0},{-91,20}})));
@@ -22,19 +22,19 @@ model ClockedWith_AD_DA_Effects
     annotation (Placement(transformation(extent={{60,0},{80,20}})));
 
   Clocked.RealSignals.Sampler.SampleWithADeffects sample2(
-    limited=true,
-    quantized=true,
-    yMax=10,
+    limited=true, 
+    quantized=true, 
+    yMax=10, 
     bits=16) 
     annotation (Placement(transformation(extent={{-68,4},{-56,16}})));
   Clocked.RealSignals.Sampler.HoldWithDAeffects hold1(
-    computationalDelay=true,
-    resolution=10,
-    shiftCounter=2,
-    limited=true,
-    quantized=true,
-    yMax=9.5,
-    yMin=-9.5,
+    computationalDelay=true, 
+    resolution=10, 
+    shiftCounter=2, 
+    limited=true, 
+    quantized=true, 
+    yMax=9.5, 
+    yMin=-9.5, 
     bits=16) annotation (Placement(transformation(extent={{26,4},{38,16}})));
   Clocked.RealSignals.Sampler.SampleWithADeffects sample1(noisy=true, noise(
         noiseMax=0.01)) 
@@ -51,61 +51,61 @@ equation
   connect(torque.flange, load.flange_a) annotation (Line(
       points={{80,10},{87,10}}));
   connect(ramp.y, sample2.u) annotation (Line(
-      points={{-90,10},{-69.2,10}},
+      points={{-90,10},{-69.2,10}}, 
       color={0,0,127}));
   connect(sample2.y, feedback.u1) annotation (Line(
-      points={{-55.4,10},{-41,10}},
+      points={{-55.4,10},{-41,10}}, 
       color={0,0,127}));
   connect(hold1.y, torque.tau) annotation (Line(
-      points={{38.6,10},{58,10}},
+      points={{38.6,10},{58,10}}, 
       color={0,0,127}));
   connect(speed.w, sample1.u) annotation (Line(
-      points={{115,-21.8},{115,-30},{39.2,-30}},
+      points={{115,-21.8},{115,-30},{39.2,-30}}, 
       color={0,0,127}));
   connect(feedback.y, PI.u) annotation (Line(
-      points={{-24,10},{-16,10}},
+      points={{-24,10},{-16,10}}, 
       color={0,0,127}));
   connect(PI.y, hold1.u) annotation (Line(
-      points={{7,10},{24.8,10}},
+      points={{7,10},{24.8,10}}, 
       color={0,0,127}));
   connect(sample1.y, assignClock1.u) annotation (Line(
-      points={{25.4,-30},{9.2,-30}},
+      points={{25.4,-30},{9.2,-30}}, 
       color={0,0,127}));
   connect(assignClock1.y, feedback.u2) annotation (Line(
-      points={{-4.6,-30},{-33,-30},{-33,2}},
+      points={{-4.6,-30},{-33,-30},{-33,2}}, 
       color={0,0,127}));
 connect(periodicClock.y, assignClock1.clock) annotation (Line(
-    points={{-41.4,-68},{2,-68},{2,-37.2}},
-    color={175,175,175},
-    pattern=LinePattern.Dot,
+    points={{-41.4,-68},{2,-68},{2,-37.2}}, 
+    color={175,175,175}, 
+    pattern=LinePattern.Dot, 
     thickness=0.5));
-  annotation (Diagram(coordinateSystem(extent={{-140,-100},{140,100}},
-grid={2,2}),graphics = {Text(origin={-16,36},
-lineColor={255,0,0},
-extent={{-25,3},{25,-3}},
-textString="反馈控制",
-textColor={255,0,0}), Text(origin={97,36},
-lineColor={255,0,0},
-extent={{-25,3},{25,-3}},
-textString="被控对象",
-textColor={255,0,0}), Rectangle(origin={-100,10},
-lineColor={255,0,0},
-extent={{-20,30},{20,-30}}), Text(origin={-101,36},
-lineColor={255,0,0},
-extent={{-24,3},{24,-3}},
-textString="期望信号",
-textColor={255,0,0}), Rectangle(origin={-16,-4},
-lineColor={255,0,0},
-extent={{-30,44},{30,-44}}), Rectangle(origin={91,-4},
-lineColor={255,0,0},
-extent={{-41,44},{41,-44}})}),
+  annotation (Diagram(coordinateSystem(extent={{-140,-100},{140,100}}, 
+grid={2,2}),graphics = {Text(origin={-16,36}, 
+lineColor={255,0,0}, 
+extent={{-25,3},{25,-3}}, 
+textString="反馈控制", 
+textColor={255,0,0}), Text(origin={97,36}, 
+lineColor={255,0,0}, 
+extent={{-25,3},{25,-3}}, 
+textString="被控对象", 
+textColor={255,0,0}), Rectangle(origin={-100,10}, 
+lineColor={255,0,0}, 
+extent={{-20,30},{20,-30}}), Text(origin={-101,36}, 
+lineColor={255,0,0}, 
+extent={{-24,3},{24,-3}}, 
+textString="期望信号", 
+textColor={255,0,0}), Rectangle(origin={-16,-4}, 
+lineColor={255,0,0}, 
+extent={{-30,44},{30,-44}}), Rectangle(origin={91,-4}, 
+lineColor={255,0,0}, 
+extent={{-41,44},{41,-44}})}), 
     Documentation(info="<html>
 <p>
 这与 <a href=\"modelica://Modelica.Clocked.Examples.SimpleControlledDrive.ClockedWithDiscreteController\">ClockedWithDiscreteController</a> 的模型相同。
 唯一的区别是考虑了现实世界的影响，
 如限制、数值离散化、噪音和计算时间。
 </p>
-</html>"),
+</html>"), 
     experiment(
       StopTime=5));
 end ClockedWith_AD_DA_Effects;

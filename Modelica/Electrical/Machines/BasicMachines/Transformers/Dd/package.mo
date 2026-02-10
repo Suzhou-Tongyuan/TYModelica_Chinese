@@ -4,7 +4,7 @@ package Dd "变压器：主D连接/次d连接"
 
   annotation (Documentation(info="<html>
 <p>该库含有所有可能矢量组中的主D连接/次d连接的变压器。</p>
-</html>",
+</html>", 
     revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

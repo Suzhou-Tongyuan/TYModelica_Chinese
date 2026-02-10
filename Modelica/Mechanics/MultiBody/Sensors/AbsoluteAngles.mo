@@ -1,44 +1,44 @@
 ﻿within Modelica.Mechanics.MultiBody.Sensors;
-model AbsoluteAngles
+model AbsoluteAngles 
   "测量坐标系连接器与全局坐标系之间的绝对角度"
   extends Internal.PartialAbsoluteSensor;
 
   Modelica.Blocks.Interfaces.RealOutput angles[3](
-    each final quantity="Angle",
-    each final unit="rad",
-    each displayUnit="deg")
+    each final quantity="Angle", 
+    each final unit="rad", 
+    each displayUnit="deg") 
     "将全局坐标系旋转到frame_a通过'sequence'的角度" 
     annotation (Placement(transformation(
-        origin={110,0},
+        origin={110,0}, 
         extent={{-10,-10},{10,10}})));
   parameter MultiBody.Types.RotationSequence sequence(
-    min={1,1,1},
-    max={3,3,3})={1,2,3}
+    min={1,1,1}, 
+    max={3,3,3})={1,2,3} 
     "角度返回以使全局坐标系绕轴sequence[1]、sequence[2]和最后sequence[3]旋转到frame_a" 
     annotation (Evaluate=true);
-  parameter SI.Angle guessAngle1=0
+  parameter SI.Angle guessAngle1=0 
     "选择angles[1]，使得abs(angles[1]-guessAngle1)最小";
 
 equation
   frame_a.f = zeros(3);
   frame_a.t = zeros(3);
   angles = MultiBody.Frames.axesRotationsAngles(
-    frame_a.R,
-    sequence,
+    frame_a.R, 
+    sequence, 
     guessAngle1);
-  annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
+  annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
             -100},{100,100}}), graphics={
         Text(
-          extent={{-132,76},{129,124}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-132,76},{129,124}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Line(
-          points={{70,0},{100,0}},
-          color={0,0,127}),
+          points={{70,0},{100,0}}, 
+          color={0,0,127}), 
         Text(
-          extent={{-50,-14},{50,-54}},
-          textColor={64,64,64},
-          textString="rad")}),
+          extent={{-50,-14},{50,-54}}, 
+          textColor={64,64,64}, 
+          textString="rad")}), 
     Documentation(info="<html>
 <p>
 这个模型确定了将全局坐标系旋转到frame_a的三个角度，沿着由参数<strong>sequence</strong>定义的轴。

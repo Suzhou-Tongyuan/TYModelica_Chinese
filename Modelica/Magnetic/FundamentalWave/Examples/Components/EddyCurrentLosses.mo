@@ -1,12 +1,12 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Examples.Components;
-model EddyCurrentLosses
+model EddyCurrentLosses 
   "涡流损耗模型等效电路的比较"
   extends Modelica.Icons.Example;
   parameter Integer m=3 "相数" annotation(Evaluate=true);
-  parameter SI.Resistance R=0.1
+  parameter SI.Resistance R=0.1 
     "引线电阻";
   parameter SI.Conductance Gc=1 "损失电导";
-  parameter SI.Reluctance R_m=1
+  parameter SI.Reluctance R_m=1 
     "磁路的磁阻";
   parameter Real N=1 "转数";
   output SI.Power lossPower_e=sum(loss_e.conductor.LossPower);
@@ -17,55 +17,55 @@ model EddyCurrentLosses
     annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
   Modelica.Electrical.Polyphase.Basic.Star star_e(m=m) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,30})));
   Modelica.Electrical.Polyphase.Basic.Star star_m(m=m) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,-60})));
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage_e(
-    m=m,
-    V=fill(1, m),
+    m=m, 
+    V=fill(1, m), 
     f=fill(1, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,60})));
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage_m(
-    m=m,
-    V=fill(1, m),
+    m=m, 
+    V=fill(1, m), 
     f=fill(1, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,-30})));
-  Modelica.Electrical.Polyphase.Basic.Resistor resistor_e(m=m, R=fill(R,
+  Modelica.Electrical.Polyphase.Basic.Resistor resistor_e(m=m, R=fill(R, 
         m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={-60,70})));
-  Modelica.Electrical.Polyphase.Basic.Resistor resistor_m(m=m, R=fill(R,
+  Modelica.Electrical.Polyphase.Basic.Resistor resistor_m(m=m, R=fill(R, 
         m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={-60,-20})));
   Magnetic.FundamentalWave.Components.PolyphaseElectroMagneticConverter converter_e(
-    m=m,
-    effectiveTurns=fill(N, m),
+    m=m, 
+    effectiveTurns=fill(N, m), 
     orientation=Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m)) 
     annotation (Placement(transformation(extent={{20,50},{40,70}})));
   Magnetic.FundamentalWave.Components.PolyphaseElectroMagneticConverter converter_m(
-    m=m,
-    effectiveTurns=fill(N, m),
+    m=m, 
+    effectiveTurns=fill(N, m), 
     orientation=Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m)) 
     annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
   Magnetic.FundamentalWave.Components.Reluctance reluctance_e(R_m(d=R_m, q=R_m)) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={80,60})));
   Magnetic.FundamentalWave.Components.Reluctance reluctance_m(R_m(d=R_m, q=R_m)) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={80,-30})));
   Magnetic.FundamentalWave.Components.Ground mground_e 
     annotation (Placement(transformation(extent={{30,0},{50,20}})));
@@ -73,11 +73,11 @@ model EddyCurrentLosses
     annotation (Placement(transformation(extent={{30,-90},{50,-70}})));
   Modelica.Electrical.Polyphase.Basic.Conductor loss_e(m=m, G=fill(Gc, m)) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-10,60})));
   Magnetic.FundamentalWave.Components.EddyCurrent loss_m(G=m*N^2*Gc/2) 
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={60,
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={60, 
             -20})));
   Modelica.Electrical.Polyphase.Sensors.PowerSensor powerb_e(m=m) 
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));

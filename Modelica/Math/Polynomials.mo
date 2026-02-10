@@ -1,11 +1,11 @@
 ﻿within Modelica.Math;
-    package Polynomials
+    package Polynomials 
       "多项式运算函数库(包括多项式拟合)"
       extends Modelica.Icons.FunctionsPackage;
 
       function evaluate "在给定的横坐标值处计算多项式"
         extends Modelica.Icons.Function;
-        input Real p[:]
+        input Real p[:] 
           "多项式系数(p[1]为最高幂系数)";
         input Real u "横坐标值";
         output Real y "多项式在u处的值";
@@ -17,39 +17,39 @@
         annotation(derivative(zeroDerivative=p)=evaluate_der);
       end evaluate;
 
-      function evaluateWithRange
+      function evaluateWithRange 
         "用定义范围外的线性外推计算给定横坐标值处的多项式"
         extends Modelica.Icons.Function;
-        input Real p[:]
+        input Real p[:] 
           "多项式系数(p[1]为最高幂系数)";
         input Real uMin "在uMin ..范围内有效的多项式uMax";
         input Real uMax "在uMin ..范围内有效的多项式uMax";
         input Real u "横坐标值";
-        output Real y
+        output Real y 
           "在uMin,uMax之外，使用线性外推";
       algorithm
         if u < uMin then
           y := evaluate(p, uMin) - evaluate_der(
-                  p,
-                  uMin,
+                  p, 
+                  uMin, 
                   uMin - u);
         elseif u > uMax then
           y := evaluate(p, uMax) + evaluate_der(
-                  p,
-                  uMax,
+                  p, 
+                  uMax, 
                   u - uMax);
         else
           y := evaluate(p, u);
         end if;
         annotation (derivative(
-            zeroDerivative=p,
-            zeroDerivative=uMin,
+            zeroDerivative=p, 
+            zeroDerivative=uMin, 
             zeroDerivative=uMax) = evaluateWithRange_der);
       end evaluateWithRange;
 
       function derivative "多项式的导数"
         extends Modelica.Icons.Function;
-        input Real p1[:]
+        input Real p1[:] 
           "多项式系数(p1[1]为最高幂系数)";
         output Real p2[size(p1, 1) - 1] "多项式p1的导数";
       protected
@@ -61,10 +61,10 @@
         end for;
       end derivative;
 
-      function derivativeValue
+      function derivativeValue 
         "多项式在横坐标u处的导数值"
         extends Modelica.Icons.Function;
-        input Real p[:]
+        input Real p[:] 
           "多项式系数(p[1]为最高幂系数)";
         input Real u "横坐标值";
         output Real y "多项式在u处的导数值";
@@ -78,10 +78,10 @@
         annotation(derivative(zeroDerivative=p)=derivativeValue_der);
       end derivativeValue;
 
-      function secondDerivativeValue
+      function secondDerivativeValue 
         "多项式的二阶导数在横坐标u处的值"
         extends Modelica.Icons.Function;
-        input Real p[:]
+        input Real p[:] 
           "多项式系数(p[1]为最高幂系数)";
         input Real u "横坐标值";
         output Real y "多项式在u处二阶导数的值";
@@ -97,9 +97,9 @@
 
       function integral "多项式p(u)的不定积分"
         extends Modelica.Icons.Function;
-        input Real p1[:]
+        input Real p1[:] 
           "多项式系数(p1[1]为最高幂系数)";
-        output Real p2[size(p1, 1) + 1]
+        output Real p2[size(p1, 1) + 1] 
           "多项式p1不定积分的多项式系数(多项式p2 + C为p1不定积分，其中C为任意常数)";
       protected
         Integer n=size(p1, 1) + 1 "输出多项式的次数";
@@ -116,7 +116,7 @@
         input Real p[:] "多项式的系数";
         input Real u_high "高积值";
         input Real u_low=0 "低积分值，默认为0";
-        output Real integral=0.0
+        output Real integral=0.0 
           "多项式p从u_low到u_high的积分";
       protected
         Integer n=size(p, 1) "多项式的积分度";
@@ -130,14 +130,14 @@
         annotation(derivative(zeroDerivative=p)=integralValue_der);
       end integralValue;
 
-      function fitting
+      function fitting 
         "在最小二乘意义上计算拟合一组数据点的多项式的系数"
         extends Modelica.Icons.Function;
         input Real u[:] "横坐标数据值";
         input Real y[size(u, 1)] "坐标数据值";
-        input Integer n(min=1)
+        input Integer n(min=1) 
           "拟合数据点(u,y)的期望多项式的阶数";
-        output Real p[n + 1]
+        output Real p[n + 1] 
           "多项式的多项式系数符合日期点";
       protected
         Real V[size(u, 1), n + 1] "范德蒙矩阵";
@@ -163,10 +163,10 @@ p(u) = p[1]*u^n + p[2]*u^(n-1) + ... + p[n]*u + p[n+1];
 </html>"      ));
       end fitting;
 
-      function evaluate_der
+      function evaluate_der 
         "在给定的横坐标处求多项式的导数"
         extends Modelica.Icons.Function;
-        input Real p[:]
+        input Real p[:] 
           "多项式系数(p[1]为最高幂系数)";
         input Real u "横坐标值";
         input Real du "横坐标的值";
@@ -182,10 +182,10 @@ p(u) = p[1]*u^n + p[2]*u^(n-1) + ... + p[n]*u + p[n+1];
         dy := dy*du;
       end evaluate_der;
 
-      function evaluateWithRange_der
+      function evaluateWithRange_der 
         "在给定的横坐标值处计算多项式的导数，并在定义的范围外外推"
         extends Modelica.Icons.Function;
-        input Real p[:]
+        input Real p[:] 
           "多项式系数(p[1]为最高幂系数)";
         input Real uMin "在uMin ..范围内有效的多项式uMax";
         input Real uMax "在uMin ..范围内有效的多项式uMax";
@@ -196,23 +196,23 @@ p(u) = p[1]*u^n + p[2]*u^(n-1) + ... + p[n]*u + p[n+1];
       algorithm
         if u < uMin then
           dy := evaluate_der(
-                  p,
-                  uMin,
+                  p, 
+                  uMin, 
                   du);
         elseif u > uMax then
           dy := evaluate_der(
-                  p,
-                  uMax,
+                  p, 
+                  uMax, 
                   du);
         else
           dy := evaluate_der(
-                  p,
-                  u,
+                  p, 
+                  u, 
                   du);
         end if;
       end evaluateWithRange_der;
 
-      function integralValue_der
+      function integralValue_der 
         "多项式p(u)从u_low到u_high的积分的时间导数，仅假设u_high是时间相关的(莱布尼茨规则)"
         extends Modelica.Icons.Function;
         input Real p[:] "多项式的系数";
@@ -220,21 +220,21 @@ p(u) = p[1]*u^n + p[2]*u^(n-1) + ... + p[n]*u + p[n+1];
         input Real u_low=0 "低积分值，默认为0";
         input Real du_high "高积值";
         input Real du_low=0 "低积分值，默认为0";
-        output Real dintegral=0.0
+        output Real dintegral=0.0 
           "多项式p从u_low到u_high的积分";
         annotation();
       algorithm
         dintegral := evaluate(p,u_high)*du_high;
       end integralValue_der;
 
-      function derivativeValue_der
+      function derivativeValue_der 
         "多项式导数的时间导数"
         extends Modelica.Icons.Function;
-        input Real p[:]
+        input Real p[:] 
           "多项式系数(p[1]为最高幂系数)";
         input Real u "横坐标值";
         input Real du "横坐标的值";
-        output Real dy
+        output Real dy 
           "输入变量在u处的多项式w.r.t.的导数的时间导数";
       protected
         Integer n=size(p, 1);
@@ -243,17 +243,17 @@ p(u) = p[1]*u^n + p[2]*u^(n-1) + ... + p[n]*u + p[n+1];
         dy := secondDerivativeValue(p,u)*du;
       end derivativeValue_der;
 
-      encapsulated function roots
+      encapsulated function roots 
         "在假设最高系数不为零的情况下，计算多项式的零"
         import Modelica.Math.Matrices;
         import Modelica;
         extends Modelica.Icons.Function;
-        input Real p[:]
+        input Real p[:] 
           "多项式系数向量 p[1]*x^n + p[2]*x^(n-1) + p[n]*x +p[n-1]";
         output Real roots[max(0, size(p, 1) - 1), 2]=fill(
-                  0,
-                  max(0, size(p, 1) - 1),
-                  2)
+                  0, 
+                  max(0, size(p, 1) - 1), 
+                  2) 
           "roots[:,1]和roots[:,2]是多项式p根的实部和虚部";
       protected
         Integer np=size(p, 1);
@@ -262,9 +262,9 @@ p(u) = p[1]*u^n + p[2]*u^(n-1) + ... + p[n]*u + p[n+1];
         Real ev[max(size(p, 1) - 1, 0), 2] "特征值";
       algorithm
         if n > 0 then
-          assert(abs(p[1]) > 0,
-            "Computing the roots of a polynomial with function \"Modelica.Math.Polynomials.roots\"\n"
-             +
+          assert(abs(p[1]) > 0, 
+            "Computing the roots of a polynomial with function \"Modelica.Math.Polynomials.roots\"\n" 
+             + 
             "failed because the first element of the coefficient vector is zero, but should not be.");
 
           // 同伴矩阵

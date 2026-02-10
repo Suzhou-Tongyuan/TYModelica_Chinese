@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.Interfaces.DCMachines;
-record PartialPowerBalanceDCMachines
+record PartialPowerBalanceDCMachines 
   "直流机器的部分功率平衡"
   extends Modelica.Icons.Record;
   SI.Power powerArmature=0 "电枢电功率";

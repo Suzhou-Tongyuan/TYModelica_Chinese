@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines;
+within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines;
 model SMEE_DOL
   "电励磁同步电机直接在线启动"
   extends Modelica.Icons.Example;
@@ -107,7 +107,7 @@ model SMEE_DOL
     TrSpecification=293.15,
     TrRef=293.15,
     TeSpecification=293.15,
-    TeRef=293.15) "Synchronous machine data" annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
+    TeRef=293.15) "同步电机参数" annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
 
   Modelica.Electrical.Polyphase.Ideal.IdealClosingSwitch switch(
     final m=m,

@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Types;
-type SpecularCoefficient = Modelica.Icons.TypeReal(min=0)
+type SpecularCoefficient = Modelica.Icons.TypeReal(min=0) 
   "环境光的反射(=0：光完全被吸收)" 
      annotation (choices(
-       choice=0 "0.0\"暗淡\"",
-       choice=0.7 "0.7\"中等\"",
-       choice=1 "1.0\"光亮\""),
+       choice=0 "0.0\"暗淡\"", 
+       choice=0.7 "0.7\"中等\"", 
+       choice=1 "1.0\"光亮\""), 
   Documentation(info="<html>
 <p>
 类型<strong>SpecularCoefficient</strong>定义了形状表面对环境光的反射。

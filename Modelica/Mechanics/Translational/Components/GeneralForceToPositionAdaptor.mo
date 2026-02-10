@@ -1,20 +1,20 @@
 ﻿within Modelica.Mechanics.Translational.Components;
-model GeneralForceToPositionAdaptor
+model GeneralForceToPositionAdaptor 
   "信号适配器，用于将位置、速度、加速度作为输出，力作为输入的一维平动接口(特别适用于FMUs)"
   extends Modelica.Blocks.Interfaces.Adaptors.FlowToPotentialAdaptor(
-    final Name_p="s",
-    final Name_pder="v",
-    final Name_pder2="a",
-    final Name_f="f",
-    final Name_fder="der(f)",
-    final Name_fder2="der2(f)",
-    final use_fder=false,
-    final use_fder2=false,
-    final p(unit="m"),
-    final pder(unit="m/s"),
-    final pder2(unit="m/s2"),
-    final f(unit="N"),
-    final fder(unit="N/s"),
+    final Name_p="s", 
+    final Name_pder="v", 
+    final Name_pder2="a", 
+    final Name_f="f", 
+    final Name_fder="der(f)", 
+    final Name_fder2="der2(f)", 
+    final use_fder=false, 
+    final use_fder2=false, 
+    final p(unit="m"), 
+    final pder(unit="m/s"), 
+    final pder2(unit="m/s2"), 
+    final f(unit="N"), 
+    final fder(unit="N/s"), 
     final fder2(unit="N/s2"));
   Modelica.Mechanics.Translational.Interfaces.Flange_a flange 
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
@@ -22,7 +22,7 @@ equation
   y = flange.s "输出 = 势能 = 位置";
   u = flange.f "输入 = 流量 = 力";
   annotation (
-    defaultComponentName="forceToPositionAdaptor",
+    defaultComponentName="forceToPositionAdaptor", 
     Documentation(info="<html>
 <p>
 一维平动接口 连接器与一维平动接口 信号表示之间的适配器。
@@ -33,8 +33,8 @@ equation
 </p>
 </html>"), Icon(graphics={
             Rectangle(
-              extent={{-20,100},{20,-100}},
-              lineColor={0,127,0},
-              radius=10,
+              extent={{-20,100},{20,-100}}, 
+              lineColor={0,127,0}, 
+              radius=10, 
           lineThickness=0.5)}));
 end GeneralForceToPositionAdaptor;

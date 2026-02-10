@@ -1,11 +1,11 @@
 ﻿within Modelica.Mechanics.Rotational.Interfaces;
-partial model PartialElementaryTwoFlangesAndSupport2
+partial model PartialElementaryTwoFlangesAndSupport2 
     "具有两个一维转动接口和一个支撑的部分模型，用于文本建模，即用于基本模型"
-  parameter Boolean useSupport=false
+  parameter Boolean useSupport=false 
     "= true，如果启用支撑一维转动接口，否则隐式接地" 
     annotation (
-    Evaluate=true,
-    HideResult=true,
+    Evaluate=true, 
+    HideResult=true, 
     choices(checkBox=true));
   Flange_a flange_a "左轴的一维转动接口" annotation (Placement(
         transformation(extent={{-110,-10},{-90,10}})));
@@ -31,17 +31,17 @@ equation
 如果<em>useSupport=true</em>，则支撑连接器被有条件地启用并需要连接。<br>
 如果<em>useSupport=false</em>，则支撑连接器被有条件地禁用，而组件则内部固定到地面。
 </p>
-</html>"),
-       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+</html>"), 
+       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
             {100,100}}),graphics={Line(
-              visible=not useSupport,
+              visible=not useSupport, 
               points={{-50,-120},{-30,-100}}),Line(
-              visible=not useSupport,
+              visible=not useSupport, 
               points={{-30,-120},{-10,-100}}),Line(
-              visible=not useSupport,
+              visible=not useSupport, 
               points={{-10,-120},{10,-100}}),Line(
-              visible=not useSupport,
+              visible=not useSupport, 
               points={{10,-120},{30,-100}}),Line(
-              visible=not useSupport,
+              visible=not useSupport, 
               points={{-30,-100},{30,-100}})}));
 end PartialElementaryTwoFlangesAndSupport2;

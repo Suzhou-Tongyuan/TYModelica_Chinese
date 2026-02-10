@@ -1,12 +1,12 @@
 ﻿within Modelica.Electrical.Batteries.BatteryStacksWithSensors;
 model Cell "带测量的电池单体"
   extends Modelica.Electrical.Batteries.BaseClasses.BaseCellWithSensors(
-    redeclare Modelica.Electrical.Batteries.ParameterRecords.CellData cellData,
+    redeclare Modelica.Electrical.Batteries.ParameterRecords.CellData cellData, 
     redeclare Modelica.Electrical.Batteries.BatteryStacks.CellStack cell(
-      cellData=cellData,
-      SOC(start=SOC0, fixed=true),
-      SOCtolerance=SOCtolerance,
-      useHeatPort=true,
+      cellData=cellData, 
+      SOC(start=SOC0, fixed=true), 
+      SOCtolerance=SOCtolerance, 
+      useHeatPort=true, 
       T=T));
  annotation (Documentation(info="<html>
 <p>

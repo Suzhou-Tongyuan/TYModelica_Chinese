@@ -1,31 +1,31 @@
 ﻿within Modelica.Mechanics.MultiBody.Joints;
-model RollingWheel
+model RollingWheel 
   "描述理想滚轮(在平面z=0上滚动)的运动副(无质量，无转动惯量)"
 
   import Modelica.Mechanics.MultiBody.Frames;
 
-  Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a
+  Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a 
     "固定在轮毂中心点的参考系。
 x轴：向上，y轴：沿着轮轴方向" 
     annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
 
   parameter SI.Radius radius "滚轮半径";
-  parameter StateSelect stateSelect=StateSelect.always
+  parameter StateSelect stateSelect=StateSelect.always 
     "将广义坐标用作状态的优先级" annotation(HideResult=true,Evaluate=true);
 
   SI.Position x(start=0, stateSelect=stateSelect) "滚轮轴的x坐标";
   SI.Position y(start=0, stateSelect=stateSelect) "滚轮轴的y坐标";
   SI.Position z;
 
-  SI.Angle angles[3](start={0,0,0}, each stateSelect=stateSelect)
+  SI.Angle angles[3](start={0,0,0}, each stateSelect=stateSelect) 
     "将世界参考系旋转到frame_a参考系所需的角度，分别绕z轴、y轴、x轴旋转" 
     annotation(Dialog(group="初始值", showStartAttribute=true));
 
-  SI.AngularVelocity der_angles[3](start={0,0,0}, each stateSelect=stateSelect)
+  SI.AngularVelocity der_angles[3](start={0,0,0}, each stateSelect=stateSelect) 
     "角度的导数" 
     annotation(Dialog(group="初始值", showStartAttribute=true));
 
-  SI.Position r_road_0[3]
+  SI.Position r_road_0[3] 
     "从世界参考系到路面接触点的位置矢量，以世界参考系为基准";
 
   // 接触力
@@ -40,11 +40,11 @@ protected
   SI.Position delta_0[3](start={0,0,-radius}) "从滚轮中心到接触点的距离矢量";
 
    // 接触点处的坐标系
-  Real e_n_0[3]
+  Real e_n_0[3] 
     "路面接触点处的法向单位矢量，以世界参考系为基准";
-  Real e_lat_0[3]
+  Real e_lat_0[3] 
     "滚轮接触点处的横向单位矢量，以世界参考系为基准";
-  Real e_long_0[3]
+  Real e_long_0[3] 
     "滚轮接触点处的纵向单位矢量，以世界参考系为基准";
 
   // 路面描述
@@ -111,17 +111,17 @@ equation
  annotation (
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, -100},{100,100}}), graphics={
         Rectangle(
-          extent={{-100,-80},{100,-100}},
-          fillColor={175,175,175},
-          fillPattern=FillPattern.Solid),
+          extent={{-100,-80},{100,-100}}, 
+          fillColor={175,175,175}, 
+          fillPattern=FillPattern.Solid), 
         Text(
-          extent={{-150,120},{150,80}},
-          textColor={0,0,255},
-          textString="%name"),
+          extent={{-150,120},{150,80}}, 
+          textColor={0,0,255}, 
+          textString="%name"), 
         Ellipse(
-          extent={{-80,80},{80,-80}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}),
+          extent={{-80,80},{80,-80}}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid)}), 
     Documentation(info="<html>
 <p>
 一个用于滚轮在全局坐标系的x-y平面上滚动的连接件。

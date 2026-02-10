@@ -2,11 +2,11 @@
 model RelSpeedSensor "理想传感器，用于测量相对速度"
   extends Translational.Interfaces.PartialRelativeSensor;
   SI.Position s_rel "两个一维平动接口之间的距离（flange_b.s - flange_a.s）";
-  Modelica.Blocks.Interfaces.RealOutput v_rel(unit="m/s")
+  Modelica.Blocks.Interfaces.RealOutput v_rel(unit="m/s") 
     "输出信号：两个一维平动接口之间的相对速度（= der(flange_b.s) - der(flange_a.s)）" 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={0,-110})));
 
 equation
@@ -22,13 +22,13 @@ equation
 <ul>
 <li><em>由P. Beater于1999年8月26日发布的第一个版本</em></li>
 </ul>
-</html>"),
-       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+</html>"), 
+       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
             {100,100}}), graphics={
-                              Line(points={{0,-100},{0,-61}}, color={0,0,
-          127}),
+                              Line(points={{0,-100},{0,-61}}, color={0,0, 
+          127}), 
         Text(
-          extent={{-24,20},{66,-40}},
-          textColor={64,64,64},
+          extent={{-24,20},{66,-40}}, 
+          textColor={64,64,64}, 
           textString="m/s")}));
 end RelSpeedSensor;

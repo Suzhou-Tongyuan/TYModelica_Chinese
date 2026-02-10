@@ -25,49 +25,49 @@ v[2] = j*omega*L[2,1]*i[1] + j*omega*L[2,2]*i[2] + ... + j*omega*L[2,m]*i[m]
 v[m] = j*omega*L[m,1]*i[1] + j*omega*L[m,2]*i[2] + ... + j*omega*L[m,m]*i[m]
 </pre></blockquote>
 
-</html>"),
+</html>"), 
        Icon(graphics={
-        Line(points={{-80,20},{-80,-20},{-60,-20}}, color={85,170,255}),
-        Line(points={{-80,20},{-60,20}}, color={85,170,255}),
-        Line(points={{60,20},{80,20}}, color={85,170,255}),
-        Line(points={{80,20},{80,-20},{60,-20}}, color={85,170,255}),
-        Line(points={{-90,0},{-80,0}}, color={85,170,255}),
-        Line(points={{80,0},{90,0}}, color={85,170,255}),
-        Text(extent={{-150,-80},{150,-40}}, textString="m=%m"),
+        Line(points={{-80,20},{-80,-20},{-60,-20}}, color={85,170,255}), 
+        Line(points={{-80,20},{-60,20}}, color={85,170,255}), 
+        Line(points={{60,20},{80,20}}, color={85,170,255}), 
+        Line(points={{80,20},{80,-20},{60,-20}}, color={85,170,255}), 
+        Line(points={{-90,0},{-80,0}}, color={85,170,255}), 
+        Line(points={{80,0},{90,0}}, color={85,170,255}), 
+        Text(extent={{-150,-80},{150,-40}}, textString="m=%m"), 
         Line(
-          points={{-60,20},{-59,26},{-52,34},{-38,34},{-31,26},{-30,20}},
-          color={85,170,255},
-          smooth=Smooth.Bezier),
+          points={{-60,20},{-59,26},{-52,34},{-38,34},{-31,26},{-30,20}}, 
+          color={85,170,255}, 
+          smooth=Smooth.Bezier), 
         Line(
-          points={{-30,20},{-29,26},{-22,34},{-8,34},{-1,26},{0,20}},
-          color={85,170,255},
-          smooth=Smooth.Bezier),
+          points={{-30,20},{-29,26},{-22,34},{-8,34},{-1,26},{0,20}}, 
+          color={85,170,255}, 
+          smooth=Smooth.Bezier), 
         Line(
-          points={{0,20},{1,26},{8,34},{22,34},{29,26},{30,20}},
-          color={85,170,255},
-          smooth=Smooth.Bezier),
+          points={{0,20},{1,26},{8,34},{22,34},{29,26},{30,20}}, 
+          color={85,170,255}, 
+          smooth=Smooth.Bezier), 
         Line(
-          points={{30,20},{31,26},{38,34},{52,34},{59,26},{60,20}},
-          color={85,170,255},
-          smooth=Smooth.Bezier),
+          points={{30,20},{31,26},{38,34},{52,34},{59,26},{60,20}}, 
+          color={85,170,255}, 
+          smooth=Smooth.Bezier), 
         Line(
-          points={{-60,-20},{-59,-26},{-52,-34},{-38,-34},{-31,-26},{-30,-20}},
-          color={85,170,255},
-          smooth=Smooth.Bezier),
+          points={{-60,-20},{-59,-26},{-52,-34},{-38,-34},{-31,-26},{-30,-20}}, 
+          color={85,170,255}, 
+          smooth=Smooth.Bezier), 
         Line(
-          points={{-30,-20},{-29,-26},{-22,-34},{-8,-34},{-1,-26},{0,-20}},
-          color={85,170,255},
-          smooth=Smooth.Bezier),
+          points={{-30,-20},{-29,-26},{-22,-34},{-8,-34},{-1,-26},{0,-20}}, 
+          color={85,170,255}, 
+          smooth=Smooth.Bezier), 
         Line(
-          points={{0,-20},{1,-26},{8,-34},{22,-34},{29,-26},{30,-20}},
-          color={85,170,255},
-          smooth=Smooth.Bezier),
+          points={{0,-20},{1,-26},{8,-34},{22,-34},{29,-26},{30,-20}}, 
+          color={85,170,255}, 
+          smooth=Smooth.Bezier), 
         Line(
-          points={{30,-20},{31,-26},{38,-34},{52,-34},{59,-26},{60,-20}},
-          color={85,170,255},
-          smooth=Smooth.Bezier),
+          points={{30,-20},{31,-26},{38,-34},{52,-34},{59,-26},{60,-20}}, 
+          color={85,170,255}, 
+          smooth=Smooth.Bezier), 
         Text(
-          extent={{-150,90},{150,50}},
-          textString="%name",
+          extent={{-150,90},{150,50}}, 
+          textString="%name", 
           textColor={0,0,255})}));
 end MutualInductor;

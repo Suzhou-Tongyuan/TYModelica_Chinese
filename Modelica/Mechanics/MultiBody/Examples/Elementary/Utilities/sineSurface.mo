@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Examples.Elementary.Utilities;
-function sineSurface
+function sineSurface 
   "定义三维移动正弦特性的函数"
    extends Modelica.Mechanics.MultiBody.Interfaces.partialSurfaceCharacteristic;
    input Real x_min "x的最小值";

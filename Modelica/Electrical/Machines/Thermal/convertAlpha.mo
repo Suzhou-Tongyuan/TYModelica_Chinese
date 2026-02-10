@@ -1,13 +1,13 @@
 ﻿within Modelica.Electrical.Machines.Thermal;
-function convertAlpha
+function convertAlpha 
   "将alpha从温度1(默认为20°C)转换为温度2"
   extends Modelica.Icons.Function;
-  input SI.LinearTemperatureCoefficient alpha1
+  input SI.LinearTemperatureCoefficient alpha1 
     "温度1(默认：20°C)处的温度系数";
   input SI.Temperature T2 "温度2";
-  input SI.Temperature T1=293.15
+  input SI.Temperature T1=293.15 
     "温度1(默认20°C)";
-  output SI.LinearTemperatureCoefficient alpha2
+  output SI.LinearTemperatureCoefficient alpha2 
     "TRef处的温度系数";
 algorithm
   alpha2 := alpha1/(1 + alpha1*(T2 - T1));

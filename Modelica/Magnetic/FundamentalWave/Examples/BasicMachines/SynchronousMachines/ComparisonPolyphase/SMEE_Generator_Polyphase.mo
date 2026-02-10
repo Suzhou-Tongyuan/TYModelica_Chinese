@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines.ComparisonPolyphase;
+within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines.ComparisonPolyphase;
 model SMEE_Generator_Polyphase
   "作为发电机运行的电励磁多相同步电机"
 
@@ -19,11 +19,11 @@ model SMEE_Generator_Polyphase
   parameter SI.Resistance Rs=0.03
     "每相温定子电阻";
   parameter SI.Inductance Lssigma=0.1/(2*Modelica.Constants.pi
-      *fsNominal) "Stator stray inductance per phase";
+      *fsNominal) "每相定子杂散电感";
   parameter SI.Inductance Lmd=1.5/(2*Modelica.Constants.pi*
-      fsNominal) "Main field inductance in d-axis";
+      fsNominal) "d轴主电感";
   parameter SI.Inductance Lmq=1.5/(2*Modelica.Constants.pi*
-      fsNominal) "Main field inductance in q-axis";
+      fsNominal) "q轴主电感";
   parameter SI.Inductance Lrsigmad=0.05/(2*Modelica.Constants.pi
       *fsNominal)
     "阻尼器杂散电感(等效三相绕组)d轴";
@@ -201,7 +201,7 @@ model SMEE_Generator_Polyphase
     TrSpecification=293.15,
     TrRef=293.15,
     TeSpecification=293.15,
-    TeRef=293.15) "Synchronous machine data" 
+    TeRef=293.15) "同步电机参数" 
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
 
   Modelica.Electrical.Polyphase.Sensors.CurrentQuasiRMSSensor 

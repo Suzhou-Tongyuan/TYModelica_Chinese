@@ -3,9 +3,9 @@ partial model FourPlug "具有两个多相电气端口的元件"
   parameter Integer m(final min=1) = 3 "相数" annotation(Evaluate=true);
   SI.Voltage v1[m] "端口1的电压降";
   SI.Voltage v2[m] "端口2的电压降";
-  SI.Current i1[m]
+  SI.Current i1[m] 
     "流入端口1的正多相插头的电流";
-  SI.Current i2[m]
+  SI.Current i2[m] 
     "流入端口2的正多相插头的电流";
   PositivePlug plug_p1(final m=m) "具有m个引脚的端口1的正电气多相插头" annotation (Placement(transformation(
           extent={{-110,90},{-90,110}})));

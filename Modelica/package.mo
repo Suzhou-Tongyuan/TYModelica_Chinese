@@ -1,4 +1,4 @@
-﻿package Modelica "Modelica标准库-Version4.0.0.TY.1.Beta-中文试用版"
+﻿package Modelica "Modelica标准库中文版-Version4.0.0.TY.1.CN"
   parameter Boolean MediumTransfer = true "等于true时，可实现介质传递";
   extends Modelica.Icons.Package;
   package UsersGuide "用户指南"
@@ -99,11 +99,11 @@ Modelica标准库由以下主要子模型库组成：
  提供大规模介质库，包含用于计算介质属性的模型和函数，如h = h(p,T)、d = d(p,T)，
  适用于以下介质：
  <ul>
- <li>1240种气体及其混合物。</li>
- <li>不可压缩的基于表格的液体(h = h(T)等)。</li>
- <li>可压缩液体。</li>
- <li>干空气和湿空气。</li>
- <li>高精度水模型(IF97)。</li>
+ <li> 1240种气体及其混合物。</li>
+ <li> 不可压缩的基于表格的液体(h = h(T)等)。</li>
+ <li> 可压缩液体。</li>
+ <li> 干空气和湿空气。</li>
+ <li> 高精度水模型(IF97)。</li>
  </ul>
  </td>
 </tr>
@@ -114,10 +114,8 @@ Modelica标准库由以下主要子模型库组成：
  <td>
  <a href=\"modelica://Modelica.Thermal.FluidHeatFlow\">FluidHeatFlow</a>,
  <a href=\"modelica://Modelica.Thermal.HeatTransfer\">HeatTransfer</a>
-  简单的热流体管道流动，特别用于模拟机器的冷却
- 与空气或水(管道，泵，阀门，环境，传感器，源)和
- 热电容器、热导体、对流、
-人体辐射源和传感器。
+ 简单热流体管道流动模型，尤其适用于以空气或水为介质的设备冷却仿真(包括管道、泵、阀门、环境、传感器、热源等组件)，
+ 同时支持集总参数式传热建模，包含热容、热传导、对流换热、体辐射、热源及传感器。
  </td>
 </tr>
 
@@ -130,7 +128,7 @@ Modelica标准库由以下主要子模型库组成：
  输入/输出块用于建模框图和逻辑网络，例如:
  积分，PI，PID，传递函数，线性状态空间系统，
  采样器，单位延迟，离散传递函数，和/或块，
- 定时器，迟滞，非线性和路由块，源，表.
+ 定时器，迟滞，非线性和路由块，源，表。
  </td>
 </tr>
 
@@ -174,144 +172,142 @@ Matrices.eigenValues(A);
 </tr>
 
 </table>
-</html>"                ));
+</html>"                    ));
     end Overview;
 
     class Connectors "连接器"
       extends Modelica.Icons.Information;
 
       annotation(Documentation(info = "<html><p>
-<span style=\"color: rgb(51, 51, 51);\">Modelica标准库定义了各个领域中最重要的基本连接器。如果可能，用户应该使用这些连接器，以便Modelica标准库中的组件与其他库中的组件可以无障碍地组合。以下是定义的基本连接器(势变量、流变量和stream变量的含义在下面的\"连接器方程\"部分中解释)：</span>
+Modelica标准库定义了各个领域中最重要的基本连接器。
+如果可能，用户应该使用这些连接器，以便Modelica标准库中的组件与其他库中的组件可以无障碍地组合。
+以下是定义的基本连接器(势变量、流变量和stream变量的含义在下面的\"连接器方程\"部分中解释)：
 </p>
+
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"1\">
-<tr><td><strong>domain</strong></td>
-   <td><strong>potential<br>variables</strong></td>
-   <td><strong>flow<br>variables</strong></td>
-   <td><strong>stream<br>variables</strong></td>
+<tr><td><strong>领域</strong></td>
+   <td><strong>势变量</strong></td>
+   <td><strong>流变量</strong></td>
+   <td><strong>stream<br>变量</strong></td>
    <td><strong>连接器定义</strong></td>
    <td><strong>图标</strong></td></tr>
 
-<tr><td><strong>electrical<br>analog</strong></td>
-   <td>electrical potential</td>
-   <td>electrical current</td>
+<tr><td><strong>模拟电路</strong></td>
+   <td>电势</td>
+   <td>电流</td>
    <td></td>
    <td><a href=\"modelica://Modelica.Electrical.Analog.Interfaces\">Modelica.Electrical.Analog.Interfaces</a>
      <br>Pin, PositivePin, NegativePin</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/ElectricalPins.png\"></td></tr>
 
-<tr><td><strong>electrical<br>polyphase</strong></td>
-   <td colspan=\"3\">vector of electrical pins</td>
+<tr><td><strong>多相电</strong></td>
+   <td colspan=\"3\">电气针脚矢量</td>
    <td><a href=\"modelica://Modelica.Electrical.Polyphase.Interfaces\">Modelica.Electrical.Polyphase.Interfaces</a>
      <br>Plug, PositivePlug, NegativePlug</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/ElectricalPlugs.png\"></td></tr>
 
-<tr><td><strong>electrical<br>space phasor</strong></td>
-   <td>2 electrical potentials</td>
-   <td>2 electrical currents</td>
+<tr><td><strong>电机空间矢量</strong></td>
+   <td>2个电势</td>
+   <td>2个电流</td>
    <td></td>
    <td><a href=\"modelica://Modelica.Electrical.Machines.Interfaces\">Modelica.Electrical.Machines.Interfaces</a>
      <br>SpacePhasor</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/SpacePhasor.png\"></td></tr>
 
-<tr><td><strong>quasi-static<br>single-phase</strong></td>
-   <td>complex electrical potential</td>
-   <td>complex electrical current</td>
+<tr><td><strong>准静态<br>单相</strong></td>
+   <td>复电势</td>
+   <td>复电流</td>
    <td></td>
    <td><a href=\"modelica://Modelica.Electrical.QuasiStatic.SinglePhase.Interfaces\">
                                        Modelica.Electrical.QuasiStatic.SinglePhase.Interfaces</a>
      <br>Pin, PositivePin, NegativePin</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/QuasiStaticSinglePhasePins.png\"></td></tr>
 
-<tr><td><strong>quasi-static<br>polyphase</strong></td>
-   <td colspan=\"3\">vector of quasi-static single-phase pins</td>
+<tr><td><strong>准静态<br>多相</strong></td>
+   <td colspan=\"3\">准静态单相针脚的向量</td>
    <td><a href=\"modelica://Modelica.Electrical.QuasiStatic.Polyphase.Interfaces\">Modelica.Electrical.QuasiStatic.Polyphase.Interfaces</a>
      <br>Plug, PositivePlug, NegativePlug</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/QuasiStaticPolyphasePlugs.png\"></td></tr>
 
-<tr><td><strong>electrical<br>digital</strong></td>
-   <td>Integer (1..9)</td>
+<tr><td><strong>数电</strong></td>
+   <td>整数(1..9)</td>
    <td></td>
    <td></td>
    <td><a href=\"modelica://Modelica.Electrical.Digital.Interfaces\">Modelica.Electrical.Digital.Interfaces</a>
      <br>DigitalSignal, DigitalInput, DigitalOutput</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/Digital.png\"></td></tr>
 
-<tr><td><strong>magnetic<br>flux tubes</strong></td>
-   <td>magnetic potential</td>
-   <td>magnetic flux</td>
+<tr><td><strong>磁通管</strong></td>
+   <td>磁势</td>
+   <td>磁通量</td>
    <td></td>
    <td>
 <a href=\"modelica://Modelica.Magnetic.FluxTubes.Interfaces\">Modelica.Magnetic.FluxTubes.Interfaces</a>
      <br>MagneticPort, PositiveMagneticPort,<br>NegativeMagneticPort</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/MagneticPorts.png\"></td></tr>
 
-<tr><td><strong>magnetic<br>fundamental<br>wave</strong></td>
-   <td>complex magnetic potential</td>
-   <td>complex magnetic flux</td>
+<tr><td><strong>磁学基本波</strong></td>
+   <td>复磁势</td>
+   <td>复磁通量</td>
    <td></td>
    <td>
 <a href=\"modelica://Modelica.Magnetic.FundamentalWave.Interfaces\">Modelica.Magnetic.FundamentalWave.Interfaces</a>
      <br>MagneticPort, PositiveMagneticPort,<br>NegativeMagneticPort</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/FundamentalWavePorts.png\"></td></tr>
 
-<tr><td><strong>translational</strong></td>
-   <td>distance</td>
-   <td>cut-force</td>
+<tr><td><strong>平动</strong></td>
+   <td>位移</td>
+   <td>局部力</td>
    <td></td>
    <td><a href=\"modelica://Modelica.Mechanics.Translational.Interfaces\">Modelica.Mechanics.Translational.Interfaces</a>
      <br>Flange_a, Flange_b</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/TranslationalFlanges.png\"></td></tr>
 
-<tr><td><strong>rotational</strong></td>
-   <td>angle</td>
-   <td>cut-torque</td>
+<tr><td><strong>转动</strong></td>
+   <td>角度</td>
+   <td>局部力矩</td>
    <td></td>
    <td><a href=\"modelica://Modelica.Mechanics.Rotational.Interfaces\">Modelica.Mechanics.Rotational.Interfaces</a>
      <br>Flange_a, Flange_b</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/RotationalFlanges.png\"></td></tr>
 
-<tr><td><strong>3-dim.<br>mechanics</strong></td>
-   <td>position vector<br>
-    orientation object</td>
-   <td>cut-force vector<br>
-    cut-torque vector</td>
+<tr><td><strong>三维机械</strong></td>
+   <td>位置向量<br>姿态对象</td>
+   <td>局部力向量<br>局部力矩向量</td>
    <td></td>
    <td><a href=\"modelica://Modelica.Mechanics.MultiBody.Interfaces\">Modelica.Mechanics.MultiBody.Interfaces</a>
      <br>Frame, Frame_a, Frame_b, Frame_resolve</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/MultiBodyFrames.png\"></td></tr>
 
-<tr><td><strong>simple<br>fluid flow</strong></td>
-   <td>pressure<br>
-    specific enthalpy</td>
-   <td>mass flow rate<br>
-    enthalpy flow rate</td>
+<tr><td><strong>简单流体流动</strong></td>
+   <td>压力<br>比焓</td>
+   <td>质量流量<br>焓流量</td>
    <td></td>
    <td><a href=\"modelica://Modelica.Thermal.FluidHeatFlow.Interfaces\">Modelica.Thermal.FluidHeatFlow.Interfaces</a>
      <br>FlowPort, FlowPort_a, FlowPort_b</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/FluidHeatFlowPorts.png\"></td></tr>
 
-<tr><td><strong>thermo<br>fluid flow</strong></td>
-   <td>pressure</td>
-   <td>mass flow rate</td>
-   <td>specific enthalpy<br>mass fractions</td>
+<tr><td><strong>热流体流动</strong></td>
+   <td>压力</td>
+   <td>质量流量</td>
+   <td>比焓<br>质量分数</td>
    <td>
 <a href=\"modelica://Modelica.Fluid.Interfaces\">Modelica.Fluid.Interfaces</a>
      <br>FluidPort, FluidPort_a, FluidPort_b</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/FluidPorts.png\"></td></tr>
 
-<tr><td><strong>heat<br>transfer</strong></td>
-   <td>temperature</td>
-   <td>heat flow rate</td>
+<tr><td><strong>热传导</strong></td>
+   <td>温度</td>
+   <td>热流量</td>
    <td></td>
    <td><a href=\"modelica://Modelica.Thermal.HeatTransfer.Interfaces\">Modelica.Thermal.HeatTransfer.Interfaces</a>
      <br>HeatPort, HeatPort_a, HeatPort_b</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/ThermalHeatPorts.png\"></td></tr>
 
-<tr><td><strong>blocks</strong></td>
-   <td>
-    Real variable<br>
-    Integer variable<br>
-    Boolean variable</td>
+<tr><td><strong>块</strong></td>
+   <td>实数变量<br>
+   整数变量<br>
+   布尔变量</td>
    <td></td>
    <td></td>
    <td><a href=\"modelica://Modelica.Blocks.Interfaces\">Modelica.Blocks.Interfaces</a>
@@ -321,108 +317,122 @@ Matrices.eigenValues(A);
       BooleanSignal, BooleanInput, BooleanOutput</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/Signals.png\"></td></tr>
 
-<tr><td><strong>complex<br>blocks</strong></td>
-   <td>
-    Complex variable</td>
+<tr><td><strong>复数块</strong></td>
+   <td>复数变量</td>
    <td></td>
    <td></td>
    <td><a href=\"modelica://Modelica.ComplexBlocks.Interfaces\">Modelica.ComplexBlocks.Interfaces</a>
      <br>ComplexSignal, ComplexInput, ComplexOutput</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/ComplexSignals.png\"></td></tr>
 
-<tr><td><strong>state<br>machine</strong></td>
-   <td>Boolean variables<br>
-    (occupied, set,<br>
-     available, reset)</td>
+<tr><td><strong>状态机</strong></td>
+   <td>布尔变量<br>
+    (占用，设置，<br>
+     待命，重置)</td>
    <td></td>
    <td></td>
    <td><a href=\"modelica://Modelica.StateGraph.Interfaces\">Modelica.StateGraph.Interfaces</a>
      <br>Step_in, Step_out, Transition_in, Transition_out</td>
    <td><img src=\"modelica://Modelica/Resources/Images/UsersGuide/StateGraphPorts.png\"></td></tr>
 </table>
-<p>
 
-在所有领域中，通常定义2个连接器。变量声明是<strong>相同的</strong>，只是图标不同，<span style=\"color: rgb(51, 51, 51);\">以便于区分附加在同一组件上的属于同一领域的连接器</span>。
-</p>
-<h4>分层的连接器 </h4><p>
-<span style=\"color: rgb(51, 51, 51);\">Modelica 还支持层次化连接器，类似于层次化模型。因此，例如，可以将基本连接器聚集在一起。例如，一个由两个电气插脚组成的电气插头可以被定义为：</span>:
-</p>
 <p>
-<br>
+在所有领域中，通常定义2个连接器。
+变量声明是<strong>相同的</strong>，只是图标不同，以便于区分附加在同一组件上的属于同一领域的连接器。
 </p>
-<pre><code >connector Plug
-   import Modelica.Electrical.Analog.Interfaces;
+
+<h4>分层连接器</h4>
+<p>
+Modelica还支持分层连接器，类似于分层模型。因此，用户可以将基础连接器组合在一起。
+例如，一个由两个电气引脚组成的电气插头可以定义为：
+</p>
+
+<blockquote><pre>
+<strong>connector</strong> Plug
+   <strong>import</strong> Modelica.Electrical.Analog.Interfaces;
    Interfaces.PositivePin phase;
    Interfaces.NegativePin ground;
-end Plug;
-</code></pre><p>
-<br>
-</p>
+<strong>end</strong> Plug;
+</pre></blockquote>
+
 <p>
-<span style=\"color: rgb(51, 51, 51);\">通过一个 connect(..) 方程，可以连接两个插头(因此也隐式地连接相位和接地引脚)，或者将一个引脚连接器直接连接到插头连接器的相位或接地部分，例如 \"connect(resistor.p, plug.phase)\"。</span>
+通过一个方程connect(..)方程，可以连接两个插头(因此隐式地连接了相位和接地引脚)，
+或者可以将一个引脚连接器直接连接到插头连接器的相位和接地，例如：\"connect(resistor.p, plug.phase)\".
 </p>
-<h4>连接器方程</h4><p>
-上述列出的连接器变量基本上是通过以下策略确定的：
-</p>
-<ol><li>
-陈述特定物理领域体积的相关平衡方程和边界条件。</li>
-<li>
-通过取无穷小体积的极限(例如，热领域：温度相同，热流率总和为零)简化第(1)步中的平衡方程和边界条件。</li>
-<li>
-在连接器中使用第(2)步平衡方程和边界条件所需的变量，并选择适当的Modelica<strong>前缀</strong>，以便这些方程通过Modelica连接语义生成。</li>
-</ol><p>
-通过一个例子说明Modelica连接语义：三个连接器c1、c2、c3的定义
-</p>
+
+<h4 id=\"ConnectorEquations\">连接器方程</h4>
+
 <p>
-<br>
+上述列出的连接器变量基本上是通过以下策略来确定的：
 </p>
-<pre><code >connector Demo
+
+<ol>
+<li> 陈述特定物理领域中体积的相关平衡方程和边界条件。</li>
+<li> 
+     Simplify the balance equations and boundary conditions
+     of (1) by taking the
+     limit of an infinitesimal small volume
+     (e.g., thermal domain:
+      temperatures are identical and heat flow rates
+      sum up to zero).
+</li>
+<li> Use the variables needed for the balance equations
+     and boundary conditions of (2)
+     in the connector and select appropriate Modelica
+     <strong>prefixes</strong>, so that these equations
+     are generated by the Modelica connection semantics.
+</li>
+</ol>
+
+<p>
+以下是一个例子，说明Modelica连接语义的生成过程：
+三个连接器c1, c2, c3定义如下：
+</p>
+
+<blockquote><pre>
+<strong>connector</strong> Demo
   Real        p;  // potential variable
-  flow   Real f;  // flow variable
-  stream Real s;  // stream variable
-end Demo;
-</code></pre><p>
-<br>
-</p>
+  <strong>flow</strong>   Real f;  // flow variable
+  <strong>stream</strong> Real s;  // stream variable
+<strong>end</strong> Demo;
+</pre></blockquote>
+
 <p>
-连接在一起
+将它们连接在一起
 </p>
+
+<blockquote><pre>
+<strong>connect</strong>(c1,c2);
+<strong>connect</strong>(c1,c3);
+</pre></blockquote>
+
 <p>
-<br>
+这将生成以下方程：
 </p>
-<pre><code >connect(c1,c2);
-connect(c1,c3);
-</code></pre><p>
-<br>
-</p>
-<p>
-则可得出以下方程:
-</p>
-<p>
-<br>
-</p>
-<pre><code >// 势变量(potential variables)相等
+
+<blockquote><pre>
+// Potential variables are identical
 c1.p = c2.p;
 c1.p = c3.p;
 
-// 流变量(flow variables)之和为零
+// The sum of the flow variables is zero
 0 = c1.f + c2.f + c3.f;
 
-/* 流变量(flow variables)和上游流变量(stream variables)的乘积之和为零
-(该隐式方程组在生成代码时显式求解;
-\"&lt;undefined&gt;\"部分的定义方式如下，inStream(..)是连续的)。
+/* The sum of the product of flow variables and upstream stream variables is zero
+   (this implicit set of equations is explicitly solved when generating code;
+   the \"&lt;undefined&gt;\" parts are defined in such a way that
+   inStream(..) is continuous).
 */
-0 = c1.f*(if c1.f &gt; 0 then s_mix else c1.s) +
-    c2.f*(if c2.f &gt; 0 then s_mix else c2.s) +
-    c3.f*(if c3.f &gt; 0 then s_mix else c3.s);
+0 = c1.f*(<strong>if</strong> c1.f > 0 <strong>then</strong> s_mix <strong>else</strong> c1.s) +
+    c2.f*(<strong>if</strong> c2.f > 0 <strong>then</strong> s_mix <strong>else</strong> c2.s) +
+    c3.f*(<strong>if</strong> c3.f > 0 <strong>then</strong> s_mix <strong>else</strong> c3.s);
 
-inStream(c1.s) = if c1.f &gt; 0 then s_mix else &lt;undefined&gt;;
-inStream(c2.s) = if c2.f &gt; 0 then s_mix else &lt;undefined&gt;;
-inStream(c3.s) = if c3.f &gt; 0 then s_mix else &lt;undefined&gt;;
-</code></pre><p>
-<br>
-</p>
-</html>"            ));
+<strong>inStream</strong>(c1.s) = <strong>if</strong> c1.f > 0 <strong>then</strong> s_mix <strong>else</strong> &lt;undefined&gt;;
+<strong>inStream</strong>(c2.s) = <strong>if</strong> c2.f > 0 <strong>then</strong> s_mix <strong>else</strong> &lt;undefined&gt;;
+<strong>inStream</strong>(c3.s) = <strong>if</strong> c3.f > 0 <strong>then</strong> s_mix <strong>else</strong> &lt;undefined&gt;;
+</pre></blockquote>
+
+</html>"    ));
     end Connectors;
 
     package Conventions "约定"
@@ -510,7 +520,7 @@ y[i,2] = b[i]
 
             annotation(Documentation(info = "<html>
 <p>
-<a href=\"modelica://Modelica.UsersGuide.Conventions.ModelicaCode\">Modelica code</a> 类和实例名的约定;
+<a href=\"modelica://Modelica.UsersGuide.Conventions.ModelicaCode\">Modelica code</a> 类和实例名的约定；
 参数和变量是分开指定的。在本节中总结了如何参考
 HTML文档中的Modelica代码。
 </p>
@@ -520,10 +530,10 @@ HTML文档中的Modelica代码。
 和<code>&lt;/code&gt;</code>应该使用，例如，<br>
 <code><strong>parameter</strong> Modelica.Units.SI.Time tStart &quot;Start time&quot;</code></li>
 <li> 编写多行或单行代码段作为引用的预格式化文本，即嵌入在
-<code>&lt;blockquote&gt;&lt;pre&gt;</code>和<code>&lt;/pre&gt;&lt;/blockquote&gt;</code>标签.</li>
-<li> 多行或单行代码不得额外缩进.</li>
-<li> 内联代码段可以用<code>&lt;code&gt;</code>和<code>&lt;/code&gt;</code>进行排版.</li>
-<li> 在代码段中，使用粗体强调Modelica关键字.</li>
+<code>&lt;blockquote&gt;&lt;pre&gt;</code>和<code>&lt;/pre&gt;&lt;/blockquote&gt;</code>标签。</li>
+<li> 多行或单行代码不得额外缩进。</li>
+<li> 内联代码段可以用<code>&lt;code&gt;</code>和<code>&lt;/code&gt;</code>进行排版。</li>
+<li> 在代码段中，使用粗体强调Modelica关键字。</li>
 </ol>
 
 <h4>示例</h4>
@@ -561,7 +571,7 @@ HTML文档中的Modelica代码。
 <blockquote><pre>
 <strong>parameter</strong> Modelica.Units.SI.Conductance G=1 &quot;Conductance&quot;;
 </pre></blockquote>
-</html>"                          ));
+</html>"                                    ));
           end Code;
 
           class Equations "方程"
@@ -1072,7 +1082,7 @@ Modelica类的 <a href=\"http://www.w3c.org/\">HTML</a> 文档。
 
           annotation(Documentation(info = "<html>
 
-<p>本软件包中列出的术语应符合<a href=\"http://www.electropedia.org/\">Electropedia</a>的规定。.</p>
+<p>本软件包中列出的术语应符合<a href=\"http://www.electropedia.org/\">Electropedia</a>的规定。</p>
 
 <table border=\"1\" cellpadding=\"2\" cellspacing=\"0\" >
 <caption align=\"bottom\">电气术语拼写表</caption>
@@ -1126,7 +1136,7 @@ Modelica类的 <a href=\"http://www.w3c.org/\">HTML</a> 文档。
 </tr>
 </table>
 
-</html>"          ));
+</html>"                  ));
         end Electrical;
 
         class Magnetic "电磁术语"
@@ -1716,7 +1726,7 @@ email: <a href=\"mailto:author2@example.org\">author2@example.org</a><br>
 
 <p>这段代码出现在下面的\"Revisions\"一节中。</p>
 
-</html>"      ,
+</html>"      , 
             revisions = "<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr>
@@ -2237,10 +2247,50 @@ annotation(version      = \"4.0.1\",
 </ul>
 </html>"              ));
       end VersionManagement;
-      class Version_4_0_0_TY_1_build_6 "版本4.0.0.TY.1 build 6(2025年7月30日)"
+      class Version_4_0_0_TY_1_build_8 "版本4.0.0.TY.1 build 8(2025年12月30日)"
+        extends Modelica.Icons.ReleaseNotes;
+
+        annotation(Documentation(info="<html><p>
+<span style=\"font-size: 22px;\"><strong>版本说明</strong></span>
+</p>
+<p>
+<span style=\"font-size: 19px;\"><strong>Version 4.0.0.TY.1 build 8，2025.12.30</strong></span>
+</p>
+<p>
+<br>1. 新增2个Blocks模型，具体见下表：<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"100\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"293.36\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">KinematicPTPJerk</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Sources.KinematicPTPJerk</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">在给定的运动学约束条件下，以尽可能快的速度沿一定距离移动</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">TYAdapters</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Interfaces.TYAdapters</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">用于规避模型求导失败问题</td></tr></tbody></table><p>
+<br>2. 优化了LookupTable1D、LookupTable2D、LookupTable3D、Equality、Add、Add3、Product组件，具体见下表：<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"100\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"384.33\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable1D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable1D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">模型中保护变量增加parameter修饰，避免出现翻译效率慢的问题</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable2D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable2D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">模型中保护变量增加parameter修饰，避免出现翻译效率慢的问题</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">LookupTable3D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Tables.NTables.LookupTable3D</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">模型中保护变量增加parameter修饰，避免出现翻译效率慢的问题</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Equality</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Logical.Equality</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">用于消除警告</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Add</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Add</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">增加可选整数类型和布尔类型数据，扩大使用范围</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Add3</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Add3</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">增加可选整数类型和布尔类型数据，扩大使用范围</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Product</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Product</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">增加可选整数类型和布尔类型数据，扩大使用范围</td></tr></tbody></table><p>
+<br>
+</p>
+</html>"));
+      end Version_4_0_0_TY_1_build_8;
+      class Version_4_0_0_TY_1_build_7 "版本4.0.0.TY.1 build 7(2025年8月30日)"
         extends Modelica.Icons.ReleaseNotes;
 
         annotation(Documentation(info = "<html><p>
+<span style=\"font-size: 22px;\"><strong>版本说明</strong></span>
+</p>
+<p>
+<span style=\"font-size: 19px;\"><strong>Version 4.0.0.TY.1 build 7，2025.08.30</strong></span>
+</p>
+<p>
+<br>1. 新增1个Blocks模型，具体见下表：<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"100\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"293.36\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">功能描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">FFT</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.FFT</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">快速傅里叶变换</td></tr></tbody></table><p>
+<br>2. 补充Modelica.Media中ParticalSimpleGasMedium和ParticalSimpleMediume缺失的物理属性函数，以确保在进行介质切换时不会出现错误。<br>
+</p>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"100\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"594.34\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">density_derp_h</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Media.Interfaces.PartialSimpleIdealGasMedium.density_derp_h</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">返回在恒定比焓下，相对于压力的密度导数</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">density_derh_p</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Media.Interfaces.PartialSimpleIdealGasMedium.density_derh_p</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">返回在恒定压力下，相对于比焓的密度导数</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">density_derp_h</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Media.Interfaces.PartialSimpleMedium.density_derp_h</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">返回在恒定比焓下，相对于压力的密度导数</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">density_derh_p</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Media.Interfaces.PartialSimpleMedium.density_derh_p</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">返回在恒定压力下，相对于比焓的密度导数</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">specificInternalEnergy_derT_p</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Media.Interfaces.PartialSimpleMedium.specificInternalEnergy_derT_p</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">返回在恒定压力下，相对于温度的比内能导数</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">specificInternalEnergy_derp_T</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Media.Interfaces.PartialSimpleMedium.specificInternalEnergy_derp_T</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">返回在恒定温度下，相对于压力的比内能导数</td></tr></tbody></table><p>
+<br>
+</p>
+</html>"      ));
+      end Version_4_0_0_TY_1_build_7;
+      class Version_4_0_0_TY_1_build_6 "版本4.0.0.TY.1 build 6(2025年7月30日)"
+        extends Modelica.Icons.ReleaseNotes;
+
+        annotation(Documentation(info="<html><p>
 <span style=\"font-size: 22px;\"><strong>版本说明</strong></span>
 </p>
 <p>
@@ -2252,16 +2302,10 @@ annotation(version      = \"4.0.1\",
 <table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"100\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"293.36\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">功能描述</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Cot</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Math.Cot</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">用于计算输入值的余切值</td></tr></tbody></table><p>
 <br>2.修改时间相关表格模型的描述说明，具体见下表：<br>
 </p>
-<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"196.24\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"381.96\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化说明</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTimeTable</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Sources.CombiTimeTable</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">修改对MAT文件支持版本的说明</td></tr></tbody></table><p>
-<br>
+<table style=\"width: 100%;\"><tbody><tr><th colSpan=\"1\" rowSpan=\"1\" width=\"196.24\">模型名称</th><th colSpan=\"1\" rowSpan=\"1\" width=\"381.96\">模型路径</th><th colSpan=\"1\" rowSpan=\"1\" width=\"auto\">优化说明</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">CombiTimeTable</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">Modelica.Blocks.Sources.CombiTimeTable</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">修改对MAT文件支持版本的说明<br></td></tr></tbody></table><p>
+3.优化Modelica.Blocks.Math.RealFFTWithOutput模块存在的性能问题<br><br>
 </p>
-<p>
-3.优化Modelica.Blocks.Math.RealFFTWithOutput模块存在的性能问题
-</p>
-<p>
-<br>
-</p>
-</html>"            ));
+</html>"      ));
       end Version_4_0_0_TY_1_build_6;
       class Version_4_0_0_TY_1_build_5 "版本4.0.0.TY.1 build 5(2025年6月30日)"
         extends Modelica.Icons.ReleaseNotes;
@@ -2400,7 +2444,6 @@ annotation(version      = \"4.0.1\",
 </p>
 </html>"            ));
       end Version_4_0_0_TY_1;
-
       class Version_4_0_0 "版本4.0.0(2020年6月4日)"
         extends Modelica.Icons.ReleaseNotes;
 
@@ -8141,8 +8184,8 @@ end BooleanStep;
 <p>连接器<em>Surface_a</em>和<em>Surface_b</em>的定义:<br>
 <code>flow SIunits.HeatFlux q;</code> changed to <code>flow SIunits.HeatFlowRate q;</code></p>
 <p><em>MultiBody.Parts.InertialSystem</em></p>
-<p>图标纠正.</p>
-</html>"            ));
+<p>图标纠正。</p>
+</html>"                  ));
       end Version_1_5;
 
       class Version_1_4 "版本1.4(2001年6月28日)"
@@ -8803,27 +8846,27 @@ Sine sin1(outPort(redeclare type SignalType=Modelica.SIunits.Torque))
   end UsersGuide;
 
   annotation(
-    preferredView = "info",
-    version = "4.0.0.TY.1",
-    versionDate = "2025-04-18",
-    dateModified = "2025-04-18 15:00:00Z",
-    revisionId = "e2983375f2 2024-04-04 08:28:31 +0200",
-    uses(Complex(version = "4.0.0.TY.1"), ModelicaServices(version = "4.0.0.TY.1")),
+    preferredView = "info", 
+    version = "4.0.0.TY.1", 
+    versionDate = "2025-04-18", 
+    dateModified = "2025-04-18 15:00:00Z", 
+    revisionId = "e2983375f2 2024-04-04 08:28:31 +0200", 
+    uses(Complex(version = "4.0.0.TY.1"), ModelicaServices(version = "4.0.0.TY.1")), 
     conversion(
-    from(version = {"3.0", "3.0.1", "3.1", "3.2", "3.2.1", "3.2.2", "3.2.3"}, script = "modelica://Modelica/Resources/Scripts/Conversion/ConvertModelica_from_3.2.3_to_4.0.0.mos")),
+    from(version = {"3.0", "3.0.1", "3.1", "3.2", "3.2.1", "3.2.2", "3.2.3"}, script = "modelica://Modelica/Resources/Scripts/Conversion/ConvertModelica_from_3.2.3_to_4.0.0.mos")), 
     Icon(coordinateSystem(extent = {{-100.0, -100.0}, {100.0, 100.0}}), graphics = {
     Polygon(
-    origin = {-6.9888, 20.048},
-    pattern = LinePattern.None,
-    fillPattern = FillPattern.Solid,
-    points = {{-93.0112, 10.3188}, {-93.0112, 10.3188}, {-73.011, 24.6}, {-63.011, 31.221}, {-51.219, 36.777}, {-39.842, 38.629}, {-31.376, 36.248}, {-25.819, 29.369}, {-24.232, 22.49}, {-23.703, 17.463}, {-15.501, 25.135}, {-6.24, 32.015}, {3.02, 36.777}, {15.191, 39.423}, {27.097, 37.306}, {32.653, 29.633}, {35.035, 20.108}, {43.501, 28.046}, {54.085, 35.19}, {65.991, 39.952}, {77.897, 39.688}, {87.422, 33.338}, {91.126, 21.696}, {90.068, 9.525}, {86.099, -1.058}, {79.749, -10.054}, {71.283, -21.431}, {62.816, -33.337}, {60.964, -32.808}, {70.489, -16.14}, {77.368, -2.381}, {81.072, 10.054}, {79.749, 19.05}, {72.605, 24.342}, {61.758, 23.019}, {49.587, 14.817}, {39.003, 4.763}, {29.214, -6.085}, {21.012, -16.669}, {13.339, -26.458}, {5.401, -36.777}, {-1.213, -46.037}, {-6.24, -53.446}, {-8.092, -52.387}, {-0.684, -40.746}, {5.401, -30.692}, {12.81, -17.198}, {19.424, -3.969}, {23.658, 7.938}, {22.335, 18.785}, {16.514, 23.283}, {8.047, 23.019}, {-1.478, 19.05}, {-11.267, 11.113}, {-19.734, 2.381}, {-29.259, -8.202}, {-38.519, -19.579}, {-48.044, -31.221}, {-56.511, -43.392}, {-64.449, -55.298}, {-72.386, -66.939}, {-77.678, -74.612}, {-79.53, -74.083}, {-71.857, -61.383}, {-62.861, -46.037}, {-52.278, -28.046}, {-44.869, -15.346}, {-38.784, -2.117}, {-35.344, 8.731}, {-36.403, 19.844}, {-42.488, 23.813}, {-52.013, 22.49}, {-60.744, 16.933}, {-68.947, 10.054}, {-76.884, 2.646}, {-93.0112, -12.1707}, {-93.0112, -12.1707}},
-    smooth = Smooth.Bezier),
+    origin = {-6.9888, 20.048}, 
+    pattern = LinePattern.None, 
+    fillPattern = FillPattern.Solid, 
+    points = {{-93.0112, 10.3188}, {-93.0112, 10.3188}, {-73.011, 24.6}, {-63.011, 31.221}, {-51.219, 36.777}, {-39.842, 38.629}, {-31.376, 36.248}, {-25.819, 29.369}, {-24.232, 22.49}, {-23.703, 17.463}, {-15.501, 25.135}, {-6.24, 32.015}, {3.02, 36.777}, {15.191, 39.423}, {27.097, 37.306}, {32.653, 29.633}, {35.035, 20.108}, {43.501, 28.046}, {54.085, 35.19}, {65.991, 39.952}, {77.897, 39.688}, {87.422, 33.338}, {91.126, 21.696}, {90.068, 9.525}, {86.099, -1.058}, {79.749, -10.054}, {71.283, -21.431}, {62.816, -33.337}, {60.964, -32.808}, {70.489, -16.14}, {77.368, -2.381}, {81.072, 10.054}, {79.749, 19.05}, {72.605, 24.342}, {61.758, 23.019}, {49.587, 14.817}, {39.003, 4.763}, {29.214, -6.085}, {21.012, -16.669}, {13.339, -26.458}, {5.401, -36.777}, {-1.213, -46.037}, {-6.24, -53.446}, {-8.092, -52.387}, {-0.684, -40.746}, {5.401, -30.692}, {12.81, -17.198}, {19.424, -3.969}, {23.658, 7.938}, {22.335, 18.785}, {16.514, 23.283}, {8.047, 23.019}, {-1.478, 19.05}, {-11.267, 11.113}, {-19.734, 2.381}, {-29.259, -8.202}, {-38.519, -19.579}, {-48.044, -31.221}, {-56.511, -43.392}, {-64.449, -55.298}, {-72.386, -66.939}, {-77.678, -74.612}, {-79.53, -74.083}, {-71.857, -61.383}, {-62.861, -46.037}, {-52.278, -28.046}, {-44.869, -15.346}, {-38.784, -2.117}, {-35.344, 8.731}, {-36.403, 19.844}, {-42.488, 23.813}, {-52.013, 22.49}, {-60.744, 16.933}, {-68.947, 10.054}, {-76.884, 2.646}, {-93.0112, -12.1707}, {-93.0112, -12.1707}}, 
+    smooth = Smooth.Bezier), 
     Ellipse(
-    origin = {40.8208, -37.7602},
-    fillColor = {161, 0, 4},
-    pattern = LinePattern.None,
-    fillPattern = FillPattern.Solid,
-    extent = {{-17.8562, -17.8563}, {17.8563, 17.8562}})}),
+    origin = {40.8208, -37.7602}, 
+    fillColor = {161, 0, 4}, 
+    pattern = LinePattern.None, 
+    fillPattern = FillPattern.Solid, 
+    extent = {{-17.8562, -17.8563}, {17.8563, 17.8562}})}), 
     Documentation(info = "<html>
 <div>
 <img src=\"modelica://Modelica/Resources/Images/Logos/Modelica_Libraries.svg\" width=\"250\">

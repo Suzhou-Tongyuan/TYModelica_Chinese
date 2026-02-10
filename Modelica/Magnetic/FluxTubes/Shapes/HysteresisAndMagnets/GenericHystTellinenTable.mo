@@ -1,12 +1,12 @@
-﻿within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
+within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
 model GenericHystTellinenTable
   "基于 Tellinen 模型和表格数据的通用铁磁滞后磁通管"
 
   parameter FluxTubes.Material.HysteresisTableData.BaseData mat=
     FluxTubes.Material.HysteresisTableData.BaseData() "材料特性" 
-    annotation (choicesAllMatching=true, Dialog(group="Hysteresis"));
+    annotation (choicesAllMatching=true, Dialog(group="磁滞"));
   parameter Real K = 1
-    "饱和区的滞后斜率 (K*mu_0)" annotation(Dialog(group="Hysteresis"));
+    "饱和区的滞后斜率 (K*mu_0)" annotation(Dialog(group="磁滞"));
 
   extends BaseClasses.GenericHysteresisTellinen(      mu0=mu_0*K, sigma=mat.sigma);
 

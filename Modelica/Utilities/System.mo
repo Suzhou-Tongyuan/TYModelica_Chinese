@@ -25,11 +25,11 @@ end setWorkDirectory;
 function getEnvironmentVariable "获取环境变量的内容"
   extends Modelica.Icons.Function;
   input String name "环境变量名称";
-  input Boolean convertToSlash =  false
+  input Boolean convertToSlash =  false 
       "True，如果环境变量中的本地目录分隔符必须更改为'/'";
-  output String content
+  output String content 
       "环境变量的内容(如果不存在则为空)";
-  output Boolean exist
+  output Boolean exist 
       "= true，如果环境变量存在;= false，如果不存在";
   external "C" ModelicaInternal_getenv(name, convertToSlash, content, exist) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaInternal.h\"", Library="ModelicaExternalC");
     annotation (Documentation(info="<html>
@@ -41,7 +41,7 @@ impure function setEnvironmentVariable "设置本地环境变量的内容"
   extends Modelica.Icons.Function;
   input String name "环境变量名称";
   input String content "环境变量的值";
-  input Boolean convertFromSlash =  false
+  input Boolean convertFromSlash =  false 
       "True，如果环境变量中的'/'必须更改为本机目录分隔符";
 external "C" ModelicaInternal_setenv(name, content, convertFromSlash) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaInternal.h\"", Library="ModelicaExternalC");
     annotation (Documentation(info="<html>

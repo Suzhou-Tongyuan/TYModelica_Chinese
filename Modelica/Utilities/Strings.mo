@@ -22,10 +22,10 @@ Strings.<strong>length</strong>(string);
   pure function substring "返回由开始和结束索引定义的子字符串"
     extends Modelica.Icons.Function;
     input String string "从其中查询子字符串的字符串";
-    input Integer startIndex(min=1)
+    input Integer startIndex(min=1) 
       "子字符串的字符位置begin (index=1是字符串中的第一个字符)";
     input Integer endIndex(min=1) "子字符串结束的字符位置";
-    output String result
+    output String result 
       "包含子字符串的字符串[startIndex:endIndex]";
   external "C" result = ModelicaStrings_substring(string,startIndex,endIndex) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaStrings.h\"", Library="ModelicaExternalC");
     annotation (Documentation(info="<html>
@@ -114,7 +114,7 @@ e.g., \"a\" &lt; \"b\";
     extends Modelica.Icons.Function;
     input String string1;
     input String string2;
-    input Boolean caseSensitive=true
+    input Boolean caseSensitive=true 
       "= 如果在比较中忽略小写和大写，则为False";
     output Boolean identical "如果string1与string2相同，则为True";
   algorithm
@@ -134,7 +134,7 @@ Strings.<strong>isEqual</strong>(string1, string2, caseSensitive=true);
 </html>"  ));
   end isEqual;
 
-  function isEmpty
+  function isEmpty 
     "如果字符串为空(只有空白字符)则返回true"
     extends Modelica.Icons.Function;
     input String string;
@@ -177,7 +177,7 @@ isEmpty(\"a\");      // returns false
     input String string "被分析的字符串";
     input String searchString "在String中搜索的字符串";
     input Integer startIndex(min=1)=1 "从索引startIndex开始搜索";
-    input Boolean caseSensitive=true
+    input Boolean caseSensitive=true 
       "= False，如果计数忽略小写和大写";
     output Integer result "'searchString'在'string'中出现的次数";
   protected
@@ -216,9 +216,9 @@ Strings.<strong>count</strong>(string, searchString, startIndex=1,
     input String string "被分析的字符串";
     input String searchString "在String中搜索的字符串";
     input Integer startIndex(min=1)=1 "从索引startIndex开始搜索";
-    input Boolean caseSensitive=true
+    input Boolean caseSensitive=true 
       "= False，如果在搜索中忽略小写和大写";
-     output Integer index
+     output Integer index 
       "'searchString'在'string'中第一次出现的开头的索引，如果不存在则为零";
   protected
     Integer lengthSearchString = length(searchString);
@@ -228,7 +228,7 @@ Strings.<strong>count</strong>(string, searchString, startIndex=1,
   algorithm
     index := 0;
     while i <= i_max loop
-       if isEqual(substring(string,i,i+len),
+       if isEqual(substring(string,i,i+len), 
                   searchString, caseSensitive) then
           index := i;
           i := i_max + 1;
@@ -260,11 +260,11 @@ index = Strings.<strong>find</strong>(string, searchString, startIndex=1,
     extends Modelica.Icons.Function;
     input String string "被分析的字符串";
     input String searchString "在String中搜索的字符串";
-    input Integer startIndex(min=0)=0
+    input Integer startIndex(min=0)=0 
       "从索引startIndex开始搜索。如果startIndex = 0，从长度(字符串)开始";
-    input Boolean caseSensitive=true
+    input Boolean caseSensitive=true 
       "= False，如果在搜索中忽略小写和大写";
-    output Integer index
+    output Integer index 
       "'searchString'最后一次出现在'string'中的开头的索引，如果不存在则为零";
   protected
     Integer lenString = length(string);
@@ -275,7 +275,7 @@ index = Strings.<strong>find</strong>(string, searchString, startIndex=1,
     i := if startIndex == 0 or startIndex > iMax then iMax else startIndex;
     index := 0;
     while i >= 1 loop
-       if isEqual(substring(string,i,i+lenSearchString-1),
+       if isEqual(substring(string,i,i+lenSearchString-1), 
                   searchString, caseSensitive) then
           index := i;
           i := 0;
@@ -305,18 +305,18 @@ index = Strings.<strong>findLast</strong>(string, searchString,
 </html>"  ));
   end findLast;
 
-  function replace
+  function replace 
     "从左到右替换不重叠的字符串"
     extends Modelica.Icons.Function;
     input String string "要修改的字符串";
-    input String searchString
+    input String searchString 
       "用'replaceString'替换'string'中不重叠的'searchString'";
-    input String replaceString
+    input String replaceString 
       "替换' String'中的'searchString'的字符串";
     input Integer startIndex=1 "Start search at index startIndex";
-    input Boolean replaceAll=true
+    input Boolean replaceAll=true 
       "= False，如果只替换第一个出现项，否则替换所有出现项";
-    input Boolean caseSensitive=true
+    input Boolean caseSensitive=true 
       "= false，如果在搜索searchString时忽略小写和大写";
     output String result "替换操作的结果字符串";
   protected
@@ -383,9 +383,9 @@ Strings.<strong>replace</strong>(string, searchString, replaceString,
   function sort "按字母顺序排序字符串向量"
     extends Modelica.Icons.Function;
     input String stringVector1[:] "字符串向量";
-    input Boolean caseSensitive=true
+    input Boolean caseSensitive=true 
       "= false，如果在比较stringVector1的元素时忽略小写和大写";
-    output String stringVector2[size(stringVector1,1)]
+    output String stringVector2[size(stringVector1,1)] 
       "按字母顺序排序的stringVector1";
     /* shellsort算法;应该在以后改进 */
   protected
@@ -404,7 +404,7 @@ Strings.<strong>replace</strong>(string, searchString, replaceString,
        while i < nStringVector1 loop
           j := i-gap;
           if j >= 0 then
-             swap := compare(stringVector2[j+1], stringVector2[j+gap+1], caseSensitive)
+             swap := compare(stringVector2[j+1], stringVector2[j+gap+1], caseSensitive) 
                      == Modelica.Utilities.Types.Compare.Greater;
           else
              swap := false;
@@ -416,7 +416,7 @@ Strings.<strong>replace</strong>(string, searchString, replaceString,
              stringVector2[j+gap+1] := tempString;
              j := j - gap;
              if j >= 0 then
-                swap := compare(stringVector2[j+1], stringVector2[j+gap+1], caseSensitive)
+                swap := compare(stringVector2[j+1], stringVector2[j+gap+1], caseSensitive) 
                         == Modelica.Utilities.Types.Compare.Greater;
              else
                 swap := false;
@@ -495,12 +495,12 @@ hashString(\"Controller.noise1\")  // = -1025762750
   function scanToken "扫描下一个令牌并返回它"
     extends Modelica.Icons.Function;
     input String string "要扫描的字符串";
-    input Integer startIndex(min=1) = 1
+    input Integer startIndex(min=1) = 1 
       "从字符startIndex处开始扫描字符串";
-    input Boolean unsigned=false
+    input Boolean unsigned=false 
       "= 如果Real和Integer标记不能以符号开头，则为true";
     output Types.TokenValue token "扫描的令牌";
-    output Integer nextIndex
+    output Integer nextIndex 
       "找到的标记后的字符索引;= 0，如果NoToken";
   protected
     Integer startTokenIndex;
@@ -633,15 +633,15 @@ import T = Modelica.Utilities.Types.TokenType;
 </html>"  ));
   end scanToken;
 
-  function scanReal
+  function scanReal 
     "扫描下一个实数，如果不存在则触发断言"
     extends Modelica.Icons.Function;
     input String string "要扫描的字符串";
-    input Integer startIndex(min=1)=1
+    input Integer startIndex(min=1)=1 
       "从字符startIndex处开始扫描字符串";
-    input Boolean unsigned=false
+    input Boolean unsigned=false 
       "= 真实的符号不应该以符号开始";
-    input String message=""
+    input String message="" 
       "如果扫描不成功，在错误消息中使用的消息";
     output Real number "实数值";
     output Integer nextIndex "在找到的数字之后的字符索引";
@@ -683,15 +683,15 @@ import T = Modelica.Utilities.Types.TokenType;
 </html>"  ));
   end scanReal;
 
-  function scanInteger
+  function scanInteger 
     "扫描下一个整数，如果不存在则触发断言"
     extends Modelica.Icons.Function;
     input String string "要扫描的字符串";
-    input Integer startIndex(min=1)=1
+    input Integer startIndex(min=1)=1 
       "从字符startIndex处开始扫描字符串";
-    input Boolean unsigned=false
+    input Boolean unsigned=false 
       "= 如果整数标记不以符号开头，则为true";
-    input String message=""
+    input String message="" 
       "如果扫描不成功，在错误消息中使用的消息";
     output Integer number "整数的值";
     output Integer nextIndex "在找到的数字之后的字符索引";
@@ -724,13 +724,13 @@ import T = Modelica.Utilities.Types.TokenType;
 </html>"  ));
   end scanInteger;
 
-  function scanBoolean
+  function scanBoolean 
     "扫描下一个布尔值，如果不存在则触发断言"
     extends Modelica.Icons.Function;
     input String string "要扫描的字符串";
-    input Integer startIndex(min=1)=1
+    input Integer startIndex(min=1)=1 
       "从字符startIndex处开始扫描字符串";
-    input String message=""
+    input String message="" 
       "如果扫描不成功，在错误消息中使用的消息";
     output Boolean number "布尔值";
     output Integer nextIndex "在找到的数字之后的字符索引";
@@ -751,7 +751,7 @@ import T = Modelica.Utilities.Types.TokenType;
 
     if nextIndex == startIndex then
        nextIndex :=Advanced.skipWhiteSpace(string, startIndex);
-       syntaxError(string, nextIndex,
+       syntaxError(string, nextIndex, 
          "Expected a Boolean constant, i.e., \"false\" or \"true\" " + message);
     end if;
     annotation (Documentation(info="<html>
@@ -773,13 +773,13 @@ import T = Modelica.Utilities.Types.TokenType;
 </html>"  ));
   end scanBoolean;
 
-  function scanString
+  function scanString 
     "扫描下一个Modelica字符串，如果不存在则触发断言"
     extends Modelica.Icons.Function;
     input String string "要扫描的字符串";
-    input Integer startIndex(min=1)=1
+    input Integer startIndex(min=1)=1 
       "从字符startIndex处开始扫描字符串";
-    input String message=""
+    input String message="" 
       "如果扫描不成功，在错误消息中使用的消息";
     output String result "字符串的值";
     output Integer nextIndex "找到的字符串后的字符索引";
@@ -807,13 +807,13 @@ import T = Modelica.Utilities.Types.TokenType;
 </html>"    ));
   end scanString;
 
-  function scanIdentifier
+  function scanIdentifier 
     "扫描下一个标识符，如果不存在则触发断言"
     extends Modelica.Icons.Function;
     input String string "要扫描的字符串";
-    input Integer startIndex(min=1)=1
+    input Integer startIndex(min=1)=1 
       "从字符startIndex处开始扫描标识符";
-    input String message=""
+    input String message="" 
       "如果扫描不成功，在错误消息中使用的消息";
     output String identifier "标识符的值";
     output Integer nextIndex "在找到的标识符之后的字符索引";
@@ -841,14 +841,14 @@ import T = Modelica.Utilities.Types.TokenType;
 </html>"  ));
   end scanIdentifier;
 
-  function scanDelimiter
+  function scanDelimiter 
     "扫描下一个分隔符，如果不存在则触发断言"
     extends Modelica.Icons.Function;
     input String string "要扫描的字符串";
-    input Integer startIndex(min=1)=1
+    input Integer startIndex(min=1)=1 
       "从字符startIndex处开始扫描分隔符";
     input String requiredDelimiters[:]={","} "搜索的分隔符";
-    input String message=""
+    input String message="" 
       "如果扫描不成功，在错误消息中使用的消息";
     output String delimiter "发现分隔符";
     output Integer nextIndex "在找到的分隔符之后的字符索引";
@@ -904,7 +904,7 @@ import T = Modelica.Utilities.Types.TokenType;
        if size(requiredDelimiters,1) == 1 then
           syntaxError(string, nextIndex, "预期的分隔符 \"" + requiredDelimiters[1] + "\"\n" + message);
        else
-          syntaxError(string, nextIndex, "的分隔符 " +
+          syntaxError(string, nextIndex, "的分隔符 " + 
                       concatenate(requiredDelimiters) + "\n" + message);
        end if;
     end if;
@@ -933,9 +933,9 @@ import T = Modelica.Utilities.Types.TokenType;
   function scanNoToken "扫描字符串并检查它是否不再包含令牌"
     extends Modelica.Icons.Function;
     input String string "要扫描的字符串";
-    input Integer startIndex(min=1)=1
+    input Integer startIndex(min=1)=1 
       "从字符startIndex处开始扫描字符串";
-    input String message=""
+    input String message="" 
       "如果扫描不成功，在错误消息中使用的消息";
   protected
     Integer nextIndex;
@@ -960,7 +960,7 @@ Strings.<strong>scanNoToken</strong>(string, startIndex=1, message=\"\");
 </html>"  ));
   end scanNoToken;
 
-  function syntaxError
+  function syntaxError 
     "打印一条错误消息、一个字符串和扫描检测到错误的索引"
     extends Modelica.Icons.Function;
     input String string "在位置索引处有错误的字符串";
@@ -987,9 +987,9 @@ Strings.<strong>scanNoToken</strong>(string, startIndex=1, message=\"\");
      end if;
 
   // 打印错误信息
-     Streams.error("字符处的语法错误 " + String(index) + " of\n" +
-                   errString + "\n" +
-                   repeat(index2-1, " ") + "*" + "\n" +
+     Streams.error("字符处的语法错误 " + String(index) + " of\n" + 
+                   errString + "\n" + 
+                   repeat(index2-1, " ") + "*" + "\n" + 
                    message);
     annotation (Documentation(info="<html>
 <h4>语法</h4>
@@ -1025,9 +1025,9 @@ Strings.<strong>syntaxError</strong>(string, index, message);
       extends Modelica.Icons.Function;
       input String string;
       input Integer startIndex(min=1)=1 "开始扫描的索引";
-      input Boolean unsigned=false
+      input Boolean unsigned=false 
         "= 真的，如果数字不能以开头 '+' or '-'";
-      output Integer nextIndex
+      output Integer nextIndex 
         "找到的令牌之后的索引(success=true)或扫描失败的索引(success=false)";
       output Real number "实数的值";
       external "C" ModelicaStrings_scanReal(string, startIndex, unsigned, nextIndex, number) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaStrings.h\"", Library="ModelicaExternalC");
@@ -1072,9 +1072,9 @@ digit    ::= '0'|'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9'
       extends Modelica.Icons.Function;
       input String string;
       input Integer startIndex(min=1)=1;
-      input Boolean unsigned=false
+      input Boolean unsigned=false 
         "= true，如果数字不能以'+'或'-'开头";
-      output Integer nextIndex
+      output Integer nextIndex 
         "找到的令牌之后的索引(success=true)或扫描失败的索引(success=false)";
       output Integer number "整数的值";
       external "C" ModelicaStrings_scanInteger(string, startIndex, unsigned, nextIndex, number) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaStrings.h\"", Library="ModelicaExternalC");
@@ -1118,7 +1118,7 @@ digit    ::= '0'|'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9'
       extends Modelica.Icons.Function;
       input String string;
       input Integer startIndex(min=1)=1 "开始扫描的索引";
-      output Integer nextIndex
+      output Integer nextIndex 
         "找到的令牌之后的索引(success=true)或扫描失败的索引(success=false)";
       output String string2 "字符串记号的值";
       external "C" ModelicaStrings_scanString(string, startIndex, nextIndex, string2) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaStrings.h\"", Library="ModelicaExternalC");
@@ -1151,7 +1151,7 @@ digit    ::= '0'|'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9'
       extends Modelica.Icons.Function;
       input String string;
       input Integer startIndex(min=1)=1 "开始扫描的索引";
-      output Integer nextIndex
+      output Integer nextIndex 
         "找到的令牌之后的索引(success=true)或扫描失败的索引(success=false)";
       output String identifier "标识令牌的值";
       external "C" ModelicaStrings_scanIdentifier(string, startIndex, nextIndex, identifier) annotation(IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaStrings.h\"", Library="ModelicaExternalC");

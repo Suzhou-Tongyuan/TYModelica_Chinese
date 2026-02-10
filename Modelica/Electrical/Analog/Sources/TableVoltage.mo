@@ -1,14 +1,14 @@
 ﻿within Modelica.Electrical.Analog.Sources;
 model TableVoltage "线性插值表电压源"
   extends Interfaces.VoltageSource;
-  parameter Real table[:,:] = [0, 0; 1, 1; 2, 4]
+  parameter Real table[:,:] = [0, 0; 1, 1; 2, 4] 
     "表格数据(时间位于第一列，电压位于第二列)";
 
   annotation(
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
-    100}}), graphics = {Line(points = {{-58, -36}, {-58, 84}, {42, 84}, {42, -36},
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
+    100}}), graphics = {Line(points = {{-58, -36}, {-58, 84}, {42, 84}, {42, -36}, 
     {-58, -36}, {-58, -6}, {42, -6}, {42, 24}, {-58, 24}, {-58, 54}, {42, 54}, {
-    42, 84}, {-8, 84}, {-8, -37}}, color = {192, 192, 192})}),
+    42, 84}, {-8, 84}, {-8, -37}}, color = {192, 192, 192})}), 
     Documentation(info = "<html>
 <p>这个电压源使用了Modelica.Blocks.Sources库中相应的信号源。关于Blocks库中参数的意义，需要特别注意。另外，这里引入了一个offset参数，它将被添加到blocks源计算出的值中。startTime参数可用于沿时间轴平移的源模块。
 </p>
@@ -54,7 +54,7 @@ If, e.g., time = 1.0, the voltage v =  0.0 (before event), 1.0 (after event)
 <img src=\"modelica://Modelica/Resources/Images/Electrical/Analog/Sources/TableVoltage.png\"
      alt=\"TableVoltage.png\">
 </div>
-</html>",
+</html>", 
     revisions = "<html>
 <ul>
 <li><em> 1998   </em>

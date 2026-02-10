@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Interfaces;
-partial function partialGravityAcceleration
+partial function partialGravityAcceleration 
   "用于World对象中重力函数的接口"
   extends Modelica.Icons.Function;
-  input SI.Position r[3]
+  input SI.Position r[3] 
     "从全局坐标系到实际点的位置矢量，在全局坐标系中解析";
-  output SI.Acceleration gravity[3]
+  output SI.Acceleration gravity[3] 
     "在位置r处的重力加速度，在全局坐标系中解析";
   annotation (Documentation(info="<html>
 <p>

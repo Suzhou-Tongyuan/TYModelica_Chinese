@@ -1,19 +1,19 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.FixedShape;
-model HollowCylinderRadialFlux
+model HollowCylinderRadialFlux 
 "具有固定形状径向通量和线性材料特性的空心圆筒"
 
   extends BaseClasses.FixedShape;
   extends Modelica.Magnetic.QuasiStatic.FluxTubes.Icons.HollowCylinderRadialFlux;
 
   parameter SI.Length l=0.01 "宽度（与通量方向正交）" 
-                                           annotation (Dialog(group=
-          "Fixed geometry", groupImage=
+                                           annotation (Dialog(group= 
+          "Fixed geometry", groupImage= 
           "modelica://Modelica/Resources/Images/Magnetic/QuasiStatic/FluxTubes/HollowCylinderRadialFlux_qs.png"));
   parameter SI.Radius r_i=0.01 "空心圆柱体的内半径" 
     annotation (Dialog(group="Fixed geometry"));
   parameter SI.Radius r_o=0.02 "空心圆柱体外半径" 
     annotation (Dialog(group="Fixed geometry"));
-  parameter SI.Angle alpha=2*Modelica.Constants.pi
+  parameter SI.Angle alpha=2*Modelica.Constants.pi 
   "中心角";
 equation
   A = l*pi*(r_o + r_i);

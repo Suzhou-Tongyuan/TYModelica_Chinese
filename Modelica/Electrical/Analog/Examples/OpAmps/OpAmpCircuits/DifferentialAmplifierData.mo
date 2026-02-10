@@ -25,7 +25,7 @@ record DifferentialAmplifierData "差分放大器的数据记录"
     annotation(Dialog(group = "OpAmp"));
   parameter SI.Resistance RInstrument = 100e3 "仪器的输入阻抗" 
     annotation(Dialog(group = "Measurement"));
-  annotation(defaultComponentPrefixes = "parameter", defaultComponentName = "data",
+  annotation(defaultComponentPrefixes = "parameter", defaultComponentName = "data", 
     Documentation(info = "<html>
 <p>
 相关参数分类的总结：

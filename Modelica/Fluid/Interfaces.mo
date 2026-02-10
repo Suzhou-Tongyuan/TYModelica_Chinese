@@ -1,200 +1,200 @@
 ﻿within Modelica.Fluid;
-package Interfaces
+package Interfaces 
   "稳态和非稳态、混和相、多物质、不可压缩和可压缩流动的接口"
 
   extends Modelica.Icons.InterfacesPackage;
 
-  connector FluidPort
+  connector FluidPort 
     "管网中准一维流体流动的接口(不可压缩或可压缩、单相或多相、一种或多种物质)"
 
-    replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+    replaceable package Medium = Modelica.Media.Interfaces.PartialMedium 
       "介质模型" annotation(choicesAllMatching = true);
 
-    flow Medium.MassFlowRate m_flow
+    flow Medium.MassFlowRate m_flow 
       "从接口进入组件的质量流量";
     Medium.AbsolutePressure p "接口处热力学压力";
-    stream Medium.SpecificEnthalpy h_outflow
+    stream Medium.SpecificEnthalpy h_outflow 
       "m_flow<0时接口附近热力学比焓";
-    stream Medium.MassFraction Xi_outflow[Medium.nXi]
+    stream Medium.MassFraction Xi_outflow[Medium.nXi] 
       "如果 m_flow < 0, 靠近连接点的独立混合物的质量分数 m_i/m";
-    stream Medium.ExtraProperty C_outflow[Medium.nC]
+    stream Medium.ExtraProperty C_outflow[Medium.nC] 
       "如果 m_flow < 0, 靠近连接点的性质 c_i/m";
     annotation();
   end FluidPort;
 
   connector FluidPort_a "设计入口处的通用流体连接器"
     extends FluidPort;
-    annotation(defaultComponentName = "port_a",
-      Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,
+    annotation(defaultComponentName = "port_a", 
+      Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, 
       -100}, {100, 100}}), graphics = {Ellipse(
-      extent = {{-40, 40}, {40, -40}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid), Text(extent = {{-150, 110}, {150, 50}},
-      textString = "%name")}),
+      extent = {{-40, 40}, {40, -40}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), Text(extent = {{-150, 110}, {150, 50}}, 
+      textString = "%name")}), 
       Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {
       100, 100}}), graphics = {Ellipse(
-      extent = {{-100, 100}, {100, -100}},
-      lineColor = {0, 127, 255},
-      fillColor = {0, 127, 255},
+      extent = {{-100, 100}, {100, -100}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {0, 127, 255}, 
       fillPattern = FillPattern.Solid), Ellipse(
-      extent = {{-100, 100}, {100, -100}},
-      fillColor = {0, 127, 255},
+      extent = {{-100, 100}, {100, -100}}, 
+      fillColor = {0, 127, 255}, 
       fillPattern = FillPattern.Solid)}));
   end FluidPort_a;
 
   connector FluidPort_b "设计出口处的通用流体连接器"
     extends FluidPort;
-    annotation(defaultComponentName = "port_b",
-      Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,
+    annotation(defaultComponentName = "port_b", 
+      Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, 
       -100}, {100, 100}}), graphics = {
       Ellipse(
-      extent = {{-40, 40}, {40, -40}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-40, 40}, {40, -40}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-30, 30}, {30, -30}},
-      lineColor = {0, 127, 255},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
-      Text(extent = {{-150, 110}, {150, 50}}, textString = "%name")}),
+      extent = {{-30, 30}, {30, -30}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
+      Text(extent = {{-150, 110}, {150, 50}}, textString = "%name")}), 
       Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {
       100, 100}}), graphics = {
       Ellipse(
-      extent = {{-100, 100}, {100, -100}},
-      lineColor = {0, 127, 255},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-100, 100}, {100, -100}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-100, 100}, {100, -100}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-100, 100}, {100, -100}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-80, 80}, {80, -80}},
-      lineColor = {0, 127, 255},
-      fillColor = {255, 255, 255},
+      extent = {{-80, 80}, {80, -80}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {255, 255, 255}, 
       fillPattern = FillPattern.Solid)}));
   end FluidPort_b;
 
-  connector FluidPorts_a
+  connector FluidPorts_a 
     "流体连接器, 用于流体接口的矢量(向量维度必须在拖动后添加)."
     extends FluidPort;
-    annotation(defaultComponentName = "ports_a",
+    annotation(defaultComponentName = "ports_a", 
       Diagram(coordinateSystem(
-      preserveAspectRatio = false,
-      extent = {{-50, -200}, {50, 200}},
+      preserveAspectRatio = false, 
+      extent = {{-50, -200}, {50, 200}}, 
       initialScale = 0.2), graphics = {
-      Text(extent = {{-75, 130}, {75, 100}}, textString = "%name"),
+      Text(extent = {{-75, 130}, {75, 100}}, textString = "%name"), 
       Rectangle(
-      extent = {{25, -100}, {-25, 100}},
-      lineColor = {0, 127, 255}),
+      extent = {{25, -100}, {-25, 100}}, 
+      lineColor = {0, 127, 255}), 
       Ellipse(
-      extent = {{-25, 90}, {25, 40}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-25, 90}, {25, 40}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-25, 25}, {25, -25}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-25, 25}, {25, -25}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-25, -40}, {25, -90}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid)}),
+      extent = {{-25, -40}, {25, -90}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid)}), 
       Icon(coordinateSystem(
-      preserveAspectRatio = false,
-      extent = {{-50, -200}, {50, 200}},
+      preserveAspectRatio = false, 
+      extent = {{-50, -200}, {50, 200}}, 
       initialScale = 0.2), graphics = {
       Rectangle(
-      extent = {{50, -200}, {-50, 200}},
-      lineColor = {0, 127, 255},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{50, -200}, {-50, 200}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-50, 180}, {50, 80}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-50, 180}, {50, 80}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-50, 50}, {50, -50}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-50, 50}, {50, -50}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-50, -80}, {50, -180}},
-      fillColor = {0, 127, 255},
+      extent = {{-50, -80}, {50, -180}}, 
+      fillColor = {0, 127, 255}, 
       fillPattern = FillPattern.Solid)}));
   end FluidPorts_a;
 
-  connector FluidPorts_b
+  connector FluidPorts_b 
     "流体连接器, 用于流体接口的矢量(向量维度必须在拖动后添加)."
     extends FluidPort;
-    annotation(defaultComponentName = "ports_b",
+    annotation(defaultComponentName = "ports_b", 
       Diagram(coordinateSystem(
-      preserveAspectRatio = false,
-      extent = {{-50, -200}, {50, 200}},
+      preserveAspectRatio = false, 
+      extent = {{-50, -200}, {50, 200}}, 
       initialScale = 0.2), graphics = {
-      Text(extent = {{-75, 130}, {75, 100}}, textString = "%name"),
+      Text(extent = {{-75, 130}, {75, 100}}, textString = "%name"), 
       Rectangle(
-      extent = {{-25, 100}, {25, -100}}),
+      extent = {{-25, 100}, {25, -100}}), 
       Ellipse(
-      extent = {{-25, 90}, {25, 40}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-25, 90}, {25, 40}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-25, 25}, {25, -25}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-25, 25}, {25, -25}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-25, -40}, {25, -90}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-25, -40}, {25, -90}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-15, -50}, {15, -80}},
-      lineColor = {0, 127, 255},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-15, -50}, {15, -80}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-15, 15}, {15, -15}},
-      lineColor = {0, 127, 255},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-15, 15}, {15, -15}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-15, 50}, {15, 80}},
-      lineColor = {0, 127, 255},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid)}),
+      extent = {{-15, 50}, {15, 80}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid)}), 
       Icon(coordinateSystem(
-      preserveAspectRatio = false,
-      extent = {{-50, -200}, {50, 200}},
+      preserveAspectRatio = false, 
+      extent = {{-50, -200}, {50, 200}}, 
       initialScale = 0.2), graphics = {
       Rectangle(
-      extent = {{-50, 200}, {50, -200}},
-      lineColor = {0, 127, 255},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-50, 200}, {50, -200}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-50, 180}, {50, 80}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-50, 180}, {50, 80}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-50, 50}, {50, -50}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-50, 50}, {50, -50}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-50, -80}, {50, -180}},
-      fillColor = {0, 127, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-50, -80}, {50, -180}}, 
+      fillColor = {0, 127, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-30, 30}, {30, -30}},
-      lineColor = {0, 127, 255},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-30, 30}, {30, -30}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-30, 100}, {30, 160}},
-      lineColor = {0, 127, 255},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-30, 100}, {30, 160}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{-30, -100}, {30, -160}},
-      lineColor = {0, 127, 255},
-      fillColor = {255, 255, 255},
+      extent = {{-30, -100}, {30, -160}}, 
+      lineColor = {0, 127, 255}, 
+      fillColor = {255, 255, 255}, 
       fillPattern = FillPattern.Solid)}));
   end FluidPorts_b;
 
@@ -202,31 +202,31 @@ package Interfaces
     import Modelica.Constants;
     outer Modelica.Fluid.System system "全局属性";
 
-    replaceable package Medium =
+    replaceable package Medium = 
       Modelica.Media.Interfaces.PartialMedium "组件中的介质" 
       annotation(choicesAllMatching = true);
 
-    parameter Boolean allowFlowReversal = system.allowFlowReversal
+    parameter Boolean allowFlowReversal = system.allowFlowReversal 
       "true: 允许反向流, false: 只能从 port_a 流向 port_b" 
       annotation(Dialog(tab = "假设"), Evaluate = true);
 
     Modelica.Fluid.Interfaces.FluidPort_a port_a(
-    redeclare package Medium = Medium,
-      m_flow(min = if allowFlowReversal then -Constants.inf else 0))
+    redeclare package Medium = Medium, 
+      m_flow(min = if allowFlowReversal then -Constants.inf else 0)) 
       "流体连接器 a(正向设计流向是从 port_a 到 port_b)" 
       annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
     Modelica.Fluid.Interfaces.FluidPort_b port_b(
-    redeclare package Medium = Medium,
-      m_flow(max = if allowFlowReversal then +Constants.inf else 0))
+    redeclare package Medium = Medium, 
+      m_flow(max = if allowFlowReversal then +Constants.inf else 0)) 
       "流体连接器 b(正向设计流向是从 port_a 到 port_b)" 
       annotation(Placement(transformation(extent = {{110, -10}, {90, 10}}), iconTransformation(extent = {{110, -10}, {90, 10}})));
     // 模型结构, 例如用于可视化的结构
   protected
-    parameter Boolean port_a_exposesState = false
-      "true: port_a 显示了流体容积的状态";
-    parameter Boolean port_b_exposesState = false
-      "true: port_b.p 显示了流体容积的状态";
-    parameter Boolean showDesignFlowDirection = true
+    parameter Boolean port_a_exposesState = false 
+      "true: port_a 反映流体容积的状态";
+    parameter Boolean port_b_exposesState = false 
+      "true: port_b.p 反映流体容积的状态";
+    parameter Boolean showDesignFlowDirection = true 
       "false: 隐藏模型图标中的箭头";
 
     annotation(
@@ -240,94 +240,94 @@ package Interfaces
 通过 port_a 或接口 port_b 直接访问内部质量或能量存储的扩展模型应适当重新定义受保护的参数 <code><strong>port_a_exposesState</strong></code> 和 <code><strong>port_b_exposesState</strong></code>。
 为了更好地理解流体模型图，这将在接口图标上直观地显示出来。
 </p>
-</html>"),
+</html>"  ), 
       Icon(coordinateSystem(
-      preserveAspectRatio = true,
+      preserveAspectRatio = true, 
       extent = {{-100, -100}, {100, 100}}), graphics = {
       Polygon(
-      points = {{20, -70}, {60, -85}, {20, -100}, {20, -70}},
-      lineColor = {0, 128, 255},
-      fillColor = {0, 128, 255},
-      fillPattern = FillPattern.Solid,
-      visible = showDesignFlowDirection),
+      points = {{20, -70}, {60, -85}, {20, -100}, {20, -70}}, 
+      lineColor = {0, 128, 255}, 
+      fillColor = {0, 128, 255}, 
+      fillPattern = FillPattern.Solid, 
+      visible = showDesignFlowDirection), 
       Polygon(
-      points = {{20, -75}, {50, -85}, {20, -95}, {20, -75}},
-      lineColor = {255, 255, 255},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid,
-      visible = allowFlowReversal),
+      points = {{20, -75}, {50, -85}, {20, -95}, {20, -75}}, 
+      lineColor = {255, 255, 255}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid, 
+      visible = allowFlowReversal), 
       Line(
-      points = {{55, -85}, {-60, -85}},
-      color = {0, 128, 255},
-      visible = showDesignFlowDirection),
+      points = {{55, -85}, {-60, -85}}, 
+      color = {0, 128, 255}, 
+      visible = showDesignFlowDirection), 
       Text(
-      extent = {{-149, -114}, {151, -154}},
-      textColor = {0, 0, 255},
-      textString = "%name"),
+      extent = {{-149, -114}, {151, -154}}, 
+      textColor = {0, 0, 255}, 
+      textString = "%name"), 
       Ellipse(
-      extent = {{-110, 26}, {-90, -24}},
-      fillPattern = FillPattern.Solid,
-      visible = port_a_exposesState),
+      extent = {{-110, 26}, {-90, -24}}, 
+      fillPattern = FillPattern.Solid, 
+      visible = port_a_exposesState), 
       Ellipse(
-      extent = {{90, 25}, {110, -25}},
-      fillPattern = FillPattern.Solid,
+      extent = {{90, 25}, {110, -25}}, 
+      fillPattern = FillPattern.Solid, 
       visible = port_b_exposesState)}));
   end PartialTwoPort;
 
-  partial model PartialTwoPortTransport
+  partial model PartialTwoPortTransport 
     "在两个接口之间输送流体而不储存质量或能量的基类元件"
 
     extends PartialTwoPort(
-      final port_a_exposesState = false,
+      final port_a_exposesState = false, 
       final port_b_exposesState = false);
 
     // 高级
-    // 注意: dp_start 的值应由衍生模型根据本地 dp_nominal 值加以完善
-    parameter Medium.AbsolutePressure dp_start(min = -Modelica.Constants.inf) = 0.01 * system.p_start
-      "猜测 dp = port_a.p - port_b.p" 
+    // 注意: 初始压差(dp_start) 的值需由派生模型基于局部额定压差(dp_nominal)进行优化修正
+    parameter Medium.AbsolutePressure dp_start(min = -Modelica.Constants.inf) = 0.01 * system.p_start 
+      "压差(dp)的猜测值= port_a.p - port_b.p" 
       annotation(Dialog(tab = "高级"));
-    parameter Medium.MassFlowRate m_flow_start = system.m_flow_start
-      "猜测 m_flow = port_a.m_flow" 
+    parameter Medium.MassFlowRate m_flow_start = system.m_flow_start 
+      "质量流量(m_flow)的猜测值= port_a.m_flow" 
       annotation(Dialog(tab = "高级"));
-    // 注意: m_flow_small 的值应由衍生模型根据本地 m_flow_nominal 值加以完善
-    parameter Medium.MassFlowRate m_flow_small = if system.use_eps_Re then system.eps_m_flow * system.m_flow_nominal else system.m_flow_small
+    // 注意: 小质量流量(m_flow_small)的值需由派生模型基于局部额定质量流量(m_flow_nominal)进行优化修正
+    parameter Medium.MassFlowRate m_flow_small = if system.use_eps_Re then system.eps_m_flow * system.m_flow_nominal else system.m_flow_small 
       "零流量正则化的小质量流量" 
       annotation(Dialog(tab = "高级"));
 
     // 诊断
-    parameter Boolean show_T = true
-      "true: 如果计算了 port_a 和 port_b 的温度" 
+    parameter Boolean show_T = true 
+      "true: port_a 和 port_b 的温度已完成计算" 
       annotation(Dialog(tab = "高级", group = "诊断"));
-    parameter Boolean show_V_flow = true
-      "true: 如果计算了流入口的体积流量" 
+    parameter Boolean show_V_flow = true 
+      "true: 流入端口的体积流量已完成计算" 
       annotation(Dialog(tab = "高级", group = "诊断"));
 
     // 变量
     Medium.MassFlowRate m_flow(
-      min = if allowFlowReversal then -Modelica.Constants.inf else 0,
+      min = if allowFlowReversal then -Modelica.Constants.inf else 0, 
       start = m_flow_start) "设计流向的质量流量";
-    SI.Pressure dp(start = dp_start)
+    SI.Pressure dp(start = dp_start) 
       "port_a 和 port_b 之间的压力差(= port_a.p - port_b.p)";
 
-    SI.VolumeFlowRate V_flow =
-      m_flow / Modelica.Fluid.Utilities.regStep(m_flow,
-      Medium.density(state_a),
-      Medium.density(state_b),
-      m_flow_small) if show_V_flow
+    SI.VolumeFlowRate V_flow = 
+      m_flow / Modelica.Fluid.Utilities.regStep(m_flow, 
+      Medium.density(state_a), 
+      Medium.density(state_b), 
+      m_flow_small) if show_V_flow 
       "流入口的体积流量(从 port_a 流向 port_b 接口时为正值)";
 
-    Medium.Temperature port_a_T =
-      Modelica.Fluid.Utilities.regStep(port_a.m_flow,
-      Medium.temperature(state_a),
-      Medium.temperature(Medium.setState_phX(port_a.p, port_a.h_outflow, port_a.Xi_outflow)),
-      m_flow_small) if show_T
-      "若 show_T = true, 靠近 port_a 接口的温度";
-    Medium.Temperature port_b_T =
-      Modelica.Fluid.Utilities.regStep(port_b.m_flow,
-      Medium.temperature(state_b),
-      Medium.temperature(Medium.setState_phX(port_b.p, port_b.h_outflow, port_b.Xi_outflow)),
-      m_flow_small) if show_T
-      "若 show_T = true, 靠近 port_b 接口的温度";
+    Medium.Temperature port_a_T = 
+      Modelica.Fluid.Utilities.regStep(port_a.m_flow, 
+      Medium.temperature(state_a), 
+      Medium.temperature(Medium.setState_phX(port_a.p, port_a.h_outflow, port_a.Xi_outflow)), 
+      m_flow_small) if show_T 
+      "若 show_T = true, 则显示靠近 port_a 接口的温度";
+    Medium.Temperature port_b_T = 
+      Modelica.Fluid.Utilities.regStep(port_b.m_flow, 
+      Medium.temperature(state_b), 
+      Medium.temperature(Medium.setState_phX(port_b.p, port_b.h_outflow, port_b.Xi_outflow)), 
+      m_flow_small) if show_T 
+      "若 show_T = true, 则显示靠近 port_b 接口的温度";
   protected
     Medium.ThermodynamicState state_a "通过 port_a 的流入介质的状态";
     Medium.ThermodynamicState state_b "通过 port_b 的流入介质的状态";
@@ -377,63 +377,63 @@ package Interfaces
 </html>"  ));
   end PartialTwoPortTransport;
 
-  connector HeatPorts_a
+  connector HeatPorts_a 
     "热接口连接器, 用于热接口的矢量(向量维度必须在拖动后添加)."
     extends Modelica.Thermal.HeatTransfer.Interfaces.HeatPort;
-    annotation(defaultComponentName = "heatPorts_a",
+    annotation(defaultComponentName = "heatPorts_a", 
       Icon(coordinateSystem(
-      preserveAspectRatio = false,
-      extent = {{-200, -50}, {200, 50}},
+      preserveAspectRatio = false, 
+      extent = {{-200, -50}, {200, 50}}, 
       initialScale = 0.2), graphics = {
       Rectangle(
-      extent = {{-201, 50}, {200, -50}},
-      lineColor = {127, 0, 0},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-201, 50}, {200, -50}}, 
+      lineColor = {127, 0, 0}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
       Rectangle(
-      extent = {{-171, 45}, {-83, -45}},
-      lineColor = {127, 0, 0},
-      fillColor = {127, 0, 0},
-      fillPattern = FillPattern.Solid),
+      extent = {{-171, 45}, {-83, -45}}, 
+      lineColor = {127, 0, 0}, 
+      fillColor = {127, 0, 0}, 
+      fillPattern = FillPattern.Solid), 
       Rectangle(
-      extent = {{-45, 45}, {43, -45}},
-      lineColor = {127, 0, 0},
-      fillColor = {127, 0, 0},
-      fillPattern = FillPattern.Solid),
+      extent = {{-45, 45}, {43, -45}}, 
+      lineColor = {127, 0, 0}, 
+      fillColor = {127, 0, 0}, 
+      fillPattern = FillPattern.Solid), 
       Rectangle(
-      extent = {{82, 45}, {170, -45}},
-      lineColor = {127, 0, 0},
-      fillColor = {127, 0, 0},
+      extent = {{82, 45}, {170, -45}}, 
+      lineColor = {127, 0, 0}, 
+      fillColor = {127, 0, 0}, 
       fillPattern = FillPattern.Solid)}));
   end HeatPorts_a;
 
-  connector HeatPorts_b
+  connector HeatPorts_b 
     "热接口连接器, 用于热接口的矢量(向量维度必须在拖动后添加)."
     extends Modelica.Thermal.HeatTransfer.Interfaces.HeatPort;
-    annotation(defaultComponentName = "heatPorts_b",
+    annotation(defaultComponentName = "heatPorts_b", 
       Icon(coordinateSystem(
-      preserveAspectRatio = false,
-      extent = {{-200, -50}, {200, 50}},
+      preserveAspectRatio = false, 
+      extent = {{-200, -50}, {200, 50}}, 
       initialScale = 0.2), graphics = {
       Rectangle(
-      extent = {{-200, 50}, {200, -51}},
-      lineColor = {127, 0, 0},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-200, 50}, {200, -51}}, 
+      lineColor = {127, 0, 0}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
       Rectangle(
-      extent = {{-170, 44}, {-82, -46}},
-      lineColor = {127, 0, 0},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-170, 44}, {-82, -46}}, 
+      lineColor = {127, 0, 0}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
       Rectangle(
-      extent = {{-44, 46}, {44, -44}},
-      lineColor = {127, 0, 0},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid),
+      extent = {{-44, 46}, {44, -44}}, 
+      lineColor = {127, 0, 0}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid), 
       Rectangle(
-      extent = {{82, 45}, {170, -45}},
-      lineColor = {127, 0, 0},
-      fillColor = {255, 255, 255},
+      extent = {{82, 45}, {170, -45}}, 
+      lineColor = {127, 0, 0}, 
+      fillColor = {255, 255, 255}, 
       fillPattern = FillPattern.Solid)}));
   end HeatPorts_b;
 
@@ -489,14 +489,14 @@ package Interfaces
 </html>"));
   end PartialHeatTransfer;
 
-  partial model PartialLumpedVolume
+  partial model PartialLumpedVolume 
     "质量守恒、能量守恒的集总容积"
     import Modelica.Fluid.Types;
     import Modelica.Fluid.Types.Dynamics;
     import Modelica.Media.Interfaces.Choices.IndependentVariables;
 
     outer Modelica.Fluid.System system "全局属性";
-    replaceable package Medium =
+    replaceable package Medium = 
       Modelica.Media.Interfaces.PartialMedium "组件中的介质" 
       annotation(choicesAllMatching = true);
 
@@ -518,10 +518,10 @@ package Interfaces
       annotation(Dialog(tab = "初始化"));
     parameter Boolean use_T_start = true "true: 使用 use T_start, false: 使用 h_start" 
       annotation(Dialog(tab = "初始化"), Evaluate = true);
-    parameter Medium.Temperature T_start =
+    parameter Medium.Temperature T_start = 
       if use_T_start then system.T_start else Medium.temperature_phX(p_start, h_start, X_start) "温度初始值" 
       annotation(Dialog(tab = "初始化", enable = use_T_start));
-    parameter Medium.SpecificEnthalpy h_start =
+    parameter Medium.SpecificEnthalpy h_start = 
       if use_T_start then Medium.specificEnthalpy_pTX(p_start, T_start, X_start) else Medium.h_default "比热初始值" 
       annotation(Dialog(tab = "初始化", enable = not use_T_start));
     parameter Medium.MassFraction X_start[Medium.nX] = Medium.X_default "质量分数的起始值 m_i/m" 
@@ -532,10 +532,10 @@ package Interfaces
 
     Medium.BaseProperties medium(
       preferredMediumStates = (if energyDynamics == Dynamics.SteadyState and 
-      massDynamics == Dynamics.SteadyState then false else true),
-      p(start = p_start),
-      h(start = h_start),
-      T(start = T_start),
+      massDynamics == Dynamics.SteadyState then false else true), 
+      p(start = p_start), 
+      h(start = h_start), 
+      T(start = T_start), 
       Xi(start = X_start[1:Medium.nXi]));
     SI.Energy U "流体内能";
     SI.Mass m "流体质量";
@@ -556,8 +556,8 @@ package Interfaces
     parameter Boolean initialize_p = not Medium.singleState "true: 则建立压力初始方程";
     Real[Medium.nC] mC_scaled(min = fill(Modelica.Constants.eps, Medium.nC)) "流体中微量物质的比重";
   equation
-    assert(not (energyDynamics <> Dynamics.SteadyState and massDynamics == Dynamics.SteadyState) or Medium.singleState,
-      "如果 fluidVolume 是固定的，则动力学选项和不储存质量介质的组合不好。");
+    assert(not (energyDynamics <> Dynamics.SteadyState and massDynamics == Dynamics.SteadyState) or Medium.singleState, 
+      "动力学选项组合不当，且当流体体积固定时，介质会出现质量不守恒的情况");
 
     // 总物理量
     m = fluidVolume * medium.d;
@@ -667,18 +667,18 @@ package Interfaces
 <code><strong>mbXi_flow</strong></code>, 物质质量流量,</li>
 <li>
 <code><strong>mbC_flow</strong></code>, 微量物质质量流量.</li>
-</ul></html>"      ));
+</ul></html>"        ));
   end PartialLumpedVolume;
 
-  partial model PartialLumpedFlow
+  partial model PartialLumpedFlow 
     "集总动量平衡的基类"
 
     outer Modelica.Fluid.System system "全局属性";
 
-    replaceable package Medium =
+    replaceable package Medium = 
       Modelica.Media.Interfaces.PartialMedium "组件中的介质" annotation();
 
-    parameter Boolean allowFlowReversal = system.allowFlowReversal
+    parameter Boolean allowFlowReversal = system.allowFlowReversal 
       "true: 允许反向流动, false: 只能沿设计方向流动(m_flow >= 0)" 
       annotation(Dialog(tab = "假设"), Evaluate = true);
 
@@ -687,18 +687,18 @@ package Interfaces
 
     // 流程模型定义的变量
     Medium.MassFlowRate m_flow(
-      min = if allowFlowReversal then -Modelica.Constants.inf else 0,
-      start = m_flow_start,
+      min = if allowFlowReversal then -Modelica.Constants.inf else 0, 
+      start = m_flow_start, 
       stateSelect = if momentumDynamics == Types.Dynamics.SteadyState then StateSelect.default else 
-      StateSelect.prefer)
+      StateSelect.prefer) 
       "状态之间的质量流量";
 
     // 参数
-    parameter Modelica.Fluid.Types.Dynamics momentumDynamics = system.momentumDynamics
+    parameter Modelica.Fluid.Types.Dynamics momentumDynamics = system.momentumDynamics 
       "动量平衡公式" 
       annotation(Dialog(tab = "假设", group = "动力学"), Evaluate = true);
 
-    parameter Medium.MassFlowRate m_flow_start = system.m_flow_start
+    parameter Medium.MassFlowRate m_flow_start = system.m_flow_start 
       "质量流量初值" 
       annotation(Dialog(tab = "初始化"));
 
@@ -747,14 +747,14 @@ package Interfaces
 </html>"  ));
   end PartialLumpedFlow;
 
-  partial model PartialDistributedVolume
+  partial model PartialDistributedVolume 
     "离散容积模型的基类"
     import Modelica.Fluid.Types;
     import Modelica.Fluid.Types.Dynamics;
     import Modelica.Media.Interfaces.Choices.IndependentVariables;
     outer Modelica.Fluid.System system "系统属性";
 
-    replaceable package Medium =
+    replaceable package Medium = 
       Modelica.Media.Interfaces.PartialMedium "组件中的介质" 
       annotation(choicesAllMatching = true);
 
@@ -762,32 +762,32 @@ package Interfaces
     parameter Integer n = 2 "离散容积的数量";
 
     // 为容积模型提供的输入
-    input SI.Volume[n] fluidVolumes
+    input SI.Volume[n] fluidVolumes 
       "容积离散化, 在扩展类中确定";
 
     // 假设
-    parameter Types.Dynamics energyDynamics = system.energyDynamics
+    parameter Types.Dynamics energyDynamics = system.energyDynamics 
       "能量平衡公式" 
       annotation(Evaluate = true, Dialog(tab = "假设", group = "动力学"));
-    parameter Types.Dynamics massDynamics = system.massDynamics
+    parameter Types.Dynamics massDynamics = system.massDynamics 
       "质量平衡公式" 
       annotation(Evaluate = true, Dialog(tab = "假设", group = "动力学"));
-    final parameter Types.Dynamics substanceDynamics = massDynamics
+    final parameter Types.Dynamics substanceDynamics = massDynamics 
       "物质平衡公式" 
       annotation(Evaluate = true, Dialog(tab = "假设", group = "动力学"));
-    final parameter Types.Dynamics traceDynamics = massDynamics
+    final parameter Types.Dynamics traceDynamics = massDynamics 
       "微量物质平衡公式" 
       annotation(Evaluate = true, Dialog(tab = "假设", group = "动力学"));
 
     //初始化
-    parameter Medium.AbsolutePressure p_a_start = system.p_start
+    parameter Medium.AbsolutePressure p_a_start = system.p_start 
       "port a 的压力初值" 
       annotation(Dialog(tab = "初始化"));
-    parameter Medium.AbsolutePressure p_b_start = p_a_start
+    parameter Medium.AbsolutePressure p_b_start = p_a_start 
       "port b 的压力初值" 
       annotation(Dialog(tab = "初始化"));
     final parameter Medium.AbsolutePressure[n] ps_start = if n > 1 then linspace(
-      p_a_start, p_b_start, n) else {(p_a_start + p_b_start) / 2}
+      p_a_start, p_b_start, n) else {(p_a_start + p_b_start) / 2} 
       "压力初值";
 
     parameter Boolean use_T_start = true "true: 使用 T 初值, 否则使用 h 初值" 
@@ -795,21 +795,21 @@ package Interfaces
 
     parameter Medium.Temperature T_start = if use_T_start then system.T_start else 
       Medium.temperature_phX(
-      (p_a_start + p_b_start) / 2,
-      h_start,
+      (p_a_start + p_b_start) / 2, 
+      h_start, 
       X_start) "温度初值" 
       annotation(Evaluate = true, Dialog(tab = "初始化", enable = use_T_start));
     parameter Medium.SpecificEnthalpy h_start = if use_T_start then 
       Medium.specificEnthalpy_pTX(
-      (p_a_start + p_b_start) / 2,
-      T_start,
+      (p_a_start + p_b_start) / 2, 
+      T_start, 
       X_start) else Medium.h_default "比焓初值" 
       annotation(Evaluate = true, Dialog(tab = "初始化", enable = not use_T_start));
-    parameter Medium.MassFraction X_start[Medium.nX] = Medium.X_default
+    parameter Medium.MassFraction X_start[Medium.nX] = Medium.X_default 
       "质量分数的初值 m_i/m" 
       annotation(Dialog(tab = "初始化", enable = Medium.nXi > 0));
     parameter Medium.ExtraProperty C_start[Medium.nC](
-      quantity = Medium.extraPropertiesNames) = Medium.C_default
+      quantity = Medium.extraPropertiesNames) = Medium.C_default 
       "微量物质初值" 
       annotation(Dialog(tab = "初始化", enable = Medium.nC > 0));
 
@@ -823,28 +823,28 @@ package Interfaces
     Medium.ExtraProperty Cs[n,Medium.nC] "微量物质混合物含量";
 
     Medium.BaseProperties[n] mediums(
-      each preferredMediumStates = true,
-      p(start = ps_start),
-      each h(start = h_start),
-      each T(start = T_start),
+      each preferredMediumStates = true, 
+      p(start = ps_start), 
+      each h(start = h_start), 
+      each T(start = T_start), 
       each Xi(start = X_start[1:Medium.nXi]));
 
     //源项, 必须由扩展模型定义(如果未使用, 则归零)
     Medium.MassFlowRate[n] mb_flows "质量流量, 源或汇";
-    Medium.MassFlowRate[n,Medium.nXi] mbXi_flows
+    Medium.MassFlowRate[n,Medium.nXi] mbXi_flows 
       "独立质量流量、源或汇";
-    Medium.ExtraPropertyFlowRate[n,Medium.nC] mbC_flows
+    Medium.ExtraPropertyFlowRate[n,Medium.nC] mbC_flows 
       "微量物质的质量流量, 源或汇";
     SI.EnthalpyFlowRate[n] Hb_flows "焓流, 源或汇";
     SI.HeatFlowRate[n] Qb_flows "热流量, 源或汇";
     SI.Power[n] Wb_flows "机械功率、p*der(V)等";
 
   protected
-    parameter Boolean initialize_p = not Medium.singleState
+    parameter Boolean initialize_p = not Medium.singleState 
       "true: 建立压力初始方程";
 
   equation
-    assert(not (energyDynamics <> Dynamics.SteadyState and massDynamics == Dynamics.SteadyState) or Medium.singleState,
+    assert(not (energyDynamics <> Dynamics.SteadyState and massDynamics == Dynamics.SteadyState) or Medium.singleState, 
       "如果 fluidVolume 是固定的，则动力学选项和不储存质量介质的组合不好。");
 
     // 全部量
@@ -977,15 +977,15 @@ package Interfaces
 </html>"    ));
   end PartialDistributedVolume;
 
-  partial model PartialDistributedFlow
+  partial model PartialDistributedFlow 
     "离散动量平衡基类"
 
     outer Modelica.Fluid.System system "全局属性";
 
-    replaceable package Medium =
+    replaceable package Medium = 
       Modelica.Media.Interfaces.PartialMedium "组件中的介质" annotation();
 
-    parameter Boolean allowFlowReversal = system.allowFlowReversal
+    parameter Boolean allowFlowReversal = system.allowFlowReversal 
       "true: 允许反向流动, false: 只能沿设计方向流动(m_flows >= zeros(m))" 
       annotation(Dialog(tab = "假设"), Evaluate = true);
 
@@ -997,18 +997,18 @@ package Interfaces
 
     // 动量模型定义的变量
     Medium.MassFlowRate[m] m_flows(
-      each min = if allowFlowReversal then -Modelica.Constants.inf else 0,
-      each start = m_flow_start,
+      each min = if allowFlowReversal then -Modelica.Constants.inf else 0, 
+      each start = m_flow_start, 
       each stateSelect = if momentumDynamics == Types.Dynamics.SteadyState then StateSelect.default else 
-      StateSelect.prefer)
+      StateSelect.prefer) 
       "状态之间的质量流量";
 
     // 参数
-    parameter Modelica.Fluid.Types.Dynamics momentumDynamics = system.momentumDynamics
+    parameter Modelica.Fluid.Types.Dynamics momentumDynamics = system.momentumDynamics 
       "动量平衡公式" 
       annotation(Dialog(tab = "假设", group = "动力学"), Evaluate = true);
 
-    parameter Medium.MassFlowRate m_flow_start = system.m_flow_start
+    parameter Medium.MassFlowRate m_flow_start = system.m_flow_start 
       "质量流量初值" 
       annotation(Dialog(tab = "初始化"));
 
@@ -1057,21 +1057,21 @@ package Interfaces
 </html>"));
   end PartialDistributedFlow;
 
-  partial model PartialPressureLoss
+  partial model PartialPressureLoss 
     "面积相同的port_a和port_b压力损失函数的基本流量模型"
     extends Modelica.Fluid.Interfaces.PartialTwoPortTransport;
   protected
     parameter Medium.ThermodynamicState state_dp_small = Medium.setState_pTX(
-      Medium.reference_p,
-      Medium.reference_T,
+      Medium.reference_p, 
+      Medium.reference_T, 
       Medium.reference_X) "计算 dp_small 的介质状态";
-    Medium.Density d_a
+    Medium.Density d_a 
       "当流体从 port_a 接口流向 port_b 时, port_a 的密度";
-    Medium.Density d_b
+    Medium.Density d_b 
       "如果 allowFlowReversal=true, 则为流体从 port_b 流向 port_a 时 port_b 的密度, 否则为 d_a";
-    Medium.DynamicViscosity eta_a
+    Medium.DynamicViscosity eta_a 
       "当流体从 port_a 接口流向 port_b 时, port_a 的动力黏度";
-    Medium.DynamicViscosity eta_b
+    Medium.DynamicViscosity eta_b 
       "如果 allowFlowReversal=true, 则为流体从 port_b 流向 port_a 时 port_b 的动力黏度, 否则为 eta_a";
     annotation();
   equation

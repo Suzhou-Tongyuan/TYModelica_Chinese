@@ -1,10 +1,10 @@
 ﻿within Modelica.Electrical.Machines.Thermal;
-function linearTemperatureDependency
+function linearTemperatureDependency 
   "将一个值(例如电阻)从参考温度转换为实际温度"
   extends Modelica.Icons.Function;
   input Real RRef "TRef处的值";
   input SI.Temperature TRef "参考温度";
-  input SI.LinearTemperatureCoefficient alpha20
+  input SI.LinearTemperatureCoefficient alpha20 
     "20°C处的温度系数";
   input SI.Temperature T "实际温度";
   output Real R "T处的实际值";

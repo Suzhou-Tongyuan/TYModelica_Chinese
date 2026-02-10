@@ -1,10 +1,10 @@
 ﻿within Modelica.Electrical.Polyphase.Functions;
-function symmetricBackTransformationMatrix
+function symmetricBackTransformationMatrix 
   "用于对称分量的逆变换矩阵"
   extends Modelica.Icons.Function; // 使用函数图标
   import Modelica.ComplexMath.fromPolar; // 导入复数工具箱
   input Integer m "相数"; // 输入参数为相数
-  output Complex bTM[m, m]
+  output Complex bTM[m, m] 
     "m相对称分量的逆变换矩阵"; // 输出参数为m相对称分量的逆变换矩阵
 protected
   Integer nBase=numberOfSymmetricBaseSystems(m); // 基本对称系统数量

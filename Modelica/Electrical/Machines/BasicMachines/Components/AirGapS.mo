@@ -2,10 +2,10 @@
 model AirGapS "定子固定坐标系中的气隙"
   parameter SI.Inductance Lm "主磁场电感";
   extends PartialAirGap;
-  SI.Current i_ms[2]
+  SI.Current i_ms[2] 
     "相对于定子固定框架的磁化电流空间矢量";
 protected
-  parameter SI.Inductance L[2, 2]={{Lm,0},{0,Lm}}
+  parameter SI.Inductance L[2, 2]={{Lm,0},{0,Lm}} 
     "电感矩阵";
 equation
   // 相对于定子参考框架的磁化电流
@@ -15,11 +15,11 @@ equation
   // 相对于转子参考框架的磁通链
   psi_mr = transpose(RotationMatrix)*psi_ms;
   annotation (
-    defaultComponentName="airGap",
+    defaultComponentName="airGap", 
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={Text(
-          extent={{-80,40},{0,-40}},
-          textString="S")}),
+          extent={{-80,40},{0,-40}}, 
+          textString="S")}), 
     Documentation(info="<html>
 定子固定坐标系中气隙的模型，仅使用方程。
 </html>"));

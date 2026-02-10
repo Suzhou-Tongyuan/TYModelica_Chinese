@@ -1,12 +1,12 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FundamentalWave.Examples.Components;
-model EddyCurrentLosses
+model EddyCurrentLosses 
   "涡流损耗模型等效电路的比较"
   extends Modelica.Icons.Example;
   constant Integer m=3 "相数";
   // ## 原始值 R = 0.1 Ohm
   parameter SI.Resistance R=0.1 "磁阻";
   parameter SI.Conductance Gc=0.0001 "损失电导";
-  parameter SI.Reluctance R_m=1
+  parameter SI.Reluctance R_m=1 
     "磁路的磁阻";
   parameter Real N=1 "转数";
   output SI.Power lossPower_e=sum(loss_e.conductor.LossPower);
@@ -17,47 +17,47 @@ model EddyCurrentLosses
     annotation (Placement(transformation(extent={{-90,-90},{-70,-70}})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star_e(m=m) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,30})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star_m(m=m) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,-60})));
   Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource 
     sineVoltage_e(
-    m=m,
-    f=1,
-    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
-    V=fill(1/sqrt(2), m),
+    m=m, 
+    f=1, 
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
+    V=fill(1/sqrt(2), m), 
     gamma(fixed=true, start=0)) 
                           annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,60})));
 
   Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource 
     sineVoltage_m(
-    m=m,
-    f=1,
-    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
-    V=fill(1/sqrt(2), m),
+    m=m, 
+    f=1, 
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
+    V=fill(1/sqrt(2), m), 
     gamma(fixed=true, start=0)) 
                           annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,-30})));
 
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Resistor 
     resistor_e(m=m, R_ref=fill(R*m/3, m)) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={-60,70})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Resistor 
     resistor_m(m=m, R_ref=fill(R*m/3, m)) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={-60,-20})));
   Modelica.Electrical.QuasiStatic.Polyphase.Sensors.PowerSensor 
     powerb_e(m=m) 
@@ -65,10 +65,10 @@ model EddyCurrentLosses
   Modelica.Electrical.QuasiStatic.Polyphase.Sensors.PowerSensor 
     powerb_m(m=m) 
     annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
-  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Conductor loss_e(m=
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Conductor loss_e(m= 
        m,G_ref=fill(Gc*3/m, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={0,60})));
   Magnetic.QuasiStatic.FundamentalWave.Components.PolyphaseElectroMagneticConverter 
     converter_e(effectiveTurns=N) 
@@ -76,18 +76,18 @@ model EddyCurrentLosses
   Magnetic.QuasiStatic.FundamentalWave.Components.PolyphaseElectroMagneticConverter 
     converter_m(effectiveTurns=N) 
     annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
-  Magnetic.QuasiStatic.FundamentalWave.Components.EddyCurrent loss_m(G=m*N^2*Gc
-        /2) annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  Magnetic.QuasiStatic.FundamentalWave.Components.EddyCurrent loss_m(G=m*N^2*Gc 
+        /2) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
           origin={60,-20})));
-  Magnetic.QuasiStatic.FundamentalWave.Components.Reluctance reluctance_e(R_m(d=R_m,
+  Magnetic.QuasiStatic.FundamentalWave.Components.Reluctance reluctance_e(R_m(d=R_m, 
         q=R_m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={80,60})));
-  Magnetic.QuasiStatic.FundamentalWave.Components.Reluctance reluctance_m(R_m(d=R_m,
+  Magnetic.QuasiStatic.FundamentalWave.Components.Reluctance reluctance_m(R_m(d=R_m, 
         q=R_m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={80,-30})));
   Magnetic.QuasiStatic.FundamentalWave.Components.Ground mground_e 
     annotation (Placement(transformation(extent={{30,0},{50,20}})));
@@ -145,7 +145,7 @@ equation
   connect(powerb_m.voltageN, sineVoltage_m.plug_n) annotation (Line(
       points={{-30,-30},{-30,-40},{-80,-40}}, color={85,170,255}));
   annotation (
-    experiment(StopTime=40, Interval=0.01),
+    experiment(StopTime=40, Interval=0.01), 
     Documentation(info="<html>
 <p>
 在本例中，涡流损耗以两种不同的方式实现。比较损耗损耗<code>powerb_e。Power </code>和<code>powerb_m。功率表显示的两种型号的功率</code>.</p>

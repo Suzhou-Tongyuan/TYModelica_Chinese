@@ -1,15 +1,14 @@
 ﻿within Modelica.Electrical.Analog.Interfaces;
 partial model IdealSwitch "理想电气开关"
   extends Modelica.Electrical.Analog.Interfaces.OnePort;
-  parameter SI.Resistance Ron(final min = 0) = 1e-5
+  parameter SI.Resistance Ron(final min = 0) = 1e-5 
     "闭合开关电阻";
-  parameter SI.Conductance Goff(final min = 0) = 1e-5
+  parameter SI.Conductance Goff(final min = 0) = 1e-5 
     "打开开关导纳";
-
   extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
 protected
-  Boolean off "Indicates off-state";
-  Real s(final unit = "1") "Auxiliary variable";
+  Boolean off "表示关断状态";
+  Real s(final unit = "1") "辅助变量";
   constant SI.Voltage unitVoltage = 1 annotation(HideResult = true);
   constant SI.Current unitCurrent = 1 annotation(HideResult = true);
 equation
@@ -27,7 +26,7 @@ equation
 <strong>请注意：</strong>
 如果useHeatPort=true，则<strong>不会</strong>对电行为的温度依赖性进行建模。参数不是温度依赖的。即使环境温度发生变化，电子元件的电气特性也不会随之改变。
 </p>
-</html>",
+</html>", 
     revisions = "<html>
 <ul>
 <li><em> March 11, 2009   </em>
@@ -37,20 +36,20 @@ equation
        由Christoph Clauss<br>创建<br>
        </li>
 </ul>
-</html>"),
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
+</html>"), 
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
     100}}), graphics = {
-    Ellipse(extent = {{-44, 4}, {-36, -4}}, lineColor = {0, 0, 255}),
-    Line(points = {{-90, 0}, {-44, 0}}, color = {0, 0, 255}),
-    Line(points = {{-37, 2}, {40, 40}}, color = {0, 0, 255}),
-    Line(points = {{40, 0}, {90, 0}}, color = {0, 0, 255}),
+    Ellipse(extent = {{-44, 4}, {-36, -4}}, lineColor = {0, 0, 255}), 
+    Line(points = {{-90, 0}, {-44, 0}}, color = {0, 0, 255}), 
+    Line(points = {{-37, 2}, {40, 40}}, color = {0, 0, 255}), 
+    Line(points = {{40, 0}, {90, 0}}, color = {0, 0, 255}), 
     Line(
-    visible = useHeatPort,
-    points = {{0, -100}, {0, 25}},
-    color = {127, 0, 0},
-    pattern = LinePattern.Dot),
+    visible = useHeatPort, 
+    points = {{0, -100}, {0, 25}}, 
+    color = {127, 0, 0}, 
+    pattern = LinePattern.Dot), 
     Text(
-    extent = {{-150, 90}, {150, 50}},
-    textString = "%name",
+    extent = {{-150, 90}, {150, 50}}, 
+    textString = "%name", 
     textColor = {0, 0, 255})}));
 end IdealSwitch;

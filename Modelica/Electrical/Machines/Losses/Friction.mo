@@ -1,7 +1,7 @@
 ﻿within Modelica.Electrical.Machines.Losses;
 model Friction "角速度相关摩擦损耗模型"
   extends Machines.Interfaces.FlangeSupport;
-  parameter FrictionParameters frictionParameters
+  parameter FrictionParameters frictionParameters 
     "摩擦损耗参数";
   extends 
     Modelica.Thermal.HeatTransfer.Interfaces.PartialElementaryConditionalHeatPortWithoutT(
@@ -17,58 +17,58 @@ equation
   lossPower = -tau*w;
   annotation (Icon(graphics={
         Ellipse(
-          extent={{-60,60},{60,-60}},
-          fillColor={175,175,175},
-          fillPattern=FillPattern.Solid),
+          extent={{-60,60},{60,-60}}, 
+          fillColor={175,175,175}, 
+          fillPattern=FillPattern.Solid), 
         Ellipse(
-          extent={{-50,50},{50,-50}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-50,50},{50,-50}}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Ellipse(
-          extent={{-12,50},{8,30}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={135,135,135}),
+          extent={{-12,50},{8,30}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={135,135,135}), 
         Ellipse(
-          extent={{-10,-30},{10,-50}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={135,135,135}),
+          extent={{-10,-30},{10,-50}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={135,135,135}), 
         Ellipse(
-          extent={{24,-10},{44,-30}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={135,135,135}),
+          extent={{24,-10},{44,-30}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={135,135,135}), 
         Ellipse(
-          extent={{22,34},{42,14}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={135,135,135}),
+          extent={{22,34},{42,14}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={135,135,135}), 
         Ellipse(
-          extent={{-44,30},{-24,10}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={135,135,135}),
+          extent={{-44,30},{-24,10}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={135,135,135}), 
         Ellipse(
-          extent={{-44,-12},{-24,-32}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={135,135,135}),
+          extent={{-44,-12},{-24,-32}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={135,135,135}), 
         Ellipse(
-          extent={{-30,30},{30,-30}},
-          fillColor={175,175,175},
-          fillPattern=FillPattern.Solid),
+          extent={{-30,30},{30,-30}}, 
+          fillColor={175,175,175}, 
+          fillPattern=FillPattern.Solid), 
         Ellipse(
-          extent={{-20,20},{20,-20}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-20,20},{20,-20}}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Line(
-          visible=useHeatPort,
-          points={{-40,0},{-100,0},{-100,-90}},
-          color={255,0,0}),
+          visible=useHeatPort, 
+          points={{-40,0},{-100,0},{-100,-90}}, 
+          color={255,0,0}), 
         Line(
-          points={{0,90},{0,0}},
-          color={95,95,95}),
+          points={{0,90},{0,0}}, 
+          color={95,95,95}), 
         Line(
-          points={{0,-60},{0,-90}},
-          color={95,95,95}),
+          points={{0,-60},{0,-90}}, 
+          color={95,95,95}), 
         Text(
-          extent={{-150,90},{150,60}},
-          textColor={0,0,255},
+          extent={{-150,90},{150,60}}, 
+          textColor={0,0,255}, 
           textString="%name")}), Documentation(info="<html>
 <p>
 摩擦损耗由以下方程式考虑

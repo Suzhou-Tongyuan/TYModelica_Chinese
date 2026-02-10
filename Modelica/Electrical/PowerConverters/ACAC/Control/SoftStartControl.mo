@@ -1,7 +1,7 @@
 ﻿within Modelica.Electrical.PowerConverters.ACAC.Control;
 block SoftStartControl
   extends Modelica.Blocks.Icons.Block;
-  import ModeOfOperation =
+  import ModeOfOperation = 
     Modelica.Electrical.PowerConverters.Types.SoftStarterModeOfOperation;
   parameter SI.Time tRampUp "启动斜坡持续时间";
   parameter Real vStart=0 "启动电压 / 额定电压";
@@ -17,8 +17,8 @@ parameter SI.Time tRampDown "停止斜坡持续时间";
         transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.BooleanInput start annotation (Placement(
         transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
+        extent={{-20,-20},{20,20}}, 
+        rotation=90, 
         origin={0,-120})));
 protected
   PowerConverters.Types.SoftStarterModeOfOperation modeOfOperation;
@@ -84,51 +84,51 @@ equation
 </p>
 </html>"), Icon(graphics={
         Polygon(
-          points={{-12,20},{-12,-4},{12,8},{-12,20}},
-          lineColor={0,0,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Line(points={{-12,20},{-12,-20}}, color={0,0,255}),
-        Line(points={{12,20},{12,-20}}, color={0,0,255}),
+          points={{-12,20},{-12,-4},{12,8},{-12,20}}, 
+          lineColor={0,0,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
+        Line(points={{-12,20},{-12,-20}}, color={0,0,255}), 
+        Line(points={{12,20},{12,-20}}, color={0,0,255}), 
         Polygon(
-          points={{-12,12},{-12,-12},{12,0},{-12,12}},
-          lineColor={0,0,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          origin={0,-8},
-          rotation=180),
-        Line(points={{-40,0},{-12,0}}, color={0,0,255}),
-        Line(points={{12,0},{40,0}}, color={0,0,255}),
+          points={{-12,12},{-12,-12},{12,0},{-12,12}}, 
+          lineColor={0,0,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid, 
+          origin={0,-8}, 
+          rotation=180), 
+        Line(points={{-40,0},{-12,0}}, color={0,0,255}), 
+        Line(points={{12,0},{40,0}}, color={0,0,255}), 
         Polygon(
-          points={{-12,80},{-12,56},{12,68},{-12,80}},
-          lineColor={0,0,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Line(points={{-12,80},{-12,40}}, color={0,0,255}),
-        Line(points={{12,80},{12,40}}, color={0,0,255}),
+          points={{-12,80},{-12,56},{12,68},{-12,80}}, 
+          lineColor={0,0,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
+        Line(points={{-12,80},{-12,40}}, color={0,0,255}), 
+        Line(points={{12,80},{12,40}}, color={0,0,255}), 
         Polygon(
-          points={{-12,12},{-12,-12},{12,0},{-12,12}},
-          lineColor={0,0,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          origin={0,52},
-          rotation=180),
-        Line(points={{-40,60},{-12,60}}, color={0,0,255}),
-        Line(points={{12,60},{40,60}}, color={0,0,255}),
+          points={{-12,12},{-12,-12},{12,0},{-12,12}}, 
+          lineColor={0,0,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid, 
+          origin={0,52}, 
+          rotation=180), 
+        Line(points={{-40,60},{-12,60}}, color={0,0,255}), 
+        Line(points={{12,60},{40,60}}, color={0,0,255}), 
         Polygon(
-          points={{-12,-40},{-12,-64},{12,-52},{-12,-40}},
-          lineColor={0,0,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Line(points={{-12,-40},{-12,-80}}, color={0,0,255}),
-        Line(points={{12,-40},{12,-80}}, color={0,0,255}),
+          points={{-12,-40},{-12,-64},{12,-52},{-12,-40}}, 
+          lineColor={0,0,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
+        Line(points={{-12,-40},{-12,-80}}, color={0,0,255}), 
+        Line(points={{12,-40},{12,-80}}, color={0,0,255}), 
         Polygon(
-          points={{-12,12},{-12,-12},{12,0},{-12,12}},
-          lineColor={0,0,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          origin={0,-68},
-          rotation=180),
-        Line(points={{-40,-60},{-12,-60}}, color={0,0,255}),
+          points={{-12,12},{-12,-12},{12,0},{-12,12}}, 
+          lineColor={0,0,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid, 
+          origin={0,-68}, 
+          rotation=180), 
+        Line(points={{-40,-60},{-12,-60}}, color={0,0,255}), 
         Line(points={{12,-60},{40,-60}}, color={0,0,255})}));
 end SoftStartControl;

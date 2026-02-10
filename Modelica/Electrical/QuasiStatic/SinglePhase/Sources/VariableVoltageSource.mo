@@ -3,24 +3,24 @@ model VariableVoltageSource "可变交流电压"
   extends Interfaces.Source;
   Modelica.Blocks.Interfaces.RealInput f(unit="Hz") annotation (Placement(
         transformation(
-        origin={60,120},
-        extent={{-20,-20},{20,20}},
+        origin={60,120}, 
+        extent={{-20,-20},{20,20}}, 
         rotation=270)));
   Modelica.ComplexBlocks.Interfaces.ComplexInput V annotation (Placement(
         transformation(
-        origin={-60,120},
-        extent={{-20,-20},{20,20}},
+        origin={-60,120}, 
+        extent={{-20,-20},{20,20}}, 
         rotation=270)));
 equation
   omega = 2*Modelica.Constants.pi*f;
   v = V;
-  annotation (defaultComponentName="voltageSource",
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+  annotation (defaultComponentName="voltageSource", 
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
             -100},{100,100}}), graphics={
-        Line(points={{-50,0},{50,0}}, color={85,170,255}),
-        Line(points={{-70,30},{-70,10}}, color={85,170,255}),
-        Line(points={{-80,20},{-60,20}}, color={85,170,255}),
-        Line(points={{60,20},{80,20}}, color={85,170,255})}),
+        Line(points={{-50,0},{50,0}}, color={85,170,255}), 
+        Line(points={{-70,30},{-70,10}}, color={85,170,255}), 
+        Line(points={{-80,20},{-60,20}}, color={85,170,255}), 
+        Line(points={{60,20},{80,20}}, color={85,170,255})}), 
                                          Documentation(info="<html>
 
 <p>

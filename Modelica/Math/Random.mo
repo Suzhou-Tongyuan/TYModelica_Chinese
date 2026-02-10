@@ -2,22 +2,22 @@
 package Random "生成随机数的函数库"
    extends Modelica.Icons.Package;
 
-  package Examples
+  package Examples 
     "示例演示了Random包中函数的用法"
     extends Modelica.Icons.ExamplesPackage;
 
-    model GenerateRandomNumbers
+    model GenerateRandomNumbers 
       "使用各种随机数生成器生成随机数"
        extends Modelica.Icons.Example;
 
     // 全局参数
-      parameter Modelica.Units.SI.Period samplePeriod = 0.05
+      parameter Modelica.Units.SI.Period samplePeriod = 0.05 
         "随机数生成的采样周期";
-      parameter Integer globalSeed = 30020
+      parameter Integer globalSeed = 30020 
         "初始化随机数生成器的全局种子";
 
     // 具有暴露状态的随机数生成器
-      parameter Integer localSeed = 614657
+      parameter Integer localSeed = 614657 
         "初始化随机数生成器的本地种子";
       output Real r64 "Xorshift64star生成的随机数";
       output Real r128 "使用Xorshift128plus生成的随机数";
@@ -53,8 +53,8 @@ package Random "生成随机数的函数库"
       elsewhen sample(0,samplePeriod) then
         rImpure := Utilities.impureRandom(id=id);
         iImpure := Utilities.impureRandomInteger(
-              id=id,
-              imin=-1234,
+              id=id, 
+              imin=-1234, 
               imax=2345);
       end when;
 
@@ -114,7 +114,7 @@ package Random "生成随机数的函数库"
 </html>"    ));
   end Examples;
 
-  package Generators
+  package Generators 
     "生成范围为0 < random <= 1.0的均匀随机数的函数库(包含可访问的状态向量)"
     extends Modelica.Icons.Package;
 
@@ -123,12 +123,12 @@ package Random "生成随机数的函数库"
 
       extends Modelica.Icons.Package;
 
-      function initialState
+      function initialState 
         "返回xorshift64*算法的初始状态"
         extends Modelica.Icons.Function;
-        input Integer localSeed
+        input Integer localSeed 
           "用于生成初始状态的本地种子";
-        input Integer globalSeed
+        input Integer globalSeed 
           "要与本地种子组合的全局种子";
         output Integer state[nState] "生成的初始状态";
       protected
@@ -211,14 +211,14 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
 </html>"  ));
       end initialState;
 
-      pure function random
+      pure function random 
         "使用xorshift64*算法返回一个一致的随机数"
         extends Modelica.Icons.Function;
-        input Integer stateIn[nState]
+        input Integer stateIn[nState] 
           "随机数生成器的内部状态";
-        output Real result
+        output Real result 
           "在区间(0,1)上均匀分布的随机数";
-        output Integer stateOut[nState]
+        output Integer stateOut[nState] 
           "随机数生成器的新内部状态";
       external "C" ModelicaRandom_xorshift64star(stateIn, stateOut, result) 
         annotation(IncludeDirectory = "modelica://Modelica/Resources/C-Sources", Include = "#include \"ModelicaRandom.h\"", Library = "ModelicaExternalC");
@@ -300,15 +300,15 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
 </td></tr>
 
 </table>
-</html>"  ), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}),
+</html>"  ), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), 
         graphics = {
         Ellipse(
-        extent = {{-64, 0}, {-14, -50}},
-        fillColor = {215, 215, 215},
-        fillPattern = FillPattern.Solid),
+        extent = {{-64, 0}, {-14, -50}}, 
+        fillColor = {215, 215, 215}, 
+        fillPattern = FillPattern.Solid), 
         Ellipse(
-        extent = {{12, 52}, {62, 2}},
-        fillColor = {215, 215, 215},
+        extent = {{12, 52}, {62, 2}}, 
+        fillColor = {215, 215, 215}, 
         fillPattern = FillPattern.Solid)}));
     end Xorshift64star;
 
@@ -317,18 +317,18 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
 
       extends Modelica.Icons.Package;
 
-      function initialState
+      function initialState 
         "返回xorshift128+算法的初始状态"
         extends Modelica.Icons.Function;
-        input Integer localSeed
+        input Integer localSeed 
           "用于生成初始状态的本地种子";
-        input Integer globalSeed
+        input Integer globalSeed 
           "要与本地种子组合的全局种子";
         output Integer state[nState] "生成的初始状态";
       algorithm
         state := Utilities.initialStateWithXorshift64star(
-          localSeed,
-          globalSeed,
+          localSeed, 
+          globalSeed, 
           size(state, 1));
         annotation(Inline = true, Documentation(info = "<html>
 <h4>语法</h4>
@@ -384,14 +384,14 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
 </html>"  ));
       end initialState;
 
-      pure function random
+      pure function random 
         "使用xorshift128+算法返回一个一致的随机数"
         extends Modelica.Icons.Function;
-        input Integer stateIn[nState]
+        input Integer stateIn[nState] 
           "随机数生成器的内部状态";
-        output Real result
+        output Real result 
           "在区间(0,1)上均匀分布的随机数";
-        output Integer stateOut[nState]
+        output Integer stateOut[nState] 
           "随机数生成器的新内部状态";
       external "C" ModelicaRandom_xorshift128plus(stateIn, stateOut, result) 
         annotation(IncludeDirectory = "modelica://Modelica/Resources/C-Sources", Include = "#include \"ModelicaRandom.h\"", Library = "ModelicaExternalC");
@@ -473,19 +473,19 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
 </td></tr>
 
 </table>
-</html>"  ),
+</html>"  ), 
         Icon(graphics = {
         Ellipse(
-        extent = {{-70, 60}, {-20, 10}},
-        fillColor = {215, 215, 215},
-        fillPattern = FillPattern.Solid),
+        extent = {{-70, 60}, {-20, 10}}, 
+        fillColor = {215, 215, 215}, 
+        fillPattern = FillPattern.Solid), 
         Ellipse(
-        extent = {{32, 58}, {82, 8}},
-        fillColor = {215, 215, 215},
-        fillPattern = FillPattern.Solid),
+        extent = {{32, 58}, {82, 8}}, 
+        fillColor = {215, 215, 215}, 
+        fillPattern = FillPattern.Solid), 
         Ellipse(
-        extent = {{-20, -12}, {30, -62}},
-        fillColor = {215, 215, 215},
+        extent = {{-20, -12}, {30, -62}}, 
+        fillColor = {215, 215, 215}, 
         fillPattern = FillPattern.Solid)}));
     end Xorshift128plus;
 
@@ -494,12 +494,12 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
 
       extends Modelica.Icons.Package;
 
-      function initialState
+      function initialState 
         "返回xorshift1024*算法的初始状态"
         extends Modelica.Icons.Function;
-        input Integer localSeed
+        input Integer localSeed 
           "用于生成初始状态的本地种子";
-        input Integer globalSeed
+        input Integer globalSeed 
           "要与本地种子组合的全局种子";
         output Integer state[nState] "生成的初始状态";
       algorithm
@@ -560,14 +560,14 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
 </html>"  ));
       end initialState;
 
-      pure function random
+      pure function random 
         "使用xorshift1024*算法返回一个一致的随机数"
         extends Modelica.Icons.Function;
-        input Integer stateIn[nState]
+        input Integer stateIn[nState] 
           "随机数生成器的内部状态";
-        output Real result
+        output Real result 
           "在区间(0,1)上均匀分布的随机数";
-        output Integer stateOut[nState]
+        output Integer stateOut[nState] 
           "随机数生成器的新内部状态";
       external "C" ModelicaRandom_xorshift1024star(stateIn, stateOut, result) 
         annotation(IncludeDirectory = "modelica://Modelica/Resources/C-Sources", Include = "#include \"ModelicaRandom.h\"", Library = "ModelicaExternalC");
@@ -649,23 +649,23 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
 </td></tr>
 
 </table>
-</html>"  ),
+</html>"  ), 
         Icon(graphics = {
         Ellipse(
-        extent = {{-70, 78}, {-20, 28}},
-        fillColor = {215, 215, 215},
-        fillPattern = FillPattern.Solid),
+        extent = {{-70, 78}, {-20, 28}}, 
+        fillColor = {215, 215, 215}, 
+        fillPattern = FillPattern.Solid), 
         Ellipse(
-        extent = {{20, 58}, {70, 8}},
-        fillColor = {215, 215, 215},
-        fillPattern = FillPattern.Solid),
+        extent = {{20, 58}, {70, 8}}, 
+        fillColor = {215, 215, 215}, 
+        fillPattern = FillPattern.Solid), 
         Ellipse(
-        extent = {{-64, 6}, {-14, -44}},
-        fillColor = {215, 215, 215},
-        fillPattern = FillPattern.Solid),
+        extent = {{-64, 6}, {-14, -44}}, 
+        fillColor = {215, 215, 215}, 
+        fillPattern = FillPattern.Solid), 
         Ellipse(
-        extent = {{16, -20}, {66, -70}},
-        fillColor = {215, 215, 215},
+        extent = {{16, -20}, {66, -70}}, 
+        fillColor = {215, 215, 215}, 
         fillPattern = FillPattern.Solid)}));
     end Xorshift1024star;
     annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{
@@ -841,18 +841,18 @@ Which依次与
 </html>"  ));
   end Generators;
 
-  package Utilities
+  package Utilities 
     "Random包的实用函数库(通常用户不感兴趣)"
 
     extends Modelica.Icons.UtilitiesPackage;
 
-    function initialStateWithXorshift64star
+    function initialStateWithXorshift64star 
       "返回随机数生成器的初始状态向量(基于xorshift64star算法)"
       import Modelica.Math.Random.Generators.Xorshift64star;
       extends Modelica.Icons.Function;
-      input Integer localSeed
+      input Integer localSeed 
         "用于生成初始状态的本地种子";
-      input Integer globalSeed
+      input Integer globalSeed 
         "要与本地种子组合的全局种子";
       input Integer nState(min=1) "状态向量的维数(>= 1)";
       output Integer[nState] state "生成的初始状态";
@@ -932,7 +932,7 @@ state = Utilities.initialStateWithXorshift64star(localSeed, globalSeed, size(sta
 </html>"        ));
     end initialStateWithXorshift64star;
 
-    impure function automaticGlobalSeed
+    impure function automaticGlobalSeed 
       "创建一个自动整数种子(通常基于当前时间和进程id；这是一个不纯函数)"
       extends Modelica.Icons.Function;
       output Integer seed "自动生成种子";
@@ -995,10 +995,10 @@ seed = Utilities.<strong>automaticGlobalSeed</strong>();
 </html>"    ));
     end automaticGlobalSeed;
 
-    function automaticLocalSeed
+    function automaticLocalSeed 
       "根据实例名称自动创建本地种子"
       extends Modelica.Icons.Function;
-      input String path
+      input String path 
         "实例的完整路径名（使用 getInstanceName() 查询）";
       output Integer seed "自动生成种子";
     algorithm
@@ -1054,21 +1054,21 @@ final parameter Integer localSeed = if useAutomaticLocalSeed then
 </html>"));
     end automaticLocalSeed;
 
-    function initializeImpureRandom
+    function initializeImpureRandom 
       "初始化非纯随机数生成器的内部状态"
       extends Modelica.Icons.Function;
-      input Integer seed
+      input Integer seed 
         "初始化非纯随机数生成器的输入种子";
-      output Integer id
+      output Integer id 
         "为了使排序正确，将标识号作为输入传递给函数杂质随机";
     protected
-      constant Integer localSeed = 715827883
+      constant Integer localSeed = 715827883 
         "由于没有本地种子，所以使用较大的素数";
-      Integer rngState[33]
+      Integer rngState[33] 
         "非纯随机数生成器的内部状态向量";
 
     public
-      impure function setInternalState
+      impure function setInternalState 
         "将给定的状态向量存储在外部静态变量中"
         extends Modelica.Icons.Function;
         input Integer[33] rngState "初始状态";
@@ -1147,12 +1147,12 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
 </html>"                ));
     end initializeImpureRandom;
 
-    impure function impureRandom
+    impure function impureRandom 
       "不纯随机数生成器(带有隐藏状态向量)"
       extends Modelica.Icons.Function;
-      input Integer id
+      input Integer id 
         "initializeerroranddom(..)函数中的标识号(需要正确排序)";
-      output Real y
+      output Real y 
         "在区间(0,1)上均匀分布的随机数";
       external "C" y = ModelicaRandom_impureRandom_xorshift1024star(id) 
         annotation (IncludeDirectory="modelica://Modelica/Resources/C-Sources", Include="#include \"ModelicaRandom.h\"", Library="ModelicaExternalC");
@@ -1219,14 +1219,14 @@ r = random();
 </html>"        ));
     end impureRandom;
 
-    impure function impureRandomInteger
+    impure function impureRandomInteger 
       "整数值的不纯随机数生成器(带隐藏状态向量)"
       extends Modelica.Icons.Function;
-      input Integer id
+      input Integer id 
         "来自 initializeImpureRandom(...) 函数的标识号（正确排序所需的标识号）";
       input Integer imin = 1 "生成的最小整数";
       input Integer imax = 268435456 "生成的最大整数（默认 = 2^28）";
-      output Integer y
+      output Integer y 
         "在区间 [imin,imax] 上均匀分布的随机数";
     protected
       Real r "不纯真实随机数";
@@ -1304,23 +1304,23 @@ r = <strong>impureRandomInteger</strong>(id, imin=1, imax=Modelica.Constants.Int
 </table>
 </html>"    ));
   end Utilities;
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
         -100},{100,100}}), graphics={
     Ellipse(
-      extent={{-84,84},{-24,24}},
-      fillColor={215,215,215},
-      fillPattern=FillPattern.Solid),
+      extent={{-84,84},{-24,24}}, 
+      fillColor={215,215,215}, 
+      fillPattern=FillPattern.Solid), 
     Ellipse(
-      extent={{22,62},{82,2}},
-      fillColor={215,215,215},
-      fillPattern=FillPattern.Solid),
+      extent={{22,62},{82,2}}, 
+      fillColor={215,215,215}, 
+      fillPattern=FillPattern.Solid), 
     Ellipse(
-      extent={{-58,6},{2,-54}},
-      fillColor={215,215,215},
-      fillPattern=FillPattern.Solid),
+      extent={{-58,6},{2,-54}}, 
+      fillColor={215,215,215}, 
+      fillPattern=FillPattern.Solid), 
     Ellipse(
-      extent={{26,-30},{86,-90}},
-      fillColor={215,215,215},
+      extent={{26,-30},{86,-90}}, 
+      fillColor={215,215,215}, 
       fillPattern=FillPattern.Solid)}), Documentation(info="<html><p>
 此包包含用于生成随机数的低级函数。 通常，这个包中的功能不是直接使用的，而是被利用的 作为高级功能的构建块。
 </p>

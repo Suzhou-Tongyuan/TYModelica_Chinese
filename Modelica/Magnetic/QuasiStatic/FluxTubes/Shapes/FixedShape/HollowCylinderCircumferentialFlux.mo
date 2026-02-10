@@ -5,8 +5,8 @@ model HollowCylinderCircumferentialFlux "带有圆周通量的空心圆柱体；
   extends Modelica.Magnetic.QuasiStatic.FluxTubes.Icons.HollowCylinderCircumferentialFlux;
   import Modelica.Constants.pi;
   parameter SI.Length l=0.02 "宽度（与通量方向正交）" 
-    annotation (Dialog(group=
-          "Fixed geometry", groupImage=
+    annotation (Dialog(group= 
+          "Fixed geometry", groupImage= 
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Circumferential.png"));
   parameter SI.Radius r_i=0.01 "空心圆柱体的内半径" 
     annotation (Dialog(group="Fixed geometry"));

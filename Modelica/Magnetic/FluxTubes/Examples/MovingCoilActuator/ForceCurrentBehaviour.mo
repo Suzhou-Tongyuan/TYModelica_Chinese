@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Examples.MovingCoilActuator;
+within Modelica.Magnetic.FluxTubes.Examples.MovingCoilActuator;
 model ForceCurrentBehaviour
   "电枢闭锁在中间位置时两种变流器型号的力-电流特性比较"
 
@@ -68,15 +68,12 @@ equation
   connect(iSensor.i, comparisonWithFEA.u) annotation (Line(points={{-40,41},{-40,50},{38,50}},
                                  color={0,0,127}));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}}), graphics={Text(
-                extent={{-98,96},{100,86}},
-                textColor={0,0,255},
-                textString=
-            "Comparison of the force-current characteristics of both converter models"),
-          Text( extent={{-98,88},{2,78}},
-                textColor={0,0,255},
-                textString="with armature blocked at mid-position")}),
+    Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
+grid={2,2}),graphics = {Text(origin={7,86},
+lineColor={0,0,255},
+extent={{-105,10},{105,-10}},
+textString="衔铁固定于中间位置时，两种转换器模型的力-电流特性对比",
+textColor={0,0,255})}),
     experiment(StopTime=6, Tolerance=1e-007),
     Documentation(info="<html>
 <p>

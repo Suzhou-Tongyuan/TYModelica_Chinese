@@ -1,26 +1,26 @@
 ﻿within Modelica.Thermal.FluidHeatFlow.BaseClasses;
 partial model TwoPort "两个接口的基类模型"
-  parameter FluidHeatFlow.Media.Medium medium=FluidHeatFlow.Media.Medium()
+  parameter FluidHeatFlow.Media.Medium medium=FluidHeatFlow.Media.Medium() 
     "组件中的介质" annotation (choicesAllMatching=true);
   parameter SI.Mass m(start=1) "介质质量";
-  parameter SI.Temperature T0(start=293.15, displayUnit="degC")
+  parameter SI.Temperature T0(start=293.15, displayUnit="degC") 
     "介质初始温度" 
     annotation(Dialog(enable=m>Modelica.Constants.small));
-  parameter Boolean T0fixed=false
+  parameter Boolean T0fixed=false 
     "初始温度估计值或固定值" 
   annotation(choices(checkBox=true),Dialog(enable=m>Modelica.Constants.small));
-  parameter Real tapT(final min=0, final max=1)=1
+  parameter Real tapT(final min=0, final max=1)=1 
     "定义热接口在入口和出口温度之间的温度";
   SI.Pressure dp "压降 a->b";
   SI.VolumeFlowRate V_flow(start=0) "体积流量 a->b";
   SI.HeatFlowRate Q_flow "与环境进行热交换";
-  output SI.Temperature T(start=T0, fixed=T0fixed)
+  output SI.Temperature T(start=T0, fixed=T0fixed) 
     "介质出口温度";
   output SI.Temperature T_a "flowPort_a 的温度";
   output SI.Temperature T_b "flowPort_b 的温度";
-  output SI.TemperatureDifference dT
+  output SI.TemperatureDifference dT 
     "冷却剂在流动方向的温度升高";
-  SI.Temperature T_q
+  SI.Temperature T_q 
     "与环境热交换有关的温度";
 protected
   SI.SpecificEnthalpy h(start=medium.cp*T0) "介质的比焓";

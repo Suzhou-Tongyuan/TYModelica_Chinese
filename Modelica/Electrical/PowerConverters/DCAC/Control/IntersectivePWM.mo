@@ -6,7 +6,7 @@ block IntersectivePWM "交错PWM"
   parameter SI.Frequency f "开关频率";
   parameter SI.Time startTime=0 "PWM的开始时间";
   parameter Real uMax "信号的最大幅值";
-  parameter PowerConverters.Types.ReferenceType refType=PowerConverters.Types.ReferenceType.Triangle3
+  parameter PowerConverters.Types.ReferenceType refType=PowerConverters.Types.ReferenceType.Triangle3 
     "参考信号的类型" annotation (Evaluate=true);
   Modelica.Blocks.Interfaces.RealInput u[2] "参考空间相量" 
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
@@ -19,26 +19,26 @@ block IntersectivePWM "交错PWM"
     annotation (Placement(transformation(extent={{-60,50},{-40,70}})));
   Modelica.Blocks.Sources.Constant zero(k=0) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-70,30})));
   Modelica.Blocks.Sources.SawTooth sawTooth[m](
-    each nperiod=-1,
-    each amplitude=uMax,
-    each offset=-uMax/2,
-    each period=1/f,
+    each nperiod=-1, 
+    each amplitude=uMax, 
+    each offset=-uMax/2, 
+    each period=1/f, 
     startTime={startTime - 1.5 + (if refType == ReferenceType.Sawtooth1 
          then 0 else k)/m for k in 0:m - 1}/f) if 
        (refType==ReferenceType.Sawtooth1 or refType==ReferenceType.Sawtooth3) 
     annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
   Modelica.Blocks.Sources.Trapezoid trapezoid[3](
-    each amplitude=uMax,
-    each width=0,
-    each nperiod=-1,
-    each offset=-uMax/2,
-    each rising=0.5/f,
-    each falling=0.5/f,
-    each period=1/f,
+    each amplitude=uMax, 
+    each width=0, 
+    each nperiod=-1, 
+    each offset=-uMax/2, 
+    each rising=0.5/f, 
+    each falling=0.5/f, 
+    each period=1/f, 
     startTime={startTime - 1.25 + (if refType == ReferenceType.Triangle1 
          then 0 else k)/m for k in 0:m - 1}/f) if 
        (refType==ReferenceType.Triangle1 or refType==ReferenceType.Triangle3) 
@@ -51,16 +51,16 @@ block IntersectivePWM "交错PWM"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Constant const[m](each k=-uMax) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-20,-30})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=time >=
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=time >= 
         startTime) 
     annotation (Placement(transformation(extent={{-100,-90},{-80,-70}})));
   Modelica.Blocks.Routing.BooleanReplicator booleanReplicator(nout=m) 
     annotation (Placement(transformation(extent={{-70,-90},{-50,-70}})));
 equation
-  connect(u, fromSpacePhasor.u) annotation (Line(points={{-120,0},{-90,0},{-90,60},
+  connect(u, fromSpacePhasor.u) annotation (Line(points={{-120,0},{-90,0},{-90,60}, 
           {-62,60}}, color={0,0,127}));
   connect(zero.y, fromSpacePhasor.zero) 
     annotation (Line(points={{-70,41},{-70,52},{-62,52}}, color={0,0,127}));
@@ -76,24 +76,24 @@ equation
     annotation (Line(points={{11,0},{20,0},{20,52},{28,52}}, color={0,0,127}));
   connect(sawTooth.y, switch1.u1) annotation (Line(points={{-59,-20},{-50,-20},{
           -50,8},{-12,8}}, color={0,0,127}));
-  connect(trapezoid.y, switch1.u1) annotation (Line(points={{-59,-50},{-50,-50},
+  connect(trapezoid.y, switch1.u1) annotation (Line(points={{-59,-50},{-50,-50}, 
           {-50,8},{-12,8}}, color={0,0,127}));
   connect(const.y, switch1.u3) 
     annotation (Line(points={{-20,-19},{-20,-8},{-12,-8}}, color={0,0,127}));
-  connect(booleanReplicator.y, switch1.u2) annotation (Line(points={{-49,-80},{-40,
+  connect(booleanReplicator.y, switch1.u2) annotation (Line(points={{-49,-80},{-40, 
           -80},{-40,0},{-12,0}}, color={255,0,255}));
   connect(booleanExpression.y, booleanReplicator.u) 
     annotation (Line(points={{-79,-80},{-72,-80}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Line(
-          points={{-60,0},{-51.6,34.2},{-46.1,53.1},{-41.3,66.4},{-37.1,74.6},{-32.9,
-              79.1},{-28.64,79.8},{-24.42,76.6},{-20.201,69.7},{-15.98,59.4},{-11.16,
+          points={{-60,0},{-51.6,34.2},{-46.1,53.1},{-41.3,66.4},{-37.1,74.6},{-32.9, 
+              79.1},{-28.64,79.8},{-24.42,76.6},{-20.201,69.7},{-15.98,59.4},{-11.16, 
               44.1},{-5.1,21.2},{7.5,-30.8},{13,-50.2},{17.8,-64.2},{22,-73.1},{
-              26.2,-78.4},{30.5,-80},{34.7,-77.6},{38.9,-71.5},{43.1,-61.9},{47.9,
-              -47.2},{54,-24.8},{60,0}},
-          color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.Bezier), Line(points={{-60,-80},{-48,80},{-40,-80},{-30,
+              26.2,-78.4},{30.5,-80},{34.7,-77.6},{38.9,-71.5},{43.1,-61.9},{47.9, 
+              -47.2},{54,-24.8},{60,0}}, 
+          color={0,0,255}, 
+          thickness=0.5, 
+          smooth=Smooth.Bezier), Line(points={{-60,-80},{-48,80},{-40,-80},{-30, 
               80},{-20,-80},{-10,80},{0,-80},{10,80},{20,-78},{30,80},{40,-80},{
               50,80},{60,-80}}, color={238,46,47})}),    Documentation(info="<html>
 <p>

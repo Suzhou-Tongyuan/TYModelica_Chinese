@@ -3,8 +3,8 @@ package UsersGuide "用户指南"
   extends Modelica.Icons.Information;
 
   annotation (
-    preferredView="info",
-    DocumentationClass=true,
+    preferredView="info", 
+    DocumentationClass=true, 
     Documentation(info="<html><p>
 该库包含用于建模基于集总元件的<strong>一维热传递</strong>的组件。这尤其允许对元件中的传热进行建模，<span style=\"color: rgb(64, 64, 64);\">前提是集总元件的参数</span>（如元件的热容）可以通过测量确定 (<span style=\"color: rgb(64, 64, 64);\">由于元件中使用的几何结构复杂且材料多样，通常无法通过一些基本的解析公式计算集总元件的参数</span>）.
 </p>

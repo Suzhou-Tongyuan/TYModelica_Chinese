@@ -4,19 +4,19 @@ model BasicRelativeAngularVelocity "用于测量相对角速度的基本传感�
   import Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB;
 
   extends Modelica.Mechanics.MultiBody.Sensors.Internal.PartialRelativeBaseSensor;
-  Modelica.Blocks.Interfaces.RealOutput w_rel[3](each final quantity="AngularVelocity",each final unit = "rad/s")
+  Modelica.Blocks.Interfaces.RealOutput w_rel[3](each final quantity="AngularVelocity",each final unit = "rad/s") 
     "相对角速度矢量" 
     annotation (Placement(transformation(
-        origin={0,-110},
-        extent={{-10,-10},{10,10}},
+        origin={0,-110}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB 
-    resolveInFrame=
-  Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_a
+    resolveInFrame= 
+  Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_a 
     "解析输出矢量w_rel所在的坐标系(world、frame_a、frame_b或frame_resolve)";
 
 protected
-  Modelica.Mechanics.MultiBody.Frames.Orientation R_rel
+  Modelica.Mechanics.MultiBody.Frames.Orientation R_rel 
     "从frame_a到frame_b的相对方向对象";
 equation
    R_rel = Frames.relativeRotation(frame_a.R, frame_b.R);
@@ -33,16 +33,16 @@ equation
       w_rel = zeros(3);
    end if;
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
       graphics={
         Text(
-          extent={{-132,90},{129,138}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-132,90},{129,138}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-50,-14},{50,-54}},
-          textColor={64,64,64},
-          textString="rad/s")}),
+          extent={{-50,-14},{50,-54}}, 
+          textColor={64,64,64}, 
+          textString="rad/s")}), 
     Documentation(info="<html>
 <p>
 这个基本传感器旨在在高级传感器中使用，应确定frame_a和frame_b之间的相对角速度。

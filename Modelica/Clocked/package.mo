@@ -2,7 +2,7 @@
 package Clocked "用于描述同步行为的时钟触发模块，适合用于控制系统的实现"
   extends Modelica.Icons.Package;
 
-  annotation(preferredView = "info",
+  annotation(preferredView = "info", 
     Documentation(info="<html>
 <p>
 <strong>Modelica.Clocked</strong> <span style=\"color: rgb(51, 51, 51);\">是一个 Modelica 包，用于精确定义和同步具有不同采样率的采样数据系统。该库包含用于定义周期性时钟和事件时钟的元素，这些时钟触发元素进行同步采样、子采样、超采样或移位采样。可以选择性地模拟量化效应、计算延迟或噪声。连续时间方程可以自动离散化，并用于采样数据系统中。每个分区的采样率只需在一个位置定义。</span>
@@ -55,26 +55,26 @@ package Clocked "用于描述同步行为的时钟触发模块，适合用于控
 <tr><td></td><td>see <a href=\"modelica://Modelica.Clocked.UsersGuide.ReleaseNotes\">Release Notes</a>.</td></tr>
 
 </table>
-</html>"),
+</html>"), 
     Icon(
     coordinateSystem(
-    extent = {{-100, -100}, {100, 100}},
-    preserveAspectRatio = true),
+    extent = {{-100, -100}, {100, 100}}, 
+    preserveAspectRatio = true), 
     graphics = {
-    Ellipse(extent = {{-80, -80}, {80, 80}}),
-    Line(points = {{80, 0}, {60, 0}}),
-    Line(points = {{69.282, 40}, {51.962, 30}}),
-    Line(points = {{40, 69.282}, {30, 51.962}}),
-    Line(points = {{0, 80}, {0, 60}}),
-    Line(points = {{-40, 69.282}, {-30, 51.962}}),
-    Line(points = {{-69.282, 40}, {-51.962, 30}}),
-    Line(points = {{-80, 0}, {-60, 0}}),
-    Line(points = {{-69.282, -40}, {-51.962, -30}}),
-    Line(points = {{-40, -69.282}, {-30, -51.962}}),
-    Line(points = {{0, -80}, {0, -60}}),
-    Line(points = {{40, -69.282}, {30, -51.962}}),
-    Line(points = {{69.282, -40}, {51.962, -30}}),
-    Line(points = {{80, 0}, {60, 0}}),
-    Line(points = {{0, 0}, {-50, 50}}),
+    Ellipse(extent = {{-80, -80}, {80, 80}}), 
+    Line(points = {{80, 0}, {60, 0}}), 
+    Line(points = {{69.282, 40}, {51.962, 30}}), 
+    Line(points = {{40, 69.282}, {30, 51.962}}), 
+    Line(points = {{0, 80}, {0, 60}}), 
+    Line(points = {{-40, 69.282}, {-30, 51.962}}), 
+    Line(points = {{-69.282, 40}, {-51.962, 30}}), 
+    Line(points = {{-80, 0}, {-60, 0}}), 
+    Line(points = {{-69.282, -40}, {-51.962, -30}}), 
+    Line(points = {{-40, -69.282}, {-30, -51.962}}), 
+    Line(points = {{0, -80}, {0, -60}}), 
+    Line(points = {{40, -69.282}, {30, -51.962}}), 
+    Line(points = {{69.282, -40}, {51.962, -30}}), 
+    Line(points = {{80, 0}, {60, 0}}), 
+    Line(points = {{0, 0}, {-50, 50}}), 
     Line(points = {{0, 0}, {40, 0}})}));
 end Clocked;

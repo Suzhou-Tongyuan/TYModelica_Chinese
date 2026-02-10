@@ -1,108 +1,108 @@
 ﻿within Modelica.Magnetic.FluxTubes.Examples.Hysteresis;
-model ThreePhaseTransformerWithRectifier
+model ThreePhaseTransformerWithRectifier 
   "带整流器的三相变压器（包括滞后效应）"
   extends Modelica.Icons.Example;
 
   Modelica.Electrical.Analog.Basic.Ground ground1 annotation (Placement(transformation(extent={{-120,-90},{-100,-70}})));
   Modelica.Electrical.Analog.Basic.Ground ground2 annotation (Placement(transformation(extent={{-36,-90},{-16,-70}})));
   Modelica.Electrical.Analog.Sources.SineVoltage vSource1(
-    offset=0,
-    f=50,
+    offset=0, 
+    f=50, 
     V=50) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-140,-40})));
   Components.Transformer3PhaseYyWithHysteresis transformer(
-    EddyCurrents=true,
-    N1=200,
-    N2=10,
-    mat=FluxTubes.Material.HysteresisEverettParameter.M330_50A(),
-    sigma=2.2e6,
-    HFixed={true,true,true},
-    MagRelFixed={true,true,false},
-    I1Fixed={true,true,true},
-    I2Fixed={true,false,false},
-    useHeatPort=false,
-    MagRelStart={-0.4,0.8,-0.4},
-    l1=0.2,
-    l2=0.15,
-    a=0.04,
-    b=0.04,
+    EddyCurrents=true, 
+    N1=200, 
+    N2=10, 
+    mat=FluxTubes.Material.HysteresisEverettParameter.M330_50A(), 
+    sigma=2.2e6, 
+    HFixed={true,true,true}, 
+    MagRelFixed={true,true,false}, 
+    I1Fixed={true,true,true}, 
+    I2Fixed={true,false,false}, 
+    useHeatPort=false, 
+    MagRelStart={-0.4,0.8,-0.4}, 
+    l1=0.2, 
+    l2=0.15, 
+    a=0.04, 
+    b=0.04, 
     t=0.0005) annotation (Placement(transformation(extent={{-40,-15},{-20,5}})));
   Modelica.Electrical.Analog.Sources.SineVoltage vSource2(
-    offset=0,
-    f=vSource1.f,
-    V=50,
+    offset=0, 
+    f=vSource1.f, 
+    V=50, 
     phase=4.1887902047864) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-120,-40})));
   Modelica.Electrical.Analog.Sources.SineVoltage vSource3(
-    offset=0,
-    f=vSource1.f,
-    V=50,
+    offset=0, 
+    f=vSource1.f, 
+    V=50, 
     phase=2.0943951023932) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-100,-40})));
   Modelica.Electrical.Analog.Basic.Resistor resistor1(R=0) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-70,15})));
   Modelica.Electrical.Analog.Basic.Resistor resistor2(R=resistor1.R) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-70,-5})));
   Modelica.Electrical.Analog.Basic.Resistor resistor3(R=resistor1.R) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={-70,-25})));
   Modelica.Electrical.Analog.Ideal.IdealDiode diode1(Vknee=0.7) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={30,20})));
   Modelica.Electrical.Analog.Ideal.IdealDiode diode2(Vknee=0.7) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={30,-30})));
   Modelica.Electrical.Analog.Basic.Resistor resistorL(R=5) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={120,-5})));
   Modelica.Electrical.Analog.Ideal.IdealDiode diode3(Vknee=0.7) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={50,20})));
   Modelica.Electrical.Analog.Ideal.IdealDiode diode4(Vknee=0.7) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={50,-30})));
   Modelica.Electrical.Analog.Ideal.IdealDiode diode5(Vknee=0.7) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={70,20})));
   Modelica.Electrical.Analog.Ideal.IdealDiode diode6(Vknee=0.7) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={70,-30})));
-  Modelica.Electrical.Analog.Basic.Capacitor capacitor1(C=1e-6, v(fixed=
+  Modelica.Electrical.Analog.Basic.Capacitor capacitor1(C=1e-6, v(fixed= 
           true)) annotation (
      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={90,20})));
   Modelica.Electrical.Analog.Basic.Inductor inductor1(L=1e-3) annotation (Placement(transformation(extent={{-10,4},{10,24}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor2(L=1e-3) 
     annotation (Placement(transformation(extent={{-10,-15},{10,5}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor3(L=1e-3) 
     annotation (Placement(transformation(extent={{-10,-35},{10,-15}})));
-  Modelica.Electrical.Analog.Basic.Capacitor capacitor2(C=1e-6, v(fixed=
+  Modelica.Electrical.Analog.Basic.Capacitor capacitor2(C=1e-6, v(fixed= 
           true)) annotation (
      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={90,-30})));
   Modelica.Blocks.Sources.RealExpression rExp1(y=transformer.LossPowerStat) annotation (Placement(transformation(extent={{-113,77},{-82,93}})));
   Modelica.Blocks.Sources.RealExpression rExp2(y=transformer.LossPowerEddy) annotation (Placement(transformation(extent={{-113,57},{-81,73}})));
   Modelica.Blocks.Sources.RealExpression rExp3(y=transformer.LossPowerWinding) annotation (Placement(transformation(extent={{-113,37},{-81,53}})));
-  Modelica.Blocks.Continuous.Filter pdissStatAvg(f_cut=10)
+  Modelica.Blocks.Continuous.Filter pdissStatAvg(f_cut=10) 
     "Approx. 平均静态磁滞损耗" 
     annotation (Placement(transformation(extent={{-50,80},{-40,90}})));
-  Modelica.Blocks.Continuous.Filter pdissEddyAvg(f_cut=10)
+  Modelica.Blocks.Continuous.Filter pdissEddyAvg(f_cut=10) 
     "Approx. 平均涡流损耗" 
     annotation (Placement(transformation(extent={{-50,60},{-40,70}})));
-  Modelica.Blocks.Continuous.Filter pdissCopAvg(f_cut=10)
+  Modelica.Blocks.Continuous.Filter pdissCopAvg(f_cut=10) 
     "Approx. 平均铜损耗" 
     annotation (Placement(transformation(extent={{-50,40},{-40,50}})));
 initial equation
@@ -144,8 +144,8 @@ equation
   connect(rExp2.y,pdissEddyAvg. u) annotation (Line(points={{-79.4,65},{-51,65}}, color={0,0,127}));
   connect(rExp1.y,pdissStatAvg. u) annotation (Line(points={{-80.45,85},{-51,85}}, color={0,0,127}));
   annotation (experiment(StartTime=0, StopTime=0.2, Interval=1e-4, Tolerance=1e-006), Diagram(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-150,-100},{150,100}},
+        preserveAspectRatio=false, 
+        extent={{-150,-100},{150,100}}, 
         grid={1,1})), Documentation(info="<html>
 <p>
 这是一个使用<a href=\"modelica://Modelica.Magnetic.FluxTubes.Examples.Hysteresis.Components.Transformer3PhaseYyWithHysteresis\">Transformer3PhaseYyWithHysteresis</a>模型。使用以下模拟设置:

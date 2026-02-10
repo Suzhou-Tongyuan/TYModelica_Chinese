@@ -6,25 +6,25 @@ model SinglePhaseInductance "单相电感"
   parameter SI.Resistance R=0.1 "引线电缆电阻";
   parameter SI.Inductance L=1 "负载电感";
   parameter Real effectiveTurns=5 "有效匝数";
-  final parameter SI.Reluctance R_m=effectiveTurns^2/L
+  final parameter SI.Reluctance R_m=effectiveTurns^2/L 
     "等效磁阻";
   Modelica.Electrical.Analog.Basic.Ground ground_e 
     annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
   Modelica.Electrical.Analog.Basic.Ground ground_m 
     annotation (Placement(transformation(extent={{-70,-80},{-50,-60}})));
   Modelica.Electrical.Analog.Sources.SineVoltage voltageSource_e(
-    f=f,
-    V=sqrt(2)*VRMS,
+    f=f, 
+    V=sqrt(2)*VRMS, 
     phase=Modelica.Constants.pi/2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-60,70})));
   Modelica.Electrical.Analog.Sources.SineVoltage voltageSource_m(
-    f=f,
-    V=sqrt(2)*VRMS,
+    f=f, 
+    V=sqrt(2)*VRMS, 
     phase=Modelica.Constants.pi/2) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-60,-30})));
   Modelica.Electrical.Analog.Basic.Resistor resistor_e(R=R) 
     annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
@@ -32,16 +32,16 @@ model SinglePhaseInductance "单相电感"
     annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
   Modelica.Electrical.Analog.Basic.Inductor inductor_e(L=L) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={0,70})));
   Magnetic.FundamentalWave.Components.SinglePhaseElectroMagneticConverter converter_m(
       effectiveTurns=effectiveTurns, orientation=0) 
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
   Magnetic.FundamentalWave.Components.Reluctance reluctance_m(R_m(d=R_m, q=R_m)) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={60,-30})));
   Magnetic.FundamentalWave.Components.Ground groundM_m 
     annotation (Placement(transformation(extent={{10,-80},{30,-60}})));

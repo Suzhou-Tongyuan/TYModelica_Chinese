@@ -1,56 +1,56 @@
 ﻿within Modelica.Electrical.Machines.Examples.SynchronousMachines;
-model SMPM_CurrentSource
+model SMPM_CurrentSource 
   "测试示例：由电流源供电的永磁同步电机"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   constant Integer m=3 "相数";
-  parameter SI.Current Idq[2]={-53.5, 84.6}
+  parameter SI.Current Idq[2]={-53.5, 84.6} 
     "期望的 d- 和 q- 电流";
-  parameter SI.AngularVelocity wNominal=2*pi*smpmData.fsNominal/smpmData.p
+  parameter SI.AngularVelocity wNominal=2*pi*smpmData.fsNominal/smpmData.p 
     "名义速度";
   parameter SI.Torque TLoad=181.4 "名义负载转矩";
-  parameter SI.Inertia JLoad=0.29
+  parameter SI.Inertia JLoad=0.29 
     "负载的转动惯量";
   Machines.BasicMachines.SynchronousMachines.SM_PermanentMagnet smpm(
-    p=smpmData.p,
-    fsNominal=smpmData.fsNominal,
-    TsOperational=293.15,
-    Rs=smpmData.Rs,
-    TsRef=smpmData.TsRef,
-    alpha20s=smpmData.alpha20s,
-    Lszero=smpmData.Lszero,
-    Lssigma=smpmData.Lssigma,
-    Jr=smpmData.Jr,
-    Js=smpmData.Js,
-    frictionParameters=smpmData.frictionParameters,
-    phiMechanical(fixed=true),
-    wMechanical(fixed=true),
-    statorCoreParameters=smpmData.statorCoreParameters,
-    strayLoadParameters=smpmData.strayLoadParameters,
-    TrOperational=293.15,
-    VsOpenCircuit=smpmData.VsOpenCircuit,
-    Lmd=smpmData.Lmd,
-    Lmq=smpmData.Lmq,
-    useDamperCage=smpmData.useDamperCage,
-    Lrsigmad=smpmData.Lrsigmad,
-    Lrsigmaq=smpmData.Lrsigmaq,
-    Rrd=smpmData.Rrd,
-    Rrq=smpmData.Rrq,
-    TrRef=smpmData.TrRef,
-    alpha20r=smpmData.alpha20r,
+    p=smpmData.p, 
+    fsNominal=smpmData.fsNominal, 
+    TsOperational=293.15, 
+    Rs=smpmData.Rs, 
+    TsRef=smpmData.TsRef, 
+    alpha20s=smpmData.alpha20s, 
+    Lszero=smpmData.Lszero, 
+    Lssigma=smpmData.Lssigma, 
+    Jr=smpmData.Jr, 
+    Js=smpmData.Js, 
+    frictionParameters=smpmData.frictionParameters, 
+    phiMechanical(fixed=true), 
+    wMechanical(fixed=true), 
+    statorCoreParameters=smpmData.statorCoreParameters, 
+    strayLoadParameters=smpmData.strayLoadParameters, 
+    TrOperational=293.15, 
+    VsOpenCircuit=smpmData.VsOpenCircuit, 
+    Lmd=smpmData.Lmd, 
+    Lmq=smpmData.Lmq, 
+    useDamperCage=smpmData.useDamperCage, 
+    Lrsigmad=smpmData.Lrsigmad, 
+    Lrsigmaq=smpmData.Lrsigmaq, 
+    Rrd=smpmData.Rrd, 
+    Rrq=smpmData.Rrq, 
+    TrRef=smpmData.TrRef, 
+    alpha20r=smpmData.alpha20r, 
     permanentMagnetLossParameters=smpmData.permanentMagnetLossParameters) 
     annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Modelica.Electrical.Polyphase.Sources.SignalCurrent signalCurrent(
       final m=m) annotation (Placement(transformation(
-        origin={-10,50},
-        extent={{-10,10},{10,-10}},
+        origin={-10,50}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=270)));
   Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
       Placement(transformation(extent={{-50,80},{-70,100}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-90,90},
-        extent={{-10,-10},{10,10}},
+        origin={-90,90}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Utilities.DQToThreePhase dqToThreePhase(p=smpm.p) 
     annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
@@ -60,39 +60,39 @@ model SMPM_CurrentSource
     annotation (Placement(transformation(extent={{-90,60},{-70,80}})));
   Sensors.VoltageQuasiRMSSensor voltageQuasiRMSSensor annotation (
       Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=180,
+        extent={{-10,10},{10,-10}}, 
+        rotation=180, 
         origin={-30,-10})));
   Modelica.Electrical.Polyphase.Basic.Star starM(final m=m) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
+        extent={{-10,-10},{10,10}}, 
+        rotation=180, 
         origin={-60,-10})));
   Modelica.Electrical.Analog.Basic.Ground groundM annotation (Placement(
         transformation(
-        origin={-80,-28},
-        extent={{-10,-10},{10,10}},
+        origin={-80,-28}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Machines.Utilities.TerminalBox terminalBox(terminalConnection="Y") 
     annotation (Placement(transformation(extent={{-20,-34},{0,-14}})));
   Machines.Sensors.RotorDisplacementAngle rotorDisplacementAngle(p=smpm.p) 
     annotation (Placement(transformation(
-        origin={10,-20},
+        origin={10,-20}, 
         extent={{-10,10},{10,-10}})));
   Mechanics.Rotational.Sensors.AngleSensor angleSensor annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={30,-20})));
   Mechanics.Rotational.Sensors.MultiSensor  multiSensor  annotation (
       Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=180,
+        extent={{10,10},{-10,-10}}, 
+        rotation=180, 
         origin={40,-40})));
   Mechanics.Rotational.Components.Inertia inertiaLoad(J=JLoad) 
     annotation (Placement(transformation(extent={{60,-50},{80,-30}})));
   Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque 
-    quadraticSpeedDependentTorque(            tau_nominal=-TLoad,
+    quadraticSpeedDependentTorque(            tau_nominal=-TLoad, 
       w_nominal(displayUnit="rad/s") = wNominal) 
     annotation (Placement(transformation(extent={{100,-50},{80,-30}})));
   parameter Utilities.ParameterRecords.SM_PermanentMagnetData smpmData(
@@ -100,8 +100,8 @@ model SMPM_CurrentSource
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
   Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensor annotation (
       Placement(transformation(
-        origin={-10,20},
-        extent={{-10,-10},{10,10}},
+        origin={-10,20}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
 equation
   connect(star.pin_n, ground.p) 
@@ -109,37 +109,37 @@ equation
   connect(rotorDisplacementAngle.plug_n, smpm.plug_sn) annotation (Line(
         points={{0,-14},{0,-20},{-16,-20},{-16,-30}},   color={0,0,255}));
   connect(rotorDisplacementAngle.plug_p, smpm.plug_sp) 
-    annotation (Line(points={{0,-26},{0,-30},{-4,-30}},
+    annotation (Line(points={{0,-26},{0,-30},{-4,-30}}, 
                                                  color={0,0,255}));
   connect(terminalBox.plug_sn, smpm.plug_sn) annotation (Line(
-      points={{-16,-30},{-16,-30}},
+      points={{-16,-30},{-16,-30}}, 
       color={0,0,255}));
   connect(terminalBox.plug_sp, smpm.plug_sp) annotation (Line(
-      points={{-4,-30},{-4,-30}},
+      points={{-4,-30},{-4,-30}}, 
       color={0,0,255}));
   connect(smpm.flange, rotorDisplacementAngle.flange) annotation (Line(
       points={{0,-40},{10,-40},{10,-30}}));
   connect(signalCurrent.plug_p, star.plug_p) annotation (Line(
-      points={{-10,60},{-10,90},{-50,90}},
+      points={{-10,60},{-10,90},{-50,90}}, 
       color={0,0,255}));
-  connect(id.y, dqToThreePhase.d) annotation (Line(points={{-69,70},{-60,
+  connect(id.y, dqToThreePhase.d) annotation (Line(points={{-69,70},{-60, 
           70},{-60,56},{-52,56}}, color={0,0,127}));
-  connect(iq.y, dqToThreePhase.q) annotation (Line(points={{-69,30},{-60,
+  connect(iq.y, dqToThreePhase.q) annotation (Line(points={{-69,30},{-60, 
           30},{-60,44},{-52,44}}, color={0,0,127}));
   connect(groundM.p, terminalBox.starpoint) annotation (Line(
-      points={{-70,-28},{-20,-28}},
+      points={{-70,-28},{-20,-28}}, 
       color={0,0,255}));
   connect(smpm.flange, multiSensor.flange_a) 
     annotation (Line(points={{0,-40},{30,-40}}));
   connect(voltageQuasiRMSSensor.plug_p, terminalBox.plugSupply) 
     annotation (Line(
-      points={{-20,-10},{-10,-10},{-10,-28}},
+      points={{-20,-10},{-10,-10},{-10,-28}}, 
       color={0,0,255}));
   connect(starM.plug_p, voltageQuasiRMSSensor.plug_n) annotation (Line(
-      points={{-50,-10},{-40,-10}},
+      points={{-50,-10},{-40,-10}}, 
       color={0,0,255}));
   connect(starM.pin_n, groundM.p) annotation (Line(
-      points={{-70,-10},{-70,-28}},
+      points={{-70,-10},{-70,-28}}, 
       color={0,0,255}));
   connect(dqToThreePhase.y, signalCurrent.i) 
     annotation (Line(points={{-29,50},{-22,50}}, color={0,0,127}));
@@ -150,11 +150,11 @@ equation
     annotation (Line(points={{50,-40},{60,-40}}));
   connect(signalCurrent.plug_n, currentQuasiRMSSensor.plug_p) annotation (
      Line(
-      points={{-10,40},{-10,30}},
+      points={{-10,40},{-10,30}}, 
       color={0,0,255}));
   connect(currentQuasiRMSSensor.plug_n, voltageQuasiRMSSensor.plug_p) 
     annotation (Line(
-      points={{-10,10},{-10,-10},{-20,-10}},
+      points={{-10,10},{-10,-10},{-20,-10}}, 
                                     color={0,0,255}));
   connect(smpm.flange, angleSensor.flange) 
     annotation (Line(points={{0,-40},{30,-40},{30,-30}}, color={0,0,0}));

@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.BasicMachines.QuasiStaticDCMachines;
-model DC_ElectricalExcited
+model DC_ElectricalExcited 
   "准静态电励磁并联/分离励磁线性直流电机"
   extends Machines.BasicMachines.DCMachines.DC_ElectricalExcited(final
       quasiStatic=true);

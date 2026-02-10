@@ -17,13 +17,13 @@ equation
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={Text(
-              extent={{-150,110},{150,150}},
-              textColor={0,0,255},
+              extent={{-150,110},{150,150}}, 
+              textColor={0,0,255}, 
               textString="%name"),           Line(
-              points={{-100,100},{-42,100},{42,-100},{100,-100}},
+              points={{-100,100},{-42,100},{42,-100},{100,-100}}, 
               color={255,170,85}),Line(
-              points={{100,100},{42,100},{-40,-100},{-100,-100}},
-              color={255,170,85})}),
+              points={{100,100},{42,100},{-40,-100},{-100,-100}}, 
+              color={255,170,85})}), 
     Documentation(info="<html>
 <p>
 这是一个简单的捷径分支.

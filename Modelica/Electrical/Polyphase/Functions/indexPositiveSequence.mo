@@ -1,9 +1,9 @@
 ﻿within Modelica.Electrical.Polyphase.Functions;
-function indexPositiveSequence
+function indexPositiveSequence 
   "确定所有正序的索引"
   extends Modelica.Icons.Function; // 使用函数图标
   input Integer m=3 "相数"; // 输入参数为相数，默认为3
-  output Integer ind[numberOfSymmetricBaseSystems(m)]
+  output Integer ind[numberOfSymmetricBaseSystems(m)] 
     "对称基本系统的数量"; // 输出参数为对称基本系统的数量
 protected
   Integer n=numberOfSymmetricBaseSystems(m); // 计算对称基本系统的数量

@@ -1,8 +1,8 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Interfaces;
 connector MagneticPort "基波机的磁端口"
-  SI.ComplexMagneticPotential V_m
+  SI.ComplexMagneticPotential V_m 
     "端口处的复磁势";
-  flow SI.ComplexMagneticFlux Phi
+  flow SI.ComplexMagneticFlux Phi 
     "进入端口的复合磁通量";
   annotation (Documentation(info="<html>
 <p>

@@ -2,27 +2,27 @@
 model SuperCapDischargeCharge "放电和充电理想化超级电容"
   extends Modelica.Icons.Example;
   Modelica.Electrical.Batteries.Utilities.PulseSeries pulseSeries(
-    n1=5,
-    T1=10,
-    Tp1=10,
-    n2=5,
-    Tp=10,
+    n1=5, 
+    T1=10, 
+    Tp1=10, 
+    n2=5, 
+    Tp=10, 
     startTime=10) 
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Electrical.Batteries.BatteryStacks.SuperCap superCap(
-    Vnom=48,
-    C=500,
-    Rs=0.002,
-    Idis=0.05,
+    Vnom=48, 
+    C=500, 
+    Rs=0.002, 
+    Idis=0.05, 
     useHeatPort=false) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=270,
+        extent={{-10,10},{10,-10}}, 
+        rotation=270, 
         origin={40,0})));
   Modelica.Electrical.Analog.Basic.Ground ground 
     annotation (Placement(transformation(extent={{10,-40},{30,-20}})));
   Modelica.Electrical.Analog.Sources.SignalCurrent signalCurrent 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
   Modelica.Electrical.Analog.Sensors.PowerSensor powerSensor 
     annotation (Placement(transformation(extent={{10,30},{30,50}})));
@@ -31,7 +31,7 @@ model SuperCapDischargeCharge "放电和充电理想化超级电容"
   Modelica.Blocks.Math.Gain gain(k=300) 
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 equation
-  connect(superCap.n, ground.p) annotation (Line(points={{40,-10},{40,-20},
+  connect(superCap.n, ground.p) annotation (Line(points={{40,-10},{40,-20}, 
           {20,-20}}, color={0,0,255}));
   connect(signalCurrent.n, ground.p) 
     annotation (Line(points={{0,-10},{0,-20},{20,-20}}, color={0,0,255}));
@@ -45,14 +45,14 @@ equation
     annotation (Line(points={{10,40},{10,50},{20,50}}, color={0,0,255}));
   connect(powerSensor.power, energy.u) 
     annotation (Line(points={{10,29},{10,20},{58,20}}, color={0,0,127}));
-  connect(gain.y, signalCurrent.i) annotation (Line(points={{-29,0},{-12,0},
+  connect(gain.y, signalCurrent.i) annotation (Line(points={{-29,0},{-12,0}, 
           {-12,6.66134e-16}}, color={0,0,127}));
   connect(pulseSeries.y, gain.u) 
     annotation (Line(points={{-59,0},{-52,0}}, color={0,0,127}));
   annotation (experiment(
-      StopTime=720,
-      Interval=0.01,
-      Tolerance=1e-06),
+      StopTime=720, 
+      Interval=0.01, 
+      Tolerance=1e-06), 
     Documentation(info="<html>
 <p>一个电容为500F的超级电容，初始电压为48V，
 通过5个持续10秒的240A电流脉冲进行放电，脉冲之间间隔10秒。

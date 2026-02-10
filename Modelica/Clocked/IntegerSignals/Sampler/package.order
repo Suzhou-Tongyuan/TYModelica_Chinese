@@ -4,8 +4,8 @@ SampleVectorizedAndClocked
 Hold
 SubSample
 SuperSample
-BackSample
 ShiftSample
+BackSample
 AssignClock
 AssignClockVectorized
 Utilities

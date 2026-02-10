@@ -1,4 +1,4 @@
-﻿within Modelica.Clocked.Examples.Elementary.RealSignals;
+within Modelica.Clocked.Examples.Elementary.RealSignals;
 model SuperSample "实信号超级采样模块示例"
    extends Modelica.Icons.Example;
 

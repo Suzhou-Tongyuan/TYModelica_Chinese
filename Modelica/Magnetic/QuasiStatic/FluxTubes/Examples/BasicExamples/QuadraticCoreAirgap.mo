@@ -11,80 +11,80 @@ model QuadraticCoreAirgap "教育示例：带气隙的铁芯"
   parameter SI.Current I=1.5 "最大激励电流";
   Modelica.Magnetic.QuasiStatic.FluxTubes.Basic.ElectroMagneticConverter excitingCoil(N=N) annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.FixedShape.Cuboid leftLeg(
-    mu_rConst=mu_r,
-    l=l - a,
-    a=a,
+    mu_rConst=mu_r, 
+    l=l - a, 
+    a=a, 
     b=a) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-20,30})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.FixedShape.Cuboid upperYoke(
-    mu_rConst=mu_r,
-    l=l - a,
-    a=a,
+    mu_rConst=mu_r, 
+    l=l - a, 
+    a=a, 
     b=a) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={10,50})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.FixedShape.Cuboid rightLeg(
-    mu_rConst=mu_r,
-    l=l - a - delta,
-    a=a,
+    mu_rConst=mu_r, 
+    l=l - a - delta, 
+    a=a, 
     b=a) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={40,30})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.FixedShape.Cuboid airGap(
-    mu_rConst=1,
-    l=delta,
-    a=a,
+    mu_rConst=1, 
+    l=delta, 
+    a=a, 
     b=a) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={40,-30})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Basic.ElectroMagneticConverter measuringCoil(N=1) annotation (Placement(transformation(extent={{60,-10},{40,10}})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.FixedShape.Cuboid lowerYoke(
-    mu_rConst=mu_r,
-    l=l - a,
-    a=a,
+    mu_rConst=mu_r, 
+    l=l - a, 
+    a=a, 
     b=a) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        extent={{10,-10},{-10,10}}, 
         origin={10,-50})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Basic.Ground magneticGround annotation (Placement(transformation(extent={{-30,-70},{-10,-50}})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground electricGround1 annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Sources.VariableCurrentSource currentSource(gamma(fixed=true, start=0)) 
                                                                                           annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-60,0})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Sensors.MagneticFluxSensor magFluxSensor annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=270,
+        extent={{10,-10},{-10,10}}, 
+        rotation=270, 
         origin={-20,-30})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground electricGround2 annotation (Placement(transformation(extent={{60,-30},{80,-10}})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Sensors.VoltageSensor voltageSensor annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=270,
+        extent={{-10,10},{10,-10}}, 
+        rotation=270, 
         origin={80,0})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Basic.LeakageWithCoefficient leakage(c_usefulFlux=1 - sigma, G_m(start = 1e-8)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={10,0})));
   Modelica.Blocks.Sources.RealExpression usefulReluctance(y=1/airGap.G_m) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={30,-20})));
   Modelica.Blocks.Sources.Constant const(k=10.6103) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,30})));
   Modelica.ComplexBlocks.Sources.ComplexRampPhasor complexRamp(
-    magnitude1=0,
-    magnitude2=I,
-    phi=0,
-    startTime=0.01,
+    magnitude1=0, 
+    magnitude2=I, 
+    phi=0, 
+    startTime=0.01, 
     duration=0.015) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-80,-30})));
 equation
   connect(excitingCoil.port_p, leftLeg.port_p) 
@@ -105,7 +105,7 @@ equation
     annotation (Line(points={{-20,-10},{-20,-20}}, color={255,127,0}));
   connect(magFluxSensor.port_p, magneticGround.port) 
     annotation (Line(points={{-20,-40},{-20,-50}}, color={255,127,0}));
-  connect(leakage.port_n, airGap.port_n) annotation (Line(points={{10,-10},{10,-40},{40,-40}},
+  connect(leakage.port_n, airGap.port_n) annotation (Line(points={{10,-10},{10,-40},{40,-40}}, 
                                           color={255,127,0}));
   connect(measuringCoil.port_p, leakage.port_p) 
     annotation (Line(points={{40,10},{10,10}},color={255,127,0}));

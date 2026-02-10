@@ -13,21 +13,21 @@ model ToroidalCoreQuadraticCrossSection "教育示例：带气隙的铁芯"
   Modelica.Magnetic.QuasiStatic.FluxTubes.Basic.ElectroMagneticConverter excitingCoil(N=N) 
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.FixedShape.HollowCylinderCircumferentialFlux core(
-    mu_rConst=mu_r,
-    l=l,
-    r_i=r_i,
-    r_o=r_o,
+    mu_rConst=mu_r, 
+    l=l, 
+    r_i=r_i, 
+    r_o=r_o, 
     alpha=alpha) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
+        extent={{-10,10},{10,-10}}, 
         origin={0,30})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.FixedShape.HollowCylinderCircumferentialFlux airGap(
-    mu_rConst=1,
-    l=l,
-    r_i=r_i,
-    r_o=r_o,
+    mu_rConst=1, 
+    l=l, 
+    r_i=r_i, 
+    r_o=r_o, 
     alpha=2*pi - alpha) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=180,
+        extent={{-10,10},{10,-10}}, 
+        rotation=180, 
         origin={0,-50})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Basic.ElectroMagneticConverter measuringCoil(N=1) 
     annotation (Placement(transformation(extent={{40,-10},{20,10}})));
@@ -36,33 +36,33 @@ model ToroidalCoreQuadraticCrossSection "教育示例：带气隙的铁芯"
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground electricGround1 
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Sources.VariableCurrentSource currentSource(gamma(fixed=true, start=0)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-60,0})));
   Modelica.Magnetic.QuasiStatic.FluxTubes.Sensors.MagneticFluxSensor magFluxSensor 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=270,
+        extent={{10,-10},{-10,10}}, 
+        rotation=270, 
         origin={-20,-30})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground electricGround2 
     annotation (Placement(transformation(extent={{40,-30},{60,-10}})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Sensors.VoltageSensor voltageSensor annotation (
       Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=270,
+        extent={{-10,10},{10,-10}}, 
+        rotation=270, 
         origin={60,0})));
   Blocks.Sources.Constant const(k=50) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,30})));
   ComplexBlocks.Sources.ComplexRampPhasor complexRamp(
-    magnitude1=0,
-    magnitude2=I,
-    phi=0,
-    startTime=0.01,
+    magnitude1=0, 
+    magnitude2=I, 
+    phi=0, 
+    startTime=0.01, 
     duration=0.015) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-80,-30})));
 equation
   connect(excitingCoil.port_n, magFluxSensor.port_n) 

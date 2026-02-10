@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.Translational.Interfaces;
-connector Flange_a
+connector Flange_a 
   "一维平动接口（左侧，一维平动接口轴向指向切割平面内）"
   extends Flange;
 
   annotation (
-    defaultComponentName="flange_a",
+    defaultComponentName="flange_a", 
     Documentation(info="<html>
 <p>
 这是用于一维平动机械系统的连接器，表示机械一维平动接口。
@@ -22,20 +22,20 @@ s: Absolute position of the flange in [m]. A positive translation
    means that the flange is translated along the flange axis.
 f: Cut-force in direction of the flange axis in [N].
 </pre></blockquote>
-</html>"),
+</html>"), 
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={Rectangle(
-          extent={{-100,-100},{100,100}},
-          lineColor={0,127,0},
-          fillColor={0,127,0},
-          fillPattern=FillPattern.Solid)}),
-    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+          extent={{-100,-100},{100,100}}, 
+          lineColor={0,127,0}, 
+          fillColor={0,127,0}, 
+          fillPattern=FillPattern.Solid)}), 
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
             {100,100}}), graphics={Rectangle(
-          extent={{-40,-40},{40,40}},
-          lineColor={0,127,0},
-          fillColor={0,127,0},
+          extent={{-40,-40},{40,40}}, 
+          lineColor={0,127,0}, 
+          fillColor={0,127,0}, 
           fillPattern=FillPattern.Solid), Text(
-          extent={{-160,110},{40,50}},
-          textColor={0,127,0},
+          extent={{-160,110},{40,50}}, 
+          textColor={0,127,0}, 
           textString="%name")}));
 end Flange_a;

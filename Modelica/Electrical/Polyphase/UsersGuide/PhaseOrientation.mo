@@ -1,8 +1,8 @@
 ﻿within Modelica.Electrical.Polyphase.UsersGuide;
 class PhaseOrientation "相位定向"
   extends Modelica.Icons.Information;
-  annotation (preferredView="info",
-    DocumentationClass=true,
+  annotation (preferredView="info", 
+    DocumentationClass=true, 
     Documentation(info="<html>
 <p>
 <strong>在多相系统中，相位电压和电流的角位移以及机器绕组的空间位移必须遵循相同的规则，即它们基于相同的<a href=\"modelica://Modelica.Electrical.Polyphase.Functions.symmetricOrientation\">定向函数</a>。</strong>

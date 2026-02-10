@@ -32,16 +32,16 @@ y = k1*u1Internal + k2*u2Internal;
 y = 2 * Modelica.ComplexMath.conj(u1) - 3 * u2
 </pre></blockquote>
 
-</html>"),
+</html>"), 
     Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
-    100, 100}}), graphics = {Text(extent = {{-98, -52}, {5, -92}},
-    textString = "%k2"), Text(extent = {{-98, 92}, {5, 52}}, textString = "%k1"),
-    Line(points = {{50, 0}, {100, 0}}, color = {0, 0, 255}),
-    Line(points = {{-100, 60}, {-74, 24}, {-44, 24}}, color = {85, 170, 255}),
-    Line(points = {{-100, -60}, {-74, -24}, {-44, -24}}, color = {85, 170, 255}),
-    Ellipse(extent = {{-50, 50}, {50, -50}}, lineColor = {85, 170, 255}),
-    Line(points = {{50, 0}, {100, 0}}, color = {85, 170, 255}),
-    Text(extent = {{-40, 40}, {40, -40}},
-    textColor = {85, 170, 255},
+    100, 100}}), graphics = {Text(extent = {{-98, -52}, {5, -92}}, 
+    textString = "%k2"), Text(extent = {{-98, 92}, {5, 52}}, textString = "%k1"), 
+    Line(points = {{50, 0}, {100, 0}}, color = {0, 0, 255}), 
+    Line(points = {{-100, 60}, {-74, 24}, {-44, 24}}, color = {85, 170, 255}), 
+    Line(points = {{-100, -60}, {-74, -24}, {-44, -24}}, color = {85, 170, 255}), 
+    Ellipse(extent = {{-50, 50}, {50, -50}}, lineColor = {85, 170, 255}), 
+    Line(points = {{50, 0}, {100, 0}}, color = {85, 170, 255}), 
+    Text(extent = {{-40, 40}, {40, -40}}, 
+    textColor = {85, 170, 255}, 
     textString = "+")}));
 end Add;

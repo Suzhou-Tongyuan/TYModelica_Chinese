@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.Interfaces.InductionMachines;
-connector ThermalPortIMS
+connector ThermalPortIMS 
   "带滑环的异步电机热端口"
   extends 
     Machines.Interfaces.InductionMachines.PartialThermalPortInductionMachines;
@@ -7,7 +7,7 @@ connector ThermalPortIMS
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a 
     heatPortRotorWinding[mr] "转子绕组热端口" 
     annotation (Placement(transformation(extent={{-20,-30},{0,-10}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPortBrush
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPortBrush 
     "(可选)刷子损耗热端口" 
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   annotation (Documentation(info="<html>

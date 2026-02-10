@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Analog.Examples;
-model AmplifierWithOpAmpDetailed
+model AmplifierWithOpAmpDetailed 
   "详细运算放大器的简单放大电路"
   extends Modelica.Icons.Example;
 
@@ -11,13 +11,13 @@ model AmplifierWithOpAmpDetailed
     annotation(Placement(transformation(extent = {{-22, 46}, {-4, 64}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor2(R = 10000) annotation(
     Placement(transformation(
-    extent = {{-9, -9}, {9, 9}},
-    rotation = 270,
+    extent = {{-9, -9}, {9, 9}}, 
+    rotation = 270, 
     origin = {21, -23})));
   Modelica.Electrical.Analog.Sources.SineVoltage sineVoltage(V = 12, f = 1000) 
     annotation(Placement(transformation(
-    extent = {{-10, -10}, {10, 10}},
-    rotation = 270,
+    extent = {{-10, -10}, {10, 10}}, 
+    rotation = 270, 
     origin = {-80, -30})));
   Modelica.Electrical.Analog.Basic.Ground ground 
     annotation(Placement(transformation(extent = {{-20, -70}, {0, -50}})));
@@ -60,9 +60,9 @@ equation
 
   annotation(
     experiment(
-    StopTime = 0.003,
-    Interval = 1.2e-6,
-    Tolerance = 2e-007),
+    StopTime = 0.003, 
+    Interval = 1.2e-6, 
+    Tolerance = 2e-007), 
     Documentation(revisions = "<html>
 <dl>
 <dt>2009/6/17</dt>

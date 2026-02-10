@@ -1,9 +1,9 @@
 ﻿within Modelica.Electrical.Analog.Lines;
-model TLine2
+model TLine2 
   "无损耗传输线(特性阻抗为Z0,工作频率为F,且具有归一化长度NL)"
 
   extends Modelica.Electrical.Analog.Interfaces.TwoPort;
-  parameter SI.Resistance Z0(start=1)
+  parameter SI.Resistance Z0(start=1) 
     "特性阻抗";
   parameter SI.Frequency F(start=1) "频率";
   parameter Real NL(start=1) "归一化长度";
@@ -19,7 +19,7 @@ equation
   i2 = (v2 - er)/Z0;
   es = 2*delay(v2, TD) - delay(er, TD);
   er = 2*delay(v1, TD) - delay(es, TD);
-  annotation (defaultComponentName="line",
+  annotation (defaultComponentName="line", 
     Documentation(info="<html>
 <p>具有特性阻抗Z0、频率F和归一化长度NL的无损耗传输线TLine2是一个双端口网络。两个端口分支均由一个阻值等于特性阻抗Z0的电阻和一个考虑了传输延迟的受控电压源组成。
 具体查看[<a href=\"modelica://Modelica.Electrical.Analog.UsersGuide.References\">Branin1967</a>]。
@@ -33,31 +33,31 @@ equation
 <dt><em>1998</em></dt>
 <dd>由Joachim Haase创建</dd>
 </dl>
-</html>"),
+</html>"), 
     Icon(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={
         Text(
-          extent={{-150,150},{150,110}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,150},{150,110}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Rectangle(
-          extent={{-80,80},{80,-80}},
-          lineColor={0,0,255},
-          fillPattern=FillPattern.Solid,
-          fillColor={255,255,255}),
-        Line(points={{60,-100},{90,-100}}, color={0,0,255}),
-        Line(points={{60,100},{90,100}}, color={0,0,255}),
-        Line(points={{-60,100},{-90,100}}, color={0,0,255}),
-        Line(points={{-60,-100},{-90,-100}}, color={0,0,255}),
+          extent={{-80,80},{80,-80}}, 
+          lineColor={0,0,255}, 
+          fillPattern=FillPattern.Solid, 
+          fillColor={255,255,255}), 
+        Line(points={{60,-100},{90,-100}}, color={0,0,255}), 
+        Line(points={{60,100},{90,100}}, color={0,0,255}), 
+        Line(points={{-60,100},{-90,100}}, color={0,0,255}), 
+        Line(points={{-60,-100},{-90,-100}}, color={0,0,255}), 
         Text(
-          extent={{-70,-10},{70,-50}},
-          textString="TLine2"),
-        Line(points={{-40,40},{-40,20}}),
-        Line(points={{40,30},{-40,30}}),
-        Line(points={{40,40},{40,20}}),
-        Line(points={{-60,100},{-60,80}}, color={0,0,255}),
-        Line(points={{60,100},{60,80}}, color={0,0,255}),
-        Line(points={{60,-80},{60,-100}}, color={0,0,255}),
+          extent={{-70,-10},{70,-50}}, 
+          textString="TLine2"), 
+        Line(points={{-40,40},{-40,20}}), 
+        Line(points={{40,30},{-40,30}}), 
+        Line(points={{40,40},{40,20}}), 
+        Line(points={{-60,100},{-60,80}}, color={0,0,255}), 
+        Line(points={{60,100},{60,80}}, color={0,0,255}), 
+        Line(points={{60,-80},{60,-100}}, color={0,0,255}), 
         Line(points={{-60,-80},{-60,-100}}, color={0,0,255})}));
 end TLine2;

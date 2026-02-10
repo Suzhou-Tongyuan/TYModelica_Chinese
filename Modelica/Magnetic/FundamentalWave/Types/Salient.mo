@@ -1,7 +1,7 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Types;
 record Salient "带有 d 和 q 分量的典型性基本记录"
   replaceable Real d "d 轴（直接）的分量，与实部对齐";
-  replaceable Real q
+  replaceable Real q 
     "q（正交）轴的分量，与虚部对齐";
   annotation (Documentation(info="<html>
 <p>

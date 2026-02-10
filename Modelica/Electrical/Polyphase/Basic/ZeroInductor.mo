@@ -17,18 +17,18 @@ equation
 v = Lzero*sum(der(i)) = Lzero*der(sum(i))
 </pre></blockquote>
 
-</html>"),
+</html>"), 
        Icon(graphics={
-        Line(points={{-90,0},{-50,0}}, color={0,0,255}),
-        Line(points={{52,0},{90,0}}, color={0,0,255}),
-        Ellipse(extent={{-50,30},{-8,-32}}, lineColor={0,0,255}),
-        Ellipse(extent={{-20,30},{22,-32}}, lineColor={0,0,255}),
-        Ellipse(extent={{10,30},{52,-32}}, lineColor={0,0,255}),
+        Line(points={{-90,0},{-50,0}}, color={0,0,255}), 
+        Line(points={{52,0},{90,0}}, color={0,0,255}), 
+        Ellipse(extent={{-50,30},{-8,-32}}, lineColor={0,0,255}), 
+        Ellipse(extent={{-20,30},{22,-32}}, lineColor={0,0,255}), 
+        Ellipse(extent={{10,30},{52,-32}}, lineColor={0,0,255}), 
         Text(
-          extent={{-150,50},{150,90}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,50},{150,90}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-150,-80},{150,-40}},
+          extent={{-150,-80},{150,-40}}, 
           textString="m=%m")}));
 end ZeroInductor;

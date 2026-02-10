@@ -26,7 +26,7 @@ Christoph Clau&szlig;
 Copyright &copy; 1998-2020, Modelica Association and contributors
 </p>
 </html>"), Icon(graphics={
-        Line(points={{-90,0},{-40,0}}),
-        Line(points={{-40,0},{32,60}}),
+        Line(points={{-90,0},{-40,0}}), 
+        Line(points={{-40,0},{32,60}}), 
         Line(points={{40,0},{90,0}})}));
 end Ideal;

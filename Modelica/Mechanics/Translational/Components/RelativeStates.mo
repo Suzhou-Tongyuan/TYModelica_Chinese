@@ -1,11 +1,11 @@
 ﻿within Modelica.Mechanics.Translational.Components;
 model RelativeStates "相对状态变量的定义"
   extends Translational.Interfaces.PartialTwoFlanges;
-  parameter StateSelect stateSelect=StateSelect.prefer
+  parameter StateSelect stateSelect=StateSelect.prefer 
     "优先使用相对角度和相对速度作为状态";
-  SI.Position s_rel(start=0, stateSelect=StateSelect.prefer)
+  SI.Position s_rel(start=0, stateSelect=StateSelect.prefer) 
     "作为状态变量使用的相对位置";
-  SI.Velocity v_rel(start=0, stateSelect=StateSelect.prefer)
+  SI.Velocity v_rel(start=0, stateSelect=StateSelect.prefer) 
     "作为状态变量使用的相对速度";
   SI.Acceleration a_rel(start=0) "相对角加速度";
 
@@ -38,23 +38,23 @@ equation
 这里，两个质量之间的相对位置和相对速度被用作状态变量。另外，模拟器选择模型 mass1 或模型 mass2 的绝对位置和绝对速度作为状态变量。
 </p>
 
-</html>"),
+</html>"), 
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={ Line(
-              points={{-100,0},{100,0}},
-              pattern=LinePattern.Dot,
-          color={0,127,0}),
+              points={{-100,0},{100,0}}, 
+              pattern=LinePattern.Dot, 
+          color={0,127,0}), 
         Ellipse(
-          extent={{-40,40},{40,-40}},
-          lineColor={52,219,218},
-          fillColor={52,219,218},
-          fillPattern=FillPattern.Solid),
+          extent={{-40,40},{40,-40}}, 
+          lineColor={52,219,218}, 
+          fillColor={52,219,218}, 
+          fillPattern=FillPattern.Solid), 
         Text(
-          extent={{-40,40},{40,-40}},
-          textString="S",
-          textColor={0,0,255}),
+          extent={{-40,40},{40,-40}}, 
+          textString="S", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-150,90},{150,50}},
-          textString="%name",
+          extent={{-150,90},{150,50}}, 
+          textString="%name", 
           textColor={0,0,255})}));
 end RelativeStates;

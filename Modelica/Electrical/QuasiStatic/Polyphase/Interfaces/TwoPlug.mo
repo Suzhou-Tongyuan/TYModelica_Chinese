@@ -3,25 +3,25 @@ partial model TwoPlug "带有引脚适配器、参考连接和电压、电流声
   extends Modelica.Electrical.QuasiStatic.Polyphase.Interfaces.TwoPlugElementary;
 
   SI.ComplexVoltage v[m] "复电压";
-  SI.Voltage abs_v[m]=Modelica.ComplexMath.abs(v)
+  SI.Voltage abs_v[m]=Modelica.ComplexMath.abs(v) 
     "复电压的幅值";
-  SI.Angle arg_v[m]=Modelica.ComplexMath.arg(v)
+  SI.Angle arg_v[m]=Modelica.ComplexMath.arg(v) 
     "复电压的幅角";
   SI.ComplexCurrent i[m] "复电流";
-  SI.Current abs_i[m]=Modelica.ComplexMath.abs(i)
+  SI.Current abs_i[m]=Modelica.ComplexMath.abs(i) 
     "复电流的幅值";
-  SI.Angle arg_i[m]=Modelica.ComplexMath.arg(i)
+  SI.Angle arg_i[m]=Modelica.ComplexMath.arg(i) 
     "复电流的幅角";
-  SI.ActivePower P[m]={Modelica.ComplexMath.real(v[k]*
+  SI.ActivePower P[m]={Modelica.ComplexMath.real(v[k]* 
       Modelica.ComplexMath.conj(i[k])) for k in 1:m} "有功功率";
   SI.ActivePower P_total=sum(P) "总有功功率";
-  SI.ReactivePower Q[m]={Modelica.ComplexMath.imag(v[k]*
+  SI.ReactivePower Q[m]={Modelica.ComplexMath.imag(v[k]* 
       Modelica.ComplexMath.conj(i[k])) for k in 1:m} "无功功率";
   SI.ReactivePower Q_total=sum(Q) "总无功功率";
-  SI.ApparentPower S[m]={Modelica.ComplexMath.abs(v[k]*
-      Modelica.ComplexMath.conj(i[k])) for k in 1:m}
+  SI.ApparentPower S[m]={Modelica.ComplexMath.abs(v[k]* 
+      Modelica.ComplexMath.conj(i[k])) for k in 1:m} 
     "复视在功率的幅值";
-  SI.ApparentPower S_total=sqrt(P_total^2 + Q_total^2)
+  SI.ApparentPower S_total=sqrt(P_total^2 + Q_total^2) 
     "总复视在功率的幅值";
   Real pf[m]={cos(Modelica.ComplexMath.arg(Complex(P[k], Q[k]))) for k in 1
       :m} "功率因数";

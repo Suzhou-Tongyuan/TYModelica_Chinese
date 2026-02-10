@@ -7,32 +7,32 @@ model TwoTanks "两个连接的OpenTank"
   output SI.Length level2=openTank2.level "2号罐液位";
   output SI.Temperature T2(displayUnit="degC")=openTank2.TTank "2号储罐温度";
   FluidHeatFlow.Components.OpenTank openTank1(
-    ATank=1,
-    hTank=1,
-    useHeatPort=false,
-    g=10,
-    level(fixed=true, start=0.9),
-    T0=313.15,
-    T0fixed=true,
+    ATank=1, 
+    hTank=1, 
+    useHeatPort=false, 
+    g=10, 
+    level(fixed=true, start=0.9), 
+    T0=313.15, 
+    T0fixed=true, 
     pAmbient=100000) 
     annotation (Placement(transformation(extent={{-60,12},{-40,32}})));
   FluidHeatFlow.Components.OpenTank openTank2(
-    ATank=1,
-    hTank=1,
-    useHeatPort=false,
-    g=10,
-    level(fixed=true, start=0.1),
-    T0=293.15,
-    T0fixed=true,
+    ATank=1, 
+    hTank=1, 
+    useHeatPort=false, 
+    g=10, 
+    level(fixed=true, start=0.1), 
+    T0=293.15, 
+    T0fixed=true, 
     pAmbient=100000) 
     annotation (Placement(transformation(extent={{60,10},{40,30}})));
   FluidHeatFlow.Components.Pipe pipe(
-    m=0,
-    h_g=0,
-    T0=293.15,
-    V_flowLaminar=2,
-    dpLaminar=10,
-    V_flowNominal=4,
+    m=0, 
+    h_g=0, 
+    T0=293.15, 
+    V_flowLaminar=2, 
+    dpLaminar=10, 
+    V_flowNominal=4, 
     dpNominal=30) 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
@@ -40,7 +40,7 @@ equation
     annotation (Line(points={{-50,12},{-50,0},{-10,0}}, color={255,0,0}));
   connect(pipe.flowPort_b, openTank2.flowPort) 
     annotation (Line(points={{10,0},{50,0},{50,10}}, color={255,0,0}));
-  annotation (experiment(StopTime=1.5),
+  annotation (experiment(StopTime=1.5), 
     Documentation(info="<html><p>
 两个储罐用一根管道连接:
 </p>

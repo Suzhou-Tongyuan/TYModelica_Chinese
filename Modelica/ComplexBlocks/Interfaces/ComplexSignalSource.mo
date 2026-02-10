@@ -2,7 +2,7 @@
 partial block ComplexSignalSource "连续信号源基类"
   extends ComplexBlocks.Interfaces.ComplexSO;
   parameter Complex offset = Complex(0) "输出信号的偏移y";
-  parameter Modelica.Units.SI.Time startTime = 0
+  parameter Modelica.Units.SI.Time startTime = 0 
     "当time < startTime时，输出y = offset";
   annotation(Documentation(info = "<html>
 <p>

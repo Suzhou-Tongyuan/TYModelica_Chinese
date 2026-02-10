@@ -1,13 +1,13 @@
 ﻿within Modelica.Electrical.Analog.Basic;
-model VariableCapacitor
+model VariableCapacitor 
   "理想线性可变电容"
   extends Modelica.Electrical.Analog.Interfaces.OnePort;
   Modelica.Blocks.Interfaces.RealInput C(unit="F") annotation (Placement(
         transformation(
-        origin={0,120},
-        extent={{-20,-20},{20,20}},
+        origin={0,120}, 
+        extent={{-20,-20},{20,20}}, 
         rotation=270)));
-  parameter SI.Capacitance Cmin=Modelica.Constants.eps
+  parameter SI.Capacitance Cmin=Modelica.Constants.eps 
     "可变电容的下限";
   SI.ElectricCharge Q;
   parameter SI.Voltage IC=0 "初始值";
@@ -21,7 +21,7 @@ equation
   // protect solver from index change
   Q = noEvent(max(C, Cmin))*v;
   i = der(Q);
-  annotation (defaultComponentName="capacitor",
+  annotation (defaultComponentName="capacitor", 
     Documentation(info="<html>
 <p>线性导体通过下面式子的分支电压<em>v</em>与分支电流<em>i</em>连接起来
 <br><em><strong>i = dQ/dt</strong></em>，<em><strong>Q = C * v</strong></em>.
@@ -32,7 +32,7 @@ equation
 
 <p><br>因此，电容器在模拟开始时被充电。另一个参数UIC是布尔类型。如果UIC为真，模拟工具在初始计算时使用IC值，通过添加方程v=IC。如果UIC为假，IC 值可以被用于(但不是必须的！)计算初始值，以便简化初始计算的数值算法。</p>
 <p><br>如果UIC为假，IC值可以被用于(但不是必须的！)计算初始值，以便简化初始计算的数值算法。<p><br>
-</html>",
+</html>", 
         revisions="<html>
 <ul>
 
@@ -47,15 +47,15 @@ equation
      </li>
 </ul>
 
-</html>"),
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+</html>"), 
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
             100}}),graphics={
-        Line(points={{-90,0},{-6,0}}, color={0,0,255}),
-        Line(points={{6,0},{90,0}}, color={0,0,255}),
-        Line(points={{-6,28},{-6,-28}}, color={0,0,255}),
-        Line(points={{6,28},{6,-28}}, color={0,0,255}),
+        Line(points={{-90,0},{-6,0}}, color={0,0,255}), 
+        Line(points={{6,0},{90,0}}, color={0,0,255}), 
+        Line(points={{-6,28},{-6,-28}}, color={0,0,255}), 
+        Line(points={{6,28},{6,-28}}, color={0,0,255}), 
         Text(
-          extent={{-150,90},{150,50}},
-          textString="%name",
+          extent={{-150,90},{150,50}}, 
+          textString="%name", 
           textColor={0,0,255})}));
 end VariableCapacitor;

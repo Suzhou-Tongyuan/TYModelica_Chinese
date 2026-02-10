@@ -1,58 +1,58 @@
 ﻿within Modelica.Electrical.Machines.BasicMachines.DCMachines;
 model DC_SeriesExcited "串激励线性直流电机"
   extends Machines.Interfaces.PartialBasicDCMachine(
-    wNominal(start=1410*2*pi/60),
+    wNominal(start=1410*2*pi/60), 
     final ViNominal=VaNominal - (Machines.Thermal.convertResistance(
-        Ra,
-        TaRef,
-        alpha20a,
+        Ra, 
+        TaRef, 
+        alpha20a, 
         TaNominal) + Machines.Thermal.convertResistance(
-        Re,
-        TeRef,
-        alpha20e,
+        Re, 
+        TeRef, 
+        alpha20e, 
         TeNominal))*IaNominal - Machines.Losses.DCMachines.brushVoltageDrop(
-        brushParameters, IaNominal),
-    final psi_eNominal=Lme*abs(IaNominal),
+        brushParameters, IaNominal), 
+    final psi_eNominal=Lme*abs(IaNominal), 
     redeclare final Machines.Thermal.DCMachines.ThermalAmbientDCSE 
-      thermalAmbient(final Tse=TeOperational),
-    redeclare final Machines.Interfaces.DCMachines.ThermalPortDCSE thermalPort,
+      thermalAmbient(final Tse=TeOperational), 
+    redeclare final Machines.Interfaces.DCMachines.ThermalPortDCSE thermalPort, 
 
     redeclare final Machines.Interfaces.DCMachines.ThermalPortDCSE 
-      internalThermalPort,
+      internalThermalPort, 
     redeclare final Machines.Interfaces.DCMachines.PowerBalanceDCSE 
       powerBalance(final powerSeriesExcitation=ve*ie, final
-        lossPowerSeriesExcitation=re.LossPower),
+        lossPowerSeriesExcitation=re.LossPower), 
     core(final w=airGapDC.w));
-  parameter SI.Resistance Re(start=0.01)
+  parameter SI.Resistance Re(start=0.01) 
     "TeRef处串激励电阻" 
-    annotation (Dialog(tab="Excitation"));
-  parameter SI.Temperature TeRef(start=293.15)
+    annotation (Dialog(tab="激励"));
+  parameter SI.Temperature TeRef(start=293.15) 
     "串激励电阻的参考温度" 
-    annotation (Dialog(tab="Excitation"));
-  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20e(start=0)
+    annotation (Dialog(tab="激励"));
+  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20e(start=0) 
     "串激励电阻的温度系数" 
-    annotation (Dialog(tab="Excitation"));
-  parameter SI.Inductance Le(start=0.0005)
+    annotation (Dialog(tab="激励"));
+  parameter SI.Inductance Le(start=0.0005) 
     "总磁场励磁电感" 
-    annotation (Dialog(tab="Excitation"));
+    annotation (Dialog(tab="激励"));
   parameter Real sigmae(
-    min=0,
-    max=0.99,
+    min=0, 
+    max=0.99, 
     start=0) "总励磁电感的杂散部分" 
-    annotation (Dialog(tab="Excitation"));
-  parameter SI.Temperature TeNominal(start=293.15)
+    annotation (Dialog(tab="激励"));
+  parameter SI.Temperature TeNominal(start=293.15) 
     "串激励的额定温度" 
-    annotation (Dialog(tab="Nominal parameters"));
-  parameter SI.Temperature TeOperational(start=293.15)
-    "串激励的操作温度" annotation (Dialog(group=
-          "Operational temperatures", enable=not useThermalPort));
-  output SI.Voltage ve=pin_ep.v - pin_en.v
+    annotation (Dialog(tab="额定参数"));
+  parameter SI.Temperature TeOperational(start=293.15) 
+    "串激励的操作温度" annotation (Dialog(group= 
+          "工作温度", enable=not useThermalPort));
+  output SI.Voltage ve=pin_ep.v - pin_en.v 
     "磁场励磁电压";
   output SI.Current ie=pin_ep.i "磁场励磁电流";
   Machines.BasicMachines.Components.AirGapDC airGapDC(
-    final turnsRatio=turnsRatio,
-    final Le=Lme,
-    final quasiStatic=quasiStatic) annotation (Placement(transformation(extent=
+    final turnsRatio=turnsRatio, 
+    final Le=Lme, 
+    final quasiStatic=quasiStatic) annotation (Placement(transformation(extent= 
             {{-10,-10},{10,10}}, rotation=270)));
   Machines.BasicMachines.Components.CompoundDCExcitation compoundDCExcitation(final
       excitationTurnsRatio=1) 
@@ -62,28 +62,28 @@ model DC_SeriesExcited "串激励线性直流电机"
   Modelica.Electrical.Analog.Basic.Ground groundE 
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   Modelica.Electrical.Analog.Basic.Resistor re(
-    final R=Re,
-    final T_ref=TeRef,
-    final alpha=Machines.Thermal.convertAlpha(alpha20e, TeRef),
+    final R=Re, 
+    final T_ref=TeRef, 
+    final alpha=Machines.Thermal.convertAlpha(alpha20e, TeRef), 
     final useHeatPort=true) annotation (Placement(transformation(
-        origin={-80,50},
-        extent={{-10,10},{10,-10}},
+        origin={-80,50}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=270)));
   Machines.BasicMachines.Components.InductorDC lesigma(final L=Lesigma, final
       quasiStatic=quasiStatic) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,20})));
-  Modelica.Electrical.Analog.Interfaces.PositivePin pin_ep
+  Modelica.Electrical.Analog.Interfaces.PositivePin pin_ep 
     "正串激励引脚" annotation (Placement(transformation(
           extent={{-110,70},{-90,50}})));
-  Modelica.Electrical.Analog.Interfaces.NegativePin pin_en
+  Modelica.Electrical.Analog.Interfaces.NegativePin pin_en 
     "负串激励引脚" annotation (Placement(transformation(
           extent={{-90,-50},{-110,-70}})));
 protected
-  final parameter SI.Inductance Lme=Le*(1 - sigmae)
+  final parameter SI.Inductance Lme=Le*(1 - sigmae) 
     "励磁电感的主要部分";
-  final parameter SI.Inductance Lesigma=Le*sigmae
+  final parameter SI.Inductance Lesigma=Le*sigmae 
     "励磁电感的杂散部分" annotation (Evaluate=true);
 equation
   connect(airGapDC.pin_ap, la.n) annotation (Line(
@@ -114,17 +114,17 @@ equation
     annotation (Line(
       points={{-70,50},{-60,50},{-60,40},{50,40},{50,-80},{0,-80}}, color={191,0,0}));
   annotation (
-    defaultComponentName="dcse",
+    defaultComponentName="dcse", 
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
-        Line(points={{-100,-10},{-105,-9},{-109,-5},{-110,0},{-109,5},{-105,
-              9},{-100,10}}, color={0,0,255}),
-        Line(points={{-100,-30},{-105,-29},{-109,-25},{-110,-20},{-109,-15},
-              {-105,-11},{-100,-10}}, color={0,0,255}),
-        Line(points={{-100,10},{-105,11},{-109,15},{-110,20},{-109,25},{-105,
-              29},{-100,30}}, color={0,0,255}),
-        Line(points={{-100,50},{-100,30}}, color={0,0,255}),
-        Line(points={{-100,-30},{-100,-50}}, color={0,0,255})}),
+        Line(points={{-100,-10},{-105,-9},{-109,-5},{-110,0},{-109,5},{-105, 
+              9},{-100,10}}, color={0,0,255}), 
+        Line(points={{-100,-30},{-105,-29},{-109,-25},{-110,-20},{-109,-15}, 
+              {-105,-11},{-100,-10}}, color={0,0,255}), 
+        Line(points={{-100,10},{-105,11},{-109,15},{-110,20},{-109,25},{-105, 
+              29},{-100,30}}, color={0,0,255}), 
+        Line(points={{-100,50},{-100,30}}, color={0,0,255}), 
+        Line(points={{-100,-30},{-100,-50}}, color={0,0,255})}), 
     Documentation(info="<html>
 <p><strong>串激励直流电机模型。</strong><br>
 电枢电阻和电感直接建模后，使用<em>AirGapDC</em>模型。<br>

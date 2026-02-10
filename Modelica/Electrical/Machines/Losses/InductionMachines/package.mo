@@ -4,7 +4,7 @@ package InductionMachines "感应电机的损耗模型"
 
   annotation (Documentation(info="<html>
 该库含有用于感应电机模型的损耗模型。
-</html>",
+</html>", 
       revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

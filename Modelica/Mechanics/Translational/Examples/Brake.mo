@@ -2,24 +2,24 @@
 model Brake "演示一个平移运动质量块的制动"
   extends Modelica.Icons.Example;
 
-  Modelica.Mechanics.Translational.Components.Brake brake(fn_max=1,
+  Modelica.Mechanics.Translational.Components.Brake brake(fn_max=1, 
       useSupport=false) 
     annotation (Placement(transformation(extent={{0,50},{20,30}})));
   Modelica.Mechanics.Translational.Components.Mass mass1(
-    m=1,
-    s(fixed=true),
+    m=1, 
+    s(fixed=true), 
     v(start=1, fixed=true)) 
     annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
   Modelica.Blocks.Sources.Step step(startTime=0.1, height=2) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={-30,0})));
-  Modelica.Mechanics.Translational.Components.Brake brake1(fn_max=1,
+  Modelica.Mechanics.Translational.Components.Brake brake1(fn_max=1, 
       useSupport=true) 
     annotation (Placement(transformation(extent={{0,-50},{20,-30}})));
   Modelica.Mechanics.Translational.Components.Mass mass2(
-    m=1,
-    s(fixed=true),
+    m=1, 
+    s(fixed=true), 
     v(start=1, fixed=true)) 
     annotation (Placement(transformation(extent={{-40,-50},{-20,-30}})));
   Modelica.Mechanics.Translational.Components.Fixed fixed 
@@ -42,6 +42,6 @@ equation
 该系统有两个版本，
 一个是制动器被隐式的接地，另一个是被显式的接地。
 </p>
-</html>"),
+</html>"), 
        experiment(StopTime=2.0, Interval=0.001));
 end Brake;

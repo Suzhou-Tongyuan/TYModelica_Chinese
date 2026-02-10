@@ -1,67 +1,67 @@
 ﻿within Modelica.Mechanics.Translational.Components;
-model MassWithStopAndFriction
+model MassWithStopAndFriction 
   "带硬性止动和 Stribeck 摩擦的滑动质量"
   extends PartialFrictionWithStop;
-  SI.Velocity v(start = 0, stateSelect = StateSelect.always)
+  SI.Velocity v(start = 0, stateSelect = StateSelect.always) 
     "flange_a 和 flange_b 的绝对速度";
-  SI.Acceleration a(start = 0)
+  SI.Acceleration a(start = 0) 
     "flange_a 和 flange_b 的绝对加速度";
   parameter SI.Mass m(start = 1) "质量";
   parameter Real F_prop(
-    final unit = "N.s/m",
-    final min = 0,
+    final unit = "N.s/m", 
+    final min = 0, 
     start = 1) "速度相关的摩擦";
-  parameter SI.Force F_Coulomb(start = 5)
+  parameter SI.Force F_Coulomb(start = 5) 
     "常数摩擦：库仑力";
   parameter SI.Force F_Stribeck(start = 10) "Stribeck 效应";
   parameter Real fexp(
-    final unit = "s/m",
-    final min = 0,
+    final unit = "s/m", 
+    final min = 0, 
     start = 2) "指数衰减";
   extends Modelica.Thermal.HeatTransfer.Interfaces.PartialElementaryConditionalHeatPortWithoutT;
-  Integer stopped
+  Integer stopped 
     "停止模式（-1：flange_a 处硬性止动，0：无止动，+1：flange_b 处硬性止动）";
-  encapsulated partial model PartialFrictionWithStop
+  encapsulated partial model PartialFrictionWithStop 
     "带止动的库仑摩擦元件的基础模型"
 
     import Modelica;
     import Modelica.Mechanics.Translational.Interfaces.PartialRigid;
-    parameter Modelica.Units.SI.Position smax(start = 25)
+    parameter Modelica.Units.SI.Position smax(start = 25) 
       "滑动质量（滑动端的右端）的右止";
-    parameter Modelica.Units.SI.Position smin(start = -25)
+    parameter Modelica.Units.SI.Position smin(start = -25) 
       "滑动质量（滑动端的左端）的左止";
-    parameter Modelica.Units.SI.Velocity v_small = 1e-3
+    parameter Modelica.Units.SI.Velocity v_small = 1e-3 
       "接近零的相对速度（请参阅模型信息文本）" 
       annotation(Dialog(tab = "高级"));
     // 定义以下变量的方程必须在子类中定义
     Modelica.Units.SI.Velocity v_relfric "摩擦表面之间的相对速度";
-    Modelica.Units.SI.Acceleration a_relfric
+    Modelica.Units.SI.Acceleration a_relfric 
       "摩擦表面之间的相对加速度";
-    Modelica.Units.SI.Force f
+    Modelica.Units.SI.Force f 
       "摩擦力（正向，如果与 v_rel 相反方向）";
     Modelica.Units.SI.Force f0 "v=0 且向前滑动时的摩擦力";
     Modelica.Units.SI.Force f0_max "v=0 且锁定时的最大摩擦力";
     Boolean free "= true，如果摩擦元件未激活";
     // 定义以下变量的方程在此类中给出
-    Real sa(unit = "1")
+    Real sa(unit = "1") 
       "摩擦特性的路径参数 f = f(a_relfric)";
-    Boolean startForward(start = false, fixed = true)
+    Boolean startForward(start = false, fixed = true) 
       "= true，如果 v_rel=0 且开始向前滑动或 v_rel > v_small";
-    Boolean startBackward(start = false, fixed = true)
+    Boolean startBackward(start = false, fixed = true) 
       "= true，如果 v_rel=0 且开始向后滑动或 v_rel < -v_small";
     Boolean locked(start = false) "= true，如果 v_rel=0 且不滑动";
     extends PartialRigid(s(start = 0, stateSelect = StateSelect.always));
     constant Integer Unknown = 3 "模式值未知";
     constant Integer Free = 2 "元素未激活";
     constant Integer Forward = 1 "v_rel > 0（向前滑动）";
-    constant Integer Stuck = 0
+    constant Integer Stuck = 0 
       "v_rel = 0（向前滑动，锁定或向后滑动）";
     constant Integer Backward = -1 "v_rel < 0（向后滑动）";
     Integer mode(
-      final min = Backward,
-      final max = Unknown,
-      start = Unknown,
-      fixed = true)
+      final min = Backward, 
+      final max = Unknown, 
+      start = Unknown, 
+      fixed = true) 
       "摩擦模式（-1：向后滑动，0：锁定，1：向前滑动，2：不活动，3：未知）";
   protected
     constant Modelica.Units.SI.Acceleration unitAcceleration = 1 annotation(HideResult = true);
@@ -72,10 +72,10 @@ model MassWithStopAndFriction
     不同的结构配置，如果要为每个配置生成特殊代码）
     */
     startForward = pre(mode) == Stuck and (sa > f0_max / unitForce and s < (
-      smax - L / 2) or pre(startForward) and sa > f0 / unitForce and s < (smax
+      smax - L / 2) or pre(startForward) and sa > f0 / unitForce and s < (smax 
       - L / 2)) or pre(mode) == Backward and v_relfric > v_small or initial() 
       and (v_relfric > 0);
-    startBackward = pre(mode) == Stuck and (sa < -f0_max / unitForce and s >
+    startBackward = pre(mode) == Stuck and (sa < -f0_max / unitForce and s > 
       (smin + L / 2) or pre(startBackward) and sa < -f0 / unitForce and s > (
       smin + L / 2)) or pre(mode) == Forward and v_relfric < -v_small or 
       initial() and (v_relfric < 0);
@@ -96,7 +96,7 @@ model MassWithStopAndFriction
     -Modelica.Math.Vectors.interpolate(mu_pos[:,1], mu_pos[:,2], -v_relfric, 1));
     */
     // 确定配置的有限状态机
-    mode = if free then Free else (if (pre(mode) == Forward or pre(mode)
+    mode = if free then Free else (if (pre(mode) == Forward or pre(mode) 
       == Free or startForward) and v_relfric > 0 and s < (smax - L / 2) 
       then Forward else if (pre(mode) == Backward or pre(mode) == Free or 
       startBackward) and v_relfric < 0 and s > (smin + L / 2) then Backward 
@@ -124,17 +124,17 @@ equation
   f = if locked then sa * unitForce else if free then 0 else (if startForward 
     then F_prop * v + F_Coulomb + F_Stribeck else if startBackward then 
     F_prop * v - F_Coulomb - F_Stribeck else if pre(mode) == Forward then 
-    F_prop * v + F_Coulomb + F_Stribeck * Modelica.Math.exp(-fexp * abs(v)) else F_prop * v -
+    F_prop * v + F_Coulomb + F_Stribeck * Modelica.Math.exp(-fexp * abs(v)) else F_prop * v - 
     F_Coulomb - F_Stribeck * Modelica.Math.exp(-fexp * abs(v)));
   lossPower = f * v_relfric;
   when (initial()) then
-    assert(s > smin + L / 2 or s >= smin + L / 2 and v >= 0,
-      "硬性止动初始化错误。 (s - L/2) 必须 >= smin\n"
-      + "(s=" + String(s) + ", L=" + String(L) + ", smin=" + String(smin)
+    assert(s > smin + L / 2 or s >= smin + L / 2 and v >= 0, 
+      "硬性止动初始化错误。 (s - L/2) 必须 >= smin\n" 
+      + "(s=" + String(s) + ", L=" + String(L) + ", smin=" + String(smin) 
       + ")");
-    assert(s < smax - L / 2 or s <= smax - L / 2 and v <= 0,
-      "硬性止动初始化错误。 (s + L/2) 必须 <= smax\n"
-      + "(s=" + String(s) + ", L=" + String(L) + ", smax=" + String(smax)
+    assert(s < smax - L / 2 or s <= smax - L / 2 and v <= 0, 
+      "硬性止动初始化错误。 (s + L/2) 必须 <= smax\n" 
+      + "(s=" + String(s) + ", L=" + String(L) + ", smax=" + String(smax) 
       + ")");
   end when;
 
@@ -254,7 +254,7 @@ Armstrong B. (1991):</dt>
 由于质量的动能发生不连续变化（lossPower 是质量动能在撞击时刻的导数）。
 </p>
 
-</html>",
+</html>", 
     revisions = "<html>
 <h4>版本说明</h4>
 <ul>
@@ -263,50 +263,50 @@ Armstrong B. (1991):</dt>
 <li><em>2001 年 10 月 11 日，由 Hans Olsson, Dassault Syst&egrave;mes AB 制作，修改了初始化断言以处理止动开始的情况，修改了事件逻辑，如果摩擦参数等于零，则不会在止动之间获得事件。</em></li>
 <li><em>2002 年 6 月 10 日，由 P. Beater 制作，为变量 s 和 v 添加了 StateSelect.always（而不是 fixed=true）。</em></li>
 </ul>
-</html>"),
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}),
+</html>"), 
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), 
     graphics = {
-    Line(points = {{-100, 0}, {100, 0}}, color = {0, 127, 0}),
+    Line(points = {{-100, 0}, {100, 0}}, color = {0, 127, 0}), 
     Polygon(
-    points = {{80, -100}, {50, -90}, {50, -110}, {80, -100}},
-    lineColor = {95, 127, 95},
-    fillColor = {95, 127, 95},
-    fillPattern = FillPattern.Solid),
-    Line(points = {{-40, -100}, {50, -100}}, color = {95, 127, 95}),
+    points = {{80, -100}, {50, -90}, {50, -110}, {80, -100}}, 
+    lineColor = {95, 127, 95}, 
+    fillColor = {95, 127, 95}, 
+    fillPattern = FillPattern.Solid), 
+    Line(points = {{-40, -100}, {50, -100}}, color = {95, 127, 95}), 
     Rectangle(
-    extent = {{-30, 30}, {30, -30}},
-    fillPattern = FillPattern.Sphere,
-    fillColor = {166, 221, 166},
-    lineColor = {0, 127, 0}),
+    extent = {{-30, 30}, {30, -30}}, 
+    fillPattern = FillPattern.Sphere, 
+    fillColor = {166, 221, 166}, 
+    lineColor = {0, 127, 0}), 
     Rectangle(
-    extent = {{-64, -16}, {-56, -46}},
-    fillPattern = FillPattern.Solid,
-    lineColor = {0, 127, 0},
-    fillColor = {0, 127, 0}),
+    extent = {{-64, -16}, {-56, -46}}, 
+    fillPattern = FillPattern.Solid, 
+    lineColor = {0, 127, 0}, 
+    fillColor = {0, 127, 0}), 
     Rectangle(
-    extent = {{56, -16}, {64, -46}},
-    fillPattern = FillPattern.Solid,
-    lineColor = {0, 127, 0},
-    fillColor = {0, 127, 0}),
-    Text(extent = {{-150, 80}, {150, 40}},
-    textString = "%name",
-    textColor = {0, 0, 255}),
-    Line(points = {{-50, -90}, {-28, -68}}, color = {0, 127, 0}),
-    Line(points = {{-30, -90}, {-8, -68}}, color = {0, 127, 0}),
-    Line(points = {{-10, -90}, {12, -68}}, color = {0, 127, 0}),
-    Line(points = {{10, -90}, {32, -68}}, color = {0, 127, 0}),
+    extent = {{56, -16}, {64, -46}}, 
+    fillPattern = FillPattern.Solid, 
+    lineColor = {0, 127, 0}, 
+    fillColor = {0, 127, 0}), 
+    Text(extent = {{-150, 80}, {150, 40}}, 
+    textString = "%name", 
+    textColor = {0, 0, 255}), 
+    Line(points = {{-50, -90}, {-28, -68}}, color = {0, 127, 0}), 
+    Line(points = {{-30, -90}, {-8, -68}}, color = {0, 127, 0}), 
+    Line(points = {{-10, -90}, {12, -68}}, color = {0, 127, 0}), 
+    Line(points = {{10, -90}, {32, -68}}, color = {0, 127, 0}), 
     Text(
-    extent = {{-150, -110}, {150, -140}},
-    textString = "m=%m"),
+    extent = {{-150, -110}, {150, -140}}, 
+    textString = "m=%m"), 
     Line(
-    visible = useHeatPort,
-    points = {{-100, -100}, {-100, -40}, {3, -40}},
-    color = {191, 0, 0},
-    pattern = LinePattern.Dot),
+    visible = useHeatPort, 
+    points = {{-100, -100}, {-100, -40}, {3, -40}}, 
+    color = {191, 0, 0}, 
+    pattern = LinePattern.Dot), 
     Rectangle(
-    extent = {{-70, -46}, {70, -70}},
-    fillColor = {160, 215, 160},
-    fillPattern = FillPattern.Solid,
+    extent = {{-70, -46}, {70, -70}}, 
+    fillColor = {160, 215, 160}, 
+    fillPattern = FillPattern.Solid, 
     lineColor = {0, 127, 0})})
 
     );

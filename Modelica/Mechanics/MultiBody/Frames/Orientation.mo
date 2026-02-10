@@ -1,28 +1,28 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-record Orientation
+record Orientation 
   "定义从坐标系1旋转到坐标系2的方向对象"
 
   extends Modelica.Icons.Record;
   Real T[3, 3] "从世界坐标系到本地坐标系的转换矩阵";
-  SI.AngularVelocity w[3]
+  SI.AngularVelocity w[3] 
     "本地坐标系的绝对角速度，在本地坐标系下解析";
 
-  encapsulated function equalityConstraint
+  encapsulated function equalityConstraint 
     "返回表达两个坐标系具有相同方向的约束残差"
 
     import Modelica;
     import Modelica.Mechanics.MultiBody.Frames;
     extends Modelica.Icons.Function;
-    input Frames.Orientation R1
+    input Frames.Orientation R1 
       "将坐标系0旋转到坐标系1的方向对象";
-    input Frames.Orientation R2
+    input Frames.Orientation R2 
       "将坐标系0旋转到坐标系2的方向对象";
-    output Real residue[3]
+    output Real residue[3] 
       "将坐标系1旋转到坐标系2的绕x、y和z轴的旋转角度(对于小的旋转应为零)";
   algorithm
     residue := {
-       Modelica.Math.atan2(cross(R1.T[1, :], R1.T[2, :])*R2.T[2, :],R1.T[1,:]*R2.T[1,:]),
-       Modelica.Math.atan2(-cross(R1.T[1, :],R1.T[2, :])*R2.T[1, :],R1.T[2,:]*R2.T[2,:]),
+       Modelica.Math.atan2(cross(R1.T[1, :], R1.T[2, :])*R2.T[2, :],R1.T[1,:]*R2.T[1,:]), 
+       Modelica.Math.atan2(-cross(R1.T[1, :],R1.T[2, :])*R2.T[1, :],R1.T[2,:]*R2.T[2,:]), 
        Modelica.Math.atan2(R1.T[2, :]*R2.T[1, :],R1.T[3,:]*R2.T[3,:])};
     annotation(Inline=true, Documentation(info="<html>
 <h4>语法</h4>

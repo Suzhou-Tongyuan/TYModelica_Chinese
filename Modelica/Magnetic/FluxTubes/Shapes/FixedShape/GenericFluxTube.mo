@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
+within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
 model GenericFluxTube
   "具有固定截面和长度的通量管；线性或非线性材料特性"
 
@@ -6,10 +6,10 @@ model GenericFluxTube
   extends Modelica.Magnetic.FluxTubes.Icons.Reluctance;
 
   parameter SI.Length l=0.01 "通量方向上的长度" 
-    annotation(Dialog(group="Fixed geometry", groupImage=
+    annotation(Dialog(group="固定几何结构", groupImage=
       "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/GenericFluxTube.png"));
   parameter SI.CrossSection area=0.0001 "横截面积" 
-    annotation (Dialog(group="Fixed geometry"));
+    annotation (Dialog(group="固定几何结构"));
 equation
   A=area;
   G_m = (mu_0*mu_r*A)/l;

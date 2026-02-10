@@ -14,21 +14,21 @@ package Defaults "通过常量设置MultiBody库的默认设置"
   constant Types.Color ArrowColor = {0, 0, 255} "箭头和双箭头的默认颜色(蓝色)";
 
   // 箭头和坐标系默认值
-  constant Real FrameHeadLengthFraction = 5.0
+  constant Real FrameHeadLengthFraction = 5.0 
     "坐标系箭头头部长度/箭头直径";
-  constant Real FrameHeadWidthFraction = 3.0
+  constant Real FrameHeadWidthFraction = 3.0 
     "坐标系箭头头部宽度/箭头直径";
-  constant Real FrameLabelHeightFraction = 3.0
+  constant Real FrameLabelHeightFraction = 3.0 
     "坐标系标签的高度/箭头直径";
-  constant Real ArrowHeadLengthFraction = 4.0
+  constant Real ArrowHeadLengthFraction = 4.0 
     "箭头头部长度/箭头直径";
-  constant Real ArrowHeadWidthFraction = 3.0
+  constant Real ArrowHeadWidthFraction = 3.0 
     "箭头头部宽度/箭头直径";
 
   // 其他默认值
-  constant Real BodyCylinderDiameterFraction = 3
+  constant Real BodyCylinderDiameterFraction = 3 
     "构件圆柱直径的默认值，作为构件球直径的一部分";
-  constant Real JointRodDiameterFraction = 2
+  constant Real JointRodDiameterFraction = 2 
     "杆直径的默认值，作为连接到杆的关节球直径的一部分";
 
   /*

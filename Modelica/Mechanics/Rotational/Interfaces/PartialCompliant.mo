@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.Rotational.Interfaces;
-partial model PartialCompliant
+partial model PartialCompliant 
   "具有两个一维转动接口的弹性连接的部分模型"
 
-  SI.Angle phi_rel(start=0)
+  SI.Angle phi_rel(start=0) 
     "相对旋转角度（= flange_b.phi - flange_a.phi）";
   SI.Torque tau "一维转动接口之间的扭矩（= flange_b.tau）";
   Flange_a flange_a "具有弹性连接的一维旋转组件的左侧一维转动接口" 

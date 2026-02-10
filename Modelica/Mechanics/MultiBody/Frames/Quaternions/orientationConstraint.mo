@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
-function orientationConstraint
+function orientationConstraint 
   "返回方向约束的残差(应为零)"
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q
+  input Quaternions.Orientation Q 
     "将坐标系1旋转到坐标系2的四元数方向对象";
   output Real residue[1] "残差约束(应为零)";
 algorithm

@@ -2,37 +2,37 @@
 partial model PartialFriction "Coulomb摩擦元件的部分模型"
 
   // parameter SI.AngularVelocity w_small=1 "接近零时的相对角速度（请参阅模型信息文本）";
-  parameter SI.AngularVelocity w_small=1.0e10
+  parameter SI.AngularVelocity w_small=1.0e10 
     "如果由于速度的重新初始化（reinit(..)）而可能发生跃变，则接近零的相对角速度（仅在出现这样的冲击时设置为低值）" 
     annotation (Dialog(tab="高级"));
   // 下列变量的定义方程必须在子类中定义
-  SI.AngularVelocity w_relfric
+  SI.AngularVelocity w_relfric 
     "摩擦表面之间的相对角速度";
-  SI.AngularAcceleration a_relfric
+  SI.AngularAcceleration a_relfric 
     "摩擦表面之间的相对角加速度";
   //SI.Torque tau "摩擦力矩（正向时为负）";
   SI.Torque tau0 "w_relfric=0且正向滑动时的摩擦力矩";
   SI.Torque tau0_max "w_relfric=0且锁定时的最大摩擦力矩";
   Boolean free "= true，如果摩擦元件未激活";
   // 下列变量的定义方程在该类中给出
-  Real sa(final unit="1")
+  Real sa(final unit="1") 
     "摩擦特性tau = f(a_relfric)";
-  Boolean startForward(start=false, fixed=true)
+  Boolean startForward(start=false, fixed=true) 
     "= true，如果w_relfric=0且正向滑动开始";
-  Boolean startBackward(start=false, fixed=true)
+  Boolean startBackward(start=false, fixed=true) 
     "= true，如果w_relfric=0且反向滑动开始";
   Boolean locked(start=false) "= true，如果w_rel=0且未滑动";
   constant Integer Unknown=3 "模式的值未知";
   constant Integer Free=2 "元素未激活";
   constant Integer Forward=1 "w_relfric > 0（正向滑动）";
-  constant Integer Stuck=0
+  constant Integer Stuck=0 
     "w_relfric = 0（正向滑动、锁定或反向滑动）";
   constant Integer Backward=-1 "w_relfric < 0（反向滑动）";
   Integer mode(
-    final min=Backward,
-    final max=Unknown,
-    start=Unknown,
-    fixed=true)
+    final min=Backward, 
+    final max=Unknown, 
+    start=Unknown, 
+    fixed=true) 
     "摩擦的模式（-1：反向滑动，0：锁定，1：正向滑动，2：未激活，3：未知）";
 protected
   constant SI.AngularAcceleration unitAngularAcceleration=1 
@@ -55,7 +55,7 @@ equation
 
   a_relfric/unitAngularAcceleration = if locked then 0 else if free then sa 
      else if startForward then sa - tau0_max/unitTorque else if 
-    startBackward then sa + tau0_max/unitTorque else if pre(mode) ==
+    startBackward then sa + tau0_max/unitTorque else if pre(mode) == 
     Forward then sa - tau0_max/unitTorque else sa + tau0_max/unitTorque;
 
   /* 摩擦力矩必须在子类中定义。例如，对于离合器：
@@ -67,8 +67,8 @@ equation
                                                -Modelica.Math.Vectors.interpolate(mu_pos[:,1], mu_pos[:,2], -w_relfric, 1));
 */
   // 有限状态机确定配置
-  mode = if free then Free else (if (pre(mode) == Forward or pre(mode) ==
-    Free or startForward) and w_relfric > 0 then Forward else if (pre(mode)
+  mode = if free then Free else (if (pre(mode) == Forward or pre(mode) == 
+    Free or startForward) and w_relfric > 0 then Forward else if (pre(mode) 
      == Backward or pre(mode) == Free or startBackward) and w_relfric < 0 
      then Backward else Stuck);
   annotation (Documentation(info="<html><p>

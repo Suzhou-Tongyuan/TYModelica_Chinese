@@ -5,14 +5,14 @@ model SeriesResonance "串联共振电路"
   Sources.SineVoltageVariableFrequencyAndAmplitude sineVoltage(
       useConstantAmplitude=true,                               phi(fixed=true)) 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={-40,50})));
   Basic.Ground ground1 
     annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
   Basic.Resistor resistor1(R=0.5) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={40,50})));
   Basic.Inductor inductor1(i(fixed=true), L=0.1/(2*pi)) 
     annotation (Placement(transformation(extent={{-30,60},{-10,80}})));
@@ -21,22 +21,22 @@ model SeriesResonance "串联共振电路"
   Sensors.CurrentSensor currentSensor1 
     annotation (Placement(transformation(extent={{10,20},{-10,40}})));
   Blocks.Sources.Ramp ramp(
-    height=200,
-    duration=1,
-    offset=0,
+    height=200, 
+    duration=1, 
+    offset=0, 
     startTime=0) 
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
   Sources.CosineVoltageVariableFrequencyAndAmplitude cosineVoltage(
       useConstantAmplitude=true, phi(fixed=true)) annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={-40,-50})));
   Basic.Ground ground2 
     annotation (Placement(transformation(extent={{-50,-90},{-30,-70}})));
   Basic.Resistor resistor2(R=0.5) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={40,-50})));
   Basic.Inductor inductor2(i(fixed=true), L=0.1/(2*pi)) 
     annotation (Placement(transformation(extent={{-30,-40},{-10,-20}})));
@@ -55,8 +55,8 @@ equation
     annotation (Line(points={{-40,40},{-40,30}}, color={0,0,255}));
   connect(currentSensor1.p, resistor1.n) 
     annotation (Line(points={{10,30},{40,30},{40,40}}, color={0,0,255}));
-  connect(ramp.y, sineVoltage.f) annotation (Line(points={{-69,0},{-60,0},{-60,
-          56},{-52,56}},
+  connect(ramp.y, sineVoltage.f) annotation (Line(points={{-69,0},{-60,0},{-60, 
+          56},{-52,56}}, 
                        color={0,0,127}));
   connect(ground1.p, currentSensor1.n) 
     annotation (Line(points={{-40,30},{-10,30}}, color={0,0,255}));

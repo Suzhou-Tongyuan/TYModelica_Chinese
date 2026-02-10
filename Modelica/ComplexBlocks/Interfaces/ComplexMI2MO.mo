@@ -1,5 +1,5 @@
 ﻿within Modelica.ComplexBlocks.Interfaces;
-partial block ComplexMI2MO
+partial block ComplexMI2MO 
   "2个多输入/1个多输出连续控制模块"
   extends Modelica.ComplexBlocks.Icons.ComplexBlock;
   parameter Integer n = 1 "输入和输出向量的维度";
@@ -10,16 +10,16 @@ partial block ComplexMI2MO
   ComplexOutput y[n] "复合输出信号的连接器" annotation(
     Placement(transformation(extent = {{100, -10}, {120, 10}})));
 
-  parameter Boolean useConjugateInput1[n] = fill(false, n)
+  parameter Boolean useConjugateInput1[n] = fill(false, n) 
     "如果为真，则处理输入1的共轭复数";
-  parameter Boolean useConjugateInput2[n] = fill(false, n)
+  parameter Boolean useConjugateInput2[n] = fill(false, n) 
     "如果为真，则处理输入2的共轭复数";
 protected
   Complex u1Internal[n] = {if useConjugateInput1[k] then 
-    Modelica.ComplexMath.conj(u1[k]) else u1[k] for k in 1:n}
+    Modelica.ComplexMath.conj(u1[k]) else u1[k] for k in 1:n} 
     "如果 useComplexInput = true，则等于 u1 或 u1 的共轭复数输入";
   Complex u2Internal[n] = {if useConjugateInput2[k] then 
-    Modelica.ComplexMath.conj(u2[k]) else u2[k] for k in 1:n}
+    Modelica.ComplexMath.conj(u2[k]) else u2[k] for k in 1:n} 
     "如果 useComplexInput = true，则等于 u1 或 u1 的共轭复数输入";
 
   annotation(Documentation(info = "<html>

@@ -10,10 +10,10 @@ equation
   annotation (
     Icon(graphics={
         Polygon(
-          points={{90,0},{60,10},{60,-10},{90,0}},
-          lineColor={85,170,255},
-          fillColor={85,170,255},
-          fillPattern=FillPattern.Solid), Line(points={{0,50},{0,-50}}, color={85,170,255})}),
+          points={{90,0},{60,10},{60,-10},{90,0}}, 
+          lineColor={85,170,255}, 
+          fillColor={85,170,255}, 
+          fillPattern=FillPattern.Solid), Line(points={{0,50},{0,-50}}, color={85,170,255})}), 
                                             Documentation(info="<html>
 
 <p>

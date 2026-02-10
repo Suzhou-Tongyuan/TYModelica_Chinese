@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
+within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
 model Toroid
   "具有圆形截面的环面;固定的形状;线性或非线性材料特性"
 
@@ -6,12 +6,12 @@ model Toroid
   extends Modelica.Magnetic.FluxTubes.Icons.Toroid;
   import Modelica.Constants.pi;
   parameter SI.Radius r=0.1 "环形半径（中间）" 
-    annotation (Dialog(group="Fixed geometry", groupImage=
+    annotation (Dialog(group="固定几何结构", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Toroid.png"));
   parameter SI.Radius d=0.01 "圆柱形磁芯直径" 
-    annotation (Dialog(group="Fixed geometry"));
+    annotation (Dialog(group="固定几何结构"));
   parameter SI.Angle alpha=pi/2 "环形截面角度" 
-    annotation (Dialog(group="Fixed geometry"));
+    annotation (Dialog(group="固定几何结构"));
 equation
   A = d^2*pi/4 "用于计算平均通量密度的算术平均半径处的面积";
   G_m = mu_0*mu_r*A/(r*alpha);

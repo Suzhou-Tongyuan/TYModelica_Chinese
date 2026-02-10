@@ -1,26 +1,26 @@
 ﻿within Modelica.Mechanics.Rotational.Sources;
-model Position
+model Position 
   "根据参考角度信号强制一维转动接口的转动"
   extends Modelica.Mechanics.Rotational.Interfaces.PartialElementaryOneFlangeAndSupport2;
-  parameter Boolean exact=false
+  parameter Boolean exact=false 
     "输入信号是否进行精确处理/滤波，分别为真/假" 
     annotation (Evaluate=true);
-  parameter SI.Frequency f_crit=50
+  parameter SI.Frequency f_crit=50 
     "如果exact=false，则用于滤波输入信号的临界频率" 
     annotation (Dialog(enable=not exact));
-  SI.Angle phi(stateSelect=if exact then StateSelect.default else StateSelect.prefer)
+  SI.Angle phi(stateSelect=if exact then StateSelect.default else StateSelect.prefer) 
     "一维转动接口相对于支撑组件的旋转角度";
-  SI.AngularVelocity w(start=0,
-    stateSelect=if exact then StateSelect.default else StateSelect.prefer)
+  SI.AngularVelocity w(start=0, 
+    stateSelect=if exact then StateSelect.default else StateSelect.prefer) 
     "如果exact=false，则为一维转动接口相对于支撑组件的角速度，否则为虚拟变量" 
     annotation(Dialog(enable=not exact, showStartAttribute = true));
-  SI.AngularAcceleration a(start=0)
+  SI.AngularAcceleration a(start=0) 
     "如果exact=false，则为一维转动接口相对于支撑组件的角加速度，否则为虚拟变量" 
     annotation(Dialog(enable=not exact, showStartAttribute = true));
   Modelica.Blocks.Interfaces.RealInput phi_ref(
-    final quantity="Angle",
-    final unit="rad",
-    displayUnit="deg")
+    final quantity="Angle", 
+    final unit="rad", 
+    displayUnit="deg") 
     "作为输入信号的一维转动接口相对于支撑组件的参考角度" 
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 
@@ -66,28 +66,28 @@ equation
 <p>
 输入信号可以从Modelica.Blocks.Sources库中的信号发生器块之一提供。
 </p>
-</html>"),
+</html>"), 
        Icon(
-    coordinateSystem(preserveAspectRatio=true,
-      extent={{-100.0,-100.0},{100.0,100.0}}),
+    coordinateSystem(preserveAspectRatio=true, 
+      extent={{-100.0,-100.0},{100.0,100.0}}), 
       graphics={
-    Rectangle(lineColor={64,64,64},
-      fillColor={192,192,192},
-      fillPattern=FillPattern.HorizontalCylinder,
-      extent={{-100.0,-20.0},{100.0,20.0}}),
-    Line(points={{-30,-32},{30,-32}}),
-    Line(points={{0,52},{0,32}}),
-    Line(points={{-29,32},{30,32}}),
-    Line(points={{0,-32},{0,-100}}),
-    Text(extent={{-150,-60},{-40,-30}},
-          textColor={128,128,128},
-          textString="phi_ref",
-          horizontalAlignment=TextAlignment.Right),
-    Text(textColor={0,0,255},
-      extent={{-150,60},{150,100}},
-      textString="%name"),
-    Text(extent={{30,-60},{150,-30}},
-      textString="exact="),
-    Text(extent={{30,-90},{150,-60}},
+    Rectangle(lineColor={64,64,64}, 
+      fillColor={192,192,192}, 
+      fillPattern=FillPattern.HorizontalCylinder, 
+      extent={{-100.0,-20.0},{100.0,20.0}}), 
+    Line(points={{-30,-32},{30,-32}}), 
+    Line(points={{0,52},{0,32}}), 
+    Line(points={{-29,32},{30,32}}), 
+    Line(points={{0,-32},{0,-100}}), 
+    Text(extent={{-150,-60},{-40,-30}}, 
+          textColor={128,128,128}, 
+          textString="phi_ref", 
+          horizontalAlignment=TextAlignment.Right), 
+    Text(textColor={0,0,255}, 
+      extent={{-150,60},{150,100}}, 
+      textString="%name"), 
+    Text(extent={{30,-60},{150,-30}}, 
+      textString="exact="), 
+    Text(extent={{30,-90},{150,-60}}, 
       textString="%exact")}));
 end Position;

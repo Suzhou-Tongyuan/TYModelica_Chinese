@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Batteries.Utilities;
-model CCCVcharger
+model CCCVcharger 
   "具有恒定电流-恒定电压特性的充电器"
   extends Modelica.Electrical.Analog.Interfaces.OnePort;
   parameter SI.Current I "恒定充电电流";
@@ -14,20 +14,20 @@ equation
   else
     i = -I*(if time<startTime then 0 else min(1,(time - startTime)/rampTime));
   end if;
-  annotation (defaultComponentName="cccvCharger",
+  annotation (defaultComponentName="cccvCharger", 
     Icon(graphics={   Rectangle(
-        extent={{-100,-100},{100,100}},
-        lineColor={0,0,127},
-        fillColor={255,255,255},
+        extent={{-100,-100},{100,100}}, 
+        lineColor={0,0,127}, 
+        fillColor={255,255,255}, 
         fillPattern=FillPattern.Solid), Text(
-        extent={{-150,150},{150,110}},
-        textString="%name",
-        textColor={0,0,255}),
+        extent={{-150,150},{150,110}}, 
+        textString="%name", 
+        textColor={0,0,255}), 
         Polygon(
-          points={{20,80},{-50,-20},{0,-20},{-20,-80},{50,20},{0,20},{20,80}},
-          lineColor={0,0,255},
-          fillColor={0,0,255},
-          fillPattern=FillPattern.Solid)}),
+          points={{20,80},{-50,-20},{0,-20},{-20,-80},{50,20},{0,20},{20,80}}, 
+          lineColor={0,0,255}, 
+          fillColor={0,0,255}, 
+          fillPattern=FillPattern.Solid)}), 
     Documentation(info="<html>
 <p>
 理想充电器，从恒定电流切换到恒定电压特性。

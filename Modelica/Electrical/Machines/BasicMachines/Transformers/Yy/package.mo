@@ -4,7 +4,7 @@ package Yy "变压器：一次侧Y接法/二次侧y接法"
 
   annotation (Documentation(info="<html>
 该库含所有可能矢量组中一次侧为Y接法/二次侧为y接法的变压器。
-</html>",
+</html>", 
     revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

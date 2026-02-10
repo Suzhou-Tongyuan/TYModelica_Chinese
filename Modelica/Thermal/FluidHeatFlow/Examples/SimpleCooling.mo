@@ -2,50 +2,50 @@
 model SimpleCooling "简单冷却回路"
   extends Modelica.Icons.Example;
 
-  parameter FluidHeatFlow.Media.Medium medium=FluidHeatFlow.Media.Medium()
+  parameter FluidHeatFlow.Media.Medium medium=FluidHeatFlow.Media.Medium() 
     "冷却介质" annotation (choicesAllMatching=true);
-  parameter SI.Temperature TAmb(displayUnit="degC")=293.15
+  parameter SI.Temperature TAmb(displayUnit="degC")=293.15 
     "环境温度";
-  output SI.TemperatureDifference dTSource=
+  output SI.TemperatureDifference dTSource= 
     prescribedHeatFlow.port.T-TAmb "过热源";
-  output SI.TemperatureDifference dTtoPipe=prescribedHeatFlow.port.T-pipe.T_q
+  output SI.TemperatureDifference dTtoPipe=prescribedHeatFlow.port.T-pipe.T_q 
     "过冷源";
-  output SI.TemperatureDifference dTCoolant=pipe.dT
+  output SI.TemperatureDifference dTCoolant=pipe.dT 
     "冷却剂温度升高";
   FluidHeatFlow.Sources.Ambient ambient1(
-    constantAmbientTemperature=TAmb,
-    medium=medium,
+    constantAmbientTemperature=TAmb, 
+    medium=medium, 
     constantAmbientPressure=0) 
     annotation (Placement(transformation(extent={{-60,-10},{-80,10}})));
   FluidHeatFlow.Sources.VolumeFlow pump(
-    medium=medium,
-    m=0,
-    T0=TAmb,
-    useVolumeFlowInput=true,
+    medium=medium, 
+    m=0, 
+    T0=TAmb, 
+    useVolumeFlowInput=true, 
     constantVolumeFlow=1) 
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   FluidHeatFlow.Components.Pipe pipe(
-    medium=medium,
-    m=0.1,
-    T0=TAmb,
-    V_flowLaminar=0.1,
-    dpLaminar(displayUnit="Pa") = 0.1,
-    V_flowNominal=1,
-    dpNominal(displayUnit="Pa") = 1,
-    h_g=0,
-    T0fixed=true,
+    medium=medium, 
+    m=0.1, 
+    T0=TAmb, 
+    V_flowLaminar=0.1, 
+    dpLaminar(displayUnit="Pa") = 0.1, 
+    V_flowNominal=1, 
+    dpNominal(displayUnit="Pa") = 1, 
+    h_g=0, 
+    T0fixed=true, 
     useHeatPort=true) 
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   FluidHeatFlow.Sources.Ambient ambient2(
-    constantAmbientTemperature=TAmb,
-    medium=medium,
+    constantAmbientTemperature=TAmb, 
+    medium=medium, 
     constantAmbientPressure=0) 
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
                    C=0.1, T(start=TAmb, fixed=true)) 
     annotation (Placement(transformation(
-        origin={40,-50},
-        extent={{-10,10},{10,-10}},
+        origin={40,-50}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=90)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow 
     prescribedHeatFlow 
@@ -56,8 +56,8 @@ model SimpleCooling "简单冷却回路"
     annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
   Modelica.Thermal.HeatTransfer.Components.Convection convection 
     annotation (Placement(transformation(
-        origin={10,-30},
-        extent={{-10,-10},{10,10}},
+        origin={10,-30}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Blocks.Sources.Constant thermalConductance(k=1) 
     annotation (Placement(transformation(extent={{-30,-40},{-10,-20}})));
@@ -74,7 +74,7 @@ equation
         points={{10,-40},{10,-50},{-10,-50}}, color={191,0,0}));
   connect(convection.solid, heatCapacitor.port) annotation (Line(points={
           {10,-40},{10,-50},{30,-50}}, color={191,0,0}));
-  connect(pipe.heatPort, convection.fluid) annotation (Line(points={{10,
+  connect(pipe.heatPort, convection.fluid) annotation (Line(points={{10, 
           -10},{10,-20}}, color={191,0,0}));
   connect(thermalConductance.y, convection.Gc) 
                                annotation (Line(points={{-9,-30},{0,-30}}, color={0,0,127}));

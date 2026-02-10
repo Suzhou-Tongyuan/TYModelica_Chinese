@@ -1,10 +1,10 @@
 ﻿within Modelica.Thermal.HeatTransfer.Interfaces;
-connector HeatPort_b
+connector HeatPort_b 
   "用于一维热传导的热接口(空心矩形图标)"
 
   extends HeatPort;
 
-  annotation(defaultComponentName = "port_b",
+  annotation(defaultComponentName = "port_b", 
     Documentation(info="<html><p>
 该连接器用于组件之间的一维热流。连接器中的变量为:
 </p>
@@ -22,20 +22,20 @@ Q_flow  热流 [Watt].
 <p>
 <br>
 </p>
-</html>"),
-                                        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+</html>"), 
+                                        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
             {100,100}}), graphics={Rectangle(
-          extent={{-50,50},{50,-50}},
-          lineColor={191,0,0},
-          fillColor={255,255,255},
+          extent={{-50,50},{50,-50}}, 
+          lineColor={191,0,0}, 
+          fillColor={255,255,255}, 
           fillPattern=FillPattern.Solid), Text(
-          extent={{-100,120},{120,60}},
-          textColor={191,0,0},
-          textString="%name")}),
+          extent={{-100,120},{120,60}}, 
+          textColor={191,0,0}, 
+          textString="%name")}), 
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={Rectangle(
-          extent={{-100,100},{100,-100}},
-          lineColor={191,0,0},
-          fillColor={255,255,255},
+          extent={{-100,100},{100,-100}}, 
+          lineColor={191,0,0}, 
+          fillColor={255,255,255}, 
           fillPattern=FillPattern.Solid)}));
 end HeatPort_b;

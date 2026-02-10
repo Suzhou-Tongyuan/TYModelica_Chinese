@@ -2,24 +2,24 @@
 model Valve "简单的阀"
   extends FluidHeatFlow.BaseClasses.TwoPort(m(start=0), final tapT=1);
 
-  parameter Boolean LinearCharacteristic(start=true)
+  parameter Boolean LinearCharacteristic(start=true) 
     "特性类型" 
-    annotation(Dialog(group="标准特性"), choices(choice=true "线性", choice=false
+    annotation(Dialog(group="标准特性"), choices(choice=true "线性", choice=false 
         "指数"));
   parameter Real y1(min=small, start=1) "最大阀门开度" 
     annotation(Dialog(group="标准特性"));
-  parameter SI.VolumeFlowRate Kv1(min=small, start=1)
+  parameter SI.VolumeFlowRate Kv1(min=small, start=1) 
     "最大体积流量y = y1" 
     annotation(Dialog(group="标准特性"));
-  parameter Real kv0(min=small,max=1-small, start=0.01)
+  parameter Real kv0(min=small,max=1-small, start=0.01) 
     "泄露流量 / 最大体积流量y = 0" 
     annotation(Dialog(group="标准特性"));
   parameter SI.Pressure dp0(start=1) "标准压降" 
     annotation(Dialog(group="标准特性"));
-  parameter SI.Density rho0(start=10)
+  parameter SI.Density rho0(start=10) 
     "标准介质密度" 
     annotation(Dialog(group="标准特性"));
-  parameter Real frictionLoss(min=0, max=1, start=0)
+  parameter Real frictionLoss(min=0, max=1, start=0) 
     "部分摩擦损失给介质";
 protected
   constant SI.VolumeFlowRate unitVolumeFlowRate = 1;
@@ -30,8 +30,8 @@ protected
   SI.VolumeFlowRate Kv "标准流量";
 public
   Modelica.Blocks.Interfaces.RealInput y annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=270,
+        extent={{-20,-20},{20,20}}, 
+        rotation=270, 
         origin={0,100})));
 initial algorithm
   assert(y1>small, "阀的特性: y1 必须 > 0 !");
@@ -68,18 +68,18 @@ annotation (Documentation(info="<html>
 <blockquote><pre>
 V_flow**2 * rho / dp = Kv(y)**2 * rho0 / dp0
 </pre></blockquote>
-</html>"),
-  Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+</html>"), 
+  Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
             100}}), graphics={
         Polygon(
-          points={{-90,10},{-60,10},{-60,60},{0,0},{60,60},{60,10},{90,10},
-              {90,-10},{60,-10},{60,-60},{0,0},{-60,-60},{-60,-10},{-90,-10},
-              {-90,10}},
-          lineColor={255,0,0},
-          fillColor={0,0,255},
-          fillPattern=FillPattern.Solid),
-        Line(points={{0,80},{0,0}}, color={0,0,127}),
-                                          Text(extent={{-150,-70},{150,-110}},
-          textString="%name",
+          points={{-90,10},{-60,10},{-60,60},{0,0},{60,60},{60,10},{90,10}, 
+              {90,-10},{60,-10},{60,-60},{0,0},{-60,-60},{-60,-10},{-90,-10}, 
+              {-90,10}}, 
+          lineColor={255,0,0}, 
+          fillColor={0,0,255}, 
+          fillPattern=FillPattern.Solid), 
+        Line(points={{0,80},{0,0}}, color={0,0,127}), 
+                                          Text(extent={{-150,-70},{150,-110}}, 
+          textString="%name", 
           textColor={0,0,255})}));
 end Valve;

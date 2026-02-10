@@ -1,21 +1,21 @@
 ﻿within Modelica.Mechanics.MultiBody.Forces.Internal;
-model BasicWorldTorque
+model BasicWorldTorque 
   "在frame_b作用的外部力矩，由3个输入信号定义"
   import Modelica.Mechanics.MultiBody.Types.ResolveInFrameB;
   extends Interfaces.PartialOneFrame_b;
-  Interfaces.Frame_resolve frame_resolve
+  Interfaces.Frame_resolve frame_resolve 
     "输入信号可选地在此坐标系中解析" 
     annotation (Placement(transformation(
-        origin={0,100},
-        extent={{16,-16},{-16,16}},
+        origin={0,100}, 
+        extent={{16,-16},{-16,16}}, 
         rotation=270)));
 
-  Modelica.Blocks.Interfaces.RealInput torque[3](each final quantity="扭矩", each final unit="N.m")
+  Modelica.Blocks.Interfaces.RealInput torque[3](each final quantity="扭矩", each final unit="N.m") 
     "在resolveInFrame定义的坐标系中解析的扭矩的x、y、z坐标" 
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameB 
-    resolveInFrame=
-    Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.world
+    resolveInFrame= 
+    Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.world 
     "扭矩解析的坐标系(1: 全局坐标系，2: frame_b，3: frame_resolve)";
 equation
   assert(cardinality(frame_resolve) > 0, "连接器frame_resolve必须至少连接一次，并且frame_resolve.r_0/.R必须设置");
@@ -38,25 +38,25 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
         Text(
-          extent={{-61,64},{46,27}},
-          textColor={192,192,192},
-          textString="resolve"),
+          extent={{-61,64},{46,27}}, 
+          textColor={192,192,192}, 
+          textString="resolve"), 
         Text(
-          extent={{-150,-40},{150,-80}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,-40},{150,-80}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Line(
-          points={{0,95},{0,82}},
-          color={95,95,95},
-          pattern=LinePattern.Dot),
+          points={{0,95},{0,82}}, 
+          color={95,95,95}, 
+          pattern=LinePattern.Dot), 
         Line(
-          points={{-100,0},{-94,13},{-86,28},{-74,48},{-65,60},{-52,72},{-35,
+          points={{-100,0},{-94,13},{-86,28},{-74,48},{-65,60},{-52,72},{-35, 
               81},{-22,84},{-8,84},{7,80},{19,73},{32,65},{44,55},{52,47},{
-              58,40}},
-          thickness=0.5),
+              58,40}}, 
+          thickness=0.5), 
         Polygon(
-          points={{94,10},{75,59},{41,24},{94,10}},
-          fillPattern=FillPattern.Solid)}),
+          points={{94,10},{75,59},{41,24},{94,10}}, 
+          fillPattern=FillPattern.Solid)}), 
     Documentation(info="<html>
 <p>
   <strong>力矩</strong>连接器的3个信号被解释为作用在此组件所连接的坐标系上的x、y和z坐标的<strong>力矩</strong>。

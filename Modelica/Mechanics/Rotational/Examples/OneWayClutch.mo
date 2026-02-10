@@ -4,27 +4,27 @@ model OneWayClutch "带有主动控制单向离合器的传动系统"
   extends Modelica.Icons.Example;
 
   Modelica.Mechanics.Rotational.Components.Inertia inertiaIn(
-    J=1,
-    phi(fixed=true, start=0),
+    J=1, 
+    phi(fixed=true, start=0), 
     w(fixed=true, start=-0.5)) annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Mechanics.Rotational.Components.Inertia inertiaOut(
-    J=1,
-    phi(fixed=true, start=0),
+    J=1, 
+    phi(fixed=true, start=0), 
     w(fixed=true, start=0)) annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   Modelica.Mechanics.Rotational.Components.OneWayClutch oneWayClutch(
-    peak=25,
-    fn_max=3,
-    startForward(fixed=true),
+    peak=25, 
+    fn_max=3, 
+    startForward(fixed=true), 
     stuck(fixed=true)) annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   Modelica.Mechanics.Rotational.Sources.Torque torque 
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   Modelica.Blocks.Sources.Sine signalTorque(
-    amplitude=10,
+    amplitude=10, 
     f=3) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Sources.Pulse signalEngagement(
-    amplitude=1,
-    width=50,
-    period=1.3,
+    amplitude=1, 
+    width=50, 
+    period=1.3, 
     startTime=0.3) annotation (Placement(transformation(extent={{-20,30},{0,50}})));
 equation
   connect(torque.flange, inertiaIn.flange_a) annotation (Line(points={{-30,0},{-20,0}}));

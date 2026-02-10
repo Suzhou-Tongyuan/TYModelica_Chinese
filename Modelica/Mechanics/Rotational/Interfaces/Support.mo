@@ -28,34 +28,34 @@ tau: Reaction torque in the support/housing in [Nm].
      <a href=\"modelica://Modelica.Mechanics.Rotational.Interfaces.PartialElementaryTwoFlangesAndSupport2\">PartialElementaryTwoFlangesAndSupport</a>,<br>
      <a href=\"modelica://Modelica.Mechanics.Rotational.Interfaces.PartialElementaryRotationalToTranslational\">PartialElementaryRotationalToTranslational</a>.</li>
 </ul>
-</html>"),
+</html>"), 
 
     Icon(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={
         Ellipse(
-          extent={{-100,100},{100,-100}},
-          fillColor={95,95,95},
-          fillPattern=FillPattern.Solid),
+          extent={{-100,100},{100,-100}}, 
+          fillColor={95,95,95}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{-150,150},{150,-150}},
-          lineColor={192,192,192},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
+          extent={{-150,150},{150,-150}}, 
+          lineColor={192,192,192}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid), 
         Ellipse(
-          extent={{-100,100},{100,-100}},
-          fillColor={95,95,95},
-          fillPattern=FillPattern.Solid)}),
+          extent={{-100,100},{100,-100}}, 
+          fillColor={95,95,95}, 
+          fillPattern=FillPattern.Solid)}), 
     Diagram(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={Rectangle(
-              extent={{-60,60},{60,-60}},
-              lineColor={192,192,192},
-              fillColor={192,192,192},
+              extent={{-60,60},{60,-60}}, 
+              lineColor={192,192,192}, 
+              fillColor={192,192,192}, 
               fillPattern=FillPattern.Solid),Text(
-              extent={{-160,100},{40,60}},
+              extent={{-160,100},{40,60}}, 
               textString="%name"),Ellipse(
-              extent={{-40,40},{40,-40}},
-              fillColor={135,135,135},
+              extent={{-40,40},{40,-40}}, 
+              fillColor={135,135,135}, 
               fillPattern=FillPattern.Solid)}));
 end Support;

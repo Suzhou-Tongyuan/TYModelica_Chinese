@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Polyphase.Interfaces;
-partial model OnePort
+partial model OnePort 
   "具有两个电气插头和从plug_p到plug_n的电流的元件"
 
   extends TwoPlug;

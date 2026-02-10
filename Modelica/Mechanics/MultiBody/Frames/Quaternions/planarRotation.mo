@@ -1,13 +1,13 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
-function planarRotation
+function planarRotation 
   "返回平面旋转的四元数方向对象"
   import Modelica.Math;
   extends Modelica.Icons.Function;
-  input Real e[3](each final unit="1")
+  input Real e[3](each final unit="1") 
     "旋转轴的标准化矢量（必须长度为1）";
-  input SI.Angle angle
+  input SI.Angle angle 
     "将坐标系1沿轴e旋转到坐标系2的旋转角度";
-  output Quaternions.Orientation Q
+  output Quaternions.Orientation Q 
     "将坐标系1沿轴e旋转到坐标系2的四元数方向对象";
 algorithm
   Q := vector([e*Math.sin(angle/2); Math.cos(angle/2)]);

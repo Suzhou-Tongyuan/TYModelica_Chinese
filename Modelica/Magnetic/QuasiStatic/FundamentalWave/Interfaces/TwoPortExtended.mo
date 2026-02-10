@@ -2,17 +2,17 @@
 partial model TwoPortExtended "部分二端口的图形化编程与附加变量"
   extends Magnetic.QuasiStatic.FundamentalWave.Interfaces.TwoPortElementary;
 
-  SI.ComplexMagneticPotentialDifference V_m = port_p.V_m - port_n.V_m
+  SI.ComplexMagneticPotentialDifference V_m = port_p.V_m - port_n.V_m 
     "复磁位差";
-  SI.MagneticPotentialDifference abs_V_m = Modelica.ComplexMath.abs(V_m)
+  SI.MagneticPotentialDifference abs_V_m = Modelica.ComplexMath.abs(V_m) 
     "复磁位差的大小";
-  SI.Angle arg_V_m = Modelica.ComplexMath.arg(V_m)
+  SI.Angle arg_V_m = Modelica.ComplexMath.arg(V_m) 
     "复磁位差的论证";
-  SI.ComplexMagneticFlux Phi = port_p.Phi
+  SI.ComplexMagneticFlux Phi = port_p.Phi 
     "复磁通量";
-  SI.MagneticFlux abs_Phi = Modelica.ComplexMath.abs(Phi)
+  SI.MagneticFlux abs_Phi = Modelica.ComplexMath.abs(Phi) 
     "复磁通量的大小";
-  SI.Angle arg_Phi = Modelica.ComplexMath.arg(Phi)
+  SI.Angle arg_Phi = Modelica.ComplexMath.arg(Phi) 
     "复磁通量的参数";
 
   annotation (

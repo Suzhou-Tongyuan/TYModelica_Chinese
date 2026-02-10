@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.InductionMachines;
+within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.InductionMachines;
 model IMC_Transformer
   "鼠笼式感应电机，变压器起动"
 
@@ -99,7 +99,7 @@ model IMC_Transformer
         2),
     SNominal=50E3,
     v_sc=0.06,
-    P_sc=500) "Transformer data" 
+    P_sc=500) "变压器参数" 
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica.Blocks.Sources.BooleanStep booleanStep2[m](each startTime=
         tStart2) annotation (Placement(transformation(extent={{-60,10},{-40,30}})));

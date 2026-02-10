@@ -11,8 +11,8 @@ model DQToThreePhase "将dq转换为三相"
   Modelica.Blocks.Interfaces.RealInput phi(unit="rad") "转子角度" 
                                                        annotation (Placement(
         transformation(
-        origin={0,-120},
-        extent={{20,-20},{-20,20}},
+        origin={0,-120}, 
+        extent={{20,-20},{-20,20}}, 
         rotation=270)));
   Modelica.Blocks.Math.Gain toPeak_d(k=if useRMS then sqrt(2) else 1) 
                                                 annotation (Placement(
@@ -22,8 +22,8 @@ model DQToThreePhase "将dq转换为三相"
         transformation(extent={{-60,-70},{-40,-50}})));
   Modelica.Blocks.Math.Gain toGamma(k=-p) annotation (Placement(
         transformation(
-        origin={0,-50},
-        extent={{10,-10},{-10,10}},
+        origin={0,-50}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=270)));
   Machines.SpacePhasors.Blocks.Rotator rotator 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -50,17 +50,17 @@ equation
       points={{11,40},{20,40},{20,8},{38,8}}, color={0,0,127}));
   connect(fromSpacePhasor.y, y) annotation (Line(
       points={{61,0},{110,0}}, color={0,0,127}));
-  annotation (defaultComponentName="dqToThreePhase",
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+  annotation (defaultComponentName="dqToThreePhase", 
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
             -100},{100,100}}), graphics={Text(
-          extent={{-100,70},{-60,50}},
-          textColor={0,0,255},
+          extent={{-100,70},{-60,50}}, 
+          textColor={0,0,255}, 
           textString="d"),               Text(
-          extent={{-100,-50},{-60,-70}},
-          textColor={0,0,255},
+          extent={{-100,-50},{-60,-70}}, 
+          textColor={0,0,255}, 
           textString="q"),               Text(
-          extent={{-20,-70},{20,-90}},
-          textColor={0,0,255},
+          extent={{-20,-70},{20,-90}}, 
+          textColor={0,0,255}, 
           textString="phi")}),    Documentation(info="<html>
 <p>
 将dq电流或电压转换为三相电流或电压。

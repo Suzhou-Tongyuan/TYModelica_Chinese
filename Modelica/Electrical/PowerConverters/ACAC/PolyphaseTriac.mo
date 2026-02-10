@@ -1,21 +1,21 @@
 ﻿within Modelica.Electrical.PowerConverters.ACAC;
 model PolyphaseTriac "交流三极管"
   extends Modelica.Electrical.Polyphase.Interfaces.TwoPlug;
-  parameter SI.Resistance Ron(final min=0)=1e-5
+  parameter SI.Resistance Ron(final min=0)=1e-5 
     "正向导通微分电阻（闭合电阻）";
-  parameter SI.Conductance Goff(final min=0)=1e-5
+  parameter SI.Conductance Goff(final min=0)=1e-5 
     "反向截止导纳（断开导纳）";
   parameter SI.Voltage Vknee(final min=0)=0 "正向阈值电压";
   extends Modelica.Electrical.Polyphase.Interfaces.ConditionalHeatPort(final mh=m);
   Modelica.Blocks.Interfaces.BooleanInput fire1[m] annotation (Placement(
         transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
+        extent={{-20,-20},{20,20}}, 
+        rotation=90, 
         origin={-60,-120})));
   Modelica.Blocks.Interfaces.BooleanInput fire2[m] annotation (Placement(
         transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
+        extent={{-20,-20},{20,20}}, 
+        rotation=90, 
         origin={60,-120})));
   Modelica.Electrical.Polyphase.Basic.PlugToPins_p plugToPins_p(final m=m) 
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
@@ -30,36 +30,36 @@ equation
     annotation (Line(points={{82,0},{100,0}},               color={0,0,255}));
   connect(triac.heatPort, heatPort) 
     annotation (Line(points={{0,-10},{0,-100}}, color={191,0,0}));
-  connect(fire1, triac.fire1) annotation (Line(points={{-60,-120},{-60,-20},{-6,
+  connect(fire1, triac.fire1) annotation (Line(points={{-60,-120},{-60,-20},{-6, 
           -20},{-6,-12}}, color={255,0,255}));
-  connect(fire2, triac.fire2) annotation (Line(points={{60,-120},{60,-20},{6,-20},
+  connect(fire2, triac.fire2) annotation (Line(points={{60,-120},{60,-20},{6,-20}, 
           {6,-12}}, color={255,0,255}));
   connect(plugToPins_p.pin_p, triac.p) 
     annotation (Line(points={{-78,0},{-10,0}}, color={0,0,255}));
   connect(triac.n, plugToPins_n.pin_n) 
     annotation (Line(points={{10,0},{78,0}}, color={0,0,255}));
-  annotation (defaultComponentName="triac",
+  annotation (defaultComponentName="triac", 
     Icon(graphics={
         Text(
-          extent={{-150,120},{150,80}},
-          textString="%name",
-          textColor={0,0,255}),
-        Line(points={{-60,-100},{-60,-40},{-40,-30}},
-                                                    color={255,0,255}),
-        Line(points={{60,-100},{60,20},{40,30}}, color={255,0,255}),
-        Line(points={{-40,-70},{-40,70}}, color={0,0,255}),
-        Line(points={{40,-72},{40,70}}, color={0,0,255}),
-        Polygon(points={{-40,-70},{40,-30},{-40,10},{-40,-70}},
-                                                             lineColor={0,0,
-              255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Polygon(points={{40,-10},{-40,30},{40,70},{40,-10}}, lineColor={0,0,
-              255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Line(points={{-40,0},{-90,0}}, color={0,0,255}),
-        Line(points={{90,0},{40,0}}, color={0,0,255})}),
+          extent={{-150,120},{150,80}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
+        Line(points={{-60,-100},{-60,-40},{-40,-30}}, 
+                                                    color={255,0,255}), 
+        Line(points={{60,-100},{60,20},{40,30}}, color={255,0,255}), 
+        Line(points={{-40,-70},{-40,70}}, color={0,0,255}), 
+        Line(points={{40,-72},{40,70}}, color={0,0,255}), 
+        Polygon(points={{-40,-70},{40,-30},{-40,10},{-40,-70}}, 
+                                                             lineColor={0,0, 
+              255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
+        Polygon(points={{40,-10},{-40,30},{40,70},{40,-10}}, lineColor={0,0, 
+              255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
+        Line(points={{-40,0},{-90,0}}, color={0,0,255}), 
+        Line(points={{90,0},{40,0}}, color={0,0,255})}), 
       Documentation(info="<html>
 <p>
 简化的 <code>m</code>

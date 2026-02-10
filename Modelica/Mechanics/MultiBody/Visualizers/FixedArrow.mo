@@ -4,7 +4,7 @@ model FixedArrow "在frame_a中可视化具有动态变化大小的箭头"
   import Modelica.Mechanics.MultiBody.Types;
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialVisualizer;
   parameter Boolean animation=true "=true，如果启用动画";
-  input SI.Position r_tail[3]={0,0,0}
+  input SI.Position r_tail[3]={0,0,0} 
     "从frame_a到箭头尾部的矢量，在frame_a中解析" 
     annotation (Dialog(group="如果animation=true", enable=animation));
   input Types.Axis n={1,0,0} "箭头方向上的矢量，在frame_a中解析" 
@@ -13,47 +13,47 @@ model FixedArrow "在frame_a中可视化具有动态变化大小的箭头"
     annotation (Dialog(group="如果animation=true", enable=animation));
   input Types.Color color={0,0,255} "箭头的颜色" 
     annotation (Dialog(colorSelector=true, group="如果animation=true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射(=0：光完全被吸收)" 
     annotation (Dialog(group="如果animation=true", enable=animation));
-  parameter Types.VectorQuantity quantity=Types.VectorQuantity.RelativePosition
+  parameter Types.VectorQuantity quantity=Types.VectorQuantity.RelativePosition 
     "矢量代表的物理量的类型" 
     annotation (Dialog(group="如果animation=true", enable=animation));
   input Boolean headAtOrigin=false "=true，如果矢量指向矢量坐标系的原点" 
     annotation (Dialog(group="如果animation=true", enable=animation));
 protected
   Visualizers.Advanced.Vector arrowLine(
-    color=color,
-    specularCoefficient=specularCoefficient,
-    coordinates=n*length,
-    quantity=quantity,
-    headAtOrigin=headAtOrigin,
-    r=frame_a.r_0 + Modelica.Mechanics.MultiBody.Frames.TransformationMatrices.resolve1(frame_a.R.T, r_tail),
+    color=color, 
+    specularCoefficient=specularCoefficient, 
+    coordinates=n*length, 
+    quantity=quantity, 
+    headAtOrigin=headAtOrigin, 
+    r=frame_a.r_0 + Modelica.Mechanics.MultiBody.Frames.TransformationMatrices.resolve1(frame_a.R.T, r_tail), 
     R=frame_a.R) if world.enableAnimation and animation;
 equation
   frame_a.f = zeros(3);
   frame_a.t = zeros(3);
 
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
             100}}), graphics={
         Rectangle(
-          extent={{-100,28},{20,-28}},
-          lineColor={128,128,128},
-          fillColor={128,128,128},
-          fillPattern=FillPattern.Solid),
+          extent={{-100,28},{20,-28}}, 
+          lineColor={128,128,128}, 
+          fillColor={128,128,128}, 
+          fillPattern=FillPattern.Solid), 
         Polygon(
-          points={{20,60},{100,0},{20,-60},{20,60}},
-          lineColor={128,128,128},
-          fillColor={128,128,128},
-          fillPattern=FillPattern.Solid),
+          points={{20,60},{100,0},{20,-60},{20,60}}, 
+          lineColor={128,128,128}, 
+          fillColor={128,128,128}, 
+          fillPattern=FillPattern.Solid), 
         Text(
-          extent={{-150,105},{150,65}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,105},{150,65}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-150,-75},{150,-105}},
-          textString="%length")}),
+          extent={{-150,-75},{150,-105}}, 
+          textString="%length")}), 
     Documentation(info="<html>
 <p>
 <strong>FixedArrow</strong> 模型定义了一个箭头，显示在其frame_a的位置。

@@ -1,10 +1,10 @@
 ﻿within Modelica.Magnetic.FluxTubes.Material.SoftMagnetic.PureIron;
 record VacoferS2 "VACOFER S2 (99.95% Fe)"
   extends FluxTubes.Material.SoftMagnetic.BaseData(
-    mu_i=2666,
-    B_myMax=1.15,
-    c_a=187000,
-    c_b=4.24,
+    mu_i=2666, 
+    B_myMax=1.15, 
+    c_a=187000, 
+    c_b=4.24, 
     n=19);
   annotation (Documentation(info="<html>
 <p>

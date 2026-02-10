@@ -1,13 +1,13 @@
 ﻿within Modelica.Electrical.Machines.Utilities;
-block FromDQ
+block FromDQ 
   "将转子固定空间矢量转换为瞬时定子量"
   extends Modelica.Blocks.Interfaces.MIMO(final nin=2, final nout=m);
   parameter Integer m(min=1) = 3 "相数" annotation(Evaluate=true);
   parameter Integer p "极对数";
   Modelica.Blocks.Math.Gain toGamma(final k=-p) annotation (Placement(
         transformation(
-        origin={0,-50},
-        extent={{10,-10},{-10,10}},
+        origin={0,-50}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=270)));
   Modelica.Electrical.Machines.SpacePhasors.Blocks.Rotator rotator 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -17,8 +17,8 @@ block FromDQ
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Blocks.Interfaces.RealInput phi(unit="rad") annotation (Placement(
         transformation(
-        origin={0,-120},
-        extent={{20,-20},{-20,20}},
+        origin={0,-120}, 
+        extent={{20,-20},{-20,20}}, 
         rotation=270)));
 equation
   connect(phi, toGamma.u) 

@@ -3,25 +3,25 @@ model Speed "根据参考速度强制移动一维平动接口"
   extends 
     Modelica.Mechanics.Translational.Interfaces.PartialElementaryOneFlangeAndSupport2(
      s(
-      start=0,
-      fixed=true,
+      start=0, 
+      fixed=true, 
       stateSelect=StateSelect.prefer));
-  parameter Boolean exact=false
+  parameter Boolean exact=false 
     "是否精确处理/过滤输入信号，true/false分别表示" 
     annotation (Evaluate=true);
-  parameter SI.Frequency f_crit=50
+  parameter SI.Frequency f_crit=50 
     "如果exact=false，则为过滤输入信号的滤波器的临界频率" 
     annotation (Dialog(enable=not exact));
   SI.Velocity v(stateSelect=if exact then StateSelect.default else 
         StateSelect.prefer) "一维平动接口的绝对速度";
-  SI.Acceleration a
+  SI.Acceleration a 
     "如果exact=false，则为一维平动接口的绝对加速度，否则为虚拟值";
-  Modelica.Blocks.Interfaces.RealInput v_ref(unit="m/s")
+  Modelica.Blocks.Interfaces.RealInput v_ref(unit="m/s") 
     "一维平动接口的参考速度作为输入信号" annotation (Placement(
         transformation(extent={{-140,-20},{-100,20}})));
 
 protected
-  parameter SI.AngularFrequency w_crit=2*Modelica.Constants.pi
+  parameter SI.AngularFrequency w_crit=2*Modelica.Constants.pi 
       *f_crit "临界频率";
 initial equation
   if not exact then
@@ -56,28 +56,28 @@ equation
 输入信号可以来自 Modelica.Blocks.Sources 块库中的信号生成器块之一。
 </p>
 
-</html>"),
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+</html>"), 
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
       graphics={
-        Line(points={{-30,-32},{30,-32}}, color={0,127,0}),
-        Line(points={{0,-32},{0,-100}}, color={0,127,0}),
+        Line(points={{-30,-32},{30,-32}}, color={0,127,0}), 
+        Line(points={{0,-32},{0,-100}}, color={0,127,0}), 
         Rectangle(
-          extent={{-100,20},{100,-20}},
-          lineColor={0,127,0},
-          fillColor={160,215,160},
-          fillPattern=FillPattern.Solid),
-        Line(points={{-29,32},{30,32}}, color={0,127,0}),
-        Line(points={{0,52},{0,32}}, color={0,127,0}),
+          extent={{-100,20},{100,-20}}, 
+          lineColor={0,127,0}, 
+          fillColor={160,215,160}, 
+          fillPattern=FillPattern.Solid), 
+        Line(points={{-29,32},{30,32}}, color={0,127,0}), 
+        Line(points={{0,52},{0,32}}, color={0,127,0}), 
         Text(
-          extent={{150,60},{-150,100}},
-          textString="%name",
-          textColor={0,0,255}),
-        Text(extent={{-140,-60},{-40,-30}},
-          textColor={128,128,128},
-          horizontalAlignment=TextAlignment.Right,
-          textString="v_ref"),
-        Text(extent={{30,-60},{150,-30}},
-          textString="exact="),
-        Text(extent={{30,-90},{150,-60}},
+          extent={{150,60},{-150,100}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
+        Text(extent={{-140,-60},{-40,-30}}, 
+          textColor={128,128,128}, 
+          horizontalAlignment=TextAlignment.Right, 
+          textString="v_ref"), 
+        Text(extent={{30,-60},{150,-30}}, 
+          textString="exact="), 
+        Text(extent={{30,-90},{150,-60}}, 
           textString="%exact")}));
 end Speed;

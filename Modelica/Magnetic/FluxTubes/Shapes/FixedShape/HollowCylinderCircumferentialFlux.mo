@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
+within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
 model HollowCylinderCircumferentialFlux
   "具有周向通量的空心圆柱体;固定的形状;线性或非线性材料特性"
 
@@ -6,15 +6,13 @@ model HollowCylinderCircumferentialFlux
   extends Modelica.Magnetic.FluxTubes.Icons.HollowCylinderCircumferentialFlux;
   import Modelica.Constants.pi;
   parameter SI.Length l=0.02 "宽度（与通量方向正交）" 
-    annotation (Dialog(group=
-          "Fixed geometry", groupImage=
-          "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Circumferential.png"));
+    annotation (Dialog(group="固定几何结构", groupImage= "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Circumferential.png"));
   parameter SI.Radius r_i=0.01 "空心圆柱体的内半径" 
-    annotation (Dialog(group="Fixed geometry"));
+    annotation (Dialog(group="固定几何结构"));
   parameter SI.Radius r_o=0.02 "空心圆柱体外半径" 
-    annotation (Dialog(group="Fixed geometry"));
+    annotation (Dialog(group="固定几何结构"));
   parameter SI.Angle alpha=pi/2 "气缸截面角度" 
-    annotation (Dialog(group="Fixed geometry"));
+    annotation (Dialog(group="固定几何结构"));
 equation
   A = l*(r_o - r_i) "用于计算平均通量密度的算术平均半径处的面积";
   G_m = mu_0*mu_r*A/((r_o + r_i)/2*alpha);

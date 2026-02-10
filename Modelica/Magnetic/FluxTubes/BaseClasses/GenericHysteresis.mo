@@ -1,14 +1,14 @@
-﻿within Modelica.Magnetic.FluxTubes.BaseClasses;
+within Modelica.Magnetic.FluxTubes.BaseClasses;
 partial model GenericHysteresis "部分滞后模型"
   extends BaseClasses.Generic;
   extends Interfaces.ConditionalHeatPort(final T=293.15);
 
   parameter Boolean includeEddyCurrents = false
     "= true，如果启用了涡流损耗" 
-  annotation(Dialog(tab="Losses and heat", group="Eddy currents"), Evaluate=true, HideResult=true, choices(checkBox=true));
+  annotation(Dialog(tab="损耗与发热", group="涡流"), Evaluate=true, HideResult=true, choices(checkBox=true));
 
-  parameter SI.Conductivity sigma=10e6 "芯材的导电性" annotation (Dialog(tab="Losses and heat", group="Eddy currents", enable=includeEddyCurrents));
-  parameter SI.Length d = 0.5e-3 "层压厚度" annotation (Dialog(tab="Losses and heat", group="Eddy currents", enable=includeEddyCurrents));
+  parameter SI.Conductivity sigma=10e6 "芯材的导电性" annotation (Dialog(tab="损耗与发热", group="涡流", enable=includeEddyCurrents));
+  parameter SI.Length d = 0.5e-3 "层压厚度" annotation (Dialog(tab="损耗与发热", group="涡流", enable=includeEddyCurrents));
 
   output SI.MagneticFieldStrength H(start=0) "磁场强度";
   output SI.MagneticFieldStrength Hstat

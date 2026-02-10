@@ -1,13 +1,13 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
-function from_T
+function from_T 
   "从变换矩阵T返回四元数方向对象Q"
 
   extends Modelica.Icons.Function;
-  input Real T[3, 3]
+  input Real T[3, 3] 
     "将矢量从坐标系 1 转换到坐标系 2 的变换矩阵(v2=T*v1)";
-  input Quaternions.Orientation Q_guess=nullRotation()
+  input Quaternions.Orientation Q_guess=nullRotation() 
     "Q 的猜测值(有 2 个解；选择接近 Q_guess 的一个解)";
-  output Quaternions.Orientation Q
+  output Quaternions.Orientation Q 
     "将坐标系 1 旋转到坐标系 2 的四元数方向对象(Q 和 -Q 具有相同的变换矩阵)";
 protected
   Real paux;
@@ -45,19 +45,19 @@ algorithm
   elseif c1 > c2 and c1 > c3 and c1 > c4 then
     paux := sqrt(c1)/2;
     paux4 := 4*paux;
-    Q := {paux,(T[1, 2] + T[2, 1])/paux4,(T[1, 3] + T[3, 1])/paux4,(T[2, 3]
+    Q := {paux,(T[1, 2] + T[2, 1])/paux4,(T[1, 3] + T[3, 1])/paux4,(T[2, 3] 
        - T[3, 2])/paux4};
 
   elseif c2 > c1 and c2 > c3 and c2 > c4 then
     paux := sqrt(c2)/2;
     paux4 := 4*paux;
-    Q := {(T[1, 2] + T[2, 1])/paux4,paux,(T[2, 3] + T[3, 2])/paux4,(T[3, 1]
+    Q := {(T[1, 2] + T[2, 1])/paux4,paux,(T[2, 3] + T[3, 2])/paux4,(T[3, 1] 
        - T[1, 3])/paux4};
 
   else
     paux := sqrt(c3)/2;
     paux4 := 4*paux;
-    Q := {(T[1, 3] + T[3, 1])/paux4,(T[2, 3] + T[3, 2])/paux4,paux,(T[1, 2]
+    Q := {(T[1, 3] + T[3, 1])/paux4,(T[2, 3] + T[3, 2])/paux4,paux,(T[1, 2] 
        - T[2, 1])/paux4};
   end if;
 

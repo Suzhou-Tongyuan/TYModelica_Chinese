@@ -1,11 +1,11 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
-function to_T_inv
+function to_T_inv 
   "从四元数方向对象Q返回逆变换矩阵T_inv"
 
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q
+  input Quaternions.Orientation Q 
     "将坐标系 1 旋转到坐标系 2 的四元数方向对象";
-  output Real T_inv[3, 3]
+  output Real T_inv[3, 3] 
     "用于将矢量从坐标系 2 转换到坐标系 1 的变换矩阵 (v1=T_inv*v2)";
 algorithm
   /*
@@ -14,7 +14,7 @@ algorithm
 */
   T_inv := [2*(Q[1]*Q[1] + Q[4]*Q[4]) - 1, 2*(Q[2]*Q[1] - Q[3]*Q[4]), 2*(Q[
     3]*Q[1] + Q[2]*Q[4]); 2*(Q[1]*Q[2] + Q[3]*Q[4]), 2*(Q[2]*Q[2] + Q[4]*Q[
-    4]) - 1, 2*(Q[3]*Q[2] - Q[1]*Q[4]); 2*(Q[1]*Q[3] - Q[2]*Q[4]), 2*(Q[2]*
+    4]) - 1, 2*(Q[3]*Q[2] - Q[1]*Q[4]); 2*(Q[1]*Q[3] - Q[2]*Q[4]), 2*(Q[2]* 
     Q[3] + Q[1]*Q[4]), 2*(Q[3]*Q[3] + Q[4]*Q[4]) - 1];
   annotation(Inline=true, Documentation(info="<html>
 <h4>语法</h4>

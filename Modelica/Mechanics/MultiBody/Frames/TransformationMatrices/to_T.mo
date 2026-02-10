@@ -1,9 +1,9 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
 function to_T "从方向对象R返回变换矩阵T"
   extends Modelica.Icons.Function;
-  input TransformationMatrices.Orientation R
+  input TransformationMatrices.Orientation R 
     "将坐标系 1 旋转到坐标系 2 的方向对象";
-  output Real T[3, 3]
+  output Real T[3, 3] 
     "将矢量从坐标系 1 变换到坐标系 2 的变换矩阵 (v2=T*v1)";
 algorithm
   T := R;

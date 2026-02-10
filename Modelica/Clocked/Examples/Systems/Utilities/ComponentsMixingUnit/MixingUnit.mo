@@ -1,13 +1,13 @@
 ﻿within Modelica.Clocked.Examples.Systems.Utilities.ComponentsMixingUnit;
-model MixingUnit
+model MixingUnit 
   "混合装置演示，摘自 Foellinger，Nichtlineare Regelungen II，第280页"
 
-  Modelica.Blocks.Interfaces.RealInput T_c(unit = "K")
+  Modelica.Blocks.Interfaces.RealInput T_c(unit = "K") 
     "冷却温度" 
     annotation(Placement(transformation(extent = {{-140, -20}, {-100, 20}})));
   Modelica.Blocks.Interfaces.RealOutput c(unit = "mol/l") "浓度" 
     annotation(Placement(transformation(extent = {{100, 40}, {140, 80}})));
-  Modelica.Blocks.Interfaces.RealOutput T(unit = "K")
+  Modelica.Blocks.Interfaces.RealOutput T(unit = "K") 
     "混合装置内的温度" 
     annotation(Placement(transformation(extent = {{100, -80}, {140, -40}})));
   parameter Real c0(unit = "mol/l") = 0.848 "额定浓度";
@@ -34,43 +34,43 @@ equation
   gamma = c * wk0 * exp(-weps / T);
   der(c) = -wa11 * c - wa12 * gamma + wa13;
   der(T) = -wa21 * T + wa22 * gamma + wa23 + wb * T_c;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false,
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, 
     extent = {{-100, -100}, {100, 100}}), graphics = {
     Rectangle(
-    extent = {{-100, 40}, {100, -100}},
-    lineColor = {255, 255, 255},
-    fillColor = {0, 255, 255},
-    fillPattern = FillPattern.Solid),
-    Line(points = {{-100, 100}, {-100, -100}, {100, -100}, {100, 100}}, color = {0,
-    0, 0}),
+    extent = {{-100, 40}, {100, -100}}, 
+    lineColor = {255, 255, 255}, 
+    fillColor = {0, 255, 255}, 
+    fillPattern = FillPattern.Solid), 
+    Line(points = {{-100, 100}, {-100, -100}, {100, -100}, {100, 100}}, color = {0, 
+    0, 0}), 
     Text(
-    extent = {{-144, 148}, {148, 100}},
-    textColor = {0, 0, 255},
-    fillColor = {255, 255, 255},
-    fillPattern = FillPattern.Solid,
-    textString = "%name"),
+    extent = {{-144, 148}, {148, 100}}, 
+    textColor = {0, 0, 255}, 
+    fillColor = {255, 255, 255}, 
+    fillPattern = FillPattern.Solid, 
+    textString = "%name"), 
     Text(
-    extent = {{118, -86}, {160, -124}},
-    textString = "T"),
+    extent = {{118, -86}, {160, -124}}, 
+    textString = "T"), 
     Text(
-    extent = {{116, 114}, {158, 76}},
-    textString = "c"),
+    extent = {{116, 114}, {158, 76}}, 
+    textString = "c"), 
     Text(
-    extent = {{-194, 72}, {-108, 34}},
-    textString = "T_c"),
-    Line(points = {{0, -50}, {0, -100}}),
+    extent = {{-194, 72}, {-108, 34}}, 
+    textString = "T_c"), 
+    Line(points = {{0, -50}, {0, -100}}), 
     Ellipse(
-    extent = {{-42, -38}, {0, -66}},
-    fillColor = {255, 255, 255},
-    fillPattern = FillPattern.Solid),
+    extent = {{-42, -38}, {0, -66}}, 
+    fillColor = {255, 255, 255}, 
+    fillPattern = FillPattern.Solid), 
     Ellipse(
-    extent = {{0, -38}, {42, -66}},
-    fillColor = {255, 255, 255},
-    fillPattern = FillPattern.Solid),
-    Line(points = {{0, 80}, {0, 16}}),
-    Line(points = {{20, 80}, {20, 16}}),
-    Line(points = {{-86, -72}, {-86, -114}}),
-    Line(points = {{-66, -72}, {-66, -114}})}),
+    extent = {{0, -38}, {42, -66}}, 
+    fillColor = {255, 255, 255}, 
+    fillPattern = FillPattern.Solid), 
+    Line(points = {{0, 80}, {0, 16}}), 
+    Line(points = {{20, 80}, {20, 16}}), 
+    Line(points = {{-86, -72}, {-86, -114}}), 
+    Line(points = {{-66, -72}, {-66, -114}})}), 
     Documentation(info = "<html>
 请参见 <a href=\"modelica://Modelica.Clocked.Examples.Systems.ControlledMixingUnit\">ControlledMixingUnit</a>.
 </html>"));

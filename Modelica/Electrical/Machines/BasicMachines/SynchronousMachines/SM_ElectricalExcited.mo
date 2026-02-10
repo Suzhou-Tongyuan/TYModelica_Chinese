@@ -1,175 +1,175 @@
 ﻿within Modelica.Electrical.Machines.BasicMachines.SynchronousMachines;
-  model SM_ElectricalExcited
+  model SM_ElectricalExcited 
   "带阻尼笼的电励磁同步电机"
   extends Machines.Interfaces.PartialBasicInductionMachine(
-    Lssigma(start=0.1/(2*pi*fsNominal)),
-    final idq_ss=airGap.i_ss,
-    final idq_sr=airGap.i_sr,
-    final idq_rs=airGap.i_rs,
-    final idq_rr=airGap.i_rr,
+    Lssigma(start=0.1/(2*pi*fsNominal)), 
+    final idq_ss=airGap.i_ss, 
+    final idq_sr=airGap.i_sr, 
+    final idq_rs=airGap.i_rs, 
+    final idq_rr=airGap.i_rr, 
     redeclare final Machines.Thermal.SynchronousMachines.ThermalAmbientSMEE 
       thermalAmbient(
-      final useDamperCage=useDamperCage,
-      final Te=TeOperational,
-      final Tr=TrOperational),
+      final useDamperCage=useDamperCage, 
+      final Te=TeOperational, 
+      final Tr=TrOperational), 
     redeclare final Machines.Interfaces.InductionMachines.ThermalPortSMEE 
-      thermalPort(final useDamperCage=useDamperCage),
+      thermalPort(final useDamperCage=useDamperCage), 
     redeclare final Machines.Interfaces.InductionMachines.ThermalPortSMEE 
-      internalThermalPort(final useDamperCage=useDamperCage),
+      internalThermalPort(final useDamperCage=useDamperCage), 
     redeclare final Machines.Interfaces.InductionMachines.PowerBalanceSMEE 
       powerBalance(
-      final lossPowerRotorWinding=damperCageLossPower,
-      final powerExcitation=ve*ie,
-      final lossPowerExcitation=re.LossPower,
-      final lossPowerBrush=brush.lossPower,
-      final lossPowerRotorCore=0),
+      final lossPowerRotorWinding=damperCageLossPower, 
+      final powerExcitation=ve*ie, 
+      final lossPowerExcitation=re.LossPower, 
+      final lossPowerBrush=brush.lossPower, 
+      final lossPowerRotorCore=0), 
     statorCore(final w=statorCoreParameters.wRef));
   Modelica.Blocks.Interfaces.RealOutput ir[2](
-    start=zeros(2),
-    each final quantity="ElectricCurrent",
+    start=zeros(2), 
+    each final quantity="ElectricCurrent", 
     each final unit="A") if useDamperCage "阻尼笼电流" 
     annotation (Placement(visible=false),Dialog(showStartAttribute=true));
   Modelica.Blocks.Interfaces.RealOutput idq_dr[2](
-    each stateSelect=StateSelect.prefer,
-    each final quantity="ElectricCurrent",
-    each final unit="A") if useDamperCage
+    each stateSelect=StateSelect.prefer, 
+    each final quantity="ElectricCurrent", 
+    each final unit="A") if useDamperCage 
     "阻尼空间矢量电流/转子固定坐标系" 
     annotation (Placement(visible=false));
   Machines.BasicMachines.Components.AirGapR airGap(
-    final p=p,
-    final Lmd=Lmd,
-    final Lmq=Lmq,
-    final m=m) annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    final p=p, 
+    final Lmd=Lmd, 
+    final Lmq=Lmq, 
+    final m=m) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
           rotation=270)));
-  parameter SI.Temperature TrOperational(start=293.15)
+  parameter SI.Temperature TrOperational(start=293.15) 
     "(可选)阻尼笼的运行温度" annotation (
       Dialog(group="运行温度", enable=not useThermalPort 
            and useDamperCage));
-  parameter SI.Inductance Lmd(start=1.5/(2*pi*fsNominal))
+  parameter SI.Inductance Lmd(start=1.5/(2*pi*fsNominal)) 
     "每相定子主场在d轴上的电感" 
     annotation (Dialog(tab="额定电阻和电感"));
-  parameter SI.Inductance Lmq(start=1.5/(2*pi*fsNominal))
+  parameter SI.Inductance Lmq(start=1.5/(2*pi*fsNominal)) 
     "每相定子主场在q轴上的电感" 
     annotation (Dialog(tab="额定电阻和电感"));
-  parameter Boolean useDamperCage(start=true)
-    "启用/禁用阻尼笼" annotation (Evaluate=true, Dialog(tab=
+  parameter Boolean useDamperCage(start=true) 
+    "启用/禁用阻尼笼" annotation (Evaluate=true, Dialog(tab= 
           "额定电阻和电感", group="阻尼笼"));
-  parameter SI.Inductance Lrsigmad(start=0.05/(2*pi*
+  parameter SI.Inductance Lrsigmad(start=0.05/(2*pi* 
         fsNominal)) "d轴上的阻尼笼漏电感" annotation (
       Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter SI.Inductance Lrsigmaq=Lrsigmad
+  parameter SI.Inductance Lrsigmaq=Lrsigmad 
     "q轴上的阻尼笼漏电感" annotation (Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter SI.Resistance Rrd(start=0.04)
+  parameter SI.Resistance Rrd(start=0.04) 
     "TRef时d轴上的阻尼电阻" annotation (Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter SI.Resistance Rrq=Rrd
+  parameter SI.Resistance Rrq=Rrd 
     "TRef时q轴上的阻尼电阻" annotation (Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter SI.Temperature TrRef(start=293.15)
+  parameter SI.Temperature TrRef(start=293.15) 
     "d轴和q轴阻尼电阻的参考温度" 
     annotation (Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20r(start=0)
+  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20r(start=0) 
     "d轴和q轴阻尼电阻的温度系数" 
     annotation (Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter SI.Voltage VsNominal(start=100)
+  parameter SI.Voltage VsNominal(start=100) 
     "每相定子的额定有效值电压" 
     annotation (Dialog(tab="励磁"));
-  parameter SI.Current IeOpenCircuit(start=10)
+  parameter SI.Current IeOpenCircuit(start=10) 
     "额定电压和频率下的空载励磁电流" 
     annotation (Dialog(tab="励磁"));
-  parameter SI.Resistance Re(start=2.5)
+  parameter SI.Resistance Re(start=2.5) 
     "TRef时的励磁电阻" annotation (Dialog(tab="励磁"));
-  parameter SI.Temperature TeRef(start=293.15)
+  parameter SI.Temperature TeRef(start=293.15) 
     "励磁电阻的参考温度" 
     annotation (Dialog(tab="励磁"));
-  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20e(start=0)
+  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20e(start=0) 
     "励磁电阻的温度系数" 
     annotation (Dialog(tab="励磁"));
   parameter Real sigmae(
-    min=0,
-    max=0.99,
+    min=0, 
+    max=0.99, 
     start=0.025) "总励磁电感的串扰系数" 
     annotation (Dialog(tab="励磁"));
-  parameter SI.Temperature TeOperational(start=293.15)
-    "运行励磁温度" annotation (Dialog(group=
+  parameter SI.Temperature TeOperational(start=293.15) 
+    "运行励磁温度" annotation (Dialog(group= 
           "运行温度", enable=not useThermalPort));
-  parameter Machines.Losses.BrushParameters brushParameters
+  parameter Machines.Losses.BrushParameters brushParameters 
     "刷子损耗参数记录" annotation (Dialog(tab="损耗"));
-  output SI.Voltage ve=pin_ep.v - pin_en.v
+  output SI.Voltage ve=pin_ep.v - pin_en.v 
     "励磁电压";
   output SI.Current ie=pin_ep.i "励磁电流";
 
 
 
   Machines.BasicMachines.Components.DamperCage damperCage(
-    final Lrsigmad=Lrsigmad,
-    final Lrsigmaq=Lrsigmaq,
-    final Rrd=Rrd,
-    final Rrq=Rrq,
-    final T_ref=TrRef,
-    final alpha=Machines.Thermal.convertAlpha(alpha20r, TrRef),
+    final Lrsigmad=Lrsigmad, 
+    final Lrsigmaq=Lrsigmaq, 
+    final Rrd=Rrd, 
+    final Rrq=Rrq, 
+    final T_ref=TrRef, 
+    final alpha=Machines.Thermal.convertAlpha(alpha20r, TrRef), 
     final useHeatPort=true) if useDamperCage annotation (Placement(
         transformation(
-        origin={0,-40},
-        extent={{-10,-10},{10,10}},
+        origin={0,-40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   // 阻尼笼
   Machines.BasicMachines.Components.ElectricalExcitation electricalExcitation(final
       turnsRatio=turnsRatio) annotation (Placement(transformation(
-        origin={-70,-50},
-        extent={{-10,10},{10,-10}},
+        origin={-70,-50}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=180)));
   // 电励磁
   Modelica.Electrical.Analog.Basic.Resistor re(
-    final R=Re,
-    final T_ref=TeRef,
-    final alpha=Machines.Thermal.convertAlpha(alpha20e, TeRef),
+    final R=Re, 
+    final T_ref=TeRef, 
+    final alpha=Machines.Thermal.convertAlpha(alpha20e, TeRef), 
     final useHeatPort=true) annotation (Placement(transformation(
-        origin={-80,10},
-        extent={{-10,10},{10,-10}},
+        origin={-80,10}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=270)));
   // 电阻
   Modelica.Electrical.Analog.Basic.Inductor lesigma(final L=Lesigma) 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={-80,-20})));
   // 感应器
-  Modelica.Electrical.Analog.Interfaces.PositivePin pin_ep
-    "Positive excitation pin" annotation (Placement(transformation(extent=
+  Modelica.Electrical.Analog.Interfaces.PositivePin pin_ep 
+    "Positive excitation pin" annotation (Placement(transformation(extent= 
            {{-110,70},{-90,50}})));
   // 正激励引脚
-  Modelica.Electrical.Analog.Interfaces.NegativePin pin_en
-    "Negative excitation pin" annotation (Placement(transformation(extent=
+  Modelica.Electrical.Analog.Interfaces.NegativePin pin_en 
+    "Negative excitation pin" annotation (Placement(transformation(extent= 
            {{-90,-50},{-110,-70}})));
   // 负激励引脚
-  Machines.Losses.DCMachines.Brush brush(final brushParameters=brushParameters,
+  Machines.Losses.DCMachines.Brush brush(final brushParameters=brushParameters, 
       final useHeatPort=true) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={-80,40})));
   // 刷子
 protected
-  final parameter Real turnsRatio=sqrt(2)*VsNominal/(2*pi*fsNominal*Lmd*
+  final parameter Real turnsRatio=sqrt(2)*VsNominal/(2*pi*fsNominal*Lmd* 
       IeOpenCircuit) "Stator current / excitation current";
   // 匝数比
-  final parameter SI.Inductance Lesigma=Lmd*turnsRatio^2*3/
+  final parameter SI.Inductance Lesigma=Lmd*turnsRatio^2*3/ 
       2*sigmae/(1 - sigmae);
   // 感应器电感
   Modelica.Blocks.Interfaces.RealOutput damperCageLossPower(final
@@ -214,19 +214,19 @@ equation
       points={{-10,-40},{-10,-80},{0,-80},{0,-80}}, color={191,0,0}));
   // 连接阻尼笼的热端口到内部热端口的转子绕组热端口
   annotation (
-    defaultComponentName="smee",
+    defaultComponentName="smee", 
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
-        Ellipse(extent={{-134,34},{-66,-34}}, lineColor={0,0,255}),
-        Line(points={{-100,50},{-100,20},{-130,20},{-130,-4}}, color={0,0,255}),
-        Line(points={{-130,-4},{-129,1},{-125,5},{-120,6},{-115,5},{-111,
-              1},{-110,-4}}, color={0,0,255}),
-        Line(points={{-110,-4},{-109,1},{-105,5},{-100,6},{-95,5},{-91,1},
-              {-90,-4}}, color={0,0,255}),
-        Line(points={{-90,-4},{-89,1},{-85,5},{-80,6},{-75,5},{-71,1},{-70,
-              -4}}, color={0,0,255}),
-        Line(points={{-100,-50},{-100,-20},{-70,-20},{-70,-2}}, color={0,
-              0,255})}),
+        Ellipse(extent={{-134,34},{-66,-34}}, lineColor={0,0,255}), 
+        Line(points={{-100,50},{-100,20},{-130,20},{-130,-4}}, color={0,0,255}), 
+        Line(points={{-130,-4},{-129,1},{-125,5},{-120,6},{-115,5},{-111, 
+              1},{-110,-4}}, color={0,0,255}), 
+        Line(points={{-110,-4},{-109,1},{-105,5},{-100,6},{-95,5},{-91,1}, 
+              {-90,-4}}, color={0,0,255}), 
+        Line(points={{-90,-4},{-89,1},{-85,5},{-80,6},{-75,5},{-71,1},{-70, 
+              -4}}, color={0,0,255}), 
+        Line(points={{-100,-50},{-100,-20},{-70,-20},{-70,-2}}, color={0, 
+              0,255})}), 
     Documentation(info="<html>
 <p><strong>具有阻尼笼的三相电励磁同步机模型。</strong><br>
 在定子相中直接建模定子的电阻和漏感，然后使用空间矢量变换和转子固定的<em>气隙</em>模型。转子鼠笼的电阻和漏感建模在转子固定坐标系的两个轴上。电励磁通过将励磁电流和电压转换为d轴空间矢量来建模。机器模型考虑以下损耗效应：

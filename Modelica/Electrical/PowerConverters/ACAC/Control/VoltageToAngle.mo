@@ -3,22 +3,22 @@ block VoltageToAngle "参考电压到触发角转换器"
   extends Modelica.Blocks.Icons.Block;
   import Modelica.Constants.pi;
   parameter SI.Voltage VNominal "额定电压";
-  parameter PowerConverters.Types.Voltage2AngleType voltage2Angle=
+  parameter PowerConverters.Types.Voltage2AngleType voltage2Angle= 
       PowerConverters.Types.Voltage2AngleType.Lin "选择计算类型";
   Modelica.Blocks.Interfaces.RealInput vRef "参考电压" 
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput firingAngle(
-    unit="rad",
-    displayUnit="deg",
-    min=0,
-    max=pi,
+    unit="rad", 
+    displayUnit="deg", 
+    min=0, 
+    max=pi, 
     start=pi) "触发角" 
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Math.Gain gain_v(final k=1/VNominal) 
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=1, final uMin=0) 
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-  Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(final table=
+  Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(final table= 
     if voltage2Angle ==PowerConverters.Types.Voltage2AngleType.Lin then Lin 
     else if voltage2Angle ==PowerConverters.Types.Voltage2AngleType.H01 then H01 
     else RMS, final extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint) 
@@ -70,14 +70,14 @@ equation
 由于从H01和RMS计算触发角涉及非线性方程，
 因此这两个关系已经预先计算，并从表中插值。
 </p>
-</html>"), Icon(coordinateSystem(grid={2,2}),
+</html>"), Icon(coordinateSystem(grid={2,2}), 
                 graphics={
-        Line(points={{-55.1,66.4},{-49.4,74.6},{-43.8,79.1},{-38.2,79.8},{-32.6,
-              76.6},{-26.9,69.7},{-21.3,59.4},{-14.9,44.1},{-6.83,21.2},{0,0}},
-                                                            smooth = Smooth.Bezier),
-        Line(points={{-80,0},{80,0}}, color={28,108,200}),
-        Line(points={{-55,66},{-55,0},{-80,0}}, color={0,0,0}),
-        Line(points={{26,-68},{35,-78.4},{40.6,-80},{46.2,-77.6},{51.9,-71.5},{57.5,
-              -61.9},{63.9,-47.2},{72,-24.8},{80,0}},       smooth = Smooth.Bezier),
+        Line(points={{-55.1,66.4},{-49.4,74.6},{-43.8,79.1},{-38.2,79.8},{-32.6, 
+              76.6},{-26.9,69.7},{-21.3,59.4},{-14.9,44.1},{-6.83,21.2},{0,0}}, 
+                                                            smooth = Smooth.Bezier), 
+        Line(points={{-80,0},{80,0}}, color={28,108,200}), 
+        Line(points={{-55,66},{-55,0},{-80,0}}, color={0,0,0}), 
+        Line(points={{26,-68},{35,-78.4},{40.6,-80},{46.2,-77.6},{51.9,-71.5},{57.5, 
+              -61.9},{63.9,-47.2},{72,-24.8},{80,0}},       smooth = Smooth.Bezier), 
         Line(points={{0,0},{26,0},{26,-68}}, color={0,0,0})}));
 end VoltageToAngle;

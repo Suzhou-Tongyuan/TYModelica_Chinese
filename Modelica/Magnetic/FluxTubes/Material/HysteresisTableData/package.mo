@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FluxTubes.Material;
-package HysteresisTableData "磁滞数据表"
+package HysteresisTableData
   extends Modelica.Icons.MaterialPropertiesPackage;
   annotation (Documentation(info="<html>
 <p>

@@ -1,4 +1,4 @@
-﻿within Modelica.Blocks;
+within Modelica.Blocks;
 package Sources
   "生成实数、整数和布尔信号的信号源模块库"
   import Modelica.Blocks.Interfaces;
@@ -1380,6 +1380,117 @@ realized.</li>
 </ul>
 </html>"));
   end KinematicPTP2;
+  block KinematicPTPJerk "在给定的运动学约束条件下，尽可能快地沿一定距离移动"
+
+    parameter Real deltaq = 1 "移动距离";
+    parameter Real qd_max(min = Modelica.Constants.small) = 1
+      "最大速度der(q)";
+    parameter Real qdd_max(min = Modelica.Constants.small) = 1
+      "最大加速度der(qd)";
+    parameter Real qddd_max(min = Modelica.Constants.small) = 1
+      "最大跃度der(qdd)";
+    parameter Modelica.Units.SI.Time startTime = 0
+      "运动开始的时间瞬间";
+    parameter Modelica.Units.SI.Time Tdwell = 0.1
+      "运动结束后的停留时间";
+
+    extends Modelica.Blocks.Icons.Block;
+    output Modelica.Units.SI.Time DynamicTime "步长结束时间";
+
+    Modelica.Blocks.Interfaces.RealOutput q
+      "路径规划参考位置" annotation(Placement(transformation(origin = {110, 80},
+      extent = {{-10, -10}, {10, 10}})));
+    Modelica.Blocks.Interfaces.RealOutput qd
+      "路径规划参考速度" annotation(Placement(transformation(origin = {110, 40},
+      extent = {{-10, -10}, {10, 10}})));
+    Modelica.Blocks.Interfaces.RealOutput qdd
+      "路径规划参考加速度" annotation(Placement(transformation(origin = {110, 0},
+      extent = {{-10, -10}, {10, 10}})));
+    Modelica.Blocks.Interfaces.RealOutput qddd
+      "路径规划参考跃度" annotation(Placement(transformation(origin = {110, -40},
+      extent = {{-10, -10}, {10, 10}})));
+    Modelica.Blocks.Interfaces.BooleanOutput moving(start = false)
+      "= true，则还没有到达终点；= false，则已经到达终点" 
+      annotation(Placement(transformation(origin = {110, -80},
+      extent = {{-10, -10}, {10, 10}})));
+
+  protected
+    final parameter Modelica.Blocks.Sources.Functions.STrajParameter para = Modelica.Blocks.Sources.Functions.GetSTrajectoryPara(deltaq, qd_max, qdd_max, qddd_max, Tdwell);
+    final parameter Modelica.Units.SI.Time Ta = para.Ta;
+    final parameter Modelica.Units.SI.Time Tv = para.Tv;
+    final parameter Modelica.Units.SI.Time Td = para.Td;
+    final parameter Modelica.Units.SI.Time To = para.Tdwell;
+
+  equation
+    DynamicTime = Ta + Tv + Td + To;
+
+    q = Modelica.Blocks.Sources.Functions.GenerateSPosition(time - startTime, para);
+    qd = Modelica.Blocks.Sources.Functions.GenerateSVelocity(time - startTime, para);
+    qdd = Modelica.Blocks.Sources.Functions.GenerateSAcceleration(time - startTime, para);
+    qddd = Modelica.Blocks.Sources.Functions.GenerateSJerk(time - startTime, para);
+
+    moving = time > startTime and time < startTime + Ta + Tv + Td;
+
+    annotation(
+      defaultComponentName = "kinematicPTP3",
+      Dialog(groupImage = "modelica://Modelica/Resources/Images/Blocks/Sources/KinematicPTP.png"), Documentation(info = "<html><p>
+目标是在给定的<strong>运动学约束</strong>条件下，以尽可能<strong>快</strong>的速度沿距离<strong>Δq</strong>移动。
+距离可以是位置或角度范围。在机器人技术中，这种运动被称为<strong>PTP</strong>(点对点)。
+该信号源模块将该信号的<strong>位置</strong> q(t)、<strong>速度</strong> qd(t) = der(q)、<strong>加速度</strong>
+qdd = der(qd)、<strong>跃度</strong> qddd = der(qdd)作为输出。
+信号构造方式使得在允许的最大速度qd_max、最大加速度qdd_max、最大跃度qddd_max下无法移动更快：
+</p>
+
+<div>
+<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/KinematicPTPJerk.png\"
+     alt=\"KinematicPTPJerk.png\">
+</div>
+
+<p>
+此元素用于生成控制器的参考信号，例如传动系统或者给定加速度的驱动接口。
+</p>
+</html>"                              ),
+      Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}},
+      preserveAspectRatio = true,
+      grid = {2, 2}), graphics = {Line(origin = {0, 0},
+      points = {{-80, 78}, {-80, -82}},
+      color = {192, 192, 192}), Polygon(origin = {0, 0},
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 88}, {-80, 90}}), Line(origin = {0, 0},
+      points = {{-90, 0}, {17, 0}},
+      color = {192, 192, 192}), Line(origin = {0, 0},
+      points = {{-80, 0}, {-70, 0}, {-70, 70}, {-50, 70}, {-50, 0}, {-15, 0}, {-15, -70}, {5, -70}, {5, 0}, {18, 0}}), Text(origin = {68, 80},
+      extent = {{-30, 15}, {30, -15}},
+      textString = "q"), Text(origin = {68, 40},
+      extent = {{-30, 15}, {30, -15}},
+      textString = "qd",
+      textStyle = {TextStyle.None}), Text(origin = {68, 0},
+      extent = {{-30, 13}, {30, -13}},
+      textString = "qdd",
+      textStyle = {TextStyle.None}), Text(origin = {68, -80},
+      extent = {{-30, 11}, {30, -11}},
+      textString = "moving",
+      textStyle = {TextStyle.None}), Text(origin = {8, 54},
+      lineColor = {176, 176, 176},
+      extent = {{-50, 20}, {50, -20}},
+      textString = "jerk",
+      textStyle = {TextStyle.None},
+      textColor = {176, 176, 176}), Text(origin = {68, -40},
+      extent = {{-30, 13}, {30, -13}},
+      textString = "qddd",
+      textStyle = {TextStyle.None}), Polygon(origin = {-50, -80},
+      rotation = -90,
+      lineColor = {192, 192, 192},
+      fillColor = {192, 192, 192},
+      fillPattern = FillPattern.Solid,
+      points = {{-80, 90}, {-88, 68}, {-72, 68}, {-80, 88}, {-80, 90}}), Text(origin = {0, -120},
+      extent = {{-50, -20}, {50, 20}},
+      textString = "deltaq=%deltaq",
+      textStyle = {TextStyle.None})}), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}},
+      grid = {2, 2})));
+  end KinematicPTPJerk;
 
   block TimeTable
     "通过表格中的线性插值生成(可能不连续的)信号"
@@ -2051,7 +2162,7 @@ MATLAB是MathWorks公司的注册商标。
     parameter SI.Time table[:] = {0, 1}
       "时间点向量。在每个时间点，输出 y 都会得到相反的值(例如，table={0,1})" annotation(Dialog(group = "表格数据定义"));
     parameter Boolean startValue = false
-      "y的起始值。在时间=table[1]时，y变为‘not startValue’" annotation(Dialog(group = "表格数据解释",
+      "y的起始值。在时间=table[1]时，y变为‘无初始值’" annotation(Dialog(group = "表格数据解释",
       groupImage = "modelica://Modelica/Resources/Images/Blocks/Sources/BooleanTable.png"));
     parameter Modelica.Blocks.Types.Extrapolation extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint
       "超出定义范围的数据外推法" annotation(Dialog(group = "表格数据解释"));
@@ -2154,7 +2265,7 @@ end if;
 <p>
 <br>
 </p>
-</html>"));
+</html>"  ));
   end BooleanTable;
 
   block RadioButtonSource "模拟单选按钮的布尔信号源"
@@ -2445,4 +2556,397 @@ RadioButtonSource stop (buttonTimeTable={2,4}, reset={start.on});</code></pre><p
        of Dieter Moormann and Hilding Elmqvist.</li>
 </ul>
 </html>"));
+  package Functions
+
+    record STrajParameter
+
+      Modelica.Units.SI.Time Ta(start = 0);
+      Modelica.Units.SI.Time Tv(start = 0);
+      Modelica.Units.SI.Time Td(start = 0);
+      Modelica.Units.SI.Time Tdwell(start = 0);
+      Modelica.Units.SI.Time Tj1(start = 0);
+      Modelica.Units.SI.Time Tj2(start = 0);
+
+      Real qmax(start = 0);
+      Real vlim(start = 0);
+
+      Real a_max(start = 0);
+      Real a_min(start = 0);
+
+      Real a_lima(start = 0);
+      Real a_limd(start = 0);
+
+      Real j_max(start = 0);
+      Real j_min(start = 0);
+
+    end STrajParameter;
+    function GenerateSAcceleration
+
+      input Modelica.Units.SI.Time t;
+      input Modelica.Blocks.Sources.Functions.STrajParameter Para;
+
+      output Real qdd;
+
+    protected
+      Modelica.Units.SI.Time T;
+      Modelica.Units.SI.Time Ta = Para.Ta;
+      Modelica.Units.SI.Time Tv = Para.Tv;
+      Modelica.Units.SI.Time Td = Para.Td;
+      Modelica.Units.SI.Time To = Para.Tdwell;
+      Modelica.Units.SI.Time Tj1 = Para.Tj1;
+      Modelica.Units.SI.Time Tj2 = Para.Tj2;
+
+      Real qmax = Para.qmax;
+      Real vlim = Para.vlim;
+
+      Real amax = Para.a_max;
+      Real amin = Para.a_min;
+
+      Real alima = Para.a_lima;
+      Real alimd = Para.a_limd;
+
+      Real jmax = Para.j_max;
+      Real jmin = Para.j_min;
+
+    algorithm
+      T := Ta + Tv + Td + To;
+      // 加速阶段
+      if (t >= 0 and t < Tj1) then
+        qdd := jmax * t;
+      elseif (t >= Tj1 and t < Ta - Tj1) then
+        qdd := alima;
+      elseif (t >= Ta - Tj1 and t < Ta) then
+        qdd := -jmin * (Ta - t);
+      // 匀速阶段
+      elseif (t >= Ta and t < Ta + Tv) then
+        qdd := 0;
+      // 减速阶段
+      elseif (t >= Ta + Tv and t < T - Td + Tj2 - To) then
+        qdd := -jmax * (t - T + Td + To);
+      elseif (t >= T - Td + Tj2 - To and t < T - Tj2 - To) then
+        qdd := alimd;
+      elseif (t >= T - Tj2 - To and t <= T - To) then
+        qdd := -jmax * (T - t - To);
+      elseif (t >= T - To and t <= T) then
+        qdd := 0;
+      end if;
+
+    end GenerateSAcceleration;
+    function GenerateSJerk
+
+      input Modelica.Units.SI.Time t;
+      input Modelica.Blocks.Sources.Functions.STrajParameter Para;
+
+      output Real qddd;
+
+    protected
+      Modelica.Units.SI.Time T;
+      Modelica.Units.SI.Time Ta = Para.Ta;
+      Modelica.Units.SI.Time Tv = Para.Tv;
+      Modelica.Units.SI.Time Td = Para.Td;
+      Modelica.Units.SI.Time To = Para.Tdwell;
+      Modelica.Units.SI.Time Tj1 = Para.Tj1;
+      Modelica.Units.SI.Time Tj2 = Para.Tj2;
+
+      Real qmax = Para.qmax;
+      Real vlim = Para.vlim;
+
+      Real amax = Para.a_max;
+      Real amin = Para.a_min;
+
+      Real alima = Para.a_lima;
+      Real alimd = Para.a_limd;
+
+      Real jmax = Para.j_max;
+      Real jmin = Para.j_min;
+
+    algorithm
+      T := Ta + Tv + Td + To;
+      // 加速阶段
+      if (t >= 0 and t < Tj1) then
+        qddd := jmax;
+      elseif (t >= Tj1 and t < Ta - Tj1) then
+        qddd := 0;
+      elseif (t >= Ta - Tj1 and t < Ta) then
+        qddd := jmin;
+      // 匀速阶段
+      elseif (t >= Ta and t < Ta + Tv) then
+        qddd := 0;
+      // 减速阶段
+      elseif (t >= Ta + Tv and t < T - Td + Tj2 - To) then
+        qddd := -jmax;
+      elseif (t >= T - Td + Tj2 - To and t < T - Tj2 - To) then
+        qddd := 0;
+      elseif (t >= T - Tj2 - To and t <= T - To) then
+        qddd := jmax;
+      elseif (t >= T - To and t <= T) then
+        qddd := 0;
+      end if;
+
+    end GenerateSJerk;
+    function GenerateSPosition
+
+      input Modelica.Units.SI.Time t;
+      input Modelica.Blocks.Sources.Functions.STrajParameter Para;
+
+      output Real q;
+
+    protected
+      Modelica.Units.SI.Time T;
+      Modelica.Units.SI.Time Ta = Para.Ta;
+      Modelica.Units.SI.Time Tv = Para.Tv;
+      Modelica.Units.SI.Time Td = Para.Td;
+      Modelica.Units.SI.Time To = Para.Tdwell;
+      Modelica.Units.SI.Time Tj1 = Para.Tj1;
+      Modelica.Units.SI.Time Tj2 = Para.Tj2;
+
+      Real qmax = Para.qmax;
+      Real vlim = Para.vlim;
+
+      Real amax = Para.a_max;
+      Real amin = Para.a_min;
+
+      Real alima = Para.a_lima;
+      Real alimd = Para.a_limd;
+
+      Real jmax = Para.j_max;
+      Real jmin = Para.j_min;
+
+    algorithm
+      T := Ta + Tv + Td + To;
+      // 加速阶段
+      if (t >= 0 and t < Tj1) then
+        q := jmax * t ^ 3 / 6;
+      elseif (t >= Tj1 and t < Ta - Tj1) then
+        q := (alima / 6) * (3 * t ^ 2 - 3 * Tj1 * t + Tj1 ^ 2);
+      elseif (t >= Ta - Tj1 and t < Ta) then
+        q := (vlim) * (Ta / 2) - vlim * (Ta - t) - jmin * ((Ta - t) ^ 3 / 6);
+      // 匀速阶段
+      elseif (t >= Ta and t < Ta + Tv) then
+        q := (vlim) * (Ta / 2) + vlim * (t - Ta);
+      // 减速阶段
+      elseif (t >= Ta + Tv and t < T - Td + Tj2 - To) then
+        q := qmax - (vlim) * (Td / 2) + vlim * (t - T + Td + To) - jmax * ((t - T + Td + To) ^ 3 / 6);
+      elseif (t >= T - Td + Tj2 - To and t < T - Tj2 - To) then
+        q := qmax - (vlim) * (Td / 2) + vlim * (t - T + Td + To) + (alimd / 6) * (3 * (t - T + Td + To) ^ 2 - 3 * Tj2 * (t - T + Td + To) + Tj2 ^ 2);
+      elseif (t >= T - Tj2 - To and t <= T - To) then
+        q := qmax - jmax * ((T - t - To) ^ 3 / 6);
+      else
+        // (t >=T - To and t <= T)
+        q := qmax;
+      end if;
+
+    end GenerateSPosition;
+    function GenerateSVelocity
+
+      input Modelica.Units.SI.Time t;
+      input Modelica.Blocks.Sources.Functions.STrajParameter Para;
+
+      output Real qd;
+
+    protected
+      Modelica.Units.SI.Time T;
+      Modelica.Units.SI.Time Ta = Para.Ta;
+      Modelica.Units.SI.Time Tv = Para.Tv;
+      Modelica.Units.SI.Time Td = Para.Td;
+      Modelica.Units.SI.Time To = Para.Tdwell;
+      Modelica.Units.SI.Time Tj1 = Para.Tj1;
+      Modelica.Units.SI.Time Tj2 = Para.Tj2;
+
+      Real qmax = Para.qmax;
+      Real vlim = Para.vlim;
+
+      Real amax = Para.a_max;
+      Real amin = Para.a_min;
+
+      Real alima = Para.a_lima;
+      Real alimd = Para.a_limd;
+
+      Real jmax = Para.j_max;
+      Real jmin = Para.j_min;
+
+    algorithm
+      T := Ta + Tv + Td + To;
+      // 加速阶段
+      if (t >= 0 and t < Tj1) then
+        qd := jmax * (t ^ 2 / 2);
+      elseif (t >= Tj1 and t < Ta - Tj1) then
+        qd := alima * (t - Tj1 / 2);
+      elseif (t >= Ta - Tj1 and t < Ta) then
+        qd := vlim + jmin * ((Ta - t) ^ 2 / 2);
+      // 匀速阶段
+      elseif (t >= Ta and t < Ta + Tv) then
+        qd := vlim;
+      // 减速阶段
+      elseif (t >= Ta + Tv and t < T - Td + Tj2 - To) then
+        qd := vlim - jmax * ((t - T + Td + To) ^ 2 / 2);
+      elseif (t >= T - Td + Tj2 - To and t < T - Tj2 - To) then
+        qd := vlim + alimd * (t - T + Td - Tj2 / 2 + To);
+      elseif (t >= T - Tj2 - To and t <= T - To) then
+        qd := jmax * ((t - T + To) ^ 2 / 2);
+      elseif (t >= T - To and t <= T) then
+        qd := 0;
+      end if;
+
+    end GenerateSVelocity;
+    function GetSTrajectoryPara
+
+      input Real deltaq;
+      input Real qd_max;
+      input Real qdd_max;
+      input Real qddd_max;
+      input Real Tdwell;
+
+      output Modelica.Blocks.Sources.Functions.STrajParameter Para;
+
+    protected
+      constant Real eps = 10 * Modelica.Constants.eps;
+      constant Real qmax = deltaq;
+
+      Real qd_min;
+      Real qdd_min;
+      Real qddd_min;
+
+      Real q_max;
+
+      Real sigma;
+
+      Real v_max;
+      Real v_min;
+
+      Modelica.Units.SI.Time Tj;
+      Modelica.Units.SI.Time T;
+
+      Real delta;
+      Real lambda;
+
+      Real a_max;
+      Real a_min;
+      Real j_max;
+      Real j_min;
+
+      Modelica.Units.SI.Time Tj1;
+      Modelica.Units.SI.Time Tj2;
+      Modelica.Units.SI.Time Ta;
+      Modelica.Units.SI.Time Tv;
+      Modelica.Units.SI.Time Td;
+
+      Real a_lima;
+      Real a_limd;
+      Real vlim;
+
+    algorithm
+
+      qd_min := -qd_max;
+      qdd_min := -qdd_max;
+      qddd_min := -qddd_max;
+
+      sigma := sign(qmax);
+      q_max := sigma * qmax;
+      v_max := ((sigma + 1) / 2) * qd_max + ((sigma - 1) / 2) * qd_min;
+      v_min := ((sigma + 1) / 2) * qd_min + ((sigma - 1) / 2) * qd_max;
+      a_max := ((sigma + 1) / 2) * qdd_max + ((sigma - 1) / 2) * qdd_min;
+      a_min := ((sigma + 1) / 2) * qdd_min + ((sigma - 1) / 2) * qdd_max;
+      j_max := ((sigma + 1) / 2) * qddd_max + ((sigma - 1) / 2) * qddd_min;
+      j_min := ((sigma + 1) / 2) * qddd_min + ((sigma - 1) / 2) * qddd_max;
+
+      if ((v_max) * j_max < a_max ^ 2) then
+        Tj1 := sqrt((v_max) / j_max);
+        Ta := 2 * Tj1;
+        a_lima := j_max * Tj1;
+      else
+        Tj1 := a_max / j_max;
+        Ta := Tj1 + (v_max) / a_max;
+        a_lima := a_max;
+      end if;
+
+      if ((v_max) * j_max < a_max ^ 2) then
+        Tj2 := sqrt((v_max) / j_max);
+        Td := 2 * Tj2;
+        a_limd := -j_max * Tj2;
+      else
+        Tj2 := a_max / j_max;
+        Td := Tj2 + (v_max) / a_max;
+        a_limd := -a_max;
+      end if;
+
+      Tv := (q_max) / v_max - (Ta / 2) - (Td / 2);
+
+      if (Tv > 0) then
+        vlim := v_max;
+        T := Ta + Tv + Td + Tdwell;
+
+      else
+        Tv := 0;
+        Tj := a_max / j_max;
+        Tj1 := Tj;
+        Tj2 := Tj;
+        delta := (a_max ^ 4 / j_max ^ 2) + a_max * (4 * (q_max));
+        Ta := ((a_max ^ 2 / j_max) + sqrt(delta)) / (2.0 * a_max);
+        Td := ((a_max ^ 2 / j_max) + sqrt(delta)) / (2.0 * a_max);
+        if (Ta < 0 or Td < 0) then
+          if (Ta < 0) then
+            Ta := 0;
+            Tj1 := 0;
+            Td := 0;
+            Tj2 := 0;
+            a_lima := 0;
+            a_limd := -j_max * Tj2;
+            vlim := 0;
+          else
+            Td := 0;
+            Tj2 := 0;
+            Ta := 0;
+            Tj1 := 0;
+            a_lima := j_max * Tj1;
+            a_limd := 0;
+            vlim := a_lima * (Ta - Tj1);
+          end if;
+        elseif (Ta >= 2 * Tj and Td >= 2 * Tj) then
+          a_lima := a_max;
+          a_limd := -a_max;
+          vlim := a_lima * (Ta - Tj);
+        else
+          lambda := 0.99;
+          while (Ta < 2 * Tj or Td < 2 * Tj) loop
+            a_max := lambda * a_max;
+            Tv := 0;
+            Tj := a_max / j_max;
+            Tj1 := Tj;
+            Tj2 := Tj;
+            delta := (a_max ^ 4 / j_max ^ 2) + a_max * (4 * (q_max));
+            Ta := ((a_max ^ 2 / j_max) + sqrt(delta)) / (2.0 * a_max);
+            Td := ((a_max ^ 2 / j_max) + sqrt(delta)) / (2.0 * a_max);
+            if (Ta < 0 or Td < 0) then
+              if (Ta < 0) then
+                Ta := 0;
+                Tj1 := 0;
+                Td := 0;
+                Tj2 := 0;
+                a_lima := 0;
+                a_limd := -j_max * Tj2;
+                vlim := 0;
+              else
+                Td := 0;
+                Tj2 := 0;
+                Ta := 0;
+                Tj1 := 0;
+                a_lima := j_max * Tj1;
+                a_limd := 0;
+                vlim := a_lima * (Ta - Tj1);
+              end if;
+            elseif (Ta >= 2 * Tj and Td >= 2 * Tj) then
+              a_lima := a_max;
+              a_limd := -a_max;
+              vlim := a_lima * (Ta - Tj);
+            end if;
+          end while;
+        end if;
+      end if;
+
+      Para := Modelica.Blocks.Sources.Functions.STrajParameter(Ta, Tv, Td, Tdwell, Tj1, Tj2, q_max, vlim, a_max, a_min, a_lima, a_limd, j_max, j_min);
+
+
+    end GetSTrajectoryPara;
+  end Functions;
 end Sources;

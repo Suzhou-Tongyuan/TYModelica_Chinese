@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FluxTubes.Examples.Hysteresis;
-model HysteresisModelComparison
+model HysteresisModelComparison 
   "不同滞后模型的比较"
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.TimeTable timeTable(table=[0.0,0.0; 1,500; 3,-500;
@@ -13,56 +13,56 @@ model HysteresisModelComparison
     annotation (Placement(transformation(extent={{60,30},{80,50}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor1(R=1) annotation (Placement(transformation(extent={{0,60},{20,80}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage vSource1 annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={-10,60})));
   Basic.ElectroMagneticConverterWithLeakageInductance winding2(i(start=0, fixed=true), N=1) "Winding 2" annotation (Placement(transformation(extent={{30,-10},{50,10}})));
   Modelica.Electrical.Analog.Basic.Ground elGnd2 
     annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
   Shapes.HysteresisAndMagnets.GenericHystTellinenTable tellinenTable(
-    includeEddyCurrents=false,
-    sigma=1,
-    K=100,
-    mat=FluxTubes.Material.HysteresisTableData.M330_50A(),
-    l=1,
+    includeEddyCurrents=false, 
+    sigma=1, 
+    K=100, 
+    mat=FluxTubes.Material.HysteresisTableData.M330_50A(), 
+    l=1, 
     MagRel(fixed=true, start=0)) 
          annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={70,10})));
   Basic.Ground magGnd2 
     annotation (Placement(transformation(extent={{60,-30},{80,-10}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor2(R=1) annotation (Placement(transformation(extent={{0,0},{20,20}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage vSource2 annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={-10,0})));
   Basic.ElectroMagneticConverterWithLeakageInductance winding3(i(fixed=true, start=0), N=1) "Winding 3" annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
   Modelica.Electrical.Analog.Basic.Ground elGnd3 
     annotation (Placement(transformation(extent={{0,-90},{20,-70}})));
   Shapes.HysteresisAndMagnets.GenericHystPreisachEverett preisachEverett(
-    includeEddyCurrents=false,
-    sigma=1,
-    mat=FluxTubes.Material.HysteresisEverettParameter.M330_50A(),
-    l=1,
+    includeEddyCurrents=false, 
+    sigma=1, 
+    mat=FluxTubes.Material.HysteresisEverettParameter.M330_50A(), 
+    l=1, 
     MagRel(fixed=true, start=0)) 
          annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={70,-50})));
   Basic.Ground magGnd3 
     annotation (Placement(transformation(extent={{60,-90},{80,-70}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor3(R=1) annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   Modelica.Electrical.Analog.Sources.SignalVoltage vSource3 annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={-10,-60})));
   Modelica.Blocks.Math.Gain gain(k=1) 
     annotation (Placement(transformation(extent={{-58,50},{-38,70}})));
   Shapes.HysteresisAndMagnets.GenericHystTellinenSoft tellinenSoft(
-    l=1,
-    Js=1.35,
-    Br=1.0,
-    Hc=40,
-    K=100,
+    l=1, 
+    Js=1.35, 
+    Br=1.0, 
+    Hc=40, 
+    K=100, 
     MagRel(fixed=true, start=0)) 
     annotation (Placement(transformation(extent={{62,60},{82,80}})));
 equation
@@ -78,7 +78,7 @@ equation
   connect(vSource2.p, resistor2.p) annotation (Line(points={{-10,10},{-6,10},{-6,10},{-4,10},{-4,10},{0,10}}, color={0,0,255}));
   connect(elGnd2.p, vSource2.n) annotation (Line(points={{10,-10},{-10,-10}}, color={0,0,255}));
   connect(tellinenTable.port_n, magGnd2.port) annotation (Line(
-      points={{80,10},{90,10},{90,-10},{70,-10}},
+      points={{80,10},{90,10},{90,-10},{70,-10}}, 
                                               color={255,127,0}));
   connect(vSource2.v, vSource1.v) annotation (Line(points={{-22,0},{-30,0},{-30,60},{-22,60}}, color={0,0,127}));
   connect(winding3.port_n, magGnd3.port) annotation (Line(points={{50,-70},{70,-70}}, color={255,127,0}));
@@ -94,7 +94,7 @@ equation
       points={{-69,60},{-60,60}},     color={0,0,127}));
   connect(gain.y, vSource1.v) annotation (Line(points={{-37,60},{-22,60}}, color={0,0,127}));
   connect(winding1.port_p, tellinenSoft.port_p) annotation (Line(points={{50,70},{62,70}}, color={255,127,0}));
-  connect(magGnd1.port,tellinenSoft. port_n) annotation (Line(points={{70,50},{90,50},{90,70},{82,70}},
+  connect(magGnd1.port,tellinenSoft. port_n) annotation (Line(points={{70,50},{90,50},{90,70},{82,70}}, 
                                         color={255,127,0}));
   annotation (experiment(StartTime=0, StopTime=14, Interval=3e-3, Tolerance=1e-005), Documentation(info="<html>
 <p>

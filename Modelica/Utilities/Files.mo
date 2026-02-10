@@ -4,7 +4,7 @@ package Files "处理文件和目录的功能"
 
 impure function list "列出文件或目录的内容"
   extends Modelica.Icons.Function;
-  input String name
+  input String name 
       "如果名称是目录，则列出目录内容。如果是文件，则列出文件内容";
 //..............................................................
   protected
@@ -23,7 +23,7 @@ impure function list "列出文件或目录的内容"
   end listFile;
 
 public
-function getDirectorysOrFiles
+function getDirectorysOrFiles 
    "如果isDir为true，则获取给定目录中的目录数，否则获取文件数"
    input String directory;
    input String names[:];
@@ -57,16 +57,16 @@ function getDirectorysOrFiles
    end if;
 end getDirectorysOrFiles;
 
-    impure function sortDirectory
+    impure function sortDirectory 
       "按字母顺序对目录和文件进行排序"
       extends Modelica.Icons.Function;
-      input String directory
+      input String directory 
         "读取的目录（包括尾部的 '/')";
-      input String names[:]
+      input String names[:] 
         "目录中的文件名和目录名，顺序不限";
-      output String orderedNames[size(names, 1)]
+      output String orderedNames[size(names, 1)] 
         "目录名后跟文件名";
-      output Integer nDirectories
+      output Integer nDirectories 
         "orderedNames 中的前 nDirectories 条目是目录";
     protected
       Integer nEntries = size(names, 1);
@@ -130,7 +130,7 @@ end getDirectorysOrFiles;
       String files[nEntries];
       Integer nDirectories;
       parameter String files1[nEntries] = Modelica.Utilities.Internal.FileSystem.readDirectory(
-        directoryName, nEntries) "目录内容";
+        directoryName, nEntries);
       annotation();
     algorithm
       if nEntries > 0 then
@@ -166,10 +166,10 @@ algorithm
   elseif fileType == Types.FileType.Directory then
      listDirectory(name, Modelica.Utilities.Internal.FileSystem.getNumberOfFiles(name));
   elseif fileType == Types.FileType.SpecialFile then
-     Streams.error("无法列出文件 \"" + name + "\"\n" +
+     Streams.error("无法列出文件 \"" + name + "\"\n" + 
                    "since it is not a regular file (pipe, device, ...)");
   else
-     Streams.error("无法列出文件或目录 \"" + name + "\"\n" +
+     Streams.error("无法列出文件或目录 \"" + name + "\"\n" + 
                    "since it does not exist");
   end if;
   annotation (Documentation(info="<html>
@@ -193,15 +193,15 @@ impure function copy "生成文件或目录的副本"
   extends Modelica.Icons.Function;
   input String oldName "要复制的文件或目录的名称";
   input String newName "文件或目录副本的名称";
-  input Boolean replace=false
+  input Boolean replace=false 
       "= true，如果现有文件可被所需副本替换";
 //..............................................................
   protected
   impure function copyDirectory "复制目录"
      extends Modelica.Icons.Function;
-     input String oldName
+     input String oldName 
         "旧目录名称不带尾部'/'；保证存在";
-     input String newName
+     input String newName 
         "新目录名称不带尾部 '/'; 目录已经创建";
      input Boolean replace "= true，如果可以替换现有的 newName";
       annotation();
@@ -241,7 +241,7 @@ impure function copy "生成文件或目录的副本"
   Types.FileType newFileType;
 algorithm
   if oldFileType == Types.FileType.NoFile then
-     Streams.error("无法复制文件或目录\n" +
+     Streams.error("无法复制文件或目录\n" + 
                    "\"" + oldName2 + "\" because it does not exist.");
   elseif oldFileType == Types.FileType.Directory then
      newFileType :=Modelica.Utilities.Internal.FileSystem.stat(
@@ -254,8 +254,8 @@ algorithm
            Files.removeFile(newName2);
            Files.createDirectory(newName2);
         else
-           Streams.error("目录 \"" + oldName2 + "\" 应复制到\n" +
-                         "\"" + newName2 + "\" which is an existing file.\n" +
+           Streams.error("目录 \"" + oldName2 + "\" 应复制到\n" + 
+                         "\"" + newName2 + "\" which is an existing file.\n" + 
                          "Since argument replace=false, this is not allowed");
         end if;
      end if;
@@ -264,8 +264,8 @@ algorithm
      if replace then
         Files.removeFile(newName2);
      else
-        Files.assertNew(newName2, "文件 \"" + oldName2 + "\" 应复制或移至\n" +
-                                  "\"" + newName2 + "\" which is an existing file or directory.\n" +
+        Files.assertNew(newName2, "文件 \"" + oldName2 + "\" 应复制或移至\n" + 
+                                  "\"" + newName2 + "\" which is an existing file or directory.\n" + 
                                   "Since argument replace=false, this is not allowed");
      end if;
      Modelica.Utilities.Internal.FileSystem.copyFile(
@@ -310,7 +310,7 @@ impure function move "将文件或目录移动到其他位置"
   extends Modelica.Icons.Function;
   input String oldName "要移动的文件或目录的名称";
   input String newName "被移动文件或目录的新名称";
-  input Boolean replace=false
+  input Boolean replace=false 
       "= true，如果可以替换现有文件或目录";
 algorithm
   // 如果 oldName 和 newName 都在当前目录中
@@ -432,10 +432,10 @@ algorithm
      Modelica.Utilities.Internal.FileSystem.removeFile(
                          fileName);
   elseif fileType == Types.FileType.Directory then
-     Streams.error("文件 \"" + fileName + "\" 应该被移除.\n" +
+     Streams.error("文件 \"" + fileName + "\" 应该被移除.\n" + 
                    "This is not possible, because it is a directory");
   elseif fileType == Types.FileType.SpecialFile then
-     Streams.error("文件 \"" + fileName + "\" 应该被移除.\n" +
+     Streams.error("文件 \"" + fileName + "\" 应该被移除.\n" + 
                    "This is not possible, because it is a special file (pipe, device, etc.)");
   end if;
   annotation (Documentation(info="<html>
@@ -456,13 +456,13 @@ Files.<strong>removeFile</strong>(fileName);
 </html>"));
 end removeFile;
 
-impure function createDirectory
+impure function createDirectory 
     "创建目录(如果目录已经存在，忽略调用)"
   extends Modelica.Icons.Function;
-  input String directoryName
+  input String directoryName 
       "要创建的目录名(如果存在，忽略调用)";
 //..............................................................
-  impure function existDirectory
+  impure function existDirectory 
       "查询目录是否存在；如果不是目录，则触发错误"
      extends Modelica.Icons.Function;
      input String directoryName;
@@ -474,7 +474,7 @@ impure function createDirectory
   algorithm
      if fileType == Types.FileType.RegularFile or 
         fileType == Types.FileType.SpecialFile then
-        Streams.error("目录\"" + directoryName + "\"不能创建\n" +
+        Streams.error("目录\"" + directoryName + "\"不能创建\n" + 
                       "因为这是一个已经存在的文件。");
      elseif fileType == Types.FileType.Directory then
         exists :=true;
@@ -483,7 +483,7 @@ impure function createDirectory
      end if;
   end existDirectory;
 
-  function assertCorrectIndex
+  function assertCorrectIndex 
       "如果目录中最后一个重要字符的索引错误，则打印错误"
      extends Modelica.Icons.Function;
      input Integer index "索引必须是 > 0";
@@ -491,8 +491,8 @@ impure function createDirectory
     annotation();
   algorithm
      if index < 1 then
-        Streams.error("无法创建目录\n" +
-                      "\"" + directoryName + "\"\n" +
+        Streams.error("无法创建目录\n" + 
+                      "\"" + directoryName + "\"\n" + 
                       "因为这个目录名无效");
      end if;
   end assertCorrectIndex;
@@ -599,7 +599,7 @@ end exist;
 impure function assertNew "如果存在文件或目录，则触发一个断言"
   extends Modelica.Icons.Function;
   input String name "文件或目录的名称";
-  input String message="这是不允许的."
+  input String message="这是不允许的." 
       "消息，该消息应打印在默认消息之后的新行中";
   protected
   Types.FileType fileType = Modelica.Utilities.Internal.FileSystem.stat(
@@ -646,7 +646,7 @@ fullName = Files.<strong>fullPathName</strong>(name);
 </html>"));
 end fullPathName;
 
-function splitPathName
+function splitPathName 
     "在目录中拆分路径名称，文件名内核，文件扩展名"
   extends Modelica.Icons.Function;
   input String pathName "绝对或相对文件或目录名";
@@ -718,7 +718,7 @@ algorithm
 </html>"));
 end splitPathName;
 
-function temporaryFileName
+function temporaryFileName 
     "返回不存在的文件的任意名称，该文件位于访问权限允许写入该文件的目录中(用于文件的临时输出)"
   extends Modelica.Icons.Function;
   output String fileName "临时文件的完整路径名";
@@ -754,13 +754,13 @@ Files.removeFile(fileName);
 </html>"));
 end temporaryFileName;
 
-  function loadResource
+  function loadResource 
     "返回URI的绝对路径名或本地文件名"
     extends 
       Modelica.Utilities.Internal.PartialModelicaServices.ExternalReferences.PartialLoadResource;
     extends ModelicaServices.ExternalReferences.loadResource;
     annotation(
-      Documentation(info =
+      Documentation(info = 
       "<html>
 <h4>语法</h4>
 <blockquote><pre>

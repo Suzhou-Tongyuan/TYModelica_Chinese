@@ -3,11 +3,11 @@ model Brake "基于库仑摩擦的制动器"
 
   extends Modelica.Mechanics.Translational.Interfaces.PartialElementaryTwoFlangesAndSupport2;
   extends Modelica.Thermal.HeatTransfer.Interfaces.PartialElementaryConditionalHeatPortWithoutT;
-  parameter Real mu_pos[:, 2]=[0, 0.5]
+  parameter Real mu_pos[:, 2]=[0, 0.5] 
     "作为相对速度 [m/s] 函数的正向滑动摩擦系数 [-] (v_rel>=0)";
-  parameter Real peak(final min=1) = 1
+  parameter Real peak(final min=1) = 1 
     "w==0 时 mu 最大值的峰值 (mu0_max = peak*mu_pos[1,2])";
-  parameter Real cgeo(final min=0) = 1
+  parameter Real cgeo(final min=0) = 1 
     "包含摩擦分布假设的几何常数";
   parameter SI.Force fn_max(final min=0, start=1) "最大法向力";
   extends Translational.Interfaces.PartialFriction;
@@ -21,17 +21,17 @@ model Brake "基于库仑摩擦的制动器"
   SI.Force fn "法向力 (=fn_max*f_normalized)";
 
   // 常数辅助变量
-  Modelica.Blocks.Interfaces.RealInput f_normalized
+  Modelica.Blocks.Interfaces.RealInput f_normalized 
     "归一化力信号 0..1 (法向力 = fn_max*f_normalized; 当 > 0 时制动器激活)" 
     annotation (Placement(transformation(
-        origin={0,110},
-        extent={{20,-20},{-20,20}},
+        origin={0,110}, 
+        extent={{20,-20},{-20,20}}, 
         rotation=90)));
 equation
   mu0 = Modelica.Math.Vectors.interpolate(
-        mu_pos[:, 1],
-        mu_pos[:, 2],
-        0,
+        mu_pos[:, 1], 
+        mu_pos[:, 2], 
+        0, 
         1);
 
   s = s_a;
@@ -53,22 +53,22 @@ equation
   // 摩擦力
   f = if locked then sa*unitForce else if free then 0 else cgeo*fn*(if 
     startForward then Modelica.Math.Vectors.interpolate(
-        mu_pos[:, 1],
-        mu_pos[:, 2],
-        v,
+        mu_pos[:, 1], 
+        mu_pos[:, 2], 
+        v, 
         1) else if startBackward then -Modelica.Math.Vectors.interpolate(
-        mu_pos[:, 1],
-        mu_pos[:, 2],
-        -v,
+        mu_pos[:, 1], 
+        mu_pos[:, 2], 
+        -v, 
         1) else if pre(mode) == Forward then 
     Modelica.Math.Vectors.interpolate(
-        mu_pos[:, 1],
-        mu_pos[:, 2],
-        v,
+        mu_pos[:, 1], 
+        mu_pos[:, 2], 
+        v, 
         1) else -Modelica.Math.Vectors.interpolate(
-        mu_pos[:, 1],
-        mu_pos[:, 2],
-        -v,
+        mu_pos[:, 1], 
+        mu_pos[:, 2], 
+        -v, 
         1));
 
   lossPower = f*v_relfric;
@@ -126,50 +126,50 @@ frictional_force = <strong>peak</strong> * <strong>cgeo</strong> * <strong>mu</s
 <dd><strong>A new model for control of systems with friction.</strong>
     IEEE Transactions on Automatic Control, Vol. 40, No. 3, pp. 419-425.<br><br></dd>
 </dl>
-</html>"),
-       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+</html>"), 
+       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
             {100,100}}), graphics={Rectangle(
-          extent={{-90,10},{90,-10}},
-          lineColor={0,127,0},
-          fillColor={160,215,160},
+          extent={{-90,10},{90,-10}}, 
+          lineColor={0,127,0}, 
+          fillColor={160,215,160}, 
           fillPattern=FillPattern.Solid),    Polygon(
-              points={{0,-30},{10,-50},{-10,-50},{0,-30}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
+              points={{0,-30},{10,-50},{-10,-50},{0,-30}}, 
+              lineColor={0,0,127}, 
+              fillColor={0,0,127}, 
               fillPattern=FillPattern.Solid),Polygon(
-              points={{10,50},{-10,50},{0,30},{10,50}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
+              points={{10,50},{-10,50},{0,30},{10,50}}, 
+              lineColor={0,0,127}, 
+              fillColor={0,0,127}, 
               fillPattern=FillPattern.Solid),Line(
-              points={{0,90},{0,50}}, color={0,0,127}),
+              points={{0,90},{0,50}}, color={0,0,127}), 
                                       Rectangle(
-              extent={{20,28},{30,22}},
-              lineColor={175,190,175},
-              fillColor={175,190,175},
+              extent={{20,28},{30,22}}, 
+              lineColor={175,190,175}, 
+              fillColor={175,190,175}, 
               fillPattern=FillPattern.Solid),Rectangle(
-              extent={{20,-22},{30,-28}},
-              lineColor={175,190,175},
-              fillColor={175,190,175},
+              extent={{20,-22},{30,-28}}, 
+              lineColor={175,190,175}, 
+              fillColor={175,190,175}, 
               fillPattern=FillPattern.Solid),Rectangle(
-              extent={{30,28},{36,-102}},
-              lineColor={175,190,175},
-              fillColor={175,190,175},
+              extent={{30,28},{36,-102}}, 
+              lineColor={175,190,175}, 
+              fillColor={175,190,175}, 
               fillPattern=FillPattern.Solid),Rectangle(
-              extent={{14,-96},{30,-102}},
-              lineColor={175,190,175},
-              fillColor={175,190,175},
+              extent={{14,-96},{30,-102}}, 
+              lineColor={175,190,175}, 
+              fillColor={175,190,175}, 
               fillPattern=FillPattern.Solid),Line(
-              points={{0,-50},{0,-60},{-40,-50},{-40,48},{0,60},{0,90}}, color={0,0,127}),
+              points={{0,-50},{0,-60},{-40,-50},{-40,48},{0,60},{0,90}}, color={0,0,127}), 
                                                                          Text(
-              extent={{-150,-120},{150,-160}},
-              textString="%name",
+              extent={{-150,-120},{150,-160}}, 
+              textString="%name", 
               textColor={0,0,255}),Line(
-              visible=useHeatPort,
-              points={{-100,-102},{-100,-16},{0,-16}},
-              color={191,0,0},
+              visible=useHeatPort, 
+              points={{-100,-102},{-100,-16},{0,-16}}, 
+              color={191,0,0}, 
               pattern=LinePattern.Dot),      Rectangle(
-              extent={{-20,30},{20,20}},
+              extent={{-20,30},{20,20}}, 
               fillPattern=FillPattern.Solid),Rectangle(
-              extent={{-20,-20},{20,-30}},
+              extent={{-20,-20},{20,-30}}, 
               fillPattern=FillPattern.Solid)}));
 end Brake;

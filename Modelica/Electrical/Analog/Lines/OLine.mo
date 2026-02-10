@@ -11,58 +11,58 @@ model OLine "有损传输线"
   SI.Current i1;
   SI.Current i2;
   parameter Real r(
-    final min=Modelica.Constants.small,
-    unit="Ohm/m",
+    final min=Modelica.Constants.small, 
+    unit="Ohm/m", 
     start=1) "每米电阻";
   parameter Real l(
-    final min=Modelica.Constants.small,
-    unit="H/m",
+    final min=Modelica.Constants.small, 
+    unit="H/m", 
     start=1) "每米电感";
   parameter Real g(
-    final min=Modelica.Constants.small,
-    unit="S/m",
+    final min=Modelica.Constants.small, 
+    unit="S/m", 
     start=1) "每米电导";
   parameter Real c(
-    final min=Modelica.Constants.small,
-    unit="F/m",
+    final min=Modelica.Constants.small, 
+    unit="F/m", 
     start=1) "每米电容";
-  parameter SI.Length length(final min=Modelica.Constants.small,
+  parameter SI.Length length(final min=Modelica.Constants.small, 
       start=1) "线长";
   parameter Integer N(final min=1, start=1) "分段数";
-  parameter SI.LinearTemperatureCoefficient alpha_R=0
+  parameter SI.LinearTemperatureCoefficient alpha_R=0 
     "电阻的温度系数 (R_actual = R*(1 + alpha*(heatPort.T - T_ref))";
-  parameter SI.LinearTemperatureCoefficient alpha_G=0
+  parameter SI.LinearTemperatureCoefficient alpha_G=0 
     "电导的温度系数 (G_actual = G/(1 + alpha*(heatPort.T - T_ref))";
   parameter Boolean useHeatPort=false "= true，如果启用了热端口" 
     annotation (
-    Evaluate=true,
-    HideResult=true,
+    Evaluate=true, 
+    HideResult=true, 
     choices(checkBox=true));
-  parameter SI.Temperature T=293.15
+  parameter SI.Temperature T=293.15 
     "如果未启用热端口，则设备的固定温度" 
     annotation (Dialog(enable=not useHeatPort));
   parameter SI.Temperature T_ref=300.15 "参考温度";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatPort 
-    annotation (Placement(transformation(extent={{-10,-110},{10,-90}}),
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}}), 
         iconTransformation(extent={{-110,-110},{-90,-90}})));
 protected
-  parameter SI.Resistance rm[N + 1]=
+  parameter SI.Resistance rm[N + 1]= 
   {if i==1 or i==N + 1 then r*length/(N*2) else r*length/N for i in 1:N+1};
   Modelica.Electrical.Analog.Basic.Resistor R[N + 1](
-    R=rm,
-    T_ref=fill(T_ref, N + 1),
-    alpha=fill(alpha_R, N + 1),
-    useHeatPort=fill(useHeatPort, N + 1),
+    R=rm, 
+    T_ref=fill(T_ref, N + 1), 
+    alpha=fill(alpha_R, N + 1), 
+    useHeatPort=fill(useHeatPort, N + 1), 
     T=fill(T, N + 1));
-  parameter SI.Inductance lm[N + 1]=
+  parameter SI.Inductance lm[N + 1]= 
   {if i==1 or i==N + 1 then l*length/(N*2) else l*length/N for i in 1:N+1};
   Modelica.Electrical.Analog.Basic.Inductor L[N + 1](L=lm);
   Modelica.Electrical.Analog.Basic.Capacitor C[N](C=fill(c*length/(N), N));
   Modelica.Electrical.Analog.Basic.Conductor G[N](
-    G=fill(g*length/(N), N),
-    T_ref=fill(T_ref, N),
-    alpha=fill(alpha_G, N),
-    useHeatPort=fill(useHeatPort, N),
+    G=fill(g*length/(N), N), 
+    T_ref=fill(T_ref, N), 
+    alpha=fill(alpha_G, N), 
+    useHeatPort=fill(useHeatPort, N), 
     T=fill(T, N));
 equation
   v13 = p1.v - p3.v;
@@ -88,7 +88,7 @@ equation
       connect(heatPort, G[i].heatPort);
     end for;
   end if;
-  annotation (defaultComponentName="line",
+  annotation (defaultComponentName="line", 
     Documentation(info="<html><p>
 如同下图所示，有损传输线OLine是一根单导体有损传输线，由连续放置的电阻和电感元件 (分别在同轴线上) 以及连接在参考脚p3上的导体和电容元件组成。该模型的精度取决于选择的拆分段数N。
 </p>
@@ -118,23 +118,23 @@ equation
 <li><em> 1998   </em>
        由Christoph Clauss<br>创建br>
        </li></ul>
-</html>"),
+</html>"), 
     Icon(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
-          extent={{-80,80},{80,-80}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          lineColor={0,0,255}),
-        Line(points={{0,-80},{0,-90}}, color={0,0,255}),
-        Line(points={{80,0},{90,0}}, color={0,0,255}),
-        Line(points={{-80,0},{-90,0}}, color={0,0,255}),
+          extent={{-80,80},{80,-80}}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid, 
+          lineColor={0,0,255}), 
+        Line(points={{0,-80},{0,-90}}, color={0,0,255}), 
+        Line(points={{80,0},{90,0}}, color={0,0,255}), 
+        Line(points={{-80,0},{-90,0}}, color={0,0,255}), 
         Text(
-          extent={{-150,130},{150,90}},
-          textString="%name",
-          textColor={0,0,255}),
-        Line(points={{40,30},{-40,30}}),
-        Line(points={{-40,40},{-40,20}}),
+          extent={{-150,130},{150,90}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
+        Line(points={{40,30},{-40,30}}), 
+        Line(points={{-40,40},{-40,20}}), 
         Line(points={{40,40},{40,20}})}));
 end OLine;

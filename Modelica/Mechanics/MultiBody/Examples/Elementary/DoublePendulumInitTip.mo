@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Examples.Elementary;
-model DoublePendulumInitTip
+model DoublePendulumInitTip 
   "演示如何初始化双摆，使其尖端从预定义位置开始"
   extends Modelica.Icons.Example;
   inner World world annotation (Placement(
@@ -15,11 +15,11 @@ model DoublePendulumInitTip
   Parts.BodyBox boxBody2(r={0.5,0,0}, width=0.06) 
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Mechanics.MultiBody.Joints.FreeMotionScalarInit freeMotionScalarInit(
-    use_r=true,
-    r_rel_a_1(start=0.7, fixed=true),
-    r_rel_a_2(start=0.3, fixed=true),
-    use_v=true,
-    v_rel_a_1(fixed=true),
+    use_r=true, 
+    r_rel_a_1(start=0.7, fixed=true), 
+    r_rel_a_2(start=0.3, fixed=true), 
+    use_v=true, 
+    v_rel_a_1(fixed=true), 
     v_rel_a_2(fixed=true)) 
     annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
 equation
@@ -27,34 +27,34 @@ equation
   connect(revolute1.support,damper. flange_a) annotation (Line(points={{-56,10},{-56,20},{-60,20},{-60,40}}));
   connect(revolute1.frame_b,boxBody1. frame_a) 
     annotation (Line(
-      points={{-40,0},{-20,0}},
-      color={95,95,95},
+      points={{-40,0},{-20,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(revolute2.frame_b,boxBody2. frame_a) 
     annotation (Line(
-      points={{40,0},{60,0}},
-      color={95,95,95},
+      points={{40,0},{60,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(boxBody1.frame_b,revolute2. frame_a) 
     annotation (Line(
-      points={{0,0},{20,0}},
-      color={95,95,95},
+      points={{0,0},{20,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(world.frame_b,revolute1. frame_a) 
     annotation (Line(
-      points={{-80,0},{-60,0}},
-      color={95,95,95},
+      points={{-80,0},{-60,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(world.frame_b, freeMotionScalarInit.frame_a) annotation (Line(
-      points={{-80,0},{-70,0},{-70,-40},{-20,-40}},
-      color={95,95,95},
+      points={{-80,0},{-70,0},{-70,-40},{-20,-40}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(freeMotionScalarInit.frame_b, boxBody2.frame_b) annotation (Line(
-      points={{0,-40},{90,-40},{90,0},{80,0}},
-      color={95,95,95},
+      points={{0,-40},{90,-40},{90,0},{80,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   annotation (
-    experiment(StopTime=5),
+    experiment(StopTime=5), 
     Documentation(info="<html><p>
 这个例子通过一个双摆演示了如何定义非标准初始化；摆尖的绝对位置和其绝对速度应该最初定义的。
 这可以通过初始化其相对矢量的各个元素的<a href=\"modelica://Modelica.Mechanics.MultiBody.Joints.FreeMotionScalarInit\" target=\"\">Joints.FreeMotionScalarInit</a>的关节来执行。

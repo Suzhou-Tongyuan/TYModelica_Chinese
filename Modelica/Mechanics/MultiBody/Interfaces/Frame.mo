@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Interfaces;
-connector Frame
+connector Frame 
   "固定于组件的坐标系，同时带有一个局部力和局部力矩(无图标)"
 
-  SI.Position r_0[3]
+  SI.Position r_0[3] 
     "从全局坐标系原点到连接器局部坐标系原点的位置矢量，在全局坐标系中解析";
-  Frames.Orientation R
+  Frames.Orientation R 
     "将全局坐标系旋转到连接器局部坐标系的方向对象";
   flow SI.Force f[3] "在连接器局部坐标系中解析的力" annotation(
     unassignedMessage = "无法每次都唯一地计算所有力。

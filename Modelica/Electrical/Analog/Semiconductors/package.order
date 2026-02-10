@@ -5,5 +5,9 @@ NMOS
 PMOS
 NPN
 PNP
+pow
+powlin
+exlin
+exlin2
 Thyristor
 SimpleTriac

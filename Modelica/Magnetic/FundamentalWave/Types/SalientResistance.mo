@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Types;
-record SalientResistance = Salient (redeclare SI.Resistance d,
+record SalientResistance = Salient (redeclare SI.Resistance d, 
       redeclare SI.Resistance q) "显著的阻力" 
   annotation (Documentation(info="<html>
 <p>表示电阻的 d 轴和 q 轴相对于基波的类型.</p>

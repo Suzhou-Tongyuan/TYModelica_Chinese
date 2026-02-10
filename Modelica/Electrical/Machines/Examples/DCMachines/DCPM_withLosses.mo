@@ -1,113 +1,113 @@
 ﻿within Modelica.Electrical.Machines.Examples.DCMachines;
-model DCPM_withLosses
+model DCPM_withLosses 
   "测试示例：研究损耗对DCPM电机性能的影响"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter SI.Voltage Va=100 "实际电枢电压";
-  parameter SI.Time tStart=0.2
+  parameter SI.Time tStart=0.2 
     "电枢电压斜坡的开始时间";
   parameter SI.Time tRamp=0.8 "电枢电压斜坡";
   parameter SI.Torque TLoad1=63.66 "额定负载转矩";
-  parameter SI.AngularVelocity wLoad1=1425*2*pi/60
+  parameter SI.AngularVelocity wLoad1=1425*2*pi/60 
     "额定负载速度";
   parameter SI.Torque TLoad2=61.30 "额定负载转矩";
-  parameter SI.AngularVelocity wLoad2=1417.5*2*pi/60
+  parameter SI.AngularVelocity wLoad2=1417.5*2*pi/60 
     "额定负载速度";
-  parameter SI.Inertia JLoad=0.15
+  parameter SI.Inertia JLoad=0.15 
     "负载的转动惯量";
   Machines.BasicMachines.DCMachines.DC_PermanentMagnet dcpm1(
-    VaNominal=dcpmData1.VaNominal,
-    IaNominal=dcpmData1.IaNominal,
-    wNominal=dcpmData1.wNominal,
-    TaNominal=dcpmData1.TaNominal,
-    Ra=dcpmData1.Ra,
-    TaRef=dcpmData1.TaRef,
-    La=dcpmData1.La,
-    Jr=dcpmData1.Jr,
-    useSupport=false,
-    Js=dcpmData1.Js,
-    frictionParameters=dcpmData1.frictionParameters,
-    coreParameters=dcpmData1.coreParameters,
-    strayLoadParameters=dcpmData1.strayLoadParameters,
-    brushParameters=dcpmData1.brushParameters,
-    TaOperational=293.15,
-    alpha20a=dcpmData1.alpha20a,
-    phiMechanical(fixed=true),
-    wMechanical(fixed=true),
+    VaNominal=dcpmData1.VaNominal, 
+    IaNominal=dcpmData1.IaNominal, 
+    wNominal=dcpmData1.wNominal, 
+    TaNominal=dcpmData1.TaNominal, 
+    Ra=dcpmData1.Ra, 
+    TaRef=dcpmData1.TaRef, 
+    La=dcpmData1.La, 
+    Jr=dcpmData1.Jr, 
+    useSupport=false, 
+    Js=dcpmData1.Js, 
+    frictionParameters=dcpmData1.frictionParameters, 
+    coreParameters=dcpmData1.coreParameters, 
+    strayLoadParameters=dcpmData1.strayLoadParameters, 
+    brushParameters=dcpmData1.brushParameters, 
+    TaOperational=293.15, 
+    alpha20a=dcpmData1.alpha20a, 
+    phiMechanical(fixed=true), 
+    wMechanical(fixed=true), 
     ia(fixed=true)) 
     annotation (Placement(transformation(extent={{0,0},{20,20}})));
   Modelica.Blocks.Sources.Ramp ramp(
-    duration=tRamp,
-    height=Va,
+    duration=tRamp, 
+    height=Va, 
     startTime=tStart) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={-70,70})));
   Modelica.Electrical.Analog.Sources.SignalVoltage signalVoltage 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={-40,70})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-60,30},
+        origin={-60,30}, 
         extent={{-10,-10},{10,10}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia1(J=JLoad) 
     annotation (Placement(transformation(extent={{30,0},{50,20}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque 
     loadTorque1(
-    useSupport=false,
-    tau_nominal=-TLoad1,
-    TorqueDirection=false,
-    w_nominal=wLoad1) annotation (Placement(transformation(extent={{80,0},
+    useSupport=false, 
+    tau_nominal=-TLoad1, 
+    TorqueDirection=false, 
+    w_nominal=wLoad1) annotation (Placement(transformation(extent={{80,0}, 
             {60,20}})));
   Machines.BasicMachines.DCMachines.DC_PermanentMagnet dcpm2(
-    VaNominal=dcpmData2.VaNominal,
-    IaNominal=dcpmData2.IaNominal,
-    wNominal=dcpmData2.wNominal,
-    TaNominal=dcpmData2.TaNominal,
-    Ra=dcpmData2.Ra,
-    TaRef=dcpmData2.TaRef,
-    La=dcpmData2.La,
-    Jr=dcpmData2.Jr,
-    useSupport=false,
-    Js=dcpmData2.Js,
-    frictionParameters=dcpmData2.frictionParameters,
-    coreParameters=dcpmData2.coreParameters,
-    strayLoadParameters=dcpmData2.strayLoadParameters,
-    brushParameters=dcpmData2.brushParameters,
-    alpha20a=dcpmData2.alpha20a,
-    phiMechanical(fixed=true),
-    wMechanical(fixed=true),
-    ia(fixed=true),
-    TaOperational=368.15,
+    VaNominal=dcpmData2.VaNominal, 
+    IaNominal=dcpmData2.IaNominal, 
+    wNominal=dcpmData2.wNominal, 
+    TaNominal=dcpmData2.TaNominal, 
+    Ra=dcpmData2.Ra, 
+    TaRef=dcpmData2.TaRef, 
+    La=dcpmData2.La, 
+    Jr=dcpmData2.Jr, 
+    useSupport=false, 
+    Js=dcpmData2.Js, 
+    frictionParameters=dcpmData2.frictionParameters, 
+    coreParameters=dcpmData2.coreParameters, 
+    strayLoadParameters=dcpmData2.strayLoadParameters, 
+    brushParameters=dcpmData2.brushParameters, 
+    alpha20a=dcpmData2.alpha20a, 
+    phiMechanical(fixed=true), 
+    wMechanical(fixed=true), 
+    ia(fixed=true), 
+    TaOperational=368.15, 
     core(v(start=0))) 
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia2(J=JLoad) 
     annotation (Placement(transformation(extent={{30,-60},{50,-40}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque 
     loadTorque2(
-    useSupport=false,
-    tau_nominal=-TLoad2,
-    TorqueDirection=false,
-    w_nominal=wLoad2) annotation (Placement(transformation(extent={{80,-60},
+    useSupport=false, 
+    tau_nominal=-TLoad2, 
+    TorqueDirection=false, 
+    w_nominal=wLoad2) annotation (Placement(transformation(extent={{80,-60}, 
             {60,-40}})));
   parameter Utilities.ParameterRecords.DcPermanentMagnetData dcpmData1 "DC机器1的数据" 
     annotation (Placement(transformation(extent={{0,60},{20,80}})));
   parameter Utilities.ParameterRecords.DcPermanentMagnetData dcpmData2(
-    Ra=0.03864,
-    alpha20a(displayUnit="1/K")=Modelica.Electrical.Machines.Thermal.Constants.alpha20Copper,
-    wNominal=148.44025288212,
-    TaNominal=368.15,
-    frictionParameters(PRef=100),
-    coreParameters(PRef=200),
-    strayLoadParameters(PRef=50),
+    Ra=0.03864, 
+    alpha20a(displayUnit="1/K")=Modelica.Electrical.Machines.Thermal.Constants.alpha20Copper, 
+    wNominal=148.44025288212, 
+    TaNominal=368.15, 
+    frictionParameters(PRef=100), 
+    coreParameters(PRef=200), 
+    strayLoadParameters(PRef=50), 
     brushParameters(V=0.5)) "DC机器2的数据" 
     annotation (Placement(transformation(extent={{0,-100},{20,-80}})));
 
 equation
   connect(ramp.y, signalVoltage.v) 
     annotation (Line(points={{-59,70},{-52,70}}, color={0,0,255}));
-  connect(signalVoltage.n, ground.p) annotation (Line(points={{-40,60},{-40,
+  connect(signalVoltage.n, ground.p) annotation (Line(points={{-40,60},{-40, 
           60},{-40,40},{-60,40}}, color={0,0,255}));
   connect(loadInertia1.flange_b, loadTorque1.flange) 
     annotation (Line(points={{50,10},{60,10}}));

@@ -1,9 +1,9 @@
 ﻿within Modelica.ComplexBlocks.ComplexMath;
 block Division "输出第一个输入除以第二个输入"
   extends Interfaces.ComplexSI2SO;
-  parameter Boolean useConjugateInput1 = false
+  parameter Boolean useConjugateInput1 = false 
     "如果为真，则处理输入1的共轭复数";
-  parameter Boolean useConjugateInput2 = false
+  parameter Boolean useConjugateInput2 = false 
     "如果为真，则处理输入2的共轭复数";
 equation
   y = (if useConjugateInput1 then Modelica.ComplexMath.conj(u1) else u1) / (
@@ -25,30 +25,30 @@ equation
 <p>
 <br>
 </p>
-</html>"),
+</html>"), 
     Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
     100, 100}}), graphics = {
-    Line(points = {{-100, 60}, {-60, 60}, {0, 0}}, color = {85, 170, 255}),
-    Line(points = {{-100, -60}, {-60, -60}, {0, 0}}, color = {85, 170, 255}),
-    Ellipse(extent = {{-50, 50}, {50, -50}}, lineColor = {85, 170, 255},
-    fillColor = {255, 255, 255},
-    fillPattern = FillPattern.Solid),
-    Line(points = {{50, 0}, {100, 0}}, color = {85, 170, 255}),
-    Line(points = {{-30, 0}, {30, 0}}, color = {85, 170, 255}),
+    Line(points = {{-100, 60}, {-60, 60}, {0, 0}}, color = {85, 170, 255}), 
+    Line(points = {{-100, -60}, {-60, -60}, {0, 0}}, color = {85, 170, 255}), 
+    Ellipse(extent = {{-50, 50}, {50, -50}}, lineColor = {85, 170, 255}, 
+    fillColor = {255, 255, 255}, 
+    fillPattern = FillPattern.Solid), 
+    Line(points = {{50, 0}, {100, 0}}, color = {85, 170, 255}), 
+    Line(points = {{-30, 0}, {30, 0}}, color = {85, 170, 255}), 
     Ellipse(
-    extent = {{-5, 20}, {5, 30}},
-    lineColor = {85, 170, 255},
-    fillColor = {85, 170, 255},
+    extent = {{-5, 20}, {5, 30}}, 
+    lineColor = {85, 170, 255}, 
+    fillColor = {85, 170, 255}, 
     fillPattern = FillPattern.Solid), Ellipse(
-    extent = {{-5, -20}, {5, -30}},
-    lineColor = {85, 170, 255},
-    fillColor = {85, 170, 255},
-    fillPattern = FillPattern.Solid),
+    extent = {{-5, -20}, {5, -30}}, 
+    lineColor = {85, 170, 255}, 
+    fillColor = {85, 170, 255}, 
+    fillPattern = FillPattern.Solid), 
     Text(
-    extent = {{-60, 90}, {90, 50}},
-    textColor = {128, 128, 128},
-    textString = "u1 / u2")}),
-    Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
-    {100, 100}}), graphics = {Line(points = {{50, 0}, {100, 0}},
+    extent = {{-60, 90}, {90, 50}}, 
+    textColor = {128, 128, 128}, 
+    textString = "u1 / u2")}), 
+    Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
+    {100, 100}}), graphics = {Line(points = {{50, 0}, {100, 0}}, 
     color = {0, 0, 255})}));
 end Division;

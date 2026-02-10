@@ -1,9 +1,9 @@
 ﻿within Modelica.Electrical.Polyphase.Functions;
-function indexNonPositiveSequence
+function indexNonPositiveSequence 
   "确定所有非正序的索引"
   extends Modelica.Icons.Function; // 使用函数图标
   input Integer m=3 "相数"; // 输入参数为相数，默认为3
-  output Integer ind[numberOfSymmetricBaseSystems(m)*(integer(m/numberOfSymmetricBaseSystems(m)) - 1)]
+  output Integer ind[numberOfSymmetricBaseSystems(m)*(integer(m/numberOfSymmetricBaseSystems(m)) - 1)] 
     "非正序的索引"; // 输出参数为非正序的索引
 protected
   constant Integer nBase=numberOfSymmetricBaseSystems(m) "基本系统数量"; // 常量定义基本系统的数量

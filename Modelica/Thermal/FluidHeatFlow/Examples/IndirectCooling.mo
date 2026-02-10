@@ -1,80 +1,80 @@
 ﻿within Modelica.Thermal.FluidHeatFlow.Examples;
 model IndirectCooling "间接冷却回路"
   extends Modelica.Icons.Example;
-  parameter FluidHeatFlow.Media.Medium outerMedium=FluidHeatFlow.Media.Medium()
+  parameter FluidHeatFlow.Media.Medium outerMedium=FluidHeatFlow.Media.Medium() 
     "外部媒介" annotation (choicesAllMatching=true);
-  parameter FluidHeatFlow.Media.Medium innerMedium=FluidHeatFlow.Media.Medium()
+  parameter FluidHeatFlow.Media.Medium innerMedium=FluidHeatFlow.Media.Medium() 
     "内部媒介" annotation (choicesAllMatching=true);
-  parameter SI.Temperature TAmb(displayUnit="degC")=293.15
+  parameter SI.Temperature TAmb(displayUnit="degC")=293.15 
     "环境温度";
-  output SI.TemperatureDifference dTSource=
+  output SI.TemperatureDifference dTSource= 
     prescribedHeatFlow.port.T-TAmb "过热源";
-  output SI.TemperatureDifference dTtoPipe=prescribedHeatFlow.port.T-pipe1.T_q
+  output SI.TemperatureDifference dTtoPipe=prescribedHeatFlow.port.T-pipe1.T_q 
     "内过冷源";
-  output SI.TemperatureDifference dTinnerCoolant=pipe1.dT
+  output SI.TemperatureDifference dTinnerCoolant=pipe1.dT 
     "内冷却液温度升高";
-  output SI.TemperatureDifference dTCooler=innerPipe.T_q-outerPipe.T_q
+  output SI.TemperatureDifference dTCooler=innerPipe.T_q-outerPipe.T_q 
     "冷却器在内外管道之间的温度升高";
-  output SI.TemperatureDifference dTouterCoolant=outerPipe.dT
+  output SI.TemperatureDifference dTouterCoolant=outerPipe.dT 
     "外冷却液温度升高";
   FluidHeatFlow.Sources.Ambient ambient1(
-    constantAmbientTemperature=TAmb,
-    medium=outerMedium,
+    constantAmbientTemperature=TAmb, 
+    medium=outerMedium, 
     constantAmbientPressure=0) 
     annotation (Placement(transformation(extent={{-60,60},{-80,80}})));
   FluidHeatFlow.Sources.VolumeFlow outerPump(
-    medium=outerMedium,
-    m=0,
-    T0=TAmb,
-    useVolumeFlowInput=true,
+    medium=outerMedium, 
+    m=0, 
+    T0=TAmb, 
+    useVolumeFlowInput=true, 
     constantVolumeFlow=1) 
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
   FluidHeatFlow.Sources.Ambient ambient2(
-    constantAmbientTemperature=TAmb,
-    medium=outerMedium,
+    constantAmbientTemperature=TAmb, 
+    medium=outerMedium, 
     constantAmbientPressure=0) 
     annotation (Placement(transformation(extent={{40,60},{60,80}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor 
     thermalConductor(G=1) 
     annotation (Placement(transformation(
-        origin={10,-70},
-        extent={{-10,-10},{10,10}},
+        origin={10,-70}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
     C=0.05, T(start=TAmb, fixed=true)) 
     annotation (Placement(transformation(
-        origin={40,-90},
-        extent={{-10,10},{10,-10}},
+        origin={40,-90}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=90)));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow 
     prescribedHeatFlow 
     annotation (Placement(transformation(
-        origin={-20,-90},
-        extent={{10,-10},{-10,10}},
+        origin={-20,-90}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=180)));
   FluidHeatFlow.Components.Pipe pipe1(
-    medium=innerMedium,
-    m=0.1,
-    T0=TAmb,
-    V_flowLaminar=1,
-    V_flowNominal=2,
-    h_g=0,
-    T0fixed=true,
-    useHeatPort=true,
-    dpLaminar=1000,
+    medium=innerMedium, 
+    m=0.1, 
+    T0=TAmb, 
+    V_flowLaminar=1, 
+    V_flowNominal=2, 
+    h_g=0, 
+    T0fixed=true, 
+    useHeatPort=true, 
+    dpLaminar=1000, 
     dpNominal=2000) 
     annotation (Placement(transformation(extent={{20,-50},{0,-30}})));
-  FluidHeatFlow.Sources.AbsolutePressure absolutePressure(p=10000, medium=
+  FluidHeatFlow.Sources.AbsolutePressure absolutePressure(p=10000, medium= 
         innerMedium) 
     annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
   FluidHeatFlow.Sources.VolumeFlow innerPump(
-    medium=innerMedium,
-    m=0,
-    T0=TAmb,
-    useVolumeFlowInput=true,
+    medium=innerMedium, 
+    m=0, 
+    T0=TAmb, 
+    useVolumeFlowInput=true, 
     constantVolumeFlow=1) annotation (Placement(transformation(
-        origin={-20,-30},
-        extent={{-10,-10},{10,10}},
+        origin={-20,-30}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Blocks.Sources.Constant heatFlow(k=10) 
     annotation (Placement(transformation(extent={{-60,-100},{-40,-80}})));
@@ -87,38 +87,38 @@ model IndirectCooling "间接冷却回路"
   Modelica.Blocks.Sources.Constant innerGc(k=2) 
     annotation (Placement(transformation(extent={{-40,20},{-20,0}})));
   FluidHeatFlow.Components.Pipe outerPipe(
-    medium=outerMedium,
-    m=0.1,
-    T0=TAmb,
-    V_flowLaminar=0.1,
-    dpLaminar(displayUnit="Pa") = 0.1,
-    V_flowNominal=1,
-    dpNominal(displayUnit="Pa") = 1,
-    h_g=0,
-    T0fixed=true,
+    medium=outerMedium, 
+    m=0.1, 
+    T0=TAmb, 
+    V_flowLaminar=0.1, 
+    dpLaminar(displayUnit="Pa") = 0.1, 
+    V_flowNominal=1, 
+    dpNominal(displayUnit="Pa") = 1, 
+    h_g=0, 
+    T0fixed=true, 
     useHeatPort=true) 
     annotation (Placement(transformation(extent={{0,60},{20,80}})));
   FluidHeatFlow.Components.Pipe innerPipe(
-    medium=innerMedium,
-    m=0.1,
-    T0=TAmb,
-    V_flowLaminar=0.1,
-    dpLaminar(displayUnit="Pa") = 0.1,
-    V_flowNominal=1,
-    dpNominal(displayUnit="Pa") = 1,
-    h_g=0,
-    T0fixed=true,
+    medium=innerMedium, 
+    m=0.1, 
+    T0=TAmb, 
+    V_flowLaminar=0.1, 
+    dpLaminar(displayUnit="Pa") = 0.1, 
+    V_flowNominal=1, 
+    dpNominal(displayUnit="Pa") = 1, 
+    h_g=0, 
+    T0fixed=true, 
     useHeatPort=true) 
     annotation (Placement(transformation(extent={{0,-10},{20,-30}})));
   Modelica.Thermal.HeatTransfer.Components.Convection innerConvection 
     annotation (Placement(transformation(
-        origin={10,10},
-        extent={{-10,10},{10,-10}},
+        origin={10,10}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=270)));
   Modelica.Thermal.HeatTransfer.Components.Convection outerConvection 
     annotation (Placement(transformation(
-        origin={10,40},
-        extent={{10,10},{-10,-10}},
+        origin={10,40}, 
+        extent={{10,10},{-10,-10}}, 
         rotation=270)));
 equation
   connect(ambient1.flowPort, outerPump.flowPort_a) 

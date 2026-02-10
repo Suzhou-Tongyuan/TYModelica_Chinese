@@ -4,17 +4,17 @@ connector PositivePin "正交流单相接线针脚"
   QuasiStatic.Types.Reference reference "参考";
   annotation (
     Diagram(graphics={Text(
-          extent={{-100,100},{100,60}},
-          textColor={0,0,255},
+          extent={{-100,100},{100,60}}, 
+          textColor={0,0,255}, 
           textString="%name"), Rectangle(
-          extent={{-40,40},{40,-40}},
-          lineColor={85,170,255},
-          fillColor={85,170,255},
+          extent={{-40,40},{40,-40}}, 
+          lineColor={85,170,255}, 
+          fillColor={85,170,255}, 
           fillPattern=FillPattern.Solid)}), // 在图示中指定图形
     Icon(graphics={Rectangle(
-          extent={{-100,100},{100,-100}},
-          lineColor={85,170,255},
-          fillColor={85,170,255},
+          extent={{-100,100},{100,-100}}, 
+          lineColor={85,170,255}, 
+          fillColor={85,170,255}, 
           fillPattern=FillPattern.Solid)}), // 在图标中指定图形
     Documentation(info="<html>
 

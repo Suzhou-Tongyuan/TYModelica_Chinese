@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.Rotational.Interfaces;
-partial model PartialRelativeSensor
+partial model PartialRelativeSensor 
   "测量两个一维转动接口之间单个相对变量的部分模型"
   extends Modelica.Icons.RoundSensor;
 
@@ -17,14 +17,14 @@ equation
 或一维转动接口处的局部力矩，并将测量信号作为输出信号提供给
 Modelica.Blocks包中的其他处理块。
 </p>
-</html>"),
+</html>"), 
        Icon(
-    coordinateSystem(preserveAspectRatio=true,
-      extent={{-100.0,-100.0},{100.0,100.0}}),
+    coordinateSystem(preserveAspectRatio=true, 
+      extent={{-100.0,-100.0},{100.0,100.0}}), 
       graphics={
-    Line(points={{-70.0,0.0},{-90.0,0.0}}),
-    Line(points={{70.0,0.0},{90.0,0.0}}),
-    Text(textColor={0,0,255},
-      extent={{-150,80},{150,120}},
+    Line(points={{-70.0,0.0},{-90.0,0.0}}), 
+    Line(points={{70.0,0.0},{90.0,0.0}}), 
+    Text(textColor={0,0,255}, 
+      extent={{-150,80},{150,120}}, 
       textString="%name")}));
 end PartialRelativeSensor;

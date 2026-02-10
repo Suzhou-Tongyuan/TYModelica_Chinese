@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Types;
-record SalientReluctance = Salient (redeclare SI.Reluctance d,
+record SalientReluctance = Salient (redeclare SI.Reluctance d, 
       redeclare SI.Reluctance q) "典型磁阻" 
   annotation (Documentation(info="<html>
 <p>表示磁阻的 d 轴和 q 轴相对于基波的类型.</p>

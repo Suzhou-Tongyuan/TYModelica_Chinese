@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.RectifierCenterTap2Pulse;
-model DiodeCenterTap2Pulse
+model DiodeCenterTap2Pulse 
   "带有电阻负载的双脉冲中心点二极管整流器"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
@@ -9,46 +9,46 @@ model DiodeCenterTap2Pulse
 
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-90,-50},
+        origin={-90,-50}, 
         extent={{-10,-10},{10,10}})));
-  Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage_n(V=sqrt(2)
+  Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage_n(V=sqrt(2) 
         *Vrms,f=f) annotation (Placement(transformation(
-        origin={-80,-13.9999},
-        extent={{-9.999890000000001,-10},{10,10}},
+        origin={-80,-13.9999}, 
+        extent={{-9.999890000000001,-10},{10,10}}, 
         rotation=-90)));
-  Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage_p(V=sqrt(2)
+  Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage_p(V=sqrt(2) 
         *Vrms,f=f) annotation (Placement(transformation(
-        origin={-80,14},
-        extent={{-10,-10},{10,10}},
+        origin={-80,14}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=-90)));
   PowerConverters.ACDC.DiodeCenterTap2Pulse rectifier 
     annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor 
     annotation (Placement(transformation(
-        origin={50,10},
-        extent={{10,-10},{-10,10}},
+        origin={50,10}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
   Modelica.Blocks.Math.Mean meanVoltage(f=2*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,40})));
   Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f=2*f) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,10})));
   Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=180,
+        extent={{-10,10},{10,-10}}, 
+        rotation=180, 
         origin={0,-40})));
   Modelica.Blocks.Math.Mean meanCurrent(f=2*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,-60})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
       Placement(transformation(
-        origin={30,30},
-        extent={{10,-10},{-10,10}},
+        origin={30,30}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
 equation
   connect(meanCurrent.u, currentSensor.i) annotation (Line(
@@ -77,9 +77,9 @@ equation
       points={{30,40},{-20,40}}, color={0,0,255}));
   annotation (
     experiment(
-      StopTime=0.1,
-      Tolerance=1e-06,
-      Interval=0.0002),
+      StopTime=0.1, 
+      Tolerance=1e-06, 
+      Interval=0.0002), 
     Documentation(info="<html>
 <p>This example shows an uncontrolled two pulse center tap diode rectifier with resistive load.</p>
 

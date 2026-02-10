@@ -8,8 +8,8 @@ model ReactivePowerSensor "用于无功功率的三相传感器"
         transformation(extent={{90,-10},{110,10}})));
   Modelica.Blocks.Interfaces.RealOutput reactivePower(unit="var") "无功功率" 
     annotation (Placement(transformation(
-        origin={0,-110},
-        extent={{10,-10},{-10,10}},
+        origin={0,-110}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
   Basic.PlugToPins_p plugToPins_p(final m=m) 
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
@@ -20,11 +20,11 @@ model ReactivePowerSensor "用于无功功率的三相传感器"
   Modelica.Electrical.Analog.Sensors.PowerSensor powerSensor2 
     annotation (Placement(transformation(extent={{10,10},{30,-10}})));
   Modelica.Blocks.Math.Add3 add(
-    final k1=1/sqrt(3),
-    final k2=1/sqrt(3),
+    final k1=1/sqrt(3), 
+    final k2=1/sqrt(3), 
     final k3=1/sqrt(3))        annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=270,
+        extent={{-10,10},{10,-10}}, 
+        rotation=270, 
         origin={0,-80})));
   Modelica.Electrical.Analog.Sensors.PowerSensor powerSensor3 
     annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
@@ -59,27 +59,27 @@ equation
     annotation (Line(points={{-20,30},{40,30},{40,-20}}, color={0,0,255}));
   connect(powerSensor3.nv, plugToPins_n.pin_n[2]) annotation (Line(points={
           {40,-40},{40,-50},{60,-50},{60,0},{68,0}}, color={0,0,255}));
-  connect(powerSensor2.power, add.u2) annotation (Line(points={{10,11},{10,
+  connect(powerSensor2.power, add.u2) annotation (Line(points={{10,11},{10, 
           20},{0,20},{0,-66},{0,-66},{0,-68}}, color={0,0,127}));
   connect(powerSensor1.power, add.u1) annotation (Line(points={{-40,19},{
           -40,-60},{-8,-60},{-8,-68}}, color={0,0,127}));
-  connect(powerSensor3.power, add.u3) annotation (Line(points={{30,-41},{30,
+  connect(powerSensor3.power, add.u3) annotation (Line(points={{30,-41},{30, 
           -60},{8,-60},{8,-68}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
             -100},{100,100}}), graphics={
-                                       Line(points={{0,-100},
-          {0,-70}}, color={0,0,127}),
+                                       Line(points={{0,-100}, 
+          {0,-70}}, color={0,0,127}), 
         Text(
-          extent={{150,-100},{-150,-70}},
-          textString="m=%m"),
+          extent={{150,-100},{-150,-70}}, 
+          textString="m=%m"), 
         Text(
-          extent={{-150,80},{150,120}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,80},{150,120}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-30,-10},{30,-70}},
-          textColor={64,64,64},
-          textString="var"),Line(points={{100,0},{-100,0}}, color={0,0,255})}),
+          extent={{-30,-10},{30,-70}}, 
+          textColor={64,64,64}, 
+          textString="var"),Line(points={{100,0},{-100,0}}, color={0,0,255})}), 
                                   Documentation(info="<html>
 <p>
 包含3个功率计(Modelica.Electrical.Analog.Sensors.PowerSensor)，用于测量三相系统中的总无功功率。

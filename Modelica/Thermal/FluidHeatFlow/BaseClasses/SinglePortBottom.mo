@@ -1,10 +1,10 @@
 ﻿within Modelica.Thermal.FluidHeatFlow.BaseClasses;
 partial model SinglePortBottom "底部单接口基类模型"
-  parameter FluidHeatFlow.Media.Medium medium=FluidHeatFlow.Media.Medium()
+  parameter FluidHeatFlow.Media.Medium medium=FluidHeatFlow.Media.Medium() 
     "介质" annotation (choicesAllMatching=true);
-  parameter SI.Temperature T0(start=293.15, displayUnit="degC")
+  parameter SI.Temperature T0(start=293.15, displayUnit="degC") 
     "介质初始温度";
-  parameter Boolean T0fixed=false
+  parameter Boolean T0fixed=false 
     "初始温度估计值或固定值" 
   annotation(choices(checkBox=true));
   output SI.Temperature T_port "flowPort_a 的温度";
@@ -28,10 +28,10 @@ equation
 annotation (Documentation(info="<html><p>
 底部单接口基类模型，定义接口处的介质和温度。
 </p>
-</html>"),
-     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+</html>"), 
+     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
             {100,100}}), graphics={       Text(
-          extent={{-150,140},{150,100}},
-          textColor={0,0,255},
+          extent={{-150,140},{150,100}}, 
+          textColor={0,0,255}, 
           textString="%name")}));
 end SinglePortBottom;

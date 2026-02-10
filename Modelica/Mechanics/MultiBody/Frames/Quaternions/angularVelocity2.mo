@@ -1,12 +1,12 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
-function angularVelocity2
+function angularVelocity2 
   "从四元数方向对象及其导数计算在坐标系 2中解析的角速度"
 
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q
+  input Quaternions.Orientation Q 
     "将坐标系1旋转到坐标系2的四元数方向对象";
   input der_Orientation der_Q "Q的导数";
-  output SI.AngularVelocity w[3]
+  output SI.AngularVelocity w[3] 
     "相对于坐标系1解析的坐标系2的角速度在坐标系2中解析";
 algorithm
   w := 2*([Q[4], Q[3], -Q[2], -Q[1]; -Q[3], Q[4], Q[1], -Q[2]; Q[2], -Q[1],

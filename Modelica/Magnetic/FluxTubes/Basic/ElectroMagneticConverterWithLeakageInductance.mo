@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Basic;
+within Modelica.Magnetic.FluxTubes.Basic;
 model ElectroMagneticConverterWithLeakageInductance
   "带漏感的电磁能量转换"
 
@@ -24,12 +24,12 @@ model ElectroMagneticConverterWithLeakageInductance
   parameter Real N(start=1, min=Modelica.Constants.eps) "转数";
 
   parameter SI.Length L=10e-3 "通量方向上的长度" 
-    annotation (Dialog(tab="Leakage inductance"));
+    annotation (Dialog(tab="漏电感"));
   parameter SI.Area A=10e-6 "横截面积" 
-    annotation (Dialog(tab="Leakage inductance"));
+    annotation (Dialog(tab="漏电感"));
   parameter SI.RelativePermeability mu_rel(min=Modelica.Constants.eps) = 1
     "泄漏电感的恒定相对磁导率（要求 > 0）" 
-    annotation (Dialog(tab="Leakage inductance"));
+    annotation (Dialog(tab="漏电感"));
   final parameter SI.Permeance G_m=Modelica.Constants.mu_0*mu_rel*A/L
     "漏感的磁导率";
 

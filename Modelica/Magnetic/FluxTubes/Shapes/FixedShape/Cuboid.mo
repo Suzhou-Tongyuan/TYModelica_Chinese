@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
+within Modelica.Magnetic.FluxTubes.Shapes.FixedShape;
 model Cuboid
   "通量管，矩形截面；固定形状；线性或非线性材料特性"
 
@@ -6,12 +6,12 @@ model Cuboid
   extends Modelica.Magnetic.FluxTubes.Icons.Cuboid;
 
   parameter SI.Length l=0.01 "通量方向上的长度" annotation (
-      Dialog(group="Fixed geometry", groupImage=
+      Dialog(group="固定几何结构", groupImage=
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/CuboidParallelFlux.png"));
   parameter SI.Length a=0.01 "矩形截面宽度" 
-    annotation (Dialog(group="Fixed geometry"));
+    annotation (Dialog(group="固定几何结构"));
   parameter SI.Length b=0.01 "矩形截面高度" 
-    annotation (Dialog(group="Fixed geometry"));
+    annotation (Dialog(group="固定几何结构"));
 
 equation
   A = a*b;

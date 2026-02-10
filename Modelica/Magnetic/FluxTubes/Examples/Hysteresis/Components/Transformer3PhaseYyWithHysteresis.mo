@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Examples.Hysteresis.Components;
+within Modelica.Magnetic.FluxTubes.Examples.Hysteresis.Components;
 model Transformer3PhaseYyWithHysteresis
   "Yy 配置的三相变压器"
 
@@ -7,45 +7,45 @@ model Transformer3PhaseYyWithHysteresis
 
   // Tab: 电气 //Group:初级绕组
   parameter Integer N1=10 "初级匝线" 
-    annotation(Dialog(tab="Electrical", group="Primary winding"));
+    annotation(Dialog(tab="电气", group="一次绕组"));
   parameter SI.Length L1(displayUnit="mm") = 1.2*2*(a+b)
     "平均初级匝线长度" 
-    annotation(Dialog(tab="Electrical", group="Primary winding"));
+    annotation(Dialog(tab="电气", group="一次绕组"));
   parameter SI.Length d1(displayUnit="mm") = 0.5e-3
     "初级匝线直径" 
-    annotation(Dialog(tab="Electrical", group="Primary winding"));
+    annotation(Dialog(tab="电气", group="一次绕组"));
   parameter SI.Resistivity rho1 = 1.678e-8
     "初级绕组电阻率（20 摄氏度时）" 
-    annotation(Dialog(tab="Electrical", group="Primary winding"));
+    annotation(Dialog(tab="电气", group="一次绕组"));
   parameter SI.LinearTemperatureCoefficient alpha1 = 0
-    "初级匝数的温度系数" annotation(Dialog(tab="Electrical", group="Primary winding"));
+    "初级匝数的温度系数" annotation(Dialog(tab="电气", group="一次绕组"));
 
   // Tab: 电气 //Group:次级绕组
   parameter Integer N2=10 "次级匝线" 
-     annotation(Dialog(tab="Electrical", group="Secondary winding"));
+     annotation(Dialog(tab="电气",group="二次绕组"));
   parameter SI.Length L2(displayUnit="mm") = L1
     "平均次级匝线长度" 
-    annotation(Dialog(tab="Electrical", group="Secondary winding"));
+    annotation(Dialog(tab="电气",group="二次绕组"));
   parameter SI.Length d2(displayUnit="mm") = d1
     "次级匝线直径" 
-    annotation(Dialog(tab="Electrical", group="Secondary winding"));
+    annotation(Dialog(tab="电气",group="二次绕组"));
   parameter SI.Resistivity rho2 = rho1
     "次级绕组电阻率（20 摄氏度时）" 
-    annotation(Dialog(tab="Electrical", group="Secondary winding"));
+    annotation(Dialog(tab="电气",group="二次绕组"));
 
   parameter SI.LinearTemperatureCoefficient alpha2 = alpha1
-    "次级匝数的温度系数" annotation(Dialog(tab="Electrical", group="Secondary winding"));
+    "次级匝数的温度系数" annotation(Dialog(tab="电气",group="二次绕组"));
 
   parameter SI.Length l1(displayUnit="mm") = 40e-3
-    "核心平均长度 l1" annotation (Dialog(tab="Core", group="Geometry", groupImage="modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Examples/Hysteresis/Components/Transformer3PhaseYyWithHysteresis/Core_ThreePhase1.png"));
+    "核心平均长度 l1" annotation (Dialog(tab="铁芯", group="几何结构", groupImage="modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Examples/Hysteresis/Components/Transformer3PhaseYyWithHysteresis/Core_ThreePhase1.png"));
   parameter SI.Length l2(displayUnit="mm") = 60e-3
-    "核心平均长度 l2" annotation (Dialog(tab="Core", group="Geometry"));
-  parameter SI.Length a(displayUnit="mm") = 15e-3 "核心高度" annotation (Dialog(tab="Core", group="Geometry"));
-  parameter SI.Length b(displayUnit="mm") = 10e-3 "芯材宽度" annotation (Dialog(tab="Core", group="Geometry"));
+    "核心平均长度 l2" annotation (Dialog(tab="铁芯", group="几何结构"));
+  parameter SI.Length a(displayUnit="mm") = 15e-3 "核心高度" annotation (Dialog(tab="铁芯", group="几何结构"));
+  parameter SI.Length b(displayUnit="mm") = 10e-3 "芯材宽度" annotation (Dialog(tab="铁芯", group="几何结构"));
 
   parameter FluxTubes.Material.HysteresisEverettParameter.BaseData mat=
       FluxTubes.Material.HysteresisEverettParameter.BaseData()
-    "核心材料" annotation (Dialog(tab="Core", group="Material"),
+    "核心材料" annotation (Dialog(tab="铁芯", group="材料"),
       choicesAllMatching=true);
 
   output SI.Voltage v1[3] "初级绕组电压降 1-3";
@@ -72,42 +72,42 @@ model Transformer3PhaseYyWithHysteresis
   //输出 SI.Resistance R1
 
   parameter Real MagRelStart[3]={0,0,0}
-    "磁芯初始磁化强度(-1…1)" annotation (Dialog(tab="Core", group="Initialization"));
-  parameter Boolean MagRelFixed[3] = {false,false,false} "Fixed" annotation (Dialog(tab="Core", group="Initialization"));
+    "磁芯初始磁化强度(-1…1)" annotation (Dialog(tab="铁芯", group="初始化"));
+  parameter Boolean MagRelFixed[3] = {false,false,false} "Fixed" annotation (Dialog(tab="铁芯", group="初始化"));
 
   parameter SI.MagneticFieldStrength HStart[3]={0,0,0}
-    "磁芯的初始磁场强度" annotation (Dialog(tab="Core", group="Initialization"));
-  parameter Boolean HFixed[3] = {false,false,false} "Fixed" annotation (Dialog(tab="Core", group="Initialization"),choices(checkBox=true));
+    "磁芯的初始磁场强度" annotation (Dialog(tab="铁芯", group="初始化"));
+  parameter Boolean HFixed[3] = {false,false,false} "Fixed" annotation (Dialog(tab="铁芯", group="初始化"),choices(checkBox=true));
 
   parameter SI.ElectricCurrent I1Start[3]={0,0,0}
-    "初级绕组的初始电流" annotation (Dialog(tab="Core", group="Initialization"));
-  parameter Boolean I1Fixed[3] = {false,false,false} "Fixed" annotation (Dialog(tab="Core", group="Initialization"),choices(checkBox=true));
+    "初级绕组的初始电流" annotation (Dialog(tab="铁芯", group="初始化"));
+  parameter Boolean I1Fixed[3] = {false,false,false} "Fixed" annotation (Dialog(tab="铁芯", group="初始化"),choices(checkBox=true));
 
   parameter SI.ElectricCurrent I2Start[3]={0,0,0}
-    "二次绕组初始电流" annotation (Dialog(tab="Core", group="Initialization"));
-  parameter Boolean I2Fixed[3] = {false,false,false} "Fixed" annotation (Dialog(tab="Core", group="Initialization"),choices(checkBox=true));
+    "二次绕组初始电流" annotation (Dialog(tab="铁芯", group="初始化"));
+  parameter Boolean I2Fixed[3] = {false,false,false} "Fixed" annotation (Dialog(tab="铁芯", group="初始化"),choices(checkBox=true));
 
   output SI.Power LossPowerWinding "绕组的损失";
   output SI.Power LossPowerStat "铁磁滞回损耗";
   output SI.Power LossPowerEddy "涡流损耗";
 
   extends Interfaces.ConditionalHeatPort;
-  parameter Boolean EddyCurrents = false "启用涡流" annotation(Dialog(tab="Losses and heat", group="Eddy currents"), choices(checkBox=true));
+  parameter Boolean EddyCurrents = false "启用涡流" annotation(Dialog(tab="损耗与发热", group="涡流"), choices(checkBox=true));
   parameter SI.Conductivity sigma = mat.sigma
-    "芯材的导电性" annotation (Dialog(tab="Losses and heat", group="Eddy currents", enable=EddyCurrents));
+    "芯材的导电性" annotation (Dialog(tab="损耗与发热", group="涡流", enable=EddyCurrents));
   parameter SI.Length t(displayUnit="mm") = 0.5e-3
-    "层压板厚度" annotation (Dialog(tab="Losses and heat", group="Eddy currents", enable=EddyCurrents));
+    "层压板厚度" annotation (Dialog(tab="损耗与发热", group="涡流", enable=EddyCurrents));
 
-  parameter SI.Length L_l1=10e-3 "初级绕组泄漏长度" annotation (Dialog(tab="Leakage"));
+  parameter SI.Length L_l1=10e-3 "初级绕组泄漏长度" annotation (Dialog(tab="漏磁"));
   parameter SI.Area A_l1=10e-6
-    "主绕组泄漏截面图" annotation (Dialog(tab="Leakage"));
+    "主绕组泄漏截面图" annotation (Dialog(tab="漏磁"));
   parameter Real mu_rel1=1
-    "一次泄漏的恒定相对渗透率（要求 >0）" annotation (Dialog(tab="Leakage"));
+    "一次泄漏的恒定相对渗透率（要求 >0）" annotation (Dialog(tab="漏磁"));
   parameter SI.Length L_l2=10e-3
-    "次级绕组泄漏截面图" annotation (Dialog(tab="Leakage"));
-  parameter SI.Area A_l2=10e-6 "次级绕组泄漏长度" annotation (Dialog(tab="Leakage"));
+    "次级绕组泄漏截面图" annotation (Dialog(tab="漏磁"));
+  parameter SI.Area A_l2=10e-6 "次级绕组泄漏长度" annotation (Dialog(tab="漏磁"));
   parameter Real mu_rel2=1
-    "恒定的二次泄漏相对渗透率（要求 >0）" annotation (Dialog(tab="Leakage"));
+    "恒定的二次泄漏相对渗透率（要求 >0）" annotation (Dialog(tab="漏磁"));
 
   Shapes.HysteresisAndMagnets.GenericHystTellinenEverett core1(
     mat=mat,

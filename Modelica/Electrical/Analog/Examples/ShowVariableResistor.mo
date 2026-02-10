@@ -21,36 +21,36 @@ model ShowVariableResistor "简单演示可变电阻模型"
 
   Modelica.Electrical.Analog.Sources.SineVoltage SineVoltage1(V=1, f=1) 
   annotation (Placement(transformation(
-        origin={-90,-30},
-        extent={{-10,-10},{10,10}},
+        origin={-90,-30}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
-  Modelica.Blocks.Sources.Ramp Ramp1(height=5, offset=2,
+  Modelica.Blocks.Sources.Ramp Ramp1(height=5, offset=2, 
     duration=2) 
   annotation (Placement(transformation(
-        origin={-10,20},
-        extent={{-10,-10},{10,10}},
+        origin={-10,20}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
 equation
   connect(R1.n, R2.p) annotation (Line(points={{-40,50},{-20,50}}, color={0,0,255}));
   connect(R2.n, R3.p) annotation (Line(points={{0,50},{20,50}}, color={0,0,255}));
   connect(R4.n, VariableResistor.p) annotation (Line(points={{-40,-10},{
           -20,-10}}, color={0,0,255}));
-  connect(VariableResistor.n, R5.p) annotation (Line(points={{0,-10},{20,
+  connect(VariableResistor.n, R5.p) annotation (Line(points={{0,-10},{20, 
           -10}}, color={0,0,255}));
-  connect(R3.n, Ground2.p) annotation (Line(points={{40,50},{70,50},{70,
+  connect(R3.n, Ground2.p) annotation (Line(points={{40,50},{70,50},{70, 
           -20}}, color={0,0,255}));
-  connect(Ground2.p, R5.n) annotation (Line(points={{70,-20},{70,-10},{40,
+  connect(Ground2.p, R5.n) annotation (Line(points={{70,-20},{70,-10},{40, 
           -10}}, color={0,0,255}));
   connect(SineVoltage1.p, Ground1.p) annotation (Line(points={{-90,-40},{-90,-60}}, color={0,0,255}));
-  connect(SineVoltage1.n, R1.p) annotation (Line(points={{-90,-20},{-90,50},
+  connect(SineVoltage1.n, R1.p) annotation (Line(points={{-90,-20},{-90,50}, 
           {-60,50}}, color={0,0,255}));
-  connect(SineVoltage1.n, R4.p) annotation (Line(points={{-90,-20},{-90,
+  connect(SineVoltage1.n, R4.p) annotation (Line(points={{-90,-20},{-90, 
           -10},{-60,-10}}, color={0,0,255}));
   connect(Ramp1.y, VariableResistor.R) annotation (Line(points={{-10,9},{-10,2},{-10,2}}, color={0,0,255}));
 annotation (Documentation(info="<html>
 <p>这是一个用于测试可变电阻工作性能的简单测试回路。用户可以在特定界面将VariableResistor的图像与R2的相关图像进行比较。</p>
 <p>该测试回路的仿真时间为1秒。</p>
-</html>",
+</html>", 
    revisions="<html>
 <p><strong>版本信息：</strong></p>
 <ul>
@@ -58,12 +58,12 @@ annotation (Documentation(info="<html>
        Teresa Schlegel<br> 创建<br>
        </li>
 </ul>
-</html>"),
-  experiment(StopTime=1),
-    Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
-grid={2,2}),graphics = {Text(origin={-10,97},
-lineColor={0,0,255},
-extent={{-61,19},{61,-19}},
-textString="可变电阻示例",
+</html>"), 
+  experiment(StopTime=1), 
+    Diagram(coordinateSystem(extent={{-100,-100},{100,100}}, 
+grid={2,2}),graphics = {Text(origin={-10,97}, 
+lineColor={0,0,255}, 
+extent={{-61,19},{61,-19}}, 
+textString="可变电阻示例", 
 textColor={0,0,255})}));
 end ShowVariableResistor;

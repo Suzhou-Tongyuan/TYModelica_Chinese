@@ -5,22 +5,22 @@ model RelativeAngles "测量两个坐标系连接器之间的相对角度"
   extends Modelica.Icons.RoundSensor;
 
   Modelica.Blocks.Interfaces.RealOutput angles[3](
-    each final quantity="Angle",
-    each final unit="rad",
-    each displayUnit="deg")
+    each final quantity="Angle", 
+    each final unit="rad", 
+    each displayUnit="deg") 
     "将frame_a旋转到frame_b的角度通过'sequence'进行" 
     annotation (Placement(transformation(
-        origin={0,-110},
-        extent={{-10,-10},{10,10}},
+        origin={0,-110}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   parameter MultiBody.Types.RotationSequence sequence(
-    min={1,1,1},
-    max={3,3,3})={1,2,3}
+    min={1,1,1}, 
+    max={3,3,3})={1,2,3} 
     "返回将frame_a绕轴sequence[1]、sequence[2]和最终sequence[3]旋转到frame_b的角度" 
     annotation (Evaluate=true);
-  parameter SI.Angle guessAngle1=0
+  parameter SI.Angle guessAngle1=0 
     "选择angles[1]使得abs(angles[1]-guessAngle1)最小";
-  Modelica.Mechanics.MultiBody.Frames.Orientation R_rel
+  Modelica.Mechanics.MultiBody.Frames.Orientation R_rel 
     "从frame_a到frame_b的相对方向对象";
 
 
@@ -31,35 +31,35 @@ equation
   frame_b.t = zeros(3);
   R_rel = Modelica.Mechanics.MultiBody.Frames.relativeRotation(frame_a.R, frame_b.R);
   angles = MultiBody.Frames.axesRotationsAngles(
-    R_rel,
-    sequence,
+    R_rel, 
+    sequence, 
     guessAngle1);
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
       graphics={
         Line(
-          points={{0,-70},{0,-100}},
-          color={0,0,127}),
+          points={{0,-70},{0,-100}}, 
+          color={0,0,127}), 
         Line(
-          points={{-70,0},{-96,0},{-96,0}}),
+          points={{-70,0},{-96,0},{-96,0}}), 
         Line(
-          points={{96,0},{70,0},{70,0}}),
+          points={{96,0},{70,0},{70,0}}), 
         Text(
-          extent={{-132,90},{129,138}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-132,90},{129,138}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-50,-14},{50,-54}},
-          textColor={64,64,64},
-          textString="rad"),
+          extent={{-50,-14},{50,-54}}, 
+          textColor={64,64,64}, 
+          textString="rad"), 
         Text(
-          extent={{-108,43},{-72,18}},
-          textColor={128,128,128},
-          textString="a"),
+          extent={{-108,43},{-72,18}}, 
+          textColor={128,128,128}, 
+          textString="a"), 
         Text(
-          extent={{72,43},{108,18}},
-          textColor={128,128,128},
-          textString="b")}),
+          extent={{72,43},{108,18}}, 
+          textColor={128,128,128}, 
+          textString="b")}), 
     Documentation(info="<html>
 <p>
 这个模型确定了将frame_a旋转到frame_b的3个角度，沿着参数<strong>sequence</strong>定义的轴。

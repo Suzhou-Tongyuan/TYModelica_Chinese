@@ -15,23 +15,23 @@ Modelica.Blocks.Sources.Constant const(k=1)
   annotation (Placement(transformation(extent={{-92,12},{-72,32}})));
 equation
 connect(periodicClock.y, assignClock1.clock) annotation (Line(
-    points={{-29.4,6},{-20,6},{-20,20.8}},
-    color={175,175,175},
-    pattern=LinePattern.Dot,
+    points={{-29.4,6},{-20,6},{-20,20.8}}, 
+    color={175,175,175}, 
+    pattern=LinePattern.Dot, 
     thickness=0.5));
 connect(add.u2, const.y) annotation (Line(
-    points={{-60,22},{-71,22}},
+    points={{-60,22},{-71,22}}, 
     color={0,0,127}));
 connect(assignClock1.y, unitDelay1.u) annotation (Line(
-    points={{-13.4,28},{-2,28},{-2,58},{-36,58}},
+    points={{-13.4,28},{-2,28},{-2,58},{-36,58}}, 
     color={0,0,127}));
 connect(unitDelay1.y, add.u1) annotation (Line(
-    points={{-59,58},{-68,58},{-68,34},{-60,34}},
+    points={{-59,58},{-68,58},{-68,34},{-60,34}}, 
     color={0,0,127}));
 connect(add.y, assignClock1.u) annotation (Line(
-    points={{-37,28},{-27.2,28}},
+    points={{-37,28},{-27.2,28}}, 
     color={0,0,127}));
-  annotation (experiment(StopTime=0.09),
+  annotation (experiment(StopTime=0.09), 
   Documentation(info="<html>
 <p>
 生成一个用于区模块文档的示例图

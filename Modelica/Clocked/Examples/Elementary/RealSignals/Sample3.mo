@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.Examples.Elementary.RealSignals;
-model Sample3
+model Sample3 
   "实时信号的示例块，具有在连续时间和时钟分区中的直接反馈"
   extends Modelica.Icons.Example;
   Modelica.Clocked.RealSignals.Sampler.SampleClocked sample1 
@@ -20,27 +20,27 @@ model Sample3
 equation
   connect(step.y, sample1.u) 
     annotation(Line(
-    points = {{-59, 30}, {-53.2, 30}},
+    points = {{-59, 30}, {-53.2, 30}}, 
     color = {0, 0, 127}));
   connect(gain.y, hold1.u) 
     annotation(Line(points = {{13, 30}, {18.8, 30}}, color = {0, 0, 127}));
   connect(feedback.y, gain.u) annotation(Line(
-    points = {{-17, 30}, {-10, 30}},
+    points = {{-17, 30}, {-10, 30}}, 
     color = {0, 0, 127}));
   connect(sample2.y, feedback.u2) annotation(Line(
-    points = {{-6.6, 0}, {-26, 0}, {-26, 22}},
+    points = {{-6.6, 0}, {-26, 0}, {-26, 22}}, 
     color = {0, 0, 127}));
   connect(periodicClock.y, sample1.clock) annotation(Line(
-    points = {{-63.4, 0}, {-46, 0}, {-46, 22.8}},
-    color = {175, 175, 175},
-    pattern = LinePattern.Dot,
+    points = {{-63.4, 0}, {-46, 0}, {-46, 22.8}}, 
+    color = {175, 175, 175}, 
+    pattern = LinePattern.Dot, 
     thickness = 0.5));
   connect(sample1.y, feedback.u1) annotation(Line(
-    points = {{-39.4, 30}, {-34, 30}},
+    points = {{-39.4, 30}, {-34, 30}}, 
     color = {0, 0, 127}));
-  connect(hold1.y, sample2.u) annotation(Line(points = {{32.6, 30}, {38, 30}, {38, 0},
+  connect(hold1.y, sample2.u) annotation(Line(points = {{32.6, 30}, {38, 30}, {38, 0}, 
     {7.2, 0}}, color = {0, 0, 127}));
-  annotation(experiment(StopTime = 0.2),
+  annotation(experiment(StopTime = 0.2), 
     Documentation(info = "<html>
 <p>
 生成用于区模块文档的示例图示<a href=\"modelica://Modelica.Clocked.RealSignals.Sampler.Sample\">Modelica.Clocked.RealSignals.Sampler.Sample</a>.

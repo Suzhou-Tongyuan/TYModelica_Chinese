@@ -1,46 +1,46 @@
 ﻿within Modelica.Mechanics.MultiBody.Joints.Internal;
-model RollingConstraintVerticalWheel
+model RollingConstraintVerticalWheel 
 "始终垂直于x-y平面的滚轮滚动约束"
  import Modelica.Mechanics.MultiBody.Frames;
 
-   Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a
+   Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a 
    "固定在滚轮中心点的坐标系。
 x轴：向上，y轴：沿着滚轮轴" 
-     annotation (Placement(transformation(extent={{-16,4},{16,36}}),
+     annotation (Placement(transformation(extent={{-16,4},{16,36}}), 
          iconTransformation(extent={{-16,4},{16,36}})));
 
    parameter SI.Radius radius "Wheelradius";
 
-   parameter Boolean lateralSlidingConstraint = true
+   parameter Boolean lateralSlidingConstraint = true 
    "=true，如果考虑侧向滑动约束，=false，如果侧向力=0(需要避免过度约束，如果两个理想的滚动滚轮连接在一个轴上)" 
                                                                                                        annotation(choices(checkBox=true),Evaluate=true);
 
    // 接触力
-SI.Force f_wheel_0[3]
+SI.Force f_wheel_0[3] 
 "作用在滚轮上的接触力，在全局坐标系中分解";
 SI.Force f_lat "作用在滚轮上的侧向接触力";
-SI.Force f_long
+SI.Force f_long 
 "作用在滚轮上的纵向接触力";
 protected
-Real e_axis_0[3]
+Real e_axis_0[3] 
 "沿着滚轮轴的单位矢量，在全局坐标系中分解";
-SI.Position rContact_0[3]
+SI.Position rContact_0[3] 
 "从滚轮中心到接触点的距离矢量，在全局坐标系中分解";
 
 // 接触点的坐标系
-Real e_n_0[3]
+Real e_n_0[3] 
 "在接触点处，道路法线方向的单位矢量，在全局坐标系中分解";
-Real e_lat_0[3]
+Real e_lat_0[3] 
 "在接触点处，滚轮侧向方向的单位矢量，在全局坐标系中分解";
-Real e_long_0[3]
+Real e_long_0[3] 
 "在接触点处，滚轮纵向方向的单位矢量，在全局坐标系中分解";
 
 // 滑动速度
 SI.Velocity v_0[3] "滚轮中心的速度，在全局坐标系中分解";
-SI.AngularVelocity w_0[3]
+SI.AngularVelocity w_0[3] 
 "滚轮的角速度，在全局坐标系中分解";
 
-SI.Velocity vContact_0[3]
+SI.Velocity vContact_0[3] 
 "滚轮接触点的速度，在全局坐标系中分解";
 
 // 实用矢量
@@ -72,26 +72,26 @@ equation
     // 滚轮中心处的力和力矩平衡
     zeros(3) = frame_a.f + Frames.resolve2(frame_a.R, f_wheel_0);
     zeros(3) = frame_a.t + Frames.resolve2(frame_a.R, cross(rContact_0, f_wheel_0));
-   annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
+   annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100, 
              -100},{100,100}}), graphics={
          Rectangle(
-           extent={{-100,-60},{100,-80}},
-           fillColor={175,175,175},
-           fillPattern=FillPattern.Solid),
+           extent={{-100,-60},{100,-80}}, 
+           fillColor={175,175,175}, 
+           fillPattern=FillPattern.Solid), 
          Text(
-           extent={{-148,-86},{152,-126}},
-           textColor={0,0,255},
-           textString="%name"),
+           extent={{-148,-86},{152,-126}}, 
+           textColor={0,0,255}, 
+           textString="%name"), 
          Line(
-           points={{0,-60},{0,4}},
-           pattern=LinePattern.Dot),
+           points={{0,-60},{0,4}}, 
+           pattern=LinePattern.Dot), 
          Line(
-           visible=lateralSlidingConstraint,
-           points={{-98,-30},{-16,-30}}),
+           visible=lateralSlidingConstraint, 
+           points={{-98,-30},{-16,-30}}), 
          Polygon(
-           visible=lateralSlidingConstraint,
-           points={{-40,-16},{-40,-42},{-6,-30},{-40,-16}},
-           fillColor={255,255,255},
+           visible=lateralSlidingConstraint, 
+           points={{-40,-16},{-40,-42},{-6,-30},{-40,-16}}, 
+           fillColor={255,255,255}, 
 
            fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <p>

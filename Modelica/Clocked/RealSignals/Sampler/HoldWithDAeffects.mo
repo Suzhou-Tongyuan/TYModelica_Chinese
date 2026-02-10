@@ -1,34 +1,34 @@
 ﻿within Modelica.Clocked.RealSignals.Sampler;
-block HoldWithDAeffects
+block HoldWithDAeffects 
   "保持(模拟)数模转换器效应和计算延迟"
   extends Clocked.RealSignals.Interfaces.PartialSISOHold;
 
-  parameter Boolean computationalDelay = false
+  parameter Boolean computationalDelay = false 
     "=true，如果需要计算延迟" 
     annotation(Evaluate = true, choices(checkBox = true), Dialog(group = "计算延迟（秒） = 间隔（） * 移位计数器/分辨率"));
-  parameter Integer shiftCounter(min = 0, max = resolution) = 0
+  parameter Integer shiftCounter(min = 0, max = resolution) = 0 
     "(最小=0，最大=分辨率)，计算延迟 = 间隔（）*移位计数器/分辨率" 
     annotation(Dialog(enable = computationalDelay, group = "计算延迟（秒） = 间隔（） * 移位计数器/分辨率"));
-  parameter Integer resolution(min = 1) = 1
+  parameter Integer resolution(min = 1) = 1 
     "采样间隔的时间量化分辨率" annotation(Dialog(enable = computationalDelay, group = "计算延迟（秒） = 间隔（） * 移位计数器/分辨率"));
 
   parameter Boolean limited = false "= true，如果限制输出" 
     annotation(Evaluate = true, choices(checkBox = true), Dialog(group = "限制和量化"));
-  parameter Boolean quantized = false
+  parameter Boolean quantized = false 
     "= true，如果包括输出量化效果" 
     annotation(Evaluate = true, choices(checkBox = true), Dialog(enable = limited, group = "限制和量化"));
   parameter Real yMax = 1 "输出上限（如果 limited = true）" annotation(Dialog(enable = limited, group = "限制和量化"));
   parameter Real yMin = -yMax "输出下限（如果 limited = true）" annotation(Dialog(enable = limited, group = "限制和量化"));
-  parameter Integer bits(min = 1) = 8
+  parameter Integer bits(min = 1) = 8 
     "量化位数（如果量化 = true）" annotation(Dialog(enable = limited and quantized, group = "限制和量化"));
 
-  Clocked.RealSignals.Sampler.Utilities.Internal.Limiter limiter(uMax = yMax,
+  Clocked.RealSignals.Sampler.Utilities.Internal.Limiter limiter(uMax = yMax, 
     uMin = yMin) if limited 
     annotation(Placement(transformation(extent = {{-56, -8}, {-40, 8}})));
   Clocked.RealSignals.Sampler.Utilities.Internal.Quantization quantization(
-    quantized = quantized,
-    yMax = yMax,
-    yMin = yMin,
+    quantized = quantized, 
+    yMax = yMax, 
+    yMin = yMin, 
     bits = bits) if quantized and limited 
     annotation(Placement(transformation(extent = {{-18, -8}, {-2, 8}})));
   Clocked.RealSignals.Sampler.Utilities.Internal.ComputationalDelay compDelay(
@@ -54,82 +54,82 @@ protected
     annotation(Placement(transformation(extent = {{63, -1}, {65, 1}})));
 equation
   connect(y2, limiter.u) annotation(Line(
-    points = {{-66, 0}, {-57.6, 0}},
+    points = {{-66, 0}, {-57.6, 0}}, 
     color = {0, 0, 127}));
   connect(y2, uFeedthrough2) annotation(Line(
-    points = {{-66, 0}, {-62, 0}, {-62, 20}, {-50, 20}},
+    points = {{-66, 0}, {-62, 0}, {-62, 20}, {-50, 20}}, 
     color = {0, 0, 127}));
   connect(limiter.y, y3) annotation(Line(
-    points = {{-39.2, 0}, {-28, 0}},
+    points = {{-39.2, 0}, {-28, 0}}, 
     color = {0, 0, 127}));
   connect(y3, quantization.u) annotation(Line(
-    points = {{-28, 0}, {-19.6, 0}},
+    points = {{-28, 0}, {-19.6, 0}}, 
     color = {0, 0, 127}));
   connect(y3, uFeedthrough3) annotation(Line(
-    points = {{-28, 0}, {-24, 0}, {-24, 20}, {-12, 20}},
+    points = {{-28, 0}, {-24, 0}, {-24, 20}, {-12, 20}}, 
     color = {0, 0, 127}));
   connect(quantization.y, y4) annotation(Line(
-    points = {{-1.2, 0}, {10, 0}},
+    points = {{-1.2, 0}, {10, 0}}, 
     color = {0, 0, 127}));
   connect(y4, compDelay.u) annotation(Line(
-    points = {{10, 0}, {18.4, 0}},
+    points = {{10, 0}, {18.4, 0}}, 
     color = {0, 0, 127}));
   connect(uFeedthrough3, y4) annotation(Line(
-    points = {{-12, 20}, {6, 20}, {6, 0}, {10, 0}},
+    points = {{-12, 20}, {6, 20}, {6, 0}, {10, 0}}, 
     color = {0, 0, 127}));
   connect(y4, uFeedthrough4) annotation(Line(
-    points = {{10, 0}, {14, 0}, {14, 20}, {26, 20}},
+    points = {{10, 0}, {14, 0}, {14, 20}, {26, 20}}, 
     color = {0, 0, 127}));
   connect(uFeedthrough2, y3) annotation(Line(
-    points = {{-50, 20}, {-32, 20}, {-32, 0}, {-28, 0}},
+    points = {{-50, 20}, {-32, 20}, {-32, 0}, {-28, 0}}, 
     color = {0, 0, 127}));
 
   connect(y5, compDelay.y) annotation(Line(
-    points = {{64, 0}, {36.8, 0}},
+    points = {{64, 0}, {36.8, 0}}, 
     color = {0, 0, 127}));
   connect(y5, uFeedthrough4) annotation(Line(
-    points = {{64, 0}, {46, 0}, {46, 20}, {26, 20}},
+    points = {{64, 0}, {46, 0}, {46, 20}, {26, 20}}, 
     color = {0, 0, 127}));
 
   connect(y5, hold1.u) annotation(Line(
-    points = {{64, 0}, {76.8, 0}},
+    points = {{64, 0}, {76.8, 0}}, 
     color = {0, 0, 127}));
   connect(u, y2) annotation(Line(
-    points = {{-120, 0}, {-66, 0}},
+    points = {{-120, 0}, {-66, 0}}, 
     color = {0, 0, 127}));
   connect(hold1.y, y) annotation(Line(
-    points = {{90.6, 0}, {110, 0}},
+    points = {{90.6, 0}, {110, 0}}, 
     color = {0, 0, 127}));
   annotation(
-    defaultComponentName = "hold1",
+    defaultComponentName = "hold1", 
     Icon(coordinateSystem(
-    preserveAspectRatio = true,
-    extent = {{-100, -100}, {100, 100}},
-    initialScale = 0.06),
+    preserveAspectRatio = true, 
+    extent = {{-100, -100}, {100, 100}}, 
+    initialScale = 0.06), 
     graphics = {
     Ellipse(
-    extent = {{-88, -30}, {-68, -50}},
-    lineColor = {0, 0, 127},
-    fillColor = {0, 0, 127},
-    fillPattern = FillPattern.Solid),
+    extent = {{-88, -30}, {-68, -50}}, 
+    lineColor = {0, 0, 127}, 
+    fillColor = {0, 0, 127}, 
+    fillPattern = FillPattern.Solid), 
     Ellipse(
-    extent = {{-48, 30}, {-28, 10}},
-    lineColor = {0, 0, 127},
-    fillColor = {0, 0, 127},
-    fillPattern = FillPattern.Solid),
+    extent = {{-48, 30}, {-28, 10}}, 
+    lineColor = {0, 0, 127}, 
+    fillColor = {0, 0, 127}, 
+    fillPattern = FillPattern.Solid), 
     Ellipse(
-    extent = {{-8, 70}, {12, 50}},
-    lineColor = {0, 0, 127},
-    fillColor = {0, 0, 127},
-    fillPattern = FillPattern.Solid),
+    extent = {{-8, 70}, {12, 50}}, 
+    lineColor = {0, 0, 127}, 
+    fillColor = {0, 0, 127}, 
+    fillPattern = FillPattern.Solid), 
     Ellipse(
-    extent = {{32, 10}, {52, -10}},
-    lineColor = {0, 0, 127},
-    fillColor = {0, 0, 127},
-    fillPattern = FillPattern.Solid),
-    Text(visible = computationalDelay,
-    extent = {{-150, -150}, {150, -190}},
-    textString = "%shiftCounter/%resolution")}),
+    extent = {{32, 10}, {52, -10}}, 
+    lineColor = {0, 0, 127}, 
+    fillColor = {0, 0, 127}, 
+    fillPattern = FillPattern.Solid), 
+    Text(visible = computationalDelay, 
+    extent = {{-150, -150}, {150, -190}}, 
+    textString = "%shiftCounter/%resolution")}), 
     Documentation(info = "<html><p>
 这个模块类似于保持<a href=\"modelica://Modelica.Clocked.RealSignals.Sampler.Hold\" target=\"\">Hold</a>&nbsp; 模块。 唯一的区别在于，在将信号转换为零阶保持的连续时间信号之前，对时钟输入信号 u <span style=\"color: rgb(51, 51, 51);\">应用模拟的现实世界效应</span>。 具体来说：
 </p>

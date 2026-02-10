@@ -1,7 +1,7 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
 function to_vector "将旋转对象映射到矢量"
   extends Modelica.Icons.Function;
-  input TransformationMatrices.Orientation T
+  input TransformationMatrices.Orientation T 
     "将坐标系1旋转到坐标系2的方向对象";
   output Real vec[9] "T的元素组成的矢量";
 algorithm

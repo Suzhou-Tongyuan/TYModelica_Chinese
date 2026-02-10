@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines;
+within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines;
 model SMEE_LoadDump
   "测试示例： 带电压控制器的电励磁同步电机"
 
@@ -11,17 +11,17 @@ model SMEE_LoadDump
       smeeData.SNominal "标称负载阻抗";
   parameter Real powerFactor(
     min=0,
-    max=1) = 0.8 "Load power factor";
+    max=1) = 0.8 "负载功率因数";
   parameter SI.Resistance RLoad=ZNominal*powerFactor
     "负载阻力";
   parameter SI.Inductance LLoad=ZNominal*sqrt(1 -
-      powerFactor^2)/(2*pi*smeeData.fsNominal) "Load inductance";
+      powerFactor^2)/(2*pi*smeeData.fsNominal) "负载电感";
   parameter SI.Voltage Ve0=smee.IeOpenCircuit*
       Modelica.Electrical.Machines.Thermal.convertResistance(
             smee.Re,
             smee.TeRef,
             smee.alpha20e,
-            smee.TeOperational) "No load excitation voltage";
+            smee.TeOperational) "空载励磁电压";
   parameter Real k=2*Ve0/smeeData.VsNominal "电压控制器：增益";
   parameter SI.Time Ti=smeeData.Td0Transient/2
     "电压控制器：积分时间常数";

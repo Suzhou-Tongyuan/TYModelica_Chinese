@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Interfaces;
-partial function partialColorMap
+partial function partialColorMap 
   "返回颜色映射的函数接口"
   extends Modelica.Icons.Function;
   input Integer n_colors=64 "颜色映射中的颜色个数";

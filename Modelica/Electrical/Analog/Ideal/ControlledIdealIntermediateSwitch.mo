@@ -1,23 +1,23 @@
 ﻿within Modelica.Electrical.Analog.Ideal;
-model ControlledIdealIntermediateSwitch
+model ControlledIdealIntermediateSwitch 
   "受控理想中间开关"
   parameter SI.Voltage level = 0.5 "开关级别";
   parameter SI.Resistance Ron(final min = 0) = 1e-5 "关闭开关电阻";
-  parameter SI.Conductance Goff(final min = 0) = 1e-5
+  parameter SI.Conductance Goff(final min = 0) = 1e-5 
     "打开开关电阻";
-  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T =
+  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 
     293.15);
   Interfaces.PositivePin p1 annotation(Placement(transformation(extent = {{-110, 30}, {-90, 50}}), iconTransformation(extent = {{-110, 30}, {-90, 50}})));
-  Interfaces.PositivePin p2 annotation(Placement(transformation(extent = {{-110,
+  Interfaces.PositivePin p2 annotation(Placement(transformation(extent = {{-110, 
     -10}, {-90, 10}})));
   Interfaces.NegativePin n1 annotation(Placement(transformation(extent = {{90, 30}, {110, 50}}), iconTransformation(extent = {{90, 30}, {110, 50}})));
-  Interfaces.NegativePin n2 annotation(Placement(transformation(extent = {{90,
+  Interfaces.NegativePin n2 annotation(Placement(transformation(extent = {{90, 
     -10}, {110, 10}})));
   Interfaces.Pin control "控制端口:如果control.v>level，p1--n2,p2--n1连接,否则p1--n1,p2--n2连接" 
     annotation(Placement(
     transformation(
-    origin = {0, 100},
-    extent = {{-10, -10}, {10, 10}},
+    origin = {0, 100}, 
+    extent = {{-10, -10}, {10, 10}}, 
     rotation = 90)));
 protected
   Real s1(final unit = "1");
@@ -44,7 +44,7 @@ equation
     else -s2 * unitCurrent - s3 * unitVoltage * Goff;
 
   LossPower = p1.i * p1.v + p2.i * p2.v + n1.i * n1.v + n2.i * n2.v;
-  annotation(defaultComponentName = "switch",
+  annotation(defaultComponentName = "switch", 
     Documentation(info = "<html>
 <p>中继开关有四个切换接触管脚p1、p2、n1和n2。 切换行为由控制引脚控制。 如果控制引脚的电压超过参数级别的值，则管脚p1将连接到管脚n2，管脚p2将连接到管脚n1。 否则，管脚p1将连接到管脚n1，管脚p2将连接到管脚n2。
 </p>
@@ -68,7 +68,7 @@ equation
 </p>
 <p><br><strong>请注意:</strong>在使用useHeatPort=true的情况下，电行为的温度依赖性并未被建模。参数<strong>不</strong>随温度变化。
 </p>
-</html>",
+</html>", 
     revisions = "<html>
 <ul>
 <li><em>2009年3月11日</em>
@@ -79,23 +79,23 @@ equation
        </li>
 </ul>
 
-</html>"),
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
+</html>"), 
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
     100}}), graphics = {
-    Ellipse(extent = {{-4, 24}, {4, 16}}, lineColor = {0, 0, 255}),
-    Line(points = {{-90, 0}, {-40, 0}}, color = {0, 0, 255}),
-    Line(points = {{-90, 40}, {-40, 40}}, color = {0, 0, 255}),
-    Line(points = {{-40, 0}, {40, 40}}, color = {0, 0, 255}),
-    Line(points = {{-40, 40}, {40, 0}}, color = {0, 0, 255}),
-    Line(points = {{40, 40}, {90, 40}}, color = {0, 0, 255}),
-    Line(points = {{40, 0}, {90, 0}}, color = {0, 0, 255}),
+    Ellipse(extent = {{-4, 24}, {4, 16}}, lineColor = {0, 0, 255}), 
+    Line(points = {{-90, 0}, {-40, 0}}, color = {0, 0, 255}), 
+    Line(points = {{-90, 40}, {-40, 40}}, color = {0, 0, 255}), 
+    Line(points = {{-40, 0}, {40, 40}}, color = {0, 0, 255}), 
+    Line(points = {{-40, 40}, {40, 0}}, color = {0, 0, 255}), 
+    Line(points = {{40, 40}, {90, 40}}, color = {0, 0, 255}), 
+    Line(points = {{40, 0}, {90, 0}}, color = {0, 0, 255}), 
     Line(
-    visible = useHeatPort,
-    points = {{0, -100}, {0, 22}},
-    color = {127, 0, 0},
-    pattern = LinePattern.Dot),
+    visible = useHeatPort, 
+    points = {{0, -100}, {0, 22}}, 
+    color = {127, 0, 0}, 
+    pattern = LinePattern.Dot), 
     Text(
-    extent = {{-150, 90}, {150, 50}},
-    textString = "%name",
+    extent = {{-150, 90}, {150, 50}}, 
+    textString = "%name", 
     textColor = {0, 0, 255})}));
 end ControlledIdealIntermediateSwitch;

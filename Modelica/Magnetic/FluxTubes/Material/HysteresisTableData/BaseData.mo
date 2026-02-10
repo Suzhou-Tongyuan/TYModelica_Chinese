@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Material.HysteresisTableData;
+within Modelica.Magnetic.FluxTubes.Material.HysteresisTableData;
 record BaseData "滞回表数据"
 
   extends Modelica.Icons.Record;
@@ -50,7 +50,7 @@ record BaseData "滞回表数据"
     300, 0.8000;
     1000, 0.8000;
     10000000, 0.8000]
-    "Table data of the rising (lower) branch of the hysteresis envelope curve (H, B)";
+    "磁滞包络线上升(下)支的表格数据(磁场强度H, 磁感应强度B)";
 
   parameter Real[:,:] tabfal=[
     -10000000, -0.8000;
@@ -99,8 +99,8 @@ record BaseData "滞回表数据"
     300, 0.8000;
     1000, 0.8000;
     10000000, 0.8000]
-    "Table data of the falling (upper) branch of the hysteresis envelope curve (H, B)";
-  parameter SI.Conductivity sigma = 1 "Electric conductivity";
+    "磁滞包络线下降(上)支的表格数据(磁场强度H, 磁感应强度B)";
+  parameter SI.Conductivity sigma = 1 "电导率";
   annotation (Documentation(info="<html>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"0\">
   <tr>

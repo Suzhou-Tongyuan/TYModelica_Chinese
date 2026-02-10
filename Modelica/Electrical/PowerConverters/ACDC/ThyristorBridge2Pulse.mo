@@ -2,76 +2,76 @@
 model ThyristorBridge2Pulse "双脉冲格雷兹晶闸管整流桥"
   extends Icons.Converter;
   import Modelica.Constants.pi;
-  parameter SI.Resistance RonThyristor(final min=0) = 1e-05
+  parameter SI.Resistance RonThyristor(final min=0) = 1e-05 
     "闭合晶闸管电阻";
-  parameter SI.Conductance GoffThyristor(final min=0) = 1e-05
+  parameter SI.Conductance GoffThyristor(final min=0) = 1e-05 
     "开启晶闸管导纳";
-  parameter SI.Voltage VkneeThyristor(final min=0) = 0
+  parameter SI.Voltage VkneeThyristor(final min=0) = 0 
     "晶闸管正向阈值电压";
-  parameter Boolean offStart_p1=true
+  parameter Boolean offStart_p1=true 
     "变量 thyristor_p1.off 的布尔起始值" 
     annotation (choices(checkBox=true));
-  parameter Boolean offStart_p2=true
+  parameter Boolean offStart_p2=true 
     "变量 thyristor_p2.off 的布尔起始值" 
     annotation (choices(checkBox=true));
-  parameter Boolean offStart_n1=true
+  parameter Boolean offStart_n1=true 
     "变量 thyristor_n1.off 的布尔起始值" 
     annotation (choices(checkBox=true));
-  parameter Boolean offStart_n2=true
+  parameter Boolean offStart_n2=true 
     "变量 thyristor_n2.off 的布尔起始值" 
     annotation (choices(checkBox=true));
   extends PowerConverters.Interfaces.ACDC.ACtwoPin;
   extends PowerConverters.Interfaces.ACDC.DCtwoPin;
-  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T= 
        293.15);
   extends Interfaces.Enable.Enable2;
   Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(
-    final Ron=RonThyristor,
-    final Goff=GoffThyristor,
-    final Vknee=VkneeThyristor,
-    final useHeatPort=useHeatPort,
-    final off(start=offStart_p1, fixed=true))
+    final Ron=RonThyristor, 
+    final Goff=GoffThyristor, 
+    final Vknee=VkneeThyristor, 
+    final useHeatPort=useHeatPort, 
+    final off(start=offStart_p1, fixed=true)) 
     "将正交流输入引脚与正直流输出连接的晶闸管" 
     annotation (Placement(transformation(
-        origin={-20,50},
-        extent={{-10,-10},{10,10}},
+        origin={-20,50}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(
-    final Ron=RonThyristor,
-    final Goff=GoffThyristor,
-    final Vknee=VkneeThyristor,
-    final useHeatPort=useHeatPort,
-    final off(start=offStart_p2, fixed=true))
+    final Ron=RonThyristor, 
+    final Goff=GoffThyristor, 
+    final Vknee=VkneeThyristor, 
+    final useHeatPort=useHeatPort, 
+    final off(start=offStart_p2, fixed=true)) 
     "将负交流输入引脚与正直流输出连接的晶闸管" 
     annotation (Placement(transformation(
-        origin={20,50},
-        extent={{-10,10},{10,-10}},
+        origin={20,50}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=90)));
   Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n1(
-    final Ron=RonThyristor,
-    final Goff=GoffThyristor,
-    final Vknee=VkneeThyristor,
-    final useHeatPort=useHeatPort,
-    final off(start=offStart_n1, fixed=true))
+    final Ron=RonThyristor, 
+    final Goff=GoffThyristor, 
+    final Vknee=VkneeThyristor, 
+    final useHeatPort=useHeatPort, 
+    final off(start=offStart_n1, fixed=true)) 
     "将正交流输入与负直流输出连接的晶闸管" 
     annotation (Placement(transformation(
-        origin={-20,-50},
-        extent={{-10,-10},{10,10}},
+        origin={-20,-50}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n2(
-    final Ron=RonThyristor,
-    final Goff=GoffThyristor,
-    final Vknee=VkneeThyristor,
-    final useHeatPort=useHeatPort,
-    final off(start=offStart_n2, fixed=true))
+    final Ron=RonThyristor, 
+    final Goff=GoffThyristor, 
+    final Vknee=VkneeThyristor, 
+    final useHeatPort=useHeatPort, 
+    final off(start=offStart_n2, fixed=true)) 
     "将负交流输入与负直流输出连接的晶闸管" 
     annotation (Placement(transformation(
-        origin={20,-50},
-        extent={{-10,10},{10,-10}},
+        origin={20,-50}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=90)));
 equation
   if not useHeatPort then
-    LossPower = thyristor_p1.LossPower + thyristor_p2.LossPower +
+    LossPower = thyristor_p1.LossPower + thyristor_p2.LossPower + 
       thyristor_n1.LossPower + thyristor_n2.LossPower;
   end if;
   connect(thyristor_p2.n, thyristor_p1.n) annotation (Line(
@@ -106,34 +106,34 @@ equation
       points={{60,-69},{60,60},{32,60}}, color={255,0,255}));
   connect(andCondition_n.y, thyristor_n1.fire) annotation (Line(
       points={{60,-69},{60,-66},{-40,-66},{-40,-40},{-32,-40}}, color={255,0,255}));
-  annotation (defaultComponentName="rectifier",
+  annotation (defaultComponentName="rectifier", 
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={
         Text(
-          extent={{-100,70},{0,50}},
-          textColor={0,0,255},
-          textString="交流"),
+          extent={{-100,70},{0,50}}, 
+          textColor={0,0,255}, 
+          textString="交流"), 
         Text(
-          extent={{0,-50},{100,-70}},
-          textColor={0,0,255},
-          textString="直流"),
+          extent={{0,-50},{100,-70}}, 
+          textColor={0,0,255}, 
+          textString="直流"), 
         Rectangle(
-          extent={{-40,24},{40,-24}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-40,24},{40,-24}}, 
+          lineColor={255,255,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Line(
-          points={{-40,0},{40,0}},
-          color={0,0,255}),
+          points={{-40,0},{40,0}}, 
+          color={0,0,255}), 
         Line(
-          points={{20,24},{20,-24}},
-          color={0,0,255}),
+          points={{20,24},{20,-24}}, 
+          color={0,0,255}), 
         Line(
-          points={{20,0},{-20,24},{-20,-24},{20,0}},
-          color={0,0,255}),
+          points={{20,0},{-20,24},{-20,-24},{20,0}}, 
+          color={0,0,255}), 
         Line(
-          points={{0,12},{0,28}},
-          color={0,0,255})}),
+          points={{0,12},{0,28}}, 
+          color={0,0,255})}), 
     Documentation(info="<html>
 <p>
 有关交流/直流转换器的一般信息，请参阅

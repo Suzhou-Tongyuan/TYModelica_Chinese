@@ -1,11 +1,11 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.Leakage;
-model EighthOfSphere
+model EighthOfSphere 
 "泄漏通量通过一个边缘和八分之一球面的另一个平面"
 
   extends BaseClasses.Leakage;
 
   parameter SI.Radius r=0.01 "球面半径的八分之一" 
-    annotation (Dialog(group="Parameters", groupImage=
+    annotation (Dialog(group="Parameters", groupImage= 
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Leakage/EighthOfSphere.png"));
 
 equation

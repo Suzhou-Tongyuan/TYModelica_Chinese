@@ -1,17 +1,17 @@
 ﻿within Modelica.Mechanics.MultiBody.Types;
-type ShapeType = Modelica.Icons.TypeString
+type ShapeType = Modelica.Icons.TypeString 
   "形状类型(长方体、球体、圆柱体、管状圆柱体、锥体、管道、梁、齿轮、弹簧，<外部形状>)" 
   annotation (choices(
-    choice="box" "\"box\"",
-    choice="sphere" "\"sphere\"",
-    choice="cylinder" "\"cylinder\"",
-    choice="pipecylinder" "\"pipecylinder\"",
-    choice="cone" "\"cone\"",
-    choice="pipe" "\"pipe\"",
-    choice="beam" "\"beam\"",
-    choice="gearwheel" "\"gearwheel\"",
-    choice="spring" "\"spring\"",
-    choice="modelica://PackageName/PathName.dxf"),
+    choice="box" "\"box\"", 
+    choice="sphere" "\"sphere\"", 
+    choice="cylinder" "\"cylinder\"", 
+    choice="pipecylinder" "\"pipecylinder\"", 
+    choice="cone" "\"cone\"", 
+    choice="pipe" "\"pipe\"", 
+    choice="beam" "\"beam\"", 
+    choice="gearwheel" "\"gearwheel\"", 
+    choice="spring" "\"spring\"", 
+    choice="modelica://PackageName/PathName.dxf"), 
   Documentation(info="<html>
 <p>
 类型<strong>ShapeType</strong>用于以字符串参数定义可视对象的形状。

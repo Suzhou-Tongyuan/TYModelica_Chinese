@@ -1,120 +1,120 @@
 ﻿within Modelica.Electrical.Machines.BasicMachines.SynchronousMachines;
 model SM_PermanentMagnet "永磁同步电机"
   extends Machines.Interfaces.PartialBasicInductionMachine(
-    Lssigma(start=0.1/(2*pi*fsNominal)),
-    final idq_ss=airGap.i_ss,
-    final idq_sr=airGap.i_sr,
-    final idq_rs=airGap.i_rs,
-    final idq_rr=airGap.i_rr,
+    Lssigma(start=0.1/(2*pi*fsNominal)), 
+    final idq_ss=airGap.i_ss, 
+    final idq_sr=airGap.i_sr, 
+    final idq_rs=airGap.i_rs, 
+    final idq_rr=airGap.i_rr, 
     redeclare final Machines.Thermal.SynchronousMachines.ThermalAmbientSMPM 
       thermalAmbient(
-      final useDamperCage=useDamperCage,
-      final Tr=TrOperational,
-      final Tpm=TpmOperational),
+      final useDamperCage=useDamperCage, 
+      final Tr=TrOperational, 
+      final Tpm=TpmOperational), 
     redeclare final Machines.Interfaces.InductionMachines.ThermalPortSMPM 
-      thermalPort(final useDamperCage=useDamperCage),
+      thermalPort(final useDamperCage=useDamperCage), 
     redeclare final Machines.Interfaces.InductionMachines.ThermalPortSMPM 
-      internalThermalPort(final useDamperCage=useDamperCage),
+      internalThermalPort(final useDamperCage=useDamperCage), 
     redeclare final Machines.Interfaces.InductionMachines.PowerBalanceSMPM 
       powerBalance(
-      final lossPowerRotorWinding=damperCageLossPower,
-      final lossPowerRotorCore=0,
-      final lossPowerPermanentMagnet=permanentMagnet.lossPower),
+      final lossPowerRotorWinding=damperCageLossPower, 
+      final lossPowerRotorCore=0, 
+      final lossPowerPermanentMagnet=permanentMagnet.lossPower), 
     statorCore(final w=statorCoreParameters.wRef));
   Modelica.Blocks.Interfaces.RealOutput ir[2](
-    start=zeros(2),
-    each final quantity="ElectricCurrent",
+    start=zeros(2), 
+    each final quantity="ElectricCurrent", 
     each final unit="A") if useDamperCage "阻尼笼电流" 
     annotation (Placement(visible=false),Dialog(showStartAttribute=true));
   Modelica.Blocks.Interfaces.RealOutput idq_dr[2](
-    each stateSelect=StateSelect.prefer,
-    each final quantity="ElectricCurrent",
-    each final unit="A") if useDamperCage
+    each stateSelect=StateSelect.prefer, 
+    each final quantity="ElectricCurrent", 
+    each final unit="A") if useDamperCage 
     "阻尼空间矢量电流 / 转子固定坐标系" 
     annotation (Placement(visible=false));
   Machines.BasicMachines.Components.AirGapR airGap(
-    final p=p,
-    final Lmd=Lmd,
-    final Lmq=Lmq,
-    final m=m) annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    final p=p, 
+    final Lmd=Lmd, 
+    final Lmq=Lmq, 
+    final m=m) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
           rotation=270)));
-  final parameter SI.Temperature TpmOperational=293.15
+  final parameter SI.Temperature TpmOperational=293.15 
     "永磁体的运行温度" 
     annotation (Dialog(group="操作温度"));
-  parameter SI.Temperature TrOperational(start=293.15)
+  parameter SI.Temperature TrOperational(start=293.15) 
     "（可选）阻尼笼的运行温度" annotation (
       Dialog(group="操作温度", enable=not useThermalPort 
            and useDamperCage));
-  parameter SI.Voltage VsOpenCircuit(start=112.3)
+  parameter SI.Voltage VsOpenCircuit(start=112.3) 
     "空载时每相的有效值电压 @ fsNominal";
-  parameter SI.Inductance Lmd(start=0.3/(2*pi*fsNominal))
+  parameter SI.Inductance Lmd(start=0.3/(2*pi*fsNominal)) 
     "d轴的每相定子主场电感" 
     annotation (Dialog(tab="额定电阻和电感"));
-  parameter SI.Inductance Lmq(start=0.3/(2*pi*fsNominal))
+  parameter SI.Inductance Lmq(start=0.3/(2*pi*fsNominal)) 
     "q轴的每相定子主场电感" 
     annotation (Dialog(tab="额定电阻和电感"));
-  parameter Boolean useDamperCage(start=true)
-    "启用/禁用阻尼笼" annotation (Evaluate=true, Dialog(tab=
+  parameter Boolean useDamperCage(start=true) 
+    "启用/禁用阻尼笼" annotation (Evaluate=true, Dialog(tab= 
           "额定电阻和电感", group="阻尼笼"));
-  parameter SI.Inductance Lrsigmad(start=0.05/(2*pi*
+  parameter SI.Inductance Lrsigmad(start=0.05/(2*pi* 
         fsNominal)) "d轴的阻尼漏感" annotation (
       Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter SI.Inductance Lrsigmaq=Lrsigmad
+  parameter SI.Inductance Lrsigmaq=Lrsigmad 
     "q轴的阻尼漏感" annotation (Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter SI.Resistance Rrd(start=0.04)
+  parameter SI.Resistance Rrd(start=0.04) 
     "TRef时d轴的阻尼电阻" annotation (Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter SI.Resistance Rrq=Rrd
+  parameter SI.Resistance Rrq=Rrd 
     "TRef时q轴的阻尼电阻" annotation (Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter SI.Temperature TrRef(start=293.15)
+  parameter SI.Temperature TrRef(start=293.15) 
     "d-和q-轴阻尼电阻的参考温度" 
     annotation (Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
-  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20r(start=0)
+  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20r(start=0) 
     "d-和q-轴阻尼电阻的温度系数" 
     annotation (Dialog(
-      tab="额定电阻和电感",
-      group="阻尼笼",
+      tab="额定电阻和电感", 
+      group="阻尼笼", 
       enable=useDamperCage));
   parameter Machines.Losses.PermanentMagnetLossParameters permanentMagnetLossParameters(IRef(
-        start=100), wRef(start=2*pi*fsNominal/p))
+        start=100), wRef(start=2*pi*fsNominal/p)) 
     "永磁体损耗参数记录" annotation (Dialog(tab="损耗"));
   Components.PermanentMagnetWithLosses permanentMagnet(
-    final Ie=Ie,
-    final useHeatPort=true,
-    final m=m,
-    final permanentMagnetLossParameters=permanentMagnetLossParameters,
+    final Ie=Ie, 
+    final useHeatPort=true, 
+    final m=m, 
+    final permanentMagnetLossParameters=permanentMagnetLossParameters, 
     final is=is) annotation (Placement(transformation(
-        origin={30,-30},
-        extent={{10,10},{-10,-10}},
+        origin={30,-30}, 
+        extent={{10,10},{-10,-10}}, 
         rotation=180)));
   Machines.BasicMachines.Components.DamperCage damperCage(
-    final Lrsigmad=Lrsigmad,
-    final Lrsigmaq=Lrsigmaq,
-    final Rrd=Rrd,
-    final Rrq=Rrq,
-    final T_ref=TrRef,
-    final alpha=Machines.Thermal.convertAlpha(alpha20r, TrRef),
+    final Lrsigmad=Lrsigmad, 
+    final Lrsigmaq=Lrsigmaq, 
+    final Rrd=Rrd, 
+    final Rrq=Rrq, 
+    final T_ref=TrRef, 
+    final alpha=Machines.Thermal.convertAlpha(alpha20r, TrRef), 
     final useHeatPort=true) if useDamperCage annotation (Placement(
         transformation(
-        origin={0,-40},
-        extent={{-10,-10},{10,10}},
+        origin={0,-40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
 protected
-  final parameter SI.Current Ie=sqrt(2)*VsOpenCircuit/(Lmd*
+  final parameter SI.Current Ie=sqrt(2)*VsOpenCircuit/(Lmd* 
       2*pi*fsNominal) "等效励磁电流";
   Modelica.Blocks.Interfaces.RealOutput damperCageLossPower(final
       quantity="Power", final unit="W") "阻尼损耗";
@@ -146,18 +146,18 @@ equation
   connect(internalSupport, permanentMagnet.support) annotation (Line(
       points={{60,-100},{60,-100},{60,-90},{30,-90},{30,-40},{30,-40}}));
   annotation (
-    defaultComponentName="smpm",
+    defaultComponentName="smpm", 
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
         Rectangle(
-          extent={{-130,10},{-100,-10}},
-          fillColor={0,255,0},
-          fillPattern=FillPattern.Solid),
+          extent={{-130,10},{-100,-10}}, 
+          fillColor={0,255,0}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{-100,10},{-70,-10}},
-          fillColor={255,0,0},
-          fillPattern=FillPattern.Solid),
-        Ellipse(extent={{-134,34},{-66,-34}}, lineColor={0,0,255})}),
+          extent={{-100,10},{-70,-10}}, 
+          fillColor={255,0,0}, 
+          fillPattern=FillPattern.Solid), 
+        Ellipse(extent={{-134,34},{-66,-34}}, lineColor={0,0,255})}), 
     Documentation(info="<html>
 <p><strong>三相永磁同步机模型。</strong><br>
 定子的电阻和漏感直接建模在定子相中，然后使用空间矢量变换和一个转子固定的<em>AirGap</em>模型。 转子鼠笼的电阻和漏感在转子固定坐标系的两个轴上建模。永磁体励磁由恒定的等效励磁电流模拟，供给d轴。 机器模型考虑以下损耗效应：

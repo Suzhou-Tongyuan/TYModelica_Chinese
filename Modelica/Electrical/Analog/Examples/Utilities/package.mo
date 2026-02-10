@@ -6,7 +6,7 @@ package Utilities "Examples库使用的实用组件"
   Documentation(info="<html>
 <p>
 此库包含一些被Examples库使用的实用组件。这些组件是辅助性组件，不应该像真正的MLS组件那样使用，因为它们是为了示例的目的而设计的，而不是为常规使用。</p>
-</html>",
+</html>", 
    revisions="<html>
 <dl>
 <dt>

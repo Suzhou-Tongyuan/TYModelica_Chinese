@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function resolveRelative
+function resolveRelative 
   "使用坐标系1和坐标系2的绝对方向对象，将矢量从坐标系1下解析转换到坐标系2下解析"
 
   extends Modelica.Icons.Function;
@@ -10,8 +10,8 @@ function resolveRelative
 algorithm
   v2 := resolve2(R2, resolve1(R1, v1));
   annotation (
-    derivative(noDerivative=R1, noDerivative=R2) = Internal.resolveRelative_der,
-    InlineAfterIndexReduction=true,
+    derivative(noDerivative=R1, noDerivative=R2) = Internal.resolveRelative_der, 
+    InlineAfterIndexReduction=true, 
     Documentation(info="<html>
 <h4>语法</h4>
 <blockquote><pre>

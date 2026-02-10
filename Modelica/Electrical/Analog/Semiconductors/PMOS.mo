@@ -58,7 +58,7 @@ equation
   S.i = smooth(0, if (D.v > S.v) then id else -id);
   B.i = 0;
   LossPower = D.i * (D.v - S.v);
-  annotation(defaultComponentName = "pMOS",
+  annotation(defaultComponentName = "pMOS", 
     Documentation(info = "<html>
 <p>PMOS 模型是p沟道金属氧化物半导体场效应晶体管的简化模型。它与SPICE仿真器中使用的器件略有不同。如需了解更多详情，请关注：
 [<a href=\"modelica://Modelica.Electrical.Analog.UsersGuide.References\">Spiro1990</a>]。
@@ -93,24 +93,24 @@ m       m      A/V^2       V     -      -       m        m
        Christoph Clauss<br>创建<br>
        </li>
 </ul>
-</html>"),
+</html>"), 
     Icon(coordinateSystem(
-    preserveAspectRatio = true,
+    preserveAspectRatio = true, 
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-90, -60}, {-10, -60}}, color = {0, 0, 255}),
-    Line(points = {{-10, -60}, {-10, 60}}, color = {0, 0, 255}),
-    Line(points = {{10, 80}, {10, 39}}, color = {0, 0, 255}),
-    Line(points = {{10, 20}, {10, -21}}, color = {0, 0, 255}),
-    Line(points = {{10, -40}, {10, -81}}, color = {0, 0, 255}),
-    Line(points = {{10, 60}, {91, 60}}, color = {0, 0, 255}),
-    Line(points = {{10, 0}, {90, 0}}, color = {0, 0, 255}),
-    Line(points = {{10, -60}, {90, -60}}, color = {0, 0, 255}),
+    Line(points = {{-90, -60}, {-10, -60}}, color = {0, 0, 255}), 
+    Line(points = {{-10, -60}, {-10, 60}}, color = {0, 0, 255}), 
+    Line(points = {{10, 80}, {10, 39}}, color = {0, 0, 255}), 
+    Line(points = {{10, 20}, {10, -21}}, color = {0, 0, 255}), 
+    Line(points = {{10, -40}, {10, -81}}, color = {0, 0, 255}), 
+    Line(points = {{10, 60}, {91, 60}}, color = {0, 0, 255}), 
+    Line(points = {{10, 0}, {90, 0}}, color = {0, 0, 255}), 
+    Line(points = {{10, -60}, {90, -60}}, color = {0, 0, 255}), 
     Polygon(
-    points = {{60, 0}, {40, 5}, {40, -5}, {60, 0}},
-    fillColor = {0, 0, 255},
-    fillPattern = FillPattern.Solid,
-    lineColor = {0, 0, 255}),
-    Text(extent = {{-150, 130}, {150, 90}},
-    textString = "%name",
+    points = {{60, 0}, {40, 5}, {40, -5}, {60, 0}}, 
+    fillColor = {0, 0, 255}, 
+    fillPattern = FillPattern.Solid, 
+    lineColor = {0, 0, 255}), 
+    Text(extent = {{-150, 130}, {150, 90}}, 
+    textString = "%name", 
     textColor = {0, 0, 255})}));
 end PMOS;

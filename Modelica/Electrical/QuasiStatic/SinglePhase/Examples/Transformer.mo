@@ -2,37 +2,37 @@
 model Transformer "具有短路阻抗、传输电阻和负载的变压器示例"
   extends Modelica.Icons.Example;
   Sources.VoltageSource voltageSource(
-    f=50,
-    V=1000,
-    phi=0,
+    f=50, 
+    V=1000, 
+    phi=0, 
     gamma(fixed=true, start=0)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-90,-30})));
   Ideal.IdealTransformer idealTransformer(n=5) annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
   Sensors.PowerSensor sensor0 annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
   Basic.Impedance zk(Z_ref(re=0.72, im=0.96)) annotation (Placement(transformation(
-        extent={{-10,-10}, {10,10}},
+        extent={{-10,-10}, {10,10}}, 
         origin={-20,-10})));
   Sources.VariableCurrentSource load(gamma(fixed=true, start=0)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={80,-30})));
   Sensors.PowerSensor sensorL annotation (Placement(transformation(extent={{50,-20},{70,0}})));
   Basic.Ground ground1 annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
   Basic.Ground ground2 annotation (Placement(transformation(extent={{30,-70},{50,-50}})));
   Sensors.VoltageSensor v2 annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={40,-32})));
   Modelica.ComplexBlocks.ComplexMath.PolarToComplex polarToComplex 
     annotation (Placement(transformation(extent={{60,52},{80,72}})));
   Modelica.Blocks.Sources.Constant const(k=250) 
     annotation (Placement(transformation(extent={{-34,70},{-14,90}})));
   Modelica.Blocks.Sources.Ramp ramp(
-    duration=1,
-    offset=0,
-    startTime=0,
+    duration=1, 
+    offset=0, 
+    startTime=0, 
     height=2*Modelica.Constants.pi) 
     annotation (Placement(transformation(extent={{-14,40},{6,60}})));
   Modelica.Blocks.Sources.Constant constFrequency(k=50) 
@@ -53,7 +53,7 @@ equation
   connect(load.pin_p, sensorL.currentN) annotation (Line(points={{80,-20},{80,-20},{80,-12},{80,-10},{70,-10}}, color={85,170,255}));
   connect(sensorL.voltageN, ground2.pin) annotation (Line(points={{60,-20},{60,-20},{60,-44},{60,-50},{40,-50}}, color={85,170,255}));
   connect(load.pin_n, ground2.pin) annotation (Line(points={{80,-40},{80,-40},{80,-50},{40,-50}}, color={85,170,255}));
-  connect(ground2.pin, idealTransformer.pin_n2) annotation (Line(points={{40,-50},{10,-50},{10,-39.8}},
+  connect(ground2.pin, idealTransformer.pin_n2) annotation (Line(points={{40,-50},{10,-50},{10,-39.8}}, 
                                                                                                       color={85,170,255}));
   connect(load.I, polarToComplex.y) annotation (Line(points={{92,-24},{100,-24},{100,62},{81,62}}, color={85,170,255}));
   connect(load.f, constFrequency.y) annotation (Line(points={{92,-36},{100,-36},{100,-80},{81,-80}}, color={0,0,127}));
@@ -63,22 +63,22 @@ equation
   connect(i1.pin_n, zk.pin_p) annotation (Line(points={{-40,-10},{-35,-10},{-30,-10}}, color={85,170,255}));
   connect(idealTransformer.pin_p2, i2.pin_p) annotation (Line(points={{10,-20},{12,-20},{12,-10},{20,-10}}, color={85,170,255}));
   annotation (experiment(StopTime=1),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={Rectangle(
-          extent={{50,10},{96,-60}},
-          pattern=LinePattern.Dash,
-          fillColor={255,255,170},
+          extent={{50,10},{96,-60}}, 
+          pattern=LinePattern.Dash, 
+          fillColor={255,255,170}, 
           fillPattern=FillPattern.Solid), Rectangle(
-          extent={{-40,10},{20,-60}},
-          pattern=LinePattern.Dash,
-          fillColor={255,255,170},
-          fillPattern=FillPattern.Solid),
+          extent={{-40,10},{20,-60}}, 
+          pattern=LinePattern.Dash, 
+          fillColor={255,255,170}, 
+          fillPattern=FillPattern.Solid), 
         Text(
-          extent={{-60,30},{40,10}},
-          textColor={28,108,200},
-          textString="具有短路阻抗的变压器"),
+          extent={{-60,30},{40,10}}, 
+          textColor={28,108,200}, 
+          textString="具有短路阻抗的变压器"), 
         Text(
-          extent={{50,30},{96,10}},
-          textColor={28,108,200},
-          textString="负载电流")}),
+          extent={{50,30},{96,10}}, 
+          textColor={28,108,200}, 
+          textString="负载电流")}), 
     Documentation(info="<html>
 <p>此示例展示了具有短路阻抗的变压器的运行行为。该变压器以恒定电流幅值250A负载，但相位角可变。相角在一秒的仿真时间内从0变化到360度。</p>
 

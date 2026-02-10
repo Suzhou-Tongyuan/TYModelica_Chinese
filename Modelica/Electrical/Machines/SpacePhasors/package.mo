@@ -12,7 +12,7 @@ package SpacePhasors "带有空间矢量模型的库"
 <p>
 您可以查看关于空间矢量理论的简要概述：<a href=\"https://www.haumer.at/refimg/SpacePhasors.pdf\">https://www.haumer.at/refimg/SpacePhasors.pdf</a>
 </p>
-</html>",
+</html>", 
         revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

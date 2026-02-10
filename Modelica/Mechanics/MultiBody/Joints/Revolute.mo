@@ -1,92 +1,92 @@
 ﻿within Modelica.Mechanics.MultiBody.Joints;
-model Revolute
+model Revolute 
   "转动副(1个转动自由度，2个潜在状态变量，可选轴接口)"
 
-  Modelica.Mechanics.Rotational.Interfaces.Flange_a axis if useAxisFlange
+  Modelica.Mechanics.Rotational.Interfaces.Flange_a axis if useAxisFlange 
     "驱动转动副的一维旋转接口" 
-    annotation (Placement(transformation(extent={{10,90},{-10,110}})));
-  Modelica.Mechanics.Rotational.Interfaces.Flange_b support if useAxisFlange
+    annotation(Placement(transformation(extent = {{10, 90}, {-10, 110}})));
+  Modelica.Mechanics.Rotational.Interfaces.Flange_b support if useAxisFlange 
     "驱动支撑的一维旋转接口(假定固定在全局坐标系中，而不是转动副中)" 
-    annotation (Placement(transformation(extent={{-70,90},{-50,110}})));
+    annotation(Placement(transformation(extent = {{-70, 90}, {-50, 110}})));
 
-  Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a
-    "接口坐标系a，具有一个局部力和一个局部力矩" 
-    annotation (Placement(transformation(extent={{-116,-16},{-84,16}})));
-  Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_b
-    "接口坐标系b，具有一个局部力和一个局部力矩" 
-    annotation (Placement(transformation(extent={{84,-16},{116,16}})));
+  Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a 
+    "接口坐标系，具有一个局部力和一个局部力矩" 
+    annotation(Placement(transformation(extent = {{-116, -16}, {-84, 16}})));
+  Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_b 
+    "接口坐标系，具有一个局部力和一个局部力矩" 
+    annotation(Placement(transformation(extent = {{84, -16}, {116, 16}})));
 
-  parameter Boolean useAxisFlange=false "=true，如果启用轴接口" 
-    annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Boolean animation=true
+  parameter Boolean useAxisFlange = false "=true，如果启用轴接口" 
+    annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
+  parameter Boolean animation = true 
     "=true，如果启用动画(显示为圆柱体)";
-  parameter Modelica.Mechanics.MultiBody.Types.Axis n={0,0,1}
+  parameter Modelica.Mechanics.MultiBody.Types.Axis n = {0, 0, 1} 
     "旋转轴，在frame_a中解析(与frame_b中相同)" 
-    annotation (Evaluate=true);
-  parameter SI.Distance cylinderLength=world.defaultJointLength
+    annotation(Evaluate = true);
+  parameter SI.Distance cylinderLength = world.defaultJointLength 
     "转动副（圆柱体）的长度" 
-    annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
-  parameter SI.Distance cylinderDiameter=world.defaultJointWidth
+    annotation(Dialog(tab = "动画", group = "如果animation = true", enable = animation));
+  parameter SI.Distance cylinderDiameter = world.defaultJointWidth 
     "转动副（圆柱体）的直径" 
-    annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
-  input Modelica.Mechanics.MultiBody.Types.Color cylinderColor=Modelica.Mechanics.MultiBody.Types.Defaults.JointColor
+    annotation(Dialog(tab = "动画", group = "如果animation = true", enable = animation));
+  input Modelica.Mechanics.MultiBody.Types.Color cylinderColor = Modelica.Mechanics.MultiBody.Types.Defaults.JointColor 
     "转动副（圆柱体）的颜色" 
-    annotation (Dialog(colorSelector=true, tab="动画", group="如果animation=true", enable=animation));
+    annotation(Dialog(colorSelector = true, tab = "动画", group = "如果animation = true", enable = animation));
   input Modelica.Mechanics.MultiBody.Types.SpecularCoefficient 
-    specularCoefficient = world.defaultSpecularCoefficient
+    specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射(=0：光完全被吸收)" 
-    annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
-  parameter StateSelect stateSelect=StateSelect.prefer
-    "优先使用连接件角度phi和w=der(phi)作为状态变量" annotation(Dialog(tab="高级"));
+    annotation(Dialog(tab = "动画", group = "如果animation = true", enable = animation));
+  parameter StateSelect stateSelect = StateSelect.prefer 
+    "优先使用连接件角度phi和w=der(phi)作为状态变量" annotation(Dialog(tab = "高级"));
 
-  SI.Angle phi(start=0, final stateSelect=stateSelect)
+  SI.Angle phi(start = 0, final stateSelect = stateSelect) 
     "从frame_a到frame_b的相对旋转角度" 
-     annotation (unassignedMessage="
+    annotation(unassignedMessage = "
 无法确定转动副的旋转角度phi。
 可能的原因为：
 -转动副所连接的任一侧的部件缺少非零质量。
 -定义了过多的StateSelect.always，并且模型的自由度少于此设置指定的自由度(请移除所有StateSelect.always设置)。
 ");
-  SI.AngularVelocity w(start=0, stateSelect=stateSelect)
+  SI.AngularVelocity w(start = 0, stateSelect = stateSelect) 
     "角度phi的第一阶导数(相对角速度)";
-  SI.AngularAcceleration a(start=0)
+  SI.AngularAcceleration a(start = 0) 
     "角度phi的第二阶导数(相对角加速度)";
   SI.Torque tau "绕旋转轴方向的驱动力矩";
   SI.Angle angle "=phi";
 
 protected
   outer Modelica.Mechanics.MultiBody.World world;
-  parameter Real e[3](each final unit="1")=Modelica.Math.Vectors.normalizeWithAssert(n)
+  parameter Real e[3](each final unit = "1") = Modelica.Math.Vectors.normalizeWithAssert(n) 
     "沿旋转轴方向的单位矢量，在frame_a中解析(与frame_b中相同)";
-  Frames.Orientation R_rel
+  Frames.Orientation R_rel 
     "从frame_a到frame_b的相对方向对象，或从frame_b到frame_a的相对方向对象";
   Visualizers.Advanced.Shape cylinder(
-    shapeType="cylinder",
-    color=cylinderColor,
-    specularCoefficient=specularCoefficient,
-    length=cylinderLength,
-    width=cylinderDiameter,
-    height=cylinderDiameter,
-    lengthDirection=e,
-    widthDirection={0,1,0},
-    r_shape=-e*(cylinderLength/2),
-    r=frame_a.r_0,
-    R=frame_a.R) if world.enableAnimation and animation;
+    shapeType = "cylinder", 
+    color = cylinderColor, 
+    specularCoefficient = specularCoefficient, 
+    length = cylinderLength, 
+    width = cylinderDiameter, 
+    height = cylinderDiameter, 
+    lengthDirection = e, 
+    widthDirection = {0, 1, 0}, 
+    r_shape = -e * (cylinderLength / 2), 
+    r = frame_a.r_0, 
+    R = frame_a.R) if world.enableAnimation and animation;
 
 protected
-  Modelica.Mechanics.Rotational.Components.Fixed fixed
+  Modelica.Mechanics.Rotational.Components.Fixed fixed 
     "支撑接口固定在地面上" 
-    annotation (Placement(transformation(extent={{-70,70},{-50,90}})));
-  Rotational.Interfaces.InternalSupport internalAxis(tau=tau) 
-    annotation (Placement(transformation(extent={{-10,90},{10,70}})));
-  Rotational.Sources.ConstantTorque constantTorque(tau_constant=0) if not useAxisFlange 
-    annotation (Placement(transformation(extent={{40,70},{20,90}})));
+    annotation(Placement(transformation(extent = {{-70, 70}, {-50, 90}})));
+  Rotational.Interfaces.InternalSupport internalAxis(tau = tau) 
+    annotation(Placement(transformation(extent = {{-10, 90}, {10, 70}})));
+  Rotational.Sources.ConstantTorque constantTorque(tau_constant = 0) if not useAxisFlange 
+    annotation(Placement(transformation(extent = {{40, 70}, {20, 90}})));
 equation
   Connections.branch(frame_a.R, frame_b.R);
 
-  assert(cardinality(frame_a) > 0,
+  assert(cardinality(frame_a) > 0, 
     "转动副的连接器frame_a未连接");
-  assert(cardinality(frame_b) > 0,
+  assert(cardinality(frame_b) > 0, 
     "转动副的连接器frame_b未连接");
 
   angle = phi;
@@ -109,93 +109,93 @@ equation
   end if;
 
   // 达朗贝尔原理
-  tau = -frame_b.t*e;
+  tau = -frame_b.t * e;
 
   // 内部连接件的连接
   phi = internalAxis.phi;
 
 
-  connect(fixed.flange, support) annotation (Line(
-      points={{-60,80},{-60,100}}));
-  connect(internalAxis.flange, axis) annotation (Line(
-      points={{0,80},{0,100}}));
-  connect(constantTorque.flange, internalAxis.flange) annotation (Line(
-      points={{20,80},{0,80}}));
-  annotation (
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}},
-preserveAspectRatio=true,
-grid={2,2}),graphics = {Rectangle(origin={-65,0},
-lineColor={64,64,64},
-fillColor={255,255,255},
-fillPattern=FillPattern.HorizontalCylinder,
-extent={{-35,-60},{35,60}},
-radius=10), Rectangle(origin={65,0},
-lineColor={64,64,64},
-fillColor={255,255,255},
-fillPattern=FillPattern.HorizontalCylinder,
-extent={{-35,-60},{35,60}},
-radius=10), Rectangle(origin={-65,0},
-lineColor={64,64,64},
-extent={{-35,60},{35,-60}},
-radius=10), Rectangle(origin={65,0},
-lineColor={64,64,64},
-extent={{-35,60},{35,-60}},
-radius=10), Text(origin={-72,1.5},
-lineColor={128,128,128},
-extent={{-18,12.5},{18,-12.5}},
-textString="a",
-textColor={128,128,128}), Text(origin={69,-1.5},
-lineColor={128,128,128},
-extent={{-18,12.5},{18,-12.5}},
-textString="b",
-textColor={128,128,128}), Line(visible=useAxisFlange,
-origin={-20,70},
-points={{0,10},{0,-10}}), Line(visible=useAxisFlange,
-origin={20,70},
-points={{0,10},{0,-10}}), Rectangle(visible=useAxisFlange,
-origin={0,75},
-fillColor={192,192,192},
-fillPattern=FillPattern.VerticalCylinder,
-extent={{-10,25},{10,-25}}), Polygon(visible=useAxisFlange,
-origin={0,40},
-lineColor={64,64,64},
-fillColor={192,192,192},
-fillPattern=FillPattern.Solid,
-points={{-10,-10},{10,-10},{30,10},{-30,10},{-10,-10}}), Rectangle(origin={0,0.5},
-lineColor={64,64,64},
-fillColor={192,192,192},
-fillPattern=FillPattern.Solid,
-extent={{-30,10.5},{30,-10.5}}), Polygon(visible=useAxisFlange,
-origin={20,0},
-lineColor={64,64,64},
-fillColor={192,192,192},
-fillPattern=FillPattern.Solid,
-points={{-10,30},{10,50},{10,-50},{-10,-30},{-10,30}}), Text(origin={0,-95},
-extent={{-150,-15},{150,15}},
-textString="n=%n"), Text(visible=useAxisFlange,
-origin={0,-135},
-lineColor={0,0,255},
-extent={{-150,-20},{150,20}},
-textString="%name",
-textColor={0,0,255}), Line(visible=useAxisFlange,
-origin={-40,65},
-points={{20,5},{-20,5},{-20,-5}}), Line(visible=useAxisFlange,
-origin={35,65},
-points={{-15,5},{15,5},{15,-5}}), Line(visible=useAxisFlange,
-origin={-60,100},
-points={{-30,0},{30,0}}), Line(visible=useAxisFlange,
-origin={-40,90},
-points={{10,10},{-10,-10}}), Line(visible=useAxisFlange,
-origin={-59.5,90},
-points={{10.5,10},{-10.5,-10}}), Line(visible=useAxisFlange,
-origin={-80,90},
-points={{10,10},{-10,-10}}), Text(visible=not useAxisFlange,
-origin={0,90},
-lineColor={0,0,255},
-extent={{-150,-20},{150,20}},
-textString="%name",
-textColor={0,0,255})}),
-    Documentation(info="<html>
+  connect(fixed.flange, support) annotation(Line(
+    points = {{-60, 80}, {-60, 100}}));
+  connect(internalAxis.flange, axis) annotation(Line(
+    points = {{0, 80}, {0, 100}}));
+  connect(constantTorque.flange, internalAxis.flange) annotation(Line(
+    points = {{20, 80}, {0, 80}}));
+  annotation(
+    Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, 
+    preserveAspectRatio = true, 
+    grid = {2, 2}), graphics = {Rectangle(origin = {-65, 0}, 
+    lineColor = {64, 64, 64}, 
+    fillColor = {255, 255, 255}, 
+    fillPattern = FillPattern.HorizontalCylinder, 
+    extent = {{-35, -60}, {35, 60}}, 
+    radius = 10), Rectangle(origin = {65, 0}, 
+    lineColor = {64, 64, 64}, 
+    fillColor = {255, 255, 255}, 
+    fillPattern = FillPattern.HorizontalCylinder, 
+    extent = {{-35, -60}, {35, 60}}, 
+    radius = 10), Rectangle(origin = {-65, 0}, 
+    lineColor = {64, 64, 64}, 
+    extent = {{-35, 60}, {35, -60}}, 
+    radius = 10), Rectangle(origin = {65, 0}, 
+    lineColor = {64, 64, 64}, 
+    extent = {{-35, 60}, {35, -60}}, 
+    radius = 10), Text(origin = {-72, 1.5}, 
+    lineColor = {128, 128, 128}, 
+    extent = {{-18, 12.5}, {18, -12.5}}, 
+    textString = "a", 
+    textColor = {128, 128, 128}), Text(origin = {69, -1.5}, 
+    lineColor = {128, 128, 128}, 
+    extent = {{-18, 12.5}, {18, -12.5}}, 
+    textString = "b", 
+    textColor = {128, 128, 128}), Line(visible = useAxisFlange, 
+    origin = {-20, 70}, 
+    points = {{0, 10}, {0, -10}}), Line(visible = useAxisFlange, 
+    origin = {20, 70}, 
+    points = {{0, 10}, {0, -10}}), Rectangle(visible = useAxisFlange, 
+    origin = {0, 75}, 
+    fillColor = {192, 192, 192}, 
+    fillPattern = FillPattern.VerticalCylinder, 
+    extent = {{-10, 25}, {10, -25}}), Polygon(visible = useAxisFlange, 
+    origin = {0, 40}, 
+    lineColor = {64, 64, 64}, 
+    fillColor = {192, 192, 192}, 
+    fillPattern = FillPattern.Solid, 
+    points = {{-10, -10}, {10, -10}, {30, 10}, {-30, 10}, {-10, -10}}), Rectangle(origin = {0, 0.5}, 
+    lineColor = {64, 64, 64}, 
+    fillColor = {192, 192, 192}, 
+    fillPattern = FillPattern.Solid, 
+    extent = {{-30, 10.5}, {30, -10.5}}), Polygon(visible = useAxisFlange, 
+    origin = {20, 0}, 
+    lineColor = {64, 64, 64}, 
+    fillColor = {192, 192, 192}, 
+    fillPattern = FillPattern.Solid, 
+    points = {{-10, 30}, {10, 50}, {10, -50}, {-10, -30}, {-10, 30}}), Text(origin = {0, -95}, 
+    extent = {{-150, -15}, {150, 15}}, 
+    textString = "n=%n"), Text(visible = useAxisFlange, 
+    origin = {0, -135}, 
+    lineColor = {0, 0, 255}, 
+    extent = {{-150, -20}, {150, 20}}, 
+    textString = "%name", 
+    textColor = {0, 0, 255}), Line(visible = useAxisFlange, 
+    origin = {-40, 65}, 
+    points = {{20, 5}, {-20, 5}, {-20, -5}}), Line(visible = useAxisFlange, 
+    origin = {35, 65}, 
+    points = {{-15, 5}, {15, 5}, {15, -5}}), Line(visible = useAxisFlange, 
+    origin = {-60, 100}, 
+    points = {{-30, 0}, {30, 0}}), Line(visible = useAxisFlange, 
+    origin = {-40, 90}, 
+    points = {{10, 10}, {-10, -10}}), Line(visible = useAxisFlange, 
+    origin = {-59.5, 90}, 
+    points = {{10.5, 10}, {-10.5, -10}}), Line(visible = useAxisFlange, 
+    origin = {-80, 90}, 
+    points = {{10, 10}, {-10, -10}}), Text(visible = not useAxisFlange, 
+    origin = {0, 90}, 
+    lineColor = {0, 0, 255}, 
+    extent = {{-150, -20}, {150, 20}}, 
+    textString = "%name", 
+    textColor = {0, 0, 255})}), 
+    Documentation(info = "<html>
 
 <p>
 转动副，其中frame_b围绕固定在frame_a中的轴n旋转。

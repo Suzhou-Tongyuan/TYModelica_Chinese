@@ -1,18 +1,18 @@
 ﻿within Modelica.Electrical.Machines.Interfaces;
-partial model PartialBasicTransformer
+partial model PartialBasicTransformer 
   "三相变压器的基类模型"
   extends Machines.Icons.TransientTransformer;
   final parameter Integer m(min = 1) = 3 "相数" annotation(Evaluate = true);
   constant String VectorGroup = "Yy00";
-  parameter Real n(start = 1)
+  parameter Real n(start = 1) 
     "一次电压（相间电压）/二次电压（相间电压) 比值";
   parameter SI.Resistance R1(start = 5E-3 / (if C1 == "D" then 1 
     else 3)) "一次电阻每相在参考温度下的值" 
     annotation(Dialog(tab = "额定电阻和电感"));
-  parameter SI.Temperature T1Ref(start = 293.15)
+  parameter SI.Temperature T1Ref(start = 293.15) 
     "一次电阻的参考温度" 
     annotation(Dialog(tab = "额定电阻和电感"));
-  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20_1(start = 0)
+  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20_1(start = 0) 
     "一次电阻在20℃时的温度系数" 
     annotation(Dialog(tab = "额定电阻和电感"));
   parameter SI.Inductance L1sigma(start = 78E-6 / (if C1 == "D" 
@@ -21,29 +21,29 @@ partial model PartialBasicTransformer
   parameter SI.Resistance R2(start = 5E-3 / (if C2 == "d" then 1 
     else 3)) "二次电阻每相在参考温度下的值" 
     annotation(Dialog(tab = "额定电阻和电感"));
-  parameter SI.Temperature T2Ref(start = 293.15)
+  parameter SI.Temperature T2Ref(start = 293.15) 
     "二次电阻的参考温度" 
     annotation(Dialog(tab = "额定电阻和电感"));
-  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20_2(start = 0)
+  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20_2(start = 0) 
     "二次电阻在20℃时的温度系数" 
     annotation(Dialog(tab = "额定电阻和电感"));
   parameter SI.Inductance L2sigma(start = 78E-6 / (if C2 == "d" 
     then 1 else 3)) "二次寄生电感每相的值" 
     annotation(Dialog(tab = "额定电阻和电感"));
-  parameter Boolean useThermalPort = false
+  parameter Boolean useThermalPort = false 
     "启用/禁用（=固定温度）热端口" 
     annotation(Evaluate = true);
-  parameter SI.Temperature T1Operational(start = 293.15)
+  parameter SI.Temperature T1Operational(start = 293.15) 
     "一次电阻的工作温度" annotation(Dialog(
     group = "工作温度", enable = not useThermalPort));
-  parameter SI.Temperature T2Operational(start = 293.15)
+  parameter SI.Temperature T2Operational(start = 293.15) 
     "二次电阻的工作温度" annotation(Dialog(
     group = "工作温度", enable = not useThermalPort));
   output Machines.Interfaces.PowerBalanceTransformer powerBalance(
-    final power1 = Machines.SpacePhasors.Functions.activePower(v1, i1),
-    final power2 = Machines.SpacePhasors.Functions.activePower(v2, i2),
-    final lossPower1 = sum(r1.resistor.LossPower),
-    final lossPower2 = sum(r2.resistor.LossPower),
+    final power1 = Machines.SpacePhasors.Functions.activePower(v1, i1), 
+    final power2 = Machines.SpacePhasors.Functions.activePower(v2, i2), 
+    final lossPower1 = sum(r1.resistor.LossPower), 
+    final lossPower2 = sum(r2.resistor.LossPower), 
     final lossPowerCore = 0) "功率平衡";
   output SI.Voltage v1[m] = plug1.pin.v "一次电压";
   output SI.Current i1[m] = plug1.pin.i "一次电流";
@@ -51,59 +51,59 @@ partial model PartialBasicTransformer
   output SI.Current i2[m] = plug2.pin.i "二次电流";
 protected
   constant String C1 = Modelica.Utilities.Strings.substring(
-    VectorGroup,
-    1,
+    VectorGroup, 
+    1, 
     1);
   constant String C2 = Modelica.Utilities.Strings.substring(
-    VectorGroup,
-    2,
+    VectorGroup, 
+    2, 
     2);
   parameter Real ni = n * (if C2 == "z" then sqrt(3) else 2) * (if C2 == "d" 
     then 1 else sqrt(3)) / (if C1 == "D" then 1 else sqrt(3));
 public
-  Modelica.Electrical.Polyphase.Interfaces.PositivePlug plug1(final m = m)
-    "一次端口" annotation(Placement(transformation(extent = {{-110, -10},
+  Modelica.Electrical.Polyphase.Interfaces.PositivePlug plug1(final m = m) 
+    "一次端口" annotation(Placement(transformation(extent = {{-110, -10}, 
     {-90, 10}})));
-  Modelica.Electrical.Polyphase.Interfaces.NegativePlug plug2(final m = m)
-    "二次端口" annotation(Placement(transformation(extent = {{90, -10},
+  Modelica.Electrical.Polyphase.Interfaces.NegativePlug plug2(final m = m) 
+    "二次端口" annotation(Placement(transformation(extent = {{90, -10}, 
     {110, 10}})));
   Modelica.Electrical.Polyphase.Basic.Resistor r1(
-    final m = m,
-    final R = fill(R1, m),
-    final T_ref = fill(T1Ref, m),
-    final alpha = fill(Machines.Thermal.convertAlpha(alpha20_1, T1Ref), m),
-    final useHeatPort = true,
-    final T = fill(T1Ref, m)) annotation(Placement(transformation(extent = {{-90,
+    final m = m, 
+    final R = fill(R1, m), 
+    final T_ref = fill(T1Ref, m), 
+    final alpha = fill(Machines.Thermal.convertAlpha(alpha20_1, T1Ref), m), 
+    final useHeatPort = true, 
+    final T = fill(T1Ref, m)) annotation(Placement(transformation(extent = {{-90, 
     10}, {-70, -10}})));
-  Modelica.Electrical.Polyphase.Basic.Inductor l1sigma(final m = m, final L =
-    fill(L1sigma, m)) annotation(Placement(transformation(extent = {{-70,
+  Modelica.Electrical.Polyphase.Basic.Inductor l1sigma(final m = m, final L = 
+    fill(L1sigma, m)) annotation(Placement(transformation(extent = {{-70, 
     -10}, {-50, 10}})));
   Modelica.Electrical.Polyphase.Basic.Resistor r2(
-    final m = m,
-    final R = fill(R2, m),
-    final T_ref = fill(T2Ref, m),
-    final alpha = fill(Machines.Thermal.convertAlpha(alpha20_2, T2Ref), m),
-    final useHeatPort = true,
+    final m = m, 
+    final R = fill(R2, m), 
+    final T_ref = fill(T2Ref, m), 
+    final alpha = fill(Machines.Thermal.convertAlpha(alpha20_2, T2Ref), m), 
+    final useHeatPort = true, 
     final T = fill(T2Ref, m)) annotation(Placement(transformation(extent = {{
     90, 10}, {70, -10}})));
-  Modelica.Electrical.Polyphase.Basic.Inductor l2sigma(final m = m, final L =
-    fill(L2sigma, m)) annotation(Placement(transformation(extent = {{70,
+  Modelica.Electrical.Polyphase.Basic.Inductor l2sigma(final m = m, final L = 
+    fill(L2sigma, m)) annotation(Placement(transformation(extent = {{70, 
     -10}, {50, 10}})));
   Machines.BasicMachines.Components.IdealCore core(
-    final m = m,
-    final n12 = ni,
+    final m = m, 
+    final n12 = ni, 
     final n13 = ni) 
     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
   Machines.Interfaces.ThermalPortTransformer thermalPort(final m = m) if 
     useThermalPort 
     annotation(Placement(transformation(extent = {{-10, 90}, {10, 110}})));
   Machines.Thermal.ThermalAmbientTransformer thermalAmbient(
-    final useTemperatureInputs = false,
-    final T1 = T1Operational,
-    final T2 = T2Operational,
+    final useTemperatureInputs = false, 
+    final T1 = T1Operational, 
+    final T2 = T2Operational, 
     final m = m) if not useThermalPort annotation(Placement(transformation(
-    extent = {{-10, -10}, {10, 10}},
-    rotation = 270,
+    extent = {{-10, -10}, {10, 10}}, 
+    rotation = 270, 
     origin = {-30, 80})));
 protected
   Machines.Interfaces.ThermalPortTransformer internalThermalPort(final m = m) 
@@ -127,11 +127,11 @@ equation
     points = {{70, 0}, {70, 0}}, color = {0, 0, 255}));
   annotation(
     Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(
-    extent = {{150, -60}, {-150, -100}},
+    extent = {{150, -60}, {-150, -100}}, 
     textString = "%VectorGroup"), Text(
-    extent = {{150, 100}, {-150, 60}},
-    textColor = {0, 0, 255},
-    textString = "%name")}),
+    extent = {{150, 100}, {-150, 60}}, 
+    textColor = {0, 0, 255}, 
+    textString = "%name")}), 
     Documentation(info = "<html>
 部分三相变压器模型，包含了初级和次级电阻以及漏感和铁心。
 需要定义初级和次级绕组的电路布局（矢量组）。

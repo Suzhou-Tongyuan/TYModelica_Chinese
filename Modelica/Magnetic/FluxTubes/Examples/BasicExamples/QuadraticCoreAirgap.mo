@@ -11,82 +11,82 @@ model QuadraticCoreAirgap "教学示例：带气隙的铁芯"
   Basic.ElectroMagneticConverter excitingCoil(N=N) 
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   Shapes.FixedShape.Cuboid leftLeg(
-    nonLinearPermeability=false,
-    mu_rConst=mu_r,
-    l=l - a,
-    a=a,
+    nonLinearPermeability=false, 
+    mu_rConst=mu_r, 
+    l=l - a, 
+    a=a, 
     b=a)                           annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-30,30})));
   Shapes.FixedShape.Cuboid upperYoke(
-    nonLinearPermeability=false,
-    mu_rConst=mu_r,
-    l=l - a,
-    a=a,
+    nonLinearPermeability=false, 
+    mu_rConst=mu_r, 
+    l=l - a, 
+    a=a, 
     b=a) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={0,50})));
   Shapes.FixedShape.Cuboid rightLeg(
-    nonLinearPermeability=false,
-    mu_rConst=mu_r,
-    l=l - a - delta,
-    a=a,
+    nonLinearPermeability=false, 
+    mu_rConst=mu_r, 
+    l=l - a - delta, 
+    a=a, 
     b=a)                           annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={30,30})));
   Shapes.FixedShape.Cuboid airGap(
-    nonLinearPermeability=false,
-    mu_rConst=1,
-    l=delta,
-    a=a,
+    nonLinearPermeability=false, 
+    mu_rConst=1, 
+    l=delta, 
+    a=a, 
     b=a) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={30,-30})));
   Basic.ElectroMagneticConverter measuringCoil(N=1) 
     annotation (Placement(transformation(extent={{50,-10},{30,10}})));
   Shapes.FixedShape.Cuboid lowerYoke(
-    nonLinearPermeability=false,
-    mu_rConst=mu_r,
-    l=l - a,
-    a=a,
+    nonLinearPermeability=false, 
+    mu_rConst=mu_r, 
+    l=l - a, 
+    a=a, 
     b=a) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        extent={{10,-10},{-10,10}}, 
         origin={0,-50})));
   Basic.Ground magneticGround 
     annotation (Placement(transformation(extent={{-40,-70},{-20,-50}})));
   Electrical.Analog.Basic.Ground electricGround1 
     annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
   Electrical.Analog.Sources.RampCurrent rampCurrent(
-    I=I,
-    duration=0.015,
+    I=I, 
+    duration=0.015, 
     startTime=0.01)                                 annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-70,0})));
   Sensors.MagneticFluxSensor magFluxSensor annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=270,
+        extent={{10,-10},{-10,10}}, 
+        rotation=270, 
         origin={-30,-30})));
   Electrical.Analog.Basic.Ground electricGround2 
     annotation (Placement(transformation(extent={{50,-30},{70,-10}})));
   Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation (Placement(
         transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=270,
+        extent={{-10,10},{10,-10}}, 
+        rotation=270, 
         origin={70,0})));
   Basic.LeakageWithCoefficient leakage(c_usefulFlux=1 - sigma, G_m(start = 1e-8)) 
                                                          annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Blocks.Sources.RealExpression usefulReluctance(y=1/airGap.G_m) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={20,-20})));
 equation
   connect(excitingCoil.port_p, leftLeg.port_p) 
@@ -119,7 +119,7 @@ equation
     annotation (Line(points={{-30,-10},{-30,-20}}, color={255,127,0}));
   connect(magFluxSensor.port_p, magneticGround.port) 
     annotation (Line(points={{-30,-40},{-30,-50}}, color={255,127,0}));
-  connect(leakage.port_n, airGap.port_n) annotation (Line(points={{0,
+  connect(leakage.port_n, airGap.port_n) annotation (Line(points={{0, 
           -10},{0,-10},{0,-40},{30,-40}}, color={255,127,0}));
   connect(measuringCoil.port_p, leakage.port_p) 
     annotation (Line(points={{30,10},{0,10}}, color={255,127,0}));

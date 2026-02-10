@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Interfaces;
-partial model PartialTwoFramesDoubleSize
+partial model PartialTwoFramesDoubleSize 
   "提供两个坐标系连接器+外部world+确保组件被连接的断言的基础模型(默认图标大小为常规的两倍)"
 
   Interfaces.Frame_a frame_a "固定在组件上的坐标系，带有一个局部力和局部力矩" annotation(Placement(transformation(extent = {{-108, -8}, {-92, 8}})));
@@ -8,21 +8,21 @@ partial model PartialTwoFramesDoubleSize
 protected
   outer Modelica.Mechanics.MultiBody.World world;
 equation
-  assert(cardinality(frame_a) > 0,
+  assert(cardinality(frame_a) > 0, 
     "组件的连接器frame_a未被连接");
-  assert(cardinality(frame_b) > 0,
+  assert(cardinality(frame_b) > 0, 
     "组件的连接器frame_b未被连接");
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true,
-    extent = {{-100, -100}, {100, 100}},
+    preserveAspectRatio = true, 
+    extent = {{-100, -100}, {100, 100}}, 
     initialScale = 0.2), graphics = {Text(
-    extent = {{-117, -13}, {-106, -23}},
-    textColor = {128, 128, 128},
+    extent = {{-117, -13}, {-106, -23}}, 
+    textColor = {128, 128, 128}, 
     textString = "a"), Text(
-    extent = {{110, -15}, {122, -25}},
-    textColor = {128, 128, 128},
-    textString = "b")}),
+    extent = {{110, -15}, {122, -25}}, 
+    textColor = {128, 128, 128}, 
+    textString = "b")}), 
     Documentation(info = "<html>
 <p>
 这个部分模型提供两个坐标系连接器，world对象访问和一个断言来检查两个坐标系连接器是否被连接。

@@ -20,46 +20,46 @@ model Vehicle "具有行驶阻力的一维车辆"
   final parameter SI.Force fGrav=m*g_n*sin(alpha) "重力阻力" 
   annotation(Dialog(enable=false));
   Components.Vehicle vehicle(
-    m=m,
-    J=0,
-    R=R,
-    A=A,
-    Cd=Cd,
-    CrConstant=Cr,
-    vWindConstant=vWind,
-    useInclinationInput=true,
-    s(fixed=true),
+    m=m, 
+    J=0, 
+    R=R, 
+    A=A, 
+    Cd=Cd, 
+    CrConstant=Cr, 
+    vWindConstant=vWind, 
+    useInclinationInput=true, 
+    s(fixed=true), 
     v(fixed=true)) 
     annotation (Placement(transformation(extent={{30,-10},{50,10}})));
   Components.Vehicle vehicle1(
-    m=m,
-    J=0,
-    R=R,
-    A=A,
-    Cd=Cd,
-    CrConstant=Cr,
-    vWindConstant=vWind,
-    useInclinationInput=true,
-    s(fixed=true),
+    m=m, 
+    J=0, 
+    R=R, 
+    A=A, 
+    Cd=Cd, 
+    CrConstant=Cr, 
+    vWindConstant=vWind, 
+    useInclinationInput=true, 
+    s(fixed=true), 
     v(fixed=true)) 
     annotation (Placement(transformation(extent={{30,40},{50,60}})));
   Components.Vehicle trailer(
-    m=m,
-    J=0,
-    R=R,
-    A=A,
-    Cd=Cd,
-    CrConstant=Cr,
-    vWindConstant=vWind,
-    useInclinationInput=true,
-    s(fixed=false),
+    m=m, 
+    J=0, 
+    R=R, 
+    A=A, 
+    Cd=Cd, 
+    CrConstant=Cr, 
+    vWindConstant=vWind, 
+    useInclinationInput=true, 
+    s(fixed=false), 
     v(fixed=false)) 
     annotation (Placement(transformation(extent={{70,40},{90,60}})));
   Modelica.Mechanics.Translational.Sensors.MultiSensor multiSensor 
     annotation (Placement(transformation(extent={{60,84},{80,64}})));
   Modelica.Blocks.Sources.CombiTimeTable timeTableTorqueInclination(
     table=[0,0,0; 5,0,0; 5,5.6,0; 10.8,5.6,0; 10.8,1,0; 20,1,0; 20,2.8,0.05;
-           25,2.8,0.05; 25,1,0; 50,1,0; 50,-5,0; 55,-5,0; 55,0,0; 60,0,0],
+           25,2.8,0.05; 25,1,0; 50,1,0; 50,-5,0; 55,-5,0; 55,0,0; 60,0,0], 
     extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint) 
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Rotational.Sources.Torque torque 
@@ -69,8 +69,8 @@ model Vehicle "具有行驶阻力的一维车辆"
   Modelica.Blocks.Math.Gain gain(k=(fDrag + fRoll + fGrav)*R) 
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Blocks.Math.Gain gain1(k=2) 
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-10,30})));
 equation
   connect(timeTableTorqueInclination.y[1], gain.u) 
@@ -84,7 +84,7 @@ equation
   connect(torque1.flange, vehicle1.flangeR) 
     annotation (Line(points={{20,50},{30,50}}, color={0,0,0}));
   connect(vehicle.inclination, vehicle1.inclination) annotation (Line(
-        points={{34,-12},{34,-20},{60,-20},{60,30},{34,30},{34,38}}, color=
+        points={{34,-12},{34,-20},{60,-20},{60,30},{34,30},{34,38}}, color= 
           {0,0,127}));
   connect(vehicle1.inclination, trailer.inclination) annotation (Line(points={{34,38},{34,30},{74,30},{74,38}}, color={0,0,127}));
   connect(gain.y, gain1.u) 

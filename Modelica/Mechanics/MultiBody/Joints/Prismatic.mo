@@ -1,42 +1,42 @@
 ﻿within Modelica.Mechanics.MultiBody.Joints;
-model Prismatic
+model Prismatic 
 "平移副(1个平移自由度，2个潜在状态变量，可选轴接口)"
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialElementaryJoint;
-  Modelica.Mechanics.Translational.Interfaces.Flange_a axis if useAxisFlange
+  Modelica.Mechanics.Translational.Interfaces.Flange_a axis if useAxisFlange 
     "驱动平移副的一维平动接口" 
     annotation (Placement(transformation(extent={{90,50},{70,70}})));
-  Modelica.Mechanics.Translational.Interfaces.Flange_b support if useAxisFlange
+  Modelica.Mechanics.Translational.Interfaces.Flange_b support if useAxisFlange 
     "驱动支撑的一维平动接口(假定在全局坐标系中固定，而不在运动副中)" 
     annotation (Placement(transformation(extent={{-30,50},{-50,70}})));
 
   parameter Boolean useAxisFlange=false "=true，如果启用轴接口" 
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   parameter Boolean animation=true "=true，如果启用动画（显示为长方体）";
-  parameter Modelica.Mechanics.MultiBody.Types.Axis n={1,0,0}
+  parameter Modelica.Mechanics.MultiBody.Types.Axis n={1,0,0} 
     "平移轴向量，在frame_a中解析" 
     annotation (Evaluate=true);
-  parameter Types.Axis boxWidthDirection={0,1,0}
+  parameter Types.Axis boxWidthDirection={0,1,0} 
     "长方体宽度方向的矢量，在frame_a中解析" 
-    annotation (Evaluate=true, Dialog(tab="动画", group=
+    annotation (Evaluate=true, Dialog(tab="动画", group= 
           "如果animation=true", enable=animation));
-  parameter SI.Distance boxWidth=world.defaultJointWidth
+  parameter SI.Distance boxWidth=world.defaultJointWidth 
     "平移副的的宽度" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
   parameter SI.Distance boxHeight=boxWidth "平移副的高度" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
-  input Types.Color boxColor=Modelica.Mechanics.MultiBody.Types.Defaults.JointColor
+  input Types.Color boxColor=Modelica.Mechanics.MultiBody.Types.Defaults.JointColor 
     "平移副的颜色" 
     annotation (Dialog(colorSelector=true, tab="动画", group="如果animation=true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射(=0：光完全被吸收)" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
-  parameter StateSelect stateSelect=StateSelect.prefer
+  parameter StateSelect stateSelect=StateSelect.prefer 
     "优先使用距离s和v=der(s)作为状态变量" annotation(Dialog(tab="高级"));
-  final parameter Real e[3](each final unit="1")=
-     Modelica.Math.Vectors.normalizeWithAssert(n)
+  final parameter Real e[3](each final unit="1")= 
+     Modelica.Math.Vectors.normalizeWithAssert(n) 
     "平移轴的单位矢量";
 
-  SI.Position s(start=0, final stateSelect=stateSelect)
+  SI.Position s(start=0, final stateSelect=stateSelect) 
 "frame_a和frame_b之间的相对距离" 
 annotation (unassignedMessage="
 无法确定平移副的相对距离s。
@@ -48,22 +48,22 @@ annotation (unassignedMessage="
 (移除所有StateSelect.always设置)。
 ");
 
-SI.Velocity v(start=0,final stateSelect=stateSelect)
+SI.Velocity v(start=0,final stateSelect=stateSelect) 
 "s的一阶导数(相对速度)";
 SI.Acceleration a(start=0) "s的二阶导数(相对加速度)";
 SI.Force f "沿平移轴方向的作用力";
 
 protected
 Visualizers.Advanced.Shape box(
-shapeType="box",
-color=boxColor,
-specularCoefficient=specularCoefficient,
-length=if noEvent(abs(s) > 1.e-6) then s else 1.e-6,
-width=boxWidth,
-height=boxHeight,
-lengthDirection=e,
-widthDirection=boxWidthDirection,
-r=frame_a.r_0,
+shapeType="box", 
+color=boxColor, 
+specularCoefficient=specularCoefficient, 
+length=if noEvent(abs(s) > 1.e-6) then s else 1.e-6, 
+width=boxWidth, 
+height=boxHeight, 
+lengthDirection=e, 
+widthDirection=boxWidthDirection, 
+r=frame_a.r_0, 
 R=frame_a.R) if world.enableAnimation and animation;
 Translational.Components.Fixed fixed 
 annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
@@ -97,60 +97,60 @@ s = internalAxis.s;
       points={{60,40},{80,40}}, color={0,127,0}));
   annotation (
     Icon(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
-          extent={{-100,-50},{-30,41}},
-          pattern=LinePattern.None,
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid,
-          lineColor={0,0,255}),
+          extent={{-100,-50},{-30,41}}, 
+          pattern=LinePattern.None, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid, 
+          lineColor={0,0,255}), 
         Rectangle(
-          extent={{-100,40},{-30,50}},
-          pattern=LinePattern.None,
-          fillPattern=FillPattern.Solid,
-          lineColor={0,0,255}),
+          extent={{-100,40},{-30,50}}, 
+          pattern=LinePattern.None, 
+          fillPattern=FillPattern.Solid, 
+          lineColor={0,0,255}), 
         Rectangle(
-          extent={{-30,-30},{100,20}},
-          pattern=LinePattern.None,
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid,
-          lineColor={0,0,255}),
+          extent={{-30,-30},{100,20}}, 
+          pattern=LinePattern.None, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid, 
+          lineColor={0,0,255}), 
         Rectangle(
-          extent={{-30,20},{100,30}},
-          pattern=LinePattern.None,
-          fillPattern=FillPattern.Solid,
-          lineColor={0,0,255}),
-        Line(points={{-30,-50},{-30,50}}),
-        Line(points={{100,-30},{100,21}}),
+          extent={{-30,20},{100,30}}, 
+          pattern=LinePattern.None, 
+          fillPattern=FillPattern.Solid, 
+          lineColor={0,0,255}), 
+        Line(points={{-30,-50},{-30,50}}), 
+        Line(points={{100,-30},{100,21}}), 
         Text(
-          extent={{60,12},{96,-13}},
-          textColor={128,128,128},
-          textString="b"),
+          extent={{60,12},{96,-13}}, 
+          textColor={128,128,128}, 
+          textString="b"), 
         Text(
-          extent={{-95,13},{-60,-9}},
-          textColor={128,128,128},
-          textString="a"),
+          extent={{-95,13},{-60,-9}}, 
+          textColor={128,128,128}, 
+          textString="a"), 
         Text(
-          visible=useAxisFlange,
-          extent={{-150,-135},{150,-95}},
-          textString="%name",
-          textColor={0,0,255}),
+          visible=useAxisFlange, 
+          extent={{-150,-135},{150,-95}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-150,-90},{150,-60}},
-          textString="n=%n"),
+          extent={{-150,-90},{150,-60}}, 
+          textString="n=%n"), 
         Rectangle(
-          visible=useAxisFlange,
-          extent={{90,30},{100,70}},
-          pattern=LinePattern.None,
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid,
-          lineColor={0,0,255}),
+          visible=useAxisFlange, 
+          extent={{90,30},{100,70}}, 
+          pattern=LinePattern.None, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid, 
+          lineColor={0,0,255}), 
         Text(
-          visible=not useAxisFlange,
-          extent={{-150,60},{150,100}},
-          textString="%name",
-          textColor={0,0,255})}),
+          visible=not useAxisFlange, 
+          extent={{-150,60},{150,100}}, 
+          textString="%name", 
+          textColor={0,0,255})}), 
     Documentation(info="<html>
 <p>
 在运动副中frame_b沿着在frame_a中固定的轴n进行平移。

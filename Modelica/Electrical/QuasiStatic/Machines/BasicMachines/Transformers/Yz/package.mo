@@ -3,7 +3,7 @@ package Yz "变压器：一次侧Y / 二次侧zig-zag"
   extends Modelica.Icons.VariantsPackage;
   annotation (Documentation(info="<html>
 该包含所有可能矢量组中的主 Y 连接 / 次 Z 形连接的变压器。
-</html>",
+</html>", 
     revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

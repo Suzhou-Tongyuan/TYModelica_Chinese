@@ -1,9 +1,9 @@
 ﻿within Modelica.Magnetic.FluxTubes.Material.HardMagnetic;
 record SmCo5 "烧结SmCo5，示例值"
   extends FluxTubes.Material.HardMagnetic.BaseData(
-    H_cBRef=720000,
-    B_rRef=0.95,
-    T_ref=20 + 273.15,
+    H_cBRef=720000, 
+    B_rRef=0.95, 
+    T_ref=20 + 273.15, 
     alpha_Br=-0.0004);
   annotation (Documentation(info="<html>
 <p>

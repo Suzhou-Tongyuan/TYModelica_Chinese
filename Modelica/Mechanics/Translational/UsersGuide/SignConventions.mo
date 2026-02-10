@@ -3,7 +3,7 @@ class SignConventions "符号约定"
   extends Modelica.Icons.Information;
 
   annotation (
-    DocumentationClass=true,
+    DocumentationClass=true, 
     Documentation(info="<html>
 
 <p>

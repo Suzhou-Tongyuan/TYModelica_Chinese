@@ -1,38 +1,38 @@
 ﻿within Modelica.Mechanics.MultiBody.Forces;
-model WorldTorque
+model WorldTorque 
   "作用在frame_b上的外部力矩，由3个输入信号定义，并在world坐标系、frame_b或frame_resolve中解析"
 
   extends Interfaces.PartialOneFrame_b;
 
   Interfaces.Frame_resolve frame_resolve if 
-       resolveInFrame == Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.frame_resolve
+       resolveInFrame == Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.frame_resolve 
     "输入信号可以选择在此坐标系中解析" 
     annotation (Placement(transformation(
-        origin={0,100},
-        extent={{16,-16},{-16,16}},
+        origin={0,100}, 
+        extent={{16,-16},{-16,16}}, 
         rotation=270)));
-  Modelica.Blocks.Interfaces.RealInput torque[3](each final quantity="Torque", each final unit="N.m")
+  Modelica.Blocks.Interfaces.RealInput torque[3](each final quantity="Torque", each final unit="N.m") 
     "在由resolveInFrame定义的坐标系中解析的力矩的x、y、z坐标" 
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   parameter Boolean animation=true "= true时，启用动画";
-  parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameB resolveInFrame=
-    Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.world
+  parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameB resolveInFrame= 
+    Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.world 
     "输入力矩在哪个坐标系中解析(1: world, 2: frame_b, 3: frame_resolve)";
-  input Types.Color color=Modelica.Mechanics.MultiBody.Types.Defaults.TorqueColor
+  input Types.Color color=Modelica.Mechanics.MultiBody.Types.Defaults.TorqueColor 
     "箭头的颜色" 
     annotation (Dialog(colorSelector=true, group="如果animation = true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射率(= 0: 光完全被吸收)" 
     annotation (Dialog(group="如果animation = true", enable=animation));
 
 protected
   Visualizers.Advanced.DoubleArrow arrow(
-    color=color,
-    specularCoefficient=specularCoefficient,
-    R=frame_b.R,
-    r=frame_b.r_0,
-    quantity=Modelica.Mechanics.MultiBody.Types.VectorQuantity.Torque,
-    headAtOrigin=true,
+    color=color, 
+    specularCoefficient=specularCoefficient, 
+    R=frame_b.R, 
+    r=frame_b.r_0, 
+    quantity=Modelica.Mechanics.MultiBody.Types.VectorQuantity.Torque, 
+    headAtOrigin=true, 
     r_head=-frame_b.t) if world.enableAnimation and animation;
 public
   Internal.BasicWorldTorque basicWorldTorque(resolveInFrame=resolveInFrame) 
@@ -43,21 +43,21 @@ protected
     annotation (Placement(transformation(extent={{20,10},{40,30}})));
 equation
   connect(basicWorldTorque.frame_b, frame_b) annotation (Line(
-      points={{10,0},{100,0}},
-      color={95,95,95},
+      points={{10,0},{100,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(basicWorldTorque.torque, torque) annotation (Line(
       points={{-12,0},{-120,0}}, color={0,0,127}));
   connect(frame_resolve, basicWorldTorque.frame_resolve) annotation (Line(
-      points={{0,100},{0,10}},
-      color={95,95,95},
+      points={{0,100},{0,10}}, 
+      color={95,95,95}, 
       pattern=LinePattern.Dot));
   connect(zeroPosition.frame_resolve, basicWorldTorque.frame_resolve) 
     annotation (Line(
-      points={{20,20},{0,20},{0,10}},
-      color={95,95,95},
+      points={{20,20},{0,20},{0,10}}, 
+      color={95,95,95}, 
       pattern=LinePattern.Dot));
-  annotation (defaultComponentName="torque",
+  annotation (defaultComponentName="torque", 
     Documentation(info="<html>
 
 <p>
@@ -115,28 +115,28 @@ equation
 <img src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/Forces/WorldTorque2.png\">
 </div>
 
-</html>"),
+</html>"), 
          Icon(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={
         Text(
-          extent={{-61,64},{46,27}},
-          textColor={192,192,192},
-          textString="resolve"),
+          extent={{-61,64},{46,27}}, 
+          textColor={192,192,192}, 
+          textString="resolve"), 
         Text(
-          extent={{-150,-40},{150,-80}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,-40},{150,-80}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Line(
-          points={{0,95},{0,82}},
-          color={95,95,95},
-          pattern=LinePattern.Dot),
+          points={{0,95},{0,82}}, 
+          color={95,95,95}, 
+          pattern=LinePattern.Dot), 
         Line(
-          points={{-100,0},{-94,13},{-86,28},{-74,48},{-65,60},{-52,72},{-35,
-              81},{-22,84},{-8,84},{7,80},{19,73},{32,65},{44,55},{52,47},{58,
-              40}},
-          thickness=0.5),
+          points={{-100,0},{-94,13},{-86,28},{-74,48},{-65,60},{-52,72},{-35, 
+              81},{-22,84},{-8,84},{7,80},{19,73},{32,65},{44,55},{52,47},{58, 
+              40}}, 
+          thickness=0.5), 
         Polygon(
-          points={{94,10},{75,59},{41,24},{94,10}},
+          points={{94,10},{75,59},{41,24},{94,10}}, 
           fillPattern=FillPattern.Solid)}));
 end WorldTorque;

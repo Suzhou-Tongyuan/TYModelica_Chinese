@@ -1,27 +1,27 @@
 ﻿within Modelica.Mechanics.MultiBody.Forces.Internal;
-model BasicTorque
+model BasicTorque 
   "在两个坐标系之间作用的力矩，由3个输入信号定义"
   import Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB;
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialTwoFrames;
-  Interfaces.Frame_resolve frame_resolve
+  Interfaces.Frame_resolve frame_resolve 
     "输入信号可选择在此坐标系中解析" 
     annotation (Placement(transformation(
-        origin={40,100},
-        extent={{-16,-16},{16,16}},
+        origin={40,100}, 
+        extent={{-16,-16},{16,16}}, 
         rotation=90)));
 
-  Modelica.Blocks.Interfaces.RealInput torque[3](each final quantity="Torque", each final unit="N.m")
+  Modelica.Blocks.Interfaces.RealInput torque[3](each final quantity="Torque", each final unit="N.m") 
     "力矩的x、y、z坐标，解析在resolveInFrame定义的坐标系中" 
     annotation (Placement(transformation(
-        origin={-60,120},
-        extent={{-20,-20},{20,20}},
+        origin={-60,120}, 
+        extent={{-20,-20},{20,20}}, 
         rotation=270)));
   parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB 
-    resolveInFrame=
-    Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_b
+    resolveInFrame= 
+    Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_b 
     "力矩解析的坐标系(1: 全局坐标系，2: frame_a，3: frame_b，4: frame_resolve)";
 
-  SI.Position r_0[3]
+  SI.Position r_0[3] 
     "从frame_a原点到frame_b原点的位置向量，解析在全局坐标系中";
   SI.Torque t_b_0[3] "frame_b.t 解析在全局坐标系中";
 
@@ -59,34 +59,34 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
         Rectangle(
-          extent={{-98,99},{99,-98}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-98,99},{99,-98}}, 
+          lineColor={255,255,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Text(
-          extent={{-59,55},{72,30}},
-          textColor={192,192,192},
-          textString="resolve"),
+          extent={{-59,55},{72,30}}, 
+          textColor={192,192,192}, 
+          textString="resolve"), 
         Text(
-          extent={{-139,-27},{146,-88}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-139,-27},{146,-88}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Polygon(
-          points={{100,20},{84,52},{69,39},{100,20}},
-          fillPattern=FillPattern.Solid),
+          points={{100,20},{84,52},{69,39},{100,20}}, 
+          fillPattern=FillPattern.Solid), 
         Line(
-          points={{40,100},{76,46}},
-          color={95,95,95},
-          pattern=LinePattern.Dot),
+          points={{40,100},{76,46}}, 
+          color={95,95,95}, 
+          pattern=LinePattern.Dot), 
         Polygon(
-          points={{-99,20},{-86,53},{-70,42},{-99,20}},
-          fillPattern=FillPattern.Solid),
+          points={{-99,20},{-86,53},{-70,42},{-99,20}}, 
+          fillPattern=FillPattern.Solid), 
         Line(
-          points={{-60,100},{40,100}},
-          color={95,95,95},
-          pattern=LinePattern.Dot),
-        Line(points={{-79,47},{-70,61},{-59,72},{-45,81},{-32,84},{-20,85}}),
-        Line(points={{77,45},{66,60},{55,69},{49,74},{41,80},{31,84},{20,85}})}),
+          points={{-60,100},{40,100}}, 
+          color={95,95,95}, 
+          pattern=LinePattern.Dot), 
+        Line(points={{-79,47},{-70,61},{-59,72},{-45,81},{-32,84},{-20,85}}), 
+        Line(points={{77,45},{66,60},{55,69},{49,74},{41,80},{31,84},{20,85}})}), 
     Documentation(info="<html>
 <p>
 <strong>力矩</strong>连接器的<strong>3</strong>个信号被解释为作用在此组件的frame_b所连接的坐标系连接器上的<strong>力矩</strong>的x、y和z坐标。

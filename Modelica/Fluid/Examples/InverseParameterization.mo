@@ -1,5 +1,5 @@
 ﻿within Modelica.Fluid.Examples;
-model InverseParameterization
+model InverseParameterization 
   "展示了给定额定值下的泵和管道的参数化设置"
   extends Modelica.Icons.Example;
 
@@ -7,34 +7,34 @@ model InverseParameterization
   //replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
   //parameter Real eps_m_flow_turbulent = 0.0 "湍流 |m_flow| >= eps_m_flow_nominal*m_flow_nominal";
-  parameter Real eps_m_flow_turbulent = 0.1
+  parameter Real eps_m_flow_turbulent = 0.1 
     "湍流 |m_flow| >= eps_m_flow_nominal*m_flow_nominal";
   //parameter Real eps_m_flow_turbulent = 1 "Turbulent flow |m_flow| >= eps_m_flow_nominal*m_flow_nominal";
 
   Modelica.Fluid.Sources.Boundary_pT source(
-  redeclare package Medium = Medium,
-    nPorts = 1,
-    use_p_in = false,
+  redeclare package Medium = Medium, 
+    nPorts = 1, 
+    use_p_in = false, 
     p = 100000) 
     annotation(Placement(transformation(extent = {{-76, 14}, {-64, 26}})));
   Modelica.Fluid.Machines.ControlledPump pump(
-    m_flow_nominal = 1,
-    control_m_flow = false,
-    use_p_set = true,
-  redeclare package Medium = Medium,
-    p_a_nominal = 100000,
+    m_flow_nominal = 1, 
+    control_m_flow = false, 
+    use_p_set = true, 
+  redeclare package Medium = Medium, 
+    p_a_nominal = 100000, 
     p_b_nominal = 200000) 
     annotation(Placement(transformation(extent = {{-40, 10}, {-20, 30}})));
   Modelica.Fluid.Fittings.SimpleGenericOrifice orifice(
-  redeclare package Medium = Medium,
-    diameter = 2.54e-2,
-    use_zeta = false,
-    zeta = 0,
-    dp_nominal = 100000,
-    m_flow_nominal = 1) annotation(Placement(transformation(extent = {{20, 10}, {40,
+  redeclare package Medium = Medium, 
+    diameter = 2.54e-2, 
+    use_zeta = false, 
+    zeta = 0, 
+    dp_nominal = 100000, 
+    m_flow_nominal = 1) annotation(Placement(transformation(extent = {{20, 10}, {40, 
     30}})));
 
-  Modelica.Fluid.Sources.Boundary_pT sink(nPorts = 1, redeclare package Medium = Medium, p =
+  Modelica.Fluid.Sources.Boundary_pT sink(nPorts = 1, redeclare package Medium = Medium, p = 
     100000) 
     annotation(Placement(transformation(extent = {{76, 14}, {64, 26}})));
 
@@ -42,39 +42,39 @@ model InverseParameterization
     annotation(Placement(transformation(extent = {{-90, 50}, {
     -70, 70}})));
   Modelica.Fluid.Pipes.StaticPipe pipe1(
-  redeclare package Medium = Medium,
-    flowModel(states(h(each start = 1e5))),
-    diameter = 2.54e-2,
-    length = 0,
-  redeclare model FlowModel =
+  redeclare package Medium = Medium, 
+    flowModel(states(h(each start = 1e5))), 
+    diameter = 2.54e-2, 
+    length = 0, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalTurbulentPipeFlow(
-    show_Res = true,
-    m_flow_nominal = 1,
-    m_flow_turbulent = eps_m_flow_turbulent * 1,
+    show_Res = true, 
+    m_flow_nominal = 1, 
+    m_flow_turbulent = eps_m_flow_turbulent * 1, 
     dp_nominal = 100000)) 
-    annotation(Placement(transformation(extent = {{20, -30}, {40,
+    annotation(Placement(transformation(extent = {{20, -30}, {40, 
     -10}})));
-  Modelica.Fluid.Sources.Boundary_pT sink1(nPorts = 1,
+  Modelica.Fluid.Sources.Boundary_pT sink1(nPorts = 1, 
   redeclare package Medium = Medium, p = 200000) 
     annotation(Placement(transformation(extent = {{76, -26}, {64, -14}})));
   Modelica.Blocks.Sources.Ramp p_set(
-    height = 0.2e5,
-    offset = 1.9e5,
-    duration = 8,
+    height = 0.2e5, 
+    offset = 1.9e5, 
+    duration = 8, 
     startTime = 1) 
     annotation(Placement(transformation(extent = {{-50, 40}, {-30, 60}})));
   Modelica.Fluid.Pipes.StaticPipe pipe2(
-  redeclare package Medium = Medium,
-    diameter = 2.54e-2,
-    length = 1000,
-  redeclare model FlowModel =
+  redeclare package Medium = Medium, 
+    diameter = 2.54e-2, 
+    length = 1000, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow(
-    show_Res = true,
-    dp_nominal = 100000,
+    show_Res = true, 
+    dp_nominal = 100000, 
     m_flow_nominal = 1)) 
-    annotation(Placement(transformation(extent = {{20, -70}, {40,
+    annotation(Placement(transformation(extent = {{20, -70}, {40, 
     -50}})));
-  Modelica.Fluid.Sources.Boundary_pT sink2(nPorts = 1,
+  Modelica.Fluid.Sources.Boundary_pT sink2(nPorts = 1, 
   redeclare package Medium = Medium, p = 200000) 
     annotation(Placement(transformation(extent = {{76, -66}, {64, -54}})));
 equation
@@ -98,9 +98,9 @@ equation
   connect(pump.port_b, pipe2.port_a) annotation(Line(
     points = {{-20, 20}, {0, 20}, {0, -60}, {20, -60}}, color = {0, 127, 255}));
   annotation(
-    __Dymola_Commands(file(ensureSimulated = true) = "modelica://Modelica/Resources/Scripts/Dymola/Fluid/InverseParameterization/plotResults.mos"
-    "plotResults"),
-    experiment(StopTime = 10, Interval = 0.001),
+    __Dymola_Commands(file(ensureSimulated = true) = "modelica://Modelica/Resources/Scripts/Dymola/Fluid/InverseParameterization/plotResults.mos" 
+    "plotResults"), 
+    experiment(StopTime = 10, Interval = 0.001), 
     Documentation(info = "<html><p>
 泵、孔板与两根管道的参数化（基于简单标称值）</span>。说明，管道 1 和管道 2 分别使用标准湍流模型（flowModel NominalTurbulentFlow）
 和标准层流模型（flowModel NominalLaminarFlow），不需要指定几何数据。在给定额定压力损失和额定质量流量的情况下，pathLengths_nominal值由内部获得。

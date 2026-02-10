@@ -1,30 +1,30 @@
 ﻿within Modelica.Mechanics.Rotational.Sources;
-model Speed
+model Speed 
   "根据参考角速度信号强制一维转动接口转动"
   extends 
     Modelica.Mechanics.Rotational.Interfaces.PartialElementaryOneFlangeAndSupport2;
-  parameter Boolean exact=false
+  parameter Boolean exact=false 
     "exact为true时精确处理输入信号，为false时对输入信号进行滤波" 
     annotation (Evaluate=true);
-  parameter SI.Frequency f_crit=50
+  parameter SI.Frequency f_crit=50 
     "如果exact为false，则为用于滤波输入信号的滤波器的临界频率" 
     annotation (Dialog(enable=not exact));
   SI.Angle phi(
-    start=0,
-    fixed=true,
-    stateSelect=StateSelect.prefer)
+    start=0, 
+    fixed=true, 
+    stateSelect=StateSelect.prefer) 
     "一维转动接口相对于支撑组件的旋转角度";
   SI.AngularVelocity w(stateSelect=if exact then StateSelect.default else 
-        StateSelect.prefer)
+        StateSelect.prefer) 
     "一维转动接口相对于支撑组件的角速度";
-  SI.AngularAcceleration a
+  SI.AngularAcceleration a 
     "如果exact为false，则为一维转动接口相对于支撑组件的角加速度，否则为虚拟变量";
-  Modelica.Blocks.Interfaces.RealInput w_ref(unit="rad/s")
+  Modelica.Blocks.Interfaces.RealInput w_ref(unit="rad/s") 
     "作为输入信号的一维转动接口相对于支撑组件的参考角速度" 
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 
 protected
-  parameter SI.AngularFrequency w_crit=2*Modelica.Constants.pi
+  parameter SI.AngularFrequency w_crit=2*Modelica.Constants.pi 
       *f_crit "临界频率";
 initial equation
   if not exact then
@@ -66,28 +66,28 @@ equation
 <p>
 输入信号可以从Modelica.Blocks.Sources块库中的信号发生器块之一提供。
 </p>
-</html>"),
+</html>"), 
        Icon(
-    coordinateSystem(preserveAspectRatio=true,
-      extent={{-100.0,-100.0},{100.0,100.0}}),
+    coordinateSystem(preserveAspectRatio=true, 
+      extent={{-100.0,-100.0},{100.0,100.0}}), 
       graphics={
-    Text(extent={{-140,-60},{-40,-30}},
-          textColor={128,128,128},
-          horizontalAlignment=TextAlignment.Right,
-          textString="w_ref"),
-    Text(extent={{30,-60},{150,-30}},
-      textString="exact="),
-    Text(extent={{30,-90},{150,-60}},
-      textString="%exact"),
-    Rectangle(lineColor={64,64,64},
-      fillColor={192,192,192},
-      fillPattern=FillPattern.HorizontalCylinder,
-      extent={{-100.0,-20.0},{100.0,20.0}}),
-    Line(points={{-30.0,-32.0},{30.0,-32.0}}),
-    Line(points={{0.0,52.0},{0.0,32.0}}),
-    Line(points={{-29.0,32.0},{30.0,32.0}}),
-    Line(points={{0.0,-32.0},{0.0,-100.0}}),
-    Text(textColor={0,0,255},
-      extent={{-150,60},{150,100}},
+    Text(extent={{-140,-60},{-40,-30}}, 
+          textColor={128,128,128}, 
+          horizontalAlignment=TextAlignment.Right, 
+          textString="w_ref"), 
+    Text(extent={{30,-60},{150,-30}}, 
+      textString="exact="), 
+    Text(extent={{30,-90},{150,-60}}, 
+      textString="%exact"), 
+    Rectangle(lineColor={64,64,64}, 
+      fillColor={192,192,192}, 
+      fillPattern=FillPattern.HorizontalCylinder, 
+      extent={{-100.0,-20.0},{100.0,20.0}}), 
+    Line(points={{-30.0,-32.0},{30.0,-32.0}}), 
+    Line(points={{0.0,52.0},{0.0,32.0}}), 
+    Line(points={{-29.0,32.0},{30.0,32.0}}), 
+    Line(points={{0.0,-32.0},{0.0,-100.0}}), 
+    Text(textColor={0,0,255}, 
+      extent={{-150,60},{150,100}}, 
       textString="%name")}));
 end Speed;

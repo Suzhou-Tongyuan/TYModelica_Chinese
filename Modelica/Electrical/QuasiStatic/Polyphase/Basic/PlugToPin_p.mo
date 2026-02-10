@@ -2,7 +2,7 @@
 model PlugToPin_p "连接一个（正）引脚"
   parameter Integer m(final min=1) = 3 "相数" annotation(Evaluate=true);
   parameter Integer k(
-    final min=1,
+    final min=1, 
     final max=m) = 1 "相索引" annotation(Evaluate=true);
   Interfaces.PositivePlug plug_p(final m=m) annotation (Placement(
         transformation(extent={{-30,-10},{-10,10}})));
@@ -18,18 +18,18 @@ equation
     plug_p.pin[j].i = if j == k then -pin_p.i else Complex(0);
   end for;
   annotation (defaultComponentName="plugToPin", Icon(graphics={Rectangle(
-              extent={{-20,20},{40,-20}},
-              fillColor={215,215,215},
+              extent={{-20,20},{40,-20}}, 
+              fillColor={215,215,215}, 
               fillPattern=FillPattern.Solid),Ellipse(
-              extent={{-40,20},{0,-20}},
-              fillColor={215,215,215},
-              fillPattern=FillPattern.Solid),
+              extent={{-40,20},{0,-20}}, 
+              fillColor={215,215,215}, 
+              fillPattern=FillPattern.Solid), 
         Text(
-          extent={{-150,50},{150,90}},
-              textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,50},{150,90}}, 
+              textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-150,-40},{150,-80}},
+          extent={{-150,-40},{150,-80}}, 
               textString="k = %k")}), Documentation(info="<html>
 <p>
 连接多相（正）插头的单相（正）引脚<code>k</code>到单相（正）引脚。

@@ -1,16 +1,16 @@
 ﻿within Modelica.Mechanics.MultiBody.Visualizers.Advanced.SurfaceCharacteristics;
-function pipeWithScalarField
+function pipeWithScalarField 
   "函数定义了管道曲面特性，其中标量场值沿着管道轴线以颜色显示"
   extends Modelica.Mechanics.MultiBody.Interfaces.partialSurfaceCharacteristic(
     final multiColoredSurface=true);
   input SI.Radius rOuter "圆柱体的外半径" annotation(Dialog);
   input SI.Length length "圆柱体的长度" annotation(Dialog);
-  input SI.Position xsi[:]
+  input SI.Position xsi[:] 
     "沿着管道的相对位置，其中x[1]=0，x[end]=1" annotation(Dialog);
   input Real T[size(xsi,1)] "位置xsi*length处的标量场值" annotation(Dialog);
   input Real T_min "T<=T_min映射到colorMap[1,:]中" annotation(Dialog);
   input Real T_max "T>=T_max映射到colorMap[end,:]中" annotation(Dialog);
-  input Real colorMap[:,3]
+  input Real colorMap[:,3] 
     "将标量T映射到相应颜色的颜色映射" annotation(Dialog);
 protected
   Real beta;
@@ -29,9 +29,9 @@ algorithm
 
     // 将标量场值 Ti 映射到颜色值
     Ci := Modelica.Mechanics.MultiBody.Visualizers.Colors.scalarToColor(
-      Ti,
-      T_min,
-      T_max,
+      Ti, 
+      T_min, 
+      T_max, 
       colorMap);
 
     // 确定输出

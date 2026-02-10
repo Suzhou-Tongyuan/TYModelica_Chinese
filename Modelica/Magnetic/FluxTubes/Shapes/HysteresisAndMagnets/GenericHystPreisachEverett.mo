@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
+within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
 model GenericHystPreisachEverett
   "基于Preisach模型和Everett函数的具有铁磁滞回的通用磁通管[Ya89]"
   import Modelica.Constants.pi;
@@ -6,12 +6,12 @@ model GenericHystPreisachEverett
   parameter FluxTubes.Material.HysteresisEverettParameter.BaseData mat=
       FluxTubes.Material.HysteresisEverettParameter.BaseData()
     "Preisach 参数" 
-    annotation (Dialog(group="Material"), choicesAllMatching=true);
+    annotation (Dialog(group="材料"), choicesAllMatching=true);
 
-  parameter Integer Count=100 "历史数组的长度" annotation(Dialog(group="Advanced"));
+  parameter Integer Count=100 "历史数组的长度" annotation(Dialog(group="高级"));
   parameter SI.MagneticFieldStrength eps=1e-5
-    "Preisach 历史的宽容" annotation(Dialog(group="Advanced"));
-  parameter SI.Time t1=1e-6 "初始化时间" annotation(Dialog(group="Advanced"));
+    "Preisach 历史的宽容" annotation(Dialog(group="高级"));
+  parameter SI.Time t1=1e-6 "初始化时间" annotation(Dialog(group="高级"));
 
   extends BaseClasses.GenericHysteresis(sigma=mat.sigma);
 

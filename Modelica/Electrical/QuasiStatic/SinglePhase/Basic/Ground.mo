@@ -10,13 +10,13 @@ equation
   end if;
   pin.v = Complex(0);
   annotation (Icon(graphics={
-        Line(points={{-60,50},{60,50}}, color={85,170,255}),
-        Line(points={{-40,30},{40,30}}, color={85,170,255}),
-        Line(points={{-20,10},{20,10}}, color={85,170,255}),
-        Line(points={{0,90},{0,50}}, color={85,170,255}),
+        Line(points={{-60,50},{60,50}}, color={85,170,255}), 
+        Line(points={{-40,30},{40,30}}, color={85,170,255}), 
+        Line(points={{-20,10},{20,10}}, color={85,170,255}), 
+        Line(points={{0,90},{0,50}}, color={85,170,255}), 
         Text(
-          extent={{150,-50},{-150,-10}},
-          textString="%name",
+          extent={{150,-50},{-150,-10}}, 
+          textString="%name", 
           textColor={0,0,255})}), Documentation(info="<html>
 <p>
 单相电路的接地。接地节点的电势为零。

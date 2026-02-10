@@ -4,16 +4,16 @@ connector PositivePlug "具有m个引脚的正极电气多相插头"
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={Ellipse(
-          extent={{-100,100},{100,-100}},
-          lineColor={0,0,255},
-          fillColor={0,0,255},
-          fillPattern=FillPattern.Solid)}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+          extent={{-100,100},{100,-100}}, 
+          lineColor={0,0,255}, 
+          fillColor={0,0,255}, 
+          fillPattern=FillPattern.Solid)}), 
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
             {100,100}}), graphics={Ellipse(
-          extent={{-40,40},{40,-40}},
-          lineColor={0,0,255},
-          fillColor={0,0,255},
-          fillPattern=FillPattern.Solid)}),
+          extent={{-40,40},{40,-40}}, 
+          lineColor={0,0,255}, 
+          fillColor={0,0,255}, 
+          fillPattern=FillPattern.Solid)}), 
     Documentation(info="<html>
 <p>
 连接器PositivePlug和NegativePlug几乎相同。

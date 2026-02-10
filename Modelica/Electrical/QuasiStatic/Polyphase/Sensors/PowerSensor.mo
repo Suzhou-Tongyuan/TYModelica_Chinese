@@ -12,50 +12,50 @@ model PowerSensor "功率传感器"
   Interfaces.NegativePlug voltageN(final m=m) annotation (Placement(
         transformation(extent={{-10,-110},{10,-90}})));
   Modelica.ComplexBlocks.Interfaces.ComplexOutput apparentPower "复合输出信号的总视在功率" annotation (Placement(transformation(
-        origin={-100,-110},
-        extent={{-10,-10},{10,10}},
+        origin={-100,-110}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270), iconTransformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-100,-110})));
   Basic.PlugToPins_p plugToPinsCurrentP(final m=m) annotation (Placement(
         transformation(extent={{-80,-10},{-60,10}})));
   Basic.PlugToPins_p plugToPinsVoltageP(final m=m) annotation (Placement(
         transformation(
-        origin={0,70},
-        extent={{-10,-10},{10,10}},
+        origin={0,70}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Basic.PlugToPins_n plugToPinsCurrentN(final m=m) annotation (Placement(
         transformation(extent={{80,-10},{60,10}})));
   Basic.PlugToPins_n plugToPinsVoltageN(final m=m) annotation (Placement(
         transformation(
-        origin={0,-70},
-        extent={{-10,10},{10,-10}},
+        origin={0,-70}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=90)));
   QuasiStatic.SinglePhase.Sensors.PowerSensor powerSensor[m] 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.ComplexBlocks.ComplexMath.Sum sum(final nin=m) annotation (
       Placement(transformation(
-        origin={-80,-70},
-        extent={{-10,-10},{10,10}},
+        origin={-80,-70}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
 
   SI.ApparentPower abs_apparentPower=Modelica.ComplexMath.abs(apparentPower) "复合视在功率的幅值";
   SI.Angle arg_apparentPower=Modelica.ComplexMath.arg(apparentPower) "复合视在功率的参数";
 
 equation
-  connect(plugToPinsCurrentP.plug_p, currentP) annotation (Line(points={{-72,
+  connect(plugToPinsCurrentP.plug_p, currentP) annotation (Line(points={{-72, 
           0},{-79,0},{-86,0},{-100,0}}, color={85,170,255}));
   connect(currentN, plugToPinsCurrentN.plug_n) annotation (Line(points={{
           100,0},{93,0},{86,0},{72,0}}, color={85,170,255}));
   connect(voltageP, plugToPinsVoltageP.plug_p) 
     annotation (Line(points={{0,100},{0,100},{0,72}}, color={85,170,255}));
-  connect(plugToPinsVoltageN.plug_n, voltageN) annotation (Line(points={{0,
+  connect(plugToPinsVoltageN.plug_n, voltageN) annotation (Line(points={{0, 
           -72},{0,-72},{0,-100}}, color={85,170,255}));
   connect(plugToPinsCurrentP.pin_p, powerSensor.currentP) annotation (Line(
         points={{-68,0},{-53.5,0},{-53.5,0},{-39,0},{-39,0},{-10,0}}, color={85,170,255}));
   connect(powerSensor.currentN, plugToPinsCurrentN.pin_n) annotation (Line(
-        points={{10,0},{24.5,0},{24.5,0},{39,0},{39,0},{68,0}}, color={85,
+        points={{10,0},{24.5,0},{24.5,0},{39,0},{39,0},{68,0}}, color={85, 
           170,255}));
   connect(powerSensor.voltageP, plugToPinsVoltageP.pin_p) annotation (Line(
         points={{0,10},{0,10},{0,68},{0,68}}, color={85,170,255}));
@@ -65,18 +65,18 @@ equation
   connect(sum.y, apparentPower) annotation (Line(points={{-80,-81},{-80,-90},{-100,-90},{-100,-110}}, color={85,170,255}));
   annotation (
     Icon(graphics={
-        Line(points={{0,100},{0,70}}, color={85,170,255}),
-        Line(points={{0,-70},{0,-100}}, color={85,170,255}),
+        Line(points={{0,100},{0,70}}, color={85,170,255}), 
+        Line(points={{0,-70},{0,-100}}, color={85,170,255}), 
         Text(
-          textColor={0,0,255},
-          extent={{-150,110},{150,150}},
-          textString="%name"),
-        Line(points={{-100,0},{100,0}}, color={85,170,255}),
-      Line(points={{-100,-100},{-100,-80},{-58,-38}}, color={85,170,255}),
+          textColor={0,0,255}, 
+          extent={{-150,110},{150,150}}, 
+          textString="%name"), 
+        Line(points={{-100,0},{100,0}}, color={85,170,255}), 
+      Line(points={{-100,-100},{-100,-80},{-58,-38}}, color={85,170,255}), 
         Text(
-          extent={{-30,-10},{30,-70}},
-          textColor={64,64,64},
-          textString="V.A")}),
+          extent={{-30,-10},{30,-70}}, 
+          textColor={64,64,64}, 
+          textString="V.A")}), 
     Documentation(info="<html>
 
 <p>

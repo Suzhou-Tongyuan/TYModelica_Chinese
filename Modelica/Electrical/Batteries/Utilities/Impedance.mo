@@ -23,28 +23,28 @@ equation
 </p>
 </html>"), Icon(graphics={
         Ellipse(
-          extent={{-42,60},{78,-60}},
-          lineColor={0,0,0},
-          startAngle=0,
-          endAngle=141,
-          closure=EllipseClosure.None),
+          extent={{-42,60},{78,-60}}, 
+          lineColor={0,0,0}, 
+          startAngle=0, 
+          endAngle=141, 
+          closure=EllipseClosure.None), 
         Polygon(
-          points={{-82,90},{-90,68},{-74,68},{-82,90}},
-          lineColor={192,192,192},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
-        Line(points={{-82,-80},{-82,68}},
-                                      color={192,192,192}),
-        Line(points={{-82,0},{76,0}}, color={192,192,192}),
+          points={{-82,90},{-90,68},{-74,68},{-82,90}}, 
+          lineColor={192,192,192}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid), 
+        Line(points={{-82,-80},{-82,68}}, 
+                                      color={192,192,192}), 
+        Line(points={{-82,0},{76,0}}, color={192,192,192}), 
         Polygon(
-          points={{98,0},{76,8},{76,-8},{98,0}},
-          lineColor={192,192,192},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
+          points={{98,0},{76,8},{76,-8},{98,0}}, 
+          lineColor={192,192,192}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid), 
         Ellipse(
-          extent={{-82,40},{-2,-40}},
-          lineColor={0,0,0},
-          startAngle=70,
-          endAngle=180,
+          extent={{-82,40},{-2,-40}}, 
+          lineColor={0,0,0}, 
+          startAngle=70, 
+          endAngle=180, 
           closure=EllipseClosure.None)}));
 end Impedance;

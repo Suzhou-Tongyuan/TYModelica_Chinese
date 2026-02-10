@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.Examples.Transformers;
-model IMC_Transformer
+model IMC_Transformer 
   "测试示例：鼠笼型感应电机-变压器起动"
   extends Machines.Examples.InductionMachines.IMC_Transformer;
   annotation (experiment(StopTime=2.5, Interval=1E-4, Tolerance=1E-6), Documentation(

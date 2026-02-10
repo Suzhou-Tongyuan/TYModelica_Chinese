@@ -65,7 +65,7 @@ density(0,-1,1) // = 0.5
 </html>"            ));
     end density;
 
-    function cumulative
+    function cumulative 
       "均匀分布的累积分布函数"
       extends Modelica.Math.Distributions.Interfaces.partialCumulative;
       input Real u_min=0 "u的下限" annotation (Dialog);
@@ -330,7 +330,7 @@ density(3,1,0.5) // = 0.00026766045152977074
 </html>"            ));
     end density;
 
-    function cumulative
+    function cumulative 
       "正态分布的累积分布函数"
       import Modelica.Math.Special;
       extends Modelica.Math.Distributions.Interfaces.partialCumulative;
@@ -485,17 +485,17 @@ quantile(0.5,1,0.5) // = 1
 </html>"            ));
     end quantile;
   annotation (Icon(graphics={Line(
-            points={{-70,-63.953},{-66.5,-63.8975},{-63,-63.7852},{-59.5,
+            points={{-70,-63.953},{-66.5,-63.8975},{-63,-63.7852},{-59.5, 
             -63.5674},{-56,-63.1631},{-52.5,-62.4442},{-49,-61.2213},{
-            -45.5,-59.2318},{-42,-56.1385},{-38.5,-51.5468},{-35,-45.0467},
-            {-31.5,-36.2849},{-28,-25.0617},{-24.5,-11.4388},{-21,4.16818},
+            -45.5,-59.2318},{-42,-56.1385},{-38.5,-51.5468},{-35,-45.0467}, 
+            {-31.5,-36.2849},{-28,-25.0617},{-24.5,-11.4388},{-21,4.16818}, 
             {-17.5,20.9428},{-14,37.695},{-10.5,52.9771},{-7,65.2797},{
-            -3.5,73.2739},{0,76.047},{3.5,73.2739},{7,65.2797},{10.5,
-            52.9771},{14,37.695},{17.5,20.9428},{21,4.16818},{24.5,
-            -11.4388},{28,-25.0617},{31.5,-36.2849},{35,-45.0467},{38.5,
-            -51.5468},{42,-56.1385},{45.5,-59.2318},{49,-61.2213},{52.5,
-            -62.4442},{56,-63.1631},{59.5,-63.5674},{63,-63.7852},{66.5,
-            -63.8975},{70,-63.953}},
+            -3.5,73.2739},{0,76.047},{3.5,73.2739},{7,65.2797},{10.5, 
+            52.9771},{14,37.695},{17.5,20.9428},{21,4.16818},{24.5, 
+            -11.4388},{28,-25.0617},{31.5,-36.2849},{35,-45.0467},{38.5, 
+            -51.5468},{42,-56.1385},{45.5,-59.2318},{49,-61.2213},{52.5, 
+            -62.4442},{56,-63.1631},{59.5,-63.5674},{63,-63.7852},{66.5, 
+            -63.8975},{70,-63.953}}, 
             smooth=Smooth.Bezier)}), Documentation(info="<html>
 <p>
 这个包提供
@@ -552,9 +552,9 @@ quantile(0.5,1,0.5) // = 1
     function density "截断正态分布的密度"
       import Modelica.Math.Distributions.Normal;
       extends Modelica.Math.Distributions.Interfaces.partialTruncatedDensity;
-      input Real mu= (u_max + u_min)/2
+      input Real mu= (u_max + u_min)/2 
         "Expectation (mean) value of the normal distribution" annotation(Dialog);
-      input Real sigma=(u_max - u_min)/6
+      input Real sigma=(u_max - u_min)/6 
         "Standard deviation of the normal distribution" annotation(Dialog);
     protected
       Real pdf;
@@ -629,13 +629,13 @@ A. Kl&ouml;ckner, F. v.d. Linden, D. Zimmer, M. Otter.<br>
 </html>"                        ));
     end density;
 
-    function cumulative
+    function cumulative 
       "截断正态分布的累积分布函数"
       import Modelica.Math.Distributions.Normal;
       extends Modelica.Math.Distributions.Interfaces.partialTruncatedCumulative;
-      input Real mu= (u_max + u_min)/2
+      input Real mu= (u_max + u_min)/2 
         "正态分布的期望值(平均值)" annotation(Dialog);
-      input Real sigma=(u_max - u_min)/6
+      input Real sigma=(u_max - u_min)/6 
         "正态分布的标准差" annotation(Dialog);
     protected
       Real cdf;
@@ -724,9 +724,9 @@ cumulative(0.5,-1.5,1.5,1,0.9)  // = 0.4046868865634537
     function quantile "截断正态分布的定量"
       import Modelica.Math.Distributions.Normal;
       extends Modelica.Math.Distributions.Interfaces.partialTruncatedQuantile;
-      input Real mu= (y_max + y_min)/2
+      input Real mu= (y_max + y_min)/2 
         "正态分布的期望（平均）值" annotation(Dialog);
-      input Real sigma=(y_max - y_min)/6
+      input Real sigma=(y_max - y_min)/6 
         "正态分布的标准差" annotation(Dialog);
     protected
       Real cdf_min = Normal.cumulative(y_min, mu, sigma);
@@ -820,25 +820,25 @@ quantile(0.5,0,1,0.5,0.9) // = 0.5
 </html>"            ));
     end quantile;
     annotation (Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={1,1}),
+          preserveAspectRatio=false, 
+          extent={{-100,-100},{100,100}}, 
+          grid={1,1}), 
                      graphics={
           Line(
-            points={{-32,-32},{-32,-80}}),
+            points={{-32,-32},{-32,-80}}), 
                              Line(
             points={{-32,-32},{-28,-21.0617},{-24.5,-7.4388},{-21,8.1682},{
-                -17.5,24.9428},{-14,41.695},{-10.5,56.9771},{-7,69.2797},{-3.5,
+                -17.5,24.9428},{-14,41.695},{-10.5,56.9771},{-7,69.2797},{-3.5, 
                 77.2739},{0,80.047},{3.5,77.2739},{7,69.2797},{10.5,56.9771},{
-                14,41.695},{17.5,24.9428},{21,8.1682},{24.5,-7.4388},{28,
-                -21.0617},{31.5,-32.2849},{35,-41.0467}},
-            smooth=Smooth.Bezier),
+                14,41.695},{17.5,24.9428},{21,8.1682},{24.5,-7.4388},{28, 
+                -21.0617},{31.5,-32.2849},{35,-41.0467}}, 
+            smooth=Smooth.Bezier), 
           Line(
-            points={{34.5,-40.5},{34.5,-78.5}}),
+            points={{34.5,-40.5},{34.5,-78.5}}), 
           Line(
-            points={{34.5,-78.5},{70.5,-78.5}}),
+            points={{34.5,-78.5},{70.5,-78.5}}), 
           Line(
-            points={{-68,-79},{-32,-79}})}),
+            points={{-68,-79},{-32,-79}})}), 
       Documentation(info="<html>
 <p>
 这个包提供
@@ -897,7 +897,7 @@ quantile(0.5,0,1,0.5,0.9) // = 0.5
 
     function density "威布尔分布的密度"
       extends Modelica.Math.Distributions.Interfaces.partialDensity;
-      input Real lambda(min=0) = 1
+      input Real lambda(min=0) = 1 
         "威布尔分布的标度参数" annotation(Dialog);
       input Real k(min=0) "威布尔分布的形状参数" annotation(Dialog);
     algorithm
@@ -965,11 +965,11 @@ density(1,0.5,2) // = 0.14652511110987343
 </html>"            ));
     end density;
 
-    function cumulative
+    function cumulative 
       "威布尔分布的累积分布函数"
       import Modelica.Math.Special;
       extends Modelica.Math.Distributions.Interfaces.partialCumulative;
-      input Real lambda(min=0) = 1
+      input Real lambda(min=0) = 1 
         "威布尔分布的标度参数" annotation(Dialog);
       input Real k(min=0) "威布尔分布的形状参数" annotation(Dialog);
     algorithm
@@ -1047,7 +1047,7 @@ cumulative(0.5,0.5,1) // = 0.6321205588285577
 
     function quantile "威布尔分布的量值"
       extends Modelica.Math.Distributions.Interfaces.partialQuantile;
-      input Real lambda(min=0) = 1
+      input Real lambda(min=0) = 1 
         "威布尔分布的标度参数" annotation(Dialog);
       input Real k(min=0) "威布尔分布的形状参数" annotation(Dialog);
     algorithm
@@ -1124,12 +1124,12 @@ quantile(0.5,1,0.5) // = 0.41627730557884884
 </html>"        ));
     end quantile;
     annotation (Icon(graphics={Line(
-            points={{-72,-60},{-68.5,-60},{-65,-60},{-61.5,-60},{-58,-60},{-54.5,-60},{-51,-60},{-47.5,
-                -60},{-44,-60},{-40.5,-60},{-37,-60},{-33.5,-60},{-30,-60},{-26.5,-60},{-23,-60},{-19.5,
-                -60},{-16,-60},{-12.5,-60},{-9,-60},{-5.5,-60},{-2,-60},{1.5,43.1424},{5,71.1658},{8.5,
-                80},{12,77.3585},{15.5,67.6645},{19,54.0082},{22.5,38.6157},{26,23.0458},{29.5,8.32389},
-                {33,-4.9424},{36.5,-16.4596},{40,-26.1579},{43.5,-34.1153},{47,-40.4975},{50.5,-45.5133},
-                {54,-49.3832},{57.5,-52.3187},{61,-54.5105},{64.5,-56.123},{68,-57.2928}},
+            points={{-72,-60},{-68.5,-60},{-65,-60},{-61.5,-60},{-58,-60},{-54.5,-60},{-51,-60},{-47.5, 
+                -60},{-44,-60},{-40.5,-60},{-37,-60},{-33.5,-60},{-30,-60},{-26.5,-60},{-23,-60},{-19.5, 
+                -60},{-16,-60},{-12.5,-60},{-9,-60},{-5.5,-60},{-2,-60},{1.5,43.1424},{5,71.1658},{8.5, 
+                80},{12,77.3585},{15.5,67.6645},{19,54.0082},{22.5,38.6157},{26,23.0458},{29.5,8.32389}, 
+                {33,-4.9424},{36.5,-16.4596},{40,-26.1579},{43.5,-34.1153},{47,-40.4975},{50.5,-45.5133}, 
+                {54,-49.3832},{57.5,-52.3187},{61,-54.5105},{64.5,-56.123},{68,-57.2928}}, 
             smooth=Smooth.Bezier)}), Documentation(info="<html>
 <p>
 这个包提供
@@ -1180,14 +1180,14 @@ quantile(0.5,1,0.5) // = 0.41627730557884884
 </html>"    ));
   end Weibull;
 
-  package TruncatedWeibull
+  package TruncatedWeibull 
     "截断威布尔分布函数库"
     extends Modelica.Icons.Package;
 
     function density "截尾威布尔分布的密度"
       import Modelica.Math.Distributions.Weibull;
       extends Modelica.Math.Distributions.Interfaces.partialTruncatedDensity;
-      input Real lambda(min=0) = 1
+      input Real lambda(min=0) = 1 
         "威布尔分布的标度参数" annotation(Dialog);
       input Real k(min=0) "威布尔分布的形状参数" annotation(Dialog);
     protected
@@ -1263,11 +1263,11 @@ density(0.5,0,0.8,0.5,2) // = 1.5948036466479143
 </html>"              ));
     end density;
 
-    function cumulative
+    function cumulative 
       "截尾威布尔分布的累积分布函数"
       import Modelica.Math.Distributions.Weibull;
       extends Modelica.Math.Distributions.Interfaces.partialTruncatedCumulative;
-      input Real lambda(min=0) = 1
+      input Real lambda(min=0) = 1 
         "威布尔分布的标度参数" annotation(Dialog);
       input Real k(min=0) "威布尔分布的形状参数" annotation(Dialog);
     protected
@@ -1357,13 +1357,13 @@ cumulative(0.5,0,0.8,0.5,2) // = 0.6850805314988328
     function quantile "截断威布尔分布的定量值"
       import Modelica.Math.Distributions.Weibull;
       extends Modelica.Math.Distributions.Interfaces.partialTruncatedQuantile;
-      input Real lambda(min=0) = 1
+      input Real lambda(min=0) = 1 
         "威布尔分布的标度参数" annotation(Dialog);
       input Real k(min=0) "威布尔分布的形状参数" annotation(Dialog);
     protected
-      Real cdf_min = Weibull.cumulative(y_min, lambda=lambda, k=k)
+      Real cdf_min = Weibull.cumulative(y_min, lambda=lambda, k=k) 
         "y_min 时的 cdf 值";
-      Real cdf_max = Weibull.cumulative(y_max, lambda=lambda, k=k)
+      Real cdf_max = Weibull.cumulative(y_max, lambda=lambda, k=k) 
         "y_max 时的 cdf 值";
     algorithm
       y := Weibull.quantile(cdf_min + u*(cdf_max-cdf_min), lambda=lambda,k=k);
@@ -1455,22 +1455,22 @@ quantile(0.5,0,1,0.5,0.9) // = 0.256951787882498
 </html>"                  ));
     end quantile;
     annotation (Icon(coordinateSystem(
-          preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}},
-          grid={1,1}),
+          preserveAspectRatio=false, 
+          extent={{-100,-100},{100,100}}, 
+          grid={1,1}), 
                      graphics={Line(
             points={{-72,-62},{-68.5,-62},{-65,-62},{-61.5,-62},{-58,-62},{
-                -54.5,-62},{-51,-62},{-47.5,-62},{-44,-62},{-40.5,-62},{-37,-62},
-                {-33.5,-62},{-30,-62},{-26.5,-62},{-23,-62},{-19.5,-62},{-16,
-                -62},{-12.5,-62},{-9,-62},{-5.5,-62},{-2,-62},{1.5,41.1424},{5,
+                -54.5,-62},{-51,-62},{-47.5,-62},{-44,-62},{-40.5,-62},{-37,-62}, 
+                {-33.5,-62},{-30,-62},{-26.5,-62},{-23,-62},{-19.5,-62},{-16, 
+                -62},{-12.5,-62},{-9,-62},{-5.5,-62},{-2,-62},{1.5,41.1424},{5, 
                 69.1658},{8.5,78},{12,75.3585},{15.5,65.6645},{19,52.0082},{
-                22.5,36.6157},{26,21.0458},{29.5,6.3239},{33,-6.9424},{36.5,
-                -18.4596},{40,-28.1579},{43.5,-36.1153}},
-            smooth=Smooth.Bezier),
+                22.5,36.6157},{26,21.0458},{29.5,6.3239},{33,-6.9424},{36.5, 
+                -18.4596},{40,-28.1579},{43.5,-36.1153}}, 
+            smooth=Smooth.Bezier), 
           Line(
-            points={{43.5,-36},{43.5,-63}}),
+            points={{43.5,-36},{43.5,-63}}), 
           Line(
-            points={{43.5,-63},{79.5,-63}})}),
+            points={{43.5,-63},{79.5,-63}})}), 
       Documentation(info="<html>
 <p>
 该软件包提供
@@ -1527,7 +1527,7 @@ quantile(0.5,0,1,0.5,0.9) // = 0.256951787882498
   package Interfaces "分配功能接口库"
     extends Modelica.Icons.InterfacesPackage;
 
-    partial function partialDensity
+    partial function partialDensity 
       "概率密度函数的常见接口"
       extends Modelica.Icons.Function;
       input Real u "实轴上的随机数（-inf < u < inf）";
@@ -1557,7 +1557,7 @@ quantile(0.5,0,1,0.5,0.9) // = 0.256951787882498
 </html>"      ));
     end partialDensity;
 
-    partial function partialCumulative
+    partial function partialCumulative 
       "累积分布函数的共同界面"
       extends Modelica.Icons.Function;
       input Real u "实轴上的数值（-inf < u < inf）";
@@ -1588,11 +1588,11 @@ quantile(0.5,0,1,0.5,0.9) // = 0.256951787882498
 </html>"      ));
     end partialCumulative;
 
-    partial function partialQuantile
+    partial function partialQuantile 
       "量子函数(=反向累积分布函数)的常见接口"
       extends Modelica.Icons.Function;
       input Real u(min = 0, max = 1) "0 <= u <= 1 范围内的随机数";
-      output Real y
+      output Real y 
         "根据给定分布变换的随机数 u";
       annotation(Documentation(info = "<html>
 <p>
@@ -1620,7 +1620,7 @@ quantile(0.5,0,1,0.5,0.9) // = 0.256951787882498
 </html>"    ));
     end partialQuantile;
 
-    partial function partialTruncatedDensity
+    partial function partialTruncatedDensity 
       "截断概率密度函数的共同界面"
       extends partialDensity;
       input Real u_min=0 "u 的下限" annotation(Dialog);
@@ -1651,7 +1651,7 @@ quantile(0.5,0,1,0.5,0.9) // = 0.256951787882498
 </html>"      ));
     end partialTruncatedDensity;
 
-    partial function partialTruncatedCumulative
+    partial function partialTruncatedCumulative 
       "截断累积分布函数的共同界面"
       extends partialCumulative;
       input Real u_min=0 "u 的下限" annotation(Dialog);
@@ -1682,7 +1682,7 @@ quantile(0.5,0,1,0.5,0.9) // = 0.256951787882498
 </html>"      ));
     end partialTruncatedCumulative;
 
-    partial function partialTruncatedQuantile
+    partial function partialTruncatedQuantile 
       "截断量子函数(=反向累积分布函数)的常见接口"
       extends partialQuantile;
       input Real y_min = 0 "y 的下限" annotation(Dialog);
@@ -1739,17 +1739,17 @@ quantile(0.5,0,1,0.5,0.9) // = 0.256951787882498
 </html>"  ));
   end Interfaces;
 annotation (Icon(graphics={Line(
-          points={{-70,-65.953},{-66.5,-65.8975},{-63,-65.7852},{-59.5,
-          -65.5674},{-56,-65.1631},{-52.5,-64.4442},{-49,-63.2213},{-45.5,
-          -61.2318},{-42,-58.1385},{-38.5,-53.5468},{-35,-47.0467},{-31.5,
-          -38.2849},{-28,-27.0617},{-24.5,-13.4388},{-21,2.1682},{-17.5,
-          18.9428},{-14,35.695},{-10.5,50.9771},{-7,63.2797},{-3.5,
+          points={{-70,-65.953},{-66.5,-65.8975},{-63,-65.7852},{-59.5, 
+          -65.5674},{-56,-65.1631},{-52.5,-64.4442},{-49,-63.2213},{-45.5, 
+          -61.2318},{-42,-58.1385},{-38.5,-53.5468},{-35,-47.0467},{-31.5, 
+          -38.2849},{-28,-27.0617},{-24.5,-13.4388},{-21,2.1682},{-17.5, 
+          18.9428},{-14,35.695},{-10.5,50.9771},{-7,63.2797},{-3.5, 
           71.2739},{0,74.047},{3.5,71.2739},{7,63.2797},{10.5,50.9771},{
-          14,35.695},{17.5,18.9428},{21,2.1682},{24.5,-13.4388},{28,
-          -27.0617},{31.5,-38.2849},{35,-47.0467},{38.5,-53.5468},{42,
-          -58.1385},{45.5,-61.2318},{49,-63.2213},{52.5,-64.4442},{56,
-          -65.1631},{59.5,-65.5674},{63,-65.7852},{66.5,-65.8975},{70,
-          -65.953}},
+          14,35.695},{17.5,18.9428},{21,2.1682},{24.5,-13.4388},{28, 
+          -27.0617},{31.5,-38.2849},{35,-47.0467},{38.5,-53.5468},{42, 
+          -58.1385},{45.5,-61.2318},{49,-63.2213},{52.5,-64.4442},{56, 
+          -65.1631},{59.5,-65.5674},{63,-65.7852},{66.5,-65.8975},{70, 
+          -65.953}}, 
           smooth=Smooth.Bezier)}), Documentation(info="<html>
 <p>
 这个包提供

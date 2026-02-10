@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.Examples.Elementary.BooleanSignals;
-model SampleClocked
+model SampleClocked 
   "布尔信号采样时钟模块示例"
    extends Modelica.Icons.Example;
 
@@ -13,13 +13,13 @@ model SampleClocked
     annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
 equation
   connect(periodicClock.y, sample1.clock) annotation (Line(
-      points={{-49.4,0},{-40,0},{-40,22.8}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
+      points={{-49.4,0},{-40,0},{-40,22.8}}, 
+      color={175,175,175}, 
+      pattern=LinePattern.Dot, 
       thickness=0.5));
   connect(sample1.u, step.y) 
     annotation (Line(points={{-47.2,30},{-59,30}}, color={255,0,255}));
-  annotation (experiment(StopTime=0.2),
+  annotation (experiment(StopTime=0.2), 
   Documentation(info="<html>
 <p>
 模块文件的基本范例

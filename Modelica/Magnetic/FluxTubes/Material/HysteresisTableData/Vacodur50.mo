@@ -1,5 +1,5 @@
-﻿within Modelica.Magnetic.FluxTubes.Material.HysteresisTableData;
-record Vacodur50 "Vacodur50"
+within Modelica.Magnetic.FluxTubes.Material.HysteresisTableData;
+record Vacodur50 "Vacodur50-铁钴钒软磁合金"
   extends FluxTubes.Material.HysteresisTableData.BaseData(
     tabris=[-10000000.000,-2.137; -1500.000,-2.137; -1000.000,-2.137; -798.541,
         -2.137; -632.270,-2.108; -464.540,-2.072; -283.683,-1.999; -145.123,

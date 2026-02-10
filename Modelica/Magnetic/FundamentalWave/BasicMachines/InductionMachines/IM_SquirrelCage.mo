@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FundamentalWave.BasicMachines.InductionMachines;
+within Modelica.Magnetic.FundamentalWave.BasicMachines.InductionMachines;
 model IM_SquirrelCage
   "带鼠笼的感应电机"
   extends Magnetic.FundamentalWave.BaseClasses.Machine(
@@ -21,24 +21,24 @@ model IM_SquirrelCage
       powerBalance(final lossPowerRotorWinding=sum(rotorCage.resistor.resistor.LossPower),
         final lossPowerRotorCore=0));
   parameter SI.Inductance Lm(start=3*sqrt(1 - 0.0667)/(2*pi
-        *fsNominal)) "Stator main field inductance" annotation (Dialog(
-        tab="Nominal resistances and inductances", groupImage=
+        *fsNominal)) "定子主电感" annotation (Dialog(
+        tab="额定电阻与额定电感", groupImage=
           "modelica://Modelica/Resources/Images/Electrical/Machines/IMC.png"));
   parameter SI.Inductance Lrsigma(start=3*(1 - sqrt(1 -
         0.0667))/(2*pi*fsNominal))
     "定子侧等效m相绕组的漏感" 
-    annotation (Dialog(tab="Nominal resistances and inductances"));
+    annotation (Dialog(tab="额定电阻与额定电感"));
   parameter SI.Resistance Rr(start=0.04)
     "定子侧等效m相绕组的转子电阻" 
-    annotation (Dialog(tab="Nominal resistances and inductances"));
+    annotation (Dialog(tab="额定电阻与额定电感"));
   parameter SI.Temperature TrRef(start=293.15)
     "转子电阻参考温度" 
-    annotation (Dialog(tab="Nominal resistances and inductances"));
+    annotation (Dialog(tab="额定电阻与额定电感"));
   parameter
     Modelica.Electrical.Machines.Thermal.LinearTemperatureCoefficient20 
     alpha20r(start=0)
     "20 摄氏度时转子电阻的温度系数" 
-    annotation (Dialog(tab="Nominal resistances and inductances"));
+    annotation (Dialog(tab="额定电阻与额定电感"));
   parameter SI.Temperature TrOperational(start=293.15)
     "转子电阻的工作温度" annotation (Dialog(
         group="Operational temperatures", enable=not useThermalPort));

@@ -1,84 +1,84 @@
 ﻿within Modelica.Electrical.Machines.Interfaces;
 partial model PartialBasicDCMachine "直流电机的基类模型"
-  parameter SI.Temperature TaOperational(start=293.15)
-    "工作臂绕组温度" annotation (Dialog(group=
+  parameter SI.Temperature TaOperational(start=293.15) 
+    "工作臂绕组温度" annotation (Dialog(group= 
           "工作温度", enable=not useThermalPort));
-  parameter SI.Voltage VaNominal(start=100)
+  parameter SI.Voltage VaNominal(start=100) 
     "额定臂绕组电压" annotation (Dialog(tab="额定参数"));
-  parameter SI.Current IaNominal(start=100)
+  parameter SI.Current IaNominal(start=100) 
     "额定臂绕组电流 (>0..电动机, <0..发电机)" 
     annotation (Dialog(tab="额定参数"));
-  parameter SI.AngularVelocity wNominal(displayUnit="rev/min",
+  parameter SI.AngularVelocity wNominal(displayUnit="rev/min", 
       start=1425*2*pi/60) "额定转速" 
     annotation (Dialog(tab="额定参数"));
-  parameter SI.Temperature TaNominal(start=293.15)
+  parameter SI.Temperature TaNominal(start=293.15) 
     "额定臂绕组温度" 
     annotation (Dialog(tab="额定参数"));
-  parameter SI.Resistance Ra(start=0.05)
+  parameter SI.Resistance Ra(start=0.05) 
     "在TaRef下的臂绕组电阻" 
     annotation (Dialog(tab="臂绕组"));
-  parameter SI.Temperature TaRef(start=293.15)
+  parameter SI.Temperature TaRef(start=293.15) 
     "臂绕组电阻的参考温度" 
     annotation (Dialog(tab="臂绕组"));
-  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20a(start=0)
+  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20a(start=0) 
     "臂绕组电阻的温度系数" 
     annotation (Dialog(tab="臂绕组"));
-  parameter SI.Inductance La(start=0.0015)
+  parameter SI.Inductance La(start=0.0015) 
     "臂绕组电感" 
     annotation (Dialog(tab="臂绕组"));
   extends PartialBasicMachine(
-    Jr(start=0.15),
-    frictionParameters(wRef=wNominal),
+    Jr(start=0.15), 
+    frictionParameters(wRef=wNominal), 
     friction(final useHeatPort=true));
   parameter Machines.Losses.CoreParameters coreParameters(
-    final m=1,
-    VRef=ViNominal,
+    final m=1, 
+    VRef=ViNominal, 
     wRef=wNominal) "臂绕组铁心损耗参数记录" 
     annotation (Dialog(tab="损耗"));
-  parameter Machines.Losses.StrayLoadParameters strayLoadParameters(IRef=
+  parameter Machines.Losses.StrayLoadParameters strayLoadParameters(IRef= 
         IaNominal, wRef=wNominal) "附加负载损耗参数记录" 
     annotation (Dialog(tab="损耗"));
-  parameter Machines.Losses.BrushParameters brushParameters(ILinear=0.01*
+  parameter Machines.Losses.BrushParameters brushParameters(ILinear=0.01* 
         IaNominal) "刷子损耗参数记录" 
     annotation (Dialog(tab="损耗"));
   replaceable output
     Machines.Interfaces.DCMachines.PartialPowerBalanceDCMachines powerBalance(
-    final powerArmature=va*ia,
-    final powerMechanical=wMechanical*tauShaft,
-    final powerInertiaStator=inertiaStator.J*inertiaStator.a*inertiaStator.w,
-    final powerInertiaRotor=inertiaRotor.J*inertiaRotor.a*inertiaRotor.w,
-    final lossPowerArmature=ra.LossPower,
-    final lossPowerCore=core.lossPower,
-    final lossPowerStrayLoad=strayLoad.lossPower,
-    final lossPowerFriction=friction.lossPower,
+    final powerArmature=va*ia, 
+    final powerMechanical=wMechanical*tauShaft, 
+    final powerInertiaStator=inertiaStator.J*inertiaStator.a*inertiaStator.w, 
+    final powerInertiaRotor=inertiaRotor.J*inertiaRotor.a*inertiaRotor.w, 
+    final lossPowerArmature=ra.LossPower, 
+    final lossPowerCore=core.lossPower, 
+    final lossPowerStrayLoad=strayLoad.lossPower, 
+    final lossPowerFriction=friction.lossPower, 
     final lossPowerBrush=brush.lossPower) "功率平衡";
 
   output SI.Voltage va=pin_ap.v - pin_an.v "臂绕组电压";
   output SI.Current ia(start=0) = pin_ap.i "臂绕组电流";
-  Modelica.Electrical.Analog.Interfaces.PositivePin pin_ap
+  Modelica.Electrical.Analog.Interfaces.PositivePin pin_ap 
     "正极臂绕组引脚" annotation (Placement(transformation(extent={{
             50,110},{70,90}})));
-  Modelica.Electrical.Analog.Interfaces.NegativePin pin_an
-    "负极臂绕组引脚" annotation (Placement(transformation(extent={{-70,
+  Modelica.Electrical.Analog.Interfaces.NegativePin pin_an 
+    "负极臂绕组引脚" annotation (Placement(transformation(extent={{-70, 
             110},{-50,90}})));
   Modelica.Electrical.Analog.Basic.Resistor ra(
-    final R=Ra,
-    final T_ref=TaRef,
-    final alpha=Machines.Thermal.convertAlpha(alpha20a, TaRef),
-    final useHeatPort=true) annotation (Placement(transformation(extent={{60,50},{40,
+    final R=Ra, 
+    final T_ref=TaRef, 
+    final alpha=Machines.Thermal.convertAlpha(alpha20a, TaRef), 
+    final useHeatPort=true) annotation (Placement(transformation(extent={{60,50},{40, 
             70}})));
-  Machines.BasicMachines.Components.InductorDC la(final L=La, final quasiStatic=
+  Machines.BasicMachines.Components.InductorDC la(final L=La, final quasiStatic= 
        quasiStatic) 
     annotation (Placement(transformation(extent={{30,50},{10,70}})));
-  Machines.Losses.DCMachines.Brush brush(final brushParameters=brushParameters,
+  Machines.Losses.DCMachines.Brush brush(final brushParameters=brushParameters, 
       final useHeatPort=true) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=180,
+        extent={{-10,10},{10,-10}}, 
+        rotation=180, 
         origin={-20,60})));
-  Machines.Losses.DCMachines.Core core(final coreParameters=coreParameters,
+  Machines.Losses.DCMachines.Core core(final coreParameters=coreParameters, 
       final useHeatPort=true) 
     annotation (Placement(transformation(extent={{10,70},{-10,90}})));
-  Machines.Losses.DCMachines.StrayLoad strayLoad(final strayLoadParameters=
+  Machines.Losses.DCMachines.StrayLoad strayLoad(final strayLoadParameters= 
         strayLoadParameters, final useHeatPort=true) 
     annotation (Placement(transformation(extent={{90,50},{70,70}})));
   replaceable Machines.Interfaces.DCMachines.PartialThermalPortDCMachines thermalPort if 
@@ -87,22 +87,22 @@ partial model PartialBasicDCMachine "直流电机的基类模型"
   replaceable Machines.Interfaces.DCMachines.PartialThermalAmbientDCMachines thermalAmbient(final
       useTemperatureInputs=false, final Ta=TaOperational) if not useThermalPort 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-30,-80})));
 protected
   constant Real pi = Modelica.Constants.pi;
   constant Boolean quasiStatic=false "如果为真，则无电气瞬态" 
     annotation (Evaluate=true);
   parameter SI.Voltage ViNominal "额定感应电压";
-  parameter SI.MagneticFlux psi_eNominal
+  parameter SI.MagneticFlux psi_eNominal 
     "额定磁通";
-  parameter Real turnsRatio=ViNominal/(wNominal*psi_eNominal)
+  parameter Real turnsRatio=ViNominal/(wNominal*psi_eNominal) 
     "臂绕组匝数与励磁绕组匝数之比";
   replaceable Machines.Interfaces.DCMachines.PartialThermalPortDCMachines internalThermalPort 
     annotation (Placement(transformation(extent={{-4,-84},{4,-76}})));
 equation
-  assert(ViNominal > Modelica.Constants.eps,
+  assert(ViNominal > Modelica.Constants.eps, 
     "VaNominal必须大于(Ra[+Rse])*IaNominal");
   connect(la.p, ra.n) 
     annotation (Line(points={{30,60},{40,60}}, color={0,0,255}));
@@ -140,7 +140,7 @@ equation
     annotation (Line(points={{0,-80},{0,-100}}, color={191,0,0}));
   annotation (Documentation(info="<html>
 用于直流电机模型的部分模型。
-</html>"),
-       Icon(graphics={Line(points={{-40,70},{-60,70},{-60,90}}, color={0,0,255}),
+</html>"), 
+       Icon(graphics={Line(points={{-40,70},{-60,70},{-60,90}}, color={0,0,255}), 
                Line(points={{40,70},{60,70},{60,90}}, color={0,0,255})}));
 end PartialBasicDCMachine;

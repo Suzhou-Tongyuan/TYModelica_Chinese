@@ -7,11 +7,11 @@ model GearType1 "r3机器人关节1、2、3的电机的惯性和齿轮箱模型"
   parameter SI.RotationalSpringConstant c = 43 "弹性系数";
   parameter SI.RotationalDampingConstant d = 0.005 "阻尼系数";
   parameter SI.Torque Rv0=0.4 "零速度时的粘性摩擦扭矩";
-  parameter Real Rv1(unit="N.m.s/rad") = (0.13/160)
+  parameter Real Rv1(unit="N.m.s/rad") = (0.13/160) 
     "粘性摩擦系数 (R=Rv0+Rv1*abs(qd))";
-  parameter Real peak=1
+  parameter Real peak=1 
     "最大静摩擦扭矩 peak*Rv0 (peak >= 1)";
-  SI.AngularAcceleration a_rel=der(spring.w_rel)
+  SI.AngularAcceleration a_rel=der(spring.w_rel) 
     "弹簧的相对角加速度";
   constant SI.AngularVelocity unitAngularVelocity = 1;
   constant SI.Torque unitTorque = 1;
@@ -24,7 +24,7 @@ model GearType1 "r3机器人关节1、2、3的电机的惯性和齿轮箱模型"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Mechanics.Rotational.Components.BearingFriction bearingFriction(
     tau_pos=[0,
-         Rv0/unitTorque; 1, (Rv0 + Rv1*unitAngularVelocity)/unitTorque],
+         Rv0/unitTorque; 1, (Rv0 + Rv1*unitAngularVelocity)/unitTorque], 
       useSupport=false) annotation (Placement(
         transformation(extent={{-60,-10},{-40,10}})));
 equation
@@ -53,22 +53,22 @@ initial equation
 否则，弹簧在初始时刻会有一个不符合实际的偏转。
 由于使用相对量作为状态变量，这大大简化了初始值的定义。
 </p>
-</html>"),
+</html>"), 
        Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
         Text(
-          extent={{-150,100},{150,60}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,100},{150,60}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-30,-30},{30,-80}},
-          textColor={255,255,255},
-          textString="1"),
-        Line(points={{-24,0},{-16,0},{-12,14},{-4,-14},{4,14},{12,-14},{16,0},{24,0}}, color={95,95,95})}),
+          extent={{-30,-30},{30,-80}}, 
+          textColor={255,255,255}, 
+          textString="1"), 
+        Line(points={{-24,0},{-16,0},{-12,14},{-4,-14},{4,14},{12,-14},{16,0},{24,0}}, color={95,95,95})}), 
     Diagram(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={Text(
-          extent={{72,30},{130,22}},
+          extent={{72,30},{130,22}}, 
           textString="flange of joint axis"), Text(
-          extent={{-128,26},{-70,18}},
+          extent={{-128,26},{-70,18}}, 
           textString="flange of motor axis")}));
 end GearType1;

@@ -5,9 +5,9 @@ function torus "定义环面曲面特性的函数"
   input SI.Length R=1 "主半径(从环面中心到管道中心的距离)" annotation(Dialog);
   input SI.Length r=0.2 "次半径(管道半径)" annotation(Dialog);
   input SI.Angle opening=0 "环面的开口角度" annotation(Dialog);
-  input SI.Angle startAngle= -Modelica.Constants.pi
+  input SI.Angle startAngle= -Modelica.Constants.pi 
     "环面切片的起始角度" annotation(Dialog);
-  input SI.Angle stopAngle= Modelica.Constants.pi
+  input SI.Angle stopAngle= Modelica.Constants.pi 
     "环面切片的结束角度" annotation(Dialog);
 protected
   SI.Angle alpha;

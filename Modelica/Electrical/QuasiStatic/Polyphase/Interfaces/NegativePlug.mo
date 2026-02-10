@@ -4,18 +4,18 @@ connector NegativePlug "负准静态多相接口"
   QuasiStatic.Types.Reference reference;
   annotation (
     Icon(graphics={Ellipse(
-          extent={{-100,100},{100,-100}},
-          lineColor={85,170,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}),
+          extent={{-100,100},{100,-100}}, 
+          lineColor={85,170,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid)}), 
     Diagram(graphics={Ellipse(
-          extent={{-40,40},{40,-40}},
-          lineColor={85,170,255},
-          fillColor={255,255,255},
+          extent={{-40,40},{40,-40}}, 
+          lineColor={85,170,255}, 
+          fillColor={255,255,255}, 
           fillPattern=FillPattern.Solid), Text(
-          extent={{-100,100},{100,60}},
-          textColor={0,0,255},
-          textString="%name")}),
+          extent={{-100,100},{100,60}}, 
+          textColor={0,0,255}, 
+          textString="%name")}), 
     Documentation(info="<html>
 
 <p>

@@ -5,38 +5,38 @@ model TransformerYD "带有多相组件的测试示例"
   parameter SI.Voltage V=1 "星型电压幅值";
   parameter SI.Frequency f=5 "频率";
   parameter SI.Inductance Lm=1 "变压器主电感";
-  parameter SI.Inductance LT=0.003
+  parameter SI.Inductance LT=0.003 
     "变压器漏感";
   parameter SI.Resistance RT=0.05 "变压器电阻";
   parameter SI.Resistance RL=1 "负载电阻";
-  parameter Real nT=1/sqrt((1 - Modelica.Math.cos(2*Modelica.Constants.pi/m))
-      ^2 + (Modelica.Math.sin(2*Modelica.Constants.pi/m))^2)
+  parameter Real nT=1/sqrt((1 - Modelica.Math.cos(2*Modelica.Constants.pi/m)) 
+      ^2 + (Modelica.Math.sin(2*Modelica.Constants.pi/m))^2) 
     "变压器比";
   Sources.SineVoltage sineVoltage(
-    V=fill(V, m),
-    f=fill(f, m),
+    V=fill(V, m), 
+    f=fill(f, m), 
     m=m) annotation (Placement(transformation(
-        origin={-80,20},
-        extent={{-10,-10},{10,10}},
+        origin={-80,20}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=180)));
   Basic.Star starS(m=m) annotation (Placement(transformation(
-        origin={-90,-62},
-        extent={{-10,-10},{10,10}},
+        origin={-90,-62}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Ground groundS annotation (Placement(
         transformation(extent={{-100,-100},{-80,-80}})));
   Ideal.IdealTransformer idealTransformer(
-    m=m,
-    n=fill(nT, m),
+    m=m, 
+    n=fill(nT, m), 
     Lm1=fill(Lm, m)) annotation (Placement(transformation(extent={{-40,0},{
             -20,20}})));
   Basic.Star starT(m=m) annotation (Placement(transformation(
-        origin={-40,-62},
-        extent={{-10,-10},{10,10}},
+        origin={-40,-62}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Basic.Delta deltaT2(m=m) annotation (Placement(transformation(
-        origin={50,10},
-        extent={{-10,10},{10,-10}},
+        origin={50,10}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Ground groundT annotation (Placement(
         transformation(extent={{-50,-100},{-30,-80}})));
@@ -47,8 +47,8 @@ model TransformerYD "带有多相组件的测试示例"
   Basic.Resistor loadR(m=m, R=fill(RL, m)) annotation (Placement(
         transformation(extent={{70,10},{90,30}})));
   Basic.Star starL(m=m) annotation (Placement(transformation(
-        origin={90,-62},
-        extent={{-10,-10},{10,10}},
+        origin={90,-62}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Ground groundL annotation (Placement(
         transformation(extent={{80,-100},{100,-80}})));
@@ -87,6 +87,6 @@ equation
 使用f=5Hz和LT=3mH，定义了约10%的名义电压降。<br>
 示例的仿真时间为1秒钟(2个周期)，用户可以在特定界面比较源、变压器和负载的电压和电流。
 </p>
-</html>"),
+</html>"), 
        experiment(StopTime=1.0, Interval=0.001));
 end TransformerYD;

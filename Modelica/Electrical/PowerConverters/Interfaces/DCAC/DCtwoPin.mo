@@ -1,10 +1,10 @@
 ﻿within Modelica.Electrical.PowerConverters.Interfaces.DCAC;
 partial model DCtwoPin "正负直流引脚"
 
-  Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+  Modelica.Electrical.Analog.Interfaces.PositivePin dc_p 
     "正直流输入" 
     annotation (Placement(transformation(extent={{-110,70},{-90,50}})));
-  Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+  Modelica.Electrical.Analog.Interfaces.NegativePin dc_n 
     "负直流输入" 
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
   SI.Voltage vDC=dc_p.v - dc_n.v "直流电压";

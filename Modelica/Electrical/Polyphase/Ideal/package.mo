@@ -7,7 +7,7 @@ package Ideal "具有理想行为的多相组件"
 该包含有理想行为的模拟电气多相组件，
 如可控硅、二极管、开关、变压器。
 </p>
-</html>",
+</html>", 
         revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>
@@ -24,19 +24,19 @@ package Ideal "具有理想行为的多相组件"
   </ul>
   </dd>
 </dl>
-</html>"),
-         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+</html>"), 
+         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
             {100,100}}), graphics={
         Line(
-          origin={10,40},
-          points={{-100,-40},{80,-40}},
-          color={0,0,255}),
+          origin={10,40}, 
+          points={{-100,-40},{80,-40}}, 
+          color={0,0,255}), 
         Polygon(
-          origin={10,40},
-          fillColor={255,255,255},
-          points={{20,-40},{-40,0},{-40,-80},{20,-40}}),
+          origin={10,40}, 
+          fillColor={255,255,255}, 
+          points={{20,-40},{-40,0},{-40,-80},{20,-40}}), 
         Line(
-          origin={-10,0},
-          points={{40,40},{40,-40}},
+          origin={-10,0}, 
+          points={{40,40},{40,-40}}, 
           color={0,0,255})}));
 end Ideal;

@@ -1,5 +1,5 @@
-﻿within Modelica.Magnetic.FluxTubes.Material.HysteresisTableData;
-record M270_50A "M270-50A"
+within Modelica.Magnetic.FluxTubes.Material.HysteresisTableData;
+record M270_50A "M270-50A-冷轧无取向电工钢"
   extends FluxTubes.Material.HysteresisTableData.BaseData(
     tabris=[-50000,-2.36142149079005; -37500,-2.34572149079005; -25000,-2.20784143083814;
         -12500,-1.94778131093431; -9500,-1.85604366776894; -9000,-1.83955155226256;

@@ -1,12 +1,12 @@
 ﻿within Modelica.Mechanics.MultiBody.Visualizers;
-model FixedShape2
+model FixedShape2 
   "使用动态变化的形状属性可视化基本形状(具有两个坐标系连接器)"
 
   import Modelica.Mechanics.MultiBody.Frames;
   import Modelica.Mechanics.MultiBody.Types;
   import Modelica.Units.Conversions.to_unit1;
 
-  Interfaces.Frame_a frame_a
+  Interfaces.Frame_a frame_a 
     "坐标系a(所有形状定义矢量在此坐标系中解析)" 
     annotation(Placement(transformation(extent = {{-116, -16}, {-84, 16}})));
   Interfaces.Frame_b frame_b "坐标系b" 
@@ -15,15 +15,15 @@ model FixedShape2
   parameter Boolean animation = true "=true，则启用动画";
   parameter Types.ShapeType shapeType = "box" "形状类型" 
     annotation(Dialog(group = "如果animation=true", enable = animation));
-  input SI.Position r[3] = {1, 0, 0}
+  input SI.Position r[3] = {1, 0, 0} 
     "从frame_a到frame_b的矢量，解析在frame_a中";
-  input SI.Position r_shape[3] = {0, 0, 0}
+  input SI.Position r_shape[3] = {0, 0, 0} 
     "从frame_a到形状原点的矢量，解析在frame_a中" 
     annotation(Dialog(group = "如果animation=true", enable = animation));
-  input Types.Axis lengthDirection = to_unit1(r - r_shape)
+  input Types.Axis lengthDirection = to_unit1(r - r_shape) 
     "形状长度方向的矢量，解析在frame_a中" 
     annotation(Dialog(group = "如果animation=true", enable = animation));
-  input Types.Axis widthDirection = {0, 1, 0}
+  input Types.Axis widthDirection = {0, 1, 0} 
     "形状宽度方向的矢量，解析在frame_a中" 
     annotation(Dialog(group = "如果animation=true", enable = animation));
   input SI.Length length = Modelica.Math.Vectors.length(r - r_shape) "形状长度" 
@@ -32,29 +32,29 @@ model FixedShape2
     annotation(Dialog(group = "如果animation=true", enable = animation));
   input SI.Distance height = width "形状高度" 
     annotation(Dialog(group = "如果animation=true", enable = animation));
-  input Types.ShapeExtra extra = 0.0
+  input Types.ShapeExtra extra = 0.0 
     "圆柱体、圆锥体、管道、齿轮和弹簧的附加数据" 
     annotation(Dialog(group = "如果animation=true", enable = animation));
   input Types.Color color = {0, 128, 255} "形状颜色" 
     annotation(Dialog(colorSelector = true, group = "如果animation=true", enable = animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射(=0：光完全被吸收)" 
     annotation(Dialog(group = "如果animation=true", enable = animation));
 
 protected
   outer MultiBody.World world;
   Advanced.Shape shape(
-    shapeType = shapeType,
-    r_shape = r_shape,
-    lengthDirection = lengthDirection,
-    widthDirection = widthDirection,
-    length = length,
-    width = width,
-    height = height,
-    extra = extra,
-    color = color,
-    specularCoefficient = specularCoefficient,
-    r = frame_a.r_0,
+    shapeType = shapeType, 
+    r_shape = r_shape, 
+    lengthDirection = lengthDirection, 
+    widthDirection = widthDirection, 
+    length = length, 
+    width = width, 
+    height = height, 
+    extra = extra, 
+    color = color, 
+    specularCoefficient = specularCoefficient, 
+    r = frame_a.r_0, 
     R = frame_a.R) if world.enableAnimation and animation;
 equation
   Connections.branch(frame_a.R, frame_b.R);
@@ -69,36 +69,36 @@ equation
 
   annotation(
     Icon(coordinateSystem(
-    preserveAspectRatio = true,
+    preserveAspectRatio = true, 
     extent = {{-100, -100}, {100, 100}}), graphics = {
     Text(
-    extent = {{-150, 115}, {150, 75}},
-    textString = "%name",
-    textColor = {0, 0, 255}),
+    extent = {{-150, 115}, {150, 75}}, 
+    textString = "%name", 
+    textColor = {0, 0, 255}), 
     Text(
-    extent = {{150, -90}, {-150, -60}},
-    textString = "r=%r"),
+    extent = {{150, -90}, {-150, -60}}, 
+    textString = "r=%r"), 
     Polygon(
-    points = {{-100, 50}, {-66, 62}, {0, 46}, {100, 70}, {80, 50}, {-10, 28}, {-100, 50}},
-    lineColor = {255, 255, 255},
-    fillColor = {160, 160, 164},
-    fillPattern = FillPattern.Solid),
+    points = {{-100, 50}, {-66, 62}, {0, 46}, {100, 70}, {80, 50}, {-10, 28}, {-100, 50}}, 
+    lineColor = {255, 255, 255}, 
+    fillColor = {160, 160, 164}, 
+    fillPattern = FillPattern.Solid), 
     Polygon(
-    points = {{100, 70}, {80, 50}, {80, -44}, {100, -16}, {100, 70}},
-    lineColor = {255, 255, 255},
-    fillColor = {160, 160, 164},
-    fillPattern = FillPattern.Solid),
+    points = {{100, 70}, {80, 50}, {80, -44}, {100, -16}, {100, 70}}, 
+    lineColor = {255, 255, 255}, 
+    fillColor = {160, 160, 164}, 
+    fillPattern = FillPattern.Solid), 
     Polygon(
-    points = {{-100, 50}, {-100, -44}, {-10, -24}, {80, -44}, {80, 50}, {-10, 28}, {-100, 50}},
-    lineColor = {215, 215, 215},
-    fillColor = {0, 127, 255},
-    fillPattern = FillPattern.Solid),
+    points = {{-100, 50}, {-100, -44}, {-10, -24}, {80, -44}, {80, 50}, {-10, 28}, {-100, 50}}, 
+    lineColor = {215, 215, 215}, 
+    fillColor = {0, 127, 255}, 
+    fillPattern = FillPattern.Solid), 
     Text(
-    extent = {{-86, 15}, {-50, -10}},
-    textString = "a"),
+    extent = {{-86, 15}, {-50, -10}}, 
+    textString = "a"), 
     Text(
-    extent = {{37, 15}, {73, -10}},
-    textString = "b")}),
+    extent = {{37, 15}, {73, -10}}, 
+    textString = "b")}), 
     Documentation(info = "<html>
 <p>
 <strong>FixedShape2</strong>模型定义了一个在frame_a位置显示的视觉形状。

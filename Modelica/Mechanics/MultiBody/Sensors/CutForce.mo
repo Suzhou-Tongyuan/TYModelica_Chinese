@@ -1,22 +1,22 @@
 ﻿within Modelica.Mechanics.MultiBody.Sensors;
 model CutForce "测量局部力矢量"
 
-  Modelica.Blocks.Interfaces.RealOutput force[3](each final quantity="Force", each final unit="N")
+  Modelica.Blocks.Interfaces.RealOutput force[3](each final quantity="Force", each final unit="N") 
     "在由resolveInFrame定义的坐标系中解析的局部力" 
        annotation (Placement(transformation(
-        origin={-80,-110},
-        extent={{10,-10},{-10,10}},
+        origin={-80,-110}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
 
-  parameter Boolean animation=true
+  parameter Boolean animation=true 
     "=true，如果启用动画(显示箭头)";
-  parameter Boolean positiveSign=true
+  parameter Boolean positiveSign=true 
     "=true，如果返回带有正号的力(=frame_a.f)，否则带有负号(=frame_b.f)";
 
   input Types.Color forceColor=Modelica.Mechanics.MultiBody.Types.Defaults.
       ForceColor "力箭头的颜色" 
     annotation (Dialog(colorSelector=true, group="如果animation=true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射(=0：光完全被吸收)" 
     annotation (Dialog(group="如果animation=true", enable=animation));
 
@@ -25,15 +25,15 @@ model CutForce "测量局部力矢量"
 
 protected
   Visualizers.Advanced.Arrow forceArrow(
-    color=forceColor,
-    specularCoefficient=specularCoefficient,
-    R=frame_b.R,
-    r=frame_b.r_0,
-    headAtOrigin=true,
-    quantity=Modelica.Mechanics.MultiBody.Types.VectorQuantity.Force,
+    color=forceColor, 
+    specularCoefficient=specularCoefficient, 
+    R=frame_b.R, 
+    r=frame_b.r_0, 
+    headAtOrigin=true, 
+    quantity=Modelica.Mechanics.MultiBody.Types.VectorQuantity.Force, 
     r_head=-frame_a.f*(if positiveSign then +1 else -1)) if world.enableAnimation and animation;
 
-  Internal.BasicCutForce cutForce(resolveInFrame=resolveInFrame, positiveSign=
+  Internal.BasicCutForce cutForce(resolveInFrame=resolveInFrame, positiveSign= 
         positiveSign) 
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   Modelica.Mechanics.MultiBody.Interfaces.ZeroPosition zeroPosition if 
@@ -41,32 +41,32 @@ protected
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
 equation
   connect(cutForce.frame_a, frame_a) annotation (Line(
-      points={{-50,0},{-100,0}},
-      color={95,95,95},
+      points={{-50,0},{-100,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(cutForce.frame_b, frame_b) annotation (Line(
-      points={{-30,0},{100,0}},
-      color={95,95,95},
+      points={{-30,0},{100,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(cutForce.frame_resolve, frame_resolve) annotation (Line(
-      points={{-32,-10},{-32,-60},{80,-60},{80,-100}},
-      color={95,95,95},
+      points={{-32,-10},{-32,-60},{80,-60},{80,-100}}, 
+      color={95,95,95}, 
       pattern=LinePattern.Dot));
   connect(cutForce.force, force) annotation (Line(
       points={{-48,-11},{-48,-60},{-80,-60},{-80,-110}}, color={0,0,127}));
   connect(zeroPosition.frame_resolve, cutForce.frame_resolve) annotation (
       Line(
-      points={{0,-30},{-32,-30},{-32,-10}},
-      color={95,95,95},
+      points={{0,-30},{-32,-30},{-32,-10}}, 
+      color={95,95,95}, 
       pattern=LinePattern.Dot));
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
       graphics={
-        Line(points={{-80,-100},{-80,0}}, color={0,0,127}),
+        Line(points={{-80,-100},{-80,0}}, color={0,0,127}), 
         Text(
-          extent={{-50,-14},{50,-54}},
-          textColor={64,64,64},
-          textString="N")}),
+          extent={{-50,-14},{50,-54}}, 
+          textColor={64,64,64}, 
+          textString="N")}), 
     Documentation(info="<html>
 <p>
 连接到此模型的两个坐标系之间的局部力由输出信号连接器<strong>force</strong>(=frame_a.f)确定并提供。

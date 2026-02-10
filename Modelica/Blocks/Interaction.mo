@@ -1,22 +1,22 @@
 ﻿within Modelica.Blocks;
-package Interaction
+package Interaction 
   "用户交互模块库，用于在图表动画中输入和显示变量"
   extends Modelica.Icons.Package;
 
   package Show "在图示动画中显示变量的模块库"
     extends Modelica.Icons.Package;
 
-    block RealValue
+    block RealValue 
       "在图表层动态显示来自numberPort或数字输入栏的实数值"
       parameter Boolean use_numberPort = true "= true，当启用了numberPort" 
         annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
-      input Real number = 0.0
+      input Real number = 0.0 
         "当use_numberPort=false，则数字是可视化的(随时间变化)" 
         annotation(Dialog(enable = not use_numberPort), HideResult = true);
-      parameter Integer significantDigits(min = 1) = 2
+      parameter Integer significantDigits(min = 1) = 2 
         "显示的有效数字个数";
 
-      Modelica.Blocks.Interfaces.RealInput numberPort if use_numberPort
+      Modelica.Blocks.Interfaces.RealInput numberPort if use_numberPort 
         "当use_numberPort=true，图表层中要显示编号" 
         annotation(HideResult = true, Placement(transformation(extent = {{-130, -15}, {-100, 15}})));
       Modelica.Blocks.Interfaces.RealOutput showNumber;
@@ -28,19 +28,19 @@ package Interaction
       end if;
 
       annotation(Icon(
-        coordinateSystem(preserveAspectRatio = false,
-        extent = {{-100.0, -100.0}, {100.0, 100.0}}),
+        coordinateSystem(preserveAspectRatio = false, 
+        extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
         graphics = {
-        Rectangle(lineColor = {0, 0, 127},
-        fillColor = {236, 233, 216},
-        fillPattern = FillPattern.Solid,
-        lineThickness = 5.0,
-        borderPattern = BorderPattern.Raised,
-        extent = {{-100.0, -40.0}, {100.0, 40.0}}),
-        Text(extent = {{-94.0, -34.0}, {96.0, 34.0}},
-        textString = DynamicSelect("0.0", String(showNumber, significantDigits = significantDigits))),
-        Text(visible = not use_numberPort,
-        extent = {{-150.0, -70.0}, {150.0, -50.0}},
+        Rectangle(lineColor = {0, 0, 127}, 
+        fillColor = {236, 233, 216}, 
+        fillPattern = FillPattern.Solid, 
+        lineThickness = 5.0, 
+        borderPattern = BorderPattern.Raised, 
+        extent = {{-100.0, -40.0}, {100.0, 40.0}}), 
+        Text(extent = {{-94.0, -34.0}, {96.0, 34.0}}, 
+        textString = DynamicSelect("0.0", String(showNumber, significantDigits = significantDigits))), 
+        Text(visible = not use_numberPort, 
+        extent = {{-150.0, -70.0}, {150.0, -50.0}}, 
         textString = "%number")}), Documentation(info="<html><p>
 本模块通过图表动画将实数可视化。 可通过以下方式定义要可视化的数字：
 </p>
@@ -56,17 +56,17 @@ package Interaction
 <p>
 演示用法，例如示例 <a href=\"modelica://Modelica.Blocks.Examples.RealNetwork1\" target=\"\">Modelica.Blocks.Examples.RealNetwork1</a>
 </p>
-</html>"  ));
+</html>"    ));
     end RealValue;
 
-    block IntegerValue
+    block IntegerValue 
       "在图表层中动态显示来自numberPort或数字输入字段的整数值"
       parameter Boolean use_numberPort = true "=true，当启用了numberPort" 
         annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
-      input Integer number = 0
+      input Integer number = 0 
         "如果use_numberPort=false，则数字是可视化的(随时间变化)" 
         annotation(Dialog(enable = not use_numberPort), HideResult = true);
-      Modelica.Blocks.Interfaces.IntegerInput numberPort if use_numberPort
+      Modelica.Blocks.Interfaces.IntegerInput numberPort if use_numberPort 
         "如果use_numberPort=true，则图表层中要显示编号" 
         annotation(HideResult = true, Placement(transformation(extent = {{-130, -15}, {-100, 15}})));
       Modelica.Blocks.Interfaces.IntegerOutput showNumber;
@@ -78,19 +78,19 @@ package Interaction
       end if;
 
       annotation(Icon(
-        coordinateSystem(preserveAspectRatio = false,
-        extent = {{-100.0, -100.0}, {100.0, 100.0}}),
+        coordinateSystem(preserveAspectRatio = false, 
+        extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
         graphics = {
-        Rectangle(lineColor = {0, 0, 127},
-        fillColor = {236, 233, 216},
-        fillPattern = FillPattern.Solid,
-        lineThickness = 5.0,
-        borderPattern = BorderPattern.Raised,
-        extent = {{-100.0, -40.0}, {100.0, 40.0}}),
-        Text(extent = {{-94.0, -34.0}, {96.0, 34.0}},
-        textString = DynamicSelect("0", String(showNumber))),
-        Text(visible = not use_numberPort,
-        extent = {{-150.0, -70.0}, {150.0, -50.0}},
+        Rectangle(lineColor = {0, 0, 127}, 
+        fillColor = {236, 233, 216}, 
+        fillPattern = FillPattern.Solid, 
+        lineThickness = 5.0, 
+        borderPattern = BorderPattern.Raised, 
+        extent = {{-100.0, -40.0}, {100.0, 40.0}}), 
+        Text(extent = {{-94.0, -34.0}, {96.0, 34.0}}, 
+        textString = DynamicSelect("0", String(showNumber))), 
+        Text(visible = not use_numberPort, 
+        extent = {{-150.0, -70.0}, {150.0, -50.0}}, 
         textString = "%number")}), Documentation(info="<html><p>
 本模块在图表动画中将整数可视化。 可通过以下方式定义要可视化的数字：
 </p>
@@ -106,17 +106,17 @@ package Interaction
 <p>
 演示用法，例如示例 <a href=\"modelica://Modelica.Blocks.Examples.IntegerNetwork1\" target=\"\">Modelica.Blocks.Examples.IntegerNetwork1</a>。
 </p>
-</html>"  ));
+</html>"    ));
     end IntegerValue;
 
-    block BooleanValue
+    block BooleanValue 
       "在图表层动态显示来自numberPort或数字输入框的布尔值"
       parameter Boolean use_activePort = true "=true，当activePort已启用" 
         annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
-      input Boolean active = false
+      input Boolean active = false 
         "布尔变量显示use_activePort=false(随时间变化)" 
         annotation(Dialog(enable = not use_activePort), HideResult = true);
-      Modelica.Blocks.Interfaces.BooleanInput activePort if use_activePort
+      Modelica.Blocks.Interfaces.BooleanInput activePort if use_activePort 
         "当use_activePort=true，图层中将显示布尔变量" 
         annotation(HideResult = true, Placement(transformation(extent = {{-130, -15}, {-100, 15}})));
 
@@ -129,16 +129,16 @@ package Interaction
       end if;
 
       annotation(Icon(
-        coordinateSystem(preserveAspectRatio = false,
-        extent = {{-100.0, -100.0}, {100.0, 100.0}}),
+        coordinateSystem(preserveAspectRatio = false, 
+        extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
         graphics = {
-        Text(visible = not use_activePort,
-        extent = {{-188.0, -80.0}, {62.0, -60.0}},
-        textString = "%active"),
-        Ellipse(lineColor = {64, 64, 64},
-        fillColor = DynamicSelect({192, 192, 192}, if showActive then {0, 255, 0} else {235, 235, 235}),
-        pattern = LinePattern.None,
-        fillPattern = FillPattern.Sphere,
+        Text(visible = not use_activePort, 
+        extent = {{-188.0, -80.0}, {62.0, -60.0}}, 
+        textString = "%active"), 
+        Ellipse(lineColor = {64, 64, 64}, 
+        fillColor = DynamicSelect({192, 192, 192}, if showActive then {0, 255, 0} else {235, 235, 235}), 
+        pattern = LinePattern.None, 
+        fillPattern = FillPattern.Sphere, 
         extent = {{-100.0, -40.0}, {-20.0, 40.0}})}), Documentation(info="<html><p>
 本模块在图表动画中显示一个布尔变量。 要可视化的布尔变量可以通过以下方式定义:
 </p>
@@ -154,14 +154,10 @@ package Interaction
 <p>
 演示用法，例如示例 <a href=\"modelica://Modelica.Blocks.Examples.BooleanNetwork1\" target=\"\">Modelica.Blocks.Examples.BooleanNetwork1</a>&nbsp;。
 </p>
-</html>"));
+</html>"  ));
     end BooleanValue;
-    annotation(Documentation(info="<html><p>
-<br>
-</p>
-</html>"      ));
   end Show;
   annotation(Icon(graphics = {Text(
-    extent = {{-98, -30}, {96, 34}},
+    extent = {{-98, -30}, {96, 34}}, 
     textString = "0")}));
 end Interaction;

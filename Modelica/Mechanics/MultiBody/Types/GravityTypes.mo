@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.MultiBody.Types;
 type GravityTypes = enumeration(
-    NoGravity "无重力场",
-    UniformGravity "均匀重力场",
-    PointGravity "点重力场")
+    NoGravity "无重力场", 
+    UniformGravity "均匀重力场", 
+    PointGravity "点重力场") 
   "枚举类型，定义了重力场的类型" 
     annotation (Documentation(info="<html>
 <table border=\"1\"cellspacing=\"0\"cellpadding=\"2\">

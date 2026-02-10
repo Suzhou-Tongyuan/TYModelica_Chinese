@@ -7,7 +7,7 @@ expandable connector AxisControlBus "单个机器人轴的数据总线"
   SI.Angle angle "轴的一维接口的角度" annotation(HideResult = false);
   SI.AngularVelocity speed_ref "轴的一维接口的参考速度" annotation(HideResult = false);
   SI.AngularVelocity speed "轴的一维接口的的速度" annotation(HideResult = false);
-  SI.AngularAcceleration acceleration_ref
+  SI.AngularAcceleration acceleration_ref 
     "轴的一维接口的的参考加速度" annotation(HideResult = false);
   SI.AngularAcceleration acceleration "轴的一维接口的的加速度" annotation(HideResult = false);
   SI.Current current_ref "电机的参考电流" annotation(HideResult = false);
@@ -15,7 +15,7 @@ expandable connector AxisControlBus "单个机器人轴的数据总线"
   SI.Angle motorAngle "电机一维接口的角度" annotation(HideResult = false);
   SI.AngularVelocity motorSpeed "电机一维接口的速度" annotation(HideResult = false);
 
-  annotation(defaultComponentPrefixes = "protected",
+  annotation(defaultComponentPrefixes = "protected", 
     Documentation(info = "<html>
 <p>
 信号总线用于<strong>一个</strong>轴的所有信号通信。这是一个可扩展的连接器，具有一组\"默认\"信号。

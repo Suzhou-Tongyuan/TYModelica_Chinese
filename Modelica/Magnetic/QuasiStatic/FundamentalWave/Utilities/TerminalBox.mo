@@ -2,20 +2,20 @@
 model TerminalBox "接线盒Y/ d型连接"
   parameter Integer m(min=1) = 3 "相数" annotation(Evaluate=true);
   parameter String terminalConnection(start="Y") "选择“Y”作为星型连接，选择“D”作为delta连接" 
-    annotation (choices(choice="Y" "Star connection", choice="D"
+    annotation (choices(choice="Y" "Star connection", choice="D" 
         "Delta connection"));
   Modelica.Electrical.QuasiStatic.Polyphase.Interfaces.PositivePlug 
     plug_sp(final m=m) "用正极定子插头连接" annotation (Placement(
-        transformation(extent={{50,-50},{70,-70}}),
+        transformation(extent={{50,-50},{70,-70}}), 
         iconTransformation(extent={{50,-50},{70,-70}})));
   Modelica.Electrical.QuasiStatic.Polyphase.Interfaces.NegativePlug 
     plug_sn(final m=m) "用负极定子插头连接" annotation (Placement(
-        transformation(extent={{-70,-50},{-50,-70}}),
+        transformation(extent={{-70,-50},{-50,-70}}), 
         iconTransformation(extent={{-70,-50},{-50,-70}})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(final m=m) if (
     terminalConnection <> "D") annotation (Placement(transformation(
-        origin={-70,-80},
-        extent={{-10,10},{10,-10}},
+        origin={-70,-80}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=180)));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Delta delta(final m=m) if (
     terminalConnection == "D") 
@@ -42,13 +42,13 @@ equation
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={Text(
-              extent={{-40,-50},{40,-90}},
+              extent={{-40,-50},{40,-90}}, 
               textString="%terminalConnection"),Polygon(
               points={{-80,-40},{-80,-44},{-80,-80},{-40,-100},{40,-100},{
-              80,-70},{80,-44},{76,-40},{-80,-40}},
-              lineColor={95,95,95},
-              fillColor={135,135,135},
-              fillPattern=FillPattern.Solid)}),
+              80,-70},{80,-44},{76,-40},{-80,-40}}, 
+              lineColor={95,95,95}, 
+              fillColor={135,135,135}, 
+              fillPattern=FillPattern.Solid)}), 
     Documentation(info="<html>
 <p>
 该模型表示电机接线盒的内部连接。

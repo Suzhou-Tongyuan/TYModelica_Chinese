@@ -14,10 +14,10 @@ equation
       points={{41,0},{110,0}}, color={0,0,127}));
   annotation (
     Documentation(info="<html>
-<p>该模型确定输入空间矢量<code>u</code>的均方根值。</p> </html>"),
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+<p>该模型确定输入空间矢量<code>u</code>的均方根值。</p> </html>"), 
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
             {100,100}}), graphics={Text(
-                extent={{-60,40},{60,-20}},
-                textColor={0,0,255},
+                extent={{-60,40},{60,-20}}, 
+                textColor={0,0,255}, 
                 textString="RMS")}));
 end QuasiRMS;

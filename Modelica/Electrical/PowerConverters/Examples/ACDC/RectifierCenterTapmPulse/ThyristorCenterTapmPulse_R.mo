@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.RectifierCenterTapmPulse;
-model ThyristorCenterTapmPulse_R
+model ThyristorCenterTapmPulse_R 
   "带中心点和电阻负载的2*m脉冲可控硅整流器"
   extends ExampleTemplates.ThyristorCenterTapmPulse(pulsem(
         constantFiringAngle=constantFiringAngle));
@@ -11,8 +11,8 @@ model ThyristorCenterTapmPulse_R
 
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
       Placement(transformation(
-        origin={30,30},
-        extent={{10,-10},{-10,10}},
+        origin={30,30}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
 
 equation
@@ -23,9 +23,9 @@ equation
 
   annotation (
     experiment(
-      StopTime=0.1,
-      Tolerance=1e-06,
-      Interval=0.0002),
+      StopTime=0.1, 
+      Tolerance=1e-06, 
+      Interval=0.0002), 
     Documentation(info="<html>
 <p>该示例展示了一个带有电阻负载的控制的<code>m</code>脉冲中心点整流器，其中<code>m</code>是相数。</p>
 

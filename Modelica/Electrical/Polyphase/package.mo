@@ -23,28 +23,28 @@ package Polyphase "多相电气元件库"
       添加了条件热端口作为Electrical.Analog<br>
       添加了带弧的开关作为Electrical.Analog</li>
   </ul>
-</html>"), Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+</html>"), Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
             {100,100}}), graphics={
         Ellipse(
-          origin={14,56},
-          lineColor={95,95,95},
-          extent={{-84,-126},{56,14}}),
+          origin={14,56}, 
+          lineColor={95,95,95}, 
+          extent={{-84,-126},{56,14}}), 
         Ellipse(
-          origin={0,42},
-          lineColor={95,95,95},
-          fillColor={95,95,95},
-          fillPattern=FillPattern.Solid,
-          extent={{-40,-34},{-20,-14}}),
+          origin={0,42}, 
+          lineColor={95,95,95}, 
+          fillColor={95,95,95}, 
+          fillPattern=FillPattern.Solid, 
+          extent={{-40,-34},{-20,-14}}), 
         Ellipse(
-          origin={20,40},
-          lineColor={95,95,95},
-          fillColor={95,95,95},
-          fillPattern=FillPattern.Solid,
-          extent={{0,-34},{20,-14}}),
+          origin={20,40}, 
+          lineColor={95,95,95}, 
+          fillColor={95,95,95}, 
+          fillPattern=FillPattern.Solid, 
+          extent={{0,-34},{20,-14}}), 
         Ellipse(
-          origin={10,34},
-          lineColor={95,95,95},
-          fillColor={95,95,95},
-          fillPattern=FillPattern.Solid,
+          origin={10,34}, 
+          lineColor={95,95,95}, 
+          fillColor={95,95,95}, 
+          fillPattern=FillPattern.Solid, 
           extent={{-20,-74},{0,-54}})}));
 end Polyphase;

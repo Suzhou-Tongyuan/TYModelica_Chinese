@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.InductionMachines;
+within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.InductionMachines;
 model IMC_withLosses
   "感应电机与鼠笼和损耗"
   extends Modelica.Icons.Example;
@@ -30,7 +30,7 @@ protected
   parameter Real Itable[:]={11.0,11.20,12.27,13.87,16.41,18.78,21.07,
       23.92,27.05,29.40,32.85,32.95,35.92,39.35} "测量电流数据表";
   parameter Real wtable[:]=from_rpm({1500,1496,1493,1490,1486,1482,1479,1475,1471,
-      1467,1462,1462,1458,1453}) "Table of measured speed data";
+      1467,1462,1462,1458,1453}) "实测转速数据表";
   parameter Real ctable[:]={0.085,0.327,0.506,0.636,0.741,0.797,0.831,
       0.857,0.875,0.887,0.896,0.896,0.902,0.906} "测量功率因数数据表";
   parameter Real etable[:]={0,0.7250,0.8268,0.8698,0.8929,0.9028,0.9064,

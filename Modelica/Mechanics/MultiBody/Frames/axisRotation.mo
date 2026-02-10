@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function axisRotation
+function axisRotation 
   "返回围绕一个坐标系轴沿角度旋转的旋转对象"
 
   extends Modelica.Icons.Function;
   input Integer axis(min=1, max=3) "围绕坐标系1的'axis'旋转";
-  input SI.Angle angle
+  input SI.Angle angle 
     "将坐标系1旋转到坐标系2沿着坐标系1的'axis'的旋转角度";
   input SI.AngularVelocity der_angle "= der(angle)";
   output Orientation R "将坐标系1旋转到坐标系2的方向对象";
@@ -12,7 +12,7 @@ algorithm
   R := Orientation(T=(if axis == 1 then [1, 0, 0; 0, Modelica.Math.cos(angle), Modelica.Math.sin(angle);
     0, -Modelica.Math.sin(angle), Modelica.Math.cos(angle)] else if axis == 2 then [Modelica.Math.cos(angle), 0, -Modelica.Math.sin(
     angle); 0, 1, 0; Modelica.Math.sin(angle), 0, Modelica.Math.cos(angle)] else [Modelica.Math.cos(angle), Modelica.Math.sin(angle),
-     0; -Modelica.Math.sin(angle), Modelica.Math.cos(angle), 0; 0, 0, 1]),w= if axis == 1 then {der_angle,
+     0; -Modelica.Math.sin(angle), Modelica.Math.cos(angle), 0; 0, 0, 1]),w= if axis == 1 then {der_angle, 
     0,0} else if axis == 2 then {0,der_angle,0} else {0,0,der_angle});
   annotation(Inline=true, Documentation(info="<html>
 <h4>语法</h4>

@@ -1,8 +1,8 @@
-﻿within Modelica.ComplexBlocks.Examples;
+within Modelica.ComplexBlocks.Examples;
 model ShowTransferFunction "测试复数传递函数模块"
   extends Modelica.Icons.Example;
   parameter Real d = 1 / sqrt(2) "阻尼系数";
-  parameter Real b[:] = {1} "传递函数的分母多项式系数";
+  parameter Real b[:] = {1} "传递函数的分子多项式系数";
   parameter Real a[:] = {1, 2 * d, 1} "传递函数的分母多项式系数";
   parameter Real wMin = 0.01 "频率扫描下限";
   parameter Real wMax = 100 "频率扫描上限";
@@ -12,7 +12,8 @@ model ShowTransferFunction "测试复数传递函数模块"
   Modelica.Blocks.Sources.LogFrequencySweep logFrequencySweep(
     duration = 1,
     wMin = wMin,
-    wMax = wMax) annotation(Placement(transformation(extent = {{-80, -40}, {-60, -20}})));
+    wMax = wMax) annotation(Placement(transformation(origin={-70,-38},
+extent={{-10,-10},{10,10}})));
   Modelica.ComplexBlocks.Sources.ComplexConstant const(k(re = 1, im = 0)) 
     annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
   Modelica.ComplexBlocks.ComplexMath.TransferFunction transferFunction(b = b,
@@ -24,7 +25,9 @@ equation
   connect(const.y, transferFunction.u) 
     annotation(Line(points = {{-59, 0}, {-50.5, 0}, {-42, 0}}, color = {85, 170, 255}));
   connect(logFrequencySweep.y, transferFunction.w) 
-    annotation(Line(points = {{-59, -30}, {-30, -30}, {-30, -12}}, color = {0, 0, 127}));
+    annotation(Line(origin={0,0},
+points={{-59,-38},{-30,-38},{-30,-12}},
+color={0,0,127}));
   connect(transferFunction.y, complexToPolar.u) 
     annotation(Line(points = {{-19, 0}, {-2, 0}}, color = {85, 170, 255}));
   annotation(

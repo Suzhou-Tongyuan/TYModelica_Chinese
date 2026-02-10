@@ -145,7 +145,7 @@ Real        L, angle;
   </tr>
 </table>
 </html>"), Icon(graphics={
-        Line(points={{-2,-18},{80,-60}}, color={95,95,95}),
-        Line(points={{-2,-18},{-2,80}}, color={95,95,95}),
+        Line(points={{-2,-18},{80,-60}}, color={95,95,95}), 
+        Line(points={{-2,-18},{-2,80}}, color={95,95,95}), 
         Line(points={{-78,-56},{-2,-18}}, color={95,95,95})}));
 end Frames;

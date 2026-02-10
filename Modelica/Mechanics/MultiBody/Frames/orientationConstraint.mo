@@ -1,9 +1,9 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function orientationConstraint
+function orientationConstraint 
   "返回方向约束的残差(应等于零)"
   extends Modelica.Icons.Function;
   input Orientation R "将坐标系1旋转到坐标系2的方向对象";
-  output Real residue[6]
+  output Real residue[6] 
     "方向对象元素之间约束的残差(应等于零)";
 algorithm
   residue := {R.T[:, 1]*R.T[:, 1] - 1,R.T[:, 2]*R.T[:, 2] - 1,R.T[:, 3]*R.T[:,

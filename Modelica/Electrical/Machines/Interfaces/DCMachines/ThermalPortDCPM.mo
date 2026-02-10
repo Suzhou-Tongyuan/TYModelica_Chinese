@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.Interfaces.DCMachines;
-connector ThermalPortDCPM
+connector ThermalPortDCPM 
   "永磁直流电机的热端口"
   extends Machines.Interfaces.DCMachines.PartialThermalPortDCMachines;
 

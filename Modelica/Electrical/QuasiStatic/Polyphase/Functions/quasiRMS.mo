@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.QuasiStatic.Polyphase.Functions;
-function quasiRMS
+function quasiRMS 
   "复数输入（电流或电压）的整体准有效值"
   extends Modelica.Icons.Function;
   import Modelica.ComplexMath.abs;

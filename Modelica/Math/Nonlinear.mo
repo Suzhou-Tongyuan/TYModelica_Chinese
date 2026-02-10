@@ -1,7 +1,7 @@
 ﻿within Modelica.Math;
 package Nonlinear "非线性方程运算函数库"
   extends Modelica.Icons.Package;
-  package Examples
+  package Examples 
     "示例演示了非线性包中函数的用法"
     extends Modelica.Icons.ExamplesPackage;
 
@@ -13,29 +13,29 @@ package Nonlinear "非线性方程运算函数库"
     protected
       Real I_numerical[3] "数值整数值";
       Real I_analytical[size(I_numerical, 1)] "解析积分值";
-      Real I_err[size(I_numerical, 1)]
+      Real I_err[size(I_numerical, 1)] 
         "数值和解析积分值之间的绝对误差";
 
     algorithm
       I_numerical[1] := Modelica.Math.Nonlinear.quadratureLobatto(
-        function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun4(),
-        0,
-        1,
+        function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun4(), 
+        0, 
+        1, 
         tolerance);
       I_analytical[1] := -cos(1) + cos(0);
 
       I_numerical[2] := Modelica.Math.Nonlinear.quadratureLobatto(
-        function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun5(w = 5),
-        0,
-        13,
+        function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun5(w = 5), 
+        0, 
+        13, 
         tolerance);
       I_analytical[2] := -cos(5 * 13) / 5 + cos(5 * 0) / 5;
 
       I_numerical[3] := Modelica.Math.Nonlinear.quadratureLobatto(
-        function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun6(k = 1 /
-        sqrt(2)),
-        0,
-        Modelica.Constants.pi / 2,
+        function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun6(k = 1 / 
+        sqrt(2)), 
+        0, 
+        Modelica.Constants.pi / 2, 
         tolerance);
       I_analytical[3] := 1.8540746773013719184338503;
 
@@ -43,25 +43,25 @@ package Nonlinear "非线性方程运算函数库"
 
       print("\n... Results of Modelica.Math.Nonlinear.Examples.quadratureLobatto1:");
       print("Function 1 ( integral(sin(x)*dx) from x=0 to x=1): ");
-      print("Analytical integral value = " + String(I_analytical[1], format =
+      print("Analytical integral value = " + String(I_analytical[1], format = 
         "2.16f"));
-      print("Numerical integral value  = " + String(I_numerical[1], format =
+      print("Numerical integral value  = " + String(I_numerical[1], format = 
         "2.16f"));
       print("Absolute difference       = " + String(I_err[1], format = "2.0e"));
 
       print("");
       print("Function 2 (integral(sin(5*x)*dx) from x=0 to x=13): ");
-      print("Analytical integral value = " + String(I_analytical[2], format =
+      print("Analytical integral value = " + String(I_analytical[2], format = 
         "2.16f"));
-      print("Numerical integral value  = " + String(I_numerical[2], format =
+      print("Numerical integral value  = " + String(I_numerical[2], format = 
         "2.16f"));
       print("Absolute difference       = " + String(I_err[2], format = "2.0e"));
 
       print("");
       print("Function 3 (Elliptic integral from x=0 to pi/2): ");
-      print("Analytical integral value = " + String(I_analytical[3], format =
+      print("Analytical integral value = " + String(I_analytical[3], format = 
         "2.16f"));
-      print("Numerical integral value  = " + String(I_numerical[3], format =
+      print("Numerical integral value  = " + String(I_numerical[3], format = 
         "2.16f"));
       print("Absolute difference       = " + String(I_err[3], format = "2.0e"));
 
@@ -106,21 +106,21 @@ package Nonlinear "非线性方程运算函数库"
 
     algorithm
       I[1] := Modelica.Math.Nonlinear.quadratureLobatto(
-          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun4(),
-          a1,
-          b1,
+          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun4(), 
+          a1, 
+          b1, 
           Tolerance);
 
       I[2] := Modelica.Math.Nonlinear.quadratureLobatto(
-          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun5(w=w),
-          a2,
-          b2,
+          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun5(w=w), 
+          a2, 
+          b2, 
           Tolerance);
 
       I[3] := Modelica.Math.Nonlinear.quadratureLobatto(
-          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun6(k=k),
-          a3,
-          b3,
+          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun6(k=k), 
+          a3, 
+          b3, 
           Tolerance);
 
       print("\n... Results of Modelica.Math.Nonlinear.Examples.quadratureLobatto2:");
@@ -153,12 +153,12 @@ package Nonlinear "非线性方程运算函数库"
 </html>"          ));
     end quadratureLobatto2;
 
-    function solveNonlinearEquations1
+    function solveNonlinearEquations1 
       "求解具有固定输入的非线性方程"
       extends Modelica.Icons.Function;
       import Modelica.Utilities.Streams.print;
 
-      input Real tolerance=100*Modelica.Constants.eps
+      input Real tolerance=100*Modelica.Constants.eps 
         "溶液的相对容忍度";
 
     protected
@@ -168,24 +168,24 @@ package Nonlinear "非线性方程运算函数库"
 
     algorithm
       u_numerical[1] := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
-          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun1(),
-          -0.5,
-          10,
+          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun1(), 
+          -0.5, 
+          10, 
           tolerance);
       u_analytical[1] := 1.0;
 
       u_numerical[2] := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
-          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun2(w=3),
-          0,
-          5,
+          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun2(w=3), 
+          0, 
+          5, 
           tolerance);
       u_analytical[2] := 0.6448544035840080891877538;
 
       u_numerical[3] := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
-          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun3(p={5,1},
-          m=1),
-          1,
-          8,
+          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun3(p={5,1}, 
+          m=1), 
+          1, 
+          8, 
           tolerance);
       u_analytical[3] := 6.9368474072202187221643182;
 
@@ -229,12 +229,12 @@ package Nonlinear "非线性方程运算函数库"
 </html>"      ));
     end solveNonlinearEquations1;
 
-    function solveNonlinearEquations2
+    function solveNonlinearEquations2 
       "求解具有用户依赖输入的非线性方程"
       extends Modelica.Icons.Function;
       import Modelica.Utilities.Streams.print;
 
-      input Real tolerance=100*Modelica.Constants.eps
+      input Real tolerance=100*Modelica.Constants.eps 
         "溶液的相对容忍度" 
         annotation (Dialog(group="General"));
       input Real u_min1=-0.5 "下限" annotation (Dialog(group="u^2-1"));
@@ -259,22 +259,22 @@ package Nonlinear "非线性方程运算函数库"
 
     algorithm
       u[1] := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
-          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun1(),
-          u_min1,
-          u_max1,
+          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun1(), 
+          u_min1, 
+          u_max1, 
           tolerance);
 
       u[2] := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
-          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun2(w=w),
-          u_min2,
-          u_max2,
+          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun2(w=w), 
+          u_min2, 
+          u_max2, 
           tolerance);
 
       u[3] := Modelica.Math.Nonlinear.solveOneNonlinearEquation(
-          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun3(p=p, m=
-          m),
-          u_min3,
-          u_max3,
+          function Modelica.Math.Nonlinear.Examples.UtilityFunctions.fun3(p=p, m= 
+          m), 
+          u_min3, 
+          u_max3, 
           tolerance);
 
       print("\n... Results of Modelica.Math.Nonlinear.Examples.solveNonlinearEquations2:");
@@ -318,7 +318,7 @@ package Nonlinear "非线性方程运算函数库"
       Real qd(start=0, fixed=true) "二阶状态变量";
       Real x "作为s和q的乘积的总体值";
       final parameter Real s = Modelica.Math.Nonlinear.quadratureLobatto(
-                                  function UtilityFunctions.fun7(A=A, w=ws),
+                                  function UtilityFunctions.fun7(A=A, w=ws), 
                                   0,1) "Time-invariant integral value";
     equation
       qd = der(q);
@@ -330,11 +330,11 @@ package Nonlinear "非线性方程运算函数库"
 <p>
 从建模的角度来看，该示例以非常简化的方式演示了使用Ritz方法对分布式系统建模的基本方法。 质点的位移场<code>u(c,t)</code>(其中<code>c</code>为未变形的位置，<code>t</code>为时间)用与空间相关的模态振型<code>Φ(c)</code>和与时间相关的模态幅值<code>q(t)</code>表示，即<code>u</code> = <code>Φ(c)*q(t)</code>。当将这种分解插入到运动方程中，然后对所有粒子进行积分时，出现了诸如<code>∫(Φ(c) dc)*q(t)</code>之类的项，其中定常积分项可以事先用<a href=\"modelica://Modelica.Math.Nonlinear. quadratureLobatto\" target=\"\">Lobatto method</a>。用这种方法将偏微分方程转化为常微分方程组。
 </p>
-</html>"),
+</html>"), 
         experiment(StopTime=5));
     end QuadratureLobatto3;
 
-    package UtilityFunctions
+    package UtilityFunctions 
       "用作示例的函数参数的实用函数"
       extends Modelica.Icons.UtilitiesPackage;
 
@@ -406,7 +406,7 @@ package Nonlinear "非线性方程运算函数库"
 
   package Interfaces "函数接口"
     extends Modelica.Icons.InterfacesPackage;
-    encapsulated partial function partialScalarFunction
+    encapsulated partial function partialScalarFunction 
       "一个函数接口，一个输入和一个输出实数信号"
       import Modelica;
       extends Modelica.Icons.Function;
@@ -432,14 +432,14 @@ package Nonlinear "非线性方程运算函数库"
 </html>"  ));
   end Interfaces;
 
-  function quadratureLobatto
+  function quadratureLobatto 
     "使用自适应Lobatto规则返回被积函数的积分"
     extends Modelica.Icons.Function;
-    input Modelica.Math.Nonlinear.Interfaces.partialScalarFunction f
+    input Modelica.Math.Nonlinear.Interfaces.partialScalarFunction f 
       "被积函数的函数";
     input Real a "积分区间的下限";
     input Real b "积分区间的上限";
-    input Real tolerance = 100 * Modelica.Constants.eps
+    input Real tolerance = 100 * Modelica.Constants.eps 
       "整数值的相对容差";
     output Real integral "积分值";
 
@@ -511,18 +511,18 @@ package Nonlinear "非线性方程运算函数库"
       fmr := y[4];
       fmrr := y[5];
       i2 := (h / 6) * (fa + fb + 5 * (fml + fmr));
-      i1 := (h / 1470) * (77 * (fa + fb) + 432 * (fmll + fmrr) + 625 * (fml + fmr) +
+      i1 := (h / 1470) * (77 * (fa + fb) + 432 * (fmll + fmrr) + 625 * (fml + fmr) + 
         672 * fm);
 
       if (is + (i1 - i2) == is) or (mll <= a) or (b <= mrr) then
         I := i1;
 
       else
-        I := quadStep(f, a, mll, fa, fmll, is) +
-          quadStep(f, mll, ml, fmll, fml, is) +
-          quadStep(f, ml, m, fml, fm, is) +
-          quadStep(f, m, mr, fm, fmr, is) +
-          quadStep(f, mr, mrr, fmr, fmrr, is) +
+        I := quadStep(f, a, mll, fa, fmll, is) + 
+          quadStep(f, mll, ml, fmll, fml, is) + 
+          quadStep(f, ml, m, fml, fm, is) + 
+          quadStep(f, m, mr, fm, fmr, is) + 
+          quadStep(f, mr, mrr, fmr, fmrr, is) + 
           quadStep(f, mrr, b, fmrr, fb, is);
       end if;
     end quadStep;
@@ -542,18 +542,18 @@ package Nonlinear "非线性方程运算函数库"
     h := (b - a) / 2;
     alpha := sqrt(2 / 3);
     beta := 1 / sqrt(5);
-    x := {a,
-      m - x1 * h,
-      m - alpha * h,
-      m - x2 * h,
-      m - beta * h,
-      m - x3 * h,
-      m,
-      m + x3 * h,
-      m + beta * h,
-      m + x2 * h,
-      m + alpha * h,
-      m + x1 * h,
+    x := {a, 
+      m - x1 * h, 
+      m - alpha * h, 
+      m - x2 * h, 
+      m - beta * h, 
+      m - x3 * h, 
+      m, 
+      m + x3 * h, 
+      m + beta * h, 
+      m + x2 * h, 
+      m + alpha * h, 
+      m + x1 * h, 
       b};
     for i in 1:size(x, 1) loop
       y[i] := f(x[i]);
@@ -561,11 +561,11 @@ package Nonlinear "非线性方程运算函数库"
     fa := y[1];
     fb := y[13];
     i2 := (h / 6) * (y[1] + y[13] + 5 * (y[5] + y[9]));
-    i1 := (h / 1470) * (77 * (y[1] + y[13]) + 432 * (y[3] + y[11]) + 625 * (y[5] + y[9])
+    i1 := (h / 1470) * (77 * (y[1] + y[13]) + 432 * (y[3] + y[11]) + 625 * (y[5] + y[9]) 
       + 672 * y[7]);
     is := h * (0.0158271919734802 * (y[1] + y[13]) + 0.0942738402188500 * (y[2] + y[
-      12]) + 0.155071987336585 * (y[3] + y[11]) + 0.188821573960182 * (y[4] + y[10])
-      + 0.199773405226859 * (y[5] + y[9]) + 0.224926465333340 * (y[6] + y[8]) + 0.242611071901408
+      12]) + 0.155071987336585 * (y[3] + y[11]) + 0.188821573960182 * (y[4] + y[10]) 
+      + 0.199773405226859 * (y[5] + y[9]) + 0.224926465333340 * (y[6] + y[8]) + 0.242611071901408 
       * y[7]);
     s := sign(is);
     if (s == 0) then
@@ -585,11 +585,11 @@ package Nonlinear "非线性方程运算函数库"
       is := b - a;
     end if;
     integral := quadStep(
-      f,
-      a,
-      b,
-      fa,
-      fb,
+      f, 
+      a, 
+      b, 
+      fa, 
+      fb, 
       is);
 
     annotation(Documentation(info = "<html>
@@ -624,16 +624,16 @@ package Nonlinear "非线性方程运算函数库"
 </html>"  ));
   end quadratureLobatto;
 
-  function solveOneNonlinearEquation
+  function solveOneNonlinearEquation 
     "以一种非常可靠和有效的方法求解f(u) = 0 (f(u_min)和f(u_max)必须有不同的符号)"
     extends Modelica.Icons.Function;
     import Modelica.Utilities.Streams.error;
 
-    input Modelica.Math.Nonlinear.Interfaces.partialScalarFunction f
+    input Modelica.Math.Nonlinear.Interfaces.partialScalarFunction f 
       "函数y = f(u);U的计算使y=0";
     input Real u_min "搜索区间的下界";
     input Real u_max "搜索区间的上界";
-    input Real tolerance=100*Modelica.Constants.eps
+    input Real tolerance=100*Modelica.Constants.eps 
       "溶液的相对容忍度";
     output Real u "自变量u的值，使f(u) = 0";
 
@@ -661,12 +661,12 @@ package Nonlinear "非线性方程运算函数库"
     fc := fb;
     if fa > 0.0 and fb > 0.0 or fa < 0.0 and fb < 0.0 then
       error(
-        "The arguments u_min and u_max provided in the function call\n"+
-        "    solveOneNonlinearEquation(f,u_min,u_max)\n" +
-        "do not bracket the root of the single non-linear equation 0=f(u):\n" +
-        "  u_min  = " + String(u_min) + "\n" + "  u_max  = " + String(u_max)
-         + "\n" + "  fa = f(u_min) = " + String(fa) + "\n" +
-        "  fb = f(u_max) = " + String(fb) + "\n" +
+        "The arguments u_min and u_max provided in the function call\n"+ 
+        "    solveOneNonlinearEquation(f,u_min,u_max)\n" + 
+        "do not bracket the root of the single non-linear equation 0=f(u):\n" + 
+        "  u_min  = " + String(u_min) + "\n" + "  u_max  = " + String(u_max) 
+         + "\n" + "  fa = f(u_min) = " + String(fa) + "\n" + 
+        "  fb = f(u_max) = " + String(fb) + "\n" + 
         "fa and fb must have opposite sign which is not the case");
     end if;
 
@@ -829,10 +829,10 @@ Modelica.Media.Common.OneNonLinearEquation
 <li><em>June 2002 </em> by Gerhard Schillhuber (master thesis at DLR-RM):<br>
        自适应正交计算样条的曲线长度.</li>
 </ul>
-</html>"), Icon(graphics={Polygon(points={{-44,-52},{-44,-26},{-17.1,
-              44.4},{-11.4,52.6},{-5.8,57.1},{-0.2,57.8},{5.4,54.6},{11.1,47.7},
-              {16.7,37.4},{23.1,22.1},{31.17,-0.8},{48,-52},{-44,-52}},
-          lineColor={135,135,135},
-          fillColor={215,215,215},
+</html>"), Icon(graphics={Polygon(points={{-44,-52},{-44,-26},{-17.1, 
+              44.4},{-11.4,52.6},{-5.8,57.1},{-0.2,57.8},{5.4,54.6},{11.1,47.7}, 
+              {16.7,37.4},{23.1,22.1},{31.17,-0.8},{48,-52},{-44,-52}}, 
+          lineColor={135,135,135}, 
+          fillColor={215,215,215}, 
           fillPattern=FillPattern.Solid)}));
 end Nonlinear;

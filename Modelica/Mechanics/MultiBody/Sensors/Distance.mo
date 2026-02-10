@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Sensors;
-model Distance
+model Distance 
   "测量两个连接器原点之间的距离"
 
   import Modelica.Mechanics.MultiBody.Frames;
@@ -7,33 +7,33 @@ model Distance
 
   extends Interfaces.PartialTwoFrames;
   extends Modelica.Icons.RectangularSensor;
-  Modelica.Blocks.Interfaces.RealOutput distance
+  Modelica.Blocks.Interfaces.RealOutput distance 
     "frame_a的原点和frame_b的原点之间的距离" 
     annotation (Placement(transformation(
-        origin={0,-110},
-        extent={{10,-10},{-10,10}},
+        origin={0,-110}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
 
-  parameter Boolean animation=true
+  parameter Boolean animation=true 
     "=true,如果启用动画(显示箭头)" ;
-  input Types.Color arrowColor=Modelica.Mechanics.MultiBody.Types.Defaults.SensorColor
+  input Types.Color arrowColor=Modelica.Mechanics.MultiBody.Types.Defaults.SensorColor 
     "从frame_a到frame_b的相对箭头的颜色" 
     annotation (Dialog(colorSelector=true, group="如果animation=true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "反射环境光的程度(=0：光完全被吸收)" 
     annotation (Dialog(group="如果animation=true", enable=animation));
-  input SI.Position s_small(min=sqrt(Modelica.Constants.small))=1e-10
+  input SI.Position s_small(min=sqrt(Modelica.Constants.small))=1e-10 
     "如果frame_a和frame_b之间的距离为零，则防止零除法" 
     annotation (Dialog(tab="高级"));
 protected
   Modelica.Mechanics.MultiBody.Visualizers.Advanced.Arrow arrow(
-    r=frame_a.r_0,
-    r_head=frame_b.r_0 - frame_a.r_0,
-    color=arrowColor,
+    r=frame_a.r_0, 
+    r_head=frame_b.r_0 - frame_a.r_0, 
+    color=arrowColor, 
     specularCoefficient=specularCoefficient) if world.enableAnimation and animation;
 
 protected
-  SI.Position r_rel_0[3] = frame_b.r_0 - frame_a.r_0
+  SI.Position r_rel_0[3] = frame_b.r_0 - frame_a.r_0 
     "在全局坐标系中解析的从frame_a到frame_b的位置矢量";
   SI.Area L2 = r_rel_0*r_rel_0;
   SI.Area s_small2 = s_small^2;
@@ -45,19 +45,19 @@ equation
 
   distance =  smooth(1,if noEvent(L2 > s_small2) then sqrt(L2) else L2/(2*s_small)*(3-L2/s_small2));
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
             100}}), graphics={
-        Line(points={{0,-60},{0,-100}}, color={0,0,127}),
-        Line(points={{-70,0},{-101,0}}),
-        Line(points={{70,0},{100,0}}),
+        Line(points={{0,-60},{0,-100}}, color={0,0,127}), 
+        Line(points={{-70,0},{-101,0}}), 
+        Line(points={{70,0},{100,0}}), 
         Text(
-          extent={{-128,30},{133,78}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-128,30},{133,78}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-30,10},{70,-30}},
-          textColor={64,64,64},
-          textString="m")}),
+          extent={{-30,10},{70,-30}}, 
+          textColor={64,64,64}, 
+          textString="m")}), 
     Documentation(info="<html>
 <p>
 输出信号连接器<strong>distance</strong>提供了frame_a和frame_b原点之间的距离。

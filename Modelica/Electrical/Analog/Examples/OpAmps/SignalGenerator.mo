@@ -11,26 +11,26 @@ model SignalGenerator "矩形三角波发生器"
   parameter SI.Resistance R=1000 "积分器部分的可变电阻";
   parameter SI.Capacitance C=Vps/VAmp/(4*f*R) "为达到频率f计算所需电容";
   Modelica.Electrical.Analog.Ideal.IdealizedOpAmpLimited opAmp1(
-    Vps=Vps,
-    Vns=Vns,
-    strict=false,
+    Vps=Vps, 
+    Vns=Vns, 
+    strict=false, 
     homotopyType=Modelica.Blocks.Types.LimiterHomotopy.LowerLimit) 
     annotation (Placement(transformation(extent={{-60,10},{-40,-10}})));
   Modelica.Electrical.Analog.Basic.Resistor r2(R=R2, i(start=Vps/R2)) 
     annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=180,
+        extent={{10,10},{-10,-10}}, 
+        rotation=180, 
         origin={-50,30})));
   Modelica.Electrical.Analog.Basic.Resistor r1(R=R1) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={-50,50})));
   Modelica.Electrical.Analog.Basic.Ground ground 
     annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
   Modelica.Electrical.Analog.Ideal.IdealizedOpAmpLimited opAmp2(
-    Vps=Vps,
-    Vns=Vns,
-    v_in(start=0),
+    Vps=Vps, 
+    Vns=Vns, 
+    v_in(start=0), 
     strict=false) 
     annotation (Placement(transformation(extent={{30,-10},{50,10}})));
   Modelica.Electrical.Analog.Basic.Capacitor c(C=C, v(fixed=true, start=0)) 
@@ -39,13 +39,13 @@ model SignalGenerator "矩形三角波发生器"
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor vOutRectangle annotation (
       Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=270,
+        extent={{-10,10},{10,-10}}, 
+        rotation=270, 
         origin={-30,-20})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor vOutTriangle annotation (
       Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=270,
+        extent={{-10,10},{10,-10}}, 
+        rotation=270, 
         origin={60,-18})));
 equation
   connect(opAmp1.out, r2.n) annotation (Line(
@@ -80,10 +80,10 @@ equation
 <p>这个信号发生器由一个Schmitt触发器和一个积分器组成。Schmitt触发器部分的运算放大器(opAmp1)输出一个幅度为VAmp、频率为f的矩形信号。积分器部分的运算放大器(opAmp2)输出一个幅度也为Vamp、频率也为f的三角形信号。</p>
 <p>参考文献：</p>
 <p>U. Tietze and C. Schenk, Halbleiter-Schaltungstechnik (German), 11th edition, Springer 1999, Chapter 14.5.2</p>
-</html>"),
+</html>"), 
     experiment(
-      StartTime=0,
-      StopTime=1,
-      Tolerance=1e-006,
+      StartTime=0, 
+      StopTime=1, 
+      Tolerance=1e-006, 
       Interval=0.001));
 end SignalGenerator;

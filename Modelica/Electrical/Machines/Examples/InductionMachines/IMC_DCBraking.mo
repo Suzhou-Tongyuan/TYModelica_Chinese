@@ -3,47 +3,47 @@ model IMC_DCBraking "感应电机带直流制动"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   constant Integer m=3 "相数";
-  parameter SI.AngularVelocity w0(displayUnit="rev/min")=
+  parameter SI.AngularVelocity w0(displayUnit="rev/min")= 
     2*pi*imcData.fsNominal/imcData.p "初始机械速度";
-  parameter SI.Inertia JLoad=4*imcData.Jr
+  parameter SI.Inertia JLoad=4*imcData.Jr 
     "负载惯性矩";
   SI.Torque tauElectrical=imc.tauElectrical "电机转矩";
   SI.Torque tauShaft=imc.tauShaft "轴转矩";
-  SI.AngularVelocity wMechanical(displayUnit="rev/min") = imc.wMechanical
+  SI.AngularVelocity wMechanical(displayUnit="rev/min") = imc.wMechanical 
     "轴速度";
-  parameter Modelica.Electrical.Machines.Utilities.DcBrakeSettings settings(INominal=
+  parameter Modelica.Electrical.Machines.Utilities.DcBrakeSettings settings(INominal= 
         100, layout="D3") 
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
   parameter
     Modelica.Electrical.Machines.Utilities.ParameterRecords.IM_SquirrelCageData 
     imcData annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
   Modelica.Electrical.Machines.BasicMachines.InductionMachines.IM_SquirrelCage imc(
-    p=imcData.p,
-    fsNominal=imcData.fsNominal,
-    Rs=imcData.Rs,
-    TsRef=imcData.TsRef,
-    alpha20s(displayUnit="1/K") = imcData.alpha20s,
-    Lssigma=imcData.Lssigma,
-    Jr=imcData.Jr,
-    Js=imcData.Js,
-    Lszero=imcData.Lszero,
-    frictionParameters=imcData.frictionParameters,
-    phiMechanical(fixed=true, start=0),
-    wMechanical(fixed=true, start=w0),
-    statorCoreParameters=imcData.statorCoreParameters,
-    strayLoadParameters=imcData.strayLoadParameters,
-        stateSelect_sr = StateSelect.avoid,
-    Lm=imcData.Lm,
-    Lrsigma=imcData.Lrsigma,
-    Rr=imcData.Rr,
-    TrRef=imcData.TrRef,
-    TsOperational=293.15,
-    alpha20r=imcData.alpha20r,
+    p=imcData.p, 
+    fsNominal=imcData.fsNominal, 
+    Rs=imcData.Rs, 
+    TsRef=imcData.TsRef, 
+    alpha20s(displayUnit="1/K") = imcData.alpha20s, 
+    Lssigma=imcData.Lssigma, 
+    Jr=imcData.Jr, 
+    Js=imcData.Js, 
+    Lszero=imcData.Lszero, 
+    frictionParameters=imcData.frictionParameters, 
+    phiMechanical(fixed=true, start=0), 
+    wMechanical(fixed=true, start=w0), 
+    statorCoreParameters=imcData.statorCoreParameters, 
+    strayLoadParameters=imcData.strayLoadParameters, 
+        stateSelect_sr = StateSelect.avoid, 
+    Lm=imcData.Lm, 
+    Lrsigma=imcData.Lrsigma, 
+    Rr=imcData.Rr, 
+    TrRef=imcData.TrRef, 
+    TsOperational=293.15, 
+    alpha20r=imcData.alpha20r, 
     TrOperational=293.15) 
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=JLoad) 
     annotation (Placement(transformation(extent={{50,-10},{70,10}})));
-  Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(m=m,
+  Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(m=m, 
       terminalConnection=settings.terminalConnection) 
     annotation (Placement(transformation(extent={{20,6},{40,26}})));
   Modelica.Electrical.Polyphase.Basic.PlugToPin_p plugToPin1(m=m, k=1) 
@@ -55,8 +55,8 @@ model IMC_DCBraking "感应电机带直流制动"
   Modelica.Electrical.Analog.Sources.ConstantCurrent 
     constantCurrent(I=settings.Idc) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-50,62})));
   Modelica.Electrical.Analog.Basic.Ground ground 
     annotation (Placement(transformation(extent={{-70,20},{-50,40}})));
@@ -94,9 +94,9 @@ equation
     annotation (Line(points={{-32,40},{-50,40},{-50,52}}, color={0,0,255}));
   connect(constantCurrent.p, plugToPin3.pin_p) 
     annotation (Line(points={{-50,52},{-50,0},{-32,0}}, color={0,0,255}));
-  connect(plugToPin2.plug_p, plugToPin1.plug_p) annotation (Line(points={{-28,40},
+  connect(plugToPin2.plug_p, plugToPin1.plug_p) annotation (Line(points={{-28,40}, 
           {-20,40},{-20,80},{-28,80}}, color={0,0,255}));
-  connect(plugToPin2.plug_p, plugToPin3.plug_p) annotation (Line(points={{-28,40},
+  connect(plugToPin2.plug_p, plugToPin3.plug_p) annotation (Line(points={{-28,40}, 
           {-20,40},{-20,0},{-28,0}}, color={0,0,255}));
   connect(terminalBox.plug_sn, imc.plug_sn) 
     annotation (Line(points={{24,10},{24,10}}, color={0,0,255}));
@@ -107,8 +107,8 @@ equation
   connect(plugToPin2.pin_p, ground.p) 
     annotation (Line(points={{-32,40},{-60,40}}, color={0,0,255}));
   annotation (experiment(
-      StopTime=25,
-      Interval=0.001,
+      StopTime=25, 
+      Interval=0.001, 
       Tolerance=1e-06), Documentation(info="<html>
 <p>
 感应电机的定子绕组由直流电流供电，导致一个静态的电流空间矢量。

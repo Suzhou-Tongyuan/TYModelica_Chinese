@@ -7,13 +7,13 @@ equation
   Complex(0,0) = pin_p.i + pin_n.i "电流平衡";
 
   annotation (Icon(graphics={
-        Line(points={{-70,0},{-94,0}}, color={85,170,255}),
-        Line(points={{70,0},{94,0}}, color={85,170,255}),
+        Line(points={{-70,0},{-94,0}}, color={85,170,255}), 
+        Line(points={{70,0},{94,0}}, color={85,170,255}), 
         Text(
-          extent={{-150,120},{150,80}},
-          textColor={0,0,255},
-          textString="%name"),
-        Line(points={{0,-100},{0,-70}}, color={85,170,255})}),
+          extent={{-150,120},{150,80}}, 
+          textColor={0,0,255}, 
+          textString="%name"), 
+        Line(points={{0,-100},{0,-70}}, color={85,170,255})}), 
       Documentation(info="<html>
 <p>
 相对传感器部分模型依赖于

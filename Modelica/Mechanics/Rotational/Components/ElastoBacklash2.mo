@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.Rotational.Components;
-model ElastoBacklash2
+model ElastoBacklash2 
   "串联连接到线性弹簧和阻尼器的齿隙（齿隙用弹性建模；在接触开始时，一维转动接口扭矩可能会跳跃，与 ElastoBacklash 模型相反)"
 
-  parameter SI.RotationalSpringConstant c(final min=Modelica.Constants.small,
+  parameter SI.RotationalSpringConstant c(final min=Modelica.Constants.small, 
       start=1.0e5) "弹簧刚度系数（要求 c > 0）";
-  parameter SI.RotationalDampingConstant d(final min=0, start=0)
+  parameter SI.RotationalDampingConstant d(final min=0, start=0) 
     "阻尼系数";
   parameter SI.Angle b(final min=0)=0 "总齿隙";
   parameter SI.Angle phi_rel0=0 "未拉伸弹簧角度";
@@ -14,9 +14,9 @@ model ElastoBacklash2
   extends 
     Modelica.Thermal.HeatTransfer.Interfaces.PartialElementaryConditionalHeatPortWithoutT;
 protected
-  final parameter SI.Angle bMax=b/2
+  final parameter SI.Angle bMax=b/2 
     "在范围 bMin <= phi_rel - phi_rel0 <= bMax 内的齿隙";
-  final parameter SI.Angle bMin=-bMax
+  final parameter SI.Angle bMin=-bMax 
     "在范围 bMin <= phi_rel - phi_rel0 <= bMax 内的齿隙";
   SI.Torque tau_c;
   SI.Torque tau_d;
@@ -90,7 +90,7 @@ equation
                    (if tau_c + tau_d >= 0 then 0 else tau_d*w_rel) 
                 else 0;
   end if;
-  annotation (defaultComponentName="elastoBacklash",
+  annotation (defaultComponentName="elastoBacklash", 
     Documentation(info="<html>
 <p>
 该元素由一个<strong>回程</strong>元素串联连接到一个<strong>弹簧</strong>和<strong>阻尼器</strong>元素，它们<strong>并联连接</strong>。
@@ -169,38 +169,38 @@ desiredContactTorque = c*phi_contact + d*<strong>der</strong>(phi_contact)
 的进一步讨论请查阅Rotational库的用户手册
 </p>
 
-</html>"),
+</html>"), 
     Icon(
-    coordinateSystem(preserveAspectRatio=false,
-      extent={{-100,-100},{100,100}}),
+    coordinateSystem(preserveAspectRatio=false, 
+      extent={{-100,-100},{100,100}}), 
       graphics={
-    Line(points={{-80,32},{-58,32},{-48,0},{-34,61},{-20,0},{-8,60},{0,30},{20,30}}),
-    Rectangle(extent={{-60,-10},{-10,-50}},
-      fillColor={192,192,192},
-      fillPattern=FillPattern.Solid),
-    Line(points={{-60,-50},{0,-50}}),
-    Line(points={{-60,-10},{0,-10}}),
-    Line(points={{-10,-30},{20,-30}}),
-    Line(points={{-80,-30},{-60,-30}}),
-    Line(points={{-80,32},{-80,-30}}),
-    Line(points={{20,30},{20,-30}}),
-    Line(points={{-90,0},{-80,0}}),
-    Line(points={{90,0},{80,0}}),
-    Line(points={{20,0},{60,0},{60,-30}}),
-    Line(points={{40,-12},{40,-40},{80,-40},{80,0}}),
-    Text(extent={{-150,-130},{150,-90}},
-      textString="b=%b"),
-    Text(extent={{-150,100},{150,60}},
-      textColor={0,0,255},
-      textString="%name"),
-    Text(extent={{-152,-92},{148,-52}},
-      textString="c=%c"),
-    Line(visible=useHeatPort,
-      points={{-100,-100},{-100,-43},{-34,-43}},
-      color={191,0,0},
-      pattern=LinePattern.Dot),
+    Line(points={{-80,32},{-58,32},{-48,0},{-34,61},{-20,0},{-8,60},{0,30},{20,30}}), 
+    Rectangle(extent={{-60,-10},{-10,-50}}, 
+      fillColor={192,192,192}, 
+      fillPattern=FillPattern.Solid), 
+    Line(points={{-60,-50},{0,-50}}), 
+    Line(points={{-60,-10},{0,-10}}), 
+    Line(points={{-10,-30},{20,-30}}), 
+    Line(points={{-80,-30},{-60,-30}}), 
+    Line(points={{-80,32},{-80,-30}}), 
+    Line(points={{20,30},{20,-30}}), 
+    Line(points={{-90,0},{-80,0}}), 
+    Line(points={{90,0},{80,0}}), 
+    Line(points={{20,0},{60,0},{60,-30}}), 
+    Line(points={{40,-12},{40,-40},{80,-40},{80,0}}), 
+    Text(extent={{-150,-130},{150,-90}}, 
+      textString="b=%b"), 
+    Text(extent={{-150,100},{150,60}}, 
+      textColor={0,0,255}, 
+      textString="%name"), 
+    Text(extent={{-152,-92},{148,-52}}, 
+      textString="c=%c"), 
+    Line(visible=useHeatPort, 
+      points={{-100,-100},{-100,-43},{-34,-43}}, 
+      color={191,0,0}, 
+      pattern=LinePattern.Dot), 
         Text(
-          extent={{20,48},{80,10}},
-          textColor={95,95,95},
+          extent={{20,48},{80,10}}, 
+          textColor={95,95,95}, 
           textString="2")}));
 end ElastoBacklash2;

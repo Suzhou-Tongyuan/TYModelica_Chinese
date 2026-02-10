@@ -3,31 +3,31 @@ model ChuaCircuit "蔡氏电路, ns, V, A"
   extends Modelica.Icons.Example;
 
   Modelica.Electrical.Analog.Basic.Inductor L(L=18, i(start=0, fixed=true)) annotation (Placement(transformation(
-        origin={-75,38},
-        extent={{-25,-25},{25,25}},
+        origin={-75,38}, 
+        extent={{-25,-25},{25,25}}, 
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Resistor Ro(R=12.5e-3) annotation (Placement(transformation(
-        origin={-75,-17},
-        extent={{-25,-25},{25,25}},
+        origin={-75,-17}, 
+        extent={{-25,-25},{25,25}}, 
         rotation=270)));
-  Modelica.Electrical.Analog.Basic.Conductor G(G=0.565) annotation (Placement(transformation(extent={{-25,38},
+  Modelica.Electrical.Analog.Basic.Conductor G(G=0.565) annotation (Placement(transformation(extent={{-25,38}, 
             {25,88}})));
   Modelica.Electrical.Analog.Basic.Capacitor C1(C=10, v(start=4, fixed=true)) annotation (Placement(transformation(
-        origin={25,3},
-        extent={{-25,-25},{25,25}},
+        origin={25,3}, 
+        extent={{-25,-25},{25,25}}, 
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Capacitor C2(C=100, v(start=0, fixed=true)) annotation (Placement(transformation(
-        origin={-25,3},
-        extent={{-25,-25},{25,25}},
+        origin={-25,3}, 
+        extent={{-25,-25},{25,25}}, 
         rotation=270)));
   Modelica.Electrical.Analog.Examples.Utilities.NonlinearResistor Nr(
-    Ga(min=-1) = -0.757576,
-    Gb(min=-1) = -0.409091,
+    Ga(min=-1) = -0.757576, 
+    Gb(min=-1) = -0.409091, 
     Ve=1) annotation (Placement(transformation(
-        origin={75,3},
-        extent={{-25,-25},{25,25}},
+        origin={75,3}, 
+        extent={{-25,-25},{25,25}}, 
         rotation=270)));
-  Modelica.Electrical.Analog.Basic.Ground Gnd annotation (Placement(transformation(extent={{-25,-112},{25,
+  Modelica.Electrical.Analog.Basic.Ground Gnd annotation (Placement(transformation(extent={{-25,-112},{25, 
             -62}})));
 equation
   connect(L.n, Ro.p) annotation (Line(points={{-75,13},{-75,8}}));
@@ -76,13 +76,13 @@ Christoph Clau&szlig;
     D-01069 Dresden<br>
 </dd>
 </dl>
-</html>"),
-    experiment(StopTime=5e4, Interval=1),
-    Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
-preserveAspectRatio=true,
-grid={2,2}),graphics = {Text(origin={-65,88},
-lineColor={0,0,255},
-extent={{-33,16},{33,-16}},
-textString="蔡氏电路",
+</html>"), 
+    experiment(StopTime=5e4, Interval=1), 
+    Diagram(coordinateSystem(extent={{-100,-100},{100,100}}, 
+preserveAspectRatio=true, 
+grid={2,2}),graphics = {Text(origin={-65,88}, 
+lineColor={0,0,255}, 
+extent={{-33,16},{33,-16}}, 
+textString="蔡氏电路", 
 textColor={0,0,255})}));
 end ChuaCircuit;

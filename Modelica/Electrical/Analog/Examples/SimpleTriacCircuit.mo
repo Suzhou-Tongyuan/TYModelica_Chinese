@@ -4,36 +4,36 @@ model SimpleTriacCircuit "简单的双向晶闸管测试电路"
 
   Modelica.Electrical.Analog.Basic.Ground ground 
     annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
-  Modelica.Electrical.Analog.Basic.Inductor L(L=2e-6, i(start=0, fixed=true),
+  Modelica.Electrical.Analog.Basic.Inductor L(L=2e-6, i(start=0, fixed=true), 
     p(                                                          v(  start=0))) 
     annotation (Placement(transformation(extent={{20,50},{40,70}})));
   Modelica.Electrical.Analog.Basic.Resistor R(R=10) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={60,30})));
   Modelica.Electrical.Analog.Sources.SineVoltage V(V=30, f=10000) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={60,-10})));
-  Modelica.Electrical.Analog.Semiconductors.SimpleTriac simpleTriac(VDRM=400, VRRM=400,
+  Modelica.Electrical.Analog.Semiconductors.SimpleTriac simpleTriac(VDRM=400, VRRM=400, 
     thyristor1(                                                                         vGK(           start=0))) 
                           annotation (Placement(transformation(
-        extent={{-13,-13},{11,11}},
-        rotation=270,
+        extent={{-13,-13},{11,11}}, 
+        rotation=270, 
         origin={1,23})));
   Sources.TrapezoidCurrent                        trapezoidCurrent(
-    I=0.005,
-    rising=0.000001,
-    width=0.000005,
-    falling=0.000001,
-    nperiod=-1,
-    startTime=0.00002,
+    I=0.005, 
+    rising=0.000001, 
+    width=0.000005, 
+    falling=0.000001, 
+    nperiod=-1, 
+    startTime=0.00002, 
     period=0.00005) 
                 annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-40,-10})));
 
 initial equation
@@ -56,9 +56,9 @@ equation
   connect(trapezoidCurrent.p, ground.p) 
     annotation (Line(points={{-40,-20},{-40,-40},{0,-40}}, color={0,0,255}));
   annotation (experiment(
-      StopTime=0.001,
-      Interval=5e-7,
-      Tolerance=1e-12),
+      StopTime=0.001, 
+      Interval=5e-7, 
+      Tolerance=1e-12), 
     Documentation(revisions="<html>
 <ul>
 <li><em>2009/11/5   </em><br>

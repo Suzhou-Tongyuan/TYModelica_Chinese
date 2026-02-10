@@ -1,11 +1,11 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function to_exy
+function to_exy 
   "将旋转对象映射为坐标系2的e_x和e_y矢量在坐标系1中进行解析"
 
   extends Modelica.Icons.Function;
-  input TransformationMatrices.Orientation T
+  input TransformationMatrices.Orientation T 
     "将坐标系1旋转到坐标系2的方向对象";
-  output Real exy[3, 2]
+  output Real exy[3, 2] 
     "= [e_x, e_y]，其中e_x和e_y是表示坐标系2轴的单位矢量，在坐标系1中解析";
 algorithm
   exy := [T[1, :], T[2, :]];

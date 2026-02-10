@@ -3,8 +3,8 @@ partial model RelativeSensor "相对传感器的基类模型"
   extends RelativeSensorBase;
   Modelica.Blocks.Interfaces.RealOutput y 
     annotation (Placement(transformation(
-        origin={0,-110},
-        extent={{10,-10},{-10,10}},
+        origin={0,-110}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
 annotation (Documentation(info="<html><p>
 相对传感器的基类模型（压降/温差）。

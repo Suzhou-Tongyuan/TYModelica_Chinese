@@ -1,12 +1,12 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
 function resolve2 "从坐标系1到坐标系2的变换矢量"
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q
+  input Quaternions.Orientation Q 
     "将坐标系 1旋转到坐标系 2的四元数方向对象";
   input Real v1[3] "坐标系 1中的矢量";
   output Real v2[3] "坐标系 2中的矢量";
 algorithm
-  v2 := 2*((Q[4]*Q[4] - 0.5)*v1 + (Q[1:3]*v1)*Q[1:3] - Q[4]*cross(Q[1:3],
+  v2 := 2*((Q[4]*Q[4] - 0.5)*v1 + (Q[1:3]*v1)*Q[1:3] - Q[4]*cross(Q[1:3], 
     v1));
   annotation(Inline=true, Documentation(info="<html>
 <h4>语法</h4>

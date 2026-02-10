@@ -1,11 +1,11 @@
-﻿within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
+within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
 model GenericHystTellinenEverett
   "基于泰利宁模型和埃弗雷特函数 [Ya89] 的具有铁磁滞后的通用磁通管)"
 
   parameter FluxTubes.Material.HysteresisEverettParameter.BaseData mat=
       FluxTubes.Material.HysteresisEverettParameter.BaseData()
     "材料特性" 
-    annotation (Dialog(group="Material"), choicesAllMatching=true);
+    annotation (Dialog(group="材料"), choicesAllMatching=true);
   extends BaseClasses.GenericHysteresisTellinen(      mu0=mat.K*mu_0, sigma=mat.sigma);
 
 protected

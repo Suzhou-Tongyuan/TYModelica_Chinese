@@ -1,15 +1,15 @@
-﻿within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
+within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
 model GenericHystTellinenPermanentMagnet
   "基于特利南磁滞模型的永磁体用于初始化普雷萨赫模型的变量"
 
   extends BaseClasses.GenericHysteresisTellinen(                mu0=K*
         Modelica.Constants.mu_0, MagRel(start=-1, fixed=true));
 
-  parameter SI.MagneticFluxDensity Br=1.2 "余热" annotation (Dialog(group="Hysteresis", groupImage="modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/HysteresisAndMagnets/GenericHystTellinenHard/HardMagneticHysteresis.png"));
-  parameter SI.MagneticFieldStrength Hc=5e5 "矫顽力" annotation (Dialog(group="Hysteresis"));
+  parameter SI.MagneticFluxDensity Br=1.2 "余热" annotation (Dialog(group="磁滞", groupImage="modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/HysteresisAndMagnets/GenericHystTellinenHard/HardMagneticHysteresis.png"));
+  parameter SI.MagneticFieldStrength Hc=5e5 "矫顽力" annotation (Dialog(group="磁滞"));
   parameter Real M(final unit="1") = unitH*10/Hc
-    "tanh()- 函数的斜率" annotation (Dialog(group="Hysteresis"));
-  parameter Real K(final unit="1")=1 "mu_0 倍增器" annotation (Dialog(group="Hysteresis"));
+    "tanh()- 函数的斜率" annotation (Dialog(group="磁滞"));
+  parameter Real K(final unit="1")=1 "mu_0 倍增器" annotation (Dialog(group="磁滞"));
 
 protected
   constant SI.MagneticFieldStrength unitH = 1;

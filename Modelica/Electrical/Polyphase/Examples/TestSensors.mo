@@ -1,9 +1,9 @@
 ﻿within Modelica.Electrical.Polyphase.Examples;
-model TestSensors"测试传感器"
+model TestSensors
   extends Modelica.Icons.Example;
   constant Integer m=3 "相数";
   import Modelica.Constants.pi;
-  parameter SI.Voltage VRMS=100
+  parameter SI.Voltage VRMS=100 
     "每相标称有效值电压";
   parameter SI.Frequency f=50 "频率";
   parameter SI.Resistance R=1/sqrt(2) "负载电阻";
@@ -14,93 +14,93 @@ model TestSensors"测试传感器"
   final parameter SI.ReactivePower Q=3*(2*pi*f*L)*IRMS^2 "总无功功率";
   final parameter SI.ApparentPower S=3*Z*IRMS^2 "总视在功率";
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage(
-    final m=m,
-    V=fill(sqrt(2)*VRMS, m),
+    final m=m, 
+    V=fill(sqrt(2)*VRMS, m), 
     f=fill(f, m)) annotation (Placement(transformation(
-        origin={-20,-30},
-        extent={{10,-10},{-10,10}},
+        origin={-20,-30}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
   Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
       Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={-20,-70})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-20,-100},
+        origin={-20,-100}, 
         extent={{-10,-10},{10,10}})));
   Modelica.Electrical.Polyphase.Basic.Resistor resistor(m=m, R=fill(R, m)) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={20,-20})));
   Modelica.Electrical.Polyphase.Basic.Inductor inductor(m=m, L=fill(L, m)) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={20,-50})));
   Modelica.Electrical.Polyphase.Basic.Star starLoad(m=m) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={20,-80})));
   Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensor(m=m) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=90,
+        extent={{-10,10},{10,-10}}, 
+        rotation=90, 
         origin={-20,40})));
   Modelica.Blocks.Math.Feedback feedbackI 
     annotation (Placement(transformation(extent={{-70,30},{-90,50}})));
   Modelica.Blocks.Sources.Constant constI(k=IRMS) annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=270,
+        extent={{10,-10},{-10,10}}, 
+        rotation=270, 
         origin={-80,10})));
 
   Sensors.VoltageQuasiRMSSensor voltageQuasiRMSSensor(m=m) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-50,-30})));
   Modelica.Blocks.Math.Feedback feedbackV 
     annotation (Placement(transformation(extent={{-70,-40},{-90,-20}})));
   Modelica.Blocks.Sources.Constant constV(k=VRMS) annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=270,
+        extent={{10,-10},{-10,10}}, 
+        rotation=270, 
         origin={-80,-60})));
   Sensors.PowerSensor powerSensor(m=m) annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={20,10})));
   Modelica.Blocks.Math.Feedback feedbackP 
     annotation (Placement(transformation(extent={{40,10},{60,30}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=
+  Modelica.Blocks.Sources.RealExpression realExpression(y= 
         Modelica.Electrical.Polyphase.Functions.activePower(
         voltageQuasiRMSSensor.v, currentQuasiRMSSensor.i)) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={50,-20})));
   Modelica.Electrical.Machines.Sensors.ElectricalPowerSensor powerSensorSpacePhasor 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-20,70})));
   Modelica.Blocks.Math.Feedback feedbackSpacePhasor annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
+        extent={{-10,-10},{10,10}}, 
+        rotation=180, 
         origin={-60,60})));
   Sensors.AronSensor aronSensor annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={20,40})));
   Modelica.Blocks.Math.Feedback feedbackAron 
     annotation (Placement(transformation(extent={{80,30},{100,50}})));
   Sensors.ReactivePowerSensor reactivePowerSensor annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={20,70})));
   Modelica.Blocks.Math.Feedback feedbackQ 
     annotation (Placement(transformation(extent={{40,80},{60,60}})));
@@ -119,17 +119,17 @@ equation
       points={{20,-60},{20,-70}}, color={0,0,255}));
   connect(voltageQuasiRMSSensor.plug_n, sineVoltage.plug_n) annotation (
       Line(
-      points={{-50,-40},{-20,-40}},
+      points={{-50,-40},{-20,-40}}, 
                                   color={0,0,255}));
   connect(voltageQuasiRMSSensor.plug_p, sineVoltage.plug_p) annotation (
       Line(
-      points={{-50,-20},{-20,-20}},
+      points={{-50,-20},{-20,-20}}, 
                                   color={0,0,255}));
   connect(feedbackV.u1, voltageQuasiRMSSensor.V) annotation (Line(
-      points={{-72,-30},{-61,-30}},
+      points={{-72,-30},{-61,-30}}, 
                                   color={0,0,127}));
   connect(constV.y, feedbackV.u2) annotation (Line(
-      points={{-80,-49},{-80,-38}},
+      points={{-80,-49},{-80,-38}}, 
                                   color={0,0,127}));
   connect(powerSensor.nc, resistor.plug_p) annotation (Line(
       points={{20,0},{20,-10}},color={0,0,255}));
@@ -161,7 +161,7 @@ equation
     annotation (Line(points={{20,60},{20,50}}, color={0,0,255}));
   connect(reactivePowerSensor.reactivePower, feedbackQ.u1) 
     annotation (Line(points={{31,70},{42,70}}, color={0,0,127}));
-  connect(powerSensorSpacePhasor.Q, feedbackQ.u2) annotation (Line(points={{-31,
+  connect(powerSensorSpacePhasor.Q, feedbackQ.u2) annotation (Line(points={{-31, 
           75},{-40,75},{-40,90},{50,90},{50,78}}, color={0,0,127}));
   connect(aronSensor.power, feedbackAron.u1) 
     annotation (Line(points={{31,40},{82,40}}, color={0,0,127}));
@@ -169,7 +169,7 @@ equation
         points={{-52,60},{-40,60},{-40,65},{-31,65}}, color={0,0,127}));
   connect(realExpression.y, feedbackAron.u2) 
     annotation (Line(points={{50,-9},{50,0},{90,0},{90,32}}, color={0,0,127}));
-  connect(realExpression.y, feedbackSpacePhasor.u2) annotation (Line(points={{50,
+  connect(realExpression.y, feedbackSpacePhasor.u2) annotation (Line(points={{50, 
           -9},{50,0},{70,0},{70,98},{-60,98},{-60,68}}, color={0,0,127}));
   annotation (experiment(StopTime=0.1, Interval=0.0001), Documentation(info="<html>
 <p>

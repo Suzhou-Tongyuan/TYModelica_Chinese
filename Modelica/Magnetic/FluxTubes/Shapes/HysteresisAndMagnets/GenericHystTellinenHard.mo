@@ -1,14 +1,14 @@
-﻿within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
+within Modelica.Magnetic.FluxTubes.Shapes.HysteresisAndMagnets;
 model GenericHystTellinenHard
   "基于 Tellinen 模型和简单 tanh()函数的具有硬磁滞的通用磁通管"
 
   extends BaseClasses.GenericHysteresisTellinen(      mu0=K*mu_0);
 
   //磁滞参数
-  parameter SI.MagneticFluxDensity Br=1.2 "余热" annotation (Dialog(group="Hysteresis", groupImage="modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/HysteresisAndMagnets/GenericHystTellinenHard/HardMagneticHysteresis.png"));
-  parameter SI.MagneticFieldStrength Hc=5e5 "矫顽力" annotation (Dialog(group="Hysteresis"));
-  parameter Real M = 10/Hc "tanh()- 函数的斜率" annotation (Dialog(group="Hysteresis"));
-  parameter Real K=1 "饱和区的滞后斜率 (K*mu_0)" annotation (Dialog(group="Hysteresis"));
+  parameter SI.MagneticFluxDensity Br=1.2 "余热" annotation (Dialog(group="磁滞", groupImage="modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/HysteresisAndMagnets/GenericHystTellinenHard/HardMagneticHysteresis.png"));
+  parameter SI.MagneticFieldStrength Hc=5e5 "矫顽力" annotation (Dialog(group="磁滞"));
+  parameter Real M = 10/Hc "tanh()- 函数的斜率" annotation (Dialog(group="磁滞"));
+  parameter Real K=1 "饱和区的滞后斜率 (K*mu_0)" annotation (Dialog(group="磁滞"));
 
 protected
   final parameter SI.MagneticFluxDensity eps = Br/1000;

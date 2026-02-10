@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines;
+within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines;
 model SMEE_Rectifier
   "测试示例： 带整流器的电励磁同步电机"
 
@@ -16,7 +16,7 @@ model SMEE_Rectifier
             smee.Re,
             smee.TeRef,
             smee.alpha20e,
-            smee.TeOperational) "No load excitation voltage";
+            smee.TeOperational) "空载励磁电压";
   parameter Real k=2*Ve0/smeeData.VsNominal "电压控制器：增益";
   parameter SI.Time Ti=smeeData.Td0Transient/2
     "电压控制器：积分时间常数";

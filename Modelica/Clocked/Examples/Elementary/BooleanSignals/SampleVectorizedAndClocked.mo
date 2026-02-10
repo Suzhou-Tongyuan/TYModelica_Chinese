@@ -1,11 +1,11 @@
 ﻿within Modelica.Clocked.Examples.Elementary.BooleanSignals;
-model SampleVectorizedAndClocked
+model SampleVectorizedAndClocked 
   "布尔信号 SampleVectorizedAndClocked 模块示例"
    extends Modelica.Icons.Example;
 
   Modelica.Blocks.Sources.BooleanStep 
                                step2(startTime=0.04) 
-    annotation (Placement(transformation(origin={-70,48},
+    annotation (Placement(transformation(origin={-70,48}, 
 extent={{-10,-10},{10,10}})));
   Modelica.Clocked.BooleanSignals.Sampler.SampleVectorizedAndClocked sample1(n=2) 
     annotation (Placement(transformation(extent={{-14,24},{-2,36}})));
@@ -17,16 +17,16 @@ extent={{-10,-10},{10,10}})));
     annotation (Placement(transformation(extent={{-80,-2},{-60,18}})));
 equation
   connect(periodicClock.y, sample1.clock) annotation (Line(
-      points={{-15.4,0},{-8,0},{-8,22.8}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
+      points={{-15.4,0},{-8,0},{-8,22.8}}, 
+      color={175,175,175}, 
+      pattern=LinePattern.Dot, 
       thickness=0.5));
-  connect(sample1.u[1], step2.y) annotation (Line(origin={0,0},
-points={{-15.2,30},{-38,30},{-38,48},{-59,48}},
+  connect(sample1.u[1], step2.y) annotation (Line(origin={0,0}, 
+points={{-15.2,30},{-38,30},{-38,48},{-59,48}}, 
 color={255,0,255}));
-  connect(step1.y, sample1.u[2]) annotation (Line(points={{-59,8},{-38,8},{-38,
+  connect(step1.y, sample1.u[2]) annotation (Line(points={{-59,8},{-38,8},{-38, 
           30.6},{-15.2,30.6}}, color={255,0,255}));
-  annotation (experiment(StopTime=0.2),
+  annotation (experiment(StopTime=0.2), 
   Documentation(info="<html>
 <p>
 模块文件的基本范例

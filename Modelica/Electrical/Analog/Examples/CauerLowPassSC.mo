@@ -5,10 +5,10 @@ model CauerLowPassSC "使用运算放大器和开关电容器实现的Cauer低�
   parameter SI.Capacitance l1 = 1.304 "滤波器系数i1";
   parameter SI.Capacitance l2 = 0.8586 "滤波器系数i2";
   parameter SI.Capacitance c1 = 1.072 "滤波器系数c1";
-  parameter SI.Capacitance c2 = 1 / (1.704992 ^ 2 * l1)
+  parameter SI.Capacitance c2 = 1 / (1.704992 ^ 2 * l1) 
     "滤波器系数c2";
   parameter SI.Capacitance c3 = 1.682 "滤波器系数c3";
-  parameter SI.Capacitance c4 = 1 / (1.179945 ^ 2 * l2)
+  parameter SI.Capacitance c4 = 1 / (1.179945 ^ 2 * l2) 
     "滤波器系数c4";
   parameter SI.Capacitance c5 = 0.7262 "滤波器系数c5";
   Modelica.Electrical.Analog.Basic.Capacitor C1(C = c1 + c2, v(start = 0, fixed = true)) 
@@ -55,8 +55,8 @@ protected
 protected
   Modelica.Electrical.Analog.Interfaces.NegativePin n4 
     annotation(Placement(transformation(
-    origin = {-161, 40},
-    extent = {{2, 2}, {-2, -2}},
+    origin = {-161, 40}, 
+    extent = {{2, 2}, {-2, -2}}, 
     rotation = 180)));
 protected
   Modelica.Electrical.Analog.Interfaces.NegativePin n5 
@@ -113,8 +113,8 @@ public
     annotation(Placement(transformation(extent = {{212, -76}, {226, -60}})));
   Modelica.Electrical.Analog.Sources.StepVoltage V(startTime = 1, V = 1) 
     annotation(Placement(transformation(
-    origin = {-241, -150},
-    extent = {{-10, -10}, {10, 10}},
+    origin = {-241, -150}, 
+    extent = {{-10, -10}, {10, 10}}, 
     rotation = 90)));
   Modelica.Electrical.Analog.Basic.Ground Ground1 
     annotation(Placement(transformation(extent = {{-247, -182}, {-235, -170}})));
@@ -123,35 +123,35 @@ public
   Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R5(clock = 0.1, R = -1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{-140, -80}, {
     -120, -60}})));
   Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R8(clock = 0.1, R = -1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{60, 10}, {80, 30}})));
-  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R9(clock = 0.1, R = -1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{60, -40}, {80,
+  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R9(clock = 0.1, R = -1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{60, -40}, {80, 
     -20}})));
-  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R1(clock = 0.1,
+  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R1(clock = 0.1, 
     R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{-240, -30}, {
     -220, -10}})));
-  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R2(clock = 0.1,
-    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{-240, 10}, {-220,
+  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R2(clock = 0.1, 
+    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{-240, 10}, {-220, 
     30}})));
-  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R3(clock = 0.1,
-    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{-200, 70}, {-180,
+  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R3(clock = 0.1, 
+    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{-200, 70}, {-180, 
     90}})));
-  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor Rp1(clock = 0.1,
-    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{-32, 10}, {-12,
+  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor Rp1(clock = 0.1, 
+    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{-32, 10}, {-12, 
     30}})));
-  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R7(clock = 0.1,
-    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{-32, -40}, {-12,
+  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R7(clock = 0.1, 
+    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{-32, -40}, {-12, 
     -20}})));
-  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R10(clock = 0.1,
-    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{160, -40}, {180,
+  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R10(clock = 0.1, 
+    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{160, -40}, {180, 
     -20}})));
-  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R11(clock = 0.1,
-    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{208, 50}, {228,
+  Modelica.Electrical.Analog.Examples.Utilities.SwitchedCapacitor R11(clock = 0.1, 
+    R = 1, Capacitor(v(start = 0, fixed = true))) annotation(Placement(transformation(extent = {{208, 50}, {228, 
     70}})));
 equation
-  connect(Op1.in_p, G.p) annotation(Line(points = {{-201, -42}, {-201, -50}, {-181, -50}, {-181, -60}, {-182, -60}},
+  connect(Op1.in_p, G.p) annotation(Line(points = {{-201, -42}, {-201, -50}, {-181, -50}, {-181, -60}, {-182, -60}}, 
     color = {0, 0, 255}));
-  connect(G1.p, Op2.in_p) annotation(Line(points = {{-81, -60}, {-81, -50}, {-101, -50}, {-101, -42}},
+  connect(G1.p, Op2.in_p) annotation(Line(points = {{-81, -60}, {-81, -50}, {-101, -50}, {-101, -42}}, 
     color = {0, 0, 255}));
-  connect(n1, Op1.in_n) annotation(Line(points = {{-213, -20}, {-208, -20}, {-208, -18}, {-201, -18}},
+  connect(n1, Op1.in_n) annotation(Line(points = {{-213, -20}, {-208, -20}, {-208, -18}, {-201, -18}}, 
     color = {0, 0, 255}));
   connect(C2.n, n1) annotation(Line(points = {{-221, -60}, {-213, -60}, {-213, -20}}, color = {0, 0, 255}));
   connect(n1, n2) 
@@ -162,11 +162,11 @@ equation
     annotation(Line(points = {{-213, 40}, {-193, 40}}, color = {0, 0, 255}));
   connect(C1.n, n4) 
     annotation(Line(points = {{-173, 40}, {-161, 40}}, color = {0, 0, 255}));
-  connect(n4, Op1.out) annotation(Line(points = {{-161, 40}, {-161, -30}}, color = {0,
+  connect(n4, Op1.out) annotation(Line(points = {{-161, 40}, {-161, -30}}, color = {0, 
     0, 255}));
-  connect(C5.p, Op1.out) annotation(Line(points = {{-31, -90}, {-161, -90}, {-161,
+  connect(C5.p, Op1.out) annotation(Line(points = {{-31, -90}, {-161, -90}, {-161, 
     -30}}, color = {0, 0, 255}));
-  connect(n5, Op2.in_n) annotation(Line(points = {{-113, -30}, {-113, -18}, {-101, -18}},
+  connect(n5, Op2.in_n) annotation(Line(points = {{-113, -30}, {-113, -18}, {-101, -18}}, 
     color = {0, 0, 255}));
   connect(C3.p, n5) annotation(Line(points = {{-91, 40}, {-113, 40}, {-113, -30}}, color = {0, 0, 255}));
   connect(C2.p, p1) annotation(Line(points = {{-241, -60}, {-241, -120}, {-152, -120}}, color = {0, 0, 255}));
@@ -186,9 +186,9 @@ equation
   connect(C6.n, Op3.out) annotation(Line(points = {{28, 40}, {45, 40}, {45, -30}}, color = {0, 0, 255}));
   connect(Op3.out, out1) 
     annotation(Line(points = {{45, -30}, {45, -120}}, color = {0, 0, 255}));
-  connect(p1, out1) annotation(Line(points = {{-152, -120}, {45, -120}}, color = {0, 0,
+  connect(p1, out1) annotation(Line(points = {{-152, -120}, {45, -120}}, color = {0, 0, 
     255}));
-  connect(out1, C8.p) annotation(Line(points = {{45, -120}, {159, -120}}, color = {0,
+  connect(out1, C8.p) annotation(Line(points = {{45, -120}, {159, -120}}, color = {0, 
     0, 255}));
   connect(C4.p, p3) annotation(Line(points = {{-31, 60}, {-41, 60}, {-41, 80}, {59, 80}}, color = {0, 0, 255}));
   connect(n9, n10) 
@@ -217,7 +217,7 @@ equation
   connect(C8.n, n14) annotation(Line(points = {{179, -120}, {190, -120}, {190, -30}}, color = {0, 0, 255}));
   connect(Op4.in_p, G3.p) annotation(Line(points = {{99, -42}, {99, -60}, {119, -60}}, color = {0, 0, 255}));
   connect(Op5.in_p, G4.p) annotation(Line(points = {{199, -42}, {199, -60}, {219, -60}}, color = {0, 0, 255}));
-  connect(V.p, Ground1.p) annotation(Line(points = {{-241, -160}, {-241,
+  connect(V.p, Ground1.p) annotation(Line(points = {{-241, -160}, {-241, 
     -170}}, color = {0, 0, 255}));
   connect(R4.n, n5) annotation(Line(
     points = {{-120, -30}, {-116, -30}, {-116, -30}, {-113, -30}}, color = {0, 0, 255}));
@@ -263,14 +263,14 @@ equation
     points = {{228, 60}, {234, 60}, {234, 60}, {239, 60}}, color = {0, 0, 255}));
   connect(R11.p, p4) annotation(Line(
     points = {{207.8, 60}, {190, 60}, {190, 20}}, color = {0, 0, 255}));
-  annotation(Diagram(coordinateSystem(extent={{-250,-200},{250,200}},
-preserveAspectRatio=true,
-grid={2,2}),graphics = {Text(origin={-3,160},
-lineColor={0,0,255},
-extent={{-97,20},{97,-20}},
-textString="Cauer低通开关电容滤波器",
-textColor={0,0,255})}),
-    experiment(StopTime = 60, Interval = 0.04),
+  annotation(Diagram(coordinateSystem(extent={{-250,-200},{250,200}}, 
+preserveAspectRatio=true, 
+grid={2,2}),graphics = {Text(origin={-3,160}, 
+lineColor={0,0,255}, 
+extent={{-97,20},{97,-20}}, 
+textString="Cauer低通开关电容滤波器", 
+textColor={0,0,255})}), 
+    experiment(StopTime = 60, Interval = 0.04), 
     Documentation(revisions = "<html>
 <ul>
 <li><em>January 13, 2006</em>

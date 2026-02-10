@@ -1,9 +1,9 @@
 ﻿within Modelica.Electrical.Batteries.ParameterRecords;
 record CellData "电池单体的参数"
   extends Modelica.Electrical.Batteries.Icons.BaseCellRecord;
-  parameter SI.ElectricCharge Qnom(displayUnit="A.h")
+  parameter SI.ElectricCharge Qnom(displayUnit="A.h") 
     "额定(最大)电荷";
-  parameter Boolean useLinearSOCDependency=true
+  parameter Boolean useLinearSOCDependency=true 
     "使用线性SOC依赖的OCV，否则基于表格" 
     annotation(Dialog(group="OCV versus SOC"));
   parameter SI.Voltage OCVmax(final min=0) "SOC = SOCmax 时的OCV" 
@@ -16,11 +16,11 @@ record CellData "电池单体的参数"
     annotation(Dialog(group="OCV versus SOC"));
   parameter Real OCV_SOC[:,2]=[SOCmin,OCVmin/OCVmax; SOCmax,1] "OCV/OCVmax versus SOC 表格" 
     annotation(Dialog(group="OCV versus SOC", enable=not useLinearSOCDependency));
-  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
+  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments 
     "表格插值的平滑度" 
     annotation(Dialog(group="OCV versus SOC", enable=not useLinearSOCDependency));
-  final parameter Real OCV_SOC_internal[:,2]=
-    if useLinearSOCDependency then [SOCmin,OCVmin/OCVmax; SOCmax,1] else OCV_SOC
+  final parameter Real OCV_SOC_internal[:,2]= 
+    if useLinearSOCDependency then [SOCmin,OCVmin/OCVmax; SOCmax,1] else OCV_SOC 
     "内部使用的OCV/OCVmax versus SOC 表格" 
     annotation(Dialog(group="OCV versus SOC"));
   parameter SI.Resistance Ri "总内阻(=OCVmax/Isc)";
@@ -28,7 +28,7 @@ record CellData "电池单体的参数"
   parameter SI.LinearTemperatureCoefficient alpha=0 "在T_ref时的阻力温度系数";
   parameter SI.Current Idis=0 "SOC = SOCmax 时的自放电电流" 
     annotation(Evaluate=true);
-  parameter SI.Resistance R0=Ri
+  parameter SI.Resistance R0=Ri 
     "无并联C时的内阻";
   annotation(defaultComponentPrefixes="parameter", Documentation(info="<html>
 <p>收集电池单体的参数：</p>

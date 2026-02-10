@@ -1,47 +1,47 @@
 ﻿within Modelica.Mechanics.MultiBody.Joints.Constraints;
-model Spherical
+model Spherical 
     "球面局部运动副和平动方向可以被约束或释放"
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialTwoFrames;
   import MBS = Modelica.Mechanics.MultiBody;
 
-  parameter Boolean x_locked=true
+  parameter Boolean x_locked=true 
     "=true:在x方向上的约束力，在frame_a中解算" 
     annotation (Dialog(group="约束"), choices(checkBox=true));
-  parameter Boolean y_locked=true
+  parameter Boolean y_locked=true 
     "=true:在y方向上的约束力，在frame_a中解算" 
     annotation (Dialog(group="约束"), choices(checkBox=true));
-  parameter Boolean z_locked=true
+  parameter Boolean z_locked=true 
     "=true:在z方向上的约束力，在frame_a中解算" 
     annotation (Dialog(group="约束"), choices(checkBox=true));
 
-  parameter Boolean animation=true
+  parameter Boolean animation=true 
     "=true，如果启用动画(显示球体)" 
     annotation (Dialog(group="动画"));
-  parameter SI.Distance sphereDiameter=world.defaultJointLength /3
+  parameter SI.Distance sphereDiameter=world.defaultJointLength /3 
     "表示球面副的直径" 
     annotation (Dialog(group="动画", enable=animation));
-  input MBS.Types.Color sphereColor=MBS.Types.Defaults.JointColor
+  input MBS.Types.Color sphereColor=MBS.Types.Defaults.JointColor 
     "表示球面副的颜色" 
     annotation (Dialog(colorSelector=true, group="动画", enable=animation));
-  input MBS.Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input MBS.Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射(=0：光完全被吸收)" 
     annotation (Dialog(group="动画", enable=animation));
 
   Modelica.Mechanics.MultiBody.Visualizers.Advanced.Shape sphere(
-    shapeType="sphere",
-    color=sphereColor,
-    specularCoefficient=specularCoefficient,
-    length=sphereDiameter,
-    width=sphereDiameter,
-    height=sphereDiameter,
-    lengthDirection={1,0,0},
-    widthDirection={0,1,0},
-    r_shape={-0.5,0,0}*sphereDiameter,
-    r=frame_a.r_0,
+    shapeType="sphere", 
+    color=sphereColor, 
+    specularCoefficient=specularCoefficient, 
+    length=sphereDiameter, 
+    width=sphereDiameter, 
+    height=sphereDiameter, 
+    lengthDirection={1,0,0}, 
+    widthDirection={0,1,0}, 
+    r_shape={-0.5,0,0}*sphereDiameter, 
+    r=frame_a.r_0, 
     R=frame_a.R) if world.enableAnimation and animation;
-  MBS.Frames.Orientation R_rel
+  MBS.Frames.Orientation R_rel 
     "从frame_a到frame_b的虚拟或相对方向对象";
-  SI.Position r_rel_a[3]
+  SI.Position r_rel_a[3] 
     "从frame_a原点到frame_b原点的位置矢量，在frame_a中解算";
   SI.InstantaneousPower P;
 
@@ -88,79 +88,79 @@ equation
   zeros(3) = frame_a.t + MBS.Frames.resolve1(R_rel, frame_b.t) - cross(r_rel_a, frame_a.f);
   P= frame_a.t*MBS.Frames.angularVelocity2(frame_a.R)+frame_b.t*MBS.Frames.angularVelocity2(frame_b.R) + MBS.Frames.resolve1(frame_b.R,frame_b.f)*der(frame_b.r_0)+MBS.Frames.resolve1(frame_a.R,frame_a.f)*der(frame_a.r_0);
   annotation (
-    defaultComponentName="constraint",
+    defaultComponentName="constraint", 
     Icon(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={
         Text(
-          extent={{-150,120},{150,80}},
-          textColor={0,0,255},
-          textString="%name"),
+          extent={{-150,120},{150,80}}, 
+          textColor={0,0,255}, 
+          textString="%name"), 
         Text(
-          extent={{-100,-70},{100,-100}},
-          textColor={95,95,95},
-          textString="lock:x",
-          visible=x_locked and not y_locked and not z_locked),
+          extent={{-100,-70},{100,-100}}, 
+          textColor={95,95,95}, 
+          textString="lock:x", 
+          visible=x_locked and not y_locked and not z_locked), 
         Text(
-          extent={{-100,-70},{100,-100}},
-          textColor={95,95,95},
-          textString="lock:y",
-          visible=not x_locked and y_locked and not z_locked),
+          extent={{-100,-70},{100,-100}}, 
+          textColor={95,95,95}, 
+          textString="lock:y", 
+          visible=not x_locked and y_locked and not z_locked), 
         Text(
-          extent={{-100,-70},{100,-100}},
-          textColor={95,95,95},
-          textString="lock:z",
-          visible=not x_locked and not y_locked and z_locked),
+          extent={{-100,-70},{100,-100}}, 
+          textColor={95,95,95}, 
+          textString="lock:z", 
+          visible=not x_locked and not y_locked and z_locked), 
         Text(
-          extent={{-100,-70},{100,-100}},
-          textColor={95,95,95},
-          textString="lock:x,y",
-          visible=x_locked and y_locked and not z_locked),
+          extent={{-100,-70},{100,-100}}, 
+          textColor={95,95,95}, 
+          textString="lock:x,y", 
+          visible=x_locked and y_locked and not z_locked), 
         Text(
-          extent={{-100,-70},{100,-100}},
-          textColor={95,95,95},
-          textString="lock:x,z",
-          visible=x_locked and not y_locked and z_locked),
+          extent={{-100,-70},{100,-100}}, 
+          textColor={95,95,95}, 
+          textString="lock:x,z", 
+          visible=x_locked and not y_locked and z_locked), 
         Text(
-          extent={{-100,-70},{100,-100}},
-          textColor={95,95,95},
-          textString="lock:y,z",
-          visible=not x_locked and y_locked and z_locked),
+          extent={{-100,-70},{100,-100}}, 
+          textColor={95,95,95}, 
+          textString="lock:y,z", 
+          visible=not x_locked and y_locked and z_locked), 
         Text(
-          extent={{-100,-70},{100,-100}},
-          textColor={95,95,95},
-          textString="lock:x,y,z",
-          visible=x_locked and y_locked and z_locked),
+          extent={{-100,-70},{100,-100}}, 
+          textColor={95,95,95}, 
+          textString="lock:x,y,z", 
+          visible=x_locked and y_locked and z_locked), 
         Ellipse(
-          extent={{-66,-70},{74,70}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={192,192,192}),
+          extent={{-66,-70},{74,70}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={192,192,192}), 
         Ellipse(
-          extent={{-45,-50},{55,50}},
-          lineColor={128,128,128},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-45,-50},{55,50}}, 
+          lineColor={128,128,128}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{34,70},{75,-68}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{34,70},{75,-68}}, 
+          lineColor={255,255,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{-96,10},{-64,-10}},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={192,192,192}),
+          extent={{-96,10},{-64,-10}}, 
+          fillPattern=FillPattern.HorizontalCylinder, 
+          fillColor={192,192,192}), 
         Rectangle(
-          extent={{27,10},{104,-10}},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={192,192,192}),
+          extent={{27,10},{104,-10}}, 
+          fillPattern=FillPattern.HorizontalCylinder, 
+          fillColor={192,192,192}), 
         Ellipse(
-          extent={{-20,25},{30,-25}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={160,160,164}),
+          extent={{-20,25},{30,-25}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={160,160,164}), 
         Line(
-          points={{-81,-66},{-23,25},{40,-39},{97,71}},
-          color={255,0,0},
-          thickness=0.5)}),
+          points={{-81,-66},{-23,25},{40,-39},{97,71}}, 
+          color={255,0,0}, 
+          thickness=0.5)}), 
     Documentation(info="<html>
 <p>
 该模型不使用显式变量，例如状态变量来描述frame_b相对于frame_a的相对运动，而是在frame_a和frame_b之间定义运动约束。

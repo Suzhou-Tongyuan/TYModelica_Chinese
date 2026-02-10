@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Examples.MovingCoilActuator;
+within Modelica.Magnetic.FluxTubes.Examples.MovingCoilActuator;
 model ArmatureStroke
   "两个动圈推杆模型在 t=0 时的电压阶跃后的电枢行程"
 
@@ -58,15 +58,12 @@ equation
   connect(pmSource.p, pmActuator.p) annotation (Line(points={{-70,-20},{-55,-20},{-55,-20},{-40,-20}},
                                      color={0,0,255}));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}}), graphics={Text(
-                extent={{-98,98},{48,86}},
-                textColor={0,0,255},
-                textString=
-            "Comparison of a pull-in stroke of both converter models"),
-          Text( extent={{-98,90},{-30,80}},
-                textColor={0,0,255},
-                textString="after a voltage step at t=0")}),
+    Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
+grid={2,2}),graphics = {Text(origin={-24,76},
+lineColor={0,0,255},
+extent={{-82,10},{82,-10}},
+textString="t=0时刻施加阶跃电压后，两种转换器模型的吸合行程对比",
+textColor={0,0,255})}),
     experiment(StopTime=0.05, Tolerance=1e-007),
     Documentation(info="<html>
 <p>

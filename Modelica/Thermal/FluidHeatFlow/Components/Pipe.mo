@@ -5,7 +5,7 @@ model Pipe "可选热交换管"
 
   parameter Boolean useHeatPort = false "= true, 如果HeatPort已开启" 
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter SI.Length h_g(start=0)
+  parameter SI.Length h_g(start=0) 
     "高度差(从flowPort_a到flowPort_b的高差)";
   parameter SI.Acceleration g(final min=0)=Modelica.Constants.g_n "重力加速度";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort(T=T_q, Q_flow=Q_flowHeatPort) if useHeatPort 
@@ -33,17 +33,17 @@ annotation (Documentation(info="<html><p>
 <p>
 <strong>注释:</strong> 在质量流量为零的管道中注入热量会导致温度升高，这由介质质量中的热量存储定义。
 </p>
-</html>"),
-  Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+</html>"), 
+  Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
             100}}), graphics={
         Rectangle(
-          extent={{-90,20},{90,-20}},
-          lineColor={255,0,0},
-          fillColor={0,0,255},
-          fillPattern=FillPattern.Solid),
-        Polygon(visible=useHeatPort,
-          points={{-10,-90},{-10,-40},{0,-20},{10,-40},{10,-90},{-10,-90}},
-          lineColor={255,0,0}),           Text(extent={{-150,80},{150,40}},
-          textString="%name",
+          extent={{-90,20},{90,-20}}, 
+          lineColor={255,0,0}, 
+          fillColor={0,0,255}, 
+          fillPattern=FillPattern.Solid), 
+        Polygon(visible=useHeatPort, 
+          points={{-10,-90},{-10,-40},{0,-20},{10,-40},{10,-90},{-10,-90}}, 
+          lineColor={255,0,0}),           Text(extent={{-150,80},{150,40}}, 
+          textString="%name", 
           textColor={0,0,255})}));
 end Pipe;

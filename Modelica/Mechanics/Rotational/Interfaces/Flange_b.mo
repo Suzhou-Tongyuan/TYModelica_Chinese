@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.Rotational.Interfaces;
-connector Flange_b
+connector Flange_b 
   "一维转动接口b（空心圆图标）"
   extends Flange;
 
   annotation (
-    defaultComponentName="flange_b",
+    defaultComponentName="flange_b", 
     Documentation(info="<html><p>
 这是一个用于一维旋转机械系统和模型的连接器，代表轴的机械一维转动接口。此连接器中定义了以下变量：
 </p>
@@ -24,19 +24,19 @@ a = der(w);
 <p>
 <br>
 </p>
-</html>"),
+</html>"), 
     Icon(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}),
+              extent={{-100,100},{100,-100}}, 
+              fillColor={255,255,255}, 
+              fillPattern=FillPattern.Solid)}), 
     Diagram(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={Ellipse(
-              extent={{-40,40},{40,-40}},
-              fillColor={255,255,255},
+              extent={{-40,40},{40,-40}}, 
+              fillColor={255,255,255}, 
               fillPattern=FillPattern.Solid),Text(
-              extent={{-40,90},{160,50}},
+              extent={{-40,90},{160,50}}, 
               textString="%name")}));
 end Flange_b;

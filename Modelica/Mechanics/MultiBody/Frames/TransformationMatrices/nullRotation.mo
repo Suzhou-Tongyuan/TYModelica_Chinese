@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function nullRotation
+function nullRotation 
   "返回不旋转坐标系的方向对象"
   extends Modelica.Icons.Function;
-  output TransformationMatrices.Orientation T
+  output TransformationMatrices.Orientation T 
     "方向对象，使得坐标系1和坐标系2相同";
 algorithm
   T := identity(3);

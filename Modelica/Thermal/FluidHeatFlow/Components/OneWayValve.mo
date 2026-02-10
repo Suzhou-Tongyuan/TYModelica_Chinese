@@ -6,11 +6,11 @@ model OneWayValve "简易单向阀"
   parameter SI.Pressure dpForward(displayUnit="bar")=1e-6 "公称流量压降(正向)";
   parameter SI.Pressure dpNominal(displayUnit="bar", start=1e5) "公称压力(反向)";
   parameter SI.VolumeFlowRate V_flowBackward(start=1E-6) "泄漏体积流量(反向)";
-  parameter Real frictionLoss(min=0, max=1, start=0)
+  parameter Real frictionLoss(min=0, max=1, start=0) 
     "部分摩擦损失给介质";
   Boolean backward(start=true) "前向状态=false / 后向=true";
 protected
-  Real s(start=0, final unit="1")
+  Real s(start=0, final unit="1") 
     "辅助变量为实际位置上的阀门特性";
   /* s < 0: 向后，泄漏流
          s > 0: 向前，压降小 */
@@ -28,21 +28,21 @@ annotation (Documentation(info="<html><p>
 from flowPort_a to flowPort_b: 小压降，与体积流量呈线性关系</li>
 <li>
 from flowPort_b to flowPort_a: 小泄漏流量，与压降呈线性关系</li>
-</html>"),
-  Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+</html>"), 
+  Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
             100}}), graphics={
         Polygon(
-          points={{-90,10},{-60,10},{-60,60},{0,0},{60,60},{60,10},{90,10},{90,-10},
-              {60,-10},{60,-60},{0,0},{-60,-60},{-60,-10},{-90,-10},{-90,10}},
-          lineColor={255,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid), Text(extent={{-150,-70},{150,-110}},
-          textString="%name",
-          textColor={0,0,255}),
+          points={{-90,10},{-60,10},{-60,60},{0,0},{60,60},{60,10},{90,10},{90,-10}, 
+              {60,-10},{60,-60},{0,0},{-60,-60},{-60,-10},{-90,-10},{-90,10}}, 
+          lineColor={255,0,0}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), Text(extent={{-150,-70},{150,-110}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Line(
-          points={{-60,60},{60,-60},{50,-40},{40,-50},{60,-60}},
-          thickness=0.5),
+          points={{-60,60},{60,-60},{50,-40},{40,-50},{60,-60}}, 
+          thickness=0.5), 
         Polygon(
-          points={{50,-40},{60,-60},{40,-50},{50,-40}},
+          points={{50,-40},{60,-60},{40,-50},{50,-40}}, 
           fillPattern=FillPattern.Solid)}));
 end OneWayValve;

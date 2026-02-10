@@ -7,9 +7,9 @@ model PotentialSensor "电位传感器"
         transformation(extent={{-80,-10},{-60,10}})));
   Modelica.ComplexBlocks.Interfaces.ComplexOutput v[m] "复数输出信号的电势" 
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  SI.Voltage abs_v[m]=Modelica.ComplexMath.abs(v)
+  SI.Voltage abs_v[m]=Modelica.ComplexMath.abs(v) 
     "复数电势的幅值";
-  SI.Angle arg_v[m]=Modelica.ComplexMath.arg(v)
+  SI.Angle arg_v[m]=Modelica.ComplexMath.arg(v) 
     "复数电势的参数";
 
 equation
@@ -40,10 +40,10 @@ equation
 <a href=\"modelica://Modelica.Electrical.QuasiStatic.Polyphase.Sensors.MultiSensor\">MultiSensor</a>
 </p>
 
-</html>"),
+</html>"), 
        Icon(graphics={
         Text(
-          extent={{-30,-10},{30,-70}},
-          textColor={64,64,64},
+          extent={{-30,-10},{30,-70}}, 
+          textColor={64,64,64}, 
           textString="V"), Line(points={{70,0},{100,0}}, color={85,170,255})}));
 end PotentialSensor;

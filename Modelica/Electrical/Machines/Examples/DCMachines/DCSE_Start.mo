@@ -1,68 +1,68 @@
 ﻿within Modelica.Electrical.Machines.Examples.DCMachines;
-model DCSE_Start
+model DCSE_Start 
   "测试示例：串励磁的直流电机，通过斜坡电压启动"
   extends Modelica.Icons.Example;
   parameter SI.Voltage Va=100 "实际电枢电压";
   parameter SI.Time tStart=0.1 "电阻斜坡开始时间";
   parameter SI.Time tRamp=0.9 "电阻斜坡";
   parameter SI.Torque TLoad=63.66 "额定负载转矩";
-  parameter SI.AngularVelocity wLoad(displayUnit="rev/min")=
+  parameter SI.AngularVelocity wLoad(displayUnit="rev/min")= 
        1410*2*Modelica.Constants.pi/60 "额定负载转速";
-  parameter SI.Inertia JLoad=0.15
+  parameter SI.Inertia JLoad=0.15 
     "负载的转动惯量";
   Machines.BasicMachines.DCMachines.DC_SeriesExcited dcse(
-    VaNominal=dcseData.VaNominal,
-    IaNominal=dcseData.IaNominal,
-    wNominal=dcseData.wNominal,
-    TaNominal=dcseData.TaNominal,
-    TeNominal=dcseData.TeNominal,
-    Ra=dcseData.Ra,
-    TaRef=dcseData.TaRef,
-    La=dcseData.La,
-    Jr=dcseData.Jr,
-    useSupport=false,
-    Js=dcseData.Js,
-    frictionParameters=dcseData.frictionParameters,
-    coreParameters=dcseData.coreParameters,
-    strayLoadParameters=dcseData.strayLoadParameters,
-    brushParameters=dcseData.brushParameters,
-    Re=dcseData.Re,
-    TeRef=dcseData.TeRef,
-    Le=dcseData.Le,
-    sigmae=dcseData.sigmae,
-    TaOperational=293.15,
-    alpha20a=dcseData.alpha20a,
-    phiMechanical(fixed=true),
-    wMechanical(fixed=true),
-    ia(fixed=true),
-    alpha20e=dcseData.alpha20e,
+    VaNominal=dcseData.VaNominal, 
+    IaNominal=dcseData.IaNominal, 
+    wNominal=dcseData.wNominal, 
+    TaNominal=dcseData.TaNominal, 
+    TeNominal=dcseData.TeNominal, 
+    Ra=dcseData.Ra, 
+    TaRef=dcseData.TaRef, 
+    La=dcseData.La, 
+    Jr=dcseData.Jr, 
+    useSupport=false, 
+    Js=dcseData.Js, 
+    frictionParameters=dcseData.frictionParameters, 
+    coreParameters=dcseData.coreParameters, 
+    strayLoadParameters=dcseData.strayLoadParameters, 
+    brushParameters=dcseData.brushParameters, 
+    Re=dcseData.Re, 
+    TeRef=dcseData.TeRef, 
+    Le=dcseData.Le, 
+    sigmae=dcseData.sigmae, 
+    TaOperational=293.15, 
+    alpha20a=dcseData.alpha20a, 
+    phiMechanical(fixed=true), 
+    wMechanical(fixed=true), 
+    ia(fixed=true), 
+    alpha20e=dcseData.alpha20e, 
     TeOperational=293.15) 
     annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
   Modelica.Blocks.Sources.Ramp ramp(
-    duration=tRamp,
-    startTime=tStart,
-    height=-1,
+    duration=tRamp, 
+    startTime=tStart, 
+    height=-1, 
     offset=1) annotation (Placement(transformation(extent={{60,0},{40,20}})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=Va) 
     annotation (Placement(transformation(extent={{0,50},{-20,30}})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(
-        origin={-70,40},
-        extent={{-10,-10},{10,10}},
+        origin={-70,40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=JLoad) 
     annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
   Modelica.Mechanics.Rotational.Sources.QuadraticSpeedDependentTorque 
     quadraticLoadTorque(
-    w_nominal=wLoad,
-    TorqueDirection=false,
-    tau_nominal=-TLoad,
-    useSupport=false) annotation (Placement(transformation(extent={{90,-50},
+    w_nominal=wLoad, 
+    TorqueDirection=false, 
+    tau_nominal=-TLoad, 
+    useSupport=false) annotation (Placement(transformation(extent={{90,-50}, 
             {70,-30}})));
   Modelica.Electrical.Analog.Basic.VariableResistor variableResistor 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={0,10})));
   parameter Utilities.ParameterRecords.DcSeriesExcitedData dcseData "直流机数据" 
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
@@ -71,10 +71,10 @@ equation
     annotation (Line(points={{-20,40},{-60,40}}, color={0,0,255}));
   connect(loadInertia.flange_b, quadraticLoadTorque.flange) 
     annotation (Line(points={{60,-40},{70,-40}}));
-  connect(dcse.pin_an, dcse.pin_ep) annotation (Line(points={{-16,-30},{-20,
+  connect(dcse.pin_an, dcse.pin_ep) annotation (Line(points={{-16,-30},{-20, 
           -30},{-20,-34}}, color={0,0,255}));
-  connect(dcse.pin_en, constantVoltage.n) annotation (Line(origin={0,0},
-points={{-20,-46},{-30,-46},{-30,40},{-20,40}},
+  connect(dcse.pin_en, constantVoltage.n) annotation (Line(origin={0,0}, 
+points={{-20,-46},{-30,-46},{-30,40},{-20,40}}, 
 color={0,0,255}));
   connect(dcse.flange, loadInertia.flange_a) annotation (Line(
       points={{0,-40},{40,-40}}));

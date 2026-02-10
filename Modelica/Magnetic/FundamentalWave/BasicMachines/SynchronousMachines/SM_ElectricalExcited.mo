@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousMachines;
+within Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousMachines;
 model SM_ElectricalExcited
   "带可选阻尼笼的电励磁同步电机"
   extends Magnetic.FundamentalWave.BaseClasses.Machine(
@@ -34,7 +34,7 @@ model SM_ElectricalExcited
           "modelica://Modelica/Resources/Images/Electrical/Machines/SMEE.png"));
   parameter SI.Inductance Lmq(start=1.5/(2*pi*fsNominal))
     "定子主磁场电感，q 轴" 
-    annotation (Dialog(tab="Nominal resistances and inductances"));
+    annotation (Dialog(tab="额定电阻与额定电感"));
   // 转子笼参数
   parameter Boolean useDamperCage(start=true)
     "启用/禁用阻尼笼" annotation (Dialog(tab=

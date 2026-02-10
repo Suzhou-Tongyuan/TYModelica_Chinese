@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Types;
-type ShapeExtra = Modelica.Icons.TypeReal
+type ShapeExtra = Modelica.Icons.TypeReal 
   "用于定义可为基本ShapeType定义的额外数据的类型" 
      annotation (
   Documentation(info="<html>

@@ -1,9 +1,9 @@
 ﻿within Modelica.Mechanics.Rotational.Sensors;
-model SpeedSensor
+model SpeedSensor 
   "理想传感器，用于测量绝对一维转动接口角速度"
 
   extends Rotational.Interfaces.PartialAbsoluteSensor;
-  Modelica.Blocks.Interfaces.RealOutput w(unit="rad/s")
+  Modelica.Blocks.Interfaces.RealOutput w(unit="rad/s") 
     "作为输出信号的一维转动接口绝对角速度" annotation (
       Placement(transformation(extent={{100,-10},{120,10}})));
 
@@ -16,12 +16,12 @@ equation
 
 （用于进一步使用Modelica.Blocks库中的块进行处理）。
 </p>
-</html>"),
+</html>"), 
        Icon(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={
         Text(
-          extent={{-50,-14},{50,-54}},
-          textColor={64,64,64},
+          extent={{-50,-14},{50,-54}}, 
+          textColor={64,64,64}, 
           textString="rad/s")}));
 end SpeedSensor;

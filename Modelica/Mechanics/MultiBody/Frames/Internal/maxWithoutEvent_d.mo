@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Internal;
-function maxWithoutEvent_d
+function maxWithoutEvent_d 
   "函数maxWithoutEvent(..)的一阶导数"
   extends Modelica.Icons.Function;
 
@@ -11,8 +11,8 @@ function maxWithoutEvent_d
 algorithm
   y_d := if u1 > u2 then u1_d else u2_d;
   annotation (
-    Inline=false,
-    derivative(order=2) = maxWithoutEvent_dd,
+    Inline=false, 
+    derivative(order=2) = maxWithoutEvent_dd, 
     Documentation(info="<html>
 <p>
 这是函数

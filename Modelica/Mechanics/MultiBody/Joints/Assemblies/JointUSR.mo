@@ -1,163 +1,163 @@
 ﻿within Modelica.Mechanics.MultiBody.Joints.Assemblies;
-model JointUSR
+model JointUSR 
   "万向节-球面副-转动副组合(无约束，无势态)"
 
   import Modelica.Mechanics.MultiBody.Types;
 
   extends Interfaces.PartialTwoFramesDoubleSize;
-  Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_ia
+  Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_ia 
     "位于frame_a原点的坐标系，固定在万向节和球面副的连接杆上" 
     annotation (Placement(transformation(
-        origin={-80,100},
-        extent={{-8,-8},{8,8}},
+        origin={-80,100}, 
+        extent={{-8,-8},{8,8}}, 
         rotation=90)));
-  Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_ib
+  Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_ib 
     "位于frame_b原点的坐标系，固定在球面副和转动副的连接杆上" 
     annotation (Placement(transformation(
-        origin={80,100},
-        extent={{-8,8},{8,-8}},
+        origin={80,100}, 
+        extent={{-8,8},{8,-8}}, 
         rotation=270)));
-  Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_im
+  Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_im 
     "位于球面副原点的坐标系，固定在球面副和转动副的连接杆上" 
     annotation (Placement(transformation(
-        origin={0,100},
-        extent={{8,-8},{-8,8}},
+        origin={0,100}, 
+        extent={{8,-8},{-8,8}}, 
         rotation=270)));
-  Modelica.Mechanics.Rotational.Interfaces.Flange_a axis
+  Modelica.Mechanics.Rotational.Interfaces.Flange_a axis 
     "驱动转动副的一维旋转一维接口" 
     annotation (Placement(transformation(extent={{105,85},{95,75}})));
-  Modelica.Mechanics.Rotational.Interfaces.Flange_b bearing
+  Modelica.Mechanics.Rotational.Interfaces.Flange_b bearing 
     "转动副驱动轴承的一维旋转一维接口" 
     annotation (Placement(transformation(extent={{95,45},{105,35}})));
 
   parameter Boolean animation=true "=true，则启用动画";
-  parameter Boolean showUniversalAxes=true
+  parameter Boolean showUniversalAxes=true 
     "=true，则用两个圆柱体可视化万向节运动副，否则用一个球体(仅在animation=true时有效)";
-  parameter Modelica.Mechanics.MultiBody.Types.Axis n1_a={0,0,1}
+  parameter Modelica.Mechanics.MultiBody.Types.Axis n1_a={0,0,1} 
     "固定在frame_a上的万向节运动副轴1，解析在frame_a中(轴2与轴1和杆1正交)" 
     annotation (Evaluate=true);
-  parameter Modelica.Mechanics.MultiBody.Types.Axis n_b={0,0,1}
+  parameter Modelica.Mechanics.MultiBody.Types.Axis n_b={0,0,1} 
     "固定在frame_b上的转动副轴" 
     annotation (Evaluate=true);
-  parameter SI.Position rRod1_ia[3]={1,0,0}
+  parameter SI.Position rRod1_ia[3]={1,0,0} 
     "从frame_a原点到球面副的矢量，解析在frame_ia中" 
     annotation (Evaluate=true);
-  parameter SI.Position rRod2_ib[3]={-1,0,0}
+  parameter SI.Position rRod2_ib[3]={-1,0,0} 
     "从frame_ib原点到球面副的矢量，解析在frame_ib中";
-  parameter Modelica.Units.NonSI.Angle_deg phi_offset=0
+  parameter Modelica.Units.NonSI.Angle_deg phi_offset=0 
     "转动副的相对角度偏移(角度=phi(t)+from_deg(phi_offset))";
-  parameter Modelica.Units.NonSI.Angle_deg phi_guess=0
+  parameter Modelica.Units.NonSI.Angle_deg phi_guess=0 
     "选择配置，使得初始时间|phi(t0)-from_deg(phi_guess)|最小化";
-  parameter SI.Diameter sphereDiameter=world.defaultJointLength
+  parameter SI.Diameter sphereDiameter=world.defaultJointLength 
     "表示万向节和球面副的球直径" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
   input Types.Color sphereColor=Modelica.Mechanics.MultiBody.Types.Defaults.
-       JointColor
+       JointColor 
     "表示万向节和球面副的球的颜色" 
     annotation (Dialog(colorSelector=true, tab="动画", group="如果animation=true", enable=animation));
   parameter SI.Diameter rod1Diameter=sphereDiameter/Types.Defaults.
-      JointRodDiameterFraction
+      JointRodDiameterFraction 
     "连接万向节和球面副的杆1的直径" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
   input Types.Color rod1Color=Modelica.Mechanics.MultiBody.Types.Defaults.
-      RodColor
+      RodColor 
     "连接万向节和球面副的杆1的颜色" 
     annotation (Dialog(colorSelector=true, tab="动画", group="如果animation=true", enable=animation));
 
-  parameter SI.Diameter rod2Diameter = rod1Diameter
+  parameter SI.Diameter rod2Diameter = rod1Diameter 
 "连接转动副和球面副的第二根杆的直径" 
 annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
 
-input Types.Color rod2Color = rod1Color
+input Types.Color rod2Color = rod1Color 
 "连接转动副和球面副的第二根杆的颜色" 
 annotation (Dialog(colorSelector=true, tab="动画", group="如果animation=true", enable=animation));
 
-parameter SI.Diameter revoluteDiameter = world.defaultJointWidth
+parameter SI.Diameter revoluteDiameter = world.defaultJointWidth 
 "表示转动副的圆柱的直径" 
 annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
 
-parameter SI.Distance revoluteLength = world.defaultJointLength
+parameter SI.Distance revoluteLength = world.defaultJointLength 
 "表示转动副的圆柱的长度" 
 annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
 
-input Types.Color revoluteColor = Modelica.Mechanics.MultiBody.Types.Defaults.JointColor
+input Types.Color revoluteColor = Modelica.Mechanics.MultiBody.Types.Defaults.JointColor 
 "表示转动副的圆柱的颜色" 
 annotation (Dialog(colorSelector=true, tab="动画", group="如果animation=true", enable=animation));
 
-input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
 "环境光的反射率(=0:光线完全被吸收)" 
 annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
 
-parameter SI.Distance cylinderLength = world.defaultJointLength
+parameter SI.Distance cylinderLength = world.defaultJointLength 
 "表示两个万向节轴的圆柱的长度" 
 annotation (
   Dialog(tab="动画", group="如果启用动画并显示万向轴", enable=animation and showUniversalAxes));
 
-parameter SI.Distance cylinderDiameter = world.defaultJointWidth
+parameter SI.Distance cylinderDiameter = world.defaultJointWidth 
 "表示两个万向节轴的圆柱的直径" 
 annotation (
   Dialog(tab="动画", group="如果启用动画并显示万向轴", enable=animation and showUniversalAxes));
 
-input Types.Color cylinderColor = Modelica.Mechanics.MultiBody.Types.Defaults.JointColor
+input Types.Color cylinderColor = Modelica.Mechanics.MultiBody.Types.Defaults.JointColor 
 "表示两个万向节轴的圆柱的颜色" 
 annotation (
   Dialog(colorSelector=true, tab="动画", group="如果启用动画并显示万向轴", enable=animation and showUniversalAxes));
 
-parameter Boolean checkTotalPower = false
+parameter Boolean checkTotalPower = false 
 "如果要确定流入该组件的总功率(必须为零)，则为true" 
 annotation (Dialog(tab="高级"));
 
-final parameter Real eRod1_ia[3](each final unit="1") = rod1.eRod_ia
+final parameter Real eRod1_ia[3](each final unit="1") = rod1.eRod_ia 
 "从frame_a原点到球面副原点的单位矢量，在frame_ia中解析";
 
-final parameter Real e2_ia[3](each final unit="1") = rod1.e2_ia
+final parameter Real e2_ia[3](each final unit="1") = rod1.e2_ia 
 "万向节轴2方向上的单位矢量，在frame_ia中解析";
 
-final parameter SI.Distance rod1Length = rod1.rodLength
+final parameter SI.Distance rod1Length = rod1.rodLength 
 "rod1的长度(=万向节和球面副之间的距离)";
 
-SI.Power totalPower
+SI.Power totalPower 
 "如果checkTotalPower=true，则流入该元件的总功率(否则为虚拟值)";
 
-SI.Position aux
+SI.Position aux 
 "用于计算连接万向节和球面副的杆的力的分母";
 
-SI.Force f_rod
+SI.Force f_rod 
 "杆的方向上的约束力(如果杆被压缩，则为正)";
 
   Modelica.Mechanics.MultiBody.Joints.Internal.RevoluteWithLengthConstraint revolute(
-    animation=animation,
-    lengthConstraint=rod1Length,
-    n=n_b,
-    phi_offset=phi_offset,
-    phi_guess=phi_guess,
-    cylinderDiameter=revoluteDiameter,
-    cylinderLength=revoluteLength,
-    cylinderColor=revoluteColor,
+    animation=animation, 
+    lengthConstraint=rod1Length, 
+    n=n_b, 
+    phi_offset=phi_offset, 
+    phi_guess=phi_guess, 
+    cylinderDiameter=revoluteDiameter, 
+    cylinderLength=revoluteLength, 
+    cylinderColor=revoluteColor, 
     specularCoefficient=specularCoefficient) annotation (Placement(transformation(extent={{75,-20},{35,20}})));
   Modelica.Mechanics.MultiBody.Joints.UniversalSpherical rod1(
-    animation=animation,
-    showUniversalAxes=showUniversalAxes,
-    rRod_ia=rRod1_ia,
-    n1_a=n1_a,
-    sphereDiameter=sphereDiameter,
-    sphereColor=sphereColor,
-    rodWidth=rod1Diameter,
-    rodHeight=rod1Diameter,
-    rodColor=rod1Color,
-    cylinderLength=cylinderLength,
-    cylinderDiameter=cylinderDiameter,
-    cylinderColor=cylinderColor,
-    specularCoefficient=specularCoefficient,
-    kinematicConstraint=false,
+    animation=animation, 
+    showUniversalAxes=showUniversalAxes, 
+    rRod_ia=rRod1_ia, 
+    n1_a=n1_a, 
+    sphereDiameter=sphereDiameter, 
+    sphereColor=sphereColor, 
+    rodWidth=rod1Diameter, 
+    rodHeight=rod1Diameter, 
+    rodColor=rod1Color, 
+    cylinderLength=cylinderLength, 
+    cylinderDiameter=cylinderDiameter, 
+    cylinderColor=cylinderColor, 
+    specularCoefficient=specularCoefficient, 
+    kinematicConstraint=false, 
     constraintResidue=rod1.f_rod - f_rod) annotation (Placement(transformation(extent={{-92,-20},{-52,20}})));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation rod2(
-    animation=animation,
-    width=rod2Diameter,
-    height=rod2Diameter,
-    color=rod2Color,
-    specularCoefficient=specularCoefficient,
-    r=rRod2_ib) annotation (Placement(transformation(extent={{15,-20},{-25,
+    animation=animation, 
+    width=rod2Diameter, 
+    height=rod2Diameter, 
+    color=rod2Color, 
+    specularCoefficient=specularCoefficient, 
+    r=rRod2_ib) annotation (Placement(transformation(extent={{15,-20},{-25, 
             20}})));
   Sensors.RelativePosition relativePosition(resolveInFrame=Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_a) 
     annotation (Placement(transformation(extent={{60,-70},{40,-90}})));
@@ -187,7 +187,7 @@ equation
 
      f_rod 通过高级菜单中的变量 "constraintResidue" 传递给组件 JointsUSR.rod1
   */
-  aux = cross(revolute.e, rRod2_ib)*Frames.resolveRelative(rod1.eRod_a,
+  aux = cross(revolute.e, rRod2_ib)*Frames.resolveRelative(rod1.eRod_a, 
     rod1.frame_a.R, rod1.frame_b.R);
   f_rod = (-revolute.tau - revolute.e*(frame_ib.t + frame_im.t + cross(
     rRod2_ib, frame_im.f) - cross(rRod2_ib, Frames.resolveRelative(rod1.
@@ -196,62 +196,62 @@ equation
 
   // 用于测试目的测量功率
   if checkTotalPower then
-    totalPower = frame_a.f*Frames.resolve2(frame_a.R, der(frame_a.r_0)) +
-      frame_b.f*Frames.resolve2(frame_b.R, der(frame_b.r_0)) + frame_ia.f*
-      Frames.resolve2(frame_ia.R, der(frame_ia.r_0)) + frame_ib.f*
-      Frames.resolve2(frame_ib.R, der(frame_ib.r_0)) + frame_im.f*
-      Frames.resolve2(frame_im.R, der(frame_im.r_0)) + frame_a.t*
-      Frames.angularVelocity2(frame_a.R) + frame_b.t*
-      Frames.angularVelocity2(frame_b.R) + frame_ia.t*
-      Frames.angularVelocity2(frame_ia.R) + frame_ib.t*
-      Frames.angularVelocity2(frame_ib.R) + frame_im.t*
-      Frames.angularVelocity2(frame_im.R) + axis.tau*der(axis.phi) +
+    totalPower = frame_a.f*Frames.resolve2(frame_a.R, der(frame_a.r_0)) + 
+      frame_b.f*Frames.resolve2(frame_b.R, der(frame_b.r_0)) + frame_ia.f* 
+      Frames.resolve2(frame_ia.R, der(frame_ia.r_0)) + frame_ib.f* 
+      Frames.resolve2(frame_ib.R, der(frame_ib.r_0)) + frame_im.f* 
+      Frames.resolve2(frame_im.R, der(frame_im.r_0)) + frame_a.t* 
+      Frames.angularVelocity2(frame_a.R) + frame_b.t* 
+      Frames.angularVelocity2(frame_b.R) + frame_ia.t* 
+      Frames.angularVelocity2(frame_ia.R) + frame_ib.t* 
+      Frames.angularVelocity2(frame_ib.R) + frame_im.t* 
+      Frames.angularVelocity2(frame_im.R) + axis.tau*der(axis.phi) + 
       bearing.tau*der(bearing.phi);
   else
     totalPower = 0;
   end if;
 
   connect(revolute.frame_b, rod2.frame_a) annotation (Line(
-      points={{35,0},{15,0}},
-      color={95,95,95},
+      points={{35,0},{15,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(rod2.frame_b, rod1.frame_b) annotation (Line(
-      points={{-25,0},{-52,0}},
-      color={95,95,95},
+      points={{-25,0},{-52,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(revolute.frame_a, frame_b) annotation (Line(
-      points={{75,0},{100,0}},
-      color={95,95,95},
+      points={{75,0},{100,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(rod2.frame_a, frame_ib) annotation (Line(
-      points={{15,0},{26,0},{26,70},{80,70},{80,100}},
-      color={95,95,95},
+      points={{15,0},{26,0},{26,70},{80,70},{80,100}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(rod1.frame_a, frame_a) annotation (Line(
-      points={{-92,0},{-100,0}},
-      color={95,95,95},
+      points={{-92,0},{-100,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(relativePosition.frame_b, frame_a) 
                                            annotation (Line(
-      points={{40,-80},{-96,-80},{-96,0},{-100,0}},
-      color={95,95,95},
+      points={{40,-80},{-96,-80},{-96,0},{-100,0}}, 
+      color={95,95,95}, 
       pattern=LinePattern.Dot));
   connect(relativePosition.frame_a, frame_b) 
                                            annotation (Line(
-      points={{60,-80},{96,-80},{96,0},{100,0}},
-      color={95,95,95},
+      points={{60,-80},{96,-80},{96,0},{100,0}}, 
+      color={95,95,95}, 
       pattern=LinePattern.Dot));
   connect(position_b.y, revolute.position_b) annotation (Line(
       points={{1,-40},{20,-40},{20,-12},{31,-12}}, color={0,0,127}));
   connect(rod2.frame_b, frame_im) annotation (Line(
-      points={{-25,0},{-40,0},{-40,80},{0,80},{0,100}},
-      color={95,95,95},
+      points={{-25,0},{-40,0},{-40,80},{0,80},{0,100}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(rod1.frame_ia, frame_ia) annotation (Line(
-      points={{-80,20},{-80,100}},
-      color={95,95,95},
+      points={{-80,20},{-80,100}}, 
+      color={95,95,95}, 
       thickness=0.5));
-  connect(revolute.axis, axis) annotation (Line(points={{55,20},{55,60},{90,
+  connect(revolute.axis, axis) annotation (Line(points={{55,20},{55,60},{90, 
           60},{90,80},{100,80}}));
   connect(relativePosition.r_rel, revolute.position_a) annotation (Line(
       points={{50,-69},{50,-40},{90,-40},{90,-12},{79,-12}}, color={0,0,127}));
@@ -342,122 +342,122 @@ width=jointUSR.rod1Length/10);
 <strong>connect</strong>(jointUSP.frame_ia,shape.frame_a);
 </pre></blockquote>
 
-</html>"),
+</html>"), 
     Icon(coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}},
+        preserveAspectRatio=true, 
+        extent={{-100,-100},{100,100}}, 
         initialScale=0.2), graphics={
         Text(
-          extent={{-140,-41},{140,-66}},
-          textColor={0,0,255},
-          textString="%name"),
+          extent={{-140,-41},{140,-66}}, 
+          textColor={0,0,255}, 
+          textString="%name"), 
         Ellipse(
-          extent={{-100,-30},{-40,30}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={192,192,192}),
+          extent={{-100,-30},{-40,30}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={192,192,192}), 
         Ellipse(
-          extent={{-93,-22},{-48,23}},
-          lineColor={160,160,164},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-93,-22},{-48,23}}, 
+          lineColor={160,160,164}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{-70,40},{-39,-33}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-70,40},{-39,-33}}, 
+          lineColor={255,255,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Line(
-          points={{-70,28},{-70,-30}},
-          thickness=0.5),
+          points={{-70,28},{-70,-30}}, 
+          thickness=0.5), 
         Ellipse(
-          extent={{-89,-18},{-48,18}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={192,192,192}),
+          extent={{-89,-18},{-48,18}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={192,192,192}), 
         Ellipse(
-          extent={{-84,-12},{-53,13}},
-          lineColor={160,160,164},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-84,-12},{-53,13}}, 
+          lineColor={160,160,164}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Polygon(
-          points={{-81,-17},{-92,-1},{-83,16},{-57,24},{-81,-17}},
-          pattern=LinePattern.None,
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          lineColor={0,0,255}),
+          points={{-81,-17},{-92,-1},{-83,16},{-57,24},{-81,-17}}, 
+          pattern=LinePattern.None, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid, 
+          lineColor={0,0,255}), 
         Line(
-          points={{-70,30},{-70,-10}},
-          thickness=0.5),
+          points={{-70,30},{-70,-10}}, 
+          thickness=0.5), 
         Line(
-          points={{-61,16},{-79,-15}},
-          thickness=0.5),
+          points={{-61,16},{-79,-15}}, 
+          thickness=0.5), 
         Line(
-          points={{-50,0},{-50,80},{-80,80},{-80,100}},
-          color={95,95,95},
-          thickness=0.5),
+          points={{-50,0},{-50,80},{-80,80},{-80,100}}, 
+          color={95,95,95}, 
+          thickness=0.5), 
         Ellipse(
-          extent={{-40,-30},{20,30}},
-          fillPattern=FillPattern.Sphere,
-          fillColor={192,192,192}),
+          extent={{-40,-30},{20,30}}, 
+          fillPattern=FillPattern.Sphere, 
+          fillColor={192,192,192}), 
         Ellipse(
-          extent={{-33,-22},{12,23}},
-          lineColor={192,192,192},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-33,-22},{12,23}}, 
+          lineColor={192,192,192}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{-44,31},{-14,-30}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-44,31},{-14,-30}}, 
+          lineColor={255,255,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Ellipse(
-          extent={{-23,10},{-3,-10}},
-          fillPattern=FillPattern.Solid),
+          extent={{-23,10},{-3,-10}}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{19,6},{61,-6}},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={192,192,192}),
+          extent={{19,6},{61,-6}}, 
+          fillPattern=FillPattern.HorizontalCylinder, 
+          fillColor={192,192,192}), 
         Rectangle(
-          extent={{-50,5},{-21,-5}},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={192,192,192}),
+          extent={{-50,5},{-21,-5}}, 
+          fillPattern=FillPattern.HorizontalCylinder, 
+          fillColor={192,192,192}), 
         Rectangle(
-          extent={{60,-30},{76,30}},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={192,192,192}),
+          extent={{60,-30},{76,30}}, 
+          fillPattern=FillPattern.HorizontalCylinder, 
+          fillColor={192,192,192}), 
         Rectangle(
-          extent={{85,-30},{100,30}},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={192,192,192}),
+          extent={{85,-30},{100,30}}, 
+          fillPattern=FillPattern.HorizontalCylinder, 
+          fillColor={192,192,192}), 
         Rectangle(
-          extent={{76,10},{85,-10}},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
-        Rectangle(extent={{60,30},{76,-30}}),
-        Rectangle(extent={{85,30},{100,-30}}),
+          extent={{76,10},{85,-10}}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid), 
+        Rectangle(extent={{60,30},{76,-30}}), 
+        Rectangle(extent={{85,30},{100,-30}}), 
         Text(
-          extent={{40,109},{77,91}},
-          textColor={128,128,128},
-          textString="ib"),
+          extent={{40,109},{77,91}}, 
+          textColor={128,128,128}, 
+          textString="ib"), 
         Text(
-          extent={{-124,109},{-95,92}},
-          textColor={128,128,128},
-          textString="ia"),
+          extent={{-124,109},{-95,92}}, 
+          textColor={128,128,128}, 
+          textString="ia"), 
         Line(
-          points={{60,30},{60,80},{80,80},{80,100}},
-          color={95,95,95},
-          thickness=0.5),
+          points={{60,30},{60,80},{80,80},{80,100}}, 
+          color={95,95,95}, 
+          thickness=0.5), 
         Text(
-          extent={{-43,108},{-10,92}},
-          textColor={128,128,128},
-          textString="im"),
+          extent={{-43,108},{-10,92}}, 
+          textColor={128,128,128}, 
+          textString="im"), 
         Line(
-          points={{19,6},{19,80},{0,80},{0,100}},
-          color={95,95,95},
-          thickness=0.5),
+          points={{19,6},{19,80},{0,80},{0,100}}, 
+          color={95,95,95}, 
+          thickness=0.5), 
         Line(
-          points={{80,80},{101,80}},
-          color={128,128,128},
-          thickness=0.5),
+          points={{80,80},{101,80}}, 
+          color={128,128,128}, 
+          thickness=0.5), 
         Line(
-          points={{90,30},{90,40},{95,40}},
-          color={95,95,95},
+          points={{90,30},{90,40},{95,40}}, 
+          color={95,95,95}, 
           thickness=0.5)}));
 end JointUSR;

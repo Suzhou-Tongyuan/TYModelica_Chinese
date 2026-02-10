@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.Translational.Examples;
-model GenerationOfFMUs
+model GenerationOfFMUs 
   "示例演示生成FMUs（Functional Mock-up Units）的变体"
   extends Modelica.Icons.Example;
 
@@ -14,8 +14,8 @@ model GenerationOfFMUs
     springDamper(c=1e4, d=100) 
     annotation (Placement(transformation(extent={{20,-20},{40,0}})));
   Modelica.Mechanics.Translational.Components.Mass mass2a(
-    m=1.1,
-    s(fixed=true, start=0),
+    m=1.1, 
+    s(fixed=true, start=0), 
     v(fixed=true, start=0)) 
     annotation (Placement(transformation(extent={{-30,-20},{-10,0}})));
   Modelica.Mechanics.Translational.Sources.Force force2 
@@ -23,8 +23,8 @@ model GenerationOfFMUs
   Modelica.Mechanics.Translational.Components.GeneralForceToPositionAdaptor forceToPosition2a(use_pder2=false) 
     annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
   Modelica.Mechanics.Translational.Components.Mass mass2b(
-    m=2.2,
-    s(fixed=true, start=0),
+    m=2.2, 
+    s(fixed=true, start=0), 
     v(fixed=true, start=0)) 
     annotation (Placement(transformation(extent={{70,-20},{90,0}})));
   Modelica.Mechanics.Translational.Components.GeneralForceToPositionAdaptor forceToPosition2b(use_pder2=false) 
@@ -32,8 +32,8 @@ model GenerationOfFMUs
   Modelica.Mechanics.Translational.Examples.Utilities.Spring spring(c=1e4) 
     annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
   Modelica.Mechanics.Translational.Components.Mass mass3a(
-    m=1.1,
-    s(fixed=true, start=0),
+    m=1.1, 
+    s(fixed=true, start=0), 
     v(fixed=true, start=0)) 
     annotation (Placement(transformation(extent={{-30,-80},{-10,-60}})));
   Modelica.Mechanics.Translational.Sources.Force force3 
@@ -41,8 +41,8 @@ model GenerationOfFMUs
   Modelica.Mechanics.Translational.Components.GeneralForceToPositionAdaptor forceToPosition3a(use_pder=false, use_pder2=false) 
     annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
   Modelica.Mechanics.Translational.Components.Mass mass3b(
-    m=2.2,
-    s(fixed=true, start=0),
+    m=2.2, 
+    s(fixed=true, start=0), 
     v(fixed=true, start=0)) 
     annotation (Placement(transformation(extent={{70,-80},{90,-60}})));
   Modelica.Mechanics.Translational.Components.GeneralForceToPositionAdaptor forceToPosition3b(use_pder=false, use_pder2=false) 
@@ -53,10 +53,10 @@ equation
   connect(directMass.s, inverseMass.s) 
     annotation (Line(points={{21,58},{38,58}},color={0,0,127}));
   connect(directMass.v,inverseMass.v) 
-    annotation (Line(points={{21,53},{30,53},{30,55},{38,55}},
+    annotation (Line(points={{21,53},{30,53},{30,55},{38,55}}, 
                                               color={0,0,127}));
   connect(directMass.a, inverseMass.a) 
-    annotation (Line(points={{21,47},{30,47},{30,45},{38,45}},
+    annotation (Line(points={{21,47},{30,47},{30,45},{38,45}}, 
                                               color={0,0,127}));
   connect(inverseMass.f, directMass.f) 
     annotation (Line(points={{39,42},{22,42}}, color={0,0,127}));
@@ -87,15 +87,15 @@ equation
   connect(forceToPosition2a.p, springDamper.s1) 
     annotation (Line(points={{3,-2},{18,-2}}, color={0,0,127}));
   connect(forceToPosition2a.pder, springDamper.v1) annotation (Line(
-        points={{3,-5},{10,-5},{10,-5},{18,-5}},
+        points={{3,-5},{10,-5},{10,-5},{18,-5}}, 
                                                color={0,0,127}));
   connect(springDamper.s2, forceToPosition2b.p) 
     annotation (Line(points={{42,-2},{57,-2}}, color={0,0,127}));
   connect(forceToPosition2b.pder, springDamper.v2) annotation (Line(
         points={{57,-5},{50,-5},{50,-5},{42,-5}}, color={0,0,127}));
-  connect(sine1.y, force2.f) annotation (Line(points={{-79,50},{-70,50},
+  connect(sine1.y, force2.f) annotation (Line(points={{-79,50},{-70,50}, 
           {-70,-10},{-62,-10}}, color={0,0,127}));
-  connect(sine1.y, force3.f) annotation (Line(points={{-79,50},{-70,50},
+  connect(sine1.y, force3.f) annotation (Line(points={{-79,50},{-70,50}, 
           {-70,-70},{-62,-70}}, color={0,0,127}));
   annotation (experiment(StopTime=1, Interval=0.001), Documentation(info="<html>
 <p>

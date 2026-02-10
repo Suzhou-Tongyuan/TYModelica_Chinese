@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.Examples.Elementary.BooleanSignals;
-model TimeBasedStep
+model TimeBasedStep 
   "使用基于时钟模拟时间的布尔阶跃源模块示例"
    extends Modelica.Icons.Example;
 
@@ -13,14 +13,14 @@ Modelica.Clocked.ClockSignals.Clocks.PeriodicRealClock
     annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
 equation
   connect(periodicClock1.y, assignClock1.clock) annotation (Line(
-      points={{-47.4,-2},{-16,-2},{-16,22.8}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
+      points={{-47.4,-2},{-16,-2},{-16,22.8}}, 
+      color={175,175,175}, 
+      pattern=LinePattern.Dot, 
       thickness=0.5));
   connect(step.y, assignClock1.u) annotation (Line(
-      points={{-39,30},{-23.2,30}},
+      points={{-39,30},{-23.2,30}}, 
       color={255,0,255}));
-  annotation (experiment(StopTime=1.0),
+  annotation (experiment(StopTime=1.0), 
   Documentation(info="<html>
 <p>
 模块示例

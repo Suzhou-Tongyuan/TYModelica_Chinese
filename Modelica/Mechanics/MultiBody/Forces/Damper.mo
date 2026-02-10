@@ -2,22 +2,22 @@
 model Damper "线性(速度相关)阻尼器"
   import Modelica.Mechanics.MultiBody.Types;
   parameter Boolean animation = true "= true，如果要启用动画";
-  parameter SI.TranslationalDampingConstant d(final min = 0, start = 0)
+  parameter SI.TranslationalDampingConstant d(final min = 0, start = 0) 
     "阻尼常数";
-  parameter SI.Distance length_a = world.defaultForceLength
+  parameter SI.Distance length_a = world.defaultForceLength 
     "frame_a 侧圆柱的长度" 
     annotation(Dialog(tab = "动画", group = "如果 animation = true ", enable = animation));
-  input SI.Diameter diameter_a = world.defaultForceWidth
+  input SI.Diameter diameter_a = world.defaultForceWidth 
     "frame_a 侧圆柱的直径" 
     annotation(Dialog(tab = "动画", group = "如果 animation = true ", enable = animation));
-  input SI.Diameter diameter_b = 0.6 * diameter_a
+  input SI.Diameter diameter_b = 0.6 * diameter_a 
     "frame_b 侧圆柱的直径" 
     annotation(Dialog(tab = "动画", group = "如果 animation = true ", enable = animation));
   input Types.Color color_a = {100, 100, 100} "frame_a 的颜色" 
     annotation(Dialog(colorSelector = true, tab = "动画", group = "如果 animation = true ", enable = animation));
   input Types.Color color_b = {155, 155, 155} "frame_b 的颜色" 
     annotation(Dialog(colorSelector = true, tab = "动画", group = "如果 animation = true ", enable = animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射 (= 0: 光完全被吸收)" 
     annotation(Dialog(tab = "动画", group = "如果 animation = true ", enable = animation));
   extends Interfaces.PartialLineForce;
@@ -27,27 +27,27 @@ model Damper "线性(速度相关)阻尼器"
 protected
   SI.Position r0_b[3] = e_a * noEvent(min(length_a, s));
   Visualizers.Advanced.Shape shape_a(
-    shapeType = "cylinder",
-    color = color_a,
-    specularCoefficient = specularCoefficient,
-    length = noEvent(min(length_a, s)),
-    width = diameter_a,
-    height = diameter_a,
-    lengthDirection = e_a,
-    widthDirection = {0, 1, 0},
-    r = frame_a.r_0,
+    shapeType = "cylinder", 
+    color = color_a, 
+    specularCoefficient = specularCoefficient, 
+    length = noEvent(min(length_a, s)), 
+    width = diameter_a, 
+    height = diameter_a, 
+    lengthDirection = e_a, 
+    widthDirection = {0, 1, 0}, 
+    r = frame_a.r_0, 
     R = frame_a.R) if world.enableAnimation and animation;
   Visualizers.Advanced.Shape shape_b(
-    shapeType = "cylinder",
-    color = color_b,
-    specularCoefficient = specularCoefficient,
-    length = noEvent(max(s - length_a, 0)),
-    width = diameter_b,
-    height = diameter_b,
-    lengthDirection = e_a,
-    widthDirection = {0, 1, 0},
-    r_shape = r0_b,
-    r = frame_a.r_0,
+    shapeType = "cylinder", 
+    color = color_b, 
+    specularCoefficient = specularCoefficient, 
+    length = noEvent(max(s - length_a, 0)), 
+    width = diameter_b, 
+    height = diameter_b, 
+    lengthDirection = e_a, 
+    widthDirection = {0, 1, 0}, 
+    r_shape = r0_b, 
+    r = frame_a.r_0, 
     R = frame_a.R) if world.enableAnimation and animation;
 equation
   f = d * der(s);
@@ -73,28 +73,28 @@ f = d*<strong>der</strong>(s);
 <img src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/Forces/Damper.png\">
 </div>
 
-</html>"),
+</html>"), 
     Icon(coordinateSystem(
-    preserveAspectRatio = true,
+    preserveAspectRatio = true, 
     extent = {{-100, -100}, {100, 100}}), graphics = {
-    Line(points = {{-101, 0}, {-60, 0}}),
-    Line(points = {{-60, -30}, {-60, 30}}),
-    Line(points = {{-60, -30}, {60, -30}}),
-    Line(points = {{-60, 30}, {60, 30}}),
+    Line(points = {{-101, 0}, {-60, 0}}), 
+    Line(points = {{-60, -30}, {-60, 30}}), 
+    Line(points = {{-60, -30}, {60, -30}}), 
+    Line(points = {{-60, 30}, {60, 30}}), 
     Rectangle(
-    extent = {{-60, 30}, {30, -30}},
-    fillColor = {192, 192, 192},
-    fillPattern = FillPattern.Solid),
-    Line(points = {{30, 0}, {100, 0}}),
+    extent = {{-60, 30}, {30, -30}}, 
+    fillColor = {192, 192, 192}, 
+    fillPattern = FillPattern.Solid), 
+    Line(points = {{30, 0}, {100, 0}}), 
     Text(
-    extent = {{-150, 50}, {150, 90}},
-    textString = "%name",
-    textColor = {0, 0, 255}),
+    extent = {{-150, 50}, {150, 90}}, 
+    textString = "%name", 
+    textColor = {0, 0, 255}), 
     Text(
-    extent = {{-150, -75}, {150, -45}},
-    textString = "d=%d"),
-    Line(visible = useHeatPort,
-    points = {{-100, -99}, {-100, -25}, {-10, -25}},
-    color = {191, 0, 0},
+    extent = {{-150, -75}, {150, -45}}, 
+    textString = "d=%d"), 
+    Line(visible = useHeatPort, 
+    points = {{-100, -99}, {-100, -25}, {-10, -25}}, 
+    color = {191, 0, 0}, 
     pattern = LinePattern.Dot)}));
 end Damper;

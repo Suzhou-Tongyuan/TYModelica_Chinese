@@ -20,16 +20,16 @@ equation
   end for;
   annotation (defaultComponentName="plugToPins", Icon(graphics={
         Rectangle(
-          extent={{-20,20},{40,-20}},
-          fillColor={170,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-20,20},{40,-20}}, 
+          fillColor={170,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Ellipse(
-          extent={{-40,20},{0,-20}},
-          fillColor={170,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-40,20},{0,-20}}, 
+          fillColor={170,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Text(
-          extent={{-150,50},{150,90}},
-          textString="%name",
+          extent={{-150,50},{150,90}}, 
+          textString="%name", 
           textColor={0,0,255})}), Documentation(info="<html>
 <p>
 连接多相（负）插头的所有<code>m</code>单相（负）引脚到一个<code>m</code>单相（负）引脚数组。

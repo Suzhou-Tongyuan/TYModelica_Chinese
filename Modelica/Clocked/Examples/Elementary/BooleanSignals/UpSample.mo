@@ -15,27 +15,27 @@ Modelica.Clocked.BooleanSignals.Sampler.Utilities.UpSample upSample2(
   Modelica.Blocks.Sources.BooleanTable table1(table={0.05,0.15}) 
     annotation (Placement(transformation(extent={{-82,20},{-62,40}})));
 Modelica.Blocks.Logical.And and1 
-  annotation (Placement(transformation(origin={10,28},
+  annotation (Placement(transformation(origin={10,28}, 
 extent={{-10,-10},{10,10}})));
 equation
   connect(periodicClock.y, sample1.clock) annotation (Line(
-      points={{-55.4,0},{-42,0},{-42,22.8}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
+      points={{-55.4,0},{-42,0},{-42,22.8}}, 
+      color={175,175,175}, 
+      pattern=LinePattern.Dot, 
       thickness=0.5));
   connect(table1.y, sample1.u) 
     annotation (Line(points={{-61,30},{-49.2,30}}, color={255,0,255}));
-  connect(upSample1.u, sample1.y) annotation (Line(points={{-27.2,40},{-30,40},
+  connect(upSample1.u, sample1.y) annotation (Line(points={{-27.2,40},{-30,40}, 
           {-30,30},{-35.4,30}}, color={255,0,255}));
-  connect(upSample2.u, sample1.y) annotation (Line(points={{-27.2,20},{-30,20},
+  connect(upSample2.u, sample1.y) annotation (Line(points={{-27.2,20},{-30,20}, 
           {-30,30},{-35.4,30}}, color={255,0,255}));
-connect(upSample1.y, and1.u1) annotation (Line(origin={0,0},
-points={{-13.4,40},{-8,40},{-8,28},{-2,28}},
+connect(upSample1.y, and1.u1) annotation (Line(origin={0,0}, 
+points={{-13.4,40},{-8,40},{-8,28},{-2,28}}, 
 color={255,0,255}));
-connect(upSample2.y, and1.u2) annotation (Line(origin={0,0},
-points={{-13.4,20},{-2,20}},
+connect(upSample2.y, and1.u2) annotation (Line(origin={0,0}, 
+points={{-13.4,20},{-2,20}}, 
 color={255,0,255}));
-  annotation (experiment(StopTime=0.09),
+  annotation (experiment(StopTime=0.09), 
   Documentation(info="<html>
 <p>
 模块文件的基本范例

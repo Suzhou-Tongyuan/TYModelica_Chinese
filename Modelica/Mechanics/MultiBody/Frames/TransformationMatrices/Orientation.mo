@@ -1,25 +1,25 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-type Orientation
+type Orientation 
   "使用一个变换矩阵描述从一个坐标系1到另一个坐标系2的旋转的方向类型"
 
   extends Internal.TransformationMatrix;
 
-  encapsulated function equalityConstraint
+  encapsulated function equalityConstraint 
     "返回表达两个坐标系具有相同方向的约束残差"
 
     import Modelica;
     import Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
     extends Modelica.Icons.Function;
-    input TransformationMatrices.Orientation T1
+    input TransformationMatrices.Orientation T1 
       "将坐标系0旋转到坐标系1的方向对象";
-    input TransformationMatrices.Orientation T2
+    input TransformationMatrices.Orientation T2 
       "将坐标系0旋转到坐标系2的方向对象";
-    output Real residue[3]
+    output Real residue[3] 
       "坐标系1绕x轴、y轴和z轴旋转以将坐标系1旋转到坐标系2的旋转角度(应为零)";
   algorithm
     residue := {
-      cross(T1[1, :], T1[2, :]) * T2[2, :],
-      -cross(T1[1, :], T1[2, :]) * T2[1, :],
+      cross(T1[1, :], T1[2, :]) * T2[2, :], 
+      -cross(T1[1, :], T1[2, :]) * T2[1, :], 
       T1[2, :]*T2[1, :]};
     annotation(Inline=true, Documentation(info="<html>
 <h4>语法</h4>

@@ -1,17 +1,17 @@
 ﻿within Modelica.Mechanics.MultiBody.Sensors.Internal;
-model BasicCutForce
+model BasicCutForce 
   "基本传感器，用于测量局部力矢量(frame_resolve必须连接)"
   import Modelica.Mechanics.MultiBody.Types.ResolveInFrameA;
   import Modelica.Mechanics.MultiBody.Frames;
   extends Modelica.Mechanics.MultiBody.Sensors.Internal.PartialCutForceBaseSensor;
 
-  Modelica.Blocks.Interfaces.RealOutput force[3](each final quantity="Force", each final unit="N")
+  Modelica.Blocks.Interfaces.RealOutput force[3](each final quantity="Force", each final unit="N") 
     "在resolveInFrame坐标系中解析的局部力" 
        annotation (Placement(transformation(
-        origin={-80,-110},
-        extent={{10,-10},{-10,10}},
+        origin={-80,-110}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
-  parameter Boolean positiveSign=true
+  parameter Boolean positiveSign=true 
     "=true，如果返回具有正号的力(=frame_a.f)，否则返回具有负号的力(=frame_b.f)";
 protected
   parameter Integer csign=if positiveSign then +1 else -1;
@@ -27,13 +27,13 @@ equation
     force = zeros(3);
   end if;
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
       graphics={
-        Line(points={{-80,-100},{-80,0}}, color={0,0,127}),
+        Line(points={{-80,-100},{-80,0}}, color={0,0,127}), 
         Text(
-          extent={{-50,-14},{50,-54}},
-          textColor={64,64,64},
-          textString="N")}),
+          extent={{-50,-14},{50,-54}}, 
+          textColor={64,64,64}, 
+          textString="N")}), 
     Documentation(info="<html>
 <p>
 这是一个基本传感器，旨在用于高级传感器中，以确定两个坐标系之间作用的局部力。

@@ -1533,10 +1533,10 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       extends Modelica.Icons.Example;
 
       parameter SI.Volume V = 1 "容积";
-      parameter SI.EnthalpyFlowRate H_flow_ext = 1.e6
+      parameter SI.EnthalpyFlowRate H_flow_ext = 1.e6 
         "流入容积的恒定焓流";
 
-      package Medium = Water.ConstantPropertyLiquidWater(SpecificEnthalpy(max =
+      package Medium = Water.ConstantPropertyLiquidWater(SpecificEnthalpy(max = 
         1e6)) "介质模型" annotation();
       Medium.BaseProperties medium(T(start = 300, fixed = true));
 
@@ -1569,9 +1569,9 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       medium2.T = 330;
       m_flow_ext2 = time - 30;
       state = Medium.setSmoothState(
-        m_flow_ext2,
-        medium.state,
-        medium2.state,
+        m_flow_ext2, 
+        medium.state, 
+        medium2.state, 
         10);
       der_p = der(state.p);
       der_T = der(state.T);
@@ -1593,7 +1593,7 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       Medium.VelocityOfSound a = Medium.velocityOfSound(state);
       Real beta = Medium.isobaricExpansionCoefficient(state);
       Real gamma = Medium.isothermalCompressibility(state);
-      Medium.SpecificEnthalpy h_is = Medium.isentropicEnthalpyApproximation(2.0,
+      Medium.SpecificEnthalpy h_is = Medium.isentropicEnthalpyApproximation(2.0, 
         state);
 
       Medium.ThermodynamicState smoothState;
@@ -1611,9 +1611,9 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       // 平滑状态
       m_flow_ext = time - 0.5;
       smoothState = Medium.setSmoothState(
-        m_flow_ext,
-        state,
-        state2,
+        m_flow_ext, 
+        state, 
+        state2, 
         0.1);
       der_p = der(smoothState.p);
       der_T = der(smoothState.T);
@@ -1628,20 +1628,20 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       extends Modelica.Icons.Example;
       package Medium = Water.StandardWater "介质模型" annotation();
       Medium.BaseProperties medium(
-        p(start = 1.e5,
-        fixed = true,
-        stateSelect = StateSelect.prefer),
-        h(start = 1.0e5,
-        fixed = true,
-        stateSelect = StateSelect.prefer),
-        T(start = 275.0),
+        p(start = 1.e5, 
+        fixed = true, 
+        stateSelect = StateSelect.prefer), 
+        h(start = 1.0e5, 
+        fixed = true, 
+        stateSelect = StateSelect.prefer), 
+        T(start = 275.0), 
         d(start = 999.0));
       SI.Volume V(start = 0.1, fixed = true);
-      parameter SI.VolumeFlowRate dV = 0.0
+      parameter SI.VolumeFlowRate dV = 0.0 
         "容积的恒定时间导数";
-      parameter Medium.MassFlowRate m_flow_ext = 0
+      parameter Medium.MassFlowRate m_flow_ext = 0 
         "流入容积的恒定质量流量";
-      parameter Medium.EnthalpyFlowRate H_flow_ext = 10000
+      parameter Medium.EnthalpyFlowRate H_flow_ext = 10000 
         "流入容积的恒定焓流";
       SI.Mass m "容积的质量";
       SI.InternalEnergy U "容积的内能";
@@ -1667,9 +1667,9 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       m_flow_ext2 = time - 0.5;
       state2 = Medium.setState_pT(1e5 * (1 + time), 300 + 200 * time);
       state = Medium.setSmoothState(
-        m_flow_ext2,
-        medium.state,
-        state2,
+        m_flow_ext2, 
+        medium.state, 
+        state2, 
         0.05);
       der_p = der(state.p);
       der_T = der(state.T);
@@ -1682,20 +1682,20 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       extends Modelica.Icons.Example;
 
       parameter SI.Volume V = 1 "容积1和容积2的体积";
-      parameter SI.MassFlowRate m_flow_ext = 0.01
+      parameter SI.MassFlowRate m_flow_ext = 0.01 
         "流入容积1和容积2的恒定质量流量";
-      parameter SI.EnthalpyFlowRate H_flow_ext = 5000
+      parameter SI.EnthalpyFlowRate H_flow_ext = 5000 
         "流入容积1和容积2的恒定焓流";
 
-      package Medium1 = Modelica.Media.IdealGases.MixtureGases.CombustionAir
+      package Medium1 = Modelica.Media.IdealGases.MixtureGases.CombustionAir 
         "介质模型" annotation();
       Medium1.BaseProperties medium1(
-        p(start = 1.e5,
-        fixed = true,
-        stateSelect = StateSelect.prefer),
-        T(start = 300,
-        fixed = true,
-        stateSelect = StateSelect.prefer),
+        p(start = 1.e5, 
+        fixed = true, 
+        stateSelect = StateSelect.prefer), 
+        T(start = 300, 
+        fixed = true, 
+        stateSelect = StateSelect.prefer), 
         X(start = {0.8, 0.2}));
       Real m1(quantity = Medium1.mediumName, start = 1.0);
       SI.InternalEnergy U1;
@@ -1703,15 +1703,15 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       Medium1.DynamicViscosity eta1 = Medium1.dynamicViscosity(medium1.state);
       Medium1.ThermalConductivity lambda1 = Medium1.thermalConductivity(medium1.state);
 
-      package Medium2 = Modelica.Media.IdealGases.MixtureGases.SimpleNaturalGas
+      package Medium2 = Modelica.Media.IdealGases.MixtureGases.SimpleNaturalGas 
         "介质模型" annotation();
       Medium2.BaseProperties medium2(
-        p(start = 1.e5,
-        fixed = true,
-        stateSelect = StateSelect.prefer),
-        T(start = 300,
-        fixed = true,
-        stateSelect = StateSelect.prefer),
+        p(start = 1.e5, 
+        fixed = true, 
+        stateSelect = StateSelect.prefer), 
+        T(start = 300, 
+        fixed = true, 
+        stateSelect = StateSelect.prefer), 
         X(start = {0.1, 0.1, 0.1, 0.2, 0.2, 0.3}));
       Real m2(quantity = Medium2.mediumName, start = 1.0);
       SI.InternalEnergy U2;
@@ -1720,8 +1720,8 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       Medium2.ThermalConductivity lambda2 = Medium2.thermalConductivity(medium2.state);
 
       Medium2.ThermodynamicState state2 = Medium2.setState_pTX(
-        1.005e5,
-        302,
+        1.005e5, 
+        302, 
         {0.3, 0.2, 0.2, 0.1, 0.1, 0.1});
       Medium2.ThermodynamicState smoothState;
       Real m_flow_ext2;
@@ -1744,9 +1744,9 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       // 平滑状态
       m_flow_ext2 = time - 0.5;
       smoothState = Medium2.setSmoothState(
-        m_flow_ext2,
-        medium2.state,
-        state2,
+        m_flow_ext2, 
+        medium2.state, 
+        state2, 
         0.2);
       der_p = der(smoothState.p);
       der_T = der(smoothState.T);
@@ -1759,14 +1759,14 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       extends Modelica.Icons.Example;
       package Medium = Air.MoistAir "介质模型" annotation();
       Medium.BaseProperties medium(
-        T(start = 274.0, fixed = true),
-        X(start = {0.95, 0.05}),
+        T(start = 274.0, fixed = true), 
+        X(start = {0.95, 0.05}), 
         p(start = 1.0e5, fixed = true));
       //  Medium.SpecificEntropy s=Medium.specificEntropy(medium);
       //  Medium.SpecificEnthalpy h_is = Medium.isentropicEnthalpyApproximation(medium, 2.0e5);
-      parameter Medium.MolarMass[2] MMx = {Medium.dryair.MM, Medium.steam.MM}
+      parameter Medium.MolarMass[2] MMx = {Medium.dryair.MM, Medium.steam.MM} 
         "摩尔质量向量(由干空气和水蒸气组成)";
-      Medium.MolarMass MM = 1 / ((1 - medium.X[1]) / MMx[1] + medium.X[1] / MMx[2])
+      Medium.MolarMass MM = 1 / ((1 - medium.X[1]) / MMx[1] + medium.X[1] / MMx[2]) 
         "混合物气体部分的摩尔质量";
       //  Real[4] dddX=Medium.density_derX(medium,MM);
 
@@ -1795,9 +1795,9 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       state2.T = 340 - 20 * time;
       state2.X = {0.5 * time, 1 - 0.5 * time} / unitTime;
       smoothState = Medium.setSmoothState(
-        m_flow_ext,
-        state1,
-        state2,
+        m_flow_ext, 
+        state1, 
+        state2, 
         0.2);
       der_p = der(smoothState.p);
       der_T = der(smoothState.T);
@@ -1812,38 +1812,38 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       parameter SI.Pressure p_const = 1e5 "压力";
       parameter Integer n_T = 11 "等温线数量";
       parameter SI.Temperature T_min = 253.15 "最低等温线";
-      parameter SI.Temperature T_step = 10
+      parameter SI.Temperature T_step = 10 
         "两根等温线间的温度步长";
       parameter Integer n_h = 16 "等比焓线数目";
-      parameter SI.SpecificEnthalpy h_min = -20e3
+      parameter SI.SpecificEnthalpy h_min = -20e3 
         "最低等比焓线";
-      parameter SI.SpecificEnthalpy h_step = 1e4
+      parameter SI.SpecificEnthalpy h_step = 1e4 
         "两根等比焓线间的比焓步长";
-      parameter Integer n_phi = 10
+      parameter Integer n_phi = 10 
         "等相对湿度线数目";
       parameter Real phi_min = 0.1 "最低等湿线";
       parameter Real phi_step = 0.1 "两根等湿线间的步长";
-      parameter SI.MassFraction x_min = 0.00
+      parameter SI.MassFraction x_min = 0.00 
         "图中的最小绝对湿度";
-      parameter SI.MassFraction x_max = 0.03
+      parameter SI.MassFraction x_max = 0.03 
         "图中的最大绝对湿度";
       parameter SI.Time t = 1 "仿真时间";
 
-      final parameter SI.Temperature[n_T] T_const = {T_min - T_step + i *
+      final parameter SI.Temperature[n_T] T_const = {T_min - T_step + i * 
         T_step for i in 1:n_T} "恒定温度";
-      final parameter SI.SpecificEnthalpy[n_h] h_const = {(i - 1) * h_step +
+      final parameter SI.SpecificEnthalpy[n_h] h_const = {(i - 1) * h_step + 
         h_min for i in 1:n_h} "恒定比焓";
       final parameter Real[n_phi] phi_const = {(i - 1) * phi_step + phi_min for i in 
         1:n_phi} "恒定相对湿度";
-      final parameter Real diagSlope = Medium.enthalpyOfVaporization(273.15)
+      final parameter Real diagSlope = Medium.enthalpyOfVaporization(273.15) 
         "旋转图表，使零度等温线在雾区之外成为水平线";
-      final parameter SI.MassFraction x_start = x_min
+      final parameter SI.MassFraction x_start = x_min 
         "初始绝对湿度(kg水/kg干空气)";
 
-      SI.MassFraction x(start = x_start)
+      SI.MassFraction x(start = x_start) 
         "绝对湿度(kg水/kg干空气)";
       SI.SpecificEnthalpy[n_T] hx_T "恒定温度下的h_1+x";
-      SI.SpecificEnthalpy[n_h] hx_h(start = h_const, each fixed = true)
+      SI.SpecificEnthalpy[n_h] hx_h(start = h_const, each fixed = true) 
         "恒定h_1+x";
       SI.SpecificEnthalpy[n_phi] hx_phi "恒定相对湿度下的h_1+x";
       SI.SpecificEnthalpy[n_T] y_T "恒定温度下的焓图";
@@ -1855,7 +1855,7 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
     protected
       SI.Pressure[n_phi] ps_phi "等湿线上的饱和压力";
       SI.Temperature[n_phi] T_phi(each start = 290);
-      Boolean[n_T] fog(start = fill(false, n_T))
+      Boolean[n_T] fog(start = fill(false, n_T)) 
         "在等温线与phi=1相交处是否触发事件";
       SI.Pressure[n_T] pd "沿等温线的蒸汽分压";
     initial equation
@@ -1914,7 +1914,7 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
 
     package TwoPhaseWater "扩展StandardWater介质库"
       extends Modelica.Media.Water.StandardWater;
-      redeclare model extends BaseProperties
+      redeclare model extends BaseProperties 
         "使StandardWater.BaseProperties不可替换，以便在模型ExtendedProperties中可继承"
         annotation();
       end BaseProperties;
@@ -1946,7 +1946,7 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
         SpecificEntropy s_b;
         SpecificEntropy s_d;
       equation
-        eta = if phase == 1 then dynamicViscosity(state) else 1 / (x / eta_d + (1 - x)
+        eta = if phase == 1 then dynamicViscosity(state) else 1 / (x / eta_d + (1 - x) 
           / eta_b);
         dew = setDewState(sat);
         bubble = setBubbleState(sat);
@@ -1976,7 +1976,7 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
 
       model TestTwoPhaseStates "两相水模型测试"
         extends Modelica.Icons.Example;
-        ExtendedProperties medium(p(start = 2000.0, fixed = true), h(start = 8.0e5,
+        ExtendedProperties medium(p(start = 2000.0, fixed = true), h(start = 8.0e5, 
           fixed = true));
         parameter Real dh(unit = "J/(kg.s)", displayUnit = "kJ/(kg.s)") = 80000.0 "介质比焓的导数";
         parameter Real dp(unit = "Pa/s", displayUnit = "bar/s") = 1.0e6 "介质压力的导数";
@@ -2010,7 +2010,7 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
 </html>"));
     end TwoPhaseWater;
 
-    package ReferenceAir
+    package ReferenceAir 
       "干空气和湿空气介质模型示例"
       extends Modelica.Icons.ExamplesPackage;
 
@@ -2030,18 +2030,18 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
 
       model MoistAir "湿空气示例"
         extends Modelica.Icons.Example;
-        parameter SI.Temperature T_start = 274
+        parameter SI.Temperature T_start = 274 
           "温度初值";
-        parameter SI.Pressure p_start = 1e5
+        parameter SI.Pressure p_start = 1e5 
           "压力初值";
         package Medium = Modelica.Media.Air.ReferenceMoistAir "介质模型" annotation();
         Medium.BaseProperties medium(
-          T(start = T_start, fixed = true),
-          X(start = {0.95, 0.05}),
+          T(start = T_start, fixed = true), 
+          X(start = {0.95, 0.05}), 
           p(start = p_start, fixed = true));
-        parameter Medium.MolarMass[2] MMx = {Medium.dryair.MM, Medium.steam.MM}
+        parameter Medium.MolarMass[2] MMx = {Medium.dryair.MM, Medium.steam.MM} 
           "摩尔质量向量(由干空气和蒸气组成)";
-        Medium.MolarMass MM = 1 / ((1 - medium.X[1]) / MMx[1] + medium.X[1] / MMx[2])
+        Medium.MolarMass MM = 1 / ((1 - medium.X[1]) / MMx[1] + medium.X[1] / MMx[2]) 
           "混合物气体部分摩尔质量";
         Medium.ThermodynamicState state1;
         Medium.ThermodynamicState state2;
@@ -2063,9 +2063,9 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
         state2.T = 340 - 20 * time;
         state2.X = {0.5 * time, 1 - 0.5 * time} / unitTime;
         smoothState = Medium.setSmoothState(
-          m_flow_ext,
-          state1,
-          state2,
+          m_flow_ext, 
+          state1, 
+          state2, 
           0.2);
         der_p = der(smoothState.p);
         der_T = der(smoothState.T);
@@ -2086,34 +2086,34 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
         annotation(experiment(StopTime = 1.01));
       end MoistAir2;
 
-      model Inverse_sh_T
+      model Inverse_sh_T 
         "已知h或s,根据h = h_pT(p, T),s = s_pT(p, T)求T"
         extends Modelica.Icons.Example;
 
         import Medium = Modelica.Media.Air.ReferenceAir.Air_pT "介质模型";
 
-        parameter SI.Temperature T_min = 300
+        parameter SI.Temperature T_min = 300 
           "温度从T_min(time=0)线性变化增加到T_max(time=1)";
-        parameter SI.Temperature T_max = 500
+        parameter SI.Temperature T_max = 500 
           "温度从T_min(time=0)线性变化增加到T_max(time=1)";
         parameter SI.Pressure p = 1.0e5 "压力";
-        final parameter SI.SpecificEnthalpy h_min =
-          Medium.specificEnthalpy(Medium.setState_pT(p, T_min))
+        final parameter SI.SpecificEnthalpy h_min = 
+          Medium.specificEnthalpy(Medium.setState_pT(p, T_min)) 
           "T_min时的比焓";
-        final parameter SI.SpecificEnthalpy h_max =
-          Medium.specificEnthalpy(Medium.setState_pT(p, T_max))
+        final parameter SI.SpecificEnthalpy h_max = 
+          Medium.specificEnthalpy(Medium.setState_pT(p, T_max)) 
           "T_max时的比焓";
-        final parameter SI.SpecificEntropy s_min =
-          Medium.specificEntropy(Medium.setState_pT(p, T_min))
+        final parameter SI.SpecificEntropy s_min = 
+          Medium.specificEntropy(Medium.setState_pT(p, T_min)) 
           "T_min时的比熵";
-        final parameter SI.SpecificEntropy s_max =
-          Medium.specificEntropy(Medium.setState_pT(p, T_max))
+        final parameter SI.SpecificEntropy s_max = 
+          Medium.specificEntropy(Medium.setState_pT(p, T_max)) 
           "T_max时的比熵";
         SI.SpecificEnthalpy h1 "预定义比焓";
-        SI.SpecificEnthalpy h2
+        SI.SpecificEnthalpy h2 
           "根据T计算的比焓(= h1 required)";
         SI.SpecificEntropy s1 "预定义的比熵";
-        SI.SpecificEntropy s2
+        SI.SpecificEntropy s2 
           "根据T计算的比熵 (= h1 required)";
         SI.Temperature Th "根据h1计算的温度";
         SI.Temperature Ts "根据s1计算的温度";
@@ -2123,77 +2123,77 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
 
       equation
         // 定义比焓和比熵
-        h1 = if time < 0 then h_min else if time >= 1 then h_max else h_min + time
+        h1 = if time < 0 then h_min else if time >= 1 then h_max else h_min + time 
           / timeUnit * (h_max - h_min);
-        s1 = if time < 0 then s_min else if time >= 1 then s_max else s_min + time
+        s1 = if time < 0 then s_min else if time >= 1 then s_max else s_min + time 
           / timeUnit * (s_max - s_min);
 
         // 计算温度
         Th = Medium.temperature_phX(
-          p,
-          h1,
+          p, 
+          h1, 
           fill(0.0, 0));
         Ts = Medium.temperature_psX(
-          p,
-          s1,
+          p, 
+          s1, 
           fill(0.0, 0));
 
         // 检查 (h2必须与h1相等)
         h2 = Medium.specificEnthalpy_pTX(
-          p,
-          Th,
+          p, 
+          Th, 
           fill(0.0, 0));
         s2 = Medium.specificEntropy_pTX(
-          p,
-          Ts,
+          p, 
+          Ts, 
           fill(0, 0));
         assert(abs(h1 - h2) < 1e-3, "反算h错误");
         assert(abs(s1 - s2) < 1e-3, "反算s错误");
         annotation(experiment(StopTime = 1));
       end Inverse_sh_T;
 
-      model Inverse_sh_TX
+      model Inverse_sh_TX 
         "已知h或s,根据h = h_pTX(p, T, X),s = s_pTX(p, T, X)求T"
         extends Modelica.Icons.Example;
 
         import Medium = Modelica.Media.Air.ReferenceMoistAir "介质模型";
 
-        parameter SI.Temperature T_min = 300
+        parameter SI.Temperature T_min = 300 
           "温度从T_min(time=0)线性变化增加到T_max(time=1)";
-        parameter SI.Temperature T_max = 500
+        parameter SI.Temperature T_max = 500 
           "温度从T_min(time=0)线性变化增加到T_max(time=1)";
         parameter SI.Pressure p = 1.0e5 "压力";
-        parameter SI.MassFraction[:] X = Modelica.Media.Air.ReferenceMoistAir.reference_X
+        parameter SI.MassFraction[:] X = Modelica.Media.Air.ReferenceMoistAir.reference_X 
           "质量分数向量";
-        final parameter SI.SpecificEnthalpy h_min =
+        final parameter SI.SpecificEnthalpy h_min = 
           Modelica.Media.Air.ReferenceMoistAir.specificEnthalpy(
           Modelica.Media.Air.ReferenceMoistAir.setState_pTX(
-          p,
-          T_min,
+          p, 
+          T_min, 
           X)) "Specific enthalpy at T_min";
-        final parameter SI.SpecificEnthalpy h_max =
+        final parameter SI.SpecificEnthalpy h_max = 
           Modelica.Media.Air.ReferenceMoistAir.specificEnthalpy(
           Modelica.Media.Air.ReferenceMoistAir.setState_pTX(
-          p,
-          T_max,
+          p, 
+          T_max, 
           X)) "Specific enthalpy at T_max";
-        final parameter SI.SpecificEntropy s_min =
+        final parameter SI.SpecificEntropy s_min = 
           Modelica.Media.Air.ReferenceMoistAir.specificEntropy(
           Modelica.Media.Air.ReferenceMoistAir.setState_pTX(
-          p,
-          T_min,
+          p, 
+          T_min, 
           X)) "Specific entropy at T_min";
-        final parameter SI.SpecificEntropy s_max =
+        final parameter SI.SpecificEntropy s_max = 
           Modelica.Media.Air.ReferenceMoistAir.specificEntropy(
           Modelica.Media.Air.ReferenceMoistAir.setState_pTX(
-          p,
-          T_max,
+          p, 
+          T_max, 
           X)) "Specific entropy at T_max";
         SI.SpecificEnthalpy h1 "预定义比焓";
-        SI.SpecificEnthalpy h2
+        SI.SpecificEnthalpy h2 
           "根据T计算的比焓(= h1 required)";
         SI.SpecificEntropy s1 "预定义的比熵";
-        SI.SpecificEntropy s2
+        SI.SpecificEntropy s2 
           "根据T计算的比熵 (= h1 required)";
         SI.Temperature Th "根据h1计算的温度";
         SI.Temperature Ts "根据s1计算的温度";
@@ -2203,29 +2203,29 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
 
       equation
         // 定义比焓
-        h1 = if time < 0 then h_min else if time >= 1 then h_max else h_min + time
+        h1 = if time < 0 then h_min else if time >= 1 then h_max else h_min + time 
           / timeUnit * (h_max - h_min);
-        s1 = if time < 0 then s_min else if time >= 1 then s_max else s_min + time
+        s1 = if time < 0 then s_min else if time >= 1 then s_max else s_min + time 
           / timeUnit * (s_max - s_min);
 
         // 计算温度
         Th = Medium.temperature_phX(
-          p,
-          h1,
+          p, 
+          h1, 
           X);
         Ts = Medium.temperature_psX(
-          p,
-          s1,
+          p, 
+          s1, 
           X);
 
         // 检查 (h2必须与h1相等)
         h2 = Medium.specificEnthalpy_pTX(
-          p,
-          Th,
+          p, 
+          Th, 
           X);
         s2 = Medium.specificEntropy_pTX(
-          p,
-          Ts,
+          p, 
+          Ts, 
           X);
         assert(abs(h1 - h2) < 1e-3, "反算h错误");
         assert(abs(s1 - s2) < 1e-3, "反算s错误");
@@ -2243,10 +2243,10 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       model R134a1 "R134a示例1"
         extends Modelica.Icons.Example;
         extends Modelica.Media.Examples.Utilities.PartialTestModel(
-        redeclare package Medium = Modelica.Media.R134a.R134a_ph,
-          h_start = 107390,
-          fixedMassFlowRate(use_T_ambient = false),
-          volume(use_T_start = false),
+        redeclare package Medium = Modelica.Media.R134a.R134a_ph, 
+          h_start = 107390, 
+          fixedMassFlowRate(use_T_ambient = false), 
+          volume(use_T_start = false), 
           ambient(use_T_ambient = false));
         annotation(experiment(StopTime = 1.01));
       end R134a1;
@@ -2254,17 +2254,17 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
       model R134a2 "R134a示例2"
         extends Modelica.Icons.Example;
         extends Modelica.Media.Examples.Utilities.PartialTestModel2(
-        redeclare package Medium = Modelica.Media.R134a.R134a_ph,
-          h_start = 107390,
-          fixedMassFlowRate(use_T_ambient = false),
-          volume(use_T_start = false),
+        redeclare package Medium = Modelica.Media.R134a.R134a_ph, 
+          h_start = 107390, 
+          fixedMassFlowRate(use_T_ambient = false), 
+          volume(use_T_start = false), 
           ambient(use_T_ambient = false));
         annotation(experiment(StopTime = 1.01));
       end R134a2;
       annotation();
     end R134a;
 
-    package SolveOneNonlinearEquation
+    package SolveOneNonlinearEquation 
       "示范如何求解一个未知数的非线性方程"
       extends Modelica.Icons.ExamplesPackage;
 
@@ -2293,7 +2293,7 @@ Modelica 工具将有足够的信息生成与传统（耦合）定义一样高�
         x_zero = Modelica.Math.Nonlinear.solveOneNonlinearEquation(
           function f_nonlinear(A = A, w = w, s = -y_zero), x_min, x_max);
 
-        print("x_zero = " + String(x_zero) + ", y_zero = " + String(y_zero) +
+        print("x_zero = " + String(x_zero) + ", y_zero = " + String(y_zero) + 
           ", A*sin(w*x_zero) = " + String(A * Modelica.Math.sin(w * x_zero)));
         annotation(experiment(StopTime = 0), Documentation(info = "<html>
 <p>
@@ -2312,17 +2312,17 @@ y = A*sin(w*x); -> 给定y，确定x
 </html>"));
       end Inverse_sine;
 
-      model Inverse_sh_T
+      model Inverse_sh_T 
         "已知NASA理想气体的h或s,根据h = h_T(T),s = s_T(T)求T"
         extends Modelica.Icons.Example;
 
-        replaceable package Medium = Modelica.Media.Air.DryAirNasa constrainedby Modelica.Media.IdealGases.Common.SingleGasNasa
+        replaceable package Medium = Modelica.Media.Air.DryAirNasa constrainedby Modelica.Media.IdealGases.Common.SingleGasNasa 
           "介质模型" 
           annotation(choicesAllMatching = true);
 
-        parameter SI.Temperature T_min = 300
+        parameter SI.Temperature T_min = 300 
           "温度从T_min(time=0)线性变化增加到T_max(time=1)";
-        parameter SI.Temperature T_max = 500
+        parameter SI.Temperature T_max = 500 
           "温度从T_min(time=0)线性变化增加到T_max(time=1)";
         parameter SI.Pressure p = 1.0e5 "压力";
         final parameter SI.SpecificEnthalpy h_min = Medium.specificEnthalpy(
@@ -2333,11 +2333,11 @@ y = A*sin(w*x); -> 给定y，确定x
           Medium.setState_pT(p, T_min)) "T_min时的比熵";
         final parameter SI.SpecificEntropy s_max = Medium.specificEntropy(
           Medium.setState_pT(p, T_max)) "T_max时的比熵";
-        SI.SpecificEnthalpy h1(start = h_min, fixed = true)
+        SI.SpecificEnthalpy h1(start = h_min, fixed = true) 
           "预定义比焓";
-        SI.SpecificEnthalpy h2
+        SI.SpecificEnthalpy h2 
           "根据Th计算的比焓(= h1 required)";
-        SI.SpecificEntropy s1(start = s_min, fixed = true)
+        SI.SpecificEntropy s1(start = s_min, fixed = true) 
           "预定义的比熵";
         SI.SpecificEntropy s2 "根据Ts计算的比熵(= s1 required)";
         SI.Temperature Th "根据h1计算的温度";
@@ -2376,33 +2376,33 @@ y = A*sin(w*x); -> 给定y，确定x
 </html>"));
       end Inverse_sh_T;
 
-      model InverseIncompressible_sh_T
+      model InverseIncompressible_sh_T 
         "不可压缩介质的逆运算"
         extends Modelica.Icons.Example;
 
-        replaceable package Medium =
+        replaceable package Medium = 
           Modelica.Media.Incompressible.Examples.Glycol47 "介质模型" 
           annotation(choicesAllMatching = true);
 
-        parameter SI.Temperature T_min = Medium.T_min
+        parameter SI.Temperature T_min = Medium.T_min 
           "温度从T_min(time=0)线性变化增加到T_max(time=1)";
-        parameter SI.Temperature T_max = Medium.T_max
+        parameter SI.Temperature T_max = Medium.T_max 
           "温度从T_min(time=0)线性变化增加到T_max(time=1)";
         parameter SI.Pressure p = 1.0e5 "压力";
-        final parameter SI.SpecificEnthalpy h_min = Medium.h_T(Medium.T_min)
+        final parameter SI.SpecificEnthalpy h_min = Medium.h_T(Medium.T_min) 
           "T_min时的比焓";
-        final parameter SI.SpecificEnthalpy h_max = Medium.h_T(Medium.T_max)
+        final parameter SI.SpecificEnthalpy h_max = Medium.h_T(Medium.T_max) 
           "T_max时的比焓";
         final parameter SI.SpecificEntropy s_min = Medium.specificEntropy(
           Medium.setState_pT(p, T_min)) "T_min时的比熵";
         final parameter SI.SpecificEntropy s_max = Medium.specificEntropy(
           Medium.setState_pT(p, T_max)) "T_max时比熵";
 
-        SI.SpecificEnthalpy h1(start = h_min, fixed = true)
+        SI.SpecificEnthalpy h1(start = h_min, fixed = true) 
           "预定义比焓";
-        SI.SpecificEnthalpy h2
+        SI.SpecificEnthalpy h2 
           "根据Th计算的比焓(= h1 required)";
-        SI.SpecificEntropy s1(start = s_min, fixed = true)
+        SI.SpecificEntropy s1(start = s_min, fixed = true) 
           "预定义比熵";
         SI.SpecificEntropy s2 "根据Ts计算的比熵(= s1 required)";
         SI.Temperature Th "根据h1计算的温度";
@@ -2441,33 +2441,33 @@ y = A*sin(w*x); -> 给定y，确定x
 </html>"));
       end InverseIncompressible_sh_T;
 
-      model Inverse_sh_TX
+      model Inverse_sh_TX 
         "已知NASA理想气体的h,根据h = h_TX(TX)求T"
         extends Modelica.Icons.Example;
 
-        replaceable package Medium =
+        replaceable package Medium = 
           Modelica.Media.IdealGases.MixtureGases.FlueGasLambdaOnePlus 
-          constrainedby Modelica.Media.IdealGases.Common.MixtureGasNasa
+          constrainedby Modelica.Media.IdealGases.Common.MixtureGasNasa 
           "介质模型" annotation(choicesAllMatching = true);
 
-        parameter SI.Temperature T_min = 300
+        parameter SI.Temperature T_min = 300 
           "温度从T_min(time=0)线性变化增加到T_max(time=1)";
-        parameter SI.Temperature T_max = 500
+        parameter SI.Temperature T_max = 500 
           "温度从T_min(time=0)线性变化增加到T_max(time=1)";
         parameter SI.Pressure p = 1.0e5 "压力";
-        final parameter SI.SpecificEnthalpy h_min = Medium.h_TX(T_min, X)
+        final parameter SI.SpecificEnthalpy h_min = Medium.h_TX(T_min, X) 
           "T_min时的比焓";
-        final parameter SI.SpecificEnthalpy h_max = Medium.h_TX(T_max, X)
+        final parameter SI.SpecificEnthalpy h_max = Medium.h_TX(T_max, X) 
           "T_max时的比焓";
         final parameter SI.SpecificEntropy s_min = Medium.specificEntropy(
           Medium.setState_pTX(p, T_min, Medium.reference_X)) "T_min时的比熵";
         final parameter SI.SpecificEntropy s_max = Medium.specificEntropy(
           Medium.setState_pTX(p, T_max, Medium.reference_X)) "T_max时的比熵";
-        SI.SpecificEnthalpy h1(start = h_min, fixed = true)
+        SI.SpecificEnthalpy h1(start = h_min, fixed = true) 
           "预定义比焓";
-        SI.SpecificEnthalpy h2
+        SI.SpecificEnthalpy h2 
           "根据Th计算的比焓(= h1 required)";
-        SI.SpecificEntropy s1(start = s_min, fixed = true)
+        SI.SpecificEntropy s1(start = s_min, fixed = true) 
           "预定义比熵";
         SI.SpecificEntropy s2 "根据Ts计算的比熵(= s1 required)";
         SI.Temperature Th "根据h1计算的温度";
@@ -2514,33 +2514,33 @@ y = A*sin(w*x); -> 给定y，确定x
 </html>"));
     end SolveOneNonlinearEquation;
 
-    package Utilities
+    package Utilities 
       "介质模型测例中所需的函数,接口和模型"
 
       extends Modelica.Icons.UtilitiesPackage;
 
-      connector FluidPort
+      connector FluidPort 
         "在管网中的准一维流动接口(不可压缩或可压缩,单相或多相,单组分或多组分)"
-        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium 
           "介质模型" annotation(choicesAllMatching = true);
 
         Medium.AbsolutePressure p "接口处压力";
-        flow Medium.MassFlowRate m_flow
+        flow Medium.MassFlowRate m_flow 
           "接口处进入组件的质量流量";
 
-        Medium.SpecificEnthalpy h
+        Medium.SpecificEnthalpy h 
           "接口处混合比焓";
-        flow Medium.EnthalpyFlowRate H_flow
+        flow Medium.EnthalpyFlowRate H_flow 
           "进入组件的焓流(if m_flow > 0, H_flow = m_flow*h)";
 
-        Medium.MassFraction Xi[Medium.nXi]
+        Medium.MassFraction Xi[Medium.nXi] 
           "接口处混合物各组分质量分数 m_i/m";
-        flow Medium.MassFlowRate mXi_flow[Medium.nXi]
+        flow Medium.MassFlowRate mXi_flow[Medium.nXi] 
           "接口处进入组件的混合物各组分质量流量(if m_flow > 0, mX_flow = m_flow*X)";
 
-        Medium.ExtraProperty C[Medium.nC]
+        Medium.ExtraProperty C[Medium.nC] 
           "接口处流体性质 c_i/m";
-        flow Medium.ExtraPropertyFlowRate mC_flow[Medium.nC]
+        flow Medium.ExtraPropertyFlowRate mC_flow[Medium.nC] 
           "接口处进入组件的辅助属性的流速(if m_flow > 0, mC_flow = m_flow*C)";
 
         annotation(Documentation(info = "<html>
@@ -2551,27 +2551,27 @@ y = A*sin(w*x); -> 给定y，确定x
       connector FluidPort_a "实心图标的流体接口"
         extends FluidPort;
         annotation(
-          Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
+          Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
           {100, 100}}), graphics = {Ellipse(
-          extent = {{-100, 100}, {100, -100}},
-          lineColor = {0, 127, 255},
-          fillColor = {0, 127, 255},
+          extent = {{-100, 100}, {100, -100}}, 
+          lineColor = {0, 127, 255}, 
+          fillColor = {0, 127, 255}, 
           fillPattern = FillPattern.Solid), Ellipse(
-          extent = {{-100, 100}, {100, -100}},
-          fillColor = {0, 127, 255},
+          extent = {{-100, 100}, {100, -100}}, 
+          fillColor = {0, 127, 255}, 
           fillPattern = FillPattern.Solid), Text(
-          extent = {{-88, 206}, {112, 112}},
-          textString = "%name",
-          textColor = {0, 0, 255})}),
+          extent = {{-88, 206}, {112, 112}}, 
+          textString = "%name", 
+          textColor = {0, 0, 255})}), 
           Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
           100, 100}}), graphics = {Ellipse(
-          extent = {{-100, 100}, {100, -100}},
-          lineColor = {0, 127, 255},
-          fillColor = {0, 127, 255},
+          extent = {{-100, 100}, {100, -100}}, 
+          lineColor = {0, 127, 255}, 
+          fillColor = {0, 127, 255}, 
           fillPattern = FillPattern.Solid), Ellipse(
-          extent = {{-100, 100}, {100, -100}},
-          fillColor = {0, 127, 255},
-          fillPattern = FillPattern.Solid)}),
+          extent = {{-100, 100}, {100, -100}}, 
+          fillColor = {0, 127, 255}, 
+          fillPattern = FillPattern.Solid)}), 
           Documentation(info = "<html>Modelica.Media.Examples.Tests.Components.FluidPort_a
 </html>"));
       end FluidPort_a;
@@ -2579,70 +2579,70 @@ y = A*sin(w*x); -> 给定y，确定x
       connector FluidPort_b "空心图标的流体接口"
         extends FluidPort;
         annotation(
-          Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
+          Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
           {100, 100}}), graphics = {Ellipse(
-          extent = {{-100, 100}, {100, -100}},
-          lineColor = {0, 127, 255},
-          fillColor = {0, 127, 255},
+          extent = {{-100, 100}, {100, -100}}, 
+          lineColor = {0, 127, 255}, 
+          fillColor = {0, 127, 255}, 
           fillPattern = FillPattern.Solid), Ellipse(
-          extent = {{-100, 100}, {100, -100}},
-          fillColor = {0, 127, 255},
+          extent = {{-100, 100}, {100, -100}}, 
+          fillColor = {0, 127, 255}, 
           fillPattern = FillPattern.Solid), Ellipse(
-          extent = {{-80, 80}, {80, -80}},
-          lineColor = {0, 127, 255},
-          fillColor = {255, 255, 255},
+          extent = {{-80, 80}, {80, -80}}, 
+          lineColor = {0, 127, 255}, 
+          fillColor = {255, 255, 255}, 
           fillPattern = FillPattern.Solid), Text(
-          extent = {{-88, 192}, {112, 98}},
-          textString = "%name",
-          textColor = {0, 0, 255})}),
+          extent = {{-88, 192}, {112, 98}}, 
+          textString = "%name", 
+          textColor = {0, 0, 255})}), 
           Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
           100, 100}}), graphics = {Ellipse(
-          extent = {{-100, 100}, {100, -100}},
-          lineColor = {0, 127, 255},
-          fillColor = {0, 127, 255},
+          extent = {{-100, 100}, {100, -100}}, 
+          lineColor = {0, 127, 255}, 
+          fillColor = {0, 127, 255}, 
           fillPattern = FillPattern.Solid), Ellipse(
-          extent = {{-100, 100}, {100, -100}},
-          fillColor = {0, 127, 255},
+          extent = {{-100, 100}, {100, -100}}, 
+          fillColor = {0, 127, 255}, 
           fillPattern = FillPattern.Solid), Ellipse(
-          extent = {{-80, 80}, {80, -80}},
-          lineColor = {0, 127, 255},
-          fillColor = {255, 255, 255},
-          fillPattern = FillPattern.Solid)}),
+          extent = {{-80, 80}, {80, -80}}, 
+          lineColor = {0, 127, 255}, 
+          fillColor = {255, 255, 255}, 
+          fillPattern = FillPattern.Solid)}), 
           Documentation(info = "<html>
 
 </html>"));
       end FluidPort_b;
 
-      model PortVolume
+      model PortVolume 
         "有限体积方法的单接口定容容积"
-        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium 
           "介质模型" annotation(choicesAllMatching = true);
 
         parameter SI.Volume V = 1e-6 "容积接口的固定体积";
 
         parameter Boolean use_p_start = true "选择p_start或d_start" 
-          annotation(Evaluate = true, Dialog(group =
+          annotation(Evaluate = true, Dialog(group = 
           "初始压力或初始密度"));
         parameter Medium.AbsolutePressure p_start = 101325 "初始压力" 
-          annotation(Dialog(group = "初始压力或初始密度",
+          annotation(Dialog(group = "初始压力或初始密度", 
           enable = use_p_start));
         parameter Medium.Density d_start = 1 "初始密度" annotation(Dialog(
           group = "初始压力或初始密度", enable = not 
           use_p_start));
         parameter Boolean use_T_start = true "选择T_start或h_start" 
-          annotation(Evaluate = true, Dialog(group =
+          annotation(Evaluate = true, Dialog(group = 
           "初始温度或初始比焓"));
-        parameter Medium.Temperature T_start =
+        parameter Medium.Temperature T_start = 
           Modelica.Units.Conversions.from_degC(20) "初始温度" 
-          annotation(Dialog(group =
-          "初始温度或初始比焓", enable =
+          annotation(Dialog(group = 
+          "初始温度或初始比焓", enable = 
           use_T_start));
-        parameter Medium.SpecificEnthalpy h_start = 1.e4
-          "初始比焓" annotation(Dialog(group =
+        parameter Medium.SpecificEnthalpy h_start = 1.e4 
+          "初始比焓" annotation(Dialog(group = 
           "初始温度或初始比焓", enable = not 
           use_T_start));
-        parameter Medium.MassFraction X_start[Medium.nX]
-          "初始质量分数 m_i/m" annotation(Dialog(group =
+        parameter Medium.MassFraction X_start[Medium.nX] 
+          "初始质量分数 m_i/m" annotation(Dialog(group = 
           "仅用于多组分流动", enable = Medium.nX > 0));
 
         FluidPort_a port(redeclare package Medium = Medium) annotation(
@@ -2650,7 +2650,7 @@ y = A*sin(w*x); -> 给定y，确定x
         Medium.BaseProperties medium(preferredMediumStates = true);
         SI.Energy U "容积的内能";
         SI.Mass m "容积的质量";
-        SI.Mass mXi[Medium.nXi]
+        SI.Mass mXi[Medium.nXi] 
           "容积接口的独立物质质量";
 
       initial equation
@@ -2684,42 +2684,42 @@ y = A*sin(w*x); -> 给定y，确定x
         der(m) = port.m_flow;
         der(mXi) = port.mXi_flow;
         der(U) = port.H_flow;
-        annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
+        annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
           -100}, {100, 100}}), graphics = {Ellipse(
-          extent = {{-100, 100}, {100, -100}},
-          fillPattern = FillPattern.Sphere,
+          extent = {{-100, 100}, {100, -100}}, 
+          fillPattern = FillPattern.Sphere, 
           fillColor = {170, 213, 255}), Text(
-          extent = {{-150, 150}, {150, 110}},
-          textString = "%name",
+          extent = {{-150, 150}, {150, 110}}, 
+          textString = "%name", 
           textColor = {0, 0, 255}), Text(
-          extent = {{-150, -110}, {150, -150}},
+          extent = {{-150, -110}, {150, -150}}, 
           textString = "V=%V")}), Documentation(info = "<html><p>
 该组件为<strong>固定大小的容积</strong>建模，该容积与所连接的<strong>流体接口</strong>相关联。这意味着容积内的所有介质属性都与接口介质属性相同。特别是，体积内的比焓（= medium.h）始终与接口内的比焓（port.h = medium.h）相同。通常，在根据有限体积法将部件离散化为内部接口的体积（仅存储能量和质量）和内部接口之间的传输元素（仅传输能量、质量和动量，传输过程中不存储这些量）时，会使用该模型。
 </p>
 </html>"));
       end PortVolume;
 
-      model FixedMassFlowRate
+      model FixedMassFlowRate 
         "理想泵,在固定温度和质量分数下,从一个大储液池产生恒定的质量流量"
-        parameter Medium.MassFlowRate m_flow
+        parameter Medium.MassFlowRate m_flow 
           "从无限大储液池到流体接口的固定质量流量";
 
         parameter Boolean use_T_ambient = true "选择T_ambient或h_ambient" 
-          annotation(Evaluate = true, Dialog(group =
+          annotation(Evaluate = true, Dialog(group = 
           "环境温度或环境比焓"));
-        parameter Medium.Temperature T_ambient =
+        parameter Medium.Temperature T_ambient = 
           Modelica.Units.Conversions.from_degC(20) "环境温度" 
-          annotation(Dialog(group =
-          "环境温度或环境比焓", enable =
+          annotation(Dialog(group = 
+          "环境温度或环境比焓", enable = 
           use_T_ambient));
-        parameter Medium.SpecificEnthalpy h_ambient = 1.e4
-          "环境比焓" annotation(Dialog(group =
+        parameter Medium.SpecificEnthalpy h_ambient = 1.e4 
+          "环境比焓" annotation(Dialog(group = 
           "环境温度或环境比焓", enable = not 
           use_T_ambient));
-        parameter Medium.MassFraction X_ambient[Medium.nX]
+        parameter Medium.MassFraction X_ambient[Medium.nX] 
           "储液池的环境质量分数 m_i/m";
 
-        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium 
           "介质模型" annotation(choicesAllMatching = true);
 
         Medium.BaseProperties medium "源中的介质";
@@ -2736,74 +2736,74 @@ y = A*sin(w*x); -> 给定y，确定x
         medium.p = port.p;
         port.m_flow = -m_flow;
         port.mXi_flow = semiLinear(
-          port.m_flow,
-          port.Xi,
+          port.m_flow, 
+          port.Xi, 
           medium.Xi);
         port.H_flow = semiLinear(
-          port.m_flow,
-          port.h,
+          port.m_flow, 
+          port.h, 
           medium.h);
         annotation(Icon(coordinateSystem(
-          preserveAspectRatio = true,
+          preserveAspectRatio = true, 
           extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(
-          extent = {{20, 60}, {100, -60}},
-          fillPattern = FillPattern.HorizontalCylinder,
+          extent = {{20, 60}, {100, -60}}, 
+          fillPattern = FillPattern.HorizontalCylinder, 
           fillColor = {192, 192, 192}), Rectangle(
-          extent = {{38, 40}, {100, -40}},
-          fillPattern = FillPattern.HorizontalCylinder,
+          extent = {{38, 40}, {100, -40}}, 
+          fillPattern = FillPattern.HorizontalCylinder, 
           fillColor = {0, 127, 255}), Ellipse(
-          extent = {{-100, 80}, {60, -80}},
-          fillColor = {255, 255, 255},
-          fillPattern = FillPattern.Solid,
+          extent = {{-100, 80}, {60, -80}}, 
+          fillColor = {255, 255, 255}, 
+          fillPattern = FillPattern.Solid, 
           lineColor = {0, 0, 255}), Polygon(
-          points = {{-60, 70}, {60, 0}, {-60, -68}, {-60, 70}},
-          lineColor = {0, 0, 255},
-          fillColor = {0, 0, 255},
+          points = {{-60, 70}, {60, 0}, {-60, -68}, {-60, 70}}, 
+          lineColor = {0, 0, 255}, 
+          fillColor = {0, 0, 255}, 
           fillPattern = FillPattern.Solid), Text(
-          extent = {{-54, 32}, {16, -30}},
-          textColor = {255, 0, 0},
+          extent = {{-54, 32}, {16, -30}}, 
+          textColor = {255, 0, 0}, 
           textString = "m"), Text(
-          extent = {{-150, 150}, {150, 110}},
-          textString = "%name",
+          extent = {{-150, 150}, {150, 110}}, 
+          textString = "%name", 
           textColor = {0, 0, 255}), Text(
-          extent = {{-150, -110}, {150, -150}},
+          extent = {{-150, -110}, {150, -150}}, 
           textString = "%m_flow"), Ellipse(
-          extent = {{-26, 30}, {-18, 22}},
-          lineColor = {255, 0, 0},
-          fillColor = {255, 0, 0},
+          extent = {{-26, 30}, {-18, 22}}, 
+          lineColor = {255, 0, 0}, 
+          fillColor = {255, 0, 0}, 
           fillPattern = FillPattern.Solid)}), Documentation(info = "<html>
 
 </html>"));
       end FixedMassFlowRate;
 
-      model FixedAmbient
+      model FixedAmbient 
         "环境压力、温度和质量分数源"
-        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium 
           "介质模型" annotation(choicesAllMatching = true);
 
         parameter Boolean use_p_ambient = true "选择p_ambient或d_ambient" 
-          annotation(Evaluate = true, Dialog(group =
+          annotation(Evaluate = true, Dialog(group = 
           "环境压力或环境密度"));
         parameter Medium.AbsolutePressure p_ambient = 101325 "环境压力" 
-          annotation(Dialog(group = "环境压力或环境密度",
+          annotation(Dialog(group = "环境压力或环境密度", 
           enable = use_p_ambient));
         parameter Medium.Density d_ambient = 1 "环境密度" annotation(
           Dialog(group = "环境压力或环境密度", enable = not 
           use_p_ambient));
         parameter Boolean use_T_ambient = true "选择T_ambient或h_ambient" 
-          annotation(Evaluate = true, Dialog(group =
+          annotation(Evaluate = true, Dialog(group = 
           "环境温度或环境比焓"));
-        parameter Medium.Temperature T_ambient =
+        parameter Medium.Temperature T_ambient = 
           Modelica.Units.Conversions.from_degC(20) "环境温度" 
-          annotation(Dialog(group =
-          "环境温度或环境比焓", enable =
+          annotation(Dialog(group = 
+          "环境温度或环境比焓", enable = 
           use_T_ambient));
-        parameter Medium.SpecificEnthalpy h_ambient = 1.e4
-          "环境比焓" annotation(Dialog(group =
+        parameter Medium.SpecificEnthalpy h_ambient = 1.e4 
+          "环境比焓" annotation(Dialog(group = 
           "环境温度或环境比焓", enable = not 
           use_T_ambient));
-        parameter Medium.MassFraction X_ambient[Medium.nX]
-          "环境质量分数 m_i/m" annotation(Dialog(group =
+        parameter Medium.MassFraction X_ambient[Medium.nX] 
+          "环境质量分数 m_i/m" annotation(Dialog(group = 
           "仅用于多组分流动", enable = Medium.nX > 0));
 
         Medium.BaseProperties medium "源中的介质";
@@ -2827,21 +2827,21 @@ y = A*sin(w*x); -> 给定y，确定x
 
         port.p = medium.p;
         port.H_flow = semiLinear(
-          port.m_flow,
-          port.h,
+          port.m_flow, 
+          port.h, 
           medium.h);
         port.mXi_flow = semiLinear(
-          port.m_flow,
-          port.Xi,
+          port.m_flow, 
+          port.Xi, 
           medium.Xi);
         annotation(Icon(coordinateSystem(
-          preserveAspectRatio = true,
+          preserveAspectRatio = true, 
           extent = {{-100, -100}, {100, 100}}), graphics = {Ellipse(
-          extent = {{-100, 100}, {100, -100}},
-          fillPattern = FillPattern.Sphere,
+          extent = {{-100, 100}, {100, -100}}, 
+          fillPattern = FillPattern.Sphere, 
           fillColor = {0, 127, 255}), Text(
-          extent = {{-150, 150}, {150, 110}},
-          textString = "%name",
+          extent = {{-150, 150}, {150, 110}}, 
+          textString = "%name", 
           textColor = {0, 0, 255})}), Documentation(info = "<html><p>
 模型 <strong>FixedAmbient_pt</strong> 定义了环境条件的常数值:
 </p>
@@ -2858,12 +2858,12 @@ y = A*sin(w*x); -> 给定y，确定x
       end FixedAmbient;
 
       model ShortPipe "简单的管道压力损失"
-        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium 
           "介质模型" annotation(choicesAllMatching = true);
 
-        parameter Medium.AbsolutePressure dp_nominal(min = 1e-10)
+        parameter Medium.AbsolutePressure dp_nominal(min = 1e-10) 
           "额定压降";
-        parameter Medium.MassFlowRate m_flow_nominal(min = 1e-10)
+        parameter Medium.MassFlowRate m_flow_nominal(min = 1e-10) 
           "额定压降下的额定质量流量";
 
         FluidPort_a port_a(redeclare package Medium = Medium) annotation(
@@ -2874,18 +2874,18 @@ y = A*sin(w*x); -> 给定y，确定x
         //   "Medium properties in port_a";
         // Medium.BaseProperties medium_b(p=port_b.p, h=port_b.h, Xi=port_b.Xi)
         //   "Medium properties in port_b";
-        Medium.MassFlowRate m_flow
+        Medium.MassFlowRate m_flow 
           "从port_a到port_b的质量流量 (m_flow>0为设计流向)";
         SI.Pressure dp "从port_a到port_b的压降";
       equation
         /* 处理反向和零流量 */
         port_a.H_flow = semiLinear(
-          port_a.m_flow,
-          port_a.h,
+          port_a.m_flow, 
+          port_a.h, 
           port_b.h);
         port_a.mXi_flow = semiLinear(
-          port_a.m_flow,
-          port_a.Xi,
+          port_a.m_flow, 
+          port_a.Xi, 
           port_b.Xi);
 
         /* 能量,质量和物质质量平衡 */
@@ -2899,18 +2899,18 @@ y = A*sin(w*x); -> 给定y，确定x
         // 压降
         dp = port_a.p - port_b.p;
         m_flow = (m_flow_nominal / dp_nominal) * dp;
-        annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
+        annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
           -100}, {100, 100}}), graphics = {Rectangle(
-          extent = {{-100, 60}, {100, -60}},
-          fillPattern = FillPattern.HorizontalCylinder,
+          extent = {{-100, 60}, {100, -60}}, 
+          fillPattern = FillPattern.HorizontalCylinder, 
           fillColor = {192, 192, 192}), Rectangle(
-          extent = {{-100, 34}, {100, -36}},
-          fillPattern = FillPattern.HorizontalCylinder,
+          extent = {{-100, 34}, {100, -36}}, 
+          fillPattern = FillPattern.HorizontalCylinder, 
           fillColor = {0, 127, 255}), Text(
-          extent = {{-150, 110}, {150, 70}},
+          extent = {{-150, 110}, {150, 70}}, 
           textString = "%name", textColor = {0, 0, 255}), Text(
-          extent = {{-150, -70}, {150, -110}},
-          textString = "k=%m_flow_nominal/%dp_nominal")}),
+          extent = {{-150, -70}, {150, -110}}, 
+          textString = "k=%m_flow_nominal/%dp_nominal")}), 
           Documentation(info = "<html>
 <p>
 模型 <strong>ShortPipe</strong> 定义了一个简单的管道模型，其中压力损失是由摩擦引起的。假设管道中没有储存质量或能量。
@@ -2920,15 +2920,15 @@ y = A*sin(w*x); -> 给定y，确定x
 
       partial model PartialTestModel "介质模型示例的基类模型"
 
-        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium 
           "介质模型" annotation(choicesAllMatching = true);
-        parameter SI.AbsolutePressure p_start = Medium.p_default
+        parameter SI.AbsolutePressure p_start = Medium.p_default 
           "压力初值";
-        parameter SI.Temperature T_start = Medium.T_default
+        parameter SI.Temperature T_start = Medium.T_default 
           "温度初值";
-        parameter SI.SpecificEnthalpy h_start = Medium.h_default
+        parameter SI.SpecificEnthalpy h_start = Medium.h_default 
           "比焓初值";
-        parameter Real X_start[Medium.nX] = Medium.X_default
+        parameter Real X_start[Medium.nX] = Medium.X_default 
           "质量分数初值";
 
         /*
@@ -2939,30 +2939,30 @@ y = A*sin(w*x); -> 给定y，确定x
         "Initial value of mass fractions";
         */
         PortVolume volume(
-        redeclare package Medium = Medium,
-          p_start = p_start,
-          T_start = T_start,
-          h_start = h_start,
-          X_start = X_start,
+        redeclare package Medium = Medium, 
+          p_start = p_start, 
+          T_start = T_start, 
+          h_start = h_start, 
+          X_start = X_start, 
           V = 0.1) annotation(Placement(transformation(extent = {{-40, 0}, {-20, 20}})));
         FixedMassFlowRate fixedMassFlowRate(
-        redeclare package Medium = Medium,
-          T_ambient = 1.2 * T_start,
-          h_ambient = 1.2 * h_start,
-          m_flow = 1,
+        redeclare package Medium = Medium, 
+          T_ambient = 1.2 * T_start, 
+          h_ambient = 1.2 * h_start, 
+          m_flow = 1, 
           X_ambient = 0.5 * X_start) annotation(Placement(transformation(extent = {{
           -80, 0}, {-60, 20}})));
         FixedAmbient ambient(
-        redeclare package Medium = Medium,
-          T_ambient = T_start,
-          h_ambient = h_start,
-          X_ambient = X_start,
-          p_ambient = p_start) annotation(Placement(transformation(extent = {{60, 0},
+        redeclare package Medium = Medium, 
+          T_ambient = T_start, 
+          h_ambient = h_start, 
+          X_ambient = X_start, 
+          p_ambient = p_start) annotation(Placement(transformation(extent = {{60, 0}, 
           {40, 20}})));
         ShortPipe shortPipe(
-        redeclare package Medium = Medium,
-          m_flow_nominal = 1,
-          dp_nominal = 0.1e5) annotation(Placement(transformation(extent = {{0, 0},
+        redeclare package Medium = Medium, 
+          m_flow_nominal = 1, 
+          dp_nominal = 0.1e5) annotation(Placement(transformation(extent = {{0, 0}, 
           {20, 20}})));
       equation
         connect(fixedMassFlowRate.port, volume.port) 
@@ -2976,53 +2976,53 @@ y = A*sin(w*x); -> 给定y，确定x
 </html>"));
       end PartialTestModel;
 
-      partial model PartialTestModel2
+      partial model PartialTestModel2 
         "稍大点的介质示例模型基类"
-        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+        replaceable package Medium = Modelica.Media.Interfaces.PartialMedium 
           "介质模型" annotation(choicesAllMatching = true);
         parameter SI.AbsolutePressure p_start = 1.0e5 "压力初值";
         parameter SI.Temperature T_start = 300 "温度初值";
-        parameter SI.SpecificEnthalpy h_start = 1
+        parameter SI.SpecificEnthalpy h_start = 1 
           "比焓初值";
-        parameter Real X_start[Medium.nX] = Medium.reference_X
+        parameter Real X_start[Medium.nX] = Medium.reference_X 
           "质量分数初值";
         PortVolume volume(
-        redeclare package Medium = Medium,
-          p_start = p_start,
-          T_start = T_start,
-          h_start = h_start,
-          X_start = X_start,
+        redeclare package Medium = Medium, 
+          p_start = p_start, 
+          T_start = T_start, 
+          h_start = h_start, 
+          X_start = X_start, 
           V = 0.1) annotation(Placement(transformation(extent = {{-60, 0}, {-40, 20}})));
         FixedMassFlowRate fixedMassFlowRate(
-        redeclare package Medium = Medium,
-          T_ambient = 1.2 * T_start,
-          h_ambient = 1.2 * h_start,
-          m_flow = 1,
+        redeclare package Medium = Medium, 
+          T_ambient = 1.2 * T_start, 
+          h_ambient = 1.2 * h_start, 
+          m_flow = 1, 
           X_ambient = 0.5 * X_start) annotation(Placement(transformation(extent = {{
           -100, 0}, {-80, 20}})));
         FixedAmbient ambient(
-        redeclare package Medium = Medium,
-          T_ambient = T_start,
-          h_ambient = h_start,
-          X_ambient = X_start,
-          p_ambient = p_start) annotation(Placement(transformation(extent = {{92, 0},
+        redeclare package Medium = Medium, 
+          T_ambient = T_start, 
+          h_ambient = h_start, 
+          X_ambient = X_start, 
+          p_ambient = p_start) annotation(Placement(transformation(extent = {{92, 0}, 
           {72, 20}})));
         ShortPipe shortPipe(
-        redeclare package Medium = Medium,
-          m_flow_nominal = 1,
-          dp_nominal = 0.1e5) annotation(Placement(transformation(extent = {{-30, 0},
+        redeclare package Medium = Medium, 
+          m_flow_nominal = 1, 
+          dp_nominal = 0.1e5) annotation(Placement(transformation(extent = {{-30, 0}, 
           {-10, 20}})));
         PortVolume volume1(
-        redeclare package Medium = Medium,
-          p_start = p_start,
-          T_start = T_start,
-          h_start = h_start,
-          X_start = X_start,
+        redeclare package Medium = Medium, 
+          p_start = p_start, 
+          T_start = T_start, 
+          h_start = h_start, 
+          X_start = X_start, 
           V = 0.1) annotation(Placement(transformation(extent = {{0, 0}, {20, 20}})));
         ShortPipe shortPipe1(
-        redeclare package Medium = Medium,
-          m_flow_nominal = 1,
-          dp_nominal = 0.1e5) annotation(Placement(transformation(extent = {{36, 0},
+        redeclare package Medium = Medium, 
+          m_flow_nominal = 1, 
+          dp_nominal = 0.1e5) annotation(Placement(transformation(extent = {{36, 0}, 
           {56, 20}})));
       equation
         connect(fixedMassFlowRate.port, volume.port) 
@@ -3064,18 +3064,18 @@ BaseProperties 的每个实例都包含一条 \"状态 \"记录，它是所有�
       请注意，其他常数(如nX、nXi)将通过基类Interfaces.PartialMedium中给定的定义自动定义。
       */
       extends Modelica.Media.Interfaces.PartialMedium(
-        final mediumName = "NameOfMedium",
-        final substanceNames = {mediumName},
-        final singleState = false,
-        final reducedX = true,
-        final fixedX = true,
+        final mediumName = "NameOfMedium", 
+        final substanceNames = {mediumName}, 
+        final singleState = false, 
+        final reducedX = true, 
+        final fixedX = true, 
         Temperature(
-        min = 273,
-        max = 450,
+        min = 273, 
+        max = 450, 
         start = 323));
 
       // 此处设置介质常数
-      constant SpecificHeatCapacity cp_const = 123456
+      constant SpecificHeatCapacity cp_const = 123456 
         "恒压下的比焓常数";
 
       /* 矢量substanceNames是必需的，因为物质的数量是根据其大小确定的。
@@ -3104,7 +3104,7 @@ BaseProperties 的每个实例都包含一条 \"状态 \"记录，它是所有�
       不应在此重复。下面的代码片段用于具有p、T作为独立变量的单一物质介质。
       */
 
-      redeclare model extends BaseProperties(final standardOrderComponents = true)
+      redeclare model extends BaseProperties(final standardOrderComponents = true) 
         "介质的基础属性"
         annotation();
 
@@ -3123,7 +3123,7 @@ BaseProperties 的每个实例都包含一条 \"状态 \"记录，它是所有�
       并与PartialMedium中使用的类型定义一起定义。
       该记录通常包含两个变量“p、T、d、h”（例如，medium.T）。
       */
-      redeclare replaceable record ThermodynamicState
+      redeclare replaceable record ThermodynamicState 
         "定义热力状态"
         extends Modelica.Icons.Record;
         AbsolutePressure p "介质的绝对压力";
@@ -3141,7 +3141,7 @@ BaseProperties 的每个实例都包含一条 \"状态 \"记录，它是所有�
 </html>"));
       end dynamicViscosity;
 
-      redeclare function extends thermalConductivity
+      redeclare function extends thermalConductivity 
         "计算导热系数"
       algorithm
         lambda := 0;
@@ -3158,7 +3158,7 @@ BaseProperties 的每个实例都包含一条 \"状态 \"记录，它是所有�
 </html>"));
       end specificEntropy;
 
-      redeclare function extends specificHeatCapacityCp
+      redeclare function extends specificHeatCapacityCp 
         "计算定压比热"
       algorithm
         cp := 0;
@@ -3167,7 +3167,7 @@ BaseProperties 的每个实例都包含一条 \"状态 \"记录，它是所有�
 </html>"));
       end specificHeatCapacityCp;
 
-      redeclare function extends specificHeatCapacityCv
+      redeclare function extends specificHeatCapacityCv 
         "计算定容比热"
       algorithm
         cv := 0;
@@ -3202,7 +3202,7 @@ BaseProperties 的每个实例都包含一条 \"状态 \"记录，它是所有�
 </html>"));
     end TemplateMedium;
 
-    partial package PartialMedium
+    partial package PartialMedium 
       "介质物性基类(所有介质子库的基础库)"
       extends Modelica.Media.Interfaces.Types;
       extends Modelica.Icons.MaterialPropertiesPackage;
@@ -3211,88 +3211,88 @@ BaseProperties 的每个实例都包含一条 \"状态 \"记录，它是所有�
       constant Modelica.Media.Interfaces.Choices.IndependentVariables 
         ThermoStates "独立变量的枚举类型";
       constant String mediumName = "unusablePartialMedium" "介质名称";
-      constant String substanceNames[:] = {mediumName}
+      constant String substanceNames[:] = {mediumName} 
         "混合物组分的名称,单组分时设为substanceNames={mediumName}";
-      constant String extraPropertiesNames[:] = fill("", 0)
-        "额外输运性质的名称。如果未使用,设为extraPropertiesNames=fill(,0)";
-      constant Boolean singleState
-        "= true,u和d不是压力的函数";
-      constant Boolean reducedX = true
-        "= true,介质使用方程 sum(X) = 1.0;如果为单组分,则设置reducedX=true（详细信息请参阅文档）";
-      constant Boolean fixedX = false
-        "= true,介质使用方程 X = reference_X";
-      constant AbsolutePressure reference_p = 101325
+      constant String extraPropertiesNames[:] = fill("", 0) 
+        "额外传输特性的名称。若未使用,设置extraPropertiesNames=fill(,0)";
+      constant Boolean singleState 
+        "若参数u和d不依赖压力,则值为true";
+      constant Boolean reducedX = true 
+        "若介质包含组分分数之和等于1.0的方程，则值为true;若仅含一种物质,需设置reducedX=true（详细信息请参阅文档）";
+      constant Boolean fixedX = false 
+        "若介质包含组分分数X等于参考组分分数(reference_X)的方程，则值为true";
+      constant AbsolutePressure reference_p = 101325 
         "介质的参考压力: 默认为1个大气压";
-      constant Temperature reference_T = 298.15
+      constant Temperature reference_T = 298.15 
         "介质的参考温度: 默认为25℃";
-      constant MassFraction reference_X[nX] = fill(1 / nX, nX)
+      constant MassFraction reference_X[nX] = fill(1 / nX, nX) 
         "介质默认质量分数";
-      constant AbsolutePressure p_default = 101325
+      constant AbsolutePressure p_default = 101325 
         "介质默认压力 (用于初始化)";
-      constant Temperature T_default = Modelica.Units.Conversions.from_degC(20)
+      constant Temperature T_default = Modelica.Units.Conversions.from_degC(20) 
         "介质默认温度 (用于初始化)";
       constant SpecificEnthalpy h_default = specificEnthalpy_pTX(
-        p_default,
-        T_default,
-        X_default)
+        p_default, 
+        T_default, 
+        X_default) 
         "介质默认比焓 (用于初始化)";
-      constant MassFraction X_default[nX] = reference_X
+      constant MassFraction X_default[nX] = reference_X 
         "介质默认质量分数 (用于初始化)";
-      constant ExtraProperty C_default[nC] = fill(0, nC)
+      constant ExtraProperty C_default[nC] = fill(0, nC) 
         "介质默认微量物质 (用于初始化)";
 
       final constant Integer nS = size(substanceNames, 1) "物质数量";
       constant Integer nX = nS "质量分数数量";
-      constant Integer nXi = if fixedX then 0 else if reducedX then nS - 1 else nS
+      constant Integer nXi = if fixedX then 0 else if reducedX then nS - 1 else nS 
         "结构独立质量分数的数量(详细信息请参阅文档)";
 
-      final constant Integer nC = size(extraPropertiesNames, 1)
+      final constant Integer nC = size(extraPropertiesNames, 1) 
         "额外输运属性数量(超出标准质量平衡)";
-      constant Real C_nominal[nC](min = fill(Modelica.Constants.eps, nC)) = 1.0e-6 *
+      constant Real C_nominal[nC](min = fill(Modelica.Constants.eps, nC)) = 1.0e-6 * 
         ones(nC) "默认额外属性的额定值";
-      replaceable record FluidConstants =
-        Modelica.Media.Interfaces.Types.Basic.FluidConstants
+      replaceable record FluidConstants = 
+        Modelica.Media.Interfaces.Types.Basic.FluidConstants 
         "介质的临界,三相,分子和其他标准数据" annotation();
 
-      replaceable record ThermodynamicState
+      replaceable record ThermodynamicState 
         "可作为每个介质函数输入参数的最小变量集合"
         extends Modelica.Icons.Record;
         annotation();
       end ThermodynamicState;
 
-      replaceable partial model BaseProperties
+      replaceable partial model BaseProperties 
         "介质的基础物性(p, d, T, h, u, R_s, MM , X 和 Xi)"
         InputAbsolutePressure p "介质的绝对压力";
-        InputMassFraction[nXi] Xi(start = reference_X[1:nXi])
+        InputMassFraction[nXi] Xi(start = reference_X[1:nXi]) 
           "结构独立质量分数";
         InputSpecificEnthalpy h "介质的比焓";
         Density d "介质的密度";
         Temperature T "介质的温度";
-        MassFraction[nX] X(start = reference_X)
+        MassFraction[nX] X(start = reference_X) 
           "质量分数(=组分质量/总质量 m_i/m)";
         SpecificInternalEnergy u "介质的比内能";
         SpecificHeatCapacity R_s "气体常数(若适用混合物)";
         MolarMass MM "摩尔质量(混合物或单组分流体)";
-        ThermodynamicState state
+        ThermodynamicState state 
           "可选函数的热力学状态记录";
-        parameter Boolean preferredMediumStates = false
+        parameter Boolean preferredMediumStates = false 
           "= true,StateSelect.prefer将用于介质的独立物性变量" 
           annotation(Evaluate = true, Dialog(tab = "高级"));
-        parameter Boolean standardOrderComponents = true
+        parameter Boolean standardOrderComponents = true 
           "=true且reducedX=true,X的最后一个元素将由其他计算";
-        Modelica.Units.NonSI.Temperature_degC T_degC =
-          Modelica.Units.Conversions.to_degC(T)
+        Modelica.Units.NonSI.Temperature_degC T_degC = 
+          Modelica.Units.Conversions.to_degC(T) 
           "介质温度[degC]";
-        Modelica.Units.NonSI.Pressure_bar p_bar =
-          Modelica.Units.Conversions.to_bar(p)
+        Modelica.Units.NonSI.Pressure_bar p_bar = 
+          Modelica.Units.Conversions.to_bar(p) 
           "介质绝对压力[bar]";
 
         // 定义本地连接器,用于方程平衡检查
-        connector InputAbsolutePressure = input SI.AbsolutePressure
+        connector InputAbsolutePressure = input SI.AbsolutePressure 
           "压力作为输入的单个连接器" annotation();
-        connector InputSpecificEnthalpy = input SI.SpecificEnthalpy
+        connector InputSpecificEnthalpy = input SI.SpecificEnthalpy 
           "比焓作为输入的单个连接器" annotation();
-        connector InputMassFraction = input SI.MassFraction
+        connector InputMassFraction = input SI.MassFraction 
           "质量分数作为输入的单个连接器" annotation();
 
       equation
@@ -3306,24 +3306,24 @@ BaseProperties 的每个实例都包含一条 \"状态 \"记录，它是所有�
             X[nX] = 1 - sum(Xi);
           end if;
           for i in 1:nX loop
-            assert(X[i] >= -1.e-5 and X[i] <= 1 + 1.e-5, "物质的质量分数 X[" +
-              String(i) + "] = " + String(X[i]) +
-              substanceNames[i] + "\nof medium " + mediumName +
+            assert(X[i] >= -1.e-5 and X[i] <= 1 + 1.e-5, "物质的质量分数 X[" + 
+              String(i) + "] = " + String(X[i]) + 
+              substanceNames[i] + "\nof medium " + mediumName + 
               " 不在 0...1 的范围内");
           end for;
 
         end if;
 
-        assert(p >= 0.0, "介质压力 (= " + String(p) + " Pa) \"" +
+        assert(p >= 0.0, "介质压力 (= " + String(p) + " Pa) \"" + 
           mediumName + "\" 为负数\n(温度 = " + String(T) + " K)");
-        annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100,
+        annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, 
           -100}, {100, 100}}), graphics = {Rectangle(
-          extent = {{-100, 100}, {100, -100}},
-          fillColor = {255, 255, 255},
-          fillPattern = FillPattern.Solid,
+          extent = {{-100, 100}, {100, -100}}, 
+          fillColor = {255, 255, 255}, 
+          fillPattern = FillPattern.Solid, 
           lineColor = {0, 0, 255}), Text(
-          extent = {{-152, 164}, {152, 102}},
-          textString = "%name",
+          extent = {{-152, 164}, {152, 102}}, 
+          textString = "%name", 
           textColor = {0, 0, 255})}), Documentation(info = "<html>
 <p>
 模型<strong>BaseProperties</strong>是PartialMedium包中的一个模型，包含了每个介质模型都应支持的最少数量变量的声明。具体介质从模型<strong>BaseProperties</strong>继承，并提供基本属性的方程。
@@ -3368,10 +3368,10 @@ BaseProperties模型包含以下<strong>7+nXi个变量</strong>（nXi是PartialM
 请注意，这并不意味着附加方程应该是连接方程，也不意味着必须提供完全那些变量才能完成模型。
 有关更多信息，请参见<a href=\"modelica://Modelica.Media.UsersGuide\">Modelica.Media用户指南</a>，以及<a href=\"https://specification.modelica.org/v3.4/Ch4.html#balanced-models\">Modelica 3.4规范的第4.7节（平衡模型）</a>。
 </p>
-</html>"    ));
+</html>"        ));
       end BaseProperties;
 
-      replaceable partial function setState_pTX
+      replaceable partial function setState_pTX 
         "根据p,T和组分X或Xi计算热力状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -3381,7 +3381,7 @@ BaseProperties模型包含以下<strong>7+nXi个变量</strong>（nXi是PartialM
         annotation();
       end setState_pTX;
 
-      replaceable partial function setState_phX
+      replaceable partial function setState_phX 
         "根据p,h和组分X或Xi计算热力状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -3391,7 +3391,7 @@ BaseProperties模型包含以下<strong>7+nXi个变量</strong>（nXi是PartialM
         annotation();
       end setState_phX;
 
-      replaceable partial function setState_psX
+      replaceable partial function setState_psX 
         "根据p,s和组分X或Xi计算热力状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -3401,7 +3401,7 @@ BaseProperties模型包含以下<strong>7+nXi个变量</strong>（nXi是PartialM
         annotation();
       end setState_psX;
 
-      replaceable partial function setState_dTX
+      replaceable partial function setState_dTX 
         "根据p,d和组分X或Xi计算热力状态"
         extends Modelica.Icons.Function;
         input Density d "密度";
@@ -3411,15 +3411,15 @@ BaseProperties模型包含以下<strong>7+nXi个变量</strong>（nXi是PartialM
         annotation();
       end setState_dTX;
 
-      replaceable partial function setSmoothState
+      replaceable partial function setSmoothState 
         "返回热力学状态,使其平滑逼近：如果x>0,则为state_a,否则为state_b"
         extends Modelica.Icons.Function;
         input Real x "m_flow或dp";
         input ThermodynamicState state_a "x>0时的热力状态";
         input ThermodynamicState state_b "x<0时的热力状态";
-        input Real x_small(min = 0)
+        input Real x_small(min = 0) 
           "在区域-x_small < x < x_small内进行平滑过渡";
-        output ThermodynamicState state
+        output ThermodynamicState state 
           "平滑的热力学状态对于所有x(连续且可微)";
         annotation(Documentation(info = "<html>
 <p>
@@ -3476,7 +3476,7 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
 = 1
 </pre></blockquote>
 
-</html>"    ));
+</html>"        ));
       end setSmoothState;
 
       replaceable partial function dynamicViscosity "计算动力黏度"
@@ -3486,7 +3486,7 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
         annotation();
       end dynamicViscosity;
 
-      replaceable partial function thermalConductivity
+      replaceable partial function thermalConductivity 
         "计算导热系数"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -3500,7 +3500,7 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
         output PrandtlNumber Pr "普朗特数";
         annotation();
       algorithm
-        Pr := dynamicViscosity(state) * specificHeatCapacityCp(state) /
+        Pr := dynamicViscosity(state) * specificHeatCapacityCp(state) / 
           thermalConductivity(state);
       end prandtlNumber;
 
@@ -3532,7 +3532,7 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
         annotation();
       end specificEnthalpy;
 
-      replaceable partial function specificInternalEnergy
+      replaceable partial function specificInternalEnergy 
         "计算比内能"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -3547,7 +3547,7 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
         annotation();
       end specificEntropy;
 
-      replaceable partial function specificGibbsEnergy
+      replaceable partial function specificGibbsEnergy 
         "计算比吉布斯能"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -3555,7 +3555,7 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
         annotation();
       end specificGibbsEnergy;
 
-      replaceable partial function specificHelmholtzEnergy
+      replaceable partial function specificHelmholtzEnergy 
         "计算比亥姆霍兹能"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -3563,39 +3563,37 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
         annotation();
       end specificHelmholtzEnergy;
 
-      replaceable partial function specificHeatCapacityCp
+      replaceable partial function specificHeatCapacityCp 
         "计算定压比热"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
-        output SpecificHeatCapacity cp
+        output SpecificHeatCapacity cp 
           "定压比热";
         annotation();
       end specificHeatCapacityCp;
 
-      function heatCapacity_cp = specificHeatCapacityCp
-        "定压比热函数别名" annotation();
+      function heatCapacity_cp = specificHeatCapacityCp 
+        "定压比热函数别名";
 
-      replaceable partial function specificHeatCapacityCv
+      replaceable partial function specificHeatCapacityCv 
         "计算定容比热"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
-        output SpecificHeatCapacity cv
+        output SpecificHeatCapacity cv 
           "定容比热";
-        annotation();
       end specificHeatCapacityCv;
 
-      function heatCapacity_cv = specificHeatCapacityCv
-        "定容比热函数别名" annotation();
+      function heatCapacity_cv = specificHeatCapacityCv 
+        "定压比热函数别名";
 
-      replaceable partial function isentropicExponent
+      replaceable partial function isentropicExponent 
         "计算等熵指数"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
         output IsentropicExponent gamma "等熵指数";
-        annotation();
       end isentropicExponent;
 
-      replaceable partial function isentropicEnthalpy
+      replaceable partial function isentropicEnthalpy 
         "计算等熵焓降"
         extends Modelica.Icons.Function;
         input AbsolutePressure p_downstream "下游压力";
@@ -3610,7 +3608,7 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
 <li> 在假设从 refState 到 h_is 的状态转换是在特定熵变化 ds = 0 的条件下进行的，并且状态 h_is 的压力为 p_downstream，假定上游和下游的组成 X 是相同的。</li>
 </ol>
 
-</html>"    ));
+</html>"        ));
       end isentropicEnthalpy;
 
       replaceable partial function velocityOfSound "计算声速"
@@ -3620,7 +3618,7 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
         annotation();
       end velocityOfSound;
 
-      replaceable partial function isobaricExpansionCoefficient
+      replaceable partial function isobaricExpansionCoefficient 
         "计算等压膨胀系数"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -3629,13 +3627,13 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
 <blockquote><pre>
 beta is defined as  1/v * der(v,T), with v = 1/d, at constant pressure p.
 </pre></blockquote>
-</html>"    ));
+</html>"        ));
       end isobaricExpansionCoefficient;
 
-      function beta = isobaricExpansionCoefficient
+      function beta = isobaricExpansionCoefficient 
         "等压膨胀系数函数别名" annotation();
 
-      replaceable partial function isothermalCompressibility
+      replaceable partial function isothermalCompressibility 
         "计算等温压缩系数"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -3646,14 +3644,14 @@ beta is defined as  1/v * der(v,T), with v = 1/d, at constant pressure p.
 kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
 
 </pre></blockquote>
-</html>"    ));
+</html>"        ));
       end isothermalCompressibility;
 
-      function kappa = isothermalCompressibility
+      function kappa = isothermalCompressibility 
         "等温压缩系数别名" annotation();
 
       // explicit derivative functions for finite element models
-      replaceable partial function density_derp_h
+      replaceable partial function density_derp_h 
         "计算定比焓下,密度关于压力的偏导数"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -3661,16 +3659,16 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       end density_derp_h;
 
-      replaceable partial function density_derh_p
+      replaceable partial function density_derh_p 
         "计算定压下,密度关于比焓的偏导数"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
-        output DerDensityByEnthalpy ddhp
+        output DerDensityByEnthalpy ddhp 
           "密度关于比焓的偏导数";
         annotation();
       end density_derh_p;
 
-      replaceable partial function density_derp_T
+      replaceable partial function density_derp_T 
         "计算定温下,密度关于压力的偏导数"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -3678,16 +3676,16 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       end density_derp_T;
 
-      replaceable partial function density_derT_p
+      replaceable partial function density_derT_p 
         "计算定压下,密度关于温度的偏导数"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
-        output DerDensityByTemperature ddTp
+        output DerDensityByTemperature ddTp 
           "密度关于温度的偏导数";
         annotation();
       end density_derT_p;
 
-      replaceable partial function density_derX
+      replaceable partial function density_derX 
         "计算密度关于质量分数的偏导数"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -3695,7 +3693,7 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       end density_derX;
 
-      replaceable partial function molarMass
+      replaceable partial function molarMass 
         "计算介质摩尔质量"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -3703,7 +3701,7 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       end molarMass;
 
-      replaceable function specificEnthalpy_pTX
+      replaceable function specificEnthalpy_pTX 
         "根据p,T和X或Xi计算比焓"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -3712,16 +3710,16 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         output SpecificEnthalpy h "比焓";
       algorithm
         h := specificEnthalpy(setState_pTX(
-          p,
-          T,
+          p, 
+          T, 
           X));
         annotation(inverse(T = temperature_phX(
-          p,
-          h,
+          p, 
+          h, 
           X)));
       end specificEnthalpy_pTX;
 
-      replaceable function specificEntropy_pTX
+      replaceable function specificEntropy_pTX 
         "根据p,T和X或Xi计算比熵"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -3730,13 +3728,13 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         output SpecificEntropy s "比熵";
       algorithm
         s := specificEntropy(setState_pTX(
-          p,
-          T,
+          p, 
+          T, 
           X));
 
         annotation(inverse(T = temperature_psX(
-          p,
-          s,
+          p, 
+          s, 
           X)));
       end specificEntropy_pTX;
 
@@ -3749,12 +3747,12 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         d := density(setState_pTX(
-          p,
-          T,
+          p, 
+          T, 
           X));
       end density_pTX;
 
-      replaceable function temperature_phX
+      replaceable function temperature_phX 
         "根据p,h和X或Xi计算温度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -3764,8 +3762,8 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         T := temperature(setState_phX(
-          p,
-          h,
+          p, 
+          h, 
           X));
       end temperature_phX;
 
@@ -3778,12 +3776,12 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         d := density(setState_phX(
-          p,
-          h,
+          p, 
+          h, 
           X));
       end density_phX;
 
-      replaceable function temperature_psX
+      replaceable function temperature_psX 
         "根据p,s和X或Xi计算温度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -3792,12 +3790,12 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         output Temperature T "温度";
       algorithm
         T := temperature(setState_psX(
-          p,
-          s,
+          p, 
+          s, 
           X));
         annotation(inverse(s = specificEntropy_pTX(
-          p,
-          T,
+          p, 
+          T, 
           X)));
       end temperature_psX;
 
@@ -3810,12 +3808,12 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         d := density(setState_psX(
-          p,
-          s,
+          p, 
+          s, 
           X));
       end density_psX;
 
-      replaceable function specificEnthalpy_psX
+      replaceable function specificEnthalpy_psX 
         "根据p,s和X或Xi计算比焓"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -3825,25 +3823,28 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         h := specificEnthalpy(setState_psX(
-          p,
-          s,
+          p, 
+          s, 
           X));
       end specificEnthalpy_psX;
 
       type MassFlowRate = SI.MassFlowRate(
-        quantity = "MassFlowRate." + mediumName,
-        min = -1.0e5,
+        quantity = "MassFlowRate." + mediumName, 
+        min = -1.0e5, 
         max = 1.e5) "具有介质特定属性的质量流量类" annotation();
 
       annotation(Documentation(info = "<html><p>
-<strong>PartialMedium</strong>库包含了介质的所有声明。 这意味着定义了所有介质都应支持的常量、模型和函数（其中一些是可选的）。 介质库继承自<strong>PartialMedium</strong>，并为介质提供方程。 此库的详细信息在<a href=\"modelica://Modelica.Media.UsersGuide\" target=\"\">Modelica.Media.UsersGuide</a>中描述。
+<strong>PartialMedium</strong>库包含了介质的所有声明。
+这意味着定义了所有介质都应支持的常量、模型和函数(其中一些是可选的)。
+介质库继承自<strong>PartialMedium</strong>，并为介质提供方程。
+此库的详细信息在<a href=\"modelica://Modelica.Media.UsersGuide\" target=\"\">Modelica.Media.UsersGuide</a>中描述。
 </p>
-</html>"    , revisions = "<html>
+</html>"        , revisions = "<html>
 
-</html>"    ));
+</html>"        ));
     end PartialMedium;
 
-    partial package PartialPureSubstance
+    partial package PartialPureSubstance 
       "用于单一化学物质纯净物的基类"
       extends PartialMedium(final reducedX = true, final fixedX = true);
 
@@ -3855,8 +3856,8 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         state := setState_pTX(
-          p,
-          T,
+          p, 
+          T, 
           fill(0, 0));
       end setState_pT;
 
@@ -3868,8 +3869,8 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         state := setState_phX(
-          p,
-          h,
+          p, 
+          h, 
           fill(0, 0));
       end setState_ph;
 
@@ -3881,8 +3882,8 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         state := setState_psX(
-          p,
-          s,
+          p, 
+          s, 
           fill(0, 0));
       end setState_ps;
 
@@ -3894,8 +3895,8 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         state := setState_dTX(
-          d,
-          T,
+          d, 
+          T, 
           fill(0, 0));
       end setState_dT;
 
@@ -3907,12 +3908,12 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         d := density_phX(
-          p,
-          h,
+          p, 
+          h, 
           fill(0, 0));
       end density_ph;
 
-      replaceable function temperature_ph "根据p和T计算温度"
+      replaceable function temperature_ph "根据p和h计算温度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEnthalpy h "比焓";
@@ -3920,8 +3921,8 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         T := temperature_phX(
-          p,
-          h,
+          p, 
+          h, 
           fill(0, 0));
       end temperature_ph;
 
@@ -3933,12 +3934,12 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         p := pressure(setState_dTX(
-          d,
-          T,
+          d, 
+          T, 
           fill(0, 0)));
       end pressure_dT;
 
-      replaceable function specificEnthalpy_dT
+      replaceable function specificEnthalpy_dT 
         "根据d和T计算比焓"
         extends Modelica.Icons.Function;
         input Density d "密度";
@@ -3947,12 +3948,12 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         h := specificEnthalpy(setState_dTX(
-          d,
-          T,
+          d, 
+          T, 
           fill(0, 0)));
       end specificEnthalpy_dT;
 
-      replaceable function specificEnthalpy_ps
+      replaceable function specificEnthalpy_ps 
         "根据p和s计算比焓"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -3961,8 +3962,8 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         h := specificEnthalpy_psX(
-          p,
-          s,
+          p, 
+          s, 
           fill(0, 0));
       end specificEnthalpy_ps;
 
@@ -3974,8 +3975,8 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         T := temperature_psX(
-          p,
-          s,
+          p, 
+          s, 
           fill(0, 0));
       end temperature_ps;
 
@@ -3987,12 +3988,12 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         d := density_psX(
-          p,
-          s,
+          p, 
+          s, 
           fill(0, 0));
       end density_ps;
 
-      replaceable function specificEnthalpy_pT
+      replaceable function specificEnthalpy_pT 
         "根据p和T计算比焓"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -4001,8 +4002,8 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         h := specificEnthalpy_pTX(
-          p,
-          T,
+          p, 
+          T, 
           fill(0, 0));
       end specificEnthalpy_pT;
 
@@ -4014,8 +4015,8 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         annotation();
       algorithm
         d := density(setState_pTX(
-          p,
-          T,
+          p, 
+          T, 
           fill(0, 0)));
       end density_pT;
 
@@ -4026,27 +4027,27 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
       annotation();
     end PartialPureSubstance;
 
-    partial package PartialLinearFluid
+    partial package PartialLinearFluid 
       "具有恒定定压比热、等温压缩系数和热膨胀系数的通用纯液体模型"
 
-      extends Interfaces.PartialPureSubstance(ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pTX,
+      extends Interfaces.PartialPureSubstance(ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pTX, 
         singleState = false);
-      constant SpecificHeatCapacity cp_const
+      constant SpecificHeatCapacity cp_const 
         "定压比热";
-      constant IsobaricExpansionCoefficient beta_const
+      constant IsobaricExpansionCoefficient beta_const 
         "定压下热膨胀系数";
-      constant SI.IsothermalCompressibility kappa_const
+      constant SI.IsothermalCompressibility kappa_const 
         "等温压缩系数";
       constant MolarMass MM_const "摩尔质量";
       constant Density reference_d "基准条件下的密度";
-      constant SpecificEnthalpy reference_h
+      constant SpecificEnthalpy reference_h 
         "基准条件下的比焓";
-      constant SpecificEntropy reference_s
+      constant SpecificEntropy reference_s 
         "基准条件下的比熵";
-      constant Boolean constantJacobian
+      constant Boolean constantJacobian 
         "=true,在基准条件下热力学雅各比矩阵中的条目是常数";
 
-      redeclare record ThermodynamicState
+      redeclare record ThermodynamicState 
         "唯一确定热力学状态的变量组"
         extends Modelica.Icons.Record;
         AbsolutePressure p "介质绝对压力";
@@ -4055,14 +4056,14 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
       end ThermodynamicState;
 
       redeclare model extends BaseProperties(T(stateSelect = if 
-        preferredMediumStates then StateSelect.prefer else StateSelect.default),
+        preferredMediumStates then StateSelect.prefer else StateSelect.default), 
         p(stateSelect = if preferredMediumStates then StateSelect.prefer else 
         StateSelect.default)) "介质基础属性"
         annotation();
       equation
-        d = (1 + (p - reference_p) * kappa_const - (T - reference_T) * beta_const) *
+        d = (1 + (p - reference_p) * kappa_const - (T - reference_T) * beta_const) * 
           reference_d;
-        h = reference_h + (T - reference_T) * cp_const + (p - reference_p) * (1 -
+        h = reference_h + (T - reference_T) * cp_const + (p - reference_p) * (1 - 
           beta_const * reference_T) / reference_d;
         u = h - p / d;
         p = state.p;
@@ -4071,14 +4072,14 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         R_s = Modelica.Constants.R / MM;
       end BaseProperties;
 
-      redeclare function extends setState_pTX
+      redeclare function extends setState_pTX 
         "根据p和T计算热力状态(无需X)"
         annotation();
       algorithm
         state := ThermodynamicState(p = p, T = T);
       end setState_pTX;
 
-      redeclare function extends setState_phX
+      redeclare function extends setState_phX 
         "根据p和h计算热力状态(无需X)"
         annotation();
       algorithm
@@ -4086,83 +4087,83 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
           (1 - beta_const * reference_T) / reference_d)) / cp_const + reference_T);
       end setState_phX;
 
-      redeclare function extends setState_psX
+      redeclare function extends setState_psX 
         "根据p和s计算热力状态(无需X)"
         annotation();
       algorithm
-        state := ThermodynamicState(p = p, T = reference_T * cp_const / (cp_const - s +
+        state := ThermodynamicState(p = p, T = reference_T * cp_const / (cp_const - s + 
           reference_s + (p - reference_p) * (-beta_const / reference_d)));
       end setState_psX;
 
-      redeclare function extends setState_dTX
+      redeclare function extends setState_dTX 
         "根据d和T计算热力状态(无需X)"
         annotation();
       algorithm
-        state := ThermodynamicState(p = ((d - reference_d) + (T - reference_T)
+        state := ThermodynamicState(p = ((d - reference_d) + (T - reference_T) 
           * beta_const * reference_d) / (reference_d * kappa_const) + reference_p, T = T);
       end setState_dTX;
 
-      redeclare function extends setSmoothState
+      redeclare function extends setSmoothState 
         "返回热力学状态,使其平滑逼近：如果x>0,则为state_a,否则为state_b"
         annotation();
       algorithm
         state := ThermodynamicState(p = Media.Common.smoothStep(
-          x,
-          state_a.p,
-          state_b.p,
+          x, 
+          state_a.p, 
+          state_b.p, 
           x_small), T = Media.Common.smoothStep(
-          x,
-          state_a.T,
-          state_b.T,
+          x, 
+          state_a.T, 
+          state_b.T, 
           x_small));
       end setSmoothState;
 
-      redeclare function extends pressure
+      redeclare function extends pressure 
         "根据热力状态计算压力"
         annotation();
       algorithm
         p := state.p;
       end pressure;
 
-      redeclare function extends temperature
+      redeclare function extends temperature 
         "根据热力状态计算温度"
         annotation();
       algorithm
         T := state.T;
       end temperature;
 
-      redeclare function extends density
+      redeclare function extends density 
         "根据热力状态计算密度"
         annotation();
       algorithm
-        d := (1 + (state.p - reference_p) * kappa_const - (state.T - reference_T) *
+        d := (1 + (state.p - reference_p) * kappa_const - (state.T - reference_T) * 
           beta_const) * reference_d;
       end density;
 
-      redeclare function extends specificEnthalpy
+      redeclare function extends specificEnthalpy 
         "根据热力状态计算比焓"
         annotation();
       algorithm
-        h := reference_h + (state.T - reference_T) * cp_const + (state.p -
+        h := reference_h + (state.T - reference_T) * cp_const + (state.p - 
           reference_p) * (1 - beta_const * reference_T) / reference_d;
       end specificEnthalpy;
 
-      redeclare function extends specificEntropy
+      redeclare function extends specificEntropy 
         "根据热力状态计算比熵"
         annotation();
       algorithm
-        s := reference_s + (state.T - reference_T) * cp_const / state.T + (state.p -
+        s := reference_s + (state.T - reference_T) * cp_const / state.T + (state.p - 
           reference_p) * (-beta_const / reference_d);
       end specificEntropy;
 
-      redeclare function extends specificInternalEnergy
+      redeclare function extends specificInternalEnergy 
         "根据热力状态计算比内能"
         annotation();
       algorithm
         u := specificEnthalpy(state) - state.p / reference_d;
       end specificInternalEnergy;
 
-      redeclare function extends specificGibbsEnergy
+      redeclare function extends specificGibbsEnergy 
         "根据热力状态计算比吉布斯能"
         extends Modelica.Icons.Function;
         annotation();
@@ -4170,7 +4171,7 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         g := specificEnthalpy(state) - state.T * specificEntropy(state);
       end specificGibbsEnergy;
 
-      redeclare function extends specificHelmholtzEnergy
+      redeclare function extends specificHelmholtzEnergy 
         "根据热力状态计算比亥姆霍兹能"
         extends Modelica.Icons.Function;
         annotation();
@@ -4178,16 +4179,16 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         f := specificInternalEnergy(state) - state.T * specificEntropy(state);
       end specificHelmholtzEnergy;
 
-      redeclare function extends velocityOfSound
+      redeclare function extends velocityOfSound 
         "根据热力状态计算声速"
         extends Modelica.Icons.Function;
         annotation();
       algorithm
-        a := sqrt(max(0, 1 / (kappa_const * density(state) - beta_const * beta_const *
+        a := sqrt(max(0, 1 / (kappa_const * density(state) - beta_const * beta_const * 
           state.T / cp_const)));
       end velocityOfSound;
 
-      redeclare function extends isentropicExponent
+      redeclare function extends isentropicExponent 
         "根据热力状态计算等熵指数"
         extends Modelica.Icons.Function;
         annotation();
@@ -4229,57 +4230,57 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         */
 
         h_is := specificEnthalpy(setState_pTX(
-          p_downstream,
+          p_downstream, 
           reference_T / (1 - ((refState.T - reference_T) / refState.T + (
-          refState.p - p_downstream) * (-beta_const / (reference_d * cp_const)))),
+          refState.p - p_downstream) * (-beta_const / (reference_d * cp_const)))), 
           reference_X));
         annotation(Documentation(info = "<html>
 <p>
 使用了一个小的近似：使用参考密度代替真实密度，后者需要数值解。
 </p>
-</html>"));
+</html>"    ));
       end isentropicEnthalpy;
 
-      redeclare function extends specificHeatCapacityCp
-        "计算定压比热"
+      redeclare function extends specificHeatCapacityCp 
+        "计算定容比热容"
         annotation();
       algorithm
         cp := cp_const;
       end specificHeatCapacityCp;
 
-      redeclare function extends specificHeatCapacityCv
+      redeclare function extends specificHeatCapacityCv 
         "根据热力状态计算定容比热"
         annotation();
       algorithm
-        cv := if constantJacobian then cp_const - reference_T * beta_const *
-          beta_const / (kappa_const * reference_d) else state.T * beta_const * beta_const
+        cv := if constantJacobian then cp_const - reference_T * beta_const * 
+          beta_const / (kappa_const * reference_d) else state.T * beta_const * beta_const 
           / (kappa_const * reference_d);
       end specificHeatCapacityCv;
 
-      redeclare function extends isothermalCompressibility
+      redeclare function extends isothermalCompressibility 
         "计算等温压缩系数kappa"
         annotation();
       algorithm
         kappa := kappa_const;
       end isothermalCompressibility;
 
-      redeclare function extends isobaricExpansionCoefficient
+      redeclare function extends isobaricExpansionCoefficient 
         "计算等压膨胀系数"
         annotation();
       algorithm
         beta := beta_const;
       end isobaricExpansionCoefficient;
 
-      redeclare function extends density_derp_h
+      redeclare function extends density_derp_h 
         "计算定比焓下,密度关于压力的偏导数"
         annotation();
       algorithm
-        ddph := if constantJacobian then kappa_const * reference_d + (beta_const * (1
-          - reference_T * beta_const)) / cp_const else kappa_const * density(state) +
+        ddph := if constantJacobian then kappa_const * reference_d + (beta_const * (1 
+          - reference_T * beta_const)) / cp_const else kappa_const * density(state) + 
           (beta_const * (1 - temperature(state) * beta_const)) / cp_const;
       end density_derp_h;
 
-      redeclare function extends density_derh_p
+      redeclare function extends density_derh_p 
         "计算定压下,密度关于比焓的偏导数"
         annotation();
       algorithm
@@ -4287,23 +4288,23 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
           beta_const * density(state) / cp_const;
       end density_derh_p;
 
-      redeclare function extends density_derp_T
+      redeclare function extends density_derp_T 
         "计算定温下,密度关于压力的偏导数"
         annotation();
       algorithm
-        ddpT := if constantJacobian then kappa_const * reference_d else kappa_const
+        ddpT := if constantJacobian then kappa_const * reference_d else kappa_const 
           * density(state);
       end density_derp_T;
 
-      redeclare function extends density_derT_p
+      redeclare function extends density_derT_p 
         "计算定压下,密度关于温度的偏导数"
         annotation();
       algorithm
-        ddTp := if constantJacobian then -beta_const * reference_d else -beta_const
+        ddTp := if constantJacobian then -beta_const * reference_d else -beta_const 
           * density(state);
       end density_derT_p;
 
-      redeclare function extends density_derX
+      redeclare function extends density_derX 
         "计算定压定温下,密度关于质量分数的偏导数"
         annotation();
       algorithm
@@ -4323,7 +4324,7 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
         output Temperature T "温度";
         annotation();
       algorithm
-        T := (h - reference_h - (p - reference_p) * ((1 - beta_const * reference_T) /
+        T := (h - reference_h - (p - reference_p) * ((1 - beta_const * reference_T) / 
           reference_d)) / cp_const + reference_T;
       end T_ph;
 
@@ -4383,27 +4384,27 @@ kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
 <strong>作者：</strong></li>
 <li>
 Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Politecnico di Milano<br><br>Via Ponzio 34/5<br><br>I-20133 Milano, Italy<br><br>email: <a href=\"mailto:casella@elet.polimi.it\" target=\"\">casella@elet.polimi.it</a>&nbsp;<br><br>和<br><br>Hubertus Tummescheit<br><br>Modelon AB<br><br>Ideon Science Park<br><br>SE-22730 Lund, Sweden<br><br>email: <a href=\"mailto:Hubertus.Tummescheit@Modelon.se\" target=\"\">Hubertus.Tummescheit@Modelon.se</a>&nbsp;</li>
-</html>"));
+</html>"    ));
     end PartialLinearFluid;
 
-    partial package PartialMixtureMedium
+    partial package PartialMixtureMedium 
       "多种化学纯物质混合物的基类"
-      extends PartialMedium(redeclare replaceable record FluidConstants =
+      extends PartialMedium(redeclare replaceable record FluidConstants = 
         Modelica.Media.Interfaces.Types.IdealGas.FluidConstants);
 
-      redeclare replaceable record extends ThermodynamicState
+      redeclare replaceable record extends ThermodynamicState 
         "热力学状态"
         AbsolutePressure p "介质绝对压力";
         Temperature T "介质温度";
-        MassFraction[nX] X(start = reference_X)
+        MassFraction[nX] X(start = reference_X) 
           "质量分数(=组分质量/总质量 m_i/m)";
         annotation();
       end ThermodynamicState;
 
       constant FluidConstants[nS] fluidConstants "流体常数";
 
-      replaceable function gasConstant
-        "计算混合物气体常数(液体也可)"
+      replaceable function gasConstant 
+        "计算混合物的气体常数(液体亦适用)"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力学状态记录";
         output SI.SpecificHeatCapacity R_s "混合气体常数";
@@ -4414,7 +4415,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         extends Modelica.Icons.Function;
         input SI.MoleFraction moleFractions[:] "混合物摩尔分数";
         input MolarMass[:] MMX "组分的摩尔质量";
-        output SI.MassFraction X[size(moleFractions, 1)]
+        output SI.MassFraction X[size(moleFractions, 1)] 
           "气体混合物质量分数";
       protected
         MolarMass Mmix = moleFractions * MMX "混合物摩尔质量";
@@ -4429,7 +4430,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         extends Modelica.Icons.Function;
         input SI.MassFraction X[:] "混合物质量分数";
         input SI.MolarMass[:] MMX "组分的摩尔质量";
-        output SI.MoleFraction moleFractions[size(X, 1)]
+        output SI.MoleFraction moleFractions[size(X, 1)] 
           "气体混合物的摩尔分数";
       protected
         Real invMMX[size(X, 1)] "摩尔质量的倒数";
@@ -4448,11 +4449,11 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
 
     end PartialMixtureMedium;
 
-    partial package PartialCondensingGases
+    partial package PartialCondensingGases 
       "可凝结与不可凝结气体混合物的基类"
       extends PartialMixtureMedium(ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pTX);
 
-      replaceable partial function saturationPressure
+      replaceable partial function saturationPressure 
         "计算冷凝流体的饱和压力"
         extends Modelica.Icons.Function;
         input Temperature Tsat "饱和温度";
@@ -4460,7 +4461,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end saturationPressure;
 
-      replaceable partial function enthalpyOfVaporization
+      replaceable partial function enthalpyOfVaporization 
         "计算冷凝流体的汽化焓"
         extends Modelica.Icons.Function;
         input Temperature T "温度";
@@ -4468,7 +4469,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end enthalpyOfVaporization;
 
-      replaceable partial function enthalpyOfLiquid
+      replaceable partial function enthalpyOfLiquid 
         "计算冷凝流体的液体焓"
         extends Modelica.Icons.Function;
         input Temperature T "温度";
@@ -4476,7 +4477,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end enthalpyOfLiquid;
 
-      replaceable partial function enthalpyOfGas
+      replaceable partial function enthalpyOfGas 
         "计算非冷凝气体混合物的焓"
         extends Modelica.Icons.Function;
         input Temperature T "温度";
@@ -4485,7 +4486,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end enthalpyOfGas;
 
-      replaceable partial function enthalpyOfCondensingGas
+      replaceable partial function enthalpyOfCondensingGas 
         "计算冷凝气体(通常是蒸汽)的焓"
         extends Modelica.Icons.Function;
         input Temperature T "温度";
@@ -4493,7 +4494,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end enthalpyOfCondensingGas;
 
-      replaceable partial function enthalpyOfNonCondensingGas
+      replaceable partial function enthalpyOfNonCondensingGas 
         "计算非冷凝介质的焓"
         extends Modelica.Icons.Function;
         input Temperature T "温度";
@@ -4503,13 +4504,13 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       annotation();
     end PartialCondensingGases;
 
-    partial package PartialRealCondensingGases
+    partial package PartialRealCondensingGases 
       "用于真实的可凝结和不可凝结气体混合物的基类"
       extends Modelica.Media.Interfaces.PartialMixtureMedium(
-      redeclare replaceable record FluidConstants =
+      redeclare replaceable record FluidConstants = 
         Modelica.Media.Interfaces.Types.TwoPhase.FluidConstants);
 
-      replaceable partial function saturationPressure
+      replaceable partial function saturationPressure 
         "计算冷凝流体的饱和压力"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -4517,7 +4518,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end saturationPressure;
 
-      replaceable partial function saturationTemperature
+      replaceable partial function saturationTemperature 
         "计算冷凝流体的饱和温度"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -4525,7 +4526,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end saturationTemperature;
 
-      replaceable partial function massFractionSaturation
+      replaceable partial function massFractionSaturation 
         "计算饱和质量分数"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -4533,7 +4534,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end massFractionSaturation;
 
-      replaceable partial function massFraction_pTphi
+      replaceable partial function massFraction_pTphi 
         "根据压力,温度和相对湿度计算质量分数"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -4550,7 +4551,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end relativeHumidity;
 
-      replaceable partial function enthalpyOfVaporization
+      replaceable partial function enthalpyOfVaporization 
         "计算冷凝流体的汽化焓"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -4558,7 +4559,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end enthalpyOfVaporization;
 
-      replaceable partial function enthalpyOfLiquid
+      replaceable partial function enthalpyOfLiquid 
         "计算冷凝流体的液体焓"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -4566,7 +4567,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end enthalpyOfLiquid;
 
-      replaceable partial function enthalpyOfGas
+      replaceable partial function enthalpyOfGas 
         "计算非冷凝气体混合物的焓"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -4574,7 +4575,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end enthalpyOfGas;
 
-      replaceable partial function enthalpyOfCondensingGas
+      replaceable partial function enthalpyOfCondensingGas 
         "计算冷凝气体(通常是蒸汽)的焓"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -4582,7 +4583,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end enthalpyOfCondensingGas;
 
-      replaceable partial function enthalpyOfNonCondensingGas
+      replaceable partial function enthalpyOfNonCondensingGas 
         "计算非冷凝介质的焓"
         extends Modelica.Icons.Function;
         input ThermodynamicState state "热力状态记录";
@@ -4590,7 +4591,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end enthalpyOfNonCondensingGas;
 
-      replaceable partial function specificEntropy_phX
+      replaceable partial function specificEntropy_phX 
         "根据压力,比焓和质量分数计算比熵"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -4600,89 +4601,89 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       algorithm
         s := specificEntropy(setState_phX(
-          p,
-          h,
+          p, 
+          h, 
           X));
       end specificEntropy_phX;
       annotation();
 
     end PartialRealCondensingGases;
 
-    partial package PartialTwoPhaseMedium
+    partial package PartialTwoPhaseMedium 
       "单物质的两相介质基类"
-      extends PartialPureSubstance(redeclare replaceable record FluidConstants =
+      extends PartialPureSubstance(redeclare replaceable record FluidConstants = 
         Modelica.Media.Interfaces.Types.TwoPhase.FluidConstants);
-      constant Boolean smoothModel = false
+      constant Boolean smoothModel = false 
         "=true,(导出)模型不应该生成状态事件";
-      constant Boolean onePhase = false
+      constant Boolean onePhase = false 
         "=true,(导出)不应该使用两相输入进行调用";
 
       constant FluidConstants[nS] fluidConstants "流体常数";
 
-      redeclare replaceable record extends ThermodynamicState
+      redeclare replaceable record extends ThermodynamicState 
         "两相介质热力状态"
-        FixedPhase phase(min = 0, max = 2)
+        FixedPhase phase(min = 0, max = 2) 
           "流体的相态:2-两相,1-单相,0-未知,e.g.,交互使用";
         annotation();
       end ThermodynamicState;
 
-      redeclare replaceable partial model extends BaseProperties
+      redeclare replaceable partial model extends BaseProperties 
         "两相介质的基础属性(p, d, T, h, u, R_s, MM, sat)"
         SaturationProperties sat "介质压力下的饱和物性";
         annotation();
       end BaseProperties;
 
-      replaceable partial function setDewState
+      replaceable partial function setDewState 
         "计算露点线上的热力状态"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和点";
         input FixedPhase phase(
-          min = 1,
+          min = 1, 
           max = 2) = 1 "相态:默认为单相";
         output ThermodynamicState state "完整的热力学状态信息";
         annotation();
       end setDewState;
 
-      replaceable partial function setBubbleState
+      replaceable partial function setBubbleState 
         "计算泡点线上的热力状态"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和点";
         input FixedPhase phase(
-          min = 1,
+          min = 1, 
           max = 2) = 1 "相态:默认为单相";
         output ThermodynamicState state "完整的热力学状态信息";
         annotation();
       end setBubbleState;
 
-      redeclare replaceable partial function extends setState_dTX
+      redeclare replaceable partial function extends setState_dTX 
         "根据d,T和组分X或Xi计算热力状态"
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         annotation();
       end setState_dTX;
 
-      redeclare replaceable partial function extends setState_phX
+      redeclare replaceable partial function extends setState_phX 
         "根据p,h和组分X或Xi计算热力状态"
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         annotation();
       end setState_phX;
 
-      redeclare replaceable partial function extends setState_psX
+      redeclare replaceable partial function extends setState_psX 
         "根据p,s和组分X或Xi计算热力状态"
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         annotation();
       end setState_psX;
 
-      redeclare replaceable partial function extends setState_pTX
+      redeclare replaceable partial function extends setState_pTX 
         "根据p,T和组分X或Xi计算热力状态"
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         annotation();
       end setState_pTX;
 
-      replaceable function setSat_T
+      replaceable function setSat_T 
         "根据T计算饱和状态物性"
         extends Modelica.Icons.Function;
         input Temperature T "温度";
@@ -4693,7 +4694,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         sat.psat := saturationPressure(T);
       end setSat_T;
 
-      replaceable function setSat_p
+      replaceable function setSat_p 
         "根据p计算饱和状态物性"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -4703,7 +4704,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         sat.psat := p;
         sat.Tsat := saturationTemperature(p);
       end setSat_p;
-      replaceable function setSat_p_diff2
+      replaceable function setSat_p_diff2 
         "从压力返回饱和性质记录，二阶可微"
         extends Modelica.Icons.Function;
         input Types.AbsolutePressure p "压力";
@@ -4714,7 +4715,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation(smoothOrder = 2);
       end setSat_p_diff2;
 
-      replaceable partial function bubbleEnthalpy
+      replaceable partial function bubbleEnthalpy 
         "计算泡点比焓"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和物性记录类";
@@ -4722,7 +4723,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end bubbleEnthalpy;
 
-      replaceable partial function dewEnthalpy
+      replaceable partial function dewEnthalpy 
         "计算露点比焓"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和物性记录类";
@@ -4730,7 +4731,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end dewEnthalpy;
 
-      replaceable partial function bubbleEntropy
+      replaceable partial function bubbleEntropy 
         "计算泡点比熵"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和物性记录类";
@@ -4759,7 +4760,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end dewDensity;
 
-      replaceable partial function saturationPressure
+      replaceable partial function saturationPressure 
         "计算饱和压力"
         extends Modelica.Icons.Function;
         input Temperature T "温度";
@@ -4767,7 +4768,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end saturationPressure;
 
-      replaceable partial function saturationTemperature
+      replaceable partial function saturationTemperature 
         "计算饱和温度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -4784,7 +4785,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         p := sat.psat;
       end saturationPressure_sat;
 
-      replaceable function saturationTemperature_sat
+      replaceable function saturationTemperature_sat 
         "计算饱和温度"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和物性记录";
@@ -4794,43 +4795,43 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         T := sat.Tsat;
       end saturationTemperature_sat;
 
-      replaceable partial function saturationTemperature_derp
+      replaceable partial function saturationTemperature_derp 
         "计算饱和温度关于压力的偏导数"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
-        output DerTemperatureByPressure dTp
+        output DerTemperatureByPressure dTp 
           "饱和温度关于压力的偏导数";
         annotation();
       end saturationTemperature_derp;
 
-      replaceable function saturationTemperature_derp_sat
+      replaceable function saturationTemperature_derp_sat 
         "计算饱和温度关于压力的偏导数"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和物性记录";
-        output DerTemperatureByPressure dTp
+        output DerTemperatureByPressure dTp 
           "饱和温度关于压力的偏导数";
         annotation();
       algorithm
         dTp := saturationTemperature_derp(sat.psat);
       end saturationTemperature_derp_sat;
 
-      replaceable partial function surfaceTension
+      replaceable partial function surfaceTension 
         "计算两相区表面张力"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和物性记录";
-        output SurfaceTension sigma
+        output SurfaceTension sigma 
           "两相区表面张力";
         annotation();
       end surfaceTension;
 
-      redeclare replaceable function extends molarMass
+      redeclare replaceable function extends molarMass 
         "计算介质摩尔质量"
         annotation();
       algorithm
         MM := fluidConstants[1].molarMass;
       end molarMass;
 
-      replaceable partial function dBubbleDensity_dPressure
+      replaceable partial function dBubbleDensity_dPressure 
         "计算泡点密度偏导数"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和物性记录";
@@ -4838,7 +4839,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end dBubbleDensity_dPressure;
 
-      replaceable partial function dDewDensity_dPressure
+      replaceable partial function dDewDensity_dPressure 
         "计算露点密度偏导数"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和物性记录类";
@@ -4846,216 +4847,216 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end dDewDensity_dPressure;
 
-      replaceable partial function dBubbleEnthalpy_dPressure
+      replaceable partial function dBubbleEnthalpy_dPressure 
         "计算泡点比焓的偏导数"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和物性记录";
-        output DerEnthalpyByPressure dhldp
+        output DerEnthalpyByPressure dhldp 
           "沸点曲线上比焓的偏导数";
         annotation();
       end dBubbleEnthalpy_dPressure;
 
-      replaceable partial function dDewEnthalpy_dPressure
+      replaceable partial function dDewEnthalpy_dPressure 
         "计算露点比焓的偏导数"
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和物性记录";
-        output DerEnthalpyByPressure dhvdp
+        output DerEnthalpyByPressure dhvdp 
           "饱和蒸汽比焓的导数";
         annotation();
       end dDewEnthalpy_dPressure;
 
-      redeclare replaceable function specificEnthalpy_pTX
+      redeclare replaceable function specificEnthalpy_pTX 
         "根据p、T和X计算比焓"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input Temperature T "温度";
         input MassFraction X[:] "质量分数";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output SpecificEnthalpy h "p、T、X处的比焓";
         annotation();
       algorithm
         h := specificEnthalpy(setState_pTX(
-          p,
-          T,
-          X,
+          p, 
+          T, 
+          X, 
           phase));
       end specificEnthalpy_pTX;
 
-      redeclare replaceable function temperature_phX
+      redeclare replaceable function temperature_phX 
         "根据p、h和X计算温度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEnthalpy h "比焓";
         input MassFraction X[:] "质量分数";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output Temperature T "温度";
         annotation();
       algorithm
         T := temperature(setState_phX(
-          p,
-          h,
-          X,
+          p, 
+          h, 
+          X, 
           phase));
       end temperature_phX;
 
-      redeclare replaceable function density_phX
+      redeclare replaceable function density_phX 
         "根据P、h和X计算密度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEnthalpy h "比焓";
         input MassFraction X[:] "质量分数";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output Density d "密度";
         annotation();
       algorithm
         d := density(setState_phX(
-          p,
-          h,
-          X,
+          p, 
+          h, 
+          X, 
           phase));
       end density_phX;
 
-      redeclare replaceable function temperature_psX
+      redeclare replaceable function temperature_psX 
         "根据p、s和X计算温度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEntropy s "比熵";
         input MassFraction X[:] "质量分数";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output Temperature T "温度";
         annotation();
       algorithm
         T := temperature(setState_psX(
-          p,
-          s,
-          X,
+          p, 
+          s, 
+          X, 
           phase));
       end temperature_psX;
 
-      redeclare replaceable function density_psX
+      redeclare replaceable function density_psX 
         "根据p、s和X计算密度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEntropy s "比熵";
         input MassFraction X[:] "质量分数";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output Density d "密度";
         annotation();
       algorithm
         d := density(setState_psX(
-          p,
-          s,
-          X,
+          p, 
+          s, 
+          X, 
           phase));
       end density_psX;
 
-      redeclare replaceable function specificEnthalpy_psX
-        "根据p、s和X计算比焓"
+      redeclare replaceable function specificEnthalpy_psX 
+       "根据p、s和X(或Xi)计算比焓"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEntropy s "比熵";
         input MassFraction X[:] "质量分数";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output SpecificEnthalpy h "比焓";
         annotation();
       algorithm
         h := specificEnthalpy(setState_psX(
-          p,
-          s,
-          X,
+          p, 
+          s, 
+          X, 
           phase));
       end specificEnthalpy_psX;
 
-      redeclare replaceable function setState_pT
+      redeclare replaceable function setState_pT 
         "根据p和T计算热力状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input Temperature T "温度";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output ThermodynamicState state "热力状态记录";
         annotation();
       algorithm
         state := setState_pTX(
-          p,
-          T,
-          fill(0, 0),
+          p, 
+          T, 
+          fill(0, 0), 
           phase);
       end setState_pT;
 
-      redeclare replaceable function setState_ph
+      redeclare replaceable function setState_ph 
         "根据p和h计算热力状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEnthalpy h "比焓";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output ThermodynamicState state "热力状态记录";
         annotation();
       algorithm
         state := setState_phX(
-          p,
-          h,
-          fill(0, 0),
+          p, 
+          h, 
+          fill(0, 0), 
           phase);
       end setState_ph;
 
-      redeclare replaceable function setState_ps
+      redeclare replaceable function setState_ps 
         "根据p和s计算热力状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEntropy s "比熵";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output ThermodynamicState state "热力状态记录";
         annotation();
       algorithm
         state := setState_psX(
-          p,
-          s,
-          fill(0, 0),
+          p, 
+          s, 
+          fill(0, 0), 
           phase);
       end setState_ps;
 
-      redeclare replaceable function setState_dT
+      redeclare replaceable function setState_dT 
         "根据d和T计算热力状态"
         extends Modelica.Icons.Function;
         input Density d "密度";
         input Temperature T "温度";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output ThermodynamicState state "热力状态记录";
         annotation();
       algorithm
         state := setState_dTX(
-          d,
-          T,
-          fill(0, 0),
+          d, 
+          T, 
+          fill(0, 0), 
           phase);
       end setState_dT;
 
-      replaceable function setState_px
-        "根据p和x计算热力状态"
+      replaceable function setState_px 
+        "根据压力和干度计算热力学状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
-        input MassFraction x "蒸汽质量分数";
+        input MassFraction x "干度";
         output ThermodynamicState state "热力状态记录";
         annotation();
       algorithm
         state := setState_ph(
-          p,
-          (1 - x) * bubbleEnthalpy(setSat_p(p)) + x * dewEnthalpy(setSat_p(p)),
+          p, 
+          (1 - x) * bubbleEnthalpy(setSat_p(p)) + x * dewEnthalpy(setSat_p(p)), 
           2);
       end setState_px;
 
-      replaceable function setState_Tx
-        "根据T和x算热力状态"
+      replaceable function setState_Tx 
+        "根据T和x计算热力状态"
         extends Modelica.Icons.Function;
         input Temperature T "温度";
         input MassFraction x "蒸汽质量分数";
@@ -5063,8 +5064,8 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       algorithm
         state := setState_ph(
-          saturationPressure_sat(setSat_T(T)),
-          (1 - x) * bubbleEnthalpy(setSat_T(T)) + x * dewEnthalpy(setSat_T(T)),
+          saturationPressure_sat(setSat_T(T)), 
+          (1 - x) * bubbleEnthalpy(setSat_T(T)) + x * dewEnthalpy(setSat_T(T)), 
           2);
       end setState_Tx;
 
@@ -5085,32 +5086,32 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEnthalpy h "比焓";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output Density d "密度";
         annotation();
       algorithm
         d := density_phX(
-          p,
-          h,
-          fill(0, 0),
+          p, 
+          h, 
+          fill(0, 0), 
           phase);
       end density_ph;
 
-      redeclare replaceable function temperature_ph
+      redeclare replaceable function temperature_ph 
         "根据p和h计算温度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEnthalpy h "比焓";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output Temperature T "温度";
         annotation();
       algorithm
         T := temperature_phX(
-          p,
-          h,
-          fill(0, 0),
+          p, 
+          h, 
+          fill(0, 0), 
           phase);
       end temperature_ph;
 
@@ -5118,130 +5119,130 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         extends Modelica.Icons.Function;
         input Density d "密度";
         input Temperature T "温度";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output AbsolutePressure p "压力";
         annotation();
       algorithm
         p := pressure(setState_dTX(
-          d,
-          T,
-          fill(0, 0),
+          d, 
+          T, 
+          fill(0, 0), 
           phase));
       end pressure_dT;
 
-      redeclare replaceable function specificEnthalpy_dT
+      redeclare replaceable function specificEnthalpy_dT 
         "根据d和T计算比焓"
         extends Modelica.Icons.Function;
         input Density d "密度";
         input Temperature T "温度";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output SpecificEnthalpy h "比焓";
         annotation();
       algorithm
         h := specificEnthalpy(setState_dTX(
-          d,
-          T,
-          fill(0, 0),
+          d, 
+          T, 
+          fill(0, 0), 
           phase));
       end specificEnthalpy_dT;
 
-      redeclare replaceable function specificEnthalpy_ps
+      redeclare replaceable function specificEnthalpy_ps 
         "根据p和s计算比焓"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEntropy s "比熵";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output SpecificEnthalpy h "比焓";
         annotation();
       algorithm
         h := specificEnthalpy_psX(
-          p,
-          s,
+          p, 
+          s, 
           fill(0, 0));
       end specificEnthalpy_ps;
 
-      redeclare replaceable function temperature_ps
+      redeclare replaceable function temperature_ps 
         "根据p和s计算温度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEntropy s "比熵";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output Temperature T "温度";
         annotation();
       algorithm
         T := temperature_psX(
-          p,
-          s,
-          fill(0, 0),
+          p, 
+          s, 
+          fill(0, 0), 
           phase);
       end temperature_ps;
 
-      redeclare replaceable function density_ps
+      redeclare replaceable function density_ps 
         "根据p和s计算密度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEntropy s "比熵";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output Density d "密度";
         annotation();
       algorithm
         d := density_psX(
-          p,
-          s,
-          fill(0, 0),
+          p, 
+          s, 
+          fill(0, 0), 
           phase);
       end density_ps;
 
-      redeclare replaceable function specificEnthalpy_pT
+      redeclare replaceable function specificEnthalpy_pT 
         "根据p和T计算比焓"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input Temperature T "温度";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output SpecificEnthalpy h "比焓";
         annotation();
       algorithm
         h := specificEnthalpy_pTX(
-          p,
-          T,
-          fill(0, 0),
+          p, 
+          T, 
+          fill(0, 0), 
           phase);
       end specificEnthalpy_pT;
 
-      redeclare replaceable function density_pT
+      redeclare replaceable function density_pT 
         "根据p和T计算密度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input Temperature T "温度";
-        input FixedPhase phase = 0
+        input FixedPhase phase = 0 
           "2-两相,1-单相,0-未知";
         output Density d "密度";
         annotation();
       algorithm
         d := density(setState_pTX(
-          p,
-          T,
-          fill(0, 0),
+          p, 
+          T, 
+          fill(0, 0), 
           phase));
       end density_pT;
       annotation();
     end PartialTwoPhaseMedium;
 
-    partial package PartialSimpleMedium
+    partial package PartialSimpleMedium 
       "u和h与温度线性关系,所有其他量都是常量(尤其是密度)的介质模型基类"
 
-      extends Interfaces.PartialPureSubstance(final ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pT,
+      extends Interfaces.PartialPureSubstance(final ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pT, 
         final singleState = true);
 
-      constant SpecificHeatCapacity cp_const
+      constant SpecificHeatCapacity cp_const 
         "恒压比热容常数";
-      constant SpecificHeatCapacity cv_const
+      constant SpecificHeatCapacity cv_const 
         "恒容比热容常数";
       constant Density d_const "恒定密度";
       constant DynamicViscosity eta_const "恒定动力黏度";
@@ -5261,19 +5262,19 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       end ThermodynamicState;
 
       redeclare replaceable model extends BaseProperties(T(stateSelect = if 
-        preferredMediumStates then StateSelect.prefer else StateSelect.default),
+        preferredMediumStates then StateSelect.prefer else StateSelect.default), 
         p(stateSelect = if preferredMediumStates then StateSelect.prefer else 
         StateSelect.default)) "基本性质"
       equation
         assert(T >= T_min and T <= T_max, "
-温度 T (= " + String(T) + " K) 不在允许范围内 (" + String(T_min) + " K <= T <= " + String(T_max) + " K)
-介质模型 \"" + mediumName + "\" 要求。
-");
+温度 T (= "         + String(T) + " K) 不在允许范围内 (" + String(T_min) + " K <= T <= " + String(T_max) + " K)
+介质模型 \""         + mediumName + "\" 要求。
+"        );
 
         // h = cp_const*(T-T0);
         h = specificEnthalpy_pTX(
-          p,
-          T,
+          p, 
+          T, 
           X);
         u = cv_const * (T - T0);
         d = d_const;
@@ -5287,10 +5288,10 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
 其他提供的介质量都假设为常量。
 注意，压力项 p/d 的（小）影响被忽略。
 </p>
-</html>"));
+</html>"        ));
       end BaseProperties;
 
-      redeclare function setState_pTX
+      redeclare function setState_pTX 
         "根据 p、T 和 X 或 Xi 计算热力状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -5302,7 +5303,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         state := ThermodynamicState(p = p, T = T);
       end setState_pTX;
 
-      redeclare function setState_phX
+      redeclare function setState_phX 
         "根据 p、h 和 X 或 Xi 计算热力状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -5314,7 +5315,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         state := ThermodynamicState(p = p, T = T0 + h / cp_const);
       end setState_phX;
 
-      redeclare replaceable function setState_psX
+      redeclare replaceable function setState_psX 
         "根据 p、s 和 X 或 Xi 计算热力状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -5323,12 +5324,12 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         output ThermodynamicState state "热力学状态记录";
         annotation();
       algorithm
-        state := ThermodynamicState(p = p, T = Modelica.Math.exp(s / cp_const +
-          Modelica.Math.log(reference_T)))
-          "这里使用了不可压缩极限，具有 cp 作为热容";
+        state := ThermodynamicState(p = p, T = Modelica.Math.exp(s / cp_const + 
+          Modelica.Math.log(reference_T))) 
+          "此处采用不可压缩极限假设，以定容比热容(cp) 作为热容";
       end setState_psX;
 
-      redeclare function setState_dTX
+      redeclare function setState_dTX 
         "根据 d、T 和 X 或 Xi 计算热力状态"
         extends Modelica.Icons.Function;
         input Density d "密度";
@@ -5337,22 +5338,22 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         output ThermodynamicState state "热力学状态记录";
         annotation();
       algorithm
-        assert(false,
+        assert(false, 
           "无法根据温度和密度计算压力，因为对于不可压缩流体，这样的计算是不可能的！");
       end setState_dTX;
 
-      redeclare function extends setSmoothState
+      redeclare function extends setSmoothState 
         "计算热力学状态，以平滑地逼近：如果 x > 0 则 state_a，否则 state_b"
         annotation();
       algorithm
         state := ThermodynamicState(p = Media.Common.smoothStep(
-          x,
-          state_a.p,
-          state_b.p,
+          x, 
+          state_a.p, 
+          state_b.p, 
           x_small), T = Media.Common.smoothStep(
-          x,
-          state_a.T,
-          state_b.T,
+          x, 
+          state_a.T, 
+          state_b.T, 
           x_small));
       end setSmoothState;
 
@@ -5363,7 +5364,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         eta := eta_const;
       end dynamicViscosity;
 
-      redeclare function extends thermalConductivity
+      redeclare function extends thermalConductivity 
         "计算导热系数"
         annotation();
 
@@ -5399,7 +5400,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         h := cp_const * (state.T - T0);
       end specificEnthalpy;
 
-      redeclare function extends specificHeatCapacityCp
+      redeclare function extends specificHeatCapacityCp 
         "计算定压比热容"
         annotation();
 
@@ -5407,7 +5408,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         cp := cp_const;
       end specificHeatCapacityCp;
 
-      redeclare function extends specificHeatCapacityCv
+      redeclare function extends specificHeatCapacityCv 
         "计算定容比热容"
         annotation();
 
@@ -5429,7 +5430,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         a := a_const;
       end velocityOfSound;
 
-      redeclare function specificEnthalpy_pTX
+      redeclare function specificEnthalpy_pTX 
         "根据 p、T 和 X 或 Xi 计算比焓"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -5442,10 +5443,10 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
 <p>
 这个函数计算流体的比焓，但忽略了压力项 p/d 的（小）影响。
 </p>
-</html>"));
+</html>"        ));
       end specificEnthalpy_pTX;
 
-      redeclare function temperature_phX
+      redeclare function temperature_phX 
         "根据 p、h 和 X 或 Xi 计算温度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
@@ -5466,12 +5467,12 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       algorithm
         d := density(setState_phX(
-          p,
-          h,
+          p, 
+          h, 
           X));
       end density_phX;
 
-      redeclare function extends specificInternalEnergy
+      redeclare function extends specificInternalEnergy 
         "计算比内能"
         extends Modelica.Icons.Function;
       algorithm
@@ -5481,7 +5482,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
 <p>
 这个函数计算流体的比内能，但忽略了压力项 p/d 的（小）影响。
 </p>
-</html>"));
+</html>"        ));
       end specificInternalEnergy;
 
       redeclare function extends specificEntropy "计算比熵"
@@ -5491,7 +5492,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         s := cv_const * Modelica.Math.log(state.T / T0);
       end specificEntropy;
 
-      redeclare function extends specificGibbsEnergy
+      redeclare function extends specificGibbsEnergy 
         "计算比吉布斯能"
         extends Modelica.Icons.Function;
         annotation();
@@ -5499,7 +5500,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         g := specificEnthalpy(state) - state.T * specificEntropy(state);
       end specificGibbsEnergy;
 
-      redeclare function extends specificHelmholtzEnergy
+      redeclare function extends specificHelmholtzEnergy 
         "计算比亥姆霍兹能"
         extends Modelica.Icons.Function;
         annotation();
@@ -5513,36 +5514,36 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         h_is := cp_const * (temperature(refState) - T0);
       end isentropicEnthalpy;
 
-      redeclare function extends isobaricExpansionCoefficient
+      redeclare function extends isobaricExpansionCoefficient 
         "计算等压膨胀系数"
         annotation();
       algorithm
         beta := 0.0;
       end isobaricExpansionCoefficient;
 
-      redeclare function extends isothermalCompressibility
+      redeclare function extends isothermalCompressibility 
         "计算等温压缩系数"
         annotation();
       algorithm
         kappa := 0;
       end isothermalCompressibility;
 
-      redeclare function extends density_derp_T
-        "计算密度对压力的偏导数（在恒温下）"
+      redeclare function extends density_derp_T 
+        "计算密度对压力的偏导数(在恒温下)"
         annotation();
       algorithm
         ddpT := 0;
       end density_derp_T;
 
-      redeclare function extends density_derT_p
-        "计算密度对温度的偏导数（在恒压下）"
+      redeclare function extends density_derT_p 
+        "计算密度对温度的偏导数(在恒压下)"
         annotation();
       algorithm
         ddTp := 0;
       end density_derT_p;
 
-      redeclare function extends density_derX
-        "计算密度对质量分数的偏导数（在恒压恒温下）"
+      redeclare function extends density_derX 
+        "计算密度对质量分数的偏导数(在恒压恒温下)"
         annotation();
       algorithm
         dddX := fill(0, nX);
@@ -5553,21 +5554,49 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       algorithm
         MM := MM_const;
       end molarMass;
-      annotation();
+
+      redeclare function extends density_derp_h 
+         "计算密度对压力的偏导数(在定比焓下)"
+      algorithm
+        ddph := 0;
+      end density_derp_h;
+
+      redeclare function extends density_derh_p 
+         "计算密度对比焓的偏导数(在恒压下)"
+      algorithm
+        ddhp := 0;
+      end density_derh_p;
+
+      function specificInternalEnergy_derT_p "计算比内能对温度的偏导数(在恒压下)"
+        extends Modelica.Icons.Function;
+        input ThermodynamicState state "热力状态";
+        output Real duTp "计算比内能对温度的偏导数";
+      algorithm
+        duTp := cv_const;
+      end specificInternalEnergy_derT_p;
+
+      function specificInternalEnergy_derp_T "计算比内能对压力的偏导数(在恒温下)"
+        extends Modelica.Icons.Function;
+        input ThermodynamicState state "热力状态";
+        output Real dupT "比内能对压力的偏导数";
+      algorithm
+        dupT := 0;
+      end specificInternalEnergy_derp_T;
+
     end PartialSimpleMedium;
 
-    partial package PartialSimpleIdealGasMedium
+    partial package PartialSimpleIdealGasMedium 
       "定cp和cv的理想气体的介质模型(其他所有量如输运性质保持恒定)"
 
       extends Interfaces.PartialPureSubstance(
-      redeclare replaceable record FluidConstants =
-        Modelica.Media.Interfaces.Types.Basic.FluidConstants,
-        ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pT,
+      redeclare replaceable record FluidConstants = 
+        Modelica.Media.Interfaces.Types.Basic.FluidConstants, 
+        ThermoStates = Modelica.Media.Interfaces.Choices.IndependentVariables.pT, 
         final singleState = false);
 
-      constant SpecificHeatCapacity cp_const
+      constant SpecificHeatCapacity cp_const 
         "恒定的定压比热容";
-      constant SpecificHeatCapacity cv_const = cp_const - R_gas
+      constant SpecificHeatCapacity cv_const = cp_const - R_gas 
         "恒定的定容比热容";
       constant SpecificHeatCapacity R_gas "介质的比气体常数";
       constant MolarMass MM_const "摩尔质量";
@@ -5578,25 +5607,24 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       constant Temperature T0 = reference_T "零焓温度";
       constant FluidConstants[nS] fluidConstants "流体常数";
 
-      redeclare record extends ThermodynamicState
+      redeclare record extends ThermodynamicState 
         "理想气体的热力学状态"
         AbsolutePressure p "介质的绝对压力";
         Temperature T "介质的温度";
-        annotation();
       end ThermodynamicState;
 
       redeclare replaceable model extends BaseProperties(T(stateSelect = if 
-        preferredMediumStates then StateSelect.prefer else StateSelect.default),
+        preferredMediumStates then StateSelect.prefer else StateSelect.default), 
         p(stateSelect = if preferredMediumStates then StateSelect.prefer else 
         StateSelect.default)) "理想气体的基本属性"
       equation
         assert(T >= T_min and T <= T_max, "
-温度 T (= " + String(T) + " K) 不在允许范围内 (" + String(T_min) + " K <= T <= " + String(T_max) + " K)
-这是由介质模型 \"" + mediumName + "\" 所要求的。
-");
+温度 T (= "         + String(T) + " K) 不在允许范围内 (" + String(T_min) + " K <= T <= " + String(T_max) + " K)
+这是由介质模型 \""         + mediumName + "\" 所要求的。
+"        );
         h = specificEnthalpy_pTX(
-          p,
-          T,
+          p, 
+          T, 
           X);
         u = h - R_s * T;
         R_s = R_gas;
@@ -5607,217 +5635,194 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation(Documentation(info = "<html><p>
 这是最简单的不可压缩介质模型，其中比焓 h 和比内能 u 仅为温度 T 的函数，所有其他提供的介质量假设为恒定。
 </p>
-</html>"));
+</html>"        ));
       end BaseProperties;
 
-      redeclare function setState_pTX
-        "根据 p、T 和 X 或 Xi 计算热力学状态"
+      redeclare function setState_pTX 
+        "根据p、T和X或Xi计算热力学状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input Temperature T "温度";
         input MassFraction X[:] = reference_X "质量分数";
         output ThermodynamicState state "热力学状态记录";
-        annotation();
       algorithm
         state := ThermodynamicState(p = p, T = T);
       end setState_pTX;
 
-      redeclare function setState_phX
-        "根据 p、h 和 X 或 Xi 计算热力学状态"
+      redeclare function setState_phX 
+        "根据p、h和X或Xi计算热力学状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEnthalpy h "比焓";
         input MassFraction X[:] = reference_X "质量分数";
         output ThermodynamicState state "热力学状态记录";
-        annotation();
       algorithm
         state := ThermodynamicState(p = p, T = T0 + h / cp_const);
       end setState_phX;
 
-      redeclare replaceable function setState_psX
-        "根据 p、s 和 X 或 Xi 计算热力学状态"
+      redeclare replaceable function setState_psX 
+        "根据p、s和X或Xi计算热力学状态"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEntropy s "比熵";
         input MassFraction X[:] = reference_X "质量分数";
         output ThermodynamicState state "热力学状态记录";
-        annotation();
       algorithm
-        state := ThermodynamicState(p = p, T = Modelica.Math.exp(s / cp_const +
+        state := ThermodynamicState(p = p, T = Modelica.Math.exp(s / cp_const + 
           Modelica.Math.log(reference_T) + R_gas * Modelica.Math.log(p / reference_p)));
       end setState_psX;
 
-      redeclare function setState_dTX
-        "根据 d、T 和 X 或 Xi 计算热力学状态"
+      redeclare function setState_dTX 
+        "根据d、T和X或Xi计算热力学状态"
         extends Modelica.Icons.Function;
         input Density d "密度";
         input Temperature T "温度";
         input MassFraction X[:] = reference_X "质量分数";
         output ThermodynamicState state "热力学状态记录";
-        annotation();
       algorithm
         state := ThermodynamicState(p = d * R_gas * T, T = T);
       end setState_dTX;
 
-      redeclare function extends setSmoothState
-        "计算光滑逼近热力学状态: 如果 x > 0 则为 state_a 否则为 state_b"
-        annotation();
+      redeclare function extends setSmoothState 
+        "计算光滑逼近热力学状态: 如果x > 0则为state_a否则为state_b"
       algorithm
         state := ThermodynamicState(p = Media.Common.smoothStep(
-          x,
-          state_a.p,
-          state_b.p,
+          x, 
+          state_a.p, 
+          state_b.p, 
           x_small), T = Media.Common.smoothStep(
-          x,
-          state_a.T,
-          state_b.T,
+          x, 
+          state_a.T, 
+          state_b.T, 
           x_small));
       end setSmoothState;
 
       redeclare function extends pressure "计算理想气体的压力"
-        annotation();
 
       algorithm
         p := state.p;
       end pressure;
 
       redeclare function extends temperature "计算理想气体的温度"
-        annotation();
 
       algorithm
         T := state.T;
       end temperature;
 
       redeclare function extends density "计算理想气体的密度"
-        annotation();
       algorithm
         d := state.p / (R_gas * state.T);
       end density;
 
       redeclare function extends specificEnthalpy "计算比焓"
         extends Modelica.Icons.Function;
-        annotation();
       algorithm
         h := cp_const * (state.T - T0);
       end specificEnthalpy;
 
-      redeclare function extends specificInternalEnergy
+      redeclare function extends specificInternalEnergy 
         "计算比内能"
         extends Modelica.Icons.Function;
-        annotation();
       algorithm
         u := cp_const * (state.T - T0) - R_gas * state.T;
       end specificInternalEnergy;
 
       redeclare function extends specificEntropy "计算比熵"
         extends Modelica.Icons.Function;
-        annotation();
       algorithm
         s := cp_const * Modelica.Math.log(state.T / T0) - R_gas * Modelica.Math.log(
           state.p / reference_p);
       end specificEntropy;
 
-      redeclare function extends specificGibbsEnergy
+      redeclare function extends specificGibbsEnergy 
         "计算比吉布斯能"
         extends Modelica.Icons.Function;
-        annotation();
       algorithm
         g := cp_const * (state.T - T0) - state.T * specificEntropy(state);
       end specificGibbsEnergy;
 
-      redeclare function extends specificHelmholtzEnergy
+      redeclare function extends specificHelmholtzEnergy 
         "计算比亥姆霍兹能"
         extends Modelica.Icons.Function;
-        annotation();
       algorithm
         f := specificInternalEnergy(state) - state.T * specificEntropy(state);
       end specificHelmholtzEnergy;
 
       redeclare function extends dynamicViscosity "计算动力黏度"
-        annotation();
 
       algorithm
         eta := eta_const;
       end dynamicViscosity;
 
-      redeclare function extends thermalConductivity
+      redeclare function extends thermalConductivity 
         "计算导热系数"
-        annotation();
 
       algorithm
         lambda := lambda_const;
       end thermalConductivity;
 
-      redeclare function extends specificHeatCapacityCp
+      redeclare function extends specificHeatCapacityCp 
         "计算定压比热容"
-        annotation();
 
       algorithm
         cp := cp_const;
       end specificHeatCapacityCp;
 
-      redeclare function extends specificHeatCapacityCv
+      redeclare function extends specificHeatCapacityCv 
         "计算定容比热容"
-        annotation();
 
       algorithm
         cv := cv_const;
       end specificHeatCapacityCv;
 
       redeclare function extends isentropicExponent "计算等熵指数"
-        annotation();
 
       algorithm
         gamma := cp_const / cv_const;
       end isentropicExponent;
 
       redeclare function extends velocityOfSound "计算声速"
-        annotation();
 
       algorithm
         a := sqrt(cp_const / cv_const * R_gas * state.T);
       end velocityOfSound;
 
-      redeclare function specificEnthalpy_pTX
-        "根据 p、T 和 X 或 Xi 计算比焓"
+      redeclare function specificEnthalpy_pTX 
+        "根据p、T和X或Xi计算比焓"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input Temperature T "温度";
         input MassFraction X[:] "质量分数";
         output SpecificEnthalpy h "在 p、T、X 下的比焓";
-        annotation();
       algorithm
         h := cp_const * (T - T0);
       end specificEnthalpy_pTX;
 
-      redeclare function temperature_phX
-        "根据 p、h 和 X 或 Xi 计算温度"
+      redeclare function temperature_phX 
+        "根据p、h和X或Xi计算温度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEnthalpy h "比焓";
         input MassFraction X[:] "质量分数";
         output Temperature T "温度";
-        annotation();
       algorithm
         T := h / cp_const + T0;
       end temperature_phX;
 
-      redeclare function density_phX "根据 p、h 和 X 或 Xi 计算密度"
+      redeclare function density_phX "根据p、h和X或Xi计算密度"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "压力";
         input SpecificEnthalpy h "比焓";
         input MassFraction X[:] "质量分数";
         output Density d "密度";
-        annotation();
       algorithm
         d := density(setState_phX(
-          p,
-          h,
+          p, 
+          h, 
           X));
       end density_phX;
 
       redeclare function extends isentropicEnthalpy "计算等熵焓"
-        annotation();
       algorithm
         /* s = cp_const*log(refState.T/T0) - R_gas*log(refState.p/reference_p)
         = cp_const*log(state.T/T0) - R_gas*log(p_downstream/reference_p)
@@ -5828,13 +5833,12 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         = log(refState.T) + log( (p_downstream/refState.p)^(R_gas/cp_const) )
         state.T = refstate.T*(p_downstream/refstate.p)^(R_gas/cp_const)
         */
-        h_is := cp_const * (refState.T * (p_downstream / refState.p) ^ (R_gas / cp_const)
+        h_is := cp_const * (refState.T * (p_downstream / refState.p) ^ (R_gas / cp_const) 
           - T0);
       end isentropicEnthalpy;
 
-      redeclare function extends isobaricExpansionCoefficient
+      redeclare function extends isobaricExpansionCoefficient 
         "计算等压膨胀系数"
-        annotation();
       algorithm
         /* beta = 1/v * der(v,T), with v = 1/d, at constant pressure p:
         v = R_s*T/p
@@ -5846,9 +5850,8 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         beta := 1 / state.T;
       end isobaricExpansionCoefficient;
 
-      redeclare function extends isothermalCompressibility
+      redeclare function extends isothermalCompressibility 
         "计算等温压缩系数"
-        annotation();
       algorithm
         /* kappa = - 1/v * der(v,p), with v = 1/d at constant temperature T.
         v = R_s*T/p
@@ -5859,9 +5862,8 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         kappa := 1 / state.p;
       end isothermalCompressibility;
 
-      redeclare function extends density_derp_T
-        "计算密度对压力的偏导数 (保持温度不变)"
-        annotation();
+      redeclare function extends density_derp_T 
+        "计算密度对压力的偏导数(保持温度不变)"
       algorithm
         /*  d = p/(R_s*T)
         ddpT = 1/(R_s*T)
@@ -5869,9 +5871,8 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         ddpT := 1 / (R_gas * state.T);
       end density_derp_T;
 
-      redeclare function extends density_derT_p
-        "计算密度对温度的偏导数 (保持压力不变)"
-        annotation();
+      redeclare function extends density_derT_p 
+        "计算密度对温度的偏导数(保持压力不变)"
       algorithm
         /*  d = p/(R_s*T)
         ddpT = -p/(R_s*T^2)
@@ -5879,71 +5880,81 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         ddTp := -state.p / (R_gas * state.T * state.T);
       end density_derT_p;
 
-      redeclare function extends density_derX
-        "计算密度对质量分数的偏导数 (保持压力和温度不变)"
-        annotation();
+      redeclare function extends density_derX 
+        "计算密度对质量分数的偏导数(保持压力和温度不变)"
       algorithm
         dddX := fill(0, nX);
       end density_derX;
 
       redeclare function extends molarMass "计算介质的摩尔质量"
-        annotation();
       algorithm
         MM := MM_const;
       end molarMass;
-      annotation();
+
+      redeclare function extends density_derp_h 
+         "计算密度对压力的偏导数(在定比焓下)"
+      algorithm
+        ddph := 1 / (R_gas * state.T);
+      end density_derp_h;
+
+      redeclare function extends density_derh_p 
+        "计算密度对比焓的偏导数(在恒压下)"
+      algorithm
+        ddhp := -state.p * cp_const / (R_gas * specificEnthalpy(state) * specificEnthalpy(state));
+      end density_derh_p;
+
     end PartialSimpleIdealGasMedium;
 
     package Choices "用于定义菜单选择的类型和常量"
       extends Modelica.Icons.Package;
 
       type IndependentVariables = enumeration(
-        T "温度",
-        pT "压力, 温度",
-        ph "压力, 比焓",
-        phX "压力, 比焓, 质量分数",
-        pTX "压力, 温度, 质量分数",
-        dTX "密度, 温度, 质量分数")
+        T "温度", 
+        pT "压力, 温度", 
+        ph "压力, 比焓", 
+        phX "压力, 比焓, 质量分数", 
+        pTX "压力, 温度, 质量分数", 
+        dTX "密度, 温度, 质量分数") 
         "定义介质独立变量的枚举" annotation();
 
       type Init = enumeration(
-        NoInit "无初始化",
-        InitialStates "初始化介质状态",
-        SteadyState "初始化为稳态",
-        SteadyMass
-        "初始化密度或压力为稳态")
-        "定义流体流动初始化的枚举" annotation(Evaluate =
+        NoInit "无初始化", 
+        InitialStates "初始化介质状态", 
+        SteadyState "初始化为稳态", 
+        SteadyMass 
+        "初始化密度或压力为稳态") 
+        "定义流体流动初始化的枚举" annotation(Evaluate = 
         true);
 
       type ReferenceEnthalpy = enumeration(
-        ZeroAt0K
-        "焓在 0K 时为 0 (默认), 如果不包括生成焓",
-        ZeroAt25C
-        "焓在 25 摄氏度时为 0, 如果不包括生成焓",
-        UserDefined
-        "用户定义的参考焓在 293.15 K (25 摄氏度)时使用")
+        ZeroAt0K 
+        "焓在 0K 时为 0 (默认), 如果不包括生成焓", 
+        ZeroAt25C 
+        "焓在 25 摄氏度时为 0, 如果不包括生成焓", 
+        UserDefined 
+        "用户定义的参考焓在 293.15 K (25 摄氏度)时使用") 
         "定义介质参考焓的枚举" annotation(
         Evaluate = true);
 
       type ReferenceEntropy = enumeration(
-        ZeroAt0K "熵在 0K 时为 0 (默认)",
-        ZeroAt0C "熵在 0 摄氏度时为 0",
-        UserDefined
-        "用户定义的参考熵在293.15 K (25 摄氏度)时使用")
+        ZeroAt0K "熵在 0K 时为 0 (默认)", 
+        ZeroAt0C "熵在 0 摄氏度时为 0", 
+        UserDefined 
+        "用户定义的参考熵在293.15 K (25 摄氏度)时使用") 
         "定义介质参考熵的枚举" annotation(
         Evaluate = true);
 
       type pd = enumeration(
-        default "默认 (没有 p 或 d 的边界条件)",
-        p_known "p_known (已知压力 p)",
-        d_known "d_known (已知密度 d)")
+        default "默认 (没有 p 或 d 的边界条件)", 
+        p_known "p_known (已知压力 p)", 
+        d_known "d_known (已知密度 d)") 
         "定义边界条件中是否已知 p 或 d 的枚举" 
         annotation(Evaluate = true);
 
       type Th = enumeration(
-        default "默认 (没有 T 或 h 的边界条件)",
-        T_known "T_known (已知温度 T)",
-        h_known "h_known (已知比焓 h)")
+        default "默认 (没有 T 或 h 的边界条件)", 
+        T_known "T_known (已知温度 T)", 
+        h_known "h_known (已知比焓 h)") 
         "定义边界条件中是否已知 T 或 h 的枚举" 
         annotation(Evaluate = true);
 
@@ -5960,163 +5971,163 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       extends Modelica.Icons.Package;
 
       type AbsolutePressure = SI.AbsolutePressure(
-        min = 0,
-        max = 1.e8,
-        nominal = 1.e5,
-        start = 1.e5)
+        min = 0, 
+        max = 1.e8, 
+        nominal = 1.e5, 
+        start = 1.e5) 
         "具有介质特定属性的绝对压力类型" annotation();
 
       type Density = SI.Density(
-        min = 0,
-        max = 1.e5,
-        nominal = 1,
-        start = 1)
+        min = 0, 
+        max = 1.e5, 
+        nominal = 1, 
+        start = 1) 
         "具有介质特定属性的密度类型" annotation();
 
       type DynamicViscosity = SI.DynamicViscosity(
-        min = 0,
-        max = 1.e8,
-        nominal = 1.e-3,
-        start = 1.e-3)
+        min = 0, 
+        max = 1.e8, 
+        nominal = 1.e-3, 
+        start = 1.e-3) 
         "具有介质特定属性的动力黏度类型" annotation();
 
       type EnthalpyFlowRate = SI.EnthalpyFlowRate(
-        nominal = 1000.0,
-        min = -1.0e8,
-        max = 1.e8)
+        nominal = 1000.0, 
+        min = -1.0e8, 
+        max = 1.e8) 
         "具有介质特定属性的焓流类型" annotation();
 
       type MassFraction = Real(
-        quantity = "MassFraction",
-        final unit = "kg/kg",
-        min = 0,
-        max = 1,
-        nominal = 0.1)
+        quantity = "MassFraction", 
+        final unit = "kg/kg", 
+        min = 0, 
+        max = 1, 
+        nominal = 0.1) 
         "具有介质特定属性的质量分数类型" annotation();
 
       type MoleFraction = Real(
-        quantity = "MoleFraction",
-        final unit = "mol/mol",
-        min = 0,
-        max = 1,
-        nominal = 0.1)
+        quantity = "MoleFraction", 
+        final unit = "mol/mol", 
+        min = 0, 
+        max = 1, 
+        nominal = 0.1) 
         "具有介质特定属性的摩尔分数类型" annotation();
 
       type MolarMass = SI.MolarMass(
-        min = 0.001,
-        max = 0.25,
-        nominal = 0.032)
+        min = 0.001, 
+        max = 0.25, 
+        nominal = 0.032) 
         "具有介质特定属性的摩尔质量类型" annotation();
 
       type MolarVolume = SI.MolarVolume(
-        min = 1e-6,
-        max = 1.0e6,
-        nominal = 1.0)
+        min = 1e-6, 
+        max = 1.0e6, 
+        nominal = 1.0) 
         "具有介质特定属性的摩尔体积类型" annotation();
 
       type IsentropicExponent = SI.RatioOfSpecificHeatCapacities(
-        min = 1,
-        max = 500000,
-        nominal = 1.2,
-        start = 1.2)
+        min = 1, 
+        max = 500000, 
+        nominal = 1.2, 
+        start = 1.2) 
         "具有介质特定属性的等熵指数类型" annotation();
 
       type SpecificEnergy = SI.SpecificEnergy(
-        min = -1.0e8,
-        max = 1.e8,
-        nominal = 1.e6)
+        min = -1.0e8, 
+        max = 1.e8, 
+        nominal = 1.e6) 
         "具有介质特定属性的比能类型" annotation();
 
-      type SpecificInternalEnergy = SpecificEnergy
+      type SpecificInternalEnergy = SpecificEnergy 
         "具有介质特定属性的比内能类型" annotation();
 
       type SpecificEnthalpy = SI.SpecificEnthalpy(
-        min = -1.0e10,
-        max = 1.e10,
-        nominal = 1.e6)
+        min = -1.0e10, 
+        max = 1.e10, 
+        nominal = 1.e6) 
         "具有介质特定属性的比焓类型" annotation();
 
       type SpecificEntropy = SI.SpecificEntropy(
-        min = -1.e7,
-        max = 1.e7,
-        nominal = 1.e3)
+        min = -1.e7, 
+        max = 1.e7, 
+        nominal = 1.e3) 
         "具有介质特定属性的比熵类型" annotation();
 
       type SpecificHeatCapacity = SI.SpecificHeatCapacity(
-        min = 0,
-        max = 1.e7,
-        nominal = 1.e3,
-        start = 1.e3)
+        min = 0, 
+        max = 1.e7, 
+        nominal = 1.e3, 
+        start = 1.e3) 
         "具有介质特定属性的比热容类型" annotation();
 
-      type SurfaceTension = SI.SurfaceTension
+      type SurfaceTension = SI.SurfaceTension 
         "具有介质特定属性的表面张力类型" annotation();
 
       type Temperature = SI.Temperature(
-        min = 1,
-        max = 1.e4,
-        nominal = 300,
-        start = 288.15)
+        min = 1, 
+        max = 1.e4, 
+        nominal = 300, 
+        start = 288.15) 
         "具有介质特定属性的温度类型" annotation();
 
       type ThermalConductivity = SI.ThermalConductivity(
-        min = 0,
-        max = 500,
-        nominal = 1,
-        start = 1)
+        min = 0, 
+        max = 500, 
+        nominal = 1, 
+        start = 1) 
         "具有介质特定属性的导热系数类型" annotation();
 
       type PrandtlNumber = SI.PrandtlNumber(
-        min = 1e-3,
-        max = 1e5,
-        nominal = 1.0)
+        min = 1e-3, 
+        max = 1e5, 
+        nominal = 1.0) 
         "具有介质特定属性的普朗特数类型" annotation();
 
       type VelocityOfSound = SI.Velocity(
-        min = 0,
-        max = 1.e5,
-        nominal = 1000,
-        start = 1000)
+        min = 0, 
+        max = 1.e5, 
+        nominal = 1000, 
+        start = 1000) 
         "具有介质特定属性的声速类型" annotation();
 
-      type ExtraProperty = Real(min = 0.0, start = 1.0)
+      type ExtraProperty = Real(min = 0.0, start = 1.0) 
         "流动中输运的质量特性，未指定类型" annotation();
 
-      type CumulativeExtraProperty = Real(min = 0.0, start = 1.0)
+      type CumulativeExtraProperty = Real(min = 0.0, start = 1.0) 
         "未指定的守恒积分类型，质量特性" annotation();
 
-      type ExtraPropertyFlowRate = Real(unit = "kg/s")
+      type ExtraPropertyFlowRate = Real(unit = "kg/s") 
         "未指定的流量类型，质量特性" annotation();
 
       type IsobaricExpansionCoefficient = Real(
-        min = 0,
-        max = 1.0e8,
-        unit = "1/K")
+        min = 0, 
+        max = 1.0e8, 
+        unit = "1/K") 
         "具有介质特定属性的等压膨胀系数类型" annotation();
 
       type DipoleMoment = Real(
-        min = 0.0,
-        max = 2.0,
-        unit = "debye",
-        quantity = "ElectricDipoleMoment")
-        "具有介质特定属性的偶极矩类型" annotation();
+        min = 0.0, 
+        max = 2.0, 
+        unit = "debye", 
+        quantity = "ElectricDipoleMoment") 
+        "具有介质特定属性的偶极矩类型定义" annotation();
 
-      type DerDensityByPressure = SI.DerDensityByPressure
+      type DerDensityByPressure = SI.DerDensityByPressure 
         "具有介质特定属性的密度对压力的偏导数类型" annotation();
 
-      type DerDensityByEnthalpy = SI.DerDensityByEnthalpy
+      type DerDensityByEnthalpy = SI.DerDensityByEnthalpy 
         "具有介质特定属性的密度对焓的偏导数类型" annotation();
 
-      type DerEnthalpyByPressure = SI.DerEnthalpyByPressure
+      type DerEnthalpyByPressure = SI.DerEnthalpyByPressure 
         "具有介质特定属性的焓对压力的偏导数类型" annotation();
 
-      type DerDensityByTemperature = SI.DerDensityByTemperature
+      type DerDensityByTemperature = SI.DerDensityByTemperature 
         "具有介质特定属性的密度对温度的偏导数类型" annotation();
 
-      type DerTemperatureByPressure = Real(final unit = "K/Pa")
+      type DerTemperatureByPressure = Real(final unit = "K/Pa") 
         "具有介质特定属性的温度对压力的偏导数类型" annotation();
 
-      replaceable record SaturationProperties
+      replaceable record SaturationProperties 
         "两相介质的饱和特性"
         extends Modelica.Icons.Record;
         AbsolutePressure psat "饱和压力";
@@ -6142,21 +6153,21 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
 </html>"));
       end FluidLimits;
 
-      type FixedPhase = Integer(min = 0, max = 2)
+      type FixedPhase = Integer(min = 0, max = 2) 
         "流体相态：1 为单相，2 为两相，0 为未知，例如交互使用" annotation();
 
-      package Basic
+      package Basic 
         "用于多种详细程度的记录的最基础版本"
         extends Icons.Package;
 
-        record FluidConstants
+        record FluidConstants 
           "流体的临界、三相、分子和其他标准数据"
           extends Modelica.Icons.Record;
-          String iupacName
+          String iupacName 
             "完整的 IUPAC 名称（如果不存在，则使用常用名称）";
-          String casRegistryNumber
+          String casRegistryNumber 
             "化学序列号（如果存在）";
-          String chemicalFormula
+          String chemicalFormula 
             "化学式（按照 Hill 命名法）";
           String structureFormula "化学结构式";
           MolarMass molarMass "摩尔质量";
@@ -6166,7 +6177,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
 
       end Basic;
 
-      package IdealGas
+      package IdealGas 
         "用于多种详细程度的理想气体记录表"
         extends Icons.Package;
 
@@ -6180,42 +6191,42 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
           //   AbsolutePressure triplePointPressure "三相点压力";
           Temperature meltingPoint "在 101325 Pa 时的熔点";
           Temperature normalBoilingPoint "额定沸点（在 101325 Pa 时）";
-          DipoleMoment dipoleMoment
+          DipoleMoment dipoleMoment 
             "分子的偶极矩，单位为 debye(1 debye = 3.33564e10-30 C.m)";
-          Boolean hasIdealGasHeatCapacity = false
+          Boolean hasIdealGasHeatCapacity = false 
             "如果理想气体的比热容可用，则为 true";
-          Boolean hasCriticalData = false
+          Boolean hasCriticalData = false 
             "如果已知临界数据，则为 true";
-          Boolean hasDipoleMoment = false
+          Boolean hasDipoleMoment = false 
             "如果已知偶极矩，则为 true";
-          Boolean hasFundamentalEquation = false
+          Boolean hasFundamentalEquation = false 
             "如果有基本方程，则为 true";
-          Boolean hasLiquidHeatCapacity = false
+          Boolean hasLiquidHeatCapacity = false 
             "如果液体的比热容可用，则为 true";
-          Boolean hasSolidHeatCapacity = false
+          Boolean hasSolidHeatCapacity = false 
             "如果固体的比热容可用，则为 true";
-          Boolean hasAccurateViscosityData = false
+          Boolean hasAccurateViscosityData = false 
             "如果黏度函数的准确数据可用，则为 true";
-          Boolean hasAccurateConductivityData = false
+          Boolean hasAccurateConductivityData = false 
             "如果导热系数的准确数据可用，则为 true";
-          Boolean hasVapourPressureCurve = false
+          Boolean hasVapourPressureCurve = false 
             "如果已知蒸汽压力数据，例如 Antoine 系数，则为 true";
-          Boolean hasAcentricFactor = false
+          Boolean hasAcentricFactor = false 
             "如果已知 Pitzer 偏心系数，则为 true";
-          SpecificEnthalpy HCRIT0 = 0.0
+          SpecificEnthalpy HCRIT0 = 0.0 
             "基本方程的临界比焓";
-          SpecificEntropy SCRIT0 = 0.0
+          SpecificEntropy SCRIT0 = 0.0 
             "基本方程的临界比熵";
-          SpecificEnthalpy deltah = 0.0
+          SpecificEnthalpy deltah = 0.0 
             "比焓模型 (h_m) 和基本方程 (h_f) 之间的差异 (h_m - h_f)";
-          SpecificEntropy deltas = 0.0
+          SpecificEntropy deltas = 0.0 
             "比熵模型 (s_m) 和基本方程 (s_f) 之间的差异 (s_m - s_f)";
           annotation();
         end FluidConstants;
         annotation();
       end IdealGas;
 
-      package TwoPhase
+      package TwoPhase 
         "用于多种详细程度的两相流体记录表"
         extends Icons.Package;
 
@@ -6229,35 +6240,35 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
           AbsolutePressure triplePointPressure "三相点压力";
           Temperature meltingPoint "在 101325 Pa 时的熔点";
           Temperature normalBoilingPoint "正常沸点（在 101325 Pa 时）";
-          DipoleMoment dipoleMoment
+          DipoleMoment dipoleMoment 
             "分子的偶极矩，单位为 debye（1 debye = 3.33564e10-30 C.m）";
-          Boolean hasIdealGasHeatCapacity = false
+          Boolean hasIdealGasHeatCapacity = false 
             "如果理想气体的比热容可用，则为 true";
-          Boolean hasCriticalData = false
+          Boolean hasCriticalData = false 
             "如果已知临界数据，则为 true";
-          Boolean hasDipoleMoment = false
+          Boolean hasDipoleMoment = false 
             "如果已知偶极矩，则为 true";
-          Boolean hasFundamentalEquation = false
+          Boolean hasFundamentalEquation = false 
             "如果有基本方程，则为 true";
-          Boolean hasLiquidHeatCapacity = false
+          Boolean hasLiquidHeatCapacity = false 
             "如果液体的比热容可用，则为 true";
-          Boolean hasSolidHeatCapacity = false
+          Boolean hasSolidHeatCapacity = false 
             "如果固体的比热容可用，则为 true";
-          Boolean hasAccurateViscosityData = false
+          Boolean hasAccurateViscosityData = false 
             "如果黏度函数的准确数据可用，则为 true";
-          Boolean hasAccurateConductivityData = false
+          Boolean hasAccurateConductivityData = false 
             "如果导热系数的准确数据可用，则为 true";
-          Boolean hasVapourPressureCurve = false
+          Boolean hasVapourPressureCurve = false 
             "如果已知蒸汽压力数据，例如 Antoine 系数，则为 true";
-          Boolean hasAcentricFactor = false
+          Boolean hasAcentricFactor = false 
             "如果已知 Pitzer 偏心系数，则为 true";
-          SpecificEnthalpy HCRIT0 = 0.0
+          SpecificEnthalpy HCRIT0 = 0.0 
             "基本方程的临界比焓";
-          SpecificEntropy SCRIT0 = 0.0
+          SpecificEntropy SCRIT0 = 0.0 
             "基本方程的临界比熵";
-          SpecificEnthalpy deltah = 0.0
+          SpecificEnthalpy deltah = 0.0 
             "比焓模型 (h_m) 和基本方程 (h_f) 之间的差异 (h_m - h_f)";
-          SpecificEntropy deltas = 0.0
+          SpecificEntropy deltas = 0.0 
             "比熵模型 (s_m) 和基本方程 (s_f) 之间的差异 (s_m - s_f)";
           annotation();
         end FluidConstants;
@@ -6278,47 +6289,47 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
 
     type Rate = Real(final quantity = "Rate", final unit = "s-1") annotation();
     type MolarFlowRate = Real(final quantity = "MolarFlowRate", final unit = "mol/s") annotation();
-    type MolarReactionRate = Real(final quantity = "MolarReactionRate", final unit =
+    type MolarReactionRate = Real(final quantity = "MolarReactionRate", final unit = 
       "mol/(m3.s)") annotation();
     type MolarEnthalpy = Real(final quantity = "MolarEnthalpy", final unit = "J/mol") annotation();
     type DerDensityByEntropy = Real(final quantity = "DerDensityByEntropy", final
       unit = "kg2.K/(m3.J)") annotation();
     type DerEnergyByPressure = Real(final quantity = "DerEnergyByPressure", final
       unit = "J/Pa") annotation();
-    type DerEnergyByMoles = Real(final quantity = "DerEnergyByMoles", final unit =
+    type DerEnergyByMoles = Real(final quantity = "DerEnergyByMoles", final unit = 
       "J/mol") annotation();
-    type DerEntropyByTemperature = Real(final quantity = "DerEntropyByTemperature",
+    type DerEntropyByTemperature = Real(final quantity = "DerEntropyByTemperature", 
       final unit = "J/K2") annotation();
-    type DerEntropyByPressure = Real(final quantity = "DerEntropyByPressure",
+    type DerEntropyByPressure = Real(final quantity = "DerEntropyByPressure", 
       final unit = "J/(K.Pa)") annotation();
-    type DerEntropyByMoles = Real(final quantity = "DerEntropyByMoles", final unit =
+    type DerEntropyByMoles = Real(final quantity = "DerEntropyByMoles", final unit = 
       "J/(mol.K)") annotation();
-    type DerPressureByDensity = Real(final quantity = "DerPressureByDensity",
+    type DerPressureByDensity = Real(final quantity = "DerPressureByDensity", 
       final unit = "Pa.m3/kg") annotation();
-    type DerPressureBySpecificVolume = Real(final quantity =
+    type DerPressureBySpecificVolume = Real(final quantity = 
       "DerPressureBySpecificVolume", final unit = "Pa.kg/m3") annotation();
-    type DerPressureByTemperature = Real(final quantity =
+    type DerPressureByTemperature = Real(final quantity = 
       "DerPressureByTemperature", final unit = "Pa/K") annotation();
-    type DerVolumeByTemperature = Real(final quantity = "DerVolumeByTemperature",
+    type DerVolumeByTemperature = Real(final quantity = "DerVolumeByTemperature", 
       final unit = "m3/K") annotation();
     type DerVolumeByPressure = Real(final quantity = "DerVolumeByPressure", final
       unit = "m3/Pa") annotation();
-    type DerVolumeByMoles = Real(final quantity = "DerVolumeByMoles", final unit =
+    type DerVolumeByMoles = Real(final quantity = "DerVolumeByMoles", final unit = 
       "m3/mol") annotation();
-    type IsenthalpicExponent = Real(final quantity = "IsenthalpicExponent", unit =
+    type IsenthalpicExponent = Real(final quantity = "IsenthalpicExponent", unit = 
       "1") annotation();
     type IsentropicExponent = Real(final quantity = "IsentropicExponent", unit = "1") annotation();
-    type IsobaricVolumeExpansionCoefficient = Real(final quantity =
+    type IsobaricVolumeExpansionCoefficient = Real(final quantity = 
       "IsobaricVolumeExpansionCoefficient", unit = "1/K") annotation();
-    type IsochoricPressureCoefficient = Real(final quantity =
+    type IsochoricPressureCoefficient = Real(final quantity = 
       "IsochoricPressureCoefficient", unit = "1/K") annotation();
-    type IsothermalCompressibility = Real(final quantity =
+    type IsothermalCompressibility = Real(final quantity = 
       "IsothermalCompressibility", unit = "1/Pa") annotation();
-    type JouleThomsonCoefficient = Real(final quantity = "JouleThomsonCoefficient",
+    type JouleThomsonCoefficient = Real(final quantity = "JouleThomsonCoefficient", 
       unit = "K/Pa") annotation();
 
     // 引入最小-最大-额定值
-    constant Real MINPOS = 1.0e-9
+    constant Real MINPOS = 1.0e-9 
       "最小的物理变量值，总是 > 0.0";
 
     constant SI.Area AMIN = MINPOS "最小初始面积";
@@ -6369,11 +6380,11 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
     constant SI.Pressure COMPPMIN = -1.0 * MINPOS "最小初始压力";
     constant SI.Pressure COMPPMAX = 1.0e8 "最大初始压力";
     constant SI.Pressure COMPPNOM = 1.0e5 "额定初始压力";
-    constant SI.RatioOfSpecificHeatCapacities KAPPAMIN = 1.0
+    constant SI.RatioOfSpecificHeatCapacities KAPPAMIN = 1.0 
       "最小初始比热容指数";
-    constant SI.RatioOfSpecificHeatCapacities KAPPAMAX = 1.7
+    constant SI.RatioOfSpecificHeatCapacities KAPPAMAX = 1.7 
       "最大初始比热容指数";
-    constant SI.RatioOfSpecificHeatCapacities KAPPANOM = 1.2
+    constant SI.RatioOfSpecificHeatCapacities KAPPANOM = 1.2 
       "额定初始比热容指数";
     constant SI.SpecificEnergy SEMIN = -1.0e8 "最小初始比能";
     constant SI.SpecificEnergy SEMAX = 1.0e8 "最大初始比能";
@@ -6384,18 +6395,18 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
     constant SI.SpecificEntropy SSMIN = -1.0e6 "最小初始比熵";
     constant SI.SpecificEntropy SSMAX = 1.0e6 "最大初始比熵";
     constant SI.SpecificEntropy SSNOM = 1.0e3 "额定初始比熵";
-    constant SI.SpecificHeatCapacity CPMIN = MINPOS
+    constant SI.SpecificHeatCapacity CPMIN = MINPOS 
       "最小初始比热容";
-    constant SI.SpecificHeatCapacity CPMAX = 1.0e6
+    constant SI.SpecificHeatCapacity CPMAX = 1.0e6 
       "最大初始比热容";
-    constant SI.SpecificHeatCapacity CPNOM = 1.0e3
+    constant SI.SpecificHeatCapacity CPNOM = 1.0e3 
       "额定初始比热容";
     constant SI.Temperature TMIN = 1.0 "最小初始温度";
     constant SI.Temperature TMAX = 6000.0 "最大初始温度";
     constant SI.Temperature TNOM = 320.0 "额定初始温度";
-    constant SI.ThermalConductivity LMIN = MINPOS
+    constant SI.ThermalConductivity LMIN = MINPOS 
       "最小初始导热系数";
-    constant SI.ThermalConductivity LMAX = 500.0
+    constant SI.ThermalConductivity LMAX = 500.0 
       "最大初始导热系数";
     constant SI.ThermalConductivity LNOM = 1.0 "额定初始导热系数";
     constant SI.Velocity VELMIN = -1.0e5 "最小初始速度";
@@ -6424,82 +6435,82 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         parameter Integer n(min = 1) "离散化数量";
         parameter Integer nspecies(min = 1) "组分数量";
         SI.Pressure[n] p(
-          min = PMIN,
-          max = PMAX,
-          nominal = PNOM,
+          min = PMIN, 
+          max = PMAX, 
+          nominal = PNOM, 
           start = fill(1.0e5, n)) "压力";
         SI.Temperature[n] T(
-          min = TMIN,
-          max = TMAX,
+          min = TMIN, 
+          max = TMAX, 
           nominal = TNOM) "温度";
         SI.Density[n] d(
-          min = DMIN,
-          max = DMAX,
+          min = DMIN, 
+          max = DMAX, 
           nominal = DNOM) "密度";
         SI.SpecificEnthalpy[n] h(
-          min = SHMIN,
-          max = SHMAX,
+          min = SHMIN, 
+          max = SHMAX, 
           nominal = SHNOM) "比焓";
         SI.SpecificEntropy[n] s(
-          min = SSMIN,
-          max = SSMAX,
+          min = SSMIN, 
+          max = SSMAX, 
           nominal = SSNOM) "比熵";
         SI.RatioOfSpecificHeatCapacities[n] kappa "比热容比 cp/cv";
         SI.Mass[n] M(
-          min = MMIN,
-          max = MMAX,
+          min = MMIN, 
+          max = MMAX, 
           nominal = MNOM) "总质量";
         SI.Energy[n] U(
-          min = EMIN,
-          max = EMAX,
+          min = EMIN, 
+          max = EMAX, 
           nominal = ENOM) "内能";
         SI.MassFlowRate[n] dM(
-          min = MDOTMIN,
-          max = MDOTMAX,
+          min = MDOTMIN, 
+          max = MDOTMAX, 
           nominal = MDOTNOM) "总质量变化";
         SI.Power[n] dU(
-          min = POWMIN,
-          max = POWMAX,
+          min = POWMIN, 
+          max = POWMAX, 
           nominal = POWNOM) "内能变化";
         SI.Volume[n] V(
-          min = VMIN,
-          max = VMAX,
+          min = VMIN, 
+          max = VMAX, 
           nominal = VNOM) "体积";
         SI.MassFraction[n,nspecies] mass_x(
-          min = MASSXMIN,
-          max = MASSXMAX,
+          min = MASSXMIN, 
+          max = MASSXMAX, 
           nominal = MASSXNOM) "质量分数";
         SI.MoleFraction[n,nspecies] mole_y(
-          min = MOLEYMIN,
-          max = MOLEYMAX,
+          min = MOLEYMIN, 
+          max = MOLEYMAX, 
           nominal = MOLEYNOM) "摩尔分数";
         SI.Mass[n,nspecies] M_x(
-          min = MMIN,
-          max = MMAX,
+          min = MMIN, 
+          max = MMAX, 
           nominal = MNOM) "组分质量";
         SI.MassFlowRate[n,nspecies] dM_x(
-          min = MDOTMIN,
-          max = MDOTMAX,
+          min = MDOTMIN, 
+          max = MDOTMAX, 
           nominal = MDOTNOM) "组分质量变化率";
         MolarFlowRate[n,nspecies] dZ(
-          min = -1.0e6,
-          max = 1.0e6,
+          min = -1.0e6, 
+          max = 1.0e6, 
           nominal = 0.0) "组分摩尔变化率";
         MolarFlowRate[n,nspecies] rZ(
-          min = -1.0e6,
-          max = 1.0e6,
+          min = -1.0e6, 
+          max = 1.0e6, 
           nominal = 0.0) "反应（源）摩尔速率";
         SI.MolarMass[n] MM(
-          min = MMMIN,
-          max = MMMAX,
+          min = MMMIN, 
+          max = MMMAX, 
           nominal = MMNOM) "混合物的摩尔质量";
         SI.AmountOfSubstance[n] Moles(
-          min = MOLMIN,
-          max = MOLMAX,
+          min = MOLMIN, 
+          max = MOLMAX, 
           nominal = MOLNOM) "总摩尔数";
         SI.AmountOfSubstance[n,nspecies] Moles_z(
-          min = MOLMIN,
-          max = MOLMAX,
+          min = MOLMIN, 
+          max = MOLMAX, 
           nominal = MOLNOM) "摩尔向量";
         annotation(Documentation(info = "<html>
                          <h4>模型描述</h4>
@@ -6509,99 +6520,99 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
                               </html>"));
       end ThermoBaseVars;
 
-      record ThermoProperties
+      record ThermoProperties 
         "所有状态模型的热力学基础属性数据"
         extends Modelica.Icons.Record;
         parameter Integer nspecies(min = 1) "组分数量";
         SI.Temperature T(
-          min = TMIN,
-          max = TMAX,
+          min = TMIN, 
+          max = TMAX, 
           nominal = TNOM) "温度";
         SI.Density d(
-          min = DMIN,
-          max = DMAX,
+          min = DMIN, 
+          max = DMAX, 
           nominal = DNOM) "密度";
         SI.Pressure p(
-          min = PMIN,
-          max = PMAX,
+          min = PMIN, 
+          max = PMAX, 
           nominal = PNOM) "压力";
         SI.Volume V(
-          min = VMIN,
-          max = VMAX,
+          min = VMIN, 
+          max = VMAX, 
           nominal = VNOM) "体积";
         SI.SpecificEnthalpy h(
-          min = SHMIN,
-          max = SHMAX,
+          min = SHMIN, 
+          max = SHMAX, 
           nominal = SHNOM) "比焓";
         SI.SpecificEnergy u(
-          min = SEMIN,
-          max = SEMAX,
+          min = SEMIN, 
+          max = SEMAX, 
           nominal = SENOM) "比内能";
         SI.SpecificEntropy s(
-          min = SSMIN,
-          max = SSMAX,
+          min = SSMIN, 
+          max = SSMAX, 
           nominal = SSNOM) "比熵";
         SI.SpecificGibbsFreeEnergy g(
-          min = SHMIN,
-          max = SHMAX,
+          min = SHMIN, 
+          max = SHMAX, 
           nominal = SHNOM) "比吉布斯自由能";
         SI.SpecificHeatCapacity cp(
-          min = CPMIN,
-          max = CPMAX,
+          min = CPMIN, 
+          max = CPMAX, 
           nominal = CPNOM) "定压比热容";
         SI.SpecificHeatCapacity cv(
-          min = CPMIN,
-          max = CPMAX,
+          min = CPMIN, 
+          max = CPMAX, 
           nominal = CPNOM) "定容比热容";
         SI.SpecificHeatCapacity R_s(
-          min = CPMIN,
-          max = CPMAX,
+          min = CPMIN, 
+          max = CPMAX, 
           nominal = CPNOM) "气体常数";
         SI.MolarMass MM(
-          min = MMMIN,
-          max = MMMAX,
+          min = MMMIN, 
+          max = MMMAX, 
           nominal = MMNOM) "混合物的摩尔质量";
         SI.MassFraction[nspecies] mass_x(
-          min = MASSXMIN,
-          max = MASSXMAX,
+          min = MASSXMIN, 
+          max = MASSXMAX, 
           nominal = MASSXNOM) "质量分数";
         SI.MoleFraction[nspecies] mole_y(
-          min = MOLEYMIN,
-          max = MOLEYMAX,
+          min = MOLEYMIN, 
+          max = MOLEYMAX, 
           nominal = MOLEYNOM) "摩尔分数";
         SI.RatioOfSpecificHeatCapacities kappa "比热容比（cp/cv）";
-        SI.DerDensityByTemperature ddTp
+        SI.DerDensityByTemperature ddTp 
           "在恒压下密度对温度的导数";
-        SI.DerDensityByPressure ddpT
+        SI.DerDensityByPressure ddpT 
           "在恒温下密度对压力的导数";
-        Real dupT(unit = "m3.kg-1")
+        Real dupT(unit = "m3.kg-1") 
           "在恒温下内能对压力的导数";
-        Real dudT(unit = "(J.m3)/(kg2)")
+        Real dudT(unit = "(J.m3)/(kg2)") 
           "在恒温下内能对密度的导数";
-        SI.SpecificHeatCapacity duTp
+        SI.SpecificHeatCapacity duTp 
           "在恒压下内能对温度的导数";
-        SI.SpecificEnergy ddx[nspecies]
+        SI.SpecificEnergy ddx[nspecies] 
           "密度对质量组成变化的导数向量";
         SI.SpecificEnergy[nspecies] compu(
-          min = SEMIN,
-          max = SEMAX,
+          min = SEMIN, 
+          max = SEMAX, 
           nominal = SENOM) "组分的内能";
         SI.Pressure[nspecies] compp(
-          min = COMPPMIN,
-          max = COMPPMAX,
+          min = COMPPMIN, 
+          max = COMPPMAX, 
           nominal = COMPPNOM) "组分的分压力";
         SI.Velocity a(
-          min = VELMIN,
-          max = VELMAX,
+          min = VELMIN, 
+          max = VELMAX, 
           nominal = VELNOM) "声速";
-        SI.HeatCapacity dUTZ
+        SI.HeatCapacity dUTZ 
           "在恒摩尔数下内能对温度的导数";
-        SI.MolarInternalEnergy[nspecies] dUZT
+        SI.MolarInternalEnergy[nspecies] dUZT 
           "在恒温下内能对摩尔数的导数";
         SI.SpecificEnthalpy[nspecies] dHMxT(
-          min = SEMIN,
-          max = SEMAX,
-          nominal = SENOM)
+          min = SEMIN, 
+          max = SEMAX, 
+          nominal = SENOM) 
           "在恒温下总焓对组分质量的导数";
         Real dpT "压力对温度的导数";
         Real dpZ[nspecies] "压力对摩尔数的导数";
@@ -6612,50 +6623,50 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
   </p>
     </html>"));
       end ThermoProperties;
-      record ThermoProperties_ph
+      record ThermoProperties_ph 
         "压力 p 和比焓 h 作为动态状态的热力学属性数据"
 
         extends Modelica.Icons.Record;
         SI.Temperature T(
-          min = 1.0e-9,
-          max = 10000.0,
+          min = 1.0e-9, 
+          max = 10000.0, 
           nominal = 298.15) "温度";
         SI.Density d(
-          min = 1.0e-9,
-          max = 10000.0,
+          min = 1.0e-9, 
+          max = 10000.0, 
           nominal = 10.0) "密度";
         SI.SpecificEnergy u(
-          min = -1.0e8,
-          max = 1.0e8,
+          min = -1.0e8, 
+          max = 1.0e8, 
           nominal = 1.0e6) "比内能";
         SI.SpecificEntropy s(
-          min = -1.0e6,
-          max = 1.0e6,
+          min = -1.0e6, 
+          max = 1.0e6, 
           nominal = 1.0e3) "比熵";
         SI.SpecificHeatCapacity cp(
-          min = 1.0,
-          max = 1.0e6,
+          min = 1.0, 
+          max = 1.0e6, 
           nominal = 1000.0) "定压比热容";
         SI.SpecificHeatCapacity cv(
-          min = 1.0,
-          max = 1.0e6,
+          min = 1.0, 
+          max = 1.0e6, 
           nominal = 1000.0) "定容比热容";
         SI.SpecificHeatCapacity R_s(
-          min = 1.0,
-          max = 1.0e6,
+          min = 1.0, 
+          max = 1.0e6, 
           nominal = 1000.0) "气体常数";
         SI.RatioOfSpecificHeatCapacities kappa "比热容比（cp/cv）";
         SI.Velocity a(
-          min = 1.0,
-          max = 10000.0,
+          min = 1.0, 
+          max = 10000.0, 
           nominal = 300.0) "声速";
-        SI.DerDensityByEnthalpy ddhp
+        SI.DerDensityByEnthalpy ddhp 
           "在恒压下密度对焓的导数";
-        SI.DerDensityByPressure ddph
+        SI.DerDensityByPressure ddph 
           "在恒焓下密度对压力的导数";
-        Real duph(unit = "m3/kg")
+        Real duph(unit = "m3/kg") 
           "在恒焓下内能对压力的导数";
-        Real duhp(unit = "1")
+        Real duhp(unit = "1") 
           "在恒压下内能对焓的导数";
         annotation(Documentation(info = "<html>
 <h4>模型描述</h4>
@@ -6666,50 +6677,50 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
 </html>"));
       end ThermoProperties_ph;
 
-      record ThermoProperties_pT
+      record ThermoProperties_pT 
         "压力 p 和温度 T 作为动态状态的热力学属性数据"
 
         extends Modelica.Icons.Record;
         SI.Density d(
-          min = 1.0e-9,
-          max = 10000.0,
+          min = 1.0e-9, 
+          max = 10000.0, 
           nominal = 10.0) "密度";
         SI.SpecificEnthalpy h(
-          min = -1.0e8,
-          max = 1.0e8,
+          min = -1.0e8, 
+          max = 1.0e8, 
           nominal = 1.0e6) "比焓";
         SI.SpecificEnergy u(
-          min = -1.0e8,
-          max = 1.0e8,
+          min = -1.0e8, 
+          max = 1.0e8, 
           nominal = 1.0e6) "比内能";
         SI.SpecificEntropy s(
-          min = -1.0e6,
-          max = 1.0e6,
+          min = -1.0e6, 
+          max = 1.0e6, 
           nominal = 1.0e3) "比熵";
         SI.SpecificHeatCapacity cp(
-          min = 1.0,
-          max = 1.0e6,
+          min = 1.0, 
+          max = 1.0e6, 
           nominal = 1000.0) "定压比热容";
         SI.SpecificHeatCapacity cv(
-          min = 1.0,
-          max = 1.0e6,
+          min = 1.0, 
+          max = 1.0e6, 
           nominal = 1000.0) "定容比热容";
         SI.SpecificHeatCapacity R_s(
-          min = 1.0,
-          max = 1.0e6,
+          min = 1.0, 
+          max = 1.0e6, 
           nominal = 1000.0) "气体常数";
         SI.RatioOfSpecificHeatCapacities kappa "比热容比（cp/cv）";
         SI.Velocity a(
-          min = 1.0,
-          max = 10000.0,
+          min = 1.0, 
+          max = 10000.0, 
           nominal = 300.0) "声速";
-        SI.DerDensityByTemperature ddTp
+        SI.DerDensityByTemperature ddTp 
           "在恒压下密度对温度的导数";
-        SI.DerDensityByPressure ddpT
+        SI.DerDensityByPressure ddpT 
           "在恒温下密度对压力的导数";
-        Real dupT(unit = "m3.kg-1")
+        Real dupT(unit = "m3.kg-1") 
           "在恒温下内能对压力的导数";
-        SI.SpecificHeatCapacity duTp
+        SI.SpecificHeatCapacity duTp 
           "在恒压下内能对温度的导数";
         annotation(Documentation(info = "<html>
 <h4>模型描述</h4>
@@ -6719,44 +6730,44 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
 </p>
 </html>"));
       end ThermoProperties_pT;
-      record ThermoProperties_dT
+      record ThermoProperties_dT 
         "密度 d 和温度 T 作为动态状态的热力学属性数据"
 
         extends Modelica.Icons.Record;
         SI.Pressure p(
-          min = 1.0,
-          max = 1.0e9,
+          min = 1.0, 
+          max = 1.0e9, 
           nominal = 1.0e5) "压力";
         SI.SpecificEnthalpy h(
-          min = -1.0e8,
-          max = 1.0e8,
+          min = -1.0e8, 
+          max = 1.0e8, 
           nominal = 1.0e6) "比焓";
         SI.SpecificEnergy u(
-          min = -1.0e8,
-          max = 1.0e8,
+          min = -1.0e8, 
+          max = 1.0e8, 
           nominal = 1.0e6) "比内能";
         SI.SpecificEntropy s(
-          min = -1.0e6,
-          max = 1.0e6,
+          min = -1.0e6, 
+          max = 1.0e6, 
           nominal = 1.0e3) "比熵";
         SI.SpecificHeatCapacity cp(
-          min = 1.0,
-          max = 1.0e6,
+          min = 1.0, 
+          max = 1.0e6, 
           nominal = 1000.0) "定压比热容";
         SI.SpecificHeatCapacity cv(
-          min = 1.0,
-          max = 1.0e6,
+          min = 1.0, 
+          max = 1.0e6, 
           nominal = 1000.0) "定容比热容";
         SI.SpecificHeatCapacity R_s(
-          min = 1.0,
-          max = 1.0e6,
+          min = 1.0, 
+          max = 1.0e6, 
           nominal = 1000.0) "气体常数";
         SI.RatioOfSpecificHeatCapacities kappa "比热容比（cp/cv）";
         SI.Velocity a(
-          min = 1.0,
-          max = 10000.0,
+          min = 1.0, 
+          max = 10000.0, 
           nominal = 300.0) "声速";
-        Real dudT(unit = "m5/(kg.s2)")
+        Real dudT(unit = "m5/(kg.s2)") 
           "在恒温下内能对密度的导数";
         annotation(Documentation(info = "<html>
 <h4>模型描述</h4>
@@ -6802,17 +6813,17 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         annotation();
       end TransportProps;
 
-      function gibbsToProps_ph
+      function gibbsToProps_ph 
         "根据无量纲吉布斯函数计算压力和比焓作为状态的属性记录表"
 
         extends Modelica.Icons.Function;
         input GibbsDerivs g "无量纲吉布斯函数的导数";
-        output ThermoProperties_ph pro
+        output ThermoProperties_ph pro 
           "压力和比焓作为动态状态的属性记录表";
       protected
-        Real vt(unit = "m3.kg-1.K-1")
+        Real vt(unit = "m3.kg-1.K-1") 
           "比容对温度的导数";
-        Real vp(unit = "m4.kg-2.s2")
+        Real vp(unit = "m4.kg-2.s2") 
           "比容对压力的导数";
         annotation();
       algorithm
@@ -6822,9 +6833,9 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         pro.u := g.T * g.R_s * (g.tau * g.gtau - g.pi * g.gpi);
         pro.s := pro.R_s * (g.tau * g.gtau - g.g);
         pro.cp := -pro.R_s * g.tau * g.tau * g.gtautau;
-        pro.cv := pro.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi
+        pro.cv := pro.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi 
           - g.tau * g.gtaupi) / (g.gpipi));
-        pro.a := abs(g.R_s * g.T * (g.gpi * g.gpi / ((g.gpi - g.tau * g.gtaupi) * (g.gpi - g.tau
+        pro.a := abs(g.R_s * g.T * (g.gpi * g.gpi / ((g.gpi - g.tau * g.gtaupi) * (g.gpi - g.tau 
           * g.gtaupi) / (g.tau * g.tau * g.gtautau) - g.gpipi))) ^ 0.5;
         vt := g.R_s / g.p * (g.pi * g.gpi - g.tau * g.pi * g.gtaupi);
         vp := g.R_s * g.T / (g.p * g.p) * g.pi * g.pi * g.gpipi;
@@ -6834,16 +6845,16 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         pro.duph := -1 / pro.d + g.p / (pro.d * pro.d) * pro.ddph;
         pro.duhp := 1 + g.p / (pro.d * pro.d) * pro.ddhp;
       end gibbsToProps_ph;
-      function gibbsToBoundaryProps
+      function gibbsToBoundaryProps 
         "根据无量纲吉布斯函数计算相边界属性记录表"
 
         extends Modelica.Icons.Function;
         input GibbsDerivs g "无量纲吉布斯函数的导数";
         output PhaseBoundaryProperties sat "相边界属性";
       protected
-        Real vt(unit = "m3.kg-1.K-1")
+        Real vt(unit = "m3.kg-1.K-1") 
           "比容对温度的导数";
-        Real vp(unit = "m4.kg-2.s2")
+        Real vp(unit = "m4.kg-2.s2") 
           "比容对压力的导数";
         annotation();
       algorithm
@@ -6852,7 +6863,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         sat.u := g.T * g.R_s * (g.tau * g.gtau - g.pi * g.gpi);
         sat.s := g.R_s * (g.tau * g.gtau - g.g);
         sat.cp := -g.R_s * g.tau * g.tau * g.gtautau;
-        sat.cv := g.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi
+        sat.cv := g.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi 
           - g.tau * g.gtaupi) / (g.gpipi));
         vt := g.R_s / g.p * (g.pi * g.gpi - g.tau * g.pi * g.gtaupi);
         vp := g.R_s * g.T / (g.p * g.p) * g.pi * g.pi * g.gpipi;
@@ -6861,17 +6872,17 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         sat.pd := -g.R_s * g.T * g.gpi * g.gpi / (g.gpipi);
       end gibbsToBoundaryProps;
 
-      function gibbsToProps_dT
+      function gibbsToProps_dT 
         "根据无量纲吉布斯函数计算密度和温度作为状态的属性记录表"
 
         extends Modelica.Icons.Function;
         input GibbsDerivs g "无量纲吉布斯函数的导数";
-        output ThermoProperties_dT pro
+        output ThermoProperties_dT pro 
           "密度和温度作为动态状态的属性记录表";
       protected
-        Real vt(unit = "m3.kg-1.K-1")
+        Real vt(unit = "m3.kg-1.K-1") 
           "比容对温度的导数";
-        Real vp(unit = "m4.kg-2.s2")
+        Real vp(unit = "m4.kg-2.s2") 
           "比容对压力的导数";
         SI.Density d;
         annotation();
@@ -6882,30 +6893,30 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         pro.h := g.R_s * g.T * g.tau * g.gtau;
         pro.s := pro.R_s * (g.tau * g.gtau - g.g);
         pro.cp := -pro.R_s * g.tau * g.tau * g.gtautau;
-        pro.cv := pro.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi
+        pro.cv := pro.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi 
           - g.tau * g.gtaupi) / g.gpipi);
         vt := g.R_s / g.p * (g.pi * g.gpi - g.tau * g.pi * g.gtaupi);
         vp := g.R_s * g.T / (g.p * g.p) * g.pi * g.pi * g.gpipi;
-        pro.kappa := -1 / ((g.p / (pro.R_s * g.T * g.pi * g.gpi)) * g.p) * pro.cp / (vp * pro.cp + vt
+        pro.kappa := -1 / ((g.p / (pro.R_s * g.T * g.pi * g.gpi)) * g.p) * pro.cp / (vp * pro.cp + vt 
           * vt * g.T);
-        pro.a := abs(g.R_s * g.T * (g.gpi * g.gpi / ((g.gpi - g.tau * g.gtaupi) * (g.gpi - g.tau
+        pro.a := abs(g.R_s * g.T * (g.gpi * g.gpi / ((g.gpi - g.tau * g.gtaupi) * (g.gpi - g.tau 
           * g.gtaupi) / (g.tau * g.tau * g.gtautau) - g.gpipi))) ^ 0.5;
 
         d := g.p / (pro.R_s * g.T * g.pi * g.gpi);
         pro.dudT := (pro.p - g.T * vt / vp) / (d * d);
       end gibbsToProps_dT;
 
-      function gibbsToProps_pT
+      function gibbsToProps_pT 
         "根据无量纲吉布斯函数计算压力和温度作为状态的属性记录表"
 
         extends Modelica.Icons.Function;
         input GibbsDerivs g "无量纲吉布斯函数的导数";
-        output ThermoProperties_pT pro
+        output ThermoProperties_pT pro 
           "压力和温度作为动态状态的属性记录表";
       protected
-        Real vt(unit = "m3.kg-1.K-1")
+        Real vt(unit = "m3.kg-1.K-1") 
           "比容对温度的导数";
-        Real vp(unit = "m4.kg-2.s2")
+        Real vp(unit = "m4.kg-2.s2") 
           "比容对压力的导数";
         annotation();
       algorithm
@@ -6915,30 +6926,30 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         pro.h := g.R_s * g.T * g.tau * g.gtau;
         pro.s := pro.R_s * (g.tau * g.gtau - g.g);
         pro.cp := -pro.R_s * g.tau * g.tau * g.gtautau;
-        pro.cv := pro.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi
+        pro.cv := pro.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi 
           - g.tau * g.gtaupi) / g.gpipi);
         vt := g.R_s / g.p * (g.pi * g.gpi - g.tau * g.pi * g.gtaupi);
         vp := g.R_s * g.T / (g.p * g.p) * g.pi * g.pi * g.gpipi;
         pro.kappa := -1 / (pro.d * g.p) * pro.cp / (vp * pro.cp + vt * vt * g.T);
-        pro.a := abs(g.R_s * g.T * (g.gpi * g.gpi / ((g.gpi - g.tau * g.gtaupi) * (g.gpi - g.tau
+        pro.a := abs(g.R_s * g.T * (g.gpi * g.gpi / ((g.gpi - g.tau * g.gtaupi) * (g.gpi - g.tau 
           * g.gtaupi) / (g.tau * g.tau * g.gtautau) - g.gpipi))) ^ 0.5;
         pro.ddpT := -(pro.d * pro.d) * vp;
         pro.ddTp := -(pro.d * pro.d) * vt;
         pro.duTp := pro.cp - g.p * vt;
         pro.dupT := -g.T * vt - g.p * vp;
       end gibbsToProps_pT;
-      function helmholtzToProps_ph
+      function helmholtzToProps_ph 
         "根据无量纲亥姆霍兹函数计算压力和比焓作为状态的属性记录表"
 
         extends Modelica.Icons.Function;
         input HelmholtzDerivs f "无量纲亥姆霍兹函数的导数";
-        output ThermoProperties_ph pro
+        output ThermoProperties_ph pro 
           "压力和比焓作为动态状态的属性记录表";
       protected
         SI.Pressure p "压力";
         DerPressureByDensity pd "压力对密度的导数";
         DerPressureByTemperature pt "压力对温度的导数";
-        DerPressureBySpecificVolume pv
+        DerPressureBySpecificVolume pv 
           "压力对比容的导数";
         annotation();
       algorithm
@@ -6953,32 +6964,32 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         pv := -pd * f.d * f.d;
 
         // 在临界点附近计算cp可能会有问题 (cp -> 无穷大)。
-        pro.cp := f.R_s * (-f.tau * f.tau * f.ftautau + (f.delta * f.fdelta - f.delta * f.tau
+        pro.cp := f.R_s * (-f.tau * f.tau * f.ftautau + (f.delta * f.fdelta - f.delta * f.tau 
           * f.fdeltatau) ^ 2 / (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta));
         pro.cv := f.R_s * (-f.tau * f.tau * f.ftautau);
-        pro.kappa := 1 / (f.d * f.R_s * f.d * f.T * f.delta * f.fdelta) * ((-pv * pro.cv + pt * pt * f.T)
+        pro.kappa := 1 / (f.d * f.R_s * f.d * f.T * f.delta * f.fdelta) * ((-pv * pro.cv + pt * pt * f.T) 
           / (pro.cv));
-        pro.a := abs(f.R_s * f.T * (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta
-          - ((f.delta * f.fdelta - f.delta * f.tau * f.fdeltatau) * (f.delta * f.fdelta -
+        pro.a := abs(f.R_s * f.T * (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta 
+          - ((f.delta * f.fdelta - f.delta * f.tau * f.fdeltatau) * (f.delta * f.fdelta - 
           f.delta * f.tau * f.fdeltatau)) / (f.tau * f.tau * f.ftautau))) ^ 0.5;
         pro.ddph := (f.d * (pro.cv * f.d + pt)) / (f.d * f.d * pd * pro.cv + f.T * pt * pt);
         pro.ddhp := -f.d * f.d * pt / (f.d * f.d * pd * pro.cv + f.T * pt * pt);
         pro.duph := -1 / pro.d + p / (pro.d * pro.d) * pro.ddph;
         pro.duhp := 1 + p / (pro.d * pro.d) * pro.ddhp;
       end helmholtzToProps_ph;
-      function helmholtzToProps_pT
+      function helmholtzToProps_pT 
         "根据无量纲亥姆霍兹函数计算压力和温度作为状态的属性记录表"
 
         extends Modelica.Icons.Function;
         input HelmholtzDerivs f "无量纲亥姆霍兹函数的导数";
-        output ThermoProperties_pT pro
+        output ThermoProperties_pT pro 
           "压力和温度作为动态状态的属性记录表";
       protected
         DerPressureByDensity pd "压力对密度的导数";
         DerPressureByTemperature pt "压力对温度的导数";
-        DerPressureBySpecificVolume pv
+        DerPressureBySpecificVolume pv 
           "压力对比容的导数";
-        IsobaricVolumeExpansionCoefficient alpha
+        IsobaricVolumeExpansionCoefficient alpha 
           "等压体积膨胀系数";
         // beta in Bejan
         IsothermalCompressibility gamma "等温压缩系数";
@@ -6998,13 +7009,13 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         gamma := -f.d / pv;
         p := f.R_s * f.d * f.T * f.delta * f.fdelta;
         // 在临界点附近计算cp可能会有问题 (cp -> 无穷大)。
-        pro.cp := f.R_s * (-f.tau * f.tau * f.ftautau + (f.delta * f.fdelta - f.delta * f.tau
+        pro.cp := f.R_s * (-f.tau * f.tau * f.ftautau + (f.delta * f.fdelta - f.delta * f.tau 
           * f.fdeltatau) ^ 2 / (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta));
         pro.cv := f.R_s * (-f.tau * f.tau * f.ftautau);
-        pro.kappa := 1 / (f.d * f.R_s * f.d * f.T * f.delta * f.fdelta) * ((-pv * pro.cv + pt * pt * f.T)
+        pro.kappa := 1 / (f.d * f.R_s * f.d * f.T * f.delta * f.fdelta) * ((-pv * pro.cv + pt * pt * f.T) 
           / (pro.cv));
-        pro.a := abs(f.R_s * f.T * (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta
-          - ((f.delta * f.fdelta - f.delta * f.tau * f.fdeltatau) * (f.delta * f.fdelta -
+        pro.a := abs(f.R_s * f.T * (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta 
+          - ((f.delta * f.fdelta - f.delta * f.tau * f.fdeltatau) * (f.delta * f.fdelta - 
           f.delta * f.tau * f.fdeltatau)) / (f.tau * f.tau * f.ftautau))) ^ 0.5;
         pro.ddTp := -pt / pd;
         pro.ddpT := 1 / pd;
@@ -7013,12 +7024,12 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         pro.duTp := pro.cp - alpha * p / f.d;
       end helmholtzToProps_pT;
 
-      function helmholtzToProps_dT
+      function helmholtzToProps_dT 
         "根据无量纲亥姆霍兹函数计算密度和温度作为状态的属性记录表"
 
         extends Modelica.Icons.Function;
         input HelmholtzDerivs f "无量纲亥姆霍兹函数的导数";
-        output ThermoProperties_dT pro
+        output ThermoProperties_dT pro 
           "密度和温度作为动态状态的属性记录表";
       protected
         DerPressureByTemperature pt "压力对温度的导数";
@@ -7034,26 +7045,26 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         pt := f.R_s * f.d * f.delta * (f.fdelta - f.tau * f.fdeltatau);
 
         // 在临界点附近计算cp可能会有问题 (cp -> 无穷大)。
-        pro.cp := f.R_s * (-f.tau * f.tau * f.ftautau + (f.delta * f.fdelta - f.delta * f.tau
+        pro.cp := f.R_s * (-f.tau * f.tau * f.ftautau + (f.delta * f.fdelta - f.delta * f.tau 
           * f.fdeltatau) ^ 2 / (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta));
         pro.cv := f.R_s * (-f.tau * f.tau * f.ftautau);
         pro.kappa := 1 / (f.d * pro.p) * ((-pv * pro.cv + pt * pt * f.T) / (pro.cv));
-        pro.a := abs(f.R_s * f.T * (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta
-          - ((f.delta * f.fdelta - f.delta * f.tau * f.fdeltatau) * (f.delta * f.fdelta -
+        pro.a := abs(f.R_s * f.T * (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta 
+          - ((f.delta * f.fdelta - f.delta * f.tau * f.fdeltatau) * (f.delta * f.fdelta - 
           f.delta * f.tau * f.fdeltatau)) / (f.tau * f.tau * f.ftautau))) ^ 0.5;
         pro.dudT := (pro.p - f.T * pt) / (f.d * f.d);
       end helmholtzToProps_dT;
-      function TwoPhaseToProps_ph
+      function TwoPhaseToProps_ph 
         "根据饱和性质计算压力和比焓作为状态的属性记录表"
 
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和性质记录表";
-        output ThermoProperties_ph pro
+        output ThermoProperties_ph pro 
           "压力和比焓作为动态状态的属性记录表";
       protected
-        Real dht(unit = "(J/kg)/K")
+        Real dht(unit = "(J/kg)/K") 
           "比焓对温度的导数";
-        Real dhd(unit = "(J/kg)/(kg/m3)")
+        Real dhd(unit = "(J/kg)/(kg/m3)") 
           "比焓对密度的导数";
         Real detph(unit = "m4.s4/(K.s8)") "热力学行列式";
         annotation();
@@ -7073,12 +7084,12 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
         pro.ddph := dht / detph;
         pro.ddhp := -sat.dpT / detph;
       end TwoPhaseToProps_ph;
-      function TwoPhaseToProps_dT
+      function TwoPhaseToProps_dT 
         "根据饱和性质计算密度和温度作为状态的属性记录表"
 
         extends Modelica.Icons.Function;
         input SaturationProperties sat "饱和性质";
-        output ThermoProperties_dT pro
+        output ThermoProperties_dT pro 
           "密度和温度作为动态状态的属性记录表";
         annotation();
       algorithm
@@ -7109,17 +7120,17 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       SI.SpecificHeatCapacity cv "定容比热容";
       SI.SpecificHeatCapacity R_s "气体常数";
       SI.RatioOfSpecificHeatCapacities kappa "等熵膨胀系数";
-      PhaseBoundaryProperties liq
+      PhaseBoundaryProperties liq 
         "沸腾曲线上的热力学基础性质";
-      PhaseBoundaryProperties vap
+      PhaseBoundaryProperties vap 
         "露点曲线上的热力学基础性质";
-      Real dpT(unit = "Pa/K")
+      Real dpT(unit = "Pa/K") 
         "饱和压力关于温度的导数";
       SI.MassFraction x "蒸汽质量分数";
       annotation();
     end SaturationProperties;
 
-    record SaturationBoundaryProperties
+    record SaturationBoundaryProperties 
       "两相区域边界上的物性，包括一些导数"
 
       extends Modelica.Icons.Record;
@@ -7139,7 +7150,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
 
     record IF97BaseTwoPhase "IF97 中间属性数据记录表"
       extends Modelica.Icons.Record;
-      Integer phase(start = 0)
+      Integer phase(start = 0) 
         "相态：2表示两相，1表示一相，0表示未知";
       Integer region(min = 1, max = 5) "IF97 区域";
       SI.Pressure p "压力";
@@ -7147,7 +7158,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       SI.SpecificEnthalpy h "单位质量焓";
       SI.SpecificHeatCapacity R_s "气体常数";
       SI.SpecificHeatCapacity cp "定压比热容";
-      SI.SpecificHeatCapacity cv "定容比热容";
+      SI.SpecificHeatCapacity cv "定压比热容";
       SI.Density rho "密度";
       SI.SpecificEntropy s "单位质量熵";
       DerPressureByTemperature pt "压力关于温度的导数";
@@ -7159,7 +7170,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       annotation();
     end IF97BaseTwoPhase;
 
-    record IF97PhaseBoundaryProperties
+    record IF97PhaseBoundaryProperties 
       "IF97 蒸汽表相界面上的热力学基础性质"
 
       extends Modelica.Icons.Record;
@@ -7174,13 +7185,13 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       DerPressureByTemperature dpT "饱和曲线上 dp/dT 的导数";
       DerPressureByTemperature pt "压力关于温度的导数";
       DerPressureByDensity pd "压力关于密度的导数";
-      Real vt(unit = "m3/(kg.K)")
+      Real vt(unit = "m3/(kg.K)") 
         "单位质量体积关于温度的导数";
       Real vp(unit = "m3/(kg.Pa)") "单位质量体积关于压力的导数";
       annotation();
     end IF97PhaseBoundaryProperties;
 
-    record GibbsDerivs
+    record GibbsDerivs 
       "吉布斯函数无量纲形式关于无量纲压力和温度的导数"
 
       extends Modelica.Icons.Record;
@@ -7198,7 +7209,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       annotation();
     end GibbsDerivs;
 
-    record HelmholtzDerivs
+    record HelmholtzDerivs 
       "亥姆霍兹函数无量纲形式关于无量纲压力、密度和温度的导数"
       extends Modelica.Icons.Record;
       SI.Density d "密度";
@@ -7215,7 +7226,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       annotation();
     end HelmholtzDerivs;
 
-    record TwoPhaseTransportProps
+    record TwoPhaseTransportProps 
       "定义在两相区域中需要的两相边界上的属性"
       extends Modelica.Icons.Record;
       SI.Density d_vap "露点上的密度";
@@ -7230,7 +7241,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       annotation();
     end TwoPhaseTransportProps;
 
-    record PhaseBoundaryProperties
+    record PhaseBoundaryProperties 
       "相界面上的热力学基础性质"
       extends Modelica.Icons.Record;
       SI.Density d "密度";
@@ -7244,7 +7255,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       annotation();
     end PhaseBoundaryProperties;
 
-    record NewtonDerivatives_ph
+    record NewtonDerivatives_ph 
       "亥姆霍兹函数快速逆运算的导数：p & h"
 
       extends Modelica.Icons.Record;
@@ -7257,7 +7268,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       annotation();
     end NewtonDerivatives_ph;
 
-    record NewtonDerivatives_ps
+    record NewtonDerivatives_ps 
       "亥姆霍兹函数快速逆运算的导数：p & s"
 
       extends Modelica.Icons.Record;
@@ -7270,7 +7281,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       annotation();
     end NewtonDerivatives_ps;
 
-    record NewtonDerivatives_pT
+    record NewtonDerivatives_pT 
       "亥姆霍兹函数快速逆运算的导数：p & T"
 
       extends Modelica.Icons.Record;
@@ -7285,7 +7296,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       // Bejan 中的 k
       IsenthalpicExponent theta "等焓指数";
       // 与 kappa 相同，但在恒定 h 时的导数
-      IsobaricVolumeExpansionCoefficient alpha
+      IsobaricVolumeExpansionCoefficient alpha 
         "等压体积膨胀系数";
       // Bejan 中 的beta
       IsochoricPressureCoefficient beta "等容压缩系数";
@@ -7297,7 +7308,7 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       // Bejan 中的 mu_J
     end ExtraDerivatives;
 
-    record BridgmansTables
+    record BridgmansTables 
       "如果给出前七个变量，则计算 Bridgmans 表中的所有项目"
       extends Modelica.Icons.Record;
       // 前 7 个变量需要在函数中计算！
@@ -7306,90 +7317,90 @@ Francesco Casella<br><br>Dipartimento di Elettronica e Informazione<br><br>Polit
       SI.Temperature T "温度";
       SI.SpecificEntropy s "比熵";
       SI.SpecificHeatCapacity cp "定压比热容";
-      IsobaricVolumeExpansionCoefficient alpha
+      IsobaricVolumeExpansionCoefficient alpha 
         "等压体积膨胀系数";
       // Bejan 中的 beta
       IsothermalCompressibility gamma "等温压缩系数";
       // Bejan 中的 kappa
       // 压力的导数
-      Real dTp = 1 "Bridgmans 表中的系数，使用信息见下方";
-      Real dpT = -dTp "Bridgmans 表中的系数，使用信息见下方";
-      Real dvp = alpha * v "Bridgmans 表中的系数，使用信息见下方";
-      Real dpv = -dvp "Bridgmans 表中的系数，使用信息见下方";
-      Real dsp = cp / T "Bridgmans 表中的系数，使用信息见下方";
-      Real dps = -dsp "Bridgmans 表中的系数，使用信息见下方";
-      Real dup = cp - alpha * p * v
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dpu = -dup "Bridgmans 表中的系数，使用信息见下方";
-      Real dhp = cp "Bridgmans 表中的系数，使用信息见下方";
-      Real dph = -dhp "Bridgmans 表中的系数，使用信息见下方";
-      Real dfp = -s - alpha * p * v
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dpf = -dfp "Bridgmans 表中的系数，使用信息见下方";
-      Real dgp = -s "Bridgmans 表中的系数，使用信息见下方";
-      Real dpg = -dgp "Bridgmans表 中的系数，使用信息见下方";
+      Real dTp = 1 "Bridgmans表中的系数，使用方法见信息说明";
+      Real dpT = -dTp "Bridgmans表中的系数，使用方法见信息说明";
+      Real dvp = alpha * v "Bridgmans表中的系数，使用方法见信息说明";
+      Real dpv = -dvp "Bridgmans表中的系数，使用方法见信息说明";
+      Real dsp = cp / T "Bridgmans表中的系数，使用方法见信息说明";
+      Real dps = -dsp "Bridgmans表中的系数，使用方法见信息说明";
+      Real dup = cp - alpha * p * v 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dpu = -dup "Bridgmans表中的系数，使用方法见信息说明";
+      Real dhp = cp "Bridgmans表中的系数，使用方法见信息说明";
+      Real dph = -dhp "Bridgmans表中的系数，使用方法见信息说明";
+      Real dfp = -s - alpha * p * v 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dpf = -dfp "Bridgmans表中的系数，使用方法见信息说明";
+      Real dgp = -s "Bridgmans表中的系数，使用方法见信息说明";
+      Real dpg = -dgp "Bridgmans表中的系数，使用方法见信息说明";
       // 在恒定温度时的导数
-      Real dvT = gamma * v "Bridgmans 表中的系数，使用信息见下方";
-      Real dTv = -dvT "Bridgmans 表中的系数，使用信息见下方";
-      Real dsT = alpha * v "Bridgmans 表中的系数，使用信息见下方";
-      Real dTs = -dsT "Bridgmans 表中的系数，使用信息见下方";
-      Real duT = alpha * T * v - gamma * p * v
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dTu = -duT "Bridgmans 表中的系数，使用信息见下方";
-      Real dhT = -v + alpha * T * v
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dTh = -dhT "Bridgmans 表中的系数，使用信息见下方";
-      Real dfT = -gamma * p * v "Bridgmans 表中的系数，使用信息见下方";
-      Real dTf = -dfT "Bridgmans 表中的系数，使用信息见下方";
-      Real dgT = -v "Bridgmans 表中的系数，使用信息见下方";
-      Real dTg = -dgT "Bridgmans 表中的系数，使用信息见下方";
+      Real dvT = gamma * v "Bridgmans表中的系数，使用方法见信息说明";
+      Real dTv = -dvT "Bridgmans表中的系数，使用方法见信息说明";
+      Real dsT = alpha * v "Bridgmans表中的系数，使用方法见信息说明";
+      Real dTs = -dsT "Bridgmans表中的系数，使用方法见信息说明";
+      Real duT = alpha * T * v - gamma * p * v 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dTu = -duT "Bridgmans表中的系数，使用方法见信息说明";
+      Real dhT = -v + alpha * T * v 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dTh = -dhT "Bridgmans表中的系数，使用方法见信息说明";
+      Real dfT = -gamma * p * v "Bridgmans表中的系数，使用方法见信息说明";
+      Real dTf = -dfT "Bridgmans表中的系数，使用方法见信息说明";
+      Real dgT = -v "Bridgmans表中的系数，使用方法见信息说明";
+      Real dTg = -dgT "Bridgmans表中的系数，使用方法见信息说明";
       // 在恒定比容时的导数
-      Real dsv = alpha * alpha * v * v - gamma * v * cp / T
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dvs = -dsv "Bridgmans表中的系数，使用信息见下方";
-      Real duv = T * alpha * alpha * v * v - gamma * v * cp
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dvu = -duv "Bridgmans表中的系数，使用信息见下方";
-      Real dhv = T * alpha * alpha * v * v - alpha * v * v - gamma * v * cp
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dvh = -dhv "Bridgmans 表中的系数，使用信息见下方";
-      Real dfv = gamma * v * s "Bridgmans 表中的系数，使用信息见下方";
-      Real dvf = -dfv "Bridgmans 表中的系数，使用信息见下方";
-      Real dgv = gamma * v * s - alpha * v * v
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dvg = -dgv "Bridgmans 表中的系数，使用信息见下方";
+      Real dsv = alpha * alpha * v * v - gamma * v * cp / T 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dvs = -dsv "Bridgmans表中的系数，使用方法见信息说明";
+      Real duv = T * alpha * alpha * v * v - gamma * v * cp 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dvu = -duv "Bridgmans表中的系数，使用方法见信息说明";
+      Real dhv = T * alpha * alpha * v * v - alpha * v * v - gamma * v * cp 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dvh = -dhv "Bridgmans表中的系数，使用方法见信息说明";
+      Real dfv = gamma * v * s "Bridgmans表中的系数，使用方法见信息说明";
+      Real dvf = -dfv "Bridgmans表中的系数，使用方法见信息说明";
+      Real dgv = gamma * v * s - alpha * v * v 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dvg = -dgv "Bridgmans表中的系数，使用方法见信息说明";
       // 在恒定熵时的导数
-      Real dus = dsv * p "Bridgmans 表中的系数，使用信息见下方";
-      Real dsu = -dus "Bridgmans 表中的系数，使用信息见下方";
-      Real dhs = -v * cp / T "Bridgmans 表中的系数，使用信息见下方";
-      Real dsh = -dhs "Bridgmans 表中的系数，使用信息见下方";
-      Real dfs = alpha * v * s + dus
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dsf = -dfs "Bridgmans表中的系数，使用信息见下方";
-      Real dgs = alpha * v * s - v * cp / T
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dsg = -dgs "Bridgmans 表中的系数，使用信息见下方";
+      Real dus = dsv * p "Bridgmans表中的系数，使用方法见信息说明";
+      Real dsu = -dus "Bridgmans表中的系数，使用方法见信息说明";
+      Real dhs = -v * cp / T "Bridgmans表中的系数，使用方法见信息说明";
+      Real dsh = -dhs "Bridgmans表中的系数，使用方法见信息说明";
+      Real dfs = alpha * v * s + dus 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dsf = -dfs "Bridgmans表中的系数，使用方法见信息说明";
+      Real dgs = alpha * v * s - v * cp / T 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dsg = -dgs "Bridgmans表中的系数，使用方法见信息说明";
       // 在恒定内能时的导数
-      Real dhu = p * alpha * v * v + gamma * v * cp * p - v * cp - p * T * alpha * alpha * v * v
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real duh = -dhu "Bridgmans 表中的系数，使用信息见下方";
-      Real dfu = s * T * alpha * v - gamma * v * cp * p - gamma * v * s * p + p * T * alpha * alpha * v * v
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real duf = -dfu "Bridgmans表中的系数，使用信息见下方";
-      Real dgu = alpha * v * v * p + alpha * v * s * T - v * cp - gamma * v * s * p
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dug = -dgu "Bridgmans表中的系数，使用信息见下方";
+      Real dhu = p * alpha * v * v + gamma * v * cp * p - v * cp - p * T * alpha * alpha * v * v 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real duh = -dhu "Bridgmans表中的系数，使用方法见信息说明";
+      Real dfu = s * T * alpha * v - gamma * v * cp * p - gamma * v * s * p + p * T * alpha * alpha * v * v 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real duf = -dfu "Bridgmans表中的系数，使用方法见信息说明";
+      Real dgu = alpha * v * v * p + alpha * v * s * T - v * cp - gamma * v * s * p 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dug = -dgu "Bridgmans表中的系数，使用方法见信息说明";
       // 在恒定焓时的导数
-      Real dfh = (s - v * alpha * p) * (v - v * alpha * T) - gamma * v * cp * p
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dhf = -dfh "Bridgmans表中的系数，使用信息见下方";
-      Real dgh = alpha * v * s * T - v * (s + cp)
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dhg = -dgh "Bridgmans表中的系数，使用信息见下方";
+      Real dfh = (s - v * alpha * p) * (v - v * alpha * T) - gamma * v * cp * p 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dhf = -dfh "Bridgmans表中的系数，使用方法见信息说明";
+      Real dgh = alpha * v * s * T - v * (s + cp) 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dhg = -dgh "Bridgmans表中的系数，使用方法见信息说明";
       // 在恒定 g 时的导数
-      Real dfg = gamma * v * s * p - v * s - alpha * v * v * p
-        "Bridgmans 表中的系数，使用信息见下方";
-      Real dgf = -dfg "Bridgmans表中的系数，使用信息见下方";
+      Real dfg = gamma * v * s * p - v * s - alpha * v * v * p 
+        "Bridgmans表中的系数，使用方法见信息说明";
+      Real dgf = -dfg "Bridgmans表中的系数，使用方法见信息说明";
       annotation(Documentation(info = "<html>
 <p>
 重要：尚未考虑相平衡条件。
@@ -7442,7 +7453,7 @@ derOfsByTAtConstantv =  bt.dsv/bt.dTv;
 end BridgmansTablesForWater;
                 </pre></blockquote>
 
-                </html>"));
+                </html>"    ));
     end BridgmansTables;
 
     record FundamentalConstants "介质的常数"
@@ -7464,7 +7475,7 @@ end BridgmansTablesForWater;
       SI.SpecificEnthalpy h "比焓";
       SI.SpecificHeatCapacity R_s "气体常数";
       SI.SpecificHeatCapacity cp "定压比热容";
-      SI.SpecificHeatCapacity cv "定容比热容";
+      SI.SpecificHeatCapacity cv "定压比热容";
       SI.Density rho "密度";
       SI.SpecificEntropy s "比熵";
       SI.DerPressureByTemperature pt "压力对温度的导数";
@@ -7474,7 +7485,7 @@ end BridgmansTablesForWater;
       annotation();
     end AuxiliaryProperties;
 
-    record GibbsDerivs2
+    record GibbsDerivs2 
       "吉布斯函数关于压力和温度的导数"
 
       extends Modelica.Icons.Record;
@@ -7492,14 +7503,14 @@ end BridgmansTablesForWater;
       annotation();
     end GibbsDerivs2;
 
-    record NewtonDerivatives_dT
+    record NewtonDerivatives_dT 
       "用于快速逆向计算吉布斯函数的导数"
       extends Modelica.Icons.Record;
       SI.SpecificVolume v "比容";
       Real vp "比容对压力的导数";
       annotation();
     end NewtonDerivatives_dT;
-    function gibbsToBridgmansTables
+    function gibbsToBridgmansTables 
       "根据吉布斯函数计算 Bridgman 表的基本系数"
       extends Modelica.Icons.Function;
       input GibbsDerivs g "吉布斯函数的无量纲导数";
@@ -7508,13 +7519,13 @@ end BridgmansTablesForWater;
       output SI.Temperature T = g.T "温度";
       output SI.SpecificEntropy s "比熵";
       output SI.SpecificHeatCapacity cp "定压比热容";
-      output IsobaricVolumeExpansionCoefficient alpha
+      output IsobaricVolumeExpansionCoefficient alpha 
         "等压体积膨胀系数";
       // beta in Bejan
       output IsothermalCompressibility gamma "等温压缩系数";
       // kappa in Bejan
     protected
-      Real vt(unit = "m3/(kg.K)")
+      Real vt(unit = "m3/(kg.K)") 
         "比容对温度的导数";
       Real vp(unit = "m4.kg-2.s2") "比容对压力的导数";
       annotation();
@@ -7527,7 +7538,7 @@ end BridgmansTablesForWater;
       alpha := vt / v;
       gamma := -vp / v;
     end gibbsToBridgmansTables;
-    function helmholtzToBridgmansTables
+    function helmholtzToBridgmansTables 
       "根据亥姆霍兹能量计算 Bridgman 表的基本系数"
       extends Modelica.Icons.Function;
       input HelmholtzDerivs f "亥姆霍兹函数的无量纲导数";
@@ -7536,14 +7547,14 @@ end BridgmansTablesForWater;
       output SI.Temperature T = f.T "温度";
       output SI.SpecificEntropy s "比熵";
       output SI.SpecificHeatCapacity cp "定压比热容";
-      output IsobaricVolumeExpansionCoefficient alpha
+      output IsobaricVolumeExpansionCoefficient alpha 
         "等压体积膨胀系数";
       // beta in Bejan
       output IsothermalCompressibility gamma "等温压缩系数";
       // kappa in Bejan
     protected
       DerPressureByTemperature pt "压力对温度的导数";
-      DerPressureBySpecificVolume pv
+      DerPressureBySpecificVolume pv 
         "压力对比容的导数";
       SI.SpecificHeatCapacity cv "等容比热容";
       annotation();
@@ -7554,10 +7565,10 @@ end BridgmansTablesForWater;
       s := f.R_s * (f.tau * f.ftau - f.f);
       alpha := -f.d * pt / pv;
       gamma := -f.d / pv;
-      cp := f.R_s * (-f.tau * f.tau * f.ftautau + (f.delta * f.fdelta - f.delta * f.tau * f.fdeltatau)
+      cp := f.R_s * (-f.tau * f.tau * f.ftautau + (f.delta * f.fdelta - f.delta * f.tau * f.fdeltatau) 
         ^ 2 / (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta));
     end helmholtzToBridgmansTables;
-    function gibbsToBoundaryProps
+    function gibbsToBoundaryProps 
       "根据无量纲吉布斯函数计算相界属性记录表"
       extends Modelica.Icons.Function;
       input GibbsDerivs g "吉布斯函数的无量纲导数";
@@ -7572,7 +7583,7 @@ end BridgmansTablesForWater;
       sat.u := g.T * g.R_s * (g.tau * g.gtau - g.pi * g.gpi);
       sat.s := g.R_s * (g.tau * g.gtau - g.g);
       sat.cp := -g.R_s * g.tau * g.tau * g.gtautau;
-      sat.cv := g.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi - g.tau
+      sat.cv := g.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi - g.tau 
         * g.gtaupi) / (g.gpipi));
       vt := g.R_s / g.p * (g.pi * g.gpi - g.tau * g.pi * g.gtaupi);
       vp := g.R_s * g.T / (g.p * g.p) * g.pi * g.pi * g.gpipi;
@@ -7580,7 +7591,7 @@ end BridgmansTablesForWater;
       sat.pt := -g.p / g.T * (g.gpi - g.tau * g.gtaupi) / (g.gpipi * g.pi);
       sat.pd := -g.R_s * g.T * g.gpi * g.gpi / (g.gpipi);
     end gibbsToBoundaryProps;
-    function helmholtzToBoundaryProps
+    function helmholtzToBoundaryProps 
       "根据无量纲亥姆霍兹函数计算相界属性记录表"
       extends Modelica.Icons.Function;
       input HelmholtzDerivs f "亥姆霍兹函数的无量纲导数";
@@ -7594,13 +7605,13 @@ end BridgmansTablesForWater;
       sat.h := f.R_s * f.T * (f.tau * f.ftau + f.delta * f.fdelta);
       sat.s := f.R_s * (f.tau * f.ftau - f.f);
       sat.u := f.R_s * f.T * f.tau * f.ftau;
-      sat.cp := f.R_s * (-f.tau * f.tau * f.ftautau + (f.delta * f.fdelta - f.delta * f.tau * f.fdeltatau)
+      sat.cp := f.R_s * (-f.tau * f.tau * f.ftautau + (f.delta * f.fdelta - f.delta * f.tau * f.fdeltatau) 
         ^ 2 / (2 * f.delta * f.fdelta + f.delta * f.delta * f.fdeltadelta));
       sat.cv := f.R_s * (-f.tau * f.tau * f.ftautau);
       sat.pt := f.R_s * f.d * f.delta * (f.fdelta - f.tau * f.fdeltatau);
       sat.pd := f.R_s * f.T * f.delta * (2.0 * f.fdelta + f.delta * f.fdeltadelta);
     end helmholtzToBoundaryProps;
-    function cv2Phase
+    function cv2Phase 
       "计算两相区域内的等容比热容量"
       extends Modelica.Icons.Function;
       input PhaseBoundaryProperties liq "沸腾曲线上的性质";
@@ -7629,7 +7640,7 @@ end BridgmansTablesForWater;
       duTv := vap.cv + (T * vap.pt - p) * dvTv;
       cv := duTl + x * (duTv - duTl) + dxt * (vap.u - liq.u);
     end cv2Phase;
-    function cvdpT2Phase
+    function cvdpT2Phase 
       "计算两相区域内的等容比热容和压力对温度的导数"
       extends Modelica.Icons.Function;
       input PhaseBoundaryProperties liq "沸腾曲线上的属性";
@@ -7658,7 +7669,7 @@ end BridgmansTablesForWater;
       duTv := vap.cv + (T * vap.pt - p) * dvTv;
       cv := duTl + x * (duTv - duTl) + dxt * (vap.u - liq.u);
     end cvdpT2Phase;
-    function gibbsToExtraDerivs
+    function gibbsToExtraDerivs 
       "根据无量纲吉布斯函数计算额外的热力学导数"
       extends Modelica.Icons.Function;
       input GibbsDerivs g "吉布斯函数的无量纲导数";
@@ -7677,7 +7688,7 @@ end BridgmansTablesForWater;
       vt := g.R_s / g.p * (g.pi * g.gpi - g.tau * g.pi * g.gtaupi);
       vp := g.R_s * g.T / (g.p * g.p) * g.pi * g.pi * g.gpipi;
       cp := -g.R_s * g.tau * g.tau * g.gtautau;
-      cv := g.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi - g.tau
+      cv := g.R_s * (-g.tau * g.tau * g.gtautau + (g.gpi - g.tau * g.gtaupi) * (g.gpi - g.tau 
         * g.gtaupi) / g.gpipi);
       dpro.kappa := -1 / (d * g.p) * cp / (vp * cp + vt * vt * g.T);
       dpro.theta := cp / (d * g.p * (-vp * cp + vt * v - g.T * vt * vt));
@@ -7686,7 +7697,7 @@ end BridgmansTablesForWater;
       dpro.gamma := -d * vp;
       dpro.mu := -(v - g.T * vt) / cp;
     end gibbsToExtraDerivs;
-    function helmholtzToExtraDerivs
+    function helmholtzToExtraDerivs 
       "根据无量纲亥姆霍兹函数计算额外的热力学导数"
       extends Modelica.Icons.Function;
       input HelmholtzDerivs f "亥姆霍兹函数的无量纲导数";
@@ -7711,7 +7722,7 @@ end BridgmansTablesForWater;
       dpro.gamma := -f.d / pv;
       dpro.mu := (v * pv + f.T * pt) / (pt * pt * f.T - pv * cv);
     end helmholtzToExtraDerivs;
-    function Helmholtz_ph
+    function Helmholtz_ph 
       "用于计算根据p和h计算d和t的解析导数的函数"
       extends Modelica.Icons.Function;
       input HelmholtzDerivs f "亥姆霍兹函数的无量纲导数";
@@ -7728,11 +7739,11 @@ end BridgmansTablesForWater;
       nderivs.ht := cv + nderivs.pt / f.d;
       nderivs.hd := (nderivs.pd - f.T * nderivs.pt / f.d) / f.d;
     end Helmholtz_ph;
-    function Helmholtz_pT
+    function Helmholtz_pT 
       "计算根据p和t计算d和t的解析导数的函数"
       extends Modelica.Icons.Function;
       input HelmholtzDerivs f "亥姆霍兹函数的无量纲导数";
-      output NewtonDerivatives_pT nderivs
+      output NewtonDerivatives_pT nderivs 
         "用于根据p和t计算d和t的牛顿迭代的导数";
       annotation();
     algorithm
@@ -7740,11 +7751,11 @@ end BridgmansTablesForWater;
       nderivs.pd := f.R_s * f.T * f.delta * (2.0 * f.fdelta + f.delta * f.fdeltadelta);
     end Helmholtz_pT;
 
-    function Helmholtz_ps
+    function Helmholtz_ps 
       "计算根据p和s计算d和t的解析导数的函数"
       extends Modelica.Icons.Function;
       input HelmholtzDerivs f "亥姆霍兹函数的无量纲导数";
-      output NewtonDerivatives_ps nderivs
+      output NewtonDerivatives_ps nderivs 
         "用于根据p和s计算d和t的牛顿迭代的导数";
     protected
       SI.SpecificHeatCapacity cv "等容热容";
@@ -7758,23 +7769,23 @@ end BridgmansTablesForWater;
       nderivs.st := cv / f.T;
       nderivs.sd := -nderivs.pt / (f.d * f.d);
     end Helmholtz_ps;
-    function smoothStep
+    function smoothStep 
       "对一般阶跃函数的近似，使得特征是连续且可微的"
       extends Modelica.Icons.Function;
       input Real x "自变量值";
       input Real y1 "x > 0 时的纵坐标值";
       input Real y2 "x < 0 时的纵坐标值";
-      input Real x_small(min = 0) = 1e-5
+      input Real x_small(min = 0) = 1e-5 
         "用于近似 -x_small <= x <= x_small 的阶跃函数; 要求 x_small > 0";
       output Real y "近似值，使得 y = if x > 0 then y1 else y2";
     algorithm
       y := smooth(1, if x > x_small then y1 else if x < -x_small then y2 else if 
-        abs(x_small) > 0 then (x / x_small) * ((x / x_small) ^ 2 - 3) * (y2 - y1) / 4 + (y1
+        abs(x_small) > 0 then (x / x_small) * ((x / x_small) ^ 2 - 3) * (y2 - y1) / 4 + (y1 
         + y2) / 2 else (y1 + y2) / 2);
 
       annotation(
-        Inline = true,
-        smoothOrder = 1,
+        Inline = true, 
+        smoothOrder = 1, 
         Documentation(revisions = "<html>
 <ul>
 <li><em>April 29, 2008</em>
@@ -7843,12 +7854,12 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
 </pre></blockquote>
 </html>"));
     end smoothStep;
-    function Gibbs2_ph
+    function Gibbs2_ph 
       "计算根据p和h计算T的解析导数的函数"
       extends Modelica.Icons.Function;
-      input Modelica.Media.Common.GibbsDerivs2 g
+      input Modelica.Media.Common.GibbsDerivs2 g 
         "吉布斯函数的无量纲导数";
-      output Modelica.Media.Common.NewtonDerivatives_ph nderivs
+      output Modelica.Media.Common.NewtonDerivatives_ph nderivs 
         "用于根据p和h计算d和t的牛顿迭代的导数";
       annotation();
 
@@ -7863,12 +7874,12 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
       nderivs.hd := 0.0;
     end Gibbs2_ph;
 
-    function Gibbs2_dT
+    function Gibbs2_dT 
       "计算根据d和T计算p的解析导数的函数"
       extends Modelica.Icons.Function;
-      input Modelica.Media.Common.GibbsDerivs2 g
+      input Modelica.Media.Common.GibbsDerivs2 g 
         "吉布斯函数的无量纲导数";
-      output Modelica.Media.Common.NewtonDerivatives_dT nderivs
+      output Modelica.Media.Common.NewtonDerivatives_dT nderivs 
         "用于根据d和T计算p的牛顿迭代的导数";
       annotation();
 
@@ -7877,13 +7888,13 @@ sum(X) = c*(sum(X_a) - sum(X_b)) + (sum(X_a) + sum(X_b))/2
       nderivs.vp := nderivs.v * g.gpp / g.gp;
     end Gibbs2_dT;
 
-    function Gibbs2_ps
+    function Gibbs2_ps 
       "计算根据p和s计算d和t的解析导数的函数"
 
       extends Modelica.Icons.Function;
-      input Modelica.Media.Common.GibbsDerivs2 g
+      input Modelica.Media.Common.GibbsDerivs2 g 
         "吉布斯函数的无量纲导数";
-      output Modelica.Media.Common.NewtonDerivatives_ps nderivs
+      output Modelica.Media.Common.NewtonDerivatives_ps nderivs 
         "用于根据p和s计算T的牛顿迭代的导数";
       annotation();
 
@@ -7918,49 +7929,49 @@ Modelica.Media.Common 提供了许多物性子库共享的记录和函数。尽�
       电子邮件: hubertus@control.lth.se
       </address>
 </html>"));
-    package OneNonLinearEquation
+    package OneNonLinearEquation 
       "在可靠和高效的方式中确定一元非线性代数方程的解，无需导数"
       extends Modelica.Icons.Package;
 
-      replaceable record f_nonlinear_Data
+      replaceable record f_nonlinear_Data 
         "函数 f_nonlinear 的特定数据"
         extends Modelica.Icons.Record;
         annotation();
       end f_nonlinear_Data;
 
-      replaceable partial function f_nonlinear
+      replaceable partial function f_nonlinear 
         "一元非线性代数方程：y = f_nonlinear(x,p,X)的解"
         extends Modelica.Icons.Function;
         input Real x "函数的自变量";
         input Real p = 0.0 "忽略的变量（这里始终用于压力）";
-        input Real[:] X = fill(0, 0)
+        input Real[:] X = fill(0, 0) 
           "忽略的变量（这里始终用于组分）";
-        input f_nonlinear_Data f_nonlinear_data
+        input f_nonlinear_Data f_nonlinear_data 
           "函数的额外数据";
         output Real y "= f_nonlinear(x)";
         annotation();
       end f_nonlinear;
 
-      replaceable function solve
+      replaceable function solve 
         "解决 f_nonlinear(x_zero)=y_zero；f_nonlinear(x_min) - y_zero 和 f_nonlinear(x_max)-y_zero 必须具有不同的符号"
         import Modelica.Utilities.Streams.error;
         extends Modelica.Icons.Function;
-        input Real y_zero
+        input Real y_zero 
           "确定 x_zero，使得 f_nonlinear(x_zero) = y_zero";
         input Real x_min "x 的最小值";
         input Real x_max "x 的最大值";
-        input Real pressure = 0.0
+        input Real pressure = 0.0 
           "忽略的变量（这里始终用于压力）";
-        input Real[:] X = fill(0, 0)
+        input Real[:] X = fill(0, 0) 
           "忽略的变量（这里始终用于组分）";
-        input f_nonlinear_Data f_nonlinear_data
+        input f_nonlinear_Data f_nonlinear_data 
           "函数 f_nonlinear 的额外数据";
-        input Real x_tol = 100 * Modelica.Constants.eps
+        input Real x_tol = 100 * Modelica.Constants.eps 
           "结果的相对容差";
         output Real x_zero "f_nonlinear(x_zero) = y_zero";
       protected
         constant Real eps = Modelica.Constants.eps "机械精度";
-        constant Real x_eps = 1e-10
+        constant Real x_eps = 1e-10 
           "对 x_min、x_max 进行轻微修改，因为 x_min、x_max 通常恰好在边界 T_min/h_min。小的数值噪声可能使区间无效";
         Real x_min2 = x_min - x_eps;
         Real x_max2 = x_max + x_eps;
@@ -7983,24 +7994,24 @@ Modelica.Media.Common 提供了许多物性子库共享的记录和函数。尽�
       algorithm
         // 检查 f(x_min) 和 f(x_max) 是否有不同的符号
         fa := f_nonlinear(
-          x_min2,
-          pressure,
-          X,
+          x_min2, 
+          pressure, 
+          X, 
           f_nonlinear_data) - y_zero;
         fb := f_nonlinear(
-          x_max2,
-          pressure,
-          X,
+          x_max2, 
+          pressure, 
+          X, 
           f_nonlinear_data) - y_zero;
         fc := fb;
         if fa > 0.0 and fb > 0.0 or fa < 0.0 and fb < 0.0 then
           error(
-            "OneNonLinearEquation.solve(..) 的参数 x_min 和 x_max\n"
-            + "不包围单个非线性方程的根:\n" +
-            "  x_min  = " + String(x_min2) + "\n" + "  x_max  = " + String(x_max2)
-            + "\n" + "  y_zero = " + String(y_zero) + "\n" +
-            "  fa = f(x_min) - y_zero = " + String(fa) + "\n" +
-            "  fb = f(x_max) - y_zero = " + String(fb) + "\n" +
+            "OneNonLinearEquation.solve(..) 的参数 x_min 和 x_max\n" 
+            + "不包围单个非线性方程的根:\n" + 
+            "  x_min  = " + String(x_min2) + "\n" + "  x_max  = " + String(x_max2) 
+            + "\n" + "  y_zero = " + String(y_zero) + "\n" + 
+            "  fa = f(x_min) - y_zero = " + String(fa) + "\n" + 
+            "  fb = f(x_max) - y_zero = " + String(fb) + "\n" + 
             "fa 和 fb 必须具有相反的符号，但实际上并非如此");
         end if;
 
@@ -8071,9 +8082,9 @@ Modelica.Media.Common 提供了许多物性子库共享的记录和函数。尽�
             fa := fb;
             b := b + (if abs(d) > tol then d else if m > 0 then tol else -tol);
             fb := f_nonlinear(
-              b,
-              pressure,
-              X,
+              b, 
+              pressure, 
+              X, 
               f_nonlinear_data) - y_zero;
 
             if fb > 0 and fc > 0 or fb < 0 and fc < 0 then
@@ -8178,35 +8189,35 @@ SimpleAir，DryAirNasa，ReferenceAir，MoistAir，ReferenceMoistAir。</li>
 <li><em>2011年5月25日</em>由Francesco Casella添加：<br>为Water，TableBased，MixtureGasNasa，SimpleAir和MoistAir本地类型添加了min/max属性。</li>
 <li><em>2011年5月25日</em>由Stefan Wischhusen添加：<br>添加了属性多项式拟合的个别设置。</li>
 </ul>
-</html>"),
-    Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}),
+</html>"), 
+    Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), 
     graphics = {
     Line(
-    points = {{-76, -80}, {-62, -30}, {-32, 40}, {4, 66}, {48, 66}, {73, 45}, {62, -8}, {48, -50}, {38, -80}},
-    color = {64, 64, 64},
-    smooth = Smooth.Bezier),
+    points = {{-76, -80}, {-62, -30}, {-32, 40}, {4, 66}, {48, 66}, {73, 45}, {62, -8}, {48, -50}, {38, -80}}, 
+    color = {64, 64, 64}, 
+    smooth = Smooth.Bezier), 
     Line(
-    points = {{-40, 20}, {68, 20}},
-    color = {175, 175, 175}),
+    points = {{-40, 20}, {68, 20}}, 
+    color = {175, 175, 175}), 
     Line(
-    points = {{-40, 20}, {-44, 88}, {-44, 88}},
-    color = {175, 175, 175}),
+    points = {{-40, 20}, {-44, 88}, {-44, 88}}, 
+    color = {175, 175, 175}), 
     Line(
-    points = {{68, 20}, {86, -58}},
-    color = {175, 175, 175}),
+    points = {{68, 20}, {86, -58}}, 
+    color = {175, 175, 175}), 
     Line(
-    points = {{-60, -28}, {56, -28}},
-    color = {175, 175, 175}),
+    points = {{-60, -28}, {56, -28}}, 
+    color = {175, 175, 175}), 
     Line(
-    points = {{-60, -28}, {-74, 84}, {-74, 84}},
-    color = {175, 175, 175}),
+    points = {{-60, -28}, {-74, 84}, {-74, 84}}, 
+    color = {175, 175, 175}), 
     Line(
-    points = {{56, -28}, {70, -80}},
-    color = {175, 175, 175}),
+    points = {{56, -28}, {70, -80}}, 
+    color = {175, 175, 175}), 
     Line(
-    points = {{-76, -80}, {38, -80}},
-    color = {175, 175, 175}),
+    points = {{-76, -80}, {38, -80}}, 
+    color = {175, 175, 175}), 
     Line(
-    points = {{-76, -80}, {-94, -16}, {-94, -16}},
+    points = {{-76, -80}, {-94, -16}, {-94, -16}}, 
     color = {175, 175, 175})}));
 end Media;

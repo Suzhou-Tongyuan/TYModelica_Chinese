@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Machines.SpacePhasors.Functions;
-function activePower
+function activePower 
   "计算电压和电流输入的有功功率"
   import Modelica.Constants.pi;
   extends Modelica.Icons.Function;

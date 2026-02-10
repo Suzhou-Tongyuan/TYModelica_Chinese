@@ -3,37 +3,37 @@ model DiodeBridge2mPulse "2*m脉冲二极管整流桥"
   extends Icons.Converter;
   import Modelica.Constants.pi;
   parameter Integer m(final min=3) = 3 "相数" annotation(Evaluate=true);
-  parameter SI.Resistance RonDiode(final min=0) = 1e-05
+  parameter SI.Resistance RonDiode(final min=0) = 1e-05 
     "闭合二极管电阻";
-  parameter SI.Conductance GoffDiode(final min=0) = 1e-05
+  parameter SI.Conductance GoffDiode(final min=0) = 1e-05 
     "开启二极管导纳";
-  parameter SI.Voltage VkneeDiode(final min=0) = 0
+  parameter SI.Voltage VkneeDiode(final min=0) = 0 
     "二极管正向阈值电压";
   extends PowerConverters.Interfaces.ACDC.ACplug;
   extends PowerConverters.Interfaces.ACDC.DCtwoPin;
-  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T= 
        293.15);
   Modelica.Electrical.Polyphase.Ideal.IdealDiode diode_p(
-    final m=m,
-    final Ron=fill(RonDiode, m),
-    final Goff=fill(GoffDiode, m),
-    final Vknee=fill(VkneeDiode, m),
-    final useHeatPort=useHeatPort)
+    final m=m, 
+    final Ron=fill(RonDiode, m), 
+    final Goff=fill(GoffDiode, m), 
+    final Vknee=fill(VkneeDiode, m), 
+    final useHeatPort=useHeatPort) 
     "连接到正直流电势的二极管" annotation (Placement(
         transformation(
-        origin={0,40},
-        extent={{-10,-10},{10,10}},
+        origin={0,40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Electrical.Polyphase.Ideal.IdealDiode diode_n(
-    final m=m,
-    final Ron=fill(RonDiode, m),
-    final Goff=fill(GoffDiode, m),
-    final Vknee=fill(VkneeDiode, m),
-    final useHeatPort=useHeatPort)
+    final m=m, 
+    final Ron=fill(RonDiode, m), 
+    final Goff=fill(GoffDiode, m), 
+    final Vknee=fill(VkneeDiode, m), 
+    final useHeatPort=useHeatPort) 
     "连接到负直流电势的二极管" annotation (Placement(
         transformation(
-        origin={0,-40},
-        extent={{-10,-10},{10,10}},
+        origin={0,-40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Electrical.Polyphase.Basic.Star star_p(final m=m) 
     annotation (Placement(transformation(extent={{70,70},{90,50}})));
@@ -64,31 +64,31 @@ equation
       points={{20,-100},{0,-100}}, color={191,0,0}));
   connect(diode_p.heatPort, thermalCollector.port_a) annotation (Line(
       points={{10,40},{20,40},{20,-80}}, color={191,0,0}));
-  annotation (defaultComponentName="rectifier",
+  annotation (defaultComponentName="rectifier", 
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}), graphics={
         Text(
-          extent={{-100,70},{0,50}},
-          textColor={0,0,255},
-          textString="交流"),
+          extent={{-100,70},{0,50}}, 
+          textColor={0,0,255}, 
+          textString="交流"), 
         Text(
-          extent={{0,-50},{100,-70}},
-          textColor={0,0,255},
-          textString="直流"),
+          extent={{0,-50},{100,-70}}, 
+          textColor={0,0,255}, 
+          textString="直流"), 
         Rectangle(
-          extent={{-40,24},{40,-24}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-40,24},{40,-24}}, 
+          lineColor={255,255,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Line(
-          points={{-40,0},{40,0}},
-          color={0,0,255}),
+          points={{-40,0},{40,0}}, 
+          color={0,0,255}), 
         Line(
-          points={{20,24},{20,-24}},
-          color={0,0,255}),
+          points={{20,24},{20,-24}}, 
+          color={0,0,255}), 
         Line(
-          points={{20,0},{-20,24},{-20,-24},{20,0}},
-          color={0,0,255})}),
+          points={{20,0},{-20,24},{-20,-24},{20,0}}, 
+          color={0,0,255})}), 
     Documentation(info="<html>
 <p>
 有关交流/直流转换器的一般信息，请参阅

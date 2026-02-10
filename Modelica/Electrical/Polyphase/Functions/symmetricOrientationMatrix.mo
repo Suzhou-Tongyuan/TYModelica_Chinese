@@ -1,10 +1,10 @@
 ﻿within Modelica.Electrical.Polyphase.Functions;
-function symmetricOrientationMatrix
+function symmetricOrientationMatrix 
   "用于创建对称变换矩阵的矩阵对称方向角"
   extends Modelica.Icons.Function;  // 使用函数图标
   import Modelica.Constants.pi;  // 导入π常数
   input Integer m "相数";  // 输入参数为相数
-  output SI.Angle oM[m,m]
+  output SI.Angle oM[m,m] 
     "对称变换矩阵的角度";  // 输出参数为对称变换矩阵的角度
 protected
   Integer nBase = numberOfSymmetricBaseSystems(m);  // 基本对称系统数量

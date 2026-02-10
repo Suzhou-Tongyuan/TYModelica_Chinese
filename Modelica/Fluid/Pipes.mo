@@ -16,23 +16,23 @@ package Pipes "流体输送设备"
       annotation(Evaluate = true, Dialog(tab = "初始化"));
 
     FlowModel flowModel(
-    redeclare final package Medium = Medium,
-      final n = 2,
-      states = {Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), inStream(port_a.Xi_outflow)),
-      Medium.setState_phX(port_b.p, inStream(port_b.h_outflow), inStream(port_b.Xi_outflow))},
-      vs = {port_a.m_flow / Medium.density(flowModel.states[1]) / flowModel.crossAreas[1],
-      -port_b.m_flow / Medium.density(flowModel.states[2]) / flowModel.crossAreas[2]} / nParallel,
-      final momentumDynamics = Types.Dynamics.SteadyState,
-      final allowFlowReversal = allowFlowReversal,
-      final p_a_start = p_a_start,
-      final p_b_start = p_b_start,
-      final m_flow_start = m_flow_start,
-      final nParallel = nParallel,
-      final pathLengths = {length},
-      final crossAreas = {crossArea, crossArea},
-      final dimensions = {4 * crossArea / perimeter, 4 * crossArea / perimeter},
-      final roughnesses = {roughness, roughness},
-      final dheights = {height_ab},
+    redeclare final package Medium = Medium, 
+      final n = 2, 
+      states = {Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), inStream(port_a.Xi_outflow)), 
+      Medium.setState_phX(port_b.p, inStream(port_b.h_outflow), inStream(port_b.Xi_outflow))}, 
+      vs = {port_a.m_flow / Medium.density(flowModel.states[1]) / flowModel.crossAreas[1], 
+      -port_b.m_flow / Medium.density(flowModel.states[2]) / flowModel.crossAreas[2]} / nParallel, 
+      final momentumDynamics = Types.Dynamics.SteadyState, 
+      final allowFlowReversal = allowFlowReversal, 
+      final p_a_start = p_a_start, 
+      final p_b_start = p_b_start, 
+      final m_flow_start = m_flow_start, 
+      final nParallel = nParallel, 
+      final pathLengths = {length}, 
+      final crossAreas = {crossArea, crossArea}, 
+      final dimensions = {4 * crossArea / perimeter, 4 * crossArea / perimeter}, 
+      final roughnesses = {roughness, roughness}, 
+      final dheights = {height_ab}, 
       final g = system.g) "流动模型" 
       annotation(Placement(transformation(extent = {{-38, -18}, {38, 18}})));
   equation
@@ -52,7 +52,7 @@ package Pipes "流体输送设备"
     port_b.h_outflow = inStream(port_a.h_outflow) - system.g * height_ab;
     port_a.h_outflow = inStream(port_b.h_outflow) + system.g * height_ab;
 
-    annotation(defaultComponentName = "pipe",
+    annotation(defaultComponentName = "pipe", 
       Documentation(info = "<html><p>
 横截面恒定的直管模型，具有稳态质量、动量和能量平衡，即模型不储存质量或能量。
 </p>
@@ -87,39 +87,39 @@ package Pipes "流体输送设备"
 
     // 继承 PartialStraightPipe
     extends Modelica.Fluid.Pipes.BaseClasses.PartialStraightPipe(
-      final port_a_exposesState = (modelStructure == ModelStructure.av_b) or (modelStructure == ModelStructure.av_vb),
+      final port_a_exposesState = (modelStructure == ModelStructure.av_b) or (modelStructure == ModelStructure.av_vb), 
       final port_b_exposesState = (modelStructure == ModelStructure.a_vb) or (modelStructure == ModelStructure.av_vb));
 
     // 继承 PartialTwoPortFlow
     extends BaseClasses.PartialTwoPortFlow(
-      final lengths = fill(length / n, n),
-      final crossAreas = fill(crossArea, n),
-      final dimensions = fill(4 * crossArea / perimeter, n),
-      final roughnesses = fill(roughness, n),
+      final lengths = fill(length / n, n), 
+      final crossAreas = fill(crossArea, n), 
+      final dimensions = fill(4 * crossArea / perimeter, n), 
+      final roughnesses = fill(roughness, n), 
       final dheights = height_ab * dxs);
 
     // 壁面传热
     parameter Boolean use_HeatTransfer = false "true: 使用传热模型" 
       annotation(Dialog(tab = "假设", group = "传热"));
-    replaceable model HeatTransfer =
+    replaceable model HeatTransfer = 
       Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer 
       constrainedby 
       Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.PartialFlowHeatTransfer "壁面传热" 
       annotation(Dialog(tab = "假设", group = "传热", enable = use_HeatTransfer), choicesAllMatching = true);
     Interfaces.HeatPorts_a[nNodes] heatPorts if use_HeatTransfer 
-      annotation(Placement(transformation(extent = {{-10, 45}, {10, 65}}), iconTransformation(extent = {{-30, 36},
+      annotation(Placement(transformation(extent = {{-10, 45}, {10, 65}}), iconTransformation(extent = {{-30, 36}, 
       {32, 52}})));
 
     HeatTransfer heatTransfer(
-    redeclare final package Medium = Medium,
-      final n = n,
-      final nParallel = nParallel,
-      final surfaceAreas = perimeter * lengths,
-      final lengths = lengths,
-      final dimensions = dimensions,
-      final roughnesses = roughnesses,
-      final states = mediums.state,
-      final vs = vs,
+    redeclare final package Medium = Medium, 
+      final n = n, 
+      final nParallel = nParallel, 
+      final surfaceAreas = perimeter * lengths, 
+      final lengths = lengths, 
+      final dimensions = dimensions, 
+      final roughnesses = roughnesses, 
+      final states = mediums.state, 
+      final vs = vs, 
       final use_k = use_HeatTransfer) "传热模型" 
       annotation(Placement(transformation(extent = {{-45, 20}, {-23, 42}})));
     final parameter Real[n] dxs = lengths / sum(lengths) "标准长度";
@@ -154,7 +154,7 @@ package Pipes "流体输送设备"
 
     connect(heatPorts, heatTransfer.heatPorts) 
       annotation(Line(points = {{0, 55}, {0, 54}, {-34, 54}, {-34, 38.7}}, color = {191, 0, 0}));
-    annotation(defaultComponentName = "pipe",
+    annotation(defaultComponentName = "pipe", 
       Documentation(info = "<html><p>
 对于具有分布式质量、能量和动量平衡的直管模型，提供<a href=\"modelica://Modelica.Fluid.UsersGuide.ComponentDefinition.BalanceEquations\" target=\"\">UsersGuide.ComponentDefinition.BalanceEquations</a>.中制定的一维流体流动的完整平衡方程。
 </p>
@@ -181,59 +181,59 @@ DynamicPipe 采用有限体积法和动量平衡交错网格方案处理偏微�
 <a href=\"modelica://Modelica.Fluid.Examples.BranchingDynamicPipes\" target=\"\">Examples.BranchingDynamicPipes</a></li>
 <li>
 <a href=\"modelica://Modelica.Fluid.Examples.IncompressibleFluidNetwork\" target=\"\">Examples.IncompressibleFluidNetwork</a>.</li>
-</ul></html>"),
+</ul></html>"), 
       Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {
       Rectangle(
-      extent = {{-100, 44}, {100, -44}},
-      fillPattern = FillPattern.HorizontalCylinder,
-      fillColor = {0, 127, 255}),
+      extent = {{-100, 44}, {100, -44}}, 
+      fillPattern = FillPattern.HorizontalCylinder, 
+      fillColor = {0, 127, 255}), 
       Ellipse(
-      extent = {{-72, 10}, {-52, -10}},
-      fillPattern = FillPattern.Solid),
+      extent = {{-72, 10}, {-52, -10}}, 
+      fillPattern = FillPattern.Solid), 
       Ellipse(
-      extent = {{50, 10}, {70, -10}},
-      fillPattern = FillPattern.Solid),
+      extent = {{50, 10}, {70, -10}}, 
+      fillPattern = FillPattern.Solid), 
       Text(
-      extent = {{-48, 15}, {46, -20}},
-      textString = "%nNodes")}),
-      Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
+      extent = {{-48, 15}, {46, -20}}, 
+      textString = "%nNodes")}), 
+      Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
       100}}), graphics = {
       Rectangle(
-      extent = {{-100, 60}, {100, 50}},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Backward),
+      extent = {{-100, 60}, {100, 50}}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Backward), 
       Rectangle(
-      extent = {{-100, -50}, {100, -60}},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Backward),
+      extent = {{-100, -50}, {100, -60}}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Backward), 
       Line(
-      points = {{100, 45}, {100, 50}},
-      arrow = {Arrow.None, Arrow.Filled},
-      pattern = LinePattern.Dot),
+      points = {{100, 45}, {100, 50}}, 
+      arrow = {Arrow.None, Arrow.Filled}, 
+      pattern = LinePattern.Dot), 
       Line(
-      points = {{0, 45}, {0, 50}},
-      arrow = {Arrow.None, Arrow.Filled},
-      pattern = LinePattern.Dot),
+      points = {{0, 45}, {0, 50}}, 
+      arrow = {Arrow.None, Arrow.Filled}, 
+      pattern = LinePattern.Dot), 
       Line(
-      points = {{100, -45}, {100, -50}},
-      arrow = {Arrow.None, Arrow.Filled},
-      pattern = LinePattern.Dot),
+      points = {{100, -45}, {100, -50}}, 
+      arrow = {Arrow.None, Arrow.Filled}, 
+      pattern = LinePattern.Dot), 
       Line(
-      points = {{0, -45}, {0, -50}},
-      arrow = {Arrow.None, Arrow.Filled},
-      pattern = LinePattern.Dot),
+      points = {{0, -45}, {0, -50}}, 
+      arrow = {Arrow.None, Arrow.Filled}, 
+      pattern = LinePattern.Dot), 
       Line(
-      points = {{-50, 60}, {-50, 50}},
-      pattern = LinePattern.Dot),
+      points = {{-50, 60}, {-50, 50}}, 
+      pattern = LinePattern.Dot), 
       Line(
-      points = {{50, 60}, {50, 50}},
-      pattern = LinePattern.Dot),
+      points = {{50, 60}, {50, 50}}, 
+      pattern = LinePattern.Dot), 
       Line(
-      points = {{0, -50}, {0, -60}},
+      points = {{0, -50}, {0, -60}}, 
       pattern = LinePattern.Dot)}));
   end DynamicPipe;
 
-  package BaseClasses
+  package BaseClasses 
     "Pipes库中使用的基类（用于构建新组件模型）"
     extends Modelica.Icons.BasesPackage;
     partial model PartialStraightPipe "直管模型基类"
@@ -244,18 +244,18 @@ DynamicPipe 采用有限体积法和动量平衡交错网格方案处理偏微�
         annotation(Dialog(group = "几何"));
       parameter SI.Length length "长度" 
         annotation(Dialog(tab = "常规", group = "几何"));
-      parameter Boolean isCircular = true
+      parameter Boolean isCircular = true 
         "true: 横截面积为圆形" 
         annotation(Evaluate, Dialog(tab = "常规", group = "几何"));
       parameter SI.Diameter diameter "圆形管道的直径" 
         annotation(Dialog(group = "常规", enable = isCircular));
-      parameter SI.Area crossArea = Modelica.Constants.pi * diameter * diameter / 4
+      parameter SI.Area crossArea = Modelica.Constants.pi * diameter * diameter / 4 
         "内部横截面积" 
         annotation(Dialog(tab = "常规", group = "几何", enable = not isCircular));
-      parameter SI.Length perimeter(min = 0) = Modelica.Constants.pi * diameter
+      parameter SI.Length perimeter(min = 0) = Modelica.Constants.pi * diameter 
         "内径" 
         annotation(Dialog(tab = "常规", group = "几何", enable = not isCircular));
-      parameter Modelica.Fluid.Types.Roughness roughness = 2.5e-5
+      parameter Modelica.Fluid.Types.Roughness roughness = 2.5e-5 
         "平均表面粗糙度(默认:光滑钢管)" 
         annotation(Dialog(group = "几何"));
       final parameter SI.Volume V = crossArea * length * nParallel "容积";
@@ -265,24 +265,24 @@ DynamicPipe 采用有限体积法和动量平衡交错网格方案处理偏微�
         annotation(Dialog(group = "静压头"));
 
       // 压降
-      replaceable model FlowModel =
+      replaceable model FlowModel = 
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow 
         constrainedby 
-        Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
+        Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel 
         "壁面摩擦，重力，动量" 
         annotation(Dialog(group = "压降"), choicesAllMatching = true);
     equation
       assert(length >= height_ab, "参数 length 必须大于或等于 height_ab");
 
       annotation(defaultComponentName = "pipe", Icon(coordinateSystem(
-        preserveAspectRatio = false,
+        preserveAspectRatio = false, 
         extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(
-        extent = {{-100, 40}, {100, -40}},
-        fillPattern = FillPattern.Solid,
-        fillColor = {95, 95, 95},
+        extent = {{-100, 40}, {100, -40}}, 
+        fillPattern = FillPattern.Solid, 
+        fillColor = {95, 95, 95}, 
         pattern = LinePattern.None), Rectangle(
-        extent = {{-100, 44}, {100, -44}},
-        fillPattern = FillPattern.HorizontalCylinder,
+        extent = {{-100, 44}, {100, -44}}, 
+        fillPattern = FillPattern.HorizontalCylinder, 
         fillColor = {0, 127, 255})}), Documentation(info = "<html><p>
 一维流动模型的基类。它实例化了一个PartialTwoPort，增加了参数接口和图标图形。
 </p>
@@ -295,12 +295,12 @@ DynamicPipe 采用有限体积法和动量平衡交错网格方案处理偏微�
 
       // 继承 PartialTwoPort
       extends Modelica.Fluid.Interfaces.PartialTwoPort(
-        final port_a_exposesState = (modelStructure == ModelStructure.av_b) or (modelStructure == ModelStructure.av_vb),
+        final port_a_exposesState = (modelStructure == ModelStructure.av_b) or (modelStructure == ModelStructure.av_vb), 
         final port_b_exposesState = (modelStructure == ModelStructure.a_vb) or (modelStructure == ModelStructure.av_vb));
 
       // 继承 PartialDistributedVolume
       extends Modelica.Fluid.Interfaces.PartialDistributedVolume(
-        final n = nNodes,
+        final n = nNodes, 
         final fluidVolumes = {crossAreas[i] * lengths[i] for i in 1:n} * nParallel);
 
       // 几何参数
@@ -331,7 +331,7 @@ DynamicPipe 采用有限体积法和动量平衡交错网格方案处理偏微�
       parameter Integer nNodes(min = 1) = 2 "离散流体容积的数量" 
         annotation(Dialog(tab = "高级"), Evaluate = true);
 
-      parameter Types.ModelStructure modelStructure = Types.ModelStructure.av_vb
+      parameter Types.ModelStructure modelStructure = Types.ModelStructure.av_vb 
         "确定接口是否存在流量或容积模型" 
         annotation(Dialog(tab = "高级"), Evaluate = true);
 
@@ -340,62 +340,62 @@ DynamicPipe 采用有限体积法和动量平衡交错网格方案处理偏微�
       final parameter Integer nFM = if useLumpedPressure then nFMLumped else nFMDistributed "flowModel 中流动模型的数量";
       final parameter Integer nFMDistributed = if modelStructure == Types.ModelStructure.a_v_b then n + 1 else if (modelStructure == Types.ModelStructure.a_vb or modelStructure == Types.ModelStructure.av_b) then n else n - 1 "离散流动模型的数量";
       final parameter Integer nFMLumped = if modelStructure == Types.ModelStructure.a_v_b then 2 else 1 "集总流动模型的数量";
-      final parameter Integer iLumped = integer(n / 2) + 1
+      final parameter Integer iLumped = integer(n / 2) + 1 
         "将压力状态合并时使用(useLumpedPressure)，为具有代表性状态的控制量指数" 
         annotation(Evaluate = true);
 
       // 高级模型选项
-      parameter Boolean useInnerPortProperties = false
+      parameter Boolean useInnerPortProperties = false 
         "true: 从内部控制容积获取流体模型的接口特性" 
         annotation(Dialog(tab = "高级"), Evaluate = true);
-      Medium.ThermodynamicState state_a
+      Medium.ThermodynamicState state_a 
         "容积外部接口 port_a 定义的状态";
-      Medium.ThermodynamicState state_b
+      Medium.ThermodynamicState state_b 
         "容积外部接口 port_b 定义的状态";
-      Medium.ThermodynamicState[nFM + 1] statesFM
+      Medium.ThermodynamicState[nFM + 1] statesFM 
         "flowModel 模型的状态向量";
 
       // 压降模型
-      replaceable model FlowModel =
+      replaceable model FlowModel = 
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow 
         constrainedby 
-        Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel
+        Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel 
         "壁面摩擦，重力，动量" 
         annotation(Dialog(group = "压降"), choicesAllMatching = true);
 
 
       FlowModel flowModel(
-      redeclare final package Medium = Medium,
-        final n = nFM + 1,
-        final states = statesFM,
-        final vs = vsFM,
-        final momentumDynamics = momentumDynamics,
-        final allowFlowReversal = allowFlowReversal,
-        final p_a_start = p_a_start,
-        final p_b_start = p_b_start,
-        final m_flow_start = m_flow_start,
-        final nParallel = nParallel,
-        final pathLengths = pathLengths,
-        final crossAreas = crossAreasFM,
-        final dimensions = dimensionsFM,
-        final roughnesses = roughnessesFM,
-        final dheights = dheightsFM,
+      redeclare final package Medium = Medium, 
+        final n = nFM + 1, 
+        final states = statesFM, 
+        final vs = vsFM, 
+        final momentumDynamics = momentumDynamics, 
+        final allowFlowReversal = allowFlowReversal, 
+        final p_a_start = p_a_start, 
+        final p_b_start = p_b_start, 
+        final m_flow_start = m_flow_start, 
+        final nParallel = nParallel, 
+        final pathLengths = pathLengths, 
+        final crossAreas = crossAreasFM, 
+        final dimensions = dimensionsFM, 
+        final roughnesses = roughnessesFM, 
+        final dheights = dheightsFM, 
         final g = system.g) "流动模型" 
         annotation(Placement(transformation(extent = {{-77, -37}, {75, -19}})));
 
       // 流量
       Medium.MassFlowRate[n + 1] m_flows(
-        each min = if allowFlowReversal then -Modelica.Constants.inf else 0,
-        each start = m_flow_start)
+        each min = if allowFlowReversal then -Modelica.Constants.inf else 0, 
+        each start = m_flow_start) 
         "通过节块边界的质量流量";
-      Medium.MassFlowRate[n + 1,Medium.nXi] mXi_flows
+      Medium.MassFlowRate[n + 1,Medium.nXi] mXi_flows 
         "通过节块边界的独立质量流量";
-      Medium.MassFlowRate[n + 1,Medium.nC] mC_flows
+      Medium.MassFlowRate[n + 1,Medium.nC] mC_flows 
         "通过节块边界的微量物质质量流量";
-      Medium.EnthalpyFlowRate[n + 1] H_flows
+      Medium.EnthalpyFlowRate[n + 1] H_flows 
         "通过节块边界的焓流";
 
-      SI.Velocity[n] vs = {0.5 * (m_flows[i] + m_flows[i + 1]) / mediums[i].d / crossAreas[i] for i in 1:n} / nParallel
+      SI.Velocity[n] vs = {0.5 * (m_flows[i] + m_flows[i + 1]) / mediums[i].d / crossAreas[i] for i in 1:n} / nParallel 
         "管道节块的平均流速";
 
       // 模型结构相关的流动几何
@@ -408,7 +408,7 @@ DynamicPipe 采用有限体积法和动量平衡交错网格方案处理偏微�
       Modelica.Fluid.Types.Roughness[nFM + 1] roughnessesFM "表面平均粗糙度";
 
     equation
-      assert(nNodes > 1 or modelStructure <> ModelStructure.av_vb,
+      assert(nNodes > 1 or modelStructure <> ModelStructure.av_vb, 
         "对于模型结构 av_vb 而言，nNodes 至少需要为 2，否则流模型会消失！");
       // 根据模型结构，对流动模型的几何进行交错网格离散处理
       if useLumpedPressure then
@@ -603,7 +603,7 @@ DynamicPipe 采用有限体积法和动量平衡交错网格方案处理偏微�
         end if;
       end if;
 
-      annotation(defaultComponentName = "pipe",
+      annotation(defaultComponentName = "pipe", 
         Documentation(info = "<html><p>
 离散流动模型的基类。总体积沿流动路径被分成 n 个管道节块。默认值为 nNodes=2。
 </p>
@@ -670,233 +670,233 @@ by R&uuml;diger Franke:<br>
 by Katrin Pr&ouml;l&szlig;:<br>
 模型添加到流体库中</li>
 </ul>
-</html>"    ),
-        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
+</html>"    ), 
+        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
         100}}), graphics = {Ellipse(
-        extent = {{-72, 10}, {-52, -10}},
+        extent = {{-72, 10}, {-52, -10}}, 
         fillPattern = FillPattern.Solid), Ellipse(
-        extent = {{50, 10}, {70, -10}},
-        fillPattern = FillPattern.Solid)}),
+        extent = {{50, 10}, {70, -10}}, 
+        fillPattern = FillPattern.Solid)}), 
         Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
         100, 100}}), graphics = {
         Polygon(
-        points = {{-100, -50}, {-100, 50}, {100, 60}, {100, -60}, {-100, -50}},
-        fillColor = {215, 215, 215},
-        fillPattern = FillPattern.Solid,
-        pattern = LinePattern.None),
+        points = {{-100, -50}, {-100, 50}, {100, 60}, {100, -60}, {-100, -50}}, 
+        fillColor = {215, 215, 215}, 
+        fillPattern = FillPattern.Solid, 
+        pattern = LinePattern.None), 
         Polygon(
-        points = {{-34, -53}, {-34, 53}, {34, 57}, {34, -57}, {-34, -53}},
-        fillColor = {255, 255, 255},
-        fillPattern = FillPattern.Solid,
-        pattern = LinePattern.None),
+        points = {{-34, -53}, {-34, 53}, {34, 57}, {34, -57}, {-34, -53}}, 
+        fillColor = {255, 255, 255}, 
+        fillPattern = FillPattern.Solid, 
+        pattern = LinePattern.None), 
         Line(
-        points = {{-100, -50}, {-100, 50}},
-        arrow = {Arrow.Filled, Arrow.Filled},
-        pattern = LinePattern.Dot),
+        points = {{-100, -50}, {-100, 50}}, 
+        arrow = {Arrow.Filled, Arrow.Filled}, 
+        pattern = LinePattern.Dot), 
         Text(
-        extent = {{-99, 36}, {-69, 30}},
-        textColor = {0, 0, 255},
-        textString = "crossAreas[1]"),
+        extent = {{-99, 36}, {-69, 30}}, 
+        textColor = {0, 0, 255}, 
+        textString = "crossAreas[1]"), 
         Line(
-        points = {{-100, 70}, {-34, 70}},
-        arrow = {Arrow.Filled, Arrow.Filled},
-        pattern = LinePattern.Dot),
+        points = {{-100, 70}, {-34, 70}}, 
+        arrow = {Arrow.Filled, Arrow.Filled}, 
+        pattern = LinePattern.Dot), 
         Text(
-        extent = {{0, 36}, {40, 30}},
-        textColor = {0, 0, 255},
-        textString = "crossAreas[2:n-1]"),
+        extent = {{0, 36}, {40, 30}}, 
+        textColor = {0, 0, 255}, 
+        textString = "crossAreas[2:n-1]"), 
         Line(
-        points = {{100, -60}, {100, 60}},
-        arrow = {Arrow.Filled, Arrow.Filled},
-        pattern = LinePattern.Dot),
+        points = {{100, -60}, {100, 60}}, 
+        arrow = {Arrow.Filled, Arrow.Filled}, 
+        pattern = LinePattern.Dot), 
         Text(
-        extent = {{100.5, 36}, {130.5, 30}},
-        textColor = {0, 0, 255},
-        textString = "crossAreas[n]"),
+        extent = {{100.5, 36}, {130.5, 30}}, 
+        textColor = {0, 0, 255}, 
+        textString = "crossAreas[n]"), 
         Line(
-        points = {{-34, 52}, {-34, -53}},
-        pattern = LinePattern.Dash),
+        points = {{-34, 52}, {-34, -53}}, 
+        pattern = LinePattern.Dash), 
         Line(
-        points = {{34, 57}, {34, -57}},
-        pattern = LinePattern.Dash),
+        points = {{34, 57}, {34, -57}}, 
+        pattern = LinePattern.Dash), 
         Line(
-        points = {{34, 70}, {100, 70}},
-        arrow = {Arrow.Filled, Arrow.Filled},
-        pattern = LinePattern.Dot),
+        points = {{34, 70}, {100, 70}}, 
+        arrow = {Arrow.Filled, Arrow.Filled}, 
+        pattern = LinePattern.Dot), 
         Line(
-        points = {{-34, 70}, {34, 70}},
-        arrow = {Arrow.Filled, Arrow.Filled},
-        pattern = LinePattern.Dot),
+        points = {{-34, 70}, {34, 70}}, 
+        arrow = {Arrow.Filled, Arrow.Filled}, 
+        pattern = LinePattern.Dot), 
         Text(
-        extent = {{-30, 77}, {30, 71}},
-        textColor = {0, 0, 255},
-        textString = "lengths[2:n-1]"),
+        extent = {{-30, 77}, {30, 71}}, 
+        textColor = {0, 0, 255}, 
+        textString = "lengths[2:n-1]"), 
         Line(
-        points = {{-100, -70}, {0, -70}},
-        arrow = {Arrow.None, Arrow.Filled}),
+        points = {{-100, -70}, {0, -70}}, 
+        arrow = {Arrow.None, Arrow.Filled}), 
         Text(
-        extent = {{-80, -63}, {-20, -69}},
-        textColor = {0, 0, 255},
-        textString = "flowModel.dps_fg[1]"),
+        extent = {{-80, -63}, {-20, -69}}, 
+        textColor = {0, 0, 255}, 
+        textString = "flowModel.dps_fg[1]"), 
         Line(
-        points = {{0, -70}, {100, -70}},
-        arrow = {Arrow.None, Arrow.Filled}),
+        points = {{0, -70}, {100, -70}}, 
+        arrow = {Arrow.None, Arrow.Filled}), 
         Text(
-        extent = {{20.5, -63}, {80, -69}},
-        textColor = {0, 0, 255},
-        textString = "flowModel.dps_fg[2:n-1]"),
+        extent = {{20.5, -63}, {80, -69}}, 
+        textColor = {0, 0, 255}, 
+        textString = "flowModel.dps_fg[2:n-1]"), 
         Line(
-        points = {{-95, 0}, {-5, 0}},
-        arrow = {Arrow.None, Arrow.Filled}),
+        points = {{-95, 0}, {-5, 0}}, 
+        arrow = {Arrow.None, Arrow.Filled}), 
         Text(
-        extent = {{-62, 7}, {-32, 1}},
-        textColor = {0, 0, 255},
-        textString = "m_flows[2]"),
+        extent = {{-62, 7}, {-32, 1}}, 
+        textColor = {0, 0, 255}, 
+        textString = "m_flows[2]"), 
         Line(
-        points = {{5, 0}, {95, 0}},
-        arrow = {Arrow.None, Arrow.Filled}),
+        points = {{5, 0}, {95, 0}}, 
+        arrow = {Arrow.None, Arrow.Filled}), 
         Text(
-        extent = {{34, 7}, {64, 1}},
-        textColor = {0, 0, 255},
-        textString = "m_flows[3:n]"),
+        extent = {{34, 7}, {64, 1}}, 
+        textColor = {0, 0, 255}, 
+        textString = "m_flows[3:n]"), 
         Line(
-        points = {{-150, 0}, {-105, 0}},
-        arrow = {Arrow.None, Arrow.Filled}),
+        points = {{-150, 0}, {-105, 0}}, 
+        arrow = {Arrow.None, Arrow.Filled}), 
         Line(
-        points = {{105, 0}, {150, 0}},
-        arrow = {Arrow.None, Arrow.Filled}),
+        points = {{105, 0}, {150, 0}}, 
+        arrow = {Arrow.None, Arrow.Filled}), 
         Text(
-        extent = {{-140, 7}, {-110, 1}},
-        textColor = {0, 0, 255},
-        textString = "m_flows[1]"),
+        extent = {{-140, 7}, {-110, 1}}, 
+        textColor = {0, 0, 255}, 
+        textString = "m_flows[1]"), 
         Text(
-        extent = {{111, 7}, {141, 1}},
-        textColor = {0, 0, 255},
-        textString = "m_flows[n+1]"),
+        extent = {{111, 7}, {141, 1}}, 
+        textColor = {0, 0, 255}, 
+        textString = "m_flows[n+1]"), 
         Text(
-        extent = {{35, -92}, {100, -98}},
-        textColor = {0, 0, 255},
-        textString = "(ModelStructure av_vb, n=3)"),
+        extent = {{35, -92}, {100, -98}}, 
+        textColor = {0, 0, 255}, 
+        textString = "(ModelStructure av_vb, n=3)"), 
         Line(
-        points = {{-100, -50}, {-100, -86}},
-        pattern = LinePattern.Dot),
+        points = {{-100, -50}, {-100, -86}}, 
+        pattern = LinePattern.Dot), 
         Line(
-        points = {{0, -55}, {0, -86}},
-        pattern = LinePattern.Dot),
+        points = {{0, -55}, {0, -86}}, 
+        pattern = LinePattern.Dot), 
         Line(
-        points = {{100, -60}, {100, -86}},
-        pattern = LinePattern.Dot),
+        points = {{100, -60}, {100, -86}}, 
+        pattern = LinePattern.Dot), 
         Ellipse(
-        extent = {{-5, 5}, {5, -5}},
-        pattern = LinePattern.None,
-        fillPattern = FillPattern.Solid),
+        extent = {{-5, 5}, {5, -5}}, 
+        pattern = LinePattern.None, 
+        fillPattern = FillPattern.Solid), 
         Text(
-        extent = {{3, -4}, {33, -10}},
-        textColor = {0, 0, 255},
-        textString = "states[2:n-1]"),
+        extent = {{3, -4}, {33, -10}}, 
+        textColor = {0, 0, 255}, 
+        textString = "states[2:n-1]"), 
         Ellipse(
-        extent = {{95, 5}, {105, -5}},
-        pattern = LinePattern.None,
-        fillPattern = FillPattern.Solid),
+        extent = {{95, 5}, {105, -5}}, 
+        pattern = LinePattern.None, 
+        fillPattern = FillPattern.Solid), 
         Text(
-        extent = {{104, -4}, {124, -10}},
-        textColor = {0, 0, 255},
-        textString = "states[n]"),
+        extent = {{104, -4}, {124, -10}}, 
+        textColor = {0, 0, 255}, 
+        textString = "states[n]"), 
         Ellipse(
-        extent = {{-105, 5}, {-95, -5}},
-        pattern = LinePattern.None,
-        fillPattern = FillPattern.Solid),
+        extent = {{-105, 5}, {-95, -5}}, 
+        pattern = LinePattern.None, 
+        fillPattern = FillPattern.Solid), 
         Text(
-        extent = {{-96, -4}, {-76, -10}},
-        textColor = {0, 0, 255},
-        textString = "states[1]"),
+        extent = {{-96, -4}, {-76, -10}}, 
+        textColor = {0, 0, 255}, 
+        textString = "states[1]"), 
         Text(
-        extent = {{-99.5, 30}, {-69.5, 24}},
-        textColor = {0, 0, 255},
-        textString = "dimensions[1]"),
+        extent = {{-99.5, 30}, {-69.5, 24}}, 
+        textColor = {0, 0, 255}, 
+        textString = "dimensions[1]"), 
         Text(
-        extent = {{-0.5, 30}, {40, 24}},
-        textColor = {0, 0, 255},
-        textString = "dimensions[2:n-1]"),
+        extent = {{-0.5, 30}, {40, 24}}, 
+        textColor = {0, 0, 255}, 
+        textString = "dimensions[2:n-1]"), 
         Text(
-        extent = {{100.5, 30}, {130.5, 24}},
-        textColor = {0, 0, 255},
-        textString = "dimensions[n]"),
+        extent = {{100.5, 30}, {130.5, 24}}, 
+        textColor = {0, 0, 255}, 
+        textString = "dimensions[n]"), 
         Line(
-        points = {{-34, 73}, {-34, 52}},
-        pattern = LinePattern.Dot),
+        points = {{-34, 73}, {-34, 52}}, 
+        pattern = LinePattern.Dot), 
         Line(
-        points = {{34, 73}, {34, 57}},
-        pattern = LinePattern.Dot),
+        points = {{34, 73}, {34, 57}}, 
+        pattern = LinePattern.Dot), 
         Line(
-        points = {{-100, 50}, {100, 60}},
-        thickness = 0.5),
+        points = {{-100, 50}, {100, 60}}, 
+        thickness = 0.5), 
         Line(
-        points = {{-100, -50}, {100, -60}},
-        thickness = 0.5),
+        points = {{-100, -50}, {100, -60}}, 
+        thickness = 0.5), 
         Line(
-        points = {{-100, 73}, {-100, 50}},
-        pattern = LinePattern.Dot),
+        points = {{-100, 73}, {-100, 50}}, 
+        pattern = LinePattern.Dot), 
         Line(
-        points = {{100, 73}, {100, 60}},
-        pattern = LinePattern.Dot),
+        points = {{100, 73}, {100, 60}}, 
+        pattern = LinePattern.Dot), 
         Line(
-        points = {{0, -55}, {0, 55}},
-        arrow = {Arrow.Filled, Arrow.Filled},
-        pattern = LinePattern.Dot),
+        points = {{0, -55}, {0, 55}}, 
+        arrow = {Arrow.Filled, Arrow.Filled}, 
+        pattern = LinePattern.Dot), 
         Line(
-        points = {{-34, 11}, {34, 11}},
-        arrow = {Arrow.None, Arrow.Filled}),
+        points = {{-34, 11}, {34, 11}}, 
+        arrow = {Arrow.None, Arrow.Filled}), 
         Text(
-        extent = {{5, 18}, {25, 12}},
-        textColor = {0, 0, 255},
-        textString = "vs[2:n-1]"),
+        extent = {{5, 18}, {25, 12}}, 
+        textColor = {0, 0, 255}, 
+        textString = "vs[2:n-1]"), 
         Text(
-        extent = {{-72, 18}, {-62, 12}},
-        textColor = {0, 0, 255},
-        textString = "vs[1]"),
+        extent = {{-72, 18}, {-62, 12}}, 
+        textColor = {0, 0, 255}, 
+        textString = "vs[1]"), 
         Line(
-        points = {{-100, 11}, {-34, 11}},
-        arrow = {Arrow.None, Arrow.Filled}),
+        points = {{-100, 11}, {-34, 11}}, 
+        arrow = {Arrow.None, Arrow.Filled}), 
         Text(
-        extent = {{63, 18}, {73, 12}},
-        textColor = {0, 0, 255},
-        textString = "vs[n]"),
+        extent = {{63, 18}, {73, 12}}, 
+        textColor = {0, 0, 255}, 
+        textString = "vs[n]"), 
         Line(
-        points = {{34, 11}, {100, 11}},
-        arrow = {Arrow.None, Arrow.Filled}),
+        points = {{34, 11}, {100, 11}}, 
+        arrow = {Arrow.None, Arrow.Filled}), 
         Text(
-        extent = {{-80, -75}, {-20, -81}},
-        textColor = {0, 0, 255},
-        textString = "flowModel.pathLengths[1]"),
+        extent = {{-80, -75}, {-20, -81}}, 
+        textColor = {0, 0, 255}, 
+        textString = "flowModel.pathLengths[1]"), 
         Line(
-        points = {{-100, -82}, {0, -82}},
-        arrow = {Arrow.Filled, Arrow.Filled}),
+        points = {{-100, -82}, {0, -82}}, 
+        arrow = {Arrow.Filled, Arrow.Filled}), 
         Line(
-        points = {{0, -82}, {100, -82}},
-        arrow = {Arrow.Filled, Arrow.Filled}),
+        points = {{0, -82}, {100, -82}}, 
+        arrow = {Arrow.Filled, Arrow.Filled}), 
         Text(
-        extent = {{15, -75}, {85, -81}},
-        textColor = {0, 0, 255},
-        textString = "flowModel.pathLengths[2:n-1]"),
+        extent = {{15, -75}, {85, -81}}, 
+        textColor = {0, 0, 255}, 
+        textString = "flowModel.pathLengths[2:n-1]"), 
         Text(
-        extent = {{-100, 77}, {-37, 71}},
-        textColor = {0, 0, 255},
-        textString = "lengths[1]"),
+        extent = {{-100, 77}, {-37, 71}}, 
+        textColor = {0, 0, 255}, 
+        textString = "lengths[1]"), 
         Text(
-        extent = {{34, 77}, {100, 71}},
-        textColor = {0, 0, 255},
+        extent = {{34, 77}, {100, 71}}, 
+        textColor = {0, 0, 255}, 
         textString = "lengths[n]")}));
     end PartialTwoPortFlow;
 
-    package FlowModels
+    package FlowModels 
       "管道流动模型，包括管壁摩擦、静压头和动量流"
       extends Modelica.Icons.Package;
       partial model PartialStaggeredFlowModel "流动模型中动量平衡的基类"
 
         // 内部接口
         // 不显示在图形用户界面上；使用该模型时需要硬编码
-        replaceable package Medium =
+        replaceable package Medium = 
           Modelica.Media.Interfaces.PartialMedium "组件中的介质" 
           annotation(Dialog(tab = "内部接口", enable = false));
 
@@ -922,7 +922,7 @@ by Katrin Pr&ouml;l&szlig;:<br>
           annotation(Dialog(tab = "内部接口", enable = false, group = "静压头"));
 
         // 假设
-        parameter Boolean allowFlowReversal = system.allowFlowReversal
+        parameter Boolean allowFlowReversal = system.allowFlowReversal 
           "true: 允许反向流动，false: 只能从states[1]流向states[n+1]" 
           annotation(Dialog(tab = "内部接口", enable = false, group = "假设"), Evaluate = true);
         parameter Modelica.Fluid.Types.Dynamics momentumDynamics = system.momentumDynamics "动量平衡" 
@@ -964,11 +964,11 @@ by Katrin Pr&ouml;l&szlig;:<br>
         parameter Boolean show_Res = false "true: 包括雷诺数，以便绘制" 
           annotation(Evaluate = true, Dialog(group = "Diagnostics"));
         SI.ReynoldsNumber[n] Res = Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber(
-          vs,
-          rhos,
-          mus,
+          vs, 
+          rhos, 
+          mus, 
           dimensions) if show_Res "雷诺数";
-        Medium.MassFlowRate[n - 1] m_flows_turbulent =
+        Medium.MassFlowRate[n - 1] m_flows_turbulent = 
           {nParallel * (crossAreas[i] + crossAreas[i + 1]) / (dimensions[i] + dimensions[i + 1]) * mus_act[i] * Re_turbulent for i in 1:n - 1} if 
           show_Res "湍流开始";
       protected
@@ -981,7 +981,7 @@ by Katrin Pr&ouml;l&szlig;:<br>
           annotation(Dialog(group = "高级"), Evaluate = true);
         parameter SI.DynamicViscosity mu_nominal = Medium.dynamicViscosity(
           Medium.setState_pTX(
-          Medium.p_default, Medium.T_default, Medium.X_default))
+          Medium.p_default, Medium.T_default, Medium.X_default)) 
           "额定动力黏度（例如，mu_liquidWater = 1e-3，mu_air = 1.8e-5）" 
           annotation(Dialog(group = "高级", enable = use_mu_nominal));
 
@@ -1032,12 +1032,12 @@ by Katrin Pr&ouml;l&szlig;:<br>
 在此基础模型中，使用了设备各节块的热力学状态 <code>states[n]</code>，预定义了各节块的密度 <code>rhos[n]</code> 和动力黏度 mus[n]</code>，以及流动的实际密度 <code>rhos_act[n-1]</code> 和实际黏度 <code>mus_act[n-1]</code>。
 请注意，模型不包括反向流动，因为这需要用扩展模型来处理，例如，用数值平滑或适当触发事件来实现。
 </p>
-</html>"      ), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,
+</html>"      ), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, 
           -100}, {100, 100}}), graphics = {Line(
-          points = {{-80, -50}, {-80, 50}, {80, -50}, {80, 50}},
-          color = {0, 0, 255},
+          points = {{-80, -50}, {-80, 50}, {80, -50}, {80, 50}}, 
+          color = {0, 0, 255}, 
           thickness = 1), Text(
-          extent = {{-40, -50}, {40, -90}},
+          extent = {{-40, -50}, {40, -90}}, 
           textString = "%name")}));
       end PartialStaggeredFlowModel;
 
@@ -1053,9 +1053,9 @@ by Katrin Pr&ouml;l&szlig;:<br>
         // 假定管道流动和考虑管道层流中的壁面摩擦时的反向参数化。
         // Laminar.massFlowRate_dp:
         //   m_flow = dp*pi*diameter^4*d/(128*length*mu);
-        SI.Length[n - 1] pathLengths_nominal =
-          {(dp_nominal / (n - 1) - g * dheights[i]) * Modelica.Constants.pi * ((dimensions[i] + dimensions[i + 1]) / 2) ^ 4 * rhos_act[i] / (128 * mus_act[i]) /
-          (m_flow_nominal / nParallel) for i in 1:n - 1} if show_Res
+        SI.Length[n - 1] pathLengths_nominal = 
+          {(dp_nominal / (n - 1) - g * dheights[i]) * Modelica.Constants.pi * ((dimensions[i] + dimensions[i + 1]) / 2) ^ 4 * rhos_act[i] / (128 * mus_act[i]) / 
+          (m_flow_nominal / nParallel) for i in 1:n - 1} if show_Res 
           "根据给定的圆管标准值得出的长度";
 
       equation
@@ -1076,7 +1076,7 @@ by Katrin Pr&ouml;l&szlig;:<br>
 </html>"  ));
       end NominalLaminarFlow;
 
-      partial model PartialGenericPipeFlow
+      partial model PartialGenericPipeFlow 
         "GenericPipeFlow: 带可更换的 WallFriction 的管道流动压降和重力子库"
 
         parameter Boolean from_dp = momentumDynamics >= Types.Dynamics.SteadyStateInitial "true: 使用m_flow = f(dp), false: dp = f(m_flow)" 
@@ -1086,7 +1086,7 @@ by Katrin Pr&ouml;l&szlig;:<br>
           Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialStaggeredFlowModel(
           final Re_turbulent = 4000);
 
-        replaceable package WallFriction =
+        replaceable package WallFriction = 
           Modelica.Fluid.Pipes.BaseClasses.WallFriction.Detailed 
           constrainedby 
           Modelica.Fluid.Pipes.BaseClasses.WallFriction.PartialWallFriction "壁面摩擦模型" 
@@ -1098,39 +1098,39 @@ by Katrin Pr&ouml;l&szlig;:<br>
         // 参数
         parameter SI.AbsolutePressure dp_nominal "额定压降（仅适用于额定模型）";
         parameter SI.MassFlowRate m_flow_nominal "额定质量流量";
-        parameter SI.MassFlowRate m_flow_small = if system.use_eps_Re then system.eps_m_flow * m_flow_nominal else system.m_flow_small
+        parameter SI.MassFlowRate m_flow_small = if system.use_eps_Re then system.eps_m_flow * m_flow_nominal else system.m_flow_small 
           "如果 |m_flows| < m_flow_small，则在正则化范围内（由于在静压头中较大的不连续性，正则化范围可能更宽）" 
           annotation(Dialog(enable = not from_dp and WallFriction.use_m_flow_small));
 
       protected
-        parameter SI.AbsolutePressure dp_small(start = 1, fixed = false)
+        parameter SI.AbsolutePressure dp_small(start = 1, fixed = false) 
           "如果 |dp| < dp_small，则在正则化范围内（由于在静压头中较大的不连续性，正则化范围可能更宽）" 
           annotation(Dialog(enable = from_dp and WallFriction.use_dp_small));
-        final parameter Boolean constantPressureLossCoefficient =
+        final parameter Boolean constantPressureLossCoefficient = 
           use_rho_nominal and (use_mu_nominal or not WallFriction.use_mu) "true: 压力损失与流体状态无关" 
           annotation(Evaluate = true);
-        final parameter Boolean continuousFlowReversal =
+        final parameter Boolean continuousFlowReversal = 
           (not useUpstreamScheme) 
           or constantPressureLossCoefficient 
-          or not allowFlowReversal
+          or not allowFlowReversal 
           "true:  压力损失在零流量附近持续存在" 
           annotation(Evaluate = true);
 
-        SI.Length[n - 1] diameters = 0.5 * (dimensions[1:n - 1] + dimensions[2:n])
+        SI.Length[n - 1] diameters = 0.5 * (dimensions[1:n - 1] + dimensions[2:n]) 
           "每节块间平均直径";
-        SI.AbsolutePressure dp_fric_nominal =
+        SI.AbsolutePressure dp_fric_nominal = 
           sum(WallFriction.pressureLoss_m_flow(
-          m_flow_nominal / nParallel,
-          rho_nominal,
-          rho_nominal,
-          mu_nominal,
-          mu_nominal,
-          pathLengths_internal,
-          diameters,
-          (crossAreas[1:n - 1] + crossAreas[2:n]) / 2,
-          (roughnesses[1:n - 1] + roughnesses[2:n]) / 2,
-          m_flow_small / nParallel,
-          Res_turbulent_internal))
+          m_flow_nominal / nParallel, 
+          rho_nominal, 
+          rho_nominal, 
+          mu_nominal, 
+          mu_nominal, 
+          pathLengths_internal, 
+          diameters, 
+          (crossAreas[1:n - 1] + crossAreas[2:n]) / 2, 
+          (roughnesses[1:n - 1] + roughnesses[2:n]) / 2, 
+          m_flow_small / nParallel, 
+          Res_turbulent_internal)) 
           "额定条件下的压力损失";
 
       initial equation
@@ -1151,32 +1151,32 @@ by Katrin Pr&ouml;l&szlig;:<br>
           if from_dp and not WallFriction.dp_is_zero then
             m_flows = homotopy(
               actual = WallFriction.massFlowRate_dp(
-              dps_fg - {g * dheights[i] * rhos_act[i] for i in 1:n - 1},
-              rhos_act,
-              rhos_act,
-              mus_act,
-              mus_act,
-              pathLengths_internal,
-              diameters,
-              (crossAreas[1:n - 1] + crossAreas[2:n]) / 2,
-              (roughnesses[1:n - 1] + roughnesses[2:n]) / 2,
-              dp_small / (n - 1),
-              Res_turbulent_internal) * nParallel,
+              dps_fg - {g * dheights[i] * rhos_act[i] for i in 1:n - 1}, 
+              rhos_act, 
+              rhos_act, 
+              mus_act, 
+              mus_act, 
+              pathLengths_internal, 
+              diameters, 
+              (crossAreas[1:n - 1] + crossAreas[2:n]) / 2, 
+              (roughnesses[1:n - 1] + roughnesses[2:n]) / 2, 
+              dp_small / (n - 1), 
+              Res_turbulent_internal) * nParallel, 
               simplified = m_flow_nominal / dp_nominal * (dps_fg - g * dheights * rho_nominal));
           else
             dps_fg = homotopy(
               actual = WallFriction.pressureLoss_m_flow(
-              m_flows / nParallel,
-              rhos_act,
-              rhos_act,
-              mus_act,
-              mus_act,
-              pathLengths_internal,
-              diameters,
-              (crossAreas[1:n - 1] + crossAreas[2:n]) / 2,
-              (roughnesses[1:n - 1] + roughnesses[2:n]) / 2,
-              m_flow_small / nParallel,
-              Res_turbulent_internal) + {g * dheights[i] * rhos_act[i] for i in 1:n - 1},
+              m_flows / nParallel, 
+              rhos_act, 
+              rhos_act, 
+              mus_act, 
+              mus_act, 
+              pathLengths_internal, 
+              diameters, 
+              (crossAreas[1:n - 1] + crossAreas[2:n]) / 2, 
+              (roughnesses[1:n - 1] + roughnesses[2:n]) / 2, 
+              m_flow_small / nParallel, 
+              Res_turbulent_internal) + {g * dheights[i] * rhos_act[i] for i in 1:n - 1}, 
               simplified = dp_nominal / m_flow_nominal * m_flows + g * dheights * rho_nominal);
           end if;
         else
@@ -1184,34 +1184,34 @@ by Katrin Pr&ouml;l&szlig;:<br>
           if from_dp and not WallFriction.dp_is_zero then
             m_flows = homotopy(
               actual = WallFriction.massFlowRate_dp_staticHead(
-              dps_fg,
-              rhos[1:n - 1],
-              rhos[2:n],
-              mus[1:n - 1],
-              mus[2:n],
-              pathLengths_internal,
-              diameters,
-              g * dheights,
-              (crossAreas[1:n - 1] + crossAreas[2:n]) / 2,
-              (roughnesses[1:n - 1] + roughnesses[2:n]) / 2,
-              dp_small / (n - 1),
-              Res_turbulent_internal) * nParallel,
+              dps_fg, 
+              rhos[1:n - 1], 
+              rhos[2:n], 
+              mus[1:n - 1], 
+              mus[2:n], 
+              pathLengths_internal, 
+              diameters, 
+              g * dheights, 
+              (crossAreas[1:n - 1] + crossAreas[2:n]) / 2, 
+              (roughnesses[1:n - 1] + roughnesses[2:n]) / 2, 
+              dp_small / (n - 1), 
+              Res_turbulent_internal) * nParallel, 
               simplified = m_flow_nominal / dp_nominal * (dps_fg - g * dheights * rho_nominal));
           else
             dps_fg = homotopy(
               actual = WallFriction.pressureLoss_m_flow_staticHead(
-              m_flows / nParallel,
-              rhos[1:n - 1],
-              rhos[2:n],
-              mus[1:n - 1],
-              mus[2:n],
-              pathLengths_internal,
-              diameters,
-              g * dheights,
-              (crossAreas[1:n - 1] + crossAreas[2:n]) / 2,
-              (roughnesses[1:n - 1] + roughnesses[2:n]) / 2,
-              m_flow_small / nParallel,
-              Res_turbulent_internal),
+              m_flows / nParallel, 
+              rhos[1:n - 1], 
+              rhos[2:n], 
+              mus[1:n - 1], 
+              mus[2:n], 
+              pathLengths_internal, 
+              diameters, 
+              g * dheights, 
+              (crossAreas[1:n - 1] + crossAreas[2:n]) / 2, 
+              (roughnesses[1:n - 1] + roughnesses[2:n]) / 2, 
+              m_flow_small / nParallel, 
+              Res_turbulent_internal), 
               simplified = dp_nominal / m_flow_nominal * m_flows + g * dheights * rho_nominal);
           end if;
         end if;
@@ -1235,48 +1235,48 @@ dp = &lambda;(Re,&Delta;)*(L/D)*&rho;*v*|v|/2.
 这可能会加快模拟速度，供更稳定的模拟。
 </p>
 </html>"              ), Diagram(coordinateSystem(
-          preserveAspectRatio = false,
+          preserveAspectRatio = false, 
           extent = {{-100, -100}, {100, 100}}), graphics = {
           Rectangle(
-          extent = {{-100, 64}, {100, -64}},
-          fillColor = {255, 255, 255},
-          fillPattern = FillPattern.Backward),
+          extent = {{-100, 64}, {100, -64}}, 
+          fillColor = {255, 255, 255}, 
+          fillPattern = FillPattern.Backward), 
           Rectangle(
-          extent = {{-100, 50}, {100, -49}},
-          fillColor = {255, 255, 255},
-          fillPattern = FillPattern.Solid),
+          extent = {{-100, 50}, {100, -49}}, 
+          fillColor = {255, 255, 255}, 
+          fillPattern = FillPattern.Solid), 
           Line(
-          points = {{-60, -49}, {-60, 50}},
-          color = {0, 0, 255},
-          arrow = {Arrow.Filled, Arrow.Filled}),
+          points = {{-60, -49}, {-60, 50}}, 
+          color = {0, 0, 255}, 
+          arrow = {Arrow.Filled, Arrow.Filled}), 
           Text(
-          extent = {{-50, 16}, {6, -10}},
-          textColor = {0, 0, 255},
-          textString = "diameters"),
+          extent = {{-50, 16}, {6, -10}}, 
+          textColor = {0, 0, 255}, 
+          textString = "diameters"), 
           Line(
-          points = {{-100, 74}, {100, 74}},
-          color = {0, 0, 255},
-          arrow = {Arrow.Filled, Arrow.Filled}),
+          points = {{-100, 74}, {100, 74}}, 
+          color = {0, 0, 255}, 
+          arrow = {Arrow.Filled, Arrow.Filled}), 
           Text(
-          extent = {{-32, 93}, {32, 74}},
-          textColor = {0, 0, 255},
+          extent = {{-32, 93}, {32, 74}}, 
+          textColor = {0, 0, 255}, 
           textString = "pathLengths")}));
       end PartialGenericPipeFlow;
 
-      model NominalTurbulentPipeFlow
+      model NominalTurbulentPipeFlow 
         "NominalTurbulentPipeFlow: 给定额定值下圆管中的二次湍流流动"
         extends 
           Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialGenericPipeFlow(
-        redeclare package WallFriction =
-          Modelica.Fluid.Pipes.BaseClasses.WallFriction.LaminarAndQuadraticTurbulent,
-          use_mu_nominal = not show_Res,
-          pathLengths_internal = pathLengths_nominal,
-          useUpstreamScheme = false,
+        redeclare package WallFriction = 
+          Modelica.Fluid.Pipes.BaseClasses.WallFriction.LaminarAndQuadraticTurbulent, 
+          use_mu_nominal = not show_Res, 
+          pathLengths_internal = pathLengths_nominal, 
+          useUpstreamScheme = false, 
           Res_turbulent_internal = Res_turbulent_nominal);
 
         import Modelica.Constants.pi;
 
-        parameter SI.MassFlowRate m_flow_turbulent(min = 0) = if system.use_eps_Re then 0.1 * m_flow_nominal else system.m_flow_small
+        parameter SI.MassFlowRate m_flow_turbulent(min = 0) = if system.use_eps_Re then 0.1 * m_flow_nominal else system.m_flow_small 
           "湍流从 |m_flows| > m_flow_turbulent 开始(在静压头有较大不连续性时范围可以放宽）" 
           annotation(Dialog(enable = not from_dp and WallFriction.use_m_flow_small));
 
@@ -1287,13 +1287,13 @@ dp = &lambda;(Re,&Delta;)*(L/D)*&rho;*v*|v|/2.
         Real[n - 1] zetas "二次湍流流动系数";
 
         // 雷诺数
-        Medium.AbsolutePressure[n - 1] dps_fg_turbulent(each min = 0) =
+        Medium.AbsolutePressure[n - 1] dps_fg_turbulent(each min = 0) = 
           {(mus_act[i] * diameters[i] * pi / 4) ^ 2 * Re_turbulent ^ 2 / (ks_inv[i] * rhos_act[i]) for i in 1:n - 1} if 
           show_Res "圆管中的湍流起始";
 
       initial equation
         for i in 1:n loop
-          assert(abs(crossAreas[i] - pi / 4 * dimensions[i] ^ 2) < 1e-10 * crossAreas[i],
+          assert(abs(crossAreas[i] - pi / 4 * dimensions[i] ^ 2) < 1e-10 * crossAreas[i], 
             "NominalTurbulentPipeFlow 模型需要圆形管道");
         end for;
 
@@ -1308,7 +1308,7 @@ dp = &lambda;(Re,&Delta;)*(L/D)*&rho;*v*|v|/2.
         for i in 1:n - 1 loop
           ks_inv[i] = (m_flow_nominal / nParallel) ^ 2 / ((dp_nominal / (n - 1) - g * dheights[i] * rhos_act[i])) / rhos_act[i];
           zetas[i] = (pi * diameters[i] * diameters[i]) ^ 2 / (8 * ks_inv[i]);
-          pathLengths_nominal[i] =
+          pathLengths_nominal[i] = 
             zetas[i] * diameters[i] * (2 * Modelica.Math.log10(3.7 / ((roughnesses[i] + roughnesses[i + 1]) / 2 / diameters[i]))) ^ 2;
           Res_turbulent_nominal[i] = m_flow_turbulent / nParallel / (pi / 4 * diameters[i] * mus_act[i]);
         end for;
@@ -1342,12 +1342,12 @@ by R&uuml;diger Franke:<br />
       model TurbulentPipeFlow "TurbulentPipeFlow: 圆管中的二次湍流（利用mu对层流区进行正则化）"
         extends 
           Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialGenericPipeFlow(
-        redeclare package WallFriction =
-          Modelica.Fluid.Pipes.BaseClasses.WallFriction.LaminarAndQuadraticTurbulent,
-          use_mu_nominal = not show_Res,
-          pathLengths_internal = pathLengths,
-          dp_nominal(start = if system.use_eps_Re then 1 else 1e3 * dp_small, fixed = not system.use_eps_Re),
-          m_flow_nominal = if system.use_eps_Re then system.m_flow_nominal else 1e2 * m_flow_small,
+        redeclare package WallFriction = 
+          Modelica.Fluid.Pipes.BaseClasses.WallFriction.LaminarAndQuadraticTurbulent, 
+          use_mu_nominal = not show_Res, 
+          pathLengths_internal = pathLengths, 
+          dp_nominal(start = if system.use_eps_Re then 1 else 1e3 * dp_small, fixed = not system.use_eps_Re), 
+          m_flow_nominal = if system.use_eps_Re then system.m_flow_nominal else 1e2 * m_flow_small, 
           Res_turbulent_internal = if use_Re then Re_turbulent * ones(n - 1) else zeros(n - 1));
 
         import Modelica.Constants.pi;
@@ -1357,7 +1357,7 @@ by R&uuml;diger Franke:<br />
 
       initial equation
         for i in 1:n loop
-          assert(abs(crossAreas[i] - pi / 4 * dimensions[i] ^ 2) < 1e-10 * crossAreas[i],
+          assert(abs(crossAreas[i] - pi / 4 * dimensions[i] ^ 2) < 1e-10 * crossAreas[i], 
             "NominalTurbulentPipeFlow 模型需要圆形管道");
         end for;
         // 从流量模型初始化 dp_nominal
@@ -1378,11 +1378,11 @@ by R&uuml;diger Franke:<br />
       model DetailedPipeFlow "DetailedPipeFlow: 层流和湍流的详细特征"
         extends 
           Modelica.Fluid.Pipes.BaseClasses.FlowModels.PartialGenericPipeFlow(
-        redeclare package WallFriction =
-          Modelica.Fluid.Pipes.BaseClasses.WallFriction.Detailed,
-          pathLengths_internal = pathLengths,
-          dp_nominal(start = 1, fixed = false),
-          m_flow_nominal = if system.use_eps_Re then system.m_flow_nominal else 1e2 * m_flow_small,
+        redeclare package WallFriction = 
+          Modelica.Fluid.Pipes.BaseClasses.WallFriction.Detailed, 
+          pathLengths_internal = pathLengths, 
+          dp_nominal(start = 1, fixed = false), 
+          m_flow_nominal = if system.use_eps_Re then system.m_flow_nominal else 1e2 * m_flow_small, 
           Res_turbulent_internal = Re_turbulent * ones(n - 1));
 
       initial equation
@@ -1411,27 +1411,27 @@ by R&uuml;diger Franke:<br />
 <p style=\"text-align: center;\"><img src=\"modelica://Modelica/Resources/Images/Fluid/Pipes/BaseClasses/PipeFrictionStaticHead_case-b.png\" alt=\"PipeFrictionStaticHead_case-b.png\" data-href=\"\" style=\"\">
 </p>
 </html>"  ), Diagram(coordinateSystem(
-          preserveAspectRatio = false,
+          preserveAspectRatio = false, 
           extent = {{-100, -100}, {100, 100}}), graphics = {
           Rectangle(
-          extent = {{-100, 64}, {100, -64}},
-          fillColor = {255, 255, 255},
-          fillPattern = FillPattern.Backward),
+          extent = {{-100, 64}, {100, -64}}, 
+          fillColor = {255, 255, 255}, 
+          fillPattern = FillPattern.Backward), 
           Rectangle(
-          extent = {{-100, 50}, {100, -49}},
-          fillColor = {255, 255, 255},
-          fillPattern = FillPattern.Solid),
+          extent = {{-100, 50}, {100, -49}}, 
+          fillColor = {255, 255, 255}, 
+          fillPattern = FillPattern.Solid), 
           Line(
-          points = {{-60, -49}, {-60, 50}},
-          color = {0, 0, 255},
-          arrow = {Arrow.Filled, Arrow.Filled}),
+          points = {{-60, -49}, {-60, 50}}, 
+          color = {0, 0, 255}, 
+          arrow = {Arrow.Filled, Arrow.Filled}), 
           Text(
-          extent = {{-50, 16}, {6, -10}},
-          textColor = {0, 0, 255},
-          textString = "diameters"),
+          extent = {{-50, 16}, {6, -10}}, 
+          textColor = {0, 0, 255}, 
+          textString = "diameters"), 
           Line(
-          points = {{-100, 74}, {100, 74}},
-          color = {0, 0, 255},
+          points = {{-100, 74}, {100, 74}}, 
+          color = {0, 0, 255}, 
           arrow = {Arrow.Filled, Arrow.Filled})}));
       end DetailedPipeFlow;
       annotation();
@@ -1459,13 +1459,13 @@ by R&uuml;diger Franke:<br />
 <p>
 几何形状在界面中指定，包括表面区域 <code>surfaceAreas[n]</code>、粗糙度 <code>roughnesses[n]</code> 和流道长度 <code>lengths[n]</code>。 此外，对于不同类型的设备，流体流动的特征还包括特征尺寸 <code>dimensions[n+1]</code> 和流体流动的平均速度 <code>vs[n+1]</code>。 有关定义示例，请参见 <a href=\"modelica://Modelica.Fluid.Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber\" target=\"\">Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </p>
-</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
+</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
           {100, 100}}), graphics = {Rectangle(
-          extent = {{-80, 60}, {80, -60}},
-          pattern = LinePattern.None,
-          fillColor = {255, 0, 0},
+          extent = {{-80, 60}, {80, -60}}, 
+          pattern = LinePattern.None, 
+          fillColor = {255, 0, 0}, 
           fillPattern = FillPattern.HorizontalCylinder), Text(
-          extent = {{-40, 22}, {38, -18}},
+          extent = {{-40, 22}, {38, -18}}, 
           textString = "%name")}));
       end PartialFlowHeatTransfer;
 
@@ -1647,21 +1647,21 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
         import Modelica.Constants.pi;
 
         // 子库中要设置的常量
-        constant Boolean use_mu = true
+        constant Boolean use_mu = true 
           "true: 在函数中使用 mu_a/mu_b，false: 在函数中不使用 mu_a/mu_b";
-        constant Boolean use_roughness = true
+        constant Boolean use_roughness = true 
           "true: 在函数中使用粗糙度，false: 在函数中不使用粗糙度";
-        constant Boolean use_dp_small = true
+        constant Boolean use_dp_small = true 
           "true: 在函数中使用 dp_small，false: 在函数中不使用 dp_small";
-        constant Boolean use_m_flow_small = true
+        constant Boolean use_m_flow_small = true 
           "true: 在函数中使用 m_flow_small，false: 在函数中不使用m_flow_small";
-        constant Boolean dp_is_zero = false
+        constant Boolean dp_is_zero = false 
           "true: 没有壁面摩擦，即dp = 0 (无法使用函数 massFlowRate_dp())";
-        constant Boolean use_Re_turbulent = true
+        constant Boolean use_Re_turbulent = true 
           "true: Re_turbulent 输入用于函数，false: Re_turbulent 输入不用于函数";
 
         // 压降特性函数
-        replaceable partial function massFlowRate_dp
+        replaceable partial function massFlowRate_dp 
           "计算质量流量 m_flow 与压降 dp 的函数关系，即由于壁面摩擦， m_flow = f(dp)"
           extends Modelica.Icons.Function;
 
@@ -1673,11 +1673,11 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           input SI.Length length "管道长度";
           input SI.Diameter diameter "管道内径（水力直径）";
           input SI.Area crossArea = pi * diameter ^ 2 / 4 "内部横截面积";
-          input Modelica.Fluid.Types.Roughness roughness = 2.5e-5
+          input Modelica.Fluid.Types.Roughness roughness = 2.5e-5 
             "管道的绝对粗糙度，默认为光滑钢管(若 use_roughness = false，则为假)";
-          input SI.AbsolutePressure dp_small = 1
+          input SI.AbsolutePressure dp_small = 1 
             "如果 |dp| < dp_small，对零流量进行正则调整(若 use_dp_small = false，则为假)";
-          input SI.ReynoldsNumber Re_turbulent = 4000
+          input SI.ReynoldsNumber Re_turbulent = 4000 
             "如果 Re >= Re_turbulent 则为湍流(若 use_Re_turbulent = false，则为假)";
 
           output SI.MassFlowRate m_flow "从 port_a 到 port_b 的质量流量";
@@ -1686,7 +1686,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end massFlowRate_dp;
 
-        replaceable partial function massFlowRate_dp_staticHead
+        replaceable partial function massFlowRate_dp_staticHead 
           "计算质量流量 m_flow 与压降 dp 的函数关系，即由于管壁摩擦和静压头 m_flow = f(dp)"
           extends Modelica.Icons.Function;
 
@@ -1699,11 +1699,11 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           input SI.Diameter diameter "管道内径（水力直径）";
           input Real g_times_height_ab(unit = "m2/s2") "重力与 port_a 和 port_b 的高度差的积";
           input SI.Area crossArea = pi * diameter ^ 2 / 4 "内部横截面积";
-          input Modelica.Fluid.Types.Roughness roughness = 2.5e-5
+          input Modelica.Fluid.Types.Roughness roughness = 2.5e-5 
             "管道的绝对粗糙度，默认为光滑钢管(若 use_roughness = false，则为假)";
-          input SI.AbsolutePressure dp_small = 1
+          input SI.AbsolutePressure dp_small = 1 
             "如果 |dp| < dp_small，对零流量进行正则调整(若 use_dp_small = false，则为假)";
-          input SI.ReynoldsNumber Re_turbulent = 4000
+          input SI.ReynoldsNumber Re_turbulent = 4000 
             "如果 Re >= Re_turbulent 则为湍流(若 use_Re_turbulent = false，则为假)";
 
           output SI.MassFlowRate m_flow "从 port_a 到 port_b 的质量流量";
@@ -1712,7 +1712,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end massFlowRate_dp_staticHead;
 
-        replaceable partial function pressureLoss_m_flow
+        replaceable partial function pressureLoss_m_flow 
           "计算压降 dp 与质量流量 m_flow 的函数关系，即由于壁面摩擦 dp = f(m_flow)"
           extends Modelica.Icons.Function;
 
@@ -1724,11 +1724,11 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           input SI.Length length "管道长度";
           input SI.Diameter diameter "管道内径（水力直径）";
           input SI.Area crossArea = pi * diameter ^ 2 / 4 "内部横截面积";
-          input Modelica.Fluid.Types.Roughness roughness = 2.5e-5
+          input Modelica.Fluid.Types.Roughness roughness = 2.5e-5 
             "管道的绝对粗糙度，默认为光滑钢管(若 use_roughness = false，则为假)";
-          input SI.MassFlowRate m_flow_small = 0.01
+          input SI.MassFlowRate m_flow_small = 0.01 
             "如果 |m_flow| < m_flow_small，则对零流量进行正则调整(若 use_m_flow_small = false，则为假)";
-          input SI.ReynoldsNumber Re_turbulent = 4000
+          input SI.ReynoldsNumber Re_turbulent = 4000 
             "如果 Re >= Re_turbulent 则为湍流(若 use_Re_turbulent = false，则为假)";
 
           output SI.Pressure dp "压降 (dp = port_a.p - port_b.p)";
@@ -1738,7 +1738,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end pressureLoss_m_flow;
 
-        replaceable partial function pressureLoss_m_flow_staticHead
+        replaceable partial function pressureLoss_m_flow_staticHead 
           "计算压降 dp 与质量流量 m_flow 的函数关系，即由于管壁摩擦和静压头 dp = f(m_flow)"
           extends Modelica.Icons.Function;
 
@@ -1751,11 +1751,11 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           input SI.Diameter diameter "管道内径（水力直径）";
           input Real g_times_height_ab(unit = "m2/s2") "重力与 port_a 和 port_b 的高度差的积";
           input SI.Area crossArea = pi * diameter ^ 2 / 4 "内部横截面积";
-          input Modelica.Fluid.Types.Roughness roughness = 2.5e-5
+          input Modelica.Fluid.Types.Roughness roughness = 2.5e-5 
             "管道的绝对粗糙度，默认为光滑钢管(若 use_roughness = false，则为假)";
-          input SI.MassFlowRate m_flow_small = 0.01
+          input SI.MassFlowRate m_flow_small = 0.01 
             "如果 |m_flow| < m_flow_small，则对零流量进行正则调整(若 use_m_flow_small = false，则为假)";
-          input SI.ReynoldsNumber Re_turbulent = 4000
+          input SI.ReynoldsNumber Re_turbulent = 4000 
             "如果 Re >= Re_turbulent 则为湍流(若 use_Re_turbulent = false，则为假)";
 
           output SI.Pressure dp "压降 (dp = port_a.p - port_b.p)";
@@ -1773,14 +1773,14 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
         extends Modelica.Icons.Package;
 
         extends PartialWallFriction(
-          final use_mu = false,
-          final use_roughness = false,
-          final use_dp_small = false,
-          final use_m_flow_small = false,
-          final dp_is_zero = true,
+          final use_mu = false, 
+          final use_roughness = false, 
+          final use_dp_small = false, 
+          final use_m_flow_small = false, 
+          final dp_is_zero = true, 
           final use_Re_turbulent = false);
 
-        redeclare function extends massFlowRate_dp
+        redeclare function extends massFlowRate_dp 
           "计算质量流量 m_flow与压降 dp 的函数关系，即由于壁面摩擦引起的 m_flow = f(dp)"
 
         algorithm
@@ -1792,7 +1792,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end massFlowRate_dp;
 
-        redeclare function extends pressureLoss_m_flow
+        redeclare function extends pressureLoss_m_flow 
           "计算压降 dp 与质量流量 m_flow 的函数关系，即由于壁面摩擦引起的 dp = f(m_flow)"
 
         algorithm
@@ -1802,7 +1802,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end pressureLoss_m_flow;
 
-        redeclare function extends massFlowRate_dp_staticHead
+        redeclare function extends massFlowRate_dp_staticHead 
           "计算质量流量 m_flow 与压力损失 dp 的函数关系，即由于管壁摩擦和静压头引起的 m_flow = f(dp)"
 
         algorithm
@@ -1817,7 +1817,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end massFlowRate_dp_staticHead;
 
-        redeclare function extends pressureLoss_m_flow_staticHead
+        redeclare function extends pressureLoss_m_flow_staticHead 
           "计算压力损失 dp 与质量流量 m_flow 的函数关系，即由于管壁摩擦和静压头引起的 dp = f(m_flow)"
 
         /* 
@@ -1831,7 +1831,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
         algorithm
           //  dp := Utilities.regStep(m_flow, dp_grav_a, dp_grav_a, m_flow_small);
           dp := 0;
-          assert(abs(g_times_height_ab) < Modelica.Constants.small,
+          assert(abs(g_times_height_ab) < Modelica.Constants.small, 
             "WallFriction.NoFriction 不考虑静水压，不能与 height_ab<>0 一起使用!");
           annotation(Documentation(info = "<html>
 
@@ -1844,17 +1844,17 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
       end NoFriction;
 
-      package Laminar
+      package Laminar 
         "圆管层流中的管壁摩擦（线性相关）"
 
         extends PartialWallFriction(
-          final use_mu = true,
-          final use_roughness = false,
-          final use_dp_small = false,
-          final use_m_flow_small = false,
+          final use_mu = true, 
+          final use_roughness = false, 
+          final use_dp_small = false, 
+          final use_m_flow_small = false, 
           final use_Re_turbulent = false);
 
-        redeclare function extends massFlowRate_dp
+        redeclare function extends massFlowRate_dp 
           "计算质量流量 m_flow 与压力损失 dp 的函数关系，即由壁面摩擦引起的 m_flow = f(dp)"
 
         algorithm
@@ -1865,7 +1865,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end massFlowRate_dp;
 
-        redeclare function extends pressureLoss_m_flow
+        redeclare function extends pressureLoss_m_flow 
           "计算压力损失 dp 与质量流量 m_flow 的函数关系，即由壁面摩擦引起的 dp = f(m_flow)"
 
         algorithm
@@ -1876,32 +1876,32 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end pressureLoss_m_flow;
 
-        redeclare function extends massFlowRate_dp_staticHead
+        redeclare function extends massFlowRate_dp_staticHead 
           "计算质量流量 m_flow 与压降 dp 的函数关系，即由壁面摩擦和静压头引起的 m_flow = f(dp)"
 
           // 警告：以下公式仅适用于圆管！
         protected
-          Real k0inv = Modelica.Constants.pi * diameter ^ 4 / (128 * length)
+          Real k0inv = Modelica.Constants.pi * diameter ^ 4 / (128 * length) 
             "常数系数";
 
-          SI.Pressure dp_grav_a = g_times_height_ab * rho_a
+          SI.Pressure dp_grav_a = g_times_height_ab * rho_a 
             "质量流沿设计方向(a to b)时的静压头";
-          SI.Pressure dp_grav_b = g_times_height_ab * rho_b
+          SI.Pressure dp_grav_b = g_times_height_ab * rho_b 
             "质量流沿设计反方向(b to a)时的静压头";
 
-          Real dm_flow_ddp_fric_a = k0inv * rho_a / mu_a
+          Real dm_flow_ddp_fric_a = k0inv * rho_a / mu_a 
             "如果质量流沿设计方向(a to b)，质量流量相对于 dp 的斜率";
-          Real dm_flow_ddp_fric_b = k0inv * rho_b / mu_b
+          Real dm_flow_ddp_fric_b = k0inv * rho_b / mu_b 
             "如果质量流沿设计反方向(b to a)，质量流量与 dp 的斜率";
 
-          Real dp_a = max(dp_grav_a, dp_grav_b) + dp_small
+          Real dp_a = max(dp_grav_a, dp_grav_b) + dp_small 
             "m_flow(dp) 关系的正则化区域上限";
-          Real dp_b = min(dp_grav_a, dp_grav_b) - dp_small
+          Real dp_b = min(dp_grav_a, dp_grav_b) - dp_small 
             "m_flow(dp) 关系的正则化区域下限";
 
-          SI.MassFlowRate m_flow_a
+          SI.MassFlowRate m_flow_a 
             "正则化域上限值";
-          SI.MassFlowRate m_flow_b
+          SI.MassFlowRate m_flow_b 
             "正则化域下限值";
 
           // 零质量流量条件的恰当定义
@@ -1948,27 +1948,27 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end massFlowRate_dp_staticHead;
 
-        redeclare function extends pressureLoss_m_flow_staticHead
+        redeclare function extends pressureLoss_m_flow_staticHead 
           "计算压降 dp 与质量流量 m_flow 的函数关系，即由管壁摩擦和静压头引起的 dp = f(m_flow)"
 
           // 警告：以下公式仅适用于圆管！
         protected
-          Real k0 = 128 * length / (Modelica.Constants.pi * diameter ^ 4)
+          Real k0 = 128 * length / (Modelica.Constants.pi * diameter ^ 4) 
             "常数系数";
 
-          SI.Pressure dp_grav_a = g_times_height_ab * rho_a
+          SI.Pressure dp_grav_a = g_times_height_ab * rho_a 
             "质量流沿设计方向(a to b)时的静压头";
-          SI.Pressure dp_grav_b = g_times_height_ab * rho_b
+          SI.Pressure dp_grav_b = g_times_height_ab * rho_b 
             "质量流沿设计反方向(b to a)时的静压头";
 
-          Real ddp_dm_flow_a = k0 * mu_a / rho_a
+          Real ddp_dm_flow_a = k0 * mu_a / rho_a 
             "如果质量流沿设计方向(a to b)，dp 相对于质量流量的斜率";
-          Real ddp_dm_flow_b = k0 * mu_b / rho_b
+          Real ddp_dm_flow_b = k0 * mu_b / rho_b 
             "如果质量流沿设计反方向(b to a)，dp 相对于质量流量的斜率";
 
-          SI.MassFlowRate m_flow_a = if dp_grav_a >= dp_grav_b then m_flow_small else m_flow_small + (dp_grav_b - dp_grav_a) / ddp_dm_flow_a
+          SI.MassFlowRate m_flow_a = if dp_grav_a >= dp_grav_b then m_flow_small else m_flow_small + (dp_grav_b - dp_grav_a) / ddp_dm_flow_a 
             "dp(m_flow) 关系的正则化区域上限";
-          SI.MassFlowRate m_flow_b = if dp_grav_a >= dp_grav_b then -m_flow_small else -m_flow_small - (dp_grav_b - dp_grav_a) / ddp_dm_flow_b
+          SI.MassFlowRate m_flow_b = if dp_grav_a >= dp_grav_b then -m_flow_small else -m_flow_small - (dp_grav_b - dp_grav_a) / ddp_dm_flow_b 
             "dp(m_flow) 关系的正则化区域下限";
 
           SI.Pressure dp_a "正则化域上限值";
@@ -2029,18 +2029,18 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
       end Laminar;
 
-      package QuadraticTurbulent
+      package QuadraticTurbulent 
         "圆管中湍流的管壁摩擦力（简单特性，忽略动力黏度 mu）"
         import Modelica.Constants.pi;
 
         extends PartialWallFriction(
-          final use_mu = false,
-          final use_roughness = true,
-          final use_dp_small = true,
-          final use_m_flow_small = true,
+          final use_mu = false, 
+          final use_roughness = true, 
+          final use_dp_small = true, 
+          final use_m_flow_small = true, 
           final use_Re_turbulent = false);
 
-        redeclare function extends massFlowRate_dp
+        redeclare function extends massFlowRate_dp 
           "计算质量流量 m_flow 与压降 dp 的函数关系，即由于避免摩擦引起的 m_flow = f(dp)"
           import Modelica.Math;
         protected
@@ -2056,7 +2056,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           = 0.5*zeta/(pi*(D/2)^2)^2
           = 8*zeta/(pi*D^2)^2
           */
-          assert(roughness > 1e-10,
+          assert(roughness > 1e-10, 
             "二次湍流壁面摩擦特性要求粗糙度 > 0");
           zeta := (length / diameter) / (2 * Math.log10(3.7 / (roughness / diameter))) ^ 2;
           // 警告：以下公式仅适用于圆管！
@@ -2067,7 +2067,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end massFlowRate_dp;
 
-        redeclare function extends pressureLoss_m_flow
+        redeclare function extends pressureLoss_m_flow 
           "计算压降 dp 与质量流流量 m_flow 的函数关系，即由于便面摩擦引起的 dp = f(m_flow)"
           import Modelica.Constants.pi;
           import Modelica.Math;
@@ -2085,7 +2085,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           = 0.5*zeta/(pi*(D/2)^2)^2
           = 8*zeta/(pi*D^2)^2
           */
-          assert(roughness > 1e-10,
+          assert(roughness > 1e-10, 
             "二次湍流壁面摩擦特性要求粗糙度 > 0");
           zeta := (length / diameter) / (2 * Math.log10(3.7 / (roughness / diameter))) ^ 2;
           // 警告：以下公式仅适用于圆管！
@@ -2096,7 +2096,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end pressureLoss_m_flow;
 
-        redeclare function extends massFlowRate_dp_staticHead
+        redeclare function extends massFlowRate_dp_staticHead 
           "计算质量流量 m_flow 与压降 dp 的函数关系，即由于避免摩擦和静压头引起的 m_flow = f(dp)"
           import Modelica.Math;
           import Modelica.Constants.pi;
@@ -2105,27 +2105,27 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           // 警告：以下公式仅适用于圆管！
           Real k_inv = (pi * diameter * diameter) ^ 2 / (8 * zeta);
 
-          SI.Pressure dp_grav_a = g_times_height_ab * rho_a
+          SI.Pressure dp_grav_a = g_times_height_ab * rho_a 
             "质量流沿设计方向(a to b)时的静压头";
-          SI.Pressure dp_grav_b = g_times_height_ab * rho_b
+          SI.Pressure dp_grav_b = g_times_height_ab * rho_b 
             "质量流沿设计反方向(b to a)时的静压头";
 
           Real k1 = rho_a * k_inv "等式 m_flow =  sqrt(k1*(dp-dp_grav_a))中的系数";
           Real k2 = rho_b * k_inv "等式 m_flow = -sqrt(k2*|dp-dp_grav_b|)中的系数";
 
-          Real dp_a = max(dp_grav_a, dp_grav_b) + dp_small
+          Real dp_a = max(dp_grav_a, dp_grav_b) + dp_small 
             "m_flow(dp) 关系的正则化区域上限";
-          Real dp_b = min(dp_grav_a, dp_grav_b) - dp_small
+          Real dp_b = min(dp_grav_a, dp_grav_b) - dp_small 
             "m_flow(dp) 关系的正则化区域下限";
 
-          SI.MassFlowRate m_flow_a
+          SI.MassFlowRate m_flow_a 
             "正则化域上限值";
-          SI.MassFlowRate m_flow_b
+          SI.MassFlowRate m_flow_b 
             "正则化域下限值";
 
-          SI.MassFlowRate dm_flow_ddp_fric_a
+          SI.MassFlowRate dm_flow_ddp_fric_a 
             "正则化域上限的导数";
-          SI.MassFlowRate dm_flow_ddp_fric_b
+          SI.MassFlowRate dm_flow_ddp_fric_b 
             "正则化域下限的导数";
 
           // 零质量流量条件的恰当定义
@@ -2142,7 +2142,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           = 0.5*zeta/(pi*(D/2)^2)^2
           = 8*zeta/(pi*D^2)^2
           */
-          assert(roughness > 1e-10,
+          assert(roughness > 1e-10, 
             "二次湍流壁面摩擦特性要求粗糙度 > 0");
 
           if dp >= dp_a then
@@ -2175,7 +2175,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end massFlowRate_dp_staticHead;
 
-        redeclare function extends pressureLoss_m_flow_staticHead
+        redeclare function extends pressureLoss_m_flow_staticHead 
           "计算压降 dp 与质量流量 m_flow 的函数关系，即由管壁摩擦和静压头引起的 dp = f(m_flow)"
           import Modelica.Math;
           import Modelica.Constants.pi;
@@ -2184,25 +2184,25 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           // 警告：以下公式仅适用于圆管！
           Real k = 8 * zeta / (pi * diameter * diameter) ^ 2;
 
-          SI.Pressure dp_grav_a = g_times_height_ab * rho_a
+          SI.Pressure dp_grav_a = g_times_height_ab * rho_a 
             "质量流沿设计方向(a to b)时的静压头";
-          SI.Pressure dp_grav_b = g_times_height_ab * rho_b
+          SI.Pressure dp_grav_b = g_times_height_ab * rho_b 
             "质量流沿设计反方向(b to a)时的静压头";
 
           Real k1 = k / rho_a "If m_flow >= 0 then dp = k1*m_flow^2 + dp_grav_a";
           Real k2 = k / rho_b "If m_flow < 0 then dp = -k2*m_flow^2 + dp_grav_b";
 
-          SI.MassFlowRate m_flow_a = if dp_grav_a >= dp_grav_b then m_flow_small else m_flow_small + sqrt((dp_grav_b - dp_grav_a) / k1)
+          SI.MassFlowRate m_flow_a = if dp_grav_a >= dp_grav_b then m_flow_small else m_flow_small + sqrt((dp_grav_b - dp_grav_a) / k1) 
             "dp(m_flow) 关系的正则化区域上限";
-          SI.MassFlowRate m_flow_b = if dp_grav_a >= dp_grav_b then -m_flow_small else -m_flow_small - sqrt((dp_grav_b - dp_grav_a) / k2)
+          SI.MassFlowRate m_flow_b = if dp_grav_a >= dp_grav_b then -m_flow_small else -m_flow_small - sqrt((dp_grav_b - dp_grav_a) / k2) 
             "dp(m_flow) 关系的正则化区域下限";
 
           SI.Pressure dp_a "正则化域上限值";
           SI.Pressure dp_b "正则化域下限值";
 
-          Real ddp_dm_flow_a
+          Real ddp_dm_flow_a 
             "m_flow_a 处压降关于质量流量的导数";
-          Real ddp_dm_flow_b
+          Real ddp_dm_flow_b 
             "m_flow_b 处压降关于质量流量的导数";
 
           // 零质量流量条件的恰当定义
@@ -2220,7 +2220,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           = 0.5*zeta/(pi*(D/2)^2)^2
           = 8*zeta/(pi*D^2)^2
           */
-          assert(roughness > 1e-10,
+          assert(roughness > 1e-10, 
             "二次湍流壁面摩擦特性要求粗糙度 > 0");
 
           if m_flow >= m_flow_a then
@@ -2265,14 +2265,14 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
       end QuadraticTurbulent;
 
-      package LaminarAndQuadraticTurbulent
+      package LaminarAndQuadraticTurbulent 
         "圆管中层流和湍流的管壁摩擦（简单特性）"
 
         extends PartialWallFriction(
-          final use_mu = true,
-          final use_roughness = true,
-          final use_dp_small = true,
-          final use_m_flow_small = true,
+          final use_mu = true, 
+          final use_roughness = true, 
+          final use_dp_small = true, 
+          final use_m_flow_small = true, 
           final use_Re_turbulent = true);
 
         import ln = Modelica.Math.log "以e为底的对数";
@@ -2280,7 +2280,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
         import Modelica.Math.exp "指数函数";
         import Modelica.Constants.pi;
 
-        redeclare function extends massFlowRate_dp
+        redeclare function extends massFlowRate_dp 
           "计算质量流量 m_flow 与压降 dp 的函数关系，即由壁面摩擦引起的 m_flow = f(dp)"
           import Modelica.Math;
         protected
@@ -2322,7 +2322,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           如果 data.zetaLaminarKnown = false，则 mu_a 和 mu_b 可能为零（因为是假值），
           因此只有在 zetaLaminarKnown = true 时才进行除法运算。
           */
-          assert(roughness > 1e-10,
+          assert(roughness > 1e-10, 
             "二次湍流壁面摩擦特性要求粗糙度 > 0");
           // 警告：以下公式仅适用于圆管！
           zeta := (length / diameter) / (2 * Math.log10(3.7 / (roughness / diameter))) ^ 2;
@@ -2330,14 +2330,14 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           k_inv := (pi * diameter * diameter) ^ 2 / (8 * zeta);
           yd0 := (rho_a + rho_b) / (k0 * (mu_a + mu_b));
           dp_turbulent := max(((mu_a + mu_b) * diameter * pi / 8) ^ 2 * Re_turbulent ^ 2 / (k_inv * (rho_a + rho_b) / 2), dp_small);
-          m_flow := Modelica.Fluid.Utilities.regRoot2(dp, dp_turbulent, rho_a * k_inv, rho_b * k_inv,
+          m_flow := Modelica.Fluid.Utilities.regRoot2(dp, dp_turbulent, rho_a * k_inv, rho_b * k_inv, 
             use_yd0 = true, yd0 = yd0);
           annotation(smoothOrder = 1, Documentation(info = "<html>
 
 </html>"  ));
         end massFlowRate_dp;
 
-        redeclare function extends pressureLoss_m_flow
+        redeclare function extends pressureLoss_m_flow 
           "计算压降 dp 与质量流量 m_flow 的函数关系，即由壁面摩擦引起的 dp = f(m_flow)"
           import Modelica.Math;
           import Modelica.Constants.pi;
@@ -2347,7 +2347,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           Real k0;
           Real k;
           Real yd0 "dp = f(m_flow) 在零点的导数";
-          SI.MassFlowRate m_flow_turbulent
+          SI.MassFlowRate m_flow_turbulent 
             "湍流区域为|m_flow| >= m_flow_turbulent";
 
         algorithm
@@ -2379,7 +2379,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           为了使 dp=f(m_flow) 的导数在 m_flow=0 时连续，
           在层流区域使用了 mu 和 d 的平均值：mu/rho = (mu_a + mu_b)/(rho_a + rho_b)。
           */
-          assert(roughness > 1e-10,
+          assert(roughness > 1e-10, 
             "二次湍流壁面摩擦特性要求粗糙度 > 0");
           // 警告：以下公式仅适用于圆管！
           zeta := (length / diameter) / (2 * Math.log10(3.7 / (roughness / diameter))) ^ 2;
@@ -2387,42 +2387,42 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           k := 8 * zeta / (pi * diameter * diameter) ^ 2;
           yd0 := k0 * (mu_a + mu_b) / (rho_a + rho_b);
           m_flow_turbulent := max((pi / 8) * diameter * (mu_a + mu_b) * Re_turbulent, m_flow_small);
-          dp := Modelica.Fluid.Utilities.regSquare2(m_flow, m_flow_turbulent, k / rho_a, k / rho_b,
+          dp := Modelica.Fluid.Utilities.regSquare2(m_flow, m_flow_turbulent, k / rho_a, k / rho_b, 
             use_yd0 = true, yd0 = yd0);
           annotation(smoothOrder = 1, Documentation(info = "<html>
 
 </html>"  ));
         end pressureLoss_m_flow;
 
-        redeclare function extends massFlowRate_dp_staticHead
+        redeclare function extends massFlowRate_dp_staticHead 
           "计算质量流量 m_flow 与压降 dp 的函数关系，即由管壁摩擦和静压头引起的 m_flow = f(dp)"
           import Modelica.Math;
 
         protected
           Real Delta(min = 0) = roughness / diameter "相对粗糙度";
-          SI.ReynoldsNumber Re1 = min(745 * exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta), Re_turbulent)
+          SI.ReynoldsNumber Re1 = min(745 * exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta), Re_turbulent) 
             "层流区与过渡区的边界";
-          SI.ReynoldsNumber Re2 = Re_turbulent
+          SI.ReynoldsNumber Re2 = Re_turbulent 
             "过渡区与湍流区的边界";
 
-          SI.Pressure dp_a
+          SI.Pressure dp_a 
             "m_flow(dp) 关系的正则化域上限";
-          SI.Pressure dp_b
+          SI.Pressure dp_b 
             "m_flow(dp) 关系的正则化域下限";
 
-          SI.MassFlowRate m_flow_a
+          SI.MassFlowRate m_flow_a 
             "正则化域上限值";
-          SI.MassFlowRate m_flow_b
+          SI.MassFlowRate m_flow_b 
             "正则化域下限值";
 
-          SI.MassFlowRate dm_flow_ddp_fric_a
+          SI.MassFlowRate dm_flow_ddp_fric_a 
             "正则化域上限的导数";
-          SI.MassFlowRate dm_flow_ddp_fric_b
+          SI.MassFlowRate dm_flow_ddp_fric_b 
             "正则化域下限的导数";
 
-          SI.Pressure dp_grav_a = g_times_height_ab * rho_a
+          SI.Pressure dp_grav_a = g_times_height_ab * rho_a 
             "质量流沿设计方向(a to b)时的静压头";
-          SI.Pressure dp_grav_b = g_times_height_ab * rho_b
+          SI.Pressure dp_grav_b = g_times_height_ab * rho_b 
             "质量流沿设计反方向(b to a)时的静压头";
 
           // 零质量流量条件的恰当定义
@@ -2430,7 +2430,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           SI.Pressure dp_zero = (dp_grav_a + dp_grav_b) / 2;
           Real dm_flow_ddp_fric_zero;
         algorithm
-          assert(roughness > 1e-10,
+          assert(roughness > 1e-10, 
             "二次湍流壁面摩擦特性要求粗糙度 > 0");
 
           dp_a := max(dp_grav_a, dp_grav_b) + dp_small;
@@ -2461,33 +2461,33 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end massFlowRate_dp_staticHead;
 
-        redeclare function extends pressureLoss_m_flow_staticHead
+        redeclare function extends pressureLoss_m_flow_staticHead 
           "计算压降 dp 与质量流量 m_flow 的函数关系，即由管壁摩擦和静压头引起的 dp = f(m_flow)"
           import Modelica.Math;
 
         protected
           Real Delta(min = 0) = roughness / diameter "相对粗糙度";
-          SI.ReynoldsNumber Re1 = min(745 * exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta), Re_turbulent)
+          SI.ReynoldsNumber Re1 = min(745 * exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta), Re_turbulent) 
             "层流区与过渡区的边界";
-          SI.ReynoldsNumber Re2 = Re_turbulent
+          SI.ReynoldsNumber Re2 = Re_turbulent 
             "过渡区与湍流区的边界";
 
-          SI.MassFlowRate m_flow_a
+          SI.MassFlowRate m_flow_a 
             "dp(m_flow) 关系的正则化域上限";
-          SI.MassFlowRate m_flow_b
+          SI.MassFlowRate m_flow_b 
             "dp(m_flow) 关系的正则化域下限";
 
           SI.Pressure dp_a "正则化域上限值";
           SI.Pressure dp_b "正则化域下限值";
 
-          SI.Pressure dp_grav_a = g_times_height_ab * rho_a
+          SI.Pressure dp_grav_a = g_times_height_ab * rho_a 
             "质量流沿设计方向(a to b)时的静压头";
-          SI.Pressure dp_grav_b = g_times_height_ab * rho_b
+          SI.Pressure dp_grav_b = g_times_height_ab * rho_b 
             "质量流沿设计反方向(b to a)时的静压头";
 
-          Real ddp_dm_flow_a
+          Real ddp_dm_flow_a 
             "m_flow_a 处压降对质量流量的导数";
-          Real ddp_dm_flow_b
+          Real ddp_dm_flow_b 
             "m_flow_b 处压降对质量流量的导数";
 
           // 零质量流量条件的恰当定义
@@ -2496,7 +2496,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           Real ddp_dm_flow_zero;
 
         algorithm
-          assert(roughness > 1e-10,
+          assert(roughness > 1e-10, 
             "二次湍流壁面摩擦特性要求粗糙度 > 0");
 
           m_flow_a := if dp_grav_a < dp_grav_b then 
@@ -2533,32 +2533,32 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
         end pressureLoss_m_flow_staticHead;
 
-        package Internal
+        package Internal 
           "通过摩擦压降计算质量流量，反之亦然"
           extends Modelica.Icons.InternalPackage;
-          function m_flow_of_dp_fric
+          function m_flow_of_dp_fric 
             "计算质量流量与摩擦产生的压降的函数关系"
             extends Modelica.Icons.Function;
 
-            input SI.Pressure dp_fric
+            input SI.Pressure dp_fric 
               "摩擦造成的压降 (dp = port_a.p - port_b.p)";
             input SI.Density rho_a "port_a 的密度";
             input SI.Density rho_b "port_b 的密度";
-            input SI.DynamicViscosity mu_a
+            input SI.DynamicViscosity mu_a 
               "port_a 的动力黏度 (如果 use_mu = false，则为假)";
-            input SI.DynamicViscosity mu_b
+            input SI.DynamicViscosity mu_b 
               "port_b 的动力黏度 (如果 use_mu = false，则为假)";
             input SI.Length length "管道长度";
             input SI.Diameter diameter "管道内径（水力直径）";
             input SI.Area crossArea "内部横截面积";
-            input SI.ReynoldsNumber Re1
+            input SI.ReynoldsNumber Re1 
               "层流区与过渡区的边界";
-            input SI.ReynoldsNumber Re2
+            input SI.ReynoldsNumber Re2 
               "过渡区与湍流区的边界";
             input Real Delta(min = 0) "相对粗糙度";
-            output SI.MassFlowRate m_flow
+            output SI.MassFlowRate m_flow 
               "从 port_a 到 port_b 的质量流量";
-            output Real dm_flow_ddp_fric
+            output Real dm_flow_ddp_fric 
               "质量流量对 dp_fric 的导数";
           protected
             SI.DynamicViscosity mu "上游黏度";
@@ -2567,11 +2567,11 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
             Real zeta;
             Real k0;
             Real k_inv;
-            Real dm_flow_ddp_laminar
+            Real dm_flow_ddp_laminar 
               "层流状态下 m_flow=m_flow(dp) 的导数";
-            SI.AbsolutePressure dp_fric_turbulent
+            SI.AbsolutePressure dp_fric_turbulent 
               "湍流区域为 |dp_fric| >= dp_fric_turbulent，简单二次相关性";
-            SI.AbsolutePressure dp_fric_laminar
+            SI.AbsolutePressure dp_fric_laminar 
               "层流区域为 |dp_fric| <= dp_fric_laminar";
           algorithm
             /*
@@ -2622,35 +2622,35 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
             else
               // 初步测试表明，这里似乎不需要 log-log 变换
               (m_flow,dm_flow_ddp_fric) := Utilities.cubicHermite_withDerivative(
-                dp_fric, dp_fric_laminar, dp_fric_turbulent, dm_flow_ddp_laminar * dp_fric_laminar,
-                sign(dp_fric_turbulent) * sqrt(rho * k_inv * abs(dp_fric_turbulent)), dm_flow_ddp_laminar,
+                dp_fric, dp_fric_laminar, dp_fric_turbulent, dm_flow_ddp_laminar * dp_fric_laminar, 
+                sign(dp_fric_turbulent) * sqrt(rho * k_inv * abs(dp_fric_turbulent)), dm_flow_ddp_laminar, 
                 if abs(dp_fric_turbulent) > 0 then 0.5 * rho * k_inv * (rho * k_inv * abs(dp_fric_turbulent)) ^ (-0.5) else Modelica.Constants.inf);
             end if;
             annotation(smoothOrder = 1);
           end m_flow_of_dp_fric;
 
-          function dp_fric_of_m_flow
+          function dp_fric_of_m_flow 
             "计算摩擦导致的压降与质量流量的函数关系"
             extends Modelica.Icons.Function;
 
             input SI.MassFlowRate m_flow "从 port_a 到 port_b 的质量流量";
             input SI.Density rho_a "port_a 的密度";
             input SI.Density rho_b "port_b 的密度";
-            input SI.DynamicViscosity mu_a
+            input SI.DynamicViscosity mu_a 
               "port_a 的动力黏度 (如果 use_mu = false，则为假)";
-            input SI.DynamicViscosity mu_b
+            input SI.DynamicViscosity mu_b 
               "port_b 的动力黏度 (如果 use_mu = false，则为假)";
             input SI.Length length "管道长度";
             input SI.Diameter diameter "管道内径（水力直径）";
             input SI.Area crossArea "内部横截面积";
-            input SI.ReynoldsNumber Re1
+            input SI.ReynoldsNumber Re1 
               "层流区与过渡区的边界";
-            input SI.ReynoldsNumber Re2
+            input SI.ReynoldsNumber Re2 
               "过渡区与湍流区的边界";
             input Real Delta(min = 0) "相对粗糙度";
-            output SI.Pressure dp_fric
+            output SI.Pressure dp_fric 
               "摩擦造成的压降 (dp_fric = port_a.p - port_b.p - dp_grav)";
-            output Real ddp_fric_dm_flow
+            output Real ddp_fric_dm_flow 
               "压降对质量流量的导数";
           protected
             SI.DynamicViscosity mu "上游黏度";
@@ -2658,11 +2658,11 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
             Real zeta;
             Real k0;
             Real k;
-            Real ddp_fric_dm_flow_laminar
+            Real ddp_fric_dm_flow_laminar 
               "dp_fric = f(m_flow) 在零点的导数";
-            SI.MassFlowRate m_flow_turbulent
+            SI.MassFlowRate m_flow_turbulent 
               "湍流区域为 |m_flow| >= m_flow_turbulent";
-            SI.MassFlowRate m_flow_laminar
+            SI.MassFlowRate m_flow_laminar 
               "层流区域为 |m_flow| <= m_flow_laminar";
           algorithm
             /*
@@ -2714,7 +2714,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
             else
               // 初步测试表明，这里似乎不需要 log-log 变换
               (dp_fric,ddp_fric_dm_flow) := Utilities.cubicHermite_withDerivative(
-                m_flow, m_flow_laminar, m_flow_turbulent, ddp_fric_dm_flow_laminar * m_flow_laminar,
+                m_flow, m_flow_laminar, m_flow_turbulent, ddp_fric_dm_flow_laminar * m_flow_laminar, 
                 k / rho * m_flow_turbulent * abs(m_flow_turbulent), ddp_fric_dm_flow_laminar, 2 * k / rho * abs(m_flow_turbulent));
             end if;
             annotation(smoothOrder = 1);
@@ -2730,33 +2730,33 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"  ));
       end LaminarAndQuadraticTurbulent;
 
-      package Detailed
+      package Detailed 
         "管道内层流和湍流的管壁摩擦（详细特性）"
 
         extends PartialWallFriction(
-          final use_mu = true,
-          final use_roughness = true,
-          final use_dp_small = true,
-          final use_m_flow_small = true,
+          final use_mu = true, 
+          final use_roughness = true, 
+          final use_dp_small = true, 
+          final use_m_flow_small = true, 
           final use_Re_turbulent = true);
 
         import ln = Modelica.Math.log "以 e 为底的对数";
         import Modelica.Math.log10 "以 10 为底的对数";
         import Modelica.Math.exp "指数函数";
 
-        redeclare function extends massFlowRate_dp
+        redeclare function extends massFlowRate_dp 
           "计算质量流量 m_flow 与压降 dp 的函数关系，即由壁面摩擦引起的 m_flow = f(dp)"
           import Modelica.Math;
         protected
           Real Delta(min = 0) = roughness / diameter "相对粗糙度";
-          SI.ReynoldsNumber Re1 = min((745 * Math.exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta)) ^ 0.97, Re_turbulent)
+          SI.ReynoldsNumber Re1 = min((745 * Math.exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta)) ^ 0.97, Re_turbulent) 
             "Re 离开层流区曲线";
           SI.ReynoldsNumber Re2 = Re_turbulent "Re 进入湍流区曲线";
           SI.DynamicViscosity mu "上游黏度";
           SI.Density rho "上游密度";
           SI.ReynoldsNumber Re "雷诺数";
           Real lambda2 "修正的摩擦系数 (= lambda*Re^2)";
-          function interpolateInRegion2 = Modelica.Fluid.Dissipation.Utilities.Functions.General.CubicInterpolation_Re
+          function interpolateInRegion2 = Modelica.Fluid.Dissipation.Utilities.Functions.General.CubicInterpolation_Re 
             "过渡区域的三次 Hermite 样条插值" annotation();
         algorithm
           // 确定上游密度、上游黏度和 lambda2
@@ -2782,20 +2782,20 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 </html>"      ));
         end massFlowRate_dp;
 
-        redeclare function extends pressureLoss_m_flow
+        redeclare function extends pressureLoss_m_flow 
           "计算压降 dp 与质量流量 m_flow 的函数关系，即由壁面摩擦引起的 dp = f(m_flow)"
           import Modelica.Math;
           import Modelica.Constants.pi;
         protected
           Real Delta(min = 0) = roughness / diameter "相对粗糙度";
-          SI.ReynoldsNumber Re1 = min(745 * Math.exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta), Re_turbulent)
+          SI.ReynoldsNumber Re1 = min(745 * Math.exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta), Re_turbulent) 
             "Re 离开层流区曲线";
           SI.ReynoldsNumber Re2 = Re_turbulent "Re 进入湍流区曲线";
           SI.DynamicViscosity mu "上游黏度";
           SI.Density rho "上游密度";
           SI.ReynoldsNumber Re "雷诺数";
           Real lambda2 "修正的摩擦系数 (= lambda*Re^2)";
-          function interpolateInRegion2 = Modelica.Fluid.Dissipation.Utilities.Functions.General.CubicInterpolation_lambda
+          function interpolateInRegion2 = Modelica.Fluid.Dissipation.Utilities.Functions.General.CubicInterpolation_lambda 
             "过渡区域的三次 Hermite 样条插值" annotation();
         algorithm
           // 确定上游密度、上游黏度
@@ -2807,40 +2807,40 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           lambda2 := if Re <= Re1 then 64 * Re else 
             (if Re >= Re2 then 0.25 * (Re / Math.log10(Delta / 3.7 + 5.74 / Re ^ 0.9)) ^ 2 else 
             interpolateInRegion2(Re, Re1, Re2, Delta));
-          dp := length * mu * mu / (2 * rho * diameter * diameter * diameter) *
+          dp := length * mu * mu / (2 * rho * diameter * diameter * diameter) * 
             (if m_flow >= 0 then lambda2 else -lambda2);
           annotation(smoothOrder = 1, Documentation(info = "<html>
 
 </html>"      ));
         end pressureLoss_m_flow;
 
-        redeclare function extends massFlowRate_dp_staticHead
+        redeclare function extends massFlowRate_dp_staticHead 
           "计算质量流量 m_flow 与压降 dp 的函数关系，即由管壁摩擦和静压头引起的 m_flow = f(dp)"
 
         protected
           Real Delta(min = 0) = roughness / diameter "相对粗糙度";
           SI.ReynoldsNumber Re "雷诺数";
-          SI.ReynoldsNumber Re1 = min((745 * exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta)) ^ 0.97, Re_turbulent)
+          SI.ReynoldsNumber Re1 = min((745 * exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta)) ^ 0.97, Re_turbulent) 
             "层流区与过渡区的边界";
-          SI.ReynoldsNumber Re2 = Re_turbulent
+          SI.ReynoldsNumber Re2 = Re_turbulent 
             "过渡区与湍流区的边界";
-          SI.Pressure dp_a
+          SI.Pressure dp_a 
             "m_flow(dp) 关系的正则化域上限";
-          SI.Pressure dp_b
+          SI.Pressure dp_b 
             "m_flow(dp) 关系的正则化域下限";
-          SI.MassFlowRate m_flow_a
+          SI.MassFlowRate m_flow_a 
             "正则化域上限值";
-          SI.MassFlowRate m_flow_b
+          SI.MassFlowRate m_flow_b 
             "正则化域下限值";
 
-          SI.MassFlowRate dm_flow_ddp_fric_a
+          SI.MassFlowRate dm_flow_ddp_fric_a 
             "正则化域上限的导数";
-          SI.MassFlowRate dm_flow_ddp_fric_b
+          SI.MassFlowRate dm_flow_ddp_fric_b 
             "正则化域下限的导数";
 
-          SI.Pressure dp_grav_a = g_times_height_ab * rho_a
+          SI.Pressure dp_grav_a = g_times_height_ab * rho_a 
             "质量流沿设计方向(a to b)时的静压头";
-          SI.Pressure dp_grav_b = g_times_height_ab * rho_b
+          SI.Pressure dp_grav_b = g_times_height_ab * rho_b 
             "质量流沿设计反方向(b to a)时的静压头";
 
           // 零质量流量条件的恰当定义
@@ -2875,32 +2875,32 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           annotation(smoothOrder = 1);
         end massFlowRate_dp_staticHead;
 
-        redeclare function extends pressureLoss_m_flow_staticHead
+        redeclare function extends pressureLoss_m_flow_staticHead 
           "计算压降 dp 与质量流量 m_flow 的函数关系，即由管壁摩擦和静压头引起的 dp = f(m_flow)"
 
         protected
           Real Delta(min = 0) = roughness / diameter "相对粗糙度";
-          SI.ReynoldsNumber Re1 = min(745 * exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta), Re_turbulent)
+          SI.ReynoldsNumber Re1 = min(745 * exp(if Delta <= 0.0065 then 1 else 0.0065 / Delta), Re_turbulent) 
             "层流区与过渡区的边界";
-          SI.ReynoldsNumber Re2 = Re_turbulent
+          SI.ReynoldsNumber Re2 = Re_turbulent 
             "过渡区与湍流区的边界";
 
-          SI.MassFlowRate m_flow_a
+          SI.MassFlowRate m_flow_a 
             "dp(m_flow) 关系的正则化域上限";
-          SI.MassFlowRate m_flow_b
+          SI.MassFlowRate m_flow_b 
             "dp(m_flow) 关系的正则化域下限";
 
           SI.Pressure dp_a "正则化域上限值";
           SI.Pressure dp_b "正则化域下限值";
 
-          SI.Pressure dp_grav_a = g_times_height_ab * rho_a
+          SI.Pressure dp_grav_a = g_times_height_ab * rho_a 
             "质量流沿设计方向(a to b)时的静压头";
-          SI.Pressure dp_grav_b = g_times_height_ab * rho_b
+          SI.Pressure dp_grav_b = g_times_height_ab * rho_b 
             "质量流沿设计反方向(b to a)时的静压头";
 
-          Real ddp_dm_flow_a
+          Real ddp_dm_flow_a 
             "m_flow_a 处压降对质量流量的导数";
-          Real ddp_dm_flow_b
+          Real ddp_dm_flow_b 
             "m_flow_b 处压降对质量流量的导数";
 
           // 零质量流量条件的恰当定义
@@ -2941,45 +2941,45 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
           annotation(smoothOrder = 1);
         end pressureLoss_m_flow_staticHead;
 
-        package Internal
+        package Internal 
           "通过摩擦压降计算质量流量，反之亦然"
           extends Modelica.Icons.InternalPackage;
-          function m_flow_of_dp_fric
+          function m_flow_of_dp_fric 
             "计算质量流量与摩擦产生的压降的函数关系"
             extends Modelica.Icons.Function;
 
-            input SI.Pressure dp_fric
+            input SI.Pressure dp_fric 
               "摩擦造成的压降 (dp = port_a.p - port_b.p)";
             input SI.Density rho_a "port_a 的密度";
             input SI.Density rho_b "port_b 的密度";
-            input SI.DynamicViscosity mu_a
+            input SI.DynamicViscosity mu_a 
               "port_a 的动力黏度 (如果 use_mu = false，则为假)";
-            input SI.DynamicViscosity mu_b
+            input SI.DynamicViscosity mu_b 
               "port_b 的动力黏度 (如果 use_mu = false，则为假)";
             input SI.Length length "管道长度";
             input SI.Diameter diameter "管道内径（水力直径）";
             input SI.Area crossArea "内部横截面积";
-            input SI.ReynoldsNumber Re1
+            input SI.ReynoldsNumber Re1 
               "层流区与过渡区的边界";
-            input SI.ReynoldsNumber Re2
+            input SI.ReynoldsNumber Re2 
               "过渡区与湍流区的边界";
             input Real Delta(min = 0) "相对粗糙度";
             output SI.MassFlowRate m_flow "从 port_a 到 port_b 的质量流量";
-            output Real dm_flow_ddp_fric
+            output Real dm_flow_ddp_fric 
               "质量流量对 dp_fric 的导数";
 
           protected
-            function interpolateInRegion2_withDerivative
+            function interpolateInRegion2_withDerivative 
               "使用三次 Hermite 多项式在 log-log 空间进行插值，其中 x=log10(lambda2), y=log10(Re)"
               extends Modelica.Icons.Function;
 
               input Real lambda2 "已知独立变量";
-              input SI.ReynoldsNumber Re1
+              input SI.ReynoldsNumber Re1 
                 "层流区与过渡区的边界";
-              input SI.ReynoldsNumber Re2
+              input SI.ReynoldsNumber Re2 
                 "过渡区与湍流区的边界";
               input Real Delta(min = 0) "相对粗糙度";
-              input SI.Pressure dp_fric
+              input SI.Pressure dp_fric 
                 "摩擦造成的压降 (dp = port_a.p - port_b.p)";
               output SI.ReynoldsNumber Re "未知的计算变量";
               output Real dRe_ddp "计算值的导数";
@@ -3034,7 +3034,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
             end if;
 
             // 正质量流量
-            lambda2 := abs(dp_fric) * 2 * diameter ^ 3 * rho / (length * mu * mu)
+            lambda2 := abs(dp_fric) * 2 * diameter ^ 3 * rho / (length * mu * mu) 
               "已知 lambda2=f(dp)";
 
             aux1 := (2 * diameter ^ 3 * rho) / (length * mu ^ 2);
@@ -3045,7 +3045,7 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
 
             // 如果是湍流，则修改 Re
             if Re > Re1 then
-              Re := -2 * sqrt(lambda2) * log10(2.51 / sqrt(lambda2) + 0.27 * Delta)
+              Re := -2 * sqrt(lambda2) * log10(2.51 / sqrt(lambda2) + 0.27 * Delta) 
                 "Colebrook-White";
               aux2 := sqrt(aux1 * abs(dp_fric));
               dRe_ddp := 1 / log(10) * (-2 * log(2.51 / aux2 + 0.27 * Delta) * aux1 / (2 * aux2) + 2 * 2.51 / (2 * abs(dp_fric) * (2.51 / aux2 + 0.27 * Delta)));
@@ -3061,39 +3061,39 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
             annotation(smoothOrder = 1);
           end m_flow_of_dp_fric;
 
-          function dp_fric_of_m_flow
+          function dp_fric_of_m_flow 
             "计算摩擦导致的压降与质量流量的函数关系"
             extends Modelica.Icons.Function;
 
             input SI.MassFlowRate m_flow "从 port_a 到 port_b 的质量流量";
             input SI.Density rho_a "port_a 的密度";
             input SI.Density rho_b "port_b 的密度";
-            input SI.DynamicViscosity mu_a
+            input SI.DynamicViscosity mu_a 
               "port_a 的动力黏度 (如果 use_mu = false，则为假)";
-            input SI.DynamicViscosity mu_b
+            input SI.DynamicViscosity mu_b 
               "port_b 的动力黏度 (如果 use_mu = false，则为假)";
             input SI.Length length "管道长度";
             input SI.Diameter diameter "管道内径（水力直径）";
             input SI.Area crossArea "内部横截面积";
-            input SI.ReynoldsNumber Re1
+            input SI.ReynoldsNumber Re1 
               "层流区与过渡区的边界";
-            input SI.ReynoldsNumber Re2
+            input SI.ReynoldsNumber Re2 
               "过渡区与湍流区的边界";
             input Real Delta(min = 0) "相对粗糙度";
-            output SI.Pressure dp_fric
+            output SI.Pressure dp_fric 
               "摩擦造成的压降 (dp_fric = port_a.p - port_b.p - dp_grav)";
-            output Real ddp_fric_dm_flow
+            output Real ddp_fric_dm_flow 
               "压降对质量流量的导数";
 
           protected
-            function interpolateInRegion2
+            function interpolateInRegion2 
               "使用三次 Hermite 多项式在 log-log 空间进行插值，其中 x=log10(Re), y=log10(lambda2)"
               extends Modelica.Icons.Function;
 
               input SI.ReynoldsNumber Re "已知独立变量";
-              input SI.ReynoldsNumber Re1
+              input SI.ReynoldsNumber Re1 
                 "层流区与过渡区的边界";
-              input SI.ReynoldsNumber Re2
+              input SI.ReynoldsNumber Re2 
                 "过渡区与湍流区的边界";
               input Real Delta(min = 0) "相对粗糙度";
               input SI.MassFlowRate m_flow "从 port_a 到 port_b 的质量流量";
@@ -3159,14 +3159,14 @@ Pipes.BaseClasses.CharacteristicNumbers.ReynoldsNumber</a>。
             elseif Re >= Re2 then
               lambda2 := 0.25 * (Re / log10(Delta / 3.7 + 5.74 / Re ^ 0.9)) ^ 2 "Swamee-Jain";
               aux2 := Delta / 3.7 + 5.74 / ((aux1 * abs(m_flow)) ^ 0.9);
-              dlambda2_dm_flow := 0.5 * aux1 * Re * log(10) ^ 2 * (1 / (log(aux2) ^ 2) + (5.74 * 0.9) / (log(aux2) ^ 3 * Re ^ 0.9 * aux2))
+              dlambda2_dm_flow := 0.5 * aux1 * Re * log(10) ^ 2 * (1 / (log(aux2) ^ 2) + (5.74 * 0.9) / (log(aux2) ^ 3 * Re ^ 0.9 * aux2)) 
                 "Swamee-Jain";
             else
               (lambda2,dlambda2_dm_flow) := interpolateInRegion2(Re, Re1, Re2, Delta, m_flow);
             end if;
 
             // 根据 lambda2 计算压降
-            dp_fric := length * mu * mu / (2 * rho * diameter * diameter * diameter) *
+            dp_fric := length * mu * mu / (2 * rho * diameter * diameter * diameter) * 
               (if m_flow >= 0 then lambda2 else -lambda2);
 
             // 计算 dlambda2/dm_flow 的导数

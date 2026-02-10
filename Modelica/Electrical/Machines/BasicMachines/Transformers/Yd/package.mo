@@ -6,7 +6,7 @@ package Yd "变压器：主接线 Y/副接线d"
 
   annotation (Documentation(info="<html>
 此库含所有可能矢量组中主接线为Y、副接线为d的变压器。
-</html>",
+</html>", 
     revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

@@ -1,222 +1,222 @@
 ﻿within Modelica.Fluid.Examples;
-model IncompressibleFluidNetwork
+model IncompressibleFluidNetwork 
   "管道多向连接和不可压缩介质模型"
   extends Modelica.Icons.Example;
 
   parameter Types.ModelStructure pipeModelStructure = Modelica.Fluid.Types.ModelStructure.av_vb "离散管道模型中的模型结构";
 
-  replaceable package Medium =
+  replaceable package Medium = 
     Modelica.Media.Incompressible.Examples.Glycol47 
     constrainedby Modelica.Media.Interfaces.PartialMedium annotation();
 
   import Modelica.Fluid.Types.Dynamics;
   parameter Dynamics systemMassDynamics = if Medium.singleState then Dynamics.SteadyState else Dynamics.SteadyStateInitial "质量平衡方程";
 
-  Sources.Boundary_pT source(nPorts = 1,
-  redeclare package Medium = Medium,
-    p = 5.0e5,
+  Sources.Boundary_pT source(nPorts = 1, 
+  redeclare package Medium = Medium, 
+    p = 5.0e5, 
     T = 300) annotation(Placement(transformation(extent = {{-98, -6}, {-86, 6}})));
   Pipes.DynamicPipe 
     pipe1(
-    use_T_start = true,
-    length = 10,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    modelStructure = pipeModelStructure,
-  redeclare model FlowModel =
+    use_T_start = true, 
+    length = 10, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    modelStructure = pipeModelStructure, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow) 
     annotation(Placement(transformation(
     extent = {{-80, -10}, {-60, 10}})));
 
   Pipes.DynamicPipe pipe2(
-    use_T_start = true,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    length = 0.5,
-    modelStructure = pipeModelStructure,
-  redeclare model FlowModel =
+    use_T_start = true, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    length = 0.5, 
+    modelStructure = pipeModelStructure, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow) 
     annotation(Placement(transformation(
-    origin = {-50, 20},
-    extent = {{-10, -10}, {10, 10}},
+    origin = {-50, 20}, 
+    extent = {{-10, -10}, {10, 10}}, 
     rotation = 90)));
 
   Pipes.DynamicPipe pipe3(
-    use_T_start = true,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    length = 0.5,
-    modelStructure = pipeModelStructure,
-  redeclare model FlowModel =
+    use_T_start = true, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    length = 0.5, 
+    modelStructure = pipeModelStructure, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow) 
     annotation(Placement(transformation(
-    origin = {-50, -20},
-    extent = {{-10, -10}, {10, 10}},
+    origin = {-50, -20}, 
+    extent = {{-10, -10}, {10, 10}}, 
     rotation = 270)));
   Pipes.DynamicPipe pipe4(
-    use_T_start = true,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    length = 2,
-    modelStructure = pipeModelStructure,
-    use_HeatTransfer = true,
-  redeclare model FlowModel =
+    use_T_start = true, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    length = 2, 
+    modelStructure = pipeModelStructure, 
+    use_HeatTransfer = true, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow) 
     annotation(Placement(transformation(
     extent = {{-20, -50}, {0, -30}})));
   Pipes.DynamicPipe pipe6(
-    use_T_start = true,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    length = 20,
-    modelStructure = pipeModelStructure,
-  redeclare model FlowModel =
+    use_T_start = true, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    length = 20, 
+    modelStructure = pipeModelStructure, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow) 
     annotation(Placement(transformation(
     extent = {{20, -50}, {40, -30}})));
   Valves.ValveIncompressible valve1(
-  redeclare package Medium = Medium,
-    m_flow_nominal = 1,
-    rho_nominal = 1000,
-    CvData = Modelica.Fluid.Types.CvTypes.Av,
-    Av = 2.5e-2 ^ 2 / 4 * Modelica.Constants.pi,
+  redeclare package Medium = Medium, 
+    m_flow_nominal = 1, 
+    rho_nominal = 1000, 
+    CvData = Modelica.Fluid.Types.CvTypes.Av, 
+    Av = 2.5e-2 ^ 2 / 4 * Modelica.Constants.pi, 
     dp_nominal = 30000) 
     annotation(Placement(transformation(extent = {{-46, 30}, {-26, 50}})));
   Valves.ValveIncompressible valve2(
-  redeclare package Medium = Medium,
-    m_flow_nominal = 1,
-    rho_nominal = 1000,
-    CvData = Modelica.Fluid.Types.CvTypes.Av,
-    Av = 2.5e-2 ^ 2 / 4 * Modelica.Constants.pi,
+  redeclare package Medium = Medium, 
+    m_flow_nominal = 1, 
+    rho_nominal = 1000, 
+    CvData = Modelica.Fluid.Types.CvTypes.Av, 
+    Av = 2.5e-2 ^ 2 / 4 * Modelica.Constants.pi, 
     dp_nominal = 30000) 
     annotation(Placement(transformation(extent = {{-46, -30}, {-26, -50}})));
   Pipes.DynamicPipe pipe7(
-    use_T_start = true,
-    length = 10,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    modelStructure = pipeModelStructure,
-    use_HeatTransfer = true,
-  redeclare model FlowModel =
+    use_T_start = true, 
+    length = 10, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    modelStructure = pipeModelStructure, 
+    use_HeatTransfer = true, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow) 
     annotation(Placement(transformation(
     extent = {{-20, 30}, {0, 50}})));
   Valves.ValveIncompressible valve3(
-  redeclare package Medium = Medium,
-    m_flow_nominal = 1,
-    rho_nominal = 1000,
-    CvData = Modelica.Fluid.Types.CvTypes.Av,
-    Av = 2.5e-2 ^ 2 / 4 * Modelica.Constants.pi,
+  redeclare package Medium = Medium, 
+    m_flow_nominal = 1, 
+    rho_nominal = 1000, 
+    CvData = Modelica.Fluid.Types.CvTypes.Av, 
+    Av = 2.5e-2 ^ 2 / 4 * Modelica.Constants.pi, 
     dp_nominal = 30000) 
     annotation(Placement(transformation(extent = {{80, 0}, {100, 20}})));
-  Sources.Boundary_pT sink(nPorts = 1,
-  redeclare package Medium = Medium,
-    T = 300,
+  Sources.Boundary_pT sink(nPorts = 1, 
+  redeclare package Medium = Medium, 
+    T = 300, 
     p = 1.0e5) 
     annotation(Placement(transformation(extent = {{118, 4}, {106, 16}})));
   inner Modelica.Fluid.System system(
-    massDynamics = systemMassDynamics, energyDynamics = Modelica.Fluid.Types.Dynamics.FixedInitial,
+    massDynamics = systemMassDynamics, energyDynamics = Modelica.Fluid.Types.Dynamics.FixedInitial, 
     use_eps_Re = true) annotation(Placement(transformation(extent = {{90, -92}, {
     110, -72}})));
   Modelica.Blocks.Sources.Step valveOpening1(
-    offset = 1,
-    startTime = 50,
+    offset = 1, 
+    startTime = 50, 
     height = -1) annotation(Placement(transformation(extent = {{-80, 80}, {-60, 60}})));
   Modelica.Blocks.Sources.Step valveOpening2(
-    offset = 1,
-    height = -0.5,
+    offset = 1, 
+    height = -0.5, 
     startTime = 100) 
-    annotation(Placement(transformation(extent = {{-80, -60}, {-60,
+    annotation(Placement(transformation(extent = {{-80, -60}, {-60, 
     -80}})));
   Modelica.Blocks.Sources.Step valveOpening3(
-    offset = 1,
-    startTime = 150,
+    offset = 1, 
+    startTime = 150, 
     height = -0.5) annotation(Placement(transformation(extent = {{60, 80}, {80, 60}})));
   Pipes.DynamicPipe pipe8(
-    use_T_start = true,
-    length = 10,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    modelStructure = pipeModelStructure,
-    use_HeatTransfer = true,
-  redeclare model FlowModel =
+    use_T_start = true, 
+    length = 10, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    modelStructure = pipeModelStructure, 
+    use_HeatTransfer = true, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow) 
     annotation(Placement(transformation(
-    origin = {10, 10},
-    extent = {{-10, 10}, {10, -10}},
+    origin = {10, 10}, 
+    extent = {{-10, 10}, {10, -10}}, 
     rotation = 270)));
   Pipes.DynamicPipe pipe9(
-    use_T_start = true,
-    length = 10,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    modelStructure = pipeModelStructure,
-    use_HeatTransfer = true,
-  redeclare model FlowModel =
+    use_T_start = true, 
+    length = 10, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    modelStructure = pipeModelStructure, 
+    use_HeatTransfer = true, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow) 
     annotation(Placement(transformation(
     extent = {{20, 30}, {40, 50}})));
   Pipes.DynamicPipe pipe10(
-    use_T_start = true,
-    length = 10,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    modelStructure = pipeModelStructure,
-    use_HeatTransfer = true,
-  redeclare model FlowModel =
+    use_T_start = true, 
+    length = 10, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    modelStructure = pipeModelStructure, 
+    use_HeatTransfer = true, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow) 
     annotation(Placement(transformation(
     extent = {{20, -30}, {40, -10}})));
   Pipes.DynamicPipe pipe5(
-    use_T_start = true,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    length = 20,
-    modelStructure = pipeModelStructure,
-  redeclare model FlowModel =
+    use_T_start = true, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    length = 20, 
+    modelStructure = pipeModelStructure, 
+  redeclare model FlowModel = 
     Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow) 
     annotation(Placement(transformation(
     extent = {{20, -70}, {40, -50}})));
-  Thermal.HeatTransfer.Sources.FixedHeatFlow[pipe8.nNodes] heat8(Q_flow = 16e3 *
+  Thermal.HeatTransfer.Sources.FixedHeatFlow[pipe8.nNodes] heat8(Q_flow = 16e3 * 
     pipe8.dxs) 
     annotation(Placement(transformation(extent = {{-20, 0}, {0, 20}})));
   Pipes.DynamicPipe pipe11(
-    use_T_start = true,
-    diameter = 2.5e-2,
-  redeclare package Medium = Medium,
-    modelStructure = pipeModelStructure,
-  redeclare model FlowModel =
-    Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow,
+    use_T_start = true, 
+    diameter = 2.5e-2, 
+  redeclare package Medium = Medium, 
+    modelStructure = pipeModelStructure, 
+  redeclare model FlowModel = 
+    Modelica.Fluid.Pipes.BaseClasses.FlowModels.TurbulentPipeFlow, 
     length = 0.5) annotation(Placement(transformation(
     extent = {{54, 0}, {74, 20}})));
 equation
-  connect(source.ports[1], pipe1.port_a) annotation(Line(points = {{-86, 0}, {-80,
+  connect(source.ports[1], pipe1.port_a) annotation(Line(points = {{-86, 0}, {-80, 
     0}}, color = {0, 127, 255}));
-  connect(pipe1.port_b, pipe3.port_a) annotation(Line(points = {{-60, 0}, {-50, 0},
+  connect(pipe1.port_b, pipe3.port_a) annotation(Line(points = {{-60, 0}, {-50, 0}, 
     {-50, -10}}, color = {0, 127, 255}));
-  connect(pipe1.port_b, pipe2.port_a) annotation(Line(points = {{-60, 0}, {-50, 0},
+  connect(pipe1.port_b, pipe2.port_a) annotation(Line(points = {{-60, 0}, {-50, 0}, 
     {-50, 10}}, color = {0, 127, 255}));
-  connect(pipe2.port_b, valve1.port_a) annotation(Line(points = {{-50, 30}, {-50,
+  connect(pipe2.port_b, valve1.port_a) annotation(Line(points = {{-50, 30}, {-50, 
     40}, {-46, 40}}, color = {0, 127, 255}));
-  connect(valve2.port_b, pipe4.port_a) annotation(Line(points = {{-26, -40}, {-26,
+  connect(valve2.port_b, pipe4.port_a) annotation(Line(points = {{-26, -40}, {-26, 
     -40}, {-20, -40}}, color = {0, 127, 255}));
-  connect(pipe3.port_b, valve2.port_a) annotation(Line(points = {{-50, -30}, {-50,
+  connect(pipe3.port_b, valve2.port_a) annotation(Line(points = {{-50, -30}, {-50, 
     -40}, {-46, -40}}, color = {0, 127, 255}));
-  connect(valve1.port_b, pipe7.port_a) annotation(Line(points = {{-26, 40}, {-26,
+  connect(valve1.port_b, pipe7.port_a) annotation(Line(points = {{-26, 40}, {-26, 
     40}, {-20, 40}}, color = {0, 127, 255}));
-  connect(valve3.port_b, sink.ports[1]) annotation(Line(points = {{100, 10}, {100,
+  connect(valve3.port_b, sink.ports[1]) annotation(Line(points = {{100, 10}, {100, 
     10}, {106, 10}}, color = {0, 127, 255}));
   connect(valveOpening1.y, valve1.opening) annotation(Line(points = {{-59, 70}, {
     -36, 70}, {-36, 48}}, color = {0, 0, 127}));
   connect(valveOpening2.y, valve2.opening) annotation(Line(points = {{-59, -70}, {
     -36, -70}, {-36, -48}}, color = {0, 0, 127}));
-  connect(valveOpening3.y, valve3.opening) annotation(Line(points = {{81, 70}, {90,
+  connect(valveOpening3.y, valve3.opening) annotation(Line(points = {{81, 70}, {90, 
     70}, {90, 18}}, color = {0, 0, 127}));
   connect(pipe7.port_b, pipe9.port_a) 
     annotation(Line(points = {{0, 40}, {0, 40}, {20, 40}}, color = {0, 127, 255}));
   connect(pipe7.port_b, pipe8.port_a) annotation(Line(points = {{0, 40}, {10, 40}, {
     10, 20}}, color = {0, 127, 255}));
-  connect(pipe8.port_b, pipe10.port_a) annotation(Line(points = {{10, 0}, {10, -20},
+  connect(pipe8.port_b, pipe10.port_a) annotation(Line(points = {{10, 0}, {10, -20}, 
     {20, -20}}, color = {0, 127, 255}));
   connect(pipe4.port_b, pipe6.port_a) annotation(Line(
     points = {{0, -40}, {20, -40}}, color = {0, 127, 255}));
@@ -272,13 +272,13 @@ equation
 相关管道中的流体温度通过热接口显示出来。
 <img src=\"modelica://Modelica/Resources/Images/Fluid/Examples/IncompressibleFluidNetwork.png\" alt=\"IncompressibleFluidNetwork.png\" data-href=\"\" style=\"\">
 </p>
-</html>"),
-    experiment(StopTime = 200),
-    __Dymola_Commands(file =
-    "modelica://Modelica/Resources/Scripts/Dymola/Fluid/IncompressibleFluidNetwork/plotResults.mos"
-    "plotResults"),
-    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {120,
-    100}})),
-    Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {120,
+</html>"), 
+    experiment(StopTime = 200), 
+    __Dymola_Commands(file = 
+    "modelica://Modelica/Resources/Scripts/Dymola/Fluid/IncompressibleFluidNetwork/plotResults.mos" 
+    "plotResults"), 
+    Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {120, 
+    100}})), 
+    Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {120, 
     100}})));
 end IncompressibleFluidNetwork;

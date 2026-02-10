@@ -9,7 +9,7 @@ package InductionMachines "感应电机模型"
 <li>IM_SlipRing: 带绕线转子的感应电机</li>
 </ul>
 这些模型使用SpacePhasors库。
-</html>",
+</html>", 
       revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

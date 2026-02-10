@@ -4,14 +4,14 @@ model BasicAbsoluteAngularVelocity "用于测量绝对角速度的基本传感�
   import Modelica.Mechanics.MultiBody.Types.ResolveInFrameA;
 
   extends Modelica.Mechanics.MultiBody.Sensors.Internal.PartialAbsoluteBaseSensor;
-  Modelica.Blocks.Interfaces.RealOutput w[3](each final quantity="AngularVelocity",each final unit = "rad/s")
+  Modelica.Blocks.Interfaces.RealOutput w[3](each final quantity="AngularVelocity",each final unit = "rad/s") 
     "绝对角速度矢量" 
     annotation (Placement(transformation(
-        origin={110,0},
+        origin={110,0}, 
         extent={{-10,-10},{10,10}})));
   parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameA 
-    resolveInFrame=
-  Modelica.Mechanics.MultiBody.Types.ResolveInFrameA.frame_a
+    resolveInFrame= 
+  Modelica.Mechanics.MultiBody.Types.ResolveInFrameA.frame_a 
     "解析输出矢量w所在的坐标系(world、frame_a或frame_resolve)";
 
 equation
@@ -26,16 +26,16 @@ equation
       w = zeros(3);
    end if;
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
       graphics={
         Text(
-          extent={{-130,76},{131,124}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-130,76},{131,124}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-50,-14},{50,-54}},
-          textColor={64,64,64},
-          textString="rad/s")}),
+          extent={{-50,-14},{50,-54}}, 
+          textColor={64,64,64}, 
+          textString="rad/s")}), 
     Documentation(info="<html>
 <p>
 这个基本传感器旨在在高级传感器中使用，应确定frame_a的绝对角速度。

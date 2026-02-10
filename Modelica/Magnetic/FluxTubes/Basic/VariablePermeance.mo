@@ -5,8 +5,8 @@ model VariablePermeance "可变磁导"
   extends Modelica.Magnetic.FluxTubes.Icons.Reluctance;
   Modelica.Blocks.Interfaces.RealInput G_m(quantity="Permeance", unit="H") "磁导" 
     annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=270,
+        extent={{-20,-20},{20,20}}, 
+        rotation=270, 
         origin={0,120})));
 
 equation

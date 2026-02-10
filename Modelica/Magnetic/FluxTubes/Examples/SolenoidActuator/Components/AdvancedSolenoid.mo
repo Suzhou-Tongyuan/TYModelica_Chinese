@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FluxTubes.Examples.SolenoidActuator.Components;
+within Modelica.Magnetic.FluxTubes.Examples.SolenoidActuator.Components;
 model AdvancedSolenoid
   "具有平面衔铁端面的起重磁铁的高级网络模型，分磁动势"
 
@@ -28,25 +28,25 @@ model AdvancedSolenoid
   parameter FluxTubes.Material.SoftMagnetic.BaseData material=
       Material.SoftMagnetic.Steel.Steel_9SMnPb28()
     "铁磁材料特性" 
-    annotation (choicesAllMatching=true, Dialog(group="Material"));
+    annotation (choicesAllMatching=true, Dialog(group="材料"));
 
   //电枢
   parameter SI.Radius r_arm=5e-3 "电枢半径 = 磁极半径" 
-    annotation (Dialog(group="Armature and stopper"));
+    annotation (Dialog(group="衔铁与限位块"));
   parameter SI.Length l_arm=26e-3 "电枢长度" 
-    annotation (Dialog(group="Armature and stopper"));
+    annotation (Dialog(group="衔铁与限位块"));
   parameter SI.TranslationalSpringConstant c=1e11
     "冲击副之间的弹簧刚度" 
-    annotation (Dialog(group="Armature and stopper"));
+    annotation (Dialog(group="衔铁与限位块"));
   parameter SI.TranslationalDampingConstant d=400
     "冲击副之间的阻尼系数" 
-    annotation (Dialog(group="Armature and stopper"));
+    annotation (Dialog(group="衔铁与限位块"));
   parameter SI.Position x_min=0.25e-3
     "电枢最小位置的限位器" 
-    annotation (Dialog(group="Armature and stopper"));
+    annotation (Dialog(group="衔铁与限位块"));
   parameter SI.Position x_max=5e-3
     "电枢最大位置的限位器" 
-    annotation (Dialog(group="Armature and stopper"));
+    annotation (Dialog(group="衔铁与限位块"));
 
   SI.Position x(start=x_max, stateSelect=StateSelect.prefer)
     "电枢位置";

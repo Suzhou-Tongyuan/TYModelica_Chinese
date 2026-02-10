@@ -4,7 +4,7 @@ package Examples "测试示例"
 
   annotation (Documentation(info="<html>
 这个库包含了电机的测试示例。
-</html>",
+</html>", 
         revisions="<html>
 <dl>
   <dt><strong>主要作者:</strong></dt>

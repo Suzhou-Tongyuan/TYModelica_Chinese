@@ -12,22 +12,22 @@ model ToroidalCoreAirgap "教学示例：带气隙的铁芯"
   Modelica.Magnetic.FluxTubes.Basic.ElectroMagneticConverter excitingCoil(N=N) 
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Shapes.FixedShape.Toroid core(
-    nonLinearPermeability=false,
-    mu_rConst=mu_r,
-    r=r,
-    d=d,
+    nonLinearPermeability=false, 
+    mu_rConst=mu_r, 
+    r=r, 
+    d=d, 
     alpha=alpha) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={0,30})));
   Shapes.FixedShape.Toroid                             airGap(
-    nonLinearPermeability=false,
-    mu_rConst=1,
-    r=r,
-    d=d,
+    nonLinearPermeability=false, 
+    mu_rConst=1, 
+    r=r, 
+    d=d, 
     alpha=2*pi - alpha) 
          annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
+        extent={{-10,-10},{10,10}}, 
+        rotation=180, 
         origin={0,-50})));
   Modelica.Magnetic.FluxTubes.Basic.ElectroMagneticConverter measuringCoil(N=1) 
     annotation (Placement(transformation(extent={{40,-10},{20,10}})));
@@ -36,29 +36,29 @@ model ToroidalCoreAirgap "教学示例：带气隙的铁芯"
   Modelica.Electrical.Analog.Basic.Ground electricGround1 
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
   Modelica.Electrical.Analog.Sources.RampCurrent rampCurrent(
-    I=I,
-    duration=0.015,
+    I=I, 
+    duration=0.015, 
     startTime=0.01) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-60,0})));
   Modelica.Magnetic.FluxTubes.Sensors.MagneticFluxSensor magFluxSensor 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=270,
+        extent={{10,-10},{-10,10}}, 
+        rotation=270, 
         origin={-20,-30})));
   Modelica.Electrical.Analog.Basic.Ground electricGround2 
     annotation (Placement(transformation(extent={{40,-30},{60,-10}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation (
       Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=270,
+        extent={{-10,10},{10,-10}}, 
+        rotation=270, 
         origin={60,0})));
 equation
   connect(core.port_n, measuringCoil.port_p) 
     annotation (Line(points={{10,30},{20,30},{20,10}}, color={255,127,0}));
   connect(measuringCoil.port_n, airGap.port_p) 
-    annotation (Line(points={{20,-10},{20,-50},{10,-50}},
+    annotation (Line(points={{20,-10},{20,-50},{10,-50}}, 
                                                  color={255,127,0}));
   connect(electricGround1.p, excitingCoil.n) 
     annotation (Line(points={{-50,-10},{-40,-10}}, color={0,0,255}));

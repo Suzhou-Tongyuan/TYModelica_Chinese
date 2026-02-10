@@ -17,9 +17,9 @@ model Derivative "低通滤波器运算放大器电路"
 equation
   connect(n1, n2) 
     annotation(Line(points = {{-100, -100}, {100, -100}}, color = {0, 0, 255}));
-  connect(opAmp.out, p2) annotation(Line(points = {{10, 0}, {80, 0}, {80, 100}, {100, 100}},
+  connect(opAmp.out, p2) annotation(Line(points = {{10, 0}, {80, 0}, {80, 100}, {100, 100}}, 
     color = {0, 0, 255}));
-  connect(n1, opAmp.in_p) annotation(Line(points = {{-100, -100}, {-10, -100}, {-10, -6}},
+  connect(n1, opAmp.in_p) annotation(Line(points = {{-100, -100}, {-10, -100}, {-10, -6}}, 
     color = {0, 0, 255}));
   connect(r1.n, opAmp.in_n) 
     annotation(Line(points = {{-30, 30}, {-10, 30}, {-10, 6}}, color = {0, 0, 255}));
@@ -34,22 +34,22 @@ equation
   annotation(Documentation(info = "<html>
 <p>反相高通滤波器 = 导数，基于 <a href=\"modelica://Modelica.Electrical.Analog.Ideal.IdealizedOpAmpLimited\">IdealizedOpAmpLimited</a> 模型。</p>
 <p>传递函数: <code>vOut/vIn = -k*s/(1 + s*T)</code></p>
-</html>"),
+</html>"), 
     Icon(graphics = {
-    Polygon(lineColor = {192, 192, 192},
-    fillColor = {192, 192, 192},
-    fillPattern = FillPattern.Solid,
-    points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}),
-    Line(points = {{-80.0, 78.0}, {-80.0, -90.0}},
-    color = {192, 192, 192}),
-    Line(origin = {-24.667, -27.333},
-    points = {{-55.333, 87.333}, {-19.333, -40.667}, {86.667, -52.667}},
-    color = {0, 0, 127},
-    smooth = Smooth.Bezier),
-    Line(points = {{-90.0, -80.0}, {82.0, -80.0}},
-    color = {192, 192, 192}),
-    Polygon(lineColor = {192, 192, 192},
-    fillColor = {192, 192, 192},
-    fillPattern = FillPattern.Solid,
+    Polygon(lineColor = {192, 192, 192}, 
+    fillColor = {192, 192, 192}, 
+    fillPattern = FillPattern.Solid, 
+    points = {{-80.0, 90.0}, {-88.0, 68.0}, {-72.0, 68.0}, {-80.0, 90.0}}), 
+    Line(points = {{-80.0, 78.0}, {-80.0, -90.0}}, 
+    color = {192, 192, 192}), 
+    Line(origin = {-24.667, -27.333}, 
+    points = {{-55.333, 87.333}, {-19.333, -40.667}, {86.667, -52.667}}, 
+    color = {0, 0, 127}, 
+    smooth = Smooth.Bezier), 
+    Line(points = {{-90.0, -80.0}, {82.0, -80.0}}, 
+    color = {192, 192, 192}), 
+    Polygon(lineColor = {192, 192, 192}, 
+    fillColor = {192, 192, 192}, 
+    fillPattern = FillPattern.Solid, 
     points = {{90.0, -80.0}, {68.0, -72.0}, {68.0, -88.0}, {90.0, -80.0}})}));
 end Derivative;

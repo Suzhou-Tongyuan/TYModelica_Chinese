@@ -1,9 +1,9 @@
 ﻿within Modelica.Magnetic.FluxTubes.Material.HardMagnetic;
 record HardFerrite "烧结硬铁氧体，示例值"
   extends FluxTubes.Material.HardMagnetic.BaseData(
-    H_cBRef=170000,
-    B_rRef=0.38,
-    T_ref=20 + 273.15,
+    H_cBRef=170000, 
+    B_rRef=0.38, 
+    T_ref=20 + 273.15, 
     alpha_Br=-0.002);
   annotation (Documentation(info="<html>
 <p>

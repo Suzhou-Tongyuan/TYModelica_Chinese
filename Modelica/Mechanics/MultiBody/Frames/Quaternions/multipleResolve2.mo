@@ -1,13 +1,13 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
-function multipleResolve2
+function multipleResolve2 
   "将多个向量从坐标系1转换到坐标系2"
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q
+  input Quaternions.Orientation Q 
     "将坐标系1旋转到坐标系2的四元数方向对象";
   input Real v1[3, :] "坐标系1中的向量";
   output Real v2[3, size(v1, 2)] "坐标系2中的向量";
 algorithm
-  v2 := ((2*Q[4]*Q[4] - 1)*identity(3) + 2*(outerProduct(Q[1:3],Q[1:3]) -
+  v2 := ((2*Q[4]*Q[4] - 1)*identity(3) + 2*(outerProduct(Q[1:3],Q[1:3]) - 
     Q[4]*skew(Q[1:3])))*v1;
   annotation(Inline=true, Documentation(info="<html>
 <h4>语法</h4>

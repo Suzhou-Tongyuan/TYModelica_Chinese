@@ -1,15 +1,15 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function from_nxy
+function from_nxy 
   "从n_x和n_y向量返回方向对象"
   extends Modelica.Icons.Function;
   import Modelica.Math.Vectors.length;
   import Modelica.Math.Vectors.normalize;
 
-  input Real n_x[3](each final unit="1")
+  input Real n_x[3](each final unit="1") 
     "坐标系1中指向坐标系2 x轴方向的向量";
-  input Real n_y[3](each final unit="1")
+  input Real n_y[3](each final unit="1") 
     "坐标系1中指向坐标系2 y轴方向的向量";
-  output TransformationMatrices.Orientation T
+  output TransformationMatrices.Orientation T 
     "将坐标系1旋转到坐标系2的方向对象";
 protected
   Real e_x[3](each final unit="1")=if length(n_x) < 1e-10 then {1,0,0} else normalize(n_x);

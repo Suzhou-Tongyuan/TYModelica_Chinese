@@ -20,7 +20,7 @@ package Sources "多相电压和电流源"
 <li>CosineCurrent：连续电流之间的默认相移由
 <a href=\"modelica://Modelica.Electrical.Polyphase.Functions.symmetricOrientation\">symmetricOrientation</a>给出</li>
 </ul>
-</html>",
+</html>", 
         revisions="<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

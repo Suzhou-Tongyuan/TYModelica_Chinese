@@ -1,7 +1,7 @@
 ﻿within Modelica.Thermal.HeatTransfer.Components;
 model BodyRadiation "用于热辐射的集总热元件"
   extends Interfaces.Element1D;
-  parameter Real Gr(unit="m2")
+  parameter Real Gr(unit="m2") 
     "两个表面之间的净辐射传导系数（见文档）";
 equation
   Q_flow = Gr*Modelica.Constants.sigma*(port_a.T^4 - port_b.T^4);
@@ -9,42 +9,42 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
         Rectangle(
-          extent={{50,80},{90,-80}},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Backward),
+          extent={{50,80},{90,-80}}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Backward), 
         Rectangle(
-          extent={{-90,80},{-50,-80}},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Backward),
-        Line(points={{-36,10},{36,10}}, color={191,0,0}),
-        Line(points={{-36,10},{-26,16}}, color={191,0,0}),
-        Line(points={{-36,10},{-26,4}}, color={191,0,0}),
-        Line(points={{-36,-10},{36,-10}}, color={191,0,0}),
-        Line(points={{26,-16},{36,-10}}, color={191,0,0}),
-        Line(points={{26,-4},{36,-10}}, color={191,0,0}),
-        Line(points={{-36,-30},{36,-30}}, color={191,0,0}),
-        Line(points={{-36,-30},{-26,-24}}, color={191,0,0}),
-        Line(points={{-36,-30},{-26,-36}}, color={191,0,0}),
-        Line(points={{-36,30},{36,30}}, color={191,0,0}),
-        Line(points={{26,24},{36,30}}, color={191,0,0}),
-        Line(points={{26,36},{36,30}}, color={191,0,0}),
+          extent={{-90,80},{-50,-80}}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Backward), 
+        Line(points={{-36,10},{36,10}}, color={191,0,0}), 
+        Line(points={{-36,10},{-26,16}}, color={191,0,0}), 
+        Line(points={{-36,10},{-26,4}}, color={191,0,0}), 
+        Line(points={{-36,-10},{36,-10}}, color={191,0,0}), 
+        Line(points={{26,-16},{36,-10}}, color={191,0,0}), 
+        Line(points={{26,-4},{36,-10}}, color={191,0,0}), 
+        Line(points={{-36,-30},{36,-30}}, color={191,0,0}), 
+        Line(points={{-36,-30},{-26,-24}}, color={191,0,0}), 
+        Line(points={{-36,-30},{-26,-36}}, color={191,0,0}), 
+        Line(points={{-36,30},{36,30}}, color={191,0,0}), 
+        Line(points={{26,24},{36,30}}, color={191,0,0}), 
+        Line(points={{26,36},{36,30}}, color={191,0,0}), 
         Text(
-          extent={{-150,125},{150,85}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,125},{150,85}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-150,-90},{150,-120}},
-          textString="Gr=%Gr"),
+          extent={{-150,-90},{150,-120}}, 
+          textString="Gr=%Gr"), 
         Rectangle(
-          extent={{-50,80},{-44,-80}},
-          lineColor={191,0,0},
-          fillColor={191,0,0},
-          fillPattern=FillPattern.Solid),
+          extent={{-50,80},{-44,-80}}, 
+          lineColor={191,0,0}, 
+          fillColor={191,0,0}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{45,80},{50,-80}},
-          lineColor={191,0,0},
-          fillColor={191,0,0},
-          fillPattern=FillPattern.Solid)}),
+          extent={{45,80},{50,-80}}, 
+          lineColor={191,0,0}, 
+          fillColor={191,0,0}, 
+          fillPattern=FillPattern.Solid)}), 
     Documentation(info="<html><p>
 这是一个描述热辐射的模型，即两个物体之间因温度不同而发出的电磁辐射。 使用的构成方程如下:
 </p>

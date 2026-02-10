@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function resolveDyade2
+function resolveDyade2 
   "将二阶张量从坐标系1变换到坐标系2"
   extends Modelica.Icons.Function;
   input Orientation R "将坐标系1旋转到坐标系2的方向对象";

@@ -1,33 +1,33 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.RectifierCenterTapmPulse;
-model ThyristorCenterTapmPulse_RLV_Characteristic
+model ThyristorCenterTapmPulse_RLV_Characteristic 
   "带中心点和电阻电感负载及电压的2*m脉冲可控硅整流器特性"
   extends ExampleTemplates.ThyristorCenterTapmPulse(pulsem(
         useConstantFiringAngle=false));
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter SI.Resistance R=20 "负载电阻";
-  parameter SI.Inductance L=1 "负载电感" 
+  parameter SI.Inductance L=1 "负载电阻" 
     annotation (Evaluate=true);
   parameter SI.Voltage VDC=-50 "直流负载偏置电压";
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
       Placement(transformation(
-        origin={30,30},
-        extent={{10,-10},{-10,10}},
+        origin={30,30}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
-  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
+  Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true, 
         start=0)) annotation (Placement(transformation(
-        origin={30,0},
-        extent={{10,-10},{-10,10}},
+        origin={30,0}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
-  Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
+  Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V= 
         VDC) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={30,-30})));
   Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
      Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=270,
+        extent={{10,-10},{-10,10}}, 
+        rotation=270, 
         origin={-30,-70})));
 equation
   connect(resistor.n, inductor.p) annotation (Line(
@@ -42,9 +42,9 @@ equation
       points={{-30,-59},{-30,-12}}, color={0,0,127}));
   annotation (
     experiment(
-      StopTime=10,
-      Tolerance=1e-06,
-      Interval=0.0002),
+      StopTime=10, 
+      Tolerance=1e-06, 
+      Interval=0.0002), 
     Documentation(info="<html>
 <p>该示例展示了带有R-L负载及直流电压源的可控<m>脉冲中心点整流器，其中<m>是相数。该示例中的额外直流电压源可以产生负平均负载电压。</p>
 

@@ -7,7 +7,7 @@ package Interfaces "电气多相模型的接口"
 这个库含有电气多相组件的连接器和接口(部分模型)，该库基于Modelica.Electrical.Analog搭建。
 </p>
 
-</html>",
+</html>", 
         revisions="<html>
 <dl>
   <dt><strong>主要作者:</strong></dt>

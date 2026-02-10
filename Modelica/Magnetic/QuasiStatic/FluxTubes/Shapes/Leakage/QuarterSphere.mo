@@ -1,11 +1,11 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.Leakage;
-model QuarterSphere
+model QuarterSphere 
 "通过四分之一球体角的泄漏通量"
 
   extends BaseClasses.Leakage;
 
   parameter SI.Radius r=0.005 "四分之一球半径" 
-    annotation (Dialog(group="Parameters", groupImage=
+    annotation (Dialog(group="Parameters", groupImage= 
           "modelica://Modelica/Resources/Images/Magnetic/FluxTubes/Shapes/Leakage/QuarterSphere.png"));
 
 equation

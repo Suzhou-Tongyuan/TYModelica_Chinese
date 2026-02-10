@@ -1,10 +1,10 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function from_T
+function from_T 
   "返回从变换矩阵 T 和角速度 w 确定的方向对象"
   extends Modelica.Icons.Function;
-  input Real T[3, 3]
+  input Real T[3, 3] 
     "将矢量从坐标系 1 转换到坐标系 2 的变换矩阵 (v2=T*v1)";
-  input SI.AngularVelocity w[3]
+  input SI.AngularVelocity w[3] 
     "在坐标系 2 中解析的相对于坐标系 1 的角速度，解析在坐标系 2 中 (skew(w)=T*der(transpose(T)))";
   output Orientation R "将坐标系 1 旋转到坐标系 2 的方向对象";
 algorithm

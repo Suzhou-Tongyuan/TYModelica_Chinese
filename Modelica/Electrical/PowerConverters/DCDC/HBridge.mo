@@ -3,49 +3,49 @@ model HBridge "H桥(四象限变换器)"
   extends Icons.Converter;
   extends PowerConverters.Interfaces.DCDC.DCtwoPin1;
   extends PowerConverters.Interfaces.DCDC.DCtwoPin2;
-  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T= 
        293.15);
-  parameter SI.Resistance RonTransistor=1e-05
+  parameter SI.Resistance RonTransistor=1e-05 
     "晶体管闭合电阻";
-  parameter SI.Conductance GoffTransistor=1e-05
+  parameter SI.Conductance GoffTransistor=1e-05 
     "晶体管开启电导";
-  parameter SI.Voltage VkneeTransistor=0
+  parameter SI.Voltage VkneeTransistor=0 
     "晶体管阈值电压";
-  parameter SI.Resistance RonDiode=1e-05
+  parameter SI.Resistance RonDiode=1e-05 
     "二极管闭合电阻";
-  parameter SI.Conductance GoffDiode=1e-05
+  parameter SI.Conductance GoffDiode=1e-05 
     "二极管开启电导";
   parameter SI.Voltage VkneeDiode=0 "二极管阈值电压";
   extends Interfaces.Enable.Enable2;
   DCAC.SinglePhase2Level inverter_p(
-    final RonTransistor=RonTransistor,
-    final GoffTransistor=GoffTransistor,
-    final VkneeTransistor=VkneeTransistor,
-    final RonDiode=RonDiode,
-    final GoffDiode=GoffDiode,
-    final VkneeDiode=VkneeDiode,
+    final RonTransistor=RonTransistor, 
+    final GoffTransistor=GoffTransistor, 
+    final VkneeTransistor=VkneeTransistor, 
+    final RonDiode=RonDiode, 
+    final GoffDiode=GoffDiode, 
+    final VkneeDiode=VkneeDiode, 
     final useHeatPort=useHeatPort) 
     annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   DCAC.SinglePhase2Level inverter_n(
-    final RonTransistor=RonTransistor,
-    final GoffTransistor=GoffTransistor,
-    final VkneeTransistor=VkneeTransistor,
-    final RonDiode=RonDiode,
-    final GoffDiode=GoffDiode,
-    final VkneeDiode=VkneeDiode,
+    final RonTransistor=RonTransistor, 
+    final GoffTransistor=GoffTransistor, 
+    final VkneeTransistor=VkneeTransistor, 
+    final RonDiode=RonDiode, 
+    final GoffDiode=GoffDiode, 
+    final VkneeDiode=VkneeDiode, 
     final useHeatPort=useHeatPort) 
     annotation (Placement(transformation(extent={{-58,-40},{-38,-20}})));
-  Modelica.Blocks.Interfaces.BooleanInput fire_p
+  Modelica.Blocks.Interfaces.BooleanInput fire_p 
     "正电位臂的触发信号" annotation (Placement(
         transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
+        extent={{-20,-20},{20,20}}, 
+        rotation=90, 
         origin={-60,-120})));
-  Modelica.Blocks.Interfaces.BooleanInput fire_n
+  Modelica.Blocks.Interfaces.BooleanInput fire_n 
     "负电位臂的触发信号" annotation (Placement(
         transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
+        extent={{-20,-20},{20,20}}, 
+        rotation=90, 
         origin={60,-120})));
 equation
   if not useHeatPort then
@@ -75,48 +75,48 @@ equation
       points={{-60,-69},{-60,-60},{-42,-60},{-42,-42}}, color={255,0,255}));
   connect(andCondition_p.y, inverter_p.fire_p) annotation (Line(
       points={{-60,-69},{-60,-60},{-16,-60},{-16,18}}, color={255,0,255}));
-  annotation (defaultComponentName="dcdc",
+  annotation (defaultComponentName="dcdc", 
     Icon(graphics={
         Rectangle(
-          extent={{-40,40},{40,-40}},
-          lineColor={255,255,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+          extent={{-40,40},{40,-40}}, 
+          lineColor={255,255,255}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Text(
-          extent={{0,-50},{100,-70}},
-          textColor={0,0,255},
-          textString="直流输出"),
+          extent={{0,-50},{100,-70}}, 
+          textColor={0,0,255}, 
+          textString="直流输出"), 
         Text(
-          extent={{-100,70},{0,50}},
-          textColor={0,0,255},
-          textString="直流输入"),
+          extent={{-100,70},{0,50}}, 
+          textColor={0,0,255}, 
+          textString="直流输入"), 
         Line(
-          points={{-40,0},{-28,0}},
-          color={0,0,255}),
+          points={{-40,0},{-28,0}}, 
+          color={0,0,255}), 
         Line(
-          points={{-28,20},{-28,-20}},
-          color={0,0,255}),
+          points={{-28,20},{-28,-20}}, 
+          color={0,0,255}), 
         Line(
-          points={{-20,20},{-20,-20}},
-          color={0,0,255}),
+          points={{-20,20},{-20,-20}}, 
+          color={0,0,255}), 
         Line(
-          points={{-20,4},{0,24},{0,40}},
-          color={0,0,255}),
+          points={{-20,4},{0,24},{0,40}}, 
+          color={0,0,255}), 
         Line(
-          points={{-20,-4},{0,-24},{0,-40}},
-          color={0,0,255}),
+          points={{-20,-4},{0,-24},{0,-40}}, 
+          color={0,0,255}), 
         Line(
-          points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}},
-          color={0,0,255}),
+          points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, 
+          color={0,0,255}), 
         Line(
-          points={{0,-24},{10,-24},{10,24},{0,24}},
-          color={0,0,255}),
+          points={{0,-24},{10,-24},{10,24},{0,24}}, 
+          color={0,0,255}), 
         Line(
-          points={{0,8},{20,8}},
-          color={0,0,255}),
+          points={{0,8},{20,8}}, 
+          color={0,0,255}), 
         Line(
-          points={{10,8},{0,-8},{20,-8},{10,8}},
-          color={0,0,255})}),
+          points={{10,8},{0,-8},{20,-8},{10,8}}, 
+          color={0,0,255})}), 
     Documentation(info="<html>
 <p>
 H桥是一个四象限直流/直流变换器。它由两个单相直流/交流变换器组成，其控制方式不同；见图&nbsp;1。</p>

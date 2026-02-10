@@ -1,8 +1,8 @@
 ﻿within Modelica.Mechanics.Rotational.Examples;
-model FirstGrounded
+model FirstGrounded 
     "第一个例子：包含与地面接触的部分的简单传动系统"
   extends Modelica.Icons.Example;
-  parameter SI.Torque amplitude=10
+  parameter SI.Torque amplitude=10 
     "驱动扭矩的幅度";
   parameter SI.Frequency f=5 "驱动扭矩的频率";
   parameter SI.Inertia Jmotor(min=0) = 0.1 "电机惯性";
@@ -19,8 +19,8 @@ model FirstGrounded
   Rotational.Components.IdealGear idealGear(ratio=ratio, useSupport=false) 
     annotation (Placement(transformation(extent={{-8,-8},{8,8}})));
   Rotational.Components.Inertia inertia2(
-    J=2,
-    phi(fixed=true, start=0),
+    J=2, 
+    phi(fixed=true, start=0), 
     w(fixed=true, start=0)) annotation (Placement(transformation(extent={{
             22,-8},{38,8}})));
   Rotational.Components.Spring spring(c=1.e4, phi_rel(fixed=true)) 
@@ -29,8 +29,8 @@ model FirstGrounded
     annotation (Placement(transformation(extent={{82,-8},{98,8}})));
   Rotational.Components.Damper damper(d=damping) annotation (Placement(
         transformation(
-        origin={46,-22},
-        extent={{-8,-8},{8,8}},
+        origin={46,-22}, 
+        extent={{-8,-8},{8,8}}, 
         rotation=270)));
   Modelica.Blocks.Sources.Sine sine(amplitude=amplitude, f=f) 
     annotation (Placement(transformation(extent={{-98,-8},{-82,8}})));
@@ -60,6 +60,6 @@ equation
 <p>
 模拟1秒，并绘制以下变量：<br> 惯性组件 inertia2 和 inertia3 的角速度：inertia2.w、inertia3.w
 </p>
-</html>"),
+</html>"), 
        experiment(StopTime=1.0, Interval=0.001));
 end FirstGrounded;

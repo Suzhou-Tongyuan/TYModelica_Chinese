@@ -5,8 +5,8 @@ model UpSample1 "实数信号 UpSample 模块示例"
   Modelica.Clocked.ClockSignals.Clocks.PeriodicExactClock periodicClock(
       factor=20, resolution=Modelica.Clocked.Types.Resolution.ms) 
     annotation (Placement(transformation(extent={{-68,-6},{-56,6}})));
-  Modelica.Blocks.Sources.Sine sine(f=2,
-    offset=0.1,
+  Modelica.Blocks.Sources.Sine sine(f=2, 
+    offset=0.1, 
     startTime=0) 
     annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
   Modelica.Clocked.RealSignals.Sampler.SampleClocked sample1 
@@ -22,21 +22,21 @@ equation
   connect(sine.y, sample1.u) 
     annotation (Line(points={{-59,30},{-49.2,30}}, color={0,0,127}));
   connect(periodicClock.y, sample1.clock) annotation (Line(
-      points={{-55.4,0},{-42,0},{-42,22.8}},
-      color={175,175,175},
-      pattern=LinePattern.Dot,
+      points={{-55.4,0},{-42,0},{-42,22.8}}, 
+      color={175,175,175}, 
+      pattern=LinePattern.Dot, 
       thickness=0.5));
-  connect(sample1.y, upSample1.u) annotation (Line(points={{-35.4,30},{-32,30},
+  connect(sample1.y, upSample1.u) annotation (Line(points={{-35.4,30},{-32,30}, 
           {-32,40},{-27.2,40}}, color={0,0,127}));
-  connect(upSample2.u, sample1.y) annotation (Line(points={{-27.2,20},{-32,20},
+  connect(upSample2.u, sample1.y) annotation (Line(points={{-27.2,20},{-32,20}, 
           {-32,30},{-35.4,30}}, color={0,0,127}));
 connect(upSample2.y, add.u2) annotation (Line(
-    points={{-13.4,20},{-8,20},{-8,24},{-2,24}},
+    points={{-13.4,20},{-8,20},{-8,24},{-2,24}}, 
     color={0,0,127}));
 connect(upSample1.y, add.u1) annotation (Line(
-    points={{-13.4,40},{-8,40},{-8,36},{-2,36}},
+    points={{-13.4,40},{-8,40},{-8,36},{-2,36}}, 
     color={0,0,127}));
-  annotation (experiment(StopTime=0.09),
+  annotation (experiment(StopTime=0.09), 
   Documentation(info="<html>
 <p>
 生成一个用于区模块文档的示例图

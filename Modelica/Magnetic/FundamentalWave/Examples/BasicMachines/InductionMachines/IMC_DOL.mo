@@ -1,4 +1,4 @@
-﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.InductionMachines;
+within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.InductionMachines;
 model IMC_DOL
   "鼠笼式感应电机直接在线启动"
   extends Modelica.Icons.Example;
@@ -9,7 +9,7 @@ model IMC_DOL
   parameter SI.Time tOn=0.1 "机器启动时间";
   parameter SI.Torque T_Load=161.4 "额定负载扭矩";
   parameter SI.AngularVelocity w_Load(displayUnit="rev/min")=
-       1440.45*2*Modelica.Constants.pi/60 "Nominal load speed";
+       1440.45*2*Modelica.Constants.pi/60 "额定负载转速";
   parameter SI.Inertia J_Load=0.29 "负载惯性";
   parameter Integer p=2 "极对数";
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(

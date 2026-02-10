@@ -15,21 +15,21 @@ model Rectifier "B6型桥式连接二极管"
   output SI.Voltage uAC[3];
   output SI.Power Losses;
 
-  Modelica.Electrical.Analog.Sources.SineVoltage SineVoltage1(f=f,
+  Modelica.Electrical.Analog.Sources.SineVoltage SineVoltage1(f=f, 
        V=VAC*sqrt(2/3)) 
                       annotation (Placement(transformation(extent={{-70,10},{
             -90,30}})));
   Modelica.Electrical.Analog.Sources.SineVoltage SineVoltage2(
-    f=f,
-    phase=-2/3*Modelica.Constants.pi,
+    f=f, 
+    phase=-2/3*Modelica.Constants.pi, 
     V=VAC*sqrt(2/3)) 
-                   annotation (Placement(transformation(extent={{-70,-10},{-90,
+                   annotation (Placement(transformation(extent={{-70,-10},{-90, 
             10}})));
   Modelica.Electrical.Analog.Sources.SineVoltage SineVoltage3(
-    f=f,
-    phase=-4/3*Modelica.Constants.pi,
+    f=f, 
+    phase=-4/3*Modelica.Constants.pi, 
     V=VAC*sqrt(2/3)) 
-                   annotation (Placement(transformation(extent={{-70,-30},{-90,
+                   annotation (Placement(transformation(extent={{-70,-30},{-90, 
             -10}})));
   Modelica.Electrical.Analog.Basic.Inductor Inductor1(L=LAC) 
   annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
@@ -38,69 +38,69 @@ model Rectifier "B6型桥式连接二极管"
   Modelica.Electrical.Analog.Basic.Inductor Inductor3(L=LAC, i(start=0, fixed=true)) 
   annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
   Ideal.IdealDiode IdealDiode1(
-    Ron=Ron,
-    Goff=Goff,
+    Ron=Ron, 
+    Goff=Goff, 
     Vknee=Vknee) 
     annotation (Placement(transformation(
-        origin={-20,40},
-        extent={{-10,-10},{10,10}},
+        origin={-20,40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Ideal.IdealDiode IdealDiode2(
-    Ron=Ron,
-    Goff=Goff,
+    Ron=Ron, 
+    Goff=Goff, 
     Vknee=Vknee) 
     annotation (Placement(transformation(
-        origin={0,40},
-        extent={{-10,-10},{10,10}},
+        origin={0,40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Ideal.IdealDiode IdealDiode3(
-    Ron=Ron,
-    Goff=Goff,
+    Ron=Ron, 
+    Goff=Goff, 
     Vknee=Vknee) 
     annotation (Placement(transformation(
-        origin={20,40},
-        extent={{-10,-10},{10,10}},
+        origin={20,40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Ideal.IdealDiode IdealDiode4(
-    Ron=Ron,
-    Goff=Goff,
+    Ron=Ron, 
+    Goff=Goff, 
     Vknee=Vknee) 
     annotation (Placement(transformation(
-        origin={-20,-40},
-        extent={{-10,-10},{10,10}},
+        origin={-20,-40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Ideal.IdealDiode IdealDiode5(
-    Ron=Ron,
-    Goff=Goff,
+    Ron=Ron, 
+    Goff=Goff, 
     Vknee=Vknee) 
     annotation (Placement(transformation(
-        origin={0,-40},
-        extent={{-10,-10},{10,10}},
+        origin={0,-40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Ideal.IdealDiode IdealDiode6(
-    Ron=Ron,
-    Goff=Goff,
+    Ron=Ron, 
+    Goff=Goff, 
     Vknee=Vknee) 
     annotation (Placement(transformation(
-        origin={20,-40},
-        extent={{-10,-10},{10,10}},
+        origin={20,-40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Electrical.Analog.Basic.Capacitor Capacitor1(C=2*CDC) 
   annotation (Placement(transformation(
-        origin={40,40},
-        extent={{-10,-10},{10,10}},
+        origin={40,40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Capacitor Capacitor2(C=2*CDC) 
   annotation (Placement(transformation(
-        origin={40,-40},
-        extent={{-10,-10},{10,10}},
+        origin={40,-40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Modelica.Electrical.Analog.Basic.Ground Ground1 
   annotation (Placement(transformation(extent={{40,-80},{60,-60}})));
   Modelica.Electrical.Analog.Sources.SignalCurrent SignalCurrent1 
   annotation (Placement(transformation(
-        origin={60,0},
-        extent={{-10,-10},{10,10}},
+        origin={60,0}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=270)));
   Modelica.Blocks.Sources.Constant Constant1(k=IDC) 
   annotation (Placement(transformation(extent={{100,-10},{80,10}})));
@@ -113,8 +113,8 @@ equation
   uAC[1] = Inductor1.n.v - Inductor2.n.v;
   uAC[2] = Inductor2.n.v - Inductor3.n.v;
   uAC[3] = Inductor3.n.v - Inductor1.n.v;
-  Losses = IdealDiode1.v*IdealDiode1.i + IdealDiode2.v*IdealDiode2.i +
-    IdealDiode3.v*IdealDiode3.i + IdealDiode4.v*IdealDiode4.i +
+  Losses = IdealDiode1.v*IdealDiode1.i + IdealDiode2.v*IdealDiode2.i + 
+    IdealDiode3.v*IdealDiode3.i + IdealDiode4.v*IdealDiode4.i + 
     IdealDiode5.v*IdealDiode5.i + IdealDiode6.v*IdealDiode6.i;
   connect(SineVoltage1.n, SineVoltage2.n) 
     annotation (Line(points={{-90,20},{-90,0}}, color={0,0,255}));
@@ -161,26 +161,26 @@ equation
   connect(Inductor3.n, IdealDiode3.p) 
     annotation (Line(points={{-40,-20},{20,-20},{20,30}}, color={0,0,255}));
 annotation (
-  Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
-grid={2,2}),graphics = {Text(origin={0,80},
-extent={{-80,10},{80,-10}},
-textString="整流器"), Line(origin={0,0},
-points={{-16,18},{-16,2},{-18,6},{-14,6},{-16,2}}), Line(origin={0,0},
-points={{-30,22},{-26,20},{-30,18},{-30,22}}), Line(origin={0,0},
-points={{32,30},{32,-30},{30,-26},{34,-26},{32,-30}}), Text(origin={-30,12},
-extent={{-8,4},{8,-4}},
-textString="iAC"), Text(origin={-6,4},
-extent={{-8,4},{8,-4}},
-textString="uAC"), Text(origin={30,-20},
-extent={{-8,4},{8,-4}},
-textString="uDC")}),
-  experiment(StopTime=0.1, Interval=1e-005),
+  Diagram(coordinateSystem(extent={{-100,-100},{100,100}}, 
+grid={2,2}),graphics = {Text(origin={0,80}, 
+extent={{-80,10},{80,-10}}, 
+textString="整流器"), Line(origin={0,0}, 
+points={{-16,18},{-16,2},{-18,6},{-14,6},{-16,2}}), Line(origin={0,0}, 
+points={{-30,22},{-26,20},{-30,18},{-30,22}}), Line(origin={0,0}, 
+points={{32,30},{32,-30},{30,-26},{34,-26},{32,-30}}), Text(origin={-30,12}, 
+extent={{-8,4},{8,-4}}, 
+textString="iAC"), Text(origin={-6,4}, 
+extent={{-8,4},{8,-4}}, 
+textString="uAC"), Text(origin={30,-20}, 
+extent={{-8,4},{8,-4}}, 
+textString="uDC")}), 
+  experiment(StopTime=0.1, Interval=1e-005), 
   Documentation(info="<html>
 <p>该示例是一个配置为B6型桥式连接的二极管整流器。该整流器从三相交流电源接收正弦波电压，将输入的交流电转换为输出的直流电供直流侧负载使用。.
 在整流器启动初期直流电容器被设置在一个理想的无负载电压状态。这有助于实现系统启动时的缓和瞬态波动。</p>
 <p>该示例的仿真时间为0.1秒。用户可在“仿真--仿真浏览器”中勾选相应的“仿真结果变量”查看以下变量的图像:
 uDC(直流侧电压)、iAC(1至3相的交流侧电流)、uAC(1至3相的交流侧电压(波形失真))。用户可以通过改变二极管的参数(例如调节负载电流)来观察整个二极管桥的损耗情况。</p>
-</html>",
+</html>", 
    revisions="<html>
 <p><strong>版本信息：</strong></p>
 <ul>

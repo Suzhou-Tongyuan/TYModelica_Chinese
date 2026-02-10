@@ -11,13 +11,13 @@ model FilterOrder "确定最小滤波器阶数的程序模块"
   annotation();
 equation
   connect(inverseBlockConstraints.u1, c_ref) annotation (Line(
-      points={{27.3,11},{55,11}},
+      points={{27.3,11},{55,11}}, 
       color={0,0,127}));
   connect(mixingUnit.T_c, inverseBlockConstraints.y2) annotation (
       Line(
-      points={{-22,8},{-30,8},{-30,11},{-37.05,11}},
+      points={{-22,8},{-30,8},{-30,11},{-37.05,11}}, 
       color={0,0,127}));
   connect(mixingUnit.c, inverseBlockConstraints.u2) annotation (Line(
-      points={{2,14},{10,14},{10,11},{17.4,11}},
+      points={{2,14},{10,14},{10,11},{17.4,11}}, 
       color={0,0,127}));
 end FilterOrder;

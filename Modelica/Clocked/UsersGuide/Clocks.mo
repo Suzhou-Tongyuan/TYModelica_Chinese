@@ -26,10 +26,12 @@ Modelica.Clocked库的一个核心元素是 <strong>clock</strong>。 以下是�
 <img src=\"modelica://Modelica/Resources/Images/Clocked/Clocks/subSampledClockExample.png\" alt=\"Sub-sample example model\" data-href=\"\" style=\"\"/><br><img src=\"modelica://Modelica/Resources/Images/Clocked/Clocks/subSampledClockResult.png\" alt=\"Sub-sample example plot\" data-href=\"\" style=\"\"/>
 </p>
 <p>
-与同步语言中一样，时钟在活动时用 <strong>true</strong> 值表示。 这些衍生时钟之间的关系是 <span style=\"color: rgb(51, 51, 51);\"><strong>精确的</strong></span>， 因此可以保证在每个\"periodicRealClock.y\"时钟的第3个节拍时， \"subSample.y\"时钟是活动的。
+与同步语言中的常规设定一致，时钟处于有效状态时，以逻辑真值(<strong>true</strong>)表示。
+此类派生时钟之间的时序关系是严格<strong>精确的</strong>，因此可保证：
+每当时钟\"periodicRealClock.y\"每累计产生3个时钟节拍，时钟\"subSample.y\"便会被触发为有效状态。
 </p>
 <p>
-如果一个时钟与一个时钟驱动的连续时间分区相关联， 那么必须定义一个 <strong>积分器</strong>，用于从上一个时钟节拍积分到当前时钟节拍。 这可以通过设置参数 <strong>useSolver</strong> = <strong>true</strong>， 并且用参数 <strong>solver</strong> 定义积分方法（以字符串形式）。 这两个参数位于一个时钟信号生成模块的 <strong>Advanced</strong> 选项卡中。 可能的积分方法取决于工具的支持。 通常，每个工具至少支持 \"External\"（使用仿真环境中选择的积分器） 和 \"ExplicitEuler\"（显式欧拉方法）这两种解算器。 有关示例，请参见 <a href=\"modelica://Modelica.Clocked.Examples.Systems.ControlledMixingUnit\" target=\"\">Examples.Systems.ControlledMixingUnit</a>&nbsp; .
+如果一个时钟与一个时钟驱动的连续时间分区相关联，那么必须定义一个<strong>积分器</strong>，用于从上一个时钟节拍积分到当前时钟节拍。 这可以通过设置参数 <strong>useSolver</strong> = <strong>true</strong>， 并且用参数 <strong>solver</strong> 定义积分方法（以字符串形式）。 这两个参数位于一个时钟信号生成模块的 <strong>Advanced</strong> 选项卡中。 可能的积分方法取决于工具的支持。 通常，每个工具至少支持 \"External\"（使用仿真环境中选择的积分器） 和 \"ExplicitEuler\"（显式欧拉方法）这两种解算器。 有关示例，请参见 <a href=\"modelica://Modelica.Clocked.Examples.Systems.ControlledMixingUnit\" target=\"\">Examples.Systems.ControlledMixingUnit</a>&nbsp; .
 </p>
 <p>
 <span style=\"color: rgb(51, 51, 51);\">时钟分区是一组相互依赖的方程式，其中边界变量使用采样保持运算符进行标记。如果一个时钟分区不包含运算符 </span><strong>der</strong><span style=\"color: rgb(51, 51, 51);\">、</span><strong>delay</strong><span style=\"color: rgb(51, 51, 51);\">、</span><strong>spatialDistribution</strong><span style=\"color: rgb(51, 51, 51);\">、任何与事件相关的运算符（除了 </span><strong>noEvent(…)</strong><span style=\"color: rgb(51, 51, 51);\">），并且没有带布尔条件的</span><span style=\"color: rgb(51, 51, 51);\"><strong> </strong></span><strong>when</strong><span style=\"color: rgb(51, 51, 51);\"> 子句，那么它就是一个时钟离散时间分区，也就是说，它是一个通过差分方程描述的标准采样数据系统。如果一个时钟分区既不是时钟离散时间分区，也不包含运算符 </span><strong>previous</strong><span style=\"color: rgb(51, 51, 51);\"> 或 </span><strong>interval</strong><span style=\"color: rgb(51, 51, 51);\">，那么它就是一个时钟离散化连续时间分区。这样的分区必须通过求解方法来解决。如果两种特性都不满足，例如在同一分区中同时使用运算符 </span><strong>previous</strong><span style=\"color: rgb(51, 51, 51);\"> 和 </span><strong>der</strong><span style=\"color: rgb(51, 51, 51);\">，则会出现错误。在时钟离散时间分区中，所有事件生成机制不再适用，特别是关系运算符和内置的事件触发运算符将不会触发事件。</span>

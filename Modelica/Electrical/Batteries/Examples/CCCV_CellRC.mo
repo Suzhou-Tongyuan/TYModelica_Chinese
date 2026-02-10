@@ -1,22 +1,22 @@
 ﻿within Modelica.Electrical.Batteries.Examples;
-model CCCV_CellRC
+model CCCV_CellRC 
   "使用恒流-恒压特性充电瞬态电池"
   extends Modelica.Icons.Example;
   parameter Modelica.Electrical.Batteries.ParameterRecords.TransientData.ExampleData cellData(
-    Qnom=18000,
-    useLinearSOCDependency=false,
-    Ri=4.2/1200,
+    Qnom=18000, 
+    useLinearSOCDependency=false, 
+    Ri=4.2/1200, 
     Idis=0.001) "电池数据" 
     annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
   Modelica.Electrical.Batteries.Utilities.CCCVcharger cccvCharger(I=25, Vend=4.2) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-50,0})));
   Modelica.Electrical.Analog.Basic.Ground ground 
     annotation (Placement(transformation(extent={{-30,-40},{-10,-20}})));
   Modelica.Electrical.Batteries.BatteryStacksWithSensors.CellRC cell(cellData=cellData) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
+        extent={{-10,10},{10,-10}}, 
         rotation=270)));
   Analog.Sensors.MultiSensor multiSensor 
     annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
@@ -38,9 +38,9 @@ equation
   connect(multiSensor.pc, cccvCharger.p) 
     annotation (Line(points={{-30,40},{-50,40},{-50,10}}, color={0,0,255}));
   annotation (experiment(
-      StopTime=1200,
-      Interval=0.1,
-      Tolerance=1e-06),
+      StopTime=1200, 
+      Interval=0.1, 
+      Tolerance=1e-06), 
     Documentation(info="<html>
 <p>
 一个放电到<code>SOC=0.1</code>的单个瞬态电池正在使用CC-CV充电器充电。

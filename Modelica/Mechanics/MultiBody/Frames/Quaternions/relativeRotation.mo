@@ -1,11 +1,11 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.Quaternions;
 function relativeRotation "返回相对四元数方向对象"
   extends Modelica.Icons.Function;
-  input Quaternions.Orientation Q1
+  input Quaternions.Orientation Q1 
     "将坐标系0旋转到坐标系1的四元数方向对象";
-  input Quaternions.Orientation Q2
+  input Quaternions.Orientation Q2 
     "将坐标系0旋转到坐标系2的四元数方向对象";
-  output Quaternions.Orientation Q_rel
+  output Quaternions.Orientation Q_rel 
     "将坐标系1旋转到坐标系2的四元数方向对象";
 algorithm
   Q_rel := [ Q1[4],  Q1[3], -Q1[2], -Q1[1];

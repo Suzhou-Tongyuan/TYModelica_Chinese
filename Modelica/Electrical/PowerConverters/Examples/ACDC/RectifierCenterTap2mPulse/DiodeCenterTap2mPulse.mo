@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.RectifierCenterTap2mPulse;
-model DiodeCenterTap2mPulse
+model DiodeCenterTap2mPulse 
   "带电阻负载的2*m脉冲二极管中心接地整流器"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
@@ -12,55 +12,55 @@ model DiodeCenterTap2mPulse
         transformation(extent={{-90,-100},{-70,-80}})));
   Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-100,-10})));
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage_p(
-    final m=m,
-    V=fill(sqrt(2)*Vrms, m),
+    final m=m, 
+    V=fill(sqrt(2)*Vrms, m), 
     phase=-
-        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
+        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
     f=fill(f, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-70,10})));
   PowerConverters.ACDC.DiodeCenterTap2mPulse rectifier(final m=m) 
     annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor 
     annotation (Placement(transformation(
-        origin={50,10},
-        extent={{10,-10},{-10,10}},
+        origin={50,10}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
   Modelica.Blocks.Math.Mean meanVoltage(f=2*m*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,40})));
   Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f=2*m*f) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,10})));
   Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=180,
+        extent={{-10,10},{10,-10}}, 
+        rotation=180, 
         origin={0,-50})));
   Modelica.Blocks.Math.Mean meanCurrent(f=2*m*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,-70})));
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage_n(
-    final m=m,
-    V=fill(sqrt(2)*Vrms, m),
+    final m=m, 
+    V=fill(sqrt(2)*Vrms, m), 
     phase=-
-        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
+        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
     f=fill(f, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-70,-20})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
       Placement(transformation(
-        origin={30,30},
-        extent={{10,-10},{-10,10}},
+        origin={30,30}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
 equation
   connect(star.pin_n, ground.p) annotation (Line(
@@ -76,7 +76,7 @@ equation
   connect(currentSensor.p, voltagesensor.n) annotation (Line(
       points={{10,-50},{50,-50},{50,0}}, color={0,0,255}));
   connect(sineVoltage_p.plug_n, sineVoltage_n.plug_p) annotation (Line(
-      points={{-70,0},{-70,
+      points={{-70,0},{-70, 
           -10}}, color={0,0,255}));
   connect(sineVoltage_n.plug_n, rectifier.ac_n) annotation (Line(
       points={{-70,-30},{-70,-40},{-50,-40},{-50,34},{-40,34}}, color={0,0,255}));
@@ -92,9 +92,9 @@ equation
       points={{30,40},{-20,40}}, color={0,0,255}));
   annotation (
     experiment(
-      StopTime=0.1,
-      Tolerance=1e-06,
-      Interval=0.0002),
+      StopTime=0.1, 
+      Tolerance=1e-06, 
+      Interval=0.0002), 
     Documentation(info="<html>
 <p>此示例展示了一个无控制的<code>2*m</code>脉冲中心接地二极管整流器，带有电阻性负载，其中<code>m</code>是相数。</p>
 

@@ -3,15 +3,15 @@ block Add3 "输出三个输入的总和"
   extends Modelica.ComplexBlocks.Icons.ComplexBlock;
 
   parameter Complex k1 = Complex(1, 0) "上输入增益";
-  parameter Boolean useConjugateInput1 = false
+  parameter Boolean useConjugateInput1 = false 
     "如果为真，则处理输入1的共轭复数";
 
   parameter Complex k2 = Complex(1, 0) "中间输入增益";
-  parameter Boolean useConjugateInput2 = false
+  parameter Boolean useConjugateInput2 = false 
     "如果为真，则处理输入2的共轭复数";
 
   parameter Complex k3 = Complex(1, 0) "下输入增益";
-  parameter Boolean useConjugateInput3 = false
+  parameter Boolean useConjugateInput3 = false 
     "如果为真，则处理输入3的共轭复数";
 
   Interfaces.ComplexInput u1 "复数输入信号的连接器1" 
@@ -24,8 +24,8 @@ block Add3 "输出三个输入的总和"
     annotation(Placement(transformation(extent = {{100, -10}, {120, 10}})));
 
 equation
-  y = k1 * (if useConjugateInput1 then Modelica.ComplexMath.conj(u1) else u1)
-    + k2 * (if useConjugateInput2 then Modelica.ComplexMath.conj(u2) else u2)
+  y = k1 * (if useConjugateInput1 then Modelica.ComplexMath.conj(u1) else u1) 
+    + k2 * (if useConjugateInput2 then Modelica.ComplexMath.conj(u2) else u2) 
     + k3 * (if useConjugateInput3 then Modelica.ComplexMath.conj(u3) else u3);
   annotation(
     Documentation(info = "<html>
@@ -59,12 +59,12 @@ y = k1*(if useConjugateInput1 then Modelica.ComplexMath.conj(u1) else u1)
 y = 2 * Modelica.ComplexMath.conj(u1) - 3 * u2 + u3;
 </pre></blockquote>
 
-</html>"),
+</html>"), 
     Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
-    100, 100}}), graphics = {Text(extent = {{-98, 50}, {5, 90}}, textString = "%k1"),
-    Text(extent = {{-98, -20}, {5, 20}}, textString = "%k2"),
-    Text(extent = {{-98, -50}, {5, -90}}, textString = "%k3"),
-    Text(extent = {{10, 40}, {90, -40}},
-    textColor = {85, 170, 255},
+    100, 100}}), graphics = {Text(extent = {{-98, 50}, {5, 90}}, textString = "%k1"), 
+    Text(extent = {{-98, -20}, {5, 20}}, textString = "%k2"), 
+    Text(extent = {{-98, -50}, {5, -90}}, textString = "%k3"), 
+    Text(extent = {{10, 40}, {90, -40}}, 
+    textColor = {85, 170, 255}, 
     textString = "+")}));
 end Add3;

@@ -9,11 +9,11 @@ SI.Angle arg_v=Modelica.ComplexMath.arg(v) "复电压的参数";
 SI.ComplexCurrent i "复电流";
 SI.Current abs_i=Modelica.ComplexMath.abs(i) "复电流的幅值";
 SI.Angle arg_i=Modelica.ComplexMath.arg(i) "复电流的参数";
-SI.ActivePower P=Modelica.ComplexMath.real(v*
+SI.ActivePower P=Modelica.ComplexMath.real(v* 
 Modelica.ComplexMath.conj(i)) "有功功率";
-SI.ReactivePower Q=Modelica.ComplexMath.imag(v*
+SI.ReactivePower Q=Modelica.ComplexMath.imag(v* 
 Modelica.ComplexMath.conj(i)) "无功功率";
-SI.ApparentPower S=Modelica.ComplexMath.abs(v*
+SI.ApparentPower S=Modelica.ComplexMath.abs(v* 
 Modelica.ComplexMath.conj(i)) "复视在功率的幅值";
 Real pf=cos(Modelica.ComplexMath.arg(Complex(P, Q))) "功率因数";
 SI.AngularVelocity omega "参考框架的角速度";

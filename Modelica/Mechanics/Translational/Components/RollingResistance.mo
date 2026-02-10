@@ -9,20 +9,20 @@ model RollingResistance "车轮的阻力"
   parameter Boolean useInclinationInput=false "启用倾斜角的信号输入";
   parameter Real inclinationConstant=0 "常数倾斜角 = tan(angle)" 
     annotation(Dialog(enable=not useInclinationInput));
-  parameter Modelica.Blocks.Types.Regularization reg=Modelica.Blocks.Types.Regularization.Exp
+  parameter Modelica.Blocks.Types.Regularization reg=Modelica.Blocks.Types.Regularization.Exp 
     "正则化类型" annotation(Evaluate=true);
-  parameter SI.Velocity v0(final min=Modelica.Constants.eps)=0.1
+  parameter SI.Velocity v0(final min=Modelica.Constants.eps)=0.1 
     "小于v0的正则化速度";
-  SI.Velocity v
+  SI.Velocity v 
     "相对于支撑组件的一维平动接口的速度 (= der(s))";
   SI.Force f_nominal "没有正则化的名义滚动阻力";
-  Blocks.Interfaces.RealInput inclination = inclination_internal if useInclinationInput
+  Blocks.Interfaces.RealInput inclination = inclination_internal if useInclinationInput 
     "倾斜角=tan(angle)" 
-    annotation (Placement(transformation(extent={{-20,-20},{20,20}},
+    annotation (Placement(transformation(extent={{-20,-20},{20,20}}, 
         origin={-120,60})));
-  Blocks.Interfaces.RealInput cr = Cr_internal if useCrInput
+  Blocks.Interfaces.RealInput cr = Cr_internal if useCrInput 
     "滚动阻力系数" 
-    annotation (Placement(transformation(extent={{-20,-20},{20,20}},
+    annotation (Placement(transformation(extent={{-20,-20},{20,20}}, 
         origin={-120,-60})));
 protected
   Real Cr_internal "滚动阻力系数";
@@ -46,51 +46,51 @@ equation
     f = -f_nominal*(if abs(v)>=v0 then sign(v) else sign(v)*(1 - Modelica.Math.cos(pi/2*v/v0)));
   end if;
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), 
       graphics={
-        Ellipse(extent={{-60,60},{60,-60}},
-          lineColor={0,127,0},
-          fillColor={160,215,160},
-          fillPattern=FillPattern.Sphere),
-        Ellipse(extent={{-40,40},{40,-40}},
-          lineColor={0,127,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
+        Ellipse(extent={{-60,60},{60,-60}}, 
+          lineColor={0,127,0}, 
+          fillColor={160,215,160}, 
+          fillPattern=FillPattern.Sphere), 
+        Ellipse(extent={{-40,40},{40,-40}}, 
+          lineColor={0,127,0}, 
+          fillColor={255,255,255}, 
+          fillPattern=FillPattern.Solid), 
         Text(
-          extent={{-100,70},{-60,50}},
-          textColor={64,64,64},
-          textString="inc."),
+          extent={{-100,70},{-60,50}}, 
+          textColor={64,64,64}, 
+          textString="inc."), 
         Text(
-          extent={{-110,-50},{-70,-70}},
-          textColor={64,64,64},
-          textString="cr"),
+          extent={{-110,-50},{-70,-70}}, 
+          textColor={64,64,64}, 
+          textString="cr"), 
         Rectangle(
-          extent={{-2,40},{2,-40}},
-          lineColor={0,127,0},
-          fillColor={160,215,160},
-          fillPattern=FillPattern.Solid),
+          extent={{-2,40},{2,-40}}, 
+          lineColor={0,127,0}, 
+          fillColor={160,215,160}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{-2,40},{2,-40}},
-          lineColor={0,127,0},
-          fillColor={160,215,160},
-          fillPattern=FillPattern.Solid,
-          rotation=90),
+          extent={{-2,40},{2,-40}}, 
+          lineColor={0,127,0}, 
+          fillColor={160,215,160}, 
+          fillPattern=FillPattern.Solid, 
+          rotation=90), 
         Rectangle(
-          extent={{-2,40},{2,-40}},
-          lineColor={0,127,0},
-          fillColor={160,215,160},
-          fillPattern=FillPattern.Solid,
-          rotation=135),
+          extent={{-2,40},{2,-40}}, 
+          lineColor={0,127,0}, 
+          fillColor={160,215,160}, 
+          fillPattern=FillPattern.Solid, 
+          rotation=135), 
         Rectangle(
-          extent={{-2,40},{2,-40}},
-          lineColor={0,127,0},
-          fillColor={160,215,160},
-          fillPattern=FillPattern.Solid,
-          rotation=45),
-        Ellipse(extent={{-10,10},{10,-10}},
-          lineColor={0,127,0},
-          fillColor={160,215,160},
-          fillPattern=FillPattern.Solid)}),
+          extent={{-2,40},{2,-40}}, 
+          lineColor={0,127,0}, 
+          fillColor={160,215,160}, 
+          fillPattern=FillPattern.Solid, 
+          rotation=45), 
+        Ellipse(extent={{-10,10},{10,-10}}, 
+          lineColor={0,127,0}, 
+          fillColor={160,215,160}, 
+          fillPattern=FillPattern.Solid)}), 
     Documentation(info="<html>
 <p>
 简化的车轮阻力模型，依赖于垂直车轮载荷（由重力引起，即仅静态载荷）、倾斜角和滚动阻力系数：

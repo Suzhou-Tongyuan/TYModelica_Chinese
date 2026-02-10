@@ -4,19 +4,19 @@ model SinglePhaseTransformerWithHysteresis2
   Modelica.Electrical.Analog.Basic.Ground el_ground1 
     annotation (Placement(transformation(extent={{-50,-20},{-30,0}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor1(R=0.05) annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
-  Modelica.Electrical.Analog.Sources.SineVoltage SineVoltage(f=
+  Modelica.Electrical.Analog.Sources.SineVoltage SineVoltage(f= 
        400, V=6) annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=270,
+        extent={{-10,10},{10,-10}}, 
+        rotation=270, 
         origin={-60,20})));
   Modelica.Electrical.Analog.Basic.Resistor resistor2(R=2) annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={40,40})));
   Modelica.Electrical.Analog.Basic.Ground el_ground2 
     annotation (Placement(transformation(extent={{30,-20},{50,0}})));
   Components.Transformer1PhaseWithHysteresis transformer(
-    mat=FluxTubes.Material.HysteresisEverettParameter.M330_50A(),
-    MagRelFixed=true,
-    I1Fixed=true,
-    EddyCurrents=false,
+    mat=FluxTubes.Material.HysteresisEverettParameter.M330_50A(), 
+    MagRelFixed=true, 
+    I1Fixed=true, 
+    EddyCurrents=false, 
     HFixed=false) annotation (Placement(transformation(extent={{-10,10},{10,30}})));
 initial equation
   transformer.core.derHstat = 0.0;

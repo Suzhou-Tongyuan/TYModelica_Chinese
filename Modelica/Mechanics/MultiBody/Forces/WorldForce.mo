@@ -1,36 +1,36 @@
 ﻿within Modelica.Mechanics.MultiBody.Forces;
-model WorldForce
+model WorldForce 
   "作用在frame_b上的外部力，由3个输入信号定义，并在world坐标系、frame_b或frame_resolve中解析"
 
   extends Interfaces.PartialOneFrame_b;
   Interfaces.Frame_resolve frame_resolve if 
-    resolveInFrame == Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.frame_resolve
+    resolveInFrame == Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.frame_resolve 
     "输入信号可选在此坐标系中解析" 
     annotation(Placement(transformation(
-    origin = {0, -100},
-    extent = {{-16, -16}, {16, 16}},
+    origin = {0, -100}, 
+    extent = {{-16, -16}, {16, 16}}, 
     rotation = 270)));
-  Modelica.Blocks.Interfaces.RealInput force[3](each final quantity = "Force", each final unit = "N")
+  Modelica.Blocks.Interfaces.RealInput force[3](each final quantity = "Force", each final unit = "N") 
     "在由resolveInFrame定义的坐标系中解析的力的x、y、z坐标" 
     annotation(Placement(transformation(extent = {{-140, -20}, {-100, 20}})));
   parameter Boolean animation = true "= true，如果启用动画";
-  parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameB resolveInFrame =
-    Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.world
+  parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameB resolveInFrame = 
+    Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.world 
     "输入力在其中解析的坐标系(1: world, 2: frame_b, 3: frame_resolve)";
-  input Types.Color color = Modelica.Mechanics.MultiBody.Types.Defaults.ForceColor
+  input Types.Color color = Modelica.Mechanics.MultiBody.Types.Defaults.ForceColor 
     "箭头的颜色" 
     annotation(Dialog(colorSelector = true, group = "如果animation = true", enable = animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射率(= 0: 光完全被吸收)" 
     annotation(Dialog(group = "如果animation = true", enable = animation));
 protected
   Visualizers.Advanced.Arrow arrow(
-    color = color,
-    specularCoefficient = specularCoefficient,
-    R = frame_b.R,
-    r = frame_b.r_0,
-    headAtOrigin = true,
-    quantity = Modelica.Mechanics.MultiBody.Types.VectorQuantity.Force,
+    color = color, 
+    specularCoefficient = specularCoefficient, 
+    R = frame_b.R, 
+    r = frame_b.r_0, 
+    headAtOrigin = true, 
+    quantity = Modelica.Mechanics.MultiBody.Types.VectorQuantity.Force, 
     r_head = -frame_b.f) if world.enableAnimation and animation;
 
 public
@@ -42,39 +42,39 @@ protected
     annotation(Placement(transformation(extent = {{20, -40}, {40, -20}})));
 equation
   connect(basicWorldForce.frame_b, frame_b) annotation(Line(
-    points = {{10, 0}, {100, 0}},
-    color = {95, 95, 95},
+    points = {{10, 0}, {100, 0}}, 
+    color = {95, 95, 95}, 
     thickness = 0.5));
   connect(basicWorldForce.force, force) annotation(Line(
     points = {{-12, 0}, {-120, 0}}, color = {0, 0, 127}));
   connect(basicWorldForce.frame_resolve, frame_resolve) annotation(Line(
-    points = {{0, -10}, {0, -100}},
-    color = {95, 95, 95},
+    points = {{0, -10}, {0, -100}}, 
+    color = {95, 95, 95}, 
     pattern = LinePattern.Dot));
   connect(zeroPosition.frame_resolve, basicWorldForce.frame_resolve) 
     annotation(Line(
-    points = {{20, -30}, {0, -30}, {0, -10}},
-    color = {95, 95, 95},
+    points = {{20, -30}, {0, -30}, {0, -10}}, 
+    color = {95, 95, 95}, 
     pattern = LinePattern.Dot));
-  annotation(defaultComponentName = "force",
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
+  annotation(defaultComponentName = "force", 
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
     100}}), graphics = {
     Text(
-    extent = {{-100, -40}, {100, -70}},
-    textColor = {192, 192, 192},
-    textString = "resolve"),
+    extent = {{-100, -40}, {100, -70}}, 
+    textColor = {192, 192, 192}, 
+    textString = "resolve"), 
     Polygon(
-    points = {{-100, 10}, {50, 10}, {50, 31}, {94, 0}, {50, -31}, {50, -10}, {-100, -10},
-    {-100, 10}},
-    fillPattern = FillPattern.Solid),
+    points = {{-100, 10}, {50, 10}, {50, 31}, {94, 0}, {50, -31}, {50, -10}, {-100, -10}, 
+    {-100, 10}}, 
+    fillPattern = FillPattern.Solid), 
     Text(
-    extent = {{-150, 80}, {150, 40}},
-    textString = "%name",
-    textColor = {0, 0, 255}),
+    extent = {{-150, 80}, {150, 40}}, 
+    textString = "%name", 
+    textColor = {0, 0, 255}), 
     Line(
-    points = {{0, -10}, {0, -95}},
-    color = {95, 95, 95},
-    pattern = LinePattern.Dot)}),
+    points = {{0, -10}, {0, -95}}, 
+    color = {95, 95, 95}, 
+    pattern = LinePattern.Dot)}), 
     Documentation(info = "<html>
 <p>
 <strong>force</strong>连接器的<strong>3</strong>个信号被解析为作用在坐标系连接器上的<strong>力</strong>的x、y和z坐标，

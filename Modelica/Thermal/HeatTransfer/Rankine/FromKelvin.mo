@@ -11,13 +11,13 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={
         Text(
-          extent={{-100,60},{-40,0}},
-          textColor={64,64,64},
-          textString="K"),
+          extent={{-100,60},{-40,0}}, 
+          textColor={64,64,64}, 
+          textString="K"), 
         Text(
-          extent={{40,60},{100,0}},
-          textColor={64,64,64},
-          textString="degRk")}),
+          extent={{40,60},{100,0}}, 
+          textColor={64,64,64}, 
+          textString="degRk")}), 
     Documentation(info="<html><p>
 该组件将所有输入信号从K转换为°R，并将其作为输出信号。
 </p>

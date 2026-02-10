@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Visualizers.Advanced;
-model DoubleArrow
+model DoubleArrow 
     "可视化可变大小的双箭头"
 
   import Modelica.Mechanics.MultiBody.Types;
@@ -7,56 +7,56 @@ model DoubleArrow
   import T = Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
   import Modelica.Units.Conversions.to_unit1;
 
-  input Frames.Orientation R=Frames.nullRotation()
+  input Frames.Orientation R=Frames.nullRotation() 
     "将全局坐标系旋转到箭头坐标系的方向对象" annotation(Dialog);
-  input SI.Position r[3]={0,0,0}
+  input SI.Position r[3]={0,0,0} 
     "从全局坐标系原点到箭头坐标系原点的位置矢量，以全局坐标系为参考" annotation(Dialog);
-  input SI.Position r_tail[3]={0,0,0}
+  input SI.Position r_tail[3]={0,0,0} 
     "从箭头坐标系原点到双箭头尾部的位置矢量，以箭头坐标系为参考" annotation(Dialog);
-  input Real r_head[3]={0,0,0}
+  input Real r_head[3]={0,0,0} 
     "从双箭头尾部到双箭头头部的矢量，以箭头坐标系为参考" annotation(Dialog);
-  input Types.Color color=Modelica.Mechanics.MultiBody.Types.Defaults.ArrowColor
+  input Types.Color color=Modelica.Mechanics.MultiBody.Types.Defaults.ArrowColor 
     "双箭头的颜色" annotation(Dialog(colorSelector=true));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "描述环境光反射的材料属性(=0表示完全吸收光)" annotation(Dialog);
-  parameter Types.VectorQuantity quantity=Types.VectorQuantity.Torque
+  parameter Types.VectorQuantity quantity=Types.VectorQuantity.Torque 
     "矢量表示的物理量的类型";
   input Boolean headAtOrigin=true "=true，如果矢量指向矢量坐标系的原点" annotation(Dialog);
 protected
   outer Modelica.Mechanics.MultiBody.World world;
   SI.Position rvisobj[3] = r + T.resolve1(R.T, r_tail);
   Visualizers.Advanced.Vector arrowLine(
-    coordinates=r_head,
-    color=color,
-    specularCoefficient=specularCoefficient,
-    r=rvisobj,
-    quantity=quantity,
-    headAtOrigin=headAtOrigin,
-    twoHeadedArrow=true,
+    coordinates=r_head, 
+    color=color, 
+    specularCoefficient=specularCoefficient, 
+    r=rvisobj, 
+    quantity=quantity, 
+    headAtOrigin=headAtOrigin, 
+    twoHeadedArrow=true, 
     R=R) if world.enableAnimation;
 
   annotation(
     Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
     100, 100}}), graphics = {
     Rectangle(
-    extent = {{-100, 28}, {0, -28}},
-    lineColor = {128, 128, 128},
-    fillColor = {128, 128, 128},
-    fillPattern = FillPattern.Solid),
+    extent = {{-100, 28}, {0, -28}}, 
+    lineColor = {128, 128, 128}, 
+    fillColor = {128, 128, 128}, 
+    fillPattern = FillPattern.Solid), 
     Polygon(
-    points = {{40, 60}, {100, 0}, {40, -60}, {40, 60}},
-    lineColor = {128, 128, 128},
-    fillColor = {128, 128, 128},
-    fillPattern = FillPattern.Solid),
+    points = {{40, 60}, {100, 0}, {40, -60}, {40, 60}}, 
+    lineColor = {128, 128, 128}, 
+    fillColor = {128, 128, 128}, 
+    fillPattern = FillPattern.Solid), 
     Text(
-    extent = {{-150, 105}, {150, 65}},
-    textString = "%name",
-    textColor = {0, 0, 255}),
+    extent = {{-150, 105}, {150, 65}}, 
+    textString = "%name", 
+    textColor = {0, 0, 255}), 
     Polygon(
-    points = {{0, 60}, {60, 0}, {0, -60}, {0, 60}},
-    lineColor = {128, 128, 128},
-    fillColor = {128, 128, 128},
-    fillPattern = FillPattern.Solid)}),
+    points = {{0, 60}, {60, 0}, {0, -60}, {0, 60}}, 
+    lineColor = {128, 128, 128}, 
+    fillColor = {128, 128, 128}, 
+    fillPattern = FillPattern.Solid)}), 
     Documentation(info = "<html>
 <p>
 <strong>DoubleArrow</strong> 模型定义了一个动态可视化的双箭头，位于定义的位置(参见下面的变量)。

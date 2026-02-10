@@ -1,5 +1,5 @@
 ﻿within Modelica.Magnetic.FundamentalWave.Types;
-record SalientInductance = Salient (redeclare SI.Inductance d,
+record SalientInductance = Salient (redeclare SI.Inductance d, 
       redeclare SI.Inductance q) "典型电感" 
   annotation (Documentation(info="<html>
 <p>表示电感的 d 轴和 q 轴相对于基波的类型.</p>

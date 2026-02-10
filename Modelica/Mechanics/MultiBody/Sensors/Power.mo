@@ -3,11 +3,11 @@ model Power "测量从frame_a流向frame_b的功率"
   extends Modelica.Icons.RoundSensor;
 
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialTwoFrames;
-  Modelica.Blocks.Interfaces.RealOutput power(quantity="Power",unit="W")
+  Modelica.Blocks.Interfaces.RealOutput power(quantity="Power",unit="W") 
     "作为输出信号的frame_a处的功率" 
     annotation (Placement(transformation(
-        origin={-80,-110},
-        extent={{10,-10},{-10,10}},
+        origin={-80,-110}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
 
 equation
@@ -16,22 +16,22 @@ equation
   frame_a.R = frame_b.R;
   zeros(3) = frame_a.f + frame_b.f;
   zeros(3) = frame_a.t + frame_b.t;
-  power = frame_a.f*Frames.resolve2(frame_a.R, der(frame_a.r_0))
+  power = frame_a.f*Frames.resolve2(frame_a.R, der(frame_a.r_0)) 
      + frame_a.t*Frames.angularVelocity2(frame_a.R);
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
             100}}), graphics={
-        Line(points={{-70,0},{-101,0}}),
-        Line(points={{70,0},{100,0}}),
-        Line(points={{-80,0},{-80,-100}}, color={0,0,127}),
+        Line(points={{-70,0},{-101,0}}), 
+        Line(points={{70,0},{100,0}}), 
+        Line(points={{-80,0},{-80,-100}}, color={0,0,127}), 
         Text(
-          extent={{-128,126},{126,68}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-128,126},{126,68}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Text(
-          extent={{-50,-14},{50,-54}},
-          textColor={64,64,64},
-          textString="W")}),
+          extent={{-50,-14},{50,-54}}, 
+          textColor={64,64,64}, 
+          textString="W")}), 
     Documentation(info="<html>
 <p>
 此组件提供了从frame_a流向frame_b的功率作为输出信号<strong>power</strong>。

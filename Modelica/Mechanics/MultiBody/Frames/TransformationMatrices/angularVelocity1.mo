@@ -1,12 +1,12 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function angularVelocity1
+function angularVelocity1 
   "返回在坐标系1中解析的方向对象及其导数的角速度"
 
   extends Modelica.Icons.Function;
-  input TransformationMatrices.Orientation T
+  input TransformationMatrices.Orientation T 
     "将坐标系1旋转到坐标系2的方向对象";
   input der_Orientation der_T "T的导数";
-  output SI.AngularVelocity w[3]
+  output SI.AngularVelocity w[3] 
     "相对于坐标系1解析的坐标系2的角速度";
 algorithm
   /* 坐标系2相对于坐标系1在坐标系1中解析的角速度w定义为：

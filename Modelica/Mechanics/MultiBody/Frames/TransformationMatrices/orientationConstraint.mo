@@ -1,13 +1,13 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
-function orientationConstraint
+function orientationConstraint 
   "返回方向约束的残差(应为零)"
   extends Modelica.Icons.Function;
-  input TransformationMatrices.Orientation T
+  input TransformationMatrices.Orientation T 
     "将坐标系1旋转到坐标系2的方向对象";
-  output Real residue[6]
+  output Real residue[6] 
     "方向对象元素之间约束的残差(应为零)";
 algorithm
-  residue := {T[:, 1]*T[:, 1] - 1, T[:, 2]*T[:, 2] - 1, T[:, 3]*T[:, 3] - 1,
+  residue := {T[:, 1]*T[:, 1] - 1, T[:, 2]*T[:, 2] - 1, T[:, 3]*T[:, 3] - 1, 
               T[:, 1]*T[:, 2], T[:, 1]*T[:, 3], T[:, 2]*T[:, 3]};
   annotation(Inline=true, Documentation(info="<html>
 <h4>语法</h4>

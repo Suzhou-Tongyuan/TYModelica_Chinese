@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.MultiBody.Examples.Loops;
-model Fourbar2
+model Fourbar2 
   "一个包含四根杆件的运动环模型(具有万向节和球面运动副；1个非线性方程)"
   extends Modelica.Icons.Example;
 
@@ -10,32 +10,32 @@ model Fourbar2
   inner Modelica.Mechanics.MultiBody.World world annotation (Placement(
         transformation(extent={{-100,-70},{-80,-50}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute j1(
-    n={1,0,0},
-    stateSelect=StateSelect.always,
-    phi(fixed=true),
-    useAxisFlange=false,
-    w(displayUnit="deg/s",
-      start=5.235987755983,
+    n={1,0,0}, 
+    stateSelect=StateSelect.always, 
+    phi(fixed=true), 
+    useAxisFlange=false, 
+    w(displayUnit="deg/s", 
+      start=5.235987755983, 
       fixed=true)) 
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
   Modelica.Mechanics.MultiBody.Joints.Prismatic j2(
-    n={1,0,0},
-    boxWidth=0.05,
+    n={1,0,0}, 
+    boxWidth=0.05, 
     s(fixed=true, start=-0.2)) 
     annotation (Placement(transformation(extent={{-20,-70},{0,-50}})));
   Modelica.Mechanics.MultiBody.Parts.BodyCylinder b1(r={0,0.5,0.1}, diameter=0.05) 
     annotation (Placement(transformation(
-        origin={-30,-10},
-        extent={{-10,-10},{10,10}},
+        origin={-30,-10}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Mechanics.MultiBody.Parts.BodyCylinder b2(r={0,0.2,0}, diameter=0.05) 
     annotation (Placement(transformation(
-        origin={50,-40},
-        extent={{-10,-10},{10,10}},
+        origin={50,-40}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Mechanics.MultiBody.Joints.UniversalSpherical universalSpherical(
-    n1_a={0,1,0},
-    computeRodLength=true,
+    n1_a={0,1,0}, 
+    computeRodLength=true, 
     rRod_ia={-1,0.3,0.1}) annotation (Placement(transformation(extent={{20,30},{0,50}})));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation b3(r={1.2,0,0}, animation=false) 
     annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
@@ -48,42 +48,42 @@ equation
   j1_w = j1.w;
   j2_v = j2.v;
   connect(j2.frame_b, b2.frame_a) annotation (Line(
-      points={{0,-60},{50,-60},{50,-50}},
-      color={95,95,95},
+      points={{0,-60},{50,-60},{50,-50}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(j1.frame_b, b1.frame_a) annotation (Line(
-      points={{-40,-30},{-30,-30},{-30,-20}},
-      color={95,95,95},
+      points={{-40,-30},{-30,-30},{-30,-20}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(j1.frame_a, world.frame_b) annotation (Line(
-      points={{-60,-30},{-70,-30},{-70,-60},{-80,-60}},
-      color={95,95,95},
+      points={{-60,-30},{-70,-30},{-70,-60},{-80,-60}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(b1.frame_b, universalSpherical.frame_b) annotation (Line(
-      points={{-30,0},{-30,40},{0,40}},
-      color={95,95,95},
+      points={{-30,0},{-30,40},{0,40}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(universalSpherical.frame_a, b2.frame_b) 
     annotation (Line(
-      points={{20,40},{50,40},{50,-30}},
-      color={95,95,95},
+      points={{20,40},{50,40},{50,-30}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(b3.frame_a, world.frame_b) 
     annotation (Line(
-      points={{-60,-60},{-80,-60}},
-      color={95,95,95},
+      points={{-60,-60},{-80,-60}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(b3.frame_b, j2.frame_a) 
     annotation (Line(
-      points={{-40,-60},{-20,-60}},
-      color={95,95,95},
+      points={{-40,-60},{-20,-60}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(fixedFrame.frame_a, universalSpherical.frame_ia) annotation (Line(
-      points={{20,70},{14,70},{14,50}},
-      color={95,95,95},
+      points={{20,70},{14,70},{14,50}}, 
+      color={95,95,95}, 
       thickness=0.5));
   annotation (
-    experiment(StopTime=5),
+    experiment(StopTime=5), 
     Documentation(info="<html><p>
 这是“四连杆”机构的第二个版本，请参见图：</p>
 <p>

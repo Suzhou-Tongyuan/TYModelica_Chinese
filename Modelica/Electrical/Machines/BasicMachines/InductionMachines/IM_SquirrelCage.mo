@@ -1,56 +1,56 @@
 ﻿within Modelica.Electrical.Machines.BasicMachines.InductionMachines;
-model IM_SquirrelCage
+model IM_SquirrelCage 
   "带鼠笼型转子的感应电机"
   extends Machines.Interfaces.PartialBasicInductionMachine(
-    final idq_ss = airGap.i_ss,
-    final idq_sr(stateSelect = stateSelect_sr) = airGap.i_sr,
-    final idq_rs = airGap.i_rs,
+    final idq_ss = airGap.i_ss, 
+    final idq_sr(stateSelect = stateSelect_sr) = airGap.i_sr, 
+    final idq_rs = airGap.i_rs, 
     final idq_rr(stateSelect = stateSelect_rr) = airGap.i_rr, redeclare final Machines.Thermal.InductionMachines.ThermalAmbientIMC 
     thermalAmbient(final Tr = TrOperational), redeclare final Machines.Interfaces.InductionMachines.ThermalPortIMC 
     thermalPort, redeclare final Machines.Interfaces.InductionMachines.ThermalPortIMC 
     internalThermalPort, redeclare final Machines.Interfaces.InductionMachines.PowerBalanceIMC 
     powerBalance(final lossPowerRotorWinding = squirrelCageR.LossPower, final
-    lossPowerRotorCore = 0),
+    lossPowerRotorCore = 0), 
     statorCore(final w = statorCoreParameters.wRef));
-  output SI.Current ir[2] = squirrelCageR.i
+  output SI.Current ir[2] = squirrelCageR.i 
     "转子笼电流";
   Machines.BasicMachines.Components.AirGapS airGap(
-    final p = p,
-    final Lm = Lm,
-    final m = m) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}},
+    final p = p, 
+    final Lm = Lm, 
+    final m = m) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, 
     rotation = 270)));
   parameter StateSelect stateSelect_ss = StateSelect.prefer;
   parameter StateSelect stateSelect_sr = StateSelect.prefer;
   parameter StateSelect stateSelect_rs = StateSelect.prefer;
   parameter StateSelect stateSelect_rr = StateSelect.prefer;
-  parameter SI.Inductance Lm(start = 3 * sqrt(1 - 0.0667) / (2 * pi
+  parameter SI.Inductance Lm(start = 3 * sqrt(1 - 0.0667) / (2 * pi 
     * fsNominal)) "每相定子主磁场电感" 
     annotation(Dialog(tab = "额定电阻和电感"));
-  parameter SI.Inductance Lrsigma(start = 3 * (1 - sqrt(1 -
-    0.0667)) / (2 * pi * fsNominal))
+  parameter SI.Inductance Lrsigma(start = 3 * (1 - sqrt(1 - 
+    0.0667)) / (2 * pi * fsNominal)) 
     "每相转子杂散电感(等效三相绕组)" 
     annotation(Dialog(tab = "额定电阻和电感"));
-  parameter SI.Resistance Rr(start = 0.04)
+  parameter SI.Resistance Rr(start = 0.04) 
     "每相转子电阻(等效三相绕组)，在 TRef 时" 
     annotation(Dialog(tab = "额定电阻和电感"));
-  parameter SI.Temperature TrRef(start = 293.15)
+  parameter SI.Temperature TrRef(start = 293.15) 
     "转子电阻的参考温度" 
     annotation(Dialog(tab = "额定电阻和电感"));
-  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20r(start = 0)
+  parameter Machines.Thermal.LinearTemperatureCoefficient20 alpha20r(start = 0) 
     "20 摄氏度下转子电阻的温度系数" 
     annotation(Dialog(tab = "额定电阻和电感"));
-  parameter SI.Temperature TrOperational(start = 293.15)
+  parameter SI.Temperature TrOperational(start = 293.15) 
     "转子电阻的操作温度" annotation(Dialog(
     group = "操作温度", enable = not useThermalPort));
   Machines.BasicMachines.Components.SquirrelCage squirrelCageR(
-    final Lrsigma = Lrsigma,
-    final Rr = Rr,
-    final useHeatPort = true,
-    final T_ref = TrRef,
+    final Lrsigma = Lrsigma, 
+    final Rr = Rr, 
+    final useHeatPort = true, 
+    final T_ref = TrRef, 
     final alpha = Machines.Thermal.convertAlpha(alpha20r, TrRef)) annotation(
     Placement(transformation(
-    origin = {0, -40},
-    extent = {{-10, -10}, {10, 10}},
+    origin = {0, -40}, 
+    extent = {{-10, -10}, {10, 10}}, 
     rotation = 270)));
 equation
   connect(airGap.spacePhasor_r, squirrelCageR.spacePhasor_r) 

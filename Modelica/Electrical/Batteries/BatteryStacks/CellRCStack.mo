@@ -1,13 +1,13 @@
 ﻿within Modelica.Electrical.Batteries.BatteryStacks;
-model CellRCStack
+model CellRCStack 
   "电池，其开路电压取决于电荷状态、自放电、内阻和一系列RC元件"
-  extends Modelica.Electrical.Batteries.BaseClasses.BaseCellStack(r0(final R=Ns*cellData.R0/Np),
+  extends Modelica.Electrical.Batteries.BaseClasses.BaseCellStack(r0(final R=Ns*cellData.R0/Np), 
     redeclare Modelica.Electrical.Batteries.ParameterRecords.TransientData.CellData cellData);
   extends Modelica.Electrical.Batteries.Icons.TransientModel;
   Modelica.Electrical.Analog.Basic.Resistor resistor[cellData.nRC](
-    final R=Ns*cellData.rcData.R/Np,
-    final T_ref=cellData.rcData.T_ref,
-    final alpha=cellData.rcData.alpha,
+    final R=Ns*cellData.rcData.R/Np, 
+    final T_ref=cellData.rcData.T_ref, 
+    final alpha=cellData.rcData.alpha, 
     each final useHeatPort=true) 
     annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
   Modelica.Electrical.Analog.Basic.Capacitor capacitor[cellData.nRC](each v(

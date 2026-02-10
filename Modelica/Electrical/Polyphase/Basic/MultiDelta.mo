@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Polyphase.Basic;
-model MultiDelta
+model MultiDelta 
   "由多个基础系统组成的多相系统的三角形连接"
   import Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems;
   parameter Integer m(final min=2) = 3 "相数" annotation(Evaluate=true);
@@ -21,25 +21,25 @@ equation
       connect(plug_n.pin[(k - 1)*mBasic + j], plug_p.pin[(k - 2)*mBasic + j + kP]);
     end for;
   end for;
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100, 
             -100},{100,100}}), graphics={
-        Line(points={{-90,0},{-46,0}}, color={0,0,255}),
+        Line(points={{-90,0},{-46,0}}, color={0,0,255}), 
         Line(
-          points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}},
-          thickness=0.5,
-          color={0,0,255}),
-        Line(points={{80,0},{90,0}}, color={0,0,255}),
+          points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}}, 
+          thickness=0.5, 
+          color={0,0,255}), 
+        Line(points={{80,0},{90,0}}, color={0,0,255}), 
         Line(
-          points={{-36,74},{-36,-64},{83,6},{-36,74},{-36,73}},
-          thickness=0.5,
-          color={0,0,255}),
+          points={{-36,74},{-36,-64},{83,6},{-36,74},{-36,73}}, 
+          thickness=0.5, 
+          color={0,0,255}), 
         Text(
-          extent={{-150,-110},{150,-70}},
-          textString="m=%m"),
+          extent={{-150,-110},{150,-70}}, 
+          textString="m=%m"), 
         Text(
-          extent={{-150,70},{150,110}},
-          textString="%name",
-          textColor={0,0,255})}),
+          extent={{-150,70},{150,110}}, 
+          textString="%name", 
+          textColor={0,0,255})}), 
                               Documentation(info="<html>
 <p>
 多个基础系统组成的多相电路的三角(多边形)连接(参见<a href=\"modelica://Modelica.Magnetic.FundamentalWave.UsersGuide.Polyphase\">多相指南</a>)。

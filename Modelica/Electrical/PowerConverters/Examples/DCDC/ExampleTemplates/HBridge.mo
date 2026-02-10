@@ -4,10 +4,10 @@ partial model HBridge "H桥DC/DC转换器"
   parameter SI.Frequency f=1000 "开关频率";
   PowerConverters.DCDC.HBridge hbridge(useHeatPort=false) 
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-  Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
+  Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V= 
         100) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,0})));
   PowerConverters.DCDC.Control.SignalPWM signalPWM(constantDutyCycle=0.6, f=f) 
     annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
@@ -17,17 +17,17 @@ partial model HBridge "H桥DC/DC转换器"
     annotation (Placement(transformation(extent={{0,-16},{-20,4}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=270,
+        extent={{-10,10},{10,-10}}, 
+        rotation=270, 
         origin={60,10})));
   Modelica.Blocks.Math.Mean meanCurrent(f=f, x0=0) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-10,-40})));
   Modelica.Blocks.Math.Mean meanVoltage(f=f, x0=0) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={90,10})));
 equation
   connect(hbridge.fire_p, signalPWM.fire) annotation (Line(

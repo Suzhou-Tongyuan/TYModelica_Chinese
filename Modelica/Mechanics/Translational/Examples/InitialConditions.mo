@@ -8,36 +8,36 @@ model InitialConditions "设置初始条件"
   Translational.Components.Spring s2(s_rel0=2, c=1e3) annotation (Placement(
         transformation(extent={{-60,30},{-40,50}})));
   Translational.Components.Mass m3(
-    L=3,
-    s(start=4.5, fixed=true),
-    v(fixed=true),
+    L=3, 
+    s(start=4.5, fixed=true), 
+    v(fixed=true), 
     m=1) annotation (Placement(transformation(extent={{-20,30},{0,50}})));
   Translational.Components.SpringDamper sd2(
-    s_rel0=4,
-    c=111,
+    s_rel0=4, 
+    c=111, 
     d=1) annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Translational.Components.Mass m4(
-    L=5,
-    s(start=12.5, fixed=true),
-    v(fixed=true),
+    L=5, 
+    s(start=12.5, fixed=true), 
+    v(fixed=true), 
     m=1) annotation (Placement(transformation(extent={{60,30},{80,50}})));
 
   Translational.Components.Fixed fixed1(s0=-1) annotation (Placement(
         transformation(extent={{-100,-70},{-80,-50}})));
   Translational.Components.Spring s1(
-    s_rel0=1,
-    c=1e3,
+    s_rel0=1, 
+    c=1e3, 
     s_rel(start=0.5, fixed=true)) annotation (Placement(transformation(
           extent={{-60,-70},{-40,-50}})));
   Translational.Components.Mass m1(
-    L=1,
-    v(fixed=true),
+    L=1, 
+    v(fixed=true), 
     m=1) annotation (Placement(transformation(extent={{-20,-70},{0,-50}})));
   Translational.Components.SpringDamper sd1(
-    s_rel0=1,
-    c=111,
-    s_rel(start=1, fixed=true),
-    v_rel(fixed=true),
+    s_rel0=1, 
+    c=111, 
+    s_rel(start=1, fixed=true), 
+    v_rel(fixed=true), 
     d=1) annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
   Translational.Components.Mass m2(L=2, m=1) annotation (Placement(
         transformation(extent={{60,-70},{80,-50}})));
@@ -93,165 +93,165 @@ equation
 <blockquote>
 <img src=\"modelica://Modelica/Resources/Images/Mechanics/Translational/Examples/InitialConditions.png\" alt=\"初始条件\">
 </blockquote>
-</html>"),
-    experiment(StopTime=5.0, Interval=0.001),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+</html>"), 
+    experiment(StopTime=5.0, Interval=0.001), 
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
             {100,100}}), graphics={
-        Line(points={{-80,58},{-80,46}}, color={0,0,255}),
+        Line(points={{-80,58},{-80,46}}, color={0,0,255}), 
         Text(
-          extent={{-10,5},{10,-5}},
-          textColor={255,0,0},
-          textString="ref= 0 m",
-          origin={-96,73},
-          rotation=90),
+          extent={{-10,5},{10,-5}}, 
+          textColor={255,0,0}, 
+          textString="ref= 0 m", 
+          origin={-96,73}, 
+          rotation=90), 
         Line(
-          points={{-10,76},{-10,50}},
-          color={0,0,255}),
+          points={{-10,76},{-10,50}}, 
+          color={0,0,255}), 
         Text(
-          extent={{-40,82},{-20,72}},
-          textColor={255,0,0},
-          textString=" 4.5 m "),
+          extent={{-40,82},{-20,72}}, 
+          textColor={255,0,0}, 
+          textString=" 4.5 m "), 
         Line(
-          points={{70,90},{70,50}},
-          color={0,0,255}),
+          points={{70,90},{70,50}}, 
+          color={0,0,255}), 
         Text(
-          extent={{40,98},{60,88}},
-          textColor={255,0,0},
-          textString="12.5 m"),
+          extent={{40,98},{60,88}}, 
+          textColor={255,0,0}, 
+          textString="12.5 m"), 
         Text(
-          extent={{-60,16},{-40,6}},
-          textColor={0,0,255},
-          textString="   2 m  "),
+          extent={{-60,16},{-40,6}}, 
+          textColor={0,0,255}, 
+          textString="   2 m  "), 
         Text(
-          extent={{20,16},{40,6}},
-          textColor={0,0,255},
-          textString="   4 m  "),
+          extent={{20,16},{40,6}}, 
+          textColor={0,0,255}, 
+          textString="   4 m  "), 
         Text(
-          extent={{-20,16},{0,6}},
-          textString="   3 m  "),
+          extent={{-20,16},{0,6}}, 
+          textString="   3 m  "), 
         Text(
-          extent={{60,16},{80,6}},
-          textString="   5 m  "),
+          extent={{60,16},{80,6}}, 
+          textString="   5 m  "), 
         Text(
-          extent={{-60,-84},{-40,-94}},
-          textColor={255,0,0},
+          extent={{-60,-84},{-40,-94}}, 
+          textColor={255,0,0}, 
           textString=" 0.5 m
-（1 m） "),
+（1 m） "), 
        Text(
-          extent={{20,-84},{40,-94}},
-          textColor={255,0,0},
+          extent={{20,-84},{40,-94}}, 
+          textColor={255,0,0}, 
           textString=" 1 m
-（1 m） "),
+（1 m） "), 
        Text(
-          extent={{-20,-84},{0,-94}},
-          textString="   1 m  "),
+          extent={{-20,-84},{0,-94}}, 
+          textString="   1 m  "), 
         Text(
-          extent={{60,-84},{80,-94}},
-          textString="   2 m  "),
+          extent={{60,-84},{80,-94}}, 
+          textString="   2 m  "), 
         Line(
-          points={{-90,-32},{-90,-56}},
-          color={0,0,255}),
+          points={{-90,-32},{-90,-56}}, 
+          color={0,0,255}), 
         Text(
-          extent={{-10,5},{10,-5}},
-          textColor={255,0,0},
-          origin={-96,-35},
-          rotation=90,
-          textString="ref= -1 m"),
+          extent={{-10,5},{10,-5}}, 
+          textColor={255,0,0}, 
+          origin={-96,-35}, 
+          rotation=90, 
+          textString="ref= -1 m"), 
         Line(
-          points={{-10,-32},{-10,-50}},
-          color={0,0,255}),
+          points={{-10,-32},{-10,-50}}, 
+          color={0,0,255}), 
         Text(
-          extent={{-20,-22},{0,-32}},
-          textColor={0,0,255},
-          textString="   0 m  "),
+          extent={{-20,-22},{0,-32}}, 
+          textColor={0,0,255}, 
+          textString="   0 m  "), 
         Line(
-          points={{70,-32},{70,-50}},
-          color={0,0,255}),
+          points={{70,-32},{70,-50}}, 
+          color={0,0,255}), 
         Text(
-          extent={{20,-24},{40,-34}},
-          textColor={238,46,47},
-          textString=" 2.5 m "),
+          extent={{20,-24},{40,-34}}, 
+          textColor={238,46,47}, 
+          textString=" 2.5 m "), 
         Line(
-          points={{-90,54},{-80,54}},
-          color={0,0,255},
-          arrow={Arrow.None,Arrow.Open}),
+          points={{-90,54},{-80,54}}, 
+          color={0,0,255}, 
+          arrow={Arrow.None,Arrow.Open}), 
         Line(
-          points={{-90,70},{-10,70}},
-          color={0,0,255},
-          arrow={Arrow.None,Arrow.Open}),
+          points={{-90,70},{-10,70}}, 
+          color={0,0,255}, 
+          arrow={Arrow.None,Arrow.Open}), 
         Line(
-          points={{-90,86},{70,86}},
-          color={0,0,255},
-          arrow={Arrow.None,Arrow.Open}),
-        Line(points={{-60,30},{-60,16}}, color={0,0,255}),
-        Line(points={{-40,30},{-40,16}}, color={0,0,255}),
-        Line(points={{-20,30},{-20,16}}, color={0,0,255}),
-        Line(points={{0,30},{0,16}}, color={0,0,255}),
-        Line(points={{20,30},{20,16}}, color={0,0,255}),
-        Line(points={{40,30},{40,16}}, color={0,0,255}),
-        Line(points={{60,30},{60,16}}, color={0,0,255}),
-        Line(points={{80,30},{80,16}}, color={0,0,255}),
+          points={{-90,86},{70,86}}, 
+          color={0,0,255}, 
+          arrow={Arrow.None,Arrow.Open}), 
+        Line(points={{-60,30},{-60,16}}, color={0,0,255}), 
+        Line(points={{-40,30},{-40,16}}, color={0,0,255}), 
+        Line(points={{-20,30},{-20,16}}, color={0,0,255}), 
+        Line(points={{0,30},{0,16}}, color={0,0,255}), 
+        Line(points={{20,30},{20,16}}, color={0,0,255}), 
+        Line(points={{40,30},{40,16}}, color={0,0,255}), 
+        Line(points={{60,30},{60,16}}, color={0,0,255}), 
+        Line(points={{80,30},{80,16}}, color={0,0,255}), 
         Line(
-          points={{-60,20},{-40,20}},
-          color={0,0,255},
-          arrow={Arrow.Open,Arrow.Open}),
+          points={{-60,20},{-40,20}}, 
+          color={0,0,255}, 
+          arrow={Arrow.Open,Arrow.Open}), 
         Line(
-          points={{-20,20},{0,20}},
-          color={0,0,255},
-          arrow={Arrow.Open,Arrow.Open}),
+          points={{-20,20},{0,20}}, 
+          color={0,0,255}, 
+          arrow={Arrow.Open,Arrow.Open}), 
         Line(
-          points={{20,20},{40,20}},
-          color={0,0,255},
-          arrow={Arrow.Open,Arrow.Open}),
+          points={{20,20},{40,20}}, 
+          color={0,0,255}, 
+          arrow={Arrow.Open,Arrow.Open}), 
         Line(
-          points={{60,20},{80,20}},
-          color={0,0,255},
-          arrow={Arrow.Open,Arrow.Open}),
+          points={{60,20},{80,20}}, 
+          color={0,0,255}, 
+          arrow={Arrow.Open,Arrow.Open}), 
         Line(
-          points={{-90,90},{-90,46}},
-          color={0,0,255}),
+          points={{-90,90},{-90,46}}, 
+          color={0,0,255}), 
         Text(
-          extent={{-90,66},{-70,56}},
-          textColor={255,0,0},
-          textString="1 m "),
+          extent={{-90,66},{-70,56}}, 
+          textColor={255,0,0}, 
+          textString="1 m "), 
         Line(
-          points={{-60,-70},{-60,-84}},
-          color={0,0,255}),
+          points={{-60,-70},{-60,-84}}, 
+          color={0,0,255}), 
         Line(
-          points={{-40,-70},{-40,-84}},
-          color={0,0,255}),
+          points={{-40,-70},{-40,-84}}, 
+          color={0,0,255}), 
         Line(
-          points={{-20,-70},{-20,-84}},
-          color={0,0,255}),
+          points={{-20,-70},{-20,-84}}, 
+          color={0,0,255}), 
         Line(
-          points={{0,-70},{0,-84}},
-          color={0,0,255}),
+          points={{0,-70},{0,-84}}, 
+          color={0,0,255}), 
         Line(
-          points={{20,-70},{20,-84}},
-          color={0,0,255}),
+          points={{20,-70},{20,-84}}, 
+          color={0,0,255}), 
         Line(
-          points={{40,-70},{40,-84}},
-          color={0,0,255}),
+          points={{40,-70},{40,-84}}, 
+          color={0,0,255}), 
         Line(
-          points={{60,-70},{60,-84}},
-          color={0,0,255}),
+          points={{60,-70},{60,-84}}, 
+          color={0,0,255}), 
         Line(
-          points={{80,-70},{80,-84}},
-          color={0,0,255}),
+          points={{80,-70},{80,-84}}, 
+          color={0,0,255}), 
         Line(
-          points={{-60,-80},{-40,-80}},
-          color={0,0,255},
-          arrow={Arrow.Open,Arrow.Open}),
+          points={{-60,-80},{-40,-80}}, 
+          color={0,0,255}, 
+          arrow={Arrow.Open,Arrow.Open}), 
         Line(
-          points={{-90,-36},{-10,-36}},
-          color={0,0,255},
-          arrow={Arrow.Open,Arrow.Open}),
+          points={{-90,-36},{-10,-36}}, 
+          color={0,0,255}, 
+          arrow={Arrow.Open,Arrow.Open}), 
         Line(
-          points={{-10,-36},{70,-36}},
-          color={0,0,255},
-          arrow={Arrow.Open,Arrow.Open}),
+          points={{-10,-36},{70,-36}}, 
+          color={0,0,255}, 
+          arrow={Arrow.Open,Arrow.Open}), 
         Text(
-          extent={{-60,-24},{-40,-34}},
-          textColor={238,46,47},
+          extent={{-60,-24},{-40,-34}}, 
+          textColor={238,46,47}, 
           textString="1 m ")}));
 end InitialConditions;

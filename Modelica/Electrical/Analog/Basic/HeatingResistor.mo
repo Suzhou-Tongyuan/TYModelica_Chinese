@@ -1,55 +1,55 @@
 ﻿model HeatingResistor "热电阻"
-  parameter SI.Resistance R_ref(start = 1)
+  parameter SI.Resistance R_ref(start = 1) 
     "在温度T_ref时的电阻";
   parameter SI.Temperature T_ref = 300.15 "参考温度";
-  parameter SI.LinearTemperatureCoefficient alpha = 0
+  parameter SI.LinearTemperatureCoefficient alpha = 0 
     "电阻的温度系数(R=R_ref*(1+alpha*(heatPort.T-T_ref))";
   extends Modelica.Electrical.Analog.Interfaces.OnePort;
-  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(T = T_ref,
+  extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(T = T_ref, 
     useHeatPort = true);
-  SI.Resistance R
+  SI.Resistance R 
     "电阻=R_ref*(1+alpha*(T_heatPort-T_ref))";
 equation
-  assert((1 + alpha * (T_heatPort - T_ref)) >= Modelica.Constants.eps,
+  assert((1 + alpha * (T_heatPort - T_ref)) >= Modelica.Constants.eps, 
     "温度超出模型范围!");
   R = R_ref * (1 + alpha * (T_heatPort - T_ref));
   v = R * i;
   LossPower = v * i;
-  annotation(defaultComponentName = "resistor",
+  annotation(defaultComponentName = "resistor", 
     Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {
     100, 100}}), graphics = {Line(points = {{-110, 20}, {-85, 20}}, color = {
     160, 160, 164}), Polygon(
-    points = {{-95, 23}, {-85, 20}, {-95, 17}, {-95, 23}},
-    lineColor = {160, 160, 164},
-    fillColor = {160, 160, 164},
-    fillPattern = FillPattern.Solid), Line(points = {{90, 20}, {115, 20}},
-    color = {160, 160, 164}), Line(points = {{-125, 0}, {-115, 0}}, color = {160, 160, 164}),
-    Line(points = {{-120, -5}, {-120, 5}}, color = {160, 160, 164}),
+    points = {{-95, 23}, {-85, 20}, {-95, 17}, {-95, 23}}, 
+    lineColor = {160, 160, 164}, 
+    fillColor = {160, 160, 164}, 
+    fillPattern = FillPattern.Solid), Line(points = {{90, 20}, {115, 20}}, 
+    color = {160, 160, 164}), Line(points = {{-125, 0}, {-115, 0}}, color = {160, 160, 164}), 
+    Line(points = {{-120, -5}, {-120, 5}}, color = {160, 160, 164}), 
     Text(
-    extent = {{-110, 25}, {-90, 45}},
-    lineColor = {160, 160, 164},
+    extent = {{-110, 25}, {-90, 45}}, 
+    lineColor = {160, 160, 164}, 
     textString = "i"), Polygon(
-    points = {{105, 23}, {115, 20}, {105, 17}, {105, 23}},
-    lineColor = {160, 160, 164},
-    fillColor = {160, 160, 164},
-    fillPattern = FillPattern.Solid), Line(points = {{115, 0}, {125, 0}},
+    points = {{105, 23}, {115, 20}, {105, 17}, {105, 23}}, 
+    lineColor = {160, 160, 164}, 
+    fillColor = {160, 160, 164}, 
+    fillPattern = FillPattern.Solid), Line(points = {{115, 0}, {125, 0}}, 
     color = {160, 160, 164}), Text(
-    extent = {{90, 45}, {110, 25}},
-    lineColor = {160, 160, 164},
-    textString = "i")}),
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
+    extent = {{90, 45}, {110, 25}}, 
+    lineColor = {160, 160, 164}, 
+    textString = "i")}), 
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
     100}}), graphics = {
-    Line(points = {{-90, 0}, {-70, 0}}, color = {0, 0, 255}),
-    Line(points = {{70, 0}, {90, 0}}, color = {0, 0, 255}),
+    Line(points = {{-90, 0}, {-70, 0}}, color = {0, 0, 255}), 
+    Line(points = {{70, 0}, {90, 0}}, color = {0, 0, 255}), 
     Rectangle(
-    extent = {{-70, 30}, {70, -30}},
-    lineColor = {0, 0, 255},
-    fillColor = {255, 255, 255},
-    fillPattern = FillPattern.Solid),
+    extent = {{-70, 30}, {70, -30}}, 
+    lineColor = {0, 0, 255}, 
+    fillColor = {255, 255, 255}, 
+    fillPattern = FillPattern.Solid), 
     Text(
-    extent = {{-150, 90}, {150, 50}},
-    textString = "%name",
-    lineColor = {0, 0, 255})}),
+    extent = {{-150, 90}, {150, 50}}, 
+    textString = "%name", 
+    lineColor = {0, 0, 255})}), 
     Documentation(info = "<html>
 <p>这是一个电阻器的模型，其中产生的热量通过连接器<strong>heatPort</strong>散发到环境中，并且电阻R的阻值随温度变化，变化规律遵循以下方程式：</p>
 <pre>    R=R_ref*(1+alpha*(heatPort.T-T_ref))</pre>

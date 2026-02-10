@@ -6,7 +6,7 @@ package Sensors "多相电位、电压和电流传感器"
 <p>
 此库含有多相电位、电压和电流传感器。
 </p>
-</html>",
+</html>", 
     revisions = "<html>
 <dl>
   <dt><strong>主要作者：</strong></dt>

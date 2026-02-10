@@ -1,19 +1,19 @@
-﻿within Modelica.Magnetic.FluxTubes.BaseClasses;
+within Modelica.Magnetic.FluxTubes.BaseClasses;
 partial model FixedShape "模拟过程中形状固定的磁通管的基类；线性或非线性材料特性"
 
   extends Interfaces.TwoPort;
 
   parameter Boolean nonLinearPermeability=true
     "= true，如果使用非线性磁导率，否则使用恒定磁导率" 
-    annotation (Dialog(group="Material"), Evaluate=true);
+    annotation (Dialog(group="材料"), Evaluate=true);
   parameter SI.RelativePermeability mu_rConst=1
     "恒定相对渗透率；当nonLinearPermeability = false时使用" 
-    annotation (Dialog(group="Material", enable=not nonLinearPermeability));
+    annotation (Dialog(group="材料", enable=not nonLinearPermeability));
 
   parameter FluxTubes.Material.SoftMagnetic.BaseData material=
       Material.SoftMagnetic.BaseData()
     "铁磁材料特性；当nonLinearPermeability = true时使用" 
-    annotation (choicesAllMatching=true, Dialog(group="Material", enable=
+    annotation (choicesAllMatching=true, Dialog(group="材料", enable=
           nonLinearPermeability));
 
   SI.Reluctance R_m "磁阻";

@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.Batteries.BaseClasses;
-partial model BaseCellStack
+partial model BaseCellStack 
   "依赖于开路电压、自放电和内阻的电池模型"
   extends Modelica.Electrical.Batteries.Icons.BatteryIcon(final displaySOC=SOC);
   parameter Integer Ns(final min=1)=1 "串联电池数";
@@ -16,34 +16,34 @@ partial model BaseCellStack
   Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor 
     annotation (Placement(transformation(extent={{-90,10},{-70,-10}})));
   Blocks.Continuous.LimIntegrator limIntegrator(
-    final k=1/(Np*cellData.Qnom),
-    outMax=1 - SOCtolerance,
-    outMin=SOCtolerance,
+    final k=1/(Np*cellData.Qnom), 
+    outMax=1 - SOCtolerance, 
+    outMin=SOCtolerance, 
     final initType=Modelica.Blocks.Types.Init.NoInit) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
+        extent={{-10,-10},{10,10}}, 
+        rotation=90, 
         origin={-80,30})));
   Modelica.Blocks.Tables.CombiTable1Ds ocv_soc(
-    final table=cellData.OCV_SOC_internal,
-    final smoothness=cellData.smoothness,
+    final table=cellData.OCV_SOC_internal, 
+    final smoothness=cellData.smoothness, 
     extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint) 
     annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
   Modelica.Blocks.Math.Gain gainV(final k=Ns*cellData.OCVmax) annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-40,30})));
   Modelica.Electrical.Analog.Sources.SignalVoltage ocv 
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   Modelica.Electrical.Analog.Basic.Conductor selfDischarge(
-    final G=Np*cellData.Idis/(Ns*cellData.OCVmax),
-    T_ref=293.15,
+    final G=Np*cellData.Idis/(Ns*cellData.OCVmax), 
+    T_ref=293.15, 
     final useHeatPort=true) 
     annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
   Modelica.Electrical.Analog.Basic.Resistor r0(
-    final T_ref=cellData.T_ref,
-    final alpha=cellData.alpha,
+    final T_ref=cellData.T_ref, 
+    final alpha=cellData.alpha, 
     final useHeatPort=true) 
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   extends Modelica.Electrical.Analog.Interfaces.PartialConditionalHeatPort;
@@ -59,7 +59,7 @@ equation
   connect(gainV.y, ocv.v) 
     annotation (Line(points={{-40,19},{-40,12}}, color={0,0,127}));
   connect(ocv_soc.y[1], gainV.u) 
-    annotation (Line(points={{-49,50},{-40,50},{-40,42}},
+    annotation (Line(points={{-49,50},{-40,50},{-40,42}}, 
                                                       color={0,0,127}));
   connect(limIntegrator.y, ocv_soc.u) 
     annotation (Line(points={{-80,41},{-80,50},{-72,50}}, color={0,0,127}));
@@ -71,11 +71,11 @@ equation
     annotation (Line(points={{-100,0},{-90,0}}, color={0,0,255}));
   connect(ocv.n, r0.p) 
     annotation (Line(points={{-30,0},{-10,0}}, color={0,0,255}));
-  connect(currentSensor.p, selfDischarge.p) annotation (Line(points={{-90,0},{-90,
+  connect(currentSensor.p, selfDischarge.p) annotation (Line(points={{-90,0},{-90, 
           -20},{-70,-20}},           color={0,0,255}));
   connect(ocv.n, selfDischarge.n) 
     annotation (Line(points={{-30,0},{-30,-20},{-50,-20}}, color={0,0,255}));
-  connect(selfDischarge.heatPort, internalHeatPort) annotation (Line(points={{-60,-30},
+  connect(selfDischarge.heatPort, internalHeatPort) annotation (Line(points={{-60,-30}, 
           {-60,-40},{0,-40},{0,-80}},      color={191,0,0}));
   connect(internalHeatPort, r0.heatPort) annotation (Line(points={{0,-80},{
           0,-10}},              color={191,0,0}));

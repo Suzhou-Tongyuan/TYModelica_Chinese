@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.Examples.Systems;
-model ControlledMixingUnit
+model ControlledMixingUnit 
   "一个简单的混合单元示例，其中使用(离散化的)非线性逆被控对象模型作为前馈控制器"
   extends Modelica.Icons.Example;
 
@@ -26,18 +26,18 @@ model ControlledMixingUnit
   final parameter Real b = b_inv * pro "设备模型的过程参数（参见帮助中的参考资料）";
   final parameter Real k0 = k0_inv * pro "设备模型的过程参数（参见帮助中的参考资料）";
   Clocked.Examples.Systems.Utilities.ComponentsMixingUnit.MixingUnit invMixingUnit(
-    c0 = c0,
-    T0 = T0,
-    a1 = a1_inv,
-    a21 = a21_inv,
-    a22 = a22_inv,
-    b = b_inv,
-    k0 = k0_inv,
-    eps = eps,
-    c(start = c_start, fixed = true),
-    T(start = T_start,
-    fixed = true,
-    stateSelect = StateSelect.always),
+    c0 = c0, 
+    T0 = T0, 
+    a1 = a1_inv, 
+    a21 = a21_inv, 
+    a22 = a22_inv, 
+    b = b_inv, 
+    k0 = k0_inv, 
+    eps = eps, 
+    c(start = c_start, fixed = true), 
+    T(start = T_start, 
+    fixed = true, 
+    stateSelect = StateSelect.always), 
     T_c(start = T_c_start)) 
     annotation(Placement(transformation(extent = {{-12, 14}, {-32, 34}})));
   Modelica.Blocks.Math.Add add 
@@ -45,26 +45,26 @@ model ControlledMixingUnit
   Modelica.Blocks.Math.InverseBlockConstraints inverseBlockConstraints 
     annotation(Placement(transformation(extent = {{-54, 8}, {-2, 40}})));
   Clocked.Examples.Systems.Utilities.ComponentsMixingUnit.MixingUnit mixingUnit(
-    c(start = c_start, fixed = true),
-    T(start = T_start, fixed = true),
-    c0 = c0,
-    T0 = T0,
-    a1 = a1,
-    a21 = a21,
-    a22 = a22,
-    b = b,
-    k0 = k0,
+    c(start = c_start, fixed = true), 
+    T(start = T_start, fixed = true), 
+    c0 = c0, 
+    T0 = T0, 
+    a1 = a1, 
+    a21 = a21, 
+    a22 = a22, 
+    b = b, 
+    k0 = k0, 
     eps = eps) 
     annotation(Placement(transformation(extent = {{88, -20}, {108, 0}})));
   Modelica.Blocks.Math.Feedback feedback 
-    annotation(Placement(transformation(origin={-14,-14},
+    annotation(Placement(transformation(origin={-14,-14}, 
 extent={{-10,-10},{10,10}})));
-  Modelica.Blocks.Math.Gain gain(k = 20) annotation(Placement(transformation(origin={14,-14},
+  Modelica.Blocks.Math.Gain gain(k = 20) annotation(Placement(transformation(origin={14,-14}, 
 extent={{-10,-10},{10,10}})));
 
   Utilities.ComponentsMixingUnit.CriticalDamping filter(
-    n = 3,
-    f = freq,
+    n = 3, 
+    f = freq, 
     x(start = {0.49, 0.49, 0.49}, fixed = {true, false, false})) 
     annotation(Placement(transformation(extent = {{-86, 14}, {-66, 34}})));
   Clocked.RealSignals.Sampler.Hold hold1(y_start = 0) 
@@ -72,71 +72,71 @@ extent={{-10,-10},{10,10}})));
   Clocked.RealSignals.Sampler.Sample sample1 
     annotation(Placement(transformation(extent = {{80, -40}, {68, -28}})));
   Clocked.ClockSignals.Clocks.PeriodicRealClock periodicClock1(
-    useSolver = true,
-    period = 1,
+    useSolver = true, 
+    period = 1, 
     solverMethod = "ExplicitEuler") 
     annotation(Placement(transformation(extent = {{-134, -26}, {-122, -14}})));
-  Modelica.Blocks.Sources.Step step(height = c_high_start - c_start, offset =
+  Modelica.Blocks.Sources.Step step(height = c_high_start - c_start, offset = 
     c_start) 
     annotation(Placement(transformation(extent = {{-136, 14}, {-116, 34}})));
   RealSignals.Sampler.SampleClocked sample2 
     annotation(Placement(transformation(extent = {{-108, 18}, {-96, 30}})));
 equation
-  connect(feedback.y, gain.u) annotation(Line(origin={0,0},
-points={{-5,-14},{2,-14}},
+  connect(feedback.y, gain.u) annotation(Line(origin={0,0}, 
+points={{-5,-14},{2,-14}}, 
 color={0,0,127}));
-  connect(gain.y, add.u2) annotation(Line(origin={0,0},
-points={{25,-14},{38.4,-14},{38.4,-14.8}},
+  connect(gain.y, add.u2) annotation(Line(origin={0,0}, 
+points={{25,-14},{38.4,-14},{38.4,-14.8}}, 
 color={0,0,127}));
   connect(inverseBlockConstraints.y2, invMixingUnit.T_c) annotation(Line(
-    points = {{-5.9, 24}, {-10, 24}},
+    points = {{-5.9, 24}, {-10, 24}}, 
     color = {0, 0, 127}));
   connect(invMixingUnit.c, inverseBlockConstraints.u2) annotation(Line(
-    points = {{-34, 30}, {-38, 30}, {-38, 24}, {-48.8, 24}},
+    points = {{-34, 30}, {-38, 30}, {-38, 24}, {-48.8, 24}}, 
     color = {0, 0, 127}));
-  connect(invMixingUnit.T, feedback.u1) annotation(Line(origin={0,0},
-points={{-34,18},{-46,18},{-46,-14},{-22,-14}},
+  connect(invMixingUnit.T, feedback.u1) annotation(Line(origin={0,0}, 
+points={{-34,18},{-46,18},{-46,-14},{-22,-14}}, 
 color={0,0,127}));
   connect(filter.y, inverseBlockConstraints.u1) annotation(Line(
-    points = {{-65, 24}, {-56.6, 24}},
+    points = {{-65, 24}, {-56.6, 24}}, 
     color = {0, 0, 127}));
   connect(hold1.y, mixingUnit.T_c) annotation(Line(
-    points = {{78.6, -10}, {86, -10}},
+    points = {{78.6, -10}, {86, -10}}, 
     color = {0, 0, 127}));
   connect(add.y, hold1.u) annotation(Line(
-    points = {{56.8, -10}, {64.8, -10}},
+    points = {{56.8, -10}, {64.8, -10}}, 
     color = {0, 0, 127}));
   connect(sample1.u, mixingUnit.T) annotation(Line(
-    points = {{81.2, -34}, {116, -34}, {116, -16}, {110, -16}},
+    points = {{81.2, -34}, {116, -34}, {116, -16}, {110, -16}}, 
     color = {0, 0, 127}));
-  connect(sample1.y, feedback.u2) annotation(Line(origin={0,0},
-points={{67.4,-34},{-14,-34},{-14,-22}},
+  connect(sample1.y, feedback.u2) annotation(Line(origin={0,0}, 
+points={{67.4,-34},{-14,-34},{-14,-22}}, 
 color={0,0,127}));
   connect(inverseBlockConstraints.y1, add.u1) annotation(Line(
-    points = {{-0.7, 24}, {30, 24}, {30, -5.2}, {38.4, -5.2}},
+    points = {{-0.7, 24}, {30, 24}, {30, -5.2}, {38.4, -5.2}}, 
     color = {0, 0, 127}));
   connect(sample2.u, step.y) annotation(Line(
-    points = {{-109.2, 24}, {-115, 24}},
+    points = {{-109.2, 24}, {-115, 24}}, 
     color = {0, 0, 127}));
   connect(filter.u, sample2.y) annotation(Line(
-    points = {{-88, 24}, {-95.4, 24}},
+    points = {{-88, 24}, {-95.4, 24}}, 
     color = {0, 0, 127}));
   connect(periodicClock1.y, sample2.clock) annotation(Line(
-    points = {{-121.4, -20}, {-102, -20}, {-102, 16.8}},
-    color = {175, 175, 175},
-    pattern = LinePattern.Dot,
+    points = {{-121.4, -20}, {-102, -20}, {-102, 16.8}}, 
+    color = {175, 175, 175}, 
+    pattern = LinePattern.Dot, 
     thickness = 0.5));
-  annotation(Diagram(coordinateSystem(extent={{-140,-100},{120,100}},
-grid={2,2}),graphics = {Rectangle(origin={-15,0},
-lineColor={255,0,0},
-extent={{-75,44},{75,-44}}), Text(origin={35,38},
-lineColor={255,0,0},
-fillColor={0,0,255},
-fillPattern=FillPattern.Solid,
-extent={{-23,4},{23,-4}},
-textString="控制器",
-textColor={255,0,0})}),
-    experiment(StopTime = 300),
+  annotation(Diagram(coordinateSystem(extent={{-140,-100},{120,100}}, 
+grid={2,2}),graphics = {Rectangle(origin={-15,0}, 
+lineColor={255,0,0}, 
+extent={{-75,44},{75,-44}}), Text(origin={35,38}, 
+lineColor={255,0,0}, 
+fillColor={0,0,255}, 
+fillPattern=FillPattern.Solid, 
+extent={{-23,4},{23,-4}}, 
+textString="控制器", 
+textColor={255,0,0})}), 
+    experiment(StopTime = 300), 
     Documentation(info = "<html><p style=\"text-align: start;\">长期以来，Modelica 一直用于建模先进的非线性控制系统。特别是，Modelica 允许对非线性逆被控对象模型进行半自动处理。在基础文章（Looye等，2005年，详见<a href=\"modelica://Modelica.Clocked.UsersGuide.Literature\" target=\"\">Literature</a>&nbsp; 或<a href=\"https://www.modelica.org/events/Conference2005/online_proceedings/Session3/Session3c3.pdf\" target=\"\">Download</a>&nbsp;）中，描述了这种方法，并提出了几种控制器结构，旨在利用逆被控对象模型来设计控制器。这种方法非常具有吸引力，因为它为整个操作范围内的被控对象设计控制器提供了系统化的流程。这与标准的控制器设计技术形成了对比，后者通常为一个在特定操作点线性化的被控对象模型设计线性控制器。因此，这些控制器的操作范围固有地有限。
 </p>
 <p style=\"text-align: start;\">直到 Modelica 3.2 版本，带有逆被控对象模型的控制器只能定义为连续时间系统。通过 Modelica 工具的导出机制，它们可以通过代码嵌入的求解器导出，然后在其他环境中作为采样数据系统使用。然而，无法将采样数据系统重新导入到 Modelica 中。

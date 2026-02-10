@@ -1,14 +1,14 @@
 ﻿within Modelica.Thermal.HeatTransfer.Interfaces;
-partial model PartialElementaryConditionalHeatPortWithoutT
+partial model PartialElementaryConditionalHeatPortWithoutT 
   "基类模型(包含条件式HeatPort以耗散损耗，适用于文本建模，即基础模型)"
   parameter Boolean useHeatPort = false "= true，如果启用了热端口" 
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   HeatTransfer.Interfaces.HeatPort_a heatPort(final Q_flow=-lossPower) if 
-    useHeatPort
+    useHeatPort 
     "以热量形式输送损耗的可选端口" 
-    annotation (Placement(transformation(extent={{-110,-110},{-90,-90}}),
+    annotation (Placement(transformation(extent={{-110,-110},{-90,-90}}), 
         iconTransformation(extent={{-110,-110},{-90,-90}})));
-  SI.Power lossPower
+  SI.Power lossPower 
     "通过热端口离开组件的损耗功率(> 0，如果热量流出组件)";
   annotation (Documentation(info="<html><p>
 该基类模型提供了一个有条件的热接口，用于耗散损耗。

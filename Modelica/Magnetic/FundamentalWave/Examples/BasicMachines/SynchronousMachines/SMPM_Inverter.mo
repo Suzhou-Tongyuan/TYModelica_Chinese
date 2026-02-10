@@ -1,11 +1,11 @@
-﻿within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines;
+within Modelica.Magnetic.FundamentalWave.Examples.BasicMachines.SynchronousMachines;
 model SMPM_Inverter
   "用逆变器启动永磁同步电机"
   extends Modelica.Icons.Example;
   constant Integer m=3 "阶段数";
   parameter SI.Voltage VsNominal=100
     "每相标称有效值电压";
-  parameter SI.Frequency fsNominal=smpmData.fsNominal "Nominal frequency";
+  parameter SI.Frequency fsNominal=smpmData.fsNominal "额定频率";
   parameter SI.Frequency fKnee=50
     "V/f 曲线的膝频率";
   parameter SI.Time tRamp=1 "频率斜坡";

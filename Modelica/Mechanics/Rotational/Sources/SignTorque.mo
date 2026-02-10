@@ -2,15 +2,15 @@
 model SignTorque "随速度改变符号的恒定转矩"
   extends Rotational.Interfaces.PartialTorque;
   import Modelica.Constants.pi;
-  parameter SI.Torque tau_nominal
+  parameter SI.Torque tau_nominal 
     "额定转矩（如果为负值，则转矩在旋转正方向上作为负载）";
-  parameter Modelica.Blocks.Types.Regularization reg=Modelica.Blocks.Types.Regularization.Exp
+  parameter Modelica.Blocks.Types.Regularization reg=Modelica.Blocks.Types.Regularization.Exp 
     "正则化类型" annotation(Evaluate=true);
-  parameter SI.AngularVelocity w0(final min=Modelica.Constants.eps, start=0.1)
+  parameter SI.AngularVelocity w0(final min=Modelica.Constants.eps, start=0.1) 
     "在 w0 以下进行正则化";
-  SI.AngularVelocity w
+  SI.AngularVelocity w 
     "一维转动接口相对于支撑的角速度（= der(phi)）";
-  SI.Torque tau
+  SI.Torque tau 
     "作用于一维转动接口的加速转矩（= -flange.tau）";
 equation
   w = der(phi);
@@ -27,15 +27,15 @@ equation
   annotation (
     Icon(
       coordinateSystem(
-        preserveAspectRatio=true,
-        extent={{-100,-100},{100,100}}),
+        preserveAspectRatio=true, 
+        extent={{-100,-100},{100,100}}), 
         graphics={
           Text(
-            extent={{-120,-50},{120,-20}},
-          textString="%tau_nominal"),
-          Line(points={{-75,24},{75,24}},
-                                        color={192,192,192}),
-          Line(points={{0,66},{0,-20}}, color={192,192,192}),
+            extent={{-120,-50},{120,-20}}, 
+          textString="%tau_nominal"), 
+          Line(points={{-75,24},{75,24}}, 
+                                        color={192,192,192}), 
+          Line(points={{0,66},{0,-20}}, color={192,192,192}), 
         Line(points={{-74,-12},{-8,-12},{-6,-10},{6,58},{8,60},{48,60}})}), Documentation(info="<html>
 <p>根据旋转方向改变符号的恒定转矩模型。</p>
 <p>请注意：<br>

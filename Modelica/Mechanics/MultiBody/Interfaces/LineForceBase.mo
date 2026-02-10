@@ -1,23 +1,23 @@
 ﻿within Modelica.Mechanics.MultiBody.Interfaces;
 partial model LineForceBase "用于线性力元素的基础模型"
   extends PartialTwoFrames;
-  parameter SI.Distance s_small = 1e-10
+  parameter SI.Distance s_small = 1e-10 
     "如果frame_a和frame_b之间的距离为零，则防止零除法" 
     annotation(Dialog(tab = "高级"));
-  parameter Boolean fixedRotationAtFrame_a = false
+  parameter Boolean fixedRotationAtFrame_a = false 
     "= true，如果旋转frame_a.R固定(直接连接线性力)" 
     annotation(Evaluate = true, choices(checkBox = true), Dialog(tab = "高级", group = "如果启用，可能会导致错误结果，请参阅MultiBody.UsersGuide.Tutorial.ConnectionOfLineForces"));
-  parameter Boolean fixedRotationAtFrame_b = false
+  parameter Boolean fixedRotationAtFrame_b = false 
     "= true，如果旋转frame_b.R固定(直接连接线性力)" 
     annotation(Evaluate = true, choices(checkBox = true), Dialog(tab = "高级", group = "如果启用，可能会导致错误结果，请参阅MultiBody.UsersGuide.Tutorial.ConnectionOfLineForces"));
 
-  SI.Distance length
+  SI.Distance length 
     "frame_a的原点到frame_b的原点之间的距离";
-  SI.Position s
+  SI.Position s 
     "frame_a的原点到frame_b的原点之间的(受保护的)距离（>= s_small))";
-  SI.Position r_rel_0[3]
+  SI.Position r_rel_0[3] 
     "从frame_a到frame_b的位置向量，在世界坐标系中解析";
-  Real e_rel_0[3](each final unit = "1")
+  Real e_rel_0[3](each final unit = "1") 
     "从frame_a指向frame_b的单位向量，在世界坐标系中解析";
 equation
   assert(noEvent(length > s_small), "
@@ -56,17 +56,17 @@ equation
 该模型定义了frame_a和frame_b，并计算相对距离<strong>s</strong>。
 如果相对距离<strong>length</strong>变小到参数<strong>s_small</strong>，则会引发断言。
 </p>
-</html>"),
-    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100},
+</html>"), 
+    Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, 
     {100, 100}}), graphics = {
-    Ellipse(visible = fixedRotationAtFrame_a, extent = {{-70, 30}, {-130, -30}}, lineColor = {255, 0, 0}),
-    Text(visible = fixedRotationAtFrame_a,
-    extent = {{-62, 50}, {-140, 30}},
-    textColor = {255, 0, 0},
-    textString = "R=0"),
-    Ellipse(visible = fixedRotationAtFrame_b, extent = {{70, 30}, {130, -30}}, lineColor = {255, 0, 0}),
-    Text(visible = fixedRotationAtFrame_b,
-    extent = {{62, 50}, {140, 30}},
-    textColor = {255, 0, 0},
+    Ellipse(visible = fixedRotationAtFrame_a, extent = {{-70, 30}, {-130, -30}}, lineColor = {255, 0, 0}), 
+    Text(visible = fixedRotationAtFrame_a, 
+    extent = {{-62, 50}, {-140, 30}}, 
+    textColor = {255, 0, 0}, 
+    textString = "R=0"), 
+    Ellipse(visible = fixedRotationAtFrame_b, extent = {{70, 30}, {130, -30}}, lineColor = {255, 0, 0}), 
+    Text(visible = fixedRotationAtFrame_b, 
+    extent = {{62, 50}, {140, 30}}, 
+    textColor = {255, 0, 0}, 
     textString = "R=0")}));
 end LineForceBase;

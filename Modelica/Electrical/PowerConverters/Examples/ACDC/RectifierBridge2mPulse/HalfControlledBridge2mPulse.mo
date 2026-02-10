@@ -1,69 +1,69 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.RectifierBridge2mPulse;
-model HalfControlledBridge2mPulse
+model HalfControlledBridge2mPulse 
   "带电阻负载的2*m脉冲半控制整流桥"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
   parameter Integer m(final min=3) = 3 "相数" annotation(Evaluate=true);
   parameter SI.Voltage Vrms=110 "有效值供电电压";
   parameter SI.Frequency f=50 "频率";
-  parameter SI.Angle constantFiringAngle=30*pi/180
+  parameter SI.Angle constantFiringAngle=30*pi/180 
     "触发角";
   parameter SI.Resistance R=20 "负载电阻";
 
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage(
-    final m=m,
-    V=fill(sqrt(2)*Vrms, m),
+    final m=m, 
+    V=fill(sqrt(2)*Vrms, m), 
     phase=-
-        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
+        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
     f=fill(f, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,-30})));
-  PowerConverters.ACDC.HalfControlledBridge2mPulse rectifier(final m=m,
+  PowerConverters.ACDC.HalfControlledBridge2mPulse rectifier(final m=m, 
       offStart_p=fill(true, m)) 
     annotation (Placement(transformation(extent={{-40,24},{-20,44}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor 
     annotation (Placement(transformation(
-        origin={50,10},
-        extent={{10,-10},{-10,10}},
+        origin={50,10}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
   Modelica.Blocks.Math.Mean meanVoltage(f=2*m*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,40})));
   Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f=2*m*f) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,10})));
   Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=180,
+        extent={{-10,10},{10,-10}}, 
+        rotation=180, 
         origin={0,-40})));
   Modelica.Blocks.Math.Mean meanCurrent(f=2*m*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,-60})));
   PowerConverters.ACDC.Control.VoltageBridge2mPulse pulse2m(
-    m=m,
-    f=f,
-    useFilter=false,
+    m=m, 
+    f=f, 
+    useFilter=false, 
     constantFiringAngle=constantFiringAngle) annotation (Placement(
         transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=180,
+        extent={{10,10},{-10,-10}}, 
+        rotation=180, 
         origin={-30,0})));
   Modelica.Electrical.Polyphase.Basic.MultiStarResistance 
     multiStarResistance(final m=m) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-80,-60})));
   Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
         transformation(extent={{-90,-100},{-70,-80}})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
       Placement(transformation(
-        origin={30,30},
-        extent={{10,-10},{-10,10}},
+        origin={30,30}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
 equation
   connect(meanCurrent.u, currentSensor.i) annotation (Line(
@@ -95,9 +95,9 @@ equation
       points={{30,40},{-20,40}}, color={0,0,255}));
   annotation (
     experiment(
-      StopTime=0.1,
-      Tolerance=1e-06,
-      Interval=0.0002),
+      StopTime=0.1, 
+      Tolerance=1e-06, 
+      Interval=0.0002), 
     Documentation(info="<html>
 <p>该示例展示了带有电阻负载的半控制<code>2*m</code>脉冲桥式整流器，其中<code>m</code>是相数。在电阻负载情况下，半控制桥与<a href=\"modelica://Modelica.Electrical.PowerConverters.Examples.ACDC.RectifierBridge2mPulse.ThyristorBridge2mPulse_R\">全控制桥</a>显示相同的输出电压。</p>
 

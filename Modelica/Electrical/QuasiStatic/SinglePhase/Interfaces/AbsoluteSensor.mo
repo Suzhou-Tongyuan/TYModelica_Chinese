@@ -2,16 +2,16 @@
 partial model AbsoluteSensor "绝对传感器"
   extends Modelica.Icons.RoundSensor;
   SI.AngularVelocity omega;
-  PositivePin pin "正电势静态单相引脚" annotation (Placement(transformation(extent={{-110,
+  PositivePin pin "正电势静态单相引脚" annotation (Placement(transformation(extent={{-110, 
             -10},{-90,10}})));
 equation
   omega = der(pin.reference.gamma);
   pin.i = Complex(0);
   annotation (Icon(graphics={
-        Line(points={{-70,0},{-94,0}}, color={85,170,255}),
+        Line(points={{-70,0},{-94,0}}, color={85,170,255}), 
         Text(
-          extent={{-150,120},{150,80}},
-          textColor={0,0,255},
+          extent={{-150,120},{150,80}}, 
+          textColor={0,0,255}, 
           textString="%name")}),         Documentation(info="<html>
 <p>
 绝对传感器部分模型提供一个

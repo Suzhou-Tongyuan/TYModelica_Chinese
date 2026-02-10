@@ -1,5 +1,5 @@
 ﻿within Modelica.Blocks;
-package Nonlinear
+package Nonlinear 
   "不连续或不可微分代数控制模块库"
   import Modelica.Blocks.Interfaces;
   extends Modelica.Icons.Package;
@@ -16,7 +16,7 @@ package Nonlinear
     Real simplifiedExpr "基于同伦初始化的简化表达式";
 
   equation
-    assert(uMax >= uMin, "Limiter: Limits must be consistent. However, uMax (=" + String(uMax) +
+    assert(uMax >= uMin, "Limiter: Limits must be consistent. However, uMax (=" + String(uMax) + 
       ") < uMin (=" + String(uMin) + ")");
     simplifiedExpr = (if homotopyType == Types.LimiterHomotopy.Linear then u 
       else if homotopyType == Types.LimiterHomotopy.UpperLimit then uMax 
@@ -26,14 +26,14 @@ package Nonlinear
       if homotopyType == Types.LimiterHomotopy.NoHomotopy then
         y = smooth(0, noEvent(if u > uMax then uMax else if u < uMin then uMin else u));
       else
-        y = homotopy(actual = smooth(0, noEvent(if u > uMax then uMax else if u < uMin then uMin else u)),
+        y = homotopy(actual = smooth(0, noEvent(if u > uMax then uMax else if u < uMin then uMin else u)), 
           simplified = simplifiedExpr);
       end if;
     else
       if homotopyType == Types.LimiterHomotopy.NoHomotopy then
         y = smooth(0, if u > uMax then uMax else if u < uMin then uMin else u);
       else
-        y = homotopy(actual = smooth(0, if u > uMax then uMax else if u < uMin then uMin else u),
+        y = homotopy(actual = smooth(0, if u > uMax then uMax else if u < uMin then uMin else u), 
           simplified = simplifiedExpr);
       end if;
     end if;
@@ -56,31 +56,31 @@ package Nonlinear
 如果事先知道输入信号将位于哪个区域，那么这个选项可以从初始化问题中去除一个强非线性因素，从而起到很大作用。
 </p>
 </html>"  ), Icon(coordinateSystem(
-      preserveAspectRatio = true,
+      preserveAspectRatio = true, 
       extent = {{-100, -100}, {100, 100}}), graphics = {
-      Line(points = {{0, -90}, {0, 68}}, color = {192, 192, 192}),
+      Line(points = {{0, -90}, {0, 68}}, color = {192, 192, 192}), 
       Polygon(
-      points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}},
-      lineColor = {192, 192, 192},
-      fillColor = {192, 192, 192},
-      fillPattern = FillPattern.Solid),
-      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
+      points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}}, 
+      lineColor = {192, 192, 192}, 
+      fillColor = {192, 192, 192}, 
+      fillPattern = FillPattern.Solid), 
+      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
       Polygon(
-      points = {{90, 0}, {68, -8}, {68, 8}, {90, 0}},
-      lineColor = {192, 192, 192},
-      fillColor = {192, 192, 192},
-      fillPattern = FillPattern.Solid),
-      Line(points = {{-80, -70}, {-50, -70}, {50, 70}, {80, 70}}),
+      points = {{90, 0}, {68, -8}, {68, 8}, {90, 0}}, 
+      lineColor = {192, 192, 192}, 
+      fillColor = {192, 192, 192}, 
+      fillPattern = FillPattern.Solid), 
+      Line(points = {{-80, -70}, {-50, -70}, {50, 70}, {80, 70}}), 
       Text(
-      extent = {{-150, -150}, {150, -110}},
-      textString = "uMax=%uMax"),
+      extent = {{-150, -150}, {150, -110}}, 
+      textString = "uMax=%uMax"), 
       Line(
-      visible = strict,
-      points = {{50, 70}, {80, 70}},
-      color = {255, 0, 0}),
+      visible = strict, 
+      points = {{50, 70}, {80, 70}}, 
+      color = {255, 0, 0}), 
       Line(
-      visible = strict,
-      points = {{-80, -70}, {-50, -70}},
+      visible = strict, 
+      points = {{-80, -70}, {-50, -70}}, 
       color = {255, 0, 0})}));
   end Limiter;
 
@@ -92,10 +92,10 @@ package Nonlinear
       annotation(Evaluate = true, Dialog(group = "初始化"));
     parameter Real ySimplified = 0 "简化模型中的固定输出值" 
       annotation(Dialog(tab = "高级", enable = homotopyType == Modelica.Blocks.Types.VariableLimiterHomotopy.Fixed));
-    Interfaces.RealInput limit1
+    Interfaces.RealInput limit1 
       "作为最大输入信号的实数输入信号接口u" 
       annotation(Placement(transformation(extent = {{-140, 60}, {-100, 100}})));
-    Interfaces.RealInput limit2
+    Interfaces.RealInput limit2 
       "作为最小输入信号的实数输入信号连口u" 
       annotation(Placement(transformation(extent = {{-140, -100}, {-100, -60}})));
   protected
@@ -109,14 +109,14 @@ package Nonlinear
       if homotopyType == Types.VariableLimiterHomotopy.NoHomotopy then
         y = smooth(0, noEvent(if u > limit1 then limit1 else if u < limit2 then limit2 else u));
       else
-        y = homotopy(actual = smooth(0, noEvent(if u > limit1 then limit1 else if u < limit2 then limit2 else u)),
+        y = homotopy(actual = smooth(0, noEvent(if u > limit1 then limit1 else if u < limit2 then limit2 else u)), 
           simplified = simplifiedExpr);
       end if;
     else
       if homotopyType == Types.VariableLimiterHomotopy.NoHomotopy then
         y = smooth(0, if u > limit1 then limit1 else if u < limit2 then limit2 else u);
       else
-        y = homotopy(actual = smooth(0, if u > limit1 then limit1 else if u < limit2 then limit2 else u),
+        y = homotopy(actual = smooth(0, if u > limit1 then limit1 else if u < limit2 then limit2 else u), 
           simplified = simplifiedExpr);
       end if;
     end if;
@@ -138,50 +138,50 @@ package Nonlinear
 <p>
 如果事先知道输入信号将位于哪个区域，那么这个选项可以从初始化问题中去除一个强非线性因素，从而起到很大作用。
 </p>
-</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100,
+</html>"  ), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 
       100}}), graphics = {
-      Line(points = {{0, -90}, {0, 68}}, color = {192, 192, 192}),
-      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
+      Line(points = {{0, -90}, {0, 68}}, color = {192, 192, 192}), 
+      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
       Polygon(
-      points = {{90, 0}, {68, -8}, {68, 8}, {90, 0}},
-      lineColor = {192, 192, 192},
-      fillColor = {192, 192, 192},
-      fillPattern = FillPattern.Solid),
-      Line(points = {{-80, -70}, {-50, -70}, {50, 70}, {80, 70}}),
-      Line(points = {{-100, 80}, {66, 80}, {66, 70}}, color = {0, 0, 127}),
-      Line(points = {{-100, -80}, {-64, -80}, {-64, -70}}, color = {0, 0, 127}),
+      points = {{90, 0}, {68, -8}, {68, 8}, {90, 0}}, 
+      lineColor = {192, 192, 192}, 
+      fillColor = {192, 192, 192}, 
+      fillPattern = FillPattern.Solid), 
+      Line(points = {{-80, -70}, {-50, -70}, {50, 70}, {80, 70}}), 
+      Line(points = {{-100, 80}, {66, 80}, {66, 70}}, color = {0, 0, 127}), 
+      Line(points = {{-100, -80}, {-64, -80}, {-64, -70}}, color = {0, 0, 127}), 
       Polygon(points = {{-64, -70}, {-66, -74}, {-62, -74}, {-64, -70}}, lineColor = {
-      0, 0, 127}),
-      Polygon(points = {{66, 70}, {64, 74}, {68, 74}, {66, 70}}, lineColor = {0, 0, 127}),
+      0, 0, 127}), 
+      Polygon(points = {{66, 70}, {64, 74}, {68, 74}, {66, 70}}, lineColor = {0, 0, 127}), 
       Polygon(
-      points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}},
-      lineColor = {192, 192, 192},
-      fillColor = {192, 192, 192},
-      fillPattern = FillPattern.Solid),
+      points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}}, 
+      lineColor = {192, 192, 192}, 
+      fillColor = {192, 192, 192}, 
+      fillPattern = FillPattern.Solid), 
       Line(
-      visible = strict,
-      points = {{50, 70}, {80, 70}},
-      color = {255, 0, 0}),
+      visible = strict, 
+      points = {{50, 70}, {80, 70}}, 
+      color = {255, 0, 0}), 
       Line(
-      visible = strict,
-      points = {{-80, -70}, {-50, -70}},
+      visible = strict, 
+      points = {{-80, -70}, {-50, -70}}, 
       color = {255, 0, 0})}));
   end VariableLimiter;
 
   block SlewRateLimiter "限制信号的斜率"
     extends Modelica.Blocks.Interfaces.SISO;
     import Modelica.Constants.small;
-    parameter Real Rising(min = small) = 1
+    parameter Real Rising(min = small) = 1 
       "最大上升斜率[+small..+inf)[1/s]";
-    parameter Real Falling(max = -small) = -Rising
+    parameter Real Falling(max = -small) = -Rising 
       "最大下降斜率(-inf..-small][1/s]";
-    parameter SI.Time Td(min = small) = 0.001
+    parameter SI.Time Td(min = small) = 0.001 
       "导数时间常数";
-    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.SteadyState
+    parameter Modelica.Blocks.Types.Init initType = Modelica.Blocks.Types.Init.SteadyState 
       "初始化类型(SteadyState表示y=u）" 
       annotation(Evaluate = true, Dialog(group = "初始化"));
     parameter Real y_start = 0 "输出的初始值或猜测值(=state)" 
-      annotation(Dialog(group = "Initialization"));
+      annotation(Dialog(group = "初始化"));
     parameter Boolean strict = false "=true，如果使用noEvent(...)进行严格限制" 
       annotation(Evaluate = true, choices(checkBox = true), Dialog(tab = "高级"));
   protected
@@ -200,24 +200,24 @@ package Nonlinear
       der(y) = if val < Falling then Falling else if val > Rising then Rising else val;
     end if;
     annotation(Icon(graphics = {
-      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
-      Line(points = {{0, -90}, {0, 68}}, color = {192, 192, 192}),
+      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
+      Line(points = {{0, -90}, {0, 68}}, color = {192, 192, 192}), 
       Polygon(
-      points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}},
-      lineColor = {192, 192, 192},
-      fillColor = {192, 192, 192},
-      fillPattern = FillPattern.Solid),
+      points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}}, 
+      lineColor = {192, 192, 192}, 
+      fillColor = {192, 192, 192}, 
+      fillPattern = FillPattern.Solid), 
       Polygon(
-      points = {{90, 0}, {68, -8}, {68, 8}, {90, 0}},
-      lineColor = {192, 192, 192},
-      fillColor = {192, 192, 192},
-      fillPattern = FillPattern.Solid),
+      points = {{90, 0}, {68, -8}, {68, 8}, {90, 0}}, 
+      lineColor = {192, 192, 192}, 
+      fillColor = {192, 192, 192}, 
+      fillPattern = FillPattern.Solid), 
       Line(
-      points = {{-50, -70}, {50, 70}}),
+      points = {{-50, -70}, {50, 70}}), 
       Line(
-      visible = strict,
-      points = {{50, 70}, {-50, -70}},
-      color = {255, 0, 0})}),
+      visible = strict, 
+      points = {{50, 70}, {-50, -70}}, 
+      color = {255, 0, 0})}), 
       Documentation(info = "<html>
 <p>
 <code>SlewRateLimiter</code> 模块将其输入信号的斜率限制在<code>[Falling, Rising]</code>范围内。
@@ -228,22 +228,22 @@ package Nonlinear
 时间常数<code>Td</code>越小，表示导数越接近理想导数。
 </p>
 <p><em>注：用户必须根据输入信号的性质选择导数时间常数。</em></p>
-</html>"  ,
+</html>"    , 
       revisions = "<html>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<th>Revision</th>
-<th>Date</th>
-<th>Author</th>
-<th>Comment</th>
+<th>版本</th>
+<th>时间</th>
+<th>作者</th>
+<th>描述</th>
 </tr>
 <tr>
 <td>4954</td>
 <td>2012-03-02</td>
 <td>A. Haumer &amp; D. Winkler</td>
-<td><p>Initial version based on discussion in ticket <a href=\"https://github.com/modelica/ModelicaStandardLibrary/issues/529\">#529</a></p></td>
+<td><p>基于<a href=\"https://github.com/modelica/ModelicaStandardLibrary/issues/529\">#529</a>讨论的最初始版本</p></td>
 </tr>
 </table>
-</html>"  ));
+</html>"    ));
   end SlewRateLimiter;
 
   block DeadZone "提供零输出区域"
@@ -252,7 +252,7 @@ package Nonlinear
     extends Interfaces.SISO;
 
   equation
-    assert(uMax >= uMin, "DeadZone: Limits must be consistent. However, uMax (=" + String(uMax) +
+    assert(uMax >= uMin, "DeadZone: Limits must be consistent. However, uMax (=" + String(uMax) + 
       ") < uMin (=" + String(uMin) + ")");
 
     y = homotopy(actual = smooth(0, if u > uMax then u - uMax else if u < uMin then u - uMin else 0), simplified = u);
@@ -265,30 +265,30 @@ DeadZone模块定义一个输出为零的区域。
 如果输入在uMin ...uMax，输出为零。在此区域之外，输出是输入的线性函数，斜率为1。
 </p>
 </html>"      ), Icon(coordinateSystem(
-      preserveAspectRatio = true,
+      preserveAspectRatio = true, 
       extent = {{-100, -100}, {100, 100}}), graphics = {
-      Line(points = {{0, -90}, {0, 68}}, color = {192, 192, 192}),
+      Line(points = {{0, -90}, {0, 68}}, color = {192, 192, 192}), 
       Polygon(
-      points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}},
-      lineColor = {192, 192, 192},
-      fillColor = {192, 192, 192},
-      fillPattern = FillPattern.Solid),
-      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}),
+      points = {{0, 90}, {-8, 68}, {8, 68}, {0, 90}}, 
+      lineColor = {192, 192, 192}, 
+      fillColor = {192, 192, 192}, 
+      fillPattern = FillPattern.Solid), 
+      Line(points = {{-90, 0}, {68, 0}}, color = {192, 192, 192}), 
       Polygon(
-      points = {{90, 0}, {68, -8}, {68, 8}, {90, 0}},
-      lineColor = {192, 192, 192},
-      fillColor = {192, 192, 192},
-      fillPattern = FillPattern.Solid),
-      Line(points = {{-80, -60}, {-20, 0}, {20, 0}, {80, 60}}),
+      points = {{90, 0}, {68, -8}, {68, 8}, {90, 0}}, 
+      lineColor = {192, 192, 192}, 
+      fillColor = {192, 192, 192}, 
+      fillPattern = FillPattern.Solid), 
+      Line(points = {{-80, -60}, {-20, 0}, {20, 0}, {80, 60}}), 
       Text(
-      extent = {{-150, -150}, {150, -110}},
-      textColor = {160, 160, 164},
+      extent = {{-150, -150}, {150, -110}}, 
+      textColor = {160, 160, 164}, 
       textString = "uMax=%uMax")}));
   end DeadZone;
 
   block FixedDelay "具有固定DelayTime的延迟模块"
     extends Modelica.Blocks.Interfaces.SISO;
-    parameter SI.Time delayTime(start = 1)
+    parameter SI.Time delayTime(start = 1) 
       "输出相对于输入信号的延迟时间";
 
   equation
@@ -302,34 +302,34 @@ DeadZone模块定义一个输出为零的区域。
 <br>
 </p>
 </html>"    ), Icon(
-      coordinateSystem(preserveAspectRatio = true,
-      extent = {{-100.0, -100.0}, {100.0, 100.0}}),
+      coordinateSystem(preserveAspectRatio = true, 
+      extent = {{-100.0, -100.0}, {100.0, 100.0}}), 
       graphics = {
       Text(
-      extent = {{8.0, -142.0}, {8.0, -102.0}},
-      textString = "delayTime=%delayTime"),
+      extent = {{8.0, -142.0}, {8.0, -102.0}}, 
+      textString = "delayTime=%delayTime"), 
       Line(
-      points = {{-92.0, 0.0}, {-80.7, 34.2}, {-73.5, 53.1}, {-67.1, 66.4}, {-61.4, 74.6}, {-55.8, 79.1}, {-50.2, 79.8}, {-44.6, 76.6}, {-38.9, 69.7}, {-33.3, 59.4}, {-26.9, 44.1}, {-18.83, 21.2}, {-1.9, -30.8}, {5.3, -50.2}, {11.7, -64.2}, {17.3, -73.1}, {23.0, -78.4}, {28.6, -80.0}, {34.2, -77.6}, {39.9, -71.5}, {45.5, -61.9}, {51.9, -47.2}, {60.0, -24.8}, {68.0, 0.0}},
-      color = {0, 0, 127},
-      smooth = Smooth.Bezier),
+      points = {{-92.0, 0.0}, {-80.7, 34.2}, {-73.5, 53.1}, {-67.1, 66.4}, {-61.4, 74.6}, {-55.8, 79.1}, {-50.2, 79.8}, {-44.6, 76.6}, {-38.9, 69.7}, {-33.3, 59.4}, {-26.9, 44.1}, {-18.83, 21.2}, {-1.9, -30.8}, {5.3, -50.2}, {11.7, -64.2}, {17.3, -73.1}, {23.0, -78.4}, {28.6, -80.0}, {34.2, -77.6}, {39.9, -71.5}, {45.5, -61.9}, {51.9, -47.2}, {60.0, -24.8}, {68.0, 0.0}}, 
+      color = {0, 0, 127}, 
+      smooth = Smooth.Bezier), 
       Line(
-      points = {{-62.0, 0.0}, {-50.7, 34.2}, {-43.5, 53.1}, {-37.1, 66.4}, {-31.4, 74.6}, {-25.8, 79.1}, {-20.2, 79.8}, {-14.6, 76.6}, {-8.9, 69.7}, {-3.3, 59.4}, {3.1, 44.1}, {11.17, 21.2}, {28.1, -30.8}, {35.3, -50.2}, {41.7, -64.2}, {47.3, -73.1}, {53.0, -78.4}, {58.6, -80.0}, {64.2, -77.6}, {69.9, -71.5}, {75.5, -61.9}, {81.9, -47.2}, {90.0, -24.8}, {98.0, 0.0}},
-      color = {160, 160, 164},
+      points = {{-62.0, 0.0}, {-50.7, 34.2}, {-43.5, 53.1}, {-37.1, 66.4}, {-31.4, 74.6}, {-25.8, 79.1}, {-20.2, 79.8}, {-14.6, 76.6}, {-8.9, 69.7}, {-3.3, 59.4}, {3.1, 44.1}, {11.17, 21.2}, {28.1, -30.8}, {35.3, -50.2}, {41.7, -64.2}, {47.3, -73.1}, {53.0, -78.4}, {58.6, -80.0}, {64.2, -77.6}, {69.9, -71.5}, {75.5, -61.9}, {81.9, -47.2}, {90.0, -24.8}, {98.0, 0.0}}, 
+      color = {160, 160, 164}, 
       smooth = Smooth.Bezier)}));
   end FixedDelay;
 
-  block PadeDelay
+  block PadeDelay 
     "延迟模块的Pade近似值，延迟时间固定(使用balance=true；这不是默认值，以便向后兼容)"
     extends Modelica.Blocks.Interfaces.SISO;
-    parameter SI.Time delayTime(start = 1)
+    parameter SI.Time delayTime(start = 1) 
       "输出相对于输入信号的延迟时间";
     parameter Integer n(min = 1) = 1 "Pade 延迟的顺序";
-    parameter Integer m(min = 1, max = n) = n
+    parameter Integer m(min = 1, max = n) = n 
       "分子的顺序(通常为m=n，或m=n-1)";
-    parameter Boolean balance = false
+    parameter Boolean balance = false 
       "=true，如果状态空间系统是平衡的（强烈推荐），否则教材版本" 
       annotation(choices(checkBox = true));
-    final output Real x[n]
+    final output Real x[n] 
       "来自控制器标准型的传递函数状态（balance=false），或平衡的控制器标准型（balance=true）";
 
   protected
@@ -465,25 +465,25 @@ of the PadeDelay block with an optional, more reliable numerics</td>
 </tr>
 </table>
 </html>"    ), Icon(
-      coordinateSystem(preserveAspectRatio = false,
-      extent = {{-100, -100}, {100, 100}}),
+      coordinateSystem(preserveAspectRatio = false, 
+      extent = {{-100, -100}, {100, 100}}), 
       graphics = {
-      Text(extent = {{8.0, -142.0}, {8.0, -102.0}},
-      textString = "delayTime=%delayTime"),
-      Line(points = {{-94.0, 0.0}, {-82.7, 34.2}, {-75.5, 53.1}, {-69.1, 66.4}, {-63.4, 74.6}, {-57.8, 79.1}, {-52.2, 79.8}, {-46.6, 76.6}, {-40.9, 69.7}, {-35.3, 59.4}, {-28.9, 44.1}, {-20.83, 21.2}, {-3.9, -30.8}, {3.3, -50.2}, {9.7, -64.2}, {15.3, -73.1}, {21.0, -78.4}, {26.6, -80.0}, {32.2, -77.6}, {37.9, -71.5}, {43.5, -61.9}, {49.9, -47.2}, {58.0, -24.8}, {66.0, 0.0}},
-      color = {0, 0, 127},
-      smooth = Smooth.Bezier),
-      Line(points = {{-72.0, 0.0}, {-60.7, 34.2}, {-53.5, 53.1}, {-47.1, 66.4}, {-41.4, 74.6}, {-35.8, 79.1}, {-30.2, 79.8}, {-24.6, 76.6}, {-18.9, 69.7}, {-13.3, 59.4}, {-6.9, 44.1}, {1.17, 21.2}, {18.1, -30.8}, {25.3, -50.2}, {31.7, -64.2}, {37.3, -73.1}, {43.0, -78.4}, {48.6, -80.0}, {54.2, -77.6}, {59.9, -71.5}, {65.5, -61.9}, {71.9, -47.2}, {80.0, -24.8}, {88.0, 0.0}},
-      color = {160, 160, 164},
-      smooth = Smooth.Bezier),
-      Text(textColor = {160, 160, 164},
-      extent = {{-10.0, 38.0}, {100.0, 100.0}},
-      textString = "m=%m"),
-      Text(textColor = {160, 160, 164},
-      extent = {{-98.0, -96.0}, {6.0, -34.0}},
-      textString = "n=%n"),
-      Text(visible = balance, textColor = {160, 160, 164},
-      extent = {{-96, -20}, {98, 22}},
+      Text(extent = {{8.0, -142.0}, {8.0, -102.0}}, 
+      textString = "delayTime=%delayTime"), 
+      Line(points = {{-94.0, 0.0}, {-82.7, 34.2}, {-75.5, 53.1}, {-69.1, 66.4}, {-63.4, 74.6}, {-57.8, 79.1}, {-52.2, 79.8}, {-46.6, 76.6}, {-40.9, 69.7}, {-35.3, 59.4}, {-28.9, 44.1}, {-20.83, 21.2}, {-3.9, -30.8}, {3.3, -50.2}, {9.7, -64.2}, {15.3, -73.1}, {21.0, -78.4}, {26.6, -80.0}, {32.2, -77.6}, {37.9, -71.5}, {43.5, -61.9}, {49.9, -47.2}, {58.0, -24.8}, {66.0, 0.0}}, 
+      color = {0, 0, 127}, 
+      smooth = Smooth.Bezier), 
+      Line(points = {{-72.0, 0.0}, {-60.7, 34.2}, {-53.5, 53.1}, {-47.1, 66.4}, {-41.4, 74.6}, {-35.8, 79.1}, {-30.2, 79.8}, {-24.6, 76.6}, {-18.9, 69.7}, {-13.3, 59.4}, {-6.9, 44.1}, {1.17, 21.2}, {18.1, -30.8}, {25.3, -50.2}, {31.7, -64.2}, {37.3, -73.1}, {43.0, -78.4}, {48.6, -80.0}, {54.2, -77.6}, {59.9, -71.5}, {65.5, -61.9}, {71.9, -47.2}, {80.0, -24.8}, {88.0, 0.0}}, 
+      color = {160, 160, 164}, 
+      smooth = Smooth.Bezier), 
+      Text(textColor = {160, 160, 164}, 
+      extent = {{-10.0, 38.0}, {100.0, 100.0}}, 
+      textString = "m=%m"), 
+      Text(textColor = {160, 160, 164}, 
+      extent = {{-98.0, -96.0}, {6.0, -34.0}}, 
+      textString = "n=%n"), 
+      Text(visible = balance, textColor = {160, 160, 164}, 
+      extent = {{-96, -20}, {98, 22}}, 
       textString = "balanced")}));
   end PadeDelay;
 
@@ -506,20 +506,20 @@ of the PadeDelay block with an optional, more reliable numerics</td>
 <pre><code >0 ≤ delayTime ≤ delayMax</code></pre><p>
 <br>
 </p>
-</html>"),
+</html>"), 
       Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100.0, -100.0}, {100.0, 100.0}}), graphics = {
-      Text(extent = {{-100.0, -148.0}, {100.0, -108.0}},
-      textString = "delayMax=%delayMax"),
-      Line(points = {{-92.0, 0.0}, {-80.7, 34.2}, {-73.5, 53.1}, {-67.1, 66.4}, {-61.4, 74.6}, {-55.8, 79.1}, {-50.2, 79.8}, {-44.6, 76.6}, {-38.9, 69.7}, {-33.3, 59.4}, {-26.9, 44.1}, {-18.83, 21.2}, {-1.9, -30.8}, {5.3, -50.2}, {11.7, -64.2}, {17.3, -73.1}, {23.0, -78.4}, {28.6, -80.0}, {34.2, -77.6}, {39.9, -71.5}, {45.5, -61.9}, {51.9, -47.2}, {60.0, -24.8}, {68.0, 0.0}},
-      color = {0, 0, 127},
-      smooth = Smooth.Bezier),
-      Line(points = {{-64.0, 0.0}, {-52.7, 34.2}, {-45.5, 53.1}, {-39.1, 66.4}, {-33.4, 74.6}, {-27.8, 79.1}, {-22.2, 79.8}, {-16.6, 76.6}, {-10.9, 69.7}, {-5.3, 59.4}, {1.1, 44.1}, {9.17, 21.2}, {26.1, -30.8}, {33.3, -50.2}, {39.7, -64.2}, {45.3, -73.1}, {51.0, -78.4}, {56.6, -80.0}, {62.2, -77.6}, {67.9, -71.5}, {73.5, -61.9}, {79.9, -47.2}, {88.0, -24.8}, {96.0, 0.0}},
-      smooth = Smooth.Bezier),
-      Polygon(fillPattern = FillPattern.Solid,
-      lineColor = {0, 0, 127},
-      fillColor = {0, 0, 127},
-      points = {{6.0, 4.0}, {-14.0, -2.0}, {-6.0, -12.0}, {6.0, 4.0}}),
-      Line(color = {0, 0, 127},
+      Text(extent = {{-100.0, -148.0}, {100.0, -108.0}}, 
+      textString = "delayMax=%delayMax"), 
+      Line(points = {{-92.0, 0.0}, {-80.7, 34.2}, {-73.5, 53.1}, {-67.1, 66.4}, {-61.4, 74.6}, {-55.8, 79.1}, {-50.2, 79.8}, {-44.6, 76.6}, {-38.9, 69.7}, {-33.3, 59.4}, {-26.9, 44.1}, {-18.83, 21.2}, {-1.9, -30.8}, {5.3, -50.2}, {11.7, -64.2}, {17.3, -73.1}, {23.0, -78.4}, {28.6, -80.0}, {34.2, -77.6}, {39.9, -71.5}, {45.5, -61.9}, {51.9, -47.2}, {60.0, -24.8}, {68.0, 0.0}}, 
+      color = {0, 0, 127}, 
+      smooth = Smooth.Bezier), 
+      Line(points = {{-64.0, 0.0}, {-52.7, 34.2}, {-45.5, 53.1}, {-39.1, 66.4}, {-33.4, 74.6}, {-27.8, 79.1}, {-22.2, 79.8}, {-16.6, 76.6}, {-10.9, 69.7}, {-5.3, 59.4}, {1.1, 44.1}, {9.17, 21.2}, {26.1, -30.8}, {33.3, -50.2}, {39.7, -64.2}, {45.3, -73.1}, {51.0, -78.4}, {56.6, -80.0}, {62.2, -77.6}, {67.9, -71.5}, {73.5, -61.9}, {79.9, -47.2}, {88.0, -24.8}, {96.0, 0.0}}, 
+      smooth = Smooth.Bezier), 
+      Polygon(fillPattern = FillPattern.Solid, 
+      lineColor = {0, 0, 127}, 
+      fillColor = {0, 0, 127}, 
+      points = {{6.0, 4.0}, {-14.0, -2.0}, {-6.0, -12.0}, {6.0, 4.0}}), 
+      Line(color = {0, 0, 127}, 
       points = {{-100.0, -60.0}, {-76.0, -60.0}, {-8.0, -6.0}})}));
   end VariableDelay;
 
@@ -537,7 +537,7 @@ of the PadeDelay block with an optional, more reliable numerics</td>
        该模块是基于现有的Dymola库，由Dieter Moormann和Hilding Elmqvist提供实现。
 </li>
 </ul>
-</html>"), Icon(graphics = {Line(points = {{-80, -66}, {-26, -66}, {28, 52}, {88, 52}},
+</html>"), Icon(graphics = {Line(points = {{-80, -66}, {-26, -66}, {28, 52}, {88, 52}}, 
     color = {95, 95, 95})}));
   model Relay "在两个常数之间切换输出"
     parameter Real op(start = Modelica.Constants.eps, unit = 1) "开点，当输入超过这个阈值时，Relay开启。开点值必须大于或等于关点值。指定一个大于关点的开点值可以模拟滞后效应，而指定相等的值则模拟在该值处具有阈值的开关。";
@@ -550,56 +550,56 @@ of the PadeDelay block with an optional, more reliable numerics</td>
       annotation(Evaluate = true, choices(checkBox = true), Dialog(tab = "高级"));
 
     Modelica.Blocks.Interfaces.RealInput u "控制Relay开关的输入信号。" 
-      annotation(Placement(transformation(origin = {-120.132, -0.739285},
+      annotation(Placement(transformation(origin = {-120.132, -0.739285}, 
       extent = {{-20, -20}, {20, 20}})));
     Modelica.Blocks.Interfaces.RealOutput y "输出信号在由参数决定的两个值之间切换：开启时输出和关闭时输出。" 
-      annotation(Placement(transformation(origin = {110.522, 1.48515e-5},
+      annotation(Placement(transformation(origin = {110.522, 1.48515e-5}, 
       extent = {{-10, -10}, {10, 10}})));
 
     output Real state(start = cv, unit = 1) "状态缓存，计算并缓存当前时间的输出值";
-    annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}},
-      grid = {2, 2}), graphics = {Rectangle(origin = {0, 0},
-      fillColor = {255, 255, 255},
-      fillPattern = FillPattern.Solid,
-      extent = {{-100, 100}, {100, -100}}), Line(origin = {0, 0},
-      points = {{-95.5557, -0.145215}, {95.9162, -0.145215}},
-      color = {181, 181, 181},
-      thickness = 1,
-      arrow = {Arrow.None, Arrow.Filled},
-      smooth = Smooth.Bezier,
-      __MWorks_Manhattanize = true), Line(origin = {0, 0},
-      rotation = 90,
-      points = {{-94.8178, 0.333333}, {95.1756, 0.333333}},
-      color = {181, 181, 181},
-      thickness = 1,
-      arrow = {Arrow.None, Arrow.Filled},
-      smooth = Smooth.Bezier,
-      __MWorks_Manhattanize = true), Line(origin = {-20, 0},
-      rotation = 90,
-      points = {{-50, 0.333333}, {50, 0.333333}},
-      color = {35, 35, 35},
-      thickness = 1.3,
-      smooth = Smooth.Bezier,
-      __MWorks_Manhattanize = true), Line(origin = {20, 0},
-      rotation = 90,
-      points = {{-50, 0.333333}, {50, 0.333333}},
-      color = {35, 35, 35},
-      thickness = 1.3,
-      smooth = Smooth.Bezier,
-      __MWorks_Manhattanize = true), Line(origin = {-30, -50},
-      points = {{-50, 0.333333}, {50, 0.333333}},
-      color = {35, 35, 35},
-      thickness = 1.3,
-      smooth = Smooth.Bezier,
-      __MWorks_Manhattanize = true), Line(origin = {30, 50},
-      points = {{-50, 0.333333}, {50, 0.333333}},
-      color = {35, 35, 35},
-      thickness = 1.3,
-      smooth = Smooth.Bezier,
-      __MWorks_Manhattanize = true), Text(origin = {1.42109e-14, 122},
-      lineColor = {0, 0, 255},
-      extent = {{-150, 20}, {150, -20}},
-      textString = "%name",
+    annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, 
+      grid = {2, 2}), graphics = {Rectangle(origin = {0, 0}, 
+      fillColor = {255, 255, 255}, 
+      fillPattern = FillPattern.Solid, 
+      extent = {{-100, 100}, {100, -100}}), Line(origin = {0, 0}, 
+      points = {{-95.5557, -0.145215}, {95.9162, -0.145215}}, 
+      color = {181, 181, 181}, 
+      thickness = 1, 
+      arrow = {Arrow.None, Arrow.Filled}, 
+      smooth = Smooth.Bezier, 
+      __MWorks_Manhattanize = true), Line(origin = {0, 0}, 
+      rotation = 90, 
+      points = {{-94.8178, 0.333333}, {95.1756, 0.333333}}, 
+      color = {181, 181, 181}, 
+      thickness = 1, 
+      arrow = {Arrow.None, Arrow.Filled}, 
+      smooth = Smooth.Bezier, 
+      __MWorks_Manhattanize = true), Line(origin = {-20, 0}, 
+      rotation = 90, 
+      points = {{-50, 0.333333}, {50, 0.333333}}, 
+      color = {35, 35, 35}, 
+      thickness = 1.3, 
+      smooth = Smooth.Bezier, 
+      __MWorks_Manhattanize = true), Line(origin = {20, 0}, 
+      rotation = 90, 
+      points = {{-50, 0.333333}, {50, 0.333333}}, 
+      color = {35, 35, 35}, 
+      thickness = 1.3, 
+      smooth = Smooth.Bezier, 
+      __MWorks_Manhattanize = true), Line(origin = {-30, -50}, 
+      points = {{-50, 0.333333}, {50, 0.333333}}, 
+      color = {35, 35, 35}, 
+      thickness = 1.3, 
+      smooth = Smooth.Bezier, 
+      __MWorks_Manhattanize = true), Line(origin = {30, 50}, 
+      points = {{-50, 0.333333}, {50, 0.333333}}, 
+      color = {35, 35, 35}, 
+      thickness = 1.3, 
+      smooth = Smooth.Bezier, 
+      __MWorks_Manhattanize = true), Text(origin = {1.42109e-14, 122}, 
+      lineColor = {0, 0, 255}, 
+      extent = {{-150, 20}, {150, -20}}, 
+      textString = "%name", 
       textColor = {0, 0, 255})}), Documentation(info = "<html><p>
 继电器模块的输出在两个指定值之间切换。
 当继电器开启时，它会保持开启状态，直到输入值降到\"关点\"参数的值以下。

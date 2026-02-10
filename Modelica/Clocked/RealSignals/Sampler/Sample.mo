@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.RealSignals.Sampler;
-block Sample
+block Sample 
   "采样连续时间实数输入信号，并将其作为时钟输出信号(推断时钟)"
   extends Clocked.RealSignals.Interfaces.PartialSISOSampler;
 
@@ -7,15 +7,15 @@ equation
   y = sample(u);
 
   annotation(
-    defaultComponentName = "sample1",
+    defaultComponentName = "sample1", 
     Icon(coordinateSystem(
-    preserveAspectRatio = true,
-    extent = {{-100, -100}, {100, 100}},
-    initialScale = 0.06),
+    preserveAspectRatio = true, 
+    extent = {{-100, -100}, {100, 100}}, 
+    initialScale = 0.06), 
     graphics = {
-    Text(extent = {{-150, 90}, {150, 50}},
-    textString = "%name",
-    textColor = {0, 0, 255})}),
+    Text(extent = {{-150, 90}, {150, 50}}, 
+    textString = "%name", 
+    textColor = {0, 0, 255})}), 
     Documentation(info = "<html><p style=\"text-align: start;\">该块采样连续时间的实数输入信号 u，并将其作为时钟化输出信号 y。输出信号的时钟是由推断得出的（即，它需要在时钟化分区的其他地方定义）。如果不希望如此，请改用 <a href=\"modelica://Modelica.Clocked.RealSignals.Sampler.SampleClocked\" target=\"\">SampleClocked</a>&nbsp; 模块，显式地将时钟分配给输出信号。
 </p>
 <p style=\"text-align: start;\">更准确地说：输入信号 u(t) 必须是一个连续时间信号。输出信号 y(ti) 与一个时钟相关联（该时钟在其他地方定义）。在时钟跳变时，u 的左极限被赋值给 y：<code>y(ti) = u(ti-eps)</code>（即时钟变为活动状态之前 u 的值）。由于该运算符返回 u 的左极限，它在连续时间和时钟化分区之间引入了一个极其微小的延迟。这与现实相符，在采样数据系统中不能无限快速地操作，即使是非常理想化的仿真，也存在一个极小的延迟。因此，时钟化和连续时间分区之间不能发生代数回路。

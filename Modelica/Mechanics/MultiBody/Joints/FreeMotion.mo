@@ -1,93 +1,93 @@
 ﻿within Modelica.Mechanics.MultiBody.Joints;
-model FreeMotion
+model FreeMotion 
   "自由运动副(6个自由度，12个潜在状态变量)"
 
   extends Modelica.Mechanics.MultiBody.Interfaces.PartialTwoFrames;
 
-  parameter Boolean animation = true
+  parameter Boolean animation = true 
     "=true，如果启用动画(显示从frame_a到frame_b的箭头)";
 
   SI.Position r_rel_a[3](start={0,0,0}, each stateSelect=if enforceStates then 
-              StateSelect.always else StateSelect.prefer)
+              StateSelect.always else StateSelect.prefer) 
     "从frame_a原点到frame_b原点的位置矢量，在frame_a中解析" 
     annotation(Dialog(group="初始值", showStartAttribute=true));
   SI.Velocity v_rel_a[3](start={0,0,0}, each stateSelect=if enforceStates then StateSelect.always else 
-              StateSelect.prefer)
+              StateSelect.prefer) 
     "=der(r_rel_a)，即frame_b相对于frame_a的原点的速度，解析在frame_a中" 
     annotation(Dialog(group="初始值", showStartAttribute=true));
   SI.Acceleration a_rel_a[3](start={0,0,0}) "=der(v_rel_a)" 
     annotation(Dialog(group="初始值", showStartAttribute=true));
 
-  parameter Boolean angles_fixed = false
+  parameter Boolean angles_fixed = false 
     "=true，如果angles_start用作初始值，否则用作猜测值" 
     annotation(Evaluate=true, choices(checkBox=true), Dialog(group="初始值"));
-  parameter SI.Angle angles_start[3]={0,0,0}
+  parameter SI.Angle angles_start[3]={0,0,0} 
     "旋转frame_a围绕'sequence_start'轴到frame_b的初始角度值" 
     annotation (Dialog(group="初始值"));
-  parameter Types.RotationSequence sequence_start={1,2,3}
+  parameter Types.RotationSequence sequence_start={1,2,3} 
     "将frame_a旋转到frame_b的旋转序列在初始时间" 
     annotation (Evaluate=true, Dialog(group="初始值"));
 
-  parameter Boolean w_rel_a_fixed = false
+  parameter Boolean w_rel_a_fixed = false 
     "=true，如果w_rel_a_start用作初始值，否则用作猜测值" 
     annotation(Evaluate=true, choices(checkBox=true), Dialog(group="初始值"));
-  parameter SI.AngularVelocity w_rel_a_start[3]={0,0,0}
+  parameter SI.AngularVelocity w_rel_a_start[3]={0,0,0} 
     "frame_b相对于frame_a的角速度的初始值，在frame_a中解析" 
     annotation (Dialog(group="初始值"));
 
-  parameter Boolean z_rel_a_fixed = false
+  parameter Boolean z_rel_a_fixed = false 
     "=true，如果z_rel_a_start用作初始值，否则用作猜测值" 
     annotation(Evaluate=true, choices(checkBox=true), Dialog(group="初始值"));
-  parameter SI.AngularAcceleration z_rel_a_start[3]={0,0,0}
+  parameter SI.AngularAcceleration z_rel_a_start[3]={0,0,0} 
     "角加速度z_rel_a的初始值=der(w_rel_a)" 
     annotation (Dialog(group="初始值"));
 
-  input Types.Color arrowColor=Modelica.Mechanics.MultiBody.Types.Defaults.SensorColor
+  input Types.Color arrowColor=Modelica.Mechanics.MultiBody.Types.Defaults.SensorColor 
     "箭头的颜色" 
     annotation (Dialog(colorSelector=true, tab="动画", group="如果animation=true", enable=animation));
-  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+  input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射(=0：光完全吸收)" 
     annotation (Dialog(tab="动画", group="如果animation=true", enable=animation));
-  parameter Boolean enforceStates=true
+  parameter Boolean enforceStates=true 
     "=true，如果frame_a和frame_b之间的相对变量应该用作状态" 
     annotation (Evaluate=true, Dialog(tab="高级"));
-  parameter Boolean useQuaternions=true
+  parameter Boolean useQuaternions=true 
     "=true，如果四元数应该用作状态，否则使用3个角度作为状态" 
     annotation (Evaluate=true, Dialog(tab="高级"));
-  parameter Types.RotationSequence sequence_angleStates={1,2,3}
+  parameter Types.RotationSequence sequence_angleStates={1,2,3} 
     "将frame_a旋转到frame_b，围绕用作状态的3个角度的旋转序列" 
      annotation (Evaluate=true, Dialog(tab="高级", enable=not 
           useQuaternions));
 
-final parameter Frames.Orientation R_rel_start=
-      Modelica.Mechanics.MultiBody.Frames.axesRotations(sequence_start, angles_start,zeros(3))
+final parameter Frames.Orientation R_rel_start= 
+      Modelica.Mechanics.MultiBody.Frames.axesRotations(sequence_start, angles_start,zeros(3)) 
     "初始时刻从frame_a到frame_b的方向对象";
 
 protected
   Visualizers.Advanced.Arrow arrow(
-    r_head=r_rel_a,
-    color=arrowColor,
-    specularCoefficient=specularCoefficient,
-    r=frame_a.r_0,
+    r_head=r_rel_a, 
+    color=arrowColor, 
+    specularCoefficient=specularCoefficient, 
+    r=frame_a.r_0, 
     R=frame_a.R) if world.enableAnimation and animation;
 
   // 四元数的声明(如果四元数未被使用则为虚拟)
-  parameter Frames.Quaternions.Orientation Q_start=Frames.to_Q(R_rel_start)
+  parameter Frames.Quaternions.Orientation Q_start=Frames.to_Q(R_rel_start) 
     "初始时刻从frame_a到frame_b的四元数方向对象";
   Frames.Quaternions.Orientation Q(start=Q_start, each stateSelect=if 
         enforceStates then (if useQuaternions then StateSelect.prefer else 
-        StateSelect.never) else StateSelect.default)
+        StateSelect.never) else StateSelect.default) 
     "从frame_a到frame_b的四元数方向对象(如果四元数未被用作状态，则为虚拟值)";
 
   // 3个角度的声明
-  parameter SI.Angle phi_start[3]=if sequence_start[1] ==
+  parameter SI.Angle phi_start[3]=if sequence_start[1] == 
       sequence_angleStates[1] and sequence_start[2] == sequence_angleStates[2] 
        and sequence_start[3] == sequence_angleStates[3] then angles_start else 
-            Frames.axesRotationsAngles(R_rel_start,
+            Frames.axesRotationsAngles(R_rel_start, 
       sequence_angleStates) "初始时刻的潜在角度状态";
   SI.Angle phi[3](start=phi_start, each stateSelect=if enforceStates then (if 
         useQuaternions then StateSelect.never else StateSelect.always) else 
-        StateSelect.prefer)
+        StateSelect.prefer) 
     "将frame_a旋转到frame_b的虚拟或3个角度";
   SI.AngularVelocity phi_d[3](each stateSelect=if enforceStates then (if 
         useQuaternions then StateSelect.never else StateSelect.always) else 
@@ -95,15 +95,15 @@ protected
   SI.AngularAcceleration phi_dd[3] "=der(phi_d)";
 
   // 其他声明
-  SI.AngularVelocity w_rel_b[3](start=Frames.resolve2(R_rel_start, w_rel_a_start),
-                                fixed=fill(w_rel_a_fixed,3),
+  SI.AngularVelocity w_rel_b[3](start=Frames.resolve2(R_rel_start, w_rel_a_start), 
+                                fixed=fill(w_rel_a_fixed,3), 
                                 each stateSelect=if enforceStates then 
                                 (if useQuaternions then StateSelect.always else 
-                                StateSelect.avoid) else StateSelect.prefer)
+                                StateSelect.avoid) else StateSelect.prefer) 
     "frame_b相对于frame_a的虚拟或相对角速度，解析在frame_b中";
-  Frames.Orientation R_rel
+  Frames.Orientation R_rel 
     "从frame_a到frame_b的虚拟或相对方向对象";
-  Frames.Orientation R_rel_inv
+  Frames.Orientation R_rel_inv 
     "从frame_b到frame_a的虚拟或相对方向对象";
 
 initial equation
@@ -241,41 +241,41 @@ FreeMotion对象的状态包括：</p>
 <img src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/Joints/FreeMotion.png\">
 </div>
 
-</html>"),
+</html>"), 
          Icon(coordinateSystem(
-        preserveAspectRatio=true,
+        preserveAspectRatio=true, 
         extent={{-100,-100},{100,100}}), graphics={
         Line(
-          points={{-86,31},{-74,61},{-49,83},{-17,92},{19,88},{40,69},{59,48}},
-          color={160,160,164},
-          thickness=0.5,
-          smooth=Smooth.Bezier),
+          points={{-86,31},{-74,61},{-49,83},{-17,92},{19,88},{40,69},{59,48}}, 
+          color={160,160,164}, 
+          thickness=0.5, 
+          smooth=Smooth.Bezier), 
         Polygon(
-          points={{90,0},{50,20},{50,-20},{90,0}},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
+          points={{90,0},{50,20},{50,-20},{90,0}}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid), 
         Polygon(
-          points={{69,58},{49,40},{77,28},{69,58}},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
+          points={{69,58},{49,40},{77,28},{69,58}}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid), 
         Text(
-          extent={{150,-35},{-150,-75}},
-          textColor={0,0,255},
-          textString="%name"),
+          extent={{150,-35},{-150,-75}}, 
+          textColor={0,0,255}, 
+          textString="%name"), 
         Rectangle(
-          extent={{-70,-5},{-90,5}},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
+          extent={{-70,-5},{-90,5}}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{50,-5},{30,5}},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
+          extent={{50,-5},{30,5}}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{11,-5},{-9,5}},
-          fillColor={192,192,192},
-          fillPattern=FillPattern.Solid),
+          extent={{11,-5},{-9,5}}, 
+          fillColor={192,192,192}, 
+          fillPattern=FillPattern.Solid), 
         Rectangle(
-          extent={{-30,-5},{-50,5}},
-          fillColor={192,192,192},
+          extent={{-30,-5},{-50,5}}, 
+          fillColor={192,192,192}, 
           fillPattern=FillPattern.Solid)}));
 end FreeMotion;

@@ -1,71 +1,71 @@
 ﻿within Modelica.Electrical.Machines.Examples.DCMachines;
-model DCPM_Temperature
+model DCPM_Temperature 
   "测试示例：测试DCPM电机的温度依赖性"
   extends Modelica.Icons.Example;
   parameter SI.Voltage Va=100 "实际电枢电压";
   parameter SI.Voltage Ve=100 "实际励磁电压";
-  parameter SI.AngularVelocity w0=
+  parameter SI.AngularVelocity w0= 
       Modelica.Units.Conversions.from_rpm(1500) "空载转速";
   parameter SI.Torque TLoad=63.66 "额定负载转矩";
-  parameter SI.Inertia JLoad=0.15
+  parameter SI.Inertia JLoad=0.15 
     "负载的转动惯量";
   Machines.BasicMachines.DCMachines.DC_PermanentMagnet dcpm(
-    wMechanical(start=w0, fixed=true),
-    VaNominal=dcpmData.VaNominal,
-    IaNominal=dcpmData.IaNominal,
-    wNominal=dcpmData.wNominal,
-    TaNominal=dcpmData.TaNominal,
-    Ra=dcpmData.Ra,
-    TaRef=dcpmData.TaRef,
-    La=dcpmData.La,
-    Jr=dcpmData.Jr,
-    useSupport=false,
-    Js=dcpmData.Js,
-    frictionParameters=dcpmData.frictionParameters,
-    coreParameters=dcpmData.coreParameters,
-    strayLoadParameters=dcpmData.strayLoadParameters,
-    brushParameters=dcpmData.brushParameters,
-    phiMechanical(fixed=true),
-    ia(fixed=true),
-    TaOperational=293.15,
-    alpha20a=dcpmData.alpha20a,
+    wMechanical(start=w0, fixed=true), 
+    VaNominal=dcpmData.VaNominal, 
+    IaNominal=dcpmData.IaNominal, 
+    wNominal=dcpmData.wNominal, 
+    TaNominal=dcpmData.TaNominal, 
+    Ra=dcpmData.Ra, 
+    TaRef=dcpmData.TaRef, 
+    La=dcpmData.La, 
+    Jr=dcpmData.Jr, 
+    useSupport=false, 
+    Js=dcpmData.Js, 
+    frictionParameters=dcpmData.frictionParameters, 
+    coreParameters=dcpmData.coreParameters, 
+    strayLoadParameters=dcpmData.strayLoadParameters, 
+    brushParameters=dcpmData.brushParameters, 
+    phiMechanical(fixed=true), 
+    ia(fixed=true), 
+    TaOperational=293.15, 
+    alpha20a=dcpmData.alpha20a, 
     useThermalPort=true) 
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Electrical.Analog.Sources.ConstantVoltage armatureVoltage(V=Va) 
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
+        extent={{10,-10},{-10,10}}, 
+        rotation=90, 
         origin={-80,70})));
   Modelica.Electrical.Analog.Basic.Ground groundArmature annotation (
       Placement(transformation(
-        origin={-80,40},
+        origin={-80,40}, 
         extent={{-10,-10},{10,10}})));
   Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=JLoad) 
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
   Modelica.Mechanics.Rotational.Sources.TorqueStep loadTorque(
-    useSupport=false,
-    stepTorque=-TLoad,
-    offsetTorque=0,
-    startTime=0.1) annotation (Placement(transformation(extent={{60,-10},
+    useSupport=false, 
+    stepTorque=-TLoad, 
+    offsetTorque=0, 
+    startTime=0.1) annotation (Placement(transformation(extent={{60,-10}, 
             {40,10}})));
   Machines.Thermal.DCMachines.ThermalAmbientDCPM thermalAmbientDCPM(
-    useTemperatureInputs=true,
-    Ta=293.15,
+    useTemperatureInputs=true, 
+    Ta=293.15, 
     Tpm=293.15) 
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   Modelica.Blocks.Sources.Exponentials exponential(
-    offset=293.15,
-    outMax=60,
-    riseTime=3600,
-    riseTimeConst=0.5,
-    fallTimeConst=0.5,
+    offset=293.15, 
+    outMax=60, 
+    riseTime=3600, 
+    riseTimeConst=0.5, 
+    fallTimeConst=0.5, 
     startTime=0.1) 
     annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
   Modelica.Blocks.Sources.Constant const(k=293.15) 
     annotation (Placement(transformation(extent={{40,-60},{20,-40}})));
   parameter Utilities.ParameterRecords.DcPermanentMagnetData dcpmData(
-    alpha20a(displayUnit="1/K")=Modelica.Electrical.Machines.Thermal.Constants.alpha20Copper,
-    TaNominal=353.15,
+    alpha20a(displayUnit="1/K")=Modelica.Electrical.Machines.Thermal.Constants.alpha20Copper, 
+    TaNominal=353.15, 
     TaRef=353.15) "DC机器数据" 
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
 

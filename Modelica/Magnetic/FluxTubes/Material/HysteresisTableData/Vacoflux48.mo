@@ -1,5 +1,5 @@
-﻿within Modelica.Magnetic.FluxTubes.Material.HysteresisTableData;
-record Vacoflux48 "Vacoflux48"
+within Modelica.Magnetic.FluxTubes.Material.HysteresisTableData;
+record Vacoflux48 "Vacoflux48-铁钴软磁合金"
   extends FluxTubes.Material.HysteresisTableData.BaseData(
     tabris=[-1500,-2.22424; -1000,-2.22424; -798.541,-2.22424; -641.021,-2.19521;
         -476.208,-2.15167; -320.146,-2.09361; -187.42,-1.9775; -134.913,-1.93396;

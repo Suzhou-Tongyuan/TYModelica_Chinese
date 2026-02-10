@@ -8,9 +8,9 @@ protected
   SI.MagneticFluxDensity hystR "限幅磁滞回路的上升支路";
   SI.MagneticFluxDensity hystF "极限磁滞回路的下降支路";
 
-  SI.MagneticFluxDensity diffHyst
+  SI.MagneticFluxDensity diffHyst 
     "当前工作点的上升和下降极限滞后支路之间的距离";
-  Real dHyst(final quantity="MagneticFluxDensitySlope", final unit="T/s")
+  Real dHyst(final quantity="MagneticFluxDensitySlope", final unit="T/s") 
     "当前工作点的上升（当 der(H)>0 时）或下降（当 der(H)<0 时）限制迟滞支路的斜率";
   Real k;
 

@@ -1,5 +1,5 @@
 ﻿within Modelica.Mechanics.Translational.Interfaces;
-partial model PartialElementaryRotationalToTranslational
+partial model PartialElementaryRotationalToTranslational 
   "用于将旋转运动转换为平移运动的部分模型"
   extends 
     Modelica.Mechanics.Rotational.Interfaces.PartialElementaryRotationalToTranslational;

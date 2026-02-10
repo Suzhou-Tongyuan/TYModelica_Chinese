@@ -1,25 +1,25 @@
 ﻿within Modelica.Magnetic.FluxTubes.Material.SoftMagnetic;
-function mu_rApprox
+function mu_rApprox 
   "软磁材料相对磁导率mu_r随磁通密度B的近似"
 
   extends Modelica.Icons.Function;
 
-  input SI.MagneticFluxDensity B
+  input SI.MagneticFluxDensity B 
     "铁磁通管元件的磁通密度";
   //材料特定参数集:
-  input SI.RelativePermeability mu_i
+  input SI.RelativePermeability mu_i 
     "B=0时的初始相对渗透率";
-  input SI.MagneticFluxDensity B_myMax
+  input SI.MagneticFluxDensity B_myMax 
     "最大相对磁导率时的磁通密度";
   input Real c_a "近似函数系数";
   input Real c_b "近似函数系数";
   input Real n "近似函数的指数";
 
-  output SI.RelativePermeability mu_r
+  output SI.RelativePermeability mu_r 
     "铁磁通管元件的相对磁导率";
 
 protected
-  Real B_N
+  Real B_N 
     "磁通密度B归一化为最大相对磁导率B_myMax时的磁通密度";
 
 algorithm

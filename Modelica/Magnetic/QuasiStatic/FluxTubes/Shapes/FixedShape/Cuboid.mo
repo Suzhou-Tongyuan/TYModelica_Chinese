@@ -1,12 +1,12 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.FixedShape;
-model Cuboid
+model Cuboid 
 "具有固定形状和线性材料特性的矩形截面通量管"
 
   extends BaseClasses.FixedShape;
   extends Modelica.Magnetic.QuasiStatic.FluxTubes.Icons.Cuboid;
 
   parameter SI.Length l=0.01 "通量方向上的长度" annotation (
-      Dialog(group="Fixed geometry", groupImage=
+      Dialog(group="Fixed geometry", groupImage= 
           "modelica://Modelica/Resources/Images/Magnetic/QuasiStatic/FluxTubes/CuboidParallelFlux_qs.png"));
   parameter SI.Length a=0.01 "矩形截面宽度" 
     annotation (Dialog(group="Fixed geometry"));

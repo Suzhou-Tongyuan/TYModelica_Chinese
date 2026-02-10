@@ -4,11 +4,11 @@ function from_nxz "从 n_x 和 n_z 矢量返回方向对象"
   import Modelica.Math.Vectors.length;
   import Modelica.Math.Vectors.normalize;
 
-  input Real n_x[3](each final unit="1")
+  input Real n_x[3](each final unit="1") 
     "在坐标系1中解析的指向 x 轴的矢量，解析为坐标系2";
-  input Real n_z[3](each final unit="1")
+  input Real n_z[3](each final unit="1") 
     "在坐标系1中解析的指向 z 轴的矢量，解析为坐标系2";
-  output TransformationMatrices.Orientation T
+  output TransformationMatrices.Orientation T 
     "将坐标系1旋转到坐标系2 的方向对象";
 protected
   Real e_x[3](each final unit="1")=if length(n_x) < 1e-10 then {1,0,0} else normalize(n_x);

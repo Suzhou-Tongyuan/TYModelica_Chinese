@@ -1,18 +1,18 @@
 ﻿within Modelica.Thermal.FluidHeatFlow.BaseClasses;
 partial model SimpleFriction "简单摩擦模型"
-  parameter SI.VolumeFlowRate V_flowLaminar(min=Modelica.Constants.small, start=0.1)
+  parameter SI.VolumeFlowRate V_flowLaminar(min=Modelica.Constants.small, start=0.1) 
     "层流体积流" 
     annotation(Dialog(group="Simple friction"));
-  parameter SI.Pressure dpLaminar(start=0.1)
+  parameter SI.Pressure dpLaminar(start=0.1) 
     "层流压降" 
     annotation(Dialog(group="Simple friction"));
-  parameter SI.VolumeFlowRate V_flowNominal(start=1)
+  parameter SI.VolumeFlowRate V_flowNominal(start=1) 
     "额定流量" 
     annotation(Dialog(group="Simple friction"));
-  parameter SI.Pressure dpNominal(start=1)
+  parameter SI.Pressure dpNominal(start=1) 
     "额定压降" 
     annotation(Dialog(group="Simple friction"));
-  parameter Real frictionLoss(min=0, max=1) = 0
+  parameter Real frictionLoss(min=0, max=1) = 0 
     "输入介质的部分摩擦损耗" 
     annotation(Dialog(group="Simple friction"));
   SI.Pressure pressureDrop;
@@ -22,9 +22,9 @@ protected
   parameter SI.Pressure dpNomMin=dpLaminar/V_flowLaminar*V_flowNominal;
   parameter Real k(final unit="Pa.s2/m6", fixed=false);
 initial algorithm
-  assert(V_flowNominal>V_flowLaminar,
+  assert(V_flowNominal>V_flowLaminar, 
     "SimpleFriction: V_flowNominal has to be > V_flowLaminar!");
-  assert(dpNominal>=dpNomMin,
+  assert(dpNominal>=dpNomMin, 
     "SimpleFriction: dpNominal has to be > dpLaminar/V_flowLaminar*V_flowNominal!");
   k:=(dpNominal - dpNomMin)/(V_flowNominal - V_flowLaminar)^2;
 equation

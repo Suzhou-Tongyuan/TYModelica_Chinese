@@ -5,13 +5,13 @@ equation
   Phi = Complex(0, 0);
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), graphics={           Line(points={{-100,0},{-40,0}},
-          color={255,170,85}),Line(points={{40,0},{100,0}}, color={255,170,
-          85}),
+            100,100}}), graphics={           Line(points={{-100,0},{-40,0}}, 
+          color={255,170,85}),Line(points={{40,0},{100,0}}, color={255,170, 
+          85}), 
         Text(
-          extent={{150,60},{-150,20}},
-          textColor={0,0,255},
-          textString="%name")}),
+          extent={{150,60},{-150,20}}, 
+          textColor={0,0,255}, 
+          textString="%name")}), 
     Documentation(info="<html>
 <p>
 这是一个简单的空闲运行分支.
@@ -26,8 +26,8 @@ equation
 <a href=\"modelica://Modelica.Magnetic.FundamentalWave.Components.Crossing\">Magnetic.FundamentalWave.Components.Crossing</a>
 </p>
 
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+</html>"), 
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
             {100,100}}), graphics={
                       Line(points={{60,0},{100,0}}, color={255,170,85})}));
 end Idle;

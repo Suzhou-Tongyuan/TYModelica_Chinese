@@ -8,11 +8,11 @@ model PolyphaseInductance "多相电感"
   parameter SI.Inductance L=1 "负载电感";
   parameter Real effectiveTurns=5 "有效转数";
   // 对称多相磁阻
-  final parameter SI.Reluctance R_m=m*effectiveTurns^2/2/L
+  final parameter SI.Reluctance R_m=m*effectiveTurns^2/2/L 
     "等效磁阻";
-  output SI.ComplexCurrent Ie=resistor_e.i[1]
+  output SI.ComplexCurrent Ie=resistor_e.i[1] 
     "电流表示法";
-  output SI.ComplexCurrent Im=resistor_m.i[1]
+  output SI.ComplexCurrent Im=resistor_m.i[1] 
     "磁性电流";
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground ground_e 
     annotation (Placement(transformation(extent={{-70,10},{-50,30}})));
@@ -20,36 +20,36 @@ model PolyphaseInductance "多相电感"
     annotation (Placement(transformation(extent={{-70,-90},{-50,-70}})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star_e(m=m) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-60,40})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star_m(m=m) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-60,-60})));
   Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource 
     voltageSource_e(
-    m=m,
-    f=f,
-    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
-    V=fill(VRMS, m),
+    m=m, 
+    f=f, 
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
+    V=fill(VRMS, m), 
     gamma(fixed=true, start=0)) 
                      annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-60,70})));
 
   Modelica.Electrical.QuasiStatic.Polyphase.Sources.VoltageSource 
     voltageSource_m(
-    m=m,
-    f=f,
-    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
-    V=fill(VRMS, m),
+    m=m, 
+    f=f, 
+    phi=-Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
+    V=fill(VRMS, m), 
     gamma(fixed=true, start=0)) 
                      annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-60,-30})));
 
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Resistor 
@@ -60,16 +60,16 @@ model PolyphaseInductance "多相电感"
     annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Inductor 
     inductor_e(m=m, L=fill(L, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={0,70})));
   Magnetic.QuasiStatic.FundamentalWave.Components.PolyphaseElectroMagneticConverter 
     converter_m(m=m, effectiveTurns=effectiveTurns) 
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
-  Magnetic.QuasiStatic.FundamentalWave.Components.Reluctance reluctance_m(R_m(d=R_m,
+  Magnetic.QuasiStatic.FundamentalWave.Components.Reluctance reluctance_m(R_m(d=R_m, 
         q=R_m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={60,-30})));
   Magnetic.QuasiStatic.FundamentalWave.Components.Ground groundM_m 
     annotation (Placement(transformation(extent={{10,-90},{30,-70}})));
@@ -100,7 +100,7 @@ equation
       points={{-60,-20},{-40,-20}}, color={85,170,255}));
   connect(resistor_m.plug_n, converter_m.plug_p) annotation (Line(
       points={{-20,-20},{0,-20}}, color={85,170,255}));
-  annotation (experiment(StopTime=100,
+  annotation (experiment(StopTime=100, 
         Interval=0.01), Documentation(info="<html>
 <p>
 本例比较了准静态多相电感与等效准静态基波磁阻电路。

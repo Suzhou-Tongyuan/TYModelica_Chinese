@@ -1,54 +1,54 @@
 ﻿within Modelica.Mechanics.MultiBody.Forces;
-model WorldForceAndTorque
+model WorldForceAndTorque 
   "作用在frame_b的外部力和力矩，由3+3个输入信号定义，并在world坐标系、frame_b或frame_resolve中解析"
 
   import Modelica.Mechanics.MultiBody.Types;
   extends Interfaces.PartialOneFrame_b;
   Interfaces.Frame_resolve frame_resolve if 
-       resolveInFrame == Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.frame_resolve
+       resolveInFrame == Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.frame_resolve 
     "该输入信号可选项在此坐标系中解析" 
     annotation (Placement(transformation(
-        origin={0,100},
-        extent={{16,-16},{-16,16}},
+        origin={0,100}, 
+        extent={{16,-16},{-16,16}}, 
         rotation=270)));
-  Blocks.Interfaces.RealInput force[3](each final quantity="Force", each final unit=
-                   "N")
+  Blocks.Interfaces.RealInput force[3](each final quantity="Force", each final unit= 
+                   "N") 
     "在由resolveInFrame定义的坐标系中解析的力的x-、y-、z-坐标" 
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
-  Blocks.Interfaces.RealInput torque[3](each final quantity="Torque", each final unit=
-                   "N.m")
+  Blocks.Interfaces.RealInput torque[3](each final quantity="Torque", each final unit= 
+                   "N.m") 
     "在由resolveInFrame定义的坐标系中解析的力矩的x-、y-、z-坐标" 
     annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
 
   parameter Boolean animation=true "= true时，启用动画";
-  parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameB resolveInFrame=
-    Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.world
+  parameter Modelica.Mechanics.MultiBody.Types.ResolveInFrameB resolveInFrame= 
+    Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.world 
     "定义输入力和力矩解析的坐标系(1: world, 2: frame_b, 3: frame_resolve)";
 
-input Types.Color forceColor=Modelica.Mechanics.MultiBody.Types.Defaults.ForceColor
+input Types.Color forceColor=Modelica.Mechanics.MultiBody.Types.Defaults.ForceColor 
     "力的箭头颜色" annotation (Dialog(colorSelector=true, group="如果 animation = true", enable=animation));
-input Types.Color torqueColor=Modelica.Mechanics.MultiBody.Types.Defaults.TorqueColor
+input Types.Color torqueColor=Modelica.Mechanics.MultiBody.Types.Defaults.TorqueColor 
     "力矩的箭头颜色" annotation (Dialog(colorSelector=true, group="如果 animation = true", enable=animation));
-input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient
+input Types.SpecularCoefficient specularCoefficient = world.defaultSpecularCoefficient 
     "环境光的反射系数(= 0: 光完全被吸收)" 
     annotation (Dialog(group="如果 animation = true", enable=animation));
 
 protected
   Visualizers.Advanced.Arrow forceArrow(
-    color=forceColor,
-    specularCoefficient=specularCoefficient,
-    quantity=Modelica.Mechanics.MultiBody.Types.VectorQuantity.Force,
-    R=frame_b.R,
-    r=frame_b.r_0,
-    r_head=-frame_b.f,
+    color=forceColor, 
+    specularCoefficient=specularCoefficient, 
+    quantity=Modelica.Mechanics.MultiBody.Types.VectorQuantity.Force, 
+    R=frame_b.R, 
+    r=frame_b.r_0, 
+    r_head=-frame_b.f, 
     headAtOrigin=true) if world.enableAnimation and animation;
   Visualizers.Advanced.DoubleArrow torqueArrow(
-    color=torqueColor,
-    specularCoefficient=specularCoefficient,
-    quantity=Modelica.Mechanics.MultiBody.Types.VectorQuantity.Torque,
-    R=frame_b.R,
-    r=frame_b.r_0,
-    r_head=-frame_b.t,
+    color=torqueColor, 
+    specularCoefficient=specularCoefficient, 
+    quantity=Modelica.Mechanics.MultiBody.Types.VectorQuantity.Torque, 
+    R=frame_b.R, 
+    r=frame_b.r_0, 
+    r_head=-frame_b.t, 
     headAtOrigin=true) if world.enableAnimation and animation;
 public
   Internal.BasicWorldForce basicWorldForce(resolveInFrame=resolveInFrame) 
@@ -61,69 +61,69 @@ protected
     annotation (Placement(transformation(extent={{58,70},{78,90}})));
 equation
   connect(basicWorldForce.frame_b, frame_b) annotation (Line(
-      points={{38,-60},{60,-60},{60,0},{100,0}},
-      color={95,95,95},
+      points={{38,-60},{60,-60},{60,0},{100,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(basicWorldForce.force, force) annotation (Line(
       points={{16,-60},{-120,-60}}, color={0,0,127}));
   connect(basicWorldTorque.frame_b, frame_b) 
     annotation (Line(
-      points={{10,60},{60,60},{60,0},{100,0}},
-      color={95,95,95},
+      points={{10,60},{60,60},{60,0},{100,0}}, 
+      color={95,95,95}, 
       thickness=0.5));
   connect(basicWorldTorque.torque, torque) 
     annotation (Line(
       points={{-12,60},{-120,60}}, color={0,0,127}));
   connect(basicWorldForce.frame_resolve, frame_resolve) annotation (Line(
-      points={{28,-50},{28,80},{0,80},{0,100}},
-      color={95,95,95},
+      points={{28,-50},{28,80},{0,80},{0,100}}, 
+      color={95,95,95}, 
       pattern=LinePattern.Dot));
   connect(basicWorldTorque.frame_resolve, frame_resolve) 
     annotation (Line(
-      points={{0,70},{0,100}},
-      color={95,95,95},
+      points={{0,70},{0,100}}, 
+      color={95,95,95}, 
       pattern=LinePattern.Dot));
   connect(zeroPosition.frame_resolve, basicWorldTorque.frame_resolve) 
     annotation (Line(
-      points={{58,80},{0,80},{0,70}},
-      color={95,95,95},
+      points={{58,80},{0,80},{0,70}}, 
+      color={95,95,95}, 
       pattern=LinePattern.Dot));
   connect(zeroPosition.frame_resolve, basicWorldForce.frame_resolve) 
     annotation (Line(
-      points={{58,80},{40,80},{40,-40},{28,-40},{28,-50}},
-      color={95,95,95},
+      points={{58,80},{40,80},{40,-40},{28,-40},{28,-50}}, 
+      color={95,95,95}, 
       pattern=LinePattern.Dot));
-  annotation (defaultComponentName="forceAndTorque",
-    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+  annotation (defaultComponentName="forceAndTorque", 
+    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100, 
             100}}), graphics={
         Text(
-          extent={{-63,56},{44,19}},
-          textColor={192,192,192},
-          textString="resolve"),
+          extent={{-63,56},{44,19}}, 
+          textColor={192,192,192}, 
+          textString="resolve"), 
         Text(
-          extent={{-150,-75},{150,-115}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,-75},{150,-115}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Line(
-          points={{-100,60},{-86,68},{-80,72},{-70,78},{-64,82},{-46,86},{-34,
+          points={{-100,60},{-86,68},{-80,72},{-70,78},{-64,82},{-46,86},{-34, 
               88},{-16,88},{-2,86},{12,80},{24,74},{34,68},{46,58},{52,54},{
-              58,48}},
-          thickness=0.5),
+              58,48}}, 
+          thickness=0.5), 
         Polygon(
-          points={{89,17},{64,76},{30,41},{89,17}},
-          fillPattern=FillPattern.Solid),
+          points={{89,17},{64,76},{30,41},{89,17}}, 
+          fillPattern=FillPattern.Solid), 
         Line(
-          points={{0,95},{0,-26}},
-          color={95,95,95},
-          pattern=LinePattern.Dot),
+          points={{0,95},{0,-26}}, 
+          color={95,95,95}, 
+          pattern=LinePattern.Dot), 
         Line(
-          points={{0,0},{96,0}},
-          color={95,95,95},
-          pattern=LinePattern.Dot),
+          points={{0,0},{96,0}}, 
+          color={95,95,95}, 
+          pattern=LinePattern.Dot), 
         Polygon(
-          points={{-104,-48},{54,0},{46,20},{96,0},{66,-42},{60,-22},{-96,-72},
-              {-104,-48}},
-          fillPattern=FillPattern.Solid)}),
+          points={{-104,-48},{54,0},{46,20},{96,0},{66,-42},{60,-22},{-96,-72}, 
+              {-104,-48}}, 
+          fillPattern=FillPattern.Solid)}), 
     Documentation(info="<html>
 <p>
 <strong>力</strong>和<strong>力矩</strong>在连接器上的<strong>3</strong>个信号被解释为作用在坐标系连接器上的<strong>力</strong>和<strong>力矩</strong>的x-、y-和z-坐标，

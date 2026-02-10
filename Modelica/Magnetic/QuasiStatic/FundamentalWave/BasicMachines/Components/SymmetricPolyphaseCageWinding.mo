@@ -3,65 +3,65 @@ model SymmetricPolyphaseCageWinding "对称转子笼"
   import Modelica.Constants.pi;
   extends Magnetic.QuasiStatic.FundamentalWave.Interfaces.TwoPortExtended;
   parameter Integer m=3 "阶段数" annotation(Evaluate=true);
-  parameter Boolean useHeatPort=false
+  parameter Boolean useHeatPort=false 
     "启用/禁用（=固定温度）热敏端口" 
     annotation (Evaluate=true);
-  parameter SI.Resistance RRef
+  parameter SI.Resistance RRef 
     "TRef 时每相的绕组电阻";
-  parameter SI.Temperature TRef(start=293.15)
+  parameter SI.Temperature TRef(start=293.15) 
     "绕组参考温度";
   parameter
     Modelica.Electrical.Machines.Thermal.LinearTemperatureCoefficient20 
     alpha20(start=0) "20 摄氏度时的绕组温度系数";
-  final parameter SI.LinearTemperatureCoefficient alphaRef=
+  final parameter SI.LinearTemperatureCoefficient alphaRef= 
       Modelica.Electrical.Machines.Thermal.convertAlpha(
-            alpha20,
-            TRef,
+            alpha20, 
+            TRef, 
             293.15) "Temperature coefficient of winding at reference temperature";
-  parameter SI.Temperature TOperational(start=293.15)
+  parameter SI.Temperature TOperational(start=293.15) 
     "绕组工作温度" 
     annotation (Dialog(enable=not useHeatPort));
   parameter SI.Inductance Lsigma "笼型杂散电感";
   parameter Real effectiveTurns=1 "有效转数";
-  final parameter Integer nBase=Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m)
+  final parameter Integer nBase=Modelica.Electrical.Polyphase.Functions.numberOfSymmetricBaseSystems(m) 
     "基地系统数量";
-  SI.ComplexCurrent i[m]=electroMagneticConverter.i
+  SI.ComplexCurrent i[m]=electroMagneticConverter.i 
     "笼电流";
   Magnetic.QuasiStatic.FundamentalWave.Components.PolyphaseElectroMagneticConverter 
-    electroMagneticConverter(final m=m, final effectiveTurns=effectiveTurns)
+    electroMagneticConverter(final m=m, final effectiveTurns=effectiveTurns) 
     "对称绕组" annotation (Placement(transformation(
-        origin={0,-10},
-        extent={{-10,-10},{10,10}},
+        origin={0,-10}, 
+        extent={{-10,-10},{10,10}}, 
         rotation=90)));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.Resistor resistor(
-    final useHeatPort=useHeatPort,
-    final m=m,
-    final T_ref=fill(TRef, m),
-    final T=fill(TOperational, m),
-    R_ref=fill(RRef, m),
+    final useHeatPort=useHeatPort, 
+    final m=m, 
+    final T_ref=fill(TRef, m), 
+    final T=fill(TOperational, m), 
+    R_ref=fill(RRef, m), 
     alpha_ref=fill(alphaRef, m)) annotation (Placement(transformation(
-        origin={-20,-50},
-        extent={{10,10},{-10,-10}},
+        origin={-20,-50}, 
+        extent={{10,10},{-10,-10}}, 
         rotation=90)));
-  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(final m=
+  Modelica.Electrical.QuasiStatic.Polyphase.Basic.Star star(final m= 
         nBase) 
            annotation (Placement(transformation(extent={{50,-30},{70,-10}})));
   Modelica.Electrical.QuasiStatic.SinglePhase.Basic.Ground ground 
     annotation (Placement(transformation(
-        origin={90,-20},
-        extent={{-10,10},{10,-10}},
+        origin={90,-20}, 
+        extent={{-10,10},{10,-10}}, 
         rotation=270)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPortWinding if 
     useHeatPort "绕组电阻器的散热口" 
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector 
-    thermalCollector(final m=m) if useHeatPort
+    thermalCollector(final m=m) if useHeatPort 
     "热转子电阻热端口连接器" 
     annotation (Placement(transformation(extent={{-50,-90},{-30,-70}})));
   Magnetic.QuasiStatic.FundamentalWave.Components.Reluctance strayReluctance(final R_m(
-        d=m*effectiveTurns^2/2/Lsigma, q=m*effectiveTurns^2/2/Lsigma))
+        d=m*effectiveTurns^2/2/Lsigma, q=m*effectiveTurns^2/2/Lsigma)) 
     "等效于理想耦合杂散电感的杂散磁阻" 
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={0,
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}}, origin={0, 
             20})));
   Modelica.Electrical.QuasiStatic.Polyphase.Basic.MultiStar multiStar(final m=m) 
     annotation (Placement(transformation(extent={{20,-30},{40,-10}})));
@@ -85,40 +85,40 @@ equation
       points={{-10,-20},{-20,-20},{-20,-40}}, color={85,170,255}));
   connect(electroMagneticConverter.plug_n, multiStar.plug_p) annotation (
       Line(points={{10,-20},{15,-20},{20,-20}}, color={85,170,255}));
-  connect(multiStar.starpoints, star.plug_p) annotation (Line(points={{40,
+  connect(multiStar.starpoints, star.plug_p) annotation (Line(points={{40, 
           -20},{45,-20},{50,-20}}, color={85,170,255}));
-  connect(multiStar.plug_p, resistor.plug_n) annotation (Line(points={{20,
+  connect(multiStar.plug_p, resistor.plug_n) annotation (Line(points={{20, 
           -20},{20,-60},{-20,-60}}, color={85,170,255}));
-  annotation (defaultComponentName="cage",
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+  annotation (defaultComponentName="cage", 
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, 
             {100,100}}), graphics={Ellipse(
-                extent={{-80,80},{80,-80}},
-                fillColor={175,175,175},
+                extent={{-80,80},{80,-80}}, 
+                fillColor={175,175,175}, 
                 fillPattern=FillPattern.Solid),Ellipse(
-                extent={{-20,76},{20,36}},
-                fillColor={255,255,255},
+                extent={{-20,76},{20,36}}, 
+                fillColor={255,255,255}, 
                 fillPattern=FillPattern.Solid),Ellipse(
-                extent={{28,46},{68,6}},
-                fillColor={255,255,255},
+                extent={{28,46},{68,6}}, 
+                fillColor={255,255,255}, 
                 fillPattern=FillPattern.Solid),Ellipse(
-                extent={{28,-8},{68,-48}},
-                fillColor={255,255,255},
+                extent={{28,-8},{68,-48}}, 
+                fillColor={255,255,255}, 
                 fillPattern=FillPattern.Solid),Ellipse(
-                extent={{-20,-36},{20,-76}},
-                fillColor={255,255,255},
+                extent={{-20,-36},{20,-76}}, 
+                fillColor={255,255,255}, 
                 fillPattern=FillPattern.Solid),Ellipse(
-                extent={{-68,-6},{-28,-46}},
-                fillColor={255,255,255},
+                extent={{-68,-6},{-28,-46}}, 
+                fillColor={255,255,255}, 
                 fillPattern=FillPattern.Solid),Ellipse(
-                extent={{-66,50},{-26,10}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),Line(points={{-80,0},{-100,
+                extent={{-66,50},{-26,10}}, 
+                fillColor={255,255,255}, 
+                fillPattern=FillPattern.Solid),Line(points={{-80,0},{-100, 
           0}}, color={255,170,85}),Line(points={{100,0},{80,0}}, color={
-          255,128,0}),
+          255,128,0}), 
         Text(
-          extent={{150,140},{-150,100}},
-          textColor={0,0,255},
-          textString="%name")}),
+          extent={{150,140},{-150,100}}, 
+          textColor={0,0,255}, 
+          textString="%name")}), 
     Documentation(info="<html>
 <div>
 <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/Machines/Components/rotorcage.png\">

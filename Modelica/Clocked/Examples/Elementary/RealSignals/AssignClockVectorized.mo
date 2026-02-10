@@ -1,5 +1,5 @@
 ﻿within Modelica.Clocked.Examples.Elementary.RealSignals;
-model AssignClockVectorized
+model AssignClockVectorized 
   "实数信号 AssignClockVectorized 模块示例"
    extends Modelica.Icons.Example;
 
@@ -23,35 +23,35 @@ Modelica.Clocked.RealSignals.NonPeriodic.UnitDelay unitDelay2
   annotation (Placement(transformation(extent={{-38,-28},{-58,-8}})));
 equation
 connect(add.u2, const.y) annotation (Line(
-    points={{-60,32},{-71,32}},
+    points={{-60,32},{-71,32}}, 
     color={0,0,127}));
 connect(unitDelay1.y, add.u1) annotation (Line(
-    points={{-59,68},{-68,68},{-68,44},{-60,44}},
+    points={{-59,68},{-68,68},{-68,44},{-60,44}}, 
     color={0,0,127}));
 connect(periodicClock.y, assignClock1.clock) annotation (Line(
-    points={{-41.4,-44},{-18,-44},{-18,16.8}},
-    color={175,175,175},
-    pattern=LinePattern.Dot,
+    points={{-41.4,-44},{-18,-44},{-18,16.8}}, 
+    color={175,175,175}, 
+    pattern=LinePattern.Dot, 
     thickness=0.5));
 connect(const1.y, add1.u1) annotation (Line(
-    points={{-71,0},{-68,0},{-68,18},{-60,18}},
+    points={{-71,0},{-68,0},{-68,18},{-60,18}}, 
     color={0,0,127}));
 connect(unitDelay2.y, add1.u2) annotation (Line(
-    points={{-59,-18},{-66,-18},{-66,6},{-60,6}},
+    points={{-59,-18},{-66,-18},{-66,6},{-60,6}}, 
     color={0,0,127}));
 connect(add.y, assignClock1.u[1]) annotation (Line(
-    points={{-37,38},{-32,38},{-32,23.4},{-25.2,23.4}},
+    points={{-37,38},{-32,38},{-32,23.4},{-25.2,23.4}}, 
     color={0,0,127}));
 connect(add1.y, assignClock1.u[2]) annotation (Line(
-    points={{-37,12},{-32,12},{-32,24.6},{-25.2,24.6}},
+    points={{-37,12},{-32,12},{-32,24.6},{-25.2,24.6}}, 
     color={0,0,127}));
 connect(assignClock1.y[2], unitDelay2.u) annotation (Line(
-    points={{-11.4,24.3},{-6,24.3},{-6,-18},{-36,-18}},
+    points={{-11.4,24.3},{-6,24.3},{-6,-18},{-36,-18}}, 
     color={0,0,127}));
 connect(assignClock1.y[1], unitDelay1.u) annotation (Line(
-    points={{-11.4,23.7},{-6,23.7},{-6,68},{-36,68}},
+    points={{-11.4,23.7},{-6,23.7},{-6,68},{-36,68}}, 
     color={0,0,127}));
-  annotation (experiment(StopTime=0.09),
+  annotation (experiment(StopTime=0.09), 
   Documentation(info="<html>
 <p>
 生成一个用于区模块文档的示例图

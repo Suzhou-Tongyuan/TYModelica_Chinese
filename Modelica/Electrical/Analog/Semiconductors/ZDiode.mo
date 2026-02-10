@@ -3,7 +3,7 @@ model ZDiode "具有3个工作区域的齐纳二极管"
   extends Modelica.Electrical.Analog.Interfaces.OnePort;
   parameter SI.Current Ids = 1e-6 "饱和电流";
   parameter SI.Voltage Vt = 0.04 "热电压(kT/qn)";
-  parameter Real Maxexp(final min = Modelica.Constants.small) = 30
+  parameter Real Maxexp(final min = Modelica.Constants.small) = 30 
     "线性连续的最大指数";
   parameter SI.Resistance R = 1e8 "并联欧姆电阻";
   parameter SI.Voltage Bv = 5.1 "击穿电压=齐纳电压或Z电压";
@@ -17,7 +17,7 @@ equation
     -Ids - Ibv * exp(Maxexp) * (1 - (v + Bv) / (Nbv * Vt) - Maxexp) + v / R else 
     Ids * (exp(v / Vt) - 1) - Ibv * exp(-(v + Bv) / (Nbv * Vt)) + v / R);
   LossPower = v * i;
-  annotation(defaultComponentName = "二极管",
+  annotation(defaultComponentName = "二极管", 
     Documentation(info = "<html>
 <p>简单的Zenner二极管是一个一端元件，它包括二极管本身和一个并联电阻 R。二极管的公式是:
 </p>
@@ -41,26 +41,26 @@ i  =  Ids ( e      - 1) - Ibv ( e                  ).
 <li><em>2004年4月   </em>Christoph Clauss<br>创建<br>
        </li>
 </ul>
-</html>"),
+</html>"), 
     Icon(coordinateSystem(
-    preserveAspectRatio = true,
+    preserveAspectRatio = true, 
     extent = {{-100, -100}, {100, 100}}), graphics = {
     Polygon(
-    points = {{30, 0}, {-30, 40}, {-30, -40}, {30, 0}},
-    lineColor = {0, 0, 255},
-    fillColor = {255, 255, 255},
-    fillPattern = FillPattern.Solid),
-    Line(points = {{-90, 0}, {40, 0}}, color = {0, 0, 255}),
-    Line(points = {{40, 0}, {90, 0}}, color = {0, 0, 255}),
-    Line(points = {{30, 40}, {30, -40}}, color = {0, 0, 255}),
+    points = {{30, 0}, {-30, 40}, {-30, -40}, {30, 0}}, 
+    lineColor = {0, 0, 255}, 
+    fillColor = {255, 255, 255}, 
+    fillPattern = FillPattern.Solid), 
+    Line(points = {{-90, 0}, {40, 0}}, color = {0, 0, 255}), 
+    Line(points = {{40, 0}, {90, 0}}, color = {0, 0, 255}), 
+    Line(points = {{30, 40}, {30, -40}}, color = {0, 0, 255}), 
     Text(
-    extent = {{-150, 90}, {150, 50}},
-    textString = "%name",
-    textColor = {0, 0, 255}),
+    extent = {{-150, 90}, {150, 50}}, 
+    textString = "%name", 
+    textColor = {0, 0, 255}), 
     Line(
-    visible = useHeatPort,
-    points = {{0, -101}, {0, -20}},
-    color = {127, 0, 0},
-    pattern = LinePattern.Dot),
+    visible = useHeatPort, 
+    points = {{0, -101}, {0, -20}}, 
+    color = {127, 0, 0}, 
+    pattern = LinePattern.Dot), 
     Line(points = {{30, -40}, {20, -40}}, color = {28, 108, 200})}));
 end ZDiode;

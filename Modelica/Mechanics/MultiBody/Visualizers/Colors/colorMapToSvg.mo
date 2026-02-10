@@ -1,22 +1,22 @@
 ﻿within Modelica.Mechanics.MultiBody.Visualizers.Colors;
-function colorMapToSvg
+function colorMapToSvg 
   "在SVG(可伸缩矢量图形)格式中保存颜色映射到文件"
   extends Modelica.Icons.Function;
   encapsulated type HeaderType = enumeration(
-    svgBeginAndEnd,
-    svgBegin,
-    svgEnd,
+    svgBeginAndEnd, 
+    svgBegin, 
+    svgEnd, 
     noHeader) annotation();
   import Modelica.Utilities.Streams.print;
   input Real colorMap[:,3] "要以SVG格式存储的颜色映射" 
-    annotation(choices(choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.jet(),
-    choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.hot(),
-    choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.gray(),
-    choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.spring(),
-    choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.summer(),
-    choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.autumn(),
+    annotation(choices(choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.jet(), 
+    choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.hot(), 
+    choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.gray(), 
+    choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.spring(), 
+    choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.summer(), 
+    choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.autumn(), 
     choice = Modelica.Mechanics.MultiBody.Visualizers.Colors.ColorMaps.winter()));
-  input String fileName = "colorMap.svg"
+  input String fileName = "colorMap.svg" 
     "SVG表示将要存储的文件名";
   input Real width(unit = "mm") = 10 "SVG图形中的宽度";
   input Real height(unit = "mm") = 100 "SVG图形中的高度";
@@ -24,14 +24,14 @@ function colorMapToSvg
   input Real y(unit = "mm") = 10 "左上角的Y坐标";
   input Real T_min = 0 "与colorMap[1,:]对应的标量值";
   input Real T_max = 100 "与colorMap[end,:]对应的标量值";
-  input Integer nScalars = 11
+  input Integer nScalars = 11 
     "在右侧显示的标量数量";
   input String format = ".3g" "数字的格式";
   input Real fontSize = 11 "字体大小[pt]";
-  input Real textWidth(unit = "mm") = 8
+  input Real textWidth(unit = "mm") = 8 
     "从x+width+textWidth开始右对齐数字";
   input String caption = "" "地图上方的标题";
-  input HeaderType headerType = Colors.colorMapToSvg.HeaderType.svgBeginAndEnd
+  input HeaderType headerType = Colors.colorMapToSvg.HeaderType.svgBeginAndEnd 
     "头部类型";
 protected
   Integer nc = size(colorMap, 1);
@@ -68,13 +68,13 @@ algorithm
   for i in nc:-1:1 loop
     // print:  <rect x="XXmm" y="XXmm" width="YYmm" height="ZZmm" style="fill:rgb(100,128,255);stroke:none"/>
     yy := yy + dy;
-    print("<rectx=\"" + String(x) +
-      "mm\"y=\"" + String(yy) +
-      "mm\"width=\"" + strWidth +
-      "mm\"height=\"" + strHeight +
-      "mm\"style=\"fill:rgb(" + String(integer(colorMap[i,1])) + ","
-      + String(integer(colorMap[i,2])) + ","
-      + String(integer(colorMap[i,3])) +
+    print("<rectx=\"" + String(x) + 
+      "mm\"y=\"" + String(yy) + 
+      "mm\"width=\"" + strWidth + 
+      "mm\"height=\"" + strHeight + 
+      "mm\"style=\"fill:rgb(" + String(integer(colorMap[i,1])) + "," 
+      + String(integer(colorMap[i,2])) + "," 
+      + String(integer(colorMap[i,3])) + 
       ");stroke:none\"/>", fileName);
   end for;
 
@@ -87,18 +87,18 @@ algorithm
     // print: <text x="22mm" y="12mm" font-family="Arial,sans-ser如果" font-size="11pt">1.2345</text>
     yy := yy + dy;
     T := T_min + (T_max - T_min) * (i - 1) / (ni - 1);
-    print("<textx=\"" + strXX +
-      "mm\"y=\"" + String(yy) +
-      "mm\"font-family=\"Fixedsys\"font-size=\"" + String(fontSize) +
-      "pt\"text-anchor=\"end\">" + String(T, format = format) +
+    print("<textx=\"" + strXX + 
+      "mm\"y=\"" + String(yy) + 
+      "mm\"font-family=\"Fixedsys\"font-size=\"" + String(fontSize) + 
+      "pt\"text-anchor=\"end\">" + String(T, format = format) + 
       "</text>", fileName);
   end for;
 
   if caption <> "" then
-    print("<textx=\"" + String(xHeading) +
-      "mm\"y=\"" + String(yHeading) +
-      "mm\"font-family=\"Fixedsys\"font-size=\"" + String(fontSize) +
-      "pt\"text-anchor=\"middle\">" + caption +
+    print("<textx=\"" + String(xHeading) + 
+      "mm\"y=\"" + String(yHeading) + 
+      "mm\"font-family=\"Fixedsys\"font-size=\"" + String(fontSize) + 
+      "pt\"text-anchor=\"middle\">" + caption + 
       "</text>", fileName);
   end if;
 

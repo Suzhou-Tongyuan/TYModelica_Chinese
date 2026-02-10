@@ -1,14 +1,14 @@
 ﻿within Modelica.Mechanics.MultiBody.Frames;
-function axesRotations
+function axesRotations 
   "返回围绕三个轴按顺序固定旋转角度的旋转对象"
 
   import TM = Modelica.Mechanics.MultiBody.Frames.TransformationMatrices;
   extends Modelica.Icons.Function;
   input Integer sequence[3](
-    min={1,1,1},
-    max={3,3,3}) = {1,2,3}
+    min={1,1,1}, 
+    max={3,3,3}) = {1,2,3} 
     "沿轴序列[i]从坐标系1旋转到坐标系2的旋转顺序";
-  input SI.Angle angles[3]
+  input SI.Angle angles[3] 
     "沿'sequence'定义的轴旋转的角度";
   input SI.AngularVelocity der_angles[3] "= der(angles)";
   output Orientation R "将坐标系1旋转到坐标系2的方向对象";

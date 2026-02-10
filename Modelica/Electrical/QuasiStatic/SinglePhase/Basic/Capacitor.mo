@@ -6,19 +6,19 @@ model Capacitor "单相线性电容"
 equation
   i = j*omega*C*v;
   annotation (Icon(graphics={
-        Text(extent={{150,-40},{-150,-80}}, textString="C=%C"),
+        Text(extent={{150,-40},{-150,-80}}, textString="C=%C"), 
         Text(
-          extent={{-150,90},{150,50}},
-          textString="%name",
-          textColor={0,0,255}),
+          extent={{-150,90},{150,50}}, 
+          textString="%name", 
+          textColor={0,0,255}), 
         Line(
-          points={{-6,28},{-6,-28}},
-          color={85,170,255}),
+          points={{-6,28},{-6,-28}}, 
+          color={85,170,255}), 
         Line(
-          points={{6,28},{6,-28}},
-          color={85,170,255}),
-                             Line(points={{-90,0},{-6,0}}, color={85,170,255}),
-                Line(points={{6,0},{90,0}}, color={85,170,255})}),
+          points={{6,28},{6,-28}}, 
+          color={85,170,255}), 
+                             Line(points={{-90,0},{-6,0}}, color={85,170,255}), 
+                Line(points={{6,0},{90,0}}, color={85,170,255})}), 
       Documentation(info="<html>
 
 <p>

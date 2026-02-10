@@ -1,19 +1,19 @@
 ﻿within Modelica.Magnetic.QuasiStatic.FluxTubes.Shapes.FixedShape;
-model HollowCylinderAxialFlux
+model HollowCylinderAxialFlux 
 "(空心)圆柱体，具有固定形状的轴向磁通和线性材料特性"
 
   extends BaseClasses.FixedShape;
   extends Modelica.Magnetic.QuasiStatic.FluxTubes.Icons.HollowCylinderAxialFlux;
 
   parameter SI.Length l=0.01 "轴向长度(磁通方向)" 
-    annotation (Dialog(group="Fixed geometry", groupImage=
+    annotation (Dialog(group="Fixed geometry", groupImage= 
           "modelica://Modelica/Resources/Images/Magnetic/QuasiStatic/FluxTubes/HollowCylinderAxialFlux_qs.png"));
-  parameter SI.Radius r_i=0
+  parameter SI.Radius r_i=0 
   "空心气缸内半径(气缸为零)" 
     annotation (Dialog(group="Fixed geometry"));
   parameter SI.Radius r_o=0.01 "(空心)圆柱体的外半径" 
     annotation (Dialog(group="Fixed geometry"));
-  parameter SI.Angle alpha=2*Modelica.Constants.pi
+  parameter SI.Angle alpha=2*Modelica.Constants.pi 
   "中央角";
 equation
   A = pi*(r_o^2 - r_i^2)*alpha/(2*Modelica.Constants.pi);

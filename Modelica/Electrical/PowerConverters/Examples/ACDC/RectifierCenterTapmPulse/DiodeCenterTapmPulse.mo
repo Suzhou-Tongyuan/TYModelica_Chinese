@@ -1,5 +1,5 @@
 ﻿within Modelica.Electrical.PowerConverters.Examples.ACDC.RectifierCenterTapmPulse;
-model DiodeCenterTapmPulse
+model DiodeCenterTapmPulse 
   "带中心点和电阻负载的2*m脉冲二极管整流器"
   extends Modelica.Icons.Example;
   import Modelica.Constants.pi;
@@ -12,46 +12,46 @@ model DiodeCenterTapmPulse
         transformation(extent={{-80,-100},{-60,-80}})));
   Modelica.Electrical.Polyphase.Basic.Star star(final m=m) annotation (
      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-70,-30})));
   Modelica.Electrical.Polyphase.Sources.SineVoltage sineVoltage_p(
-    final m=m,
-    V=fill(sqrt(2)*Vrms, m),
+    final m=m, 
+    V=fill(sqrt(2)*Vrms, m), 
     phase=-
-        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m),
+        Modelica.Electrical.Polyphase.Functions.symmetricOrientation(m), 
     f=fill(f, m)) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
+        extent={{-10,-10},{10,10}}, 
+        rotation=270, 
         origin={-70,10})));
   PowerConverters.ACDC.DiodeCenterTapmPulse rectifier(final m=m) 
     annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
   Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor 
     annotation (Placement(transformation(
-        origin={50,10},
-        extent={{10,-10},{-10,10}},
+        origin={50,10}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
   Modelica.Blocks.Math.Mean meanVoltage(f=m*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,40})));
   Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f=m*f) 
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,10})));
   Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor 
     annotation (Placement(transformation(
-        extent={{-10,10},{10,-10}},
-        rotation=180,
+        extent={{-10,10},{10,-10}}, 
+        rotation=180, 
         origin={0,-50})));
   Modelica.Blocks.Math.Mean meanCurrent(f=m*f) annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-10,-10},{10,10}}, 
         origin={80,-70})));
   Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
       Placement(transformation(
-        origin={30,30},
-        extent={{10,-10},{-10,10}},
+        origin={30,30}, 
+        extent={{10,-10},{-10,10}}, 
         rotation=90)));
 equation
   connect(star.pin_n, ground.p) annotation (Line(
@@ -78,9 +78,9 @@ equation
       points={{-20,40},{30,40}}, color={0,0,255}));
   annotation (
     experiment(
-      StopTime=0.1,
-      Tolerance=1e-06,
-      Interval=0.0002),
+      StopTime=0.1, 
+      Tolerance=1e-06, 
+      Interval=0.0002), 
     Documentation(info="<html>
 <p>该示例显示了一个带有电阻性负载的不受控制的 <code>m</code> 脉冲中心点二极管整流器，其中 <code>m</code> 是相数。</p>
 

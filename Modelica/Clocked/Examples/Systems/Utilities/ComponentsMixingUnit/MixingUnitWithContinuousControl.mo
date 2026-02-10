@@ -21,7 +21,7 @@ model MixingUnitWithContinuousControl "一个简单的混合单元示例，其�
   final parameter Real c_high_start(unit = "mol/l") = c0 * (1 - 0.72) "参考浓度";
   final parameter Real T_c_start = T0 * (1 + u0) "初始冷却温度";
 
-  parameter Real pro = 1.1
+  parameter Real pro = 1.1 
     "受控对象参数与逆受控对象参数的偏差";
   final parameter Real a1 = a1_inv * pro "设备模型的过程参数（参见帮助中的参考资料）";
   final parameter Real a21 = a21_inv * pro "设备模型的过程参数（参见帮助中的参考资料）";
@@ -30,78 +30,78 @@ model MixingUnitWithContinuousControl "一个简单的混合单元示例，其�
   final parameter Real k0 = k0_inv * pro "设备模型的过程参数（参见帮助中的参考资料）";
 
   Utilities.ComponentsMixingUnit.MixingUnit invMixingUnit(
-    c0 = c0,
-    T0 = T0,
-    a1 = a1_inv,
-    a21 = a21_inv,
-    a22 = a22_inv,
-    b = b_inv,
-    k0 = k0_inv,
-    eps = eps,
-    c(start = c_start, fixed = true),
-    T(start = T_start,
-    fixed = true,
-    stateSelect = StateSelect.always),
+    c0 = c0, 
+    T0 = T0, 
+    a1 = a1_inv, 
+    a21 = a21_inv, 
+    a22 = a22_inv, 
+    b = b_inv, 
+    k0 = k0_inv, 
+    eps = eps, 
+    c(start = c_start, fixed = true), 
+    T(start = T_start, 
+    fixed = true, 
+    stateSelect = StateSelect.always), 
     T_c(start = T_c_start, fixed = true)) 
     annotation(Placement(transformation(extent = {{-14, 14}, {-34, 34}})));
   Modelica.Blocks.Math.Add add 
     annotation(Placement(transformation(extent = {{40, -18}, {56, -2}})));
   Modelica.Blocks.Math.InverseBlockConstraints inverseBlockConstraints 
     annotation(Placement(transformation(extent = {{-54, 8}, {-2, 40}})));
-  Modelica.Blocks.Continuous.CriticalDamping filter(f = freq, n = 3,
+  Modelica.Blocks.Continuous.CriticalDamping filter(f = freq, n = 3, 
     normalized = false) 
     annotation(Placement(transformation(extent = {{-86, 14}, {-66, 34}})));
   Utilities.ComponentsMixingUnit.MixingUnit mixingUnit(
-    c(start = c_start, fixed = true),
-    T(start = T_start, fixed = true),
-    c0 = c0,
-    T0 = T0,
-    a1 = a1,
-    a21 = a21,
-    a22 = a22,
-    b = b,
-    k0 = k0,
+    c(start = c_start, fixed = true), 
+    T(start = T_start, fixed = true), 
+    c0 = c0, 
+    T0 = T0, 
+    a1 = a1, 
+    a21 = a21, 
+    a22 = a22, 
+    b = b, 
+    k0 = k0, 
     eps = eps) 
     annotation(Placement(transformation(extent = {{70, -20}, {90, 0}})));
   Modelica.Blocks.Math.Feedback feedback 
     annotation(Placement(transformation(extent = {{-24, -20}, {-4, 0}})));
-  Modelica.Blocks.Sources.Step step(height = c_high_start - c_start, offset =
+  Modelica.Blocks.Sources.Step step(height = c_high_start - c_start, offset = 
     c_start) 
     annotation(Placement(transformation(extent = {{-118, 14}, {-98, 34}})));
   Modelica.Blocks.Math.Gain gain(k = 20) annotation(Placement(transformation(
     extent = {{4, -20}, {24, 0}})));
 equation
   connect(step.y, filter.u) annotation(Line(points = {{-97, 24}, {-97, 24}, {
-    -88, 24}},
+    -88, 24}}, 
     color = {0, 0, 127}));
   connect(mixingUnit.T, feedback.u2) annotation(Line(points = {{92, -16}, {
-    98, -16}, {98, -36}, {-14, -36}, {-14, -18}},
+    98, -16}, {98, -36}, {-14, -36}, {-14, -18}}, 
     color = {0, 0, 127}));
-  connect(feedback.y, gain.u) annotation(Line(points = {{-5, -10}, {-5, -10},
-    {2, -10}},
+  connect(feedback.y, gain.u) annotation(Line(points = {{-5, -10}, {-5, -10}, 
+    {2, -10}}, 
     color = {0, 0, 127}));
   connect(add.y, mixingUnit.T_c) annotation(Line(
-    points = {{56.8, -10}, {68, -10}},
+    points = {{56.8, -10}, {68, -10}}, 
     color = {0, 0, 127}));
   connect(gain.y, add.u2) annotation(Line(
-    points = {{25, -10}, {32, -10}, {32, -14.8}, {38.4, -14.8}},
+    points = {{25, -10}, {32, -10}, {32, -14.8}, {38.4, -14.8}}, 
     color = {0, 0, 127}));
   connect(inverseBlockConstraints.y2, invMixingUnit.T_c) annotation(Line(
-    points = {{-5.9, 24}, {-12, 24}},
+    points = {{-5.9, 24}, {-12, 24}}, 
     color = {0, 0, 127}));
   connect(inverseBlockConstraints.y1, add.u1) annotation(Line(
-    points = {{-0.7, 24}, {32, 24}, {32, -5.2}, {38.4, -5.2}},
+    points = {{-0.7, 24}, {32, 24}, {32, -5.2}, {38.4, -5.2}}, 
     color = {0, 0, 127}));
   connect(filter.y, inverseBlockConstraints.u1) annotation(Line(
-    points = {{-65, 24}, {-56.6, 24}},
+    points = {{-65, 24}, {-56.6, 24}}, 
     color = {0, 0, 127}));
   connect(invMixingUnit.T, feedback.u1) annotation(Line(
-    points = {{-36, 18}, {-42, 18}, {-42, -10}, {-22, -10}},
+    points = {{-36, 18}, {-42, 18}, {-42, -10}, {-22, -10}}, 
     color = {0, 0, 127}));
   connect(invMixingUnit.c, inverseBlockConstraints.u2) annotation(Line(
-    points = {{-36, 30}, {-38, 30}, {-38, 24}, {-48.8, 24}},
+    points = {{-36, 30}, {-38, 30}, {-38, 24}, {-48.8, 24}}, 
     color = {0, 0, 127}));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-120,
-    -100}, {100, 100}})),
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-120, 
+    -100}, {100, 100}})), 
     experiment(StopTime = 500));
 end MixingUnitWithContinuousControl;

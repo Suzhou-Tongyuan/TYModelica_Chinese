@@ -3,33 +3,33 @@ connector Support "一维平动组件的支撑组件/外壳一维平动接口"
   extends Flange;
 
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100}, 
             {100,100}}), graphics={Rectangle(
-              extent={{-60,60},{60,-60}},
-              fillColor={175,190,175},
-              fillPattern=FillPattern.Solid,
+              extent={{-60,60},{60,-60}}, 
+              fillColor={175,190,175}, 
+              fillPattern=FillPattern.Solid, 
               pattern=LinePattern.None),           Text(
-              extent={{-160,110},{40,50}},
-              textColor={0,127,0},
+              extent={{-160,110},{40,50}}, 
+              textColor={0,127,0}, 
               textString="%name"),Rectangle(
-              extent={{-40,-40},{40,40}},
-              lineColor={0,127,0},
-              fillColor={0,127,0},
-              fillPattern=FillPattern.Solid)}),
+              extent={{-40,-40},{40,40}}, 
+              lineColor={0,127,0}, 
+              fillColor={0,127,0}, 
+              fillPattern=FillPattern.Solid)}), 
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
             100,100}}), graphics={Rectangle(
-              extent={{-90,-90},{90,90}},
-              lineColor={0,127,0},
-              fillColor={175,175,175},
+              extent={{-90,-90},{90,90}}, 
+              lineColor={0,127,0}, 
+              fillColor={175,175,175}, 
               fillPattern=FillPattern.Solid),Rectangle(
-          extent={{-150,150},{150,-150}},
-          fillColor={175,190,175},
-          fillPattern=FillPattern.Solid,
+          extent={{-150,150},{150,-150}}, 
+          fillColor={175,190,175}, 
+          fillPattern=FillPattern.Solid, 
           pattern=LinePattern.None),    Rectangle(
-              extent={{-90,-90},{90,90}},
-              lineColor={0,127,0},
-              fillColor={0,127,0},
-              fillPattern=FillPattern.Solid)}),
+              extent={{-90,-90},{90,90}}, 
+              lineColor={0,127,0}, 
+              fillColor={0,127,0}, 
+              fillPattern=FillPattern.Solid)}), 
     Documentation(info="<html>
 <p>
 这是用于一维平动机械系统的连接器，用于建模轴的支撑或外壳。
